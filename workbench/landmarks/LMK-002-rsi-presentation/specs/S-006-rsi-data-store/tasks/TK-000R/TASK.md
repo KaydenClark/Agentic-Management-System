@@ -19,3 +19,7 @@ Same approved private assessment persistence, successor correction after TK-000Q
 - [ ] Exponent, negative zero and nested numeric metadata survive JSONB normalization with exact original packet/result and stable digest.
 - [ ] Changed text/projection/digest refuses; duplicate and lost-response retries remain idempotent; no corrupt namespace writes.
 - [ ] Marked live normalization probes, tests and required checks pass; original failed review remains recorded.
+
+## Native corrective provenance
+
+The native failed verdict at reviewed `977ac08` generated this same Task ID at evidence row18. Its generic assignment and the already claimed bounded assignment describe the same numeric roundtrip correction; preserve the current claimant, detailed acceptance and original failed-review row. Native verdict source commit `ca447da043ad92ecfafc2ac370e7e717ff149fcc` is merged into this branch.
