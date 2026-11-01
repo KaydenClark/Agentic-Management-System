@@ -38,4 +38,4 @@ apply this contract when implementing them.
 Only public-safe reasons and source pointers belong in non-test rows; never
 copy private logs, host paths or credential text. Availability does not supply
 missing provider/model/pin/grade information or turn history into a controlled
-trial. Assessment packets remain a distinct, as-yet-unimplemented storage path.
+trial. Assessment packets use a distinct private storage path ([contract](ASSESSMENTS.md)); they are not trial rows.

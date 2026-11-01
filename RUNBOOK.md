@@ -26,7 +26,7 @@ and [page evidence](site/PAGE-TEMPLATE.md). Static scores prove no benefit.
 
 ## Test And Build
 
-Run `uv run pytest`; `AMS_LIVE=1` adds live Supabase tests. `uv run ams-board`
+`uv run pytest`; `AMS_LIVE=1` adds live Supabase tests. `uv run ams-board`
 serves the [Grill Board](grill-board/README.md) on loopback only. Room checks:
 
 ```bash
@@ -46,13 +46,14 @@ then `ams-history readcheck --ref SHA --dev-ref origin/dev`. Refresh older rows
 with `ams-history import --refresh-changed` before readcheck. `ams-rsi livecheck`
 and `ams-sources livecheck` check RSI/source rules.
 
-`uv run ams-assess score PACKET.json`, `record PACKET.json`, and `list` provide
-[local r1 intake/readback](evals/ASSESSMENTS.md), separate from Supabase and trials.
-Use the subscription meter for manual trials; unknown usage stays unknown.
+`ams-assess score|record|list` handles local r1 packets;
+`ams-assessment-store import|readcheck|livecheck` verifies private Supabase storage
+([contract](evals/ASSESSMENTS.md)). Storage proves no benefit. Trials use the
+subscription meter; unknown stays unknown.
 
-### Shared CI VM
+### Shared CI
 
-CI uses `workbench-ci` and unprivileged
+CI uses `workbench-ci` and
 `workbench-runner-ams` service, never a GitHub-hosted fallback. Queued jobs may
 mean the VM is unavailable. Fork jobs skip; inspect before internal execution.
 [Shared CI](workbench/wiki/context-shared-ci.md) owns setup/operation details.
