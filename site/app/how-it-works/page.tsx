@@ -91,33 +91,11 @@ export default function HowItWorks() {
 
       <section className={styles.section} aria-labelledby="lifecycle">
         <h2 id="lifecycle">The life of a piece of work</h2>
+        <p>
+          <Link href="/start#flow">Start here</Link> shows the path from a request to done, with who holds the work at
+          each stage, as a diagram and a toy. These are the rules behind its last steps.
+        </p>
         <ol className={styles.list}>
-          <li>
-            <strong>Capture.</strong> The request is written down with its reasons, corrections and intended end point.
-            <Source path="RUNBOOK.md">Runbook, Workflows</Source>
-          </li>
-          <li>
-            <strong>Specify.</strong> A Spec defines observable acceptance first. The owner confirms it and approves
-            its execution; the Spec links both records.
-            <Source path="RUNBOOK.md">Runbook, Workflows</Source>
-            <Source path={`${S003}SPEC.md`}>S-003, Confirmation and Execution approval</Source>
-          </li>
-          <li>
-            <strong>Plan.</strong> The Spec is cut into vertical Tasks: each a thin slice that works end to end, not one
-            Task per layer.
-            <Source path={`${ADR}000P-a-capability-change-gets-one-short-spec.md`}>ADR-000P</Source>
-          </li>
-          <li>
-            <strong>Claim.</strong> An agent claims a Task by pushing its branch with the Task marked in progress and
-            opening a draft pull request that names the Task and the agent. The owner confirmed this as a working rule,
-            and the RSI loop tests whether it holds.
-            <Source path={`${ADR}001M-a-claim-is-a-pushed-branch-and-a-draft-pr.md`}>ADR-001M</Source>
-          </li>
-          <li>
-            <strong>Build.</strong> Tests come first and fail; then the change makes them pass; then focused checks and
-            the project&apos;s suite run.
-            <Source path="AGENTS.md">AGENTS.md, Work and learn</Source>
-          </li>
           <li>
             <strong>Merge.</strong> A pull request merges only after it is brought up to date with its target branch and
             passes checks on that combined commit. Site work targets <code>dev</code>.
