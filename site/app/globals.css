@@ -1,0 +1,229 @@
+/* Shell styles. Every value comes from app/theme/tokens.css. Layout follows
+   the owner's Grilling Board canvas: a surface header, a surface sidebar
+   with the reading order, content on the ground colour, cards on surface. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: var(--focus-width) solid var(--ink);
+  outline-offset: var(--focus-offset);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-8);
+  top: var(--space-8);
+  padding: var(--space-8) var(--space-12);
+  background: var(--ink);
+  color: var(--ground);
+  border-radius: var(--radius-control);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: var(--page-min-height);
+}
+
+.topbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-10) var(--space-20);
+  padding: var(--space-10) var(--space-24);
+  background: var(--surface);
+  border-bottom: var(--border-width) solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-10);
+  text-decoration: none;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-brand);
+  line-height: var(--leading-tight);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: var(--control-min-height);
+  padding: var(--space-8) var(--space-12);
+  background: transparent;
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-control);
+  color: var(--muted);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.theme-toggle svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+.frame {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.sidebar {
+  flex: 1 1 var(--sidebar-basis);
+  max-width: 100%;
+  padding: var(--space-20) var(--space-14);
+  background: var(--surface);
+  border-right: var(--border-width) solid var(--line);
+}
+
+.reading-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.reading-nav ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.navlink {
+  display: flex;
+  align-items: center;
+  min-height: var(--control-min-height);
+  padding: var(--space-8) var(--space-12);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-nav);
+  color: var(--muted);
+  font-size: var(--text-nav);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+}
+
+.navlink:hover {
+  color: var(--ink);
+  background: var(--raised);
+}
+
+.navlink[aria-current="page"] {
+  color: var(--ink);
+  background: var(--raised);
+  border-color: var(--line-strong);
+  font-weight: var(--weight-semibold);
+}
+
+.content {
+  flex: 999 1 var(--content-basis);
+  min-width: 0;
+  padding: var(--space-48) var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.content > * {
+  max-width: var(--measure);
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-heading);
+}
+
+h1 {
+  font-size: var(--text-h1);
+}
+
+h2 {
+  font-size: var(--text-h2);
+}
+
+p {
+  margin: 0;
+}
+
+.card {
+  background: var(--surface);
+  color: var(--ink);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-card);
+  padding: var(--space-18);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.lede {
+  font-size: var(--text-body);
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  padding: var(--space-14) var(--space-24);
+  background: var(--surface);
+  border-top: var(--border-width) solid var(--line);
+  color: var(--muted);
+  font-size: var(--text-small);
+}
+
+.site-footer .mono {
+  font-family: var(--font-mono);
+}
+
+.site-footer a {
+  color: var(--ink);
+  text-underline-offset: var(--focus-offset);
+}

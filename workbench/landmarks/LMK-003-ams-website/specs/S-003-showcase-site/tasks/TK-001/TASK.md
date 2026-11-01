@@ -3,7 +3,7 @@
 **Task ID:** TK-001
 **Spec ID:** S-003
 **Slice:** A reader opens the `dev` deployment and gets the shell: navigation, light/dark with toggle, the deployed SHA linked to GitHub, and a server-rendered home page
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: SHA on every page; Responsive and accessible
 **Planned verification:** site build and tests plus the `dev` deployment checked at 375 px
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `dev`. Read this Task and the parent Spec (`../../SPEC.md`) from `origin/main`; branch from `origin/dev`, open a PR into `dev` and merge it once current and checked. Never merge `dev` -> `main`; only the owner does. Orchestrator A's lane: no Supabase service key, no web browsing; check the protected `dev` deployment through the Vercel connector ([ADR-003B](../../../../../../docs/adr/003B-the-dev-site-is-visible-only-to-the-owner-claude-and-codex.md)). Document site commands in `site/README.md`.
+**Claimed by:** orchestrator-A-dispatcher-S003
+**Current claimant:** orchestrator-A-dispatcher-S003
 
 Read `AGENTS.md`, DDR-000O, DDR-000S and DDR-000M under `workbench/docs/ddr/`, and the scaffold in `site/` on `origin/dev`.
 
