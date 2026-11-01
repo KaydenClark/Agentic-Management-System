@@ -30,6 +30,10 @@ node tests/browser-375.check.mjs --shots /tmp/shots   # also saves screenshots
 - Footer SHA: `next.config.ts` fixes it at build time from `VERCEL_GIT_COMMIT_SHA`, else `git rev-parse HEAD`, else `unknown`.
 - Fonts (IBM Plex Sans, IBM Plex Mono, Zilla Slab) are self-hosted through `@fontsource`; the site makes no third-party requests.
 
+## Theme token check
+
+The theme block of `app/theme/tokens.css` (light, manual dark, the system-dark `@media` rule and the `.tone`/`.h-*` mixes) is generated from `../grill-board/theme/tokens.json`, the recorded Grill Board theme ([DDR-000Y](../workbench/docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)), and sits between the `BEGIN theme tokens` and `END theme tokens` markers. To change a color, edit `tokens.json`, then run `npm run tokens:gen` (`node scripts/gen-tokens.mjs --write`; without `--write` it prints the block). `tests/tokens-json.test.mjs` fails `npm test` unless the block equals the generator's output byte for byte, each marker appears once, and nothing outside the markers declares a recorded token or holds a color-like value. Type and spacing tokens are hand-written after the block and are not in `tokens.json`, so they are not compared; `tests/tokens.test.mjs` still keeps every literal inside `tokens.css`. Vercel builds with root directory `site/`, so the check runs in the local `npm test` only.
+
 ## RSI charts (`/rsi`)
 
 The chart page lives in `app/rsi/`. It renders from `seriesViews(rowsBySeries)` in `app/rsi/data.ts`; until S-006's result rows exist it is fed an empty array per series (`app/rsi/fixtures/empty.ts`), so every chart place shows its "no trials recorded yet" state and no number. Its render tests, including planted-fault cases, are `tests/rsi-empty.test.mjs` and run with `npm test`.
