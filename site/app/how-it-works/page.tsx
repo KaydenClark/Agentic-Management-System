@@ -199,7 +199,7 @@ export default function HowItWorks() {
             <Source path="ARCHITECTURE.md">Architecture, Bird&apos;s-eye view</Source>
           </li>
           <li>
-            No improvement has been measured yet; the <Link href="/rsi">RSI results</Link> page, next in the reading
+            No improvement has been measured yet; the <Link href="/rsi">RSI results</Link> page, later in the reading
             order, shows where results will appear.
           </li>
         </ul>

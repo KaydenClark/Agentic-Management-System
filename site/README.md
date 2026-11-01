@@ -47,6 +47,13 @@ The theme block of `app/theme/tokens.css` (light, manual dark, the system-dark `
 - Tests (`npm test`): `tests/tour-inventory.test.mjs` (pages exist, openers, placeholders, quotes, GitHub links name existing files) and `tests/tour-links.test.mjs` (reading order, back/forward links on every page, no orphan page, internal links resolve). Each runs planted-fault self-tests first.
 - Browser check at 375 px, both themes, every page in the reading order: `node tests/tour-375.check.mjs [--shots DIR]` (needs Playwright with Chromium; screenshots are `tour-<page>-<theme>-375.png`).
 
+## Under the hood (`/under-the-hood`)
+
+- The build-history page (S-003 TK-006), in the reading order after How it works. It reads S-006's `public.build_events` rows server-side with plain `fetch` against Supabase REST (`app/under-the-hood/history.ts`; no Supabase client dependency), filtered `is_test=is.false` (RLS hides test rows too) and ordered by `occurred_at`, then renders them grouped by hour in Mountain time in server-rendered `<details>`, with CSS-only filter boxes per kind of event. Each event links its row's `source_url`; Claude-Session links are stripped at render (the rows are untouched).
+- Settings, read from the server environment at build and at each revalidation (every 10 minutes): `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` (the publishable key). They are read by computed name so Next does not inline them into the build output. Without them, or if the read fails, the page builds and shows the empty state with a note; the build never fails on it.
+- Every word in the history region comes from a row. Tests (`npm test`): `tests/under-the-hood.test.mjs` renders `history.ts` on `tests/fixtures/build-events.mjs` with `react-dom/server` (Node strips the types) and checks order, source links, provenance of every history sentence (with planted-fault cases), test rows, session-link stripping, colors, the empty state and the REST reader; on the built page it checks the opener and that no file under `.next/` holds a Supabase key.
+- Local live read: export the two settings, then `npm run build && npm test`.
+
 ## RSI charts (`/rsi`)
 
 The chart page lives in `app/rsi/`. It renders from `seriesViews(rowsBySeries)` in `app/rsi/data.ts`; until S-006's result rows exist it is fed an empty array per series (`app/rsi/fixtures/empty.ts`), so every chart place shows its "no trials recorded yet" state and no number. Its render tests, including planted-fault cases, are `tests/rsi-empty.test.mjs` and run with `npm test`.

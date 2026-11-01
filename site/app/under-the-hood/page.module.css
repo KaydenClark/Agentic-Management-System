@@ -1,0 +1,188 @@
+/* /under-the-hood styles. Signal hues appear only through the .tone/.h-*
+   mixes from tokens.css, each with its one meaning: returned (purple) for
+   corrections and returns, agent (green) for work a row says an agent did,
+   none (grey) for everything else. Every value comes from app/theme/tokens.css. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+.intro,
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.legend {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.swatch,
+.badge {
+  display: inline-block;
+  background: var(--tone-soft);
+  color: var(--tone-ink);
+  border: var(--border-width) solid var(--tone-line);
+  border-radius: var(--radius-pill);
+  padding: 0 var(--space-8);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+}
+
+.kinds {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.kind dt {
+  font-weight: var(--weight-semibold);
+}
+
+.kind dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+.source {
+  color: var(--muted);
+  font-size: var(--text-small);
+}
+
+/* The history: rows only. */
+
+.history {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.totals {
+  margin: 0;
+  color: var(--muted);
+}
+
+.filter {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 var(--space-18);
+  padding: var(--space-8) var(--space-14);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+
+.filter legend {
+  padding: 0 var(--space-4);
+  font-weight: var(--weight-semibold);
+}
+
+.filterOption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: var(--control-min-height);
+  cursor: pointer;
+}
+
+.check {
+  margin: 0;
+  width: var(--space-20);
+  height: var(--space-20);
+  accent-color: var(--ink);
+}
+
+.group {
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+  padding: 0 var(--space-14);
+}
+
+.groupSummary {
+  cursor: pointer;
+  padding: var(--space-10) 0;
+  min-height: var(--control-min-height);
+  font-weight: var(--weight-semibold);
+}
+
+.count {
+  color: var(--muted);
+  font-weight: var(--weight-regular);
+}
+
+.events {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* A closed hour's events are out of layout, not just unpainted, so they are
+   neither shown nor counted as controls. */
+.group:not([open]) > .events {
+  display: none;
+}
+
+.event {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-10) 0;
+  border-top: var(--border-width) solid var(--line);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.time,
+.subject {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+}
+
+.summary,
+.subject {
+  overflow-wrap: anywhere;
+}
+
+/* The filter boxes: an unticked category hides its events. CSS only, so it
+   works with scripts off. */
+.page:has(input[data-filter-for="plans"]:not(:checked)) li[data-category="plans"],
+.page:has(input[data-filter-for="prs"]:not(:checked)) li[data-category="prs"],
+.page:has(input[data-filter-for="commits"]:not(:checked)) li[data-category="commits"],
+.page:has(input[data-filter-for="rework"]:not(:checked)) li[data-category="rework"],
+.page:has(input[data-filter-for="other"]:not(:checked)) li[data-category="other"] {
+  display: none;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-14);
+  border: var(--border-width) dashed var(--line-strong);
+  border-radius: var(--radius-card);
+}
+
+.empty p {
+  margin: 0;
+}
+
+.emptyTitle {
+  font-weight: var(--weight-semibold);
+}

@@ -9,7 +9,9 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { builtPage, servedFiles, visibleText } from './helpers.mjs';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { join } from 'node:path';
+import { builtPage, servedFiles, siteDir, visibleText } from './helpers.mjs';
 import { hygieneFindings } from './hygiene.mjs';
 import { mainOf, pageProblems } from './tour-helpers.mjs';
 import { FIXTURE_ORDER, FIXTURE_ROWS } from './fixtures/build-events.mjs';
@@ -18,14 +20,14 @@ import { History, CATEGORIES, categoryOf, eventTime, groupLabel, historyView, ki
 const render = (rows, note = null) => renderToStaticMarkup(createElement(History, { view: historyView(rows), note }));
 const decode = (s) => s.replace(/&amp;/g, '&').replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 const text = (html) => decode(visibleText(html));
-const attr = (tag, name) => decode(tag.match(new RegExp(`\\s${name}="([^"]*)"`))?.[1] ?? '');
+const attr = (tag, name) => decode(tag.match(new RegExp(`\\s${name}="([^"]*)"`, "i"))?.[1] ?? "");
 const field = (html, name) => {
   const m = html.match(new RegExp(`<([a-z]+)\\b[^>]*data-field="${name}"[^>]*>([\\s\\S]*?)</\\1>`));
   return m ? { tag: m[0], text: text(m[2]) } : null;
 };
 
 // The history region: everything inside <section data-history>.
-const historyOf = (html) => html.match(/<section\b[^>]*data-history[^>]*>([\s\S]*)<\/section>/)?.[1] ?? '';
+const historyOf = (html) => html.match(/<section\b[^>]*data-history[^>]*>([\s\S]*?)<\/section>/)?.[1] ?? '';
 const eventsOf = (html) => [...historyOf(html).matchAll(/<li\b[^>]*data-event[^>]*>[\s\S]*?<\/li>/g)].map((m) => m[0]);
 const rowIds = (html) => eventsOf(html).map((li) => Number(attr(li, 'data-row-id')));
 
@@ -77,7 +79,7 @@ function historyProblems(html, rows) {
   });
   // The count line: derived numbers only.
   rest = rest.replace(/<p\b[^>]*data-totals[^>]*>([\s\S]*?)<\/p>/, (p, inner) => {
-    if (!/^\d+ events?, oldest first\.( \d+ rows? not shown because (it has|they have) no https source link\.)?$/.test(text(inner))) problems.push(`totals line "${text(inner)}" is not derived from rows`);
+    if (!/^\d+ events?, oldest first\.( \d+ rows? not shown because (it has|they have) no https source link or no text\.)?$/.test(text(inner))) problems.push(`totals line "${text(inner)}" is not derived from rows`);
     return ' ';
   });
   const left = text(rest);
@@ -133,7 +135,7 @@ test('a test row never renders, and a row with no https source is counted, not s
   assert.doesNotMatch(html, /HIDDEN TEST ROW|test999/);
   assert.ok(!rowIds(html).includes(98), 'unlinked row rendered');
   assert.doesNotMatch(html, /UNLINKED ROW/);
-  assert.match(text(historyOf(html)), /1 row not shown because it has no https source link\./);
+  assert.match(text(historyOf(html)), /1 row not shown because it has no https source link or no text\./);
   assert.ok(historyView(FIXTURE_ROWS).events.every((e) => e.row.is_test === false));
   // Only the test row and only test rows: still the empty state.
   const onlyTest = FIXTURE_ROWS.filter((r) => r.is_test);
@@ -234,9 +236,9 @@ test('/under-the-hood is built with its title, a plain-language opener and the h
   const { html } = builtPage('under-the-hood.html');
   assert.match(html, /<title>Under the hood \| Agentic Management System<\/title>/);
   assert.match(visibleText(html.match(/<h1[\s\S]*?<\/h1>/i)?.[0] ?? ''), /Under the hood/);
-  assert.match(html, /<section\b[^>]*data-history/);
+  assert.match(html, /<section\b[^>]*data-history|data-empty-state/);
   // The tour inventory rules apply to the page's own prose; the rows are data.
-  const prose = html.replace(/<section\b[^>]*data-history[^>]*>[\s\S]*<\/section>/, '<section></section>');
+  const prose = html.replace(/<section\b[^>]*data-history[^>]*>[\s\S]*?<\/section>/, '<section></section>');
   assert.deepEqual(pageProblems(prose), []);
 });
 
@@ -254,6 +256,20 @@ test('the built page shows rows with source links, or the empty state', () => {
   }
 });
 
-test('no served file carries a Supabase key, the publishable one included', () => {
-  for (const f of servedFiles()) assert.doesNotMatch(f.text, /sb_publishable_[A-Za-z0-9_-]{8,}/, f.name);
+// The key is read on the server at render time; it must not be inlined into
+// any build output, served or not (server chunks, manifests, caches).
+const KEY_SHAPE = /sb_(?:publishable|secret)_[A-Za-z0-9_-]{8,}/;
+function* buildFiles(dir) {
+  for (const name of readdirSync(dir)) {
+    const path = join(dir, name);
+    if (statSync(path).isDirectory()) yield* buildFiles(path);
+    else yield path;
+  }
+}
+
+test('no build output file carries a Supabase key, the publishable one included', () => {
+  for (const f of servedFiles()) assert.doesNotMatch(f.text, KEY_SHAPE, f.name);
+  for (const path of buildFiles(join(siteDir, '.next'))) {
+    assert.doesNotMatch(readFileSync(path, 'latin1'), KEY_SHAPE, path.slice(siteDir.length));
+  }
 });
