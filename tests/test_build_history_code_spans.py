@@ -111,3 +111,23 @@ def test_image_operator_and_escaped_literal_bang_are_distinct(relocated, locatio
     set_example(repo, sha, location, lambda links: prefix + links.replace("\n", "\n" + prefix))
     count = sum("#evidence-" in r["source_ref"] for r in bh.record_rows(git_runner(repo), lifecycle))
     assert count == (8 if slashes % 2 else 0)
+
+
+@pytest.mark.parametrize("location", ["article", "router"])
+@pytest.mark.parametrize("marker", ["2. continuation", "- ", "1234567890. continuation"])
+def test_literal_list_like_continuations_do_not_end_open_code_spans(relocated, location, marker):
+    repo, sha, _ = relocated
+    set_example(repo, sha, location,
+                lambda links: "Example `\n" + marker + "\n" + links + "\nend `")
+    assert not any("#evidence-" in r["source_ref"]
+                   for r in bh.record_rows(git_runner(repo), lifecycle))
+
+
+@pytest.mark.parametrize("location", ["article", "router"])
+@pytest.mark.parametrize("marker", ["1. new list", "001. new list", "- new list"])
+def test_real_list_interruptions_keep_ordinary_declarations_visible(relocated, location, marker):
+    repo, sha, _ = relocated
+    set_example(repo, sha, location,
+                lambda links: "Example `unmatched\n" + marker + "\n" + links + "\nend `")
+    assert sum("#evidence-" in r["source_ref"]
+               for r in bh.record_rows(git_runner(repo), lifecycle)) == 8
