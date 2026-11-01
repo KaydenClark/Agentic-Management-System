@@ -16,7 +16,7 @@
 | [000H](000H-confirmation-approval-and-the-two-delivery-paths.md) | Confirmation, approval and the two delivery paths | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [000I](000I-the-decision-journey-is-tracked-apart-from-delivery.md) | The decision journey is tracked apart from delivery | accepted | 2026-11-01 | BLUEPRINT.md |
 | [000J](000J-every-owner-question-has-a-too-taxing-flag-and-a-rating.md) | Every owner question has a too-taxing flag and a rating | accepted | 2026-11-01 | grill-board |
-| [000K](proposed/000K-every-card-carries-priority-and-value-grades.md) | Every card carries Priority and Value grades | proposed | 2026-11-01 | grill-board |
+| [000K](000K-every-card-carries-priority-and-value-grades.md) | Every card carries Priority and Value grades | accepted | 2026-11-01 | grill-board |
 | [000L](proposed/000L-one-local-page-shows-what-waits-on-the-owner.md) | One local page shows what waits on the owner | proposed | 2026-11-01 | grill-board |
 | [000M](proposed/000M-colors-on-owner-pages-are-signals-with-one-meaning-each.md) | Colors on owner pages are signals with one meaning each | proposed | 2026-11-01 | grill-board, site |
 | [000N](proposed/000N-setup-drafts-the-blueprint-and-starts-a-grilling.md) | Setup drafts the Blueprint and starts a grilling | proposed | 2026-11-01 | BLUEPRINT.md, RUNBOOK.md |
