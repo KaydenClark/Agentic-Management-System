@@ -30,6 +30,7 @@ test('the checks catch faults (self-test)', () => {
   assert.ok(quoteProblems(fig(real, 'Kayden, 2026-10-31')).length, 'quote without source passes');
   assert.ok(quoteProblems(fig(real, `Kayden, <a href="${src}">record</a>`)).length, 'undated quote passes');
   assert.ok(quoteProblems(fig('a tidy paraphrase of what the owner meant', `Kayden, 2026-10-31, <a href="${src}">record</a>`)).length, 'paraphrase shown as quote passes');
+  assert.deepEqual(quoteProblems('<main><p>A page that quotes no one passes.</p></main>'), [], 'a page with no quote fails');
   assert.ok(quoteProblems('<main><p>Kayden called it “a tool belt wrapped in one loop”.</p></main>').length, 'loose quote marks pass');
 });
 

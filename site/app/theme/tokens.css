@@ -183,6 +183,15 @@
   --topnav-order: 0;
   --topnav-flex: 1 1 auto;
   --brand-flex: 0 1 auto;
+
+  /* /start diagrams and toy. */
+  --node-basis: 112px; /* a lifecycle node's minimum width */
+  --stop-basis: 56px; /* a toy track stop's minimum width */
+  --dot-size: 10px; /* a holder dot */
+  --dot-size-live: 14px; /* the dot of the stage the work is on */
+  --hub-size: 300px; /* the What the AMS is picture */
+  --ring-width: 3; /* the loop ring's stroke, in picture units */
+  --motion-quick: 0.2s; /* a stage change; none under reduced motion */
 }
 
 /* Narrow screens: title and theme toggle share the first row of the top bar,
