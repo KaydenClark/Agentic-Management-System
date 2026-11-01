@@ -25,7 +25,14 @@ Use existing topic owners; grow flat Wiki notes through [MEMORY](workbench/wiki/
 
 ## Test And Build
 
-No application, test suite or eval runner exists yet. Room checks, from the root:
+Python runtime (Python 3.14.5 via uv, [ADR-003D](workbench/docs/adr/003D-python-3-14-5-pinned-with-uv.md)):
+
+```bash
+uv run pytest          # Python test suite
+uv run ams-keycheck    # Supabase service key: prints loaded, format, authenticated, HTTP status only
+```
+
+`ams-keycheck` reads `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` from the environment, else from the gitignored env file at the repository root; it never prints the key. Only orchestrator B's lane holds the key, so run it there (`uv run --directory <main checkout> ams-keycheck`). No eval runner exists yet. Room checks, from the root:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render
