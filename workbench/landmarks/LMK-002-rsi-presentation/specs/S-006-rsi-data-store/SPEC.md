@@ -111,6 +111,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | TK-000C | Task closed | TK-000E, a4470a4: tests/test_secret_scan.py scans tree and history | Spec | none; close attribution: {"agent":"orch-b","claimant":"orch-b","onBehalfOf":null} |
 | 2026-11-01 | TK-000D | Task closed | TK-000E, a4470a4: test_recorded_fact_is_for_build_history_only; DB check 20261101144510 | Spec | none; close attribution: {"agent":"orch-b","claimant":"orch-b","onBehalfOf":null} |
 | 2026-11-01 | TK-000B | Task closed | 8 lines checked, proof in TK-000B at a4470a4 | Spec | Fresh review; close attribution: {"agent":"orch-b","claimant":"orch-b","onBehalfOf":null} |
+| 2026-11-01 | review | Review verdict: pass at d6d4a6d65cc6287b667fe78ee5db937440972a5e [213a7241e512] #2 | none | Orchestrator C, Claude cloud session, separate from B's build lanes: repo-only half. Live-database half is B's local reviewer's. | none |
 
 ## Review and Human QA
 
