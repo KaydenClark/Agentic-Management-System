@@ -6,6 +6,7 @@ requires-python = "==3.14.*"
 dependencies = []
 
 [project.scripts]
+ams-board = "ams.grill_board.server:main"
 ams-keycheck = "ams.keycheck:main"
 
 [build-system]
