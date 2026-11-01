@@ -32,6 +32,8 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 
 - TK-000S corrects the exact-source `110bb7a` identity defect with source `ad7fa28`:84 focused, full local/fresh517 passed/4 skipped, live scalar conflicts refused with0 mutation requests and cleanup0. Earlier candidate reviews remain retained; checked merge and current whole Review are separate from formal owner QA/acceptance.
 
+- Post-merge pinned readcheck at `6e30c87`/dev `8ba15e0`:1,030 rows, missing0/extra8/mismatches0/unsourced0. PR #85 relocated two S-007 and six S-003 history rows to the Wiki; all8 match original ancestor blobs and the declared97bfcaa archive. TK-000U owns consumer maintenance; no retained history is deleted and the earlier successful checks remain scoped history.
+
 ## Desired Behavior
 
 - Tables for RSI results, build history and run metadata. Each result names task, held-out or dev, arm (AMS, no-AMS or plain instructions), system version (runtime, controls and skills commits), provider, model, effort, pass, cost, tokens, completed state and source.
@@ -75,7 +77,7 @@ One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (t
 - [x] **Conflict refusal.** A writer update against a row changed since it was read is refused. *Must fail:* a silent overwrite. [Proof][p].
 - [x] **Real sources only.** Each seed row names its source and strength label. *Must fail:* a row with no source, or a sample value presented as real. [Proof][p].
 - [x] **Key loads and authenticates.** A check reports only whether `SUPABASE_SERVICE_ROLE_KEY` loaded and whether Supabase accepted it, for `sb_secret_` and legacy keys. *Must fail:* any output, log or file containing the value. [Proof][p]; legacy JWT by fakes only (see limits).
-- [x] **Build history from real records.** Supabase holds build-history rows from this build's real Spec, Task, PR and commit records, each naming its source (path, PR number or commit SHA); returns and corrections are rows. Re-importing adds no duplicates. *Must fail:* a hand-typed row or a row with no source. [Proof][p].
+- [ ] **Build history from real records.** Supabase holds build-history rows from this build's real Spec, Task, PR and commit records, each naming its source (path, PR number or commit SHA); returns and corrections are rows. Re-importing adds no duplicates. *Must fail:* a hand-typed row or a row with no source. [Proof][p].
 - [x] **No secrets in Git.** The hygiene check finds no service key in the repository. *Must fail:* a committed key. [Proof][p].
 
 [p]: tasks/TK-000B/TASK.md#proof
