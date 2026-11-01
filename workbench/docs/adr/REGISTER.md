@@ -26,3 +26,4 @@
 | [000R](000R-a-task-is-one-agent-run.md) | A Task is one agent run | accepted | 2026-11-01 | workbench/specs |
 | [000S](000S-a-spec-is-accepted-against-its-conditions.md) | A Spec is accepted against its conditions | accepted | 2026-11-01 | workbench/specs |
 | [000T](000T-scaffolding-is-deleted-at-close.md) | Scaffolding is deleted at close | accepted | 2026-11-01 | workbench/specs, ARCHITECTURE.md |
+| [000U](000U-a-prototype-needs-no-spec.md) | A prototype needs no Spec | accepted | 2026-11-01 | workbench/specs |
