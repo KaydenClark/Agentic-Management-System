@@ -1,0 +1,151 @@
+/*
+ * AMS site theme tokens: the only file allowed to hold color, type or spacing
+ * values (tests/tokens.test.mjs enforces this).
+ *
+ * Source: owner design canvas Grilling Board Redesign, Color system v2.2;
+ * theme CDR pending from orchestrator B on main.
+ * Token names are kept exactly as the canvas names them so the local board
+ * can share this file. Owner choice grill-board-theme-tokens: the owner chose
+ * this canvas (relayed by orchestrator B, 2026-11-01); the theme CDR records it.
+ *
+ * Colors are signals with one stated meaning each (DDR-000M). The greys are
+ * the page, not signals. Light is the default; the system's dark preference
+ * switches to dark; a manual choice ([data-theme] on <html>, set by the theme
+ * toggle and stored in localStorage) overrides both. .t-light / .t-dark keep
+ * the canvas's class names for scoped use.
+ */
+
+:root,
+[data-theme="light"],
+.t-light {
+  --ground: #F7F7F7; /* grey: the page background, not a signal */
+  --surface: #FFFFFF; /* grey: cards, header and sidebar, not a signal */
+  --raised: #EFEFEF; /* grey: hover and current-item fill, not a signal */
+  --line: #E0E0E0; /* grey: quiet borders between regions, not a signal */
+  --line-strong: #808080; /* grey: control borders and emphasised edges, not a signal */
+  --muted: #474747; /* grey: secondary text, not a signal */
+  --ink: #0A0A0A; /* grey: primary text, not a signal */
+  --pole: #000000; /* grey: the mixing pole that darkens tone ink, not a signal */
+  --heat: #F04E12; /* heat: something is on fire, blocked or in error */
+  --worth: #F5C400; /* worth: why it is worth your time */
+  --owner: #2F86DC; /* owner (blue): the ball is with the owner */
+  --agent: #27A046; /* agent (green): agents are carrying it */
+  --returned: #A66BE0; /* returned (purple): it came back for rework */
+  --soft-pct: 22%;
+  --line-pct: 68%;
+  --dot-pct: 72%;
+  color-scheme: light;
+}
+
+[data-theme="dark"],
+.t-dark {
+  --ground: #0A0A0A; /* grey: the page background, not a signal */
+  --surface: #191919; /* grey: cards, header and sidebar, not a signal */
+  --raised: #232323; /* grey: hover and current-item fill, not a signal */
+  --line: #333333; /* grey: quiet borders between regions, not a signal */
+  --line-strong: #757575; /* grey: control borders and emphasised edges, not a signal */
+  --muted: #A8A8A8; /* grey: secondary text, not a signal */
+  --ink: #F7F7F7; /* grey: primary text, not a signal */
+  --pole: #FFFFFF; /* grey: the mixing pole that lightens tone ink, not a signal */
+  --heat: #FF5A1F; /* heat: something is on fire, blocked or in error */
+  --worth: #FFD60A; /* worth: why it is worth your time */
+  --owner: #4C9BE8; /* owner (blue): the ball is with the owner */
+  --agent: #3DBE5A; /* agent (green): agents are carrying it */
+  --returned: #A66BE0; /* returned (purple): it came back for rework */
+  --soft-pct: 22%;
+  --line-pct: 62%;
+  --dot-pct: 80%;
+  color-scheme: dark;
+}
+
+/* System dark preference: the same values as [data-theme="dark"] above
+   (tests/theme.test.mjs checks the two blocks are identical). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0A0A0A; /* grey: the page background, not a signal */
+    --surface: #191919; /* grey: cards, header and sidebar, not a signal */
+    --raised: #232323; /* grey: hover and current-item fill, not a signal */
+    --line: #333333; /* grey: quiet borders between regions, not a signal */
+    --line-strong: #757575; /* grey: control borders and emphasised edges, not a signal */
+    --muted: #A8A8A8; /* grey: secondary text, not a signal */
+    --ink: #F7F7F7; /* grey: primary text, not a signal */
+    --pole: #FFFFFF; /* grey: the mixing pole that lightens tone ink, not a signal */
+    --heat: #FF5A1F; /* heat: something is on fire, blocked or in error */
+    --worth: #FFD60A; /* worth: why it is worth your time */
+    --owner: #4C9BE8; /* owner (blue): the ball is with the owner */
+    --agent: #3DBE5A; /* agent (green): agents are carrying it */
+    --returned: #A66BE0; /* returned (purple): it came back for rework */
+    --soft-pct: 22%;
+    --line-pct: 62%;
+    --dot-pct: 80%;
+    color-scheme: dark;
+  }
+}
+
+/* Derived tones, as the canvas's .tone rule: pick a hue with .h-*, then use
+   --tone-soft (at-rest fill), --tone-ink (text on that fill), --tone-line
+   (outline) and --tone-dot (live dot). Each carries its hue's one meaning. */
+.tone {
+  --on: #0A0A0A; /* grey: text on a strong hue fill, not a signal */
+  --tone-soft: color-mix(in oklab, var(--hue) var(--soft-pct), var(--surface)); /* the hue's meaning, at rest */
+  --tone-ink: color-mix(in oklab, var(--hue) 40%, var(--pole)); /* the hue's meaning, as text */
+  --tone-line: color-mix(in oklab, var(--hue) var(--line-pct), var(--pole)); /* the hue's meaning, as an outline */
+  --tone-dot: color-mix(in oklab, var(--hue) var(--dot-pct), var(--pole)); /* the hue's meaning, live */
+}
+.h-heat { --hue: var(--heat); }
+.h-worth { --hue: var(--worth); }
+.h-owner { --hue: var(--owner); }
+.h-agent { --hue: var(--agent); }
+.h-returned { --hue: var(--returned); }
+.h-none { --hue: var(--line-strong); }
+
+:root {
+  /* Type: self-hosted from @fontsource (no third-party requests). */
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-heading: 'Zilla Slab', Georgia, 'Times New Roman', serif;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --text-body: 16px; /* canvas page body */
+  --text-ui: 15px; /* buttons */
+  --text-nav: 14px; /* sidebar links */
+  --text-small: 13px; /* eyebrows, pills, footer */
+  --text-brand: 26px; /* header wordmark */
+  --text-h2: 34px; /* section headings */
+  --text-h1: 48px; /* page title */
+  --leading-body: 1.55;
+  --leading-tight: 1;
+  --leading-heading: 1.1;
+  --tracking-eyebrow: 0.08em;
+
+  /* Spacing, named by size in px. */
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-48: 48px;
+
+  /* Shape and size conventions from the canvas. */
+  --radius-card: 14px;
+  --radius-panel: 16px;
+  --radius-control: 10px;
+  --radius-nav: 8px;
+  --radius-badge: 7px;
+  --radius-pill: 999px;
+  --border-width: 1px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+  --control-min-height: 44px;
+  --icon-size: 16px;
+  --sidebar-basis: 264px;
+  --content-basis: 320px;
+  --measure: 68ch;
+  --page-min-height: 100vh;
+}
