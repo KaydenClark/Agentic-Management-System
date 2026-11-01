@@ -37,3 +37,5 @@ CI workflow `41337850971` (run #32) passed at `4e111c9`, including the browser/r
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | codex/s002-assessment-loop | 5ec9fd3041f0ede1585e825db1fa8095f19dd54f | ahead 0 behind 0 | 0 | 40 focused; fresh 431/4 skip; CI #32 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} | 011bf1a471bfe9520c4233bb833f38fdb6c7b4e94fbec755b8dd4fbc681c61d2 |
+
+Final PR review found a separate historical-ID/current-Regression collision at `d8fc717`; [TK-000O](../TK-000O/TASK.md) owns the correction before delivery. Prior proof remains historical.
