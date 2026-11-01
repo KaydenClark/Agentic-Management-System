@@ -60,13 +60,17 @@ export function parseRules(css) {
 const norm = (v) => v.replace(/\s+/g, ' ').replace(/\s*([,()])\s*/g, '$1').trim().replace(/#[0-9a-f]{3,8}\b/gi, (h) => h.toUpperCase());
 const isColorish = (v) => COLOR_VALUE.test(v) || (/^[a-z]+$/i.test(v) && !NON_COLOR_WORD.test(v));
 
-function themeOf(rule) {
-  const sels = rule.selector.split(',').map((s) => s.trim());
-  if (rule.media && /prefers-color-scheme:\s*dark/.test(rule.media)) return 'dark';
-  if (rule.media) return null;
-  if (sels.includes('[data-theme="dark"]')) return 'dark';
-  if (sels.includes('[data-theme="light"]')) return 'light';
-  return null;
+// The only rules allowed to set theme tokens, matched exactly by media query and selector.
+// Anything else that sets a recorded token is reported (see differences()).
+const THEME_RULES = [
+  { key: 'light', theme: 'light', media: null, selector: ':root, [data-theme="light"], .t-light' },
+  { key: 'dark', theme: 'dark', media: null, selector: '[data-theme="dark"], .t-dark' },
+  { key: 'mediaDark', theme: 'dark', media: '@media (prefers-color-scheme: dark)', selector: ':root:not([data-theme="light"])' },
+];
+const squash = (v) => (v == null ? null : v.replace(/\s+/g, ' ').replace(/\s*,\s*/g, ', ').trim());
+
+function themeRuleOf(rule) {
+  return THEME_RULES.find((t) => squash(t.media) === squash(rule.media) && squash(t.selector) === squash(rule.selector)) || null;
 }
 
 function compareDecls(where, actual, expected, out) {
@@ -98,13 +102,14 @@ export function differences(css, json) {
   const seen = { dark: 0, light: 0, mediaDark: 0 };
   const seenMix = new Set();
   for (const rule of parseRules(css)) {
-    const theme = themeOf(rule);
+    const themeRule = themeRuleOf(rule);
+    const theme = themeRule ? themeRule.theme : null;
     const where = rule.media ? `${rule.media} ${rule.selector}` : rule.selector;
     const mix = !theme && !rule.media && rule.selector in json.mixes ? json.mixes[rule.selector] : null;
     checkDeclarations(where, rule, theme ? json.themes[theme] : mix || {}, out);
     if (theme) {
-      if (rule.media) seen.mediaDark++;
-      else seen[theme]++;
+      seen[themeRule.key]++;
+      if (seen[themeRule.key] > 1) out.push(`${where}: a second ${themeRule.key} theme rule; each theme rule may appear once`);
       compareDecls(where, rule.decls, json.themes[theme], out);
       continue;
     }
