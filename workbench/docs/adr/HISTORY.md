@@ -45,7 +45,7 @@
 | [001K](001K-a-pr-merges-only-after-checks-on-the-combined-commit.md) | A PR merges only after checks on the combined commit | accepted | 2026-11-01 | AGENTS.md |
 | [001L](001L-verify-runs-the-full-suite-on-one-commit.md) | Verify runs the full suite on one commit | accepted | 2026-11-01 | RUNBOOK.md |
 | [001M](001M-a-claim-is-a-pushed-branch-and-a-draft-pr.md) | A claim is a pushed branch and a draft PR | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
-| [001N](proposed/001N-the-wiki-is-a-small-linked-synthesis.md) | The Wiki is a small linked synthesis | proposed | 2026-11-01 | workbench/wiki |
+| [001N](001N-the-wiki-is-a-small-linked-synthesis.md) | The Wiki is a small linked synthesis | accepted | 2026-11-01 | workbench/wiki |
 | [001O](proposed/001O-links-and-grep-before-any-vector-index.md) | Links and grep before any vector index | proposed | 2026-11-01 | ARCHITECTURE.md |
 | [001P](proposed/001P-continuity-is-proven-by-a-fresh-recipient-trial.md) | Continuity is proven by a fresh-recipient trial | proposed | 2026-11-01 | AGENTS.md, evals |
 | [001Q](proposed/001Q-temporary-notes-are-reconciled-and-deleted.md) | Temporary notes are reconciled and deleted | proposed | 2026-11-01 | AGENTS.md |
