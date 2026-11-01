@@ -1,0 +1,55 @@
+/* /rsi styles. Theme values come only from the S-003 shell's tokens
+   (site/app/theme/tokens.css) through var(--...). Empty places are
+   "nothing here yet" states, so they use greys and a dashed frame, never a
+   signal hue (DDR-000M). Spacing and type sizes are left to the shell: no
+   spacing or type tokens exist yet, and no literals are used in their place. */
+
+.page {
+  color: var(--ink);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.split {
+  border-top: 1px solid var(--line-strong);
+}
+
+.places {
+  display: grid;
+}
+
+.place {
+  margin-inline: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.placeTitle {
+  color: var(--ink);
+}
+
+.plot {
+  min-block-size: 8lh;
+  border: 1px dashed var(--line-strong);
+  background: var(--ground);
+}
+
+.empty {
+  color: var(--ink);
+  font-weight: bold;
+}
+
+.terms {
+  color: var(--muted);
+}
+
+.terms dt {
+  color: var(--ink);
+  font-weight: bold;
+}
+
+.next {
+  color: var(--ink);
+}
