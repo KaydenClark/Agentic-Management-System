@@ -3,7 +3,7 @@
 **Task ID:** TK-001
 **Spec ID:** S-004
 **Slice:** The owner starts the board with one command and sees every committed card with Priority and Value and a reason for each
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Signals on every card; Local only
 **Planned verification:** pytest over a fixture card set through the HTTP interface
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
+**Claimed by:** claude-s004-tk001
+**Current claimant:** claude-s004-tk001
 
 Start from a clean clone of `https://github.com/KaydenClark/Agentic-Management-System`. Read `AGENTS.md`, `RUNBOOK.md`, this Task, the parent Spec (`../../SPEC.md`), [ADR-003D](../../../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md) and the card decisions it cites: DDR-000K (Priority and Value grades), DDR-000L (one local page) and DDR-000P (local Python server) under `workbench/docs/ddr/`.
 

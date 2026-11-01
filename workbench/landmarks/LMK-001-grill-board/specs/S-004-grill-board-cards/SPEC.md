@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; four Tasks planned.
-**Next gate:** Claim TK-001.
+**Latest event:** TK-001 claimed by claude-s004-tk001.
+**Next gate:** Close TK-001 with verification and documentation proof.
 
 ## Intent and authority
 
