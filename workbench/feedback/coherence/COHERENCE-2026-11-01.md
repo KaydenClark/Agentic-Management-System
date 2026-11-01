@@ -80,3 +80,9 @@ Status of the earlier findings at this commit:
 - COH-003 (RUNBOOK at 2,986 characters) is still open, so there is still no room for the coherence commands.
 - COH-004, COH-007 to COH-011 and COH-013 still have their original dispositions. C has not verified any change.
 - COH-005, 006, 016 and 019 are repaired or declined, as recorded above.
+
+## Owner correction, 2026-11-01 (`main` `1372441`)
+
+| ID | Sev | Finding | Disposition | Return to |
+|---|---|---|---|---|
+| COH-024 | high | The coordinator's "08:00 MST demo" framing was wrong, and the owner has withdrawn it: there are no demo priorities, cutoffs or freezes, and the Specs set the review order. The framing displaced confirmed scope: the orientation tour (S-003), the skills wiki (S-008, still planned in the backlog) and RSI information on the site (S-007). One record still carries it. `workbench/handoffs/orchestrator-A-website.md` lines 15 and 43 set a "Demo freeze" for 11/02 07:00 to 09:00 MST, line 40 is a "Demo plan" section, and line 19 calls PR #47 a "demo batch". C's records hold no demo framing. "Demo Grill Board" (S-009, DDR-000V) is confirmed scope, not this framing. | diagnostic (`git grep` for timed-demo terms at `1372441`) | A: remove the demo framing from its handoff. Coordinator: restore the confirmed scope's priority by Spec order. |

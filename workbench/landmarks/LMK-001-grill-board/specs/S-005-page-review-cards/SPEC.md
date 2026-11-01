@@ -9,7 +9,7 @@
 **Catalog description:** A Grill Board review card for every website page, where the owner approves or criticizes the site and the criticism becomes the voice and taste record.
 **Blockers:** S-004
 **Latest event:** Four fresh-session Tasks planned; the Spec stays planned while the six-active-Spec cap is full.
-**Next gate:** Owner confirmation and execution approval to activate when an active slot frees.
+**Next gate:** Activate into S-004's slot once S-004 completes (review #2 passed; owner approval pending), with confirmation and execution approval recorded.
 
 ## Intent and authority
 
