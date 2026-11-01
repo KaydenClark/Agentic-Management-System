@@ -40,7 +40,7 @@ The skills are how agents operate the AMS. Explaining them faithfully, without p
 
 ## Desired Behavior
 
-- **Set.** One article for each skill on the chart, under its name in the skills repository at the pinned commit: 46 skills at commit `8782412`. Skills not on the chart get no article.
+- **Set.** One article for each skill on the chart, under its name in the skills repository at the pinned commit: 39 skills at commit `8782412` (Route 5, Align 12, Prepare 2, Journey 7, Judge 1, Complete 4, Improve 8). Skills not on the chart get no article.
 - **Index (`/skills`).** The skills grouped by the chart's seven stages in order (Route, Align, Prepare, Journey, Judge, Complete, Improve), each stage with its gloss, main-flow skills first in their order, then the others. Each skill shows its name and a one-line summary and links its article.
 - **Article (`/skills/<name>`).** Sections in this order:
   1. **What it does**: the mechanism in plain words, with its key terms defined.
