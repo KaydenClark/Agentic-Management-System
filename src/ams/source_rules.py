@@ -17,7 +17,8 @@ returns only ``not is_test``.
 Command ``ams-sources livecheck`` (service key, then publishable key) inserts
 one marked test row per table, proves the writer and the database each refuse a
 row with no source, a blank source_ref and an unlisted strength (and, on the
-RSI tables, ``recorded_fact``), proves the
+RSI tables, ``recorded_fact``), each with the SQLSTATE and the column or
+constraint ``expected_refusal`` names, proves the
 site key sees none of the test rows, then deletes every probe row and confirms
 none remain. It never writes a non-test row. No key value or HTTP body is
 printed.
@@ -27,6 +28,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import subprocess
 import sys
 import uuid
@@ -72,6 +74,24 @@ BAD_CASES = (("no source", {"source_kind": None, "source_ref": None}),
              ("blank source_ref", {"source_ref": " "}),
              ("strength vibes", {"strength": "vibes"}))
 RSI_BAD_CASES = (("strength recorded_fact", {"strength": "recorded_fact"}),)
+
+
+def expected_refusal(table: str, case: str) -> tuple[str, str, str]:
+    """(SQLSTATE, "column" or "constraint", name) the database must refuse a case with,
+    so a refusal for some other reason does not pass (review N5 at d6d4a6d)."""
+    if case == "no source":
+        return "23502", "column", "source_kind"
+    if case == "blank source_ref":
+        name = "build_events_source_ref_check" if table == "build_events" else "ams_label_check"
+        return "23514", "constraint", name
+    if case == "strength vibes":
+        return "23514", "constraint", "ams_strength_check"
+    return "23514", "constraint", f"{table}_trial_strength"
+
+
+def _named_in(message, what: str) -> str | None:
+    found = re.search(rf'{what} "([^"]+)"', message) if isinstance(message, str) else None
+    return found and found.group(1)
 
 
 def _now():
@@ -132,8 +152,15 @@ def livecheck(settings: keycheck.Settings, publishable: str, http, head: str) ->
                     print(f"{table} {case}: ACCEPTED by the writer")
                 status, body = send(settings.key, "POST", _url(settings.url, table), row)
                 code = body.get("code") if isinstance(body, dict) else None
+                want_code, what, want = expected_refusal(table, case)
                 if status is not None and 400 <= status < 500 and code in REFUSED_CODES:
-                    print(f"{table} {case}: refused by the database (code {code})")
+                    named = _named_in(body.get("message"), what)
+                    if code == want_code and named == want:
+                        print(f"{table} {case}: refused by the database (code {code}, {what} {named})")
+                    else:
+                        ok = False
+                        print(f"{table} {case}: refused by the wrong {what} (code {code}, "
+                              f"{what} {named or 'none'}; expected {want})")
                 else:
                     ok = False
                     label = "ACCEPTED" if writer._ok(status) else "inconclusive"

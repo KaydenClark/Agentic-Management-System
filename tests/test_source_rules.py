@@ -35,12 +35,13 @@ class FakePostgrest:
     """PostgREST plus the migrations' source rules, for all three site tables."""
 
     def __init__(self, *, enforce_sources=True, hide_test_rows=True,
-                 enforce_trial_strength=True):
+                 enforce_trial_strength=True, constraint_override=None):
         self.tables = {table: {} for table in TABLES}
         self.next_id = 1
         self.enforce_sources = enforce_sources
         self.hide_test_rows = hide_test_rows
         self.enforce_trial_strength = enforce_trial_strength
+        self.constraint_override = constraint_override
         self.calls = []
 
     def __call__(self, method, url, headers, body):
@@ -72,12 +73,21 @@ class FakePostgrest:
                     if payload.get(col) is None:
                         message = f'null value in column "{col}" of relation "{table}"'
                         return 400, json.dumps({"code": "23502", "message": message}).encode()
-                if (not payload["source_ref"].strip()
-                        or payload["strength"] not in source_rules.STRENGTHS
-                        or (self.enforce_trial_strength and table != "build_events"
-                            and payload["strength"] == "recorded_fact")
-                        or payload["source_kind"] not in source_rules.SOURCE_KINDS):
-                    return 400, json.dumps({"code": "23514", "message": "check"}).encode()
+                broken = None
+                if not payload["source_ref"].strip():
+                    broken = ("build_events_source_ref_check" if table == "build_events"
+                              else "ams_label_check")
+                elif payload["strength"] not in source_rules.STRENGTHS:
+                    broken = "ams_strength_check"
+                elif payload["source_kind"] not in source_rules.SOURCE_KINDS:
+                    broken = "ams_source_kind_check"
+                elif (self.enforce_trial_strength and table != "build_events"
+                      and payload["strength"] == "recorded_fact"):
+                    broken = f"{table}_trial_strength"
+                if broken:
+                    broken = self.constraint_override or broken
+                    message = f'new row for relation "{table}" violates check constraint "{broken}"'
+                    return 400, json.dumps({"code": "23514", "message": message}).encode()
             row = dict(payload, id=self.next_id, version=1)
             row.setdefault("is_test", False)
             self.next_id += 1
@@ -266,7 +276,17 @@ def test_livecheck_proves_every_refusal_and_hidden_test_row_then_leaves_nothing(
         assert f"{table} test rows: service key sees 1, site key sees 0" in out
     for table in ("rsi_runs", "rsi_results"):
         assert f"{table} strength recorded_fact: refused by the writer" in out
-        assert f"{table} strength recorded_fact: refused by the database (code 23514)" in out
+        assert (f"{table} strength recorded_fact: refused by the database "
+                f"(code 23514, constraint {table}_trial_strength)") in out
+    # Review N5 at d6d4a6d: each 23514 names the constraint the case expects.
+    assert ("build_events blank source_ref: refused by the database "
+            "(code 23514, constraint build_events_source_ref_check)") in out
+    assert ("rsi_runs blank source_ref: refused by the database "
+            "(code 23514, constraint ams_label_check)") in out
+    assert ("rsi_results strength vibes: refused by the database "
+            "(code 23514, constraint ams_strength_check)") in out
+    assert ("build_events no source: refused by the database "
+            "(code 23502, column source_kind)") in out
     assert "build_events strength recorded_fact" not in out
     assert "cleanup: remaining 0" in out
     assert http.tables == {table: {} for table in TABLES}
@@ -289,6 +309,15 @@ def test_livecheck_fails_when_a_rule_is_not_enforced_and_still_cleans_up(capsys,
     assert flag in out
     assert "cleanup: remaining 0" in out
     assert http.tables == {table: {} for table in TABLES}
+
+
+def test_livecheck_fails_when_the_wrong_constraint_refuses(capsys):
+    http = FakePostgrest(constraint_override="some_other_check")
+    code, out, _ = livecheck(capsys, http)
+    assert code == 1
+    assert ("build_events blank source_ref: refused by the wrong constraint "
+            "(code 23514, constraint some_other_check; expected build_events_source_ref_check)") in out
+    assert "cleanup: remaining 0" in out
 
 
 def test_livecheck_without_the_service_key_sends_nothing(capsys):
