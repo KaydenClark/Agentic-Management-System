@@ -143,7 +143,12 @@ class ClaudeProcess:
             if self.selector is not None:
                 self.selector.close()
             for pipe in (self.process.stdin, self.process.stdout, self.process.stderr):
-                pipe.close()
+                try:
+                    pipe.close()
+                except OSError:
+                    # Buffered stdin can flush into an already exited process.
+                    # Preserve the original failure and its diagnostic instead.
+                    pass
 
     def failure_diagnostic(self, error_kind, reason):
         """Retain a bounded private cause, never worker prompts, stdout or auth payloads."""

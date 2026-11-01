@@ -160,3 +160,20 @@ def test_shutdown_is_bounded_when_descendant_retains_stderr(tmp_path,monkeypatch
     finally:
         try:os.kill(descendant,signal.SIGTERM)
         except ProcessLookupError:pass
+
+
+def test_early_exit_broken_stdin_does_not_erase_failure_diagnostic(tmp_path,monkeypatch):
+    from ams import trial_transport
+    real_popen=trial_transport.subprocess.Popen
+    monkeypatch.chdir(tmp_path)
+    auth={'loggedIn':True,'authMethod':'claude.ai','apiKeySource':None}
+    monkeypatch.setattr(trial_transport.subprocess,'run',lambda *args,**kwargs:
+                        SimpleNamespace(stdout=json.dumps(auth),stderr='',returncode=0))
+    monkeypatch.setattr(trial_transport.subprocess,'Popen',lambda *args,**kwargs:
+                        real_popen([sys.executable,'-c','raise SystemExit(7)'],**kwargs))
+    stream=trial_transport.ClaudeProcess(tmp_path);stream.process.wait(timeout=2)
+    adapter=runtime.ClaudeAdapter()
+    with pytest.raises(trials.Refused):adapter.execute('private',transport=stream)
+    assert isinstance(adapter.last_failure,str)
+    row=json.loads(Path(adapter.last_failure).read_text())
+    assert row['exitStatus']==7 and row['stage']=='initialize'
