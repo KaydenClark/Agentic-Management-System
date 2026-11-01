@@ -102,7 +102,7 @@ def test_partial_import_and_lost_response_retry(tmp_path):
 def test_stale_concurrent_append_has_one_winner(tmp_path):
     records=chain(tmp_path);db=Database();s=store(db)
     old=s.append(records[0],is_test=True,previous_digest=None)
-    e=copy.deepcopy(records[1]); other=copy.deepcopy(e);other['packet']['assessmentId']='other'
+    e=copy.deepcopy(records[1]); other=copy.deepcopy(e);other['packet']['assessmentId']='other';other['result']['assessmentId']='other'
     results=[]
     def append(value):
         try:s.append(value,is_test=True,previous_digest=old['content_digest']);results.append('ok')
@@ -141,9 +141,14 @@ def test_findings_retests_and_recurrence_survive_roundtrip(tmp_path):
     assert saved[-1]['result']['retentionAccepted'] is False
 
 
-@pytest.mark.parametrize('change', ['reset','fourth','frozen','collision','filename','symlink'])
-def test_invalid_local_history_never_writes_remote(tmp_path,change):
-    chain(tmp_path); files=list(tmp_path.glob('*.json'));f=files[0];e=json.loads(f.read_text())
+@pytest.mark.parametrize('change,reason', [
+    ('reset','attempt must continue'),('fourth','attempt must be baseline'),
+    ('frozen','frozen comparison'),('collision','identity differs'),
+    ('filename','identity differs'),('symlink','symlinks')])
+def test_invalid_local_history_never_writes_remote(tmp_path,change,reason):
+    chain(tmp_path)
+    f=next(f for f in tmp_path.glob('*.json') if json.loads(f.read_text())['packet']['attempt']==1)
+    e=json.loads(f.read_text())
     if change=='reset':e['packet']['attempt']=0
     elif change=='fourth':e['packet']['attempt']=4
     elif change=='frozen':e['packet']['conditions']['effort']='changed'
@@ -152,13 +157,13 @@ def test_invalid_local_history_never_writes_remote(tmp_path,change):
     else:
         original=f.read_text();f.unlink();target=tmp_path/'outside';target.write_text(original);f.symlink_to(target)
     if change not in ('filename','symlink'):
-        # Recompute standalone totals so replay must challenge history, not just a stale digest.
-        if change not in ('fourth',):
+        if change != 'fourth':
             e['result']=assessment.score(e['packet'])
-            e['result'].update(attempt=e['packet']['attempt'],nextAction='revise')
+            e['result'].update(attempt=e['packet']['attempt'],nextAction=(
+                'baseline-recorded' if change=='reset' else 'compare-benefit'))
         f.write_text(json.dumps(e))
     db=Database()
-    with pytest.raises(assessment.Refused):store(db).import_local(tmp_path,is_test=True)
+    with pytest.raises(assessment.Refused,match=reason):store(db).import_local(tmp_path,is_test=True)
     assert not db.rows
 
 
