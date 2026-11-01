@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000E claimed by orchestrator-b-tk000e-implementor.
-**Next gate:** Close TK-000E with verification and documentation proof.
+**Latest event:** TK-000E closed with proof.
+**Next gate:** Complete TK-000B.
 
 ## Intent and authority
 
@@ -30,7 +30,7 @@ Charts are honest only if each number has a sourced row; local writes and public
 - RLS on every public table: the site key reads; its writes get 401.
 - `build_events`: `ams-history import` derives rows from Git, `gh` and records on demand, not scheduled; `readcheck` fails on a missing or extra row.
 - `rsi_*`: empty until a real trial; four commits and a trial strength required; completed needs `passed`; stale updates 409.
-- Writers and DB refuse unsourced or unlisted rows; test rows hidden. `tests/test_secret_scan.py` scans tracked files for keys.
+- Writers and DB refuse unsourced or unlisted rows; test rows hidden. `tests/test_secret_scan.py` scans tree and history for keys.
 
 ## Desired Behavior
 
@@ -59,7 +59,7 @@ Charts are honest only if each number has a sourced row; local writes and public
 
 ## Vertical Implementation Slices
 
-One run per Task in orchestrator B's lane (sole key holder), by checked PR to `main`.
+One run per Task in B's lane (sole key holder), by checked PR to `main`.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -98,7 +98,7 @@ uv run ams-history import && uv run ams-history readcheck
 
 ## Append-Only Evidence And Execution Log
 
-Each TASK.md Receipt holds the full proof.
+TASK.md Receipts hold full proof.
 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
@@ -109,7 +109,8 @@ Each TASK.md Receipt holds the full proof.
 | 2026-11-01 | TK-004 | Task closed | PRs #31 (4d74e90), #37 (d26bb8c): `ams-history` imported 463 rows; rerun added 0 | RUNBOOK, ARCHITECTURE | Dev-only records not imported; no scheduled re-import |
 | 2026-11-01 | TK-005 | Task closed | PR #42 (55c3856): live `ams-sources livecheck` refused unsourced and unlisted rows on all 3 tables; site key saw 0 test rows | RUNBOOK, ARCHITECTURE, Spec | S-002 picks seed rows |
 | 2026-11-01 | review | Review verdict: fail at c87bf4ec86206bd5f734af7b828c81c3d3356a00 [a2124994b4d9] #1 | new Tasks TK-000B (acceptance lines unchecked, no evidence), TK-000C (no repeatable secret scan), TK-000D (recorded_fact on RSI tables) | Orchestrator C, repo half; live half is B's | 3 |
-| 2026-11-01 | TK-000E | B's review FAIL at c87bf4e: H1, M1-M3, L1, L2 | live half | this Spec | TK-000E |
+| 2026-11-01 | TK-000E | B review FAIL c87bf4e: H1, M1-M3, L1, L2 | live half | Spec | TK-000E |
+| 2026-11-01 | TK-000E | Task closed | PR #49 (a03d739): readcheck missing 0, extra 0; livechecks pass | Spec, RUNBOOK | Fresh review; close attribution: {"agent":"orchestrator-b-tk000e-implementor","claimant":"orchestrator-b-tk000e-implementor","onBehalfOf":null} |
 
 ## Review and Human QA
 
@@ -121,7 +122,7 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- Supabase region: nearest US default unless the owner chooses.
+- Region: nearest US default unless the owner chooses.
 - Evidence and Receipt rows are keyed by index: edits are not re-imported; a removed row reads as extra.
 
 ## Supersession
