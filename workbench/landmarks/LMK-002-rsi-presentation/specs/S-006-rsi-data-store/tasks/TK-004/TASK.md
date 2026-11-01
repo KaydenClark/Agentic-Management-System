@@ -3,7 +3,7 @@
 **Task ID:** TK-004
 **Spec ID:** S-006
 **Slice:** Build-history rows are imported from this build's real Spec, Task, PR and commit records, returns and corrections included
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-002
 **Destination:** spec-acceptance: Build history from real records
 **Planned verification:** import run, row counts against the records, and a rerun adding none
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
+**Claimed by:** claude-s006-tk004
+**Current claimant:** claude-s006-tk004
 
 Orchestrator B's lane only. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), the build-history table and writer from TK-002, and `node workbench/tools/spec-workbench.mjs list --all`.
 

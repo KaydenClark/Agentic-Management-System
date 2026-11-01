@@ -9,6 +9,7 @@ dependencies = []
 ams-board = "ams.grill_board.server:main"
 ams-keycheck = "ams.keycheck:main"
 ams-writer = "ams.writer:main"
+ams-history = "ams.build_history:main"
 ams-rsi = "ams.rsi_rows:main"
 
 [build-system]
