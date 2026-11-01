@@ -10,12 +10,12 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000L claimed by orch-b.
-**Next gate:** Close TK-000L with verification and documentation proof.
+**Latest event:** TK-000L closed with proof.
+**Next gate:** Fresh independent assembled Review; reconcile S-002 storage compatibility before Spec completion.
 
 ## Intent and authority
 
-The owner decided that Python pushes RSI results to Supabase as they arrive and the site reads from it; everything the site shows, build history included, lives there. Token counts go with the RSI data. Secrets live only in Vercel and Supabase settings.
+The owner decided that Python pushes RSI results to Supabase as they arrive and the site reads from it; everything the site shows, build history included, lives there. Token counts go with the RSI data. The service key stays in the gitignored local environment; the site receives only its publishable key (owner coherence correction).
 
 ## Outcome
 
@@ -27,7 +27,7 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 
 ## Current Verified State
 
-- Candidate: the TK-000L merge (SHA, pinned readcheck in its Receipt). `rsi_*` empty until a real trial; import on demand.
+- Verified candidate: `5aa2621ec03a1d419615374ec31e4c3db12069b6`, dev `c0f6c67687f432cd75b55e7d4fdad460ea2f77db`; 943 history rows, missing/extra/content mismatches/unsourced all 0. [TK-000L](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01) owns live proof and limits. No real trial or assessment storage completion claimed.
 
 ## Desired Behavior
 
@@ -56,7 +56,7 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 
 ## Vertical Implementation Slices
 
-One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (the tool refuses table rows beside them): TK-001 to TK-005, TK-000B to TK-000E done; TK-000L open.
+One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (the tool refuses table rows beside them): TK-001 to TK-005, TK-000B to TK-000E done; TK-000L closed with live verification. Native Task records own slices; duplicate table rows are not permitted.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -116,6 +116,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | TK-000B | Task closed | 8 lines checked, proof in TK-000B at a4470a4 | Spec | Fresh review |
 | 2026-11-01 | review | Review verdict: pass at d6d4a6d65cc6287b667fe78ee5db937440972a5e [213a7241e512] #2 | none | C, repo half | none |
 | 2026-11-01 | TK-000L | B review FAIL d6d4a6d: N1-N6, legacy key | live half | Spec | TK-000L |
+| 2026-11-01 | TK-000L | Task closed | 5aa2621/dev c0f6c67: history 943 rows; missing/extra/mismatch/unsourced 0; live summary edit detected/restored; key/writer/RSI/source checks pass; pytest 433 passed,4 skipped; layout valid; doctor no blocking finding | S-006 SPEC and TK-000L pinned live verification | Fresh independent assembled Review; S-002 assessment persistence and unknown metrics compatibility; close attribution: {"agent":"codex-local-writer","claimant":"orch-b","onBehalfOf":"orch-b"} |
 
 ## Review and Human QA
 
