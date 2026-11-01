@@ -4,16 +4,16 @@
 
 ## Get oriented
 
-1. Run `git status --short --branch`; preserve others' work.
+1. Run `git status --short --branch`; keep others' work.
 2. Read [AGENTS](AGENTS.md), [ARCHITECTURE](ARCHITECTURE.md#routes), [GLOSSARY](GLOSSARY.md) and the relevant [Wiki](workbench/wiki/MEMORY.md).
-3. Read [TASKBOARD](TASKBOARD.md); follow its Spec/Task owners for scope, claimant, blockers and next gate. [S-001](workbench/specs/S-001-ams/SPEC.md) answers "Are we there yet?". Load the owning skill.
+3. Read [TASKBOARD](TASKBOARD.md) and follow its Spec/Task owners; [S-001](workbench/specs/S-001-ams/SPEC.md) answers "Are we there yet?". Load the owning skill.
 
 ## Workflows
 
-1. Capture request, reasons, corrections and endpoint with `jot`; requirements belong in the Spec.
-2. A capability gets a Spec (`map`) and bounded Tasks (`plan`); define observable acceptance first. Small edits need none. Execute a Task with `journey`; coordinate with `orchestrate`. Method map: [SKILLS](workbench/docs/SKILLS.md).
-3. Check the outcome; keep proof, failures and limits. Record [review](workbench/specs/REVIEW-RECEIPT-TEMPLATE.md) and [Human QA](workbench/specs/HUMAN-QA-RECEIPT-TEMPLATE.md) only when they happen.
-4. Deliver through the verified route; update owners, run `render`, leave a [handoff](workbench/sessions/HANDOFF-TEMPLATE.md) if work remains.
+1. Capture request, reasons and corrections with `jot`; requirements go in the Spec.
+2. A capability gets a Spec (`map`) and Tasks (`plan`) with observable acceptance; small edits need none. Run a Task with `journey`, coordinate with `orchestrate` ([SKILLS](workbench/docs/SKILLS.md)).
+3. Check; keep proof, failures and limits. Record [review](workbench/specs/REVIEW-RECEIPT-TEMPLATE.md) and [Human QA](workbench/specs/HUMAN-QA-RECEIPT-TEMPLATE.md) only when they happen.
+4. Deliver; update owners, run `render`, leave a [handoff](workbench/sessions/HANDOFF-TEMPLATE.md) if work remains.
 
 ### RSI during website work
 
@@ -21,11 +21,11 @@ Capture friction in a [feedback report](workbench/feedback/REPORT_FORMAT.md); te
 
 ## Preserve knowledge as it happens
 
-Use existing topic owners; grow flat Wiki notes through [MEMORY](workbench/wiki/MEMORY.md) under its [schema](workbench/wiki/SCHEMA.md), with source, speaker, date, status and corrections.
+Use existing topic owners; grow flat Wiki notes via [MEMORY](workbench/wiki/MEMORY.md) and its [schema](workbench/wiki/SCHEMA.md), with source, speaker, date and status.
 
 ## Test And Build
 
-From the root: `uv run pytest` tests; `uv run ams-board` serves the Grill Board (committed `grill-board/cards/`) on 127.0.0.1 only; `uv run ams-keycheck` checks the Supabase service key without printing it (`src/ams/keycheck.py`), from orchestrator B's main checkout (it has the key). Room checks:
+From the root: `uv run pytest` tests (`AMS_LIVE=1` adds a live test); `uv run ams-board` serves the Grill Board (committed `grill-board/cards/`) on 127.0.0.1 only. Supabase, from orchestrator B's main checkout (it has the key; none is printed): `uv run ams-keycheck` checks the service key; `uv run ams-writer record-merge|readcheck SHA` writes a merge to `build_events` and proves the site key reads it, never writes (`src/ams/writer.py`). Room checks:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render
@@ -43,4 +43,4 @@ Non-site work: branch, commit each step, push, PR into `main`, merge-commit once
 
 ## Recovery
 
-Reopen the owning Spec/Task and Wiki history; verify live state. Adoption rollback: `workbench/sessions/recovery/adoption-recovery.json` (local).
+Reopen the owning Spec/Task and Wiki; verify live state. Adoption rollback: `workbench/sessions/recovery/adoption-recovery.json` (local).
