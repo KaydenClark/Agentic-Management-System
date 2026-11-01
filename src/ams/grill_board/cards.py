@@ -222,10 +222,24 @@ def _flagged_in_history(root, commit, prefix):
                 data = _git(Path(root), "cat-file", "blob", f"{sha}:{path}", binary=True)
             except CardSourceError:
                 continue  # this commit removed the file; the commit that added the flag lists it too
-            card = parse_card(name, data.decode("utf-8", "replace"))
-            if isinstance(card, Card) and card.flag is not None:
-                flagged.append((question_key(card.question), name))
+            question = flagged_question(data.decode("utf-8", "replace"))
+            if question:
+                flagged.append((question_key(question), name))
     return tuple(flagged)
+
+
+def flagged_question(text):
+    """The question line of a card version that carries a `## Flag` section with
+    the flag line, or "". Read apart from parse_card's acceptance rules, so a
+    flag stays binding when a later rule (such as TK-000I's) would refuse its card."""
+    lines = text.splitlines()
+    if not lines or not lines[0].startswith("# "):
+        return ""
+    starts = [at for at, line in enumerate(lines) if line in SECTIONS]
+    for at, end in zip(starts, starts[1:] + [len(lines)]):
+        if lines[at] == "## Flag" and FLAG_LINE in (line.strip() for line in lines[at + 1:end]):
+            return lines[0][2:].strip()
+    return ""
 
 
 def load_cards(cards_dir):

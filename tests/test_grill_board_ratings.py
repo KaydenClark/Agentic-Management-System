@@ -321,6 +321,22 @@ def test_a_page_draft_with_valid_card_headers_is_refused_not_shown(board, repo, 
     assert status == 409
 
 
+def test_a_flag_on_a_card_that_now_breaks_the_context_rule_still_refuses_its_question(board, repo):
+    """Codex P2 on PR #58: a flag committed before the context rule must not be lost
+    because its card would now be refused as page content."""
+    server = board()
+    old_context = "## Background\n\n" + "Long background. " * 80
+    old = CARD.replace("Fixture context.", old_context) + "\n## Flag\n\n**Too taxing:** yes\n**Flagged:** 2026-10-01T00:00:00Z\n"
+    post_card(repo, "one-card.md", old, "a card flagged before the context rule existed")
+    (repo / "grill-board" / "cards" / "one-card.md").unlink()
+    git(repo, "commit", "-qam", "an agent deletes the flagged card")
+    post_card(repo, "repost.md", CARD, "an agent re-posts the flagged question with a short context")
+    html = get(server, {"topic": "Card format"})
+    alert = html.split('aria-label="Refused cards"', 1)[1].split("</section>", 1)[0]
+    assert "repost.md" in alert and "flagged too taxing" in alert
+    assert "repost.md" not in queue(html)
+
+
 def test_a_short_plain_context_is_still_a_card():
     from ams.grill_board.cards import Card, parse_card
 
