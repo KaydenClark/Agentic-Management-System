@@ -10,38 +10,32 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000O closed with proof.
-**Next gate:** S-006 -> TK-001/TK-002.
+**Latest event:** TK-000V closed with proof.
+**Next gate:** Complete TK-001.
 
 ## Intent and authority
 
-[Owner decisions/resume](../../../../wiki/context-ams-purpose.md): Journey resumed; r1, Stable/Excellent, three attempts excluding baseline, subscription meter; bounded candidate/regressions separate from whole AMS.
-
-## Outcome
-
-Evidence-backed Skill/AMS improvements.
-
-## Why It Matters
-
-Loop on real builds until meter/stop; static scores prove no benefit.
+[Owner decisions](../../../../wiki/context-ams-purpose.md) govern resumed Journey: fixed r1/acceptance, attempts, meter and bounded versus whole scope.
 
 ## Current Verified State
 
-[CLI proof](tasks/TK-000M/TASK.md); runner/trials/storage incomplete. [Baseline a3d014e](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified reviews, not trials; no strike/skill result.
+[Scoring](tasks/TK-000M/TASK.md); [baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified; no trial, strike or skill result.
 
-S-006 TK-000S also repairs this local CLI’s immutable packet, frozen metadata, historical source, result and approved protocol identity comparisons. Source `ad7fa28` preserves scoring formulas and qualification rules; checked delivery is tracked in that owner. No real trial or evaluator qualification is inferred.
+Exact-identity repair: S-006/TK-000S.
+
+[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise.
 
 ## Desired Behavior
 
-Failure -> earliest gap/owner -> one change in its repository -> baseline/retest -> disposition/later use.
+Failure -> earliest gap/owner -> one repository change -> baseline/retest -> disposition/later use.
 
 ### Audit scores
 
 Canonical: `audit-workbench` r1 checks/scenarios/qualification, version 1,
 hash `96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578`.
-Freeze rubric, scope/inventory/exclusions, IDs/classes, baseline/candidate/skills
-commits, loaded artifacts, host/tools, evaluator model/prompt/qualification.
-No rubric changes/extra points.
+Freeze rubric, scope/inventory/exclusions, IDs/classes, baseline/candidate/skill
+pins, loaded artifacts, host/tools and evaluator model/prompt/qualification;
+no changes/extra points.
 
 Three runs/attempt: class, Yes/No/justified N/A, typed revision-bound
 evidence/qualification. Missing/Unknown/refused/interrupted stays No in its class
@@ -52,7 +46,7 @@ Run pass: all Critical/Regression Yes; Regression needs baseline pass proof.
 3/2/1/0 passing runs = Excellent/Stable/Functional/Broken; Critical No overrides
 Broken. Acceptance additionally requires complete qualified proof and no open
 Critical/Regression or unmapped historical finding. No QA/distribution/benefit
-implied. Whole fitness: ten areas; bounded results cannot certify AMS.
+implied. Whole fitness covers ten areas; bounded results cannot certify AMS.
 
 ### Skill evals and retests
 
@@ -71,8 +65,7 @@ Close only on three-run repaired-revision original/affected-regression passes
 
 - Retain only qualified Stable/Excellent with demonstrated useful benefit
   predeclared before comparison. First case: grilling failure; coordinate existing redesign.
-- Rounds start from failures, never retro ideas. On recurrence check ineffective
-  prior fixes. One change/version.
+- Failure-led rounds; review ineffective prior fixes on recurrence. One change/version.
 - Fixed provider/model/effort. Accepted-version runner/graders/scoring, never
   candidate-owned. Grader changes start a new series judged by its predecessor.
 - Same-version noise floor first. Fixed-task AMS/no-AMS/plain-instruction arms,
@@ -80,8 +73,8 @@ Close only on three-run repaired-revision original/affected-regression passes
   Inside-margin is inconclusive; audit delta proves no benefit.
 - Public lift needs >2 fresh held-out tasks, controls, baseline/interval.
   Studied cases retire to dev; scores are not lift.
-- Sandbox, no skipped permissions. No automatic proposer before trusted grader,
-  measured trial cost and owner-judged manual round.
+- Sandbox without skipped permissions. Automatic proposing waits for a trusted
+  grader, measured cost and owner-judged manual round.
 - Baseline 0: no strike. Candidate initial -> retry -> retry -> stop/report unless
   accepted. Repair/rename never resets; retain failures/harm.
 - Trial rows: task/arm, version/skills pin, provider/model/effort, completion,
@@ -93,16 +86,13 @@ Weights; running loops during mapping; presentation (S-007).
 
 ## Dependencies And Blockers
 
-S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests, behavioral links. S-007 presents scores/evals/failures/provenance; integration missing.
+S-006 retains assessment/attempt/run identities, metadata, ledgers, counts/levels, acceptance/evidence/qualification and finding/retest/behavior links. S-007 safe presentation is pending.
 
-Real build-history/skills seeds, strength labels; private summary/commit only. Storage/qualified comparisons required.
+Keep real build/skill seeds strength-labelled; private sources yield summaries/commits only. Require storage and qualified comparisons.
 
 ## Vertical Implementation Slices
 
-Local CLI/corrections: TK-000M/N/O; trials retain real inputs. B local; checked PRs to main.
-
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
+TK-000M/N/O: scoring; TK-000T/V: bootstrap; TK-001..004: trials. B local; checked PRs to main.
 
 ## Acceptance Criteria
 
@@ -112,21 +102,9 @@ Local CLI/corrections: TK-000M/N/O; trials retain real inputs. B local; checked 
 - [ ] **Stops:** omitted findings stay open; regressions visible; baseline excluded. Reject fourth attempt/reset.
 - [ ] **Readback:** S-006/S-007 retain assessment/trial distinctions and failures/evidence. Reject false storage or test/private-data publication.
 
-## RSI and website connection
-
-See dependencies.
-
 ## Testing Seams
 
-CLI/runner/writer/readback fixtures: missing proof, recurrence, original-pass/regression-fail.
-
-## Verification Procedure
-
-RUNBOOK and [Task proof](tasks/TK-000M/TASK.md).
-
-## Documentation Impact
-
-RUNBOOK, S-006/S-007, Wiki/Tasks.
+CLI/runner/writer/readback: missing proof, recurrence, original-pass/regression-fail. Checks: RUNBOOK; [proof](tasks/TK-000M/TASK.md).
 
 ## Append-Only Evidence And Execution Log
 
@@ -143,6 +121,8 @@ Kayden reported lost grilling as a failure; the linked context preserves the int
 | 2026-11-01 | TK-000M | Task closed | 36 focused; 427 suite/4 skip; QA/reviews in Task | RUNBOOK; evals; Wiki | S-006 and real trials remain; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
 | 2026-11-01 | TK-000N | Task closed | 40 focused; fresh 431/4 skip; CI #32 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
 | 2026-11-01 | TK-000O | Task closed | 42 focused; CI #38 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
+| 2026-11-01 | TK-000T | Task closed | 45 focused; fresh 562/4 skip; CI70; actual adapter smoke | evals, Runbook, Wiki | Oracle calibration, noise, controls, benefit; close attribution: {"agent":"s002-bootstrap","claimant":"s002-bootstrap","onBehalfOf":null} |
+| 2026-11-01 | TK-000V | Task closed | 50 focused; fresh 567/4 skip; actual inert adapter | evals/TRIALS.md | Oracle/noise/controls/benefit; close attribution: {"agent":"s002-transport","claimant":"s002-transport","onBehalfOf":null} |
 
 ## Review and Human QA
 
@@ -151,12 +131,3 @@ Independent review per retained change; owner judges automation.
 ## Completion Result
 
 Pending.
-
-## Remaining Limitations Or Follow-Up Specs
-
-- Qualify before running the manual loop in force.
-
-## Supersession
-
-- Supersedes: none
-- Superseded by: none

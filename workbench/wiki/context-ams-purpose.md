@@ -197,3 +197,29 @@ Supersedes: none
 
 The owner requested carrying S-002 through Journey. This resumes its scoped implementation and normal checked delivery. Existing settled decisions apply: use the paid-plan meter rather than an API campaign budget; candidate assessments have bounded r1 scope plus affected regressions, separate from whole-AMS fitness. The old campaign-budget wording and unresolved-scope summaries are stale. This supplies no new paid-service purchase, website promotion, skill-redesign duplication, evaluator qualification or outcome acceptance. Implement deterministic assessment safeguards while recovering inputs for the manual grilling-failure round.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-dcf872b8-096c-4a90-8212-b5bf1dc72039
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T20:40:20.407Z
+Author: Kayden
+Source: Kayden, AMS resume chat 01a19887-118e-7dd2-88ad-676598f589ef, 2026-11-01; async labels and retention correction relayed by the owning orchestrator
+Topic: ams-purpose
+Supersedes: none
+
+Kayden answered "Yes—PASS the first, FAIL the second" to the current chat's frozen interview-continuation and do-nothing examples. These labels seed the narrow transcript interview grader; the original lost-interview event is already owner-labelled negative. They do not qualify a whole r1 assessor, prove installed skill or document-provider behavior, or accept a candidate.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-1f6ffe88-306c-4de2-952c-28c8c72b25de
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T20:40:20.564Z
+Author: Kayden
+Source: Kayden, AMS resume chat 01a19887-118e-7dd2-88ad-676598f589ef, 2026-11-01; async labels and retention correction relayed by the owning orchestrator
+Topic: ams-purpose
+Supersedes: none
+
+Kayden corrected the proposed percentage margin: "It should actually work, if it doesnt work, then dont retain it." No one-third threshold was accepted. Judge the intended interview outcome; a failure vetoes retention. Existing requirements for demonstrated useful benefit, noise-floor and controls remain, so unchanged baseline success is not improvement. The authorized first comparison is explicitly tool-free transcript interview preservation, separate from native document capture and host discovery.
+<!-- /jot-entry -->

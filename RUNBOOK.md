@@ -7,8 +7,8 @@
 Run `git status --short --branch`; preserve others' work. Read [AGENTS](AGENTS.md),
 [Architecture routes](ARCHITECTURE.md#routes), [Glossary](GLOSSARY.md), relevant
 [Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md) and assigned Spec/Task.
-[S-001](workbench/specs/S-001-ams/SPEC.md) is the system yardstick. Load the owning
-personal skill from [methods](workbench/docs/SKILLS.md).
+[S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick; load the
+[owning skill](workbench/docs/SKILLS.md).
 
 ## Workflows
 
@@ -37,12 +37,12 @@ node workbench/tools/workbench-layout.mjs validate --project "$PWD"
 git diff --check
 ```
 
-Render must leave no diff; doctor no blocking finding. Repeat these and pytest
+Render: no diff; doctor: no blockers. Repeat these and pytest
 on a fresh clone at the recorded candidate.
 
-In B's main checkout, keys never printed: `uv run ams-keycheck`;
+In B's checkout (keys never printed): `uv run ams-keycheck`;
 `ams-writer record-merge|readcheck SHA`; after each merge `ams-history import`,
-then `ams-history readcheck --ref SHA --dev-ref origin/dev`. Refresh older rows
+then `ams-history readcheck --ref SHA --dev-ref origin/dev`. Refresh rows
 with `ams-history import --refresh-changed` before readcheck. `ams-rsi livecheck`
 and `ams-sources livecheck` check RSI/source rules.
 
@@ -50,6 +50,7 @@ and `ams-sources livecheck` check RSI/source rules.
 `ams-assessment-store import|readcheck|livecheck` verifies private Supabase storage
 ([contract](evals/ASSESSMENTS.md)). Storage proves no benefit. Trials use the
 subscription meter; unknown stays unknown.
+[Trial preparation](evals/TRIALS.md) never calls a model.
 
 ### Shared CI
 
@@ -61,7 +62,7 @@ Keep keys and `AMS_LIVE` out of CI.
 
 ## Delivery and recovery
 
-Non-site: feature branch -> checked PR -> merge commit into `main`, delete branch.
+Non-site: feature -> checked PR -> merge commit into `main`; delete branch.
 Site: feature -> checked `dev`; only the owner merges `dev` -> `main`.
 Report push, merge and deploy separately. Reopen Spec/Task and Wiki for
 recovery; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
