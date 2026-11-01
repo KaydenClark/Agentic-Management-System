@@ -3,7 +3,7 @@
 **Task ID:** TK-002
 **Spec ID:** S-004
 **Slice:** Confirming a card's answer writes it into the owning record, and a changed target is refused
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Answer lands in its owner; Conflict refusal
 **Planned verification:** pytest against a fixture record in a temporary Git repository
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
+**Claimed by:** Claude implementor (Orchestrator B)
+**Current claimant:** Claude implementor (Orchestrator B)
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), ADR-000B in `workbench/docs/adr/` (a confirmed answer goes straight to its owner) and the board code TK-001 landed under `grill-board/`.
 
