@@ -25,11 +25,11 @@ Rewriting a working runtime on preference alone is the kind of change the loop e
 
 ## Current Verified State
 
-- The Node lifecycle tools in `workbench/tools/` run the room (`render`, `doctor`, `next`, `show`, `claim`, `close`). No Python CLI exists. The system Python is older than current; a pinned current version is required.
+- The Node lifecycle tools in `workbench/tools/` run the room (`render`, `doctor`, `next`, `show`, `claim`, `close`). No Python CLI exists. The system Python is older than current; Python 3.14.5 is pinned with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
 
 ## Desired Behavior
 
-- A pinned current Python version in the repository.
+- A pinned current Python version in the repository: Python 3.14.5 with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
 - A command exists only where it prevents a repeated agent mistake or does deterministic work.
 - Read commands use the same words for every kind: `list`, `show`, `search`, `history`, `inspect`.
 - Lifecycle behavior equals the baseline's on the same records: refused operations write nothing, the Taskboard regenerates byte-identically, `doctor` fails on a hand-edited board.
