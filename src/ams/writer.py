@@ -102,11 +102,8 @@ def urllib_http(method: str, url: str, headers: Mapping[str, str], body: bytes |
 
 
 def _headers(key: str) -> dict[str, str]:
-    headers = {"apikey": key, "Content-Type": "application/json",
-               "Prefer": "return=representation"}
-    if keycheck.key_format(key) == "legacy-jwt":
-        headers["Authorization"] = "Bearer " + key
-    return headers
+    return {**keycheck.auth_headers(key), "Content-Type": "application/json",
+            "Prefer": "return=representation"}
 
 
 def _call(http: Http, method: str, url: str, key: str, payload=None):

@@ -25,7 +25,7 @@ Use existing topic owners; grow flat Wiki notes via [MEMORY](workbench/wiki/MEMO
 
 ## Test And Build
 
-From the root: `uv run pytest` (`AMS_LIVE=1` adds live tests); `uv run ams-board` serves the [Grill Board](grill-board/README.md) on 127.0.0.1 only. Supabase (`uv run` in orchestrator B's main checkout; key never printed): `ams-keycheck` checks it; `ams-writer record-merge|readcheck SHA` (a merge), `ams-history import` then `readcheck` after each merge (no schedule); `ams-rsi`/`ams-sources livecheck` test RSI and source rules. Room checks:
+From the root: `uv run pytest` (`AMS_LIVE=1` adds live tests); `uv run ams-board` serves the [Grill Board](grill-board/README.md) on 127.0.0.1 only. Supabase (`uv run` in orchestrator B's main checkout; key never printed): `ams-keycheck` checks it; `ams-writer record-merge|readcheck SHA` (a merge), `ams-history import` then `readcheck --ref SHA --dev-ref origin/dev` after each merge; `ams-rsi`/`ams-sources livecheck` test RSI and source rules. Room checks:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render
@@ -55,6 +55,10 @@ these jobs: inspect their changes before bringing them onto an internal branch.
 Inspect the service with `systemctl status workbench-runner-ams` inside the VM;
 use GitHub job details to verify the actual runner and tested commit.
 [CI context](workbench/wiki/context-shared-ci.md) records the owner's requirement.
+
+Existing history rows acquire review-fix source-availability metadata during an explicit
+`ams-history import --refresh-changed`. Run that before checking older pinned refs
+against rows imported before this metadata was introduced.
 
 ## Version control and publication
 
