@@ -9,24 +9,24 @@
 **Catalog description:** The single "Are we there yet?" check for the AMS across its four landmarks, its room and governance, its skills, its Python runtime and the owner's gates.
 **Blockers:** none
 **Latest event:** Ported from the pre-repository plan and rewritten from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning; at most six Specs may be active at once.
+**Next gate:** Claim TK-001 or TK-002; at most six Specs are active at once.
 
 ## Intent and authority
 
-The owner asked for one Spec to point at and ask "Are we there yet?", with a yes or no and the remaining steps. On 2026-11-01 the owner approved porting it here, rewritten for a public reader from the confirmed decisions; where the earlier draft and a decision disagree, the decision wins. This Spec owns only cross-landmark checks. Each capability is owned by a child Spec of a landmark.
+The owner asked for one Spec to point at and ask "Are we there yet?", with a yes or no and the remaining steps. Ported 2026-11-01 and rewritten from the confirmed decisions, which win over the earlier draft. This Spec owns only cross-landmark checks; child Specs of the landmarks own the capabilities.
 
 ## Outcome
 
-The AMS is the management system Claude Code and Codex use to align the owner's ideas and deliver them. It is a Workbench room in this repository, operated by the owner's skills, with a local Grill Board and an RSI loop that measures the work. Its first outside product is the presentation website.
+The AMS is the management system Claude Code and Codex use to align and deliver the owner's ideas: a Workbench room operated by the owner's skills, with a local Grill Board and an RSI loop that measures the work. Its first outside product is the presentation website.
 
 ## Why It Matters
 
-Skills alone are not the whole system; agent management must be auditable while it is built. The owner wants to stand behind every claim on the site, which needs one place that says what is done and what is not.
+Agent management must be auditable while it is built, and the owner wants to stand behind every site claim; that needs one place saying what is done and what is not.
 
 ## Current Verified State
 
 - The repository is adopted as a Workbench (v3.2.2): root controls, `workbench/` lanes, Node lifecycle tools, a generated Taskboard.
-- Four landmarks and their child Specs are mapped as planned; no Tasks exist.
+- Six child Specs are active with Tasks (2026-11-01): S-003 and S-007 (orchestrator A), S-004, S-006 and S-002 (B), S-013 (C). The rest wait in the backlog below.
 - `site/` holds only a placeholder; a read-only Supabase baseline migration exists; a `dev` branch exists.
 
 ## Desired Behavior
@@ -46,6 +46,10 @@ Skills alone are not the whole system; agent management must be auditable while 
 - No public claim of improved outcomes without held-out rows, controls, the prior version and an interval.
 - Secrets live only in Vercel and Supabase settings. Private evidence and traces stay out of this public repository.
 - License: MIT, copyright Kayden Clark (the license file is the owner's to add).
+
+## Backlog order
+
+Planned Specs, activated in this order as active ones close (at most six active): S-005 page review cards; S-011 land skill events; S-010 governance flow charts; S-008 skills wiki; S-009 demo Grill Board; S-012 Python lifecycle CLI. The owner may reorder.
 
 ## Non-Goals
 
@@ -83,7 +87,7 @@ A script that fails on host paths, credentials, private record IDs and any Spec,
 
 **Stance:** Builder
 
-One recorded trial in a separate session, never simulated inside the building session.
+One recorded trial in a separate session, never simulated in the building session.
 
 ## Acceptance Criteria
 
@@ -98,11 +102,7 @@ One recorded trial in a separate session, never simulated inside the building se
 
 ## RSI and website connection
 
-LMK-004 measures the build this Spec tracks; LMK-002 presents those rows. This Spec's answer is itself a page the site may show.
-
-## Testing Seams
-
-- `doctor`, `render` and `show` on the committed tree; the hygiene script; a disposable clone for the cold start.
+LMK-004 measures the build this Spec tracks; LMK-002 presents those rows. The site may show this Spec's answer.
 
 ## Verification Procedure
 
@@ -116,7 +116,7 @@ To answer "Are we there yet?": name the commit; run each check; report met, not 
 
 ## Documentation Impact
 
-- README and RUNBOOK point here as the yardstick once the first Task lands.
+- README and RUNBOOK point here as the yardstick.
 
 ## Append-Only Evidence And Execution Log
 
