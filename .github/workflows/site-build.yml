@@ -34,7 +34,7 @@ jobs:
         if: steps.app.outputs.present == 'true'
       - run: npm run lint --if-present
         if: steps.app.outputs.present == 'true'
-      - run: npm test
-        if: steps.app.outputs.present == 'true'
       - run: npm run build
+        if: steps.app.outputs.present == 'true'
+      - run: npm test
         if: steps.app.outputs.present == 'true'
