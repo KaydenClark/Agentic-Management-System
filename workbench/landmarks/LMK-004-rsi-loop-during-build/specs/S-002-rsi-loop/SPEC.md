@@ -23,7 +23,7 @@
 
 Exact-identity repair: S-006/TK-000S.
 
-[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise.
+[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise. Its reviewed engineering reference `921cb3e` (PR #92; CI87; 177 affected checks) freezes the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md). Actual calibration, rows and noise remain unrun pending selected main-contained source/release.
 
 ## Desired Behavior
 
