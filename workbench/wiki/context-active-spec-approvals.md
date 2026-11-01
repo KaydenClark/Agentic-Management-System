@@ -155,3 +155,16 @@ Source and speaker: Kayden, AMS chat, 2026-11-01
 Supersedes: blanket A/B continuation gates in Specs, handoffs and approval summaries
 Claim: Use neutral scope and continuation notes in project records; remove blanket continuation gates. Existing scoped execution approvals and actual Task inputs govern continued work.
 Effect and next action: Correct affected records and regenerate the Taskboard. Review, Human QA, page approvals and publication requirements remain in force.
+
+<!-- jot-entry -->
+### JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T21:18:59.392Z
+Author: Kayden
+Source: Owner instruction in AMS chat, 2026-11-01
+Topic: active-spec-approvals
+Supersedes: none
+
+S-008: The owner confirms S-008 (Skills wiki) as specified and approves executing its Tasks: "I authorize you to /orchestrate S-008, and /carry it to completion." Method set by the owner: Sonnet writes each skill article, a second Sonnet audits it and the feedback goes through the orchestrator to the final writer, the orchestrator judges the final copy (a failed article returns to Sonnet for a revision that comes back only to the orchestrator), and Opus builds the wiki architecture in the website. Endpoint: "I authorize you to merge into dev once you have thoroughly reviewed and approved everything matches the spec, and the actual purpose and capabilities of the skills." Then clean up the run's worktrees and uncommitted work. Site route stays feature -> dev; only the owner merges dev -> main. Page approvals, Human QA and publication to main stay with the owner.
+<!-- /jot-entry -->
