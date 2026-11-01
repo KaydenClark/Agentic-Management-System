@@ -12,7 +12,7 @@
 
 ## Assignment
 
-Owner instruction: resume approved S-006 local writer work, then carry S-002 through its authorized endpoint. The orchestrator released this sole writer at `6e30c87d839a11efb68611b91e9c7e778f390e12`; reviewed delivered storage is available independently of S-006's remaining formal acceptance. Follow plan, journey and native lifecycle. Branch `codex/s002-trial-preflight` -> checked PR -> `main`; one writer owns Task, Spec and board.
+Owner instruction: resume approved S-006 local writer work, then carry S-002 through its authorized endpoint. The orchestrator released this sole writer at `6e30c87d839a11efb68611b91e9c7e778f390e12`; reviewed delivered storage is available independently of S-006's remaining formal acceptance. Follow plan, journey and native lifecycle. Branch `feature/s002-trial-preflight` -> checked PR -> `main`; one writer owns Task, Spec and board. The owner's branch naming correction and actual failure are retained in the [failure report](../../../../../../feedback/REPORT-s002-branch-naming-failure-2026-11-01.md). The old namespace remains recovery until main contains it.
 
 Deliver the smallest callable path from frozen public-safe three-case inputs and private pinned skill manifests through clean materialization/reset, protected grader identity, strict Claude configuration and preflight evidence/readback. Provider: first-party Claude subscription; exact model `claude-opus-5-5`, effort `medium`, no fallback. Refuse unexpected runtime tools/MCP/model or protocol/result mismatch. Keep provider token breakdown separate from unknown actual subscription cost. Preserve true JSON identity rather than Python's Boolean/number equality.
 
