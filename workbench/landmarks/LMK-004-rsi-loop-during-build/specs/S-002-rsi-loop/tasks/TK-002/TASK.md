@@ -29,3 +29,9 @@ Hand back to S-002 with `close`, including measured subscription usage, or unkno
 ## Resumed bounded run
 
 The orchestrator assigned `feature/s002-rsi-loop` as the sole primary writer. Preserve r1 and the three-run Spec rule; the older two-run Task wording is reconciled above. First deliver a checked runner, frozen five-case narrow-oracle qualification protocol and deterministic error/identity guards. Actual calibration and the nine same-version worker/nine fresh judge calls stay held until the orchestrator selects the reviewed merged reference. No candidate comparisons or skill modifications occur in this Task.
+
+## Engineering checkpoint
+
+PR #92 delivers a model-free preparation CLI, frozen source/binary/system-context identities, five-case narrow qualification, one foreground worker/judge slot at a time, private immutable partial journals, public-safe S-006 rows/readback and three-row noise calculations. No actual calibration or worker trial has run; all Task acceptance remains unchecked. The root must review and select a merged exact reference before releasing qualification, then inspect qualification before separately releasing the nine worker/judge slots.
+
+Observed red: new focused test collection lacked the series module. Latest focused checks: 170 passed, 1 skipped, including cancellation after worker completion, blocked unqualified/repeated calls, mixed-version floor refusal, system-context propagation and distinct private marker exclusion. At initial engineering commit `bb4aace`, host full suite passed 586/4 skipped; enclosed full suite had the known 97 failures/9 errors from loopback-bind denial. Final delta moves/strengthens outcomes validation; its exact-candidate full/fresh checks are pending. No model call, database trial row, semantic qualification, measured floor, candidate improvement or owner Human QA is claimed.

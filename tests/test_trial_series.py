@@ -66,7 +66,10 @@ def test_qualify_requires_every_expected_match_and_binds_bytes():
 
 
 def test_noise_floor_uses_pairwise_disagreement_and_preserves_missing_grades():
-    rows=[{'id':i,'passed':v,'execution_state':'completed'}for i,v in enumerate([True,False,True],1)]
+    rows=[{'id':i,'trial':i,'passed':v,'execution_state':'completed',
+           **dict.fromkeys(('task_id','split','arm','provider','model','effort','runtime_commit',
+                            'controls_commit','skills_commit','grader_version'),'same'),'is_test':False}
+          for i,v in enumerate([True,False,True],1)]
     floor=series.noise_floor(rows)
     assert floor['flipRate']==pytest.approx(2/3) and floor['spread']==1
     assert floor['passes']==2 and floor['passCubed'] is False and floor['rowIds']==[1,2,3]
@@ -225,3 +228,24 @@ def test_public_rows_exclude_distinct_private_markers():
     result['grade']['reason']=markers[2]
     with pytest.raises(Refused,match='unsafe grade reason'):
         trial_campaign.publish_result(store,run,result,case_id='case',trial=2,evidence_digest='d'*64)
+
+
+def test_noise_floor_rejects_mixed_task_or_version_rows():
+    fields=('task_id','split','arm','provider','model','effort','runtime_commit',
+            'controls_commit','skills_commit','grader_version')
+    rows=[{'id':i,'trial':i,'passed':True,'execution_state':'completed',
+           **dict.fromkeys(fields,'same'),'is_test':False}for i in (1,2,3)]
+    rows[1]['skills_commit']='different'
+    with pytest.raises(Refused,match='mixes'):series.noise_floor(rows)
+
+
+def test_adapter_propagates_explicit_system_context_to_actual_process_factory(monkeypatch):
+    from ams import trial_transport
+    from test_trial_runtime import Transport
+    seen=[]
+    def factory(cwd,*,system_prompt=None):
+        seen.append((cwd,system_prompt));return Transport()
+    monkeypatch.setattr(trial_transport,'ClaudeProcess',factory)
+    runtime.ClaudeAdapter().execute('synthetic worker',cwd='synthetic fixture',system_prompt=series.WORKER_SYSTEM)
+    runtime.ClaudeAdapter().execute('synthetic judge',cwd='synthetic fixture',system_prompt=series.JUDGE_SYSTEM)
+    assert seen==[('synthetic fixture',series.WORKER_SYSTEM),('synthetic fixture',series.JUDGE_SYSTEM)]
