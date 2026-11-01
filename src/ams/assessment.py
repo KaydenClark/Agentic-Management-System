@@ -55,7 +55,7 @@ def evidence(items, expected, name):
 
 
 def _validate(p):
-    require(isinstance(p, dict) and p.get('schema') == 1, 'schema must be 1')
+    require(isinstance(p, dict) and type(p.get('schema')) is int and p['schema'] == 1, 'schema must be 1')
     for key in ('assessmentId','failureId','assessedAt'):
         text(p.get(key), key)
     try:
@@ -63,7 +63,7 @@ def _validate(p):
         require(stamp.utcoffset() is not None, 'assessedAt needs a timezone')
     except ValueError as exc:
         raise Refused('assessedAt must be an ISO timestamp with timezone') from exc
-    require(p.get('rubric') == RUBRIC, 'rubric must be approved r1, check version 1')
+    require(same_artifact(p.get('rubric'), RUBRIC), 'rubric must be approved r1, check version 1')
     require(p.get('scope') in ('whole','bounded'), 'scope must be whole or bounded')
     require(type(p.get('attempt')) is int and 0 <= p['attempt'] <= 3, 'attempt must be baseline 0 or candidate 1..3')
     for key in ('candidate','baseline','skillsCommit','inventoryRevision'):
@@ -253,6 +253,11 @@ def _encoded(value):
     return json.dumps(value, sort_keys=True, separators=(',',':'), ensure_ascii=False).encode()
 
 
+def same_artifact(left, right):
+    """Exact canonical JSON identity; bool/int and numeric spellings are distinct."""
+    return _encoded(left) == _encoded(right)
+
+
 def _frozen(p):
     return {k:p[k] for k in ('failureId','baseline','rubric','scope','inventory','excludedChecks','inventoryRevision','conditions')} | {
         'evaluator':{k:v for k,v in p['evaluator'].items() if k != 'qualificationEvidence'}}
@@ -288,14 +293,14 @@ def replay(records):
         identities.add(p['assessmentId'])
         history = prior.setdefault(p['failureId'], [])
         expected = _transition(p, history)
-        require(record.get('result') == expected, 'record result differs from recomputed history')
+        require(same_artifact(record.get('result'), expected), 'record result differs from recomputed history')
         history.append(record)
     return ordered
 
 
 def _transition(p, history):
     if history:
-        require(_frozen(p) == _frozen(history[0]['packet']), 'frozen comparison changed; qualify and authorize a new grader/rubric series')
+        require(same_artifact(_frozen(p), _frozen(history[0]['packet'])), 'frozen comparison changed; qualify and authorize a new grader/rubric series')
         last = history[-1]['packet']['attempt']
         require(last < 3, 'three candidate attempts exhausted; stop and report')
         require(p['attempt'] == last+1, 'attempt must continue history; rename/repair cannot reset it')
@@ -337,7 +342,7 @@ def record(p, store):
         records = read_records(folder)
         for old in records:
             if old['packet']['assessmentId'] == p['assessmentId']:
-                require(old['packet'] == p, 'assessmentId is immutable; use a new ID for new evidence')
+                require(same_artifact(old['packet'], p), 'assessmentId is immutable; use a new ID for new evidence')
                 return old['result']
         history = [r for r in records if r['packet']['failureId'] == p['failureId']]
         result = _transition(p, history)
