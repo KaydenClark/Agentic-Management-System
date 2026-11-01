@@ -366,7 +366,7 @@ def test_livecheck_fails_when_a_rule_is_not_enforced_and_still_cleans_up(capsys,
 
 
 @pytest.mark.parametrize("answer", [(503, None), (401, {"code": "42501"}), OSError("timed out"),
-                                    (200, {"not": "a list"})])
+                                    (200, {"not": "a list"}), (200, b"{not json")])
 def test_livecheck_fails_when_the_site_key_read_is_not_a_successful_query(capsys, answer):
     """An unreadable endpoint is not proof that test rows are hidden (Codex P2 4435897333)."""
     http = FakePostgrest(hide_test_rows=False)
@@ -377,6 +377,8 @@ def test_livecheck_fails_when_the_site_key_read_is_not_a_successful_query(capsys
             if isinstance(answer, Exception):
                 raise answer
             status, payload = answer
+            if isinstance(payload, bytes):
+                return status, payload
             return status, json.dumps(payload).encode() if payload is not None else b""
         return http(method, url, headers, body)
 
