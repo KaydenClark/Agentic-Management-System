@@ -3,7 +3,7 @@
 **Task ID:** TK-000L
 **Spec ID:** S-006
 **Slice:** Review FAIL at d6d4a6d corrected: readcheck pinned to a ref and comparing content; legacy-key claim narrowed
-**Status:** in-progress
+**Status:** done
 **Blockers:** TK-000B
 **Destination:** spec-acceptance: Build history from real records; Key loads and authenticates; Real sources only
 **Planned verification:** red-first pytest for each finding; after merge, live `ams-history import --refresh-changed`, then `ams-history readcheck --ref <main SHA> --dev-ref <dev SHA>` (missing 0, extra 0, content mismatches 0), every livecheck and keycheck
@@ -13,6 +13,7 @@
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
 **Claimed by:** orch-b
 **Current claimant:** orch-b
+**Proof:** 5aa2621/dev c0f6c67: history 943 rows; missing/extra/mismatch/unsourced 0; live summary edit detected/restored; key/writer/RSI/source checks pass; pytest 433 passed,4 skipped; layout valid; doctor no blocking finding
 
 Orchestrator B's lane only. Orchestrator B's live-half review of the assembled Spec at `d6d4a6d65cc6287b667fe78ee5db937440972a5e` returned FAIL (strike 2 of 3, ADR-002W). Correct its findings:
 
@@ -54,6 +55,7 @@ request does not authorize accessing the local service key or refreshing live da
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | codex/s006-local-verification | 5aa2621ec03a1d419615374ec31e4c3db12069b6 | none | 0 | Main 5aa2621/dev c0f6c67: live history 943 rows, missing/extra/mismatch/unsourced 0; summary tamper detected/restored; key/writer/RSI/source livechecks pass; pytest 433 passed,4 skipped | S-006 SPEC; TK-000L live evidence and limits | Fresh assembled Review; S-002 assessment persistence and unknown metrics compatibility remain | 64e5bf35f977574ca99a1d4670c1acd3ce7ec656a66c49bd7a9e97c3de521e99 |
+| 2 | codex/s006-local-verification | fbac9a96e27b2d4c8b6d34b7d019ce1c5f2cd3d0 | ahead 0 behind 0 | 0 | 5aa2621/dev c0f6c67: history 943 rows; missing/extra/mismatch/unsourced 0; live summary edit detected/restored; key/writer/RSI/source checks pass; pytest 433 passed,4 skipped; layout valid; doctor no blocking finding | S-006 SPEC and TK-000L pinned live verification | Fresh independent assembled Review; S-002 assessment persistence and unknown metrics compatibility; close attribution: {"agent":"codex-local-writer","claimant":"orch-b","onBehalfOf":"orch-b"} | f27db75e81f38ec9b200b7482f776a1db42419c62fdd8cb1b7513c73b7b5c59a |
 
 ## Resumed local verification, 2026-11-01
 
