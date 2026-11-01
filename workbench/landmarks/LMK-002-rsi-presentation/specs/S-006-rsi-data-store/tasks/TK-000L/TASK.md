@@ -36,3 +36,15 @@ Hand back to S-006 with `close`.
 - [ ] Livechecks name the expected constraint for every refusal; keycheck sends the writers' headers.
 - [ ] Spec: slice table filled, candidate cited, legacy-key and migration-drift limits recorded.
 - [ ] `uv run pytest` passes.
+
+## 2026-11-01 merge follow-up
+
+Owner requested merging all non-site work while retaining unfinished branches.
+Resolved the generated Taskboard conflict by rendering current records. Added
+regressions for late-discovered fix rows and legacy metadata backfill: both failed
+before repair and passed afterward. Review-fix rows now keep their earliest
+source reply time; pinned readchecks exclude fixes first derivable after the ref.
+Explicit refresh backfills that metadata. Runbook import/readcheck scopes now
+both include dev. Full checks and merge evidence are recorded in PR #65.
+The live database verification and Task acceptance remain unfinished; this merge
+request does not authorize accessing the local service key or refreshing live data.

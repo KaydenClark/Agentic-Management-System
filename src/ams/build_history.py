@@ -330,7 +330,7 @@ def review_rows(prs: Sequence[dict], comments: Sequence[dict], resolved: Mapping
         number = int(comment["pull_request_url"].rstrip("/").rsplit("/", 1)[1])
         ref, title = f"#{number} comment {comment['id']}", _finding_title(comment["body"])
         priority = _PRIORITY.search(comment["body"])
-        fix_sha, fix_reply, named_earlier = None, None, []
+        fix_sha, fix_reply, fix_derived_at, named_earlier = None, None, None, []
         human = [r for r in replies.get(comment["id"], [])
                  if not _is_codex((r.get("user") or {}).get("login", ""))]
         for reply in sorted(human, key=lambda r: r["created_at"], reverse=True):
@@ -340,8 +340,11 @@ def review_rows(prs: Sequence[dict], comments: Sequence[dict], resolved: Mapping
             if fix_reply is None:  # the newest naming reply decides, even if unresolvable
                 fix_sha = _resolve_commit(named.group(1), pr_commits, git)
                 fix_reply = reply["html_url"]
+                fix_derived_at = utc(reply["created_at"])
             else:
                 named_earlier.insert(0, named.group(1))
+                if fix_sha and _resolve_commit(named.group(1), pr_commits, git) == fix_sha:
+                    fix_derived_at = utc(reply["created_at"])
         for reply in human:
             first = reply["body"].strip().splitlines()[0].strip() if reply["body"].strip() else ""
             if _CORRECTION_EVENT.match(first):
@@ -357,7 +360,8 @@ def review_rows(prs: Sequence[dict], comments: Sequence[dict], resolved: Mapping
                           "fix_named_earlier": named_earlier}))
         if fix_sha:
             entry = fixes.setdefault(fix_sha[0], {"time": fix_sha[1], "findings": [], "titles": [],
-                                                   "prs": set(), "replies": []})
+                                                   "prs": set(), "replies": [], "derived_at": fix_derived_at})
+            entry["derived_at"] = min(entry["derived_at"], fix_derived_at, key=parse_time)
             entry["findings"].append(ref)
             entry["titles"].append(title)
             entry["prs"].add(number)
@@ -368,7 +372,7 @@ def review_rows(prs: Sequence[dict], comments: Sequence[dict], resolved: Mapping
                          "Fix for review finding: " + "; ".join(entry["titles"]),
                          utc(entry["time"]), "commit", sha, _commit_url(sha),
                          {"findings": entry["findings"], "prs": prs_named,
-                          "reply_urls": entry["replies"]}))
+                          "reply_urls": entry["replies"], "derived_at": entry["derived_at"]}))
     return rows
 
 
@@ -696,6 +700,11 @@ def _refresh(rows: Sequence[dict], settings: keycheck.Settings, http, apply: boo
     want = {_key(r): r for r in rows}
     changed = [(r, want[_key(r)], _differences(r, want[_key(r)]))
                for r in stored if _key(r) in want]
+    # Backfill source-availability metadata on rows imported before this field existed.
+    for row, record, fields in changed:
+        derived = record.get("detail", {}).get("derived_at")
+        if derived and derived != (row.get("detail") or {}).get("derived_at"):
+            fields.append("detail")
     changed = [c for c in changed if c[2]]
     if not apply:
         print(f"changed: {len(changed)} (not updated; run with --refresh-changed)")
@@ -747,7 +756,11 @@ def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page:
     missing = sorted(want.keys() - have.keys())
     unexpected = sorted(have.keys() - want.keys())
     newer = {k for k in unexpected
-             if cutoff is not None and parse_time(have[k]["occurred_at"]) > cutoff}
+             if cutoff is not None and (
+                 parse_time(have[k]["occurred_at"]) > cutoff or
+                 (have[k]["kind"] == "correction_fix" and
+                  (have[k].get("detail") or {}).get("derived_at") and
+                  parse_time(have[k]["detail"]["derived_at"]) > cutoff))}
     extra = [k for k in unexpected if k not in newer]
     mismatches = []
     for k in sorted(want.keys() & have.keys()):

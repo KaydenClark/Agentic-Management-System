@@ -764,6 +764,25 @@ def test_a_reply_after_the_cutoff_cannot_add_an_earlier_fix(fixture_repo):
     assert finding["detail"]["fix_commit"] is None
 
 
+def test_a_late_discovered_fix_is_not_extra_at_an_earlier_ref(fixture_repo, rows, capsys):
+    repo, shas = fixture_repo
+    cutoff = bh.parse_time("2026-11-01T10:31:00Z")
+    pinned = bh.collect(bh.Sources(git=git_runner(repo), gh=gh_stub(shas),
+                                   lifecycle=lifecycle_stub, refs=("main",), cutoff=cutoff))
+    fix = next(r for r in rows if r["kind"] == "correction_fix")
+    store = StubSupabase([*pinned, fix])
+    assert bh.readcheck(pinned, URL, FAKE_PUBLISHABLE, store, cutoff=cutoff) == 0
+    assert "newer than ref: 1" in capsys.readouterr().out
+
+
+def test_refresh_backfills_fix_derivation_time(rows):
+    fix = next(r for r in rows if r["kind"] == "correction_fix")
+    legacy = dict(fix, detail={k: v for k, v in fix["detail"].items() if k != "derived_at"})
+    store = StubSupabase([legacy])
+    assert bh.import_rows([fix], _settings(), store, refresh_changed=True) == 0
+    assert store.rows[0]["detail"]["derived_at"] == fix["detail"]["derived_at"]
+
+
 def test_collect_at_a_cutoff_drops_github_events_after_it(fixture_repo):
     repo, shas = fixture_repo
     cutoff = bh.parse_time("2026-11-01T10:20:00Z")
