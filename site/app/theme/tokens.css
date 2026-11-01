@@ -2,11 +2,11 @@
  * AMS site theme tokens: the only file allowed to hold color, type or spacing
  * values (tests/tokens.test.mjs enforces this).
  *
- * Source: owner design canvas Grilling Board Redesign, Color system v2.2;
- * theme CDR pending from orchestrator B on main.
- * Token names are kept exactly as the canvas names them so the local board
- * can share this file. Owner choice grill-board-theme-tokens: the owner chose
- * this canvas (relayed by orchestrator B, 2026-11-01); the theme CDR records it.
+ * Source: owner design canvas Grilling Board Redesign, Color system v2.2,
+ * recorded in grill-board/theme/tokens.json (DDR-000Y). The theme block below
+ * is generated from that file (npm run tokens:gen) and checked byte for byte
+ * by tests/tokens-json.test.mjs; type and spacing tokens after it are
+ * hand-written.
  *
  * Colors are signals with one stated meaning each (DDR-000M). The greys are
  * the page, not signals. Light is the default; the system's dark preference
@@ -15,89 +15,112 @@
  * the canvas's class names for scoped use.
  */
 
+/* BEGIN theme tokens: generated from grill-board/theme/tokens.json by scripts/gen-tokens.mjs; do not edit */
+/* Source: Grilling Board Redesign, version 1793538932-43c3. Light is the default. */
+
 :root,
 [data-theme="light"],
 .t-light {
-  --ground: #F7F7F7; /* grey: the page background, not a signal */
-  --surface: #FFFFFF; /* grey: cards, header and sidebar, not a signal */
-  --raised: #EFEFEF; /* grey: hover and current-item fill, not a signal */
-  --line: #E0E0E0; /* grey: quiet borders between regions, not a signal */
-  --line-strong: #808080; /* grey: control borders and emphasised edges, not a signal */
-  --muted: #474747; /* grey: secondary text, not a signal */
-  --ink: #0A0A0A; /* grey: primary text, not a signal */
-  --pole: #000000; /* grey: the mixing pole that darkens tone ink, not a signal */
-  --heat: #F04E12; /* heat: something is on fire, blocked or in error */
-  --worth: #F5C400; /* worth: why it is worth your time */
-  --owner: #2F86DC; /* owner (blue): the ball is with the owner */
-  --agent: #27A046; /* agent (green): agents are carrying it */
-  --returned: #A66BE0; /* returned (purple): it came back for rework */
-  --soft-pct: 22%;
-  --line-pct: 68%;
-  --dot-pct: 72%;
+  --ground: #F7F7F7; /* Page background */
+  --surface: #FFFFFF; /* Panels, cards and inputs */
+  --raised: #EFEFEF; /* Hover, the selected item and progress tracks */
+  --line: #E0E0E0; /* Hairline dividers */
+  --line-strong: #808080; /* Control borders; grey, nothing for you here */
+  --muted: #474747; /* Secondary text */
+  --ink: #0A0A0A; /* Primary text, grade badges and progress */
+  --pole: #000000; /* Mixing anchor for tone text, outlines and dots */
+  --heat: #F04E12; /* Trouble: a failed write, a blocker or a conflict */
+  --worth: #F5C400; /* Why an answer is worth the owner's time */
+  --owner: #2F86DC; /* It waits on the owner */
+  --agent: #27A046; /* Agents carry it, or it is the agents' voice */
+  --returned: #A66BE0; /* It came back for rework */
+  --soft-pct: 22%; /* Tint strength of a hue at rest */
+  --line-pct: 68%; /* Hue strength of a tone outline */
+  --dot-pct: 72%; /* Hue strength of a tone dot */
   color-scheme: light;
 }
 
+/* A manual dark choice. */
+
 [data-theme="dark"],
 .t-dark {
-  --ground: #0A0A0A; /* grey: the page background, not a signal */
-  --surface: #191919; /* grey: cards, header and sidebar, not a signal */
-  --raised: #232323; /* grey: hover and current-item fill, not a signal */
-  --line: #333333; /* grey: quiet borders between regions, not a signal */
-  --line-strong: #757575; /* grey: control borders and emphasised edges, not a signal */
-  --muted: #A8A8A8; /* grey: secondary text, not a signal */
-  --ink: #F7F7F7; /* grey: primary text, not a signal */
-  --pole: #FFFFFF; /* grey: the mixing pole that lightens tone ink, not a signal */
-  --heat: #FF5A1F; /* heat: something is on fire, blocked or in error */
-  --worth: #FFD60A; /* worth: why it is worth your time */
-  --owner: #4C9BE8; /* owner (blue): the ball is with the owner */
-  --agent: #3DBE5A; /* agent (green): agents are carrying it */
-  --returned: #A66BE0; /* returned (purple): it came back for rework */
-  --soft-pct: 22%;
-  --line-pct: 62%;
-  --dot-pct: 80%;
+  --ground: #0A0A0A; /* Page background */
+  --surface: #191919; /* Panels, cards and inputs */
+  --raised: #232323; /* Hover, the selected item and progress tracks */
+  --line: #333333; /* Hairline dividers */
+  --line-strong: #757575; /* Control borders; grey, nothing for you here */
+  --muted: #A8A8A8; /* Secondary text */
+  --ink: #F7F7F7; /* Primary text, grade badges and progress */
+  --pole: #FFFFFF; /* Mixing anchor for tone text, outlines and dots */
+  --heat: #FF5A1F; /* Trouble: a failed write, a blocker or a conflict */
+  --worth: #FFD60A; /* Why an answer is worth the owner's time */
+  --owner: #4C9BE8; /* It waits on the owner */
+  --agent: #3DBE5A; /* Agents carry it, or it is the agents' voice */
+  --returned: #A66BE0; /* It came back for rework */
+  --soft-pct: 22%; /* Tint strength of a hue at rest */
+  --line-pct: 62%; /* Hue strength of a tone outline */
+  --dot-pct: 80%; /* Hue strength of a tone dot */
   color-scheme: dark;
 }
 
-/* System dark preference: the same values as [data-theme="dark"] above
-   (tests/theme.test.mjs checks the two blocks are identical). */
+/* The system dark preference, unless the reader chose light. */
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --ground: #0A0A0A; /* grey: the page background, not a signal */
-    --surface: #191919; /* grey: cards, header and sidebar, not a signal */
-    --raised: #232323; /* grey: hover and current-item fill, not a signal */
-    --line: #333333; /* grey: quiet borders between regions, not a signal */
-    --line-strong: #757575; /* grey: control borders and emphasised edges, not a signal */
-    --muted: #A8A8A8; /* grey: secondary text, not a signal */
-    --ink: #F7F7F7; /* grey: primary text, not a signal */
-    --pole: #FFFFFF; /* grey: the mixing pole that lightens tone ink, not a signal */
-    --heat: #FF5A1F; /* heat: something is on fire, blocked or in error */
-    --worth: #FFD60A; /* worth: why it is worth your time */
-    --owner: #4C9BE8; /* owner (blue): the ball is with the owner */
-    --agent: #3DBE5A; /* agent (green): agents are carrying it */
-    --returned: #A66BE0; /* returned (purple): it came back for rework */
-    --soft-pct: 22%;
-    --line-pct: 62%;
-    --dot-pct: 80%;
+    --ground: #0A0A0A; /* Page background */
+    --surface: #191919; /* Panels, cards and inputs */
+    --raised: #232323; /* Hover, the selected item and progress tracks */
+    --line: #333333; /* Hairline dividers */
+    --line-strong: #757575; /* Control borders; grey, nothing for you here */
+    --muted: #A8A8A8; /* Secondary text */
+    --ink: #F7F7F7; /* Primary text, grade badges and progress */
+    --pole: #FFFFFF; /* Mixing anchor for tone text, outlines and dots */
+    --heat: #FF5A1F; /* Trouble: a failed write, a blocker or a conflict */
+    --worth: #FFD60A; /* Why an answer is worth the owner's time */
+    --owner: #4C9BE8; /* It waits on the owner */
+    --agent: #3DBE5A; /* Agents carry it, or it is the agents' voice */
+    --returned: #A66BE0; /* It came back for rework */
+    --soft-pct: 22%; /* Tint strength of a hue at rest */
+    --line-pct: 62%; /* Hue strength of a tone outline */
+    --dot-pct: 80%; /* Hue strength of a tone dot */
     color-scheme: dark;
   }
 }
 
-/* Derived tones, as the canvas's .tone rule: pick a hue with .h-*, then use
-   --tone-soft (at-rest fill), --tone-ink (text on that fill), --tone-line
-   (outline) and --tone-dot (live dot). Each carries its hue's one meaning. */
+/* Mixes: pick a hue with .h-*, then use the .tone tokens. */
+
 .tone {
-  --on: #0A0A0A; /* grey: text on a strong hue fill, not a signal */
-  --tone-soft: color-mix(in oklab, var(--hue) var(--soft-pct), var(--surface)); /* the hue's meaning, at rest */
-  --tone-ink: color-mix(in oklab, var(--hue) 40%, var(--pole)); /* the hue's meaning, as text */
-  --tone-line: color-mix(in oklab, var(--hue) var(--line-pct), var(--pole)); /* the hue's meaning, as an outline */
-  --tone-dot: color-mix(in oklab, var(--hue) var(--dot-pct), var(--pole)); /* the hue's meaning, live */
+  --on: #0A0A0A; /* Text on a strong hue fill */
+  --tone-soft: color-mix(in oklab,var(--hue) var(--soft-pct),var(--surface)); /* The soft, at-rest fill of the card's hue */
+  --tone-ink: color-mix(in oklab,var(--hue) 40%,var(--pole)); /* Text in the card's hue */
+  --tone-line: color-mix(in oklab,var(--hue) var(--line-pct),var(--pole)); /* The outline in the card's hue */
+  --tone-dot: color-mix(in oklab,var(--hue) var(--dot-pct),var(--pole)); /* The live dot in the card's hue */
 }
-.h-heat { --hue: var(--heat); }
-.h-worth { --hue: var(--worth); }
-.h-owner { --hue: var(--owner); }
-.h-agent { --hue: var(--agent); }
-.h-returned { --hue: var(--returned); }
-.h-none { --hue: var(--line-strong); }
+
+.h-heat {
+  --hue: var(--heat);
+}
+
+.h-worth {
+  --hue: var(--worth);
+}
+
+.h-owner {
+  --hue: var(--owner);
+}
+
+.h-agent {
+  --hue: var(--agent);
+}
+
+.h-returned {
+  --hue: var(--returned);
+}
+
+.h-none {
+  --hue: var(--line-strong);
+}
+/* END theme tokens */
 
 :root {
   /* Type: self-hosted from @fontsource (no third-party requests). */

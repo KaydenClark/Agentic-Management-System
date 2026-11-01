@@ -34,6 +34,40 @@
         "site/app/nav.ts"
       ],
       "status": "draft"
+    },
+    {
+      "path": "/start",
+      "title": "Start here",
+      "spec": "S-003",
+      "task": "TK-002",
+      "landed": {
+        "branch": "dev",
+        "commit": "0418ac716d4ad48440f512ea90420d45bf2b4eec",
+        "pr": 23
+      },
+      "sources": [
+        "site/app/start/",
+        "site/app/nav.ts",
+        "site/app/shell/PageOrder.tsx"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/how-it-works",
+      "title": "How it works",
+      "spec": "S-003",
+      "task": "TK-002",
+      "landed": {
+        "branch": "dev",
+        "commit": "0418ac716d4ad48440f512ea90420d45bf2b4eec",
+        "pr": 23
+      },
+      "sources": [
+        "site/app/how-it-works/",
+        "site/app/nav.ts",
+        "site/app/shell/PageOrder.tsx"
+      ],
+      "status": "draft"
     }
   ]
 }

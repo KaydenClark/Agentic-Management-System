@@ -42,6 +42,22 @@ export function expectedCommit() {
   return execFileSync('git', ['rev-parse', 'HEAD'], { cwd: siteDir, encoding: 'utf8' }).trim();
 }
 
+// Every text file the deployed site serves: the prerendered pages and their
+// RSC payloads in .next/server/app, and the client JS and CSS in .next/static.
+// Server-only chunks, manifests and source maps are not served, so they are
+// left out; fonts are binary. New routes are covered as soon as they build.
+const SERVED_PAGE = /\.(?:html|rsc|meta)$/;
+const SERVED_STATIC = /\.(?:js|css)$/;
+export function servedFiles() {
+  if (!existsSync(appOut)) throw new Error('No build output: run `npm run build` in site/ before `npm test`.');
+  const staticDir = join(siteDir, '.next', 'static');
+  const files = [
+    ...walk(appOut, (p) => SERVED_PAGE.test(p)),
+    ...(existsSync(staticDir) ? walk(staticDir, (p) => SERVED_STATIC.test(p)) : []),
+  ];
+  return files.map((path) => ({ path, name: relative(siteDir, path), text: readFileSync(path, 'utf8') }));
+}
+
 export function sourceFiles(dir, exts) {
   const root = join(siteDir, dir);
   if (!existsSync(root)) return [];

@@ -1,0 +1,43 @@
+/* /how-it-works styles. Page furniture only, so greys; no signal hue applies
+   here. Every value comes from app/theme/tokens.css. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+}
+
+.intro,
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.list {
+  margin: 0;
+  padding-left: var(--space-20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.records {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.records dt {
+  font-weight: var(--weight-semibold);
+}
+
+.records dd {
+  margin: 0;
+}
+
+.source {
+  color: var(--muted);
+  font-size: var(--text-small);
+}
