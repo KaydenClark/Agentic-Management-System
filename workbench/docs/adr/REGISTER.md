@@ -50,3 +50,4 @@
 | [001P](001P-continuity-is-proven-by-a-fresh-recipient-trial.md) | Continuity is proven by a fresh-recipient trial | accepted | 2026-11-01 | AGENTS.md, evals |
 | [001Q](001Q-temporary-notes-are-reconciled-and-deleted.md) | Temporary notes are reconciled and deleted | accepted | 2026-11-01 | AGENTS.md |
 | [001R](001R-a-handoff-is-a-short-live-file.md) | A handoff is a short live file | accepted | 2026-11-01 | RUNBOOK.md |
+| [001S](001S-everything-a-session-needs-is-committed.md) | Everything a session needs is committed | accepted | 2026-11-01 | AGENTS.md, .agents/skills |
