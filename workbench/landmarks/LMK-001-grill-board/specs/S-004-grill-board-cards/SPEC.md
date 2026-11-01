@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000F claimed by Claude implementor (Orchestrator B).
-**Next gate:** Close TK-000F with verification and documentation proof.
+**Latest event:** TK-000G closed with proof.
+**Next gate:** Complete TK-000F.
 
 ## Intent and authority
 
@@ -112,6 +112,7 @@ Rows are condensed per Task; full proof is in each TASK.md Receipt and Git histo
 
 Owner Human QA has not been performed for any Task.
 | 2026-11-01 | review | Review verdict: fail at dd52f705004aac5599a17935935d6fbc6d0a511c [d61980ae5d1c] #1 | new Task: No S-004 acceptance line is checked or links its evidence (ADR-001F). Link each met line's test or receipt on the line itself; new Task: Confirm writes into any tracked file named as Owner record. A card naming .github/workflows/site-build.yml got its Recommendation committed into that workflow in one click. Restrict owner records to record paths; new Task: The re-ask guard compares only the question line and is defeated by punctuation or a zero-width character (C reproduced 'too taxing ?'). Normalize punctuation and invisible characters or compare more than the question line; new Task: A page draft with valid card headers is shown as a card (Not a drafting surface). Refuse cards whose body is page content and test that case; new Task: grill-board/qa screenshots predate the live rating and flag controls and the 375px layout is untested. Regenerate the shots at the candidate and add a 375px check | Orchestrator C, Claude cloud session, separate from B's build lanes, plus a fresh-context read-only subagent | 5 |
+| 2026-11-01 | TK-000G | Task closed | pytest 367 passed; owner-root must-fail 11 cases | grill-board/README.md, S-004 Decisions | Owner QA; close attribution: {"agent":"Claude implementor (Orchestrator B)","claimant":"Claude implementor (Orchestrator B)","onBehalfOf":null} |
 
 ## Review and Human QA
 
