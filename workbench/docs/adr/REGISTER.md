@@ -59,3 +59,4 @@
 | [001Y](001Y-each-behavior-has-one-owning-skill.md) | Each behavior has one owning skill | accepted | 2026-11-01 | .agents/skills |
 | [001Z](001Z-cross-skill-calls-are-explicit-skill-tool-calls.md) | Cross-skill calls are explicit Skill-tool calls | accepted | 2026-11-01 | .agents/skills |
 | [002A](002A-one-improvement-procedure-starting-from-failed-results.md) | One improvement procedure, starting from failed results | accepted | 2026-11-01 | evals, workbench/feedback |
+| [002B](002B-a-repeated-failure-first-checks-the-earlier-fix.md) | A repeated failure first checks the earlier fix | accepted | 2026-11-01 | evals, workbench/tools |
