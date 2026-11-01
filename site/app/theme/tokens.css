@@ -172,3 +172,86 @@
   --measure: 68ch;
   --page-min-height: 100vh;
 }
+
+/*
+ * Demo Grill Board (/grill-board-demo, S-009): type, spacing and size values
+ * from the Grilling Board canvas's board page, hand-written like the tokens
+ * above. No colors: the board uses the theme block's tokens and mixes.
+ */
+:root {
+  /* Spacing steps the board uses beyond the shared scale, named by size in px. */
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-3: 3px;
+  --space-5: 5px;
+  --space-7: 7px;
+  --space-9: 9px;
+  --space-11: 11px;
+  --space-16: 16px;
+  --space-22: 22px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-40: 40px;
+
+  /* Type sizes. */
+  --gb-text-tag: 11.5px; /* Sample label */
+  --gb-text-label: 12px; /* eyebrows, counts, row meta */
+  --gb-text-grade: 12.5px; /* grade badges, small print */
+  --gb-text-control: 13.5px; /* strips, round box, reasons */
+  --gb-text-row: 14.5px; /* row titles, concerns */
+  --gb-text-agent: 15.5px; /* agent recommendation */
+  --gb-text-question: 19px; /* the question */
+  --gb-text-star: 20px; /* rating stars */
+  --gb-text-where: 22px; /* where-answers-go heading */
+  --gb-text-card-sm: 26px; /* card title at 375 px */
+  --gb-text-topic: 28px; /* topic heading */
+  --gb-text-card: 32px; /* card title */
+
+  /* Leading and tracking. */
+  --gb-leading-ui: 1.5;
+  --gb-leading-label: 1.3;
+  --gb-leading-row: 1.35;
+  --gb-leading-card: 1.18;
+  --gb-leading-where: 1.2;
+  --gb-leading-tag: 1.6;
+  --gb-leading-worth: 1.65;
+  --gb-tracking-label: 0.06em;
+
+  /* Strokes and rings. */
+  --gb-stroke-2: 2px;
+  --gb-radio-on: 6px;
+  --gb-focus-width: 3px;
+  --gb-ring-gap: 2px;
+  --gb-ring: 4px;
+
+  /* Radii beyond the shared set. */
+  --gb-radius-bar: 1px;
+  --gb-radius-track: 2px;
+  --gb-radius-progress: 4px;
+  --gb-radius-tag: 6px;
+  --gb-radius-box: 12px;
+
+  /* Sizes. */
+  --gb-bar-width: 4px;
+  --gb-bar-1: 5px;
+  --gb-bar-2: 7px;
+  --gb-bar-3: 10px;
+  --gb-bar-4: 12px;
+  --gb-progress: 8px;
+  --gb-dot: 10px;
+  --gb-glyph: 13px;
+  --gb-check: 18px;
+  --gb-control-xs: 28px;
+  --gb-control-sm: 30px;
+  --gb-control-md: 32px;
+  --gb-control-lg: 36px;
+  --gb-control-xl: 40px;
+  --gb-option-min: 48px;
+  --gb-pick-width: 32px;
+  --gb-search-min: 180px;
+  --gb-rail-basis: 232px;
+  --gb-queue-basis: 340px;
+  --gb-main-basis: 480px;
+  --gb-card-max: 760px;
+  --gb-moreline-indent: 48px;
+}

@@ -159,17 +159,18 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
     <div className="gb-cols">
       {/* Left rail */}
       <aside className="gb-rail">
-        <nav aria-label="Dashboard sections" className="gb-nav">
-          <span className="navlink">Destination Tracker</span>
-          <span className="navlink">Taskboard</span>
-          <span className="navlink is-current" aria-current="page">Grilling Board</span>
-          <span className="navlink">Drafts to approve</span>
-          <span className="navlink">Wiki</span>
-        </nav>
+        {/* A picture of the real Dashboard's sections, not links: the demo has only this board. */}
+        <ul aria-label="Sections of the real Dashboard (not links in this demo)" className="gb-nav">
+          <li className="gb-navitem">Destination Tracker</li>
+          <li className="gb-navitem">Taskboard</li>
+          <li className="gb-navitem is-current">Grilling Board</li>
+          <li className="gb-navitem">Drafts to approve</li>
+          <li className="gb-navitem">Wiki</li>
+        </ul>
 
         <div className="gb-topics">
           <div className="gb-topics-head">
-            <span className="eyebrow">Topics</span>
+            <span className="gb-eyebrow">Topics</span>
             <span className="gb-count">{totalConfirmed} / {cards.length}</span>
           </div>
           {topics.map((t) => {
@@ -194,15 +195,15 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
         </div>
 
         <section aria-label="Rounds and promotion" className="gb-round">
-          <div className="eyebrow">This round</div>
-          <div style={{ fontSize: "13.5px" }}>Round 1 · {answeredNow} answered, {confirmedNow} confirmed</div>
-          <button type="button" className="ghost" style={{ fontWeight: 600 }}>End this round</button>
+          <div className="gb-eyebrow">This round</div>
+          <div className="gb-round-line">Round 1 · {answeredNow} answered, {confirmedNow} confirmed</div>
+          <button type="button" className="ghost semibold">End this round</button>
           <div className="gb-small">Records which cards are confirmed. Starts no agent, promotes nothing.</div>
           <div className="gb-rule" />
           <div className="gb-ready">
             <span className="dot tone h-agent" />
-            <span style={{ flex: 1 }}>Confirmed, ready to promote</span>
-            <span className="mono" style={{ fontSize: "12.5px" }}>{confirmedNow}</span>
+            <span className="grow">Confirmed, ready to promote</span>
+            <span className="gb-round-count">{confirmedNow}</span>
           </div>
           <button type="button" className="ghost">Promote selected…</button>
           <div className="gb-small">In this demo, nothing is handed to an agent.</div>
@@ -217,9 +218,9 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
       {/* Question queue */}
       <section aria-label="Question queue" className="gb-queue">
         <div className="gb-qhead">
-          <h1 className="gb-h1">{topic.label}</h1>
-          <p className="gb-frame">Think about <span style={{ color: "var(--ink)" }}>{"{ " + topic.frame + " }"}</span></p>
-          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+          <h2 className="gb-h1" data-topic-title="">{topic.label}</h2>
+          <p className="gb-frame">Think about <span className="ink">{"{ " + topic.frame + " }"}</span></p>
+          <div className="gb-progress-wrap">
             <div className="gb-progress">
               <div style={{ width: `${Math.round((100 * inTopic.filter((c) => verdicts[c.id] === "confirm").length) / inTopic.length)}%` }} />
             </div>
@@ -268,7 +269,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
                 ))}
               </select>
               <label htmlFor="gb-qsearch" className="sr-only">Search these questions</label>
-              <input id="gb-qsearch" type="search" className="gb-select" placeholder="Titles, questions, text…" value={search} onChange={(e) => setSearch(e.target.value)} style={{ padding: "5px 10px", minWidth: 180 }} />
+              <input id="gb-qsearch" type="search" className="gb-select gb-search-q" placeholder="Titles, questions, text…" value={search} onChange={(e) => setSearch(e.target.value)} />
             </div>
           </details>
           <button type="button" className="gb-clear" onClick={clearFilters}>Clear</button>
@@ -320,20 +321,20 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
                   onClick={() => setSelId(c.id)}
                   aria-current={current ? "true" : undefined}
                 >
-                  <span className={"dot tone " + dotHue + (vd === "later" ? " rest" : "")} style={{ marginTop: 6 }} />
+                  <span className={"dot tone " + dotHue + (vd === "later" ? " rest" : "")} />
                   <span className="gb-row-main">
                     <span className="clamp gb-row-short">{c.short}</span>
                     <span className="gb-row-meta">
                       <span className="sample">Sample</span>
                       <span className="mono">{c.id}</span>
                       <span className="gb-bars" aria-hidden="true">
-                        {[5, 7, 10, 12].map((h, i) => (
-                          <span key={h} className={n >= i + 1 ? "bar on" : "bar"} style={{ height: h }} />
+                        {[1, 2, 3, 4].map((k) => (
+                          <span key={k} className={`bar bar-${k}${n >= k ? " on" : ""}`} />
                         ))}
                       </span>
                       <span>{c.scale}</span>
                       {c.lane === "stale" && !vd && (
-                        <span className="tone h-returned" style={{ color: "var(--tone-ink)", fontWeight: 600 }}>· Re-answer</span>
+                        <span className="tone h-returned gb-reanswer">· Re-answer</span>
                       )}
                       {taxing[c.id] && <span>· Too taxing</span>}
                     </span>
@@ -358,7 +359,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
       </section>
 
       {/* The open card */}
-      <main className="gb-main">
+      <section aria-label="The open card" className="gb-main">
         <article className="gb-card" data-open-card={sel.id} aria-label={"Sample card " + sel.id}>
           <div className="gb-cardmeta">
             <span className="sample">Sample</span>
@@ -376,7 +377,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
             )}
           </div>
 
-          <h2 className="gb-h2">{sel.title}</h2>
+          <h3 className="gb-h2">{sel.title}</h3>
 
           <div className="gb-why2">
             <details className="gb-whygrade">
@@ -390,7 +391,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
           </div>
 
           <div className="gb-block">
-            <div className="eyebrow">The question</div>
+            <div className="gb-eyebrow">The question</div>
             <p className="gb-q">{sel.q}</p>
           </div>
 
@@ -405,7 +406,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
           </div>
 
           <fieldset className="gb-opts">
-            <legend className="eyebrow">Pick an alternative</legend>
+            <legend className="gb-eyebrow">Pick an alternative</legend>
             {sel.options.map((o) => (
               <button
                 key={o.key}
@@ -416,7 +417,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
               >
                 <span className="radio" />
                 <span className="gb-opt-text">
-                  <span style={{ fontWeight: 600 }}>{o.label}</span>
+                  <span className="semibold">{o.label}</span>
                   <span className="gb-opt-hint">{o.hint}</span>
                 </span>
                 {o.recommended && <span className="tone h-agent outline gb-rectag">Recommended</span>}
@@ -425,23 +426,23 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
           </fieldset>
 
           <section aria-label="What this concerns" className="gb-concerns">
-            <div className="eyebrow">What this concerns</div>
+            <div className="gb-eyebrow">What this concerns</div>
             <ul>
               {sel.concerns.map((c) => (
                 <li key={c.name}>
-                  <span className="textlink" style={{ fontWeight: 600 }}>{c.name}</span>{" "}
-                  <span style={{ color: "var(--muted)" }}>— {c.note}</span>
+                  <span className="textlink semibold">{c.name}</span>{" "}
+                  <span className="quiet">— {c.note}</span>
                 </li>
               ))}
             </ul>
             <div className="gb-wikirow">
-              <span style={{ color: "var(--muted)" }}>Read in the Wiki</span>
+              <span className="quiet">Read in the Wiki</span>
               {sel.wiki.map((w) => (
                 <span key={w} className="wikichip">{w}</span>
               ))}
             </div>
             {sel.draft && (
-              <span className="textlink" style={{ fontSize: 14, alignSelf: "flex-start" }}>Open the proposed wording in Drafts to approve →</span>
+              <span className="textlink gb-draftlink">Open the proposed wording in Drafts to approve →</span>
             )}
           </section>
 
@@ -461,11 +462,11 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
           </div>
 
           <div className="gb-verdict">
-            <div className="eyebrow">Your verdict</div>
+            <div className="gb-eyebrow">Your verdict</div>
 
             {taxing[sel.id] && (
               <div className="tone h-returned gb-callout">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" style={{ flexShrink: 0, marginTop: 3, color: "var(--tone-ink)" }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M9 14 4 9l5-5" />
                   <path d="M4 9h11a5 5 0 0 1 0 10h-3" />
                 </svg>
@@ -523,7 +524,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
 
             <div className="gb-foot">
               <span aria-live="polite">{saveLine}</span>
-              <span style={{ display: "flex", gap: 8 }}>
+              <span className="gb-foot-nav">
                 <button type="button" className="ghost" onClick={() => go(-1)}>Previous</button>
                 <button type="button" className="inkbtn" onClick={() => go(1)}>Next question</button>
               </span>
@@ -531,7 +532,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
           </div>
         </article>
         {children}
-      </main>
+      </section>
     </div>
   );
 }
