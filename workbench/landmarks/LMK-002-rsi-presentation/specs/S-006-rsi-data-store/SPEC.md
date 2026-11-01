@@ -28,7 +28,7 @@ Charts can only be honest if each number has a row behind it with its provenance
 ## Current Verified State
 
 - `supabase/migrations/` holds a read-only baseline: clients cannot insert, update or delete, and every new public table starts with row-level security on.
-- `build_events` (migration `20261101132456`) holds one real row, the merge of PR #15 (884d021); the publishable key reads it and is refused (401) on insert, update and delete. `ams-writer` writes it. No RSI result or run tables exist.
+- `build_events` (migration `20261101132456`) holds 463 build-history rows that `ams-history` imported from Git, `gh` and the records, including ams-writer's PR #15 row; the publishable key reads them and is refused (401) on insert, update and delete. No RSI result or run tables exist.
 
 ## Desired Behavior
 

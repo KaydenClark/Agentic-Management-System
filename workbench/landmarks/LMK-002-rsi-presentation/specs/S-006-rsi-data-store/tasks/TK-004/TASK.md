@@ -24,7 +24,7 @@ Hand back to S-006 with `close`.
 
 ## Acceptance
 
-- [ ] After an import, row counts match the counts read from the records for at least Specs, Tasks, merged PRs and `main` commits.
-- [ ] At least one return or correction appears as a row in order, if the records hold one; otherwise the report says none exist.
-- [ ] Running the import twice adds no rows.
-- [ ] Every row names a source; a test fails on a row without one.
+- [x] After an import, row counts match the counts read from the records for at least Specs, Tasks, merged PRs and `main` commits.
+- [x] At least one return or correction appears as a row in order, if the records hold one; otherwise the report says none exist.
+- [x] Running the import twice adds no rows.
+- [x] Every row names a source; a test fails on a row without one.
