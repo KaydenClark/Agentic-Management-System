@@ -1,0 +1,3 @@
+# Private Wiki capture stays local.
+.jot-private-*
+.jot-write-*/

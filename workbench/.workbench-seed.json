@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "source": "LLM Workbench seeded documents",
+  "documents": {
+    "workbench/docs/SKILLS.md": {
+      "release": "v3.2.2",
+      "contentHash": "69f9271f3b0bb50cafa5dc26321159151b59a1c3bae04d908c9040f233417143"
+    },
+    "workbench/docs/WORKBENCH_STRUCTURE.md": {
+      "release": "v3.2.2",
+      "contentHash": "7f67393a688850ab71506bfe2ae45e6b6a8f03d65900f1f98a49a2a5169905f1"
+    },
+    "workbench/docs/ORGANIZATION.md": {
+      "release": "v3.2.2",
+      "contentHash": "fc72f5a151f2a162c0077367a60e80a8dceccbacc5b1f3766f0ec5ef31d96edd"
+    },
+    "workbench/sessions/notepads/templates/notepad.schema.json": {
+      "release": "v3.2.2",
+      "contentHash": "2bdc47d139314642bc4b90e8e2d2e2a5e24cc4d258aaa90ec4d126def2be00c0"
+    },
+    "workbench/sessions/notepads/templates/work.example.json": {
+      "release": "v3.2.2",
+      "contentHash": "7608eb9e6879fb564041011f6c09756de696b01a1292a48c2cee9e32c6b82376"
+    },
+    "workbench/sessions/notepads/templates/grilling.example.json": {
+      "release": "v3.2.2",
+      "contentHash": "4856b43d2f939a131172e24f455fca457b17508da505d56c89312d58906a2458"
+    },
+    "workbench/wiki/ai-coding-reference--harness.md": {
+      "release": "v3.2.2",
+      "contentHash": "cee762ee1d76a80ba785755b236b76a7606e08d8cbf29604f224eb328c5ee857",
+      "sourceHash": "543ea0f0fdc7eddf0401fa637fdd455b64ccc82c05f2a05e13ad6adbc7fbf0d6",
+      "templateValues": {
+        "[HARNESS_VERSION]": "3.2.2",
+        "[PROJECT_NAME]": "workbench-adopt",
+        "[YYYY-MM-DD]": "2026-11-01"
+      }
+    },
+    "workbench/wiki/ai-coding-reference--model-provider.md": {
+      "release": "v3.2.2",
+      "contentHash": "f53fa3ef5ce0f71d8a5f81e249c59e683a0247f90760ae2ec61c153861f6a180",
+      "sourceHash": "f12448230bcfc5416cb2fa162a699a11480b2f2b91d019516f6d08c044d848f5",
+      "templateValues": {
+        "[HARNESS_VERSION]": "3.2.2",
+        "[PROJECT_NAME]": "workbench-adopt",
+        "[YYYY-MM-DD]": "2026-11-01"
+      }
+    },
+    "workbench/wiki/ai-coding-reference--session.md": {
+      "release": "v3.2.2",
+      "contentHash": "09642557b8f16d8fd1f2b543f139d2e1e5567d52542205a6b9d56a01fdbc2bd1",
+      "sourceHash": "f4bb46eda53c32c408950703dd290cacb10963ada575b294f886e90726d4ea0f",
+      "templateValues": {
+        "[HARNESS_VERSION]": "3.2.2",
+        "[PROJECT_NAME]": "workbench-adopt",
+        "[YYYY-MM-DD]": "2026-11-01"
+      }
+    },
+    "workbench/artifact-budgets.json": {
+      "release": "v3.2.2",
+      "contentHash": "96ba4a7eb4c048fe96e9783f3f8f039b05ad54b05001db3965301e8a8bddb7c8"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "unit": "unicode-code-points",
+  "tiers": [
+    900,
+    1500,
+    3000,
+    5000,
+    8000,
+    15000
+  ],
+  "defaultMaxCharacters": 15000,
+  "artifacts": {
+    "AGENTS.md": {
+      "targetCharacters": [
+        900,
+        1500
+      ],
+      "maxCharacters": 3000
+    },
+    "BLUEPRINT.md": {
+      "targetCharacters": [
+        900,
+        1500
+      ],
+      "maxCharacters": 3000
+    },
+    "ARCHITECTURE.md": {
+      "targetCharacters": [
+        900,
+        1500
+      ],
+      "maxCharacters": 3000
+    },
+    "RUNBOOK.md": {
+      "targetCharacters": [
+        900,
+        1500
+      ],
+      "maxCharacters": 3000
+    },
+    "LANDMARK.md": {
+      "maxCharacters": 8000
+    },
+    "SPEC.md": {
+      "maxCharacters": 8000
+    },
+    "TASK.md": {
+      "maxCharacters": 8000
+    },
+    "TASKS.md": {
+      "maxCharacters": 8000
+    },
+    "SKILL.md": {
+      "targetCharacters": [
+        900,
+        900
+      ],
+      "maxCharacters": 8000
+    }
+  }
+}
