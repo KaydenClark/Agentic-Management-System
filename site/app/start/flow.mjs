@@ -3,33 +3,12 @@
 // The lifecycle diagram, the toy and the toy's no-JS fallback all render from
 // these lists, so they cannot disagree (tests/start-flow.test.mjs).
 // Every stage cites the committed records it comes from (paths from the
-// repository root). Keep to erasable TypeScript: the tests load this file
-// with Node's type stripping.
-
-export type Holder = "owner" | "agent" | "returned" | "done";
-
-export type Source = { label: string; path: string };
-
-// A way out of a stage: the reader's button label and the stage it leads to.
-export type Choice = { label: string; to: string };
-
-export type Stage = {
-  id: string;
-  name: string;
-  holder: Holder;
-  line: string;
-  sources: readonly Source[];
-  // The usual way on. Absent on the last stage.
-  next?: Choice;
-  // Where the system really branches: the choice that sends work back.
-  back?: Choice;
-  // Off the main path (the returned loop).
-  branch?: boolean;
-};
+// repository root). Plain JavaScript so the tests import it on any Node that
+// runs npm test; its types are in flow.d.mts.
 
 // The four signals /start uses, each with its one meaning (DDR-000M) and the
 // tokens.css hue class that carries it (DDR-000Y). Nothing else is coloured.
-export const HOLDERS: Record<Holder, { label: string; ball: string; meaning: string; hue: string }> = {
+export const HOLDERS = {
   owner: { label: "Kayden", ball: "Kayden has the ball", meaning: "Blue: it waits on the owner, Kayden.", hue: "h-owner" },
   agent: { label: "Agents", ball: "Agents have the ball", meaning: "Green: agents carry it.", hue: "h-agent" },
   returned: { label: "Returned", ball: "Returned for rework", meaning: "Purple: it came back for rework.", hue: "h-returned" },
@@ -60,13 +39,13 @@ const src = {
   adr002W: { label: "ADR-002W", path: `${ADR}002W-three-strikes-then-stop.md` },
   adr002Z: { label: "ADR-002Z", path: `${ADR}002Z-three-orchestrators-split-the-work-by-risk.md` },
   adr003F: { label: "ADR-003F", path: `${ADR}003F-one-standing-campaign-approval-and-no-per-merge-gate.md` },
-} as const;
+};
 export const SOURCES = src;
 
 // The sample piece of work the toy moves. It is an example, not a record.
 export const SAMPLE = "Add a Glossary page to this site";
 
-export const stages: readonly Stage[] = [
+export const stages = [
   {
     id: "ask",
     name: "Ask",
@@ -171,20 +150,20 @@ export const stages: readonly Stage[] = [
 export const mainPath = stages.filter((s) => !s.branch);
 export const firstStage = stages[0];
 export const lastStage = stages[stages.length - 1];
-export const stageById = (id: string): Stage => stages.find((s) => s.id === id) ?? firstStage;
+export const stageById = (id) => stages.find((s) => s.id === id) ?? firstStage;
 
 // What the owner does beyond the lifecycle stages he holds.
-export const ownerAlso: readonly { line: string; sources: readonly Source[] }[] = [
+export const ownerAlso = [
   { line: "Approves an improvement campaign once: its budget, round cap and stop rule. He does not approve every merge.", sources: [src.adr003F] },
 ];
 
 // What agents do beyond the lifecycle stages they hold.
-export const agentsAlso: readonly { line: string; sources: readonly Source[] }[] = [
+export const agentsAlso = [
   { line: "Merge work that is not deployed into main themselves, once checks pass.", sources: [src.ddr000H, src.adr003F] },
 ];
 
 // The three orchestrators, all Claude, split by risk (ADR-002Z).
-export const orchestrators: readonly { id: string; name: string; does: string; never: string }[] = [
+export const orchestrators = [
   { id: "A", name: "Website", does: "Builds this site; reaches the web host only by pushing to dev.", never: "Browses the web." },
   { id: "B", name: "Grill Board and RSI loop", does: "Runs the local Grill Board, the Python backend and the database keys on Kayden's own machine.", never: "Deploys anything." },
   { id: "C", name: "Coherence", does: "Checks the project stays true to its Specs, reviews Specs and does web research.", never: "Holds secrets or writes product code." },

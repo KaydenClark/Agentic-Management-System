@@ -1,13 +1,13 @@
 // /start: Start here, the first tour page (S-003). The Blueprint's elevator
 // pitch as short screens, one idea and one picture each, then a toy that moves
 // one sample piece of work through the real lifecycle. The diagram, the toy
-// and its no-JS fallback all read app/start/flow.ts. Every claim links the
+// and its no-JS fallback all read app/start/flow.mjs. Every claim links the
 // committed record it comes from; owner feedback 2026-11-01 asked for no
 // quote and no essay.
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { HOLDERS, SOURCES as S, agentsAlso, mainPath, orchestrators, ownerAlso, stageById, stages, type Holder } from "./flow";
+import { HOLDERS, SOURCES as S, agentsAlso, mainPath, orchestrators, ownerAlso, stageById, stages, type Holder } from "./flow.mjs";
 import { SourceLinks } from "./SourceLinks";
 import { Toy } from "./Toy";
 import styles from "./page.module.css";

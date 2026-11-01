@@ -1,11 +1,12 @@
 "use client";
 
 // The /start toy: the reader moves one sample piece of work through the real
-// lifecycle in flow.ts. It holds its state in memory only: no request, no
+// lifecycle in flow.mjs. It holds its state in memory only: no request, no
 // storage, no cookie. Before scripts run (and without them) it renders every
 // stage as a numbered list, so the server-rendered page carries all the text.
+// When a control it pressed goes away, focus moves to the primary button.
 import { useEffect, useRef, useState } from "react";
-import { HOLDERS, SAMPLE, lastStage, mainPath, stageById, stages, type Stage } from "./flow";
+import { HOLDERS, SAMPLE, lastStage, mainPath, stageById, stages, type Stage } from "./flow.mjs";
 import { SourceLinks } from "./SourceLinks";
 import styles from "./toy.module.css";
 
@@ -102,7 +103,11 @@ export function Toy() {
         <button
           type="button"
           className={styles.button}
-          onClick={() => setTrail((t) => (t.length > 1 ? t.slice(0, -1) : t))}
+          onClick={() => {
+            // Back to the first stage disables this button; keep focus in the toy.
+            if (trail.length === 2) primary.current?.focus();
+            setTrail((t) => (t.length > 1 ? t.slice(0, -1) : t));
+          }}
           disabled={trail.length === 1}
         >
           Back
@@ -121,7 +126,12 @@ export function Toy() {
             type="button"
             className={`${styles.button} tone h-returned ${styles.returnButton}`}
             data-toy-secondary=""
-            onClick={() => stage.back && go(stage.back.to)}
+            onClick={() => {
+              if (!stage.back) return;
+              go(stage.back.to);
+              // This button goes away with the stage; keep focus in the toy.
+              primary.current?.focus();
+            }}
           >
             {stage.back.label}
           </button>
