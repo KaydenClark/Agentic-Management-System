@@ -25,7 +25,7 @@ Use existing topic owners; grow flat Wiki notes via [MEMORY](workbench/wiki/MEMO
 
 ## Test And Build
 
-From the root: `uv run pytest` tests (`AMS_LIVE=1` adds a live test); `uv run ams-board` serves the [Grill Board](grill-board/README.md) on 127.0.0.1 only. Supabase, from orchestrator B's main checkout (it has the key; none is printed): `uv run ams-keycheck` checks the service key; `uv run ams-writer record-merge|readcheck SHA` writes a merge to `build_events` and proves the site key reads it, never writes (`src/ams/writer.py`). Room checks:
+From the root: `uv run pytest` (`AMS_LIVE=1` adds live tests); `uv run ams-board` serves the [Grill Board](grill-board/README.md) on 127.0.0.1 only. Supabase (`uv run` in orchestrator B's main checkout; key never printed): `ams-keycheck` checks it; `ams-writer record-merge|readcheck SHA` (a merge), `ams-history import|readcheck` (history, idempotent); `ams-rsi`/`ams-sources livecheck` test RSI and source rules. The site key only reads. Room checks:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render
@@ -35,11 +35,11 @@ node workbench/tools/workbench-layout.mjs validate --project "$PWD"
 git diff --check
 ```
 
-`render` must leave no diff; `doctor` no blocking finding. On a fresh clone at the recorded commit, rerun them and `uv run pytest`.
+`render` must leave no diff, `doctor` no blocking finding. On a fresh clone at the recorded commit, rerun them and `uv run pytest`.
 
 ## Version control and publication
 
-Non-site work: branch, commit each step, push, PR into `main`, merge-commit once current and checked; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev`, only the owner merges `dev` -> `main`. S-013 measures the `dev` lead. Report local, pushed, merged and deployed states separately.
+Non-site work: branch, commit each step, push, PR into `main`, merge-commit once current and checked; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev` once CI `site builds` passes; only the owner merges `dev` -> `main`. Report local, pushed, merged and deployed states separately.
 
 ## Recovery
 
