@@ -15,3 +15,4 @@
 | [000G](000G-nothing-is-built-before-the-owner-confirms-a-readback.md) | Nothing is built before the owner confirms a readback | accepted | 2026-11-01 | AGENTS.md |
 | [000H](000H-confirmation-approval-and-the-two-delivery-paths.md) | Confirmation, approval and the two delivery paths | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [000I](000I-the-decision-journey-is-tracked-apart-from-delivery.md) | The decision journey is tracked apart from delivery | accepted | 2026-11-01 | BLUEPRINT.md |
+| [000J](000J-every-owner-question-has-a-too-taxing-flag-and-a-rating.md) | Every owner question has a too-taxing flag and a rating | accepted | 2026-11-01 | grill-board |
