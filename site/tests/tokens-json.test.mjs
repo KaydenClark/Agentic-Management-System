@@ -42,6 +42,9 @@ export function problems(text) {
   const b = text.indexOf(BEGIN);
   const e = text.indexOf(END);
   if (e < b) return ['END marker comes before BEGIN'];
+  // The markers must sit at stylesheet top level: no brace left open before BEGIN or after END.
+  const depth = (t) => { let d = 0; for (const ch of t.replace(/\/\*[\s\S]*?\*\//g, '')) { if (ch === '{') d++; else if (ch === '}') d--; } return d; };
+  if (depth(text.slice(0, b)) !== 0 || depth(text.slice(e + END.length)) !== 0) out.push('the generated block is not at stylesheet top level: a rule or at-rule encloses the markers');
   // (a) the block equals the generator's output byte for byte.
   const block = text.slice(b + BEGIN.length, e);
   const expected = generate(json);
