@@ -1,19 +1,21 @@
 # S-003 - Showcase site shell and orientation tour
 
 **Spec ID:** S-003
-**Status:** planned
+**Status:** active
 **Priority:** 1
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
 **Updated:** 2026-11-01
 **Catalog description:** The Next.js site shell in `site/` and the orientation tour that explains the AMS to a reader who knows nothing about agents.
 **Blockers:** none
-**Latest event:** Ported from the pre-repository draft and rewritten from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning.
+**Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
+**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; seven Tasks planned on `dev`, under-the-hood criterion restored.
+**Next gate:** Claim TK-001 in orchestrator A's lane.
 
 ## Intent and authority
 
-The owner asked for a public site that shows off the system, explains how to use it, why and its benefits, and keeps the owner's voice and intent alive; it should be no more than a presentation website. Confirmed 2026-11-01: Next.js on Vercel at a free `*.vercel.app` address, Python backends, Supabase, no FastAPI; site work goes feature -> `dev` -> `main`. Orchestrator A deploys only through Git pushes to `dev`, browses no web and holds no Supabase service key.
+The owner asked for a public site that shows off the system, explains how and why to use it, keeps the owner's voice, and is no more than a presentation website. Confirmed 2026-11-01: Next.js on Vercel at a free `*.vercel.app` address, Python backends, Supabase, no FastAPI; site work goes feature -> `dev` -> `main`. Orchestrator A deploys only through Git pushes to `dev`, browses no web and holds no Supabase service key.
 
 ## Outcome
 
@@ -32,7 +34,8 @@ The site is the owner's public piece and the owner's way back into the system. B
 - **Shell.** Navigation with reading position, light and dark following the system with a manual toggle, the old Grill Board's theme tokens, the deployed commit SHA on every page.
 - **Tour pages.** Start here (what the AMS is and refuses to do); Why; How it works (records, lifecycle, one real Spec and Task); a short quickstart; Limits; Glossary; About with a resume summary.
 - **Links to siblings.** RSI charts (S-007), skills wiki (S-008), demo Grill Board (S-009), governance stack and flow charts (S-010).
-- **Data.** Anything dynamic, such as build history, is read from Supabase with the publishable key.
+- **Data.** Anything dynamic is read from Supabase with the publishable key.
+- **Under the hood.** A page rendered from S-006's build-history rows shows how the AMS built this site: Specs, Tasks, PRs and commits in order, returns and corrections included. No history is hand-written, so the page is the site's proof it was made with the system.
 - **Voice.** Agents draft every page from the records and the voice and taste record (S-005). Owner words appear verbatim only with their source. Each page shows a draft mark until the owner approves it on the Grill Board.
 
 ## Decisions And Contracts
@@ -52,46 +55,15 @@ The site is the owner's public piece and the owner's way back into the system. B
 
 - A Vercel project with production from `main` and a protected `dev` deployment (owner action).
 - S-005 for page approvals; until it exists, approvals happen in chat.
+- S-006 for build-history rows (TK-006).
+- Open owner choice `grill-board-theme-tokens`: the old Grill Board's token values are outside this public repository; the owner supplies them or approves copying them before TK-007. Until then the shell keeps every value in one token file.
 
 ## Vertical Implementation Slices
 
+Every Task targets `dev`: branch from `origin/dev` (it holds the Next scaffold in `site/`), PR into `dev`, and only the owner merges `dev` -> `main`. Stack: Next.js pages in `site/`, Supabase reads, the build, tests on the built output and the protected `dev` deployment.
+
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Next app in `site/` with shell, theme tokens, light/dark and SHA footer, deployed to `dev` | ready | none | pending |
-| TK-002 | Start here and How it works pages with plain-language openers and reading order | ready | TK-001 | pending |
-| TK-003 | Why, Limits, Glossary, quickstart and About pages | ready | TK-002 | pending |
-| TK-004 | Draft marks driven by hash-bound approval records | ready | TK-001 | pending |
-| TK-005 | Hygiene, accessibility, 375 px and third-party checks on the built output | ready | TK-001 | pending |
-
-### TK-001 - Shell on dev
-
-**Stance:** Builder
-
-Proves the theme, SHA and responsive criteria.
-
-### TK-002 - First tour pages
-
-**Stance:** Builder
-
-Proves the opener and reading-order criteria.
-
-### TK-003 - Remaining tour pages
-
-**Stance:** Builder
-
-Completes the page inventory.
-
-### TK-004 - Draft marks
-
-**Stance:** Builder
-
-Proves the draft-mark criterion.
-
-### TK-005 - Quality checks
-
-**Stance:** Builder
-
-Proves the hygiene, accessibility and no-third-party criteria.
 
 ## Acceptance Criteria
 
@@ -104,11 +76,12 @@ Proves the hygiene, accessibility and no-third-party criteria.
 - [ ] **Public hygiene.** The hygiene check passes on every candidate. *Must fail:* a host path or key in the built output.
 - [ ] **Owner words.** Each quoted owner statement links its dated source. *Must fail:* a paraphrase presented as a quote.
 - [ ] **Draft marks.** A page shows a draft mark until an approval bound to its content hash exists; editing restores it. *Must fail:* an approved mark on changed content.
+- [ ] **Under the hood from rows.** The page renders S-006 build-history rows in time order, returns and corrections included, each linking its source. *Check:* render against a fixture and against Supabase. *Must fail:* history text not from a row, or a hidden correction row.
 - [ ] **Quickstart replays.** A test runs the quickstart's commands on a fresh clone and gets the shown output.
 
 ## RSI and website connection
 
-The build of this site is the loop's first trial (S-002). Truthful claims link a decision record, criterion, Supabase row or sourced owner statement.
+Building this site is the loop's first trial (S-002). Claims link a decision record, criterion, Supabase row or sourced owner statement.
 
 ## Testing Seams
 
