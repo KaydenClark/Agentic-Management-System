@@ -736,6 +736,17 @@ def test_a_pinned_readcheck_reads_a_refreshed_row_as_it_stood_at_the_ref(rows, c
     assert ": summary" in capsys.readouterr().out
 
 
+def test_a_refresh_after_the_ref_that_brought_its_record_current_passes(rows, capsys):
+    # Codex P2 on PR #65 (e563f01): the documented order is import, then readcheck at
+    # the same ref; a refresh written after that ref's time must still match it.
+    store = StubSupabase(rows)
+    victim = next(r for r in store.rows if r["kind"] == "spec_event")
+    victim["detail"] = dict(victim["detail"], refreshed=[
+        {"at": "2026-11-02T08:00:00Z", "previous": {"summary": "Wording before the ref"}}])
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 0
+    assert "content mismatches: 0" in capsys.readouterr().out
+
+
 def test_a_reply_after_the_cutoff_cannot_add_an_earlier_fix(fixture_repo):
     # Codex P2 on PR #65: a fix named in a later reply is dated by its commit,
     # so comments are cut off before review events are derived.

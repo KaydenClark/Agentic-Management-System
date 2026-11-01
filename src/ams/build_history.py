@@ -615,20 +615,24 @@ def _differences(have: Mapping, want: Mapping) -> list[str]:
     return changed
 
 
-def _as_of(row: Mapping, cutoff: datetime | None) -> dict:
-    """The row's compared fields as they stood at cutoff: a refresh after cutoff is
-    undone from its logged old values (Codex P2 on PR #65)."""
+def _states(row: Mapping, cutoff: datetime | None) -> list[dict]:
+    """The row's compared fields now, then as they stood before each refresh written
+    after cutoff (newest undone first). A pinned record matches if it equals any of
+    them: the refresh time is the database write, not the source change, so a ref may
+    hold the refreshed text or the text a later refresh replaced (Codex P2s on PR #65)."""
     stood = {f: row.get(f) for f in CONTENT_FIELDS}
+    states = [dict(stood)]
     if cutoff is None:
-        return stood
+        return states
     history = (row.get("detail") or {}).get("refreshed") or []
     if isinstance(history, dict):
         history = [history]
     later = sorted((h for h in history if parse_time(h["at"]) > cutoff),
                    key=lambda h: parse_time(h["at"]), reverse=True)
-    for entry in later:  # newest first, so the earliest later refresh wins
+    for entry in later:
         stood.update(entry.get("previous") or {})
-    return stood
+        states.append(dict(stood))
+    return states
 
 
 def _named(label: str, items: Sequence[str]) -> None:
@@ -749,9 +753,11 @@ def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page:
     newer = {k for k in unexpected
              if cutoff is not None and parse_time(have[k]["occurred_at"]) > cutoff}
     extra = [k for k in unexpected if k not in newer]
-    mismatches = [(k, _differences(_as_of(have[k], cutoff), want[k]))
-                  for k in sorted(want.keys() & have.keys())]
-    mismatches = [(k, f) for k, f in mismatches if f]
+    mismatches = []
+    for k in sorted(want.keys() & have.keys()):
+        found = [_differences(state, want[k]) for state in _states(have[k], cutoff)]
+        if all(found):
+            mismatches.append((k, found[0]))  # named against the stored values
     unsourced = [r for r in visible if not (r.get("source_ref") or "").strip()
                  or not (r.get("source_url") or "").startswith("https://")
                  or r.get("strength") != STRENGTH]
