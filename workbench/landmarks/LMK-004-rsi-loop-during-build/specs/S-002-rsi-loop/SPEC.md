@@ -15,11 +15,11 @@
 
 ## Intent and authority
 
-[Owner answers/resume](../../../../wiki/context-ams-purpose.md): JOT-4fa672e3 resumes Journey after Spec-only repair. r1, Stable/Excellent, three candidate attempts, subscription meter; bounded candidate plus affected regressions, whole AMS separate.
+[Owner decisions/resume](../../../../wiki/context-ams-purpose.md): JOT-4fa672e3 resumes Journey. r1; Stable/Excellent; three attempts excluding baseline; subscription meter; bounded candidate/regressions separate from whole AMS.
 
 ## Outcome
 
-Pinned Skill/AMS baselines, scores, evals, retests and dispositions.
+Pinned baselines, scores, evals, retests and dispositions.
 
 ## Why It Matters
 
@@ -27,11 +27,11 @@ Build, then loop until meter/stop. Static scores prove no benefit.
 
 ## Current Verified State
 
-Local assessment CLI: [TK-000M](tasks/TK-000M/TASK.md). Runner/trials/storage incomplete. [Main a3d014e baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken, 4/138, incomplete/unqualified; reviews, no strike/skill result.
+[Local CLI proof](tasks/TK-000M/TASK.md); runner/trials/storage incomplete. [Main a3d014e baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken, 4/138, incomplete/unqualified; reviews, no strike/skill result.
 
 ## Desired Behavior
 
-Failure -> earliest gap/owner -> one change -> baseline/retest -> disposition/later use. Repair through the owning repository.
+Failure -> earliest gap/owner -> one change in its repository -> baseline/retest -> disposition/later use.
 
 ### Audit scores
 
@@ -67,23 +67,23 @@ Close only on three-run repaired-revision original/affected-regression passes
 
 ## Decisions And Contracts
 
-- Retain only qualified Stable/Excellent candidates with demonstrated useful benefit declared
-  before comparison. First case: grilling failure; coordinate with existing redesign.
-- Start rounds from failed results, never retro ideas. Check prior ineffective
-  fixes on recurrence; one change/version.
-- Fixed provider/model/effort; accepted-version runner/graders/scoring, never
-  candidate. Grader changes start a new series judged by its predecessor.
-- Same-version noise floor first; fixed-task AMS/no-AMS/plain-instruction arms,
-  three trials each. Predeclare effect/margin; paired per-task intervals.
-  Inside-margin: inconclusive. Audit delta proves no benefit.
-- Public lift: >2 fresh held-out tasks, controls and baseline/interval. Studied
-  cases retire to dev; audit scores are not lift.
-- Sandbox without skipped permissions. No automatic proposer before trusted
-  grader, measured cost and owner judgment of the manual round.
-- Baseline 0 consumes no strike. Candidate initial -> retry -> retry -> stop/report
-  unless accepted. Repair/rename never resets; retain failures/harm.
+- Retain only qualified Stable/Excellent with demonstrated useful benefit
+  predeclared before comparison. First case: grilling failure; coordinate existing redesign.
+- Rounds start from failures, never retro ideas. On recurrence check ineffective
+  prior fixes. One change/version.
+- Fixed provider/model/effort. Accepted-version runner/graders/scoring, never
+  candidate-owned. Grader changes start a new series judged by its predecessor.
+- Same-version noise floor first. Fixed-task AMS/no-AMS/plain-instruction arms,
+  three trials each; predeclared effect/margin, paired per-task intervals.
+  Inside-margin is inconclusive; audit delta proves no benefit.
+- Public lift needs >2 fresh held-out tasks, controls, baseline/interval.
+  Studied cases retire to dev; scores are not lift.
+- Sandbox, no skipped permissions. No automatic proposer before trusted grader,
+  measured trial cost and owner-judged manual round.
+- Baseline 0: no strike. Candidate initial -> retry -> retry -> stop/report unless
+  accepted. Repair/rename never resets; retain failures/harm.
 - Trial rows: task/arm, version/skills pin, provider/model/effort, completion,
-  cost/tokens availability and source. Subscription meter; unknown is not zero.
+  cost/tokens availability, source. Subscription meter; unknown is not zero.
 
 ## Non-Goals
 
@@ -93,11 +93,11 @@ Model weights; loop execution during mapping; presentation (S-007).
 
 S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests and behavioral links. S-007 presents scores/evals/failures/provenance. Integration missing; reviews are not trials.
 
-Real build-history/skills seeds, strength labels; private summary/commit only. Subscription meter, no API budget; storage/qualified comparisons required.
+Real build-history/skills seeds, strength labels; private summary/commit only. Storage/qualified comparisons required.
 
 ## Vertical Implementation Slices
 
-TK-000M: local assessment CLI, no trial/storage acceptance. Trial Tasks retain real inputs. B local, checked PRs to main.
+TK-000M/N: local CLI/recovery only. Trial Tasks retain real inputs. B local; checked PRs to main.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -112,15 +112,15 @@ TK-000M: local assessment CLI, no trial/storage acceptance. Trial Tasks retain r
 
 ## RSI and website connection
 
-S-006 stores; S-007 presents.
+See dependencies.
 
 ## Testing Seams
 
-Scoring/findings; known-outcome runner; writer/readback/render. Missing proof, recurrence, original-pass/regression-fail.
+CLI/runner/writer/readback fixtures: missing proof, recurrence, original-pass/regression-fail.
 
 ## Verification Procedure
 
-RUNBOOK checks; CLI packet/known-outcome proof: [TK-000M](tasks/TK-000M/TASK.md).
+RUNBOOK; [Task proof](tasks/TK-000M/TASK.md).
 
 ## Documentation Impact
 

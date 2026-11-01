@@ -18,7 +18,15 @@ Allow only validated enrichment of missing historical check/class mappings. Pres
 
 ## Acceptance
 
-- [ ] A baseline's unmapped historical finding can receive a valid mapping in a later candidate and resolve only through its repaired-revision, original/affected-regression qualified three-run retest.
-- [ ] Existing mappings and original source/observation fields cannot be overwritten; malformed or demoting mappings fail before any record write.
-- [ ] Enrichment without a retest retains the open finding; old immutable packets/readback and attempt limits remain valid.
-- [ ] Focused/full checks pass; independent corrective review and final-head CI are recorded before merging PR #78.
+- [x] A baseline's unmapped historical finding can receive a valid mapping in a later candidate and resolve only through its repaired-revision, original/affected-regression qualified three-run retest.
+- [x] Existing mappings and original source/observation fields cannot be overwritten; malformed or demoting mappings fail before any record write.
+- [x] Enrichment without a retest retains the open finding; old immutable packets/readback and attempt limits remain valid.
+- [x] Focused/full checks pass; independent corrective review and final-head CI are recorded before merging PR #78.
+
+## Corrective Check and QA
+
+Candidate `4e111c97d3e1aa06c6ff12b88a5ab49371ed4ea4`: 40 focused tests pass. Independent Spec reviewer repeated all 40; both fresh-context reviewers report no remaining corrective findings. The first recovery case and malformed partial-class case each failed for the expected reason before the fix, then passed. Fresh-clone full suite: 431 passed, 4 skipped; render leaves no diff. Room/ADR/layout/diff checks pass; doctor retains its two original nonblocking setup findings.
+
+Records preserve baseline and prior packets, reject source/remapping changes before writing, and keep enrichment open without a retest. The automated PR finding is resolved after repair and independent verification. Final-head CI gates merge; no S-006 storage or model trials are claimed. Closed TK-000M proof remains historical, supplemented by this correction.
+
+CI workflow `41337850971` (run #32) passed at `4e111c9`, including the browser/records checks. Final closure changes only owner records; final-head CI will be verified on PR #78 before merge.
