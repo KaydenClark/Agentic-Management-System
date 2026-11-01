@@ -286,3 +286,58 @@ def test_recurrence_needs_repair_after_its_latest_failed_revision(tmp_path):
     r=assessment.record(p,tmp_path)
     assert r['findings'][0]['status']=='recurred'
     assert not r['assessmentAccepted'] and r['nextAction']=='stop'
+
+
+def test_retained_unmapped_finding_can_be_enriched_then_retested(tmp_path):
+    p = packet(('A04-04',))
+    original = {'findingId':'legacy','candidate':BASE,'sourceRunId':'legacy-run',
+                'observation':'Original failure, preserve exact description'}
+    p['historicalFindings'] = [dict(original)]
+    assessment.record(p,tmp_path)
+    p.update(assessmentId='mapping-only',attempt=1,candidate='f'*40)
+    for run in p['runs']:
+        run['rows'][0]['evidence']=evidence('f'*40)
+    p['evaluator']['qualificationEvidence']=evidence('f'*40)
+    p['historicalFindings']=[dict(original,checkId='A04-04',**{'class':'Critical'})]
+    mapped=assessment.record(p,tmp_path)
+    finding=next(f for f in mapped['findings'] if f['findingId']=='legacy')
+    assert finding['checkId']=='A04-04' and finding['class']=='Critical'
+    assert finding['status']=='open' and not mapped['assessmentAccepted']
+    p.update(assessmentId='mapping-and-retest',attempt=2)
+    p['retests']=[{'findingId':'legacy','revision':'f'*40,'originalCheckId':'A04-04',
+                   'regressionExclusionReason':'No other workflow in this synthetic case'}]
+    result=assessment.record(p,tmp_path)
+    finding=next(f for f in result['findings'] if f['findingId']=='legacy')
+    assert finding['status']=='verified-resolved' and result['assessmentAccepted']
+    assert all(finding[k]==v for k,v in original.items())
+    records=assessment.read_records(tmp_path)
+    assert 'checkId' not in records[0]['packet']['historicalFindings'][0]
+    p.update(assessmentId='conflicting-remap',attempt=3)
+    p['historicalFindings'][0]['checkId']='A01-01'
+    before=len(list(tmp_path.glob('*.json')))
+    with pytest.raises(assessment.Refused,match='mapping'):
+        assessment.record(p,tmp_path)
+    assert len(list(tmp_path.glob('*.json')))==before
+
+
+def test_partial_enrichment_is_checked_against_retained_class(tmp_path):
+    p=packet()
+    p['historicalFindings']=[{'findingId':'legacy','class':'Critical','candidate':BASE}]
+    assessment.record(p,tmp_path)
+    p.update(assessmentId='bad-mapping',attempt=1)
+    p['historicalFindings']=[{'findingId':'legacy','checkId':'A04-01'}]
+    with pytest.raises(assessment.Refused,match='class'):
+        assessment.record(p,tmp_path)
+    assert len(list(tmp_path.glob('*.json')))==1
+
+
+def test_mapping_update_cannot_rewrite_original_observation(tmp_path):
+    p=packet()
+    p['historicalFindings']=[{'findingId':'legacy','observation':'Original observation'}]
+    assessment.record(p,tmp_path)
+    p.update(assessmentId='rewrite-source',attempt=1)
+    p['historicalFindings']=[{'findingId':'legacy','observation':'Replacement',
+                              'checkId':'A04-01','class':'Quality'}]
+    with pytest.raises(assessment.Refused,match='source'):
+        assessment.record(p,tmp_path)
+    assert len(list(tmp_path.glob('*.json')))==1

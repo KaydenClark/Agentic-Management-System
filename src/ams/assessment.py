@@ -150,15 +150,29 @@ def _run(p, run, inv):
 
 def _findings(p, runs, previous):
     findings = {f['findingId']:dict(f) for f in previous}
+    supplied_ids = set()
     for old in p.get('historicalFindings',[]):
         require(isinstance(old,dict), 'malformed historical finding')
         fid = text(old.get('findingId'),'historical findingId')
-        require(old.get('checkId') is None or old['checkId'] in CHECKS, 'unknown historical check')
-        cid = old.get('checkId')
-        if cid and old.get('class') is not None:
-            require(old['class'] == CHECKS[cid] or (CHECKS[cid] == 'Quality' and old['class'] == 'Regression'), 'historical class cannot be demoted')
-        if fid not in findings:
-            findings[fid] = {**old, 'status':'open'}
+        require(fid not in supplied_ids, 'duplicate historical finding')
+        supplied_ids.add(fid)
+        retained = findings.get(fid)
+        merged = dict(retained) if retained else {**old, 'status':'open'}
+        if retained:
+            for key in ('checkId','class'):
+                if old.get(key) is not None:
+                    require(retained.get(key) in (None,old[key]), 'historical mapping cannot change')
+                    merged[key] = old[key]
+            # Mapping is enrichable; recorded source facts are not replaceable.
+            for key in ('candidate','sourceRunId','observation'):
+                if key in old and key in retained:
+                    require(old[key] == retained[key], 'historical source cannot change')
+        cid = merged.get('checkId')
+        require(cid is None or cid in CHECKS, 'unknown historical check')
+        cls = merged.get('class')
+        if cid and cls is not None:
+            require(cls == CHECKS[cid] or (CHECKS[cid] == 'Quality' and cls == 'Regression'), 'historical class cannot be demoted')
+        findings[fid] = merged
     for run in runs:
         for row in run['rows']:
             if row['result'] != 'No':

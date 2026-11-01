@@ -46,7 +46,10 @@ The JSON example supplies the shape. Required fields:
   the claimed strength; a syntactically valid pointer cannot prove its truth.
 - `historicalFindings`: optional prior findings with `findingId`, `checkId`,
   `class`, original `candidate`, `sourceRunId` and observation. Unmapped historical
-  classes block acceptance. Recorded findings are retained even when omitted.
+  classes or check mappings block acceptance. Later packets may fill missing
+  `checkId`/`class` fields; existing mappings and source facts cannot change.
+  Enrichment keeps the finding open until its normal retest. Recorded findings
+  are retained even when omitted.
 - `retests`: optional `findingId`, repaired `revision`, `originalCheckId` and
   `regressionCheckIds`, or a substantive `regressionExclusionReason`. Resolution
   requires qualified Yes evidence for the original and all named regressions in
