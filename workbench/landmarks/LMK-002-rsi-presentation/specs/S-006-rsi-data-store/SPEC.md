@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000S closed with proof.
-**Next gate:** Checked exact-identity PR delivery and actual native owner QA; independent Review PASS at e5a8c33.
+**Latest event:** TK-000W claimed by codex-history-consumer.
+**Next gate:** Close TK-000W with verification and documentation proof.
 
 ## Intent and authority
 
@@ -31,6 +31,8 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 - TK-000P adds explicit unknown metrics with reasons/sources and preserves known zero; remote migration `20261101192328` and live tagged roundtrip pass. See [trial consumer contract](../../../../../evals/TRIAL-ROWS.md). TK-000R corrects the failed TK-000Q numeric roundtrip: source `d98a770`, additive migration `20261101195609`, exact TEXT artifacts/hash and JSONB projection checks. Full local/fresh495 passed/4 skipped,62 focused, source CI53 pass; tagged numeric/retry/client-denial probes cleanup0. Earlier FAIL remains recorded; checked delivery/whole Review/owner QA remain separate.
 
 - TK-000S corrects the exact-source `110bb7a` identity defect with source `ad7fa28`:84 focused, full local/fresh517 passed/4 skipped, live scalar conflicts refused with0 mutation requests and cleanup0. Earlier candidate reviews remain retained; checked merge and current whole Review are separate from formal owner QA/acceptance.
+
+- Post-merge pinned readcheck at `6e30c87`/dev `8ba15e0`:1,030 rows, missing0/extra8/mismatches0/unsourced0. PR #85 relocated two S-007 and six S-003 history rows to the Wiki; all8 match original ancestor blobs and the declared97bfcaa archive. TK-000U owns consumer maintenance; no retained history is deleted and the earlier successful checks remain scoped history.
 
 ## Desired Behavior
 
@@ -75,7 +77,7 @@ One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (t
 - [x] **Conflict refusal.** A writer update against a row changed since it was read is refused. *Must fail:* a silent overwrite. [Proof][p].
 - [x] **Real sources only.** Each seed row names its source and strength label. *Must fail:* a row with no source, or a sample value presented as real. [Proof][p].
 - [x] **Key loads and authenticates.** A check reports only whether `SUPABASE_SERVICE_ROLE_KEY` loaded and whether Supabase accepted it, for `sb_secret_` and legacy keys. *Must fail:* any output, log or file containing the value. [Proof][p]; legacy JWT by fakes only (see limits).
-- [x] **Build history from real records.** Supabase holds build-history rows from this build's real Spec, Task, PR and commit records, each naming its source (path, PR number or commit SHA); returns and corrections are rows. Re-importing adds no duplicates. *Must fail:* a hand-typed row or a row with no source. [Proof][p].
+- [ ] **Build history from real records.** Supabase holds build-history rows from this build's real Spec, Task, PR and commit records, each naming its source (path, PR number or commit SHA); returns and corrections are rows. Re-importing adds no duplicates. *Must fail:* a hand-typed row or a row with no source. [Proof][p].
 - [x] **No secrets in Git.** The hygiene check finds no service key in the repository. *Must fail:* a committed key. [Proof][p].
 
 [p]: tasks/TK-000B/TASK.md#proof
@@ -134,6 +136,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | TK-000S | Task closed | 84 focused; full local/fresh517 passed,4 skipped; sourceCI61pass; live4scalarpairs refused with0mutationrequests/exactretry/originalretention/cleanup0; scoped review no blockers | ASSESSMENTS; S-006 SPEC/TK-000S; S-002 local CLI impact | FinalCI/checkedmerge; exact whole Review; actual ownerQA; safe S007projection/realS002trials Git state at close: dirty-tree (1 file: ams_skills_by_workbench_verb.svg); recorded reason: Unowned untracked ams_skills_by_workbench_verb.svg appeared during execution and is retained untouched, excluded from owned commits; all owned tracked changes committed and pushed; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
 | 2026-11-01 | review | Review verdict: pass at e5a8c33a24226fd1f3eb595fa227f385a04934bd [6df68e2822de] #5 | none | s006_review, independent Codex context, noncontributor | none |
 | 2026-11-01 | review-detail | Independent whole PASS receipt at e5a8c33 | [Scope, evidence and limits](../../../../feedback/REVIEW-S-006-e5a8c33.md) | s006_review direct handback | Actual owner QA and checked delivery remain separate |
+| 2026-11-01 | TK-000U | Task closed | Source9f3a6ca reconciles main17293a0; local and fresh590 passed4 skipped; focused85 passed; direct independent source review d50 PASS; all8 retained facts rederived exactly. Final CI/current-owner binding then postmerge live proof remain required. | src/ams/build_history.py module contract; S006 TaskU and Spec; TASKBOARD | Postmerge history import/readcheck and durable Spec proof pending in same run; Build-history criterion remains unchecked. Owner HumanQA/formal Spec acceptance pending.; close attribution: {"agent":"codex-history-consumer","claimant":"codex-history-consumer","onBehalfOf":null} |
 
 ## Review and Human QA
 

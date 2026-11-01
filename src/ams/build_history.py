@@ -39,6 +39,18 @@ content mismatch, an unsourced row or rows out of order, naming up to 20 keys of
 each. Rows after SHA that it does not derive count as newer than the ref.
 Dev-only commits are expected only when ``--dev-ref`` names the dev branch.
 No key is ever printed.
+
+Relocated Spec evidence is still derived from explicitly declared Wiki history:
+MEMORY.md must link the article; its frontmatter source_paths block list must
+name the registered Spec path; a visible [previous S-ID at HEX](URL) link must
+name this repository's immutable blob at that same HEX/path. Only locally
+available ancestors of the record snapshot are eligible. The archived Spec ID
+and evidence table must match; original blame supplies every event's source
+commit, line and time. Exact duplicate rows coalesce; conflicting keys refuse.
+No external URL is fetched. Git must support --no-lazy-fetch (otherwise this
+read fails closed), and archived blame disables text conversion and replace
+objects. Orphan articles, code examples and comments authorize no events;
+unprovable retained DB rows continue to fail readcheck.
 """
 
 from __future__ import annotations
@@ -56,7 +68,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, Iterable, Mapping, Sequence
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 
 from ams import keycheck, source_rules, writer
 
@@ -203,16 +215,18 @@ def _first_commit(git: Runner, path: str) -> tuple[str, str] | None:
     return sha, committed
 
 
-def _blame(git: Runner, path: str) -> list[tuple[str, str, int, str, str]]:
-    """(commit, utc time, line, text, path) for each line of path at HEAD.
+def _blame(git: Runner, path: str, ref: str = "HEAD", *, required: bool = False) -> list[tuple[str, str, int, str, str]]:
+    """(commit, utc time, line, text, path) for each line of path at ref.
 
     The line number and path are the ones the line had in that commit, so a
     link to the commit's blob shows the line even after lines above it moved
     or the file was renamed.
     """
     try:
-        out = git(["blame", "--line-porcelain", "HEAD", "--", path])
+        out = git(["blame", "--no-textconv", "--line-porcelain", ref, "--", path])
     except subprocess.CalledProcessError:
+        if required:
+            raise RefusedError("historical Spec blob is unavailable") from None
         return []
     lines, sha, when, number, origin = [], None, None, 0, path
     for raw in out.splitlines():
@@ -388,9 +402,24 @@ def _resolve_commit(prefix: str, pr_commits: Mapping[str, dict], git: Runner):
     return sha, committed
 
 
+def _spec_events(spec_id: str, path: str, blame) -> list[dict]:
+    rows = []
+    for index, (cells, line) in enumerate(_table(blame, EVIDENCE_HEADING), start=1):
+        event = cells.get("event", "").strip()
+        task = cells.get("task", "").strip()
+        kind = ("correction" if _CORRECTION_EVENT.match(event)
+                else "return" if _RETURN_EVENT.match(event) else "spec_event")
+        subject = f"{spec_id} {task}" if task and task.lower() != "none" else spec_id
+        rows.append(_row(kind, subject, event or "(no event)", line[1], "path",
+                         f"{path}#evidence-{index}", _blob_url(line[0], line[4], line[2]),
+                         dict(cells, spec=spec_id, recorded_commit=line[0])))
+    return rows
+
+
 def record_rows(git: Runner, lifecycle: Runner) -> list[dict]:
     rows = []
-    for listed in json.loads(lifecycle(["list", "--all", "--json"]))["specs"]:
+    listed_specs = json.loads(lifecycle(["list", "--all", "--json"]))["specs"]
+    for listed in listed_specs:
         spec_id, path = listed["id"], listed["path"]
         shown = json.loads(lifecycle(["show", spec_id, "--json"]))
         created = _first_commit(git, path)
@@ -400,19 +429,218 @@ def record_rows(git: Runner, lifecycle: Runner) -> list[dict]:
                          path, _blob_url(created[0], path),
                          {"status": listed.get("status"), "landmark": listed.get("landmarkId"),
                           "created_commit": created[0]}))
-        blame = _blame(git, path)
-        for index, (cells, line) in enumerate(_table(blame, EVIDENCE_HEADING), start=1):
-            event = cells.get("event", "").strip()
-            task = cells.get("task", "").strip()
-            kind = ("correction" if _CORRECTION_EVENT.match(event)
-                    else "return" if _RETURN_EVENT.match(event) else "spec_event")
-            subject = f"{spec_id} {task}" if task and task.lower() != "none" else spec_id
-            rows.append(_row(kind, subject, event or "(no event)", line[1], "path",
-                             f"{path}#evidence-{index}", _blob_url(line[0], line[4], line[2]),
-                             dict(cells, spec=spec_id, recorded_commit=line[0])))
+        rows.extend(_spec_events(spec_id, path, _blame(git, path)))
         for task in [*shown.get("tasks", []), *shown.get("retiredTasks", [])]:
             rows.extend(_task_rows(git, spec_id, path, task))
+    rows.extend(_wiki_spec_events(git, listed_specs, rows))
     return rows
+
+
+_LINK = re.compile(r"\[([^]\n]+)\]\(([^)\s]+)\)")
+_PREVIOUS_SPEC = re.compile(r"previous (S-[A-Za-z0-9]+) at ([0-9a-f]{7,40})")
+
+
+def _mask_code_spans(text: str) -> str:
+    """Match exact backtick runs within one eligible paragraph (CommonMark6.1).
+
+    Escapes affect openers, but backslashes inside a code span are literal.
+    A sentinel prevents removing code from joining fragments into a declaration.
+    """
+    visible, index = [], 0
+    while index < len(text):
+        if text[index] == "\\" and index + 1 < len(text):
+            visible.append(text[index:index + 2])
+            index += 2
+        elif text[index] != "`":
+            visible.append(text[index])
+            index += 1
+        else:
+            end = index + 1
+            while end < len(text) and text[end] == "`":
+                end += 1
+            length = end - index
+            close = next((m for m in re.finditer(r"`+", text[end:])
+                          if len(m[0]) == length), None)
+            if close is None:
+                visible.append(text[index:end])  # unmatched runs remain literal
+                index = end
+            else:
+                visible.append("\0")
+                index = end + close.end()
+    return "".join(visible)
+
+
+def _visible_markdown(text: str) -> str:
+    """Exclude examples without carrying inline state across block boundaries.
+
+    This is the narrow history declaration grammar, not a Markdown renderer.
+    Preserve paragraph continuations (including quoted/lazy lines), isolating
+    headings, actual table rows, blank lines, fences and indented blocks.
+    Syntax: https://spec.commonmark.org/0.31.2/#code-spans and #precedence.
+    """
+    text = re.sub(r"<!--.*?(?:-->|\Z)", "", text, flags=re.S)
+    visible, paragraph, fence, quote_depth = [], [], None, 0
+    fence_depth, in_table = 0, False
+
+    def flush():
+        nonlocal quote_depth
+        if paragraph:
+            visible.append(_mask_code_spans("\n".join(paragraph)))
+            paragraph.clear()
+        quote_depth = 0
+
+    def parts(line):
+        quote = re.match(r"^ {0,3}(?:> ?)+", line)
+        return (quote[0].count(">"), line[quote.end():]) if quote else (0, line)
+
+    def table_separator(line):
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        return bool(cells) and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells)
+
+    lines = text.splitlines()
+    for number, line in enumerate(lines):
+        depth, logical = parts(line)
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", logical)
+        if fence is not None:
+            if logical.strip() and depth < fence_depth:
+                fence = None  # the quote container ended
+            else:
+                if (marker and depth == fence_depth and marker[1][0] == fence[0]
+                        and len(marker[1]) >= len(fence) and not marker[2].strip()):
+                    fence = None
+                continue
+        item = re.match(r"^ {0,3}(?:[-+*]|[0-9]+[.)])\s+(.*)$", logical)
+        if item:
+            marker = re.match(r"^(`{3,}|~{3,})(.*)$", item[1])
+        if marker:
+            flush()
+            fence, fence_depth, in_table = marker[1], depth, False
+            continue
+        if not logical.strip() or (not paragraph and logical.startswith(("    ", "\t"))):
+            flush()
+            visible.append("")
+            in_table = False
+            continue
+        # A pipe-prefixed paragraph continuation is not automatically a table.
+        # Only a header/separator pair starts the line-local router table scope.
+        following = parts(lines[number + 1])[1] if number + 1 < len(lines) else ""
+        if not paragraph and "|" in logical and table_separator(following):
+            in_table = True
+        if in_table and "|" not in logical:
+            in_table = False
+        if (in_table or re.match(r"^ {0,3}#{1,6}(?:[ \t]|$)", logical)
+                or re.fullmatch(r" {0,3}(?:(?:- *){3,}|(?:_ *){3,}|(?:\* *){3,})", logical)):
+            flush()
+            visible.append(_mask_code_spans(line))
+        else:
+            if depth > quote_depth or item:
+                flush()
+            paragraph.append(line)
+            # A lazy continuation may omit quote markers and then resume them.
+            quote_depth = max(quote_depth, depth)
+    flush()
+    return "\n".join(visible)
+
+
+def _markdown_links(text: str):
+    visible = _visible_markdown(text)
+
+    def escaped(index):
+        start = index
+        while start > 0 and visible[start - 1] == "\\":
+            start -= 1
+        return (index - start) % 2 == 1
+
+    for match in _LINK.finditer(visible):
+        start = match.start()
+        if escaped(start):
+            continue  # a literal opening bracket is not a link
+        if start > 0 and visible[start - 1] == "!" and not escaped(start - 1):
+            continue  # image alt text is not a route; an escaped ! is literal
+        yield match.groups()
+
+
+def _link_url(target: str):
+    try:
+        return urlsplit(target)
+    except ValueError:
+        raise RefusedError("malformed Wiki source link") from None
+
+
+def _wiki_spec_events(git: Runner, specs: Sequence[dict], current: Sequence[dict]) -> list[dict]:
+    """Only MEMORY-routed Wiki declarations can retain old Spec evidence.
+
+    A declaration is [previous S-ID at HEX](this repository/blob/HEX/Spec path).
+    The article's frontmatter source_paths must declare that registered Spec.
+    Resolve/blame locally, disabling replacement objects, lazy-fetch protocols
+    and text conversion. Neither an arbitrary ancestor nor an external URL
+    authorizes history. Existing destinations win no conflict silently.
+    """
+    def local(args):
+        return git(["--no-replace-objects", "--no-lazy-fetch", "-c", "protocol.allow=never",
+                    "-c", "blame.ignoreRevsFile=", *args])
+
+    files = set(local(["ls-tree", "-r", "--name-only", "HEAD", "--", "workbench/wiki"]).splitlines())
+    router = "workbench/wiki/MEMORY.md"
+    if router not in files:
+        return []
+    router_text = local(["show", f"HEAD:{router}"])
+    pages = set()
+    for _, target in _markdown_links(router_text):
+        url = _link_url(target)
+        path = posixpath.normpath(posixpath.join("workbench/wiki", url.path))
+        if not url.scheme and not url.netloc and not url.query and path in files and path != router:
+            pages.add(path)
+    registered = {s["path"]: s["id"] for s in specs}
+    known = {_key(r): r for r in current}
+    retained = []
+    bound = parse_time(local(["show", "-s", "--format=%cI", "HEAD"]).strip())
+    for page in sorted(pages):
+        text = local(["show", f"HEAD:{page}"])
+        frontmatter = re.match(r"\A---\n(.*?)\n---(?:\n|$)", text, re.S)
+        sources = re.search(r"(?m)^source_paths:\n((?: +-[^\n]*\n?)*)", frontmatter[1]) if frontmatter else None
+        declared = {line.strip()[2:].strip() for line in sources[1].splitlines()} if sources else set()
+        body = text[frontmatter.end():] if frontmatter else text
+        for label, target in _markdown_links(body):
+            declaration = _PREVIOUS_SPEC.fullmatch(label)
+            if declaration is None:
+                continue
+            spec_id, prefix = declaration.groups()
+            url = _link_url(target)
+            base = urlsplit(REPO_URL)
+            marker = base.path + "/blob/" + prefix + "/"
+            path = url.path.removeprefix(marker)
+            if (url.scheme != base.scheme or url.netloc != base.netloc or url.query or url.fragment
+                    or not url.path.startswith(marker) or registered.get(path) != spec_id
+                    or path not in declared or "%" in path or "\\" in path
+                    or path != posixpath.normpath(path) or path.startswith("/")):
+                raise RefusedError(f"unsupported historical Spec declaration in {page}")
+            try:
+                sha = local(["rev-parse", "--verify", prefix + "^{commit}"]).strip()
+                if not re.fullmatch(r"[0-9a-f]{40}", sha) or not sha.startswith(prefix):
+                    raise RefusedError("historical Spec ref does not identify its declared object")
+                local(["merge-base", "--is-ancestor", sha, "HEAD"])
+                when = parse_time(local(["show", "-s", "--format=%cI", sha]).strip())
+                blame = _blame(local, path, sha, required=True)
+            except subprocess.CalledProcessError:
+                raise RefusedError(f"unavailable or non-ancestor historical Spec source in {page}") from None
+            blob = "\n".join(line[3] for line in blame)
+            if not re.search(r"(?m)^\*\*Spec ID:\*\* " + re.escape(spec_id) + r"\s*$", blob):
+                raise RefusedError(f"historical Spec identity differs in {page}")
+            events = _spec_events(spec_id, path, blame)
+            if not events:
+                raise RefusedError(f"historical Spec source has no evidence table in {page}")
+            if when > bound or any(parse_time(r["occurred_at"]) > bound for r in events):
+                raise RefusedError(f"future historical Spec source in {page}")
+            for row in events:
+                key = _key(row)
+                if key in known:
+                    if row != known[key]:
+                        raise RefusedError(f"conflicting historical Spec event {row['source_ref']}")
+                else:
+                    known[key] = row
+                    retained.append(row)
+    return retained
 
 
 def _task_rows(git: Runner, spec_id: str, spec_path: str, task: Mapping) -> list[dict]:
