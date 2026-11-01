@@ -14,7 +14,10 @@ permissions:
 jobs:
   pytest:
     name: python tests
-    runs-on: ubuntu-latest
+    # Public fork code must not execute automatically on the shared CI VM.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, Linux, ARM64, servitor]
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
@@ -38,5 +41,6 @@ jobs:
           git diff --exit-code TASKBOARD.md
       - name: Grill Board at 375px
         run: |
-          uv run --with playwright python -m playwright install --with-deps chromium
+          # System packages are provisioned on the VM; the runner has no sudo.
+          uv run --with playwright python -m playwright install chromium
           uv run --with playwright pytest -q tests/test_grill_board_phone.py
