@@ -13,8 +13,10 @@ Optional header fields the page shows:
 | `Topic` | The topic in the left rail; cards without one go under "Other topics" |
 | `Why it matters` | The yellow "Why this choice matters" box |
 | `Recommendation` | The green "Agent recommendation" box; the text Confirm writes |
-| `Owner record` | The repository-relative file the confirmed answer is written into |
+| `Owner record` | The repository-relative record the confirmed answer is written into; it must be a record (below) |
 | `Write after` | One exact, unique line in that record; the answer is inserted below it |
+
+**Owner records.** Confirm writes only into a `.md` file under `workbench/specs/`, `workbench/landmarks/`, `workbench/docs/adr/`, `workbench/docs/ddr/` or `workbench/wiki/`, or into `grill-board/page-approvals.md`, matched exactly, case included (S-004 TK-000G). Everything else is refused before any write: workflows (`.github/`), code (`src/`, `site/`, `supabase/`), config (`pyproject.toml`, `uv.lock`, `*.json`) and root controls such as `AGENTS.md`. The page disables Confirm for such a card.
 
 Text below the header is shown as Context. A card without `Owner record`, `Write after` and `Recommendation` can be returned but not confirmed; the page says which is missing.
 
@@ -32,7 +34,7 @@ The verdict buttons and note POST to `/answer` (ADR-000B, ADR-002U, S-004 TK-002
 
 - The card or owning record changed since the page showed it: the page carries each file's SHA-256 at HEAD, captured at render, and the write compares them.
 - Either file has uncommitted changes.
-- The owning path is absolute, uses `..` or `.`, names `.git`, goes through a symlink, resolves outside the repository, or is not a committed regular file.
+- The owning path is absolute, uses `..` or `.`, names `.git`, is not an owner record (above), goes through a symlink, resolves outside the repository, or is not a committed regular file.
 - The card names itself as its owning record.
 - The `Write after` line is missing or appears more than once; the card is already answered; a return has no note.
 - A rating is not a whole number from 1 to 5; the card is already flagged; an answer targets a flagged card.

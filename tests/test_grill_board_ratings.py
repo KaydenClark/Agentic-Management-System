@@ -90,7 +90,7 @@ def test_one_click_saves_a_rating_as_a_committed_record_on_the_card(board, repo)
     assert git(repo, "log", "-1", "--format=%s").strip() == "Grill Board: rate one-card.md 4 of 5"
     assert CARD_PATH in git(repo, "ls-files", "--", CARD_PATH)
     assert git(repo, "status", "--porcelain") == ""
-    assert (repo / "records" / "decision.md").read_text() == RECORD, "a rating never writes the owning record"
+    assert (repo / "workbench" / "wiki" / "decision.md").read_text() == RECORD, "a rating never writes the owning record"
     # The page shows the saved rating and the card stays in the queue to answer.
     assert "Written and committed" in body
     assert re.search(r'value="4"[^>]*aria-pressed="true"', rating_form(body)[1])
@@ -282,7 +282,7 @@ def test_the_board_is_not_a_drafting_surface(board, repo):
     post_card(repo, "page-draft.md", "---\ntitle: A page draft\n---\n\nBody of a page.\n", "a page draft posted as a card")
     html = get(server, {"topic": "Card format"})
     assert "page-draft.md" in html.split('aria-label="Refused cards"', 1)[1]
-    assert before["record"] == (repo / "records" / "decision.md").read_bytes()
+    assert before["record"] == (repo / "workbench" / "wiki" / "decision.md").read_bytes()
 
 
 def test_rewriting_a_flagged_card_in_place_is_refused_so_the_flag_record_stays(board, repo):
