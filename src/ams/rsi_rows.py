@@ -346,8 +346,12 @@ def livecheck(settings: keycheck.Settings, publishable: str, http: writer.Http, 
 
 
 def _rows(store: Store, table, filters):
+    """Rows from a successful query; an error, timeout or malformed body is refused,
+    never read as an empty result."""
     status, body = store._send("GET", store._endpoint(table, **filters))
-    return body if writer._ok(status) and isinstance(body, list) else []
+    if writer._ok(status) and isinstance(body, list):
+        return body
+    raise Refused(_failure(f"{table} read", status, body))
 
 
 def _cleanup(service: Store, run, run_key) -> bool:

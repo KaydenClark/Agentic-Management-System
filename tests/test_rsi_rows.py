@@ -365,6 +365,28 @@ def test_livecheck_fails_when_a_rule_is_not_enforced_and_still_cleans_up(capsys,
     assert http.tables == {"rsi_runs": {}, "rsi_results": {}}
 
 
+@pytest.mark.parametrize("answer", [(503, None), (401, {"code": "42501"}), OSError("timed out"),
+                                    (200, {"not": "a list"})])
+def test_livecheck_fails_when_the_site_key_read_is_not_a_successful_query(capsys, answer):
+    """An unreadable endpoint is not proof that test rows are hidden (Codex P2 4435897333)."""
+    http = FakePostgrest(hide_test_rows=False)
+
+    def site_get_fails(method, url, headers, body):
+        if method == "GET" and headers["apikey"] == FAKE_PUBLISHABLE:
+            http.calls.append((method, url, dict(headers), body))
+            if isinstance(answer, Exception):
+                raise answer
+            status, payload = answer
+            return status, json.dumps(payload).encode() if payload is not None else b""
+        return http(method, url, headers, body)
+
+    code, out, _ = livecheck(capsys, site_get_fails)
+    assert code == 1, out
+    assert "site key sees test rows" not in out
+    assert "read failed" in out
+    assert http.tables == {"rsi_runs": {}, "rsi_results": {}}
+
+
 def test_livecheck_without_the_service_key_sends_nothing(capsys):
     http = FakePostgrest()
     env = {k: v for k, v in ENV.items() if k != "SUPABASE_SERVICE_ROLE_KEY"}
