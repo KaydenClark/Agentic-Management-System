@@ -27,7 +27,8 @@ Outside research does not settle whether shaping an agent's environment improves
 
 ## Current Verified State
 
-- No loop, tasks, graders or rows exist in this repository. The data store is S-006.
+- The runner and fixed eval set are unimplemented. S-006 has the writer and tables; the 2026-11-01 query found 0 non-test runs/results. Baseline means the current AMS repository implementation; no scored assessment exists yet.
+- Loop #1 adds fitness/alignment results, Stable/Excellent-only acceptance, three attempts per candidate, Supabase records and dev-site visibility. The owner confirmed r1 and paid-plan meter use, with baseline outside the attempt cap. [RSI context](../../../../wiki/context-ams-purpose.md#settled-answers-and-next-interview-question) preserves exact wording, corrections and remaining design questions. No scored result is claimed.
 
 ## Desired Behavior
 
@@ -63,7 +64,7 @@ Safeguards, each required:
 ## Dependencies And Blockers
 
 - S-006 for rows; sandboxed run hosts.
-- Open owner choice `rsi-campaign-approval`: the one standing campaign approval (budget and stop condition) before any paid trial run. The build readback approval of 2026-11-01 authorizes building the loop, not its spend.
+- Owner correction, 2026-11-01: use the paid-plan meter, not API tokens or a campaign budget. Finish the design interview, including exact baseline pins; reconcile TK-002's older campaign gate during planning.
 - Seed sources are real only: this build's own history (S-006 build-history rows) and the before/after notes the owner's skills repository records. That repository is private, so a row carries a summary and a commit pointer, never its text.
 
 ## Vertical Implementation Slices
@@ -109,6 +110,11 @@ node workbench/tools/spec-workbench.mjs show S-002
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion; campaign approval |
+| 2026-11-01 | none | Owner requested Loop #1 preparation and the first improvement wave, with fitness/alignment results, Stable/Excellent-only acceptance and a three-attempt stop. Captured source and interview frontier in the linked RSI context. | Read-only Supabase counts; dev source and READY deployment metadata inspected | Current Verified State; existing RSI context | Exact baseline pins; remaining design answers; Supabase-to-site reader and actual trials |
+
+### Interview correction, 2026-11-01
+
+Kayden reported the lost grilling flow as a failure. Resume the ready decision round and wait; the linked context preserves his corrections.
 
 ## Review and Human QA
 

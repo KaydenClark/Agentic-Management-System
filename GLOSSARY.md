@@ -14,6 +14,18 @@ Kayden's system for managing agents, workflows, intent capture, skills and AI to
 **RSI loop**:
 Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record does not prove improvement.
 
+**Alignment assessment**:
+Application of approved Alignment Check r1 to a named candidate and scope over three assessment runs.
+
+**Alignment Score**:
+The percentage of passed applicable checks pooled across all three assessment runs; distinct from fitness level and acceptance.
+
+**Fitness level**:
+The r1 classification: Excellent at three passing runs, Stable at two, Functional at one and Broken at none; any Critical failure overrides the count to Broken.
+
+**Improvement attempt**:
+One assessed version of an improvement candidate; each candidate has at most three attempts, excluding baseline.
+
 **Workbench**:
 The working foundation AMS uses and repairs. AMS also encompasses the system and tool belt that operates above it.
 

@@ -1,0 +1,96 @@
+/* /rsi styles. Every value comes from the S-003 shell's tokens
+   (site/app/theme/tokens.css). Empty places are "nothing here yet" states,
+   so they use greys and a dashed frame, never a signal hue (DDR-000M); dev
+   and held-out are told apart by headings and layout, not color. */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-48);
+  color: var(--ink);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.split {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-18);
+  padding-top: var(--space-24);
+  border-top: var(--border-width) solid var(--line-strong);
+}
+
+.places {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.place {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-18);
+  background: var(--surface);
+  color: var(--ink);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-card);
+}
+
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.placeTitle {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-body);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-heading);
+}
+
+/* An empty plot frame: dashed and muted like the canvas's grade-4 style.
+   There is no chart-height token, so the frame keeps a fixed shape. */
+.plot {
+  aspect-ratio: 3 / 1;
+  background: var(--ground);
+  border: var(--border-width) dashed var(--line-strong);
+  border-radius: var(--radius-control);
+}
+
+.empty {
+  font-weight: var(--weight-semibold);
+}
+
+.terms {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--space-4) var(--space-12);
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.terms dt {
+  font-weight: var(--weight-semibold);
+  color: var(--ink);
+}
+
+.terms dd {
+  margin: 0;
+}
+
+.next {
+  font-size: var(--text-small);
+}
