@@ -72,18 +72,24 @@ stage and exit status under `.local/trial-diagnostics`, without worker prompt,
 stdout or authentication payloads. A diagnostic-storage failure stays visible to
 the caller; it never converts an execution failure to success.
 
-The current bootstrap's transport is verified with deterministic mock streams.
-The earlier single inert Claude smoke is separate external CLI capability
-evidence; it does not claim execution of this adapter revision. No further model
-calls are part of this Task. A future series must bind the exact bootstrap and
-protected oracle revision selected by the orchestrator after review.
+Transport writes are nonblocking and drain stdout/stderr concurrently. One
+absolute deadline covers each send and its reply: 15 seconds per control exchange,
+55 seconds for execution. Inert subprocess tests exercise large prompts, partial
+writes, output floods, nonreading peers, exact delivery and private diagnostics.
+The authorized single adapter smoke at source
+`5d3632098d4316a8b34ed85a82466aacf9de5bb1` returned `PREFLIGHT_OK`; it is
+historical execution evidence, separate from the earlier external CLI smoke.
+The corrected transport at `5467b5e3715fd229d260b064c2250d36c54b4068` also
+passed one authorized inert adapter smoke. Both are execution facts, not semantic
+qualification or controlled skill trials. A future series must bind the exact bootstrap and protected oracle
+revision selected by the orchestrator after review.
 
 ## Evidence and next gate
 
 Safe execution summaries retain model/effort, source digest, token/cache counts
 and API list-equivalent cost. Actual subscription spend remains unknown. Raw
 prompts/responses, host paths and oracle content are excluded. Local evidence
-records are immutable by canonical JSON identity; readback verifies filenames,+digests, fields and gates. This is a cooperating-writer integrity boundary, not
+records are immutable by canonical JSON identity; readback verifies filenames, digests, fields and gates. This is a cooperating-writer integrity boundary, not
 proof that supplied execution claims or evidence are true.
 
 Preflight always keeps controlled execution unreleased. It reports missing

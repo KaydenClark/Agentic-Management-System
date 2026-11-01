@@ -19,9 +19,9 @@
 
 ## Current Verified State
 
-[Scoring proof](tasks/TK-000M/TASK.md). [Baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified source reviews; no trial, strike or skill result.
+[Scoring](tasks/TK-000M/TASK.md); [baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified; no trial, strike or skill result.
 
-S-006/TK-000S retains exact-identity repair proof; scoring/qualification unchanged.
+Exact-identity repair: S-006/TK-000S.
 
 [Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise.
 
@@ -33,9 +33,9 @@ Failure -> earliest gap/owner -> one repository change -> baseline/retest -> dis
 
 Canonical: `audit-workbench` r1 checks/scenarios/qualification, version 1,
 hash `96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578`.
-Freeze rubric, scope/inventory/exclusions, IDs/classes, baseline/candidate/skills
-commits, loaded artifacts, host/tools, evaluator model/prompt/qualification.
-No rubric changes/extra points.
+Freeze rubric, scope/inventory/exclusions, IDs/classes, baseline/candidate/skill
+pins, loaded artifacts, host/tools and evaluator model/prompt/qualification;
+no changes/extra points.
 
 Three runs/attempt: class, Yes/No/justified N/A, typed revision-bound
 evidence/qualification. Missing/Unknown/refused/interrupted stays No in its class
@@ -65,8 +65,7 @@ Close only on three-run repaired-revision original/affected-regression passes
 
 - Retain only qualified Stable/Excellent with demonstrated useful benefit
   predeclared before comparison. First case: grilling failure; coordinate existing redesign.
-- Rounds start from failures, never retro ideas. On recurrence check ineffective
-  prior fixes. One change/version.
+- Failure-led rounds; review ineffective prior fixes on recurrence. One change/version.
 - Fixed provider/model/effort. Accepted-version runner/graders/scoring, never
   candidate-owned. Grader changes start a new series judged by its predecessor.
 - Same-version noise floor first. Fixed-task AMS/no-AMS/plain-instruction arms,
@@ -87,16 +86,13 @@ Weights; running loops during mapping; presentation (S-007).
 
 ## Dependencies And Blockers
 
-S-006 retains frozen assessment/attempt/run identities, metadata, ledgers, counts/levels, acceptance/evidence/qualification, findings/retests and behavioral links. S-007 safe presentation remains unimplemented.
+S-006 retains assessment/attempt/run identities, metadata, ledgers, counts/levels, acceptance/evidence/qualification and finding/retest/behavior links. S-007 safe presentation is pending.
 
-Real build/skills seeds retain strength labels; private sources yield summaries/commits only. Storage and qualified comparisons required.
+Keep real build/skill seeds strength-labelled; private sources yield summaries/commits only. Require storage and qualified comparisons.
 
 ## Vertical Implementation Slices
 
-TK-000M/N/O: scoring; TK-000T: bootstrap; TK-001..004: real trials. B local, checked PRs to main.
-
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
+TK-000M/N/O: scoring; TK-000T/V: bootstrap; TK-001..004: trials. B local; checked PRs to main.
 
 ## Acceptance Criteria
 
@@ -108,9 +104,7 @@ TK-000M/N/O: scoring; TK-000T: bootstrap; TK-001..004: real trials. B local, che
 
 ## Testing Seams
 
-CLI/runner/writer/readback fixtures: missing proof, recurrence, original-pass/regression-fail.
-
-Checks: RUNBOOK and [Task proof](tasks/TK-000M/TASK.md).
+CLI/runner/writer/readback: missing proof, recurrence, original-pass/regression-fail. Checks: RUNBOOK; [proof](tasks/TK-000M/TASK.md).
 
 ## Append-Only Evidence And Execution Log
 
