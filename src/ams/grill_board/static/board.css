@@ -140,7 +140,7 @@ details.grade-why>summary::before{display:none}
 .box-head{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--tone-ink)}
 .box p{margin:0;font-size:16px;line-height:1.65;color:var(--ink)}
 .verdict-area{display:flex;flex-direction:column;gap:10px}
-.inert-note,.verdict-note{margin:0;font-size:13px;color:var(--muted)}
+.verdict-note{margin:0;font-size:13px;color:var(--muted)}
 .answer{display:flex;flex-direction:column;gap:10px}
 .notice{border-bottom:1px solid var(--line)}
 .verdicts{display:flex;flex-wrap:wrap;gap:8px}
@@ -150,9 +150,15 @@ details.grade-why>summary::before{display:none}
 textarea{background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:10px 12px;resize:vertical}
 .rating{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:10px 0;border-top:1px dashed var(--line)}
 .rating .ask{font-size:13.5px;color:var(--muted)}
+.rating .small{font-size:12.5px;color:var(--muted)}
 .stars{display:flex}
 .star{background:transparent;border:0;color:var(--line-strong);padding:2px;min-width:32px;min-height:32px;font-size:20px;line-height:1}
 .taxing{margin-left:auto;background:transparent;border:1px solid var(--line-strong);border-radius:999px;color:var(--ink);padding:6px 14px;min-height:36px;font-size:13px;font-weight:600}
+.star.on{color:var(--ink)}
+.star:hover{color:var(--ink)}
+.taxing.is-flagged{display:inline-flex;align-items:center;background:var(--tone-soft);border-color:var(--tone-line);color:var(--tone-ink);box-sizing:border-box}
+.taxing:hover{border-color:var(--ink)}
+.comment{flex:1 1 100%;background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;padding:8px 12px;min-height:36px;box-sizing:border-box}
 .pager{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
 .pager span.buttons{display:flex;gap:8px}
 .ghost{display:inline-flex;align-items:center;background:transparent;border:1px solid var(--line-strong);border-radius:10px;color:var(--ink);padding:8px 14px;min-height:40px;box-sizing:border-box;text-decoration:none}

@@ -2,6 +2,7 @@
 date: 2026-11-01
 canonicalized_in:
   - supabase
+superseded_by: 003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md
 ---
 
 # Supabase holds the RSI data and a Python writer keeps it current

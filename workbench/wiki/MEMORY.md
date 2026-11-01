@@ -76,6 +76,7 @@ an AMS glossary entry.
 | What is AMS and why is the first loop a website? | [AMS purpose](context-ams-purpose.md) — owner clarification, scope and rationale. |
 | How was the Workbench adopted, and what moved where? | [Workbench adoption](context-workbench-adoption.md) — package identity, Port/Fold/Keep/Retire map, checks and open gaps. |
 | Which Specs are active, and who approved them? | [Active Spec approvals](context-active-spec-approvals.md) — the owner's confirmed Jot entries each active Spec cites for Confirmation and Execution approval. |
+| Who approves merges, where does the Supabase service key live, and may C use the shared connectors? | [Owner answers to coherence findings](context-owner-answers-coherence.md) — owner corrections of 2026-11-01: agents merge non-site work, the key stays local, C never calls the connectors. |
 | Which research informed the templates? | [Research basis](../research/template-research-basis.md) — inspected sources, design implications and limits. |
 
 Add a row only when a durable note exists to route to. Grow flat notes beside

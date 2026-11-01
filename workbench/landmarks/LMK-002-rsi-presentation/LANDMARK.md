@@ -32,7 +32,7 @@ The AMS premise, that a managed environment beats none, is a claim to test, not 
 
 The decision records under this landmark, one line each, linked to their record.
 
-- [Supabase holds the RSI data and a Python writer keeps it current](../../docs/adr/002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md)
+- [Supabase holds the RSI data and a Python writer keeps it current](../../docs/adr/archive/002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md)
 - [The Supabase project and its read-only baseline](../../docs/adr/003C-the-supabase-project-and-its-read-only-baseline.md)
 - [Charts start blank and data is never fabricated](../../docs/ddr/000T-charts-start-blank-and-data-is-never-fabricated.md)
 - [Improvement claims need held-out ledger evidence](../../docs/adr/000A-improvement-claims-need-held-out-ledger-evidence.md)

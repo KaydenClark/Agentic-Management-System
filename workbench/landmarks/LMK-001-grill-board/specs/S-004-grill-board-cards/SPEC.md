@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-002 closed with proof.
-**Next gate:** Complete TK-003.
+**Latest event:** TK-003 closed with proof.
+**Next gate:** Confirm acceptance criteria and completion result.
 
 ## Intent and authority
 
@@ -27,7 +27,7 @@ Priority and Value are how the owner decides what needs attention; without them 
 
 ## Current Verified State
 
-- The board serves committed cards with Priority, Value and reasons on 127.0.0.1 in the artifact's layout and colors (TK-001, TK-004, TK-000A). Confirm writes the answer into the card's owning record in one commit and refuses a changed target (TK-002); rating and the flag are inert.
+- The board serves committed cards with Priority, Value and reasons on 127.0.0.1 in the artifact's layout and colors (TK-001, TK-004, TK-000A). Confirm writes into the owning record in one commit, refusing a changed target (TK-002). Rating and flag commit on the card (TK-003).
 
 ## Desired Behavior
 
@@ -106,6 +106,7 @@ Rows are condensed per Task; full proof is in each TASK.md Receipt and Git histo
 | 2026-11-01 | TK-004 | Closed; candidate 83747aa, [PR #24](https://github.com/KaydenClark/Agentic-Management-System/pull/24) | pytest 65 passed; color tests; drift mutation fails | DDR-000Y, grill-board/README.md | Agent and returned states await TK-002/TK-003 |
 | 2026-11-01 | TK-000A | Planned (blocked on TK-004; no fold), closed; candidate 63913a2, [PR #24](https://github.com/KaydenClark/Agentic-Management-System/pull/24) | pytest 121 passed; tokens equal tokens.json; no third-party URL; QA shots | DDR-000Y, grill-board/README.md | Controls inert until TK-002/TK-003 |
 | 2026-11-01 | TK-002 | Task closed | pytest 151 passed; conflict and path mutations fail; live 409/200/403 | grill-board/README.md, card-example.md | Rating, flag (TK-003); owner QA; close attribution: {"agent":"Claude implementor (Orchestrator B)","claimant":"Claude implementor (Orchestrator B)","onBehalfOf":null} |
+| 2026-11-01 | TK-003 | Task closed | pytest 321 passed; 7 mutations fail; live rate/flag 200, re-ask refused | grill-board/README.md, DDR-000Y, tokens.json | Owner QA; qa/ shots not regenerated; close attribution: {"agent":"Claude implementor (Orchestrator B)","claimant":"Claude implementor (Orchestrator B)","onBehalfOf":null} |
 
 Owner Human QA has not been performed for any Task.
 

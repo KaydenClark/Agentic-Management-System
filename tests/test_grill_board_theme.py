@@ -81,9 +81,13 @@ def test_tokens_json_has_the_contract_shape():
     assert set(TOKENS["mixes"]) == {".tone", ".h-heat", ".h-worth", ".h-owner", ".h-agent", ".h-returned", ".h-none"}
 
 
+MIX_NAMES = ["--on", "--tone-soft", "--tone-ink", "--tone-line", "--tone-dot"]
+
+
 def test_every_token_has_exactly_one_meaning_and_no_meaning_two_tokens():
     meanings = TOKENS["meanings"]
-    assert list(meanings) == NAMES
+    assert list(meanings) == NAMES + MIX_NAMES
+    assert list(TOKENS["mixes"][".tone"]) == MIX_NAMES
     assert all(isinstance(text, str) and text.strip() for text in meanings.values())
     assert len(set(meanings.values())) == len(meanings), "two tokens share a meaning"
 
@@ -190,18 +194,17 @@ def test_topics_first_layout_with_the_open_card(served):
     assert 'class="grade n4"' in picked
 
 
-def test_verdicts_are_live_and_rating_and_flag_stay_inert_placeholders(served):
+def test_verdicts_rating_and_flag_are_live(served):
     _, html, _, _ = served
     parsed = Resources()
     parsed.feed(html)
     joined = " ".join(parsed.disabled)
-    for control in ("star", "taxing"):
-        assert control in joined
-    # The showcase card names no owning record, so Confirm is off and says why; returns stay live.
-    assert "verdict confirm" in joined and joined.count("verdict") == 1
+    # The showcase card names no owning record, so Confirm is off and says why; everything else is live.
+    assert joined == "verdict confirm tone h-agent"
     assert "Confirm needs this card to name its Owner record" in html
     assert '<form class="answer" method="post" action="/answer">' in html
-    assert "Not wired yet: rating and the flag" in html
+    assert '<form class="rating" method="post" action="/rate">' in html and 'formaction="/flag"' in html
+    assert "Not wired yet" not in html
 
 
 def test_theme_follows_the_system_and_has_a_toggle(served):
