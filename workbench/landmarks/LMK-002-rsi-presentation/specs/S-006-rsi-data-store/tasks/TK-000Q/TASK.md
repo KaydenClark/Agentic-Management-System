@@ -3,10 +3,12 @@
 **Task ID:** TK-000Q
 **Spec ID:** S-006
 **Slice:** Private assessment history survives remote append and verified readback
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Private assessment persistence
 **Planned verification:** Red/green append and replay tests; paginated remote readback, duplicate/conflict/resume probes; live marked synthetic roundtrip and client access refusals; full suite and room checks.
+**Claimed by:** codex-assessment-writer
+**Current claimant:** codex-assessment-writer
 
 ## Assignment
 

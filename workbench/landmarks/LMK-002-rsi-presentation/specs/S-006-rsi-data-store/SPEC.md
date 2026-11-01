@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000P closed with proof.
-**Next gate:** Distinct private assessment persistence for S-002, then fresh independent assembled Review.
+**Latest event:** TK-000Q claimed by codex-assessment-writer.
+**Next gate:** Close TK-000Q with verification and documentation proof.
 
 ## Intent and authority
 
