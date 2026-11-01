@@ -24,6 +24,6 @@ Hand back to S-004 with `close`.
 
 ## Acceptance
 
-- [ ] The color list is documented with one meaning per color, in light and dark.
-- [ ] A test fails when the page uses a color not on the list, or one color for two meanings.
-- [ ] `uv run pytest` passes.
+- [x] The color list is documented with one meaning per color, in light and dark.
+- [x] A test fails when the page uses a color not on the list, or one color for two meanings.
+- [x] `uv run pytest` passes.
