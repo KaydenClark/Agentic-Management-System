@@ -114,8 +114,11 @@ export function differences(css, json) {
       continue;
     }
     // Any other rule may hold type and spacing tokens, but no color token.
+    // A name recorded in tokens.json may only be set in its recorded rule, whatever its value.
+    const recorded = new Set([...Object.values(json.themes), ...Object.values(json.mixes)].flatMap((o) => Object.keys(o)));
     for (const [name, value] of Object.entries(rule.decls)) {
-      if (isColorish(value)) out.push(`${where}: ${name}: ${value} is a color token outside the recorded themes and mixes`);
+      if (recorded.has(name)) out.push(`${where}: ${name}: ${value} redeclares a recorded token outside its recorded rule`);
+      else if (isColorish(value)) out.push(`${where}: ${name}: ${value} is a color token outside the recorded themes and mixes`);
     }
   }
   if (!seen.light) out.push('no [data-theme="light"] rule in tokens.css');
