@@ -13,7 +13,10 @@ permissions:
 jobs:
   site:
     name: site builds
-    runs-on: ubuntu-latest
+    # Public fork code must not execute automatically on the shared CI VM.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, Linux, ARM64, servitor]
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: site
