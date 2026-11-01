@@ -8,7 +8,7 @@
 |---|---|---|---|---|
 | [000A](000A-the-ams-is-the-owner-s-agent-management-system.md) | The AMS is the owner's agent-management system | accepted | 2026-11-01 | BLUEPRINT.md, GLOSSARY.md |
 | [000B](000B-a-project-is-a-room-and-the-ams-is-its-table.md) | A project is a room and the AMS is its table | accepted | 2026-11-01 | BLUEPRINT.md |
-| [000C](proposed/000C-the-ams-changes-runtime-controls-and-skills-never-weights.md) | The AMS changes runtime, controls and skills, never weights | proposed | 2026-11-01 | BLUEPRINT.md, evals |
+| [000C](000C-the-ams-changes-runtime-controls-and-skills-never-weights.md) | The AMS changes runtime, controls and skills, never weights | accepted | 2026-11-01 | BLUEPRINT.md, evals |
 | [000D](proposed/000D-the-blueprint-is-one-short-four-part-page.md) | The Blueprint is one short four-part page | proposed | 2026-11-01 | BLUEPRINT.md |
 | [000E](proposed/000E-a-release-is-proven-by-building-the-site-from-one-confirmed-concept.md) | A release is proven by building the site from one confirmed concept | proposed | 2026-11-01 | BLUEPRINT.md, evals |
 | [000F](proposed/000F-delivery-runs-in-rounds-the-owner-approves-or-returns.md) | Delivery runs in rounds the owner approves or returns | proposed | 2026-11-01 | BLUEPRINT.md |
