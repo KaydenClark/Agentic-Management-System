@@ -1,7 +1,9 @@
 // The skills diagram on /start (screen 3): Kayden's skills grouped by the
 // Workbench stage they serve, from his chart of 2026-11-01. Each stage lists
 // its main-flow skills in the order they run, then the skills also used at
-// that stage. Rendered by page.tsx and checked by tests/start-flow.test.mjs.
+// that stage. Names follow the owner's skills repository, where grill-me and
+// grill-with-docs are now align-concept and align-docs (owner, 2026-11-01).
+// Rendered by page.tsx and checked by tests/start-flow.test.mjs.
 // Plain JavaScript so the tests import it on any Node; types in skills.d.mts.
 
 export const stages = [
@@ -17,7 +19,7 @@ export const stages = [
     name: "Align",
     gloss: "Shared concept",
     main: ["grilling", "readback"],
-    used: ["brainstorm", "grill-me", "grill-with-docs", "oracle", "wayfinder", "prototype", "explore-kb", "research", "domain-modeling", "jot"],
+    used: ["brainstorm", "align-concept", "align-docs", "oracle", "wayfinder", "prototype", "explore-kb", "research", "domain-modeling", "jot"],
   },
   {
     id: "prepare",
