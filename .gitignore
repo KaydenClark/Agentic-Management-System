@@ -20,3 +20,4 @@ workbench/sessions/*
 
 # Python build and test byproducts
 __pycache__/
+*.pyc
