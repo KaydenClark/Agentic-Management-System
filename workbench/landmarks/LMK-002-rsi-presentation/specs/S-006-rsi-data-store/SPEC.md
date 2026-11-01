@@ -33,12 +33,14 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 ## Desired Behavior
 
 - Tables for RSI results, build history and run metadata. Each result names task, held-out or dev, arm (AMS, no-AMS or plain instructions), system version (runtime, controls and skills commits), provider, model, effort, pass, cost, tokens, completed state and source.
-- Each table has a site SELECT policy and no client write path.
+- Site presentation tables have a site SELECT policy and no client write path; raw assessment envelopes remain private.
 - A local writer with the service key inserts rows and refuses a write conflicting with a newer row.
 - Trial metrics preserve known values versus explicit unknowns with reasons/sources; unknown is never zero ([S-002 contract](../../../LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md), [consumer rules](../../../../../evals/TRIAL-ROWS.md)).
 - Seed rows come only from real sources (site build, later improvements, the skills repository's fixes), each labelled anecdote, single trial, repeated trials or held-out with interval; `recorded_fact` is for build history only.
 - Test and synthetic rows are marked; the site never shows them.
 - **Build history.** Rows for this build's Spec, Task, PR and commit events from real records, returns and corrections included, showing how the AMS built itself.
+
+- Private assessment envelopes retain S-002 frozen packets, attempt/run IDs, findings/retests and recomputable results, separately from behavioral trial rows.
 
 ## Decisions And Contracts
 
@@ -75,6 +77,8 @@ One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (t
 - [x] **No secrets in Git.** The hygiene check finds no service key in the repository. *Must fail:* a committed key. [Proof][p].
 
 [p]: tasks/TK-000B/TASK.md#proof
+
+- [ ] **Private assessment persistence.** Private remote append/readback retains the canonical assessment history with idempotence and conflict refusal; clients cannot read raw packets or write. *Must fail:* tampered totals, reset attempts, exposed private evidence or a silent overwrite.
 
 ## RSI and website connection
 
