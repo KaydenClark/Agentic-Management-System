@@ -18,9 +18,21 @@ export const CSS_PATH = `${siteDir}app/theme/tokens.css`;
 export const BEGIN = '/* BEGIN theme tokens: generated from grill-board/theme/tokens.json by scripts/gen-tokens.mjs; do not edit */';
 export const END = '/* END theme tokens */';
 
+// tokens.json gives no meaning for the mix tokens; these are the wordings
+// tokens.css carried before the block was generated (DDR-000M wants one per
+// color). A meaning added to tokens.json takes precedence.
+const MIX_MEANINGS = {
+  '--on': "grey: text on a strong hue fill, not a signal",
+  '--tone-soft': "the hue's meaning, at rest",
+  '--tone-ink': "the hue's meaning, as text",
+  '--tone-line': "the hue's meaning, as an outline",
+  '--tone-dot': "the hue's meaning, live",
+};
+
 function rule(selector, decls, meanings, indent = '') {
   const lines = Object.entries(decls).map(([name, value]) => {
-    const meaning = meanings[name] ? ` /* ${meanings[name]} */` : '';
+    const text = meanings[name] ?? MIX_MEANINGS[name];
+    const meaning = text ? ` /* ${text} */` : '';
     return `${indent}  ${name}: ${value};${meaning}`;
   });
   return `${indent}${selector} {\n${lines.join('\n')}\n${indent}}`;

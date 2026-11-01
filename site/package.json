@@ -10,7 +10,8 @@
     "build": "next build",
     "start": "next start",
     "test": "node --test \"tests/**/*.test.mjs\"",
-    "check:browser": "node tests/browser-375.check.mjs"
+    "check:browser": "node tests/browser-375.check.mjs",
+    "tokens:gen": "node scripts/gen-tokens.mjs --write"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "5.3.0",
