@@ -4,7 +4,7 @@ The public presentation site for the AMS (Spec S-003), a Next.js app deployed on
 
 ## Build and test
 
-Node.js 20 or later. From `site/`:
+Node.js 20 or later builds the site; `npm test` needs Node 21 or later (Node 22 is what the checks ran on). From `site/`:
 
 ```bash
 npm ci
@@ -12,7 +12,7 @@ npm run build
 npm test
 ```
 
-`npm test` runs Node's built-in test runner over `tests/*.test.mjs`. The tests read the prerendered HTML in `.next/server/app/`, so run `npm run build` first and rebuild after each commit: the footer test compares the built SHA with the current commit.
+`npm test` runs `node --test "tests/**/*.test.mjs"` (Node's built-in runner; the glob is quoted so Node expands it, which needs Node 21 or later). The tests read the prerendered HTML in `.next/server/app/`, so run `npm run build` first and rebuild after each commit: the footer test compares the built SHA with the current commit.
 
 Optional browser check at 375 px in both themes (needs Playwright with Chromium installed; not a site dependency):
 
