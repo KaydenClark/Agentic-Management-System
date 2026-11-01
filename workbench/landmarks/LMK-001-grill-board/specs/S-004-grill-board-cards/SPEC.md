@@ -1,15 +1,17 @@
 # S-004 - Grill Board cards and answers
 
 **Spec ID:** S-004
-**Status:** planned
+**Status:** active
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
 **Updated:** 2026-11-01
 **Catalog description:** Local Grill Board cards with Priority, Value, a rating and a "too taxing" flag, whose confirmed answers are written straight into their owning records.
 **Blockers:** none
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning.
+**Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
+**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; four Tasks planned.
+**Next gate:** Claim TK-001.
 
 ## Intent and authority
 
@@ -51,40 +53,14 @@ Priority and Value are how the owner decides what needs attention; without them 
 
 ## Dependencies And Blockers
 
-- A pinned current Python version in the repository.
+- A pinned current Python version in the repository: Python 3.14.5 with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
 
 ## Vertical Implementation Slices
 
+Each Task is one fresh-session run from a clean clone, landed feature -> `main` through a checked PR. Stack: committed card and record files, a Python server on the pinned Python ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)), the local page, and pytest against a temporary Git repository.
+
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Python server lists cards from committed records with Priority, Value and reasons | ready | none | pending |
-| TK-002 | Answer flow writes a confirmed answer into its owning record and refuses on conflict | ready | TK-001 | pending |
-| TK-003 | Rating, "too taxing" flag and comments saved as committed records; flagged cards held for rewrite | ready | TK-001 | pending |
-| TK-004 | Signal colors, each with one documented meaning, in light and dark | ready | TK-001 | pending |
-
-### TK-001 - Card list
-
-**Stance:** Builder
-
-Serve the queue from committed card files; proves the Priority/Value criterion.
-
-### TK-002 - Answer into owner
-
-**Stance:** Builder
-
-One click confirms; the owning record changes in the same step; proves the answer and conflict criteria.
-
-### TK-003 - Ratings and flags
-
-**Stance:** Builder
-
-Proves the rating and flag criteria.
-
-### TK-004 - Signal colors
-
-**Stance:** Builder
-
-Proves the color criterion.
 
 ## Acceptance Criteria
 
