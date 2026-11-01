@@ -68,7 +68,8 @@ Runner = Callable[[Sequence[str]], str]
 
 _KIND = re.compile(r"^[a-z][a-z_]*$")
 _CLAIM = re.compile(r"^Claim (S-\d+) (TK-\d+)\b")
-_FIXED_IN = re.compile(r"\bfixed in `?([0-9a-f]{7,40})\b", re.IGNORECASE)
+# "Fixed in abc1234" or a later "Correction: the fix commit is abc1234"; the newest wins.
+_FIX_NAMED = re.compile(r"\b(?:fixed in|fix commit is) `?([0-9a-f]{7,40})\b", re.IGNORECASE)
 _PRIORITY = re.compile(r"!\[(P\d) Badge\]")
 _CORRECTION_EVENT = re.compile(r"^correction\b", re.IGNORECASE)
 _RETURN_EVENT = re.compile(r"^(return|returned|reopen|reopened|fail|failed|revert|reverted)\b",
@@ -302,20 +303,31 @@ def review_rows(prs: Sequence[dict], comments: Sequence[dict], resolved: Mapping
         number = int(comment["pull_request_url"].rstrip("/").rsplit("/", 1)[1])
         ref, title = f"#{number} comment {comment['id']}", _finding_title(comment["body"])
         priority = _PRIORITY.search(comment["body"])
-        fix_sha, fix_reply = None, None
-        for reply in sorted(replies.get(comment["id"], []), key=lambda r: r["created_at"]):
-            if _is_codex((reply.get("user") or {}).get("login", "")):
+        fix_sha, fix_reply, named_earlier = None, None, []
+        human = [r for r in replies.get(comment["id"], [])
+                 if not _is_codex((r.get("user") or {}).get("login", ""))]
+        for reply in sorted(human, key=lambda r: r["created_at"], reverse=True):
+            named = _FIX_NAMED.search(reply["body"])
+            if not named:
                 continue
-            named = _FIXED_IN.search(reply["body"])
-            if named:
+            if fix_reply is None:  # the newest naming reply decides, even if unresolvable
                 fix_sha = _resolve_commit(named.group(1), pr_commits, git)
                 fix_reply = reply["html_url"]
-                break
+            else:
+                named_earlier.insert(0, named.group(1))
+        for reply in human:
+            first = reply["body"].strip().splitlines()[0].strip() if reply["body"].strip() else ""
+            if _CORRECTION_EVENT.match(first):
+                rows.append(_row("correction", f"PR #{number}", first, utc(reply["created_at"]),
+                                 "pr", f"#{number} comment {reply['id']}", reply["html_url"],
+                                 {"pr": number, "author": reply["user"]["login"],
+                                  "corrects": ref}))
         rows.append(_row("correction", f"PR #{number}", title, utc(comment["created_at"]), "pr",
                          ref, comment["html_url"],
                          {"pr": number, "reviewer": login, "priority": priority and priority.group(1),
                           "path": comment.get("path"), "resolved": resolved.get(comment["id"]),
-                          "fix_commit": fix_sha and fix_sha[0], "fix_reply_url": fix_reply}))
+                          "fix_commit": fix_sha and fix_sha[0], "fix_reply_url": fix_reply,
+                          "fix_named_earlier": named_earlier}))
         if fix_sha:
             entry = fixes.setdefault(fix_sha[0], {"time": fix_sha[1], "findings": [], "titles": [],
                                                    "prs": set(), "replies": []})
@@ -376,10 +388,18 @@ def _task_rows(git: Runner, spec_id: str, spec_path: str, task: Mapping) -> list
     task_id = task["id"]
     path = posixpath.join(posixpath.dirname(spec_path), "tasks", task_id, "TASK.md")
     created = _first_commit(git, path)
-    if created is None:
-        print(f"note: {spec_id} {task_id} has no committed TASK.md; no task row", file=sys.stderr)
-        return []
     subject = f"{spec_id} {task_id}"
+    if created is None:
+        # A planned Task recorded only as a row of its Spec's slice table.
+        line = next((line for line in _blame(git, spec_path)
+                     if re.match(rf"^\|\s*{re.escape(task_id)}\s*\|", line[3])), None)
+        if line is None:
+            print(f"note: {subject} has no committed record; no task row", file=sys.stderr)
+            return []
+        return [_row("task", subject, task.get("slice") or task_id, line[1], "path",
+                     f"{spec_path}#{task_id}", _blob_url(line[0], spec_path, line[2]),
+                     {"spec": spec_id, "task": task_id, "status": task.get("status"),
+                      "recorded_commit": line[0], "record": "spec slice table"})]
     rows = [_row("task", subject, task.get("slice") or task_id, utc(created[1]), "path", path,
                  _blob_url(created[0], path),
                  {"spec": spec_id, "task": task_id, "status": task.get("status"),
