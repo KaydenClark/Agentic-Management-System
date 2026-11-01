@@ -24,7 +24,7 @@ Hand back to S-006 with `close`.
 
 ## Acceptance
 
-- [ ] The migration applies cleanly and is committed under `supabase/migrations/`.
-- [ ] One real build event row exists in Supabase, naming its commit SHA as source.
-- [ ] The publishable key selects the row; its insert, update and delete each fail.
-- [ ] Nothing is written only to a local file; `uv run pytest` passes.
+- [x] The migration applies cleanly and is committed under `supabase/migrations/`.
+- [x] One real build event row exists in Supabase, naming its commit SHA as source.
+- [x] The publishable key selects the row; its insert, update and delete each fail.
+- [x] Nothing is written only to a local file; `uv run pytest` passes.
