@@ -27,7 +27,8 @@ Outside research does not settle whether shaping an agent's environment improves
 
 ## Current Verified State
 
-- No loop, tasks, graders or rows exist in this repository. The data store is S-006.
+- The loop runner and fixed eval task set are not implemented. S-006 has the RSI writer and live tables, but the 2026-11-01 read-only check found 0 non-test runs/results. The owner's reported completed baseline has not yet been located; no baseline score is inferred.
+- Loop #1 now includes fitness level, Alignment Score, Stable/Excellent-only acceptance, an initial attempt plus at most two retries, Supabase results and visibility on the Vercel dev site. The exact owner wording, recovered sources, proposed scoring/counter interpretation and unanswered questions are in [the existing RSI context](../../../../wiki/context-ams-purpose.md#loop-1-preparation-recovered-design-and-open-decisions). Preparation is authorized; no paid-campaign limit or assessment result is supplied by this record.
 
 ## Desired Behavior
 
@@ -109,6 +110,7 @@ node workbench/tools/spec-workbench.mjs show S-002
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion; campaign approval |
+| 2026-11-01 | none | Owner requested Loop #1 preparation and the first improvement wave, with fitness/alignment results, Stable/Excellent-only acceptance and a three-attempt stop. Captured source and interview frontier in the linked RSI context. | Read-only Supabase counts; dev source and READY deployment metadata inspected | Current Verified State; existing RSI context | Baseline artifact/findings; campaign scoring/counter answers; paid budget if needed; Supabase-to-site reader and actual trials |
 
 ## Review and Human QA
 
