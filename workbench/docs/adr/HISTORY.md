@@ -9,7 +9,7 @@
 | [000A](000A-improvement-claims-need-held-out-ledger-evidence.md) | Improvement claims need held-out ledger evidence | accepted | 2026-11-01 | AGENTS.md, evals |
 | [000B](000B-a-confirmed-grill-board-answer-goes-straight-to-its-owner.md) | A confirmed Grill Board answer goes straight to its owner | accepted | 2026-11-01 | grill-board |
 | [000C](000C-the-authority-order-for-agents.md) | The authority order for agents | accepted | 2026-11-01 | AGENTS.md |
-| [000D](proposed/000D-agents-md-is-the-only-always-loaded-instruction-file.md) | AGENTS.md is the only always-loaded instruction file | proposed | 2026-11-01 | AGENTS.md, CLAUDE.md |
+| [000D](000D-agents-md-is-the-only-always-loaded-instruction-file.md) | AGENTS.md is the only always-loaded instruction file | accepted | 2026-11-01 | AGENTS.md, CLAUDE.md |
 | [000E](proposed/000E-an-always-loaded-line-must-change-the-next-action.md) | An always-loaded line must change the next action | proposed | 2026-11-01 | AGENTS.md, workbench/artifact-budgets.json |
 | [000F](proposed/000F-agents-start-small-and-investigate-before-asking.md) | Agents start small and investigate before asking | proposed | 2026-11-01 | AGENTS.md |
 | [000G](proposed/000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md) | A rule is enforced only when code refuses and a test shows it | proposed | 2026-11-01 | AGENTS.md, tests |
