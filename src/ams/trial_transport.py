@@ -143,5 +143,3 @@ class ClaudeProcess:
             json.dump(data, output)
         self.diagnostic_file.chmod(0o600)
         return str(self.diagnostic_file)
-
-

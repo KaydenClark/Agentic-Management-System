@@ -197,5 +197,3 @@ def worker_prompt(worker, case_id, *, suite=None):
                 'manifestDigest': manifest_digest, 'loadedArtifacts': loaded,
                 'nativeInstallation': False, 'promptDigest': hashlib.sha256(prompt.encode()).hexdigest()}
     return prompt, identity
-
-

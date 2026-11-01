@@ -135,4 +135,3 @@ def test_failed_transport_retains_bounded_private_actionable_diagnostic(tmp_path
     assert 'fixture denied startup' in row['stderr'] and len(row['stderr'].encode())<=16384
     assert row['exitStatus']==7 and 'sk-ant-fixture-secret' not in files[0].read_text()
     assert 'private text must never be logged' not in files[0].read_text()
-
