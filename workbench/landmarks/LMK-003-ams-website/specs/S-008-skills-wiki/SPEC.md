@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-002 claimed by Orchestrator (Claude Opus 5.5).
-**Next gate:** Close TK-002 with verification and documentation proof.
+**Latest event:** Skills wiki merged into `dev` at `19c06cc` (PR #93): `/skills` index and 39 articles at skills commit `8782412`; TK-001 and TK-002 closed (2026-11-01).
+**Next gate:** Owner review of the 40 draft-marked pages on the protected `dev` deployment (page approvals and Human QA); only the owner merges `dev` -> `main`, after which `complete` can run.
 
 ## Intent and authority
 
@@ -36,7 +36,7 @@ The skills are how agents operate the AMS. Explaining them faithfully, without p
 
 ## Current Verified State
 
-- No wiki pages exist.
+- On `dev` at `19c06cc` (PR #93, 2026-11-01): `/skills` index and one article per chart skill, 39 in all, from skills commit `8782412`; every page carries its draft mark. Not on `main`. Checks at the merged tree: `npm test` 165/165, `check:browser` 1984/1984, `tour-375` 24/24, `check:skills-source` 0 findings; independent Standards and Spec reviews in fresh contexts found no hard breach and every criterion met.
 - `KaydenClark/skills` is private; at commit `878241202bf7ec97c0952287f1633f6f0ddf1a6e` (2026-11-01) every skill on the chart is a top-level skill directory, with `grill-me` and `grill-with-docs` renamed `align-concept` and `align-docs`. Four top-level skills are not on the chart (`clean-my-ai-harness-codex`, `obsidian-vault`, `ponder`, `teach`). The repository has a `THIRD_PARTY_NOTICES.md` and no root `LICENSE`.
 - The chart (`skills-by-workbench-stage.svg`) still shows the old names `grill-me` and `grill-with-docs`.
 
@@ -98,13 +98,13 @@ Proves the coverage criterion.
 
 ## Acceptance Criteria
 
-- [ ] **Article shape.** Every article has sections 1-5 and 7-9 in order (skill-specific sections optional, between What it does not authorize and FAQs), a credit line, and names its skills commit. *Check:* a content test over the built articles. *Must fail:* an article with no FAQs, no "It's working when" or no "What it does not authorize", or with sections out of order.
-- [ ] **Faithful.** Each described behavior, requirement and refusal appears in the pinned skill file. *Check:* a reviewer compares articles with the pinned files. *Must fail:* a behavior the skill does not have.
-- [ ] **Coverage.** Every chart skill has an article under its repository name at the pin, and every stage names at least one skill. *Must fail:* a missing chart skill, an article named `grill-me`, an article for a skill not on the chart, or an orphan stage.
-- [ ] **Index.** `/skills` lists every article under its chart stage, main-flow skills first in order, each linking its `/skills/<name>` page. *Must fail:* a skill under the wrong stage or an article with no index link.
-- [ ] **Credit.** An adapted skill names its source and license. *Must fail:* an adapted skill labeled original.
-- [ ] **No used marks.** No page marks a skill as used to build the site. *Must fail:* a "used" badge or list on any wiki page.
-- [ ] **No private files.** The hygiene check finds no copied skill file content beyond short quoted lines. *Must fail:* a skill file reproduced on the site.
+- [x] **Article shape.** Every article has sections 1-5 and 7-9 in order (skill-specific sections optional, between What it does not authorize and FAQs), a credit line, and names its skills commit. *Check:* a content test over the built articles. *Must fail:* an article with no FAQs, no "It's working when" or no "What it does not authorize", or with sections out of order. *Evidence:* the loader refuses a malformed article at build and `tests/skills-wiki.test.mjs` checks every built article with planted faults; 165/165 at `19c06cc`.
+- [x] **Faithful.** Each described behavior, requirement and refusal appears in the pinned skill file. *Check:* a reviewer compares articles with the pinned files. *Must fail:* a behavior the skill does not have. *Evidence:* the orchestrator compared all 39 finals with their pinned skill folders (16 failed and were revised and re-judged); an independent Spec reviewer re-checked six claim by claim (land, setup-workbench, improve-workbench, sitrep, oracle, triage) and found no invented behavior.
+- [x] **Coverage.** Every chart skill has an article under its repository name at the pin, and every stage names at least one skill. *Must fail:* a missing chart skill, an article named `grill-me`, an article for a skill not on the chart, or an orphan stage. *Evidence:* coverage test at `19c06cc`: 39 articles equal the chart's 39 (5/12/2/7/1/4/8), `align-concept` and `align-docs`, none off-chart.
+- [x] **Index.** `/skills` lists every article under its chart stage, main-flow skills first in order, each linking its `/skills/<name>` page. *Must fail:* a skill under the wrong stage or an article with no index link. *Evidence:* index test and browser check at `19c06cc`.
+- [x] **Credit.** An adapted skill names its source and license. *Must fail:* an adapted skill labeled original. *Evidence:* loader credit rules plus the independent review of all 39 credits against `THIRD_PARTY_NOTICES.md` and folder notices.
+- [x] **No used marks.** No page marks a skill as used to build the site. *Must fail:* a "used" badge or list on any wiki page. *Evidence:* used-marks test with planted faults at `19c06cc`.
+- [x] **No private files.** The hygiene check finds no copied skill file content beyond short quoted lines. *Must fail:* a skill file reproduced on the site. *Evidence:* site hygiene test 165/165 and `check:skills-source` 0 copied runs of 10+ words at pin `8782412`.
 
 ## RSI and website connection
 
@@ -118,7 +118,9 @@ Skill changes measured by the loop (S-002, S-011) update the affected articles a
 
 ```bash
 node workbench/tools/spec-workbench.mjs show S-008
-# site test command named at Task planning
+cd site && npm ci && npm run build && npm test
+npm run check:browser                                   # needs Playwright with Chromium
+npm run check:skills-source -- --skills DIR             # DIR: private skills checkout at 8782412
 ```
 
 ## Documentation Impact
@@ -133,6 +135,7 @@ node workbench/tools/spec-workbench.mjs show S-008
 | 2026-11-01 | none | Entry shape revised to the owner's seven-section template; open choices listed | render, doctor | this Spec | Every criterion; open owner choices |
 | 2026-11-01 | none | Owner settled the open choices: nine sections, stage grouping, chart skills at pin `8782412` under repository names, index plus page per skill, used marks dropped (TK-003 removed); implementation not started | render, doctor | this Spec | Every criterion |
 | 2026-11-01 | TK-001 | Task closed | PR #93 merged into dev at 19c06ccaf3236228f78d5b1ab8b4ebf87be07f50 (tree equal to checked head 49841646); Vercel status success for that commit. /skills index and 39 articles build; npm test 165/165; check:browser 1984/1984; tour-375 24/24; check:skills-source 0 findings at pin 8782412; independent Standards and Spec reviews (fresh contexts) found no hard breach and every acceptance criterion met. | site/README.md Skills wiki section (files, format, tests, source check) | none for TK-001; TK-002 (full set) delivered in the same PR; close attribution: {"agent":"Orchestrator (Claude Opus 5.5)","claimant":"Orchestrator (Claude Opus 5.5)","onBehalfOf":null} |
+| 2026-11-01 | TK-002 | Task closed | All 39 chart skills have articles under repository names at pin 8782412 (Route 5, Align 12, Prepare 2, Journey 7, Judge 1, Complete 4, Improve 8), delivered in PR #93 merged into dev at 19c06cc; coverage test passes (no grill-me/grill-with-docs, no off-chart article, no orphan stage). Each article: Sonnet writer, independent Sonnet audit, final writer, orchestrator judgment against the pinned skill folder (23 passed, 16 failed and were revised and re-judged). Independent Spec review spot-checked six articles claim by claim and all 39 credits. | site/content/skills/*.md; site/README.md | Owner page approvals (draft marks on all 40 pages), Grill Board review cards (S-005), page-list.json entries (orchestrator A), glossary link to the wiki, chart image still shows old names, dev -> main by owner; close attribution: {"agent":"Orchestrator (Claude Opus 5.5)","claimant":"Orchestrator (Claude Opus 5.5)","onBehalfOf":null} |
 
 ## Review and Human QA
 
@@ -145,6 +148,9 @@ Pending.
 ## Remaining Limitations Or Follow-Up Specs
 
 - The chart image keeps the old names `grill-me` and `grill-with-docs` until the owner updates it.
+- Documentation Impact (the glossary links the wiki for skill names) is not done: the site Glossary page is S-003 TK-003 (PR #84, open), and `GLOSSARY.md` edits go through domain-modeling.
+- `site/page-list.json` does not yet list `/skills` or the articles; orchestrator A is its only writer.
+- `check:skills-source` needs the private skills checkout, so it runs locally, not in CI.
 
 ## Supersession
 
