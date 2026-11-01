@@ -24,6 +24,8 @@ SPEC_TEMPLATE = """# S-900 - Fixture
 - [x] **Unevidenced.** Claimed done with nothing linked.
 - [x] **Bogus evidence.** *Evidence:* `deadbeefdeadbeef` and `tests/missing.py`.
 - [ ] **Open.** Not done yet. *Check:* `tests/test_thing.py`.
+- [x] **Sibling link.** *Evidence:* [result](evidence.md) and [up](../../../../../tests/test_thing.py).
+- [x] **Side branch.** *Evidence:* `{side}`.
 
 ## RSI and website connection
 
@@ -55,9 +57,17 @@ def _fixture():
     _git(d, "add", ".")
     _git(d, "commit", "-q", "-m", "evidence")
     sha = _git(d, "rev-parse", "HEAD")
+    # A commit that exists in the repository but only on an unmerged branch.
+    _git(d, "checkout", "-q", "-b", "side")
+    Path(d, "side.txt").write_text("side\n")
+    _git(d, "add", ".")
+    _git(d, "commit", "-q", "-m", "side")
+    side = _git(d, "rev-parse", "HEAD")
+    _git(d, "checkout", "-q", "main")
     spec_dir = Path(d, "workbench/landmarks/LMK-900-x/specs/S-900-fixture")
     (spec_dir / "tasks/TK-001").mkdir(parents=True)
-    (spec_dir / "SPEC.md").write_text(SPEC_TEMPLATE.format(sha=sha[:12]))
+    (spec_dir / "SPEC.md").write_text(SPEC_TEMPLATE.format(sha=sha[:12], side=side[:12]))
+    (spec_dir / "evidence.md").write_text("result\n")
     (spec_dir / "tasks/TK-001/TASK.md").write_text(TASK)
     _git(d, "add", ".")
     _git(d, "commit", "-q", "-m", "spec")
@@ -77,6 +87,16 @@ class UpToSpecTest(unittest.TestCase):
     def test_unresolvable_evidence_is_not_met(self):
         self.assertEqual(self.by_name["Bogus evidence"]["status"], "unknown")
         self.assertEqual(self.by_name["Bogus evidence"]["evidence"], [])
+
+    def test_markdown_links_resolve_relative_to_the_spec(self):
+        c = self.by_name["Sibling link"]
+        self.assertEqual(c["status"], "met")
+        self.assertIn("workbench/landmarks/LMK-900-x/specs/S-900-fixture/evidence.md", c["evidence"])
+        self.assertIn("tests/test_thing.py", c["evidence"])
+
+    def test_commit_off_the_checked_history_is_not_evidence(self):
+        # Codex review on PR #11: an unmerged commit must not make a line met.
+        self.assertEqual(self.by_name["Side branch"]["status"], "unknown")
 
     def test_unchecked_is_not_met_and_check_text_is_not_evidence(self):
         self.assertEqual(self.by_name["Open"]["status"], "not met")
@@ -98,7 +118,7 @@ class UpToSpecTest(unittest.TestCase):
         self.assertIn("S-900", md)
         for name in ("Unevidenced", "Bogus evidence", "Open"):
             self.assertIn(name, md)
-        self.assertEqual(self.report["summary"], {"met": 1, "not met": 1, "unknown": 2})
+        self.assertEqual(self.report["summary"], {"met": 2, "not met": 1, "unknown": 3})
 
 
 if __name__ == "__main__":

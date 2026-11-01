@@ -1,8 +1,9 @@
 """S-013 TK-002 (ADR-001F): up-to-Spec report for one Spec at one commit.
 
 Read-only; needs only `git`. For each acceptance criterion:
-  met      - line is checked AND its `Evidence:` clause names a commit SHA or a
-             repository path that resolves at the checked commit;
+  met      - line is checked AND its `Evidence:` clause names a commit SHA in the
+             checked commit's history, or a path present at that commit
+             (Markdown links resolve from the Spec's folder, code paths from root);
   unknown  - line is checked but no evidence resolves (a claim without proof);
   not met  - line is unchecked.
 `Check:` and `Must fail:` text is planned verification, never evidence.
@@ -16,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import posixpath
 import re
 import subprocess
 import sys
@@ -36,12 +38,22 @@ def _show(repo: str, commit: str, path: str) -> str:
     return _git(repo, "show", f"{commit}:{path}").stdout
 
 
-def _resolves_commit(repo: str, sha: str) -> bool:
-    return _git(repo, "cat-file", "-e", f"{sha}^{{commit}}", check=False).returncode == 0
+def _resolves_commit(repo: str, sha: str, commit: str) -> bool:
+    # Evidence must be delivered: the SHA has to be in the checked commit's history,
+    # not merely exist in the object store (e.g. on an unmerged branch).
+    if _git(repo, "cat-file", "-e", f"{sha}^{{commit}}", check=False).returncode:
+        return False
+    return _git(repo, "merge-base", "--is-ancestor", sha, commit, check=False).returncode == 0
 
 
 def _resolves_path(repo: str, commit: str, path: str) -> bool:
-    return _git(repo, "cat-file", "-e", f"{commit}:{path.lstrip('./')}", check=False).returncode == 0
+    return _git(repo, "cat-file", "-e", f"{commit}:{path}", check=False).returncode == 0
+
+
+def _normalize(path: str, base: str = "") -> str | None:
+    """Repo-relative POSIX path, or None if it escapes the repository."""
+    joined = posixpath.normpath(posixpath.join(base, path.lstrip("/") if not base else path))
+    return None if joined.startswith("..") or joined == "." else joined
 
 
 def _find_spec(files: list[str], spec_id: str) -> str:
@@ -62,16 +74,21 @@ def _section(text: str, heading: str) -> list[str]:
     return out
 
 
-def _evidence(repo: str, commit: str, rest: str) -> list[str]:
+def _evidence(repo: str, commit: str, rest: str, spec_dir: str) -> list[str]:
     m = EVIDENCE.search(rest)
     if not m:
         return []
     text, found = m.group("text"), []
-    for path in (a or b for a, b in PATH.findall(text)):
-        if not SHA.fullmatch(path) and _resolves_path(repo, commit, path):
+    for link, code in PATH.findall(text):
+        if code and SHA.fullmatch(code):
+            continue
+        # Markdown links resolve relative to the Spec (as a renderer would);
+        # backticked code paths are repository-root relative.
+        path = _normalize(link, spec_dir) if link else _normalize(code)
+        if path and _resolves_path(repo, commit, path):
             found.append(path)
     for sha in SHA.findall(text):
-        if _resolves_commit(repo, sha):
+        if _resolves_commit(repo, sha, commit):
             found.append(sha)
     return found
 
@@ -99,7 +116,7 @@ def check_spec(spec_id: str, repo: str = ".", commit: str = "HEAD") -> dict:
         if not m:
             continue
         name, checked = m.group("name").strip(), m.group("mark") != " "
-        evidence = _evidence(repo, sha, m.group("rest")) if checked else []
+        evidence = _evidence(repo, sha, m.group("rest"), posixpath.dirname(spec_path)) if checked else []
         status = "not met" if not checked else ("met" if evidence else "unknown")
         related = [{"id": t["id"], "status": t["status"], "proof": t["proof"]}
                    for t in tasks if name in t["destinations"]]
