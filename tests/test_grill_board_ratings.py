@@ -4,6 +4,7 @@ refuse-on-change write path as answers (DDR-000J, ADR-002U). A flagged card
 is held for rewrite: re-posting its question unchanged is shown as refused
 and cannot be answered, while a rewritten question is accepted."""
 
+import html as markup
 import re
 import threading
 import urllib.parse
@@ -25,7 +26,8 @@ def get(server, query=None):
 def rating_form(html):
     """The open card's rating form: its hidden fields and the form's HTML."""
     form = html.split('<form class="rating"', 1)[1].split("</form>", 1)[0]
-    return dict(re.findall(r'<input type="hidden" name="([^"]+)" value="([^"]*)"', form)), form
+    fields = re.findall(r'<input type="hidden" name="([^"]+)" value="([^"]*)"', form)
+    return {name: markup.unescape(value) for name, value in fields}, form
 
 
 def send(server, path, fields, headers=None):
@@ -281,3 +283,25 @@ def test_the_board_is_not_a_drafting_surface(board, repo):
     html = get(server, {"topic": "Card format"})
     assert "page-draft.md" in html.split('aria-label="Refused cards"', 1)[1]
     assert before["record"] == (repo / "records" / "decision.md").read_bytes()
+
+
+def test_rewriting_a_flagged_card_in_place_is_refused_so_the_flag_record_stays(board, repo):
+    server = board()
+    flag(server)
+    in_place = CARD.replace("should the board keep one card per file?", "one card per file: yes or no?")
+    post_card(repo, "one-card.md", in_place, "an agent rewrites the flagged card in place, dropping its flag")
+    html = get(server, {"topic": "Card format"})
+    alert = html.split('aria-label="Refused cards"', 1)[1].split("</section>", 1)[0]
+    assert "one-card.md" in alert and "flag is gone" in alert
+
+
+def test_a_flagged_card_with_an_unusual_name_is_still_found_in_history(board, repo):
+    odd = 'odd "name".md'
+    post_card(repo, odd, CARD.replace("Fixture: should", "Fixture odd: should"), "a card with quotes in its name")
+    server = board()
+    fields, _ = rating_form(get(server, {"topic": "Card format", "card": odd}))
+    status, body = send(server, "/flag", fields)
+    assert status == 200, re.findall(r"Not written: [^<]*", body)
+    git(repo, "revert", "--no-edit", "HEAD")
+    html = get(server, {"topic": "Card format"})
+    assert "odd &quot;name&quot;.md" in html.split('aria-label="Refused cards"', 1)[1].split("</section>", 1)[0]

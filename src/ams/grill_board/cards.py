@@ -168,34 +168,35 @@ def committed_snapshot(cards_dir):
 
 @functools.lru_cache(maxsize=32)
 def _flagged_in_history(root, commit, prefix):
-    """{question key: card name} for every card version that carried a flag
-    line in a commit reachable from `commit`, under prefix. Commits never
-    change, so the result is cached per commit."""
+    """((question key, card name), ...) for every card version that carried a
+    flag line in a commit reachable from `commit`, directly under prefix.
+    Commits never change, so the result is cached per commit."""
     if not commit:
-        return {}
+        return ()
     pattern = "^" + re.escape(FLAG_LINE)
-    listed = _git(Path(root), "-c", "core.quotePath=off", "log", "--no-renames", "--format=%x01%H", "--name-only",
+    listed = _git(Path(root), "log", "-z", "--no-renames", "--format=%x01%H", "--name-only",
                   "-G", pattern, commit, "--", prefix or ".")
-    flagged = {}
-    for block in listed.split("\x01")[1:]:
-        sha, *paths = [line for line in block.splitlines() if line]
-        for path in paths:
+    flagged = []
+    for block in listed.split("\x01")[1:]:  # each block: SHA NUL, then NUL-ended paths
+        sha, *paths = [part.lstrip("\n") for part in block.split("\0")]
+        for path in filter(None, paths):
             name = path[len(prefix):]
             if not path.startswith(prefix) or "/" in name or not name.endswith(".md"):
                 continue
             try:
                 data = _git(Path(root), "cat-file", "blob", f"{sha}:{path}", binary=True)
             except CardSourceError:
-                continue  # the commit removed the file; the commit that added the flag still lists it
+                continue  # this commit removed the file; the commit that added the flag lists it too
             card = parse_card(name, data.decode("utf-8", "replace"))
             if isinstance(card, Card) and card.flag is not None:
-                flagged.setdefault(question_key(card.question), name)
-    return flagged
+                flagged.append((question_key(card.question), name))
+    return tuple(flagged)
 
 
 def load_cards(cards_dir):
     """Read every committed `*.md` card in cards_dir: sorted Cards and Refusals.
-    A card that would ask a flagged question again unchanged is a Refusal."""
+    A card that would ask a flagged question again is a Refusal: its question
+    line is unchanged, or it is a card once flagged whose flag is gone."""
     cards, refusals = [], []
     commit, snapshot = committed_snapshot(cards_dir)
     for name, data in snapshot:
@@ -203,19 +204,29 @@ def load_cards(cards_dir):
         if isinstance(result, Card):
             result.sha, result.commit = hashlib.sha256(data).hexdigest(), commit
         (cards if isinstance(result, Card) else refusals).append(result)
-    flagged = {}
+    flagged = []
     if commit:
         root = Path(_git(Path(cards_dir), "rev-parse", "--show-toplevel").strip()).resolve()
         prefix = Path(cards_dir).resolve().relative_to(root).as_posix()
-        flagged = dict(_flagged_in_history(str(root), commit, "" if prefix == "." else prefix + "/"))
+        flagged = list(_flagged_in_history(str(root), commit, "" if prefix == "." else prefix + "/"))
+    flagged += [(question_key(card.question), card.file) for card in cards if card.flag is not None]
+    by_question, by_name = {}, set()
+    for key, name in flagged:
+        by_question.setdefault(key, name)
+        by_name.add(name)
+    held = []
     for card in cards:
-        if card.flag is not None:
-            flagged.setdefault(question_key(card.question), card.file)
-    held = [card for card in cards if card.waiting and question_key(card.question) in flagged]
-    for card in held:
-        refusals.append(Refusal(card.file, [
-            f"asks again the question flagged too taxing in {flagged[question_key(card.question)]}, "
-            "without a rewrite; rewrite the question line before posting it again (DDR-000J)"
-        ]))
+        if not card.waiting:
+            continue
+        if question_key(card.question) in by_question:
+            problem = (f"asks again the question flagged too taxing in {by_question[question_key(card.question)]} "
+                       "without a rewrite; rewrite the question line before posting it again (DDR-000J)")
+        elif card.file in by_name:
+            problem = ("was flagged too taxing and its flag is gone; keep the flag on the card and "
+                       "post the rewritten question as a new card (DDR-000J)")
+        else:
+            continue
+        held.append(card)
+        refusals.append(Refusal(card.file, [problem]))
     cards = [card for card in cards if not any(card is h for h in held)]
     return sorted(cards, key=lambda card: card.sort_key), sorted(refusals, key=lambda r: r.file)
