@@ -41,7 +41,7 @@ Three runs per attempt. Each check keeps Yes/No/justified N/A, class, typed revi
 
 Score = `100 × pooled Yes / pooled applicable`; keep exact counts/ratio, no weights/partial credit/rounding default. Empty set has no percentage. Run pass requires all Critical/Regression checks; Regression needs baseline pass proof. 3/2/1/0 passing runs = Excellent/Stable/Functional/Broken; any Critical failure overrides to Broken.
 
-Separate level/score, acceptance, evidence and qualification. Pass only Stable/Excellent with complete proof, no open Critical/Regression or unmapped historical finding. No QA/distribution/benefit implied. Whole fitness covers ten areas; bounded scores cannot certify AMS. Bounded versus whole scope awaits owner choice before trials.
+Separate level/score, acceptance, evidence and qualification. Pass only Stable/Excellent with complete proof, no open Critical/Regression or unmapped historical finding. No QA/distribution/benefit implied. Whole fitness covers ten areas; bounded scores cannot certify AMS. Candidate and whole-AMS scores remain separate, per the owner answers in the Wiki.
 
 ### Skill evals and retests
 
@@ -52,6 +52,8 @@ Qualify with good/bad/do-nothing cases; protect inputs/logs. Prefer deterministi
 Findings: ID/check/class, run/candidate/evidence, uncertain cause, owner/retest. Close only on repaired-revision original/affected-regression passes in three runs (or justified regression exclusion). Merge/omission/score cannot close; keep new failures/recurrence.
 
 ## Decisions And Contracts
+
+- Retain only qualified Stable/Excellent candidates with demonstrated useful benefit declared before comparison. First case: the grilling failure; coordinate with the owner-reported redesign already underway.
 
 - Failed results start rounds, never retro ideas; check earlier ineffective fixes on recurrence. One change/version.
 - Fixed provider/model/effort; accepted-version runner/graders/scoring, never candidate. Grader changes start new series, judged by predecessor.
