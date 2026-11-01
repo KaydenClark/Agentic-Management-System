@@ -31,9 +31,26 @@ Hand back to S-006 with `close`.
 
 ## Acceptance
 
-- [ ] A readcheck over rows plus one fabricated row exits 1 and names it.
-- [ ] Live `ams-history readcheck` after import: missing 0, extra 0.
-- [ ] The writer and the database refuse `recorded_fact` on `rsi_runs` and `rsi_results`.
-- [ ] A pytest scans tracked files for real secret shapes and fails on a planted fake.
-- [ ] L1 and L2 are recorded in the Spec.
-- [ ] `uv run pytest` passes.
+- [x] A readcheck over rows plus one fabricated row exits 1 and names it.
+- [x] Live `ams-history readcheck` after import: missing 0, extra 0.
+- [x] The writer and the database refuse `recorded_fact` on `rsi_runs` and `rsi_results`.
+- [x] A pytest scans tracked files for real secret shapes and fails on a planted fake.
+- [x] L1 and L2 are recorded in the Spec.
+- [x] `uv run pytest` passes.
+
+## Proof notes
+
+PR #49 merged as a03d739 (Codex: no findings). `uv run pytest`: 339 passed, 3 skipped; red first for H1, M2, L2.
+
+- **H1:** `test_readcheck_fails_on_a_hand_typed_row_no_record_derives`.
+- **M2:** `test_recorded_fact_is_for_build_history_only`, `test_the_rsi_writer_refuses_recorded_fact_before_sending`, `test_the_database_refuses_recorded_fact_on_rsi_tables`. Migration `20261101144510_rsi_strength_and_pass_rules` was applied with `apply_migration`; security advisors returned no lints.
+- **L2:** `test_a_score_alone_does_not_grade_a_completed_trial`, `test_the_database_requires_passed_on_a_completed_trial`.
+- **M3:** `tests/test_secret_scan.py` checks the tree and history. Commit 75d1fad's hand-written fake JWT, removed in f50a240, is named in `KNOWN_FAKE_COMMITS`.
+- **M1:** live from the shared checkout at a03d739:
+  - `ams-keycheck`: authenticated.
+  - `ams-history import` inserted 142 rows (463 were already recorded).
+  - `readcheck`: rows 605, missing 0, extra 0, unsourced 0.
+  - `ams-rsi livecheck` and `ams-sources livecheck` exit 0, including the `recorded_fact` refusal on both RSI tables. Cleanup left 0 rows.
+- **L1:** recorded in the Spec's limitations.
+
+This Task's changes also deliver the content of orchestrator C's TK-000C (secret scan of tree and history) and TK-000D (no `recorded_fact` on the RSI tables). Those records stay open for their owner to reconcile.
