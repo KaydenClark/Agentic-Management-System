@@ -13,7 +13,7 @@ AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one 
 
 | Path | What lives there |
 |---|---|
-| `src/`, `tests/` | AMS runtime software and tests (empty); `pyproject.toml` pins Python 3.14 |
+| `src/`, `tests/` | AMS runtime software and tests; `pyproject.toml` pins Python 3.14. `src/ams/keycheck.py` (`ams-keycheck`) is the Supabase writer's first seam: it checks the local service key against `/rest/v1/` |
 | `supabase/` | Supabase migrations (read-only baseline) |
 | `site/` | Public website; planned Vercel hosting, Supabase backend |
 | `grill-board/` | Local development Q&A tool, not public |

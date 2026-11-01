@@ -1,1 +1,1 @@
-"""AMS runtime package."""
+"""AMS Python runtime."""

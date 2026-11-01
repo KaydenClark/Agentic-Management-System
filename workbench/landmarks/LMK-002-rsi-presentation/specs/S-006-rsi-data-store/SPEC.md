@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; five Tasks planned, build-history criteria restored.
-**Next gate:** Claim TK-001 in orchestrator B's lane.
+**Latest event:** TK-001 claimed by claude-s006-tk001.
+**Next gate:** Close TK-001 with verification and documentation proof.
 
 ## Intent and authority
 
