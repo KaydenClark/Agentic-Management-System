@@ -135,6 +135,8 @@ test('a recorded token or color outside the generated block fails', () => {
 test('missing, duplicated or reordered markers fail', () => {
   fails(css.replace(BEGIN, ''), 'no BEGIN', /BEGIN marker appears 0 times/);
   fails(css + `\n${END}\n`, 'two END markers', /END marker appears 2 times/);
+  // Codex review on PR #32: wrapping the whole marked block in an at-rule from outside the markers.
+  fails(css.replace(BEGIN, `@media (min-width: 2000px) {\n${BEGIN}`).replace(END, `${END}\n}`), 'block wrapped from outside', /top level/);
   const b = css.indexOf(BEGIN);
   const e = css.indexOf(END);
   const swapped = css.slice(0, b) + END + css.slice(b + BEGIN.length, e) + BEGIN + css.slice(e + END.length);
