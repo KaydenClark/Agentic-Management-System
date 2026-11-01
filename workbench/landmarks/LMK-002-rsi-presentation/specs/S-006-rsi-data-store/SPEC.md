@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 claimed by claude-s006-tk001.
-**Next gate:** Close TK-001 with verification and documentation proof.
+**Latest event:** TK-001 closed with proof.
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
@@ -96,6 +96,7 @@ node workbench/tools/spec-workbench.mjs show S-006
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned; baseline migration noted | render, doctor | this Spec | Every criterion |
+| 2026-11-01 | TK-001 | Task closed | PR #15 merged as 884d021: uv run pytest 37 passed (red run 36 failed first); env -u SUPABASE_SERVICE_ROLE_KEY uv run ams-keycheck printed loaded: no, exit 1; live uv run --directory <main checkout> ams-keycheck printed loaded: yes / format: sb_secret / authenticated: yes / http status: 200, exit 0, no key value; hygiene grep found no key in tracked files or diff; render no diff, doctor no blocking finding | RUNBOOK names uv run pytest and ams-keycheck; ARCHITECTURE names src/ams/keycheck.py | Legacy-JWT path proven only with fakes; the live key is sb_secret. Tables, inserts and the publishable-key read path remain for TK-002 onward; close attribution: {"agent":"claude-s006-tk001","claimant":"claude-s006-tk001","onBehalfOf":null} |
 
 ## Review and Human QA
 
