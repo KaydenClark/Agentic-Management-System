@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000T closed with proof.
-**Next gate:** Qualify oracle; TK-002.
+**Latest event:** TK-000V claimed by s002-transport.
+**Next gate:** Close TK-000V with verification and documentation proof.
 
 ## Intent and authority
 
