@@ -81,3 +81,4 @@
 | [002U](002U-writes-to-shared-stores-refuse-on-conflict.md) | Writes to shared stores refuse on conflict | accepted | 2026-11-01 | supabase, grill-board |
 | [002V](002V-artifacts-have-character-limits.md) | Artifacts have character limits | accepted | 2026-11-01 | workbench/artifact-budgets.json |
 | [002W](002W-three-strikes-then-stop.md) | Three strikes, then stop | accepted | 2026-11-01 | AGENTS.md |
+| [002X](002X-next-js-front-end-python-backends-node-only-as-tooling.md) | Next.js front end, Python backends, Node only as tooling | accepted | 2026-11-01 | ARCHITECTURE.md, site, pyproject.toml |
