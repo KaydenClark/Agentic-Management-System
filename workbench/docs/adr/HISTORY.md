@@ -25,7 +25,7 @@
 | [000Q](000Q-each-task-is-its-own-runnable-file.md) | Each Task is its own runnable file | accepted | 2026-11-01 | workbench/specs |
 | [000R](000R-a-task-is-one-agent-run.md) | A Task is one agent run | accepted | 2026-11-01 | workbench/specs |
 | [000S](000S-a-spec-is-accepted-against-its-conditions.md) | A Spec is accepted against its conditions | accepted | 2026-11-01 | workbench/specs |
-| [000T](proposed/000T-scaffolding-is-deleted-at-close.md) | Scaffolding is deleted at close | proposed | 2026-11-01 | workbench/specs, ARCHITECTURE.md |
+| [000T](000T-scaffolding-is-deleted-at-close.md) | Scaffolding is deleted at close | accepted | 2026-11-01 | workbench/specs, ARCHITECTURE.md |
 | [000U](proposed/000U-a-prototype-needs-no-spec.md) | A prototype needs no Spec | proposed | 2026-11-01 | workbench/specs |
 | [000V](proposed/000V-the-taskboard-is-generated-and-shows-active-work.md) | The Taskboard is generated and shows active work | proposed | 2026-11-01 | TASKBOARD.md |
 | [000W](proposed/000W-read-commands-use-the-same-words-for-every-kind.md) | Read commands use the same words for every kind | proposed | 2026-11-01 | RUNBOOK.md |
