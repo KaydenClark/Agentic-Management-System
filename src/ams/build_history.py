@@ -183,20 +183,27 @@ def _first_commit(git: Runner, path: str) -> tuple[str, str] | None:
     return sha, committed
 
 
-def _blame(git: Runner, path: str) -> list[tuple[str, str, int, str]]:
-    """(commit, utc time, line number, text) for each line of path at HEAD."""
+def _blame(git: Runner, path: str) -> list[tuple[str, str, int, str, str]]:
+    """(commit, utc time, line, text, path) for each line of path at HEAD.
+
+    The line number and path are the ones the line had in that commit, so a
+    link to the commit's blob shows the line even after lines above it moved
+    or the file was renamed.
+    """
     try:
         out = git(["blame", "--line-porcelain", "HEAD", "--", path])
     except subprocess.CalledProcessError:
         return []
-    lines, sha, when, number = [], None, None, 0
+    lines, sha, when, number, origin = [], None, None, 0, path
     for raw in out.splitlines():
         if raw.startswith("\t"):
-            lines.append((sha, when, number, raw[1:]))
+            lines.append((sha, when, number, raw[1:], origin))
             continue
         head = raw.split(" ")
         if len(head) >= 3 and re.fullmatch(r"[0-9a-f]{40}", head[0]):
-            sha, number = head[0], int(head[2])
+            sha, number = head[0], int(head[1])
+        elif head[0] == "filename":
+            origin = raw[len("filename "):]
         elif head[0] == "committer-time":
             when = utc(datetime.fromtimestamp(int(head[1]), tz=timezone.utc))
     return lines
@@ -377,7 +384,7 @@ def record_rows(git: Runner, lifecycle: Runner) -> list[dict]:
                     else "return" if _RETURN_EVENT.match(event) else "spec_event")
             subject = f"{spec_id} {task}" if task and task.lower() != "none" else spec_id
             rows.append(_row(kind, subject, event or "(no event)", line[1], "path",
-                             f"{path}#evidence-{index}", _blob_url(line[0], path, line[2]),
+                             f"{path}#evidence-{index}", _blob_url(line[0], line[4], line[2]),
                              dict(cells, spec=spec_id, recorded_commit=line[0])))
         for task in [*shown.get("tasks", []), *shown.get("retiredTasks", [])]:
             rows.extend(_task_rows(git, spec_id, path, task))
@@ -389,6 +396,9 @@ def _task_rows(git: Runner, spec_id: str, spec_path: str, task: Mapping) -> list
     path = posixpath.join(posixpath.dirname(spec_path), "tasks", task_id, "TASK.md")
     created = _first_commit(git, path)
     subject = f"{spec_id} {task_id}"
+    # One key per Task whichever record holds it (and wherever the Spec moves), so a
+    # table-only Task that later gets its TASK.md is the same event, not a second row.
+    identity = f"{spec_id}/{task_id}"
     if created is None:
         # A planned Task recorded only as a row of its Spec's slice table.
         line = next((line for line in _blame(git, spec_path)
@@ -397,17 +407,17 @@ def _task_rows(git: Runner, spec_id: str, spec_path: str, task: Mapping) -> list
             print(f"note: {subject} has no committed record; no task row", file=sys.stderr)
             return []
         return [_row("task", subject, task.get("slice") or task_id, line[1], "path",
-                     f"{spec_path}#{task_id}", _blob_url(line[0], spec_path, line[2]),
+                     identity, _blob_url(line[0], line[4], line[2]),
                      {"spec": spec_id, "task": task_id, "status": task.get("status"),
-                      "recorded_commit": line[0], "record": "spec slice table"})]
-    rows = [_row("task", subject, task.get("slice") or task_id, utc(created[1]), "path", path,
+                      "recorded_commit": line[0], "record": spec_path})]
+    rows = [_row("task", subject, task.get("slice") or task_id, utc(created[1]), "path", identity,
                  _blob_url(created[0], path),
                  {"spec": spec_id, "task": task_id, "status": task.get("status"),
-                  "created_commit": created[0]})]
+                  "created_commit": created[0], "record": path})]
     for index, (cells, line) in enumerate(_table(_blame(git, path), RECEIPT_HEADING), start=1):
         rows.append(_row("task_receipt", subject,
                          f"Receipt run {cells.get('run', index)} on {cells.get('branch', 'unknown')}",
-                         line[1], "path", f"{path}#receipt-{index}", _blob_url(line[0], path, line[2]),
+                         line[1], "path", f"{path}#receipt-{index}", _blob_url(line[0], line[4], line[2]),
                          dict(cells, spec=spec_id, task=task_id, recorded_commit=line[0])))
     return rows
 
@@ -419,9 +429,9 @@ def wiki_rows(git: Runner) -> list[dict]:
     for path in sorted(n for n in names if n.endswith(".md") and "TEMPLATE" not in n):
         lines = _blame(git, path)
         heading = None
-        for i, (sha, when, number, text) in enumerate(lines):
+        for i, (sha, when, number, text, origin) in enumerate(lines):
             if text.startswith("#"):
-                heading = (text, number, sha)
+                heading = (text, number, sha, origin)
                 continue
             kind_line = re.match(r"^Kind:\s*(.*)$", text)
             if not kind_line or not re.search(r"\bcorrection\b", kind_line.group(1), re.I):
@@ -435,21 +445,21 @@ def wiki_rows(git: Runner) -> list[dict]:
                 recorded = fields.get("recorded")
                 rows.append(_row("correction", page, summary or jot.group(1),
                                  utc(recorded) if recorded else when, "jot", jot.group(1),
-                                 _blob_url(sha, path, heading[1]),
+                                 _blob_url(heading[2], heading[3], heading[1]),
                                  {"page": path, "kind": kind_line.group(1), "state": fields.get("state"),
                                   "author": fields.get("author"), "source": fields.get("source"),
                                   "recorded_commit": sha}))
             else:
                 title = heading[0].lstrip("#").strip()
                 rows.append(_row("correction", page, title, when, "path", f"{path}#{_slug(title)}",
-                                 _blob_url(sha, path, heading[1]),
+                                 _blob_url(heading[2], heading[3], heading[1]),
                                  {"page": path, "kind": kind_line.group(1), "recorded_commit": sha}))
     return rows
 
 
 def _entry_fields(lines) -> tuple[dict, str | None]:
     fields, summary = {}, None
-    for _, _, _, text in lines:
+    for _, _, _, text, _ in lines:
         if text.startswith("#") or text.startswith("<!--"):
             break
         field = re.match(r"^([A-Z][A-Za-z ]+):\s*(.*)$", text)

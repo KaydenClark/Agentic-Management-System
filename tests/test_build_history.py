@@ -54,7 +54,7 @@ SPEC_V1 = """# S-001 - Demo
 ## Review and Human QA
 """
 
-SPEC_V2 = SPEC_V1.replace(
+SPEC_V2 = SPEC_V1.replace("**Status:** active\n", "**Status:** active\n**Updated:** 2026-11-01\n").replace(
     "| Every criterion |\n",
     "| Every criterion |\n"
     "| 2026-11-01 | TK-001 | Task closed | PR #1 merged | RUNBOOK | none |\n"
@@ -372,10 +372,13 @@ def test_spec_and_task_records(rows, fixture_repo):
     assert spec["subject"] == "S-001" and spec["occurred_at"] == "2026-11-01T10:00:00Z"
     tasks = {r["subject"]: r for r in by_kind(rows, "task")}
     task = tasks["S-001 TK-001"]
-    assert task["source_ref"] == TASK_PATH
+    assert task["source_ref"] == "S-001/TK-001"  # one identity whichever record holds it
+    assert task["detail"]["record"] == TASK_PATH
+    assert task["source_url"].startswith(f"{writer.REPO_URL}/blob/{shas['map']}/{TASK_PATH}")
     assert task["detail"]["status"] == "done"
     planned = tasks["S-001 TK-002"]
-    assert planned["source_ref"] == SPEC_PATH + "#TK-002"
+    assert planned["source_ref"] == "S-001/TK-002"
+    assert planned["detail"]["record"] == SPEC_PATH
     assert planned["occurred_at"] == "2026-11-01T10:00:00Z"
     assert planned["source_url"].startswith(f"{writer.REPO_URL}/blob/{shas['map']}/{SPEC_PATH}#L")
     (claimed,) = by_kind(rows, "task_claimed")
@@ -580,3 +583,36 @@ def test_parse_time_handles_offsets():
 def test_entry_point_is_registered():
     text = Path(writer.REPO_ROOT, "pyproject.toml").read_text()
     assert 'ams-history = "ams.build_history:main"' in text
+
+
+def test_every_line_link_shows_its_row_in_the_linked_commit(rows, fixture_repo):
+    # Codex P2 on PR #31: a line added above an older row must not shift its link.
+    repo, _ = fixture_repo
+    linked = [r for r in rows if "/blob/" in r["source_url"] and "#L" in r["source_url"]]
+    assert any(r["source_ref"] == SPEC_PATH + "#evidence-1" for r in linked)
+    for row in linked:
+        tail = row["source_url"].split("/blob/", 1)[1]
+        sha, rest = tail.split("/", 1)
+        path, line = rest.rsplit("#L", 1)
+        text = _git(repo, "show", f"{sha}:{path}").splitlines()[int(line) - 1]
+        if "#evidence-" in row["source_ref"] or "#receipt-" in row["source_ref"]:
+            assert text.startswith("| 2026-11-01") or text.startswith("| 1 |"), (row["source_ref"], text)
+        if row["kind"] == "task":
+            assert text.startswith("| " + row["subject"].split()[1]), text
+        if row["source_kind"] == "jot":
+            assert row["source_ref"] in text
+
+
+def test_a_table_only_task_keeps_its_key_when_its_task_md_arrives(tmp_path, fixture_repo, rows):
+    # Codex P2 on PR #31: materialising TASK.md must not create a second task row.
+    repo, shas = fixture_repo
+    clone = tmp_path / "clone"
+    subprocess.run(["git", "clone", "-q", "-b", "main", str(repo), str(clone)], check=True)
+    _write(clone, "workbench/specs/S-001-demo/tasks/TK-002/TASK.md", "# TK-002 - Planned\n")
+    _git(clone, "add", "-A")
+    _git(clone, "commit", "-q", "-m", "Materialise TK-002", when="2026-11-01T11:00:00Z")
+    later = bh.collect(bh.Sources(git=git_runner(clone), gh=gh_stub(shas),
+                                  lifecycle=lifecycle_stub, refs=("main",)))
+    before = {bh._key(r) for r in rows if r["kind"] == "task"}
+    after = {bh._key(r) for r in later if r["kind"] == "task"}
+    assert before == after
