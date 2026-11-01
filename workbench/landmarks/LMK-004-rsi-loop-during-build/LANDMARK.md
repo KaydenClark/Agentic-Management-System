@@ -34,7 +34,7 @@ Outside research does not settle whether shaping an agent's environment improves
 
 The decision records under this landmark, one line each, linked to their record.
 
-- [The RSI loop design](../../docs/adr/002F-the-rsi-loop-design.md)
+- [The RSI loop design](../../docs/adr/archive/002F-the-rsi-loop-design.md)
 - [The first RSI trial is building the site](../../docs/ddr/000W-the-first-rsi-trial-is-building-the-site.md)
 - [One improvement procedure, starting from failed results](../../docs/adr/002A-one-improvement-procedure-starting-from-failed-results.md)
 - [A repeated failure first checks the earlier fix](../../docs/adr/002B-a-repeated-failure-first-checks-the-earlier-fix.md)
@@ -46,7 +46,7 @@ The decision records under this landmark, one line each, linked to their record.
 - [Trials run in a sandbox](../../docs/adr/002L-trials-run-in-a-sandbox.md)
 - [More than two held-out tasks before a public number](../../docs/adr/002M-more-than-two-held-out-tasks-before-a-public-number.md)
 - [Studied held-out tasks retire to the dev set](../../docs/adr/002N-studied-held-out-tasks-retire-to-the-dev-set.md)
-- [One standing campaign approval](../../docs/adr/002O-one-standing-campaign-approval.md)
+- [One standing campaign approval](../../docs/adr/archive/002O-one-standing-campaign-approval.md)
 - [Each RSI run pins the skills commit](../../docs/adr/002R-each-rsi-run-pins-the-skills-commit.md)
 - [Three strikes, then stop](../../docs/adr/002W-three-strikes-then-stop.md)
 - [Measure how far dev runs ahead of main](../../docs/adr/002T-measure-how-far-dev-runs-ahead-of-main.md)

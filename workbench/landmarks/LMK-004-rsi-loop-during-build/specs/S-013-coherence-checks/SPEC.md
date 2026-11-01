@@ -66,7 +66,7 @@ Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, 
 - [ ] **Up to Spec.** The report lists each unmet criterion of the checked Spec with evidence. *Must fail:* a criterion reported met with no evidence.
 - [ ] **Skills in sync.** Rows without a skills commit, or behind the current skills `main`, are listed. *Must fail:* an unpinned row passing.
 - [ ] **Independent review.** A review names its exact commit and comes from a context that did not build the Spec. *Must fail:* a review by the builder's own session, or one reused after the commit changed.
-- [ ] **No secrets.** C's session configuration holds no Supabase or Vercel secret. *Must fail:* any secret available to C.
+- [ ] **No secrets.** C's session configuration holds no Supabase or Vercel secret, and C never calls the Supabase or Vercel connectors shared with the other orchestrators (owner, 2026-11-01, [JOT-dfb739bc](../../../../wiki/context-owner-answers-coherence.md)). *Must fail:* a secret in C's environment, or a C call to either connector.
 
 ## RSI and website connection
 
@@ -95,6 +95,7 @@ node workbench/tools/spec-workbench.mjs doctor
 | 2026-11-01 | TK-001 | Task closed | node --test workbench/tools/coherence-drift.test.mjs: 4 pass at 6848b75; clean-clone run with only git; report workbench/feedback/coherence/DRIFT-2026-11-01.md (main 0a7d04e, dev b06d7db, 3 ahead, 0 behind) | workbench/feedback/coherence/DRIFT-2026-11-01.md; RUNBOOK not updated (at 2,996 of 3,000 chars, finding COH-005) | Grill Board item on breach (TK-005); thresholds 20 commits / 7 days are C's default pending owner choice; close attribution: {"agent":"orchestrator-C","claimant":"orchestrator-C","onBehalfOf":null} |
 | 2026-11-01 | TK-001 | Correction: check moved from `workbench/tools/` (managed runtime refused unreceipted files, `tools-receipt-missing`) to `src/ams/coherence/drift.py` on pinned Python 3.14; same fixture | `PYTHONPATH=src python3.14 -m unittest discover -s tests`: 4 pass; report regenerated (main 0a7d04e, dev 87a3576, 5 ahead, 0 behind) | workbench/feedback/coherence/DRIFT-2026-11-01.md | Receipt row 1 cites the removed Node path; superseded by this row |
 | 2026-11-01 | TK-002 | Task closed | uv run pytest: 47 pass at 206fa51 (6 up-to-Spec fixture tests incl. must-fail invariant; mutation forcing met-without-evidence fails 4 tests); report workbench/feedback/coherence/UP-TO-SPEC-S-004-2026-11-01.md for S-004 at main 8b70874 (0 met, 7 not met) | workbench/feedback/coherence/UP-TO-SPEC-S-004-2026-11-01.md; RUNBOOK line blocked by COH-003 | Specs do not yet use an Evidence: clause on acceptance lines; checked lines without one report unknown by design; close attribution: {"agent":"orchestrator-C","claimant":"orchestrator-C","onBehalfOf":null} |
+| 2026-11-01 | none | Owner answers to COH-005, COH-006 and COH-016 recorded; No secrets line reworded per COH-016 (connectors stay attached, C never uses them); ADR-003F/003G/003H supersede 002O/002F/002Y | `adr.mjs validate` ok | [owner answers](../../../../wiki/context-owner-answers-coherence.md), [sweep](../../../../feedback/coherence/COHERENCE-2026-11-01.md) | No secrets still needs evidence |
 
 ## Review and Human QA
 
