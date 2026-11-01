@@ -1,4 +1,4 @@
-# S-003 - Showcase site shell and orientation tour
+# S-003 - Website shell and AMS orientation
 
 **Spec ID:** S-003
 **Status:** active
@@ -6,122 +6,100 @@
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
 **Updated:** 2026-11-01
-**Catalog description:** The Next.js site shell in `site/` and the orientation tour that explains the AMS to a reader who knows nothing about agents.
+**Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
+**Latest event:** Destination clarified.
+**Next gate:** Reconcile assignments.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Continuation notes reconciled with confirmed scope and Task inputs.
-**Next gate:** TK-003: complete the remaining tour pages and quickstart replay.
 
 ## Intent and authority
 
-The owner asked for a public site that shows off the system, explains how and why to use it, keeps the owner's voice, and is no more than a presentation website. Confirmed 2026-11-01: Next.js on Vercel at a free `*.vercel.app` address, Python backends, Supabase, no FastAPI; site work goes feature -> `dev` -> `main`. Orchestrator A deploys only through Git pushes to `dev`, browses no web and holds no Supabase service key.
+The owner's [brief and corrections](../../../../wiki/context-website-presentation.md) establish this destination. S-003 owns shell/orientation; siblings remain required in the four-Landmark build. This revision authorizes specification repair only.
 
 ## Outcome
 
-A blog-style site with a reading order. Each page opens with a plain-language summary a non-engineer can follow, then goes deeper, so a CTO finds the architecture, guarantees, limits and evidence. This Spec owns the shell every page uses and the tour pages; other pages are sibling Specs.
+Visitors come for understanding: what AMS manages, why, how intent becomes work/feedback and what evidence demonstrates. Non-engineers get plain explanations; technical readers can follow sources. The website presents AMS without operating it.
 
 ## Why It Matters
 
-The site is the owner's public piece and the owner's way back into the system. Built with the AMS, it is evidence of the AMS only if its claims trace to records.
-
-## Current Verified State
-
-- `site/` holds a placeholder and a page template; no Next app. The `dev` branch exists. No Vercel deployment serves this repository yet.
+The site preserves the owner’s explanation of AMS and lets visitors examine whether its real work supports its claims.
 
 ## Desired Behavior
 
-- **Shell.** Navigation with reading position, light and dark following the system with a manual toggle, the old Grill Board's theme tokens, the deployed commit SHA on every page.
-- **Tour pages.** Start here (what the AMS is and refuses to do); Why; How it works (records, lifecycle, one real Spec and Task); a short quickstart; Limits; Glossary; About with a resume summary.
-- **Links to siblings.** RSI charts (S-007), skills wiki (S-008), demo Grill Board (S-009), governance stack and flow charts (S-010).
-- **Data.** Anything dynamic is read from Supabase with the publishable key.
-- **Under the hood.** A page rendered from S-006's build-history rows shows how the AMS built this site: Specs, Tasks, PRs and commits in order, returns and corrections included. No history is hand-written, so the page is the site's proof it was made with the system.
-- **Voice.** Agents draft every page from the records and the voice and taste record (S-005). Owner words appear verbatim only with their source. Each page shows a draft mark until the owner approves it on the Grill Board.
+Pages open plainly, define/link unfamiliar terms, then offer detail/sources. Explain ideas before IDs. Agents draft from approved records and owner feedback, without requiring owner-written copy.
+
+### Orientation content
+
+- **Start here:** define AMS: managing Kayden's agents, workflows, intent, skills and AI tools. Explain the problem, identify this website as its first outside product, and orient visitors to the tour, demonstrations and evidence. Distinguish presentation from live controls.
+- **Why:** explain preserving intent/corrections, organizing delegated work and learning from failures. Connect these purposes to this build. Separate intended benefits from measured results; link RSI evidence.
+- **How it works:** explain intent -> Landmark -> Spec -> Task, then implementation, checks, review, human judgment and delivery. Walk through one real, sourced Spec/Task. Explain feedback returning to its durable owner and failed results starting bounded RSI comparisons. Link governance/flow charts; do not imply every step has succeeded.
+- **Quickstart:** a reading route through the introduction, real-work example, demonstration or skill summary, then RSI evidence/limits. Explain what each stop teaches. No installation, credentials or command replay.
+- **Limits:** explain that the site runs no agents or record writes. Distinguish demonstrations, build activity, assessments and demonstrated improvement. Source incomplete/unsupported capabilities and explain where human judgment remains necessary.
+- **Glossary:** define tour terms consistently with the root glossary, including implementation Tasks versus evaluation tasks/trials. Link definitions from their uses and back to the explanation.
+- **About AMS:** explain the project, who made it, why it exists and its relationship to this website. Project context, not employment history; no CV/resume request.
+
+### Shell and related capabilities
+
+Navigation shows current page, tour order/start/finish and direct subject links, without dead ends. Core text works without scripts. Light/dark follows system or manual override. Every page links its deployed SHA to GitHub.
+
+Introduce and link RSI charts (S-007), site-written skill summaries (S-008), the demo Grill Board with non-engineering sample questions (S-009), and governance/flow charts (S-010). Keep private skill source private.
+
+No separate build-history/“Under the hood” page. S-007 explains build evidence/results from S-006; S-008 explains skills. Prose explains sourced events; sentences need not be database rows. Activity alone proves no improvement.
+
+### Data and approvals
+
+Read-only Supabase with publishable key; Python writes under S-006; service key stays local (ADR-003H). Shared states, including S-007:
+
+- **Populated:** records retain sources/event/version identity; show last successful read time.
+- **Empty successful read:** say no matching records exist and explain what belongs there. Keep chart spaces visible; no sample numbers or fabricated results.
+- **Pending/failed:** distinguish loading from unavailable and from zero results. Label retained data with its last successful read time. Static explanations remain readable.
+- Test/synthetic rows never appear as real evidence. S-007 owns result labels/comparisons; S-006 owns storage/access.
+
+Draft until Kayden approves via S-005 (chat fallback). Approval binds content hash/dated source; edits restore draft. Owner quotations are verbatim/sourced.
 
 ## Decisions And Contracts
 
-- Presentation only: the site runs no agents and edits no records.
-- No third-party scripts, fonts, trackers or cookies; requests go only to the site, Supabase and GitHub links.
-- Colors are signals with one stated meaning each; the complete token list is recorded in a theme decision record before the token check runs.
-- Core page text renders on the server, readable with scripts disabled.
+- Next.js in `site/`, Python backends, no FastAPI, free Vercel address. Feature -> protected `dev` -> `main`; only Kayden approves promotion. A holds no service key and deploys through Git pushes to `dev`.
+- No third-party scripts, remote fonts, tracking or cookies. Resource loads: site/Supabase; GitHub links are navigation.
+- Theme/fonts follow [DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md). Shared values match `grill-board/theme/tokens.json` in both themes. Site type/spacing is consistent; no equality to absent tokens.
 
 ## Non-Goals
 
-- A CMS, comments, accounts, analytics or a newsletter.
-- A custom domain; a development view on Vercel.
-- Publishing private skill content (summaries only, S-008).
+CMS, accounts, comments, analytics, newsletter, custom domain, live dashboard, installation guide, CV, Under the hood page.
 
 ## Dependencies And Blockers
 
-- A Vercel project with production from `main` and a protected `dev` deployment (owner action).
-- S-005 for page approvals; until it exists, approvals happen in chat.
-- S-006 for build-history rows (TK-006).
-- Open owner choice `grill-board-theme-tokens`: the old Grill Board's token values are outside this public repository; the owner supplies them or approves copying them before TK-007. Until then the shell keeps every value in one token file.
-
-## Vertical Implementation Slices
-
-Every Task targets `dev`: branch from `origin/dev` (it holds the Next scaffold in `site/`), PR into `dev`, and only the owner merges `dev` -> `main`. Stack: Next.js pages in `site/`, Supabase reads, the build, tests on the built output and the protected `dev` deployment.
-
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
+S-005 owns reviews; S-006 data; S-007/008/009/010 linked capabilities. Missing results do not block the tour. Inspect sources/configuration before asking for input. Only consequential unresolved decisions or inaccessible required resources block affected criteria; name them precisely.
 
 ## Acceptance Criteria
 
-- [ ] **Pages exist.** Every tour page exists with a plain-language opener. *Check:* page inventory test. *Must fail:* a placeholder page or an opener using an undefined term.
-- [ ] **Reading order.** Every page links forward and back. *Must fail:* a dead end.
-- [ ] **Theme tokens.** Every color, type and spacing value equals the recorded Grill Board token. *Check:* token comparison script. *Must fail:* a color not in the token list.
-- [ ] **Responsive and accessible.** No horizontal scroll at 375 px; WCAG AA contrast; keyboard navigable; reduced motion respected; both themes at both widths. *Check:* browser screenshots of the `dev` deployment plus an automated accessibility pass.
-- [ ] **SHA on every page.** The shown SHA equals the deployed commit and links to GitHub. *Must fail:* a page whose SHA differs from the deployment.
-- [ ] **No third parties.** Network inspection shows requests only to the site, Supabase and GitHub links. *Must fail:* an external font or script.
-- [ ] **Public hygiene.** The hygiene check passes on every candidate. *Must fail:* a host path or key in the built output.
-- [ ] **Owner words.** Each quoted owner statement links its dated source. *Must fail:* a paraphrase presented as a quote.
-- [ ] **Draft marks.** A page shows a draft mark until an approval bound to its content hash exists; editing restores it. *Must fail:* an approved mark on changed content.
-- [ ] **Under the hood from rows.** The page renders S-006 build-history rows in time order, returns and corrections included, each linking its source. *Check:* render against a fixture and against Supabase. *Must fail:* history text not from a row, or a hidden correction row.
-- [ ] **Quickstart replays.** A test runs the quickstart's commands on a fresh clone and gets the shown output.
+Audit a named deployment. CI cannot establish editorial meaning.
 
-## RSI and website connection
-
-Building this site is the loop's first trial (S-002). Claims link a decision record, criterion, Supabase row or sourced owner statement.
-
-## Testing Seams
-
-- The built output and the `dev` deployment, never the source tree: inventory, link, token, hygiene and draft-mark tests; browser checks.
+- [ ] **Content:** rendered pages satisfy every brief. A reviewer can locate purpose, workflow, evidence limits and project identity; titles/slogans alone fail.
+- [ ] **Route:** follow Quickstart without setup, reach example/evidence and return. Public revision-pinned Spec/Task sources survive record moves.
+- [ ] **Scope:** sibling subjects have meaningful introductions/working links. No CV dependency, separate build-history page or live controls.
+- [ ] **Data:** inspect populated, empty, pending and failed reads. Empty/unavailable differ; retained data has its read time; no fabricated/test evidence. S-007 also meets its own criteria.
+- [ ] **Presentation:** at 375px and desktop, both themes, text/controls are readable without horizontal page overflow. Keyboard operation has visible focus; contrast meets WCAG AA; reduced motion is respected. Shared tokens match their source.
+- [ ] **Trust:** SHA matches deployment; core text works without scripts; sources resolve; public output has no secrets, host paths or private evidence. Only permitted resource loads.
+- [ ] **Approval:** unapproved/changed content is draft; only sourced owner approval removes it for bound content. Human QA and promotion remain separate.
 
 ## Verification Procedure
 
-```bash
-node workbench/tools/spec-workbench.mjs show S-003
-# site build and test commands named at Task planning
-```
+At a recorded deployed URL/commit, inspect content/links, data states against known inputs, keyboard, themes and widths. Record each criterion’s evidence/gap. Automation proves neither comprehension nor human approval.
 
 ## Documentation Impact
 
-- RUNBOOK names the site build and test commands; ARCHITECTURE adds `site/`.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Ported and rewritten from confirmed decisions | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | TK-001 | Task closed | PR #13 merged into dev as c529821; npm ci && npm run build && npm test 14/14 pass from a fresh clone (red 10/14 at 90559c8 first); check:browser 15/15 at 375px both themes, toggle overrides system and persists, self-hosted fonts, no off-site requests, home text without JS; Vercel dev deployment dpl_71NzXZ7rd77HgFsxAbgA1oVu7qsd READY at c529821; Codex code and security review no findings at 1fd680b | site/README.md documents npm ci, build, test, check:browser; tokens.css header cites the owner design canvas Color system v2.2 | Deployed footer SHA and home text not fetched from the dev deployment: the Vercel connector's web_fetch refuses this project (owner to extend connector access); contrast, keyboard and automated a11y pass belong to TK-005; tokens unverified against B's theme CDR until TK-007; close attribution: {"agent":"orchestrator-A","claimant":"orchestrator-A-dispatcher-S003","onBehalfOf":"orchestrator-A-dispatcher-S003"} |
-| 2026-11-01 | TK-007 | Task closed | PR #32 (9c37ebf) merged into demo batch site/demo-batch-20261102 for one dev merge; scripts/gen-tokens.mjs generates the tokens.css theme block from grill-board/theme/tokens.json (DDR-000Y); tests/tokens-json.test.mjs requires the block byte-equal to the generator, markers once at stylesheet top level, nothing recorded or color-like outside; red/green per Codex finding; Codex code and security clean at 9c37ebf; batch npm test 59/59, check:browser 149/149 | site/README.md Theme token check; npm run tokens:gen | Type and spacing tokens not in tokens.json so not compared; five mix meanings supplied by the generator until S-004 TK-003 records them; check runs in npm test and CI, not in the Vercel build; dev deployment content to be verified on the owner's machine; close attribution: {"agent":"orchestrator-A","claimant":"orchestrator-A","onBehalfOf":"orchestrator-A"} |
-| 2026-11-01 | TK-002 | Task closed | PR #23 (0418ac7) merged into demo batch site/demo-batch-20261102 for one dev merge; /start and /how-it-works with plain-language openers; red 37/49 at 9f0e8fa then green 49/49 at 542f241; inventory and link tests with planted faults (placeholder, missing opener, undefined term, unsourced or non-verbatim quote, dead end); owner quote verified verbatim against workbench/wiki/context-ams-purpose.md; tour-375 20/20; Codex code and security clean at 0418ac7; batch npm test 59/59 | site/README.md Tour pages; site/page-list.json entries /start and /how-it-works | Task links point at blob/dev and break when ADR-000T deletes Task files at Spec close; owner approval of page content pending (draft mark is TK-004); dev deployment content to be verified on the owner's machine; close attribution: {"agent":"orchestrator-A","claimant":"orchestrator-A-dispatcher-S003","onBehalfOf":"orchestrator-A-dispatcher-S003"} |
-| 2026-11-01 | TK-005 | Task closed | PR #25 (0970944) merged into demo batch site/demo-batch-20261102 for one dev merge; npm test hygiene scan of every served file (host paths, keys, JWTs, private IDs, session links, external loads in every resource attribute); check:browser over every route at 375 and 1280 px in both themes: axe WCAG A/AA incl. contrast, Tab reach with visible focus change, reduced motion, 375 px no scroll, requests only to site/Supabase/GitHub, with nine planted-fault self-tests; host path, fake key, external font and low contrast each failed before passing; Codex findings (focus visibility, multi-attribute scan) fixed red/green; Codex clean at 0970944; batch npm test 59/59, check:browser 149/149 | site/README.md documents npm test and npm run check:browser | Focus check requires a visible change but does not measure indicator contrast; screenshots are from local next start, not the dev deployment; reduced-motion check fails any transition over 0.01s, so pages must disable motion under prefers-reduced-motion; close attribution: {"agent":"orchestrator-A","claimant":"orchestrator-A-dispatcher-S003-qa","onBehalfOf":"orchestrator-A-dispatcher-S003-qa"} |
-| 2026-11-01 | none | Scope correction: presentation requirements retained | Scope reconciliation, 11/01/2026. Later landed: PR #63 (b551cf3, layout and top-bar nav) and PR #67 (992a5f8, Start here rebuilt) | this Spec | `site/demo-batch-20261102` above is a branch name only; scope is unchanged. Spec exceeds 8,000 chars and needs pruning |
+S-007 consumes data states/build explanation; S-008 explains skills. Assignments follow this Spec.
 
 ## Review and Human QA
 
-The owner approves each page on the Grill Board and alone merges `dev` -> `main`.
+Bind evidence and Kayden’s Grill Board judgments to the candidate. Checks, merges and deployment alone are not acceptance.
 
 ## Completion Result
 
-Pending.
+Pending audit and Kayden's judgments. History is in the [website Wiki](../../../../wiki/context-website-presentation.md), not acceptance of this destination.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- Video walkthroughs remain an open owner choice.
-
-## Supersession
-
-- Supersedes: the pre-repository draft of S-003.
-- Superseded by: none
+Video remains undecided, not a gate.

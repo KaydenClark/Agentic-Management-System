@@ -25,11 +25,10 @@ A reader sees how skills and the build changed over time, per task and per versi
 
 The site exists partly to show whether the loop works. Only traceable, labeled numbers can show that without overclaiming.
 
-## Current Verified State
-
-- No site pages and no RSI rows exist.
-
 ## Desired Behavior
+
+- Follow S-003's shared data contract: distinguish populated, successful-empty, loading and unavailable states; identify the last successful read and any retained data. A failed read never becomes “no trials.” Static explanations and chart spaces remain visible.
+- Explain the website build using sourced S-006 build events alongside the measured results. Readable prose connects the events; it need not itself be stored as rows. Distinguish build activity, assessments and demonstrated improvement. This page supplies the build-evidence explanation; S-003 has no separate “Under the hood” page.
 
 - Chart places for each planned series exist from the first deploy.
 - **Empty state.** With no rows a chart says that no trials are recorded yet, explains what a task, trial and version are, and names the next expected event. No sample chart or placeholder number.
@@ -63,6 +62,9 @@ Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the 
 
 ## Acceptance Criteria
 
+- [ ] **Shared data states.** Populated, empty, pending and failed reads satisfy [S-003's contract](../../../LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md#data-and-approvals). A failed read shown as zero results fails; retained data without its read time fails.
+- [ ] **Build explanation.** A reader can follow sourced build activity into its related results or an explicit statement that no measured result exists. Activity alone is never labeled improvement; explanatory prose is allowed. No separate build-history page is required.
+
 - [ ] **Honest empty state.** With zero rows the page builds, shows each chart place and the "no trials yet" explanation. *Check:* render against an empty fixture. *Must fail:* a hidden section, a sample chart or any number.
 - [ ] **Every number links.** Each rendered number links to its rows. *Check:* a link-coverage test over rendered numbers. *Must fail:* a bare number.
 - [ ] **Provenance and series.** Two models never share one trend line. *Must fail:* a model change drawn as a continuation.
@@ -89,12 +91,9 @@ node workbench/tools/spec-workbench.mjs show S-007
 
 - The tour links the chart pages; the glossary defines task, trial and version.
 
-## Append-Only Evidence And Execution Log
+## Context and Evidence
 
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | TK-001 | Task closed | PR #14 merged into dev as fceec12; red: 6/6 rsi tests failed at 66f04e1 with no route; green: npm test 33/33 at bb2b3a4 after merging dev; 11 planted faults (dropped place, merged sections, missing empty message/explanation/next event, digit in a place or intro, drawn SVG, hidden/display:none/aria-hidden) each fail their check; Playwright at 375px light and dark: scrollWidth 375, zero off-site requests; Vercel preview READY at bb2b3a4; Codex code and security review no findings | site/README.md section RSI charts (/rsi); site/page-list.json entry /rsi | Page not fetched on the dev deployment: the Vercel connector's web_fetch refuses this project (owner to extend connector access); hidden-content test cannot see hiding from global or shell CSS classes; live Supabase reads are TK-002; close attribution: {"agent":"orchestrator-A","claimant":"orchestrator-A-dispatcher-S007","onBehalfOf":"orchestrator-A-dispatcher-S007"} |
+History and prior evidence are maintained in the [website Wiki](../../../../wiki/context-website-presentation.md). Audit the candidate against this destination rather than inferring acceptance from earlier work.
 
 ## Review and Human QA
 
