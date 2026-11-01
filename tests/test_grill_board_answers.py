@@ -357,3 +357,27 @@ def test_a_card_that_names_itself_as_its_owner_is_refused(board, repo):
     status, body = post(server, {**fields, "verdict": "confirm"})
     assert status == 409 and "Not written" in body and "itself" in body
     assert snapshot(repo) == before
+
+
+def test_answers_wait_for_the_repository_lock_and_then_see_the_change(board, repo):
+    """Codex P1 on PR #38: board instances on one checkout share one writer lock,
+    held from validation through commit, so a second writer refuses."""
+    import time
+
+    from ams.grill_board.answers import repository_lock
+
+    server = board()
+    fields, _ = read_form(server)
+    result = {}
+    with repository_lock(repo):
+        worker = threading.Thread(target=lambda: result.update(zip(("status", "body"), post(server, {**fields, "verdict": "confirm"}))))
+        worker.start()
+        time.sleep(1.0)
+        assert not result, "the answer must wait for the repository lock"
+        record = repo / "records" / "decision.md"
+        record.write_text(RECORD.replace("awaiting the owner", "answered by another board"))
+        git(repo, "commit", "-qam", "another board instance writes first")
+        before = snapshot(repo)
+    worker.join(timeout=10)
+    assert result["status"] == 409 and "changed since" in result["body"]
+    assert snapshot(repo) == before

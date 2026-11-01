@@ -26,7 +26,7 @@ The verdict buttons and note POST to `/answer` (ADR-000B, ADR-002U, S-004 TK-002
 - **Rework wording**, **Change the why** and **Change** are returns: they need a note and write only the card. To re-ask, an agent posts the reworked card as a new file.
 - Every verdict appends a `## Answer` section to the card (`Verdict`, `Answered` in UTC, then `Written to` or `Returned: yes`, then the note). An answered card leaves the queue and counts as answered. Nothing is deleted or renumbered.
 
-**Commits.** The server makes one Git commit per answer on the current branch, containing only the card and, for Confirm, the owning record (`git commit --only`), with a subject such as `Grill Board: confirm NAME into PATH`. Other staged or unstaged work is left alone and not committed. It refuses on a detached HEAD; if the commit fails, both files are put back to their committed bytes.
+**Commits.** The server makes one Git commit per answer on the current branch, containing only the card and, for Confirm, the owning record (`git commit --only`), with a subject such as `Grill Board: confirm NAME into PATH`. Other staged or unstaged work is left alone and not committed. Every board instance on a checkout shares one writer lock (`flock` on `ams-grill-board.lock` in the Git directory), held from the hash check through the commit, so a second writer sees the first one's change and refuses. It refuses on a detached HEAD; if the commit fails, both files are put back to their committed bytes.
 
 **Refusals** (nothing written; the page shows "Not written: ..." in the heat alert):
 

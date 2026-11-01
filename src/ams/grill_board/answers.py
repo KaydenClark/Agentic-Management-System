@@ -13,6 +13,8 @@ repository, crosses a symlink or names `.git` (ADR-002U). Nothing is deleted
 or renumbered: answers are inserted, never replaced.
 """
 
+import contextlib
+import fcntl
 import hashlib
 import os
 import stat
@@ -152,9 +154,28 @@ def _replace(path, data):
         raise
 
 
+@contextlib.contextmanager
+def repository_lock(root):
+    """One writer per checkout, across every board instance: an exclusive
+    flock on a file in this worktree's Git directory."""
+    git_dir = Path(_git(root, "rev-parse", "--absolute-git-dir").strip())
+    with open(git_dir / "ams-grill-board.lock", "a") as handle:
+        fcntl.flock(handle, fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            fcntl.flock(handle, fcntl.LOCK_UN)
+
+
 def answer(cards_dir, card, verdict, note, card_sha, record_sha, now=None):
     """Record the owner's verdict on `card` and commit it; return the commit
-    SHA. Raises AnswerRefused, with every file left as it was, otherwise."""
+    SHA. Raises AnswerRefused, with every file left as it was, otherwise.
+    Validation through commit runs under the repository lock."""
+    with repository_lock(repo_root(cards_dir)):
+        return _answer(cards_dir, card, verdict, note, card_sha, record_sha, now)
+
+
+def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
     if verdict not in VERDICTS:
         raise AnswerRefused(f"unknown verdict {verdict!r}")
     label, note = VERDICTS[verdict], (note or "").strip()
