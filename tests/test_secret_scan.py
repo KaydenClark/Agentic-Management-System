@@ -1,9 +1,11 @@
-"""Repository hygiene: no Supabase service key in any tracked file (S-006 review M3).
+"""Repository hygiene: no Supabase service key in any tracked file or in history (S-006 review M3).
 
 The scan reads every file ``git ls-files`` lists and flags the two real secret
 shapes: ``sb_secret_`` followed by 8 or more key characters, and a three-part
 JWT whose payload decodes to JSON with a ``role`` claim (the legacy service and
-anon keys). The bare documented prefix ``sb_secret_`` is allowed. Test fakes are
+anon keys). A second scan reads every line added by a commit reachable from
+any local ref (``git log --all -p``); ``KNOWN_FAKE_COMMITS`` lists the one
+commit whose added fake predates the rule. The bare documented prefix ``sb_secret_`` is allowed. Test fakes are
 built at runtime, so no tracked file holds one. A hit names only the file and
 line, never the value.
 """
@@ -53,6 +55,26 @@ def scan(root: Path) -> list[str]:
     return found
 
 
+# 75d1fad added a hand-written fake legacy JWT to tests/test_writer.py (payload only
+# {"role": "service_role"}: no iss, ref or expiry, so no Supabase project issued it);
+# f50a240 replaced it with a run-time fake two minutes later. Pushed history is not
+# rewritten, so the scan names that commit instead of failing on it.
+KNOWN_FAKE_COMMITS = {"75d1fad3e31d"}
+
+
+def scan_history(root: Path, allowed=frozenset()) -> list[str]:
+    log = subprocess.run(["git", "-C", str(root), "log", "--all", "-p", "--no-color",
+                          "--no-ext-diff", "--format=commit %H"], check=True,
+                         capture_output=True).stdout.decode("utf-8", errors="ignore")
+    found, commit = [], None
+    for line in log.splitlines():
+        if line.startswith("commit "):
+            commit = line.split()[1][:12]
+        elif line.startswith("+") and not line.startswith("+++") and secret_hits(line):
+            found.append(commit)
+    return sorted(set(found) - set(allowed))
+
+
 _rng = random.Random()
 _ALPHA = string.ascii_letters + string.digits
 
@@ -74,6 +96,11 @@ def fake_jwt(role="service_role") -> str:
 def test_no_tracked_file_holds_a_service_key():
     found = scan(REPO_ROOT)
     assert found == [], "secret shapes in tracked files (values not shown): " + ", ".join(found)
+
+
+def test_no_commit_in_history_holds_a_service_key():
+    found = scan_history(REPO_ROOT, KNOWN_FAKE_COMMITS)
+    assert found == [], "secret shapes in commits (values not shown): " + ", ".join(found)
 
 
 @pytest.mark.parametrize("planted", [fake_secret, fake_jwt, lambda: fake_jwt("anon")])
@@ -99,3 +126,17 @@ def test_the_scan_reads_tracked_files_and_names_only_the_line(tmp_path):
     found = scan(tmp_path)
     assert found == ["leak.txt:2"]
     assert key not in " ".join(found)
+
+
+def test_the_history_scan_finds_a_key_removed_from_the_tree(tmp_path):
+    def git(*args):
+        subprocess.run(["git", "-C", str(tmp_path), "-c", "user.name=t", "-c", "user.email=t@t",
+                        *args], check=True, capture_output=True)
+    git("init", "-q")
+    (tmp_path / "a.txt").write_text(f"KEY={fake_secret()}\n")
+    git("add", "a.txt")
+    git("commit", "-qm", "leak")
+    (tmp_path / "a.txt").write_text("clean\n")
+    git("commit", "-qam", "remove")
+    assert scan(tmp_path) == []
+    assert len(scan_history(tmp_path)) == 1
