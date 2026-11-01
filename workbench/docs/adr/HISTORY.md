@@ -14,7 +14,7 @@
 | [000F](000F-agents-start-small-and-investigate-before-asking.md) | Agents start small and investigate before asking | accepted | 2026-11-01 | AGENTS.md |
 | [000G](000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md) | A rule is enforced only when code refuses and a test shows it | accepted | 2026-11-01 | AGENTS.md, tests |
 | [000H](000H-a-check-never-blocks-its-own-repair.md) | A check never blocks its own repair | accepted | 2026-11-01 | AGENTS.md, workbench/tools |
-| [000I](proposed/000I-a-required-step-must-produce-a-checkable-result.md) | A required step must produce a checkable result | proposed | 2026-11-01 | AGENTS.md, RUNBOOK.md |
+| [000I](000I-a-required-step-must-produce-a-checkable-result.md) | A required step must produce a checkable result | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [000J](proposed/000J-check-a-host-before-relying-on-it.md) | Check a host before relying on it | proposed | 2026-11-01 | RUNBOOK.md |
 | [000K](proposed/000K-a-stance-is-a-working-perspective-not-a-permission.md) | A stance is a working perspective, not a permission | proposed | 2026-11-01 | GLOSSARY.md, .agents/skills |
 | [000L](proposed/000L-governance-planes-are-roles-a-claim-plays-in-one-operation.md) | Governance planes are roles a claim plays in one operation | proposed | 2026-11-01 | GLOSSARY.md |
