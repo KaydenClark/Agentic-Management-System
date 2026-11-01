@@ -512,6 +512,10 @@ def collect(sources: Sources) -> list[dict]:
     comments = [json.loads(line) for line in sources.gh(
         ["api", "--paginate", f"repos/{REPO_SLUG}/pulls/comments?per_page=100", "--jq", ".[]"]
     ).splitlines() if line.strip()]
+    if sources.cutoff is not None:
+        # Cut comments off first: a later reply can name an earlier fix commit, and
+        # that fix row is dated by the commit, not the reply (Codex P2 on PR #65).
+        comments = [c for c in comments if parse_time(c["created_at"]) <= sources.cutoff]
     github = [*pr_rows(prs, sources.git),
               *review_rows(prs, comments, _resolved_threads(sources.gh), sources.git)]
     if sources.cutoff is not None:
@@ -684,8 +688,12 @@ def _refresh(rows: Sequence[dict], settings: keycheck.Settings, http, apply: boo
     at = utc(datetime.now(timezone.utc))
     for row, record, fields in changed:
         patch = {f: record[f] for f in fields}
-        patch["detail"] = dict(record["detail"],
-                               refreshed={"at": at, "previous": {f: row.get(f) for f in fields}})
+        # Append to the stored refresh history; never drop an earlier refresh's values.
+        history = (row.get("detail") or {}).get("refreshed") or []
+        if isinstance(history, dict):
+            history = [history]
+        patch["detail"] = dict(record["detail"], refreshed=[
+            *history, {"at": at, "previous": {f: row.get(f) for f in fields}}])
         status, _ = _send(http, "PATCH", f"{writer._rest(settings.url)}?id=eq.{row['id']}",
                           headers, patch)
         if status not in (200, 204):

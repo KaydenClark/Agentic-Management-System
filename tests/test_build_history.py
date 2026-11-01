@@ -680,13 +680,39 @@ def test_refresh_changed_updates_each_changed_row_and_logs_its_old_values(rows, 
     assert f"refreshed: spec_event path {victim['source_ref']}: summary" in out
     assert "refreshed: 1" in out
     assert victim["summary"] == want["summary"]
-    assert victim["detail"]["refreshed"]["previous"] == {"summary": "Older wording"}
+    assert victim["detail"]["refreshed"][-1]["previous"] == {"summary": "Older wording"}
     patches = [c for c in store.calls if c[0] == "PATCH"]
     assert len(patches) == 1 and f"id=eq.{victim['id']}" in patches[0][1]
     assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store) == 0
     capsys.readouterr()
     assert bh.import_rows(rows, _settings(), store, refresh_changed=True) == 0
     assert "refreshed: 0" in capsys.readouterr().out
+
+
+def test_a_second_refresh_keeps_the_first_refreshs_old_values(rows, capsys):
+    # Codex P2 on PR #65: refresh history is appended, never replaced.
+    store = StubSupabase(rows)
+    victim = next(r for r in store.rows if r["kind"] == "spec_event")
+    victim["summary"] = "Original wording"
+    assert bh.import_rows(rows, _settings(), store, refresh_changed=True) == 0
+    victim["summary"] = "Intermediate wording"
+    assert bh.import_rows(rows, _settings(), store, refresh_changed=True) == 0
+    capsys.readouterr()
+    history = victim["detail"]["refreshed"]
+    assert [h["previous"]["summary"] for h in history] == ["Original wording",
+                                                           "Intermediate wording"]
+
+
+def test_a_reply_after_the_cutoff_cannot_add_an_earlier_fix(fixture_repo):
+    # Codex P2 on PR #65: a fix named in a later reply is dated by its commit,
+    # so comments are cut off before review events are derived.
+    repo, shas = fixture_repo
+    cutoff = bh.parse_time("2026-11-01T10:31:00Z")  # after the fix commit, before the replies
+    pinned = bh.collect(bh.Sources(git=git_runner(repo), gh=gh_stub(shas),
+                                   lifecycle=lifecycle_stub, refs=("main",), cutoff=cutoff))
+    assert not [r for r in pinned if r["kind"] == "correction_fix"]
+    finding = next(r for r in pinned if r["source_ref"] == "#1 comment 100")
+    assert finding["detail"]["fix_commit"] is None
 
 
 def test_collect_at_a_cutoff_drops_github_events_after_it(fixture_repo):
