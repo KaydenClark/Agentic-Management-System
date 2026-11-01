@@ -615,21 +615,17 @@ def _differences(have: Mapping, want: Mapping) -> list[str]:
     return changed
 
 
-def _states(row: Mapping, cutoff: datetime | None) -> list[dict]:
-    """The row's compared fields now, then as they stood before each refresh written
-    after cutoff (newest undone first). A pinned record matches if it equals any of
-    them: the refresh time is the database write, not the source change, so a ref may
-    hold the refreshed text or the text a later refresh replaced (Codex P2s on PR #65)."""
+def _states(row: Mapping) -> list[dict]:
+    """The row's compared fields now, then as they stood before each logged refresh
+    (newest undone first). A pinned record matches if it equals any of them. This
+    does not depend on refresh times, which are database write times, not source
+    changes (Codex P2s on PR #65)."""
     stood = {f: row.get(f) for f in CONTENT_FIELDS}
     states = [dict(stood)]
-    if cutoff is None:
-        return states
     history = (row.get("detail") or {}).get("refreshed") or []
     if isinstance(history, dict):
         history = [history]
-    later = sorted((h for h in history if parse_time(h["at"]) > cutoff),
-                   key=lambda h: parse_time(h["at"]), reverse=True)
-    for entry in later:
+    for entry in sorted(history, key=lambda h: parse_time(h["at"]), reverse=True):
         stood.update(entry.get("previous") or {})
         states.append(dict(stood))
     return states
@@ -755,7 +751,7 @@ def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page:
     extra = [k for k in unexpected if k not in newer]
     mismatches = []
     for k in sorted(want.keys() & have.keys()):
-        found = [_differences(state, want[k]) for state in _states(have[k], cutoff)]
+        found = [_differences(state, want[k]) for state in _states(have[k])]
         if all(found):
             mismatches.append((k, found[0]))  # named against the stored values
     unsourced = [r for r in visible if not (r.get("source_ref") or "").strip()

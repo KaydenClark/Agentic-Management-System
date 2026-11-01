@@ -731,7 +731,12 @@ def test_a_pinned_readcheck_reads_a_refreshed_row_as_it_stood_at_the_ref(rows, c
         {"at": "2026-11-02T08:00:00Z", "previous": {"summary": pinned_summary}}])
     assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 0
     assert "content mismatches: 0" in capsys.readouterr().out
-    victim["detail"]["refreshed"][0]["at"] = "2026-11-01T22:00:00Z"  # refreshed before the ref
+    # Order-independent: the refresh time is a database write time, so a refresh
+    # logged before the ref is matched the same way.
+    victim["detail"]["refreshed"][0]["at"] = "2026-11-01T22:00:00Z"
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 0
+    # A value in neither the row nor its refresh history still fails.
+    victim["detail"]["refreshed"][0]["previous"] = {"summary": "Never this"}
     assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 1
     assert ": summary" in capsys.readouterr().out
 
