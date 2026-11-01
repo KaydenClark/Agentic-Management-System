@@ -50,6 +50,7 @@ and `ams-sources livecheck` check RSI/source rules.
 `ams-assessment-store import|readcheck|livecheck` verifies private Supabase storage
 ([contract](evals/ASSESSMENTS.md)). Storage proves no benefit. Trials use the
 subscription meter; unknown stays unknown.
+`ams-trials materialize|preflight|readback` prepares [private trial inputs](evals/TRIALS.md); it never calls a model.
 
 ### Shared CI
 

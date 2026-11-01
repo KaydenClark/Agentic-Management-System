@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000O closed with proof.
-**Next gate:** S-006 -> TK-001/TK-002.
+**Latest event:** TK-000T claimed by s002-bootstrap.
+**Next gate:** Close TK-000T with verification and documentation proof.
 
 ## Intent and authority
 
@@ -30,6 +30,8 @@ Loop on real builds until meter/stop; static scores prove no benefit.
 [CLI proof](tasks/TK-000M/TASK.md); runner/trials/storage incomplete. [Baseline a3d014e](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified reviews, not trials; no strike/skill result.
 
 S-006 TK-000S also repairs this local CLI’s immutable packet, frozen metadata, historical source, result and approved protocol identity comparisons. Source `ad7fa28` preserves scoring formulas and qualification rules; checked delivery is tracked in that owner. No real trial or evaluator qualification is inferred.
+
+TK-000T prepares [private inputs and local preflight](../../../../../evals/TRIALS.md) at the delivered storage boundary. Original TK-002 still owns measured noise; bootstrap checks and the prior inert provider smoke are not controlled trials, qualification or useful benefit.
 
 ## Desired Behavior
 

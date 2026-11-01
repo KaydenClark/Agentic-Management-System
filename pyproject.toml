@@ -13,6 +13,7 @@ ams-history = "ams.build_history:main"
 ams-rsi = "ams.rsi_rows:main"
 ams-assess = "ams.assessment:main"
 ams-assessment-store = "ams.assessment_store:main"
+ams-trials = "ams.trials:main"
 ams-sources = "ams.source_rules:main"
 
 [build-system]
