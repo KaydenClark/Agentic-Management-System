@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000R claimed by codex-assessment-writer.
-**Next gate:** Close TK-000R with verification and documentation proof.
+**Latest event:** TK-000R closed with proof.
+**Next gate:** Checked PR delivery, corrected whole-Spec Review, then actual native owner QA.
 
 ## Intent and authority
 
@@ -126,6 +126,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | TK-000P | Task closed | 475 passed,4 skipped; focused99/1; migration20261101192328; live null and zero roundtrip; DB bad availability23514; client writes401/test hiding; cleanup0; advisors empty | TRIAL-ROWS; template; rsi_rows; S-006 SPEC/TK-000P | Fresh assembled Review; private assessment storage; real qualified S-002 trials; close attribution: {"agent":"codex-local-writer","claimant":"codex-local-writer","onBehalfOf":null} |
 | 2026-11-01 | TK-000Q | Task closed | 56 focused; fresh source489 passed,4 skipped; private migration20261101193603; live duplicate200/conflict409/concurrent200-409/client401/update403/cleanup0; source CI45 pass | ASSESSMENTS; RUNBOOK; ARCHITECTURE; S-006 SPEC/TK-000Q | Final CI/checked merge; fresh assembled Review; native owner QA; safe S007 presentation and real S002 trials; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
 | 2026-11-01 | review | Review verdict: fail at 977ac08fed4a269182b67d6ada990042e2ceee88 [cfc6d944ca57] #3 | new Task: P1 JSONB numeric normalization changes valid packet digest after append and blocks immutable namespace readback. Preserve exact canonical text and verify projection before rereview. | s006_review, independent Codex context | 1 |
+| 2026-11-01 | TK-000R | Task closed | 62 focused; full local/fresh495 passed,4 skipped; migration20261101195609; exact numeric TEXT roundtrip/retry/client denial/cleanup0; source CI53pass; scoped rereview no blockers | ASSESSMENTS; TRIAL-ROWS; S-006 SPEC/TK-000R | Final CI/merge; whole assembled Review; actual owner QA; safe S007 projection and real S002 trials; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
 
 ## Review and Human QA
 
