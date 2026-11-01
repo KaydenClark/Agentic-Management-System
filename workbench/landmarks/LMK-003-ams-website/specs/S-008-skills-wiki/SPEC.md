@@ -8,12 +8,14 @@
 **Updated:** 2026-11-01
 **Catalog description:** Site-written summaries of the owner's skills, one entry per skill, modeled on the format of aihero.dev/skills.
 **Blockers:** S-003
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
+**Latest event:** Entry shape revised to the owner's article template (2026-11-01).
 **Next gate:** Task planning after the site shell (S-003) exists.
 
 ## Intent and authority
 
 The owner chose site-written summaries of the owner's skills, modeled on https://www.aihero.dev/skills. The skills repository is private, so the site publishes summaries, not skill files.
+
+On 2026-11-01 the owner set the article template (below) in chat, giving the reference site's `/grilling` page as the model of depth and tone, and supplied the chart of skills by Workbench stage, committed as `skills-by-workbench-stage.svg` beside this Spec and drawn on `/start` screen 3 from `site/app/start/skills.mjs`.
 
 ## Outcome
 
@@ -30,7 +32,15 @@ The skills are how agents operate the AMS. Explaining them faithfully, without p
 ## Desired Behavior
 
 - An index of the owner's skills, grouped by workflow stage, and one entry per skill.
-- Each entry gives: what it does, when to use it, what it does not authorize, an example request, and its provenance or license.
+- Each entry is an article with these sections, in this order (the owner's template):
+  1. **What it does**: the mechanism in plain words, with its key terms defined.
+  2. **When to use it**: how it is invoked or reached for, and, where neighbours overlap, a table of "what you have / reach for" pointing to the right skill.
+  3. **What it requires**: the skills, records, tools or Workbench it depends on.
+  4. **Skill-specific sections**: only where the skill needs them (for example, the round and frontier of `grilling`).
+  5. **FAQs**: the questions readers actually ask, each with a direct answer, including known failure modes and their workaround.
+  6. **It's working when**: observable signs, as a list, that a run is behaving as designed.
+  7. **Where it fits in the workflow**: its stage on the skills-by-stage chart, what calls it and what it hands to, linking those skills' entries.
+- Each entry also carries a credit line: original, or adapted from a named source with its license.
 - Each entry is derived from that skill's file at a pinned skills commit, and names the commit.
 - "Used to build this site" appears only where a record links the skill to a Task or review.
 - Layout follows the reference site's format; the exact elements are confirmed against that page at Task planning.
@@ -39,11 +49,21 @@ The skills are how agents operate the AMS. Explaining them faithfully, without p
 
 - Summaries are written for the site; skill files are not copied.
 - An adapted skill is credited to its source, never labeled original.
+- The article template above is the owner's (2026-11-01); it replaces the earlier five-part entry (does, when, does not authorize, example request, provenance).
 
 ## Non-Goals
 
 - Publishing the skills repository or any skill file.
 - Editing skills; skill changes go through the skills repository's own process.
+
+## Open Owner Choices
+
+- Whether "what it does not authorize" and an example request stay, as lines inside the template's sections; the template does not list them.
+- Whether the index groups entries by the seven stages of the skills-by-stage chart (Route, Align, Prepare, Journey, Judge, Complete, Improve), and whether the chart's skills are the owner's set.
+- Which skills repository and path the authoring session reads at a pinned commit.
+- Whether TK-001 may start on the site shell already on `dev` before S-003 completes.
+- One index page plus one page per skill (`/skills/<name>`), as on the reference site.
+- Whether TK-003's "used to build this site" marks stay in this Spec.
 
 ## Dependencies And Blockers
 
@@ -77,7 +97,7 @@ Proves the "used" criterion.
 
 ## Acceptance Criteria
 
-- [ ] **Entry shape.** Every entry has all five parts and names its skills commit. *Check:* a content test over entries. *Must fail:* an entry with no "does not authorize" line.
+- [ ] **Entry shape.** Every entry has the template's six required sections in order (skill-specific sections optional, placed after What it requires), a credit line, and names its skills commit. *Check:* a content test over entries. *Must fail:* an entry with no FAQs or no "It's working when" section, or with sections out of order.
 - [ ] **Faithful.** Each described behavior appears in the pinned skill file. *Check:* a reviewer compares entries with the pinned files. *Must fail:* a behavior the skill does not have.
 - [ ] **Coverage.** Every skill in the owner's set has an entry and every stage names at least one skill. *Must fail:* an orphan stage.
 - [ ] **Used means recorded.** A "used" mark links the Task or review record. *Must fail:* a mark with no record.
@@ -107,6 +127,7 @@ node workbench/tools/spec-workbench.mjs show S-008
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
+| 2026-11-01 | none | Entry shape revised to the owner's seven-section template; open choices listed | render, doctor | this Spec | Every criterion; open owner choices |
 
 ## Review and Human QA
 
