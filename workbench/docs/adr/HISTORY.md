@@ -48,7 +48,7 @@
 | [001N](001N-the-wiki-is-a-small-linked-synthesis.md) | The Wiki is a small linked synthesis | accepted | 2026-11-01 | workbench/wiki |
 | [001O](001O-links-and-grep-before-any-vector-index.md) | Links and grep before any vector index | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [001P](001P-continuity-is-proven-by-a-fresh-recipient-trial.md) | Continuity is proven by a fresh-recipient trial | accepted | 2026-11-01 | AGENTS.md, evals |
-| [001Q](proposed/001Q-temporary-notes-are-reconciled-and-deleted.md) | Temporary notes are reconciled and deleted | proposed | 2026-11-01 | AGENTS.md |
+| [001Q](001Q-temporary-notes-are-reconciled-and-deleted.md) | Temporary notes are reconciled and deleted | accepted | 2026-11-01 | AGENTS.md |
 | [001R](proposed/001R-a-handoff-is-a-short-live-file.md) | A handoff is a short live file | proposed | 2026-11-01 | RUNBOOK.md |
 | [001S](proposed/001S-everything-a-session-needs-is-committed.md) | Everything a session needs is committed | proposed | 2026-11-01 | AGENTS.md, .agents/skills |
 | [001T](proposed/001T-size-tasks-to-one-session-and-record-tokens.md) | Size Tasks to one session and record tokens | proposed | 2026-11-01 | workbench/specs, supabase |
