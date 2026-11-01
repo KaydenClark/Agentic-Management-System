@@ -56,6 +56,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, Iterable, Mapping, Sequence
+from urllib.parse import quote
 
 from ams import keycheck, source_rules, writer
 
@@ -614,6 +615,22 @@ def _differences(have: Mapping, want: Mapping) -> list[str]:
     return changed
 
 
+def _as_of(row: Mapping, cutoff: datetime | None) -> dict:
+    """The row's compared fields as they stood at cutoff: a refresh after cutoff is
+    undone from its logged old values (Codex P2 on PR #65)."""
+    stood = {f: row.get(f) for f in CONTENT_FIELDS}
+    if cutoff is None:
+        return stood
+    history = (row.get("detail") or {}).get("refreshed") or []
+    if isinstance(history, dict):
+        history = [history]
+    later = sorted((h for h in history if parse_time(h["at"]) > cutoff),
+                   key=lambda h: parse_time(h["at"]), reverse=True)
+    for entry in later:  # newest first, so the earliest later refresh wins
+        stood.update(entry.get("previous") or {})
+    return stood
+
+
 def _named(label: str, items: Sequence[str]) -> None:
     for item in items[:SHOWN]:
         print(f"{label}: {item}")
@@ -694,11 +711,16 @@ def _refresh(rows: Sequence[dict], settings: keycheck.Settings, http, apply: boo
             history = [history]
         patch["detail"] = dict(record["detail"], refreshed=[
             *history, {"at": at, "previous": {f: row.get(f) for f in fields}}])
-        status, _ = _send(http, "PATCH", f"{writer._rest(settings.url)}?id=eq.{row['id']}",
-                          headers, patch)
+        # Conditional on the values read, so a write in between is refused, not lost.
+        match = "".join(f"&{f}=eq.{quote(str(row.get(f)), safe='')}" for f in CONTENT_FIELDS)
+        status, body = _send(http, "PATCH", f"{writer._rest(settings.url)}?id=eq.{row['id']}{match}",
+                             headers, patch)
         if status not in (200, 204):
             print(f"refresh failed: http status {status if status is not None else 'none'} "
                   f"at {' '.join(_key(row))}")
+            return 1
+        if not body:
+            print(f"refused: {' '.join(_key(row))} changed since it was read; rerun the import")
             return 1
         print(f"refreshed: {' '.join(_key(row))}: {', '.join(fields)}")
     print(f"refreshed: {len(changed)}")
@@ -717,7 +739,7 @@ def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page:
     if keycheck.key_format(key) != "unrecognized" or not key.startswith("sb_publishable_"):
         print("refused: the publishable slot holds a key that is not a publishable key")
         return 1
-    visible = _read_all(http, url, key, READ_COLUMNS, page)
+    visible = _read_all(http, url, key, READ_COLUMNS + ",detail", page)
     if visible is None:
         return 1
     have = {_key(r): r for r in visible}
@@ -727,7 +749,8 @@ def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page:
     newer = {k for k in unexpected
              if cutoff is not None and parse_time(have[k]["occurred_at"]) > cutoff}
     extra = [k for k in unexpected if k not in newer]
-    mismatches = [(k, _differences(have[k], want[k])) for k in sorted(want.keys() & have.keys())]
+    mismatches = [(k, _differences(_as_of(have[k], cutoff), want[k]))
+                  for k in sorted(want.keys() & have.keys())]
     mismatches = [(k, f) for k, f in mismatches if f]
     unsourced = [r for r in visible if not (r.get("source_ref") or "").strip()
                  or not (r.get("source_url") or "").startswith("https://")

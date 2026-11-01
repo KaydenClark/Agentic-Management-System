@@ -485,6 +485,9 @@ class StubSupabase:
             assert headers["apikey"] == FAKE_SECRET
             target = int(query["id"][0].removeprefix("eq."))
             row = next(r for r in self.rows if r["id"] == target)
+            for field, (value,) in query.items():
+                if field != "id" and str(row.get(field)) != value.removeprefix("eq."):
+                    return 200, b"[]"  # the conditional update matched no row
             row.update(json.loads(body))
             return 200, json.dumps([row]).encode()
         if method == "GET":
@@ -494,8 +497,6 @@ class StubSupabase:
             offset = int(query.get("offset", ["0"])[0])
             limit = int(query.get("limit", ["1000"])[0])
             cols = query["select"][0].split(",")
-            if headers["apikey"] == FAKE_PUBLISHABLE:
-                assert "detail" not in cols
             page = [{c: r.get(c) for c in cols} for r in visible[offset:offset + limit]]
             return 200, json.dumps(page).encode()
         return 405, b""
@@ -701,6 +702,38 @@ def test_a_second_refresh_keeps_the_first_refreshs_old_values(rows, capsys):
     history = victim["detail"]["refreshed"]
     assert [h["previous"]["summary"] for h in history] == ["Original wording",
                                                            "Intermediate wording"]
+
+
+def test_a_refresh_refuses_a_row_changed_after_it_was_read(rows, capsys):
+    # Codex P2 on PR #65: the update is conditional on the values it read.
+    store = StubSupabase(rows)
+    victim = next(r for r in store.rows if r["kind"] == "spec_event")
+    victim["summary"] = "Older wording"
+
+    def racing(method, url, headers, body):
+        if method == "PATCH":
+            victim["summary"] = "Written by someone else meanwhile"
+        return store(method, url, headers, body)
+    assert bh.import_rows(rows, _settings(), racing, refresh_changed=True) == 1
+    out = capsys.readouterr().out
+    assert f"refused: spec_event path {victim['source_ref']} changed since it was read" in out
+    assert victim["summary"] == "Written by someone else meanwhile"
+    assert "refreshed" not in victim["detail"]
+
+
+def test_a_pinned_readcheck_reads_a_refreshed_row_as_it_stood_at_the_ref(rows, capsys):
+    # Codex P2 on PR #65: a refresh after the ref does not fail a readcheck pinned before it.
+    store = StubSupabase(rows)
+    victim = next(r for r in store.rows if r["kind"] == "spec_event")
+    pinned_summary = victim["summary"]
+    victim["summary"] = "Condensed later"
+    victim["detail"] = dict(victim["detail"], refreshed=[
+        {"at": "2026-11-02T08:00:00Z", "previous": {"summary": pinned_summary}}])
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 0
+    assert "content mismatches: 0" in capsys.readouterr().out
+    victim["detail"]["refreshed"][0]["at"] = "2026-11-01T22:00:00Z"  # refreshed before the ref
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 1
+    assert ": summary" in capsys.readouterr().out
 
 
 def test_a_reply_after_the_cutoff_cannot_add_an_earlier_fix(fixture_repo):
