@@ -189,9 +189,24 @@ def test_a_runner_error_is_a_row_with_no_grade():
     rsi_rows.check_result(a_result(run, execution_state="runner_error", passed=None))
 
 
-def test_a_score_alone_grades_a_completed_trial():
+def test_a_score_alone_does_not_grade_a_completed_trial():
+    # Review L2: pass rate and cost per pass need a pass (ADR-002J); score is optional detail.
     run = dict(a_run(), id=1, version=1)
-    rsi_rows.check_result(a_result(run, passed=None, score=0.75))
+    with pytest.raises(rsi_rows.Refused, match="passed"):
+        rsi_rows.check_result(a_result(run, passed=None, score=0.75))
+    rsi_rows.check_result(a_result(run, passed=True, score=0.75))
+    with pytest.raises(rsi_rows.Refused, match="score"):
+        rsi_rows.check_result(a_result(run, execution_state="runner_error", passed=None,
+                                       score=0.5))
+
+
+def test_the_database_requires_passed_on_a_completed_trial():
+    sql = re.sub(r"\(\s+", "(", re.sub(r"\s+", " ", _all_migrations()))
+    assert "drop constraint rsi_results_graded_when_completed" in sql
+    assert ("add constraint rsi_results_passed_when_completed check "
+            "((execution_state = 'completed') = (passed is not null))") in sql
+    assert ("add constraint rsi_results_score_when_completed check "
+            "(score is null or execution_state = 'completed')") in sql
 
 
 def test_all_three_arms_and_both_splits_are_accepted():
@@ -431,6 +446,11 @@ def test_livecheck_without_the_service_key_sends_nothing(capsys):
 def _migration():
     path = next(Path(rsi_rows.REPO_ROOT, "supabase", "migrations").glob("*_rsi_rows.sql"))
     return path.read_text().lower()
+
+
+def _all_migrations():
+    folder = Path(rsi_rows.REPO_ROOT, "supabase", "migrations")
+    return "\n".join(p.read_text().lower() for p in sorted(folder.glob("*.sql")))
 
 
 def _table_body(sql, table):

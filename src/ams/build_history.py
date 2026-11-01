@@ -140,7 +140,7 @@ def validate(row: Mapping) -> None:
     for name in ("subject", "summary"):
         if not isinstance(row.get(name), str) or not row[name].strip():
             raise ValueError(f"row without {name}: {row.get('kind')}")
-    source_rules.check_source(row)  # the rule every site table shares (TK-005)
+    source_rules.check_source(row, table="build_events")  # the rule every site table shares (TK-005)
     if row.get("source_kind") not in SOURCE_KINDS:
         raise ValueError(f"row without a source kind: {row.get('kind')}")
     if not isinstance(row.get("source_ref"), str) or not row["source_ref"].strip():
