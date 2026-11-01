@@ -10,6 +10,7 @@ Supabase.
 import json
 import os
 import random
+import re
 import string
 import subprocess
 from datetime import datetime
@@ -37,6 +38,12 @@ SPEC_V1 = """# S-001 - Demo
 
 **Spec ID:** S-001
 **Status:** active
+
+## Vertical Implementation Slices
+
+| Task | Slice | Status | Blockers | Proof |
+|---|---|---|---|---|
+| TK-002 | Planned only in the table | ready | none | pending |
 
 ## Append-Only Evidence And Execution Log
 
@@ -177,7 +184,9 @@ def lifecycle_stub(args):
     if args[0] == "show" and args[1] == "S-001":
         return json.dumps({"id": "S-001", "title": "Demo", "status": "active", "path": SPEC_PATH,
                            "tasks": [{"id": "TK-001", "slice": "Demo task", "status": "done",
-                                      "blockers": "none", "proof": "PR #1"}],
+                                      "blockers": "none", "proof": "PR #1"},
+                                     {"id": "TK-002", "slice": "Planned only in the table",
+                                      "status": "ready", "blockers": "none", "proof": "pending"}],
                            "retiredTasks": []})
     raise AssertionError(f"unexpected lifecycle call {args}")
 
@@ -211,7 +220,12 @@ def gh_stub(shas):
          "created_at": "2026-11-01T10:32:00Z", "path": "src/thing.py",
          "html_url": f"{repo_url}/pull/1#discussion_r101",
          "pull_request_url": "https://api.github.com/repos/o/r/pulls/1",
-         "body": f"Fixed in {shas['fix'][:7]}: cards are read from HEAD."},
+         "body": "Fixed in deadbee: cards are read from HEAD."},
+        {"id": 103, "in_reply_to_id": 100, "user": {"login": "owner"},
+         "created_at": "2026-11-01T10:33:00Z", "path": "src/thing.py",
+         "html_url": f"{repo_url}/pull/1#discussion_r103",
+         "pull_request_url": "https://api.github.com/repos/o/r/pulls/1",
+         "body": f"Correction: the fix commit is {shas['fix'][:7]}, not deadbee.\n\n---\nfooter"},
         {"id": 102, "in_reply_to_id": None, "user": {"login": "owner"},
          "created_at": "2026-11-01T10:26:00Z", "path": "src/thing.py",
          "html_url": f"{repo_url}/pull/1#discussion_r102",
@@ -229,7 +243,12 @@ def gh_stub(shas):
     def gh(args):
         calls.append(list(args))
         if args[:2] == ["pr", "list"]:
-            return json.dumps(prs)
+            assert "commits" not in args[args.index("--json") + 1]  # too costly for GraphQL
+            return json.dumps([{k: v for k, v in pr.items() if k != "commits"} for pr in prs])
+        if args[0] == "api" and re.search(r"/pulls/\d+/commits", " ".join(args)):
+            number = int(re.search(r"/pulls/(\d+)/commits", " ".join(args)).group(1))
+            pr = next(p for p in prs if p["number"] == number)
+            return "".join(json.dumps(c) + "\n" for c in pr["commits"])
         if args[:2] == ["api", "graphql"]:
             return json.dumps(threads)
         if args[0] == "api" and "pulls/comments" in " ".join(args):
@@ -265,10 +284,10 @@ def test_counts_match_the_records(rows, fixture_repo):
         "merge": 1,         # PR #1
         "pr_opened": 2,     # PRs #1 and #2
         "return": 2,        # PR #2 closed unmerged; PR #1 changes requested
-        "correction": 4,    # Codex finding, evidence-log correction, two wiki corrections
+        "correction": 5,    # Codex finding, its corrected reply, evidence-log correction, two wiki
         "correction_fix": 1,
         "spec": 1,
-        "task": 1,
+        "task": 2,         # a TASK.md and a Spec-table-only Task
         "spec_event": 2,    # Mapped, Task closed
         "task_receipt": 1,
         "task_claimed": 1,
@@ -324,7 +343,12 @@ def test_codex_finding_and_its_fix_are_corrections(rows, fixture_repo):
     assert finding["summary"] == "Load cards from committed records only"
     assert finding["detail"]["priority"] == "P2"
     assert finding["detail"]["resolved"] is True
-    assert finding["detail"]["fix_commit"] == shas["fix"]
+    assert finding["detail"]["fix_commit"] == shas["fix"]  # the corrected reply wins
+    assert finding["detail"]["fix_reply_url"].endswith("#discussion_r103")
+    assert finding["detail"]["fix_named_earlier"] == ["deadbee"]
+    reply = next(r for r in rows if r["source_ref"] == "#1 comment 103")
+    assert reply["kind"] == "correction"
+    assert reply["summary"] == f"Correction: the fix commit is {shas['fix'][:7]}, not deadbee."
     (fix,) = by_kind(rows, "correction_fix")
     assert fix["source_kind"] == "commit" and fix["source_ref"] == shas["fix"]
     assert fix["occurred_at"] == "2026-11-01T10:30:00Z"
@@ -346,9 +370,14 @@ def test_spec_and_task_records(rows, fixture_repo):
     (spec,) = by_kind(rows, "spec")
     assert spec["source_kind"] == "path" and spec["source_ref"] == SPEC_PATH
     assert spec["subject"] == "S-001" and spec["occurred_at"] == "2026-11-01T10:00:00Z"
-    (task,) = by_kind(rows, "task")
-    assert task["source_ref"] == TASK_PATH and task["subject"] == "S-001 TK-001"
+    tasks = {r["subject"]: r for r in by_kind(rows, "task")}
+    task = tasks["S-001 TK-001"]
+    assert task["source_ref"] == TASK_PATH
     assert task["detail"]["status"] == "done"
+    planned = tasks["S-001 TK-002"]
+    assert planned["source_ref"] == SPEC_PATH + "#TK-002"
+    assert planned["occurred_at"] == "2026-11-01T10:00:00Z"
+    assert planned["source_url"].startswith(f"{writer.REPO_URL}/blob/{shas['map']}/{SPEC_PATH}#L")
     (claimed,) = by_kind(rows, "task_claimed")
     assert claimed["source_ref"] == shas["claim"] and claimed["subject"] == "S-001 TK-001"
     events = {r["source_ref"]: r for r in by_kind(rows, "spec_event")}
@@ -540,7 +569,7 @@ def test_main_dry_run_prints_counts_and_writes_nothing(fixture_repo, capsys):
     assert code == 0
     assert store.calls == []
     out = capsys.readouterr().out
-    assert "commit: 7" in out and "correction: 4" in out
+    assert "commit: 7" in out and "correction: 5" in out
 
 
 def test_parse_time_handles_offsets():
