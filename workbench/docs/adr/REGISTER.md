@@ -15,3 +15,4 @@
 | [000G](000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md) | A rule is enforced only when code refuses and a test shows it | accepted | 2026-11-01 | AGENTS.md, tests |
 | [000H](000H-a-check-never-blocks-its-own-repair.md) | A check never blocks its own repair | accepted | 2026-11-01 | AGENTS.md, workbench/tools |
 | [000I](000I-a-required-step-must-produce-a-checkable-result.md) | A required step must produce a checkable result | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
+| [000J](000J-check-a-host-before-relying-on-it.md) | Check a host before relying on it | accepted | 2026-11-01 | RUNBOOK.md |
