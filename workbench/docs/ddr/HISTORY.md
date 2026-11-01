@@ -30,3 +30,4 @@
 | [000V](000V-the-demo-grill-board-uses-sample-non-engineering-questions.md) | The demo Grill Board uses sample non-engineering questions | accepted | 2026-11-01 | site |
 | [000W](000W-the-first-rsi-trial-is-building-the-site.md) | The first RSI trial is building the site | accepted | 2026-11-01 | evals, site |
 | [000X](000X-approvals-move-to-the-grill-board-once-it-exists.md) | Approvals move to the Grill Board once it exists | accepted | 2026-11-01 | grill-board |
+| [000Y](000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md) | The Grill Board theme follows the Grilling Board Redesign artifact | accepted | 2026-11-01 | grill-board |

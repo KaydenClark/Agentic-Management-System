@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; five Tasks planned, build-history criteria restored.
-**Next gate:** Claim TK-001 in orchestrator B's lane.
+**Latest event:** TK-002 closed with proof.
+**Next gate:** Complete TK-003.
 
 ## Intent and authority
 
@@ -28,7 +28,7 @@ Charts can only be honest if each number has a row behind it with its provenance
 ## Current Verified State
 
 - `supabase/migrations/` holds a read-only baseline: clients cannot insert, update or delete, and every new public table starts with row-level security on.
-- No RSI tables, writer or rows exist.
+- `build_events` (migration `20261101132456`) holds one real row, the merge of PR #15 (884d021); the publishable key reads it and is refused (401) on insert, update and delete. `ams-writer` writes it. No RSI result or run tables exist.
 
 ## Desired Behavior
 
@@ -96,6 +96,8 @@ node workbench/tools/spec-workbench.mjs show S-006
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned; baseline migration noted | render, doctor | this Spec | Every criterion |
+| 2026-11-01 | TK-001 | Task closed | PR #15 merged as 884d021: uv run pytest 37 passed (red run 36 failed first); env -u SUPABASE_SERVICE_ROLE_KEY uv run ams-keycheck printed loaded: no, exit 1; live uv run --directory <main checkout> ams-keycheck printed loaded: yes / format: sb_secret / authenticated: yes / http status: 200, exit 0, no key value; hygiene grep found no key in tracked files or diff; render no diff, doctor no blocking finding | RUNBOOK names uv run pytest and ams-keycheck; ARCHITECTURE names src/ams/keycheck.py | Legacy-JWT path proven only with fakes; the live key is sb_secret. Tables, inserts and the publishable-key read path remain for TK-002 onward; close attribution: {"agent":"claude-s006-tk001","claimant":"claude-s006-tk001","onBehalfOf":null} |
+| 2026-11-01 | TK-002 | Task closed | PR #18 merged as d279ae1: migration 20261101132456_build_events applied to hqvtnpvwwppbeurponnn, security advisors no finding; uv run pytest 108 passed, 1 skipped (writer tests red first: import error, then 9 failing inconclusive-probe tests after Codex P2 finding 4435825468, fixed and resolved); live from main checkout: ams-writer record-merge 884d021 printed inserted: id=1 kind=merge subject=PR #15 strength=recorded_fact is_test=False, rerun printed already recorded; ams-writer readcheck with the publishable key printed rows: 1, insert/update/delete refused (http status 401), row unchanged: yes, exit 0; AMS_LIVE=1 live test passed; hygiene grep found no key in the diff; render no diff, doctor no blocking finding | RUNBOOK names ams-writer record-merge/readcheck and AMS_LIVE=1; ARCHITECTURE names ams-writer and the build_events migration; both at or under 3,000 chars | Only build_events exists, with one row; the is_test filter is proven by policy text and stubs, not by a live test row. RSI result and run tables, stale-update refusal (TK-003) and the full build-history import (TK-004) remain; legacy-JWT path still proven only with fakes; close attribution: {"agent":"claude-s006-tk002","claimant":"claude-s006-tk002","onBehalfOf":null} |
 
 ## Review and Human QA
 
