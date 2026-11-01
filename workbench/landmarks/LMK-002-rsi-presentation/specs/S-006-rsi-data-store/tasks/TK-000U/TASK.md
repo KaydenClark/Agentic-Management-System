@@ -3,12 +3,13 @@
 **Task ID:** TK-000U
 **Spec ID:** S-006
 **Slice:** Pinned history readback retains Wiki-routed historical Spec events
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Build history from real records
 **Planned verification:** Red-first relocated-history collector/readcheck fixture; original eight rows rederived from declared immutable Wiki source; tampered/missing/unsupported/future/orphan source cases; focused/full/fresh checks and independent source review.
 **Claimed by:** codex-history-consumer
 **Current claimant:** codex-history-consumer
+**Proof:** Source9f3a6ca reconciles main17293a0; local and fresh590 passed4 skipped; focused85 passed; direct independent source review d50 PASS; all8 retained facts rederived exactly. Final CI/current-owner binding then postmerge live proof remain required.
 
 ## Assignment
 
@@ -38,3 +39,9 @@ Draft PR #91 targets main. CI/current-main integration remains pending; PR #89 m
 ### Current-main reconciliation
 
 PR #89 merged at `17293a09d55806342442e57e6253984e20cdb7b8`; parent released U integration. Normal feature merge `9f3a6ca1fcb57ee15f6dcce7341d474abc00c419` reconciles that main with no conflicts and no change to reviewed history source/tests. At that exact reconciled source: local full590passed/4skipped110.87s; fresh clone full590passed/4skipped109.25s; both render/doctor/next/layout/diff checks pass, retaining the same2 informational doctor findings. Prior d50/415 CI passed; final closed-owner CI and exact record-only review binding remain required before checked merge. PR #91 is ready for review. Actual post-merge import/readcheck and durable Spec proof remain pending in this same authorized run; closed receipt will remain immutable. No live DB action or primary checkout change has occurred.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | feature/s006-wiki-history-source | c59cc9b444109944d1fff9055698793e344f2afa | ahead 0 behind 0 | 0 | Source9f3a6ca reconciles main17293a0; local and fresh590 passed4 skipped; focused85 passed; direct independent source review d50 PASS; all8 retained facts rederived exactly. Final CI/current-owner binding then postmerge live proof remain required. | src/ams/build_history.py module contract; S006 TaskU and Spec; TASKBOARD | Postmerge history import/readcheck and durable Spec proof pending in same run; Build-history criterion remains unchecked. Owner HumanQA/formal Spec acceptance pending.; close attribution: {"agent":"codex-history-consumer","claimant":"codex-history-consumer","onBehalfOf":null} | 189e485a87720a4c6209170c116fcc41955ab54269ba7f539ded75641193cd0d |
