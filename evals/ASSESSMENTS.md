@@ -138,3 +138,14 @@ Python JSON spelling against JSONB readback did not survive numeric normalizatio
 TK-000R preserves that failure and the additive exact-artifact correction; the
 migration refuses any unexpected pre-existing envelope rather than fabricate
 its lost original text. Earlier schema migrations remain history.
+
+## Exact immutable identities
+
+Canonical JSON bytes define artifact identity for duplicate packets, frozen
+comparison metadata and recomputed saved results. JSON scalars that Python
+compares equal (for example true and1,1.0 and1, or negative-zero sign) remain
+different evidence. Schema/rubric identifiers require their exact approved
+integer values. Exact retries succeed; changed artifacts refuse without an
+overwrite. These integrity checks change no r1 scoring formula or qualification.
+The scorer-source digest changes with this repair; no real remote assessments
+existed at the boundary, and no old evidence or reader identity was backfilled.

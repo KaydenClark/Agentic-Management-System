@@ -128,7 +128,7 @@ class Store:
         existing=self.rows(is_test=is_test)
         for old in existing:
             if old['assessment_id']==p['assessmentId']:
-                assessment.require(old['envelope']==envelope and old['previous_digest']==previous_digest,
+                assessment.require(old['envelope_text']==assessment._encoded(envelope).decode() and old['previous_digest']==previous_digest,
                                    'assessment identity is immutable')
                 return old
         history=[r['envelope'] for r in existing if r['failure_id']==p['failureId']]
@@ -158,7 +158,7 @@ class Store:
         for fid,items in local_groups.items():
             saved=by_failure.get(fid,[])
             assessment.require(len(saved)<=len(items) and
-                               [r['envelope'] for r in saved]==items[:len(saved)],
+                               [r['envelope_text'] for r in saved]==[assessment._encoded(e).decode() for e in items[:len(saved)]],
                                'local/remote history diverged; preserve both and reconcile')
         appended=0
         for fid,items in local_groups.items():

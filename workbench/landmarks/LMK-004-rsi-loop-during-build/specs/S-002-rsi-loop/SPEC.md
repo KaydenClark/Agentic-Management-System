@@ -29,6 +29,8 @@ Loop on real builds until meter/stop; static scores prove no benefit.
 
 [CLI proof](tasks/TK-000M/TASK.md); runner/trials/storage incomplete. [Baseline a3d014e](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified reviews, not trials; no strike/skill result.
 
+S-006 TK-000S also repairs this local CLI’s immutable packet, frozen metadata, historical source, result and approved protocol identity comparisons. Source `ad7fa28` preserves scoring formulas and qualification rules; checked delivery is tracked in that owner. No real trial or evaluator qualification is inferred.
+
 ## Desired Behavior
 
 Failure -> earliest gap/owner -> one change in its repository -> baseline/retest -> disposition/later use.
