@@ -75,7 +75,7 @@
 | [002O](002O-one-standing-campaign-approval.md) | One standing campaign approval | accepted | 2026-11-01 | evals, grill-board |
 | [002P](002P-no-session-holds-untrusted-input-secrets-and-outward-actions-together.md) | No session holds untrusted input, secrets and outward actions together | accepted | 2026-11-01 | AGENTS.md |
 | [002Q](002Q-the-workbench-folder-stays-visible.md) | The workbench folder stays visible | accepted | 2026-11-01 | ARCHITECTURE.md |
-| [002R](proposed/002R-each-rsi-run-pins-the-skills-commit.md) | Each RSI run pins the skills commit | proposed | 2026-11-01 | evals, .agents/skills |
+| [002R](002R-each-rsi-run-pins-the-skills-commit.md) | Each RSI run pins the skills commit | accepted | 2026-11-01 | evals, .agents/skills |
 | [002S](proposed/002S-at-most-six-active-specs.md) | At most six active Specs | proposed | 2026-11-01 | workbench/specs |
 | [002T](proposed/002T-measure-how-far-dev-runs-ahead-of-main.md) | Measure how far dev runs ahead of main | proposed | 2026-11-01 | RUNBOOK.md |
 | [002U](proposed/002U-writes-to-shared-stores-refuse-on-conflict.md) | Writes to shared stores refuse on conflict | proposed | 2026-11-01 | supabase, grill-board |
