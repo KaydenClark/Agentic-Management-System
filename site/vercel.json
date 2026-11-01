@@ -5,13 +5,7 @@
       "*": false,
       "**": false,
       "main": true,
-      "dev": true,
-      "site/**": true,
-      "proto/**": true,
-      "feat/s003-*": true,
-      "feat/s007-*": true,
-      "feat/s009-*": true,
-      "claude/sleepy-hamilton-5pyjrw": true
+      "dev": true
     }
   }
 }
