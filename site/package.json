@@ -11,7 +11,9 @@
     "start": "next start",
     "test": "node --test \"tests/**/*.test.mjs\"",
     "check:browser": "node tests/browser.check.mjs",
-    "tokens:gen": "node scripts/gen-tokens.mjs --write"
+    "tokens:gen": "node scripts/gen-tokens.mjs --write",
+    "glossary:gen": "node scripts/gen-glossary.mjs --write",
+    "quickstart:replay": "node tests/quickstart-replay.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "5.3.0",

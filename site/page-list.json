@@ -42,8 +42,8 @@
       "task": "TK-002",
       "landed": {
         "branch": "dev",
-        "commit": "0418ac716d4ad48440f512ea90420d45bf2b4eec",
-        "pr": 23
+        "commit": "992a5f86b7171fe837fb58dea3e91b3b7c59a9e4",
+        "pr": 67
       },
       "sources": [
         "site/app/start/",
