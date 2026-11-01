@@ -28,7 +28,7 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 ## Current Verified State
 
 - Verified candidate: `5aa2621ec03a1d419615374ec31e4c3db12069b6`, dev `c0f6c67687f432cd75b55e7d4fdad460ea2f77db`; 943 history rows, missing/extra/content mismatches/unsourced all 0. [TK-000L](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01) owns live proof and limits. No real trial or assessment storage completion claimed.
-- TK-000P adds explicit unknown metrics with reasons/sources and preserves known zero; remote migration `20261101192328` and live tagged roundtrip pass. See [trial consumer contract](../../../../../evals/TRIAL-ROWS.md). TK-000Q verifies private assessment persistence (migration `20261101193603`), including canonical replay, conflict refusal and client raw-data denial. Checked delivery/assembled Review remain separate.
+- TK-000P adds explicit unknown metrics with reasons/sources and preserves known zero; remote migration `20261101192328` and live tagged roundtrip pass. See [trial consumer contract](../../../../../evals/TRIAL-ROWS.md). TK-000R corrects the failed TK-000Q numeric roundtrip: source `d98a770`, additive migration `20261101195609`, exact TEXT artifacts/hash and JSONB projection checks. Full local/fresh495 passed/4 skipped,62 focused, source CI53 pass; tagged numeric/retry/client-denial probes cleanup0. Earlier FAIL remains recorded; checked delivery/whole Review/owner QA remain separate.
 
 ## Desired Behavior
 
@@ -78,7 +78,7 @@ One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (t
 
 [p]: tasks/TK-000B/TASK.md#proof
 
-- [ ] **Private assessment persistence.** Private remote append/readback retains the canonical assessment history with idempotence and conflict refusal; clients cannot read raw packets or write. *Must fail:* tampered totals, reset attempts, exposed private evidence or a silent overwrite.
+- [x] **Private assessment persistence.** Private remote append/readback retains the canonical assessment history with idempotence and conflict refusal; clients cannot read raw packets or write. *Must fail:* tampered totals, reset attempts, exposed private evidence or a silent overwrite.
 
 ## RSI and website connection
 
@@ -134,7 +134,7 @@ Spec review only; presentation gets Human QA in S-007.
 ## Completion Result
 
 Implementation delivered: schema/local writers, real build history, explicit
-unknown trial metrics and private assessment append/replay. TK-000L/P/Q retain
+unknown trial metrics and private assessment append/replay. TK-000L/P/Q/R retain
 candidate-specific live checks and test evidence. Private packets remain
 inaccessible to site clients; no trial result or evaluator qualification is
 inferred. Checked PR delivery, independent assembled Review and the native

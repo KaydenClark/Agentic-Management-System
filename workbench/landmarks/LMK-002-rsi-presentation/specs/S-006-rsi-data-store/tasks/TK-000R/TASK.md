@@ -16,9 +16,9 @@ Same approved private assessment persistence, successor correction after TK-000Q
 
 ## Acceptance
 
-- [ ] Exponent, negative zero and nested numeric metadata survive JSONB normalization with exact original packet/result and stable digest.
-- [ ] Changed text/projection/digest refuses; duplicate and lost-response retries remain idempotent; no corrupt namespace writes.
-- [ ] Marked live normalization probes, tests and required checks pass; original failed review remains recorded.
+- [x] Exponent, negative zero and nested numeric metadata survive JSONB normalization with exact original packet/result and stable digest.
+- [x] Changed text/projection/digest refuses; duplicate and lost-response retries remain idempotent; no corrupt namespace writes.
+- [x] Marked live normalization probes, tests and required checks pass; original failed review remains recorded.
 
 ## Native corrective provenance
 
@@ -28,4 +28,4 @@ The native failed verdict at reviewed `977ac08` generated this same Task ID at e
 
 Public transport fixtures normalize JSONB exponent metadata `1e20`/`1e308` and negative zero: all three failed before correction (digest or append-response mismatch). Exact canonical TEXT artifacts now restore original packets/results and survive repeat/lost-response import. Text/projection/hash tampering refuses. All62 focused persistence/scorer tests pass. Storage format2 and additive migration `20261101195609` retain original migration history and refuse unexpected existing rows instead of inventing original text. Database was empty before migration.
 
-Live tagged probes now preserve original exponent/negative-zero/nested numeric artifacts exactly, with duplicate200, changed identity409, concurrent200/409, all client operations401, immutable update403 and cleanup0. A DB subtransaction explicitly refused a wrong hash through rsi_assessments_exact_artifact, leaving0 rows. Advisors retain only intentional private-table INFO. Full suite, fresh clone and rereview remain pending. This is a correction to the failed private-store candidate, not an RSI trial or evaluator qualification.
+Live tagged probes now preserve original exponent/negative-zero/nested numeric artifacts exactly, with duplicate200, changed identity409, concurrent200/409, all client operations401, immutable update403 and cleanup0. A DB subtransaction explicitly refused a wrong hash through rsi_assessments_exact_artifact, leaving0 rows. Advisors retain only intentional private-table INFO. Source `d98a770f4abffb5dbb7a564c88b13c03112b4446`: full local495 passed/4 skipped and full fresh-clone495 passed/4 skipped. Source CI53 passed. Independent scoped rereview repeated62 focused tests and found no blockers; final whole-Spec verdict remains pending on the closed owner candidate. Room checks retain only the two pre-existing host informational findings. This is a correction to the failed private-store candidate, not an RSI trial or evaluator qualification.
