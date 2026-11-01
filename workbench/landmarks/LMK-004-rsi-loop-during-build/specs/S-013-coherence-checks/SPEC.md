@@ -1,15 +1,17 @@
 # S-013 - Coherence checks
 
 **Spec ID:** S-013
-**Status:** planned
+**Status:** active
 **Priority:** 2
 **Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
 **Stance:** Builder
 **Updated:** 2026-11-01
 **Catalog description:** Checks that keep the AMS coherent: up to Spec, skills pinned and in sync, `dev` measured against `main`, and independent Spec review.
 **Blockers:** none
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning.
+**Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
+**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; five Tasks planned.
+**Next gate:** Claim TK-001 or TK-002 in orchestrator C's lane.
 
 ## Intent and authority
 
@@ -48,40 +50,15 @@ An earlier Workbench let its development trunk run thousands of commits ahead of
 
 ## Dependencies And Blockers
 
-- None to start; the skills-row check needs S-006 rows.
+- None to start. The skills-row check needs S-006 rows (read with the publishable key, which is not a secret); the Grill Board item needs S-004's card format.
+- Reports live in `workbench/feedback/coherence/`.
 
 ## Vertical Implementation Slices
 
+Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, no secrets), landed feature -> `main` through a checked PR. Stack: a read-only check script, Git and GitHub reads, a committed report, and tests on fixture repositories.
+
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Report commits and days `dev` is ahead of `main`, committed as a record | ready | none | pending |
-| TK-002 | Up-to-Spec report for one active Spec against its acceptance criteria | ready | none | pending |
-| TK-003 | Skills pin and sync report over RSI rows | ready | TK-001 | pending |
-| TK-004 | Independent Spec review procedure bound to an exact commit | ready | TK-002 | pending |
-
-### TK-001 - Drift distance
-
-**Stance:** Builder
-
-Proves the `dev`-ahead criterion.
-
-### TK-002 - Up to Spec
-
-**Stance:** Builder
-
-Proves the up-to-Spec criterion.
-
-### TK-003 - Skills sync
-
-**Stance:** Builder
-
-Proves the skills criterion.
-
-### TK-004 - Spec review
-
-**Stance:** Builder
-
-Proves the review criterion.
 
 ## Acceptance Criteria
 
