@@ -80,3 +80,4 @@
 | [002T](002T-measure-how-far-dev-runs-ahead-of-main.md) | Measure how far dev runs ahead of main | accepted | 2026-11-01 | RUNBOOK.md |
 | [002U](002U-writes-to-shared-stores-refuse-on-conflict.md) | Writes to shared stores refuse on conflict | accepted | 2026-11-01 | supabase, grill-board |
 | [002V](002V-artifacts-have-character-limits.md) | Artifacts have character limits | accepted | 2026-11-01 | workbench/artifact-budgets.json |
+| [002W](002W-three-strikes-then-stop.md) | Three strikes, then stop | accepted | 2026-11-01 | AGENTS.md |
