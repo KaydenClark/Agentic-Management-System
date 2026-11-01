@@ -76,3 +76,4 @@
 | [002P](002P-no-session-holds-untrusted-input-secrets-and-outward-actions-together.md) | No session holds untrusted input, secrets and outward actions together | accepted | 2026-11-01 | AGENTS.md |
 | [002Q](002Q-the-workbench-folder-stays-visible.md) | The workbench folder stays visible | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [002R](002R-each-rsi-run-pins-the-skills-commit.md) | Each RSI run pins the skills commit | accepted | 2026-11-01 | evals, .agents/skills |
+| [002S](002S-at-most-six-active-specs.md) | At most six active Specs | accepted | 2026-11-01 | workbench/specs |
