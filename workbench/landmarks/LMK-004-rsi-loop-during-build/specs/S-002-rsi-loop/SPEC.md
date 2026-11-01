@@ -1,15 +1,17 @@
 # S-002 - RSI loop with safeguards
 
 **Spec ID:** S-002
-**Status:** planned
+**Status:** active
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
 **Updated:** 2026-11-01
 **Catalog description:** The measured self-improvement loop: the site build as the first trial, then rounds that start from failed results, under safeguards that keep the numbers honest.
 **Blockers:** none
-**Latest event:** Mapped from the earlier loop proposal and the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning; the owner's one standing campaign approval before paid trial runs.
+**Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
+**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; four Tasks planned, seeding first.
+**Next gate:** S-006 rows for TK-001; the owner's standing campaign approval before TK-002.
 
 ## Intent and authority
 
@@ -60,43 +62,20 @@ Safeguards, each required:
 
 ## Dependencies And Blockers
 
-- S-006 for rows; the standing campaign approval; sandboxed run hosts.
+- S-006 for rows; sandboxed run hosts.
+- Open owner choice `rsi-campaign-approval`: the one standing campaign approval (budget and stop condition) before any paid trial run. The build readback approval of 2026-11-01 authorizes building the loop, not its spend.
+- Seed sources are real only: this build's own history (S-006 build-history rows) and the before/after notes the owner's skills repository records. That repository is private, so a row carries a summary and a commit pointer, never its text.
 
 ## Vertical Implementation Slices
 
+Each Task is one fresh-session run in orchestrator B's local lane, landed feature -> `main` through a checked PR. Stack: task set and graders under `evals/`, a Python runner in a sandbox, the S-006 writer, Supabase rows, and queries over them.
+
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Register the site build as the first trial and write its rows with skills pin, cost and tokens | ready | none | pending |
-| TK-002 | Noise-floor run of one version against itself on a small task set | ready | TK-001 | pending |
-| TK-003 | Control arms and paired per-task statistics on the same tasks | ready | TK-002 | pending |
-| TK-004 | One full round from a failed result to a recorded disposition | ready | TK-003 | pending |
-
-### TK-001 - First trial rows
-
-**Stance:** Builder
-
-Proves the full-rows and pin criteria.
-
-### TK-002 - Noise floor
-
-**Stance:** Builder
-
-Proves the noise-floor criterion.
-
-### TK-003 - Controls
-
-**Stance:** Builder
-
-Proves the control and statistics criteria.
-
-### TK-004 - First round
-
-**Stance:** Builder
-
-Proves the round and disposition criteria.
 
 ## Acceptance Criteria
 
+- [ ] **Real, labeled seeds.** Every seed row names a real source (a build-history row, or a skills-repository commit) and the strength it supports; the build alone is one uncontrolled trial. *Must fail:* a seed row with no source, or a before/after note shown as measured improvement.
 - [ ] **Full rows.** Every row has cost, tokens, completed state, arm, version and skills commit. *Must fail:* a row missing its skills pin.
 - [ ] **Noise floor first.** A comparison is reported only after a same-version run sets the noise floor. *Must fail:* a lift smaller than the floor shown as improvement.
 - [ ] **Controls run.** Each round has no-AMS and plain-instruction rows on the same tasks. *Must fail:* a round with only the AMS arm.
