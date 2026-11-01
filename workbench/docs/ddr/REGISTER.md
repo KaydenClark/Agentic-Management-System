@@ -19,3 +19,4 @@
 | [000K](000K-every-card-carries-priority-and-value-grades.md) | Every card carries Priority and Value grades | accepted | 2026-11-01 | grill-board |
 | [000L](000L-one-local-page-shows-what-waits-on-the-owner.md) | One local page shows what waits on the owner | accepted | 2026-11-01 | grill-board |
 | [000M](000M-colors-on-owner-pages-are-signals-with-one-meaning-each.md) | Colors on owner pages are signals with one meaning each | accepted | 2026-11-01 | grill-board, site |
+| [000N](000N-setup-drafts-the-blueprint-and-starts-a-grilling.md) | Setup drafts the Blueprint and starts a grilling | accepted | 2026-11-01 | BLUEPRINT.md, RUNBOOK.md |
