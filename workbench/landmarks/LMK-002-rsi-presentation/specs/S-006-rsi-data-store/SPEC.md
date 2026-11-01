@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000C claimed by orch-b.
-**Next gate:** Close TK-000C with verification and documentation proof.
+**Latest event:** TK-000C closed with proof.
+**Next gate:** Complete TK-000B.
 
 ## Intent and authority
 
@@ -111,6 +111,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | review | Review verdict: fail at c87bf4ec86206bd5f734af7b828c81c3d3356a00 [a2124994b4d9] #1 | new Tasks TK-000B (acceptance lines unchecked, no evidence), TK-000C (no repeatable secret scan), TK-000D (recorded_fact on RSI tables) | Orchestrator C, repo half; live half is B's | 3 |
 | 2026-11-01 | TK-000E | B review FAIL c87bf4e: H1, M1-M3, L1, L2 | live half | Spec | TK-000E |
 | 2026-11-01 | TK-000E | Task closed | PR #49 (a03d739): readcheck missing 0, extra 0; livechecks pass | Spec, RUNBOOK | Fresh review; close attribution: {"agent":"orchestrator-b-tk000e-implementor","claimant":"orchestrator-b-tk000e-implementor","onBehalfOf":null} |
+| 2026-11-01 | TK-000C | Task closed | TK-000E, a4470a4: tests/test_secret_scan.py scans tree and history | Spec | none; close attribution: {"agent":"orch-b","claimant":"orch-b","onBehalfOf":null} |
 
 ## Review and Human QA
 
