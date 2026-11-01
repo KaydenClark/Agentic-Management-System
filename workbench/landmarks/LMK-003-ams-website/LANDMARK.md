@@ -8,7 +8,7 @@
 **Catalog description:** The public presentation website for the AMS, a Next.js app in `site/` on Vercel, built with the AMS as its first outside product.
 **Blockers:** none
 **Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning for S-003; fill the Decision Records links once the decision records reach `main`.
+**Next gate:** Task planning for S-003.
 
 ## Direction
 
@@ -34,15 +34,15 @@ The site is how the owner shows the AMS to friends, a manager or a CTO, and how 
 
 ## Decision Records
 
-The decision records for this landmark are being written in parallel and are not on `main` yet. They are named here by short title; links are filled at Task planning.
+The decision records under this landmark, one line each, linked to their record.
 
-- Site stack: Next.js on Vercel, Python backends, Supabase; no FastAPI.
-- Site branch model: feature -> `dev` -> `main`; only the owner approves `dev` -> `main`.
-- No development view on Vercel; the Grill Board stays local.
-- The public site only presents.
-- Owner's voice: preserved intent plus taste learned from recorded feedback.
-- Skills wiki: site-written summaries.
-- Domain: free `*.vercel.app`.
+- [Next.js front end, Python backends, Node only as tooling](../../docs/adr/002X-next-js-front-end-python-backends-node-only-as-tooling.md)
+- [The public site only presents and reads Supabase](../../docs/ddr/000O-the-public-site-only-presents-and-reads-supabase.md)
+- [Confirmation, approval and the two delivery paths](../../docs/ddr/000H-confirmation-approval-and-the-two-delivery-paths.md)
+- [The dev site is visible only to the owner, Claude and Codex](../../docs/adr/003B-the-dev-site-is-visible-only-to-the-owner-claude-and-codex.md)
+- [The site uses a free vercel.app domain](../../docs/ddr/000S-the-site-uses-a-free-vercel-app-domain.md)
+- [The skills wiki is site-written summaries](../../docs/ddr/000U-the-skills-wiki-is-site-written-summaries.md)
+- [The demo Grill Board uses sample non-engineering questions](../../docs/ddr/000V-the-demo-grill-board-uses-sample-non-engineering-questions.md)
 
 ## Child Specs
 
@@ -69,7 +69,7 @@ Page checks run against the built output and the protected `dev` deployment at a
 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
-| 2026-11-01 | none | Landmark mapped from confirmed owner decisions; S-003 ported and rewritten; S-008, S-009 and S-010 written as planned | render and doctor on the mapping branch | this record | Decision record links; Next app; Task planning |
+| 2026-11-01 | none | Landmark mapped from confirmed owner decisions; S-003 ported and rewritten; S-008, S-009 and S-010 written as planned | render and doctor on the mapping branch | this record | Next app; Task planning |
 
 ## Reached Result
 

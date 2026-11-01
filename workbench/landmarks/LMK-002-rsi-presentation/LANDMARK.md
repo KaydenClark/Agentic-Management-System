@@ -8,7 +8,7 @@
 **Catalog description:** Website pages that chart skill and build improvement from real RSI data only, read from Supabase and labeled at the strength the data supports.
 **Blockers:** none
 **Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning for S-006; fill the Decision Records links once the decision records reach `main`.
+**Next gate:** Task planning for S-006.
 
 ## Direction
 
@@ -30,13 +30,12 @@ The AMS premise, that a managed environment beats none, is a claim to test, not 
 
 ## Decision Records
 
-The decision records for this landmark are being written in parallel and are not on `main` yet. They are named here by short title; links are filled at Task planning.
+The decision records under this landmark, one line each, linked to their record.
 
-- The public site only presents; it reads Supabase and writes nothing.
-- No claim of improved outcomes without held-out rows, controls, the prior version and an interval.
-- Token counts and cost go to Supabase with the RSI data.
-- Never fabricate data; charts may start empty.
-- Secrets live only in Vercel and Supabase settings, never in the repository.
+- [Supabase holds the RSI data and a Python writer keeps it current](../../docs/adr/002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md)
+- [The Supabase project and its read-only baseline](../../docs/adr/003C-the-supabase-project-and-its-read-only-baseline.md)
+- [Charts start blank and data is never fabricated](../../docs/ddr/000T-charts-start-blank-and-data-is-never-fabricated.md)
+- [Improvement claims need held-out ledger evidence](../../docs/adr/000A-improvement-claims-need-held-out-ledger-evidence.md)
 
 ## Child Specs
 
@@ -62,7 +61,7 @@ Each reached check is confirmed against what has landed on `main` and, for pages
 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
-| 2026-11-01 | none | Landmark mapped from confirmed owner decisions; child Specs S-006 and S-007 written as planned; a read-only Supabase baseline migration already exists | render and doctor on the mapping branch | this record | Decision record links; Task planning |
+| 2026-11-01 | none | Landmark mapped from confirmed owner decisions; child Specs S-006 and S-007 written as planned; a read-only Supabase baseline migration already exists | render and doctor on the mapping branch | this record | Task planning |
 
 ## Reached Result
 

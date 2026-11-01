@@ -8,7 +8,7 @@
 **Catalog description:** The owner's local attention queue, where agents post items that need an answer and confirmed answers land straight in their owning records.
 **Blockers:** none
 **Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning for S-004; fill the Decision Records links once the decision records reach `main`.
+**Next gate:** Task planning for S-004.
 
 ## Direction
 
@@ -33,15 +33,17 @@ Owner attention is the scarcest input in the system. Without one queue, question
 
 ## Decision Records
 
-The decision records for this landmark are being written in parallel and are not on `main` yet. They are named here by short title; links are filled at Task planning.
+The decision records under this landmark, one line each, linked to their record.
 
-- The Grill Board is the owner's attention queue, never a drafting surface.
-- A confirmed Grill Board answer is written straight into its owning record.
-- Priority and Value stay on every card (owner choice).
-- Every owner question has a "too taxing" flag and a 1-5 rating.
-- Colors are signals, each with one stated meaning.
-- Writes to shared stores refuse on conflict.
-- Approvals happen in chat until the Grill Board exists, then through it.
+- [The Grill Board is local, with a Python server](../../docs/ddr/000P-the-grill-board-is-local-with-a-python-server.md)
+- [One local page shows what waits on the owner](../../docs/ddr/000L-one-local-page-shows-what-waits-on-the-owner.md)
+- [A confirmed Grill Board answer goes straight to its owner](../../docs/adr/000B-a-confirmed-grill-board-answer-goes-straight-to-its-owner.md)
+- [The decision journey is tracked apart from delivery](../../docs/ddr/000I-the-decision-journey-is-tracked-apart-from-delivery.md)
+- [Every card carries Priority and Value grades](../../docs/ddr/000K-every-card-carries-priority-and-value-grades.md)
+- [Every owner question has a too-taxing flag and a rating](../../docs/ddr/000J-every-owner-question-has-a-too-taxing-flag-and-a-rating.md)
+- [Colors on owner pages are signals with one meaning each](../../docs/ddr/000M-colors-on-owner-pages-are-signals-with-one-meaning-each.md)
+- [Writes to shared stores refuse on conflict](../../docs/adr/002U-writes-to-shared-stores-refuse-on-conflict.md)
+- [Approvals move to the Grill Board once it exists](../../docs/ddr/000X-approvals-move-to-the-grill-board-once-it-exists.md)
 
 ## Child Specs
 
@@ -67,7 +69,7 @@ Each reached check is confirmed against what has landed on `main`, by running th
 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
-| 2026-11-01 | none | Landmark mapped from confirmed owner decisions; child Specs S-004 and S-005 written as planned | render and doctor on the mapping branch | this record | Decision record links; Task planning |
+| 2026-11-01 | none | Landmark mapped from confirmed owner decisions; child Specs S-004 and S-005 written as planned | render and doctor on the mapping branch | this record | Task planning |
 
 ## Reached Result
 
