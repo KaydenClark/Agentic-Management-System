@@ -3,7 +3,7 @@
 **Task ID:** TK-004
 **Spec ID:** S-004
 **Slice:** Every board color has one documented meaning in light and dark
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Colors mean one thing
 **Planned verification:** pytest comparing used colors with the documented list
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
+**Claimed by:** claude-s004-theme
+**Current claimant:** claude-s004-theme
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), DDR-000M (colors are signals with one meaning each) under `workbench/docs/ddr/` and the board code under `grill-board/`.
 

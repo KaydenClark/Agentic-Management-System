@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 closed with proof.
-**Next gate:** Complete TK-002; TK-004 then TK-000A restyle the board to the artifact.
+**Latest event:** TK-004 claimed by claude-s004-theme.
+**Next gate:** Close TK-004 with verification and documentation proof.
 
 ## Intent and authority
 
