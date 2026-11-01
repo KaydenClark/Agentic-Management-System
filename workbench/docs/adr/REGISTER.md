@@ -33,3 +33,4 @@
 | [000Y](000Y-one-manifest-names-every-path.md) | One manifest names every path | accepted | 2026-11-01 | workbench/manifest.json |
 | [000Z](000Z-research-and-releases-have-their-own-folders.md) | Research and releases have their own folders | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [001A](001A-glossary-and-architecture-own-different-truths.md) | Glossary and Architecture own different truths | accepted | 2026-11-01 | GLOSSARY.md, ARCHITECTURE.md |
+| [001B](001B-readme-orients-people-and-the-runbook-orients-agents.md) | README orients people and the Runbook orients agents | accepted | 2026-11-01 | README.md, RUNBOOK.md |
