@@ -52,7 +52,7 @@
 | [001R](001R-a-handoff-is-a-short-live-file.md) | A handoff is a short live file | accepted | 2026-11-01 | RUNBOOK.md |
 | [001S](001S-everything-a-session-needs-is-committed.md) | Everything a session needs is committed | accepted | 2026-11-01 | AGENTS.md, .agents/skills |
 | [001T](001T-size-tasks-to-one-session-and-record-tokens.md) | Size Tasks to one session and record tokens | accepted | 2026-11-01 | workbench/specs, supabase |
-| [001U](proposed/001U-capture-a-decision-before-the-output-that-depends-on-it.md) | Capture a decision before the output that depends on it | proposed | 2026-11-01 | AGENTS.md |
+| [001U](001U-capture-a-decision-before-the-output-that-depends-on-it.md) | Capture a decision before the output that depends on it | accepted | 2026-11-01 | AGENTS.md |
 | [001V](proposed/001V-the-layout-is-judged-by-a-cold-start-eval.md) | The layout is judged by a cold-start eval | proposed | 2026-11-01 | evals |
 | [001W](proposed/001W-the-owner-s-orchestration-model-is-the-default.md) | The owner's orchestration model is the default | proposed | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [001X](proposed/001X-room-skills-live-beside-the-owner-s-personal-skills.md) | Room skills live beside the owner's personal skills | proposed | 2026-11-01 | .agents/skills |
