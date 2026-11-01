@@ -9,7 +9,7 @@
 **Catalog description:** The single "Are we there yet?" check for the AMS across its four landmarks, its room and governance, its skills, its Python runtime and the owner's gates.
 **Blockers:** none
 **Latest event:** Ported from the pre-repository plan and rewritten from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Claim TK-001 or TK-002; at most six Specs are active at once.
+**Next gate:** Backlog; activate first when one of the six active Specs closes.
 
 ## Intent and authority
 
@@ -49,7 +49,7 @@ Agent management must be auditable while it is built, and the owner wants to sta
 
 ## Backlog order
 
-Planned Specs, activated in this order as active ones close (at most six active): S-005 page review cards; S-011 land skill events; S-010 governance flow charts; S-008 skills wiki; S-009 demo Grill Board; S-012 Python lifecycle CLI. The owner may reorder.
+Planned Specs activate in this order as active ones close: S-001 itself; S-005 page review cards; S-011 land skill events; S-010 governance flow charts; S-008 skills wiki; S-009 demo Grill Board; S-012 Python lifecycle CLI. The owner may reorder.
 
 ## Non-Goals
 
