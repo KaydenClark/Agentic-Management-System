@@ -9,6 +9,16 @@
   border-top: var(--border-width) solid var(--line);
 }
 
+.position {
+  flex: 1 1 100%;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
 .link {
   flex: 1 1 var(--content-basis);
   display: flex;

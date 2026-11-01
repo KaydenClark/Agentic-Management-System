@@ -133,7 +133,7 @@
   --weight-bold: 700;
   --text-body: 16px; /* canvas page body */
   --text-ui: 15px; /* buttons */
-  --text-nav: 14px; /* sidebar links */
+  --text-nav: 14px; /* top-bar links */
   --text-small: 13px; /* eyebrows, pills, footer */
   --text-brand: 26px; /* header wordmark */
   --text-h2: 34px; /* section headings */
@@ -167,10 +167,22 @@
   --focus-offset: 2px;
   --control-min-height: 44px;
   --icon-size: 16px;
-  --sidebar-basis: 264px;
   --content-basis: 320px;
   --measure: 68ch;
   --page-min-height: 100vh;
+
+  /* Page container (owner feedback 11/01/2026): the header, <main> and the
+     footer share one centred column, so the page content lines up with the
+     header's edge. --container-wide is for wide pages (the coming Grill Board
+     page); apply it with .container-wide. */
+  --container: 960px;
+  --container-wide: 1280px;
+  --page-gutter: clamp(16px, 4vw, 24px);
+
+  /* Top bar: one row (title, links, toggle) where it fits. */
+  --topnav-order: 0;
+  --topnav-flex: 1 1 auto;
+  --brand-flex: 0 1 auto;
 
   /* /start diagrams and toy. */
   --node-basis: 112px; /* a lifecycle node's minimum width */
@@ -180,4 +192,14 @@
   --hub-size: 300px; /* the What the AMS is picture */
   --ring-width: 3; /* the loop ring's stroke, in picture units */
   --motion-quick: 0.2s; /* a stage change; none under reduced motion */
+}
+
+/* Narrow screens: title and theme toggle share the first row of the top bar,
+   the reading-order links take their own row below and wrap. */
+@media (max-width: 880px) {
+  :root {
+    --topnav-order: 2;
+    --topnav-flex: 1 1 100%;
+    --brand-flex: 1 1 0;
+  }
 }

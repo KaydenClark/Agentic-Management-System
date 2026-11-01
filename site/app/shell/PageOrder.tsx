@@ -6,7 +6,7 @@ import { nav, readingIndex } from "../nav";
 import styles from "./page-order.module.css";
 
 // Back and forward links in the reading order (app/nav.ts), at the end of
-// every page in it. Server-rendered at build time for each route; a page
+// every page in it, with the reader's "n of N" position. Server-rendered at build time for each route; a page
 // outside the reading order (such as not-found) gets none.
 export function PageOrder() {
   const index = readingIndex(usePathname());
@@ -15,6 +15,9 @@ export function PageOrder() {
   const next = nav[index + 1];
   return (
     <nav aria-label="Page order" className={styles.order}>
+      <p className={styles.position}>
+        Reading order · {index + 1} of {nav.length}
+      </p>
       {prev ? (
         <Link className={styles.link} rel="prev" href={prev.href}>
           <span className={styles.label}>Back</span>
