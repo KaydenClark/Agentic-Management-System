@@ -28,3 +28,4 @@
 | [000T](000T-scaffolding-is-deleted-at-close.md) | Scaffolding is deleted at close | accepted | 2026-11-01 | workbench/specs, ARCHITECTURE.md |
 | [000U](000U-a-prototype-needs-no-spec.md) | A prototype needs no Spec | accepted | 2026-11-01 | workbench/specs |
 | [000V](000V-the-taskboard-is-generated-and-shows-active-work.md) | The Taskboard is generated and shows active work | accepted | 2026-11-01 | TASKBOARD.md |
+| [000W](000W-read-commands-use-the-same-words-for-every-kind.md) | Read commands use the same words for every kind | accepted | 2026-11-01 | RUNBOOK.md |

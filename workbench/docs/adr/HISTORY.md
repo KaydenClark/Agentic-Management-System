@@ -28,7 +28,7 @@
 | [000T](000T-scaffolding-is-deleted-at-close.md) | Scaffolding is deleted at close | accepted | 2026-11-01 | workbench/specs, ARCHITECTURE.md |
 | [000U](000U-a-prototype-needs-no-spec.md) | A prototype needs no Spec | accepted | 2026-11-01 | workbench/specs |
 | [000V](000V-the-taskboard-is-generated-and-shows-active-work.md) | The Taskboard is generated and shows active work | accepted | 2026-11-01 | TASKBOARD.md |
-| [000W](proposed/000W-read-commands-use-the-same-words-for-every-kind.md) | Read commands use the same words for every kind | proposed | 2026-11-01 | RUNBOOK.md |
+| [000W](000W-read-commands-use-the-same-words-for-every-kind.md) | Read commands use the same words for every kind | accepted | 2026-11-01 | RUNBOOK.md |
 | [000X](proposed/000X-the-ams-runtime-is-a-small-python-cli.md) | The AMS runtime is a small Python CLI | proposed | 2026-11-01 | RUNBOOK.md, pyproject.toml |
 | [000Y](proposed/000Y-one-manifest-names-every-path.md) | One manifest names every path | proposed | 2026-11-01 | workbench/manifest.json |
 | [000Z](proposed/000Z-research-and-releases-have-their-own-folders.md) | Research and releases have their own folders | proposed | 2026-11-01 | ARCHITECTURE.md |
