@@ -38,3 +38,4 @@
 | [001D](001D-each-kind-of-truth-has-one-home.md) | Each kind of truth has one home | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [001E](001E-a-spec-needs-fresh-context-review-of-the-exact-commit.md) | A Spec needs fresh-context review of the exact commit | accepted | 2026-11-01 | AGENTS.md, workbench/specs |
 | [001F](001F-no-pass-while-an-acceptance-line-lacks-evidence.md) | No pass while an acceptance line lacks evidence | accepted | 2026-11-01 | workbench/specs |
+| [001G](001G-the-branch-policy-lives-in-one-config-file.md) | The branch policy lives in one config file | accepted | 2026-11-01 | workbench/manifest.json |
