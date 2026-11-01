@@ -14,12 +14,17 @@ npm test
 
 `npm test` runs `node --test "tests/**/*.test.mjs"` (Node's built-in runner; the glob is quoted so Node expands it, which needs Node 21 or later). The tests read the prerendered HTML in `.next/server/app/`, so run `npm run build` first and rebuild after each commit: the footer test compares the built SHA with the current commit.
 
-Optional browser check at 375 px in both themes (needs Playwright with Chromium installed; not a site dependency):
+`npm test` is browser-free and takes well under a second. Besides the page tests it runs `tests/hygiene.test.mjs` over every file the site serves (prerendered HTML and RSC in `.next/server/app/`, client JS and CSS in `.next/static/`): no host path (`/home/`, `/Users/`, `C:\Users\`, `file:///` with a drive or host directory), Supabase secret or service-role key, JWT, API token, private key block, email address, reference to the private GPT_OS repository or agent session link; and no HTML or CSS resource (script, `<link>`, image, CSS `url()` or `@import`) loaded from a host other than Supabase or GitHub. The patterns live in `tests/hygiene.mjs`; its planted-fault cases plant into a copy of a built page.
+
+Browser checks (needs Playwright with Chromium installed, resolved with `require("playwright")`; not a site dependency. axe-core is a devDependency and is injected from `node_modules`, never a CDN):
 
 ```bash
-npm run check:browser            # starts `next start` itself
-node tests/browser-375.check.mjs --shots /tmp/shots   # also saves screenshots
+npm run check:browser                                  # starts `next start` itself
+node tests/browser.check.mjs --shots DIR               # also saves qa-<route>-<theme>-<width>.png
+node tests/browser.check.mjs --url http://host:port    # check a running server instead
 ```
+
+`tests/browser.check.mjs` reads every route from the build manifests (plus the not-found page), so a new page is covered without editing the check. Each route is opened at 375 px and 1280 px in light and dark and checked for: no horizontal scroll; an axe-core WCAG 2.x A/AA pass, contrast included (contrast axe cannot decide counts as a failure); Tab reaching every visible control, each with a visible focus indicator; nothing animating, transitioning or smooth-scrolling under `prefers-reduced-motion: reduce`; and every request going to the site, Supabase or GitHub. Requests to other hosts are recorded and aborted, so the check contacts no third party. It also keeps TK-001's home checks (theme follows the system, the toggle overrides and persists, fonts self-hosted) and checks each page's text with scripts disabled. Before the real pass it plants each fault into a live page (low contrast, a too-wide element, focus outlines removed, a control taken out of the tab order, a transition and an animation ignoring reduced motion, an external font) and fails if any check misses its fault. It exits non-zero on any failure.
 
 ## Shell
 

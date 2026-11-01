@@ -3,7 +3,7 @@
 **Task ID:** TK-005
 **Spec ID:** S-003
 **Slice:** Hygiene, accessibility, 375 px and no-third-party checks run on the built output
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Public hygiene; No third parties; Responsive and accessible
 **Planned verification:** check scripts failing on planted faults
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `dev`. Read this Task and the parent Spec (`../../SPEC.md`) from `origin/main`; branch from `origin/dev`, open a PR into `dev` and merge it once current and checked. Never merge `dev` -> `main`; only the owner does. Orchestrator A's lane: no Supabase service key, no web browsing; check the protected `dev` deployment through the Vercel connector ([ADR-003B](../../../../../../docs/adr/003B-the-dev-site-is-visible-only-to-the-owner-claude-and-codex.md)). Document site commands in `site/README.md`.
+**Claimed by:** orchestrator-A-dispatcher-S003-qa
+**Current claimant:** orchestrator-A-dispatcher-S003-qa
 
 Read `AGENTS.md` and the site on `origin/dev`.
 
