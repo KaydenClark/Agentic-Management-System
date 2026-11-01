@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000J closed with proof.
-**Next gate:** Complete TK-000F.
+**Latest event:** TK-000F closed with proof.
+**Next gate:** Confirm acceptance criteria and completion result.
 
 ## Intent and authority
 
@@ -122,6 +122,7 @@ One row per Task; full proof and close attribution are in each TASK.md Receipt.
 | 2026-11-01 | TK-000J | Task closed | 00b0aa0, PR #58; 3 mutations fail | README, qa/ | 375px check skips in default pytest |
 
 Owner Human QA has not been performed for any Task.
+| 2026-11-01 | TK-000F | Task closed | PR #58; 8 of 8 lines linked | this Spec | Fresh review |
 
 ## Review and Human QA
 
