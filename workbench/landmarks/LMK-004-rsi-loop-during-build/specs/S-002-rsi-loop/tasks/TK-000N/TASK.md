@@ -3,12 +3,13 @@
 **Task ID:** TK-000N
 **Spec ID:** S-002
 **Slice:** A retained historical finding can acquire its missing mapping and pass an explicit repaired-revision retest
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Cycle; Stops (historical finding recovery)
 **Planned verification:** Red/green CLI record/readback case, refusal of conflicting remaps, no resolution by enrichment alone; full suite and room checks.
 **Claimed by:** codex-s002
 **Current claimant:** codex-s002
+**Proof:** 40 focused; fresh 431/4 skip; CI #32 pass
 
 ## Assignment
 
@@ -30,3 +31,9 @@ Candidate `4e111c97d3e1aa06c6ff12b88a5ab49371ed4ea4`: 40 focused tests pass. Ind
 Records preserve baseline and prior packets, reject source/remapping changes before writing, and keep enrichment open without a retest. The automated PR finding is resolved after repair and independent verification. Final-head CI gates merge; no S-006 storage or model trials are claimed. Closed TK-000M proof remains historical, supplemented by this correction.
 
 CI workflow `41337850971` (run #32) passed at `4e111c9`, including the browser/records checks. Final closure changes only owner records; final-head CI will be verified on PR #78 before merge.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s002-assessment-loop | 5ec9fd3041f0ede1585e825db1fa8095f19dd54f | ahead 0 behind 0 | 0 | 40 focused; fresh 431/4 skip; CI #32 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} | 011bf1a471bfe9520c4233bb833f38fdb6c7b4e94fbec755b8dd4fbc681c61d2 |
