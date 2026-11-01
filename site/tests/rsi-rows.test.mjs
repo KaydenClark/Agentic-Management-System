@@ -161,6 +161,14 @@ test('model change: two models render as two series, never one line', () => {
   }
   const perVersion = seriesIn(doc, placeOf(doc, 'dev-per-version'));
   assert.equal(perVersion.length, 2, 'the per-version view also splits on the model');
+  // Control: with one model across the same two versions, one series and
+  // one line join both points, so the split above is the model's doing.
+  const same = walk(render(cases.regressionCase));
+  const [one, ...extra] = seriesIn(same, placeOf(same, 'dev-per-task'));
+  assert.equal(extra.length, 0);
+  const lines = same.elements.filter((e) => e.name === 'polyline' && inside(e, one));
+  assert.equal(lines.length, 1);
+  assert.equal(lines[0].attrs.points.trim().split(/\s+/).length, 2);
 });
 
 test('regression: a version that passes fewer trials than the prior one is marked as a regression', () => {
