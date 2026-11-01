@@ -1,0 +1,276 @@
+/* The skills wiki (S-008): the /skills index and the /skills/<name> articles.
+   Greys only: on this site a hue means who holds the work, and a skill holds
+   nothing. Every value comes from app/theme/tokens.css. */
+
+.page,
+.article {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+/* Index: jump links to each stage. */
+
+.stageNav ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6) var(--space-8);
+}
+
+.stageNav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min-height);
+  padding: var(--space-8) var(--space-12);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-nav);
+  color: var(--ink);
+  font-size: var(--text-nav);
+  font-weight: var(--weight-medium);
+  text-decoration: none;
+}
+
+.stageNav a:hover {
+  background: var(--raised);
+}
+
+/* Index: one block per stage; main-flow entries solid and numbered, the
+   skills also used outlined. */
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding-top: var(--space-18);
+  border-top: var(--border-width) solid var(--line);
+  scroll-margin-top: var(--space-24);
+}
+
+.stageHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.gloss {
+  color: var(--muted);
+}
+
+.note {
+  color: var(--muted);
+  font-size: var(--text-small);
+}
+
+.flowHead {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.entries {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.entryMain,
+.entryUsed {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-12);
+  padding: var(--space-12) var(--space-14);
+  border-radius: var(--radius-card);
+}
+
+.entryMain {
+  background: var(--surface);
+  border: var(--border-width) solid var(--line-strong);
+}
+
+.entryUsed {
+  background: transparent;
+  border: var(--border-width) dashed var(--line-strong);
+}
+
+.step {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--step-size);
+  height: var(--step-size);
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--ground);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: var(--weight-bold);
+}
+
+.entryBody {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.entryLink {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: var(--target-min);
+  min-width: var(--target-min);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-weight: var(--weight-semibold);
+  overflow-wrap: anywhere;
+  text-underline-offset: var(--focus-offset);
+}
+
+.entrySummary {
+  color: var(--muted);
+}
+
+/* Article. */
+
+.stageLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stageLabel a {
+  color: var(--ink);
+  text-underline-offset: var(--focus-offset);
+}
+
+.title {
+  font-size: var(--text-h1-skill);
+  overflow-wrap: anywhere;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  min-width: 0;
+}
+
+.section h2 {
+  font-size: var(--text-h2-section);
+  scroll-margin-top: var(--space-24);
+}
+
+.section a {
+  text-underline-offset: var(--focus-offset);
+}
+
+.h3 {
+  margin: 0;
+  padding-top: var(--space-8);
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-heading);
+}
+
+.list {
+  margin: 0;
+  padding-inline-start: var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.code {
+  padding-inline: var(--space-4);
+  background: var(--raised);
+  border-radius: var(--radius-badge);
+  font-family: var(--font-mono);
+  font-size: var(--text-code);
+  overflow-wrap: anywhere;
+}
+
+/* Wrapped, never scrolled: no page scroll at 375 px and no tab stop needed. */
+.pre {
+  margin: 0;
+  padding: var(--space-12) var(--space-14);
+  background: var(--surface);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-control);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* Fixed layout at the column's width with wrapping cells: a table reflows
+   instead of overflowing the page. */
+.table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: var(--space-8) var(--space-10);
+  border-bottom: var(--border-width) solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+.table th {
+  font-weight: var(--weight-semibold);
+  border-bottom-color: var(--line-strong);
+}
+
+.quote {
+  margin: 0;
+  padding: var(--space-14) var(--space-18);
+  background: var(--surface);
+  border: var(--border-width) solid var(--line);
+  border-inline-start: var(--rule-width) solid var(--line-strong);
+  border-radius: var(--radius-control);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.credit {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-18);
+  border-top: var(--border-width) solid var(--line);
+  color: var(--muted);
+  font-size: var(--text-small);
+}
+
+.credit a {
+  color: var(--ink);
+  text-underline-offset: var(--focus-offset);
+}
+
+.pin .code {
+  color: var(--ink);
+}
