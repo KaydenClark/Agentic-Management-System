@@ -133,3 +133,16 @@ Supersedes: JOT-88d089a7-8f28-4167-b853-b1a7160d2c6b
 
 S-001: The owner asked to undo the Spec lockout and identified S-001 as the blocked work. Final clarification: "Parent specs should be Landmarks". Apply the existing limit of six to active Landmarks. Use Landmark -> Spec -> Task; introduce no parent-Spec hierarchy and put no Landmark beneath a Spec. Specs do not consume Landmark slots or wait for sibling completion to free one. S-001 remains the cross-landmark yardstick under the Blueprint and is authorized to start its existing ready assessment/repair Tasks without waiting for unfinished capabilities. Final system acceptance still needs the required outcomes. This replaces the all-Spec cap and slot-transfer queue, retaining real Task inputs, scoped execution authority, prior owner stops on A/B product work and QA/publication gates. No outcome is accepted or product work resumed by this repair.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-098ca81a-6d8f-410e-af85-20ed3818a0d4
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T18:12:28.027Z
+Author: Kayden
+Source: Owner correction of skill choice in AMS chat, 2026-11-01
+Topic: active-spec-approvals
+Supersedes: none
+
+For this S-001 lockout repair, use Jot, not domain-modeling. This corrects an existing operating rule; no domain-model or vocabulary change required the heavier skill. The final six-Landmark cap, hierarchy and S-001 readiness correction remain unchanged.
+<!-- /jot-entry -->
