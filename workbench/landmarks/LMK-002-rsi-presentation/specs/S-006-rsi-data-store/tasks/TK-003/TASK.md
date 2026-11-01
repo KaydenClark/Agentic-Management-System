@@ -3,7 +3,7 @@
 **Task ID:** TK-003
 **Spec ID:** S-006
 **Slice:** The writer records RSI result and run rows with full provenance, refusing a missing skills commit and a stale update
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-002
 **Destination:** spec-acceptance: Schema and provenance; Conflict refusal
 **Planned verification:** live tests for the missing-field and conflict refusals
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
+**Claimed by:** claude-s006-tk003
+**Current claimant:** claude-s006-tk003
 
 Orchestrator B's lane only. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), ADR-000A, ADR-002J and DDR-000T, and the writer under `src/`.
 
