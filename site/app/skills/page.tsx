@@ -13,7 +13,7 @@ import styles from "./skills.module.css";
 
 export const metadata: Metadata = {
   title: "Skills | Agentic Management System",
-  description: "Articles on Kayden's skills, the written methods his agents load, grouped by the Workbench stage each one serves.",
+  description: "Articles on Kayden's skills, the written methods the agents load, grouped by the Workbench stage each one serves.",
 };
 
 function Entry({ article }: { article: Article }) {
