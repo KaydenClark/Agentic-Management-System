@@ -54,3 +54,4 @@
 | [001T](001T-size-tasks-to-one-session-and-record-tokens.md) | Size Tasks to one session and record tokens | accepted | 2026-11-01 | workbench/specs, supabase |
 | [001U](001U-capture-a-decision-before-the-output-that-depends-on-it.md) | Capture a decision before the output that depends on it | accepted | 2026-11-01 | AGENTS.md |
 | [001V](001V-the-layout-is-judged-by-a-cold-start-eval.md) | The layout is judged by a cold-start eval | accepted | 2026-11-01 | evals |
+| [001W](001W-the-owner-s-orchestration-model-is-the-default.md) | The owner's orchestration model is the default | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |

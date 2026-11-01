@@ -54,7 +54,7 @@
 | [001T](001T-size-tasks-to-one-session-and-record-tokens.md) | Size Tasks to one session and record tokens | accepted | 2026-11-01 | workbench/specs, supabase |
 | [001U](001U-capture-a-decision-before-the-output-that-depends-on-it.md) | Capture a decision before the output that depends on it | accepted | 2026-11-01 | AGENTS.md |
 | [001V](001V-the-layout-is-judged-by-a-cold-start-eval.md) | The layout is judged by a cold-start eval | accepted | 2026-11-01 | evals |
-| [001W](proposed/001W-the-owner-s-orchestration-model-is-the-default.md) | The owner's orchestration model is the default | proposed | 2026-11-01 | AGENTS.md, RUNBOOK.md |
+| [001W](001W-the-owner-s-orchestration-model-is-the-default.md) | The owner's orchestration model is the default | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [001X](proposed/001X-room-skills-live-beside-the-owner-s-personal-skills.md) | Room skills live beside the owner's personal skills | proposed | 2026-11-01 | .agents/skills |
 | [001Y](proposed/001Y-each-behavior-has-one-owning-skill.md) | Each behavior has one owning skill | proposed | 2026-11-01 | .agents/skills |
 | [001Z](proposed/001Z-cross-skill-calls-are-explicit-skill-tool-calls.md) | Cross-skill calls are explicit Skill-tool calls | proposed | 2026-11-01 | .agents/skills |
