@@ -21,6 +21,7 @@ generated rows as an independent queue. An empty board means no projected work.
 <!-- hot-specs:start -->
 | Spec | Current slice | Owner | Blocker | Latest meaningful event | Next gate |
 |---|---|---|---|---|---|
+| none | No active slice | unassigned | none | All completed specs are cold. | Activate a planned spec explicitly. |
 <!-- hot-specs:end -->
 
 Completed specs disappear from this projection. Their requirements,

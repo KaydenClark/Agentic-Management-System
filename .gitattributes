@@ -1,0 +1,16 @@
+# >>> LLM Workbench line endings (managed by workbench-layout.mjs init)
+# Workbench records, runtime tools and controls check out as LF on every
+# host, so receipt hashes and record parsing hold under core.autocrlf=true.
+/workbench/** text=auto eol=lf
+/.agents/skills/** text=auto eol=lf
+/AGENTS.md text=auto eol=lf
+/BLUEPRINT.md text=auto eol=lf
+/GLOSSARY.md text=auto eol=lf
+/ARCHITECTURE.md text=auto eol=lf
+/RUNBOOK.md text=auto eol=lf
+/TASKBOARD.md text=auto eol=lf
+/CLAUDE.md text=auto eol=lf
+/README.md text=auto eol=lf
+# Content-hashed historical parts retain their exact original line endings.
+*.md.part-* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# <<< LLM Workbench line endings

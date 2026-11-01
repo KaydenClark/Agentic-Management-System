@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 2,
+  "workbenchVersion": "v3.2.2",
+  "workbenchId": "WB-7EHJDwO9oqHb2fsrerZrlZ",
+  "provenance": {
+    "lifecycle": "adoption",
+    "source": {
+      "repository": "https://github.com/KaydenClark/skills.git",
+      "release": "v3.2.2",
+      "sha256": "99080edd8e061ba6b1b142e27088338914b591cee27a7c5725383d405af7ceb2",
+      "upstream": {
+        "repository": "https://github.com/KaydenClark/LLM_Workbench.git",
+        "commit": "9d5e1f25b0d5870589ae1c5752f27f42acb796ef",
+        "note": "Historical implementation lineage; the adapted package is not a promoted upstream release."
+      }
+    }
+  },
+  "git": {
+    "defaultBranch": "main",
+    "integrationBranch": "main"
+  },
+  "lanes": {
+    "docs": "workbench/docs",
+    "specs": "workbench/specs",
+    "wiki": "workbench/wiki",
+    "sessions": "workbench/sessions",
+    "feedback": "workbench/feedback",
+    "tools": "workbench/tools",
+    "skills": ".agents/skills"
+  },
+  "collections": {
+    "adr": "workbench/docs/adr",
+    "design-concepts": "workbench/wiki/design-concepts",
+    "guidebooks": "workbench/wiki/guidebooks",
+    "archive": "workbench/wiki/archive",
+    "grilling": "workbench/sessions/grilling",
+    "handoffs": "workbench/sessions/handoffs",
+    "checkpoints": "workbench/sessions/checkpoints",
+    "notepads": "workbench/sessions/notepads",
+    "notepad-templates": "workbench/sessions/notepads/templates",
+    "recovery": "workbench/sessions/recovery",
+    "features": "workbench/wiki/features",
+    "ddr": "workbench/docs/ddr",
+    "landmarks": "workbench/landmarks"
+  },
+  "wiki": {
+    "profile": "project"
+  },
+  "skillPolicy": {
+    "required": [
+      "setup-workbench",
+      "map",
+      "plan",
+      "orchestrate",
+      "journey",
+      "jot",
+      "domain-modeling",
+      "grilling",
+      "code-review",
+      "pr",
+      "carry",
+      "reconcile",
+      "improve-workbench",
+      "evaluate-workbench",
+      "audit-workbench",
+      "author-skill"
+    ],
+    "discovery": [
+      ".agents/skills",
+      ".claude/skills"
+    ],
+    "normalSetup": "personal-catalog",
+    "updates": "explicit-only"
+  },
+  "legibility": {
+    "run": "[RUN_COMMAND]",
+    "operate": "node workbench/tools/spec-workbench.mjs claim S-### --agent NAME; close S-### --agent NAME --proof TEXT --docs TEXT --remaining-gap TEXT",
+    "inspect": "node workbench/tools/spec-workbench.mjs list; show S-###; TASKBOARD.md",
+    "errors": "node workbench/tools/spec-workbench.mjs doctor --json; git status --porcelain",
+    "journey": "[JOURNEY_COMMAND]",
+    "measure": "[MEASURE_COMMAND]"
+  }
+}
