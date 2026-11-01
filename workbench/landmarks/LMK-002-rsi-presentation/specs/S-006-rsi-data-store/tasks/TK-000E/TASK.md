@@ -3,7 +3,7 @@
 **Task ID:** TK-000E
 **Spec ID:** S-006
 **Slice:** Review FAIL at c87bf4e corrected: readcheck fails on extra rows, history current, recorded_fact limited to build history, repeatable secret scan
-**Status:** in-progress
+**Status:** done
 **Blockers:** TK-005
 **Destination:** spec-acceptance: Build history from real records; Real sources only; No secrets in Git
 **Planned verification:** pytest with red-first tests for each finding; live ams-history import and readcheck (missing 0, extra 0), ams-rsi and ams-sources livecheck, get_advisors
@@ -13,6 +13,7 @@
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
 **Claimed by:** orchestrator-b-tk000e-implementor
 **Current claimant:** orchestrator-b-tk000e-implementor
+**Proof:** PR #49 (a03d739): readcheck missing 0, extra 0; livechecks pass
 
 Orchestrator B's lane only. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`) and the writers under `src/ams/`.
 
@@ -54,3 +55,9 @@ PR #49 merged as a03d739 (Codex: no findings). `uv run pytest`: 339 passed, 3 sk
 - **L1:** recorded in the Spec's limitations.
 
 This Task's changes also deliver the content of orchestrator C's TK-000C (secret scan of tree and history) and TK-000D (no `recorded_fact` on the RSI tables). Those records stay open for their owner to reconcile.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | feat/s006-tk000e-close | 979c29ad2e046308fbb63ffd231636188b29a380 | ahead 0 behind 0 | 0 | PR #49 (a03d739): readcheck missing 0, extra 0; livechecks pass | Spec, RUNBOOK | Fresh review; close attribution: {"agent":"orchestrator-b-tk000e-implementor","claimant":"orchestrator-b-tk000e-implementor","onBehalfOf":null} | 8ced6a3d260fb80f3268b0f37b7121bc06b31fc724e25200116aac3f16d8579a |
