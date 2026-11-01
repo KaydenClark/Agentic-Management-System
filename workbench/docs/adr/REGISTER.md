@@ -49,3 +49,4 @@
 | [001O](001O-links-and-grep-before-any-vector-index.md) | Links and grep before any vector index | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [001P](001P-continuity-is-proven-by-a-fresh-recipient-trial.md) | Continuity is proven by a fresh-recipient trial | accepted | 2026-11-01 | AGENTS.md, evals |
 | [001Q](001Q-temporary-notes-are-reconciled-and-deleted.md) | Temporary notes are reconciled and deleted | accepted | 2026-11-01 | AGENTS.md |
+| [001R](001R-a-handoff-is-a-short-live-file.md) | A handoff is a short live file | accepted | 2026-11-01 | RUNBOOK.md |
