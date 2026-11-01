@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Owner authorized implementation through merge into `dev` (2026-11-01, JOT-ba986c8a).
-**Next gate:** TK-001 and TK-002 Journey; checked merge into `dev`.
+**Latest event:** TK-001 claimed by Orchestrator (Claude Opus 5.5).
+**Next gate:** Close TK-001 with verification and documentation proof.
 
 ## Intent and authority
 
