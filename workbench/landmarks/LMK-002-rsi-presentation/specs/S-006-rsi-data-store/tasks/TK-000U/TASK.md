@@ -20,6 +20,17 @@ Check/open PR into main, but WAIT for parent: S-002 PR #89 must merge first. The
 
 ## Acceptance
 
-- [ ] Current destination Specs and declared immutable Wiki history together derive the8 retained events with exact original source/fields, without duplicate events or new evidence claims.
-- [ ] Missing/tampered/unprovable rows still fail readcheck; unsupported, conflicting, future or orphan routes cannot authorize events; route processing performs no external fetch.
-- [ ] Focused/full/fresh checks and independent review pass; previous failed history proof is retained and live after-merge verification is reported truthfully.
+- [x] Current destination Specs and declared immutable Wiki history together derive the8 retained events with exact original source/fields, without duplicate events or new evidence claims.
+- [x] Missing/tampered/unprovable rows still fail readcheck; unsupported, conflicting, future or orphan routes cannot authorize events; route processing performs no external fetch.
+- [x] Focused/full/fresh checks and independent review pass; previous failed history proof is retained and live after-merge verification is reported truthfully.
+
+## Check and QA
+
+Source candidate `d50b1673db868842016428bb804f48a763738689` (base `a4d58dd6622477c0edab9bc2c61e03967b9c31dd`):
+
+- RED: relocated fixture derived0 retained events; expected8. Its existing DB rows were extras. GREEN: `pytest -q tests/test_build_history_wiki_sources.py tests/test_build_history.py`85passed, including exact six-plus-two recovery, missing/tampered/unprovable-row failures and source-route refusal cases.
+- Local `uv run pytest -q`:540passed/4skipped111.73s. Clean fresh clone at exact source:540passed/4skipped106.12s. Render unchanged, doctor0blocking (same2informational findings), next/layout/diff pass in both. An initial room-check invocation used a nonexistent validator filename; the actual RUNBOOK command then passed. No source/test check was weakened.
+- Local record reader independently compared all8 real retained facts with the saved original-blobs proof: subject, summary, UTC time, source URL and recorded_commit all exact. No database access.
+- Actual eligible independent reviewer `s002_bootstrap_review` directly supplied scoped source PASS/no blockers at exact source: Standards0/Spec0 unresolved,85focusedpass11.09s in a clean detached clone, and independently rederived all8 real rows exactly once. Reviewer contributed no U source/records, used no credentials/DB/model calls or delegation. Implementor verified direct primary report and clean exact reviewer clone. This is a source review, not whole-Spec acceptance or a live DB observation.
+
+Draft PR #91 targets main. CI/current-main integration remains pending; PR #89 must merge first and parent must release this merge. Actual post-merge history import/readcheck is pending; the earlier failed6e30c87 check remains actual evidence (missing0/extra8/mismatches0/unsourced0), not retroactively green. Owner Human QA and formal S-006 acceptance remain open. No table restoration, deletions, schema/scorer changes, secret/key copies, website changes or DB mutations occurred in this run.
