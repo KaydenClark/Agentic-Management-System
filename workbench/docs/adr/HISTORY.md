@@ -21,7 +21,7 @@
 | [000M](000M-a-directory-guide-holds-invariants-and-pointers-only.md) | A directory guide holds invariants and pointers only | accepted | 2026-11-01 | AGENTS.md |
 | [000N](000N-one-decision-record-type-the-cdr.md) | One decision-record type, the CDR | accepted | 2026-11-01 | GLOSSARY.md, ARCHITECTURE.md |
 | [000O](000O-cdrs-follow-standard-adr-practice.md) | CDRs follow standard ADR practice | accepted | 2026-11-01 | ARCHITECTURE.md |
-| [000P](proposed/000P-a-capability-change-gets-one-short-spec.md) | A capability change gets one short Spec | proposed | 2026-11-01 | workbench/specs |
+| [000P](000P-a-capability-change-gets-one-short-spec.md) | A capability change gets one short Spec | accepted | 2026-11-01 | workbench/specs |
 | [000Q](proposed/000Q-each-task-is-its-own-runnable-file.md) | Each Task is its own runnable file | proposed | 2026-11-01 | workbench/specs |
 | [000R](proposed/000R-a-task-is-one-agent-run.md) | A Task is one agent run | proposed | 2026-11-01 | workbench/specs |
 | [000S](proposed/000S-a-spec-is-accepted-against-its-conditions.md) | A Spec is accepted against its conditions | proposed | 2026-11-01 | workbench/specs |

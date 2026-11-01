@@ -21,3 +21,4 @@
 | [000M](000M-a-directory-guide-holds-invariants-and-pointers-only.md) | A directory guide holds invariants and pointers only | accepted | 2026-11-01 | AGENTS.md |
 | [000N](000N-one-decision-record-type-the-cdr.md) | One decision-record type, the CDR | accepted | 2026-11-01 | GLOSSARY.md, ARCHITECTURE.md |
 | [000O](000O-cdrs-follow-standard-adr-practice.md) | CDRs follow standard ADR practice | accepted | 2026-11-01 | ARCHITECTURE.md |
+| [000P](000P-a-capability-change-gets-one-short-spec.md) | A capability change gets one short Spec | accepted | 2026-11-01 | workbench/specs |
