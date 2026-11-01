@@ -90,11 +90,11 @@
 /* Mixes: pick a hue with .h-*, then use the .tone tokens. */
 
 .tone {
-  --on: #0A0A0A; /* grey: text on a strong hue fill, not a signal */
-  --tone-soft: color-mix(in oklab,var(--hue) var(--soft-pct),var(--surface)); /* the hue's meaning, at rest */
-  --tone-ink: color-mix(in oklab,var(--hue) 40%,var(--pole)); /* the hue's meaning, as text */
-  --tone-line: color-mix(in oklab,var(--hue) var(--line-pct),var(--pole)); /* the hue's meaning, as an outline */
-  --tone-dot: color-mix(in oklab,var(--hue) var(--dot-pct),var(--pole)); /* the hue's meaning, live */
+  --on: #0A0A0A; /* Text on a strong hue fill */
+  --tone-soft: color-mix(in oklab,var(--hue) var(--soft-pct),var(--surface)); /* The soft, at-rest fill of the card's hue */
+  --tone-ink: color-mix(in oklab,var(--hue) 40%,var(--pole)); /* Text in the card's hue */
+  --tone-line: color-mix(in oklab,var(--hue) var(--line-pct),var(--pole)); /* The outline in the card's hue */
+  --tone-dot: color-mix(in oklab,var(--hue) var(--dot-pct),var(--pole)); /* The live dot in the card's hue */
 }
 
 .h-heat {
