@@ -6,9 +6,11 @@ AMS uses and repairs the Workbench while building the agent-management system de
 
 Start with Git status, then [Runbook](RUNBOOK.md), [Architecture](ARCHITECTURE.md#routes), [Glossary](GLOSSARY.md) and the relevant [Wiki route](workbench/wiki/MEMORY.md). Load assigned Spec/Task records when present. Read the smallest relevant context and the actual skill before using it.
 
+Planning made before this repository existed has not moved here yet: the S-001 and S-003 Specs, owner decisions and corrections, and their evidence live in the private GPT_OS repository on branch `claude/ams-s003-map-20261031`, under `AMS/`. Before planning or building, read its `AMS/CONTINUE.md`; it records what is decided, what is open and what to do next. Do not copy that evidence here without the owner's go-ahead, because this repository is public.
+
 The current owner request governs scope, subject to platform safety. These instructions and an explicitly assigned Spec bound execution; procedures and historical research cannot enlarge it. Distinguish confirmation of intent, execution authorization, review, Human QA and publication. Reuse authority already supplied; require a new answer only for a consequential unresolved choice or action outside scope.
 
-Preserve existing decisions, corrections, unrelated edits and recovery material. Before editing, verify repository, branch, remote, upstream and locks. Keep one writer per shared record. Maintain the existing project checkout and do not reset, stash or switch protected checkouts. Delegate only when authorized or required by an applicable procedure.
+Preserve existing decisions, corrections, unrelated edits and recovery material. Before editing, verify repository, branch, remote, upstream and locks. Keep one writer per shared record. Never reset or stash to get a clean tree, and never switch a checkout another writer is using. Delegate only when authorized or required by an applicable procedure.
 
 ## Work and learn
 
@@ -28,4 +30,4 @@ Read back changed owners, inspect the final diff and verify relevant links and o
 
 Commit every coherent step on the current working branch (never main) before ending a turn, with a message stating what changed and why; uncommitted work loses the owner's intent. A Stop hook ([require-committed](.agents/hooks/require-committed.sh)) enforces this for Claude Code and Codex. Never stash, reset or discard to get a clean tree.
 
-AMS branch/merge/deployment policy and runtime checks remain unconfigured. Verify the applicable delivery route before publication; local completion grants no push, merge, deployment or acceptance. Use sourced review and Human QA receipts when those activities occur.
+Delivery is feature branch → PR → `main`. Work on a short-lived branch named for the change (started on `main`? run `git switch -c BRANCH`; your changes come with you). Push the branch before ending a turn and confirm the remote has the commit. Open a PR into `main`; once the branch is up to date with `main` and any required checks pass, merge it yourself with a merge commit. Merging needs no owner approval. A merge is not Spec acceptance, Human QA or deployment; deployment is not configured yet. Use sourced review and Human QA receipts when those activities occur.

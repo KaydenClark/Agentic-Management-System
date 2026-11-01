@@ -30,7 +30,15 @@ When code is introduced, fill verified setup, focused-test, full-suite and build
 
 ## Version control and publication
 
-Preserve existing work and use the current authorized branch. No default AMS merge target or deployment route is selected by these templates. Record exact candidate and actual delivery authorization before publishing. Keep local, committed, pushed, reviewed, merged and deployed states distinct.
+`main` is the only long-lived branch. For each change:
+
+1. Branch from current `main` with a name for the change.
+2. Commit each coherent step; never stash. The Stop hook refuses to end a turn with uncommitted work.
+3. Push the branch and confirm the remote has the commit.
+4. Open a PR into `main` (draft while unfinished). Once it is up to date with `main` and any required checks pass, merge it yourself with a merge commit, then confirm `main` contains it.
+5. Delete the merged branch.
+
+No deployment route is configured yet. Keep local, committed, pushed, merged and deployed states distinct when reporting.
 
 ## Recovery
 
