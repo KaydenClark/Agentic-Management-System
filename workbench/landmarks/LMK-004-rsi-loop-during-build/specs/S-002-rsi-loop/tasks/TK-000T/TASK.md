@@ -3,12 +3,13 @@
 **Task ID:** TK-000T
 **Spec ID:** S-002
 **Slice:** Isolated input materialization/reset, protected reference and strict tool-free runtime preflight
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Evals; Readback
 **Planned verification:** Public CLI red/green tests; real shell denial canaries; reuse the single actual tool-free provider smoke with its limits; full suite and fresh-clone room checks
 **Claimed by:** s002-bootstrap
 **Current claimant:** s002-bootstrap
+**Proof:** 45 focused; fresh 562/4 skip; CI70; actual adapter smoke
 
 ## Assignment
 
@@ -42,3 +43,9 @@ Observed red then green: unlisted recovery-file deletion, non-socket PermissionE
 QA materialized both exact private source packs, verified all Git blob/SHA-256 identities, preserved approved owner-example bytes outside worker inputs, and read back safe immutable facts. Actual corrected host command canaries passed all five checks; enclosed nested Seatbelt remains honestly unavailable. The separately authorized single actual adapter call at source `5d36320` returned exactly `PREFLIGHT_OK` with model `claude-opus-5-5`, medium effort and empty runtime tools/MCP. Tokens: input 2, cache creation 1649, cache read 649, output 13. API list-equivalent cost was 0.0135898 USD; actual subscription spend is unknown. Safe local fact digest `9f228f51095def00c18f8cfb54aafea274560859352a71d66deee35ebe9827ed` matches readback. No database facts or controlled skill trials were written.
 
 A separate noncontributor context inspected the bounded bootstrap source and independently repeated all 45 focused tests with no unresolved finding. This is not a whole-S-002 Review or semantic grader qualification. The orchestrator must select the exact reviewed/main-contained bootstrap reference before releasing calibration or measured trials. Oracle inputs remain unqualified.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | feature/s002-trial-preflight | 89ec0d4cd4e5edcbbaacfcd86114393303d71517 | ahead 0 behind 0 | 0 | 45 focused; fresh 562/4 skip; CI70; actual adapter smoke | evals, Runbook, Wiki | Oracle calibration, noise, controls, benefit; close attribution: {"agent":"s002-bootstrap","claimant":"s002-bootstrap","onBehalfOf":null} | 2a2df0598ae254e1e2cc982ae911e3a72eeaed895314a6c0c721e206e96c2795 |
