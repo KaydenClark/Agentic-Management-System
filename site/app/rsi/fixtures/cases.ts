@@ -117,17 +117,35 @@ export const regressionCase: RsiData = {
   results: [...results(rg1, "fixture-task-delta", "dev", [true, true, true]), ...results(rg2, "fixture-task-delta", "dev", [true, false, false])],
 };
 
-// Variant, removed version and a fired stop rule, as the loop records them on
-// its run rows: a disposition in detail and a stopped state.
-const dp1 = run({ id: 31, version: V1, started: "2026-11-01T10:00:00Z", detail: { disposition: "variant" } });
+// The S-002 row contract on rsi_runs.detail: a variant (detail.variant true),
+// a removed version (detail.disposition "remove" on the round's closing run),
+// a fired stop rule (state "stopped" with detail.stop_rule and stop_note),
+// and a candidate version label (detail.version).
+export const STOP_NOTE = "Fixture note: the same task failed on every attempt in this round.";
+const dp1 = run({ id: 31, version: V1, started: "2026-11-01T10:00:00Z", detail: { variant: true, version: "fixture-candidate-one" } });
 const dp2 = run({ id: 32, version: V2, started: "2026-11-02T10:00:00Z", detail: { disposition: "remove" } });
-const dp3 = run({ id: 33, version: V3, started: "2026-11-03T10:00:00Z", state: "stopped", detail: { stop_rule: "three strikes" } });
+const dp3 = run({ id: 33, version: V3, started: "2026-11-03T10:00:00Z", state: "stopped", detail: { stop_rule: "three_strikes", stop_note: STOP_NOTE } });
 export const dispositionCase: RsiData = {
   runs: [dp1, dp2, dp3],
   results: [
     ...results(dp1, "fixture-task-epsilon", "dev", [true]),
     ...results(dp2, "fixture-task-epsilon", "dev", [true]),
     ...results(dp3, "fixture-task-epsilon", "dev", [false]),
+  ],
+};
+
+// A revise disposition is not a variant; a failed run is not a stop; and a
+// run whose detail lacks every key (or the detail itself) renders without
+// error, every missing key read as absent.
+const fr1 = run({ id: 51, version: V1, started: "2026-11-01T10:00:00Z", detail: { disposition: "revise" } });
+const fr2 = run({ id: 52, version: V2, started: "2026-11-02T10:00:00Z", state: "failed" });
+const fr3 = { ...run({ id: 53, version: V3, started: "2026-11-03T10:00:00Z" }), detail: undefined } as unknown as RsiRun;
+export const failedRunCase: RsiData = {
+  runs: [fr1, fr2, fr3],
+  results: [
+    ...results(fr1, "fixture-task-eta", "dev", [true]),
+    ...results(fr2, "fixture-task-eta", "dev", [true]),
+    ...results(fr3, "fixture-task-eta", "dev", [true]),
   ],
 };
 

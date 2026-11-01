@@ -187,16 +187,46 @@ test('regression: a version that passes fewer trials than the prior one is marke
   assert.equal(marksIn(up, alpha, 'regression').length, 0);
 });
 
-test('variants, removed versions and fired stop rules are marked', () => {
+// S-002 row contract: detail.variant, detail.disposition ("retain", "revise",
+// "remove"), detail.version, state "stopped" with detail.stop_rule and
+// detail.stop_note, and state "failed" as a failed run, not a stop.
+test('variants, removed versions and fired stop rules are marked from the S-002 row contract', () => {
   const doc = walk(render(cases.dispositionCase));
   const [series] = seriesIn(doc, placeOf(doc, 'dev-per-task'));
   const [v1, v2, v3] = pointsIn(doc, series);
-  assert.match(marksIn(doc, v1, 'variant')[0]?.text ?? '', /variant/i);
-  assert.match(marksIn(doc, v2, 'removed')[0]?.text ?? '', /removed/i);
+  assert.match(marksIn(doc, v1, 'variant')[0]?.text ?? '', /variant/i, 'detail.variant true is not marked');
+  assert.ok(v1.text.includes('fixture-candidate-one'), 'the candidate version label (detail.version) is not shown');
+  assert.match(marksIn(doc, v2, 'removed')[0]?.text ?? '', /removed/i, 'disposition "remove" is not marked removed');
+  assert.equal(marksIn(doc, v2, 'variant').length, 0);
   const [stop] = marksIn(doc, v3, 'stop-rule');
   assert.ok(stop, 'the fired stop rule is not marked');
   assert.match(stop.text, /stop rule/i);
-  assert.match(stop.text, /three strikes/);
+  assert.match(stop.text, /three strikes/i, 'the rule is not in plain words');
+  assert.doesNotMatch(stop.text, /three_strikes/, 'the rule shows its raw code');
+  assert.ok(stop.text.includes(cases.STOP_NOTE), 'the stop note is not shown');
+  assert.equal(marksIn(doc, v3, 'failed-run').length, 0, 'a stop is not a failed run');
+});
+
+test('each stop rule code reads in plain words', async () => {
+  const { STOP_RULE_TEXT } = await import('../app/rsi/data.ts');
+  for (const code of ['three_strikes', 'paid_plan_requested', 'meter_spent', 'owner_stop']) {
+    assert.ok(STOP_RULE_TEXT[code], `no plain words for ${code}`);
+    assert.doesNotMatch(STOP_RULE_TEXT[code], /_/);
+  }
+});
+
+test('a revise disposition is not a variant, a failed run is marked distinctly, and missing detail keys are absent', () => {
+  const doc = walk(render(cases.failedRunCase));
+  const [series] = seriesIn(doc, placeOf(doc, 'dev-per-task'));
+  const [revise, failed, bare] = pointsIn(doc, series);
+  assert.equal(marksIn(doc, revise, 'variant').length, 0, 'revise must not read as a variant');
+  assert.equal(marksIn(doc, revise, 'removed').length, 0);
+  const [f] = marksIn(doc, failed, 'failed-run');
+  assert.ok(f, 'a failed run is not marked');
+  assert.match(f.text, /failed run/i);
+  assert.equal(marksIn(doc, failed, 'stop-rule').length, 0, 'a failed run is not a stop');
+  assert.equal(doc.elements.filter((e) => has(e, 'data-mark') && inside(e, bare)).length, 0, 'a run with no detail carries no mark');
+  checkLinkCoverage(render(cases.failedRunCase));
 });
 
 test('test rows never render', () => {
