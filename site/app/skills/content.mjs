@@ -26,7 +26,9 @@ export const FIXED_SECTIONS = [...LEADING_SECTIONS, ...TRAILING_SECTIONS];
 export const REACH_FOR_HEADER = ['What you have', 'Reach for'];
 export const FAQ_RANGE = [3, 6];
 
-// Site routes an article may link besides /skills/<name>.
+// Site routes an article may link besides /skills/<name>: the reading order
+// of app/nav.ts (a test keeps the two equal; nav.ts is TypeScript, which
+// this plain module cannot import).
 export const SITE_ROUTES = ['/', '/start', '/how-it-works', '/skills', '/rsi'];
 // The skills repository is private: a link to it is a 404 for readers.
 export const PRIVATE_SKILLS_REPO = /github\.com\/KaydenClark\/skills(?![\w.-])/i;

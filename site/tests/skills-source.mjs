@@ -11,6 +11,7 @@ import { tmpdir } from 'node:os';
 import { join, relative } from 'node:path';
 import { SKILLS_PIN, parseFrontMatter } from '../app/skills/content.mjs';
 import { siteDir } from './helpers.mjs';
+import { contentNames } from './skills-helpers.mjs';
 
 export const RUN = 10;
 
@@ -100,7 +101,7 @@ export function sourceFindings(contentDir, skillsDir, pin) {
   const head = checkoutHead(skillsDir);
   if (head === null) findings.push({ kind: 'note', message: 'skills folder is not a git checkout; its commit was not compared with the pin' });
   else if (head !== pin) findings.push({ kind: 'pin', message: `skills checkout is at ${head}, not the pin ${pin}` });
-  const names = existsSync(contentDir) ? readdirSync(contentDir).filter((f) => f.endsWith('.md')).map((f) => f.slice(0, -3)).sort() : [];
+  const names = contentNames(contentDir);
   for (const name of names) {
     if (folderMissing(skillsDir, name)) { findings.push({ kind: 'folder', article: name, message: `${name}: no skill folder ${name}/SKILL.md at the skills checkout` }); continue; }
     const src = readFileSync(join(contentDir, `${name}.md`), 'utf8');

@@ -4,13 +4,18 @@
 // Coverage fails until every chart skill has an article in content/skills/.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-import { SKILLS_PIN, loadArticles, contentDir, parseFrontMatter } from '../app/skills/content.mjs';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import {
+  PRIVATE_SKILLS_REPO, SITE_ROUTES, SKILLS_PIN, chartSkills, contentDir, loadArticles, parseFrontMatter,
+} from '../app/skills/content.mjs';
 import { stages } from '../app/start/skills.mjs';
 import { builtPage, builtPages, servedFiles, siteDir } from './helpers.mjs';
+import { READING_ORDER } from './tour-helpers.mjs';
 import {
   INDEX_PAGE, STAGE_COUNTS, articleNameOf, articlePage, articleShapeProblems, contentFile, contentNames, coverageProblems,
-  creditPageProblems, creditProblems, indexProblems, pinProblems, stageLabelProblems, usedMarkProblems, wikiLinkProblems,
+  creditPageProblems, creditProblems, indexProblems, pinProblems, siteRouteProblems, stageLabelProblems, usedMarkProblems,
+  wikiLinkProblems,
 } from './skills-helpers.mjs';
 
 // A built article in the renderer's shape, with sections replaceable.
@@ -61,7 +66,7 @@ test('the article shape check catches faults (self-test)', () => {
 });
 
 test('the coverage check catches faults (self-test)', () => {
-  const all = stages.flatMap((s) => [...s.main, ...s.used]);
+  const all = chartSkills().map((s) => s.name);
   assert.deepEqual(coverageProblems(all, stages), []);
   assert.ok(coverageProblems(all.filter((n) => n !== 'land'), stages).some((p) => /land/.test(p)), 'a missing chart skill passes');
   assert.ok(coverageProblems([...all.filter((n) => n !== 'align-concept'), 'grill-me'], stages).some((p) => /grill-me/.test(p)), 'an article named grill-me passes');
@@ -189,11 +194,26 @@ test('wiki links resolve to built articles, index anchors or pages, and nothing 
     indexIds: new Set([...builtPage(INDEX_PAGE).html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1])),
   };
   for (const { name, html } of [builtPage(INDEX_PAGE), ...builtArticles()]) assert.deepEqual(wikiLinkProblems(html, ctx), [], name);
-  for (const { name, text } of servedFiles()) assert.doesNotMatch(text, /github\.com\/KaydenClark\/skills(?![\w.-])/i, `${name} links the private skills repository`);
+  for (const { name, text } of servedFiles()) assert.doesNotMatch(text, PRIVATE_SKILLS_REPO, `${name} links the private skills repository`);
 });
 
-test('the loader reads every article without error, in index order', () => {
-  const order = stages.flatMap((s) => [...s.main, ...s.used]);
-  const names = articles().map((a) => a.name);
-  assert.deepEqual(names, [...names].sort((a, b) => order.indexOf(a) - order.indexOf(b)));
+test('the loader reads every article without error and returns them in index order, not file order', () => {
+  const files = readdirSync(contentDir(siteDir)).filter((f) => f.endsWith('.md')).map((f) => f.slice(0, -3));
+  const indexOrder = chartSkills().map((s) => s.name).filter((n) => files.includes(n));
+  assert.notDeepEqual(files, indexOrder, 'file order already matches index order, so this test could not fail');
+  assert.deepEqual(articles().map((a) => a.name), indexOrder);
+});
+
+test('the site route check catches drift (self-test)', () => {
+  const order = ['/', '/start', '/skills'];
+  assert.deepEqual(siteRouteProblems(['/', '/start', '/skills'], order), []);
+  assert.ok(siteRouteProblems(['/', '/skills'], order).length, 'a reading-order route missing from SITE_ROUTES passes');
+  assert.ok(siteRouteProblems(['/', '/start', '/skills', '/glossary'], order).length, 'a SITE_ROUTES entry outside the reading order passes');
+  assert.ok(siteRouteProblems(['/', '/skills', '/start'], order).length, 'SITE_ROUTES in another order passes');
+});
+
+test('the routes an article may link equal the reading order in nav.ts', () => {
+  const navHrefs = [...readFileSync(join(siteDir, 'app', 'nav.ts'), 'utf8').matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(siteRouteProblems(SITE_ROUTES, navHrefs), [], 'against app/nav.ts');
+  assert.deepEqual(siteRouteProblems(SITE_ROUTES, READING_ORDER), [], 'against READING_ORDER');
 });

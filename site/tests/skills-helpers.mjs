@@ -13,8 +13,21 @@ import { mainOf } from './tour-helpers.mjs';
 // The Spec's count of chart skills per stage at the pin (S-008 Desired
 // Behavior): 39 skills.
 export const STAGE_COUNTS = { route: 5, align: 12, prepare: 2, journey: 7, judge: 1, complete: 4, improve: 8 };
-// Old chart names the skills repository renamed (owner, 2026-11-01).
-export const RETIRED_NAMES = ['grill-me', 'grill-with-docs'];
+// Old chart names and the names the skills repository gave them (owner,
+// 2026-11-01).
+export const RETIRED_NAMES = { 'grill-me': 'align-concept', 'grill-with-docs': 'align-docs' };
+
+// Problems with the article loader's site routes (content.mjs SITE_ROUTES)
+// against the site's reading order: the same routes in the same order, so a
+// page added to or removed from nav.ts cannot leave an article link allowed
+// to a missing page or refused to a real one.
+export function siteRouteProblems(siteRoutes, order) {
+  const problems = [];
+  for (const r of order) if (!siteRoutes.includes(r)) problems.push(`SITE_ROUTES lacks ${r}`);
+  for (const r of siteRoutes) if (!order.includes(r)) problems.push(`SITE_ROUTES has ${r}, which is not in the reading order`);
+  if (!problems.length && siteRoutes.join('|') !== order.join('|')) problems.push(`SITE_ROUTES order ${siteRoutes.join(', ')} differs from ${order.join(', ')}`);
+  return problems;
+}
 
 export const INDEX_PAGE = 'skills.html';
 export const articlePage = (name) => `skills/${name}.html`;
@@ -141,8 +154,8 @@ export function creditPageProblems(html, data) {
 export function coverageProblems(names, chart) {
   const problems = [];
   const expected = chartSkills(chart).map((s) => s.name);
-  for (const old of RETIRED_NAMES) if (names.includes(old)) problems.push(`article named ${old}; the skills repository calls it ${old === 'grill-me' ? 'align-concept' : 'align-docs'}`);
-  const extra = names.filter((n) => !expected.includes(n) && !RETIRED_NAMES.includes(n));
+  for (const [old, current] of Object.entries(RETIRED_NAMES)) if (names.includes(old)) problems.push(`article named ${old}; the skills repository calls it ${current}`);
+  const extra = names.filter((n) => !expected.includes(n) && !(n in RETIRED_NAMES));
   if (extra.length) problems.push(`articles for skills not on the chart: ${extra.join(', ')}`);
   const missing = expected.filter((n) => !names.includes(n));
   if (missing.length) problems.push(`${missing.length} chart skills have no article: ${missing.join(', ')}`);
