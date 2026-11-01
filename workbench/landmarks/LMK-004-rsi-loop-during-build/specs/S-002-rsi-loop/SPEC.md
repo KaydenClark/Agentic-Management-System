@@ -19,7 +19,7 @@
 
 ## Outcome
 
-Pinned Skill/AMS baselines, fitness/alignment scores, behavioral evals, retests and dispositions.
+Pinned Skill/AMS baselines, scores, evals, retests and dispositions.
 
 ## Why It Matters
 
@@ -27,7 +27,7 @@ Build, then loop until meter/stop. Static scores prove no benefit.
 
 ## Current Verified State
 
-Runner/evals/storage reader incomplete. [Main a3d014e baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken, 4/138, incomplete/unqualified; reviews, no strike/skill result.
+Local assessment CLI: [TK-000M](tasks/TK-000M/TASK.md). Runner/trials/storage incomplete. [Main a3d014e baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken, 4/138, incomplete/unqualified; reviews, no strike/skill result.
 
 ## Desired Behavior
 
@@ -93,7 +93,7 @@ Model weights; loop execution during mapping; presentation (S-007).
 
 S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests and behavioral links. S-007 presents scores/evals/failures/provenance. Integration missing; reviews are not trials.
 
-Seed real build-history/skills sources with strength labels; private skills summary/commit pointer only. Use the subscription meter, not API budgets; storage/qualified comparisons remain required.
+Real build-history/skills seeds, strength labels; private summary/commit only. Subscription meter, no API budget; storage/qualified comparisons required.
 
 ## Vertical Implementation Slices
 
@@ -105,7 +105,7 @@ TK-000M: local assessment CLI, no trial/storage acceptance. Trial Tasks retain r
 ## Acceptance Criteria
 
 - [ ] **Cycle:** skill failure -> change -> three-run score -> retest/disposition/later use. Reject missing pin/retest.
-- [ ] **Scoring:** `8/10 + 1/2 + 1/2 = 10/14`; empty set has no score. Test all levels, Quality-only No, Critical/Regression/missing proof. Reject Broken acceptance or bounded-as-whole claims.
+- [x] **Scoring:** `8/10 + 1/2 + 1/2 = 10/14`; empty set has no score. Test all levels, Quality-only No, Critical/Regression/missing proof. Reject Broken acceptance or bounded-as-whole claims.
 - [ ] **Evals:** enforce comparison contracts; reject do-nothing passes, self-grading, anecdotal/static benefit, skipped permissions/below-floor lift.
 - [ ] **Stops:** omitted findings stay open; regressions visible; baseline excluded. Reject fourth attempt/reset.
 - [ ] **Readback:** S-006/S-007 retain assessment/trial distinctions, failures/evidence links. Reject false storage claims or test/private-data publication.
@@ -124,7 +124,7 @@ RUNBOOK checks; CLI packet/known-outcome proof: [TK-000M](tasks/TK-000M/TASK.md)
 
 ## Documentation Impact
 
-RUNBOOK; S-006/S-007; Wiki/Tasks.
+RUNBOOK, S-006/S-007, Wiki/Tasks.
 
 ## Append-Only Evidence And Execution Log
 

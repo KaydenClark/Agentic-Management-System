@@ -20,15 +20,26 @@ Local assessment records are preparation and evidence, not S-006 persistence, mo
 
 ## Acceptance
 
-- [ ] The CLI pools `8/10 + 1/2 + 1/2` as `10/14`, emits an exact ratio and no percentage for an empty set; computes all four levels and Critical override.
-- [ ] Missing/unknown/refused/interrupted proof stays No in its original class; unjustified exclusions, invented IDs/classes, unpinned evidence and Regression without baseline proof cannot silently pass.
-- [ ] Acceptance is separate from score/level, qualification and scope; no incomplete, unqualified, Broken, Functional or bounded-as-whole result is accepted.
-- [ ] Immutable local assessment readback retains every attempt, including baseline zero and failures; a fourth candidate attempt or label-only counter reset is refused.
-- [ ] Omitted findings remain open; closure requires an explicit repaired-revision retest of the original and affected regression checks in all three runs; recurrence remains visible.
-- [ ] Known-good, known-bad and do-nothing cases exercise the CLI and the full suite/room checks pass, with actual limitations recorded.
+- [x] The CLI pools `8/10 + 1/2 + 1/2` as `10/14`, emits an exact ratio and no percentage for an empty set; computes all four levels and Critical override.
+- [x] Missing/unknown/refused/interrupted proof stays No in its original class; unjustified exclusions, invented IDs/classes, unpinned evidence and Regression without baseline proof cannot silently pass.
+- [x] Acceptance is separate from score/level, qualification and scope; no incomplete, unqualified, Broken, Functional or bounded-as-whole result is accepted.
+- [x] Immutable local assessment readback retains every attempt, including baseline zero and failures; a fourth candidate attempt or label-only counter reset is refused.
+- [x] Omitted findings remain open; closure requires an explicit repaired-revision retest of the original and affected regression checks in all three runs; recurrence remains visible.
+- [x] Known-good, known-bad and do-nothing cases exercise the CLI and the full suite/room checks pass, with actual limitations recorded.
 
 ## Receipt
 
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | codex/s002-assessment-loop | e3d9881df72aa994a6c0a76b7d582b078e3860e3 | ahead 0 behind 0 | 6 | 34 focused tests passed; full suite 425 passed, 4 skipped with loopback permission. Sandbox attempt: 97 failed, 9 errors from denied local server binds. Room layout/ADR/render/diff checks pass; doctor retains 2 pre-existing nonblocking findings. Synthetic CLI score/record/list readback matched. | RUNBOOK; evals/ASSESSMENTS.md; public synthetic packet; S-002 plan and resumed-context correction | Independent review and PR CI pending. S-006 remains active under orch-b; no Supabase assessment persistence, qualified model runner, controlled trials or measured benefit. Existing grilling redesign is skills PR 56 merge 878241202bf7ec97c0952287f1633f6f0ddf1a6e; live installation unverified. | 12a950d3fa92ac52fa1ceb6421956daf0d2df1936d8b0bc8367695c0adda2682 |
+
+## Check, QA and scoped review
+
+Candidate `53ac5ed7ac8f48a8a66f19fa6760fed98be5bf94`, base `d2686e69e0c871aa309f4f7c5975e8518bc74b46`.
+36 focused tests pass; full suite: 427 passed, 4 skipped with loopback permission.
+The initial sandbox-only suite could not bind existing HTTP test servers; no checks were weakened.
+Synthetic CLI score/record/list matched; no real assessment or benefit is claimed.
+
+Independent fresh-context Standards (`review_standards`) and Spec (`review_spec`) reviews found no remaining findings at this candidate. Two code defects were reproduced red and repaired green: historical class without check mapping cannot pass; recurrence cannot close on its latest failing revision. Review also restored the explicit demonstrated-benefit retention gate after pruning. The Spec reviewer independently ran all 36 focused tests. These are bounded code reviews, not assembled S-002 Review or Human QA.
+
+Room render is unchanged; layout/ADR/diff checks pass. Doctor retains the original two nonblocking findings. Final PR CI and fresh-clone verification are recorded in the delivery continuation. S-006 remains active under orch-b; real storage, qualified runner/controls, measured benefit and later-use judgment remain outside this completed local slice. Existing grilling repair: skills PR #56, merge `878241202bf7ec97c0952287f1633f6f0ddf1a6e`; installation/use here remains unverified.
