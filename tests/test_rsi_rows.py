@@ -41,12 +41,14 @@ RESULT_REQUIRED = ("run_id", "arm", "provider", "model", "effort", "runtime_comm
 class FakePostgrest:
     """Enough of PostgREST plus the migration's rules to exercise the writer."""
 
-    def __init__(self, *, enforce_not_null=True, guard_versions=True, hide_test_rows=True):
+    def __init__(self, *, enforce_not_null=True, guard_versions=True, hide_test_rows=True,
+                 anon_inserts_runs=False):
         self.tables = {"rsi_runs": {}, "rsi_results": {}}
         self.next_id = 1
         self.enforce_not_null = enforce_not_null
         self.guard_versions = guard_versions
         self.hide_test_rows = hide_test_rows
+        self.anon_inserts_runs = anon_inserts_runs
         self.calls = []
 
     def __call__(self, method, url, headers, body):
@@ -58,7 +60,8 @@ class FakePostgrest:
         rows = self.tables[table]
         anon = headers["apikey"] == FAKE_PUBLISHABLE
         payload = json.loads(body) if body else None
-        if anon and method != "GET":
+        anon_insert = self.anon_inserts_runs and method == "POST" and table == "rsi_runs"
+        if anon and method != "GET" and not anon_insert:
             return 401, json.dumps({"code": "42501"}).encode()
         match = [r for r in rows.values()
                  if all(str(r.get(k)).lower() == v.lower() for k, v in filters.items())]
@@ -386,6 +389,32 @@ def test_livecheck_fails_when_the_site_key_read_is_not_a_successful_query(capsys
     assert code == 1, out
     assert "site key sees test rows" not in out
     assert "read failed" in out
+    assert http.tables == {"rsi_runs": {}, "rsi_results": {}}
+
+
+def test_livecheck_cleans_up_a_run_the_site_key_was_wrongly_allowed_to_insert(capsys):
+    """Codex P2 4435926325: the client-insert probe run must be cleaned up too."""
+    http = FakePostgrest(anon_inserts_runs=True)
+    code, out, _ = livecheck(capsys, http)
+    assert code == 1
+    assert "rsi_runs insert: ACCEPTED" in out
+    assert "cleanup: deleted 1 results, 2 runs; remaining 0" in out
+    assert http.tables == {"rsi_runs": {}, "rsi_results": {}}
+
+
+def test_livecheck_cleans_up_a_wrongly_inserted_client_run_whose_response_was_lost(capsys):
+    http = FakePostgrest(anon_inserts_runs=True)
+
+    def lose_client_insert(method, url, headers, body):
+        answer = http(method, url, headers, body)
+        if method == "POST" and headers["apikey"] == FAKE_PUBLISHABLE and "rsi_runs" in url:
+            raise TimeoutError("response lost")
+        return answer
+
+    code, out, _ = livecheck(capsys, lose_client_insert)
+    assert code == 1
+    assert "rsi_runs insert: inconclusive" in out
+    assert "remaining 0" in out
     assert http.tables == {"rsi_runs": {}, "rsi_results": {}}
 
 

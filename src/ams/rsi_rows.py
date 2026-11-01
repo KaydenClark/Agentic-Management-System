@@ -59,6 +59,7 @@ STRENGTHS = ("recorded_fact", "anecdote", "single_trial", "repeated_trials",
 SOURCE_KINDS = ("commit", "pr", "path", "jot")
 BOOKKEEPING = ("id", "version", "recorded_at", "updated_at")
 STALE = "PT409"
+CLIENT_PROBE_SUFFIX = "-client"
 _COMMIT = re.compile(r"^[0-9a-f]{40}$")
 _COLUMN = re.compile(r'column "([a-z_]+)"')
 
@@ -321,7 +322,7 @@ def livecheck(settings: keycheck.Settings, publishable: str, http: writer.Http, 
             ok = ok and visible == 0 and total > 0
         print(f"site key sees test rows: {seen[0][0]} of {seen[0][1]} runs, "
               f"{seen[1][0]} of {seen[1][1]} results")
-        probes = {RUN_TABLE: (dict(run_row, run_key=run_key + "-client"), run["id"]),
+        probes = {RUN_TABLE: (dict(run_row, run_key=run_key + CLIENT_PROBE_SUFFIX), run["id"]),
                   RESULT_TABLE: (result_for(run, **dict(result_fields, trial=3)), result["id"])}
         for table, (insert_row, row_id) in probes.items():
             for verb, method, url, payload in (
@@ -355,11 +356,14 @@ def _rows(store: Store, table, filters):
 
 
 def _cleanup(service: Store, run, run_key) -> bool:
+    """Delete every probe row: the test run, and a client-probe run should the site
+    key ever have been allowed to insert one (even if its response was lost)."""
+    keys = (run_key, run_key + CLIENT_PROBE_SUFFIX)
     try:
-        runs = _rows(service, RUN_TABLE, {"run_key": run_key})
+        runs = [r for key in keys for r in _rows(service, RUN_TABLE, {"run_key": key})]
         results = sum(service.delete_test_rows(RESULT_TABLE, run_id=r["id"]) for r in runs)
-        deleted = service.delete_test_rows(RUN_TABLE, run_key=run_key)
-        left = len(_rows(service, RUN_TABLE, {"run_key": run_key}))
+        deleted = sum(service.delete_test_rows(RUN_TABLE, run_key=key) for key in keys)
+        left = sum(len(_rows(service, RUN_TABLE, {"run_key": key})) for key in keys)
         left += sum(len(_rows(service, RESULT_TABLE, {"run_id": r["id"]})) for r in runs)
     except Refused as error:
         print(f"cleanup: {error}")
