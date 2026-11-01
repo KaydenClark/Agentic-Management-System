@@ -24,3 +24,4 @@
 | [000P](000P-a-capability-change-gets-one-short-spec.md) | A capability change gets one short Spec | accepted | 2026-11-01 | workbench/specs |
 | [000Q](000Q-each-task-is-its-own-runnable-file.md) | Each Task is its own runnable file | accepted | 2026-11-01 | workbench/specs |
 | [000R](000R-a-task-is-one-agent-run.md) | A Task is one agent run | accepted | 2026-11-01 | workbench/specs |
+| [000S](000S-a-spec-is-accepted-against-its-conditions.md) | A Spec is accepted against its conditions | accepted | 2026-11-01 | workbench/specs |
