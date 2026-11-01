@@ -2,6 +2,8 @@
 date: 2026-11-01
 canonicalized_in:
   - supabase
+supersedes:
+  - 002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md
 ---
 
 # Supabase holds the RSI data and the service key stays local
