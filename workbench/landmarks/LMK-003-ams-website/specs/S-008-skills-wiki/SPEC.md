@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 closed with proof.
-**Next gate:** Complete TK-002.
+**Latest event:** TK-002 claimed by Orchestrator (Claude Opus 5.5).
+**Next gate:** Close TK-002 with verification and documentation proof.
 
 ## Intent and authority
 
