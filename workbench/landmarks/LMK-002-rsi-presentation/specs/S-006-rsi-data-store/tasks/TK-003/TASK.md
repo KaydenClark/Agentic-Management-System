@@ -24,7 +24,7 @@ Hand back to S-006 with `close`.
 
 ## Acceptance
 
-- [ ] Inserting a result row with no skills commit fails at the database.
-- [ ] A complete row inserts and the publishable key reads it; client writes fail on both new tables.
-- [ ] An update against a row changed since it was read is refused and the row is unchanged.
-- [ ] `uv run pytest` passes.
+- [x] Inserting a result row with no skills commit fails at the database.
+- [x] A complete row inserts and the publishable key reads it; client writes fail on both new tables. *Scope as assigned by orchestrator B:* complete rows were inserted only as `is_test` rows (no real trial has run, so a non-test row would be fabricated); the publishable key's select succeeded and showed 0 of them, as the policy requires. A visible non-test row read waits for S-002's first real row.
+- [x] An update against a row changed since it was read is refused and the row is unchanged.
+- [x] `uv run pytest` passes.
