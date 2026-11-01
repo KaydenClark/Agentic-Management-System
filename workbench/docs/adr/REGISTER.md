@@ -62,3 +62,4 @@
 | [002B](002B-a-repeated-failure-first-checks-the-earlier-fix.md) | A repeated failure first checks the earlier fix | accepted | 2026-11-01 | evals, workbench/tools |
 | [002C](002C-reports-say-what-happened.md) | Reports say what happened | accepted | 2026-11-01 | AGENTS.md |
 | [002D](002D-every-finding-has-one-disposition.md) | Every finding has one disposition | accepted | 2026-11-01 | workbench/feedback |
+| [002E](002E-runbook-commands-are-the-commands-graders-call.md) | Runbook commands are the commands graders call | accepted | 2026-11-01 | RUNBOOK.md, evals |
