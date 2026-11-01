@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 from concurrent.futures import ThreadPoolExecutor
+from decimal import Decimal
 import hashlib
 import json
 from pathlib import Path
@@ -21,7 +22,7 @@ from ams import assessment, keycheck, writer
 
 TABLE = 'rsi_assessments'
 RPC = 'ams_append_assessment'
-FORMAT = 1
+FORMAT = 2
 Refused = assessment.Refused
 
 
@@ -74,9 +75,33 @@ class Store:
         return rows
 
     @staticmethod
-    def _verify(rows,is_test):
+    def _restore(row):
+        # JSONB changes number spelling (and may change Python int/float type).
+        # Hash/replay the original canonical TEXT artifact, not that projection.
+        raw=row.get('envelope_text')
+        assessment.require(isinstance(raw,str) and hashlib.sha256(raw.encode()).hexdigest()==row.get('content_digest'),
+                           'assessment content digest mismatch')
+        try:
+            e=json.loads(raw)
+            assessment.require(assessment._encoded(e).decode()==raw,'assessment text is not canonical')
+            left=json.loads(raw,parse_float=Decimal,parse_int=Decimal)
+            right=json.loads(json.dumps(row.get('envelope')),parse_float=Decimal,parse_int=Decimal)
+        except (ValueError,TypeError) as exc:
+            raise Refused('malformed assessment artifact') from exc
+        def equal(a,b):
+            if type(a) is not type(b):return False
+            if isinstance(a,dict):return a.keys()==b.keys() and all(equal(a[k],b[k]) for k in a)
+            if isinstance(a,list):return len(a)==len(b) and all(equal(x,y) for x,y in zip(a,b))
+            return a==b
+        assessment.require(equal(left,right),'assessment text/projection mismatch')
+        row['envelope']=e
+        return row
+
+    @classmethod
+    def _verify(cls,rows,is_test):
         previous={}
         for row in rows:
+            cls._restore(row)
             e=row.get('envelope')
             assessment.require(row.get('format_version')==FORMAT and row.get('scorer_digest')==scorer_digest(),
                                'assessment scorer identity changed; use the recorded reader revision')
@@ -109,9 +134,11 @@ class Store:
         history=[r['envelope'] for r in existing if r['failure_id']==p['failureId']]
         assessment.replay(history+[envelope])
         row={'assessment_id':p['assessmentId'],'failure_id':p['failureId'],'attempt':p['attempt'],
-             'envelope':envelope,'format_version':FORMAT,'scorer_digest':scorer_digest(),
+             'envelope':envelope,'envelope_text':assessment._encoded(envelope).decode(),'format_version':FORMAT,'scorer_digest':scorer_digest(),
              'content_digest':digest(envelope),'previous_digest':previous_digest,'is_test':is_test}
         saved=self._call('POST','rpc/'+RPC,{'p_row':row})
+        assessment.require(isinstance(saved,dict),'malformed append response')
+        self._restore(saved)
         assessment.require(isinstance(saved,dict) and all(saved.get(k)==v for k,v in row.items()),
                            'append response differs from submitted assessment')
         return saved
@@ -150,6 +177,7 @@ def livecheck(settings, publishable, http=writer.urllib_http):
     store=Store(settings.url,settings.key,http,page_size=1)
     private=json.loads((keycheck.REPO_ROOT/'evals/assessment-example.json').read_text())
     private.update(assessmentId=marker+'-0',failureId=marker,attempt=0)
+    private['measurementMetadata']={'observed':1e20,'negativeZero':-0.0,'nested':[1e308]}
     ok=True
     try:
         with tempfile.TemporaryDirectory(prefix='ams-assessment-probe-') as folder:
@@ -159,7 +187,8 @@ def livecheck(settings, publishable, http=writer.urllib_http):
             assessment.record(private,folder)
             store.import_local(folder,is_test=True)
             rows=[r for r in store.rows(is_test=True) if r['failure_id']==marker]
-            same=store.import_local(folder,is_test=True)==0 and len(rows)==2
+            same=(store.import_local(folder,is_test=True)==0 and len(rows)==2
+                  and assessment._encoded([r['envelope'] for r in rows])==assessment._encoded(assessment.read_records(folder)))
             print('private paginated roundtrip/idempotence:', 'yes' if same else 'no');ok &= same
             row=rows[0]
             status,_=writer._call(http,'POST',store.url+'/rest/v1/rpc/'+RPC,settings.key,
@@ -178,7 +207,7 @@ def livecheck(settings, publishable, http=writer.urllib_http):
                 e={'packet':packet,'result':assessment._transition(packet,[r['envelope'] for r in rows])}
                 payloads.append(dict(assessment_id=packet['assessmentId'],failure_id=marker,attempt=2,
                                      is_test=True,format_version=FORMAT,scorer_digest=scorer_digest(),
-                                     envelope=e,content_digest=digest(e),previous_digest=rows[-1]['content_digest']))
+                                     envelope=e,envelope_text=assessment._encoded(e).decode(),content_digest=digest(e),previous_digest=rows[-1]['content_digest']))
             def send(payload):
                 return writer._call(http,'POST',store.url+'/rest/v1/rpc/'+RPC,settings.key,{'p_row':payload})[0]
             with ThreadPoolExecutor(max_workers=2) as workers:

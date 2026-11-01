@@ -179,3 +179,48 @@ def test_cli_outputs_counts_without_private_packet(monkeypatch,tmp_path,capsys):
     assert 'verified private assessments: 1' in output.out
     assert 'private-probe-only' not in output.out and 'never-print-this-packet' not in output.out
     assert not output.err
+
+
+class JsonbDatabase(Database):
+    """JSONB expands numeric exponents and drops a numeric zero's sign."""
+    def __call__(self,*args):
+        from decimal import Decimal
+        status,body=super().__call__(*args)
+        value=json.loads(body)
+        def normalized(v):
+            if isinstance(v,float):
+                fixed=format(Decimal(str(v)),'f')
+                return json.loads(fixed.lstrip('-') if v==0 else fixed)
+            if isinstance(v,dict):return {k:normalized(x) for k,x in v.items()}
+            if isinstance(v,list):return [normalized(x) for x in v]
+            return v
+        # TEXT columns retain their exact spelling; only the JSONB projection changes.
+        for row in value if isinstance(value,list) else [value]:
+            if isinstance(row,dict) and 'envelope' in row:row['envelope']=normalized(row['envelope'])
+        return status,json.dumps(value).encode()
+
+
+@pytest.mark.parametrize('number',[1e20,-0.0,1e308])
+def test_jsonb_numeric_normalization_preserves_original_artifact(tmp_path,number):
+    p=packet();p['measurementMetadata']={'observed':number,'nested':[number]}
+    assessment.record(p,tmp_path);original=assessment.read_records(tmp_path)
+    db=JsonbDatabase();s=store(db)
+    assert s.import_local(tmp_path,is_test=True)==1
+    assert assessment._encoded(s.read(is_test=True))==assessment._encoded(original)
+    assert s.import_local(tmp_path,is_test=True)==0
+    db.lose_response=True
+    p.update(assessmentId='numeric-candidate',attempt=1);assessment.record(p,tmp_path)
+    with pytest.raises(assessment.Refused):s.import_local(tmp_path,is_test=True)
+    assert s.import_local(tmp_path,is_test=True)==0
+    assert assessment._encoded(s.read(is_test=True))==assessment._encoded(assessment.read_records(tmp_path))
+
+
+@pytest.mark.parametrize('field',['text','projection','digest'])
+def test_exact_artifact_tampering_is_refused(tmp_path,field):
+    p=packet();p['measurementMetadata']={'observed':1e20}
+    assessment.record(p,tmp_path);db=JsonbDatabase();s=store(db);s.import_local(tmp_path,is_test=True)
+    if field=='text':db.rows[0]['envelope_text']+=' '
+    elif field=='projection':db.rows[0]['envelope']['packet']['measurementMetadata']['observed']='changed'
+    else:db.rows[0]['content_digest']='0'*64
+    with pytest.raises(assessment.Refused):s.read(is_test=True)
+    assert len(db.rows)==1

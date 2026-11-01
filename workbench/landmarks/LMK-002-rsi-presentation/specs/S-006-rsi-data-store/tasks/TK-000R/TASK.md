@@ -23,3 +23,9 @@ Same approved private assessment persistence, successor correction after TK-000Q
 ## Native corrective provenance
 
 The native failed verdict at reviewed `977ac08` generated this same Task ID at evidence row18. Its generic assignment and the already claimed bounded assignment describe the same numeric roundtrip correction; preserve the current claimant, detailed acceptance and original failed-review row. Native verdict source commit `ca447da043ad92ecfafc2ac370e7e717ff149fcc` is merged into this branch.
+
+## Red/green correction
+
+Public transport fixtures normalize JSONB exponent metadata `1e20`/`1e308` and negative zero: all three failed before correction (digest or append-response mismatch). Exact canonical TEXT artifacts now restore original packets/results and survive repeat/lost-response import. Text/projection/hash tampering refuses. All62 focused persistence/scorer tests pass. Storage format2 and additive migration `20261101195609` retain original migration history and refuse unexpected existing rows instead of inventing original text. Database was empty before migration.
+
+Live tagged probes now preserve original exponent/negative-zero/nested numeric artifacts exactly, with duplicate200, changed identity409, concurrent200/409, all client operations401, immutable update403 and cleanup0. A DB subtransaction explicitly refused a wrong hash through rsi_assessments_exact_artifact, leaving0 rows. Advisors retain only intentional private-table INFO. Full suite, fresh clone and rereview remain pending. This is a correction to the failed private-store candidate, not an RSI trial or evaluator qualification.
