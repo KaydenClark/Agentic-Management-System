@@ -1,5 +1,7 @@
 // S-003 TK-004 end-to-end draft-mark check: real `npm run build` runs on a
-// temporary copy of site/ (the checkout is never edited).
+// temporary copy of site/ (the checkout's own files are never edited). The
+// copy is a hidden .draft-marks-check-* folder inside site/ without its own
+// lockfile, so Turbopack resolves packages from site/node_modules.
 //   1. No approvals: every page shows the draft mark.
 //   2. A fixture approval bound to the home page's hash, plus one with a wrong
 //      hash for /how-it-works: home loses its mark, every other page keeps it.
@@ -8,14 +10,14 @@
 // Four `next build` runs; takes a few minutes. Not part of `npm test`.
 // Usage: node tests/draft-marks-build.check.mjs   (npm run check:draft-marks)
 import { execFileSync } from 'node:child_process';
-import { cpSync, existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, symlinkSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { cpSync, existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { contentHash, hasDraftMark, markProblems, routeOf } from '../scripts/draft-marks.mjs';
 
 const siteDir = fileURLToPath(new URL('..', import.meta.url));
-const SKIP = new Set(['node_modules', '.next', '.vercel']);
+const PREFIX = '.draft-marks-check-';
+const SKIP = new Set(['node_modules', '.next', '.vercel', 'package-lock.json']);
 const ZERO = `sha256:${'0'.repeat(64)}`;
 const SOURCE = 'https://github.com/KaydenClark/Agentic-Management-System/blob/dev/site/tests/fixtures/draft-marks/approvals.json';
 
@@ -53,10 +55,11 @@ function writeApprovals(copy, approvals) {
 }
 
 if (!existsSync(join(siteDir, 'node_modules'))) throw new Error('Run `npm ci` in site/ first.');
-const copy = mkdtempSync(join(tmpdir(), 'ams-draft-marks-'));
+const copy = mkdtempSync(join(siteDir, PREFIX));
 try {
-  cpSync(siteDir, copy, { recursive: true, filter: (src) => !SKIP.has(relative(siteDir, src).split(/[\\/]/)[0]) });
-  symlinkSync(join(siteDir, 'node_modules'), join(copy, 'node_modules'), 'dir');
+  for (const name of readdirSync(siteDir)) {
+    if (!SKIP.has(name) && !name.startsWith(PREFIX)) cpSync(join(siteDir, name), join(copy, name), { recursive: true });
+  }
 
   writeApprovals(copy, []);
   const first = build(copy, 'no approvals');

@@ -7,10 +7,12 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/build.mjs",
     "start": "next start",
     "test": "node --test \"tests/**/*.test.mjs\"",
     "check:browser": "node tests/browser.check.mjs",
+    "check:draft-marks": "node tests/draft-marks-build.check.mjs",
+    "page-hashes": "node scripts/page-hashes.mjs",
     "tokens:gen": "node scripts/gen-tokens.mjs --write"
   },
   "dependencies": {
