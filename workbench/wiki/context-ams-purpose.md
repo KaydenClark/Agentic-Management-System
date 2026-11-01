@@ -7,7 +7,7 @@ provenance:
   - Kayden, AMS template creation request, 2026-10-31
 source_paths:
   - BLUEPRINT.md
-last_verified: 2026-10-31
+last_verified: 2026-11-01
 ---
 # AMS purpose and first RSI loop
 
@@ -82,6 +82,10 @@ continuation record, not evidence of a completed improvement or a paid campaign.
 - Use the owner's paid-plan meter, not API tokens or an API campaign budget. Unknown usage measurements stay unknown.
 - Confirmed next action: merge the current website and system work into main, then assess only the resulting pinned main revision. This specific promotion is authorized; future website promotions retain their owner gate.
 
+### Skill-audit specification, 2026-11-01
+
+[S-002](../landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md) now owns the skill-audit contract requested in JOT-5061e624-c5c2-421d-aae1-58b01a25a03c: frozen r1 checks, pooled score, fitness acceptance, skill cases, finding retests and three attempts. S-006 storage and S-007 presentation must consume it; current implementations do not establish that contract. This specifies the loop; no new assessment or execution is claimed. Bounded-versus-whole scope remains open above.
+
 ### Grilling failure reported by the owner
 
 The agent let investigation and documentation displace the interview and inferred a missing report. Kayden asked what happened to the grilling session and called it a skill failure. Resume the ready decision round, wait for answers and preserve settled choices. No skill-text repair or assessment result is claimed.
@@ -136,4 +140,17 @@ Topic: ams-purpose
 Supersedes: none
 
 Merged-main baseline a3d014e assessed in three separate read-only r1 evidence-review contexts: Broken,4/138 passing checks (approximately2.90%); evidence incomplete,evaluators unqualified,not accepted. This is evidence coverage,not observed implementation failure rate or behavioral trials. The report and evals/rsi-loop-1/baseline-20261101 own counts and ledgers. No improvement strike consumed. Next interview question pending: bounded r1 scope plus affected regressions for each improvement,keeping whole-AMS fitness separate. Supabase assessment recording and the dev reader are still unimplemented; do not label these reviews as controlled trial rows.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-5061e624-c5c2-421d-aae1-58b01a25a03c
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T17:20:42.149Z
+Author: Kayden
+Source: Kayden, RSI skill audit spec request, 2026-11-01
+Topic: ams-purpose
+Supersedes: none
+
+Find the Spec for the RSI audit loop on skills using the fitness/alignment check and score; create one if absent, otherwise repair the existing RSI Loop Spec so it contains audit-loop scores and evaluations. This request authorizes the specification change and its normal checked delivery. It does not request running assessments, changing skills or launching the loop. S-002 is the existing owner; retain the settled r1, Stable/Excellent acceptance, three attempts per candidate with baseline excluded, and paid-plan-meter decisions. The prior bounded-scope versus whole-AMS assessment question remains unresolved.
 <!-- /jot-entry -->
