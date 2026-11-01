@@ -48,4 +48,3 @@ def test_source_verification_missing_promisor_blob_cannot_lazy_fetch(tmp_path,mo
     with pytest.raises(Refused):trial_campaign.verify_source_revision(protocol)
     assert not marker.exists()
     assert not (root/'.git/objects'/blob[:2]/blob[2:]).exists()
-

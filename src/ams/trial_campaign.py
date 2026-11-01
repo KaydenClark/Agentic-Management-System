@@ -107,7 +107,6 @@ def publish_result(store,run,result,*,case_id,trial,evidence_digest):
 
 def create_run(store,protocol,campaign_digest):
     revision=protocol['sourceRevision']
-    git=['git','--no-replace-objects','--no-lazy-fetch','-c','protocol.allow=never']
     row={'run_key':'interview-noise-r1-'+campaign_digest[:20], 'arm':'ams','provider':'firstParty',
          'model':runtime.MODEL,'effort':runtime.EFFORT,'runtime_commit':revision,
          'controls_commit':revision,'skills_commit':protocol['skillsCommit'],'grader_version':revision,
