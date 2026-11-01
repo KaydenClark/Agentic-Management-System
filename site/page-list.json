@@ -6,8 +6,33 @@
       "title": "Home",
       "spec": "S-003",
       "task": "TK-001",
-      "landed": { "branch": "dev", "commit": "c529821de4f8f9b8db916dfc9988e365ab06c134", "pr": 13 },
-      "sources": ["site/app/page.tsx", "site/app/layout.tsx", "site/app/shell/", "site/app/theme/tokens.css"],
+      "landed": {
+        "branch": "dev",
+        "commit": "c529821de4f8f9b8db916dfc9988e365ab06c134",
+        "pr": 13
+      },
+      "sources": [
+        "site/app/page.tsx",
+        "site/app/layout.tsx",
+        "site/app/shell/",
+        "site/app/theme/tokens.css"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/rsi",
+      "title": "RSI results",
+      "spec": "S-007",
+      "task": "TK-001",
+      "landed": {
+        "branch": "dev",
+        "commit": "fceec125c75590d49b828e636e081edd4983fec4",
+        "pr": 14
+      },
+      "sources": [
+        "site/app/rsi/",
+        "site/app/nav.ts"
+      ],
       "status": "draft"
     }
   ]
