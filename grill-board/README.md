@@ -12,9 +12,30 @@ Optional header fields the page shows:
 |---|---|
 | `Topic` | The topic in the left rail; cards without one go under "Other topics" |
 | `Why it matters` | The yellow "Why this choice matters" box |
-| `Recommendation` | The green "Agent recommendation" box |
+| `Recommendation` | The green "Agent recommendation" box; the text Confirm writes |
+| `Owner record` | The repository-relative file the confirmed answer is written into |
+| `Write after` | One exact, unique line in that record; the answer is inserted below it |
 
-Text below the header is shown as Context.
+Text below the header is shown as Context. A card without `Owner record`, `Write after` and `Recommendation` can be returned but not confirmed; the page says which is missing.
+
+## Answers
+
+The verdict buttons and note POST to `/answer` (ADR-000B, ADR-002U, S-004 TK-002).
+
+- **Confirm** inserts ``**Owner answer (DATE, Grill Board card `NAME`):** Confirmed: RECOMMENDATION``, and the note as a quote, below the `Write after` line of the `Owner record`. No second confirmation.
+- **Rework wording**, **Change the why** and **Change** are returns: they need a note and write only the card. To re-ask, an agent posts the reworked card as a new file.
+- Every verdict appends a `## Answer` section to the card (`Verdict`, `Answered` in UTC, then `Written to` or `Returned: yes`, then the note). An answered card leaves the queue and counts as answered. Nothing is deleted or renumbered.
+
+**Commits.** The server makes one Git commit per answer on the current branch, containing only the card and, for Confirm, the owning record. It builds the commit in a throwaway index on the commit it checked, then moves the branch with `git update-ref HEAD NEW CHECKED`, so a commit that landed meanwhile makes it refuse and restore both files. It runs no commit hooks. The subject reads like `Grill Board: confirm NAME into PATH`. Other staged or unstaged work is left alone and not committed. Every board instance on a checkout shares one writer lock (`flock` on `ams-grill-board.lock` in the Git directory), held from the hash check through the commit, so a second writer sees the first one's change and refuses. It refuses on a detached HEAD; if the commit fails, both files are put back to their committed bytes.
+
+**Refusals** (nothing written; the page shows "Not written: ..." in the heat alert):
+
+- The card or owning record changed since the page showed it: the page carries each file's SHA-256 at HEAD, captured at render, and the write compares them.
+- Either file has uncommitted changes.
+- The owning path is absolute, uses `..` or `.`, names `.git`, goes through a symlink, resolves outside the repository, or is not a committed regular file.
+- The card names itself as its owning record.
+- The `Write after` line is missing or appears more than once; the card is already answered; a return has no note.
+- The POST does not come from the board's own page: the `Host` must be `127.0.0.1:PORT` and the `Origin` (or, without one, the `Referer`) that same origin; otherwise 403.
 
 ## Layout and theme
 
@@ -25,7 +46,7 @@ Dark is the default; the system preference picks light, and the header toggle ov
 - Token values: [theme/tokens.json](theme/tokens.json), the single source. `src/ams/grill_board/static/board.css` repeats them and `tests/test_grill_board_theme.py` fails on any difference, on a color outside the list, or on a color with two meanings.
 - Fonts: IBM Plex Sans, IBM Plex Mono and Zilla Slab (latin, @fontsource 5.3.0, SIL Open Font License; licenses beside the files in `src/ams/grill_board/static/fonts/`). The page loads nothing from another host.
 
-Not wired yet: the verdict buttons, note, stars and "Too taxing" are drawn where the artifact puts them but are disabled until TK-002 (answers) and TK-003 (rating and flag).
+Not wired yet: the stars and "Too taxing" are drawn where the artifact puts them but are disabled until TK-003 (rating and flag).
 
 ## QA screenshots
 

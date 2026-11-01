@@ -190,15 +190,18 @@ def test_topics_first_layout_with_the_open_card(served):
     assert 'class="grade n4"' in picked
 
 
-def test_answer_rating_and_flag_controls_are_inert_placeholders(served):
+def test_verdicts_are_live_and_rating_and_flag_stay_inert_placeholders(served):
     _, html, _, _ = served
     parsed = Resources()
     parsed.feed(html)
     joined = " ".join(parsed.disabled)
-    for control in ("verdict confirm", "star", "taxing"):
+    for control in ("star", "taxing"):
         assert control in joined
-    assert "<form" not in html
-    assert "Not wired yet" in html
+    # The showcase card names no owning record, so Confirm is off and says why; returns stay live.
+    assert "verdict confirm" in joined and joined.count("verdict") == 1
+    assert "Confirm needs this card to name its Owner record" in html
+    assert '<form class="answer" method="post" action="/answer">' in html
+    assert "Not wired yet: rating and the flag" in html
 
 
 def test_theme_follows_the_system_and_has_a_toggle(served):
