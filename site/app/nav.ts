@@ -8,6 +8,7 @@ export type NavEntry = {
 
 export const nav: readonly NavEntry[] = [
   { href: "/", label: "Home" },
+  { href: "/rsi", label: "RSI results" },
 ];
 
 // Index of the entry for `pathname` (trailing slash ignored), or -1.

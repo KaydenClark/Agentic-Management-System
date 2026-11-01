@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; three Tasks planned on `dev`.
-**Next gate:** Claim TK-001 in orchestrator A's lane.
+**Latest event:** TK-001 claimed by orchestrator-A-dispatcher-S007.
+**Next gate:** Close TK-001 with verification and documentation proof.
 
 ## Intent and authority
 
