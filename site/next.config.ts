@@ -12,8 +12,18 @@ function commitSha(): string {
   }
 }
 
+// Routes whose draft mark is removed, as a JSON list. Only scripts/build.mjs
+// sets it, after matching each built page's content hash against
+// approvals.json; unset, every page keeps its mark.
+function approvedRoutes(): string {
+  const raw = process.env.AMS_APPROVED_ROUTES || "[]";
+  const routes: unknown = JSON.parse(raw);
+  if (!Array.isArray(routes) || !routes.every((r) => typeof r === "string")) throw new Error("AMS_APPROVED_ROUTES must be a JSON list of routes");
+  return JSON.stringify(routes);
+}
+
 const nextConfig: NextConfig = {
-  env: { AMS_COMMIT_SHA: commitSha() },
+  env: { AMS_COMMIT_SHA: commitSha(), AMS_APPROVED_ROUTES: approvedRoutes() },
 };
 
 export default nextConfig;

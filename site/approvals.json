@@ -1,0 +1,4 @@
+{
+  "about": "Owner approvals of exact page content (S-003 TK-004). A page loses its draft mark only while a record here names its route and its current content hash; any edit to the page changes the hash and restores the mark. Records come only from the owner: an agent adds one only from a dated, committed record of the owner's approval (chat until the Grill Board exists, DDR-000X) and links it as source. Print current hashes with npm run page-hashes. Fields: route, hash, approver, date (YYYY-MM-DD), source (GitHub link to the dated record).",
+  "approvals": []
+}

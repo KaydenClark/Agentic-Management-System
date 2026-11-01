@@ -7,14 +7,16 @@ import styles from "./page-order.module.css";
 
 // Back and forward links in the reading order (app/nav.ts), at the end of
 // every page in it, with the reader's "n of N" position. Server-rendered at build time for each route; a page
-// outside the reading order (such as not-found) gets none.
+// outside the reading order (such as not-found) gets none. Shell navigation,
+// not page content: data-review-exclude keeps it out of the content hash, so
+// adding a page to the reading order clears no other page's approval.
 export function PageOrder() {
   const index = readingIndex(usePathname());
   if (index < 0) return null;
   const prev = nav[index - 1];
   const next = nav[index + 1];
   return (
-    <nav aria-label="Page order" className={styles.order}>
+    <nav aria-label="Page order" className={styles.order} data-review-exclude="">
       <p className={styles.position}>
         Reading order · {index + 1} of {nav.length}
       </p>

@@ -1,0 +1,29 @@
+{
+  "about": "Content-hash test vectors for the S-005 page-hash contract, matched by S-003 TK-004. Each expected hash is shasum -a 256 over the canonical string, computed independently of site/scripts/draft-marks.mjs.",
+  "vectors": [
+    {
+      "name": "text, href, src and alt in document order; mark, script, style and footer dropped",
+      "html": "<html><body><header><a href=\"/\">AMS</a></header><main id=\"main\" class=\"container\"><div data-review-mark=\"draft\"><strong>Draft</strong> not approved</div><h1>Hello  &amp; welcome</h1><p>Line\n  two <a href=\"/start\">Start</a></p><img src=\"/x.png\" alt=\"A picture\"><script>var x = 1;</script><style>p{}</style></main><footer><a href=\"https://github.com/o/r/commit/abc1234\">abc1234</a></footer></body></html>",
+      "canonical": "Hello & welcome Line two /start Start /x.png A picture",
+      "hash": "sha256:2f07cf3ac42ce4c08ae53b508a57c81127d5c60763a9a65f61f241a808d21334"
+    },
+    {
+      "name": "data-review-exclude subtree dropped with its void children; entities decoded; UTF-8",
+      "html": "<main id=\"main\"><p>Kept</p><section data-review-exclude=\"\"><p>Live <b>42</b></p><br><img src=\"/a.png\" alt=\"chart\"></section><p>Also kept&#x27;s &#39;x&#39; &lt;tag&gt; &quot;q&quot; caf&#233;</p></main>",
+      "canonical": "Kept Also kept's 'x' <tag> \"q\" café",
+      "hash": "sha256:de5c93413e77c898f1e87f4a40829f5fb6ece2ae97cd15a5133f0b25933777ac"
+    },
+    {
+      "name": "comments split text nodes; ASCII whitespace collapsed and trimmed",
+      "html": "<main id=\"main\">\n  <p>a<!-- -->b</p>\n<p>\t c \n</p></main>",
+      "canonical": "a b c",
+      "hash": "sha256:0e9f64031fcb2bc708b531c2a20441580425d151a38503f38592a7dd36019d3b"
+    },
+    {
+      "name": "a main holding only the mark and an excluded region hashes the empty string",
+      "html": "<main id=\"main\"><div data-review-mark=\"draft\">Draft</div><nav data-review-exclude=\"\"><a href=\"/next\">Next</a></nav></main>",
+      "canonical": "",
+      "hash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}
