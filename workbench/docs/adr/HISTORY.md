@@ -23,7 +23,7 @@
 | [000O](000O-cdrs-follow-standard-adr-practice.md) | CDRs follow standard ADR practice | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [000P](000P-a-capability-change-gets-one-short-spec.md) | A capability change gets one short Spec | accepted | 2026-11-01 | workbench/specs |
 | [000Q](000Q-each-task-is-its-own-runnable-file.md) | Each Task is its own runnable file | accepted | 2026-11-01 | workbench/specs |
-| [000R](proposed/000R-a-task-is-one-agent-run.md) | A Task is one agent run | proposed | 2026-11-01 | workbench/specs |
+| [000R](000R-a-task-is-one-agent-run.md) | A Task is one agent run | accepted | 2026-11-01 | workbench/specs |
 | [000S](proposed/000S-a-spec-is-accepted-against-its-conditions.md) | A Spec is accepted against its conditions | proposed | 2026-11-01 | workbench/specs |
 | [000T](proposed/000T-scaffolding-is-deleted-at-close.md) | Scaffolding is deleted at close | proposed | 2026-11-01 | workbench/specs, ARCHITECTURE.md |
 | [000U](proposed/000U-a-prototype-needs-no-spec.md) | A prototype needs no Spec | proposed | 2026-11-01 | workbench/specs |
