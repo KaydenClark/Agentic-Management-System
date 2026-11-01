@@ -3,7 +3,7 @@
 **Task ID:** TK-000L
 **Spec ID:** S-006
 **Slice:** Review FAIL at d6d4a6d corrected: readcheck pinned to a ref and comparing content; legacy-key claim narrowed
-**Status:** ready
+**Status:** in-progress
 **Blockers:** TK-000B
 **Destination:** spec-acceptance: Build history from real records; Key loads and authenticates; Real sources only
 **Planned verification:** red-first pytest for each finding; after merge, live `ams-history import --refresh-changed`, then `ams-history readcheck --ref <main SHA> --dev-ref <dev SHA>` (missing 0, extra 0, content mismatches 0), every livecheck and keycheck
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
+**Claimed by:** orch-b
+**Current claimant:** orch-b
 
 Orchestrator B's lane only. Orchestrator B's live-half review of the assembled Spec at `d6d4a6d65cc6287b667fe78ee5db937440972a5e` returned FAIL (strike 2 of 3, ADR-002W). Correct its findings:
 
