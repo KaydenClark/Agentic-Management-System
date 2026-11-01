@@ -1,0 +1,42 @@
+name: python tests
+
+# Runs the Python suite (runtime, Grill Board, Supabase writers with stubbed
+# HTTP), the repo-only record checks, and the 375px board check on every PR. No path
+# filter, so the check always reports. Live Supabase tests stay skipped:
+# CI holds no keys (AMS_LIVE is never set here).
+on:
+  pull_request:
+    branches: [main, dev]
+
+permissions:
+  contents: read
+
+jobs:
+  pytest:
+    name: python tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # the secret scan reads every commit
+      - uses: astral-sh/setup-uv@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Git identity for tests that build temp repositories
+        run: |
+          git config --global user.name "ci"
+          git config --global user.email "ci@example.invalid"
+      - run: uv run pytest -q
+      # doctor also checks host setup (the owner's personal skill catalog),
+      # which a CI runner never has; CI runs the repo-only record checks.
+      - name: Records are valid and the Taskboard is current
+        run: |
+          node workbench/tools/workbench-layout.mjs validate --project .
+          node workbench/tools/adr.mjs validate
+          node workbench/tools/spec-workbench.mjs render
+          git diff --exit-code TASKBOARD.md
+      - name: Grill Board at 375px
+        run: |
+          uv run --with playwright python -m playwright install --with-deps chromium
+          uv run --with playwright pytest -q tests/test_grill_board_phone.py
