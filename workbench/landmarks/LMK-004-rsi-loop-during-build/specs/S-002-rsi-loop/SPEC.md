@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000V closed with proof.
-**Next gate:** Complete TK-001.
+**Latest event:** TK-002 claimed by s002-noise-floor.
+**Next gate:** Close TK-002 with verification and documentation proof.
 
 ## Intent and authority
 
