@@ -6,7 +6,8 @@ tree, so drafts and uncommitted edits stay off the board (DDR-000L).
 A card is a title line, then `**Field:** value` header lines, then optional
 context. Priority and Value each need a grade and a one-line reason
 (DDR-000K). Unknown header fields are kept, so later fields (rating, flag,
-color) extend the format without breaking older cards.
+color) extend the format without breaking older cards. An answered card
+ends with a `## Answer` section the board appended (see answers.py).
 """
 
 import re
@@ -29,6 +30,7 @@ class Card:
     value_reason: str
     fields: dict = field(default_factory=dict)
     context: str = ""
+    answer: dict | None = None
 
     @property
     def sort_key(self):
@@ -63,6 +65,10 @@ def parse_card(name, text):
             problems.append(f"{label} reason is missing or blank")
     if problems:
         return Refusal(name, problems)
+    rest, answer = lines[index:], None
+    if "## Answer" in rest:
+        at = rest.index("## Answer")
+        rest, answer = rest[:at], dict(m.groups() for line in rest[at + 1:] if (m := FIELD.match(line)))
     return Card(
         file=name,
         question=question,
@@ -71,7 +77,8 @@ def parse_card(name, text):
         value=fields["Value"],
         value_reason=fields["Value reason"],
         fields=fields,
-        context="\n".join(lines[index:]).strip(),
+        context="\n".join(rest).strip(),
+        answer=answer,
     )
 
 
