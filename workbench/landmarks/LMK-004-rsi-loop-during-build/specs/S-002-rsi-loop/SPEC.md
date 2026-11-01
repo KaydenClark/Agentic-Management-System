@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000M claimed by codex-s002.
-**Next gate:** Close TK-000M with verification and documentation proof.
+**Latest event:** TK-000M closed with proof.
+**Next gate:** S-006 -> TK-001/TK-002.
 
 ## Intent and authority
 
@@ -138,6 +138,7 @@ RUNBOOK, S-006/S-007, Wiki/Tasks.
 ### Interview correction, 2026-11-01
 
 Kayden reported lost grilling as a failure; the linked context preserves the interview correction.
+| 2026-11-01 | TK-000M | Task closed | 36 focused; 427 suite/4 skip; QA/reviews in Task | RUNBOOK; evals; Wiki | S-006 and real trials remain; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
 
 ## Review and Human QA
 

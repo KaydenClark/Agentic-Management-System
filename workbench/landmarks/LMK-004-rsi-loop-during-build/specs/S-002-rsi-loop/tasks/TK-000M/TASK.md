@@ -3,12 +3,13 @@
 **Task ID:** TK-000M
 **Spec ID:** S-002
 **Slice:** A local caller records a frozen three-run assessment with exact scoring and retained attempt history
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Scoring; Stops; Cycle (assessment and retest safeguards only)
 **Planned verification:** CLI known-outcome fixtures for pooled counts, levels, missing proof, findings/retests, immutable records and fourth-attempt refusal; full pytest and room checks.
 **Claimed by:** codex-s002
 **Current claimant:** codex-s002
+**Proof:** 36 focused; 427 suite/4 skip; QA/reviews in Task
 
 ## Assignment
 
@@ -32,6 +33,7 @@ Local assessment records are preparation and evidence, not S-006 persistence, mo
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | codex/s002-assessment-loop | e3d9881df72aa994a6c0a76b7d582b078e3860e3 | ahead 0 behind 0 | 6 | 34 focused tests passed; full suite 425 passed, 4 skipped with loopback permission. Sandbox attempt: 97 failed, 9 errors from denied local server binds. Room layout/ADR/render/diff checks pass; doctor retains 2 pre-existing nonblocking findings. Synthetic CLI score/record/list readback matched. | RUNBOOK; evals/ASSESSMENTS.md; public synthetic packet; S-002 plan and resumed-context correction | Independent review and PR CI pending. S-006 remains active under orch-b; no Supabase assessment persistence, qualified model runner, controlled trials or measured benefit. Existing grilling redesign is skills PR 56 merge 878241202bf7ec97c0952287f1633f6f0ddf1a6e; live installation unverified. | 12a950d3fa92ac52fa1ceb6421956daf0d2df1936d8b0bc8367695c0adda2682 |
+| 2 | codex/s002-assessment-loop | 96f9ad924a701ee56f2dcaeacf5ba62648d2f1ca | ahead 0 behind 0 | 0 | 36 focused; 427 suite/4 skip; QA/reviews in Task | RUNBOOK; evals; Wiki | S-006 and real trials remain; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} | 729b6b27e58d84e5e485782b0342c9ca1888aad5d2495c67a75162ef7ada0f39 |
 
 ## Check, QA and scoped review
 
