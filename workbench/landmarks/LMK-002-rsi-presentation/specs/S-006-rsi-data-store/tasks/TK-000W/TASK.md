@@ -3,10 +3,12 @@
 **Task ID:** TK-000W
 **Spec ID:** S-006
 **Slice:** Historical source declarations exclude multiline inline code
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Build history from real records
 **Planned verification:** Red-first public collector/readcheck article and router fixtures, exact delimiter/escape/unmatched cases, plain declaration retention, focused/full/fresh/room/CI and independent corrected-source review.
+**Claimed by:** codex-history-consumer
+**Current claimant:** codex-history-consumer
 
 ## Assignment
 
