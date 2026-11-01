@@ -3,6 +3,8 @@ date: 2026-11-01
 canonicalized_in:
   - evals
   - supabase
+supersedes:
+  - 002F-the-rsi-loop-design.md
 ---
 
 # The RSI loop design with one owner gate

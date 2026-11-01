@@ -63,7 +63,7 @@
 | [002C](002C-reports-say-what-happened.md) | Reports say what happened | accepted | 2026-11-01 | AGENTS.md |
 | [002D](002D-every-finding-has-one-disposition.md) | Every finding has one disposition | accepted | 2026-11-01 | workbench/feedback |
 | [002E](002E-runbook-commands-are-the-commands-graders-call.md) | Runbook commands are the commands graders call | accepted | 2026-11-01 | RUNBOOK.md, evals |
-| [002F](002F-the-rsi-loop-design.md) | The RSI loop design | accepted | 2026-11-01 | evals, supabase |
+| [002F](archive/002F-the-rsi-loop-design.md) | The RSI loop design | superseded | 2026-11-01 | evals, supabase |
 | [002G](002G-measure-the-noise-floor-before-trusting-a-change.md) | Measure the noise floor before trusting a change | accepted | 2026-11-01 | evals |
 | [002H](002H-every-round-runs-two-control-arms.md) | Every round runs two control arms | accepted | 2026-11-01 | evals |
 | [002I](002I-comparisons-use-paired-per-task-statistics.md) | Comparisons use paired per-task statistics | accepted | 2026-11-01 | evals |

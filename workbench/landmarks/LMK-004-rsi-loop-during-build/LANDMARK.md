@@ -34,7 +34,7 @@ Outside research does not settle whether shaping an agent's environment improves
 
 The decision records under this landmark, one line each, linked to their record.
 
-- [The RSI loop design](../../docs/adr/002F-the-rsi-loop-design.md)
+- [The RSI loop design](../../docs/adr/archive/002F-the-rsi-loop-design.md)
 - [The first RSI trial is building the site](../../docs/ddr/000W-the-first-rsi-trial-is-building-the-site.md)
 - [One improvement procedure, starting from failed results](../../docs/adr/002A-one-improvement-procedure-starting-from-failed-results.md)
 - [A repeated failure first checks the earlier fix](../../docs/adr/002B-a-repeated-failure-first-checks-the-earlier-fix.md)
