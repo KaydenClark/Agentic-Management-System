@@ -27,7 +27,7 @@ Outside research does not settle whether shaping an agent's environment improves
 
 ## Current Verified State
 
-- The loop runner and fixed eval task set are not implemented. S-006 has the RSI writer and live tables, but the 2026-11-01 read-only check found 0 non-test runs/results. Baseline means the current AMS repository implementation; no scored assessment exists yet.
+- The runner and fixed eval set are unimplemented. S-006 has the writer and tables; the 2026-11-01 query found 0 non-test runs/results. Baseline means the current AMS repository implementation; no scored assessment exists yet.
 - Loop #1 adds fitness/alignment results, Stable/Excellent-only acceptance, three attempts per candidate, Supabase records and dev-site visibility. The owner confirmed r1 and paid-plan meter use, with baseline outside the attempt cap. [RSI context](../../../../wiki/context-ams-purpose.md#settled-answers-and-next-interview-question) preserves exact wording, corrections and remaining design questions. No scored result is claimed.
 
 ## Desired Behavior
