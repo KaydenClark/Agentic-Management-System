@@ -28,7 +28,7 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 ## Current Verified State
 
 - Verified candidate: `5aa2621ec03a1d419615374ec31e4c3db12069b6`, dev `c0f6c67687f432cd75b55e7d4fdad460ea2f77db`; 943 history rows, missing/extra/content mismatches/unsourced all 0. [TK-000L](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01) owns live proof and limits. No real trial or assessment storage completion claimed.
-- TK-000P adds explicit unknown metrics with reasons/sources and preserves known zero; remote migration `20261101192328` and live tagged roundtrip pass. See [trial consumer contract](../../../../../evals/TRIAL-ROWS.md). Distinct assessment persistence remains open.
+- TK-000P adds explicit unknown metrics with reasons/sources and preserves known zero; remote migration `20261101192328` and live tagged roundtrip pass. See [trial consumer contract](../../../../../evals/TRIAL-ROWS.md). TK-000Q implements private assessment persistence; full delivery and assembled Review remain open.
 
 ## Desired Behavior
 

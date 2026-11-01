@@ -269,16 +269,26 @@ def read_records(store):
         except (OSError,ValueError) as exc:
             raise Refused(f'unreadable local record: {file.name}') from exc
         require(isinstance(envelope,dict) and isinstance(envelope.get('packet'),dict), 'malformed record')
+        require(file.name == _filename(envelope['packet'].get('assessmentId')), 'record identity differs from filename')
         records.append(envelope)
-    ordered = sorted(records, key=lambda r:(r['packet'].get('failureId',''),r['packet'].get('attempt',-1)))
-    prior = {}
+    return replay(records)
+
+
+def replay(records):
+    """Validate immutable envelopes using the canonical transition and scorer."""
+    require(isinstance(records, list), 'records must be a list')
+    for record in records:
+        require(isinstance(record, dict) and set(record) == {'packet', 'result'}, 'malformed record envelope')
+        _validate(record['packet'])
+    ordered = sorted(records, key=lambda r:(r['packet']['failureId'],r['packet']['attempt']))
+    prior, identities = {}, set()
     for record in ordered:
         p = record['packet']
-        require(type(p.get('attempt')) is int, 'malformed recorded attempt')
-        history = prior.setdefault(p['failureId'],[])
+        require(p['assessmentId'] not in identities, 'duplicate assessment identity')
+        identities.add(p['assessmentId'])
+        history = prior.setdefault(p['failureId'], [])
         expected = _transition(p, history)
         require(record.get('result') == expected, 'record result differs from recomputed history')
-        require((folder / _filename(p['assessmentId'])).is_file(), 'record identity differs from filename')
         history.append(record)
     return ordered
 
