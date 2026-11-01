@@ -12,3 +12,4 @@
 | [000D](000D-agents-md-is-the-only-always-loaded-instruction-file.md) | AGENTS.md is the only always-loaded instruction file | accepted | 2026-11-01 | AGENTS.md, CLAUDE.md |
 | [000E](000E-an-always-loaded-line-must-change-the-next-action.md) | An always-loaded line must change the next action | accepted | 2026-11-01 | AGENTS.md, workbench/artifact-budgets.json |
 | [000F](000F-agents-start-small-and-investigate-before-asking.md) | Agents start small and investigate before asking | accepted | 2026-11-01 | AGENTS.md |
+| [000G](000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md) | A rule is enforced only when code refuses and a test shows it | accepted | 2026-11-01 | AGENTS.md, tests |

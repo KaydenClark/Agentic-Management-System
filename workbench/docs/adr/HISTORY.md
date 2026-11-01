@@ -12,7 +12,7 @@
 | [000D](000D-agents-md-is-the-only-always-loaded-instruction-file.md) | AGENTS.md is the only always-loaded instruction file | accepted | 2026-11-01 | AGENTS.md, CLAUDE.md |
 | [000E](000E-an-always-loaded-line-must-change-the-next-action.md) | An always-loaded line must change the next action | accepted | 2026-11-01 | AGENTS.md, workbench/artifact-budgets.json |
 | [000F](000F-agents-start-small-and-investigate-before-asking.md) | Agents start small and investigate before asking | accepted | 2026-11-01 | AGENTS.md |
-| [000G](proposed/000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md) | A rule is enforced only when code refuses and a test shows it | proposed | 2026-11-01 | AGENTS.md, tests |
+| [000G](000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md) | A rule is enforced only when code refuses and a test shows it | accepted | 2026-11-01 | AGENTS.md, tests |
 | [000H](proposed/000H-a-check-never-blocks-its-own-repair.md) | A check never blocks its own repair | proposed | 2026-11-01 | AGENTS.md, workbench/tools |
 | [000I](proposed/000I-a-required-step-must-produce-a-checkable-result.md) | A required step must produce a checkable result | proposed | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [000J](proposed/000J-check-a-host-before-relying-on-it.md) | Check a host before relying on it | proposed | 2026-11-01 | RUNBOOK.md |
