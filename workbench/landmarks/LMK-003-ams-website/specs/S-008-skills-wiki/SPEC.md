@@ -6,20 +6,27 @@
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
 **Updated:** 2026-11-01
-**Catalog description:** Site-written summaries of the owner's skills, one entry per skill, modeled on the format of aihero.dev/skills.
+**Catalog description:** Site-written articles on the owner's skills, one page per skill grouped by Workbench stage, modeled on aihero.dev/skills.
 **Blockers:** S-003
-**Latest event:** Entry shape revised to the owner's article template (2026-11-01).
-**Next gate:** Task planning after the site shell (S-003) exists.
+**Latest event:** Owner settled the review choices (2026-11-01): nine-section article, stage grouping, chart skills at a pinned commit, index plus page per skill, no used marks.
+**Next gate:** Owner go-ahead for implementation. The owner asked to finish this Spec and stop before implementation (2026-11-01).
 
 ## Intent and authority
 
-The owner chose site-written summaries of the owner's skills, modeled on https://www.aihero.dev/skills. The skills repository is private, so the site publishes summaries, not skill files.
+The owner chose site-written articles on the owner's skills, modeled on https://www.aihero.dev/skills. The skills repository is private, so the site publishes articles written for it, not skill files.
 
-On 2026-11-01 the owner set the article template (below) in chat, giving the reference site's `/grilling` page as the model of depth and tone, and supplied the chart of skills by Workbench stage, committed as `skills-by-workbench-stage.svg` beside this Spec. The chart is the authority for each skill's stage. `/start` screen 3 draws it from `site/app/start/skills.mjs`, which reaches `dev` through PR #87 and is not yet on `main`.
+On 2026-11-01, in chat, the owner:
+
+- set the article template, giving the reference site's `/grilling` page as the model of depth and tone, then added an example request and a "does not authorize" section, each beside its partner;
+- supplied the chart of skills by Workbench stage, committed as `skills-by-workbench-stage.svg` beside this Spec. The chart is the authority for each skill's stage. `/start` screen 3 draws it from `site/app/start/skills.mjs`, which reaches `dev` through PR #87 and is not yet on `main`;
+- named the source as the owner's skills repository, `KaydenClark/skills` (private), covering every skill on the chart under its current name in that repository, so `grill-me` is `align-concept` and `grill-with-docs` is `align-docs`;
+- chose stage grouping and an index plus one page per skill;
+- ruled out "used to build this site" marks on the public site: that record belongs to the Supabase backend and GitHub, not the wiki;
+- asked for this Spec to be finished and implementation not started.
 
 ## Outcome
 
-A reader can browse the skills that operate the AMS, see what each does, when to use it and what it does not authorize, and see which ones were actually used to build the site.
+A reader can browse the skills that operate the AMS by Workbench stage, open any one, and learn what it does, when to reach for it, what it needs and refuses, how to tell it is working and where it fits in the workflow.
 
 ## Why It Matters
 
@@ -27,61 +34,61 @@ The skills are how agents operate the AMS. Explaining them faithfully, without p
 
 ## Current Verified State
 
-- No wiki pages exist. The skills live in the owner's skills repository, outside this one.
+- No wiki pages exist.
+- `KaydenClark/skills` is private; at commit `878241202bf7ec97c0952287f1633f6f0ddf1a6e` (2026-11-01) every skill on the chart is a top-level skill directory, with `grill-me` and `grill-with-docs` renamed `align-concept` and `align-docs`. Four top-level skills are not on the chart (`clean-my-ai-harness-codex`, `obsidian-vault`, `ponder`, `teach`). The repository has a `THIRD_PARTY_NOTICES.md` and no root `LICENSE`.
+- The chart (`skills-by-workbench-stage.svg`) still shows the old names `grill-me` and `grill-with-docs`.
 
 ## Desired Behavior
 
-- An index of the owner's skills, grouped by workflow stage, and one entry per skill.
-- Each entry is an article with these sections, in this order (the owner's template):
+- **Set.** One article for each skill on the chart, under its name in the skills repository at the pinned commit: 46 skills at commit `8782412`. Skills not on the chart get no article.
+- **Index (`/skills`).** The skills grouped by the chart's seven stages in order (Route, Align, Prepare, Journey, Judge, Complete, Improve), each stage with its gloss, main-flow skills first in their order, then the others. Each skill shows its name and a one-line summary and links its article.
+- **Article (`/skills/<name>`).** Sections in this order:
   1. **What it does**: the mechanism in plain words, with its key terms defined.
-  2. **When to use it**: how it is invoked or reached for, and, where neighbours overlap, a table of "what you have / reach for" pointing to the right skill.
-  3. **What it requires**: the skills, records, tools or Workbench it depends on.
-  4. **Skill-specific sections**: only where the skill needs them (for example, the round and frontier of `grilling`).
-  5. **FAQs**: the questions readers actually ask, each with a direct answer, including known failure modes and their workaround.
-  6. **It's working when**: observable signs, as a list, that a run is behaving as designed.
-  7. **Where it fits in the workflow**: its stage on the skills-by-stage chart, what calls it and what it hands to, linking those skills' entries.
-- Each entry also carries a credit line: original, or adapted from a named source with its license.
-- Each entry is derived from that skill's file at a pinned skills commit, and names the commit.
-- "Used to build this site" appears only where a record links the skill to a Task or review.
-- Layout follows the reference site's format; the exact elements are confirmed against that page at Task planning.
+  2. **When to use it**: how it is invoked or reached for and, where neighbours overlap, a "what you have / reach for" table pointing to the right skill.
+  3. **Example request**: one realistic request that would bring the skill in.
+  4. **What it requires**: the skills, records, tools or Workbench it depends on.
+  5. **What it does not authorize**: what running it never grants (for example, merging, publishing or Human QA).
+  6. **Skill-specific sections**: only where the skill needs them (for example, the round and frontier of `grilling`).
+  7. **FAQs**: the questions readers actually ask, each with a direct answer, including known failure modes and their workaround.
+  8. **It's working when**: observable signs, as a list, that a run is behaving as designed.
+  9. **Where it fits in the workflow**: its stage on the chart, what calls it and what it hands to, linking those skills' articles.
+- **Credit.** Each article ends with a credit line: original to the owner, or adapted from a named source with its license, as the skill file and `THIRD_PARTY_NOTICES.md` state at the pin.
+- **Pin.** Each article is derived from that skill's file at the pinned commit and names the commit. A later pin updates the affected articles.
+- Layout follows the reference site's format; exact elements are confirmed against that page at Task planning.
 
 ## Decisions And Contracts
 
-- Summaries are written for the site; skill files are not copied.
+- Articles are written for the site; skill files are not copied.
 - An adapted skill is credited to its source, never labeled original.
-- The article template above is the owner's (2026-11-01); it replaces the earlier five-part entry (does, when, does not authorize, example request, provenance).
+- The nine-section article above is the owner's (2026-11-01); it replaces the earlier five-part entry (does, when, does not authorize, example request, provenance).
+- Stage membership comes from the chart; skill names come from the skills repository at the pin. Where they differ, the repository name is used and the chart is not edited by this Spec.
+- No "used to build this site" marks: which skills built which work is recorded in the Supabase backend and on GitHub, not in the wiki (owner, 2026-11-01).
 
 ## Non-Goals
 
 - Publishing the skills repository or any skill file.
 - Editing skills; skill changes go through the skills repository's own process.
-
-## Open Owner Choices
-
-- Whether "what it does not authorize" and an example request stay, as lines inside the template's sections; the template does not list them.
-- Whether the index groups entries by the seven stages of the skills-by-stage chart (Route, Align, Prepare, Journey, Judge, Complete, Improve), and whether the chart's skills are the owner's set.
-- Which skills repository and path the authoring session reads at a pinned commit.
-- Whether TK-001 may start on the site shell already on `dev` before S-003 completes.
-- One index page plus one page per skill (`/skills/<name>`), as on the reference site.
-- Whether TK-003's "used to build this site" marks stay in this Spec.
+- Articles for skills not on the chart.
+- Marking which skills were used to build the site.
 
 ## Dependencies And Blockers
 
-- S-003 (site shell); a pinned skills commit readable by the authoring session.
+- S-003 (site shell). The shell, theme and site tests exist on `dev`; implementation waits for the owner's go-ahead.
+- Read access to `KaydenClark/skills` at the pinned commit for the authoring session.
+- PR #87 (`skills.mjs` and `/start` screen 3) for the shared stage data.
 
 ## Vertical Implementation Slices
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Skills index page and one complete entry from a pinned skill, deployed to `dev` | ready | none | pending |
-| TK-002 | Entries for every skill in the owner's set, grouped by stage | ready | TK-001 | pending |
-| TK-003 | "Used to build this site" marks driven by Task and review records | ready | TK-002 | pending |
+| TK-001 | `/skills` index and one complete article from the pinned commit, deployed to `dev` | ready | owner go-ahead | pending |
+| TK-002 | Articles for every skill on the chart, grouped by stage | ready | TK-001 | pending |
 
-### TK-001 - First entry
+### TK-001 - Index and first article
 
 **Stance:** Builder
 
-Proves the entry-shape and pin criteria on one skill.
+Proves the index, the article shape, credit and pin criteria on one skill.
 
 ### TK-002 - Full set
 
@@ -89,27 +96,23 @@ Proves the entry-shape and pin criteria on one skill.
 
 Proves the coverage criterion.
 
-### TK-003 - Used marks
-
-**Stance:** Builder
-
-Proves the "used" criterion.
-
 ## Acceptance Criteria
 
-- [ ] **Entry shape.** Every entry has the template's six required sections in order (skill-specific sections optional, placed after What it requires), a credit line, and names its skills commit. *Check:* a content test over entries. *Must fail:* an entry with no FAQs or no "It's working when" section, or with sections out of order.
-- [ ] **Faithful.** Each described behavior appears in the pinned skill file. *Check:* a reviewer compares entries with the pinned files. *Must fail:* a behavior the skill does not have.
-- [ ] **Coverage.** Every skill in the owner's set has an entry and every stage names at least one skill. *Must fail:* an orphan stage.
-- [ ] **Used means recorded.** A "used" mark links the Task or review record. *Must fail:* a mark with no record.
+- [ ] **Article shape.** Every article has sections 1-5 and 7-9 in order (skill-specific sections optional, between What it does not authorize and FAQs), a credit line, and names its skills commit. *Check:* a content test over the built articles. *Must fail:* an article with no FAQs, no "It's working when" or no "What it does not authorize", or with sections out of order.
+- [ ] **Faithful.** Each described behavior, requirement and refusal appears in the pinned skill file. *Check:* a reviewer compares articles with the pinned files. *Must fail:* a behavior the skill does not have.
+- [ ] **Coverage.** Every chart skill has an article under its repository name at the pin, and every stage names at least one skill. *Must fail:* a missing chart skill, an article named `grill-me`, an article for a skill not on the chart, or an orphan stage.
+- [ ] **Index.** `/skills` lists every article under its chart stage, main-flow skills first in order, each linking its `/skills/<name>` page. *Must fail:* a skill under the wrong stage or an article with no index link.
+- [ ] **Credit.** An adapted skill names its source and license. *Must fail:* an adapted skill labeled original.
+- [ ] **No used marks.** No page marks a skill as used to build the site. *Must fail:* a "used" badge or list on any wiki page.
 - [ ] **No private files.** The hygiene check finds no copied skill file content beyond short quoted lines. *Must fail:* a skill file reproduced on the site.
 
 ## RSI and website connection
 
-Skill changes measured by the loop (S-002, S-011) update the affected entries at the new pin.
+Skill changes measured by the loop (S-002, S-011) update the affected articles at the new pin.
 
 ## Testing Seams
 
-- Content tests over the built entries; a pin comparison against the skills commit.
+- Content tests over the built index and articles; a pin comparison against the skills commit; the existing site hygiene and browser checks.
 
 ## Verification Procedure
 
@@ -128,6 +131,7 @@ node workbench/tools/spec-workbench.mjs show S-008
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
 | 2026-11-01 | none | Entry shape revised to the owner's seven-section template; open choices listed | render, doctor | this Spec | Every criterion; open owner choices |
+| 2026-11-01 | none | Owner settled the open choices: nine sections, stage grouping, chart skills at pin `8782412` under repository names, index plus page per skill, used marks dropped (TK-003 removed); implementation not started | render, doctor | this Spec | Every criterion |
 
 ## Review and Human QA
 
@@ -139,7 +143,7 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- none
+- The chart image keeps the old names `grill-me` and `grill-with-docs` until the owner updates it.
 
 ## Supersession
 
