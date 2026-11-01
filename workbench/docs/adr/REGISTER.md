@@ -70,3 +70,4 @@
 | [002J](002J-every-ledger-row-records-cost-and-run-state.md) | Every ledger row records cost and run state | accepted | 2026-11-01 | evals, supabase |
 | [002K](002K-graders-come-from-the-accepted-version.md) | Graders come from the accepted version | accepted | 2026-11-01 | evals |
 | [002L](002L-trials-run-in-a-sandbox.md) | Trials run in a sandbox | accepted | 2026-11-01 | evals |
+| [002M](002M-more-than-two-held-out-tasks-before-a-public-number.md) | More than two held-out tasks before a public number | accepted | 2026-11-01 | evals, site |
