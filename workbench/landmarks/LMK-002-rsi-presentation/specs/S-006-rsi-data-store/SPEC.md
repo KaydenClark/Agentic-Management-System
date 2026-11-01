@@ -58,7 +58,7 @@ Charts are honest only if each number has a row with provenance; local writes an
 
 ## Vertical Implementation Slices
 
-Each Task is one fresh-session run in orchestrator B's lane (the only service-key holder), landed feature -> `main` by checked PR. TK-001 to TK-005 are done.
+Each Task is one fresh-session run in orchestrator B's lane (the only service-key holder), landed feature -> `main` by checked PR. TK-001 to TK-005 are done; TK-000E corrects the review FAIL at c87bf4e.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -105,6 +105,7 @@ Condensed 2026-11-01 to one row per closed Task; each TASK.md Receipt holds the 
 | 2026-11-01 | TK-003 | Task closed | PR #29 merged as 74b446e; receipt 4f0f73e: `rsi_*` applied; `ams-rsi livecheck` refused a missing skills commit and a stale update | RUNBOOK, ARCHITECTURE | No real RSI row until S-002 |
 | 2026-11-01 | TK-004 | Task closed | PRs #31 (4d74e90) and #37 (d26bb8c); receipt ab2118c: `ams-history` imported 463 rows matching record counts; rerun added 0 | RUNBOOK, ARCHITECTURE | Dev-only records not imported; no scheduled re-import |
 | 2026-11-01 | TK-005 | Task closed | PR #42 at 55c3856, Codex no findings: ams.source_rules checks every write; pytest 250 passed, 3 skipped (red first); live ams-sources livecheck: writer and DB refused no source, blank ref, bad strength on all 3 tables; site key saw 0 test rows; 0 left; no migration; advisors none | RUNBOOK, ARCHITECTURE, Spec (recorded_fact) | S-002 picks seed rows; close attribution: {"agent":"orchestrator-b-tk005-implementor","claimant":"orchestrator-b-tk005-implementor","onBehalfOf":null} |
+| 2026-11-01 | TK-000E | Review FAIL at c87bf4e: H1, M1, M2, M3, L1, L2 | independent Spec review | this Spec | TK-000E corrects them |
 
 ## Review and Human QA
 
