@@ -21,9 +21,9 @@
 
 [Scoring proof](tasks/TK-000M/TASK.md). [Baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified source reviews; no trial, strike or skill result.
 
-S-006/TK-000S owns exact identity repair at `ad7fa28`, with unchanged scoring/qualification and delivery proof retained there.
+S-006/TK-000S retains exact-identity repair proof; scoring/qualification unchanged.
 
-[TK-000T preparation](../../../../../evals/TRIALS.md) proves no controlled result, qualification or benefit. TK-002 owns measured noise.
+[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise.
 
 ## Desired Behavior
 

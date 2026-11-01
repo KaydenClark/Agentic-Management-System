@@ -20,11 +20,17 @@ Make initialize, control and execution writes nonblocking, drain stdout/stderr w
 
 ## Acceptance
 
-- [ ] A realistic large synthetic private-context prompt arrives exactly once and complete despite partial pipe writes and simultaneous stderr/stdout output.
-- [ ] A child that never reads stdin cannot stall past the send phase's deadline; control and execution share their deadline across write and response.
-- [ ] Failure preserves an actionable private cause without recording prompt/stdout, and cleans the owned process group with no writer thread.
+- [x] A realistic large synthetic private-context prompt arrives exactly once and complete despite partial pipe writes and simultaneous stderr/stdout output.
+- [x] A child that never reads stdin cannot stall past the send phase's deadline; control and execution share their deadline across write and response.
+- [x] Failure preserves an actionable private cause without recording prompt/stdout, and cleans the owned process group with no writer thread.
 - [ ] Focused regressions and callers, required checks, fresh full suite and affected peer review bind the corrected immutable source before checked delivery.
 
 ## Continuing work
 
 TK-000T remains historical bootstrap proof at its recorded revisions. TK-002 still owns qualified same-version noise; oracle calibration, controls, useful benefit and whole-Spec acceptance remain pending. A transport regression pass is not a provider/model trial or semantic qualification.
+
+## Check and corrective evidence
+
+The four initial regressions failed under the outer watchdog before the repair; the successful-large-prompt case directly reproduces the original deadlock. After correction, five new cases and the existing callers pass together: 50 focused tests. They cover a 131072-byte prompt with 64 simultaneous stdout frames and a stderr flood, exact complete JSONL hash with no duplicate bytes, nonreading initialize/MCP/execution peers, bounded private refusal/cleanup and the combined write/reply deadline. No provider/authentication request occurred; the inert harness replaces those endpoints before constructing the transport.
+
+The implementation uses nonblocking descriptor writes and a shared selector to drain both output pipes during partial writes. Each phase computes its absolute deadline before serializing/sending its request; receive consumes the same deadline. Existing 15-second control and 55-second execution budgets are preserved. Full/fresh checks, affected peer review and checked publication remain pending at this source hand-back.

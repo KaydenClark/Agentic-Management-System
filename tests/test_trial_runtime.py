@@ -177,3 +177,118 @@ def test_early_exit_broken_stdin_does_not_erase_failure_diagnostic(tmp_path,monk
     assert isinstance(adapter.last_failure,str)
     row=json.loads(Path(adapter.last_failure).read_text())
     assert row['exitStatus']==7 and row['stage']=='initialize'
+
+
+def inert_transport_probe(tmp_path, child_program, driver, timeout=2.5):
+    """An outer watchdog can kill both owned groups even if the tested send blocks."""
+    import subprocess
+    program = f'''
+import json,sys
+from pathlib import Path
+from types import SimpleNamespace
+from ams import trial_transport as transport
+from ams.assessment import Refused
+real_popen=transport.subprocess.Popen
+transport.subprocess.run=lambda *args,**kwargs:SimpleNamespace(stdout=json.dumps({{"loggedIn":True,"authMethod":"claude.ai","apiKeySource":None}}),stderr="",returncode=0)
+transport.subprocess.Popen=lambda *args,**kwargs:real_popen([sys.executable,"-c",{child_program!r}],**kwargs)
+stream=transport.ClaudeProcess(Path.cwd())
+print(json.dumps({{"childPid":stream.process.pid}}),flush=True)
+try:
+{driver}
+finally:
+ stream.close()
+'''
+    process = subprocess.Popen([sys.executable, '-c', program], cwd=tmp_path,
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                               start_new_session=True)
+    timed_out = False
+    try:
+        try:
+            stdout, stderr = process.communicate(timeout=timeout)
+        except subprocess.TimeoutExpired as error:
+            timed_out = True
+            partial = (error.output or b'').splitlines()
+            if partial:
+                child_pid = json.loads(partial[0])['childPid']
+                try: os.killpg(child_pid, signal.SIGKILL)
+                except ProcessLookupError: pass
+            os.killpg(process.pid, signal.SIGKILL)
+            stdout, stderr = process.communicate()
+        rows = [json.loads(line) for line in stdout.splitlines()]
+        return {'timedOut': timed_out, 'rows': rows, 'stderr': stderr.decode(),
+                'returncode': process.returncode}
+    finally:
+        for row in (locals().get('rows') or []):
+            if 'childPid' in row:
+                try: os.killpg(row['childPid'], signal.SIGKILL)
+                except ProcessLookupError: pass
+
+
+def test_large_prompt_survives_partial_writes_and_concurrent_output(tmp_path):
+    import hashlib
+    child = '''
+import hashlib,json,os,select,sys
+sys.stderr.write("fixture stderr flood\\n"*16384);sys.stderr.flush()
+for _ in range(64):
+ print(json.dumps({"type":"keepalive","data":"x"*8192}),flush=True)
+data=b""
+while b"\\n" not in data:
+ data+=os.read(0,4096)
+extra=os.read(0,4096) if select.select([0],[],[],.03)[0] else b""
+print(json.dumps({"type":"result","receivedHash":hashlib.sha256(data).hexdigest(),"lines":data.count(b"\\n"),"extraBytes":len(extra)}),flush=True)
+'''
+    driver = ''' rows=list(stream.responses("x"*131072))
+ print(json.dumps({"result":rows[-1],"eventCount":len(rows)}),flush=True)'''
+    result = inert_transport_probe(tmp_path, child, driver)
+    assert not result['timedOut'], 'send blocked before draining runtime output'
+    assert result['returncode'] == 0, result['stderr']
+    expected = {'type':'user','session_id':'','parent_tool_use_id':None,
+                'message':{'role':'user','content':'x'*131072}}
+    digest = hashlib.sha256(json.dumps(expected).encode()+b'\n').hexdigest()
+    row = result['rows'][-1]
+    assert row['eventCount'] == 65
+    assert row['result'] == {'type':'result','receivedHash':digest,'lines':1,'extraBytes':0}
+
+
+@pytest.mark.parametrize('phase', ['initialize', 'mcp_status', 'execution'])
+def test_nonreading_runtime_refuses_by_phase_deadline_with_private_cause(tmp_path, phase):
+    child = 'import sys,time;sys.stderr.write("fixture not reading stdin\\n"*16384);sys.stderr.flush();time.sleep(30)'
+    call = 'list(stream.responses("x"*131072))' if phase == 'execution' else f'stream.{phase}()'
+    driver = f''' transport.CONTROL_TIMEOUT=.15;transport.EXECUTION_TIMEOUT=.15
+ try:
+  {call}
+  raise AssertionError("expected timeout")
+ except Refused as error:
+  path=stream.failure_diagnostic(type(error).__name__,str(error))
+  row=json.loads(Path(path).read_text())
+  print(json.dumps({{"stage":row["stage"],"reason":row["reason"],"stderrRetained":"fixture not reading stdin" in row["stderr"],"promptRecorded":row["workerPromptRecorded"],"stdoutRecorded":row["stdoutRecorded"],"exited":stream.process.poll() is not None}}),flush=True)'''
+    result = inert_transport_probe(tmp_path, child, driver)
+    assert not result['timedOut'], 'phase deadline failed to bound a nonreading runtime'
+    assert result['returncode'] == 0, result['stderr']
+    row = result['rows'][-1]
+    assert row['stage'] == phase and 'timed out' in row['reason']
+    assert row['stderrRetained'] and row['exited']
+    assert not row['promptRecorded'] and not row['stdoutRecorded']
+
+
+def test_send_and_reply_share_one_execution_deadline(tmp_path):
+    child = '''
+import sys,time
+# Delay reading until a large write fills the pipe, then delay the reply too.
+time.sleep(.11)
+sys.stdin.buffer.readline()
+time.sleep(.11)
+print('{"type":"result"}',flush=True)
+'''
+    driver = ''' import time
+ transport.EXECUTION_TIMEOUT=.18
+ start=time.monotonic()
+ try:
+  list(stream.responses("x"*131072))
+  raise AssertionError("send incorrectly reset the execution deadline")
+ except Refused as error:
+  print(json.dumps({"reason":str(error),"elapsed":time.monotonic()-start}),flush=True)'''
+    result = inert_transport_probe(tmp_path, child, driver)
+    assert not result['timedOut'] and result['returncode'] == 0, result['stderr']
+    row = result['rows'][-1]
+    assert 'timed out' in row['reason'] and row['elapsed'] < .4

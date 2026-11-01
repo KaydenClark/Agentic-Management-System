@@ -14,6 +14,10 @@ import uuid
 from ams.assessment import Refused, require
 from ams.trial_runtime import claude_command, clean_environment
 
+CONTROL_TIMEOUT = 15
+EXECUTION_TIMEOUT = 55
+
+
 class ClaudeProcess:
     """JSONL control handshake before sending the one authorized caller prompt."""
     def __init__(self, cwd):
@@ -45,41 +49,64 @@ class ClaudeProcess:
         self.buffer = b''
         self.pending = []
 
-    def _send(self, value):
+    def _read_ready(self, key):
+        chunk = os.read(key.fileobj.fileno(), 65536)
+        if key.data == 'stderr':
+            if chunk:
+                self.stderr = (self.stderr+chunk)[-16384:]
+            else:
+                self.selector.unregister(key.fileobj)
+            return
+        require(bool(chunk), 'Claude transport exited before result')
+        self.buffer += chunk
+        require(len(self.buffer) <= 2_000_000, 'runtime message exceeds limit')
+        while b'\n' in self.buffer:
+            line, self.buffer = self.buffer.split(b'\n', 1)
+            try:
+                self.pending.append(json.loads(line))
+            except ValueError:
+                raise Refused('malformed Claude JSONL') from None
+
+    def _send(self, value, deadline):
+        payload = json.dumps(value).encode() + b'\n'
+        descriptor = self.process.stdin.fileno()
+        os.set_blocking(descriptor, False)
+        self.selector.register(self.process.stdin, selectors.EVENT_WRITE, 'stdin')
+        offset = 0
         try:
-            self.process.stdin.write(json.dumps(value).encode() + b'\n')
-            self.process.stdin.flush()
+            # A full child stderr/stdout pipe must never prevent its stdin reader
+            # from making progress. One deadline covers this send and its reply.
+            while offset < len(payload):
+                require(time.monotonic() < deadline,
+                        'Claude transport write timed out; preserve the attempt before retry')
+                for key, _ in self.selector.select(min(.25, max(0, deadline-time.monotonic()))):
+                    if key.data != 'stdin':
+                        self._read_ready(key)
+                        continue
+                    try:
+                        written = os.write(descriptor, payload[offset:offset+65536])
+                    except (BlockingIOError, InterruptedError):
+                        continue
+                    require(written > 0, 'Claude transport write made no progress')
+                    offset += written
         except OSError:
             raise Refused('Claude transport write failed') from None
+        finally:
+            self.selector.unregister(self.process.stdin)
 
-    def _receive(self, timeout):
-        deadline = time.monotonic() + timeout
+    def _receive(self, deadline):
         while time.monotonic() < deadline:
             if self.pending:
                 return self.pending.pop(0)
             for key, _ in self.selector.select(min(.25, max(0, deadline-time.monotonic()))):
-                chunk = os.read(key.fileobj.fileno(), 65536)
-                if key.data == 'stderr':
-                    if chunk:
-                        self.stderr = (self.stderr+chunk)[-16384:]
-                    else:
-                        self.selector.unregister(key.fileobj)
-                    continue
-                require(bool(chunk), 'Claude transport exited before result')
-                self.buffer += chunk
-                require(len(self.buffer) <= 2_000_000, 'runtime message exceeds limit')
-                while b'\n' in self.buffer:
-                    line, self.buffer = self.buffer.split(b'\n', 1)
-                    try:
-                        self.pending.append(json.loads(line))
-                    except ValueError:
-                        raise Refused('malformed Claude JSONL') from None
+                self._read_ready(key)
         raise Refused('Claude transport timed out; preserve the attempt before retry')
 
     def _control(self, subtype):
         self.stage = subtype
-        self._send({'type': 'control_request', 'request_id': subtype, 'request': {'subtype': subtype}})
-        response = self._receive(15)
+        deadline = time.monotonic() + CONTROL_TIMEOUT
+        self._send({'type': 'control_request', 'request_id': subtype, 'request': {'subtype': subtype}}, deadline)
+        response = self._receive(deadline)
         require(response.get('type') == 'control_response', 'unexpected pre-prompt runtime message')
         data = response.get('response', {})
         require(data.get('request_id') == subtype and data.get('subtype') == 'success',
@@ -94,11 +121,11 @@ class ClaudeProcess:
 
     def responses(self, prompt):
         self.stage = 'execution'
+        deadline = time.monotonic() + EXECUTION_TIMEOUT
         self._send({'type': 'user', 'session_id': '', 'parent_tool_use_id': None,
-                    'message': {'role': 'user', 'content': prompt}})
-        deadline = time.monotonic() + 55
+                    'message': {'role': 'user', 'content': prompt}}, deadline)
         while time.monotonic() < deadline:
-            event = self._receive(max(0, deadline-time.monotonic()))
+            event = self._receive(deadline)
             yield event
             if event.get('type') == 'result':
                 return
