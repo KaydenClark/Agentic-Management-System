@@ -1,8 +1,8 @@
 # Local r1 assessments
 
 `uv run ams-assess` is S-002's manual assessment intake, scorer and local
-readback. It makes no model calls. These records are not S-006 rows or behavioral
-trials, and the website does not read them. The historical Loop #1 baseline is
+readback. It makes no model calls. Local records can be imported into S-006’s private assessment store below.
+They remain separate from behavioral trials; the website cannot read raw packets. The historical Loop #1 baseline is
 unchanged; its incomplete/unqualified evidence is not silently upgraded.
 
 ```bash
@@ -98,3 +98,43 @@ manual trials; unknown usage stays unknown. No API campaign budget or new paid
 service is implied. S-006 persistence, qualified behavioral graders, the noise
 floor/controls and coordination with the existing grilling redesign remain
 required before the end-to-end improvement claim.
+
+## Private Supabase persistence
+
+`uv run ams-assessment-store import --store DIRECTORY` validates the entire local
+store and the remote history before appending. `readcheck` paginates and recomputes
+private results without printing packets; `--test` selects a separate synthetic
+namespace. `livecheck` creates only marked probes, checks raw-table/RPC access
+refusals and cleans its own chain. Keys load from the local gitignored environment.
+
+Each immutable envelope retains its packet/result, assessment/failure/attempt/run
+identities, frozen conditions, evidence, qualification, findings and retests.
+Storage format2 retains exact canonical packet/result JSON as TEXT beside its
+JSONB identity projection; hashes and replay use TEXT so PostgreSQL numeric
+normalization cannot change the artifact. SQL verifies its hash and semantic
+agreement with JSONB. The record also pins SHA-256 of the canonical scorer source.
+Use the recorded reader revision when that digest changes; a changed scorer is
+refused rather than silently reinterpreting old acceptance. Readback recomputes
+canonical transitions and totals and verifies content/predecessor digests.
+
+A transactional append RPC serializes writes, requires the expected chain head,
+and refuses missing baseline, skipped/reset/fourth attempts and changed identity.
+Exact retries are idempotent, including after a lost response. Exponent and
+negative-zero metadata preserve their original spelling and decoded types. Import resumes a
+matching prefix and refuses divergence without overwrite. The database protects
+identity/order/immutability; Python replay supplies r1 semantic checks. A trusted
+service-role caller can supply structurally valid false evidence; persistence is
+not evaluator qualification or tamper-proof administration.
+
+Raw `rsi_assessments` has no public/client SELECT policy or privileges. No raw
+packet, locator, host metadata or private text is published. There is no public
+summary or website reader in this slice; S-007 still owns safe presentation.
+The historical baseline has its original older format and incomplete/unqualified
+evidence; do not invent missing fields to import or upgrade it. No controlled
+trial, useful benefit or Human QA is established by successful storage.
+
+The first private-store candidate failed independent Review because hashing
+Python JSON spelling against JSONB readback did not survive numeric normalization.
+TK-000R preserves that failure and the additive exact-artifact correction; the
+migration refuses any unexpected pre-existing envelope rather than fabricate
+its lost original text. Earlier schema migrations remain history.
