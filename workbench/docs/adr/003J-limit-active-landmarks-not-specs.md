@@ -3,6 +3,8 @@ date: 2026-11-01
 canonicalized_in:
   - AGENTS.md
   - workbench/specs/S-001-ams/SPEC.md
+supersedes:
+  - 002S-at-most-six-active-specs.md
 ---
 
 # Limit active Landmarks, not Specs
