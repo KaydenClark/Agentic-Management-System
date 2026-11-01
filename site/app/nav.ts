@@ -14,6 +14,7 @@ export const nav: readonly NavEntry[] = [
   { href: "/quickstart", label: "Quickstart" },
   { href: "/rsi", label: "RSI results" },
   { href: "/glossary", label: "Glossary" },
+  { href: "/about", label: "About" },
 ];
 
 // Index of the entry for `pathname` (trailing slash ignored), or -1.
