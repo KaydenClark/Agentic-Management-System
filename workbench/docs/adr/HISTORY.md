@@ -17,7 +17,7 @@
 | [000I](000I-a-required-step-must-produce-a-checkable-result.md) | A required step must produce a checkable result | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [000J](000J-check-a-host-before-relying-on-it.md) | Check a host before relying on it | accepted | 2026-11-01 | RUNBOOK.md |
 | [000K](000K-a-stance-is-a-working-perspective-not-a-permission.md) | A stance is a working perspective, not a permission | accepted | 2026-11-01 | GLOSSARY.md, .agents/skills |
-| [000L](proposed/000L-governance-planes-are-roles-a-claim-plays-in-one-operation.md) | Governance planes are roles a claim plays in one operation | proposed | 2026-11-01 | GLOSSARY.md |
+| [000L](000L-governance-planes-are-roles-a-claim-plays-in-one-operation.md) | Governance planes are roles a claim plays in one operation | accepted | 2026-11-01 | GLOSSARY.md |
 | [000M](proposed/000M-a-directory-guide-holds-invariants-and-pointers-only.md) | A directory guide holds invariants and pointers only | proposed | 2026-11-01 | AGENTS.md |
 | [000N](proposed/000N-one-decision-record-type-the-cdr.md) | One decision-record type, the CDR | proposed | 2026-11-01 | GLOSSARY.md, ARCHITECTURE.md |
 | [000O](proposed/000O-cdrs-follow-standard-adr-practice.md) | CDRs follow standard ADR practice | proposed | 2026-11-01 | ARCHITECTURE.md |
