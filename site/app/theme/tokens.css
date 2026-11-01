@@ -1,0 +1,205 @@
+/*
+ * AMS site theme tokens: the only file allowed to hold color, type or spacing
+ * values (tests/tokens.test.mjs enforces this).
+ *
+ * Source: owner design canvas Grilling Board Redesign, Color system v2.2,
+ * recorded in grill-board/theme/tokens.json (DDR-000Y). The theme block below
+ * is generated from that file (npm run tokens:gen) and checked byte for byte
+ * by tests/tokens-json.test.mjs; type and spacing tokens after it are
+ * hand-written.
+ *
+ * Colors are signals with one stated meaning each (DDR-000M). The greys are
+ * the page, not signals. Light is the default; the system's dark preference
+ * switches to dark; a manual choice ([data-theme] on <html>, set by the theme
+ * toggle and stored in localStorage) overrides both. .t-light / .t-dark keep
+ * the canvas's class names for scoped use.
+ */
+
+/* BEGIN theme tokens: generated from grill-board/theme/tokens.json by scripts/gen-tokens.mjs; do not edit */
+/* Source: Grilling Board Redesign, version 1793538932-43c3. Light is the default. */
+
+:root,
+[data-theme="light"],
+.t-light {
+  --ground: #F7F7F7; /* Page background */
+  --surface: #FFFFFF; /* Panels, cards and inputs */
+  --raised: #EFEFEF; /* Hover, the selected item and progress tracks */
+  --line: #E0E0E0; /* Hairline dividers */
+  --line-strong: #808080; /* Control borders; grey, nothing for you here */
+  --muted: #474747; /* Secondary text */
+  --ink: #0A0A0A; /* Primary text, grade badges and progress */
+  --pole: #000000; /* Mixing anchor for tone text, outlines and dots */
+  --heat: #F04E12; /* Trouble: a failed write, a blocker or a conflict */
+  --worth: #F5C400; /* Why an answer is worth the owner's time */
+  --owner: #2F86DC; /* It waits on the owner */
+  --agent: #27A046; /* Agents carry it, or it is the agents' voice */
+  --returned: #A66BE0; /* It came back for rework */
+  --soft-pct: 22%; /* Tint strength of a hue at rest */
+  --line-pct: 68%; /* Hue strength of a tone outline */
+  --dot-pct: 72%; /* Hue strength of a tone dot */
+  color-scheme: light;
+}
+
+/* A manual dark choice. */
+
+[data-theme="dark"],
+.t-dark {
+  --ground: #0A0A0A; /* Page background */
+  --surface: #191919; /* Panels, cards and inputs */
+  --raised: #232323; /* Hover, the selected item and progress tracks */
+  --line: #333333; /* Hairline dividers */
+  --line-strong: #757575; /* Control borders; grey, nothing for you here */
+  --muted: #A8A8A8; /* Secondary text */
+  --ink: #F7F7F7; /* Primary text, grade badges and progress */
+  --pole: #FFFFFF; /* Mixing anchor for tone text, outlines and dots */
+  --heat: #FF5A1F; /* Trouble: a failed write, a blocker or a conflict */
+  --worth: #FFD60A; /* Why an answer is worth the owner's time */
+  --owner: #4C9BE8; /* It waits on the owner */
+  --agent: #3DBE5A; /* Agents carry it, or it is the agents' voice */
+  --returned: #A66BE0; /* It came back for rework */
+  --soft-pct: 22%; /* Tint strength of a hue at rest */
+  --line-pct: 62%; /* Hue strength of a tone outline */
+  --dot-pct: 80%; /* Hue strength of a tone dot */
+  color-scheme: dark;
+}
+
+/* The system dark preference, unless the reader chose light. */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0A0A0A; /* Page background */
+    --surface: #191919; /* Panels, cards and inputs */
+    --raised: #232323; /* Hover, the selected item and progress tracks */
+    --line: #333333; /* Hairline dividers */
+    --line-strong: #757575; /* Control borders; grey, nothing for you here */
+    --muted: #A8A8A8; /* Secondary text */
+    --ink: #F7F7F7; /* Primary text, grade badges and progress */
+    --pole: #FFFFFF; /* Mixing anchor for tone text, outlines and dots */
+    --heat: #FF5A1F; /* Trouble: a failed write, a blocker or a conflict */
+    --worth: #FFD60A; /* Why an answer is worth the owner's time */
+    --owner: #4C9BE8; /* It waits on the owner */
+    --agent: #3DBE5A; /* Agents carry it, or it is the agents' voice */
+    --returned: #A66BE0; /* It came back for rework */
+    --soft-pct: 22%; /* Tint strength of a hue at rest */
+    --line-pct: 62%; /* Hue strength of a tone outline */
+    --dot-pct: 80%; /* Hue strength of a tone dot */
+    color-scheme: dark;
+  }
+}
+
+/* Mixes: pick a hue with .h-*, then use the .tone tokens. */
+
+.tone {
+  --on: #0A0A0A; /* Text on a strong hue fill */
+  --tone-soft: color-mix(in oklab,var(--hue) var(--soft-pct),var(--surface)); /* The soft, at-rest fill of the card's hue */
+  --tone-ink: color-mix(in oklab,var(--hue) 40%,var(--pole)); /* Text in the card's hue */
+  --tone-line: color-mix(in oklab,var(--hue) var(--line-pct),var(--pole)); /* The outline in the card's hue */
+  --tone-dot: color-mix(in oklab,var(--hue) var(--dot-pct),var(--pole)); /* The live dot in the card's hue */
+}
+
+.h-heat {
+  --hue: var(--heat);
+}
+
+.h-worth {
+  --hue: var(--worth);
+}
+
+.h-owner {
+  --hue: var(--owner);
+}
+
+.h-agent {
+  --hue: var(--agent);
+}
+
+.h-returned {
+  --hue: var(--returned);
+}
+
+.h-none {
+  --hue: var(--line-strong);
+}
+/* END theme tokens */
+
+:root {
+  /* Type: self-hosted from @fontsource (no third-party requests). */
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-heading: 'Zilla Slab', Georgia, 'Times New Roman', serif;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --text-body: 16px; /* canvas page body */
+  --text-ui: 15px; /* buttons */
+  --text-nav: 14px; /* top-bar links */
+  --text-small: 13px; /* eyebrows, pills, footer */
+  --text-brand: 26px; /* header wordmark */
+  --text-h2: 34px; /* section headings */
+  --text-h1: 48px; /* page title */
+  --leading-body: 1.55;
+  --leading-tight: 1;
+  --leading-heading: 1.1;
+  --tracking-eyebrow: 0.08em;
+
+  /* Spacing, named by size in px. */
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-48: 48px;
+
+  /* Shape and size conventions from the canvas. */
+  --radius-card: 14px;
+  --radius-panel: 16px;
+  --radius-control: 10px;
+  --radius-nav: 8px;
+  --radius-badge: 7px;
+  --radius-pill: 999px;
+  --border-width: 1px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+  --control-min-height: 44px;
+  --icon-size: 16px;
+  --content-basis: 320px;
+  --measure: 68ch;
+  --page-min-height: 100vh;
+
+  /* Page container (owner feedback 11/01/2026): the header, <main> and the
+     footer share one centred column, so the page content lines up with the
+     header's edge. --container-wide is for wide pages (the coming Grill Board
+     page); apply it with .container-wide. */
+  --container: 960px;
+  --container-wide: 1280px;
+  --page-gutter: clamp(16px, 4vw, 24px);
+
+  /* Top bar: one row (title, links, toggle) where it fits. */
+  --topnav-order: 0;
+  --topnav-flex: 1 1 auto;
+  --brand-flex: 0 1 auto;
+
+  /* /start diagrams and toy. */
+  --node-basis: 112px; /* a lifecycle node's minimum width */
+  --stop-basis: 56px; /* a toy track stop's minimum width */
+  --dot-size: 10px; /* a holder dot */
+  --dot-size-live: 14px; /* the dot of the stage the work is on */
+  --hub-size: 300px; /* the What the AMS is picture */
+  --ring-width: 3; /* the loop ring's stroke, in picture units */
+  --motion-quick: 0.2s; /* a stage change; none under reduced motion */
+}
+
+/* Narrow screens: title and theme toggle share the first row of the top bar,
+   the reading-order links take their own row below and wrap. */
+@media (max-width: 880px) {
+  :root {
+    --topnav-order: 2;
+    --topnav-flex: 1 1 100%;
+    --brand-flex: 1 1 0;
+  }
+}
