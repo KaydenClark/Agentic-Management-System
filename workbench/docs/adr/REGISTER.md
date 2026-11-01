@@ -40,3 +40,4 @@
 | [001F](001F-no-pass-while-an-acceptance-line-lacks-evidence.md) | No pass while an acceptance line lacks evidence | accepted | 2026-11-01 | workbench/specs |
 | [001G](001G-the-branch-policy-lives-in-one-config-file.md) | The branch policy lives in one config file | accepted | 2026-11-01 | workbench/manifest.json |
 | [001H](001H-done-requires-a-pushed-read-back-commit.md) | Done requires a pushed, read-back commit | accepted | 2026-11-01 | AGENTS.md |
+| [001I](001I-built-deployed-and-passing-claims-name-their-commit.md) | Built, deployed and passing claims name their commit | accepted | 2026-11-01 | AGENTS.md |
