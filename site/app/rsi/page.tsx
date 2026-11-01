@@ -29,7 +29,7 @@ function SeriesPlace({ series }: { series: SeriesView }) {
   const headingId = `rsi-${series.id}`;
   return (
     <figure className={styles.place} data-chart-place={series.id} aria-labelledby={headingId}>
-      <figcaption>
+      <figcaption className={styles.caption}>
         <h3 id={headingId} className={styles.placeTitle}>{series.title}</h3>
         <p className={styles.muted}>{series.shows}</p>
       </figcaption>
@@ -52,9 +52,10 @@ export default function RsiPage() {
   const views = seriesViews(emptyRows);
   return (
     <div className={styles.page} data-rsi-page="">
-      <header>
+      <header className={styles.intro}>
+        <p className="eyebrow">Results</p>
         <h1>RSI results</h1>
-        <p>
+        <p className="lede">
           This page will show what the RSI loop measures: how each task and each version of the system did, including
           no change and regressions, with every number linked to the rows behind it. Nothing has been measured yet, so
           every place below is empty on purpose. No sample or placeholder data is shown.
