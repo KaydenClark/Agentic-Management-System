@@ -48,6 +48,7 @@
   --ink: #F7F7F7; /* grey: primary text, not a signal */
   --pole: #FFFFFF; /* grey: the mixing pole that lightens tone ink, not a signal */
   --heat: #FF5A1F; /* heat: something is on fire, blocked or in error */
+  --stray: #FF00FF;
   --worth: #FFD60A; /* worth: why it is worth your time */
   --owner: #4C9BE8; /* owner (blue): the ball is with the owner */
   --agent: #3DBE5A; /* agent (green): agents are carrying it */
@@ -71,6 +72,7 @@
     --ink: #F7F7F7; /* grey: primary text, not a signal */
     --pole: #FFFFFF; /* grey: the mixing pole that lightens tone ink, not a signal */
     --heat: #FF5A1F; /* heat: something is on fire, blocked or in error */
+  --stray: #FF00FF;
     --worth: #FFD60A; /* worth: why it is worth your time */
     --owner: #4C9BE8; /* owner (blue): the ball is with the owner */
     --agent: #3DBE5A; /* agent (green): agents are carrying it */
