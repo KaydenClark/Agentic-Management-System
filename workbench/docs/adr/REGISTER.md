@@ -72,3 +72,4 @@
 | [002L](002L-trials-run-in-a-sandbox.md) | Trials run in a sandbox | accepted | 2026-11-01 | evals |
 | [002M](002M-more-than-two-held-out-tasks-before-a-public-number.md) | More than two held-out tasks before a public number | accepted | 2026-11-01 | evals, site |
 | [002N](002N-studied-held-out-tasks-retire-to-the-dev-set.md) | Studied held-out tasks retire to the dev set | accepted | 2026-11-01 | evals |
+| [002O](002O-one-standing-campaign-approval.md) | One standing campaign approval | accepted | 2026-11-01 | evals, grill-board |
