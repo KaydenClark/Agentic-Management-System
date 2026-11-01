@@ -57,6 +57,18 @@ test('third parties: each planted external font, script or stylesheet in a copy 
     '<script src="https://cdn.example.com/x.js"></script>',
     '<style>@font-face{font-family:X;src:url(https://fonts.gstatic.com/x.woff2)}</style>',
     '<img srcset="/a.png 1x, //cdn.example.com/a@2x.png 2x"/>',
+    // A local first attribute must not hide an external one on the same tag.
+    '<img src="/a.png" srcset="https://cdn.example.com/a.png 2x"/>',
+    '<img alt="x" src="/a.png" srcset="/a.png 1x, /b.png 2x, https://cdn.example.com/c.png 3x"/>',
+    '<video src="/v.mp4" poster="https://cdn.example.com/p.png"></video>',
+    '<link rel="preload" as="image" href="/a.png" imagesrcset="https://cdn.example.com/a.png 2x"/>',
+    '<object data="https://cdn.example.com/x.swf"></object>',
+    '<form action="https://forms.example.com/submit"></form>',
+    '<form action="/ok"><button formaction="https://forms.example.com/b">Go</button></form>',
+    '<svg><image href="/a.png" xlink:href="https://cdn.example.com/a.svg"/></svg>',
+    '<a href="/ok" ping="https://track.example.com/p">ok</a>',
+    '<div style="background:url(https://cdn.example.com/bg.png)"></div>',
+    "<img src='/a.png' srcset='https://cdn.example.com/single-quoted.png 2x'/>",
   ];
   for (const plant of plants) {
     assert.equal(externalResources(html.replace('</head>', `${plant}</head>`), 'html').length, 1, plant);
@@ -64,6 +76,9 @@ test('third parties: each planted external font, script or stylesheet in a copy 
   assert.equal(externalResources('@import "https://fonts.googleapis.com/css2?family=Inter";', 'css').length, 1);
   assert.equal(externalResources('a{background:url(/_next/static/media/x.woff2)}', 'css').length, 0);
   assert.equal(externalResources('<script src="https://abc.supabase.co/x.js"></script>', 'html').length, 0);
+  // Links are not loads: an <a> or <area> href to another host passes.
+  assert.equal(externalResources('<a href="https://example.com/">x</a><area href="https://example.com/"/>', 'html').length, 0);
+  assert.equal(externalResources('<img src="/a.png" srcset="/a.png 1x, /b.png 2x"/><video src="/v.mp4" poster="/p.png"></video>', 'html').length, 0);
 });
 
 test('third parties: served HTML and CSS load nothing from another host but Supabase and GitHub', () => {

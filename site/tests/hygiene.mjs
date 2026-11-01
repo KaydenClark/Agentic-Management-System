@@ -42,21 +42,48 @@ export function allowedHost(host) {
   return /(?:^|\.)supabase\.co$/.test(host) || host === 'github.com' || host.endsWith('.github.com') || host.endsWith('.githubusercontent.com');
 }
 
+// Attributes whose value the browser fetches or sends a request to. Every
+// one on every tag is read, so a local first attribute cannot hide an
+// external one. `href` loads on <link>, <base> and SVG <image>/<use>; on <a>
+// and <area> it is a link the reader follows, not a load (their `ping` is a
+// request and is read). Form `action`/`formaction` send the reader's data.
+const URL_ATTRS = new Set(['src', 'href', 'xlink:href', 'poster', 'data', 'action', 'formaction', 'background', 'lowsrc', 'dynsrc', 'manifest', 'codebase', 'archive', 'icon']);
+const CANDIDATE_LIST_ATTRS = new Set(['srcset', 'imagesrcset']); // "url descriptor, url descriptor"
+const SPACE_LIST_ATTRS = new Set(['ping']); // "url url"
+const LINK_TAGS = new Set(['a', 'area']);
+
+function attributes(attrText) {
+  const out = [];
+  for (const m of attrText.matchAll(/([^\s"'<>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g)) {
+    out.push([m[1].toLowerCase(), (m[2] ?? m[3] ?? m[4] ?? '').replace(/&amp;/g, '&')]);
+  }
+  return out;
+}
+
+function tagUrls(tag, attrs) {
+  const urls = [];
+  for (const [name, value] of attrs) {
+    if (name === 'style') urls.push(...cssUrls(value));
+    else if (CANDIDATE_LIST_ATTRS.has(name)) urls.push(...value.split(',').map((c) => c.trim().split(/\s+/)[0]).filter(Boolean));
+    else if (SPACE_LIST_ATTRS.has(name)) urls.push(...value.split(/\s+/).filter(Boolean));
+    else if (URL_ATTRS.has(name) && !(name === 'href' && LINK_TAGS.has(tag))) urls.push(value.trim());
+  }
+  return urls;
+}
+
 // Resource references in served HTML and CSS that make a browser load from
-// another host: script/img/iframe/media sources, every <link> (stylesheets,
-// fonts, preconnects) and CSS url()/@import. <a href> is a link, not a load.
-// Requests started by JS are caught by check:browser.
+// (or send to) another host: every URL-bearing attribute on every tag, inline
+// style attributes, <style> blocks and CSS url()/@import. Requests started by
+// JS are caught by check:browser.
 export function externalResources(text, kind) {
   const urls = [];
   if (kind === 'html') {
-    for (const m of text.matchAll(/<(?:script|img|iframe|source|video|audio|embed|track|input)\b[^>]*?\s(?:src|srcset|poster)="([^"]*)"/gi)) urls.push(m[1]);
-    for (const m of text.matchAll(/<link\b[^>]*?\shref="([^"]*)"/gi)) urls.push(m[1]);
+    for (const m of text.matchAll(/<([a-zA-Z][\w:-]*)\b((?:[^>"']|"[^"]*"|'[^']*')*)>/g)) urls.push(...tagUrls(m[1].toLowerCase(), attributes(m[2])));
     for (const m of text.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/gi)) urls.push(...cssUrls(m[1]));
   } else if (kind === 'css') {
     urls.push(...cssUrls(text));
   }
   return urls
-    .flatMap((u) => u.split(/\s*,\s*/).map((s) => s.trim().split(/\s+/)[0]))
     .filter((u) => /^(?:https?:)?\/\//i.test(u))
     .filter((u) => !allowedHost(new URL(u, 'https://site.invalid').hostname));
 }
