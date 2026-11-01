@@ -4,3 +4,15 @@ version = "0.0.0"
 description = "Agentic Management System: Python runtime and backends (Grill Board, RSI loop, Supabase writer)."
 requires-python = "==3.14.*"
 dependencies = []
+
+[project.scripts]
+ams-board = "ams.grill_board.server:main"
+
+[build-system]
+requires = ["uv_build>=0.11.20,<0.12"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
