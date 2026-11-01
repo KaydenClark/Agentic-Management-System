@@ -28,7 +28,7 @@ Outside research does not settle whether shaping an agent's environment improves
 ## Current Verified State
 
 - The loop runner and fixed eval task set are not implemented. S-006 has the RSI writer and live tables, but the 2026-11-01 read-only check found 0 non-test runs/results. Baseline means the current AMS repository implementation; no scored assessment exists yet.
-- Loop #1 now includes fitness level, Alignment Score, Stable/Excellent-only acceptance, an initial attempt plus at most two retries, Supabase results and visibility on the Vercel dev site. The exact owner wording, recovered sources, proposed scoring/counter interpretation and unanswered questions are in [the existing RSI context](../../../../wiki/context-ams-purpose.md#loop-1-preparation-recovered-design-and-open-decisions). The owner confirmed r1, three attempts per candidate and paid-plan meter use instead of API tokens or a campaign budget; the design interview continues.
+- Loop #1 adds fitness/alignment results, Stable/Excellent-only acceptance, three attempts per candidate, Supabase records and dev-site visibility. The owner confirmed r1 and paid-plan meter use, with baseline outside the attempt cap. [RSI context](../../../../wiki/context-ams-purpose.md#settled-answers-and-next-interview-question) preserves exact wording, corrections and remaining design questions. No scored result is claimed.
 
 ## Desired Behavior
 
