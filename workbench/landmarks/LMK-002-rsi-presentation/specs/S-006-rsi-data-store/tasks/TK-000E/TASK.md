@@ -3,7 +3,7 @@
 **Task ID:** TK-000E
 **Spec ID:** S-006
 **Slice:** Review FAIL at c87bf4e corrected: readcheck fails on extra rows, history current, recorded_fact limited to build history, repeatable secret scan
-**Status:** ready
+**Status:** in-progress
 **Blockers:** TK-005
 **Destination:** spec-acceptance: Build history from real records; Real sources only; No secrets in Git
 **Planned verification:** pytest with red-first tests for each finding; live ams-history import and readcheck (missing 0, extra 0), ams-rsi and ams-sources livecheck, get_advisors
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
+**Claimed by:** orchestrator-b-tk000e-implementor
+**Current claimant:** orchestrator-b-tk000e-implementor
 
 Orchestrator B's lane only. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`) and the writers under `src/ams/`.
 
