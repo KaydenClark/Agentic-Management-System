@@ -13,3 +13,5 @@ Considered and rejected: the free `*.vercel.app` production URL as the public ad
 Consequences: the owner attaches the domain to the project's production environment in the Vercel dashboard (the connector cannot write). Production changes only when the owner merges `dev` -> `main`. An agent must never assign a custom domain to `dev` or a preview.
 
 Provenance: Owner decisions, 2026-11-01, relayed by the coordinating session. Checked by Orchestrator B through the Vercel API the same day: `workbenchsystem.app` is registered to the team, on Vercel nameservers, verified, and not yet attached to the project. The plan tier is not visible through the API.
+
+Changed 2026-11-01: the canonical host is `www.workbenchsystem.app`; the apex `workbenchsystem.app` redirects to it (308). Both are attached to the project's production environment and verified (checked through the Vercel API).
