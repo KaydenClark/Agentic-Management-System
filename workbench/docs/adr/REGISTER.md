@@ -84,3 +84,4 @@
 | [002X](002X-next-js-front-end-python-backends-node-only-as-tooling.md) | Next.js front end, Python backends, Node only as tooling | accepted | 2026-11-01 | ARCHITECTURE.md, site, pyproject.toml |
 | [002Y](002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md) | Supabase holds the RSI data and a Python writer keeps it current | accepted | 2026-11-01 | supabase |
 | [002Z](002Z-three-orchestrators-split-the-work-by-risk.md) | Three orchestrators split the work by risk | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
+| [003A](003A-implementors-run-on-opus-or-sonnet.md) | Implementors run on Opus or Sonnet | accepted | 2026-11-01 | AGENTS.md |
