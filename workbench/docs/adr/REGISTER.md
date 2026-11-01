@@ -91,3 +91,4 @@
 | [003E](003E-the-adr-and-ddr-collections-are-the-cdr-s-two-kinds.md) | The adr and ddr collections are the CDR's two kinds | accepted | 2026-11-01 | ARCHITECTURE.md, workbench/manifest.json |
 | [003F](003F-one-standing-campaign-approval-and-no-per-merge-gate.md) | One standing campaign approval and no per-merge gate | accepted | 2026-11-01 | evals, grill-board |
 | [003G](003G-the-rsi-loop-design-with-one-owner-gate.md) | The RSI loop design with one owner gate | accepted | 2026-11-01 | evals, supabase |
+| [003H](003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md) | Supabase holds the RSI data and the service key stays local | accepted | 2026-11-01 | supabase |
