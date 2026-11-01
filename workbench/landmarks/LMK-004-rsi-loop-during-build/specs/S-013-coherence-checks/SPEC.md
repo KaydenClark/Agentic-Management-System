@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 claimed by orchestrator-C.
-**Next gate:** Close TK-001 with verification and documentation proof.
+**Latest event:** TK-001 closed with proof.
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
@@ -92,6 +92,7 @@ node workbench/tools/spec-workbench.mjs doctor
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
+| 2026-11-01 | TK-001 | Task closed | node --test workbench/tools/coherence-drift.test.mjs: 4 pass at 6848b75; clean-clone run with only git; report workbench/feedback/coherence/DRIFT-2026-11-01.md (main 0a7d04e, dev b06d7db, 3 ahead, 0 behind) | workbench/feedback/coherence/DRIFT-2026-11-01.md; RUNBOOK not updated (at 2,996 of 3,000 chars, finding COH-005) | Grill Board item on breach (TK-005); thresholds 20 commits / 7 days are C's default pending owner choice; close attribution: {"agent":"orchestrator-C","claimant":"orchestrator-C","onBehalfOf":null} |
 
 ## Review and Human QA
 
