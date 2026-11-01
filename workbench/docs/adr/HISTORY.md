@@ -42,7 +42,7 @@
 | [001H](001H-done-requires-a-pushed-read-back-commit.md) | Done requires a pushed, read-back commit | accepted | 2026-11-01 | AGENTS.md |
 | [001I](001I-built-deployed-and-passing-claims-name-their-commit.md) | Built, deployed and passing claims name their commit | accepted | 2026-11-01 | AGENTS.md |
 | [001J](001J-the-workflow-map.md) | The workflow map | accepted | 2026-11-01 | RUNBOOK.md, .agents/skills |
-| [001K](proposed/001K-a-pr-merges-only-after-checks-on-the-combined-commit.md) | A PR merges only after checks on the combined commit | proposed | 2026-11-01 | AGENTS.md |
+| [001K](001K-a-pr-merges-only-after-checks-on-the-combined-commit.md) | A PR merges only after checks on the combined commit | accepted | 2026-11-01 | AGENTS.md |
 | [001L](proposed/001L-verify-runs-the-full-suite-on-one-commit.md) | Verify runs the full suite on one commit | proposed | 2026-11-01 | RUNBOOK.md |
 | [001M](proposed/001M-a-claim-is-a-pushed-branch-and-a-draft-pr.md) | A claim is a pushed branch and a draft PR | proposed | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [001N](proposed/001N-the-wiki-is-a-small-linked-synthesis.md) | The Wiki is a small linked synthesis | proposed | 2026-11-01 | workbench/wiki |

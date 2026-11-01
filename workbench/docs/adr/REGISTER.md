@@ -42,3 +42,4 @@
 | [001H](001H-done-requires-a-pushed-read-back-commit.md) | Done requires a pushed, read-back commit | accepted | 2026-11-01 | AGENTS.md |
 | [001I](001I-built-deployed-and-passing-claims-name-their-commit.md) | Built, deployed and passing claims name their commit | accepted | 2026-11-01 | AGENTS.md |
 | [001J](001J-the-workflow-map.md) | The workflow map | accepted | 2026-11-01 | RUNBOOK.md, .agents/skills |
+| [001K](001K-a-pr-merges-only-after-checks-on-the-combined-commit.md) | A PR merges only after checks on the combined commit | accepted | 2026-11-01 | AGENTS.md |
