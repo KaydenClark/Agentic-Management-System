@@ -3,7 +3,7 @@
 **Task ID:** TK-003
 **Spec ID:** S-003
 **Slice:** Why, Limits, Glossary, quickstart and About pages complete the tour, and the quickstart replays on a fresh clone
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-002
 **Destination:** spec-acceptance: Pages exist; Quickstart replays; Owner words
 **Planned verification:** inventory test and quickstart replay test
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `dev`. Read this Task and the parent Spec (`../../SPEC.md`) from `origin/main`; branch from `origin/dev`, open a PR into `dev` and merge it once current and checked. Never merge `dev` -> `main`; only the owner does. Orchestrator A's lane: no Supabase service key, no web browsing; check the protected `dev` deployment through the Vercel connector ([ADR-003B](../../../../../../docs/adr/003B-the-dev-site-is-visible-only-to-the-owner-claude-and-codex.md)). Document site commands in `site/README.md`.
+**Claimed by:** claude-impl-s003-tk003
+**Current claimant:** claude-impl-s003-tk003
 
 Read `AGENTS.md`, `site/PAGE-TEMPLATE.md` on `origin/main`, `GLOSSARY.md`, `LICENSE` and the tour pages on `origin/dev`.
 

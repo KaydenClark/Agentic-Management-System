@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Continuation notes reconciled with confirmed scope and Task inputs.
-**Next gate:** TK-003: complete the remaining tour pages and quickstart replay.
+**Latest event:** TK-003 claimed by claude-impl-s003-tk003.
+**Next gate:** Close TK-003 with verification and documentation proof.
 
 ## Intent and authority
 
