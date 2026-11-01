@@ -26,7 +26,7 @@ The verdict buttons and note POST to `/answer` (ADR-000B, ADR-002U, S-004 TK-002
 - **Rework wording**, **Change the why** and **Change** are returns: they need a note and write only the card. To re-ask, an agent posts the reworked card as a new file.
 - Every verdict appends a `## Answer` section to the card (`Verdict`, `Answered` in UTC, then `Written to` or `Returned: yes`, then the note). An answered card leaves the queue and counts as answered. Nothing is deleted or renumbered.
 
-**Commits.** The server makes one Git commit per answer on the current branch, containing only the card and, for Confirm, the owning record. It builds the commit in a throwaway index on the commit it checked, then moves the branch with `git update-ref HEAD NEW CHECKED`, so a commit that landed meanwhile makes it refuse and restore both files. It runs no commit hooks. The subject reads like `Grill Board: confirm NAME into PATH`. Other staged or unstaged work is left alone and not committed. Every board instance on a checkout shares one writer lock (`flock` on `ams-grill-board.lock` in the Git directory), held from the hash check through the commit, so a second writer sees the first one's change and refuses. It refuses on a detached HEAD; if the commit fails, both files are put back to their committed bytes.
+**Commits.** The server makes one Git commit per answer, rating or flag on the current branch, containing only the card and, for Confirm, the owning record. It builds the commit in a throwaway index on the commit it checked, then moves the branch with `git update-ref HEAD NEW CHECKED`, so a commit that landed meanwhile makes it refuse and restore both files. It runs no commit hooks. The subject reads like `Grill Board: confirm NAME into PATH`. Other staged or unstaged work is left alone and not committed. Every board instance on a checkout shares one writer lock (`flock` on `ams-grill-board.lock` in the Git directory), held from the hash check through the commit, so a second writer sees the first one's change and refuses. It refuses on a detached HEAD; if the commit fails, both files are put back to their committed bytes.
 
 **Refusals** (nothing written; the page shows "Not written: ..." in the heat alert):
 
@@ -35,7 +35,18 @@ The verdict buttons and note POST to `/answer` (ADR-000B, ADR-002U, S-004 TK-002
 - The owning path is absolute, uses `..` or `.`, names `.git`, goes through a symlink, resolves outside the repository, or is not a committed regular file.
 - The card names itself as its owning record.
 - The `Write after` line is missing or appears more than once; the card is already answered; a return has no note.
+- A rating is not a whole number from 1 to 5; the card is already flagged; an answer targets a flagged card.
 - The POST does not come from the board's own page: the `Host` must be `127.0.0.1:PORT` and the `Origin` (or, without one, the `Referer`) that same origin; otherwise 403.
+
+## Rating and flag
+
+Each is one click on the open card, with an optional comment, and is saved on the card through the same write path as answers (DDR-000J, S-004 TK-003). Answered cards stay reachable by link after the answer, so they can still be rated or flagged.
+
+- A star POSTs to `/rate` and appends `## Rating`, `**Rating:** N of 5`, `**Rated:**` in UTC, then the comment as a quote. A new rating is appended; the last one stands.
+- **Too taxing** POSTs to `/flag` and appends `## Flag`, `**Too taxing:** yes`, `**Flagged:**` in UTC, then the comment. A flagged card leaves the queue, held for rewrite, and cannot be answered or flagged again.
+- Each is one commit of the card alone, subject `Grill Board: rate NAME N of 5` or `Grill Board: flag NAME too taxing`. These committed sections are what the RSI loop reads (S-002).
+
+**Re-asking.** An agent posts the rewrite as a new card file. The page lists as refused, never asks, a card that repeats a flagged question line (ignoring case and spacing), or a card that was flagged and whose flag is gone. Flags are read from every flag commit in the branch history, so a copy, a deletion or a reverted flag does not bring the question back.
 
 ## Layout and theme
 
@@ -45,8 +56,6 @@ Dark is the default; the system preference picks light, and the header toggle ov
 
 - Token values: [theme/tokens.json](theme/tokens.json), the single source. `src/ams/grill_board/static/board.css` repeats them and `tests/test_grill_board_theme.py` fails on any difference, on a color outside the list, or on a color with two meanings.
 - Fonts: IBM Plex Sans, IBM Plex Mono and Zilla Slab (latin, @fontsource 5.3.0, SIL Open Font License; licenses beside the files in `src/ams/grill_board/static/fonts/`). The page loads nothing from another host.
-
-Not wired yet: the stars and "Too taxing" are drawn where the artifact puts them but are disabled until TK-003 (rating and flag).
 
 ## QA screenshots
 
@@ -58,4 +67,4 @@ uv run --with playwright python grill-board/qa/capture.py --artifact PATH/TO/ART
 
 Both pages render the generic fixture cards in `tests/fixtures/grill_board/showcase/`, so no artifact sample text is published. The script fails if the board requests any host but its own or scrolls sideways.
 
-Differences from the artifact, by choice: the artifact's other Dashboard sections, search, filters, batch, rounds, lanes other than "To answer", flags and history are left out until real records back them; queue rows also show each grade's reason, because DDR-000K keeps reasons on every card; the brand reads "AMS · Grill Board".
+Differences from the artifact, by choice: the artifact's other Dashboard sections, search, filters, batch, rounds, lanes other than "To answer", a flags view and history are left out until real records back them; queue rows also show each grade's reason, because DDR-000K keeps reasons on every card; the brand reads "AMS · Grill Board".
