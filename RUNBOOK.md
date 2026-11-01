@@ -25,7 +25,7 @@ Use existing topic owners; grow flat Wiki notes through [MEMORY](workbench/wiki/
 
 ## Test And Build
 
-No application, test suite or eval runner exists yet. Room checks, from the root:
+From the root, `uv run pytest` runs the tests; `uv run ams-board` serves the Grill Board (`grill-board/cards/`) on 127.0.0.1:8765 only. Room checks:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render
@@ -35,9 +35,9 @@ node workbench/tools/workbench-layout.mjs validate --project "$PWD"
 git diff --check
 ```
 
-`render` must leave no diff; `doctor` must report no blocking finding.
+`render` must leave no diff; `doctor` no blocking finding.
 
-Fresh-clone check: clone `https://github.com/KaydenClark/Agentic-Management-System.git`, check out the recorded commit, rerun the room checks.
+Fresh clone: check out the recorded commit; rerun `uv run pytest` and the room checks.
 
 ## Version control and publication
 
