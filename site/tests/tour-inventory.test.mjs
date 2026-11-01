@@ -1,4 +1,4 @@
-// S-003 TK-002 acceptance: the tour pages exist in the built output with a
+// S-003 TK-002 and TK-003 acceptance: every tour page the Spec names exists in the built output with a
 // plain-language opener that uses no undefined term, then go deeper; a
 // placeholder page fails. Owner quotes link their dated source and are
 // verbatim; a paraphrase is not shown as a quote. GitHub links name files that

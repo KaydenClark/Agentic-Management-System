@@ -1,4 +1,4 @@
-// S-003 TK-002 acceptance: every page links forward and back in one reading
+// S-003 TK-002 and TK-003 acceptance: every page links forward and back in one reading
 // order, over the built output. A page with no forward or back link fails, and
 // so does a page that is outside the reading order. Run `npm run build` first.
 import { test } from 'node:test';
@@ -22,7 +22,7 @@ test('the check catches dead ends and wrong links (self-test)', () => {
   assert.ok(orderProblems(nav(''), 0, ['/only']).length, 'a lone page with no links passes');
 });
 
-test('nav.ts lists the reading order Home, Start here, How it works, RSI results', () => {
+test('nav.ts lists the tour reading order (READING_ORDER)', () => {
   const src = readFileSync(join(siteDir, 'app', 'nav.ts'), 'utf8');
   const hrefs = [...src.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(hrefs, READING_ORDER);

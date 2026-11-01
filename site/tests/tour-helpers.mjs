@@ -1,4 +1,4 @@
-// Shared checks for the S-003 tour tests (TK-002). Each check is a pure
+// Shared checks for the S-003 tour tests (TK-002, TK-003). Each check is a pure
 // function over built HTML so the tests can run it on the real build and on
 // planted faults. Run `npm run build` first.
 import { existsSync, readFileSync } from 'node:fs';
@@ -10,12 +10,26 @@ export const REPO_BLOB = 'https://github.com/KaydenClark/Agentic-Management-Syst
 
 // The reading order the tour must follow, in order (owner of the list:
 // app/nav.ts; this is the expectation it is tested against).
-export const READING_ORDER = ['/', '/start', '/how-it-works', '/rsi'];
+// One entry per line, so adding or dropping a page touches only its own line.
+export const READING_ORDER = [
+  '/',
+  '/start',
+  '/why',
+  '/how-it-works',
+  '/quickstart',
+  '/rsi',
+  '/glossary',
+  '/about',
+];
 
-// The tour pages this Task delivers.
+// Every tour page the Spec names (S-003 Desired Behavior, Tour pages).
 export const TOUR = [
   { href: '/start', title: 'Start here' },
+  { href: '/why', title: 'Why' },
   { href: '/how-it-works', title: 'How it works' },
+  { href: '/quickstart', title: 'Quickstart' },
+  { href: '/glossary', title: 'Glossary' },
+  { href: '/about', title: 'About' },
 ];
 
 // Route -> prerendered file name under .next/server/app/.

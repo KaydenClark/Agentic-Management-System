@@ -311,7 +311,8 @@ export default function StartHere() {
           </li>
         </ul>
         <p className={styles.say}>
-          Next, <Link href="/how-it-works">How it works</Link> opens the records behind each stage.
+          Next, <Link href="/why">Why</Link> says what the AMS is for; then{" "}
+          <Link href="/how-it-works">How it works</Link> opens the records behind each stage.
         </p>
       </Screen>
     </div>

@@ -13,7 +13,9 @@
     "check:browser": "node tests/browser.check.mjs",
     "check:draft-marks": "node tests/draft-marks-build.check.mjs",
     "page-hashes": "node scripts/page-hashes.mjs",
-    "tokens:gen": "node scripts/gen-tokens.mjs --write"
+    "tokens:gen": "node scripts/gen-tokens.mjs --write",
+    "glossary:gen": "node scripts/gen-glossary.mjs --write",
+    "quickstart:replay": "node tests/quickstart-replay.mjs"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "5.3.0",
