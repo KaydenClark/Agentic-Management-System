@@ -1,0 +1,236 @@
+/* The /start toy and its no-JS fallback. Hues only through the .tone mixes of
+   the holder's .h-* class (blue owner, green agents, purple returned, grey
+   done). Every value comes from app/theme/tokens.css. */
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-8);
+  color: var(--muted);
+  font-size: var(--text-small);
+}
+
+.sources span {
+  font-family: var(--font-mono);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.sources a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--space-24);
+  color: var(--ink);
+  text-underline-offset: var(--focus-offset);
+}
+
+/* The fallback: every stage as a numbered list. */
+
+.fallback {
+  margin: 0;
+  padding-left: var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.fallbackItem {
+  padding: var(--space-8) var(--space-12);
+  border-left: var(--focus-width) solid var(--tone-line);
+  background: var(--tone-soft);
+  border-radius: var(--radius-nav);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.fallbackHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  align-items: baseline;
+}
+
+.who,
+.branchNote {
+  font-size: var(--text-small);
+}
+
+/* The toy. */
+
+.toy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+}
+
+.sample {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-8);
+  font-weight: var(--weight-semibold);
+}
+
+.track {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--stop-basis), 1fr));
+  gap: var(--space-8) var(--space-4);
+}
+
+.stop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--text-small);
+  color: var(--muted);
+  text-align: center;
+}
+
+.stopDot {
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: var(--radius-pill);
+  border: var(--focus-width) solid var(--tone-line);
+  background: transparent;
+  transition: background-color var(--motion-quick) ease, transform var(--motion-quick) ease;
+}
+
+.stop[data-past] .stopDot {
+  background: var(--tone-dot);
+}
+
+.stop[data-now] {
+  color: var(--ink);
+  font-weight: var(--weight-bold);
+}
+
+.stop[data-now] .stopDot {
+  width: var(--dot-size-live);
+  height: var(--dot-size-live);
+  background: var(--tone-dot);
+  border-color: var(--ink);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-18);
+  background: var(--tone-soft);
+  border: var(--focus-width) solid var(--tone-dot);
+  border-radius: var(--radius-card);
+  transition: background-color var(--motion-quick) ease, border-color var(--motion-quick) ease;
+}
+
+.ball {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.ballDot {
+  width: var(--dot-size-live);
+  height: var(--dot-size-live);
+  border-radius: var(--radius-pill);
+  background: var(--tone-dot);
+}
+
+.stageName {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  font-family: var(--font-heading);
+  font-size: var(--text-brand);
+  line-height: var(--leading-heading);
+}
+
+.stepNo {
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: var(--weight-regular);
+  color: var(--muted);
+}
+
+.returns {
+  font-size: var(--text-small);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10);
+}
+
+.button {
+  min-height: var(--control-min-height);
+  padding: var(--space-8) var(--space-14);
+  background: var(--surface);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-control);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--text-ui);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--raised);
+  border-color: var(--ink);
+}
+
+.button:disabled {
+  color: var(--muted);
+  cursor: default;
+}
+
+.primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--ground);
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--ground);
+  text-decoration: underline;
+}
+
+.returnButton {
+  background: var(--tone-soft);
+  border-color: var(--tone-line);
+}
+
+.returnButton:hover:not(:disabled) {
+  background: var(--tone-soft);
+  border-color: var(--tone-ink);
+  text-decoration: underline;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: var(--border-width);
+  height: var(--border-width);
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stopDot,
+  .card {
+    transition: none;
+  }
+}

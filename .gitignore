@@ -1,6 +1,7 @@
 .DS_Store
 .local/
 .worktrees/
+.claude/worktrees/
 # Session lane: live sessions stay local. workbench/sessions/.gitignore keeps
 # grilling, handoffs, notepads and recovery contents untracked.
 workbench/sessions/*

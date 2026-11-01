@@ -37,6 +37,25 @@ git diff --check
 
 `render` must leave no diff, `doctor` no blocking finding. On a fresh clone at the recorded commit, rerun them and `uv run pytest`.
 
+### Shared CI VM
+
+Both GitHub Actions checks (`python tests` and `site builds`) use
+`[self-hosted, Linux, ARM64, servitor]` on the existing `workbench-ci` VM.
+AMS has a dedicated unprivileged runner account and the systemd service
+`workbench-runner-ams`; it shares neither credentials nor workspaces with
+other projects. The service starts with the VM and restarts after failure.
+An unavailable VM queues checks; there is no GitHub-hosted fallback.
+
+The runner cannot use sudo. Provision Playwright's Chromium system dependencies
+on the VM as an administrator with `playwright install-deps chromium` when
+installing or updating Playwright; the workflow downloads Chromium as the
+runner account. Keep Supabase keys and `AMS_LIVE` out of CI. Fork PRs skip
+these jobs: inspect their changes before bringing them onto an internal branch.
+
+Inspect the service with `systemctl status workbench-runner-ams` inside the VM;
+use GitHub job details to verify the actual runner and tested commit.
+[CI context](workbench/wiki/context-shared-ci.md) records the owner's requirement.
+
 ## Version control and publication
 
 Non-site work: branch, commit each step, push, PR into `main`, merge-commit once current and checked; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev` once CI `site builds` passes; only the owner merges `dev` -> `main`. Report local, pushed, merged and deployed states separately.

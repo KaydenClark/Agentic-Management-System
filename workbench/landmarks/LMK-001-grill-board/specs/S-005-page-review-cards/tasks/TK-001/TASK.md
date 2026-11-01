@@ -14,7 +14,7 @@
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`, its Decisions), `grill-board/README.md`, `grill-board/card-example.md`, DDR-000X, ADR-002U and the board code in `src/ams/grill_board/` (`cards.py`, `answers.py`: `repository_lock`, `_write_and_commit`). Read the page list with `git fetch origin dev && git show origin/dev:site/page-list.json`; orchestrator A is its only writer and `path` is stable.
 
-Owner intent, relayed by orchestrator B on 2026-11-01: every website page gets a Grill Board review card so the owner can approve or criticize the whole site there. The owner demos at 8:00 the next morning; this slice comes first.
+Owner intent, relayed by orchestrator B on 2026-11-01: every website page gets a Grill Board review card so the owner can approve or criticize the whole site there.
 
 Deliver `uv run ams-pages generate` (a new script in `pyproject.toml`):
 

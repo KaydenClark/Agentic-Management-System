@@ -1,0 +1,73 @@
+{
+  "about": "Every page live on the dev deployment, one entry each, for orchestrator B's Grill Board page review cards (S-005). Orchestrator A is the only writer. The review card computes the content hash from the built page; this list names the page and where it came from.",
+  "pages": [
+    {
+      "path": "/",
+      "title": "Home",
+      "spec": "S-003",
+      "task": "TK-001",
+      "landed": {
+        "branch": "dev",
+        "commit": "c529821de4f8f9b8db916dfc9988e365ab06c134",
+        "pr": 13
+      },
+      "sources": [
+        "site/app/page.tsx",
+        "site/app/layout.tsx",
+        "site/app/shell/",
+        "site/app/theme/tokens.css"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/rsi",
+      "title": "RSI results",
+      "spec": "S-007",
+      "task": "TK-001",
+      "landed": {
+        "branch": "dev",
+        "commit": "fceec125c75590d49b828e636e081edd4983fec4",
+        "pr": 14
+      },
+      "sources": [
+        "site/app/rsi/",
+        "site/app/nav.ts"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/start",
+      "title": "Start here",
+      "spec": "S-003",
+      "task": "TK-002",
+      "landed": {
+        "branch": "dev",
+        "commit": "0418ac716d4ad48440f512ea90420d45bf2b4eec",
+        "pr": 23
+      },
+      "sources": [
+        "site/app/start/",
+        "site/app/nav.ts",
+        "site/app/shell/PageOrder.tsx"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/how-it-works",
+      "title": "How it works",
+      "spec": "S-003",
+      "task": "TK-002",
+      "landed": {
+        "branch": "dev",
+        "commit": "0418ac716d4ad48440f512ea90420d45bf2b4eec",
+        "pr": 23
+      },
+      "sources": [
+        "site/app/how-it-works/",
+        "site/app/nav.ts",
+        "site/app/shell/PageOrder.tsx"
+      ],
+      "status": "draft"
+    }
+  ]
+}
