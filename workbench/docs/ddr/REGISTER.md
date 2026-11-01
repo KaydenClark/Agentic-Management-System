@@ -13,3 +13,4 @@
 | [000E](000E-a-release-is-proven-by-building-the-site-from-one-confirmed-concept.md) | A release is proven by building the site from one confirmed concept | accepted | 2026-11-01 | BLUEPRINT.md, evals |
 | [000F](000F-delivery-runs-in-rounds-the-owner-approves-or-returns.md) | Delivery runs in rounds the owner approves or returns | accepted | 2026-11-01 | BLUEPRINT.md |
 | [000G](000G-nothing-is-built-before-the-owner-confirms-a-readback.md) | Nothing is built before the owner confirms a readback | accepted | 2026-11-01 | AGENTS.md |
+| [000H](000H-confirmation-approval-and-the-two-delivery-paths.md) | Confirmation, approval and the two delivery paths | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
