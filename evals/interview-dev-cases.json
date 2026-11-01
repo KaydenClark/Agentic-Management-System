@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "suite": "interview-preservation-dev-r1",
+  "scope": "tool-free-transcript-interview-preservation",
+  "source": "S-002 owner-reported lost-interview failure; public-safe scenario summaries",
+  "limitations": ["No native skill discovery", "No document-provider writes", "No installed-host claim", "Studied development cases, never held-out lift"],
+  "conditions": {"provider": "firstParty", "model": "claude-opus-5-5", "effort": "medium", "tools": [], "mcpServers": []},
+  "cases": [
+    {"id": "grill-start-r1", "split": "dev", "checkIds": ["A04-01"], "prompt": "Interview me to make the RSI loop ready. We are exploring the requirements; keep interviewing until the important decisions are understood. The current implementation is the baseline. No implementation or document writes are requested in this transcript-only exercise.", "outcome": "Advance a consequential unresolved decision through an interview question and wait; preserve the stated baseline and authority."},
+    {"id": "grill-context-link-r1", "split": "dev", "checkIds": ["A04-01", "A01-01"], "prompt": "Continue the active requirements interview. Already answered: approved r1, three candidate attempts excluding baseline, subscription usage meter. Assessment scope is still unanswered. I supplied the current implementation branch as evidence; the branch has no scored assessment report. This is a transcript-only exercise with no document tools.", "outcome": "Preserve the answers and implementation baseline, use the branch as context and continue the unresolved interview; do not invent a missing-report prerequisite."},
+    {"id": "grill-resume-correction-r1", "split": "dev", "checkIds": ["A04-01", "A01-06"], "prompt": "The interview was displaced by investigation. What happened to my grilling session? That was a failure. Resume from these settled choices: r1, three attempts excluding baseline, subscription meter, candidate assessments separate from whole-system fitness. The outstanding decision is which real failure should be the first improvement case. No repair, implementation or document write is authorized by this transcript-only exercise.", "outcome": "Apply the correction and ask the next consequential unresolved question without reopening settled choices or starting an unsolicited repair."}
+  ]
+}
