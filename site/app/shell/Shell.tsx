@@ -1,11 +1,13 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Footer } from "./Footer";
+import { PageOrder } from "./PageOrder";
 import { ReadingNav } from "./ReadingNav";
 import { ThemeToggle } from "./ThemeToggle";
 
 // The shell every route gets from the root layout: header with the theme
-// toggle, reading-order sidebar, the page in <main>, and the commit footer.
+// toggle, reading-order sidebar, the page in <main> ending with back and
+// forward links in the reading order, and the commit footer.
 // Pages render only their own content; they need not use this directly.
 export function Shell({ children }: { children: ReactNode }) {
   return (
@@ -26,6 +28,7 @@ export function Shell({ children }: { children: ReactNode }) {
         </aside>
         <main id="main" className="content">
           {children}
+          <PageOrder />
         </main>
       </div>
       <Footer />
