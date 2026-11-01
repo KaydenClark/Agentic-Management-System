@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-003 closed with proof.
-**Next gate:** Confirm acceptance criteria and completion result.
+**Latest event:** TK-000F claimed by Claude implementor (Orchestrator B).
+**Next gate:** Close TK-000F with verification and documentation proof.
 
 ## Intent and authority
 
