@@ -16,10 +16,10 @@ Owner: "Resume S-006’s approved local writer work, then continue S-002 through
 
 ## Acceptance
 
-- [ ] Remote readback retains packet/results, IDs, findings/retests and scorer identity and recomputes every result through canonical history.
-- [ ] Identical retry succeeds; changed ID content, divergent prefix, stale concurrent append and invalid attempts refuse without overwrite. Partial imports resume.
-- [ ] Raw rows and append RPC are inaccessible to site clients; only marked synthetic probes are cleaned up.
-- [ ] Relevant tests, live roundtrip and room checks pass; documentation states storage and qualification limits.
+- [x] Remote readback retains packet/results, IDs, findings/retests and scorer identity and recomputes every result through canonical history.
+- [x] Identical retry succeeds; changed ID content, divergent prefix, stale concurrent append and invalid attempts refuse without overwrite. Partial imports resume.
+- [x] Raw rows and append RPC are inaccessible to site clients; only marked synthetic probes are cleaned up.
+- [x] Relevant tests, live roundtrip and room checks pass; documentation states storage and qualification limits.
 
 ## Check and implementor QA
 
@@ -27,4 +27,4 @@ The missing remote module was observed red; 56 focused persistence/scorer tests 
 
 Live migration `20261101193603` applied to the approved project; the filename matches the server-assigned identity because the installed CLI could not start. Raw table and invoker RPC have no anon/authenticated access. Tagged live probe: paginated roundtrip passes; duplicate200; changed identity409; simultaneous next appends200/409; all client GET/POST/PATCH/DELETE/RPC401; service UPDATE403; cleanup0. Role-privilege query independently confirms client raw SELECT/INSERT/RPC false. Security advisor has only the intentional informational RLS-without-policy notice for this private table.
 
-The database guards identity, append order, stale heads and immutability. Python canonical replay checks r1 semantics; a trusted service-role caller or database administrator is not a qualified evaluator. No real assessment/trial was invented, older baseline inputs were not reconstructed, no public projection was created and no Human QA was recorded. Full suite/fresh clone/CI remain pending before delivery.
+The database guards identity, append order, stale heads and immutability. Python canonical replay checks r1 semantics; a trusted service-role caller or database administrator is not a qualified evaluator. No real assessment/trial was invented, older baseline inputs were not reconstructed, no public projection was created and no Human QA was recorded. Source `7e784494097d643e061b85a0da008298e21c2248`: full local run488 passed/4 skipped (the CLI-output test was added after that collection); full fresh clone489 passed/4 skipped. Corrected causal fixture head `4f99790413bb2ee9270fc19828da12b2a82b1f6b` changes tests only; all56 focused tests pass locally and in the updated fresh clone. Room checks pass with only the two pre-existing informational host findings. Source CI45 passed; final-head CI remains a merge gate.
