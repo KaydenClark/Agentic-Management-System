@@ -80,7 +80,7 @@ One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (t
 
 [p]: tasks/TK-000B/TASK.md#proof
 
-- [ ] **Private assessment persistence.** Private remote append/readback retains the canonical assessment history with idempotence and conflict refusal; clients cannot read raw packets or write. *Must fail:* tampered totals, reset attempts, exposed private evidence or a silent overwrite.
+- [x] **Private assessment persistence.** Private remote append/readback retains the canonical assessment history with idempotence and conflict refusal; clients cannot read raw packets or write. *Must fail:* tampered totals, reset attempts, exposed private evidence or a silent overwrite.
 
 ## RSI and website connection
 

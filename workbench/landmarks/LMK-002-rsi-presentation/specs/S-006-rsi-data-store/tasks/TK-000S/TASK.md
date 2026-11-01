@@ -18,9 +18,9 @@ Use exact canonical artifact comparisons at remote prefix/duplicate and local im
 
 ## Acceptance
 
-- [ ] Valid scalar type/spelling changes (true-to1, exponent-float-to-integer,1.0-to1 and negative-zero sign) refuse at immutable remote/local identity and frozen/result boundaries with original evidence retained.
-- [ ] Exact retries remain idempotent and rejected changes leave remote history unmodified; all relevant comparisons use canonical artifacts without changing scoring rules.
-- [ ] Focused/full/fresh verification and marked live duplicate/conflict probes pass with cleanup0; prior review/receipt history remains intact.
+- [x] Valid scalar type/spelling changes (true-to1, exponent-float-to-integer,1.0-to1 and negative-zero sign) refuse at immutable remote/local identity and frozen/result boundaries with original evidence retained.
+- [x] Exact retries remain idempotent and rejected changes leave remote history unmodified; all relevant comparisons use canonical artifacts without changing scoring rules.
+- [x] Focused/full/fresh verification and marked live duplicate/conflict probes pass with cleanup0; prior review/receipt history remains intact.
 
 ## Red/green proof
 
@@ -29,3 +29,9 @@ Synthetic public-seam reproduction against delivered110bb7a independently observ
 ## Same-run historical-source correction
 
 Independent scoped review of a95f629 found the same equality issue in retained historical source facts. Four valid Quality-finding observation fixtures (true/int, exponent/int, float/int and negative-zero sign) were observed red before applying the same canonical helper there. Source-run/candidate/observation fact strings keep their existing meaning. Audit of remaining equality sites distinguishes validated scalar IDs/classes and typed attempt counters from artifact identity; JSONB projection comparison intentionally remains type-aware semantic comparison because JSONB normalizes number spelling.
+
+## Final source verification
+
+Source `ad7fa2837145376a99029719056cda0d450863d5`:84 focused tests passed, full local517 passed/4 skipped and full fresh-clone517 passed/4 skipped. Source CI61 passed. Independent scoped reviewer repeated84 focused tests and found no remaining blockers after auditing all identity comparisons; final whole owner-bound Review remains pending.
+
+Live marked probes for all four scalar pairs rejected changed prefix and duplicate inputs with zero mutation requests, accepted exact retries and retained original canonical readback. Cleanup0; actual remote assessment rows0 before/after, so the changed scorer-source digest needs no invented backfill. No schema or scoring-formula change occurred. Source room checks retain only the two pre-existing informational host findings. An unowned untracked SVG appeared during execution; it is retained untouched and excluded from all owned commits.
