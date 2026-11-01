@@ -440,21 +440,105 @@ _LINK = re.compile(r"(?<!!)\[([^]\n]+)\]\(([^)\s]+)\)")
 _PREVIOUS_SPEC = re.compile(r"previous (S-[A-Za-z0-9]+) at ([0-9a-f]{7,40})")
 
 
+def _mask_code_spans(text: str) -> str:
+    """Match exact backtick runs within one eligible paragraph (CommonMark6.1).
+
+    Escapes affect openers, but backslashes inside a code span are literal.
+    A sentinel prevents removing code from joining fragments into a declaration.
+    """
+    visible, index = [], 0
+    while index < len(text):
+        if text[index] == "\\" and index + 1 < len(text):
+            visible.append(text[index:index + 2])
+            index += 2
+        elif text[index] != "`":
+            visible.append(text[index])
+            index += 1
+        else:
+            end = index + 1
+            while end < len(text) and text[end] == "`":
+                end += 1
+            length = end - index
+            close = next((m for m in re.finditer(r"`+", text[end:])
+                          if len(m[0]) == length), None)
+            if close is None:
+                visible.append(text[index:end])  # unmatched runs remain literal
+                index = end
+            else:
+                visible.append("\0")
+                index = end + close.end()
+    return "".join(visible)
+
+
 def _visible_markdown(text: str) -> str:
-    """Declarations in comments, code fences or inline code are not routes."""
+    """Exclude examples without carrying inline state across block boundaries.
+
+    This is the narrow history declaration grammar, not a Markdown renderer.
+    Preserve paragraph continuations (including quoted/lazy lines), isolating
+    headings, actual table rows, blank lines, fences and indented blocks.
+    Syntax: https://spec.commonmark.org/0.31.2/#code-spans and #precedence.
+    """
     text = re.sub(r"<!--.*?(?:-->|\Z)", "", text, flags=re.S)
-    visible, fence = [], None
-    for line in text.splitlines():
-        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+    visible, paragraph, fence, quote_depth = [], [], None, 0
+    fence_depth, in_table = 0, False
+
+    def flush():
+        nonlocal quote_depth
+        if paragraph:
+            visible.append(_mask_code_spans("\n".join(paragraph)))
+            paragraph.clear()
+        quote_depth = 0
+
+    def parts(line):
+        quote = re.match(r"^ {0,3}(?:> ?)+", line)
+        return (quote[0].count(">"), line[quote.end():]) if quote else (0, line)
+
+    def table_separator(line):
+        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
+        return bool(cells) and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells)
+
+    lines = text.splitlines()
+    for number, line in enumerate(lines):
+        depth, logical = parts(line)
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", logical)
+        if fence is not None:
+            if logical.strip() and depth < fence_depth:
+                fence = None  # the quote container ended
+            else:
+                if (marker and depth == fence_depth and marker[1][0] == fence[0]
+                        and len(marker[1]) >= len(fence) and not marker[2].strip()):
+                    fence = None
+                continue
+        item = re.match(r"^ {0,3}(?:[-+*]|[0-9]+[.)])\s+(.*)$", logical)
+        if item:
+            marker = re.match(r"^(`{3,}|~{3,})(.*)$", item[1])
         if marker:
-            run = marker[1]
-            if fence is None:
-                fence = run
-            elif run[0] == fence[0] and len(run) >= len(fence) and not marker[2].strip():
-                fence = None
+            flush()
+            fence, fence_depth, in_table = marker[1], depth, False
             continue
-        if fence is None and not line.startswith(("    ", "\t")):
-            visible.append(re.sub(r"(`+).*?\1", "", line))
+        if not logical.strip() or line.startswith(("    ", "\t")):
+            flush()
+            visible.append("")
+            in_table = False
+            continue
+        # A pipe-prefixed paragraph continuation is not automatically a table.
+        # Only a header/separator pair starts the line-local router table scope.
+        following = parts(lines[number + 1])[1] if number + 1 < len(lines) else ""
+        if not paragraph and "|" in logical and table_separator(following):
+            in_table = True
+        if in_table and "|" not in logical:
+            in_table = False
+        if (in_table or re.match(r"^ {0,3}#{1,6}(?:[ \t]|$)", logical)
+                or re.fullmatch(r" {0,3}(?:(?:- *){3,}|(?:_ *){3,}|(?:\* *){3,})", logical)):
+            flush()
+            visible.append(_mask_code_spans(line))
+        else:
+            if depth > quote_depth or item:
+                flush()
+            paragraph.append(line)
+            # A lazy continuation may omit quote markers and then resume them.
+            quote_depth = max(quote_depth, depth)
+    flush()
     return "\n".join(visible)
 
 
