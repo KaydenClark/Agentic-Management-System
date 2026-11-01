@@ -1,0 +1,6 @@
+[project]
+name = "ams"
+version = "0.0.0"
+description = "Agentic Management System: Python runtime and backends (Grill Board, RSI loop, Supabase writer)."
+requires-python = "==3.14.*"
+dependencies = []

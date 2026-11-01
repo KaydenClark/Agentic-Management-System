@@ -12,3 +12,8 @@ workbench/sessions/*
 !workbench/sessions/handoffs/
 !workbench/sessions/notepads/
 !workbench/sessions/recovery/
+
+# Local secrets (Supabase service role key); never commit
+.env
+.env.*
+!.env.example

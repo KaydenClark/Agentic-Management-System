@@ -13,8 +13,9 @@ AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one 
 
 | Path | What lives there |
 |---|---|
-| `src/`, `tests/` | AMS runtime software and its tests (empty) |
-| `site/` | Public showcase website; planned Vercel hosting, Supabase backend |
+| `src/`, `tests/` | AMS runtime software and tests (empty); `pyproject.toml` pins Python 3.14 |
+| `supabase/` | Supabase migrations (read-only baseline) |
+| `site/` | Public website; planned Vercel hosting, Supabase backend |
 | `grill-board/` | Local development Q&A tool, not public |
 | `evals/` | RSI eval tasks, results and comparisons |
 | `.agents/` | Commit hook and project skill extensions; `.claude/skills` links here |
@@ -34,9 +35,9 @@ AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one 
 | Knowledge, working context | [Wiki MEMORY](workbench/wiki/MEMORY.md) via `jot` |
 | Work view | [Taskboard](TASKBOARD.md), rendered from records |
 | Procedures, checks | [Runbook](RUNBOOK.md) -> named skill and tool |
-| Configuration | Manifest and `workbench/tools/.workbench-tools.json` receipt |
+| Configuration | Manifest and `workbench/tools/` receipt |
 | Feedback | `workbench/feedback/` |
-| Evaluation | [RSI workflow](RUNBOOK.md#rsi-during-website-work) and `evals/` |
+| Evaluation | [RSI](RUNBOOK.md#rsi-during-website-work), `evals/` |
 | Orientation | [README](README.md) |
 
 ## Routes
@@ -44,8 +45,8 @@ AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one 
 | Need | Read |
 |---|---|
 | Scope | [AGENTS](AGENTS.md) and the owner request |
-| Purpose, first loop | [Blueprint](BLUEPRINT.md), [AMS purpose](workbench/wiki/context-ams-purpose.md) |
-| Assigned work | `spec-workbench.mjs show S-###` -> Spec -> Tasks |
+| Purpose | [Blueprint](BLUEPRINT.md), [AMS purpose](workbench/wiki/context-ams-purpose.md) |
+| Assigned work | `spec-workbench.mjs show S-###` |
 | Decision rationale | `adr.mjs list` -> record -> its owners |
 | Methods, layout | [SKILLS](workbench/docs/SKILLS.md), [structure](workbench/docs/WORKBENCH_STRUCTURE.md) |
 | Artifact choice | [Template inventory](workbench/research/template-inventory.md) |
@@ -55,6 +56,6 @@ AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one 
 
 - Each claim has one owner; consumers link it. Taskboard and Wiki never establish state or acceptance.
 - A manifest declares, a receipt records, a template shapes and code behaves; none proves another.
-- Review and Human QA are recorded only when performed against identified content.
+- Review and Human QA are recorded only when performed on identified content.
 - Website claims separate planned, observed and repeated behavior and publish only safe evidence.
-- Personal skills keep their own lifecycle; a host adapter changes discovery, not authority.
+- Personal skills keep their own lifecycle; a host adapter changes only discovery.

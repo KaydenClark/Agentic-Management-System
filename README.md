@@ -53,6 +53,7 @@ No license has been selected; `LICENSE` stays empty until the owner chooses one.
 |---|---|
 | `src/` | AMS runtime software |
 | `tests/` | Software correctness tests |
+| `supabase/` | Supabase migrations; `pyproject.toml` pins the Python runtime |
 | `site/` | Public showcase website; planned Vercel hosting and Supabase backend |
 | `grill-board/` | Separate locally hosted development question-and-answer tool |
 | `evals/` | RSI trials, graders and measured results |
