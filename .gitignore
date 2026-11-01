@@ -1,10 +1,14 @@
 .DS_Store
 .local/
 .worktrees/
+# Session lane: live sessions stay local. workbench/sessions/.gitignore keeps
+# grilling, handoffs, notepads and recovery contents untracked.
 workbench/sessions/*
 !workbench/sessions/.gitkeep
+!workbench/sessions/.gitignore
 !workbench/sessions/HANDOFF-TEMPLATE.md
-!workbench/sessions/notepad.schema.json
-!workbench/sessions/work.example.json
-!workbench/sessions/handoff.example.json
-!workbench/sessions/grilling.example.json
+!workbench/sessions/checkpoints/
+!workbench/sessions/grilling/
+!workbench/sessions/handoffs/
+!workbench/sessions/notepads/
+!workbench/sessions/recovery/
