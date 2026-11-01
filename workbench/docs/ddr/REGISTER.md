@@ -17,3 +17,4 @@
 | [000I](000I-the-decision-journey-is-tracked-apart-from-delivery.md) | The decision journey is tracked apart from delivery | accepted | 2026-11-01 | BLUEPRINT.md |
 | [000J](000J-every-owner-question-has-a-too-taxing-flag-and-a-rating.md) | Every owner question has a too-taxing flag and a rating | accepted | 2026-11-01 | grill-board |
 | [000K](000K-every-card-carries-priority-and-value-grades.md) | Every card carries Priority and Value grades | accepted | 2026-11-01 | grill-board |
+| [000L](000L-one-local-page-shows-what-waits-on-the-owner.md) | One local page shows what waits on the owner | accepted | 2026-11-01 | grill-board |
