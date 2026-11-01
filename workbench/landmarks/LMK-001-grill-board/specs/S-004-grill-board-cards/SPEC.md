@@ -59,7 +59,7 @@ Priority and Value are how the owner decides what needs attention; without them 
 
 ## Vertical Implementation Slices
 
-Each Task is one fresh-session run from a clean clone, landed feature -> `main` through a checked PR. Stack: committed card and record files, a Python server on the pinned Python ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)), the local page, and pytest against a temporary Git repository.
+Each Task is one fresh-session run, landed feature -> `main` through a checked PR. Stack: committed card and record files, a Python server on the pinned Python ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)), the local page, and pytest against a temporary Git repository.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -97,13 +97,16 @@ node workbench/tools/spec-workbench.mjs show S-004
 
 ## Append-Only Evidence And Execution Log
 
+Rows are condensed per Task; full proof is in each TASK.md Receipt and Git history.
+
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | TK-001 | Task closed | Candidate 1ba5df00461c5e1ee7799b251acb3a3c7cbd329a (PR #16): uv run pytest -> 12 passed on Python 3.14.5, also from a fresh clone; HTTP tests over committed fixture cards cover all four acceptance lines; mutation dropping the reason check fails the refusal test; uv run ams-board served on 127.0.0.1 only (lsof); site/vercel.json has no board reference; render clean, doctor no blocking finding | RUNBOOK (start and test commands, 2995 chars), ARCHITECTURE (src/tests/grill-board rows, 2991 chars), grill-board/card-example.md (format reference) | Answering, ratings, flags and colors are TK-002 to TK-004; no real owner cards yet; owner Human QA not performed; close attribution: {"agent":"claude-s004-tk001","claimant":"claude-s004-tk001","onBehalfOf":null} |
-| 2026-11-01 | TK-000A | Planned from the owner's artifact direction; blocked on TK-004 (the color list it uses), as the tool has no fold | doctor | this Spec, TK-000A | Every TK-000A line |
-| 2026-11-01 | TK-004 | Task closed | Candidate 83747aab296fdd08a40182f3a84667150337e497: uv run pytest -> 65 passed (52 existing + 13 theme) on Python 3.14.5; grill-board/theme/tokens.json lists 16 tokens with one meaning each, dark and light; test_no_color_is_used_outside_the_token_list, test_no_color_carries_two_meanings_within_a_theme and test_every_token_has_exactly_one_meaning_and_no_meaning_two_tokens; mutation (a drifted --worth and a raw #123456 in board.css) fails two tests | DDR-000Y (token table with meanings), grill-board/README.md (theme section) | Signal hues are drawn only where the board has real states (To answer, refusals, why and recommendation boxes); returned and agent lanes appear once TK-002 and TK-003 add their states; owner Human QA not performed; close attribution: {"agent":"claude-s004-theme","claimant":"claude-s004-theme","onBehalfOf":null} |
-| 2026-11-01 | TK-000A | Task closed | Candidate 63913a2 (PR #24): uv run pytest -> 121 passed, 1 skipped; served tokens equal tokens.json (mutation fails); no third-party URL; grill-board/qa side-by-side dark/light and 375px shots, capture saw only 127.0.0.1, no sideways scroll | DDR-000Y, grill-board/README.md, RUNBOOK and ARCHITECTURE links | Controls inert until TK-002/TK-003; owner Human QA not performed; close attribution: {"agent":"claude-s004-theme","claimant":"claude-s004-theme","onBehalfOf":null} |
+| 2026-11-01 | TK-001 | Closed; candidate 1ba5df0, [PR #16](https://github.com/KaydenClark/Agentic-Management-System/pull/16) | pytest 12 passed; refusal mutation fails; 127.0.0.1 only | RUNBOOK, ARCHITECTURE, card-example.md | Answers, ratings, flags, colors |
+| 2026-11-01 | TK-004 | Closed; candidate 83747aa, [PR #24](https://github.com/KaydenClark/Agentic-Management-System/pull/24) | pytest 65 passed; color tests; drift mutation fails | DDR-000Y, grill-board/README.md | Agent and returned states await TK-002/TK-003 |
+| 2026-11-01 | TK-000A | Planned (blocked on TK-004; no fold), closed; candidate 63913a2, [PR #24](https://github.com/KaydenClark/Agentic-Management-System/pull/24) | pytest 121 passed; tokens equal tokens.json; no third-party URL; QA shots | DDR-000Y, grill-board/README.md | Controls inert until TK-002/TK-003 |
+
+Owner Human QA has not been performed for any Task.
 
 ## Review and Human QA
 

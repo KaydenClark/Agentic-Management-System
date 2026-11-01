@@ -1,3 +1,12 @@
 {
-  "ignoreCommand": "test ! -f package.json"
+  "ignoreCommand": "test ! -f package.json",
+  "git": {
+    "deploymentEnabled": {
+      "*": false,
+      "**": false,
+      "main": true,
+      "dev": true,
+      "site/**": true
+    }
+  }
 }
