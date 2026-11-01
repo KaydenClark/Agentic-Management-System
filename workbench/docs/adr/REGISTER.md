@@ -73,3 +73,4 @@
 | [002M](002M-more-than-two-held-out-tasks-before-a-public-number.md) | More than two held-out tasks before a public number | accepted | 2026-11-01 | evals, site |
 | [002N](002N-studied-held-out-tasks-retire-to-the-dev-set.md) | Studied held-out tasks retire to the dev set | accepted | 2026-11-01 | evals |
 | [002O](002O-one-standing-campaign-approval.md) | One standing campaign approval | accepted | 2026-11-01 | evals, grill-board |
+| [002P](002P-no-session-holds-untrusted-input-secrets-and-outward-actions-together.md) | No session holds untrusted input, secrets and outward actions together | accepted | 2026-11-01 | AGENTS.md |
