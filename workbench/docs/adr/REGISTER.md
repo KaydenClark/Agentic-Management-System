@@ -89,3 +89,4 @@
 | [003C](003C-the-supabase-project-and-its-read-only-baseline.md) | The Supabase project and its read-only baseline | accepted | 2026-11-01 | supabase |
 | [003D](003D-python-3-14-5-pinned-with-uv.md) | Python 3.14.5 pinned with uv | accepted | 2026-11-01 | .python-version, pyproject.toml |
 | [003E](003E-the-adr-and-ddr-collections-are-the-cdr-s-two-kinds.md) | The adr and ddr collections are the CDR's two kinds | accepted | 2026-11-01 | ARCHITECTURE.md, workbench/manifest.json |
+| [003F](003F-one-standing-campaign-approval-and-no-per-merge-gate.md) | One standing campaign approval and no per-merge gate | accepted | 2026-11-01 | evals, grill-board |
