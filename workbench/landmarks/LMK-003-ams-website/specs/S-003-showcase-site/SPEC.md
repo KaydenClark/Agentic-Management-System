@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-003 claimed by claude-impl-s003-tk003.
-**Next gate:** Close TK-003 with verification and documentation proof.
+**Latest event:** TK-004 claimed by claude-impl-s003-tk004.
+**Next gate:** Close TK-004 with verification and documentation proof.
 
 ## Intent and authority
 
