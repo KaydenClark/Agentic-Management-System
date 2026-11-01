@@ -67,7 +67,7 @@ READ_COLUMNS = "id,kind,source_kind,source_ref,occurred_at,source_url,strength,s
 Runner = Callable[[Sequence[str]], str]
 
 _KIND = re.compile(r"^[a-z][a-z_]*$")
-_CLAIM = re.compile(r"^Claim (S-\d+) (TK-\d+)\b")
+_CLAIM = re.compile(r"^Claim (S-[0-9A-Z]+) (TK-[0-9A-Z]+)\b")
 # "Fixed in abc1234" or a later "Correction: the fix commit is abc1234"; the newest wins.
 _FIX_NAMED = re.compile(r"\b(?:fixed in|fix commit is) `?([0-9a-f]{7,40})\b", re.IGNORECASE)
 _PRIORITY = re.compile(r"!\[(P\d) Badge\]")
