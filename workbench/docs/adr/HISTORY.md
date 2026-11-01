@@ -93,3 +93,4 @@
 | [003G](003G-the-rsi-loop-design-with-one-owner-gate.md) | The RSI loop design with one owner gate | accepted | 2026-11-01 | evals, supabase |
 | [003H](003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md) | Supabase holds the RSI data and the service key stays local | accepted | 2026-11-01 | supabase |
 | [003I](003I-only-main-dev-and-site-branches-deploy-to-vercel.md) | Only main, dev and site branches deploy to Vercel | accepted | 2026-11-01 | site/vercel.json |
+| [003J](proposed/003J-limit-active-landmarks-not-specs.md) | Limit active Landmarks, not Specs | proposed | 2026-11-01 | AGENTS.md, workbench/specs/S-001-ams/SPEC.md |

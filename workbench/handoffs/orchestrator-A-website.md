@@ -27,7 +27,7 @@ LMK-002 covers S-007, the RSI pages: charts plus RSI information. Real data appe
 - Vercel deploys only `main` and `dev`.
 - Production is https://www.workbenchsystem.app, which is public and canonical, and changes only when the owner merges.
 - `dev` stays on its protected vercel.app URLs.
-- At most six active Specs (ADR-002S).
+- At most six active Landmarks ([ADR-003J](../docs/adr/proposed/003J-limit-active-landmarks-not-specs.md)); Landmark -> Spec -> Task. Specs need no slots. The owner stop above still holds.
 - One writer per file. A is the only writer of `site/page-list.json`.
 - The claim tool picks TK-004 by default, so always pass `--task`.
 - The hygiene check rejects Claude-Session links in served pages.
@@ -69,7 +69,7 @@ LMK-002 covers S-007, the RSI pages: charts plus RSI information. Real data appe
 - Fresh-context Spec reviews by orchestrator C: none requested yet.
 - Owner gates:
   - extend the Vercel connector's access to the `agentic-management-system-site` project and team;
-  - decide on the S-009 slot.
+  - resume and authorize S-009's scoped work; no Spec slot is needed.
 
 ## Resume point
 

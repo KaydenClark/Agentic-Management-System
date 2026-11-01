@@ -11,7 +11,7 @@
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Latest event:** Review #2 passed at 4d49bfc (Orchestrator C).
-**Next gate:** Owner approval and Human QA, then complete; S-005 takes this slot.
+**Next gate:** Owner approval and Human QA, then complete; this supplies no Spec activation slot.
 
 ## Intent and authority
 
