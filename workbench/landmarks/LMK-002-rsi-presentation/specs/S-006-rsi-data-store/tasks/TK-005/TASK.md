@@ -24,6 +24,6 @@ Hand back to S-006 with `close`.
 
 ## Acceptance
 
-- [ ] A row with no source, or a strength label outside the list, is refused.
-- [ ] A marked test row is readable with the service key and invisible to the publishable key.
-- [ ] `uv run pytest` passes.
+- [x] A row with no source, or a strength label outside the list, is refused.
+- [x] A marked test row is readable with the service key and invisible to the publishable key.
+- [x] `uv run pytest` passes.
