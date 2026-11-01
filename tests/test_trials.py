@@ -8,6 +8,7 @@ import pytest
 
 from ams import trials
 from ams import trial_runtime as runtime
+from test_trial_runtime import Transport
 
 
 def pack(folder):
@@ -44,38 +45,8 @@ def reference(folder):
     return path
 
 
-def events():
-    return [
-        {'type':'system','subtype':'init','model':runtime.MODEL,'tools':[],
-         'mcp_servers':[],'permissionMode':'dontAsk'},
-        {'type':'assistant','message':{'model':runtime.MODEL,
-                                     'content':[{'type':'text','text':'Fixture response'}]}},
-        {'type':'result','subtype':'success','is_error':False,'result':'Fixture response',
-         'num_turns':1,'permission_denials':[],
-         'usage':{'input_tokens':2,'output_tokens':3,'cache_read_input_tokens':4,
-                  'cache_creation_input_tokens':5,'server_tool_use':{'web_search_requests':0,'web_fetch_requests':0}},
-         'modelUsage':{runtime.MODEL:{'inputTokens':2,'outputTokens':3,'cacheReadInputTokens':4,
-                      'cacheCreationInputTokens':5,'webSearchRequests':0,'provider':'firstParty',
-                      'canonicalModel':runtime.MODEL,'costUSD':0.01}},'total_cost_usd':0.01}]
 
 
-class Transport:
-    def __init__(self, stream=None):
-        self.stream=events() if stream is None else stream
-        self.closed=False;self.prompts=[]
-
-    def initialize(self):
-        return {'commands':[]}
-
-    def mcp_status(self):
-        return []
-
-    def responses(self,prompt):
-        self.prompts.append(prompt)
-        yield from self.stream
-
-    def close(self):
-        self.closed=True
 
 
 def test_materialize_reset_and_protected_reference(tmp_path):
@@ -83,9 +54,10 @@ def test_materialize_reset_and_protected_reference(tmp_path):
     before=source.read_bytes();outside=tmp_path/'unrelated';outside.write_text('preserve')
     receipt=trials.materialize(source,target)
     assert (target/'artifacts/fixture-skill/SKILL.md').read_text().startswith('Synthetic')
-    (target/'scratch.txt').write_text('discard only inside the owned fixture')
+    (target/'artifacts/fixture-skill/SKILL.md').write_text('dirty tracked fixture artifact')
     trials.materialize(source,target,reset=True)
-    assert not (target/'scratch.txt').exists() and outside.read_text()=='preserve'
+    assert (target/'artifacts/fixture-skill/SKILL.md').read_text().startswith('Synthetic')
+    assert outside.read_text()=='preserve'
     assert source.read_bytes()==before
     ref=reference(tmp_path/'protected')
     frozen=trials.grader_reference(ref,target)
@@ -122,63 +94,25 @@ def test_reset_refuses_unowned_or_symlinked_fixture(tmp_path):
     assert (target/'precious').read_text()=='keep'
 
 
-def test_runtime_success_preserves_exact_model_unknown_cost_and_private_text():
-    t=Transport();result=runtime.ClaudeAdapter().execute('private fixture prompt',transport=t)
-    assert result['response']=='Fixture response' and result['model']==runtime.MODEL
-    assert result['actualSubscriptionCostUsd'] is None
-    assert result['usage']['cacheCreationInputTokens']==5
-    assert result['equivalentApiCostUsd']==0.01
-    assert t.closed and t.prompts==['private fixture prompt']
-    command=runtime.claude_command()
-    assert command[command.index('--tools')+1]==''
-    assert command[command.index('--model')+1]==runtime.MODEL
-    assert '--fallback-model' not in command and '--bare' not in command
-    assert '--dangerously-skip-permissions' not in command
+def test_reset_refuses_unlisted_recovery_files(tmp_path):
+    source=pack(tmp_path/'pack');target=tmp_path/'worker';trials.materialize(source,target)
+    recovery=target/'owner-recovery.txt';recovery.write_text('keep')
+    with pytest.raises(trials.Refused):trials.materialize(source,target,reset=True)
+    assert recovery.read_text()=='keep'
+    recovery.unlink()
+    recovery=target/'artifacts/owner-recovery.txt';recovery.write_text('keep')
+    with pytest.raises(trials.Refused):trials.materialize(source,target,reset=True)
+    assert recovery.read_text()=='keep'
 
 
-@pytest.mark.parametrize('fault',['tools','mcp','runtime-model','assistant-model','usage-model',
-                                  'provider','tool-use','missing-init','error','boolean-turns',
-                                  'negative-tokens','missing-result','text-mismatch','permission','usage-mismatch'])
-def test_runtime_refuses_unsafe_incomplete_or_drifted_streams(fault):
-    stream=events()
-    if fault=='tools':stream[0]['tools']=['Read']
-    if fault=='mcp':stream[0]['mcp_servers']=[{'name':'outward'}]
-    if fault=='runtime-model':stream[0]['model']='alias'
-    if fault=='assistant-model':stream[1]['message']['model']='other'
-    if fault=='usage-model':stream[2]['modelUsage']['other']=stream[2]['modelUsage'].pop(runtime.MODEL)
-    if fault=='provider':stream[2]['modelUsage'][runtime.MODEL]['provider']='thirdParty'
-    if fault=='tool-use':stream[1]['message']['content']=[{'type':'tool_use','name':'Read'}]
-    if fault=='missing-init':stream.pop(0)
-    if fault=='error':stream[2]['is_error']=True
-    if fault=='boolean-turns':stream[2]['num_turns']=True
-    if fault=='negative-tokens':stream[2]['usage']['input_tokens']=-1
-    if fault=='missing-result':stream.pop()
-    if fault=='text-mismatch':stream[2]['result']='invented'
-    if fault=='permission':stream[0]['permissionMode']='bypassPermissions'
-    if fault=='usage-mismatch':stream[2]['usage']['input_tokens']=9
-    t=Transport(stream)
-    with pytest.raises(trials.Refused):runtime.ClaudeAdapter().execute('fixture',transport=t)
-    assert t.closed
 
 
-def test_mcp_refusal_precedes_sending_prompt():
-    t=Transport();t.mcp_status=lambda:[{'name':'unexpected'}]
-    with pytest.raises(trials.Refused):runtime.ClaudeAdapter().execute('fixture',transport=t)
-    assert not t.prompts and t.closed
 
 
-def test_environment_keeps_os_auth_context_without_provider_keys():
-    env=runtime.clean_environment({'PATH':'/bin','USER':'fixture','LOGNAME':'fixture',
-                                   'ANTHROPIC_API_KEY':'do-not-forward','CLAUDE_CODE_OAUTH_TOKEN':'do-not-forward',
-                                   'SUPABASE_SERVICE_ROLE_KEY':'do-not-forward','UNRELATED':'no'})
-    assert env=={'PATH':'/bin','USER':'fixture','LOGNAME':'fixture'}
 
 
-@pytest.mark.parametrize('value',[float('inf'),True])
-def test_provider_cost_identity_cannot_smuggle_nonfinite_or_boolean(value):
-    stream=events();stream[2]['total_cost_usd']=float('inf') if value is not True else 1
-    stream[2]['modelUsage'][runtime.MODEL]['costUSD']=value
-    with pytest.raises(trials.Refused):runtime.ClaudeAdapter().execute('fixture',transport=Transport(stream))
+
+
 
 
 def test_prompt_uses_verified_artifacts_and_case_without_protected_reference(tmp_path):
@@ -198,6 +132,20 @@ def test_changed_owner_label_bytes_invalidate_reference(tmp_path):
     data['examples'][0]['response']+=' changed'
     (ref.parent/'examples.json').write_text(json.dumps(data))
     with pytest.raises(trials.Refused):trials.grader_reference(ref,worker)
+
+
+def test_ancestor_reference_cannot_put_owner_examples_inside_worker(tmp_path):
+    ref=reference(tmp_path/'protected');worker=ref.parent/'worker';worker.mkdir()
+    data=json.loads(ref.read_text());data['examplesFile']='worker/examples.json'
+    (worker/'examples.json').write_bytes((ref.parent/'examples.json').read_bytes())
+    ref.write_text(json.dumps(data))
+    with pytest.raises(trials.Refused):trials.grader_reference(ref,worker)
+
+
+
+
+
+
 
 
 def evidence():
@@ -237,3 +185,19 @@ def test_public_suite_has_three_dev_cases_and_no_private_oracle():
     assert len(suite['cases'])==3 and {c['split']for c in suite['cases']}=={'dev'}
     assert suite['scope']=='tool-free-transcript-interview-preservation'
     assert all('expectedResponse'not in c and 'ownerExamples'not in c for c in suite['cases'])
+
+
+def test_invalid_cli_input_refuses_before_command_execution(tmp_path,monkeypatch,capsys):
+    ref=reference(tmp_path/'protected')
+    def unexpected(*args):
+        raise AssertionError('sandbox command ran before input validation')
+    monkeypatch.setattr(runtime,'shell_preflight',unexpected)
+    assert trials.main(['preflight',str(tmp_path/'missing'),'--reference',str(ref),'--id','bad'])==1
+    assert not capsys.readouterr().out
+
+
+@pytest.mark.parametrize('value',[[],None,True,1])
+def test_scalar_manifest_cli_errors_are_controlled(tmp_path,capsys,value):
+    folder=tmp_path/'pack';folder.mkdir();path=folder/'manifest.json';path.write_text(json.dumps(value))
+    assert trials.main(['materialize',str(path),str(tmp_path/'worker')])==1
+    assert not (tmp_path/'worker').exists()

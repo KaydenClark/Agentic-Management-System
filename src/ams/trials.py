@@ -140,13 +140,14 @@ def main(argv=None):
         if args.command == 'materialize': result = materialize(args.manifest, args.worker, reset=args.reset)
         elif args.command == 'readback': result = read_evidence(args.store)
         else:
+            manifest_digest = fixture_identity(args.worker)
             ref = grader_reference(args.reference, args.worker)
             shell = runtime.shell_preflight(args.worker)
             gates = ['frozen-series-not-released']
             if ref['qualification'] != 'qualified': gates.append('semantic-grader-unqualified')
             if shell['status'] != 'passed': gates.append('host-command-preflight-not-passed')
             result = {'schema': 1, 'kind': 'bootstrap-preflight', 'id': args.id, 'scope': SCOPE,
-                      'manifestDigest': fixture_identity(args.worker), 'reference': ref, 'shell': shell,
+                      'manifestDigest': manifest_digest, 'reference': ref, 'shell': shell,
                       'readyForControlledTrials': False, 'gates': gates}
             save_evidence(result, args.store)
         print(json.dumps(result, indent=2))

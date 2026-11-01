@@ -64,7 +64,8 @@ def validate_manifest(path):
     path = Path(path)
     require(path.name == 'manifest.json', 'manifest filename required')
     manifest = load(path)
-    require(type(manifest.get('schema')) is int and manifest['schema'] == 1, 'manifest schema must be 1')
+    require(isinstance(manifest, dict) and type(manifest.get('schema')) is int and manifest['schema'] == 1,
+            'manifest schema must be 1')
     _hash(manifest.get('sourceCommit'), 40)
     require(manifest.get('condition') in ('baseline', 'candidate'), 'artifact condition required')
     require(isinstance(manifest.get('repository'), str) and bool(manifest['repository']), 'repository identity required')
@@ -106,6 +107,10 @@ def materialize(source, target, *, reset=False):
         require(same_artifact(load(target/MARKER), marker), 'fixture source identity changed')
         for item in target.rglob('*'):
             _no_links(item)
+        allowed_files = {MARKER, 'artifacts/manifest.json'} | {'artifacts/'+e['path'] for e in manifest['entries']}
+        allowed_dirs = {str(parent) for file in allowed_files for parent in PurePosixPath(file).parents if str(parent) != '.'}
+        require(all(item.relative_to(target).as_posix() in (allowed_files if item.is_file() else allowed_dirs)
+                    for item in target.rglob('*')), 'unlisted fixture data preserved; reset refused')
         shutil.rmtree(target)
     target.mkdir(parents=True, mode=0o700)
     artifacts = target/'artifacts'; artifacts.mkdir(mode=0o700)
@@ -132,7 +137,7 @@ def grader_reference(path, worker):
     path = Path(path).absolute(); worker = Path(worker).absolute()
     require(not path.is_relative_to(worker), 'grader must remain protected outside worker fixture')
     ref = load(path)
-    require(type(ref.get('schema')) is int and ref['schema'] == 1
+    require(isinstance(ref, dict) and type(ref.get('schema')) is int and ref['schema'] == 1
             and ref.get('kind') == 'interview-grader-reference', 'grader reference format changed')
     require(ref.get('model') == runtime.MODEL and ref.get('effort') == runtime.EFFORT,
             'grader model/effort changed')
@@ -149,7 +154,7 @@ def grader_reference(path, worker):
             and hashlib.sha256(examples_path.read_bytes()).hexdigest() == ref['examplesSha256'],
             'protected owner example bytes changed')
     examples = load(examples_path)
-    require(examples.get('kind') == 'narrow-oracle-seeds' and isinstance(examples.get('source'), str)
+    require(isinstance(examples, dict) and examples.get('kind') == 'narrow-oracle-seeds' and isinstance(examples.get('source'), str)
             and isinstance(examples.get('examples'), list) and bool(examples['examples']), 'owner seed format missing')
     for example in examples['examples']:
         require(isinstance(example, dict) and example.get('label') in ('Yes', 'No')

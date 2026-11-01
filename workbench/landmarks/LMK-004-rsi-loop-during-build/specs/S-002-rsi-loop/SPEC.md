@@ -17,25 +17,17 @@
 
 [Owner decisions/resume](../../../../wiki/context-ams-purpose.md): Journey resumed; r1, Stable/Excellent, three attempts excluding baseline, subscription meter; bounded candidate/regressions separate from whole AMS.
 
-## Outcome
-
-Evidence-backed Skill/AMS improvements.
-
-## Why It Matters
-
-Loop on real builds until meter/stop; static scores prove no benefit.
-
 ## Current Verified State
 
-[CLI proof](tasks/TK-000M/TASK.md); runner/trials/storage incomplete. [Baseline a3d014e](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified reviews, not trials; no strike/skill result.
+[CLI proof](tasks/TK-000M/TASK.md); trials unfinished. [Baseline a3d014e](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified source reviews; no trial, strike or skill result.
 
-S-006 TK-000S also repairs this local CLI’s immutable packet, frozen metadata, historical source, result and approved protocol identity comparisons. Source `ad7fa28` preserves scoring formulas and qualification rules; checked delivery is tracked in that owner. No real trial or evaluator qualification is inferred.
+S-006 TK-000S owns packet/metadata/history/result/protocol identity repair at `ad7fa28`, with unchanged scoring/qualification rules. Its proof claims no trial or qualification.
 
-TK-000T prepares [private inputs and local preflight](../../../../../evals/TRIALS.md) at the delivered storage boundary. Original TK-002 still owns measured noise; bootstrap checks and the prior inert provider smoke are not controlled trials, qualification or useful benefit.
+TK-000T prepares [private inputs/preflight](../../../../../evals/TRIALS.md). TK-002 owns measured noise; bootstrap and inert smoke prove no controlled result, qualification or benefit.
 
 ## Desired Behavior
 
-Failure -> earliest gap/owner -> one change in its repository -> baseline/retest -> disposition/later use.
+Failure -> earliest gap/owner -> one repository change -> baseline/retest -> disposition/later use.
 
 ### Audit scores
 
@@ -54,7 +46,7 @@ Run pass: all Critical/Regression Yes; Regression needs baseline pass proof.
 3/2/1/0 passing runs = Excellent/Stable/Functional/Broken; Critical No overrides
 Broken. Acceptance additionally requires complete qualified proof and no open
 Critical/Regression or unmapped historical finding. No QA/distribution/benefit
-implied. Whole fitness: ten areas; bounded results cannot certify AMS.
+implied. Whole fitness covers ten areas; bounded results cannot certify AMS.
 
 ### Skill evals and retests
 
@@ -82,8 +74,8 @@ Close only on three-run repaired-revision original/affected-regression passes
   Inside-margin is inconclusive; audit delta proves no benefit.
 - Public lift needs >2 fresh held-out tasks, controls, baseline/interval.
   Studied cases retire to dev; scores are not lift.
-- Sandbox, no skipped permissions. No automatic proposer before trusted grader,
-  measured trial cost and owner-judged manual round.
+- Sandbox without skipped permissions. Automatic proposing waits for a trusted
+  grader, measured cost and owner-judged manual round.
 - Baseline 0: no strike. Candidate initial -> retry -> retry -> stop/report unless
   accepted. Repair/rename never resets; retain failures/harm.
 - Trial rows: task/arm, version/skills pin, provider/model/effort, completion,
@@ -97,11 +89,11 @@ Weights; running loops during mapping; presentation (S-007).
 
 S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests, behavioral links. S-007 presents scores/evals/failures/provenance; integration missing.
 
-Real build-history/skills seeds, strength labels; private summary/commit only. Storage/qualified comparisons required.
+Real build/skills seeds retain strength labels; private sources yield summaries/commits only. Storage and qualified comparisons required.
 
 ## Vertical Implementation Slices
 
-Local CLI/corrections: TK-000M/N/O; trials retain real inputs. B local; checked PRs to main.
+TK-000M/N/O: scoring; TK-000T: bootstrap; TK-001..004: real trials. B local, checked PRs to main.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -114,21 +106,11 @@ Local CLI/corrections: TK-000M/N/O; trials retain real inputs. B local; checked 
 - [ ] **Stops:** omitted findings stay open; regressions visible; baseline excluded. Reject fourth attempt/reset.
 - [ ] **Readback:** S-006/S-007 retain assessment/trial distinctions and failures/evidence. Reject false storage or test/private-data publication.
 
-## RSI and website connection
-
-See dependencies.
-
 ## Testing Seams
 
 CLI/runner/writer/readback fixtures: missing proof, recurrence, original-pass/regression-fail.
 
-## Verification Procedure
-
-RUNBOOK and [Task proof](tasks/TK-000M/TASK.md).
-
-## Documentation Impact
-
-RUNBOOK, S-006/S-007, Wiki/Tasks.
+Checks: RUNBOOK and [Task proof](tasks/TK-000M/TASK.md).
 
 ## Append-Only Evidence And Execution Log
 
@@ -153,12 +135,3 @@ Independent review per retained change; owner judges automation.
 ## Completion Result
 
 Pending.
-
-## Remaining Limitations Or Follow-Up Specs
-
-- Qualify before running the manual loop in force.
-
-## Supersession
-
-- Supersedes: none
-- Superseded by: none

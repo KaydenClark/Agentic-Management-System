@@ -25,7 +25,9 @@ A private pack has `manifest.json`: schema 1, repository, condition
 `sourceUrl` and safe provenance metadata may also be retained. All files must be
 listed; traversal, symlinks, duplicate paths, missing files and changed bytes fail.
 Materialization creates an owned private fixture. Reset requires its matching
-ownership marker and refuses symlinks before removing only that fixture. Source
+ownership marker and refuses symlinks or unlisted files/directories before reset.
+Changed or missing listed artifacts can be restored; unlisted recovery files stay
+untouched and block reset. Source
 packs and unrelated files are preserved. Interrupted partial output remains
 visible for inspection, never reported as a complete fixture.
 
@@ -65,6 +67,10 @@ empty tool inventory, actual model, permission mode, final text, one-turn result
 and matching provider usage. Unexpected tools, tool calls, fallback/model drift,
 errors, missing evidence or inconsistent counts refuse the result. Worker
 thinking is not returned as final text or supplied to the future judge.
+Startup/transport failures retain at most 16 KiB of redacted private stderr,
+stage and exit status under `.local/trial-diagnostics`, without worker prompt,
+stdout or authentication payloads. A diagnostic-storage failure stays visible to
+the caller; it never converts an execution failure to success.
 
 The current bootstrap's transport is verified with deterministic mock streams.
 The earlier single inert Claude smoke is separate external CLI capability
