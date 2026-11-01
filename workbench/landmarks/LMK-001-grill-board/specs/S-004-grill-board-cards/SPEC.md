@@ -28,7 +28,7 @@ Priority and Value are how the owner decides what needs attention; without them 
 ## Current Verified State
 
 - TK-001 serves committed cards with Priority, Value and reasons on 127.0.0.1, unstyled.
-- The owner's design artifact "Grilling Board Redesign" (version 1793538932-43c3) is the board's design guide ([DDR-000Y](../../../../docs/ddr/proposed/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
+- The owner's design artifact "Grilling Board Redesign" (version 1793538932-43c3) is the board's design guide ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
 
 ## Desired Behavior
 
@@ -47,7 +47,7 @@ Priority and Value are how the owner decides what needs attention; without them 
 - The decision journey on the board is tracked apart from delivery (Specs and Tasks).
 - The board is local only; Vercel never serves it.
 - Card data lives in plain files in Git; the owner's answer is the source, the owning record the destination.
-- The theme follows the artifact; tokens live once in `grill-board/theme/tokens.json` ([DDR-000Y](../../../../docs/ddr/proposed/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
+- The theme follows the artifact; tokens live once in `grill-board/theme/tokens.json` ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
 
 ## Non-Goals
 
