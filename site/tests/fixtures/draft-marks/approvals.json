@@ -1,0 +1,19 @@
+{
+  "about": "Fixture approvals for the draft-mark tests only; no owner approved anything here. HASH_OF_BUILT_PAGE is replaced by the test with the built page's current content hash.",
+  "approvals": [
+    {
+      "route": "/start",
+      "hash": "HASH_OF_BUILT_PAGE",
+      "approver": "fixture-owner",
+      "date": "2026-11-01",
+      "source": "https://github.com/KaydenClark/Agentic-Management-System/blob/dev/site/tests/fixtures/draft-marks/approvals.json"
+    },
+    {
+      "route": "/how-it-works",
+      "hash": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "approver": "fixture-owner",
+      "date": "2026-11-01",
+      "source": "https://github.com/KaydenClark/Agentic-Management-System/blob/dev/site/tests/fixtures/draft-marks/approvals.json"
+    }
+  ]
+}
