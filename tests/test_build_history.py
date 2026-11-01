@@ -616,3 +616,15 @@ def test_a_table_only_task_keeps_its_key_when_its_task_md_arrives(tmp_path, fixt
     before = {bh._key(r) for r in rows if r["kind"] == "task"}
     after = {bh._key(r) for r in later if r["kind"] == "task"}
     assert before == after
+
+
+@pytest.mark.parametrize("subject,ids", [("Claim S-004 TK-000A", ("S-004", "TK-000A")),
+                                         ("Claim S-006 TK-004", ("S-006", "TK-004")),
+                                         ("Claim S-003Z TK-008G", ("S-003Z", "TK-008G")),
+                                         ("Claimed nothing", None)])
+def test_claim_commits_with_widened_ids_are_task_claims(subject, ids):
+    # The real history holds "Claim S-004 TK-000A"; widened IDs end in letters.
+    commit = {"sha": "b" * 40, "parents": ["c" * 40], "time": "2026-11-01T10:00:00Z",
+              "author": "x", "subject": subject, "refs": ["main"]}
+    claims = [r for r in bh.commit_rows([commit], {}) if r["kind"] == "task_claimed"]
+    assert [(r["detail"]["spec"], r["detail"]["task"]) for r in claims] == ([ids] if ids else [])
