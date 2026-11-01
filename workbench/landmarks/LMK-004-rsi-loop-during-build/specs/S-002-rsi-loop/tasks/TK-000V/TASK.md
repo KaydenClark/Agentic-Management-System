@@ -3,12 +3,13 @@
 **Task ID:** TK-000V
 **Spec ID:** S-002
 **Slice:** Bounded JSONL writes and concurrent runtime output drainage
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Evals; Readback
 **Planned verification:** Inert full-pipe/partial-write/deadline regressions; runtime callers; required room checks; full fresh suite; checked PR #89 into main
 **Claimed by:** s002-transport
 **Current claimant:** s002-transport
+**Proof:** 50 focused; fresh 567/4 skip; actual inert adapter
 
 ## Assignment
 
@@ -42,3 +43,9 @@ Inert QA demonstrates exact complete single delivery under simultaneous stdout/s
 The orchestrator additionally authorized exactly one inert actual adapter call at source `5467b5e`: `PREFLIGHT_OK`, exact `claude-opus-5-5`, medium effort, empty tools/MCP. All four loaded source hashes matched the authorized commit before the call. Usage: input 2, output 13, cache read 1545, cache creation 798. API list-equivalent cost: 0.006961 USD; actual subscription spend unknown. The safe local execution-fact digest `44d1843eecc48fe529c19ae3604f67fbcfe8e462f46fe83307c78616390fd548` matched readback. No private skill input, database fact, semantic qualification or controlled trial was involved. TK-000T's earlier source/smoke/review remain historical; they are not substituted for this corrective evidence.
 
 CI run 75 (`41351943803`) passed all 567 tests with 4 skips, then failed the record-currentness gate on the same stale TASKBOARD claim row seen locally. Its job log directly shows the ready/in-progress row diff. The regenerated board is included in this correction; final-head CI must confirm that repair. No test failure is hidden or waived.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | feature/s002-trial-preflight | ce0a585b52522cb9f3f9d9daeabd3142fe24a6d9 | ahead 0 behind 0 | 0 | 50 focused; fresh 567/4 skip; actual inert adapter | evals/TRIALS.md | Oracle/noise/controls/benefit; close attribution: {"agent":"s002-transport","claimant":"s002-transport","onBehalfOf":null} | 450ae1c87581a9c82a53b5c03bf147da88aa2e8b4be72afb032eda35a1243fd3 |
