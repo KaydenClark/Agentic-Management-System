@@ -64,3 +64,4 @@
 | [002D](002D-every-finding-has-one-disposition.md) | Every finding has one disposition | accepted | 2026-11-01 | workbench/feedback |
 | [002E](002E-runbook-commands-are-the-commands-graders-call.md) | Runbook commands are the commands graders call | accepted | 2026-11-01 | RUNBOOK.md, evals |
 | [002F](002F-the-rsi-loop-design.md) | The RSI loop design | accepted | 2026-11-01 | evals, supabase |
+| [002G](002G-measure-the-noise-floor-before-trusting-a-change.md) | Measure the noise floor before trusting a change | accepted | 2026-11-01 | evals |
