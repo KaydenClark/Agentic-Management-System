@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000D closed with proof.
-**Next gate:** Complete TK-000B.
+**Latest event:** TK-000B claimed by orch-b.
+**Next gate:** Close TK-000B with verification and documentation proof.
 
 ## Intent and authority
 
