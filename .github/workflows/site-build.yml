@@ -1,0 +1,40 @@
+name: site builds
+
+# Replaces Vercel preview builds as the PR check for site work (ADR-003I),
+# so the free Vercel deployment quota is spent only on main and dev.
+on:
+  pull_request:
+    branches: [dev, main]
+    paths: ["site/**", ".github/workflows/site-build.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  site:
+    name: site builds
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for the site app
+        id: app
+        working-directory: .
+        run: |
+          if [ -f site/package.json ]; then echo "present=true" >> "$GITHUB_OUTPUT"; else echo "present=false" >> "$GITHUB_OUTPUT"; echo "No site/package.json on this branch; nothing to build."; fi
+      - uses: actions/setup-node@v4
+        if: steps.app.outputs.present == 'true'
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - run: npm ci
+        if: steps.app.outputs.present == 'true'
+      - run: npm run lint --if-present
+        if: steps.app.outputs.present == 'true'
+      - run: npm run build
+        if: steps.app.outputs.present == 'true'
+      - run: npm test
+        if: steps.app.outputs.present == 'true'

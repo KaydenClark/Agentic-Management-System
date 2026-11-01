@@ -13,11 +13,11 @@ AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one 
 
 | Path | What lives there |
 |---|---|
-| `src/`, `tests/` | Package `ams`, pytest suite (uv); `ams-keycheck` checks the Supabase key; `ams-writer` writes rows with it, the site reads with the publishable key |
-| `supabase/` | Migrations: read-only baseline, `build_events` |
-| `site/` | Public website; planned Vercel hosting, Supabase backend |
+| `src/`, `tests/` | Package `ams`, pytest suite (uv); `ams-keycheck` checks the key; `ams-writer`, `ams-history`, `ams-rsi` write under one source rule (`ams-sources`); the site key only reads |
+| `supabase/` | Migrations: read-only baseline, `build_events`, `rsi_*` |
+| `site/` | Public website; planned Vercel hosting, Supabase data |
 | `grill-board/` | Owner's [cards](grill-board/README.md), theme, QA; local `ams-board` only |
-| `evals/` | RSI eval tasks, results and comparisons |
+| `evals/` | RSI eval tasks, results, comparisons |
 | `.agents/` | Commit hook and skill extensions (`.claude/skills` links here) |
 | Root files | The eight controls ([Ownership](#ownership)) |
 | `workbench/` | [Manifest](workbench/manifest.json) lanes: specs, landmarks, ADR/DDR, wiki, feedback, sessions, tools, research |

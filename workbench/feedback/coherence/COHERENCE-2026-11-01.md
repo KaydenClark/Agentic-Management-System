@@ -61,3 +61,7 @@ Recorded in [owner answers](../../wiki/context-owner-answers-coherence.md). Each
 | ID | Sev | Finding | Disposition | Return to |
 |---|---|---|---|---|
 | COH-019 | high | The Vercel free plan's limit of 100 deployments per day was hit at 13:48 UTC. Vercel reported `api-deployments-free-per-day` on PR #30 at `a1b3d8d`. Every push to a PR branch creates a Vercel deployment, including non-site PRs where `site/vercel.json`'s `ignoreCommand` cancels the build. With three orchestrators pushing, the daily limit runs out, and site previews on `dev` are blocked for about 24 hours. Non-site PRs show a red Vercel status that is not about their content. | diagnostic | A or B, with the owner's go-ahead: stop deployments for branches that need none, for example with `git.deploymentEnabled` in `site/vercel.json` limited to `dev` and `main`, so ignored builds stop counting. |
+
+| ID | Update | Disposition |
+|---|---|---|
+| COH-019 | PR #46 (`3affa38`) set `git.deploymentEnabled` in `site/vercel.json` to `main` and `dev` only, recorded as ADR-003I. Other branches no longer create Vercel deployments. | repaired (`3affa38`) |
