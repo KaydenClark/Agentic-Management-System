@@ -174,7 +174,9 @@ def _flagged_in_history(root, commit, prefix):
     if not commit:
         return ()
     pattern = "^" + re.escape(FLAG_LINE)
-    listed = _git(Path(root), "log", "-z", "--no-renames", "--format=%x01%H", "--name-only",
+    # --full-history: a merged branch that flagged and then reverted is TREESAME
+    # overall, and default simplification would prune it and lose the flag.
+    listed = _git(Path(root), "log", "-z", "--full-history", "--no-renames", "--format=%x01%H", "--name-only",
                   "-G", pattern, commit, "--", prefix or ".")
     flagged = []
     for block in listed.split("\x01")[1:]:  # each block: SHA NUL, then NUL-ended paths

@@ -29,7 +29,7 @@ import tempfile
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 
-from .cards import FLAG_LINE, RATINGS
+from .cards import FLAG_LINE, RATINGS, load_cards
 
 VERDICTS = {
     "confirm": "Confirm",
@@ -273,7 +273,20 @@ def _checked_card(cards_dir, card, card_sha):
     if card.sha and card.sha != card_sha:  # the parsed card must be the bytes being checked
         raise AnswerRefused(f"the card {card_rel} changed since the page showed it; reload and read it again")
     card_mode, card_blob = _unchanged(root, base, card_rel, card_file, card_sha, "card")
+    _still_askable(cards_dir, base, card)
     return root, base, card_rel, card_file, card_mode, card_blob
+
+
+def _still_askable(cards_dir, base, card):
+    """Recheck, under the lock and at base, that the card is still on the board:
+    another instance may have flagged a twin of this question since the page
+    read it, which only the whole snapshot and its history can show."""
+    cards, refusals = load_cards(cards_dir)
+    if any(c.commit != base for c in cards):
+        raise AnswerRefused("HEAD moved while the write was being checked; reload and try again")
+    if not any(c.file == card.file for c in cards):
+        problems = next((r.problems for r in refusals if r.file == card.file), ["it is no longer a committed card"])
+        raise AnswerRefused(f"{card.file} cannot be written: {'; '.join(problems)}")
 
 
 def _appended(blob, relative, section, note):

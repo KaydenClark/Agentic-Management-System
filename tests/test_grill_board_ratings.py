@@ -305,3 +305,42 @@ def test_a_flagged_card_with_an_unusual_name_is_still_found_in_history(board, re
     git(repo, "revert", "--no-edit", "HEAD")
     html = get(server, {"topic": "Card format"})
     assert "odd &quot;name&quot;.md" in html.split('aria-label="Refused cards"', 1)[1].split("</section>", 1)[0]
+
+
+def test_a_flag_reverted_on_a_merged_branch_still_refuses_the_question(board, repo):
+    """Codex P2 on PR #48: path-limited history simplification must not prune
+    a merged branch that flagged and then reverted the flag."""
+    git(repo, "switch", "-qc", "feature")
+    server = board()
+    assert flag(server)[0] == 200
+    git(repo, "revert", "--no-edit", "HEAD")
+    git(repo, "switch", "-q", "main")
+    (repo / "elsewhere.md").write_text("main moves on\n")
+    git(repo, "add", "-A")
+    git(repo, "commit", "-qm", "main moves on")
+    git(repo, "merge", "--no-ff", "-q", "-m", "merge feature", "feature")
+    html = get(server, {"topic": "Card format"})
+    assert 'aria-label="Refused cards"' in html, "the reverted flag was pruned from history"
+    assert "one-card.md" in html.split('aria-label="Refused cards"', 1)[1].split("</section>", 1)[0]
+    assert "one-card.md" not in queue(html)
+
+
+def test_confirming_a_duplicate_while_another_board_flags_it_is_refused_under_the_lock(board, repo):
+    """Codex P2 on PR #48: eligibility is rechecked inside the repository lock,
+    so a card read before its twin was flagged cannot be answered after."""
+    from ams.grill_board.answers import AnswerRefused, answer
+    from ams.grill_board.cards import load_cards
+
+    twin = CARD.replace("Keep one Markdown file per card.", "Keep one file per card.")
+    post_card(repo, "twin.md", twin, "an agent posts the same question twice")
+    cards_dir = repo / "grill-board" / "cards"
+    stale = {card.file: card for card in load_cards(cards_dir)[0]}["twin.md"]  # read before the flag
+    from ams.grill_board.answers import render_hashes
+
+    card_sha, record_sha = render_hashes(cards_dir, stale)
+    assert flag(board())[0] == 200  # another board flags one-card.md
+    before = snapshot(repo)
+    twin_bytes = (cards_dir / "twin.md").read_bytes()
+    with pytest.raises(AnswerRefused, match="flagged too taxing"):
+        answer(cards_dir, stale, "confirm", "", card_sha, record_sha)
+    assert snapshot(repo) == before and (cards_dir / "twin.md").read_bytes() == twin_bytes
