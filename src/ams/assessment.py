@@ -182,6 +182,8 @@ def _findings(p, runs, previous):
             fid = f"{p['failureId']}:{cid}"
             old = findings.get(fid)
             if old:
+                require(old.get('checkId') == cid and old.get('class') == row['class'],
+                        'historical finding ID collides with current check/class')
                 old.update(status='recurred' if old['status'] in ('verified-resolved','recurred') else 'open', lastCandidate=p['candidate'])
             else:
                 findings[fid] = {'findingId':fid, 'checkId':cid, 'class':row['class'], 'status':'open',

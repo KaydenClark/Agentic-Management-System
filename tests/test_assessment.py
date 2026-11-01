@@ -355,3 +355,15 @@ def test_invalid_class_only_enrichment_is_refused_before_write(tmp_path):
     p['historicalFindings']=[{'findingId':'legacy','checkId':'A04-01','class':'Quality'}]
     finding=assessment.record(p,tmp_path)['findings'][0]
     assert finding['class']=='Quality' and finding['status']=='open'
+
+
+def test_historical_quality_id_cannot_hide_current_regression_failure(tmp_path):
+    p=regression_packet()
+    p['historicalFindings']=[{'findingId':'synthetic-failure:A04-01',
+                              'checkId':'A04-01','class':'Quality','candidate':BASE}]
+    p['runs'][0]['rows'][0]['result']='No'
+    with pytest.raises(assessment.Refused,match='collid'):
+        assessment.score(p)
+    with pytest.raises(assessment.Refused,match='collid'):
+        assessment.record(p,tmp_path)
+    assert not list(tmp_path.glob('*.json'))

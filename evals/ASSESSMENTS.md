@@ -48,6 +48,8 @@ The JSON example supplies the shape. Required fields:
   `class`, original `candidate`, `sourceRunId` and observation. Unmapped historical
   classes or check mappings block acceptance. Later packets may fill missing
   `checkId`/`class` fields; existing mappings and source facts cannot change.
+  A historical ID colliding with a current finding's different check/class is
+  refused before writing; old metadata cannot hide a new Regression.
   Enrichment keeps the finding open until its normal retest. Recorded findings
   are retained even when omitted.
 - `retests`: optional `findingId`, repaired `revision`, `originalCheckId` and
