@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000N closed with proof.
-**Next gate:** S-006 -> TK-001/TK-002.
+**Latest event:** TK-000O claimed by codex-s002.
+**Next gate:** Close TK-000O with verification and documentation proof.
 
 ## Intent and authority
 

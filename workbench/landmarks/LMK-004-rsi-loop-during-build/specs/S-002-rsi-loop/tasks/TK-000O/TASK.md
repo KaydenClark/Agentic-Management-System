@@ -3,10 +3,12 @@
 **Task ID:** TK-000O
 **Spec ID:** S-002
 **Slice:** Historical finding ID collisions cannot bypass Regression acceptance
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Scoring; Stops
 **Planned verification:** Red/green collision fixture at score/record seams; independent review; final-head CI.
+**Claimed by:** codex-s002
+**Current claimant:** codex-s002
 
 ## Assignment
 
