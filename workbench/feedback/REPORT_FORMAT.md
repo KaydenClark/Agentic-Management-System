@@ -1,0 +1,107 @@
+# Harness Feedback Report Format
+
+> AMS template adapted from LLM_Workbench `templates/feedback/REPORT_FORMAT.md` at `227d7c2a3ca0`. This is a starting format, not evidence of installed software, approved AMS policy, or completed work.
+
+A report is an evidence-backed assessment of an assigned harness target. Store
+it at an explicitly supplied destination when an independent review application
+owns the evidence; otherwise use `workbench/feedback/`, with a descriptive name such as
+`REPORT-topic-date.md`. This file describes the format, not findings.
+Use the existing assigned spec for accepted follow-up work and current gates.
+A report never repairs its target or grants repair or automated-merge authority.
+
+## Target And Scope
+
+Name the assigned spec, exact target revision, inspected paths, report date,
+question being answered, and method. If inspecting uncommitted work, identify
+that limitation and use content hashes for the inspected files; do not call it
+an exact committed candidate review.
+
+## Evidence And Limitations
+
+List executed commands and actual results, source references, and evidence
+limitations. Distinguish observed behavior, inferences, historical evidence and
+hypotheses. Static checks do not establish agent-outcome improvements.
+
+## Findings
+
+Order supported findings by impact. For each, give its ID, severity, location,
+claim, reproduced effect or demonstrated impact, and the smallest bounded next
+action. Explain why the harness causes the friction when making that causal
+claim. Report no findings when that is what the evidence supports; do not
+invent work or label every limitation a defect.
+
+**Disposition (required):** exactly one of `diagnostic`, `test`, `repaired`, `declined`, or `accepted-open`, using the [AMS disposition definitions](../../GLOSSARY.md#feedback-dispositions). Leave an undecided finding explicitly pending rather than inventing a disposition.
+Record it in the owning Spec and link the report finding to that owner and its
+evidence. Name the registered code or test for those outcomes, the implementing
+commit for `repaired`, the reason for `declined`, or the accepted owning Spec
+for `accepted-open`. If ownership is missing, state that gap explicitly; a
+disposition neither schedules nor authorizes a repair. A missing disposition
+makes the finding incomplete against this format.
+
+Example field shape: `Disposition: [DISPOSITION]; owner: [SPEC_ID]; evidence: [EVIDENCE_REFERENCE]`.
+
+Finding identifiers are report-scoped. Cross-report aggregation keys on the
+report identity plus finding ID, or on an explicit shared recurrence key; a bare
+`F-001` never silently aliases another report's `F-001`.
+
+A claim about a skill names the copy it was read from. A Canon claim cites
+the actual owning repository path and commit read; a claim about
+an installed copy says so and names the discovery root (for example
+`.agents/skills` or `.claude/skills` under the user home) and, when present,
+the `release` and `commit` in its `.workbench-skill.json` marker. Text read
+from an installed copy is evidence about that host, never about the release.
+
+## Challenged Or Rejected Findings
+
+Record consequential claims considered but unsupported, contradicted, or outside
+scope, with the evidence that changed the conclusion. Do not quietly repair the
+target while reviewing it.
+
+## RSI follow-through
+
+[Link the improvement record and eventual comparison. Report repair delivery and later-use benefit separately; retain recurrence and owner effort.]
+
+## Next Action And Open Questions
+
+Point to the existing spec for accepted work, or clearly state that a proposed
+repair awaits owner authorization. Name the next executable action or blocker.
+Cold continuation follows the report and linked spec without the original chat;
+it does not create a new task or a universal handoff artifact.
+
+## Review Boundary
+
+A separate-context reviewer checks consequential claims and recommendations
+with the fixed candidate at the applicable delivery boundary. Earlier reviews are supports,
+not mandatory independent ceremonies. Record actual review coverage and limits;
+never manufacture an independent PASS from self-review.
+
+## Models And Evidence States
+
+Record `evaluated_model` separately from `reviewer_model`, plus the actual
+host/application, configuration, OS and tested revision. For a structural
+inspection with no evaluated model, use `not-applicable`; when unknown, say
+`unknown`. The reporting agent's model is not automatically the evaluated one.
+
+Label each claim's evidence: source inspection, observed use, behavioral test,
+or repeated outcome trial. Never pool inspection, observed use and behavioral
+results into one health score or average: report each with its own denominator,
+coverage and limits. Record passed, failed, unavailable, interrupted,
+inconclusive and missing-evidence states without turning absent proof into a
+pass. A host operation succeeding proves that operation in that configuration;
+it establishes neither forbidden-operation enforcement nor future model reliability.
+An execution failure alone does not identify a harness defect: reproduce the
+failing assumption and separate environmental limits from causal findings.
+
+One finding may have several observations and recurrences. Preserve each
+observation's target revision, scope and state. `not-retested` is not `resolved`;
+closing a finding requires the relevant correction and verification. Existing
+report keys disambiguate occurrences; they do not implement a central longitudinal
+finding store. Independent review applications may own that store; this portable
+format keeps a standalone destination and imposes no service prerequisite.
+
+Evidence source state is separate from execution outcome: name fresh, stale,
+unavailable, malformed, inaccessible or user-reported material, including its
+revision/capture date where known. Distinguish a capability being available,
+eligible, shown to the agent, consulted, and actually acted through. A discovery
+entry establishes availability only; observed tool use and its result need
+their own evidence. Preserve unknown states instead of filling gaps by inference.
