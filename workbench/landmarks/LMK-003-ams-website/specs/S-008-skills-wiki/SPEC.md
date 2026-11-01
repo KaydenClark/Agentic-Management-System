@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 claimed by Orchestrator (Claude Opus 5.5).
-**Next gate:** Close TK-001 with verification and documentation proof.
+**Latest event:** TK-001 closed with proof.
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
@@ -132,6 +132,7 @@ node workbench/tools/spec-workbench.mjs show S-008
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
 | 2026-11-01 | none | Entry shape revised to the owner's seven-section template; open choices listed | render, doctor | this Spec | Every criterion; open owner choices |
 | 2026-11-01 | none | Owner settled the open choices: nine sections, stage grouping, chart skills at pin `8782412` under repository names, index plus page per skill, used marks dropped (TK-003 removed); implementation not started | render, doctor | this Spec | Every criterion |
+| 2026-11-01 | TK-001 | Task closed | PR #93 merged into dev at 19c06ccaf3236228f78d5b1ab8b4ebf87be07f50 (tree equal to checked head 49841646); Vercel status success for that commit. /skills index and 39 articles build; npm test 165/165; check:browser 1984/1984; tour-375 24/24; check:skills-source 0 findings at pin 8782412; independent Standards and Spec reviews (fresh contexts) found no hard breach and every acceptance criterion met. | site/README.md Skills wiki section (files, format, tests, source check) | none for TK-001; TK-002 (full set) delivered in the same PR; close attribution: {"agent":"Orchestrator (Claude Opus 5.5)","claimant":"Orchestrator (Claude Opus 5.5)","onBehalfOf":null} |
 
 ## Review and Human QA
 
