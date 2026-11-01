@@ -39,7 +39,7 @@ git diff --check
 
 ## Version control and publication
 
-Non-site work: branch, commit each step, push, PR into `main`, merge-commit once current and checked; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev`, only the owner merges `dev` -> `main`. S-013 measures the `dev` lead. Report local, pushed, merged and deployed states separately.
+Non-site work: branch, commit each step, push, PR into `main`, merge-commit once current and checked; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev` once CI `site builds` passes; only the owner merges `dev` -> `main`. Report local, pushed, merged and deployed states separately.
 
 ## Recovery
 
