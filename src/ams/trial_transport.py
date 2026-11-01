@@ -20,7 +20,7 @@ EXECUTION_TIMEOUT = 55
 
 class ClaudeProcess:
     """JSONL control handshake before sending the one authorized caller prompt."""
-    def __init__(self, cwd):
+    def __init__(self, cwd, *, system_prompt=None):
         self.process = None
         self.selector = None
         self.stderr = b''
@@ -37,7 +37,7 @@ class ClaudeProcess:
                     and auth.get('authMethod') in ('claude.ai', 'oauth', 'subscription')
                     and not auth.get('apiKeySource'), 'subscription-only authentication unavailable')
             self.stage = 'startup'
-            self.process = subprocess.Popen(claude_command(), cwd=cwd, env=env, stdin=subprocess.PIPE,
+            self.process = subprocess.Popen(claude_command(system_prompt=system_prompt), cwd=cwd, env=env, stdin=subprocess.PIPE,
                                             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                             start_new_session=(os.name == 'posix'))
         except (OSError, ValueError, subprocess.TimeoutExpired) as error:
