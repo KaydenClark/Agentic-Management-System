@@ -20,7 +20,7 @@
 | [000L](000L-one-local-page-shows-what-waits-on-the-owner.md) | One local page shows what waits on the owner | accepted | 2026-11-01 | grill-board |
 | [000M](000M-colors-on-owner-pages-are-signals-with-one-meaning-each.md) | Colors on owner pages are signals with one meaning each | accepted | 2026-11-01 | grill-board, site |
 | [000N](000N-setup-drafts-the-blueprint-and-starts-a-grilling.md) | Setup drafts the Blueprint and starts a grilling | accepted | 2026-11-01 | BLUEPRINT.md, RUNBOOK.md |
-| [000O](proposed/000O-the-public-site-only-presents-and-reads-supabase.md) | The public site only presents and reads Supabase | proposed | 2026-11-01 | BLUEPRINT.md, site |
+| [000O](000O-the-public-site-only-presents-and-reads-supabase.md) | The public site only presents and reads Supabase | accepted | 2026-11-01 | BLUEPRINT.md, site |
 | [000P](proposed/000P-the-grill-board-is-local-with-a-python-server.md) | The Grill Board is local, with a Python server | proposed | 2026-11-01 | grill-board |
 | [000Q](proposed/000Q-landmarks-are-the-prds.md) | Landmarks are the PRDs | proposed | 2026-11-01 | workbench/landmarks, BLUEPRINT.md |
 | [000R](proposed/000R-the-license-is-mit-copyright-kayden-clark.md) | The license is MIT, copyright Kayden Clark | proposed | 2026-11-01 | LICENSE |
