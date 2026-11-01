@@ -58,3 +58,4 @@
 | [001X](001X-room-skills-live-beside-the-owner-s-personal-skills.md) | Room skills live beside the owner's personal skills | accepted | 2026-11-01 | .agents/skills |
 | [001Y](001Y-each-behavior-has-one-owning-skill.md) | Each behavior has one owning skill | accepted | 2026-11-01 | .agents/skills |
 | [001Z](001Z-cross-skill-calls-are-explicit-skill-tool-calls.md) | Cross-skill calls are explicit Skill-tool calls | accepted | 2026-11-01 | .agents/skills |
+| [002A](002A-one-improvement-procedure-starting-from-failed-results.md) | One improvement procedure, starting from failed results | accepted | 2026-11-01 | evals, workbench/feedback |
