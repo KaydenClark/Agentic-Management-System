@@ -341,3 +341,17 @@ def test_mapping_update_cannot_rewrite_original_observation(tmp_path):
     with pytest.raises(assessment.Refused,match='source'):
         assessment.record(p,tmp_path)
     assert len(list(tmp_path.glob('*.json')))==1
+
+
+def test_invalid_class_only_enrichment_is_refused_before_write(tmp_path):
+    p=packet()
+    p['historicalFindings']=[{'findingId':'legacy','candidate':BASE}]
+    assessment.record(p,tmp_path)
+    p.update(assessmentId='partial-mapping',attempt=1)
+    p['historicalFindings']=[{'findingId':'legacy','class':'invalid-class'}]
+    with pytest.raises(assessment.Refused,match='class'):
+        assessment.record(p,tmp_path)
+    assert len(list(tmp_path.glob('*.json')))==1
+    p['historicalFindings']=[{'findingId':'legacy','checkId':'A04-01','class':'Quality'}]
+    finding=assessment.record(p,tmp_path)['findings'][0]
+    assert finding['class']=='Quality' and finding['status']=='open'

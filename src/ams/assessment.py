@@ -170,6 +170,7 @@ def _findings(p, runs, previous):
         cid = merged.get('checkId')
         require(cid is None or cid in CHECKS, 'unknown historical check')
         cls = merged.get('class')
+        require(cls is None or cls in ('Critical','Regression','Quality'), 'invalid historical class')
         if cid and cls is not None:
             require(cls == CHECKS[cid] or (CHECKS[cid] == 'Quality' and cls == 'Regression'), 'historical class cannot be demoted')
         findings[fid] = merged
