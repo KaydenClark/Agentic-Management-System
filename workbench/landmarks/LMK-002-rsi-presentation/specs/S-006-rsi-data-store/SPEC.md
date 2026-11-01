@@ -27,26 +27,26 @@ Charts are honest only if each number has a sourced row; local writes and public
 
 ## Current Verified State
 
-- Every public table has RLS on; the site key reads, its writes get 401.
-- `build_events`: `ams-history import` derives rows from Git, `gh` and records on demand, not on a schedule; `readcheck` fails on any missing or extra row.
-- `rsi_runs`, `rsi_results`: empty until a real trial; need the four commits and a trial strength; completed needs `passed`; stale updates 409 (`ams-rsi livecheck`).
-- Writers and DB refuse rows without source or listed strength; test rows hidden (`ams-sources livecheck`). `tests/test_secret_scan.py` scans tracked files for keys.
+- RLS on every public table: the site key reads; its writes get 401.
+- `build_events`: `ams-history import` derives rows from Git, `gh` and records on demand, not scheduled; `readcheck` fails on a missing or extra row.
+- `rsi_*`: empty until a real trial; four commits and a trial strength required; completed needs `passed`; stale updates 409.
+- Writers and DB refuse unsourced or unlisted rows; test rows hidden. `tests/test_secret_scan.py` scans tracked files for keys.
 
 ## Desired Behavior
 
 - Tables for RSI results, build history and run metadata. Each result names task, held-out or dev, arm (AMS, no-AMS or plain instructions), system version (runtime, controls and skills commits), provider, model, effort, pass, cost, tokens, completed state and source.
-- Every table has a site SELECT policy and no client write path.
+- Each table has a site SELECT policy, no client write path.
 - A local writer with the service key inserts rows and refuses a write conflicting with a newer row.
-- Seed rows come only from real sources (site build, later improvements, the skills repository's recorded fixes), each labelled anecdote, single trial, repeated trials or held-out with interval. `recorded_fact` is for build history only.
+- Seed rows come only from real sources (site build, later improvements, the skills repository's fixes), each labelled anecdote, single trial, repeated trials or held-out with interval. `recorded_fact` is for build history only.
 - Test and synthetic rows are marked; the site never shows them.
 - **Build history.** Rows for this build's Spec, Task, PR and commit events from real records, returns and corrections included, showing how the AMS built itself.
 
 ## Decisions And Contracts
 
 - The site only presents; it never writes.
-- The service key never enters this repository or the site's environment; the writer reads `SUPABASE_SERVICE_ROLE_KEY` from the gitignored env file and accepts `sb_secret_` and legacy JWT keys.
+- The service key never enters this repository or the site's environment; the writer reads `SUPABASE_SERVICE_ROLE_KEY` from the gitignored env file, `sb_secret_` or legacy JWT.
 - Never fabricate data. An empty table is a valid state.
-- A completed result needs `passed` for pass rates ([ADR-002J](../../../../docs/adr/002J-every-ledger-row-records-cost-and-run-state.md)); `score` is optional.
+- A completed result needs `passed` ([ADR-002J](../../../../docs/adr/002J-every-ledger-row-records-cost-and-run-state.md)); `score` is optional.
 
 ## Non-Goals
 
@@ -59,7 +59,7 @@ Charts are honest only if each number has a sourced row; local writes and public
 
 ## Vertical Implementation Slices
 
-One fresh run per Task in orchestrator B's lane (sole key holder), landed by checked PR to `main`. TK-001 to TK-005 done; TK-000E fixes review FAIL c87bf4e.
+One run per Task in orchestrator B's lane (sole key holder), by checked PR to `main`.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -88,9 +88,9 @@ S-002 writes its rows here; S-007 reads them.
 ```bash
 node workbench/tools/spec-workbench.mjs show S-006
 uv run pytest
+# before close, after merge, in orchestrator B's checkout: missing 0, extra 0
+uv run ams-history import && uv run ams-history readcheck
 ```
-
-Before close, after merge, in orchestrator B's checkout: `uv run ams-history import`, then `readcheck` (missing 0, extra 0).
 
 ## Documentation Impact
 
@@ -98,7 +98,7 @@ Before close, after merge, in orchestrator B's checkout: `uv run ams-history imp
 
 ## Append-Only Evidence And Execution Log
 
-One row per closed Task; each TASK.md Receipt holds the full proof.
+Each TASK.md Receipt holds the full proof.
 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
@@ -106,9 +106,10 @@ One row per closed Task; each TASK.md Receipt holds the full proof.
 | 2026-11-01 | TK-001 | Task closed | PR #15 (884d021): live `ams-keycheck` authenticated, no key printed | RUNBOOK, ARCHITECTURE | Legacy-JWT path proven only with fakes |
 | 2026-11-01 | TK-002 | Task closed | PR #18 (d279ae1): `build_events` applied; `ams-writer` wrote PR #15's row; site key reads, writes 401 | RUNBOOK, ARCHITECTURE | `is_test` filter proven by stubs |
 | 2026-11-01 | TK-003 | Task closed | PR #29 (74b446e): `rsi_*` applied; `ams-rsi livecheck` refused a missing skills commit and a stale update | RUNBOOK, ARCHITECTURE | No real RSI row until S-002 |
-| 2026-11-01 | TK-004 | Task closed | PRs #31 (4d74e90), #37 (d26bb8c): `ams-history` imported 463 rows matching record counts; rerun added 0 | RUNBOOK, ARCHITECTURE | Dev-only records not imported; no scheduled re-import |
-| 2026-11-01 | TK-005 | Task closed | PR #42 (55c3856): live `ams-sources livecheck`: writer and DB refused no source, blank ref, bad strength on all 3 tables; site key saw 0 test rows | RUNBOOK, ARCHITECTURE, Spec | S-002 picks seed rows |
-| 2026-11-01 | TK-000E | Review FAIL at c87bf4e: H1, M1-M3, L1, L2 | Spec review | this Spec | TK-000E |
+| 2026-11-01 | TK-004 | Task closed | PRs #31 (4d74e90), #37 (d26bb8c): `ams-history` imported 463 rows; rerun added 0 | RUNBOOK, ARCHITECTURE | Dev-only records not imported; no scheduled re-import |
+| 2026-11-01 | TK-005 | Task closed | PR #42 (55c3856): live `ams-sources livecheck` refused unsourced and unlisted rows on all 3 tables; site key saw 0 test rows | RUNBOOK, ARCHITECTURE, Spec | S-002 picks seed rows |
+| 2026-11-01 | review | Review verdict: fail at c87bf4ec86206bd5f734af7b828c81c3d3356a00 [a2124994b4d9] #1 | new Tasks TK-000B (acceptance lines unchecked, no evidence), TK-000C (no repeatable secret scan), TK-000D (recorded_fact on RSI tables) | Orchestrator C, repo half; live half is B's | 3 |
+| 2026-11-01 | TK-000E | B's review FAIL at c87bf4e: H1, M1-M3, L1, L2 | live half | this Spec | TK-000E |
 
 ## Review and Human QA
 
@@ -121,7 +122,7 @@ Pending.
 ## Remaining Limitations Or Follow-Up Specs
 
 - Supabase region: nearest US default unless the owner chooses.
-- Evidence and Receipt rows are keyed by index: an edited row keeps its imported text; a removed one reads as extra.
+- Evidence and Receipt rows are keyed by index: edits are not re-imported; a removed row reads as extra.
 
 ## Supersession
 
