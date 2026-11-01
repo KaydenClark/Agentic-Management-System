@@ -3,8 +3,8 @@
 **Task ID:** TK-007
 **Spec ID:** S-003
 **Slice:** Recorded Grill Board tokens and a check that every value equals one
-**Status:** blocked
-**Blockers:** TK-001, owner:grill-board-theme-tokens
+**Status:** ready
+**Blockers:** none
 **Destination:** spec-acceptance: Theme tokens
 **Planned verification:** token comparison script failing on a stray color
 
