@@ -82,7 +82,7 @@
 | [002V](002V-artifacts-have-character-limits.md) | Artifacts have character limits | accepted | 2026-11-01 | workbench/artifact-budgets.json |
 | [002W](002W-three-strikes-then-stop.md) | Three strikes, then stop | accepted | 2026-11-01 | AGENTS.md |
 | [002X](002X-next-js-front-end-python-backends-node-only-as-tooling.md) | Next.js front end, Python backends, Node only as tooling | accepted | 2026-11-01 | ARCHITECTURE.md, site, pyproject.toml |
-| [002Y](proposed/002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md) | Supabase holds the RSI data and a Python writer keeps it current | proposed | 2026-11-01 | supabase |
+| [002Y](002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md) | Supabase holds the RSI data and a Python writer keeps it current | accepted | 2026-11-01 | supabase |
 | [002Z](proposed/002Z-three-orchestrators-split-the-work-by-risk.md) | Three orchestrators split the work by risk | proposed | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [003A](proposed/003A-implementors-run-on-opus-or-sonnet.md) | Implementors run on Opus or Sonnet | proposed | 2026-11-01 | AGENTS.md |
 | [003B](proposed/003B-the-dev-site-is-visible-only-to-the-owner-claude-and-codex.md) | The dev site is visible only to the owner, Claude and Codex | proposed | 2026-11-01 | site |
