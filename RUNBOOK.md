@@ -17,7 +17,7 @@
 
 ### RSI during website work
 
-Capture friction in a [feedback report](workbench/feedback/REPORT_FORMAT.md); test a bounded hypothesis with an [improvement record](workbench/research/IMPROVEMENT-TEMPLATE.md), [eval tasks](evals/EVAL-TASK-TEMPLATE.md), [results](evals/EVAL-RESULT-TEMPLATE.md) and a [comparison](evals/EVAL-COMPARISON-TEMPLATE.md). Explain verified behavior with the [page template](site/PAGE-TEMPLATE.md).
+Capture friction in a [feedback report](workbench/feedback/REPORT_FORMAT.md); test a bounded hypothesis with an [improvement record](workbench/research/IMPROVEMENT-TEMPLATE.md), eval task, result and comparison templates in [evals](evals/). Explain verified behavior with the [page template](site/PAGE-TEMPLATE.md).
 
 ## Preserve knowledge as it happens
 
@@ -25,7 +25,7 @@ Use existing topic owners; grow flat Wiki notes through [MEMORY](workbench/wiki/
 
 ## Test And Build
 
-From the root, `uv run pytest` runs the tests; `uv run ams-board` serves the Grill Board (`grill-board/cards/`) on 127.0.0.1:8765 only. Room checks:
+From the root: `uv run pytest` tests; `uv run ams-board` serves the Grill Board (`grill-board/cards/`) on 127.0.0.1:8765 only; `uv run ams-keycheck` checks the Supabase service key without printing it (`src/ams/keycheck.py`), from orchestrator B's main checkout (it has the key). Room checks:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render
@@ -35,13 +35,11 @@ node workbench/tools/workbench-layout.mjs validate --project "$PWD"
 git diff --check
 ```
 
-`render` must leave no diff; `doctor` no blocking finding.
-
-Fresh clone: check out the recorded commit; rerun `uv run pytest` and the room checks.
+`render` must leave no diff; `doctor` no blocking finding. On a fresh clone at the recorded commit, rerun them and `uv run pytest`.
 
 ## Version control and publication
 
-Non-site work: branch, commit each step, push, PR into `main`, merge with a merge commit once current and checked, confirm `main` has it; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev`, only the owner merges `dev` -> `main`. S-013 measures how far `dev` is ahead of `main`. Report local, pushed, merged and deployed states separately.
+Non-site work: branch, commit each step, push, PR into `main`, merge-commit once current and checked; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev`, only the owner merges `dev` -> `main`. S-013 measures the `dev` lead. Report local, pushed, merged and deployed states separately.
 
 ## Recovery
 

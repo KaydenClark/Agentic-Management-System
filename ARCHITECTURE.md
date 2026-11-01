@@ -7,13 +7,13 @@
 
 ## Bird's-Eye View
 
-AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one RSI loop on the Workbench it repairs. [Blueprint](BLUEPRINT.md) owns the destination; AGENTS owns authority. Runtime: the local Grill Board.
+AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one RSI loop on the Workbench it repairs. [Blueprint](BLUEPRINT.md) owns the destination; AGENTS owns authority.
 
 ## Codemap
 
 | Path | What lives there |
 |---|---|
-| `src/`, `tests/` | Package `ams`, pytest suite; `pyproject.toml` (uv) |
+| `src/`, `tests/` | Package `ams`, pytest suite (uv); `ams-keycheck` checks the Supabase key |
 | `supabase/` | Supabase migrations (read-only baseline) |
 | `site/` | Public website; planned Vercel hosting, Supabase backend |
 | `grill-board/` | Owner's card queue (`cards/*.md`); local `ams-board` only |
