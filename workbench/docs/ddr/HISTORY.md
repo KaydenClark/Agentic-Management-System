@@ -25,7 +25,7 @@
 | [000Q](000Q-landmarks-are-the-prds.md) | Landmarks are the PRDs | accepted | 2026-11-01 | workbench/landmarks, BLUEPRINT.md |
 | [000R](000R-the-license-is-mit-copyright-kayden-clark.md) | The license is MIT, copyright Kayden Clark | accepted | 2026-11-01 | LICENSE |
 | [000S](000S-the-site-uses-a-free-vercel-app-domain.md) | The site uses a free vercel.app domain | accepted | 2026-11-01 | site |
-| [000T](proposed/000T-charts-start-blank-and-data-is-never-fabricated.md) | Charts start blank and data is never fabricated | proposed | 2026-11-01 | site |
+| [000T](000T-charts-start-blank-and-data-is-never-fabricated.md) | Charts start blank and data is never fabricated | accepted | 2026-11-01 | site |
 | [000U](proposed/000U-the-skills-wiki-is-site-written-summaries.md) | The skills wiki is site-written summaries | proposed | 2026-11-01 | site |
 | [000V](proposed/000V-the-demo-grill-board-uses-sample-non-engineering-questions.md) | The demo Grill Board uses sample non-engineering questions | proposed | 2026-11-01 | site |
 | [000W](proposed/000W-the-first-rsi-trial-is-building-the-site.md) | The first RSI trial is building the site | proposed | 2026-11-01 | evals, site |
