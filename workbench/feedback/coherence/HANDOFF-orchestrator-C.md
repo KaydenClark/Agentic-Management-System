@@ -58,7 +58,7 @@ Repaired or declined: COH-005, COH-006, COH-016, COH-017 and COH-019.
 
 ## Limits
 
-C cannot message B's local session, because cross-session messages from this cloud session are refused. Requests to B travel through these records and through PRs. The PR for S-004's pass (`b0fd71f`) merged with CI green and Codex's code review clean. Codex's security review of the final merge-up commit had not finished. It had passed the previous head, and the merge-up only added `main`'s CI workflow.
+C cannot message B's local session, because cross-session messages from this cloud session are refused. Requests to B travel through these records and through PRs. The PR for S-004's pass (`b0fd71f`) merged with CI green and Codex's code review clean. Codex's security review of its final head (`244be07`) finished clean after the merge.
 
 ## Resume point
 
