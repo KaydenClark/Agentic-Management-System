@@ -3,7 +3,7 @@ import pytest
 
 from ams import build_history as bh
 from test_build_history_wiki_sources import relocated, page, PAGE, commit
-from test_build_history import _write, git_runner, StubSupabase, URL, FAKE_PUBLISHABLE
+from test_build_history import _git, _write, git_runner, StubSupabase, URL, FAKE_PUBLISHABLE
 from test_build_history_wiki_sources import lifecycle
 
 
@@ -13,7 +13,8 @@ def set_example(repo, sha, location, transform):
         _write(repo, PAGE, head + "\n\n" + transform("[previous" + links))
     else:
         _write(repo, "workbench/wiki/MEMORY.md", transform("[Website](context-website.md)"))
-    commit(repo, "Inline examples are not source declarations")
+    if _git(repo, "status", "--porcelain"):
+        commit(repo, "Inline examples are not source declarations")
 
 
 @pytest.mark.parametrize("location", ["article", "router"])
@@ -70,3 +71,43 @@ def test_code_text_cannot_be_removed_to_forge_an_exact_declaration_label(relocat
     set_example(repo, sha, "article", lambda links: links.replace("previous", "prev`example`ious"))
     assert not any("#evidence-" in r["source_ref"]
                    for r in bh.record_rows(git_runner(repo), lifecycle))
+
+
+@pytest.mark.parametrize("location", ["article", "router"])
+@pytest.mark.parametrize("indent", ["    ", "\t"])
+def test_indented_continuation_cannot_end_an_open_code_span(relocated, location, indent):
+    repo, sha, _ = relocated
+    set_example(repo, sha, location,
+                lambda links: "Example `\n" + indent + "paragraph continuation\n" + links + "\nend `")
+    assert not any("#evidence-" in r["source_ref"]
+                   for r in bh.record_rows(git_runner(repo), lifecycle))
+
+
+@pytest.mark.parametrize("location", ["article", "router"])
+@pytest.mark.parametrize("prefix", ["    ", "\t", ">     "])
+def test_new_indented_code_blocks_remain_non_declarations(relocated, location, prefix):
+    repo, sha, _ = relocated
+    set_example(repo, sha, location,
+                lambda links: "\n".join(prefix + line for line in links.splitlines()))
+    assert not any("#evidence-" in r["source_ref"]
+                   for r in bh.record_rows(git_runner(repo), lifecycle))
+
+
+@pytest.mark.parametrize("location", ["article", "router"])
+@pytest.mark.parametrize("slashes", [0, 1, 2, 3, 4])
+def test_escaped_brackets_are_literals_but_even_backslashes_keep_live_links(relocated, location, slashes):
+    repo, sha, _ = relocated
+    prefix = "\\" * slashes
+    set_example(repo, sha, location, lambda links: prefix + links.replace("\n", "\n" + prefix))
+    count = sum("#evidence-" in r["source_ref"] for r in bh.record_rows(git_runner(repo), lifecycle))
+    assert count == (0 if slashes % 2 else 8)
+
+
+@pytest.mark.parametrize("location", ["article", "router"])
+@pytest.mark.parametrize("slashes", [0, 1, 2, 3])
+def test_image_operator_and_escaped_literal_bang_are_distinct(relocated, location, slashes):
+    repo, sha, _ = relocated
+    prefix = "\\" * slashes + "!"
+    set_example(repo, sha, location, lambda links: prefix + links.replace("\n", "\n" + prefix))
+    count = sum("#evidence-" in r["source_ref"] for r in bh.record_rows(git_runner(repo), lifecycle))
+    assert count == (8 if slashes % 2 else 0)

@@ -436,7 +436,7 @@ def record_rows(git: Runner, lifecycle: Runner) -> list[dict]:
     return rows
 
 
-_LINK = re.compile(r"(?<!!)\[([^]\n]+)\]\(([^)\s]+)\)")
+_LINK = re.compile(r"\[([^]\n]+)\]\(([^)\s]+)\)")
 _PREVIOUS_SPEC = re.compile(r"previous (S-[A-Za-z0-9]+) at ([0-9a-f]{7,40})")
 
 
@@ -516,7 +516,7 @@ def _visible_markdown(text: str) -> str:
             flush()
             fence, fence_depth, in_table = marker[1], depth, False
             continue
-        if not logical.strip() or line.startswith(("    ", "\t")):
+        if not logical.strip() or (not paragraph and logical.startswith(("    ", "\t"))):
             flush()
             visible.append("")
             in_table = False
@@ -540,6 +540,24 @@ def _visible_markdown(text: str) -> str:
             quote_depth = max(quote_depth, depth)
     flush()
     return "\n".join(visible)
+
+
+def _markdown_links(text: str):
+    visible = _visible_markdown(text)
+
+    def escaped(index):
+        start = index
+        while start > 0 and visible[start - 1] == "\\":
+            start -= 1
+        return (index - start) % 2 == 1
+
+    for match in _LINK.finditer(visible):
+        start = match.start()
+        if escaped(start):
+            continue  # a literal opening bracket is not a link
+        if start > 0 and visible[start - 1] == "!" and not escaped(start - 1):
+            continue  # image alt text is not a route; an escaped ! is literal
+        yield match.groups()
 
 
 def _link_url(target: str):
@@ -568,7 +586,7 @@ def _wiki_spec_events(git: Runner, specs: Sequence[dict], current: Sequence[dict
         return []
     router_text = local(["show", f"HEAD:{router}"])
     pages = set()
-    for _, target in _LINK.findall(_visible_markdown(router_text)):
+    for _, target in _markdown_links(router_text):
         url = _link_url(target)
         path = posixpath.normpath(posixpath.join("workbench/wiki", url.path))
         if not url.scheme and not url.netloc and not url.query and path in files and path != router:
@@ -583,7 +601,7 @@ def _wiki_spec_events(git: Runner, specs: Sequence[dict], current: Sequence[dict
         sources = re.search(r"(?m)^source_paths:\n((?: +-[^\n]*\n?)*)", frontmatter[1]) if frontmatter else None
         declared = {line.strip()[2:].strip() for line in sources[1].splitlines()} if sources else set()
         body = text[frontmatter.end():] if frontmatter else text
-        for label, target in _LINK.findall(_visible_markdown(body)):
+        for label, target in _markdown_links(body):
             declaration = _PREVIOUS_SPEC.fullmatch(label)
             if declaration is None:
                 continue
