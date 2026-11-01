@@ -3,10 +3,12 @@
 **Task ID:** TK-000M
 **Spec ID:** S-002
 **Slice:** A local caller records a frozen three-run assessment with exact scoring and retained attempt history
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Scoring; Stops; Cycle (assessment and retest safeguards only)
 **Planned verification:** CLI known-outcome fixtures for pooled counts, levels, missing proof, findings/retests, immutable records and fourth-attempt refusal; full pytest and room checks.
+**Claimed by:** codex-s002
+**Current claimant:** codex-s002
 
 ## Assignment
 

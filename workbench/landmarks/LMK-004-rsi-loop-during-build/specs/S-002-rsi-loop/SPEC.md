@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Owner resumed S-002 Journey; deterministic assessment slice prepared.
-**Next gate:** Implement TK-000M; recover storage and manual-trial inputs independently.
+**Latest event:** TK-000M claimed by codex-s002.
+**Next gate:** Close TK-000M with verification and documentation proof.
 
 ## Intent and authority
 
