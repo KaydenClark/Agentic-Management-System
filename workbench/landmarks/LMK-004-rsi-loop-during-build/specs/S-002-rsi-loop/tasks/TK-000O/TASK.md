@@ -16,9 +16,9 @@ Same authorized S-002 delivery, codex-s002 writer, `codex/s002-assessment-loop` 
 
 ## Acceptance
 
-- [ ] A historical Quality finding cannot hide a current Regression failure through an ID collision; incompatible check IDs/classes cannot reuse the current finding identity.
-- [ ] Refused collisions leave stored history unchanged, and normal repeat findings, enrichment, retests and recurrence still work.
-- [ ] Focused tests, independent review and required CI pass before merge; native proof/closure retained.
+- [x] A historical Quality finding cannot hide a current Regression failure through an ID collision; incompatible check IDs/classes cannot reuse the current finding identity.
+- [x] Refused collisions leave stored history unchanged, and normal repeat findings, enrichment, retests and recurrence still work.
+- [x] Focused tests, independent review and required CI pass before merge; native proof/closure retained.
 
 ## Check and corrective review
 
@@ -30,4 +30,8 @@ S-006 and real trials remain blocked as recorded in the Spec. Required final-hea
 
 [Automated finding 4436904200](https://github.com/KaydenClark/Agentic-Management-System/pull/78#discussion_r4436904200) also showed unknown historical failure revisions could resolve after unchanged-candidate retests. This run additionally requires a known original/latest failing commit before resolution, permits validated enrichment of a missing original commit, preserves recorded sources and rejects the same failure revision. The new regression was observed red before repair.
 
-- [ ] Missing failure revision cannot close; supplying the unchanged revision remains open, while a distinct repaired revision can close after the normal qualified three-run retest.
+- [x] Missing failure revision cannot close; supplying the unchanged revision remains open, while a distinct repaired revision can close after the normal qualified three-run retest.
+
+## Final source verification
+
+Candidate `3a607f8f3470cc276aa8e93a2b1ee941cf3f6561`: 42 focused tests pass, independently repeated by the Spec reviewer. Both reviewers report no findings after probing missing/null/malformed source revisions, unchanged original/latest failures and distinct repaired revisions. CI workflow `41338924932` (run #38) passed. The new identity/revision regression was observed red then green. All three automated PR findings are repaired and resolved. Final closure changes only records; final-head CI remains a merge gate. No assembled S-002 Review, qualification, behavioral benefit or Human QA is implied.
