@@ -39,7 +39,7 @@
 | [001E](001E-a-spec-needs-fresh-context-review-of-the-exact-commit.md) | A Spec needs fresh-context review of the exact commit | accepted | 2026-11-01 | AGENTS.md, workbench/specs |
 | [001F](001F-no-pass-while-an-acceptance-line-lacks-evidence.md) | No pass while an acceptance line lacks evidence | accepted | 2026-11-01 | workbench/specs |
 | [001G](001G-the-branch-policy-lives-in-one-config-file.md) | The branch policy lives in one config file | accepted | 2026-11-01 | workbench/manifest.json |
-| [001H](proposed/001H-done-requires-a-pushed-read-back-commit.md) | Done requires a pushed, read-back commit | proposed | 2026-11-01 | AGENTS.md |
+| [001H](001H-done-requires-a-pushed-read-back-commit.md) | Done requires a pushed, read-back commit | accepted | 2026-11-01 | AGENTS.md |
 | [001I](proposed/001I-built-deployed-and-passing-claims-name-their-commit.md) | Built, deployed and passing claims name their commit | proposed | 2026-11-01 | AGENTS.md |
 | [001J](proposed/001J-the-workflow-map.md) | The workflow map | proposed | 2026-11-01 | RUNBOOK.md, .agents/skills |
 | [001K](proposed/001K-a-pr-merges-only-after-checks-on-the-combined-commit.md) | A PR merges only after checks on the combined commit | proposed | 2026-11-01 | AGENTS.md |
