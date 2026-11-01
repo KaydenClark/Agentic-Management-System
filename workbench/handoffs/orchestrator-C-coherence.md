@@ -2,7 +2,7 @@
 
 STATUS: wrapped · 2026-11-01 15:45 UTC · by orchestrator C (Claude cloud session, no secrets)
 
-Plain-language continuation for a fresh orchestrator C. It preserves context and grants no authority. Verify live state before acting. This file lives in C's tracked lane because `workbench/sessions/handoffs/` is gitignored and would not reach a cloud cold start.
+Plain-language continuation for a fresh orchestrator C. It preserves context and grants no authority. Verify live state before acting. It sits beside orchestrator A's handoff. The RUNBOOK's `workbench/sessions/handoffs/` is gitignored, so a handoff there would not reach a cloud cold start.
 
 ## The job
 
@@ -10,14 +10,14 @@ Keep the AMS coherent and up to Spec (S-013). That means three things. Run an in
 
 ## Verified state at `main` `b0fd71f`
 
-**Reviews done** (receipts in this folder):
+**Reviews done** (receipts in `workbench/feedback/coherence/`):
 
 | Spec | Commit | Verdict | Receipt |
 |---|---|---|---|
-| S-006 (repo-only half) | `c87bf4e` | fail; opened TK-000B, TK-000C, TK-000D | [REVIEW-S-006-c87bf4e](REVIEW-S-006-c87bf4e.md) |
-| S-006 (repo-only half) | `d6d4a6d` | **pass** | [REVIEW-S-006-d6d4a6d](REVIEW-S-006-d6d4a6d.md) |
-| S-004 | `dd52f70` | fail; opened TK-000F to TK-000J | [REVIEW-S-004-dd52f70](REVIEW-S-004-dd52f70.md) |
-| S-004 | `4d49bfc` | **pass**; layout fidelity is owner Human QA | [REVIEW-S-004-4d49bfc](REVIEW-S-004-4d49bfc.md) |
+| S-006 (repo-only half) | `c87bf4e` | fail; opened TK-000B, TK-000C, TK-000D | [REVIEW-S-006-c87bf4e](../feedback/coherence/REVIEW-S-006-c87bf4e.md) |
+| S-006 (repo-only half) | `d6d4a6d` | **pass** | [REVIEW-S-006-d6d4a6d](../feedback/coherence/REVIEW-S-006-d6d4a6d.md) |
+| S-004 | `dd52f70` | fail; opened TK-000F to TK-000J | [REVIEW-S-004-dd52f70](../feedback/coherence/REVIEW-S-004-dd52f70.md) |
+| S-004 | `4d49bfc` | **pass**; layout fidelity is owner Human QA | [REVIEW-S-004-4d49bfc](../feedback/coherence/REVIEW-S-004-4d49bfc.md) |
 
 S-006's live-database half belongs to orchestrator B's local reviewer. C has not seen a recorded verdict for it.
 
@@ -33,11 +33,11 @@ S-006's live-database half belongs to orchestrator B's local reviewer. C has not
 | TK-004 review procedure | ready in fact | The record still says blocked by TK-002 (COH-023). |
 | TK-005 drift breach to Grill Board card | blocked on S-004 | S-004 now passes review, so this is ready once S-004 is accepted. |
 
-**Open coherence findings**, from the sweep in [COHERENCE-2026-11-01](COHERENCE-2026-11-01.md) (one disposition each):
+**Open coherence findings**, from the sweep in [COHERENCE-2026-11-01](../feedback/coherence/COHERENCE-2026-11-01.md) (one disposition each):
 
 | ID | Severity | Finding |
 |---|---|---|
-| COH-021 | high | `dev` is 84 commits ahead of `main`, a breach ([DRIFT-2026-11-01-wrap](DRIFT-2026-11-01-wrap.md)). |
+| COH-021 | high | `dev` is 84 commits ahead of `main`, a breach ([DRIFT-2026-11-01-wrap](../feedback/coherence/DRIFT-2026-11-01-wrap.md)). |
 | COH-004 | high | There is no mapping from the owner's 81 items to the 107 CDRs. |
 | COH-007 to COH-011 | | CDRs are bundled, duplicated, partly unsourced, or use colliding bare IDs. |
 | COH-001 | | README is at 4,245 characters, over its limit. |
