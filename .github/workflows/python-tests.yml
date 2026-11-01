@@ -1,7 +1,7 @@
 name: python tests
 
 # Runs the Python suite (runtime, Grill Board, Supabase writers with stubbed
-# HTTP), the room's doctor, and the 375px board check on every PR. No path
+# HTTP), the repo-only record checks, and the 375px board check on every PR. No path
 # filter, so the check always reports. Live Supabase tests stay skipped:
 # CI holds no keys (AMS_LIVE is never set here).
 on:
@@ -28,8 +28,14 @@ jobs:
           git config --global user.name "ci"
           git config --global user.email "ci@example.invalid"
       - run: uv run pytest -q
-      - name: Room doctor
-        run: node workbench/tools/spec-workbench.mjs doctor
+      # doctor also checks host setup (the owner's personal skill catalog),
+      # which a CI runner never has; CI runs the repo-only record checks.
+      - name: Records are valid and the Taskboard is current
+        run: |
+          node workbench/tools/workbench-layout.mjs validate --project .
+          node workbench/tools/adr.mjs validate
+          node workbench/tools/spec-workbench.mjs render
+          git diff --exit-code TASKBOARD.md
       - name: Grill Board at 375px
         run: |
           uv run --with playwright python -m playwright install --with-deps chromium
