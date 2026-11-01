@@ -22,7 +22,7 @@ test('the check catches dead ends and wrong links (self-test)', () => {
   assert.ok(orderProblems(nav(''), 0, ['/only']).length, 'a lone page with no links passes');
 });
 
-test('nav.ts lists the reading order Home, Start here, How it works, RSI results', () => {
+test('nav.ts lists the reading order Home, Start here, How it works, Grill Board demo, RSI results', () => {
   const src = readFileSync(join(siteDir, 'app', 'nav.ts'), 'utf8');
   const hrefs = [...src.matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(hrefs, READING_ORDER);

@@ -10,7 +10,7 @@ export const REPO_BLOB = 'https://github.com/KaydenClark/Agentic-Management-Syst
 
 // The reading order the tour must follow, in order (owner of the list:
 // app/nav.ts; this is the expectation it is tested against).
-export const READING_ORDER = ['/', '/start', '/how-it-works', '/rsi'];
+export const READING_ORDER = ['/', '/start', '/how-it-works', '/grill-board-demo', '/rsi'];
 
 // The tour pages this Task delivers.
 export const TOUR = [
