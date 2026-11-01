@@ -11,7 +11,7 @@
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; four Tasks planned, seeding first.
-**Next gate:** S-006 rows for TK-001; the owner's standing campaign approval before TK-002.
+**Next gate:** S-006 accepted (two reviews failed; strike 2 of 3) for TK-001; the owner's standing campaign approval, given by the owner directly in the orchestrator's session, before TK-002.
 
 ## Intent and authority
 
