@@ -132,6 +132,12 @@ test('every color token in tokens.css equals grill-board/theme/tokens.json, and 
   assert.deepEqual(differences(css(), json()), []);
 });
 
+test('a recorded token redeclared outside its recorded rule is reported, whatever its value', () => {
+  // Codex review on PR #32: --soft-pct is a percentage, so a value-shape check missed it.
+  const planted = css() + '\n:root { --soft-pct: 0%; }\n';
+  assert.ok(differences(planted, json()).some((d) => d.includes('--soft-pct')), 'out-of-place percentage override');
+});
+
 test('the comparison fails on a copy with a planted stray color', () => {
   const planted = css().replace('--heat: #F04E12;', '--heat: #F04E12;\n  --stray: #FF00FF;');
   assert.notEqual(planted, css(), 'plant site not found in tokens.css');
