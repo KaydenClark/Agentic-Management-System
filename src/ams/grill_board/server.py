@@ -19,7 +19,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlencode, urlsplit
 
-from .answers import VERDICTS, AnswerRefused, render_hashes
+from .answers import VERDICTS, AnswerRefused, AnswerWrittenIndexStale, render_hashes
 from .answers import answer as write_answer
 from .cards import PRIORITIES, VALUES, CardSourceError, committed_cards, load_cards
 
@@ -319,11 +319,14 @@ def make_server(cards_dir, port=DEFAULT_PORT):
             if not self.same_origin():
                 self.reply(403, "text/plain", b"Refused: answers are accepted only from this board's own page.\n")
                 return
-            length = int(self.headers.get("Content-Length") or 0)
-            if length > MAX_POST or self.headers.get("Content-Type", "").split(";")[0] != "application/x-www-form-urlencoded":
+            try:
+                length = int(self.headers.get("Content-Length") or 0)
+                if not 0 < length <= MAX_POST or self.headers.get("Content-Type", "").split(";")[0] != "application/x-www-form-urlencoded":
+                    raise ValueError
+                form = {key: values[0] for key, values in parse_qs(self.rfile.read(length).decode("utf-8")).items()}
+            except (ValueError, UnicodeDecodeError):
                 self.reply(400, "text/plain", b"Refused: send the board's answer form.\n")
                 return
-            form = {key: values[0] for key, values in parse_qs(self.rfile.read(length).decode("utf-8")).items()}
             topic = form.get("topic", "")
             status, notice = 200, None
             try:
@@ -341,6 +344,8 @@ def make_server(cards_dir, port=DEFAULT_PORT):
                 notice = ("written", f"Written and committed {sha[:7]}: {verdict} on {card.file}, recorded in {where}.")
             except (AnswerRefused, CardSourceError) as error:
                 status, notice = 409, ("refused", str(error))
+            except AnswerWrittenIndexStale as error:
+                notice = ("written", f"Written: {error}")
             query = urlencode({"topic": topic, "card": form.get("card", "")})
             try:
                 page = render_page(cards_dir, query, notice)

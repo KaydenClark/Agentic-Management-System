@@ -381,3 +381,80 @@ def test_answers_wait_for_the_repository_lock_and_then_see_the_change(board, rep
     worker.join(timeout=10)
     assert result["status"] == 409 and "changed since" in result["body"]
     assert snapshot(repo) == before
+
+
+def test_two_boards_confirming_cards_for_one_record_never_lose_an_answer(board, repo):
+    """Codex P1 on PR #38: two instances, two cards, one record: one wins, one refuses."""
+    second = repo / "grill-board" / "cards" / "two-card.md"
+    second.write_text(CARD.replace("Fixture: should the board", "Fixture: second, should the board").replace(
+        "Keep one Markdown file per card.", "Keep the second answer too."))
+    git(repo, "add", "-A")
+    git(repo, "commit", "-qm", "second card for the same record")
+    first_board, second_board = board(), board()
+    forms = [read_form(first_board)[0], read_form(second_board, "two-card.md")[0]]
+    results = []
+    workers = [
+        threading.Thread(target=lambda s=s, f=f: results.append(post(s, {**f, "verdict": "confirm"})))
+        for s, f in zip((first_board, second_board), forms)
+    ]
+    for worker in workers:
+        worker.start()
+    for worker in workers:
+        worker.join(timeout=15)
+    assert sorted(status for status, _ in results) == [200, 409]
+    record = (repo / "records" / "decision.md").read_text()
+    assert record.count("Confirmed:") == 1
+    answered = [c for c in ("one-card.md", "two-card.md") if "## Answer" in (repo / "grill-board" / "cards" / c).read_text()]
+    assert len(answered) == 1 and f"card `{answered[0]}`" in record
+    assert git(repo, "status", "--porcelain") == ""
+
+
+def test_head_moving_before_the_commit_refuses_and_restores_the_files(board, repo, monkeypatch):
+    from ams.grill_board import answers
+
+    server = board()
+    fields, _ = read_form(server)
+    original, moved = answers._replace, []
+
+    def replace_then_someone_commits(path, data):
+        if not moved:
+            moved.append(True)
+            (repo / "elsewhere.md").write_text("another writer\n")
+            git(repo, "add", "elsewhere.md")
+            git(repo, "commit", "-qm", "another writer commits mid-answer")
+        original(path, data)
+
+    monkeypatch.setattr(answers, "_replace", replace_then_someone_commits)
+    status, body = post(server, {**fields, "verdict": "confirm"})
+    assert status == 409 and "HEAD moved" in body
+    assert (repo / "records" / "decision.md").read_text() == RECORD
+    assert (repo / "grill-board" / "cards" / "one-card.md").read_text() == CARD
+    assert git(repo, "log", "-1", "--format=%s").strip() == "another writer commits mid-answer"
+    assert git(repo, "status", "--porcelain") == ""
+
+
+def test_a_record_that_is_not_utf8_text_is_refused(board, repo):
+    (repo / "records" / "decision.md").write_bytes(RECORD.encode() + b"\xff\xfe\n")
+    git(repo, "commit", "-qam", "binary tail")
+    server = board()
+    fields, _ = read_form(server)
+    before = snapshot(repo)
+    status, body = post(server, {**fields, "verdict": "confirm"})
+    assert status == 409 and "UTF-8" in body
+    assert snapshot(repo) == before
+
+
+@pytest.mark.parametrize("length", ["abc", "-5", str(10**6)])
+def test_malformed_posts_are_refused_without_a_write(board, repo, length):
+    import http.client
+
+    server = board()
+    before = snapshot(repo)
+    host, port = server.server_address[:2]
+    connection = http.client.HTTPConnection(host, port, timeout=5)
+    connection.putrequest("POST", "/answer")
+    for key, value in (("Origin", origin(server)), ("Content-Type", "application/x-www-form-urlencoded"), ("Content-Length", length)):
+        connection.putheader(key, value)
+    connection.endheaders()
+    assert connection.getresponse().status == 400
+    assert snapshot(repo) == before
