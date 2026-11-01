@@ -81,7 +81,7 @@ continuation record, not evidence of a completed improvement or a paid campaign.
 - Each improvement candidate has three attempts maximum; baseline is outside the counter.
 - Confirmed: each candidate has a bounded r1 scope plus affected regressions; whole-AMS fitness is separate. A candidate pass never confers a system pass.
 - Confirmed retention gate: demonstrated useful benefit as well as a qualified Stable/Excellent result. Declare the intended benefit before comparison.
-- First RSI case: this chat’s grilling failure. The owner has already started the skill redesign elsewhere; resume by coordinating with that work.
+- First RSI case: this chat’s grilling failure. The existing redesign merged as skills PR #56 at `878241202bf7ec97c0952287f1633f6f0ddf1a6e`; recover its candidate/evidence before a new comparison. Source: GitHub PR metadata inspected during S-002 Journey, 2026-11-01. Installation in this host remains unverified.
 - Prior chat stopped after saving answers. The owner subsequently resumed S-002 Journey; the later resume entry below governs this run.
 - Use the owner's paid-plan meter, not API tokens or an API campaign budget. Unknown usage measurements stay unknown.
 - Confirmed next action: merge the current website and system work into main, then assess only the resulting pinned main revision. This specific promotion is authorized; future website promotions retain their owner gate.

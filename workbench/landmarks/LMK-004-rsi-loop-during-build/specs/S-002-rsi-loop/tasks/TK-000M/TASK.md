@@ -26,3 +26,9 @@ Local assessment records are preparation and evidence, not S-006 persistence, mo
 - [ ] Immutable local assessment readback retains every attempt, including baseline zero and failures; a fourth candidate attempt or label-only counter reset is refused.
 - [ ] Omitted findings remain open; closure requires an explicit repaired-revision retest of the original and affected regression checks in all three runs; recurrence remains visible.
 - [ ] Known-good, known-bad and do-nothing cases exercise the CLI and the full suite/room checks pass, with actual limitations recorded.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s002-assessment-loop | e3d9881df72aa994a6c0a76b7d582b078e3860e3 | ahead 0 behind 0 | 6 | 34 focused tests passed; full suite 425 passed, 4 skipped with loopback permission. Sandbox attempt: 97 failed, 9 errors from denied local server binds. Room layout/ADR/render/diff checks pass; doctor retains 2 pre-existing nonblocking findings. Synthetic CLI score/record/list readback matched. | RUNBOOK; evals/ASSESSMENTS.md; public synthetic packet; S-002 plan and resumed-context correction | Independent review and PR CI pending. S-006 remains active under orch-b; no Supabase assessment persistence, qualified model runner, controlled trials or measured benefit. Existing grilling redesign is skills PR 56 merge 878241202bf7ec97c0952287f1633f6f0ddf1a6e; live installation unverified. | 12a950d3fa92ac52fa1ceb6421956daf0d2df1936d8b0bc8367695c0adda2682 |
