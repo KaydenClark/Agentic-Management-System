@@ -11,8 +11,9 @@ Two commands:
 ``ams-writer readcheck SHA``
     With the publishable key only: selects the row for SHA, then tries an
     insert, an update and a delete, and selects again. It passes only when the
-    row is visible, every write is refused (a non-2xx status) and the row is
-    unchanged.
+    row is visible, every write gets an authorization denial (401, 403 or a
+    42501 body) and the row is unchanged; a timeout, 5xx or other status is
+    reported ``inconclusive`` and fails the check.
 
 Keys are loaded as in ``ams.keycheck``: the process environment first, then the
 gitignored env file at the repository root. No key value is ever printed,
@@ -40,6 +41,9 @@ TABLE = "build_events"
 PUBLISHABLE_VAR = "SUPABASE_PUBLISHABLE_KEY"
 # Public by design: ADR-003C and the env example name it; the site ships it.
 DEFAULT_PUBLISHABLE_KEY = "sb_publishable_juFt2irDgR8h0Wr3S7I4_A_eSEa06gv"
+# PostgREST answers a denied privilege (42501) with 401 for anon, 403 otherwise.
+DENIED = (401, 403)
+PERMISSION_DENIED = "42501"
 READ_COLUMNS = "id,kind,subject,summary,occurred_at,source_kind,source_ref,source_url,strength,detail"
 
 Http = Callable[[str, str, Mapping[str, str], bytes | None], tuple[int, bytes]]
@@ -169,17 +173,29 @@ def readcheck(sha: str, url: str, key: str, http: Http) -> int:
                 ("delete", "DELETE", target, None)]
     refused_all = True
     for verb, method, endpoint, payload in attempts:
-        status, _ = _call(http, method, endpoint, key, payload)
+        status, body = _call(http, method, endpoint, key, payload)
         shown = status if status is not None else "none"
-        if _ok(status):
+        if _denied(status, body):
+            print(f"{verb}: refused (http status {shown})")
+        elif _ok(status):
             refused_all = False
             print(f"{verb}: ACCEPTED (http status {shown})")
         else:
-            print(f"{verb}: refused (http status {shown})")
+            # A timeout, 5xx or other status does not show permission enforcement.
+            refused_all = False
+            print(f"{verb}: inconclusive (http status {shown})")
     status, after = _call(http, "GET", query, key)
     unchanged = bool(rows) and _ok(status) and after == before
     print(f"row unchanged: {'yes' if unchanged else 'no'}")
     return 0 if rows and refused_all and unchanged else 1
+
+
+def _denied(status, body) -> bool:
+    """True only for an explicit authorization denial, never for a timeout or 5xx."""
+    if status in DENIED:
+        return True
+    code = body.get("code") if isinstance(body, dict) else None
+    return status is not None and 400 <= status < 500 and code == PERMISSION_DENIED
 
 
 def _rest(url: str) -> str:

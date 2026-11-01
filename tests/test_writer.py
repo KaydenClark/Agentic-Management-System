@@ -292,3 +292,39 @@ def test_live_record_and_readcheck(capsys):
     assert writer.main(["readcheck", SHA]) == 0
     out = capsys.readouterr().out
     assert "rows: 1" in out and "row unchanged: yes" in out
+
+
+@pytest.mark.parametrize("outcome", [OSError("timed out"), TimeoutError("read timed out"),
+                                     (500, {"message": "boom"}), (503, None), (404, None),
+                                     (400, {"code": "PGRST100"}), (500, {"code": "42501"})])
+@pytest.mark.parametrize("probe", ["POST", "PATCH", "DELETE"])
+def test_readcheck_fails_when_a_write_probe_is_inconclusive(capsys, probe, outcome):
+    answers = {"GET": (200, [ROW]), "POST": refusing(), "PATCH": refusing(),
+               "DELETE": refusing()}
+    answers[probe] = outcome  # only an authorization denial proves refusal
+    code, out, _ = run(capsys, ["readcheck", SHA], StubHttp(answers))
+    assert code == 1
+    assert "inconclusive" in out
+
+
+def test_readcheck_accepts_403_as_an_authorization_denial(capsys):
+    http = StubHttp({"GET": (200, [ROW]), "POST": refusing(403), "PATCH": refusing(403),
+                     "DELETE": refusing(403)})
+    code, out, _ = run(capsys, ["readcheck", SHA], http)
+    assert code == 0, out
+
+
+def test_readcheck_accepts_a_42501_permission_error_body(capsys):
+    denied = (400, {"code": "42501", "message": "permission denied for table build_events"})
+    http = StubHttp({"GET": (200, [ROW]), "POST": denied, "PATCH": refusing(), "DELETE": refusing()})
+    code, out, _ = run(capsys, ["readcheck", SHA], http)
+    assert code == 0, out
+    assert "insert: refused (http status 400)" in out
+
+
+def test_readcheck_labels_an_unexpected_2xx_as_accepted_and_fails(capsys):
+    http = StubHttp({"GET": (200, [ROW]), "POST": (201, [{"id": 9}]), "PATCH": refusing(),
+                     "DELETE": refusing()})
+    code, out, _ = run(capsys, ["readcheck", SHA], http)
+    assert code == 1
+    assert "insert: ACCEPTED (http status 201)" in out
