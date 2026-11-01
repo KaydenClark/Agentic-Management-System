@@ -16,7 +16,7 @@
 
 Read `AGENTS.md`, `site/PAGE-TEMPLATE.md` on `origin/main`, `GLOSSARY.md`, `LICENSE` and the tour pages on `origin/dev`.
 
-Deliver the rest of the tour: Why, Limits, Glossary (from `GLOSSARY.md`), a short quickstart and About with a resume summary, all in the reading order. Add a replay test that runs the quickstart's commands on a fresh clone and compares the shown output.
+Deliver the rest of the tour: Why, Limits, Glossary (from `GLOSSARY.md`), a short quickstart and About (about the AMS project, no resume summary: owner correction in chat 2026-11-01), all in the reading order. Add a replay test that runs the quickstart's commands on a fresh clone and compares the shown output.
 
 Out of scope: video walkthroughs (open owner choice).
 
