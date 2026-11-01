@@ -63,7 +63,7 @@
 | [002C](002C-reports-say-what-happened.md) | Reports say what happened | accepted | 2026-11-01 | AGENTS.md |
 | [002D](002D-every-finding-has-one-disposition.md) | Every finding has one disposition | accepted | 2026-11-01 | workbench/feedback |
 | [002E](002E-runbook-commands-are-the-commands-graders-call.md) | Runbook commands are the commands graders call | accepted | 2026-11-01 | RUNBOOK.md, evals |
-| [002F](002F-the-rsi-loop-design.md) | The RSI loop design | accepted | 2026-11-01 | evals, supabase |
+| [002F](archive/002F-the-rsi-loop-design.md) | The RSI loop design | superseded | 2026-11-01 | evals, supabase |
 | [002G](002G-measure-the-noise-floor-before-trusting-a-change.md) | Measure the noise floor before trusting a change | accepted | 2026-11-01 | evals |
 | [002H](002H-every-round-runs-two-control-arms.md) | Every round runs two control arms | accepted | 2026-11-01 | evals |
 | [002I](002I-comparisons-use-paired-per-task-statistics.md) | Comparisons use paired per-task statistics | accepted | 2026-11-01 | evals |
@@ -72,7 +72,7 @@
 | [002L](002L-trials-run-in-a-sandbox.md) | Trials run in a sandbox | accepted | 2026-11-01 | evals |
 | [002M](002M-more-than-two-held-out-tasks-before-a-public-number.md) | More than two held-out tasks before a public number | accepted | 2026-11-01 | evals, site |
 | [002N](002N-studied-held-out-tasks-retire-to-the-dev-set.md) | Studied held-out tasks retire to the dev set | accepted | 2026-11-01 | evals |
-| [002O](002O-one-standing-campaign-approval.md) | One standing campaign approval | accepted | 2026-11-01 | evals, grill-board |
+| [002O](archive/002O-one-standing-campaign-approval.md) | One standing campaign approval | superseded | 2026-11-01 | evals, grill-board |
 | [002P](002P-no-session-holds-untrusted-input-secrets-and-outward-actions-together.md) | No session holds untrusted input, secrets and outward actions together | accepted | 2026-11-01 | AGENTS.md |
 | [002Q](002Q-the-workbench-folder-stays-visible.md) | The workbench folder stays visible | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [002R](002R-each-rsi-run-pins-the-skills-commit.md) | Each RSI run pins the skills commit | accepted | 2026-11-01 | evals, .agents/skills |
@@ -82,11 +82,14 @@
 | [002V](002V-artifacts-have-character-limits.md) | Artifacts have character limits | accepted | 2026-11-01 | workbench/artifact-budgets.json |
 | [002W](002W-three-strikes-then-stop.md) | Three strikes, then stop | accepted | 2026-11-01 | AGENTS.md |
 | [002X](002X-next-js-front-end-python-backends-node-only-as-tooling.md) | Next.js front end, Python backends, Node only as tooling | accepted | 2026-11-01 | ARCHITECTURE.md, site, pyproject.toml |
-| [002Y](002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md) | Supabase holds the RSI data and a Python writer keeps it current | accepted | 2026-11-01 | supabase |
+| [002Y](archive/002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md) | Supabase holds the RSI data and a Python writer keeps it current | superseded | 2026-11-01 | supabase |
 | [002Z](002Z-three-orchestrators-split-the-work-by-risk.md) | Three orchestrators split the work by risk | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [003A](003A-implementors-run-on-opus-or-sonnet.md) | Implementors run on Opus or Sonnet | accepted | 2026-11-01 | AGENTS.md |
 | [003B](003B-the-dev-site-is-visible-only-to-the-owner-claude-and-codex.md) | The dev site is visible only to the owner, Claude and Codex | accepted | 2026-11-01 | site |
 | [003C](003C-the-supabase-project-and-its-read-only-baseline.md) | The Supabase project and its read-only baseline | accepted | 2026-11-01 | supabase |
 | [003D](003D-python-3-14-5-pinned-with-uv.md) | Python 3.14.5 pinned with uv | accepted | 2026-11-01 | .python-version, pyproject.toml |
 | [003E](003E-the-adr-and-ddr-collections-are-the-cdr-s-two-kinds.md) | The adr and ddr collections are the CDR's two kinds | accepted | 2026-11-01 | ARCHITECTURE.md, workbench/manifest.json |
+| [003F](003F-one-standing-campaign-approval-and-no-per-merge-gate.md) | One standing campaign approval and no per-merge gate | accepted | 2026-11-01 | evals, grill-board |
+| [003G](003G-the-rsi-loop-design-with-one-owner-gate.md) | The RSI loop design with one owner gate | accepted | 2026-11-01 | evals, supabase |
+| [003H](003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md) | Supabase holds the RSI data and the service key stays local | accepted | 2026-11-01 | supabase |
 | [003I](003I-only-main-dev-and-site-branches-deploy-to-vercel.md) | Only main, dev and site branches deploy to Vercel | accepted | 2026-11-01 | site/vercel.json |

@@ -5,8 +5,11 @@ The page follows the "Grilling Board Redesign" artifact (DDR-000Y): topics
 on the left, the queue in the middle, the open card on the right. Styles,
 fonts and the theme script are served from `static/`; nothing loads from
 another host. The verdict buttons POST to /answer, which writes the answer
-into the card's owning record and commits it (answers.py, TK-002); rating
-and the too-taxing flag stay disabled until TK-003 wires them.
+into the card's owning record and commits it (answers.py, TK-002). The
+stars POST to /rate and "Too taxing" to /flag; each appends its record to
+the card and commits it the same way (DDR-000J, TK-003). A flagged card
+leaves the queue, held for rewrite; answered and flagged cards can still be
+opened by link, and rated or flagged.
 
 POSTs are accepted only from this page: the Host must be this server and
 the Origin (or, without one, the Referer) must be its own origin.
@@ -21,6 +24,8 @@ from urllib.parse import parse_qs, urlencode, urlsplit
 
 from .answers import VERDICTS, AnswerRefused, AnswerWrittenIndexStale, render_hashes
 from .answers import answer as write_answer
+from .answers import flag as write_flag
+from .answers import rate as write_rate
 from .cards import PRIORITIES, VALUES, CardSourceError, committed_cards, load_cards
 
 HOST = "127.0.0.1"
@@ -80,7 +85,7 @@ def render_rail(groups, topic):
     items = []
     for name, cards in groups:
         current = ' aria-current="page"' if name == topic else ""
-        waiting = len(cards) > answered(cards)
+        waiting = any(card.waiting for card in cards)
         dot = '<span class="dot tone h-owner" title="Has cards waiting on you"></span>' if waiting else ""
         items.append(f"""<a class="topic" href="{link(name)}"{current}>
 <span class="topic-line"><span class="topic-label">{escape(name)}</span><span class="count">{answered(cards)}/{len(cards)}</span></span>
@@ -116,7 +121,7 @@ def render_row(card, topic, selected):
 
 
 def render_queue(topic, all_cards, selected):
-    cards = [card for card in all_cards if card.answer is None]
+    cards = [card for card in all_cards if card.waiting]
     count = len(cards)
     rows = "\n".join(render_row(card, topic, selected) for card in cards)
     if not rows:
@@ -169,9 +174,37 @@ def render_verdicts(cards_dir, topic, card):
 </form>"""
 
 
+def render_rating(topic, card):
+    """One click each: a star POSTs its rating to /rate, "Too taxing" POSTs to
+    /flag. The optional comment travels with either click."""
+    hidden = "".join(
+        f'<input type="hidden" name="{name}" value="{escape(value, quote=True)}">'
+        for name, value in (("card", card.file), ("topic", topic), ("card_sha", card.sha))
+    )
+    stars = "".join(
+        f'<button type="submit" name="rating" value="{n}" class="star{" on" if card.rating and n <= int(card.rating) else ""}" '
+        f'aria-pressed="{"true" if str(n) == card.rating else "false"}" aria-label="Rate {n} of 5">&#9733;</button>'
+        for n in range(1, 6)
+    )
+    if card.flag is not None:
+        taxing = '<span class="taxing is-flagged tone h-returned">Flagged too taxing</span>'
+    else:
+        taxing = '<button type="submit" formaction="/flag" class="taxing">Too taxing</button>'
+    saved = f'<span class="small">Rated {escape(card.rating)} of 5</span>' if card.rating else ""
+    return f"""<form class="rating" method="post" action="/rate">
+{hidden}
+<span class="ask">Was this a good question?</span>
+<span class="stars" role="group" aria-label="Rate this question, one to five">{stars}</span>{saved}
+{taxing}
+<label class="sr-only" for="comment">Comment on the question</label>
+<input id="comment" class="comment" type="text" name="comment" maxlength="1000" placeholder="Optional comment on the question">
+</form>"""
+
+
 def render_open(cards_dir, topic, cards, card):
-    index = cards.index(card)
-    before, after = cards[index - 1], cards[(index + 1) % len(cards)]
+    if card in cards:
+        index = cards.index(card)
+        before, after = cards[index - 1], cards[(index + 1) % len(cards)]
     extras = ""
     if card.context:
         extras += f'<div class="block"><div class="eyebrow">Context</div><p class="context">{escape(card.context)}</p></div>\n'
@@ -181,11 +214,25 @@ def render_open(cards_dir, topic, cards, card):
     if card.fields.get("Recommendation"):
         extras += f"""<div class="box tone h-agent"><div class="box-head"><span class="dot rest"></span>Agent recommendation</div>
 <p>{escape(card.fields["Recommendation"])}</p></div>\n"""
-    stars = "".join(f'<button type="button" class="star" disabled aria-label="{n} of 5">&#9733;</button>' for n in range(1, 6))
+    if card.flag is not None:
+        state = '<span class="pill tone h-returned"><span class="dot"></span>Too taxing: held for rewrite</span>'
+        verdict = '<p class="verdict-note">Flagged too taxing. An agent rewrites the question and posts it as a new card before it is asked again.</p>'
+    elif card.answer is not None:
+        state = f'<span class="pill tone h-none"><span class="dot rest"></span>Answered: {escape(card.answer.get("Verdict", ""))}</span>'
+        verdict = f'<p class="verdict-note">Answered {escape(card.answer.get("Answered", ""))}. You can still rate it or flag it too taxing.</p>'
+    else:
+        state = '<span class="pill tone h-owner"><span class="dot"></span>To answer</span>'
+        verdict = render_verdicts(cards_dir, topic, card)
+    if card in cards:
+        index = cards.index(card)
+        place = f"{index + 1} of {len(cards)} in this topic"
+    else:
+        before = after = cards[0] if cards else card
+        place = f"Not in the queue; {len(cards)} waiting in this topic"
     return f"""<main class="open" aria-label="Open card">
 <article>
 <div class="open-meta">
-<span class="pill tone h-owner"><span class="dot"></span>To answer</span>
+{state}
 <span class="open-id">{escape(card.file)}</span>
 <span class="open-id">{escape(topic)}</span>
 </div>
@@ -196,15 +243,10 @@ def render_open(cards_dir, topic, cards, card):
 </div>
 {extras}<section class="verdict-area" aria-label="Your verdict">
 <div class="eyebrow">Your verdict</div>
-{render_verdicts(cards_dir, topic, card)}
-<p class="inert-note">Not wired yet: rating and the flag arrive with S-004 TK-003 and save nothing.</p>
-<div class="rating">
-<span class="ask">Was this a good question?</span>
-<span class="stars" role="group" aria-label="Rate this question, one to five">{stars}</span>
-<button type="button" class="taxing" disabled>Too taxing</button>
-</div>
+{verdict}
+{render_rating(topic, card)}
 <div class="pager">
-<span>{index + 1} of {len(cards)} in this topic</span>
+<span>{place}</span>
 <span class="buttons"><a class="ghost" href="{link(topic, before)}">Previous</a><a class="inkbtn" href="{link(topic, after)}">Next question</a></span>
 </div>
 </section>
@@ -244,12 +286,14 @@ def render_page(cards_dir, query="", notice=None):
     params = parse_qs(query)
     groups = group_by_topic(cards)
     names = [name for name, _ in groups]
-    waiting = [name for name, group in groups if any(card.answer is None for card in group)]
+    waiting = [name for name, group in groups if any(card.waiting for card in group)]
     wanted = params.get("topic", [None])[0]
     topic = wanted if wanted in names else (waiting or names or [DEFAULT_TOPIC])[0]
-    shown = [card for card in dict(groups).get(topic, []) if card.answer is None]
+    in_topic = dict(groups).get(topic, [])
+    shown = [card for card in in_topic if card.waiting]
     wanted_card = params.get("card", [None])[0]
-    selected = next((card for card in shown if card.file == wanted_card), shown[0] if shown else None)
+    # A link may open an answered or flagged card, so it can still be rated or flagged.
+    selected = next((card for card in in_topic if card.file == wanted_card), shown[0] if shown else None)
     open_card = render_open(cards_dir, topic, shown, selected) if selected else ""
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
@@ -313,11 +357,12 @@ def make_server(cards_dir, port=DEFAULT_PORT):
             return (self.headers.get("Referer") or "").startswith(f"http://{own}/")
 
         def do_POST(self):
-            if urlsplit(self.path).path != "/answer":
+            action = urlsplit(self.path).path
+            if action not in ("/answer", "/rate", "/flag"):
                 self.send_error(404)
                 return
             if not self.same_origin():
-                self.reply(403, "text/plain", b"Refused: answers are accepted only from this board's own page.\n")
+                self.reply(403, "text/plain", b"Refused: answers, ratings and flags are accepted only from this board's own page.\n")
                 return
             try:
                 length = int(self.headers.get("Content-Length") or 0)
@@ -325,7 +370,7 @@ def make_server(cards_dir, port=DEFAULT_PORT):
                     raise ValueError
                 form = {key: values[0] for key, values in parse_qs(self.rfile.read(length).decode("utf-8")).items()}
             except (ValueError, UnicodeDecodeError):
-                self.reply(400, "text/plain", b"Refused: send the board's answer form.\n")
+                self.reply(400, "text/plain", b"Refused: send one of the board's own forms.\n")
                 return
             topic = form.get("topic", "")
             status, notice = 200, None
@@ -335,13 +380,23 @@ def make_server(cards_dir, port=DEFAULT_PORT):
                     card = next((c for c in cards if c.file == form.get("card")), None)
                     if card is None:
                         raise AnswerRefused(f"no committed card named {form.get('card')!r}")
-                    sha = write_answer(
-                        cards_dir, card, form.get("verdict", ""), form.get("note", ""),
-                        form.get("card_sha", ""), form.get("record_sha", ""),
-                    )
-                verdict = VERDICTS[form["verdict"]]
-                where = card.fields["Owner record"] if form["verdict"] == "confirm" else "the card as a return"
-                notice = ("written", f"Written and committed {sha[:7]}: {verdict} on {card.file}, recorded in {where}.")
+                    if action == "/rate":
+                        sha = write_rate(cards_dir, card, form.get("rating", ""), form.get("comment", ""), form.get("card_sha", ""))
+                    elif action == "/flag":
+                        sha = write_flag(cards_dir, card, form.get("comment", ""), form.get("card_sha", ""))
+                    else:
+                        sha = write_answer(
+                            cards_dir, card, form.get("verdict", ""), form.get("note", ""),
+                            form.get("card_sha", ""), form.get("record_sha", ""),
+                        )
+                if action == "/rate":
+                    done = f"rated {form['rating']} of 5 on {card.file}"
+                elif action == "/flag":
+                    done = f"{card.file} flagged too taxing and held for rewrite"
+                else:
+                    where = card.fields["Owner record"] if form["verdict"] == "confirm" else "the card as a return"
+                    done = f"{VERDICTS[form['verdict']]} on {card.file}, recorded in {where}"
+                notice = ("written", f"Written and committed {sha[:7]}: {done}.")
             except (AnswerRefused, CardSourceError) as error:
                 status, notice = 409, ("refused", str(error))
             except AnswerWrittenIndexStale as error:
