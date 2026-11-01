@@ -7,14 +7,17 @@ source), and a ``strength`` from the closed list ``STRENGTHS``. Every writer
 (``ams-writer``, ``ams-history``, ``ams-rsi``) applies ``check_source`` before
 sending, and the migrations enforce the same lists as the ``ams_strength`` and
 ``ams_source_kind`` domains. ``recorded_fact`` is a row taken directly from a
-Git, GitHub or record file; the four trial labels grade RSI evidence.
+Git, GitHub or record file and is allowed on ``build_events`` only; RSI rows take
+one of the four trial labels (``TRIAL_STRENGTHS``), and the database's
+``*_trial_strength`` constraints refuse ``recorded_fact`` there too.
 
 ``is_test`` marks test and synthetic rows; the site's read policy on each table
 returns only ``not is_test``.
 
 Command ``ams-sources livecheck`` (service key, then publishable key) inserts
 one marked test row per table, proves the writer and the database each refuse a
-row with no source, a blank source_ref and an unlisted strength, proves the
+row with no source, a blank source_ref and an unlisted strength (and, on the
+RSI tables, ``recorded_fact``), proves the
 site key sees none of the test rows, then deletes every probe row and confirms
 none remain. It never writes a non-test row. No key value or HTTP body is
 printed.
@@ -38,12 +41,16 @@ REPO_ROOT = keycheck.REPO_ROOT
 STRENGTHS = ("recorded_fact", "anecdote", "single_trial", "repeated_trials",
              "held_out_with_interval")
 SOURCE_KINDS = ("commit", "pr", "path", "jot")
+TRIAL_STRENGTHS = STRENGTHS[1:]
 TABLES = ("build_events", "rsi_runs", "rsi_results")
+RECORDED_FACT_TABLES = ("build_events",)
 REFUSED_CODES = ("23502", "23514")  # not-null and check violations
 
 
-def check_source(row: Mapping) -> None:
-    """Raise ValueError unless the row names a source and a listed strength."""
+def check_source(row: Mapping, *, table: str) -> None:
+    """Raise ValueError unless the row names a source and a strength listed for its table."""
+    if table not in TABLES:
+        raise ValueError(f"refused: table must be one of {', '.join(TABLES)}")
     if row.get("source_kind") not in SOURCE_KINDS:
         raise ValueError(f"refused: source_kind must be one of {', '.join(SOURCE_KINDS)}")
     ref = row.get("source_ref")
@@ -54,6 +61,9 @@ def check_source(row: Mapping) -> None:
         raise ValueError("refused: source_url must be an https link")
     if row.get("strength") not in STRENGTHS:
         raise ValueError(f"refused: strength must be one of {', '.join(STRENGTHS)}")
+    if row["strength"] == "recorded_fact" and table not in RECORDED_FACT_TABLES:
+        raise ValueError(f"refused: strength recorded_fact is for build history only; "
+                         f"{table} takes one of {', '.join(TRIAL_STRENGTHS)}")
 
 
 # --- livecheck ----------------------------------------------------------------
@@ -61,6 +71,7 @@ def check_source(row: Mapping) -> None:
 BAD_CASES = (("no source", {"source_kind": None, "source_ref": None}),
              ("blank source_ref", {"source_ref": " "}),
              ("strength vibes", {"strength": "vibes"}))
+RSI_BAD_CASES = (("strength recorded_fact", {"strength": "recorded_fact"}),)
 
 
 def _now():
@@ -109,7 +120,8 @@ def livecheck(settings: keycheck.Settings, publishable: str, http, head: str) ->
                    "rsi_runs": lambda row: service.insert(rsi_rows.RUN_TABLE, row),
                    "rsi_results": lambda row: service.insert(rsi_rows.RESULT_TABLE, row)}
         for table in TABLES:
-            for n, (case, changes) in enumerate(BAD_CASES, start=1):
+            cases = BAD_CASES + (() if table in RECORDED_FACT_TABLES else RSI_BAD_CASES)
+            for n, (case, changes) in enumerate(cases, start=1):
                 row = {**good(table, n), **changes}
                 try:
                     writers[table](row)

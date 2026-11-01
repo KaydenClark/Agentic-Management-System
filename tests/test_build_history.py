@@ -557,6 +557,21 @@ def test_readcheck_fails_when_a_record_has_no_row(rows, capsys):
     assert "missing: 1" in capsys.readouterr().out
 
 
+def test_readcheck_fails_on_a_hand_typed_row_no_record_derives(rows, capsys):
+    # The criterion's must-fail case: a well-formed row (commit kind, a made-up
+    # SHA, recorded_fact, an https link) that no record produces.
+    fake_sha = "".join(_rng.choice("0123456789abcdef") for _ in range(40))
+    planted = {"kind": "commit", "subject": "Hand-typed commit", "summary": "never happened",
+               "occurred_at": rows[-1]["occurred_at"], "source_kind": "commit",
+               "source_ref": fake_sha, "source_url": bh._commit_url(fake_sha),
+               "strength": bh.STRENGTH, "detail": {}}
+    store = StubSupabase([*rows, planted])
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store) == 1
+    out = capsys.readouterr().out
+    assert "missing: 0" in out and "extra: 1" in out
+    assert f"extra: commit commit {fake_sha}" in out
+
+
 def test_readcheck_refuses_a_secret_key(rows, capsys):
     store = StubSupabase(rows)
     assert bh.readcheck(rows, URL, FAKE_SECRET, store) == 1
