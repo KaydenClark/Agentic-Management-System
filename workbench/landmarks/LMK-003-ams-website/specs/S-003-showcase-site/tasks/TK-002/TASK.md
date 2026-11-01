@@ -3,7 +3,7 @@
 **Task ID:** TK-002
 **Spec ID:** S-003
 **Slice:** Start here and How it works pages, with plain-language openers and forward and back reading order
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Pages exist; Reading order
 **Planned verification:** inventory and link tests on the built output
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `dev`. Read this Task and the parent Spec (`../../SPEC.md`) from `origin/main`; branch from `origin/dev`, open a PR into `dev` and merge it once current and checked. Never merge `dev` -> `main`; only the owner does. Orchestrator A's lane: no Supabase service key, no web browsing; check the protected `dev` deployment through the Vercel connector ([ADR-003B](../../../../../../docs/adr/003B-the-dev-site-is-visible-only-to-the-owner-claude-and-codex.md)). Document site commands in `site/README.md`.
+**Claimed by:** orchestrator-A-dispatcher-S003
+**Current claimant:** orchestrator-A-dispatcher-S003
 
 Read `AGENTS.md`, `site/PAGE-TEMPLATE.md` on `origin/main`, `GLOSSARY.md`, and the shell on `origin/dev`.
 
