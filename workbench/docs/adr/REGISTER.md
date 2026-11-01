@@ -47,3 +47,4 @@
 | [001M](001M-a-claim-is-a-pushed-branch-and-a-draft-pr.md) | A claim is a pushed branch and a draft PR | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [001N](001N-the-wiki-is-a-small-linked-synthesis.md) | The Wiki is a small linked synthesis | accepted | 2026-11-01 | workbench/wiki |
 | [001O](001O-links-and-grep-before-any-vector-index.md) | Links and grep before any vector index | accepted | 2026-11-01 | ARCHITECTURE.md |
+| [001P](001P-continuity-is-proven-by-a-fresh-recipient-trial.md) | Continuity is proven by a fresh-recipient trial | accepted | 2026-11-01 | AGENTS.md, evals |
