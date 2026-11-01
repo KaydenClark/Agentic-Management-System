@@ -17,7 +17,7 @@
 
 ### RSI during website work
 
-Log friction in a [feedback report](workbench/feedback/REPORT_FORMAT.md); test a hypothesis with an [improvement record](workbench/research/IMPROVEMENT-TEMPLATE.md) and `evals/`; explain results with the [page template](site/PAGE-TEMPLATE.md).
+Capture friction in a [feedback report](workbench/feedback/REPORT_FORMAT.md); test a bounded hypothesis with an [improvement record](workbench/research/IMPROVEMENT-TEMPLATE.md), eval task, result and comparison templates in [evals](evals/). Explain verified behavior with the [page template](site/PAGE-TEMPLATE.md).
 
 ## Preserve knowledge as it happens
 
@@ -25,16 +25,7 @@ Use existing topic owners; grow flat Wiki notes via [MEMORY](workbench/wiki/MEMO
 
 ## Test And Build
 
-Python 3.14.5 via uv ([ADR-003D](workbench/docs/adr/003D-python-3-14-5-pinned-with-uv.md)):
-
-```bash
-uv run pytest            # AMS_LIVE=1 adds the live test
-uv run ams-keycheck      # service key authenticates
-uv run ams-writer record-merge SHA  # PR merge -> build_events
-uv run ams-writer readcheck SHA     # site key reads; writes refused
-```
-
-Keys load from the environment, else the gitignored root env file; none is printed. Only orchestrator B's lane holds the service key (`--directory <main checkout>`). Migration files carry their applied version. Room checks:
+From the root: `uv run pytest` tests (`AMS_LIVE=1` adds a live test); `uv run ams-board` serves the Grill Board (committed `grill-board/cards/`) on 127.0.0.1 only. Supabase, from orchestrator B's main checkout (it has the key; none is printed): `uv run ams-keycheck` checks the service key; `uv run ams-writer record-merge|readcheck SHA` writes a merge to `build_events` and proves the site key reads it, never writes (`src/ams/writer.py`). Room checks:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render
@@ -44,11 +35,11 @@ node workbench/tools/workbench-layout.mjs validate --project "$PWD"
 git diff --check
 ```
 
-`render` must leave no diff; `doctor` no blocking finding. Fresh-clone check: rerun these at the recorded commit.
+`render` must leave no diff; `doctor` no blocking finding. On a fresh clone at the recorded commit, rerun them and `uv run pytest`.
 
 ## Version control and publication
 
-Non-site work: branch, commit each step, push, PR into `main`, merge commit once current and checked, confirm `main` has it, delete the branch. Site work: feature -> `dev` (agents) -> `main` (owner only); S-013 measures the gap. Report local, pushed, merged and deployed states separately.
+Non-site work: branch, commit each step, push, PR into `main`, merge-commit once current and checked; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev`, only the owner merges `dev` -> `main`. S-013 measures the `dev` lead. Report local, pushed, merged and deployed states separately.
 
 ## Recovery
 

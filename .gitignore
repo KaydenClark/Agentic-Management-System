@@ -17,3 +17,6 @@ workbench/sessions/*
 .env
 .env.*
 !.env.example
+
+# Python build and test byproducts
+__pycache__/
