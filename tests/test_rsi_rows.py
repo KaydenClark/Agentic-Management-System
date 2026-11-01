@@ -72,6 +72,8 @@ class FakePostgrest:
         if method == "POST":
             required = RUN_REQUIRED if table == "rsi_runs" else RESULT_REQUIRED
             for col in required:
+                if table == "rsi_results" and col in rsi_rows.METRICS:
+                    continue  # Nullable measurements; writer and live DB checks cover availability.
                 if self.enforce_not_null and payload.get(col) is None:
                     message = f'null value in column "{col}" of relation "{table}" violates not-null constraint'
                     return 400, json.dumps({"code": "23502", "message": message}).encode()
@@ -350,6 +352,8 @@ def test_livecheck_passes_and_leaves_nothing_behind(capsys):
                  "stale update: refused by the writer",
                  "stale update: refused by the database",
                  "row unchanged: yes",
+                 "unknown metrics roundtrip: yes",
+                 "known zero roundtrip: yes",
                  "site key sees test rows: 0 of 1 runs, 0 of 1 results",
                  "cleanup: deleted 1 results, 1 runs; remaining 0"):
         assert line in out

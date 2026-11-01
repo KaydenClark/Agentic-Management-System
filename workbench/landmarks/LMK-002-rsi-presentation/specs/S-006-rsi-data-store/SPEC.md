@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000L closed with proof.
-**Next gate:** Fresh independent assembled Review; reconcile S-002 storage compatibility before Spec completion.
+**Latest event:** TK-000P closed with proof.
+**Next gate:** Distinct private assessment persistence for S-002, then fresh independent assembled Review.
 
 ## Intent and authority
 
@@ -28,12 +28,14 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 ## Current Verified State
 
 - Verified candidate: `5aa2621ec03a1d419615374ec31e4c3db12069b6`, dev `c0f6c67687f432cd75b55e7d4fdad460ea2f77db`; 943 history rows, missing/extra/content mismatches/unsourced all 0. [TK-000L](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01) owns live proof and limits. No real trial or assessment storage completion claimed.
+- TK-000P adds explicit unknown metrics with reasons/sources and preserves known zero; remote migration `20261101192328` and live tagged roundtrip pass. See [trial consumer contract](../../../../../evals/TRIAL-ROWS.md). Distinct assessment persistence remains open.
 
 ## Desired Behavior
 
 - Tables for RSI results, build history and run metadata. Each result names task, held-out or dev, arm (AMS, no-AMS or plain instructions), system version (runtime, controls and skills commits), provider, model, effort, pass, cost, tokens, completed state and source.
 - Each table has a site SELECT policy and no client write path.
 - A local writer with the service key inserts rows and refuses a write conflicting with a newer row.
+- Trial metrics preserve known values versus explicit unknowns with reasons/sources; unknown is never zero ([S-002 contract](../../../LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md), [consumer rules](../../../../../evals/TRIAL-ROWS.md)).
 - Seed rows come only from real sources (site build, later improvements, the skills repository's fixes), each labelled anecdote, single trial, repeated trials or held-out with interval; `recorded_fact` is for build history only.
 - Test and synthetic rows are marked; the site never shows them.
 - **Build history.** Rows for this build's Spec, Task, PR and commit events from real records, returns and corrections included, showing how the AMS built itself.
@@ -117,6 +119,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | review | Review verdict: pass at d6d4a6d65cc6287b667fe78ee5db937440972a5e [213a7241e512] #2 | none | C, repo half | none |
 | 2026-11-01 | TK-000L | B review FAIL d6d4a6d: N1-N6, legacy key | live half | Spec | TK-000L |
 | 2026-11-01 | TK-000L | Task closed | 5aa2621/dev c0f6c67: history 943 rows; missing/extra/mismatch/unsourced 0; live summary edit detected/restored; key/writer/RSI/source checks pass; pytest 433 passed,4 skipped; layout valid; doctor no blocking finding | S-006 SPEC and TK-000L pinned live verification | Fresh independent assembled Review; S-002 assessment persistence and unknown metrics compatibility; close attribution: {"agent":"codex-local-writer","claimant":"orch-b","onBehalfOf":"orch-b"} |
+| 2026-11-01 | TK-000P | Task closed | 475 passed,4 skipped; focused99/1; migration20261101192328; live null and zero roundtrip; DB bad availability23514; client writes401/test hiding; cleanup0; advisors empty | TRIAL-ROWS; template; rsi_rows; S-006 SPEC/TK-000P | Fresh assembled Review; private assessment storage; real qualified S-002 trials; close attribution: {"agent":"codex-local-writer","claimant":"codex-local-writer","onBehalfOf":null} |
 
 ## Review and Human QA
 

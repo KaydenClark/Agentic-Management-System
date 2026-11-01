@@ -5,7 +5,12 @@ at one pinned system version; ``rsi_results`` holds one trial of one task in a
 run. Every row names provider, model, effort, arm, the runtime, controls and
 skills commits, the grader version, its source and strength, and ``is_test``.
 Results add task, split, trial, grade, cost, tokens, turns, wall time and
-execution state. The site's publishable key reads only rows with
+execution state. Each metric field is required: a known nonnegative finite value,
+or explicit ``None`` with ``metric_unknowns[metric] = {"reason": ..., "source": ...}``.
+Counts must be integral and values fit the database range. Availability strings
+on non-test rows must be public-safe. Readback retains null; consumers must not
+coalesce missing measurements to zero (see ``evals/TRIAL-ROWS.md``).
+The site's publishable key reads only rows with
 ``is_test = false``.
 
 Python API, for the S-002 runner::
@@ -33,6 +38,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
 import subprocess
@@ -57,6 +63,10 @@ EXECUTION_STATES = ("completed", "runner_error", "auth_error", "timeout", "cappe
 STRENGTHS = source_rules.STRENGTHS
 SOURCE_KINDS = source_rules.SOURCE_KINDS
 BOOKKEEPING = ("id", "version", "recorded_at", "updated_at")
+METRICS = ("cost_usd", "input_tokens", "output_tokens", "turns", "wall_seconds")
+COUNT_METRICS = ("input_tokens", "output_tokens", "turns")
+METRIC_LIMITS = {"cost_usd": 999999.999999, "wall_seconds": 999999999.999,
+                 "input_tokens": 2**63 - 1, "output_tokens": 2**63 - 1, "turns": 2**31 - 1}
 STALE = "PT409"
 CLIENT_PROBE_SUFFIX = "-client"
 _COMMIT = re.compile(r"^[0-9a-f]{40}$")
@@ -101,6 +111,35 @@ def _count(row, column, minimum=0):
         raise Refused(f"refused: {column} must be a number >= {minimum}")
 
 
+def _metrics(row):
+    # Presence is required even when a measurement was unavailable. Null never
+    # silently means zero; each unavailable datum keeps its reason and source.
+    for column in METRICS:
+        if column not in row:
+            raise Refused(f"refused: {column} missing")
+    unknowns = row.get("metric_unknowns", {})
+    if not isinstance(unknowns, dict) or unknowns.keys() - set(METRICS):
+        raise Refused("refused: metric_unknowns must map metric names to reasons and sources")
+    for column in METRICS:
+        value = row[column]
+        if value is None:
+            evidence = unknowns.get(column)
+            if not isinstance(evidence, dict) or any(
+                    not isinstance(evidence.get(k), str) or not evidence[k].strip()
+                    for k in ("reason", "source")):
+                raise Refused(f"refused: {column} unknown needs a reason and source in metric_unknowns")
+        else:
+            if column in unknowns:
+                raise Refused(f"refused: {column} cannot be both known and in metric_unknowns")
+            _count(row, column)
+            if isinstance(value, float) and not math.isfinite(value):
+                raise Refused(f"refused: {column} must be finite")
+            if value > METRIC_LIMITS[column]:
+                raise Refused(f"refused: {column} exceeds its database range")
+            if column in COUNT_METRICS and value != int(value):
+                raise Refused(f"refused: {column} must be an integer")
+
+
 def _common(row, table):
     _choice(row, "arm", ARMS)
     for column in ("provider", "model", "effort"):
@@ -130,8 +169,7 @@ def check_result(row: Mapping) -> None:
     _choice(row, "split", SPLITS)
     _count(row, "trial", 1)
     _choice(row, "execution_state", EXECUTION_STATES)
-    for column in ("cost_usd", "input_tokens", "output_tokens", "turns", "wall_seconds"):
-        _count(row, column)
+    _metrics(row)
     # A completed trial needs passed: pass rate and cost per pass need it (ADR-002J);
     # score is optional detail beside it.
     completed = row["execution_state"] == "completed"
@@ -317,6 +355,26 @@ def livecheck(settings: keycheck.Settings, publishable: str, http: writer.Http, 
         unchanged = service.get(RESULT_TABLE, result["id"]) == winner
         ok = ok and unchanged
         print(f"row unchanged: {'yes' if unchanged else 'no'}")
+
+        # Availability survives the public writer/readback seam. This is a marked
+        # test result, never an invented measurement attached to a real trial.
+        unknowns = {column: {"reason": "measurement unavailable in probe",
+                             "source": "ams-rsi livecheck"} for column in METRICS}
+        unknown = service.update(RESULT_TABLE, winner,
+                                 {**dict.fromkeys(METRICS), "metric_unknowns": unknowns})
+        read = service.get(RESULT_TABLE, result["id"])
+        preserved = (read is not None and all(read[c] is None for c in METRICS)
+                     and read["metric_unknowns"] == unknowns)
+        ok = ok and preserved
+        print(f"unknown metrics roundtrip: {'yes' if preserved else 'no'}")
+        service.update(RESULT_TABLE, unknown,
+                       {"cost_usd": 0, "metric_unknowns": {
+                           k: v for k, v in unknowns.items() if k != "cost_usd"}})
+        read = service.get(RESULT_TABLE, result["id"])
+        preserved = (read is not None and read["cost_usd"] == 0
+                     and "cost_usd" not in read["metric_unknowns"])
+        ok = ok and preserved
+        print(f"known zero roundtrip: {'yes' if preserved else 'no'}")
 
         # 3. The site key: test rows invisible, every client write refused.
         seen = []
