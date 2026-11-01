@@ -31,7 +31,7 @@
 | [000W](000W-read-commands-use-the-same-words-for-every-kind.md) | Read commands use the same words for every kind | accepted | 2026-11-01 | RUNBOOK.md |
 | [000X](000X-the-ams-runtime-is-a-small-python-cli.md) | The AMS runtime is a small Python CLI | accepted | 2026-11-01 | RUNBOOK.md, pyproject.toml |
 | [000Y](000Y-one-manifest-names-every-path.md) | One manifest names every path | accepted | 2026-11-01 | workbench/manifest.json |
-| [000Z](proposed/000Z-research-and-releases-have-their-own-folders.md) | Research and releases have their own folders | proposed | 2026-11-01 | ARCHITECTURE.md |
+| [000Z](000Z-research-and-releases-have-their-own-folders.md) | Research and releases have their own folders | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [001A](proposed/001A-glossary-and-architecture-own-different-truths.md) | Glossary and Architecture own different truths | proposed | 2026-11-01 | GLOSSARY.md, ARCHITECTURE.md |
 | [001B](proposed/001B-readme-orients-people-and-the-runbook-orients-agents.md) | README orients people and the Runbook orients agents | proposed | 2026-11-01 | README.md, RUNBOOK.md |
 | [001C](proposed/001C-current-state-files-say-what-is-true-now.md) | Current-state files say what is true now | proposed | 2026-11-01 | ARCHITECTURE.md |
