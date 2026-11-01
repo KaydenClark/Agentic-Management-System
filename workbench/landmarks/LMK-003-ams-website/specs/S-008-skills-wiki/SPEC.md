@@ -1,15 +1,17 @@
 # S-008 - Skills wiki
 
 **Spec ID:** S-008
-**Status:** planned
+**Status:** active
 **Priority:** 3
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
 **Updated:** 2026-11-01
 **Catalog description:** Site-written articles on the owner's skills, one page per skill grouped by Workbench stage, modeled on aihero.dev/skills.
-**Blockers:** S-003
-**Latest event:** Owner settled the review choices (2026-11-01): nine-section article, stage grouping, chart skills at a pinned commit, index plus page per skill, no used marks.
-**Next gate:** Owner go-ahead for implementation. The owner asked to finish this Spec and stop before implementation (2026-11-01).
+**Blockers:** none
+**Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
+**Latest event:** TK-001 claimed by Orchestrator (Claude Opus 5.5).
+**Next gate:** Close TK-001 with verification and documentation proof.
 
 ## Intent and authority
 
@@ -73,16 +75,14 @@ The skills are how agents operate the AMS. Explaining them faithfully, without p
 
 ## Dependencies And Blockers
 
-- S-003 (site shell). The shell, theme and site tests exist on `dev`; implementation waits for the owner's go-ahead.
+- S-003 (site shell): satisfied for this Spec; the shell, theme and site tests are on `dev` (checked at `2a89fe4`, 2026-11-01). The owner's go-ahead is JOT-ba986c8a.
 - Read access to `KaydenClark/skills` at the pinned commit for the authoring session.
-- PR #87 (`skills.mjs` and `/start` screen 3) for the shared stage data.
+- PR #87 (`skills.mjs` and `/start` screen 3) for the shared stage data: merged into `dev` 2026-11-01.
 
 ## Vertical Implementation Slices
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | `/skills` index and one complete article from the pinned commit, deployed to `dev` | ready | owner go-ahead | pending |
-| TK-002 | Articles for every skill on the chart, grouped by stage | ready | TK-001 | pending |
 
 ### TK-001 - Index and first article
 
