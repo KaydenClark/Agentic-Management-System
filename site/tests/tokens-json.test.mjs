@@ -134,6 +134,9 @@ test('the comparison fails on a copy with a changed, a missing or an out-of-plac
   assert.ok(differences(stray, json()).some((d) => d.includes('--accent')), 'color token in the type and spacing block');
   const mix = base.replace('.h-none { --hue: var(--line-strong); }', '.h-none { --hue: var(--line); }');
   assert.ok(differences(mix, json()).some((d) => d.startsWith('.h-none')), 'changed mix');
+  // Custom-property names are case-sensitive: a wrongly cased reference points at an undefined variable.
+  const cased = base.replace('.h-none { --hue: var(--line-strong); }', '.h-none { --hue: var(--LINE-STRONG); }');
+  assert.ok(differences(cased, json()).some((d) => d.startsWith('.h-none')), 'wrongly cased custom-property reference');
   const extraMix = base + '\n.h-extra { --hue: var(--heat); }\n';
   assert.ok(differences(extraMix, json()).some((d) => d.startsWith('.h-extra')), 'unrecorded mix rule');
   assert.deepEqual(differences(base, json()), []);
