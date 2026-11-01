@@ -15,7 +15,7 @@
 
 The owner chose site-written summaries of the owner's skills, modeled on https://www.aihero.dev/skills. The skills repository is private, so the site publishes summaries, not skill files.
 
-On 2026-11-01 the owner set the article template (below) in chat, giving the reference site's `/grilling` page as the model of depth and tone, and supplied the chart of skills by Workbench stage, committed as `skills-by-workbench-stage.svg` beside this Spec and drawn on `/start` screen 3 from `site/app/start/skills.mjs`.
+On 2026-11-01 the owner set the article template (below) in chat, giving the reference site's `/grilling` page as the model of depth and tone, and supplied the chart of skills by Workbench stage, committed as `skills-by-workbench-stage.svg` beside this Spec. The chart is the authority for each skill's stage. `/start` screen 3 draws it from `site/app/start/skills.mjs`, which reaches `dev` through PR #87 and is not yet on `main`.
 
 ## Outcome
 
