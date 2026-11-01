@@ -3,7 +3,7 @@
 **Task ID:** TK-002
 **Spec ID:** S-006
 **Slice:** The writer records one real build event and the site's publishable key reads it back while every client write fails
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Writer works end to end; No client writes
 **Planned verification:** live insert and publishable-key read and write test
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
+**Claimed by:** claude-s006-tk002
+**Current claimant:** claude-s006-tk002
 
 Orchestrator B's lane only. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), `supabase/migrations/` (the read-only baseline), DDR-000O under `workbench/docs/ddr/` and the TK-001 key module under `src/`.
 
