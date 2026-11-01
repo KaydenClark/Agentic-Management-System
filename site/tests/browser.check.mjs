@@ -7,7 +7,8 @@
 //   - an automated WCAG 2.x A/AA pass with axe-core (contrast included),
 //     injected from node_modules, never a CDN;
 //   - keyboard: Tab reaches every visible interactive element and each one
-//     shows a focus indicator;
+//     shows a focus indicator: a visible (non-transparent) outline,
+//     box-shadow, border or background that differs from its unfocused look;
 //   - reduced motion: with prefers-reduced-motion: reduce, nothing animates
 //     or transitions and scrolling is not smooth;
 //   - network: every request goes to the site, Supabase or GitHub. Requests
@@ -115,6 +116,19 @@ async function keyboardProblems(page) {
       // focus target, not a control.
       .filter((el) => el.matches(native) || el.tabIndex >= 0);
     els.forEach((el, i) => el.setAttribute('data-qa-i', String(i)));
+    // The look of a control: what a focus indicator can change. Recorded for
+    // every control now, while nothing is focused, as its baseline.
+    window.__qaLook = (el) => {
+      const s = getComputedStyle(el);
+      const sides = ['Top', 'Right', 'Bottom', 'Left'];
+      return {
+        outline: { style: s.outlineStyle, width: parseFloat(s.outlineWidth) || 0, color: s.outlineColor },
+        shadow: s.boxShadow,
+        border: sides.map((d) => `${s[`border${d}Style`]} ${parseFloat(s[`border${d}Width`]) || 0} ${s[`border${d}Color`]}`),
+        background: s.backgroundColor,
+      };
+    };
+    window.__qaBaseline = Object.fromEntries(els.map((el, i) => [String(i), window.__qaLook(el)]));
     return els.length;
   });
   const reached = new Set();
@@ -124,9 +138,26 @@ async function keyboardProblems(page) {
     const f = await page.evaluate(() => {
       const el = document.activeElement;
       if (!el || el === document.body) return null;
-      const s = getComputedStyle(el);
-      const outline = s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) > 0;
-      return { i: el.getAttribute('data-qa-i'), label: `${el.tagName.toLowerCase()}${el.className ? `.${String(el.className).split(' ')[0]}` : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 30)}"`, indicator: outline || s.boxShadow !== 'none' };
+      const i = el.getAttribute('data-qa-i');
+      // Alpha of a computed color: 0 for transparent or a zero-alpha value.
+      const alpha = (c) => {
+        if (!c || c === 'transparent') return 0;
+        const slash = c.match(/\/\s*([\d.]+)(%?)\s*\)\s*$/);
+        if (slash) return parseFloat(slash[1]) / (slash[2] ? 100 : 1);
+        const rgba = c.match(/^rgba\([^,]+,[^,]+,[^,]+,\s*([\d.]+)\s*\)$/);
+        return rgba ? parseFloat(rgba[1]) : 1;
+      };
+      const colorsIn = (v) => v.match(/(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch|color)\([^)]*\)|transparent/g) ?? [];
+      const now = window.__qaLook(el);
+      const was = window.__qaBaseline[i] ?? { outline: { style: 'none', width: 0, color: '' }, shadow: 'none', border: [], background: '' };
+      const outlineSeen = (o) => o.style !== 'none' && o.width > 0 && alpha(o.color) > 0;
+      const shadowSeen = (v) => v !== 'none' && colorsIn(v).some((c) => alpha(c) > 0);
+      const changes = [];
+      if (outlineSeen(now.outline) && JSON.stringify(now.outline) !== JSON.stringify(was.outline)) changes.push('outline');
+      if (shadowSeen(now.shadow) && now.shadow !== was.shadow) changes.push('box-shadow');
+      if (now.border.some((b, k) => b !== was.border[k] && !b.startsWith('none') && parseFloat(b.split(' ')[1]) > 0 && alpha(b.split(' ').slice(2).join(' ')) > 0)) changes.push('border');
+      if (now.background !== was.background && alpha(now.background) > 0) changes.push('background');
+      return { i, label: `${el.tagName.toLowerCase()}${el.className ? `.${String(el.className).split(' ')[0]}` : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 30)}"`, indicator: changes.length > 0 };
     });
     if (!f) break;
     if (f.i !== null && reached.has(f.i)) break;
@@ -194,6 +225,8 @@ async function selfTest(browser, server, origin) {
     ['a low-contrast color', axeProblems, (p) => p.addStyleTag({ content: 'main p { color: #c4c4c4 !important; }' }), (x) => x.some((m) => m.startsWith('color-contrast'))],
     ['an element wider than the viewport', horizontalScroll, (p) => p.evaluate(() => { const d = document.createElement('div'); d.style.width = '600px'; d.style.height = '1px'; document.querySelector('main').append(d); })],
     ['focus outlines removed', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline: none !important; box-shadow: none !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
+    ['a transparent focus outline', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline-color: transparent !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
+    ['a decorative box-shadow that does not change on focus', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline: none !important; } a, button { box-shadow: 0 0 0 2px #000 !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
     ['a control taken out of the tab order', keyboardProblems, (p) => p.evaluate(() => { const b = document.createElement('button'); b.textContent = 'Planted'; b.tabIndex = -1; document.querySelector('main').append(b); }), (x) => x.some((m) => m.startsWith('not reachable'))],
     ['a transition ignoring reduced motion', motionProblems, (p) => p.addStyleTag({ content: '.card, h1 { transition: transform 1s ease; }' })],
     ['an animation ignoring reduced motion', motionProblems, (p) => p.addStyleTag({ content: '@keyframes qa-spin { to { transform: rotate(1turn); } } h1 { animation: qa-spin 2s infinite; }' })],
