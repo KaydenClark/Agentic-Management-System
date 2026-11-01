@@ -26,4 +26,6 @@ Ask before destructive operations, paid services, material scope expansion or un
 
 Read back changed owners, inspect the final diff and verify relevant links and outputs. Report actual candidate, checks, limits and delivery state. Record independent review only from an eligible reviewer and Human QA only from actual human feedback. Keep unresolved findings visible.
 
+Commit every coherent step on the current working branch (never main) before ending a turn, with a message stating what changed and why; uncommitted work loses the owner's intent. A Stop hook ([require-committed](.agents/hooks/require-committed.sh)) enforces this for Claude Code and Codex. Never stash, reset or discard to get a clean tree.
+
 AMS branch/merge/deployment policy and runtime checks remain unconfigured. Verify the applicable delivery route before publication; local completion grants no push, merge, deployment or acceptance. Use sourced review and Human QA receipts when those activities occur.
