@@ -15,7 +15,7 @@ Captured context. Claim labels preserve intent and uncertainty; capture alone su
 
 ## Current rule
 
-The owner's final correction below replaces the all-Spec cap: at most six active Landmarks, with Specs and Tasks beneath them. Specs need no slots. S-001 is the cross-landmark yardstick under the Blueprint and may run its ready Tasks now; unfinished assessed capabilities affect final acceptance. Earlier parent-Spec interpretations below are corrected history. A/B product work remains stopped.
+The owner's final correction below replaces the all-Spec cap: at most six active Landmarks, with Specs and Tasks beneath them. Specs need no slots. S-001 is the cross-landmark yardstick under the Blueprint and may run its ready Tasks now; unfinished assessed capabilities affect final acceptance. Earlier parent-Spec interpretations below are corrected history.
 
 <!-- jot-entry -->
 ### JOT-5b41bab8-c88f-49c4-be9c-b438285490b0
@@ -105,7 +105,7 @@ Source: Owner request and clarification in AMS chat, 2026-11-01
 Topic: active-spec-approvals
 Supersedes: none
 
-S-001: The owner requested undoing the prerequisite lockout so Spec work can proceed, identified S-001 as the blocked Spec, and clarified: "We should have a limit on parent specs. We cant lock out parent specs like that." This authorizes repairing the activation policy and enabling S-001 work. Apply the existing limit of six to active parent Specs; their child Specs do not consume separate parent slots. S-001 is the AMS parent across its four landmarks and their child Specs. Unfinished children affect final acceptance, not permission to start S-001 checks. This supersedes the earlier all-Spec slot cap and completion-driven activation queue, retaining prior scoped execution approvals, real input dependencies, owner QA/publication gates and the stops on A/B product work. S-001 remains unfinished; no child Spec is completed or resumed by this correction.
+S-001: The owner requested undoing the prerequisite lockout so Spec work can proceed, identified S-001 as the blocked Spec, and clarified: "We should have a limit on parent specs. We cant lock out parent specs like that." This authorizes repairing the activation policy and enabling S-001 work. Apply the existing limit of six to active parent Specs; their child Specs do not consume separate parent slots. S-001 is the AMS parent across its four landmarks and their child Specs. Unfinished children affect final acceptance, not permission to start S-001 checks. This supersedes the earlier all-Spec slot cap and completion-driven activation queue, retaining prior scoped execution approvals, real input dependencies and owner QA/publication gates. S-001 remains unfinished; no outcome is accepted by this correction.
 <!-- /jot-entry -->
 
 <!-- jot-entry -->
@@ -118,7 +118,7 @@ Source: Owner request and hierarchy correction in AMS chat, 2026-11-01
 Topic: active-spec-approvals
 Supersedes: JOT-6ebd3b6c-9030-438a-96a1-6cfe6915be52
 
-S-001: The owner requested undoing the Spec prerequisite lockout, identified S-001 as the blocked Spec, clarified "We should have a limit on parent specs. We cant lock out parent specs like that.", then corrected "You cant have landmarks below a spec". Landmarks remain above Specs. The prior entry wrongly attributed an agent inference that S-001 parents the landmarks; that inference is withdrawn. S-001 remains a cross-landmark yardstick under the Blueprint, not a Landmark parent. Its own ready assessment/repair Tasks can start while the capabilities it assesses remain unfinished. Those outcomes still gate final system acceptance. The exact parent-counting boundary is being clarified; retain the requested limit without inventing hierarchy. No child outcome is accepted, no A/B product work resumes, and owner QA/publication gates remain.
+S-001: The owner requested undoing the Spec prerequisite lockout, identified S-001 as the blocked Spec, clarified "We should have a limit on parent specs. We cant lock out parent specs like that.", then corrected "You cant have landmarks below a spec". Landmarks remain above Specs. The prior entry wrongly attributed an agent inference that S-001 parents the landmarks; that inference is withdrawn. S-001 remains a cross-landmark yardstick under the Blueprint, not a Landmark parent. Its own ready assessment/repair Tasks can start while the capabilities it assesses remain unfinished. Those outcomes still gate final system acceptance. The exact parent-counting boundary is being clarified; retain the requested limit without inventing hierarchy. No child outcome is accepted; owner QA/publication gates remain.
 <!-- /jot-entry -->
 
 <!-- jot-entry -->
@@ -131,7 +131,7 @@ Source: Owner final clarification in AMS chat, 2026-11-01
 Topic: active-spec-approvals
 Supersedes: JOT-88d089a7-8f28-4167-b853-b1a7160d2c6b
 
-S-001: The owner asked to undo the Spec lockout and identified S-001 as the blocked work. Final clarification: "Parent specs should be Landmarks". Apply the existing limit of six to active Landmarks. Use Landmark -> Spec -> Task; introduce no parent-Spec hierarchy and put no Landmark beneath a Spec. Specs do not consume Landmark slots or wait for sibling completion to free one. S-001 remains the cross-landmark yardstick under the Blueprint and is authorized to start its existing ready assessment/repair Tasks without waiting for unfinished capabilities. Final system acceptance still needs the required outcomes. This replaces the all-Spec cap and slot-transfer queue, retaining real Task inputs, scoped execution authority, prior owner stops on A/B product work and QA/publication gates. No outcome is accepted or product work resumed by this repair.
+S-001: The owner asked to undo the Spec lockout and identified S-001 as the blocked work. Final clarification: "Parent specs should be Landmarks". Apply the existing limit of six to active Landmarks. Use Landmark -> Spec -> Task; introduce no parent-Spec hierarchy and put no Landmark beneath a Spec. Specs do not consume Landmark slots or wait for sibling completion to free one. S-001 remains the cross-landmark yardstick under the Blueprint and is authorized to start its existing ready assessment/repair Tasks without waiting for unfinished capabilities. Final system acceptance still needs the required outcomes. This replaces the all-Spec cap and slot-transfer queue, retaining real Task inputs, scoped execution authority and QA/publication gates. No outcome is accepted by this repair.
 <!-- /jot-entry -->
 
 <!-- jot-entry -->
@@ -146,3 +146,12 @@ Supersedes: none
 
 For this S-001 lockout repair, use Jot, not domain-modeling. This corrects an existing operating rule; no domain-model or vocabulary change required the heavier skill. The final six-Landmark cap, hierarchy and S-001 readiness correction remain unchanged.
 <!-- /jot-entry -->
+
+## 2026-11-01: Record cleanup
+
+Kind: intent
+State: confirmed
+Source and speaker: Kayden, AMS chat, 2026-11-01
+Supersedes: blanket A/B continuation gates in Specs, handoffs and approval summaries
+Claim: Use neutral scope and continuation notes in project records; remove blanket continuation gates. Existing scoped execution approvals and actual Task inputs govern continued work.
+Effect and next action: Correct affected records and regenerate the Taskboard. Review, Human QA, page approvals and publication requirements remain in force.

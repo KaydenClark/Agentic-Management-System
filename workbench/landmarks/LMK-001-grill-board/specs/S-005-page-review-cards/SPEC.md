@@ -9,7 +9,7 @@
 **Catalog description:** A Grill Board review card for every website page, where the owner approves or criticizes the site and the criticism becomes the voice and taste record.
 **Blockers:** S-004
 **Latest event:** Four Tasks planned; the owner moved the cap to Landmarks, so no Spec slot is needed.
-**Next gate:** Owner resumes this work; confirm scoped authority and required S-004 inputs, then activate. S-004 closure supplies no slot.
+**Next gate:** Confirm scoped authority and required S-004 inputs, then activate. S-004 closure supplies no slot.
 
 ## Intent and authority
 

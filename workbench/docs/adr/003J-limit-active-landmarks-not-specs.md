@@ -15,6 +15,6 @@ An unfinished capability can prevent final acceptance without preventing work on
 
 Considered and rejected: counting every Spec against six slots, which locked out S-001; placing Landmarks beneath S-001, which inverted the hierarchy; removing the limit entirely, which the owner rejected in favor of limiting the parent destinations.
 
-Consequences: AGENTS counts Landmarks. S-001 separates readiness from acceptance. Retire the slot-transfer queue; keep real Task inputs, scoped execution authority, owner stops, review, Human QA and publication gates. No outcome is accepted and no A/B product work resumes through this correction. Replaces ADR-002S, retained in history.
+Consequences: AGENTS counts Landmarks. S-001 separates readiness from acceptance. Retire the slot-transfer queue; keep real Task inputs, scoped execution authority, review, Human QA and publication gates. No outcome is accepted through this correction. Replaces ADR-002S, retained in history.
 
 Provenance: Kayden's AMS chat corrections, 2026-11-01: "You cant have landmarks below a spec" and "Parent specs should be Landmarks". Captured as [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md).
