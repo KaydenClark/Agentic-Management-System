@@ -71,3 +71,4 @@
 | [002K](002K-graders-come-from-the-accepted-version.md) | Graders come from the accepted version | accepted | 2026-11-01 | evals |
 | [002L](002L-trials-run-in-a-sandbox.md) | Trials run in a sandbox | accepted | 2026-11-01 | evals |
 | [002M](002M-more-than-two-held-out-tasks-before-a-public-number.md) | More than two held-out tasks before a public number | accepted | 2026-11-01 | evals, site |
+| [002N](002N-studied-held-out-tasks-retire-to-the-dev-set.md) | Studied held-out tasks retire to the dev set | accepted | 2026-11-01 | evals |
