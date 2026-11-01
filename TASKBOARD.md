@@ -1,14 +1,20 @@
 # Agentic Management System - Hot Taskboard
 
-> AMS template adapted from LLM_Workbench `templates/TASKBOARD.md` at `227d7c2a3ca0`. This is a starting format, not evidence of installed software, approved AMS policy, or completed work.
+> Generated from LLM Workbench v3.2.2.
 
-**Current focus:** [useful AMS outcome; first product loop: website explaining and demonstrating AMS]
-**Owner:** [executive owner; execution owner]
-**Last updated:** [YYYY-MM-DD]
+**Current focus:** Port the pre-repo S-001/S-003 Specs, decisions and landmarks into this room; first product loop: the website explaining and demonstrating AMS.
+**Owner:** Kayden (executive owner); execution owner per assigned Spec
+**Last updated:** 2026-11-01
 
-This is an active execution projection, not a requirements store or proof
-archive. Open the assigned Spec and its Task records; no selection command or projection generator is installed.
-Commands live in `RUNBOOK.md`.
+Read this continuation view to locate relevant work, then follow its linked
+Spec/Task owners for current scope, claimant, blockers, evidence and next action.
+A stale or missing row grants no authority; use current owners and the manifest.
+For work outside an assigned Spec, follow RUNBOOK and the relevant Wiki context.
+
+Before handoff or exit, update those owners and knowledge, then run
+`node workbench/tools/spec-workbench.mjs render` to refresh this projection.
+Keep one writer per owner and serialize shared board regeneration. Never edit
+generated rows as an independent queue. An empty board means no projected work.
 
 ## Active Specs
 
@@ -17,11 +23,10 @@ Commands live in `RUNBOOK.md`.
 |---|---|---|---|---|---|
 <!-- hot-specs:end -->
 
-Remove completed Specs from the active view only after their owning records establish completion. Their requirements,
+Completed specs disappear from this projection. Their requirements,
 decisions, acceptance, proof, completion, and supersession remain in retained
-Specs, reachable through their repository paths;
-maintained capability knowledge lives in the Wiki. The board
-projects Task records and never approves or completes them.
+Specs, listed on demand with `node workbench/tools/spec-workbench.mjs list --all`.
+The board projects Task records and never approves or completes them.
 
 ## Owner Decisions
 

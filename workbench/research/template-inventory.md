@@ -23,20 +23,20 @@ Initial source: LLM_Workbench `227d7c2a3ca009fc970900e9d18e4b72dc73c253`, read f
 | [GLOSSARY.md](../../GLOSSARY.md) | `templates/GLOSSARY.md` | Retained source glossary introduction and project-term template. Upstream filled vocabulary is not silently accepted as AMS definitions. |
 | [workbench/specs/SPEC-TEMPLATE.md](../../workbench/specs/SPEC-TEMPLATE.md) | `templates/SPEC.md` | Omitted source migration/landmark instructions and legacy inline Task seed; used agreed separate Task path. No Spec was created. |
 | [workbench/specs/TASK-TEMPLATE.md](../../workbench/specs/TASK-TEMPLATE.md) | `workbench/tools/task-record.mjs#formatTaskRecord` | Extracted established Spec-parent serializer fields; omitted optional former-ID/landmark fields, used agreed T-NNN folder naming, and left values unfilled. No parser or lifecycle implemented. |
-| [workbench/decisions/ADR-TEMPLATE.md](../../workbench/decisions/ADR-TEMPLATE.md) | `workbench/tools/adr.mjs#adrTemplate` | Extracted verbatim generator shape with date/title placeholders; both record variants share the agreed decisions folder. No accepted decision created. |
-| [workbench/decisions/DDR-TEMPLATE.md](../../workbench/decisions/DDR-TEMPLATE.md) | `workbench/tools/adr.mjs#ddrTemplate` | Extracted verbatim generator shape with date/title placeholders; both record variants share the agreed decisions folder. No accepted decision created. |
+| [ADR-TEMPLATE.md](../wiki/archive/ams-scaffold-templates/ADR-TEMPLATE.md) (retired 2026-11-01) | `workbench/tools/adr.mjs#adrTemplate` | Extracted verbatim generator shape with date/title placeholders; both record variants share the agreed decisions folder. No accepted decision created. |
+| [DDR-TEMPLATE.md](../wiki/archive/ams-scaffold-templates/DDR-TEMPLATE.md) (retired 2026-11-01) | `workbench/tools/adr.mjs#ddrTemplate` | Extracted verbatim generator shape with date/title placeholders; both record variants share the agreed decisions folder. No accepted decision created. |
 | [workbench/feedback/REPORT_FORMAT.md](../../workbench/feedback/REPORT_FORMAT.md) | `templates/feedback/REPORT_FORMAT.md` | Location and relative links only. |
 | [workbench/feedback/WORKBENCH_FEEDBACK.md](../../workbench/feedback/WORKBENCH_FEEDBACK.md) | `templates/WORKBENCH_FEEDBACK.md` | Retained source sections and log columns; replaced producer/upstream routing with AMS-local feedback and left status choices unfilled. |
 | [workbench/research/RESEARCH-TEMPLATE.md](RESEARCH-TEMPLATE.md) | `tools/new-research-project.mjs` | Extracted the established generated document shape; substituted title/question/date parameters only. |
 | [workbench/research/NOTES-TEMPLATE.md](NOTES-TEMPLATE.md) | `tools/new-research-project.mjs` | Extracted the established generated document shape; substituted title/question/date parameters only. |
 | [workbench/wiki/MEMORY.md](../../workbench/wiki/MEMORY.md) | `templates/wiki/MEMORY.project.md` | Retained project-router sections; removed routes to uncreated collections, schema/tool claims and prefilled upstream vocabulary. Used placeholder provenance/status rather than fictitious installation metadata. |
-| [workbench/wiki/DESIGN-CONCEPT-TEMPLATE.md](../../workbench/wiki/DESIGN-CONCEPT-TEMPLATE.md) | `templates/wiki/design-concepts/README.md#Article Shape` | Extracted existing article shape. Kept templates flat; replaced unconfigured retired-Spec route and unverified metadata with placeholders. |
-| [workbench/wiki/FEATURE-TEMPLATE.md](../../workbench/wiki/FEATURE-TEMPLATE.md) | `templates/wiki/features/README.md#Article Shape` | Extracted existing article shape. Kept templates flat; replaced unconfigured retired-Spec route and unverified metadata with placeholders. |
+| [DESIGN-CONCEPT-TEMPLATE.md](../wiki/archive/ams-scaffold-templates/DESIGN-CONCEPT-TEMPLATE.md) (retired 2026-11-01) | `templates/wiki/design-concepts/README.md#Article Shape` | Extracted existing article shape. Kept templates flat; replaced unconfigured retired-Spec route and unverified metadata with placeholders. |
+| [FEATURE-TEMPLATE.md](../wiki/archive/ams-scaffold-templates/FEATURE-TEMPLATE.md) (retired 2026-11-01) | `templates/wiki/features/README.md#Article Shape` | Extracted existing article shape. Kept templates flat; replaced unconfigured retired-Spec route and unverified metadata with placeholders. |
 | [workbench/sessions/HANDOFF-TEMPLATE.md](../../workbench/sessions/HANDOFF-TEMPLATE.md) | `templates/HANDOFF.md` | Source body unchanged; template-only filename/location. |
-| [workbench/sessions/notepad.schema.json](../../workbench/sessions/notepad.schema.json) | `templates/sessions/notepads/templates/notepad.schema.json` | Copied unchanged established structured-session format. No active note or session tool created. |
-| [workbench/sessions/work.example.json](../../workbench/sessions/work.example.json) | `templates/sessions/notepads/templates/work.example.json` | Copied unchanged established structured-session format. No active note or session tool created. |
-| [workbench/sessions/handoff.example.json](../../workbench/sessions/handoff.example.json) | `templates/sessions/notepads/templates/handoff.example.json` | Copied unchanged established structured-session format. No active note or session tool created. |
-| [workbench/sessions/grilling.example.json](../../workbench/sessions/grilling.example.json) | `templates/sessions/notepads/templates/grilling.example.json` | Copied unchanged established structured-session format. No active note or session tool created. |
+| [workbench/sessions/notepads/templates/notepad.schema.json](../../workbench/sessions/notepads/templates/notepad.schema.json) | `templates/sessions/notepads/templates/notepad.schema.json` | Copied unchanged established structured-session format. No active note or session tool created. |
+| [workbench/sessions/notepads/templates/work.example.json](../../workbench/sessions/notepads/templates/work.example.json) | `templates/sessions/notepads/templates/work.example.json` | Copied unchanged established structured-session format. No active note or session tool created. |
+| [workbench/sessions/notepads/templates/handoff.example.json](../../workbench/sessions/notepads/templates/handoff.example.json) | `templates/sessions/notepads/templates/handoff.example.json` | Copied unchanged established structured-session format. No active note or session tool created. |
+| [workbench/sessions/notepads/templates/grilling.example.json](../../workbench/sessions/notepads/templates/grilling.example.json) | `templates/sessions/notepads/templates/grilling.example.json` | Copied unchanged established structured-session format. No active note or session tool created. |
 
 ## AMS tuning of inherited artifacts
 
@@ -63,9 +63,9 @@ These are AMS-authored adaptations grounded in the research basis, not falsely a
 | [Eval task](../../evals/EVAL-TASK-TEMPLATE.md) | Define versioned cases under evals/; separate from implementation Tasks. |
 | [Eval result](../../evals/EVAL-RESULT-TEMPLATE.md) | Record each attempt under evals/ with exact candidate and evidence. |
 | [Eval comparison](../../evals/EVAL-COMPARISON-TEMPLATE.md) | Assess comparable runs under evals/, preserving failures and uncertainty. |
-| [Wiki note](../wiki/NOTE-TEMPLATE.md) | Flat source-linked topic in workbench/wiki/; captures intent with status and corrections. |
-| [Wiki guidebook](../wiki/GUIDEBOOK-TEMPLATE.md) | Flat extended procedure/explanation linked from the Runbook when applicable. |
-| [Wiki comparison](../wiki/COMPARISON-TEMPLATE.md) | Flat qualitative comparison; measured trials remain in evals/. |
+| [Wiki note](../wiki/archive/ams-scaffold-templates/NOTE-TEMPLATE.md) (retired 2026-11-01) | Flat source-linked topic in workbench/wiki/; captures intent with status and corrections. |
+| [Wiki guidebook](../wiki/archive/ams-scaffold-templates/GUIDEBOOK-TEMPLATE.md) (retired 2026-11-01) | Flat extended procedure/explanation linked from the Runbook when applicable. |
+| [Wiki comparison](../wiki/archive/ams-scaffold-templates/COMPARISON-TEMPLATE.md) (retired 2026-11-01) | Flat qualitative comparison; measured trials remain in evals/. |
 | [Review receipt](../specs/REVIEW-RECEIPT-TEMPLATE.md) | Candidate-bound assessment in the owning Spec's evidence location. |
 | [Human QA receipt](../specs/HUMAN-QA-RECEIPT-TEMPLATE.md) | Actual human experience/judgment in the owning Spec's evidence location. |
 | [Website page](../../site/PAGE-TEMPLATE.md) | Explanation, claim/evidence mapping and demo design under site/. |
@@ -82,7 +82,17 @@ LICENSE stays unfilled until the owner selects it. CLAUDE.md and its discovery s
 
 Actual sessions, recovery, .local and .worktrees remain ignored. No evaluation run, actual review verdict or Human QA acceptance was created. This template work is local; publication and deployment are separate endpoints.
 
+## Workbench adoption (2026-11-01)
+
+The `setup-workbench` v3.2.2 Adoption installed the lifecycle tools and manifest; its record is [Workbench adoption](../wiki/context-workbench-adoption.md). Installed tooling now owns these formats:
+
+- Decision records: `node workbench/tools/adr.mjs new --kind adr|ddr --title "..."` writes `workbench/docs/adr/` or `workbench/docs/ddr/` records, so the ADR/DDR templates and the former `workbench/decisions/` folder are retired.
+- Wiki pages: [SCHEMA](../wiki/SCHEMA.md) and the `jot` skill own note frontmatter and capture; the five Wiki templates used a different vocabulary that the validator rejects, so they are retired to the archive unchanged. Feature and design-concept article shapes live in the collection READMEs.
+- Task records: `convert-tasks` writes `tasks/TK-###/TASK.md` beneath the owning Spec. [TASK-TEMPLATE.md](../specs/TASK-TEMPLATE.md) still names the earlier agreed `T-NNN` naming; that conflict is open in [feedback](../feedback/WORKBENCH_FEEDBACK.md).
+- Notepad examples moved into the session lane's `notepads/templates/` unchanged.
+
 ## History
 
 - Initial inventory: copied/extracted established source formats; named five unresolved artifact families and deferred skill authoring.
 - 2026-10-31: owner explicitly requested complete AMS-tuned templates; added the missing families plus qualitative Wiki comparison, website page and inactive skill skeleton. Preserved inherited provenance and legacy session compatibility.
+- 2026-11-01: Workbench adoption retired the decision and Wiki templates to the archive and moved notepad examples; see above.

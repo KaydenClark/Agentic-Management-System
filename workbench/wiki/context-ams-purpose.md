@@ -1,8 +1,8 @@
 ---
-type: note
-status: current
+type: project
+status: active
 sensitivity: normal
-knowledge_role: source-linked
+knowledge_role: curated
 provenance:
   - Kayden, AMS template creation request, 2026-10-31
 source_paths:

@@ -1,33 +1,27 @@
-# AMS agent instructions
+# AMS - Agent Operating System
 
-AMS uses and repairs the Workbench while building the agent-management system described in [Blueprint](BLUEPRINT.md). These instructions govern work in this repository; templates provide reusable shapes, not completed records.
+> Generated from LLM Workbench v3.2.2.
 
-## Enter and scope the work
+AMS uses and repairs the Workbench while building the agent-management system in [Blueprint](BLUEPRINT.md). Templates are shapes, not records.
 
-Start with Git status, then [Runbook](RUNBOOK.md), [Architecture](ARCHITECTURE.md#routes), [Glossary](GLOSSARY.md) and the relevant [Wiki route](workbench/wiki/MEMORY.md). Load assigned Spec/Task records when present. Read the smallest relevant context and the actual skill before using it.
+## Dev environment tips
 
-Planning made before this repository existed has not moved here yet: the S-001 and S-003 Specs, owner decisions and corrections, and their evidence live in the private GPT_OS repository on branch `claude/ams-s003-map-20261031`, under `AMS/`. Before planning or building, read its `AMS/CONTINUE.md`; it records what is decided, what is open and what to do next. Do not copy that evidence here without the owner's go-ahead, because this repository is public.
+- Run `git status --short --branch`; read [RUNBOOK](RUNBOOK.md#get-oriented), [ARCHITECTURE](ARCHITECTURE.md#routes), [GLOSSARY](GLOSSARY.md), the [Wiki](workbench/wiki/MEMORY.md) and the assigned Spec/Task. Load the personal skill ([methods](workbench/docs/SKILLS.md)) before using it.
+- Pre-repo planning (S-001/S-003, owner decisions, evidence) is in private GPT_OS branch `claude/ams-s003-map-20261031` under `AMS/`. Read its `AMS/CONTINUE.md` before planning; copy nothing here without owner go-ahead: this repository is public.
+- The owner request governs scope; these rules and an assigned Spec bound it. Distinguish intent confirmation, execution approval, review, Human QA and publication. Reuse given authority; ask only for consequential unresolved choices. Delegate only when authorized.
+- Scope: `src/`, `tests/`, `site/`, `grill-board/`, `evals/`, root controls and `workbench/` lanes as assigned; `workbench/tools/` only via setup-workbench. Author skills with author-skill; a project skill needs a distinct need.
+- Before editing, verify repository, branch, remote, upstream and locks. Preserve decisions, corrections, unrelated edits and recovery material; one writer per shared record; never switch a checkout another writer uses.
+- Ask before destructive actions, paid services, wider scope or unrequested external changes. License choice stays with the owner. Send no messages without authorization. Never commit secrets, host paths or private research.
+- Jot sourced intent and corrections into their owner or a flat Wiki topic first.
 
-The current owner request governs scope, subject to platform safety. These instructions and an explicitly assigned Spec bound execution; procedures and historical research cannot enlarge it. Distinguish confirmation of intent, execution authorization, review, Human QA and publication. Reuse authority already supplied; require a new answer only for a consequential unresolved choice or action outside scope.
+## Testing instructions
 
-Preserve existing decisions, corrections, unrelated edits and recovery material. Before editing, verify repository, branch, remote, upstream and locks. Keep one writer per shared record. Never reset or stash to get a clean tree, and never switch a checkout another writer is using. Delegate only when authorized or required by an applicable procedure.
+- Run `node workbench/tools/spec-workbench.mjs doctor` and the [checks](RUNBOOK.md#test-and-build). Find causes before fixing; red/green/refactor. Never weaken checks; name unavailable ones.
+- RSI keeps problem, baseline, hypothesis, controlled comparison, failures and disposition; a demo or static score proves no improvement. Website claims link to evidence at its scope.
 
-## Work and learn
+## PR instructions
 
-Complete the requested useful outcome with the smallest maintainable change. Establish causes before fixing bugs. For behavior changes use red/green/refactor when practical, then focused verification and the applicable project suite. Report unavailable checks precisely; templates and placeholders do not implement a runtime.
-
-Use [artifact routes](workbench/research/template-inventory.md) only when the artifact serves the work. Capture sourced intent and corrections promptly in their existing owner or a flat Wiki topic. Requirements and proof belong in Spec/Task records; decisions retain their rationale and actual status. The Taskboard displays those records.
-
-Use personal skills through their existing discovery and ownership. Room-specific adapters or extensions must have a distinct need; preserve personal copies. Use author-skill for real skill authoring, including its validation requirements.
-
-For RSI, retain the observed problem, baseline, hypothesis, controlled comparison, failures and disposition. Static scores, shorter prompts and a single successful demo do not establish repeated outcome improvement. Link website claims to evidence at the scope it supports.
-
-## Boundaries and delivery
-
-Ask before destructive operations, paid services, material scope expansion or unrequested external changes. Never commit secrets or publish private research/traces without appropriate authorization. Do not send messages to others without explicit authorization. License choice remains with the owner.
-
-Read back changed owners, inspect the final diff and verify relevant links and outputs. Report actual candidate, checks, limits and delivery state. Record independent review only from an eligible reviewer and Human QA only from actual human feedback. Keep unresolved findings visible.
-
-Commit every coherent step on the current working branch (never main) before ending a turn, with a message stating what changed and why; uncommitted work loses the owner's intent. A Stop hook ([require-committed](.agents/hooks/require-committed.sh)) enforces this for Claude Code and Codex. Never stash, reset or discard to get a clean tree.
-
-Delivery is feature branch → PR → `main`. Work on a short-lived branch named for the change (started on `main`? run `git switch -c BRANCH`; your changes come with you). Push the branch before ending a turn and confirm the remote has the commit. Open a PR into `main`; once the branch is up to date with `main` and any required checks pass, merge it yourself with a merge commit. Merging needs no owner approval. A merge is not Spec acceptance, Human QA or deployment; deployment is not configured yet. Use sourced review and Human QA receipts when those activities occur.
+- Work on a short-lived branch named for the change; never commit to `main`. Started on `main`? Run `git switch -c BRANCH`; your changes come with you.
+- Commit each coherent step before ending a turn, saying what and why; the [require-committed](.agents/hooks/require-committed.sh) Stop hook enforces this. Never stash, reset or discard to get a clean tree.
+- Push and confirm the remote has the commit. Open a PR into `main`; once up to date with checks passing, merge it yourself with a merge commit; no owner approval is needed. A merge is not Spec acceptance, Human QA or deployment (none configured).
+- Read back changed owners and the diff; report candidate, checks, limits and delivery. Record review only from an eligible reviewer and Human QA only from a human.
