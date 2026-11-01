@@ -3,7 +3,7 @@
 **Task ID:** TK-001
 **Spec ID:** S-013
 **Slice:** A committed report gives the commits and days `dev` is ahead of and behind `main` at a named time
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Drift measured; No secrets
 **Planned verification:** script test on a fixture repository plus one real report
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Orchestrator C's cloud lane: read through Git and GitHub only, hold no Supabase or Vercel secret, write no product code. Reports go to `workbench/feedback/coherence/`.
+**Claimed by:** orchestrator-C
+**Current claimant:** orchestrator-C
 
 Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), ADR-002T and ADR-000H under `workbench/docs/adr/`.
 
