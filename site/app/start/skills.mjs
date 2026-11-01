@@ -61,6 +61,7 @@ export const stages = [
 // The committed records the diagram's claims come from (paths from the
 // repository root).
 export const sources = [
+  { label: "Skills by stage (Kayden's chart)", path: "workbench/landmarks/LMK-003-ams-website/specs/S-008-skills-wiki/skills-by-workbench-stage.svg" },
   { label: "Workbench skills", path: "workbench/docs/SKILLS.md" },
   { label: "Runbook", path: "RUNBOOK.md" },
 ];
