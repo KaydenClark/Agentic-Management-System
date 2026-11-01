@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 import re
 import selectors
+import signal
 import subprocess
 import time
 import uuid
@@ -33,7 +34,8 @@ class ClaudeProcess:
                     and not auth.get('apiKeySource'), 'subscription-only authentication unavailable')
             self.stage = 'startup'
             self.process = subprocess.Popen(claude_command(), cwd=cwd, env=env, stdin=subprocess.PIPE,
-                                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                                            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                            start_new_session=(os.name == 'posix'))
         except (OSError, ValueError, subprocess.TimeoutExpired) as error:
             self.failure_diagnostic(type(error).__name__, str(error))
             raise Refused('Claude runtime/authentication unavailable; inspect private trial diagnostics') from None
@@ -107,14 +109,37 @@ class ClaudeProcess:
             return
         self.closed = True
         if self.process is not None:
-            if self.process.poll() is None:
+            self.process.poll()
+            if os.name == 'posix':
+                try:
+                    os.killpg(self.process.pid, signal.SIGTERM)
+                except ProcessLookupError:
+                    pass
+            elif self.process.returncode is None:
                 self.process.terminate()
             try:
                 self.process.wait(timeout=3)
             except subprocess.TimeoutExpired:
-                self.process.kill()
+                if os.name == 'posix':
+                    try:
+                        os.killpg(self.process.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                else:
+                    self.process.kill()
                 self.process.wait()
-            self.stderr = (self.stderr+self.process.stderr.read(65536))[-16384:]
+            # A descendant can keep this descriptor open after the parent exits.
+            # Never wait for EOF: retain only immediately available bounded bytes.
+            descriptor = self.process.stderr.fileno()
+            os.set_blocking(descriptor, False)
+            for _ in range(4):
+                try:
+                    chunk = os.read(descriptor, 16384)
+                except BlockingIOError:
+                    break
+                if not chunk:
+                    break
+                self.stderr = (self.stderr+chunk)[-16384:]
             if self.selector is not None:
                 self.selector.close()
             for pipe in (self.process.stdin, self.process.stdout, self.process.stderr):

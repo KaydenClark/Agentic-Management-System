@@ -1,7 +1,10 @@
 """Tool-free runtime and socket-boundary contracts; provider calls are all synthetic."""
 import json
+import os
 from pathlib import Path
+import signal
 import sys
+import time
 from types import SimpleNamespace
 
 import pytest
@@ -135,3 +138,25 @@ def test_failed_transport_retains_bounded_private_actionable_diagnostic(tmp_path
     assert 'fixture denied startup' in row['stderr'] and len(row['stderr'].encode())<=16384
     assert row['exitStatus']==7 and 'sk-ant-fixture-secret' not in files[0].read_text()
     assert 'private text must never be logged' not in files[0].read_text()
+
+
+def test_shutdown_is_bounded_when_descendant_retains_stderr(tmp_path,monkeypatch):
+    from ams import trial_transport
+    real_popen=trial_transport.subprocess.Popen
+    auth={'loggedIn':True,'authMethod':'claude.ai','apiKeySource':None}
+    monkeypatch.setattr(trial_transport.subprocess,'run',lambda *args,**kwargs:
+                        SimpleNamespace(stdout=json.dumps(auth),stderr='',returncode=0))
+    program=('import subprocess,sys; '
+             'p=subprocess.Popen([sys.executable,"-c","import time;time.sleep(3)"],stdout=subprocess.DEVNULL,stderr=sys.stderr); '
+             'print(p.pid,flush=True)')
+    monkeypatch.setattr(trial_transport.subprocess,'Popen',lambda *args,**kwargs:
+                        real_popen([sys.executable,'-c',program],**kwargs))
+    stream=trial_transport.ClaudeProcess(tmp_path)
+    descendant=int(stream.process.stdout.readline())
+    stream.process.wait(timeout=2)
+    try:
+        start=time.monotonic();stream.close()
+        assert time.monotonic()-start<1, 'shutdown waited for inherited stderr EOF'
+    finally:
+        try:os.kill(descendant,signal.SIGTERM)
+        except ProcessLookupError:pass

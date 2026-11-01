@@ -15,15 +15,15 @@
 
 ## Intent and authority
 
-[Owner decisions/resume](../../../../wiki/context-ams-purpose.md): Journey resumed; r1, Stable/Excellent, three attempts excluding baseline, subscription meter; bounded candidate/regressions separate from whole AMS.
+[Owner decisions](../../../../wiki/context-ams-purpose.md) govern resumed Journey: fixed r1/acceptance, attempts, meter and bounded versus whole scope.
 
 ## Current Verified State
 
-[CLI proof](tasks/TK-000M/TASK.md); trials unfinished. [Baseline a3d014e](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified source reviews; no trial, strike or skill result.
+[Scoring proof](tasks/TK-000M/TASK.md). [Baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified source reviews; no trial, strike or skill result.
 
-S-006 TK-000S owns packet/metadata/history/result/protocol identity repair at `ad7fa28`, with unchanged scoring/qualification rules. Its proof claims no trial or qualification.
+S-006/TK-000S owns exact identity repair at `ad7fa28`, with unchanged scoring/qualification and delivery proof retained there.
 
-TK-000T prepares [private inputs/preflight](../../../../../evals/TRIALS.md). TK-002 owns measured noise; bootstrap and inert smoke prove no controlled result, qualification or benefit.
+[TK-000T preparation](../../../../../evals/TRIALS.md) proves no controlled result, qualification or benefit. TK-002 owns measured noise.
 
 ## Desired Behavior
 
@@ -87,7 +87,7 @@ Weights; running loops during mapping; presentation (S-007).
 
 ## Dependencies And Blockers
 
-S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests, behavioral links. S-007 presents scores/evals/failures/provenance; integration missing.
+S-006 retains frozen assessment/attempt/run identities, metadata, ledgers, counts/levels, acceptance/evidence/qualification, findings/retests and behavioral links. S-007 safe presentation remains unimplemented.
 
 Real build/skills seeds retain strength labels; private sources yield summaries/commits only. Storage and qualified comparisons required.
 
