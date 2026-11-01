@@ -25,7 +25,7 @@ Use existing topic owners; grow flat Wiki notes through [MEMORY](workbench/wiki/
 
 ## Test And Build
 
-From the root: `uv run pytest` tests; `uv run ams-board` serves the Grill Board (`grill-board/cards/`) on 127.0.0.1:8765 only; `uv run ams-keycheck` checks the Supabase service key without printing it (`src/ams/keycheck.py`), from orchestrator B's main checkout (it has the key). Room checks:
+From the root: `uv run pytest` tests; `uv run ams-board` serves the Grill Board (committed `grill-board/cards/`) on 127.0.0.1 only; `uv run ams-keycheck` checks the Supabase service key without printing it (`src/ams/keycheck.py`), from orchestrator B's main checkout (it has the key). Room checks:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render

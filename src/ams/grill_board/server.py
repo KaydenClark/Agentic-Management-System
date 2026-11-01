@@ -1,12 +1,12 @@
-"""The Grill Board's local HTTP server: one page, read from card files on
-every request, served on 127.0.0.1 only (DDR-000L, DDR-000P)."""
+"""The Grill Board's local HTTP server: one page, read from committed card
+files on every request, served on 127.0.0.1 only (DDR-000L, DDR-000P)."""
 
 import argparse
 from html import escape
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
-from .cards import PRIORITIES, VALUES, load_cards
+from .cards import PRIORITIES, VALUES, CardSourceError, committed_cards, load_cards
 
 HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
@@ -65,15 +65,19 @@ def render_page(cards_dir):
 
 def make_server(cards_dir, port=DEFAULT_PORT):
     cards_dir = Path(cards_dir)
+    committed_cards(cards_dir)  # refuse a directory that is not committed records
 
     class Handler(BaseHTTPRequestHandler):
         def do_GET(self):
             if self.path not in ("/", "/index.html"):
                 self.send_error(404)
                 return
-            payload = render_page(cards_dir).encode("utf-8")
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
+            try:
+                payload, status, kind = render_page(cards_dir).encode("utf-8"), 200, "text/html"
+            except CardSourceError as error:
+                payload, status, kind = f"Grill Board cannot read committed cards: {error}\n".encode("utf-8"), 500, "text/plain"
+            self.send_response(status)
+            self.send_header("Content-Type", f"{kind}; charset=utf-8")
             self.send_header("Content-Length", str(len(payload)))
             self.end_headers()
             self.wfile.write(payload)
@@ -89,9 +93,10 @@ def main(argv=None):
     parser.add_argument("--cards", type=Path, default=DEFAULT_CARDS, help="card directory (default: grill-board/cards)")
     parser.add_argument("--port", type=int, default=DEFAULT_PORT, help=f"port on {HOST} (default: {DEFAULT_PORT})")
     args = parser.parse_args(argv)
-    if not args.cards.is_dir():
-        parser.error(f"card directory not found: {args.cards} (run from the repository root or pass --cards)")
-    server = make_server(args.cards, args.port)
+    try:
+        server = make_server(args.cards, args.port)
+    except CardSourceError as error:
+        parser.error(f"{error} (run from the repository root or pass --cards)")
     print(f"Grill Board: http://{HOST}:{server.server_address[1]}/", flush=True)
     try:
         server.serve_forever()

@@ -12,6 +12,7 @@ from pathlib import Path
 
 import pytest
 
+from ams.grill_board.cards import CardSourceError
 from ams.grill_board.server import make_server
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,6 +49,21 @@ class CardPage(HTMLParser):
             self.refusals[-1] += data
 
 
+def git(repo, *args):
+    subprocess.run(
+        ["git", "-c", "user.name=fixture", "-c", "user.email=fixture@example.invalid", *args],
+        cwd=repo, check=True, capture_output=True,
+    )
+
+
+def commit(repo, message="cards"):
+    """Commit everything under repo; the board shows only committed cards."""
+    if not (repo / ".git").exists():
+        git(repo, "init", "-q")
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "--allow-empty", "-m", message)
+
+
 def serve(cards_dir):
     server = make_server(cards_dir, port=0)
     threading.Thread(target=server.serve_forever, daemon=True).start()
@@ -64,12 +80,13 @@ def get(server, path="/"):
 def board(tmp_path):
     servers = []
 
-    def start(*sources):
-        cards = tmp_path / "cards"
+    def start(*sources, cards=None):
+        cards = cards or tmp_path / "cards"
         cards.mkdir(exist_ok=True)
         for source in sources:
             for card in sorted(source.glob("*.md")):
                 shutil.copy(card, cards / card.name)
+        commit(tmp_path)
         server = serve(cards)
         servers.append(server)
         return server
@@ -130,7 +147,7 @@ def test_unknown_grades_and_missing_grades_are_refused(board, tmp_path):
         "# Bad grade\n\n**Priority:** P9\n**Priority reason:** r\n**Value:** V1\n**Value reason:** r\n"
     )
     (odd / "no-value.md").write_text("# No value\n\n**Priority:** P1\n**Priority reason:** r\n")
-    parsed, body = page(board(odd))
+    parsed, body = page(board(cards=odd))
     assert parsed.cards == []
     refusals = " ".join(parsed.refusals)
     assert "bad-grade.md" in refusals and "P9" in refusals
@@ -140,6 +157,7 @@ def test_unknown_grades_and_missing_grades_are_refused(board, tmp_path):
 def test_the_page_reads_committed_files_on_each_request(board, tmp_path):
     server = board(FIXTURES / "cards")
     shutil.copy(FIXTURES / "refused" / "value-without-reason.md", tmp_path / "cards" / "late.md")
+    commit(tmp_path, "late card")
     parsed, _ = page(server)
     assert len(parsed.cards) == 4 and len(parsed.refusals) == 1
 
@@ -151,7 +169,7 @@ def test_card_text_is_escaped(board, tmp_path):
         "# <script>alert(1)</script>\n\n**Priority:** P1\n**Priority reason:** a < b\n"
         "**Value:** V1\n**Value reason:** b > a\n"
     )
-    _, body = page(board(cards))
+    _, body = page(board(cards=cards))
     assert "<script>" not in body and "&lt;script&gt;" in body
 
 
@@ -171,6 +189,7 @@ def test_the_runbook_command_starts_the_board_on_localhost(tmp_path):
     assert scripts["ams-board"] == "ams.grill_board.server:main"
     assert "uv run ams-board" in (ROOT / "RUNBOOK.md").read_text()
     shutil.copytree(FIXTURES / "cards", tmp_path / "grill-board" / "cards")
+    commit(tmp_path)
     command = Path(sys.executable).parent / "ams-board"
     process = subprocess.Popen(
         [str(command), "--port", "0"], cwd=tmp_path, stdout=subprocess.PIPE, text=True
@@ -201,5 +220,30 @@ def test_the_committed_example_card_is_valid_and_labeled(board, tmp_path):
     cards = tmp_path / "example"
     cards.mkdir()
     shutil.copy(example, cards / example.name)
-    parsed, _ = page(board(cards))
+    parsed, _ = page(board(cards=cards))
     assert len(parsed.cards) == 1 and parsed.refusals == []
+
+
+def test_uncommitted_edits_show_the_committed_text(board, tmp_path):
+    server = board(FIXTURES / "cards")
+    card = tmp_path / "cards" / "interrupt-quick.md"
+    card.write_text(card.read_text().replace("may the board listen", "DRAFT EDIT"))
+    parsed, body = page(server)
+    assert "DRAFT EDIT" not in body
+    assert any("may the board listen only on 127.0.0.1" in c["question"] for c in parsed.cards)
+
+
+def test_untracked_and_uncommitted_cards_never_appear(board, tmp_path):
+    server = board(FIXTURES / "cards")
+    shutil.copy(FIXTURES / "cards" / "interrupt-quick.md", tmp_path / "cards" / "untracked.md")
+    staged = tmp_path / "cards" / "staged.md"
+    shutil.copy(FIXTURES / "cards" / "committed-quick.md", staged)
+    git(tmp_path, "add", str(staged))
+    parsed, body = page(server)
+    assert len(parsed.cards) == 4
+    assert "untracked.md" not in body and "staged.md" not in body
+
+
+def test_a_card_directory_outside_git_is_refused(tmp_path):
+    with pytest.raises(CardSourceError, match="not in a Git repository"):
+        make_server(tmp_path, port=0)

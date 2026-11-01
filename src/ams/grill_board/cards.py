@@ -1,5 +1,8 @@
 """Card files: one Markdown file per question waiting on the owner.
 
+Cards are read from the committed Git snapshot (HEAD), never the working
+tree, so drafts and uncommitted edits stay off the board (DDR-000L).
+
 A card is a title line, then `**Field:** value` header lines, then optional
 context. Priority and Value each need a grade and a one-line reason
 (DDR-000K). Unknown header fields are kept, so later fields (rating, flag,
@@ -7,6 +10,7 @@ color) extend the format without breaking older cards.
 """
 
 import re
+import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -71,10 +75,46 @@ def parse_card(name, text):
     )
 
 
+class CardSourceError(Exception):
+    """The card directory cannot be read as committed records."""
+
+
+def _git(cwd, *args):
+    result = subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True)
+    if result.returncode != 0:
+        raise CardSourceError(result.stderr.strip() or f"git {args[0]} failed")
+    return result.stdout
+
+
+def committed_cards(cards_dir):
+    """Return [(name, text)] for each `*.md` card committed at HEAD directly
+    in cards_dir. Uncommitted edits and untracked or staged files are ignored."""
+    cards_dir = Path(cards_dir)
+    if not cards_dir.is_dir():
+        raise CardSourceError(f"card directory not found: {cards_dir}")
+    try:
+        root = Path(_git(cards_dir, "rev-parse", "--show-toplevel").strip())
+    except CardSourceError:
+        raise CardSourceError(f"{cards_dir} is not in a Git repository; the board reads committed cards only") from None
+    try:
+        _git(root, "rev-parse", "--verify", "--quiet", "HEAD^{commit}")
+    except CardSourceError:
+        return []
+    prefix = cards_dir.resolve().relative_to(root.resolve()).as_posix()
+    prefix = "" if prefix == "." else prefix + "/"
+    listed = _git(root, "ls-tree", "--name-only", "-z", "HEAD", "--", prefix or ".")
+    cards = []
+    for path in sorted(name for name in listed.split("\0") if name.endswith(".md")):
+        if "/" in path[len(prefix):]:
+            continue
+        cards.append((path[len(prefix):], _git(root, "show", f"HEAD:{path}")))
+    return cards
+
+
 def load_cards(cards_dir):
-    """Read every `*.md` card under cards_dir: sorted Cards and Refusals."""
+    """Read every committed `*.md` card in cards_dir: sorted Cards and Refusals."""
     cards, refusals = [], []
-    for path in sorted(Path(cards_dir).glob("*.md")):
-        result = parse_card(path.name, path.read_text(encoding="utf-8"))
+    for name, text in committed_cards(cards_dir):
+        result = parse_card(name, text)
         (cards if isinstance(result, Card) else refusals).append(result)
     return sorted(cards, key=lambda card: card.sort_key), refusals
