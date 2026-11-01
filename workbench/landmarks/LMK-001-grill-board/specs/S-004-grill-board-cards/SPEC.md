@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000I closed with proof.
+**Latest event:** TK-000J closed with proof.
 **Next gate:** Complete TK-000F.
 
 ## Intent and authority
@@ -115,6 +115,7 @@ Owner Human QA has not been performed for any Task.
 | 2026-11-01 | TK-000G | Task closed | pytest 367 passed; owner-root must-fail 11 cases | grill-board/README.md, S-004 Decisions | Owner QA; close attribution: {"agent":"Claude implementor (Orchestrator B)","claimant":"Claude implementor (Orchestrator B)","onBehalfOf":null} |
 | 2026-11-01 | TK-000H | Task closed | pytest 367 passed; re-ask must-fail 4 cases | grill-board/README.md | Owner QA; close attribution: {"agent":"Claude implementor (Orchestrator B)","claimant":"Claude implementor (Orchestrator B)","onBehalfOf":null} |
 | 2026-11-01 | TK-000I | Task closed | pytest 367 passed; page-draft must-fail 4 cases | grill-board/README.md, S-004 Decisions | Owner QA; close attribution: {"agent":"Claude implementor (Orchestrator B)","claimant":"Claude implementor (Orchestrator B)","onBehalfOf":null} |
+| 2026-11-01 | TK-000J | Task closed | 375px check 3 passed; 3 mutations fail; shots regenerated | grill-board/README.md, grill-board/qa/ | 375px check skips in default pytest; owner QA; close attribution: {"agent":"Claude implementor (Orchestrator B)","claimant":"Claude implementor (Orchestrator B)","onBehalfOf":null} |
 
 ## Review and Human QA
 
