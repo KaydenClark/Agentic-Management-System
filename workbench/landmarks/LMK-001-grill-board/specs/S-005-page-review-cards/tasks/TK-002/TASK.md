@@ -25,7 +25,7 @@ Deliver:
 
 Coordinate with orchestrator A: S-003 TK-004 reads `page_approvals` with the publishable key and the TK-001 hash vectors, instead of the committed file its Task names. Do not edit S-003 or `site/`.
 
-Out of scope: the voice record (TK-003); the coverage check (TK-000F); the site's draft mark (S-003 TK-004).
+Out of scope: the voice record (TK-003); the coverage check (TK-000K); the site's draft mark (S-003 TK-004).
 
 Hand back to S-005 with `close`.
 

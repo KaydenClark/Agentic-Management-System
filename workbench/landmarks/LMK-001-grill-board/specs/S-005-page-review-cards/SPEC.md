@@ -79,7 +79,7 @@ Page ratings are loop inputs (S-002). The site shows draft or approved status pe
 ```bash
 node workbench/tools/spec-workbench.mjs show S-005
 uv run pytest
-uv run ams-pages check   # TK-000F: every listed page has a current card
+uv run ams-pages check   # TK-000K: every listed page has a current card
 ```
 
 ## Documentation Impact
@@ -92,7 +92,7 @@ uv run ams-pages check   # TK-000F: every listed page has a current card
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | none | Planned TK-001, TK-002, TK-003, TK-000F; approval storage chosen; not activated | render, doctor | this Spec, Task records | Every criterion |
+| 2026-11-01 | none | Planned TK-001, TK-002, TK-003, TK-000K; approval storage chosen; not activated | render, doctor | this Spec, Task records | Every criterion |
 
 ## Review and Human QA
 

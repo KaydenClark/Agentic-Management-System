@@ -25,7 +25,7 @@ Deliver `uv run ams-pages generate` (a new script in `pyproject.toml`):
 5. **Stale.** When a page's hash changes, write the new card and append `## Stale` (`**Superseded by:** NAME`, `**Stale since:**` in UTC) to the previous card. Never edit or remove an existing section; answered history stays byte-for-byte. The board lists stale cards outside the queue and refuses to answer them.
 6. **Idempotent.** A rerun with no change writes nothing and makes no commit. A change is one commit of cards, index and approvals record through the board's lock and compare-and-swap, subject `Grill Board: page cards for N pages`.
 
-Out of scope: approval rows in Supabase and stale-confirm refusal hardening (TK-002); the voice record (TK-003); the coverage check (TK-000F); any `site/` change. If a page needs a `data-review-exclude` region (live data on `/rsi`), ask orchestrator A; do not edit `site/`.
+Out of scope: approval rows in Supabase and stale-confirm refusal hardening (TK-002); the voice record (TK-003); the coverage check (TK-000K); any `site/` change. If a page needs a `data-review-exclude` region (live data on `/rsi`), ask orchestrator A; do not edit `site/`.
 
 Hand back to S-005 with `close`.
 

@@ -1,6 +1,6 @@
-# TK-000F - A coverage check fails when a listed page has no card for its current hash or a card's hash is stale
+# TK-000K - A coverage check fails when a listed page has no card for its current hash or a card's hash is stale
 
-**Task ID:** TK-000F
+**Task ID:** TK-000K
 **Spec ID:** S-005
 **Slice:** A coverage check fails when a listed page has no card for its current hash or a card's hash is stale
 **Status:** blocked
