@@ -16,7 +16,7 @@ AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one 
 | `src/`, `tests/` | Package `ams`, pytest suite (uv); `ams-keycheck` checks the Supabase key |
 | `supabase/` | Supabase migrations (read-only baseline) |
 | `site/` | Public website; planned Vercel hosting, Supabase backend |
-| `grill-board/` | Owner's card queue (`cards/*.md`); local `ams-board` only |
+| `grill-board/` | Owner's [cards](grill-board/README.md), theme, QA; local `ams-board` only |
 | `evals/` | RSI eval tasks, results and comparisons |
 | `.agents/` | Commit hook and project skill extensions; `.claude/skills` links here |
 | Root files | The eight controls; jobs in [Ownership](#ownership) |
