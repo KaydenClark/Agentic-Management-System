@@ -8,3 +8,4 @@
 |---|---|---|---|---|
 | [000A](000A-improvement-claims-need-held-out-ledger-evidence.md) | Improvement claims need held-out ledger evidence | accepted | 2026-11-01 | AGENTS.md, evals |
 | [000B](000B-a-confirmed-grill-board-answer-goes-straight-to-its-owner.md) | A confirmed Grill Board answer goes straight to its owner | accepted | 2026-11-01 | grill-board |
+| [000C](000C-the-authority-order-for-agents.md) | The authority order for agents | accepted | 2026-11-01 | AGENTS.md |
