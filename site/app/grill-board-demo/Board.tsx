@@ -58,6 +58,25 @@ function Triangle() {
 function FlagIcon({ flag }: { flag?: "block" | "risk" }) {
   return flag === "block" ? <Octagon /> : flag === "risk" ? <Triangle /> : null;
 }
+function Star() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" />
+    </svg>
+  );
+}
+
+// A <details> whose controls exist only while it is open, so a closed fold
+// holds nothing a keyboard can land on unseen.
+function Fold({ className, summary, children }: { className: string; summary: ReactNode; children: ReactNode }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <details className={className} onToggle={(e) => setOpen(e.currentTarget.open)}>
+      <summary>{summary}</summary>
+      {open ? children : null}
+    </details>
+  );
+}
 
 export default function Board({ topics, cards, children }: { topics: Topic[]; cards: Card[]; children?: ReactNode }) {
   const [topicKey, setTopicKey] = useState(topics[0].key);
@@ -251,8 +270,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
               <button key={g} type="button" className={"chip " + gradeClass(g)} aria-pressed={vFilter.includes(g)} onClick={() => toggleGrade(vFilter, setVFilter, g)}>{g}</button>
             ))}
           </div>
-          <details className="gb-more">
-            <summary>More filters</summary>
+          <Fold className="gb-more" summary="More filters">
             <div className="gb-more-in">
               <label htmlFor="gb-scale" className="sr-only">Scale</label>
               <select id="gb-scale" className="gb-select" value={scaleFilter} onChange={(e) => setScaleFilter(e.target.value)}>
@@ -271,7 +289,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
               <label htmlFor="gb-qsearch" className="sr-only">Search these questions</label>
               <input id="gb-qsearch" type="search" className="gb-select gb-search-q" placeholder="Titles, questions, text…" value={search} onChange={(e) => setSearch(e.target.value)} />
             </div>
-          </details>
+          </Fold>
           <button type="button" className="gb-clear" onClick={clearFilters}>Clear</button>
         </div>
 
@@ -495,14 +513,13 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
               <span>Was this a good question?</span>
               <span role="group" aria-label="Rate this question, one to five" className="gb-stars">
                 {[1, 2, 3, 4, 5].map((k) => (
-                  <button key={k} type="button" className="star" aria-pressed={k <= rating} aria-label={`${k} of 5`} onClick={() => setRatings({ ...ratings, [sel.id]: k })}>★</button>
+                  <button key={k} type="button" className="star" aria-pressed={k <= rating} aria-label={`${k} of 5`} onClick={() => setRatings({ ...ratings, [sel.id]: k })}><Star /></button>
                 ))}
               </span>
               <button type="button" className="taxing" aria-pressed={!!taxing[sel.id]} onClick={() => setTaxing({ ...taxing, [sel.id]: !taxing[sel.id] })}>Too taxing</button>
             </div>
 
-            <details className="gb-comment">
-              <summary>Comment on this question</summary>
+            <Fold className="gb-comment" summary="Comment on this question">
               <div className="gb-comment-in">
                 <label htmlFor="gb-qcomment" className="sr-only">Comment on this question</label>
                 <textarea
@@ -520,7 +537,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
                   {savedComment[sel.id] ? "Kept in this browser" : "Save comment"}
                 </button>
               </div>
-            </details>
+            </Fold>
 
             <div className="gb-foot">
               <span aria-live="polite">{saveLine}</span>

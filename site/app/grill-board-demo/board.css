@@ -39,7 +39,7 @@
 .gb-root .n1 { background: var(--ink); color: var(--ground); border: var(--border-width) solid var(--ink); }
 .gb-root .n2 { background: transparent; color: var(--ink); border: var(--border-width) solid var(--ink); }
 .gb-root .n3 { background: transparent; color: var(--muted); border: var(--border-width) solid var(--line-strong); }
-.gb-root .n4 { background: transparent; color: var(--muted); border: var(--border-width) dashed var(--line-strong); opacity: 0.75; }
+.gb-root .n4 { background: transparent; color: var(--muted); border: var(--border-width) dashed var(--line-strong); }
 .gb-root .gl { width: var(--gb-glyph); height: var(--gb-glyph); flex-shrink: 0; }
 .gb-root .grade { font-family: var(--font-mono); font-size: var(--gb-text-grade); font-weight: var(--weight-bold); border-radius: var(--radius-badge); padding: var(--space-2) var(--space-8); line-height: var(--gb-leading-ui); }
 .gb-root .dot { display: inline-block; width: var(--gb-dot); height: var(--gb-dot); border-radius: 50%; background: var(--tone-dot); flex-shrink: 0; }
@@ -86,6 +86,7 @@
 .gb-root .inkbtn { background: var(--ink); color: var(--ground); border: var(--border-width) solid var(--ink); border-radius: var(--radius-control); font-weight: var(--weight-semibold); }
 .gb-root .star { background: transparent; border: 0; color: var(--line-strong); padding: var(--space-2); min-width: var(--gb-control-md); min-height: var(--gb-control-md); font-size: var(--gb-text-star); line-height: var(--leading-tight); }
 .gb-root .star[aria-pressed="true"] { color: var(--ink); }
+.gb-root .star svg { display: block; width: var(--gb-text-star); height: var(--gb-text-star); margin: 0 auto; }
 .gb-root .taxing { background: transparent; border: var(--border-width) solid var(--line-strong); border-radius: var(--radius-pill); color: var(--ink); }
 .gb-root .taxing[aria-pressed="true"] { background: var(--ink); color: var(--ground); border-color: var(--ink); }
 .gb-root .textlink { color: var(--ink); text-decoration: underline; text-underline-offset: var(--space-3); }
