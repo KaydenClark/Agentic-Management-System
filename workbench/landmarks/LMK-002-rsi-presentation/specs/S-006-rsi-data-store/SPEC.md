@@ -128,7 +128,6 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | review | Review verdict: fail at 977ac08fed4a269182b67d6ada990042e2ceee88 [cfc6d944ca57] #3 | new Task: P1 JSONB numeric normalization changes valid packet digest after append and blocks immutable namespace readback. Preserve exact canonical text and verify projection before rereview. | s006_review, independent Codex context | 1 |
 | 2026-11-01 | TK-000R | Task closed | 62 focused; full local/fresh495 passed,4 skipped; migration20261101195609; exact numeric TEXT roundtrip/retry/client denial/cleanup0; source CI53pass; scoped rereview no blockers | ASSESSMENTS; TRIAL-ROWS; S-006 SPEC/TK-000R | Final CI/merge; whole assembled Review; actual owner QA; safe S007 projection and real S002 trials; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
 | 2026-11-01 | review | Review verdict: pass at 906f71f936ccbb4ccc777cbea5643ca2668d3a85 [079d355dd065] #4 | none | s006_review, independent Codex context, noncontributor | none |
-
 | 2026-11-01 | review-detail | Independent PASS receipt at 906f71f | [Scope, evidence and limits](../../../../feedback/REVIEW-S-006-906f71f.md) | s006_review direct handback | Actual owner QA and checked delivery remain separate |
 
 ## Review and Human QA
