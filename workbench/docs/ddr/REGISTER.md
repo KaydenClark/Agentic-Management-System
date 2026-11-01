@@ -24,3 +24,4 @@
 | [000P](000P-the-grill-board-is-local-with-a-python-server.md) | The Grill Board is local, with a Python server | accepted | 2026-11-01 | grill-board |
 | [000Q](000Q-landmarks-are-the-prds.md) | Landmarks are the PRDs | accepted | 2026-11-01 | workbench/landmarks, BLUEPRINT.md |
 | [000R](000R-the-license-is-mit-copyright-kayden-clark.md) | The license is MIT, copyright Kayden Clark | accepted | 2026-11-01 | LICENSE |
+| [000S](000S-the-site-uses-a-free-vercel-app-domain.md) | The site uses a free vercel.app domain | accepted | 2026-11-01 | site |
