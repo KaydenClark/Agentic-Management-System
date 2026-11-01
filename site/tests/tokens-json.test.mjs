@@ -142,3 +142,23 @@ test('the comparison fails on a copy with a changed, a missing or an out-of-plac
   assert.ok(differences(extraMix, json()).some((d) => d.startsWith('.h-extra')), 'unrecorded mix rule');
   assert.deepEqual(differences(base, json()), []);
 });
+
+test('the comparison fails on a copy with a duplicate or !important color declaration', () => {
+  const base = css();
+  // The last declaration matches tokens.json, but the !important one wins in the browser.
+  const dup = base.replace('--heat: #F04E12;', '--heat: #FF00FF !important; --heat: #F04E12;');
+  assert.notEqual(dup, base, 'plant site not found in tokens.css');
+  const found = differences(dup, json());
+  assert.ok(found.some((d) => d.includes('--heat is declared 2 times')), `duplicate declaration: ${found}`);
+  assert.ok(found.some((d) => d.includes('--heat') && d.includes('!important')), `!important: ${found}`);
+  const important = base.replace('--worth: #FFD60A;', '--worth: #FFD60A !important;');
+  assert.ok(differences(important, json()).some((d) => d.includes('--worth') && d.includes('!important')), 'single !important');
+});
+
+test('the comparison fails on a copy with a var() color that has a fallback or inner whitespace', () => {
+  const base = css();
+  const fallback = base + '\n:root { --heat: var(--worth, red); }\n';
+  assert.ok(differences(fallback, json()).some((d) => d.startsWith(':root: --heat')), 'var() with a fallback');
+  const spaced = base + '\n:root { --heat: var( --worth ); }\n';
+  assert.ok(differences(spaced, json()).some((d) => d.startsWith(':root: --heat')), 'var() with inner whitespace');
+});
