@@ -132,7 +132,12 @@ Spec review only; presentation gets Human QA in S-007.
 
 ## Completion Result
 
-Pending.
+Implementation delivered: schema/local writers, real build history, explicit
+unknown trial metrics and private assessment append/replay. TK-000L/P/Q retain
+candidate-specific live checks and test evidence. Private packets remain
+inaccessible to site clients; no trial result or evaluator qualification is
+inferred. Checked PR delivery, independent assembled Review and the native
+owner-QA completion gate remain distinct and pending; the Spec is not accepted.
 
 ## Remaining Limitations Or Follow-Up Specs
 
