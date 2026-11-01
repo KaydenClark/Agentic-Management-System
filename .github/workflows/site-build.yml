@@ -5,7 +5,7 @@ name: site builds
 on:
   pull_request:
     branches: [dev, main]
-    paths: ["site/**", ".github/workflows/site-build.yml"]
+    paths: ["site/**", "grill-board/theme/**", ".github/workflows/site-build.yml"]
 
 permissions:
   contents: read
