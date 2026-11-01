@@ -3,12 +3,13 @@
 **Task ID:** TK-000O
 **Spec ID:** S-002
 **Slice:** Historical finding identity cannot bypass Regression or repaired-revision acceptance
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Scoring; Stops
 **Planned verification:** Red/green collision fixture at score/record seams; independent review; final-head CI.
 **Claimed by:** codex-s002
 **Current claimant:** codex-s002
+**Proof:** 42 focused; CI #38 pass
 
 ## Assignment
 
@@ -35,3 +36,9 @@ S-006 and real trials remain blocked as recorded in the Spec. Required final-hea
 ## Final source verification
 
 Candidate `3a607f8f3470cc276aa8e93a2b1ee941cf3f6561`: 42 focused tests pass, independently repeated by the Spec reviewer. Both reviewers report no findings after probing missing/null/malformed source revisions, unchanged original/latest failures and distinct repaired revisions. CI workflow `41338924932` (run #38) passed. The new identity/revision regression was observed red then green. All three automated PR findings are repaired and resolved. Final closure changes only records; final-head CI remains a merge gate. No assembled S-002 Review, qualification, behavioral benefit or Human QA is implied.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s002-assessment-loop | ab607771763237701ff4f9217cc099e7e61286ab | ahead 0 behind 0 | 0 | 42 focused; CI #38 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} | 9e992c4535d9b30e0b24cfb07eca91a91c673d2879ed900f531310ee88d39c7b |
