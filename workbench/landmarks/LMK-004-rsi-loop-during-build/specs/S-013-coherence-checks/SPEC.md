@@ -93,6 +93,7 @@ node workbench/tools/spec-workbench.mjs doctor
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
 | 2026-11-01 | TK-001 | Task closed | node --test workbench/tools/coherence-drift.test.mjs: 4 pass at 6848b75; clean-clone run with only git; report workbench/feedback/coherence/DRIFT-2026-11-01.md (main 0a7d04e, dev b06d7db, 3 ahead, 0 behind) | workbench/feedback/coherence/DRIFT-2026-11-01.md; RUNBOOK not updated (at 2,996 of 3,000 chars, finding COH-005) | Grill Board item on breach (TK-005); thresholds 20 commits / 7 days are C's default pending owner choice; close attribution: {"agent":"orchestrator-C","claimant":"orchestrator-C","onBehalfOf":null} |
+| 2026-11-01 | TK-001 | Correction: check moved from `workbench/tools/` (managed runtime refused unreceipted files, `tools-receipt-missing`) to `src/ams/coherence/drift.py` on pinned Python 3.14; same fixture | `PYTHONPATH=src python3.14 -m unittest discover -s tests`: 4 pass; report regenerated (main 0a7d04e, dev 87a3576, 5 ahead, 0 behind) | workbench/feedback/coherence/DRIFT-2026-11-01.md | Receipt row 1 cites the removed Node path; superseded by this row |
 
 ## Review and Human QA
 
