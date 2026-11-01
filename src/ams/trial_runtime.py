@@ -27,12 +27,16 @@ def clean_environment(environ=None):
     return {key: values[key] for key in ENVIRONMENT if key in values}
 
 
-def claude_command(binary='claude'):
-    return [binary, '--restricted', '--safe-mode', '--tools', '', '--strict-mcp-config',
+def claude_command(binary='claude', *, system_prompt=None):
+    command = [binary, '--restricted', '--safe-mode', '--tools', '', '--strict-mcp-config',
             '--mcp-config', '{"mcpServers":{}}', '--no-chrome', '--disable-slash-commands',
             '--no-session-persistence', '--permission-mode', 'dontAsk', '--permission-prompts',
             'none', '--model', MODEL, '--effort', EFFORT, '--print', '--input-format',
             'stream-json', '--output-format', 'stream-json', '--verbose']
+    if system_prompt is not None:
+        require(isinstance(system_prompt, str) and bool(system_prompt.strip()), 'system prompt required')
+        command.extend(['--system-prompt', system_prompt])
+    return command
 
 
 def _count(value):
@@ -73,12 +77,12 @@ def _usage(event):
 
 
 class ClaudeAdapter:
-    def execute(self, prompt, *, cwd=None, transport=None):
+    def execute(self, prompt, *, cwd=None, transport=None, system_prompt=None):
         require(isinstance(prompt, str) and bool(prompt.strip()), 'prompt required')
         self.last_failure = None
         if transport is None:
             from ams.trial_transport import ClaudeProcess
-            stream = ClaudeProcess(cwd)
+            stream = ClaudeProcess(cwd, system_prompt=system_prompt)
         else:
             stream = transport
         try:

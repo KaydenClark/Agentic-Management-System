@@ -223,3 +223,7 @@ Supersedes: none
 
 Kayden corrected the proposed percentage margin: "It should actually work, if it doesnt work, then dont retain it." No one-third threshold was accepted. Judge the intended interview outcome; a failure vetoes retention. Existing requirements for demonstrated useful benefit, noise-floor and controls remain, so unchanged baseline success is not improvement. The authorized first comparison is explicitly tool-free transcript interview preservation, separate from native document capture and host discovery.
 <!-- /jot-entry -->
+
+### TK-002 preparation, 2026-11-01
+
+The sole primary writer resumed original TK-002 after reviewed S-006 private/trial inputs and accepted bootstrap merge `17293a09d55806342442e57e6253984e20cdb7b8`. Formal S-006 QA remains separate. [Frozen protocol](../../evals/INTERVIEW-NOISE.md) defines exact narrow calibration, same-version noise, protected evidence, cancellation and honest Unknown handling. Code delivery alone releases no model series or candidate retention. No qualification, measured floor or improvement is claimed by this preparation.

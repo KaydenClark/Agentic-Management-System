@@ -105,3 +105,5 @@ good/do-nothing examples plus applicable adverse controls; then run original
 TK-002's repeated same-version cases and TK-003's control arms. A useful-benefit
 claim additionally needs paired comparisons, retained failures, affected r1 checks
 and fresh deciding evidence. A preparation pass establishes none of these.
+
+[Noise-floor protocol](INTERVIEW-NOISE.md) describes the separately released five-call narrow qualification and nine same-version evaluations. Preparation remains model-free; actual calls need the selected accepted reference.
