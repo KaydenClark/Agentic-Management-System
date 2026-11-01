@@ -3,10 +3,12 @@
 **Task ID:** TK-000N
 **Spec ID:** S-002
 **Slice:** A retained historical finding can acquire its missing mapping and pass an explicit repaired-revision retest
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Cycle; Stops (historical finding recovery)
 **Planned verification:** Red/green CLI record/readback case, refusal of conflicting remaps, no resolution by enrichment alone; full suite and room checks.
+**Claimed by:** codex-s002
+**Current claimant:** codex-s002
 
 ## Assignment
 
