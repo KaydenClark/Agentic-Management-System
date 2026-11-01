@@ -43,7 +43,7 @@ from pathlib import Path
 from typing import Mapping
 from urllib.parse import quote
 
-from ams import keycheck, writer
+from ams import keycheck, source_rules, writer
 
 REPO_ROOT = keycheck.REPO_ROOT
 RUN_TABLE = "rsi_runs"
@@ -54,9 +54,8 @@ ARMS = ("ams", "no_ams", "plain_instructions")
 SPLITS = ("dev", "held_out")
 RUN_STATES = ("running", "completed", "stopped", "failed")
 EXECUTION_STATES = ("completed", "runner_error", "auth_error", "timeout", "capped")
-STRENGTHS = ("recorded_fact", "anecdote", "single_trial", "repeated_trials",
-             "held_out_with_interval")
-SOURCE_KINDS = ("commit", "pr", "path", "jot")
+STRENGTHS = source_rules.STRENGTHS
+SOURCE_KINDS = source_rules.SOURCE_KINDS
 BOOKKEEPING = ("id", "version", "recorded_at", "updated_at")
 STALE = "PT409"
 CLIENT_PROBE_SUFFIX = "-client"
@@ -104,13 +103,15 @@ def _count(row, column, minimum=0):
 
 def _common(row):
     _choice(row, "arm", ARMS)
-    for column in ("provider", "model", "effort", "source_ref"):
+    for column in ("provider", "model", "effort"):
         _label(row, column)
     # The skills pin first, so its absence is the reason given (ADR-002R).
     for column in ("skills_commit", "runtime_commit", "controls_commit", "grader_version"):
         _commit(row, column)
-    _choice(row, "source_kind", SOURCE_KINDS)
-    _choice(row, "strength", STRENGTHS)
+    try:
+        source_rules.check_source(row)
+    except ValueError as error:
+        raise Refused(str(error)) from None
     if not isinstance(row.get("is_test"), bool):
         raise Refused("refused: is_test must be true or false")
 
