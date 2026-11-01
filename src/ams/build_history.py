@@ -29,7 +29,9 @@ are refused, because a row must link a source others can open.
 
 Commands: ``ams-history import [--dry-run] [--ref REF ...]`` writes with the
 service key; ``ams-history readcheck [--ref REF ...]`` reads every row back with
-the publishable key and compares it with the records. No key is ever printed.
+the publishable key and compares it with the records; it fails on any record
+without a row and on any row no record derives (``extra``), so a hand-typed row
+fails it. No key is ever printed.
 """
 
 from __future__ import annotations
@@ -138,7 +140,7 @@ def validate(row: Mapping) -> None:
     for name in ("subject", "summary"):
         if not isinstance(row.get(name), str) or not row[name].strip():
             raise ValueError(f"row without {name}: {row.get('kind')}")
-    source_rules.check_source(row)  # the rule every site table shares (TK-005)
+    source_rules.check_source(row, table="build_events")  # the rule every site table shares (TK-005)
     if row.get("source_kind") not in SOURCE_KINDS:
         raise ValueError(f"row without a source kind: {row.get('kind')}")
     if not isinstance(row.get("source_ref"), str) or not row["source_ref"].strip():
@@ -627,10 +629,12 @@ def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page:
         print(f"{kind}: records {count}, rows {seen.get(kind, 0)}")
     print(f"missing: {len(missing)}\nextra: {len(extra)}\nunsourced: {len(unsourced)}")
     print(f"in time order: {'yes' if times == sorted(times) else 'no'}")
+    for key in sorted(extra):  # a row no record derives: hand-typed, fabricated or stale
+        print("extra: " + " ".join(key))
     for row in visible:
         if row["kind"] in ("return", "correction", "correction_fix"):
             print(f"{row['kind']}: {row['occurred_at']} {row['source_ref']} {row.get('summary', '')}")
-    return 0 if not missing and not unsourced and times == sorted(times) else 1
+    return 0 if not (missing or extra or unsourced) and times == sorted(times) else 1
 
 
 # --- command line ------------------------------------------------------------

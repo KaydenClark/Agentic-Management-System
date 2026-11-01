@@ -101,7 +101,7 @@ def _count(row, column, minimum=0):
         raise Refused(f"refused: {column} must be a number >= {minimum}")
 
 
-def _common(row):
+def _common(row, table):
     _choice(row, "arm", ARMS)
     for column in ("provider", "model", "effort"):
         _label(row, column)
@@ -109,7 +109,7 @@ def _common(row):
     for column in ("skills_commit", "runtime_commit", "controls_commit", "grader_version"):
         _commit(row, column)
     try:
-        source_rules.check_source(row)
+        source_rules.check_source(row, table=table)
     except ValueError as error:
         raise Refused(str(error)) from None
     if not isinstance(row.get("is_test"), bool):
@@ -117,14 +117,14 @@ def _common(row):
 
 
 def check_run(row: Mapping) -> None:
-    _common(row)
+    _common(row, RUN_TABLE)
     _label(row, "run_key")
     _choice(row, "state", RUN_STATES)
     _label(row, "started_at")
 
 
 def check_result(row: Mapping) -> None:
-    _common(row)
+    _common(row, RESULT_TABLE)
     _count(row, "run_id", 1)
     _label(row, "task_id")
     _choice(row, "split", SPLITS)
@@ -132,9 +132,13 @@ def check_result(row: Mapping) -> None:
     _choice(row, "execution_state", EXECUTION_STATES)
     for column in ("cost_usd", "input_tokens", "output_tokens", "turns", "wall_seconds"):
         _count(row, column)
-    graded = row.get("passed") is not None or row.get("score") is not None
-    if (row["execution_state"] == "completed") != graded:
-        raise Refused("refused: only a completed trial carries passed or score")
+    # A completed trial needs passed: pass rate and cost per pass need it (ADR-002J);
+    # score is optional detail beside it.
+    completed = row["execution_state"] == "completed"
+    if completed != (row.get("passed") is not None):
+        raise Refused("refused: a completed trial, and only one, carries passed")
+    if row.get("score") is not None and not completed:
+        raise Refused("refused: only a completed trial carries a score")
 
 
 CHECKS = {RUN_TABLE: check_run, RESULT_TABLE: check_result}

@@ -34,11 +34,13 @@ GOOD_SOURCE = {"source_kind": "path", "source_ref": "evals/runs/one.json",
 class FakePostgrest:
     """PostgREST plus the migrations' source rules, for all three site tables."""
 
-    def __init__(self, *, enforce_sources=True, hide_test_rows=True):
+    def __init__(self, *, enforce_sources=True, hide_test_rows=True,
+                 enforce_trial_strength=True):
         self.tables = {table: {} for table in TABLES}
         self.next_id = 1
         self.enforce_sources = enforce_sources
         self.hide_test_rows = hide_test_rows
+        self.enforce_trial_strength = enforce_trial_strength
         self.calls = []
 
     def __call__(self, method, url, headers, body):
@@ -72,6 +74,8 @@ class FakePostgrest:
                         return 400, json.dumps({"code": "23502", "message": message}).encode()
                 if (not payload["source_ref"].strip()
                         or payload["strength"] not in source_rules.STRENGTHS
+                        or (self.enforce_trial_strength and table != "build_events"
+                            and payload["strength"] == "recorded_fact")
                         or payload["source_kind"] not in source_rules.SOURCE_KINDS):
                     return 400, json.dumps({"code": "23514", "message": "check"}).encode()
             row = dict(payload, id=self.next_id, version=1)
@@ -115,20 +119,34 @@ def test_the_closed_strength_list_keeps_recorded_fact_and_the_four_trial_labels(
 ])
 def test_a_row_without_a_source_or_with_an_unlisted_strength_is_refused(changes, column):
     with pytest.raises(ValueError, match=column):
-        source_rules.check_source({**GOOD_SOURCE, **changes})
+        source_rules.check_source({**GOOD_SOURCE, **changes}, table="rsi_results")
 
 
 def test_a_url_alone_is_not_a_source():
     row = {"source_url": "https://github.com/x/y/pull/1", "strength": "anecdote"}
     with pytest.raises(ValueError, match="source_kind"):
-        source_rules.check_source(row)
+        source_rules.check_source(row, table="build_events")
 
 
 @pytest.mark.parametrize("strength", ["recorded_fact", "anecdote", "single_trial",
                                       "repeated_trials", "held_out_with_interval"])
-def test_every_listed_strength_with_a_source_is_accepted(strength):
+def test_every_listed_strength_with_a_source_is_accepted_on_build_events(strength):
     source_rules.check_source({**GOOD_SOURCE, "strength": strength,
-                               "source_url": "https://github.com/x"})
+                               "source_url": "https://github.com/x"}, table="build_events")
+
+
+@pytest.mark.parametrize("table", ["rsi_runs", "rsi_results"])
+def test_recorded_fact_is_for_build_history_only(table):
+    # Review M2: an RSI row is graded evidence, never a fact read from records.
+    with pytest.raises(ValueError, match="recorded_fact"):
+        source_rules.check_source({**GOOD_SOURCE, "strength": "recorded_fact"}, table=table)
+    for strength in source_rules.TRIAL_STRENGTHS:
+        source_rules.check_source({**GOOD_SOURCE, "strength": strength}, table=table)
+
+
+def test_a_check_names_its_table():
+    with pytest.raises(ValueError, match="table"):
+        source_rules.check_source(GOOD_SOURCE, table="elsewhere")
 
 
 # --- every writer applies it before sending -----------------------------------
@@ -170,6 +188,16 @@ def test_the_rsi_writer_refuses_before_sending(table, changes, column):
     assert http.calls == []
 
 
+@pytest.mark.parametrize("table", ["rsi_runs", "rsi_results"])
+def test_the_rsi_writer_refuses_recorded_fact_before_sending(table):
+    run, result = rsi_rows._probe_rows(HEAD, "k")
+    row = run if table == "rsi_runs" else rsi_rows.result_for(dict(run, id=1), **result)
+    http = FakePostgrest()
+    with pytest.raises(rsi_rows.Refused, match="recorded_fact"):
+        rsi_rows.Store(URL, FAKE_SECRET, http).insert(table, {**row, "strength": "recorded_fact"})
+    assert http.calls == []
+
+
 def test_the_history_importer_applies_the_shared_rule():
     good = {"kind": "commit", "subject": "s", "summary": "s",
             "occurred_at": "2026-11-01T00:00:00Z", "source_kind": "commit", "source_ref": HEAD,
@@ -196,6 +224,13 @@ def test_the_database_lists_match_the_writer_lists():
         assert body, domain
         listed = tuple(re.findall(r"'([a-z_]+)'", body.group(1)))
         assert listed == values, domain
+
+
+@pytest.mark.parametrize("table", ["rsi_runs", "rsi_results"])
+def test_the_database_refuses_recorded_fact_on_rsi_tables(table):
+    sql = _migrations()
+    assert re.search(rf"alter table public\.{table}\s+add constraint {table}_trial_strength\s+"
+                     r"check \(strength <> 'recorded_fact'\)", sql), table
 
 
 @pytest.mark.parametrize("table", TABLES)
@@ -229,6 +264,10 @@ def test_livecheck_proves_every_refusal_and_hidden_test_row_then_leaves_nothing(
             assert f"{table} {case}: refused by the writer" in out
             assert re.search(rf"{table} {case}: refused by the database \(code 235(02|14)", out)
         assert f"{table} test rows: service key sees 1, site key sees 0" in out
+    for table in ("rsi_runs", "rsi_results"):
+        assert f"{table} strength recorded_fact: refused by the writer" in out
+        assert f"{table} strength recorded_fact: refused by the database (code 23514)" in out
+    assert "build_events strength recorded_fact" not in out
     assert "cleanup: remaining 0" in out
     assert http.tables == {table: {} for table in TABLES}
     for method, url, headers, body in http.calls:
@@ -241,6 +280,7 @@ def test_livecheck_proves_every_refusal_and_hidden_test_row_then_leaves_nothing(
 @pytest.mark.parametrize("broken,flag", [
     ("enforce_sources", "build_events no source: ACCEPTED by the database"),
     ("hide_test_rows", "rsi_results test rows: service key sees 1, site key sees 1"),
+    ("enforce_trial_strength", "rsi_runs strength recorded_fact: ACCEPTED by the database"),
 ])
 def test_livecheck_fails_when_a_rule_is_not_enforced_and_still_cleans_up(capsys, broken, flag):
     http = FakePostgrest(**{broken: False})

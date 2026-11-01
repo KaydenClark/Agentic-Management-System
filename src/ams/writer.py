@@ -124,7 +124,7 @@ def _call(http: Http, method: str, url: str, key: str, payload=None):
 
 def insert_event(url: str, key: str, http: Http, row: Mapping):
     """Insert one build_events row after the shared source rule; raises ValueError first."""
-    source_rules.check_source(row)
+    source_rules.check_source(row, table="build_events")
     return _call(http, "POST", _rest(url), key, dict(row))
 
 
