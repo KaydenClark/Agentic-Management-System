@@ -90,6 +90,17 @@ function PointItem({ point, rowsBase, placeId }: { point: Point; rowsBase: strin
         <code data-label="">
           runtime {short(point.version.runtime)} · controls {short(point.version.controls)} · skills {short(point.version.skills)}
         </code>
+        {point.labels.length > 0 ? (
+          <>
+            , candidate label{" "}
+            {point.labels.map((l, i) => (
+              <span key={l}>
+                {i > 0 ? ", " : null}
+                <code data-label="">{l}</code>
+              </span>
+            ))}
+          </>
+        ) : null}
       </p>
       <p className={styles.counts}>
         {point.counts.map((c, i) => (

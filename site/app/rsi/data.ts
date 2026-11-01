@@ -26,7 +26,7 @@ interface Provenance {
   source_url: string | null;
   strength: Strength;
   is_test: boolean;
-  detail: Readonly<Record<string, unknown>>;
+  detail?: Readonly<Record<string, unknown>> | null; // S-002 row contract keys; any may be absent
 }
 
 export interface RsiRun extends Provenance {
@@ -65,7 +65,7 @@ export interface SystemVersion {
   skills: string;
 }
 
-export type MarkKind = "regression" | "variant" | "removed" | "stop-rule";
+export type MarkKind = "regression" | "variant" | "removed" | "disposition" | "stop-rule" | "failed-run";
 
 export interface Mark {
   kind: MarkKind;
@@ -87,6 +87,7 @@ export interface Point {
   runs: readonly RsiRun[];
   counts: readonly Count[];
   marks: readonly Mark[];
+  labels: readonly string[];
 }
 
 export interface Series {
@@ -116,17 +117,47 @@ const versionOf = (r: Provenance): SystemVersion => ({
 
 const text = (v: unknown): string | undefined => (typeof v === "string" && v.trim() ? v.trim() : undefined);
 
+// S-002's stop rules in plain words (detail.stop_rule on a stopped run).
+export const STOP_RULE_TEXT: Readonly<Record<string, string>> = {
+  three_strikes: "three strikes: the same failure came back after two fixes",
+  paid_plan_requested: "a paid plan was requested, which needs the owner",
+  meter_spent: "the owner's token meter is spent",
+  owner_stop: "the owner stopped the loop",
+};
+
+const DISPOSITION_TEXT: Readonly<Record<string, string>> = {
+  retain: "Retained: the round kept this change",
+  revise: "Revised: the round sent this change back for revision",
+};
+
+// Reads rsi_runs.detail by the S-002 row contract. Every key is optional; a
+// missing or mistyped key is absent, never an error.
 function runMarks(runs: readonly RsiRun[]): Mark[] {
   const marks: Mark[] = [];
-  const dispositions = new Set(runs.map((r) => text(r.detail?.disposition)?.toLowerCase()).filter(Boolean));
-  if (dispositions.has("variant") || dispositions.has("revise")) marks.push({ kind: "variant", label: "Variant: a revised form of an earlier change" });
-  if (dispositions.has("remove") || dispositions.has("removed")) marks.push({ kind: "removed", label: "Removed version: the loop took this change out" });
-  const stopped = runs.filter((r) => r.state === "stopped" || text(r.detail?.stop_rule));
-  if (stopped.length > 0) {
-    const rules = [...new Set(stopped.map((r) => text(r.detail?.stop_rule)).filter((s): s is string => !!s))];
-    marks.push({ kind: "stop-rule", label: "Stop rule fired", detail: rules.length ? rules.join("; ") : undefined });
+  const detail = (r: RsiRun): Readonly<Record<string, unknown>> => (r.detail && typeof r.detail === "object" ? r.detail : {});
+  const dispositions = new Set(runs.map((r) => text(detail(r).disposition)).filter((d): d is string => !!d));
+  if (runs.some((r) => detail(r).variant === true)) {
+    marks.push({ kind: "variant", label: "Variant: tried beside the accepted line; it never advances it" });
   }
+  if (dispositions.has("remove")) marks.push({ kind: "removed", label: "Removed version: the round took this change out" });
+  for (const d of ["retain", "revise"]) if (dispositions.has(d)) marks.push({ kind: "disposition", label: DISPOSITION_TEXT[d] });
+  const stopped = runs.filter((r) => r.state === "stopped");
+  if (stopped.length > 0) {
+    const parts = stopped.map((r) => {
+      const code = text(detail(r).stop_rule);
+      const rule = code ? STOP_RULE_TEXT[code] ?? code.replace(/_/g, " ") : "rule not recorded";
+      const note = text(detail(r).stop_note);
+      return note ? `${rule}. Note: ${note}` : rule;
+    });
+    marks.push({ kind: "stop-rule", label: "Stop rule fired", detail: [...new Set(parts)].join("; ") });
+  }
+  if (runs.some((r) => r.state === "failed")) marks.push({ kind: "failed-run", label: "Failed run: the run itself failed; this is not a stop rule" });
   return marks;
+}
+
+// The candidate version labels the loop gave this version's runs.
+function versionLabels(runs: readonly RsiRun[]): string[] {
+  return [...new Set(runs.map((r) => (r.detail && typeof r.detail === "object" ? text(r.detail.version) : undefined)).filter((v): v is string => !!v))];
 }
 
 function counts(rows: readonly RsiResult[]): Count[] {
@@ -182,7 +213,7 @@ export function seriesViews(data: RsiData): SeriesView[] {
       for (const [vid, vrows] of [...byVersion.entries()].sort((a, b) => order.get(a[0])! - order.get(b[0])!)) {
         const sorted = [...vrows].sort((a, b) => a.task_id.localeCompare(b.task_id) || a.run_id - b.run_id || a.trial - b.trial);
         const vruns = [...new Set(sorted.map((r) => r.run_id))].map((id) => runs.get(id)!);
-        const point: Point = { version: versions[order.get(vid)!], rows: sorted, runs: vruns, counts: counts(sorted), marks: runMarks(vruns) };
+        const point: Point = { version: versions[order.get(vid)!], rows: sorted, runs: vruns, counts: counts(sorted), marks: runMarks(vruns), labels: versionLabels(vruns) };
         const prev = points[points.length - 1];
         if (prev && passShareDrop(prev, point)) {
           point.marks = [{ kind: "regression", label: "Regression: fewer graded trials passed than on the prior version" }, ...point.marks];
