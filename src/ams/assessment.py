@@ -186,7 +186,7 @@ def _findings(p, runs, previous):
         require(bool(regressions) or bool(retest.get('regressionExclusionReason','').strip()), 'retest needs affected regressions or justified exclusion')
         checks = [original, *regressions]
         ok = (retest.get('revision') == p['candidate'] and original == finding.get('checkId')
-              and p['candidate'] != finding.get('candidate')
+              and p['candidate'] != finding.get('lastCandidate',finding.get('candidate'))
               and finding.get('class') in ('Critical','Regression','Quality')
               and all(any(r['id']==cid and r['result']=='Yes' and r['complete'] and r['qualified']
                           for r in run['rows']) for run in runs for cid in checks))
@@ -212,7 +212,7 @@ def score(p, previous_findings=()):
     complete = all(row['complete'] for run in runs for row in run['rows'])
     qualified = (p['evaluator']['qualification']=='qualified' and
                  all(row['qualified'] for run in runs for row in run['rows']))
-    blocking = any(f.get('class') not in ('Critical','Regression','Quality') or
+    blocking = any(f.get('checkId') not in CHECKS or f.get('class') not in ('Critical','Regression','Quality') or
                    (f['status'] != 'verified-resolved' and f['class'] in ('Critical','Regression')) for f in findings)
     accepted = bool(applicable and level in ('Stable','Excellent') and complete and qualified and not blocking)
     return {'assessmentId':p['assessmentId'],'candidate':p['candidate'],'scope':p['scope'],

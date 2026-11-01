@@ -50,7 +50,7 @@ The JSON example supplies the shape. Required fields:
 - `retests`: optional `findingId`, repaired `revision`, `originalCheckId` and
   `regressionCheckIds`, or a substantive `regressionExclusionReason`. Resolution
   requires qualified Yes evidence for the original and all named regressions in
-  all three runs on a revision different from the original finding. An exclusion
+  all three runs on a revision different from the latest failure, including recurrence. An exclusion
   is an assessor judgment; the CLI checks its presence, not its correctness.
 
 Rows may be Yes, No or N/A with a reason. Unknown, Unrun, refused, interrupted,

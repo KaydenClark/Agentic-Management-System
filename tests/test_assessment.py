@@ -256,3 +256,33 @@ def test_unknown_model_cannot_claim_qualification():
     p['evaluator']['model'] = 'unknown'
     with pytest.raises(assessment.Refused,match='exact model'):
         assessment.score(p)
+
+
+def test_historical_class_without_check_mapping_still_blocks_acceptance():
+    p = packet()
+    p['historicalFindings'] = [{'findingId':'unmapped-quality','class':'Quality'}]
+    assert not assessment.score(p)['assessmentAccepted']
+
+
+def test_recurrence_needs_repair_after_its_latest_failed_revision(tmp_path):
+    p = packet(('A04-04',))
+    p['runs'][0]['rows'][0]['result'] = 'No'
+    fid = assessment.record(p,tmp_path)['findings'][0]['findingId']
+    p.update(assessmentId='fix-one',attempt=1,candidate='f'*40)
+    for run in p['runs']:
+        run['rows'][0].update(result='Yes',evidence=evidence('f'*40))
+    p['evaluator']['qualificationEvidence'] = evidence('f'*40)
+    p['retests'] = [{'findingId':fid,'revision':'f'*40,'originalCheckId':'A04-04',
+                    'regressionExclusionReason':'No other workflow in this synthetic fixture'}]
+    assert assessment.record(p,tmp_path)['findings'][0]['status']=='verified-resolved'
+    p.update(assessmentId='recurrence',attempt=2)
+    p['retests']=[]
+    p['runs'][0]['rows'][0]['result']='No'
+    assert assessment.record(p,tmp_path)['findings'][0]['status']=='recurred'
+    p.update(assessmentId='same-revision-retry',attempt=3)
+    p['runs'][0]['rows'][0]['result']='Yes'
+    p['retests'] = [{'findingId':fid,'revision':'f'*40,'originalCheckId':'A04-04',
+                    'regressionExclusionReason':'No affected regression'}]
+    r=assessment.record(p,tmp_path)
+    assert r['findings'][0]['status']=='recurred'
+    assert not r['assessmentAccepted'] and r['nextAction']=='stop'

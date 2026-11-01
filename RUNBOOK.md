@@ -62,5 +62,5 @@ Keep keys and `AMS_LIVE` out of CI.
 
 Non-site: feature branch -> checked PR -> merge commit into `main`, delete branch.
 Site: feature -> checked `dev`; only the owner merges `dev` -> `main`.
-Report pushed, merged and deployed separately. Reopen Spec/Task and Wiki for
-recovery; local adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+Report push, merge and deploy separately. Reopen Spec/Task and Wiki for
+recovery; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
