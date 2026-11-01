@@ -141,6 +141,16 @@ test('a recorded token redeclared outside its recorded rule is reported, whateve
   assert.ok(differences(planted, json()).some((d) => d.includes('--soft-pct')), 'out-of-place percentage override');
 });
 
+test('only the exact recorded theme rules count, each exactly once', () => {
+  // Codex review on PR #32: any rule inside a dark-preference media query was accepted as the dark theme.
+  const darkDecls = Object.entries(json().themes.dark).map(([k, v]) => `${k}: ${v};`).join(' ');
+  const outOfScope = css() + `\n@media (prefers-color-scheme: dark) { [data-theme="light"] { ${darkDecls} } }\n`;
+  assert.ok(differences(outOfScope, json()).length > 0, 'dark-preference rule scoped to the light theme');
+  const lightDecls = Object.entries(json().themes.light).map(([k, v]) => `${k}: ${v};`).join(' ');
+  const twice = css() + `\n[data-theme="light"] { ${lightDecls} }\n`;
+  assert.ok(differences(twice, json()).length > 0, 'a second light-theme rule');
+});
+
 test('the comparison fails on a copy with a planted stray color', () => {
   const planted = css().replace('--heat: #F04E12;', '--heat: #F04E12;\n  --stray: #FF00FF;');
   assert.notEqual(planted, css(), 'plant site not found in tokens.css');
