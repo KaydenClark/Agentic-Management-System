@@ -24,8 +24,8 @@ Hand back to S-006 with `close`; the proof is the test output and the live run's
 
 ## Acceptance
 
-- [ ] With the real key loaded, the command reports `loaded: yes`, the right format label and `authenticated: yes`.
-- [ ] With the variable unset, it reports `loaded: no` and exits non-zero.
-- [ ] With a fake `sb_secret_` key and with a fake JWT, tests show the format is recognized and Supabase's refusal is reported as `authenticated: no`.
-- [ ] A test captures stdout, stderr and logs from every path and fails if any contains the fake key or a substring of it longer than its format prefix.
-- [ ] `uv run pytest` passes; the hygiene grep finds no key in the diff.
+- [x] With the real key loaded, the command reports `loaded: yes`, the right format label and `authenticated: yes`.
+- [x] With the variable unset, it reports `loaded: no` and exits non-zero.
+- [x] With a fake `sb_secret_` key and with a fake JWT, tests show the format is recognized and Supabase's refusal is reported as `authenticated: no`.
+- [x] A test captures stdout, stderr and logs from every path and fails if any contains the fake key or a substring of it longer than its format prefix.
+- [x] `uv run pytest` passes; the hygiene grep finds no key in the diff.
