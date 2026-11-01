@@ -12,6 +12,11 @@ the page showed it (their SHA-256 at render differs from HEAD now), when
 either file has uncommitted changes, or when the target path leaves the
 repository, crosses a symlink or names `.git` (ADR-002U). Nothing is deleted
 or renumbered: answers are inserted, never replaced.
+
+Rating and flagging a card (DDR-000J) use the same path: the same lock,
+the same check that the card is what the page showed, and one
+compare-and-swap commit, of the card alone, with a `## Rating` or `## Flag`
+section appended.
 """
 
 import contextlib
@@ -23,6 +28,8 @@ import subprocess
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
+
+from .cards import FLAG_LINE, RATINGS
 
 VERDICTS = {
     "confirm": "Confirm",
@@ -221,14 +228,40 @@ def answer(cards_dir, card, verdict, note, card_sha, record_sha, now=None):
         return _answer(cards_dir, card, verdict, note, card_sha, record_sha, now)
 
 
-def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
-    if verdict not in VERDICTS:
-        raise AnswerRefused(f"unknown verdict {verdict!r}")
-    label, note = VERDICTS[verdict], (note or "").strip()
-    if card.answer is not None:
-        raise AnswerRefused(f"{card.file} is already answered")
-    if verdict != "confirm" and not note:
-        raise AnswerRefused("a return needs a note saying what should change")
+def rate(cards_dir, card, rating, comment, card_sha, now=None):
+    """Append a 1-5 `## Rating` to the card and commit it (DDR-000J). Ratings
+    are allowed on answered and flagged cards; a later rating is appended,
+    never replacing an earlier one."""
+    if rating not in RATINGS:
+        raise AnswerRefused(f"a rating is a whole number from 1 to 5, not {rating!r}")
+    with repository_lock(repo_root(cards_dir)):
+        when = _stamp(now)
+        section = f"## Rating\n\n**Rating:** {rating} of 5\n**Rated:** {when}\n"
+        return _append_to_card(cards_dir, card, card_sha, section, comment,
+                               f"Grill Board: rate {card.file} {rating} of 5",
+                               "The owner rated this question; ratings are committed records the RSI loop reads (DDR-000J).")
+
+
+def flag(cards_dir, card, comment, card_sha, now=None):
+    """Append the `## Flag` (too taxing) section to the card and commit it.
+    The card is then held for rewrite: it leaves the queue and its question
+    cannot be asked again unchanged (DDR-000J)."""
+    with repository_lock(repo_root(cards_dir)):
+        if card.flag is not None:
+            raise AnswerRefused(f"{card.file} is already flagged too taxing")
+        section = f"## Flag\n\n{FLAG_LINE}\n**Flagged:** {_stamp(now)}\n"
+        return _append_to_card(cards_dir, card, card_sha, section, comment,
+                               f"Grill Board: flag {card.file} too taxing",
+                               "The owner flagged this question too taxing; it is rewritten before it is asked again (DDR-000J).")
+
+
+def _stamp(now):
+    return (now or datetime.now(timezone.utc)).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _checked_card(cards_dir, card, card_sha):
+    """(root, base, card_rel, card_file, mode, committed bytes) once the branch
+    is attached and the card is exactly what the page showed. Call under the lock."""
     root = repo_root(cards_dir)
     if not _git(root, "symbolic-ref", "-q", "--short", "HEAD").strip():
         raise AnswerRefused("HEAD is detached; answers commit on a branch")
@@ -237,8 +270,59 @@ def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
     card_file = Path(cards_dir) / card.file
     if card_file.is_symlink():
         raise AnswerRefused(f"the card {card_rel} is a symlink")
+    if card.sha and card.sha != card_sha:  # the parsed card must be the bytes being checked
+        raise AnswerRefused(f"the card {card_rel} changed since the page showed it; reload and read it again")
     card_mode, card_blob = _unchanged(root, base, card_rel, card_file, card_sha, "card")
-    when = (now or datetime.now(timezone.utc)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return root, base, card_rel, card_file, card_mode, card_blob
+
+
+def _appended(blob, relative, section, note):
+    """The card's committed text with one board section appended; nothing above changes."""
+    if note:
+        section += "\n" + _quote(note)
+    text = _text(blob, relative)
+    return (text + ("" if text.endswith("\n") else "\n") + "\n" + section).encode("utf-8")
+
+
+def _append_to_card(cards_dir, card, card_sha, section, note, subject, body):
+    root, base, card_rel, card_file, card_mode, card_blob = _checked_card(cards_dir, card, card_sha)
+    new = _appended(card_blob, card_rel, section, (note or "").strip())
+    return _write_and_commit(root, base, [(card_rel, card_file, card_mode, card_blob, new)], subject, body)
+
+
+def _write_and_commit(root, base, writes, subject, body):
+    """Swap in every write, commit exactly them on base by compare-and-swap,
+    and put back the committed bytes if anything fails. Call under the lock."""
+    if len({path.resolve() for _, path, *_ in writes}) != len(writes):
+        raise AnswerRefused("two writes would land in one file, so neither is written")
+    try:
+        for _, path, _, _, new in writes:
+            _replace(path, new)
+        commit = _commit_on(root, base, writes, subject, body)
+    except (AnswerRefused, OSError) as error:
+        for _, path, _, old, _ in writes:  # put back exactly the committed bytes this call replaced
+            _replace(path, old)
+        raise AnswerRefused(f"nothing was kept: {error}") from None
+    # The branch now holds the write; stage the same bytes so the tree reads clean.
+    try:
+        _git(root, "update-index", "--", *[relative for relative, *_ in writes])
+    except AnswerRefused as error:
+        raise AnswerWrittenIndexStale(f"committed {commit[:7]}, but refreshing the index failed ({error}); run git status") from None
+    return commit
+
+
+def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
+    if verdict not in VERDICTS:
+        raise AnswerRefused(f"unknown verdict {verdict!r}")
+    label, note = VERDICTS[verdict], (note or "").strip()
+    if card.answer is not None:
+        raise AnswerRefused(f"{card.file} is already answered")
+    if card.flag is not None:
+        raise AnswerRefused(f"{card.file} is flagged too taxing and held for rewrite; answer the rewritten card")
+    if verdict != "confirm" and not note:
+        raise AnswerRefused("a return needs a note saying what should change")
+    root, base, card_rel, card_file, card_mode, card_blob = _checked_card(cards_dir, card, card_sha)
+    when = _stamp(now)
     writes = []
     if verdict == "confirm":
         target, anchor = card.fields.get("Owner record", ""), card.fields.get("Write after", "")
@@ -264,24 +348,5 @@ def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
         subject = f"Grill Board: return {card.file} ({label})"
         body = "The owner returned this card with a note; an agent reworks it and posts it again before it is re-asked."
     section = f"## Answer\n\n**Verdict:** {label}\n**Answered:** {when}\n{recorded}"
-    if note:
-        section += "\n" + _quote(note)
-    card_text = _text(card_blob, card_rel)
-    card_text += ("" if card_text.endswith("\n") else "\n") + "\n" + section
-    writes.append((card_rel, card_file, card_mode, card_blob, card_text.encode("utf-8")))
-    if len({path.resolve() for _, path, *_ in writes}) != len(writes):
-        raise AnswerRefused("two writes would land in one file, so neither is written")
-    try:
-        for _, path, _, _, new in writes:
-            _replace(path, new)
-        commit = _commit_on(root, base, writes, subject, body)
-    except (AnswerRefused, OSError) as error:
-        for _, path, _, old, _ in writes:  # put back exactly the committed bytes this call replaced
-            _replace(path, old)
-        raise AnswerRefused(f"nothing was kept: {error}") from None
-    # The branch now holds the answer; stage the same bytes so the tree reads clean.
-    try:
-        _git(root, "update-index", "--", *[relative for relative, *_ in writes])
-    except AnswerRefused as error:
-        raise AnswerWrittenIndexStale(f"committed {commit[:7]}, but refreshing the index failed ({error}); run git status") from None
-    return commit
+    writes.append((card_rel, card_file, card_mode, card_blob, _appended(card_blob, card_rel, section, note)))
+    return _write_and_commit(root, base, writes, subject, body)
