@@ -30,12 +30,12 @@ Hand back to S-006 with `close`.
 
 ## Acceptance
 
-- [ ] A pinned readcheck passes with a later merge stored and fails, naming the key, on a missing earlier row.
-- [ ] A service-key edit to a real row's summary fails readcheck and is named.
-- [ ] Live after merge: missing 0, extra 0, content mismatches 0 at the new main SHA.
-- [ ] Livechecks name the expected constraint for every refusal; keycheck sends the writers' headers.
-- [ ] Spec: slice table filled, candidate cited, legacy-key and migration-drift limits recorded.
-- [ ] `uv run pytest` passes.
+- [x] A pinned readcheck passes with a later merge stored and fails, naming the key, on a missing earlier row.
+- [x] A service-key edit to a real row's summary fails readcheck and is named.
+- [x] Live after merge: missing 0, extra 0, content mismatches 0 at the new main SHA.
+- [x] Livechecks name the expected constraint for every refusal; keycheck sends the writers' headers.
+- [x] Spec: slice table filled, candidate cited, legacy-key and migration-drift limits recorded.
+- [x] `uv run pytest` passes.
 
 ## 2026-11-01 merge follow-up
 
@@ -48,3 +48,28 @@ Explicit refresh backfills that metadata. Runbook import/readcheck scopes now
 both include dev. Full checks and merge evidence are recorded in PR #65.
 The live database verification and Task acceptance remain unfinished; this merge
 request does not authorize accessing the local service key or refreshing live data.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s006-local-verification | 5aa2621ec03a1d419615374ec31e4c3db12069b6 | none | 0 | Main 5aa2621/dev c0f6c67: live history 943 rows, missing/extra/mismatch/unsourced 0; summary tamper detected/restored; key/writer/RSI/source livechecks pass; pytest 433 passed,4 skipped | S-006 SPEC; TK-000L live evidence and limits | Fresh assembled Review; S-002 assessment persistence and unknown metrics compatibility remain | 64e5bf35f977574ca99a1d4670c1acd3ce7ec656a66c49bd7a9e97c3de521e99 |
+
+## Resumed local verification, 2026-11-01
+
+Owner instruction: "Resume S-006’s approved local writer work, then continue S-002 through its authorized endpoint." This resumes approved local writer scope beyond the earlier merge-only limitation. The resumed implementor acts on behalf of recorded claimant `orch-b`; earlier Review verdicts remain.
+
+Verified main `5aa2621ec03a1d419615374ec31e4c3db12069b6`, dev `c0f6c67687f432cd75b55e7d4fdad460ea2f77db`:
+
+- `ams-keycheck`: loaded sb_secret, authenticated HTTP 200; no key printed.
+- `ams-history import --refresh-changed`: 292 inserted, 651 already recorded, 37 logged refreshes retaining previous values.
+- `ams-history readcheck --ref 5aa2621ec03a1d419615374ec31e4c3db12069b6 --dev-ref c0f6c67687f432cd75b55e7d4fdad460ea2f77db`: 943 rows; missing, extra, content mismatches and unsourced all 0; ordered; one newer row excluded. Pinned/missing/later-row regressions pass in pytest.
+- A live service-key summary edit on that main commit's real history row failed readcheck and named `mismatch: commit commit 5aa2621ec03a1d419615374ec31e4c3db12069b6: summary`. Original summary restored and read back in a finally block.
+- `ams-writer readcheck d2686e69e0c871aa309f4f7c5975e8518bc74b46`: site SELECT 200, two real rows, INSERT/UPDATE/DELETE 401, unchanged.
+- `ams-rsi livecheck`: missing skills pin and stale-update constraints refused; test rows hidden, all client writes refused; cleanup remaining 0.
+- `ams-sources livecheck`: each expected source/strength constraint named; test rows hidden on all tables; cleanup remaining 0.
+- `uv run pytest -q`: 433 passed, 4 skipped. Initial sandbox run could not bind loopback sockets; the authorized rerun with loopback permission passed.
+
+QA: all six Task criteria met. Native tasks/ records own slices; duplicate table rows are refused by the runtime. Legacy JWT remains fake-only; baseline migration drift remains documented. No trial or assessment rows invented. Task completion does not complete the Spec or its independent Review.
+
+Additional limit: `ams-writer record-merge` accepts GitHub's default `Merge pull request #...` title and refused main's custom `Merge PR #78` title; `ams-history` imported its actual commit and PR through the broader source route. S-002 still needs distinct assessment persistence and truthful unknown metrics; no real trial completion claimed.

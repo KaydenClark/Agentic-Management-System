@@ -15,7 +15,7 @@
 
 ## Intent and authority
 
-The owner decided that Python pushes RSI results to Supabase as they arrive and the site reads from it; everything the site shows, build history included, lives there. Token counts go with the RSI data. Secrets live only in Vercel and Supabase settings.
+The owner decided that Python pushes RSI results to Supabase as they arrive and the site reads from it; everything the site shows, build history included, lives there. Token counts go with the RSI data. The service key stays in the gitignored local environment; the site receives only its publishable key (owner coherence correction).
 
 ## Outcome
 
@@ -27,7 +27,7 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 
 ## Current Verified State
 
-- Candidate: the TK-000L merge (SHA, pinned readcheck in its Receipt). `rsi_*` empty until a real trial; import on demand.
+- Verified candidate: `5aa2621ec03a1d419615374ec31e4c3db12069b6`, dev `c0f6c67687f432cd75b55e7d4fdad460ea2f77db`; 943 history rows, missing/extra/content mismatches/unsourced all 0. [TK-000L](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01) owns live proof and limits. No real trial or assessment storage completion claimed.
 
 ## Desired Behavior
 
@@ -56,7 +56,7 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 
 ## Vertical Implementation Slices
 
-One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (the tool refuses table rows beside them): TK-001 to TK-005, TK-000B to TK-000E done; TK-000L open.
+One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (the tool refuses table rows beside them): TK-001 to TK-005, TK-000B to TK-000E done; TK-000L verification complete; native closure follows. Native Task records own slices; duplicate table rows are not permitted.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
