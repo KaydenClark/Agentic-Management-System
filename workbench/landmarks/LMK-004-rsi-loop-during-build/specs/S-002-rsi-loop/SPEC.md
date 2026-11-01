@@ -27,8 +27,9 @@ Outside research does not settle whether shaping an agent's environment improves
 
 ## Current Verified State
 
-- The runner and fixed eval set are unimplemented. S-006 has the writer and tables; the 2026-11-01 query found 0 non-test runs/results. Baseline means the current AMS repository implementation; no scored assessment exists yet.
-- Loop #1 adds fitness/alignment results, Stable/Excellent-only acceptance, three attempts per candidate, Supabase records and dev-site visibility. The owner confirmed r1 and paid-plan meter use, with baseline outside the attempt cap. [RSI context](../../../../wiki/context-ams-purpose.md#settled-answers-and-next-interview-question) preserves exact wording, corrections and remaining design questions. No scored result is claimed.
+- Runner/fixed eval set absent; S-006 has tables/writer; S-007 uses an empty fixture.
+- Main `a3d014e` baseline: Broken, 4/138; incomplete evidence and unqualified evaluators. [Report](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md). Three evidence reviews, no behavioral-trial or improvement claim; no strike consumed.
+- Owner answers and the pending bounded-scope question remain in the [RSI context](../../../../wiki/context-ams-purpose.md).
 
 ## Desired Behavior
 
@@ -111,6 +112,8 @@ node workbench/tools/spec-workbench.mjs show S-002
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion; campaign approval |
 | 2026-11-01 | none | Owner requested Loop #1 preparation and the first improvement wave, with fitness/alignment results, Stable/Excellent-only acceptance and a three-attempt stop. Captured source and interview frontier in the linked RSI context. | Read-only Supabase counts; dev source and READY deployment metadata inspected | Current Verified State; existing RSI context | Exact baseline pins; remaining design answers; Supabase-to-site reader and actual trials |
+
+| 2026-11-01 | baseline | Main a3d014e, attempt 0 | 4/138, Broken; incomplete/unqualified | Linked baseline report | Candidate scope; behavioral proof; storage/dev reader |
 
 ### Interview correction, 2026-11-01
 

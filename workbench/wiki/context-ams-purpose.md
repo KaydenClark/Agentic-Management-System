@@ -124,3 +124,16 @@ Supersedes: none
 
 Kayden directs merging current website and system work into main, then assessing main alone to save tokens. This authorizes this specific website promotion, not future dev-to-main promotions. The pre-build readback he supplies (planning revision 8756b29) preserves four landmarks, full website and local Grill Board scope, real Supabase-backed RSI presentation, six active Specs and meter-based execution. It was proposed then, so later decisions and corrections still govern, including the local writer secret and read-only website. Pin the checked resulting main revision as the baseline.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-aaa431d3-4eb0-4935-a246-aa22e801c8c1
+Kind: observation
+State: current
+Recorded: 2026-11-01T17:04:54.809Z
+Author: Codex
+Source: workbench/feedback/REPORT-rsi-baseline-2026-11-01.md
+Topic: ams-purpose
+Supersedes: none
+
+Merged-main baseline a3d014e assessed in three separate read-only r1 evidence-review contexts: Broken,4/138 passing checks (approximately2.90%); evidence incomplete,evaluators unqualified,not accepted. This is evidence coverage,not observed implementation failure rate or behavioral trials. The report and evals/rsi-loop-1/baseline-20261101 own counts and ledgers. No improvement strike consumed. Next interview question pending: bounded r1 scope plus affected regressions for each improvement,keeping whole-AMS fitness separate. Supabase assessment recording and the dev reader are still unimplemented; do not label these reviews as controlled trial rows.
+<!-- /jot-entry -->
