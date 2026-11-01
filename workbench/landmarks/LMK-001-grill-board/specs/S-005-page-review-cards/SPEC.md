@@ -8,8 +8,8 @@
 **Updated:** 2026-11-01
 **Catalog description:** A Grill Board review card for every website page, where the owner approves or criticizes the site and the criticism becomes the voice and taste record.
 **Blockers:** S-004
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning after S-004's card flow exists.
+**Latest event:** Four fresh-session Tasks planned; the Spec stays planned while the six-active-Spec cap is full.
+**Next gate:** Owner confirmation and execution approval to activate when an active slot frees.
 
 ## Intent and authority
 
@@ -17,7 +17,7 @@ The owner decided that approvals happen in chat until the Grill Board exists, an
 
 ## Outcome
 
-Every page of the website has a review card on the local board. The owner approves a page or says what is wrong with it. Approved pages lose their draft mark; criticism accumulates into a record agents follow when drafting.
+Every page of the website has a review card on the local board. The owner approves a page or says what is wrong with it. Approved pages lose their draft mark; criticism accumulates into a record agents follow when drafting. The build stops when the full site is on the protected `dev` deployment with a card for every page.
 
 ## Why It Matters
 
@@ -25,7 +25,8 @@ Without a durable approval tied to exact content, the site cannot honestly show 
 
 ## Current Verified State
 
-- No board and no site pages exist yet. The site's draft-mark rule lives in S-003.
+- The S-004 board serves committed cards from `grill-board/cards/` with Priority and Value; Confirm writes into an owning record; ratings and too-taxing flags commit on the card; every write holds one repository flock and moves the branch by compare-and-swap ([README](../../../../../grill-board/README.md)).
+- Orchestrator A, its only writer, keeps `site/page-list.json` on `dev`: path (stable), title, Spec, Task, `landed` {branch, commit, pr}, sources and status. It lists `/` and `/rsi`. No page shows a draft mark yet; that is S-003 TK-004.
 
 ## Desired Behavior
 
@@ -40,6 +41,9 @@ Without a durable approval tied to exact content, the site cannot honestly show 
 - Approval is bound to a content hash, never to a page name or date alone.
 - The voice record is built from the owner's recorded feedback; it is not owner-written prose.
 - Owner words appear on the site verbatim only with their source.
+- **Approval storage: a Supabase row mirrored from a committed file.** Confirm writes the approval into `grill-board/page-approvals.md` (the committed record, DDR-000X); the Python writer copies it to a `page_approvals` row with the local service key, and the site reads the row with the publishable key. Chosen because the site only presents and reads Supabase ([DDR-000O](../../../../docs/ddr/000O-the-public-site-only-presents-and-reads-supabase.md)) and reading repository files at build time was rejected ([ADR-003H](../../../../docs/adr/003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md)). A page is approved only while a row names its path and current content hash, so an edit restores the draft mark (S-003) with nothing deleted.
+- **Content hash** is SHA-256 over the canonical content of the served page's `<main id="main">`, excluding the footer, the review mark and regions marked `data-review-exclude`. TK-001 commits the contract and test vectors; S-003 TK-004 matches them.
+- Page review cards target `main`; nothing here changes `site/`.
 
 ## Non-Goals
 
@@ -54,27 +58,6 @@ Without a durable approval tied to exact content, the site cannot honestly show 
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Generate one review card per site page from the page list, with the page's content hash | ready | none | pending |
-| TK-002 | Approval writes a hash-bound record the site reads to drop the draft mark | ready | TK-001 | pending |
-| TK-003 | Criticism and ratings appended to the voice and taste record | ready | TK-001 | pending |
-
-### TK-001 - Card per page
-
-**Stance:** Builder
-
-Proves the coverage criterion.
-
-### TK-002 - Hash-bound approval
-
-**Stance:** Builder
-
-Proves the approval and draft-mark criteria.
-
-### TK-003 - Voice record
-
-**Stance:** Builder
-
-Proves the voice record criterion.
 
 ## Acceptance Criteria
 
@@ -89,24 +72,27 @@ Page ratings are loop inputs (S-002). The site shows draft or approved status pe
 
 ## Testing Seams
 
-- Fixture site page list and fixture records in a temporary Git repository; the S-003 draft-mark test.
+- Fixture page list and fixture served pages in a temporary Git repository, with the site build injected; the board's write path; the S-003 draft-mark test.
 
 ## Verification Procedure
 
 ```bash
 node workbench/tools/spec-workbench.mjs show S-005
-# Python test command named at Task planning
+uv run pytest
+uv run ams-pages check   # TK-000F: every listed page has a current card
 ```
 
 ## Documentation Impact
 
-- The voice and taste record gets a home and a pointer from the site's contributing notes.
+- `grill-board/README.md` gains page cards, the hash contract and the voice record.
+- The voice and taste record lives at `grill-board/voice-and-taste.md`; orchestrator A adds the pointer from the site's contributing notes on `dev`.
 
 ## Append-Only Evidence And Execution Log
 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
+| 2026-11-01 | none | Planned TK-001, TK-002, TK-003, TK-000F; approval storage chosen; not activated | render, doctor | this Spec, Task records | Every criterion |
 
 ## Review and Human QA
 
@@ -118,7 +104,8 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- none
+- Comparing ratings across pages and applying the difference is left to the RSI loop (S-002), reading the voice record.
+- S-003 TK-004 names a committed approval record; orchestrator A reads the `page_approvals` row instead.
 
 ## Supersession
 
