@@ -80,6 +80,9 @@ continuation record, not evidence of a completed improvement or a paid campaign.
 - Use approved Alignment Check r1: three assessment runs per attempt, pooled Alignment Score and the r1 fitness/acceptance rules.
 - Each improvement candidate has three attempts maximum; baseline is outside the counter.
 - Confirmed: each candidate has a bounded r1 scope plus affected regressions; whole-AMS fitness is separate. A candidate pass never confers a system pass.
+- Confirmed retention gate: demonstrated useful benefit as well as a qualified Stable/Excellent result. Declare the intended benefit before comparison.
+- First RSI case: this chat’s grilling failure. The owner has already started the skill redesign elsewhere; resume by coordinating with that work.
+- Owner-requested stop: save these answers, then stop this chat. Further implementation and evaluation await resume.
 - Use the owner's paid-plan meter, not API tokens or an API campaign budget. Unknown usage measurements stay unknown.
 - Confirmed next action: merge the current website and system work into main, then assess only the resulting pinned main revision. This specific promotion is authorized; future website promotions retain their owner gate.
 
@@ -150,4 +153,17 @@ Topic: ams-purpose
 Supersedes: none
 
 Kayden answered: "Yes—separate candidate and whole-AMS results". Each skill or AMS improvement receives a bounded r1 assessment of its affected scope plus regression checks; the whole-AMS baseline retains its separate fitness result. One passing candidate never confers a whole-system pass. Both result scopes must remain identifiable in records and the site. The existing Stable/Excellent evidence requirements and three-attempt limit per candidate remain unchanged.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-1b369d67-327b-4b39-912c-5fd9b98f7ec4
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T17:14:36.034Z
+Author: Kayden
+Source: chat:01a197f8-e175-76e1-8c2f-8c8be5420dc4
+Topic: ams-purpose
+Supersedes: none
+
+Kayden answered "Yes to both. It needs to actually improve, and let's use the grilling failure as the first RSI case. I already started the redesign on the grill with docs skill. record the answers and stop here". Confirmed: retaining a candidate requires demonstrated useful benefit against its frozen baseline as well as a qualified Stable/Excellent bounded r1 result with required evidence and affected regression checks. Declare the intended benefit before comparison; inconclusive results return for revision within the existing three-attempt cap. The first end-to-end RSI case is the grilling failure observed in this chat; diagnose the cause rather than assume skill text caused it. The owner reports that redesign of grill-with-docs has already started elsewhere; coordinate with that existing work on resume instead of duplicating it. This chat stops after saving these answers. No skill repair, evaluation, Supabase write or site change is performed by this capture.
 <!-- /jot-entry -->

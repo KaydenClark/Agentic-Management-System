@@ -27,9 +27,9 @@ Outside research does not settle whether shaping an agent's environment improves
 
 ## Current Verified State
 
-- Runner/fixed eval set absent; S-006 has tables/writer; S-007 uses an empty fixture.
-- Main `a3d014e` baseline: Broken, 4/138; incomplete evidence and unqualified evaluators. [Report](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md). Three evidence reviews, no behavioral-trial or improvement claim; no strike consumed.
-- Candidates use bounded r1 plus affected regressions; whole-AMS fitness stays separate. [Owner answers](../../../../wiki/context-ams-purpose.md).
+- Runner/eval set absent; writer/tables exist; site reader absent.
+- Baseline `a3d014e`: Broken, 4/138; incomplete/unqualified. [Report](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md). No strike consumed.
+- Candidate/system fitness stay separate. First case: grilling failure; owner redesign underway. This chat stops here. [Answers](../../../../wiki/context-ams-purpose.md).
 
 ## Desired Behavior
 
@@ -53,7 +53,7 @@ Safeguards, each required:
 
 ## Decisions And Contracts
 
-- One improvement procedure; one change per version.
+- One change per version; retain only qualified Stable/Excellent candidates with demonstrated useful benefit declared before comparison.
 - Same provider, model and effort within a comparison.
 - No automated proposer until a trusted grader, a measured cost per trial and an owner-judged manual round exist.
 
