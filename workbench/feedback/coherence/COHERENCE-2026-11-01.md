@@ -65,3 +65,18 @@ Recorded in [owner answers](../../wiki/context-owner-answers-coherence.md). Each
 | ID | Update | Disposition |
 |---|---|---|
 | COH-019 | PR #46 (`3affa38`) set `git.deploymentEnabled` in `site/vercel.json` to `main` and `dev` only, recorded as ADR-003I. Other branches no longer create Vercel deployments. | repaired (`3affa38`) |
+
+## Wrap-up sweep, 2026-11-01 15:43 UTC (`main` `b0fd71f`, `dev` `e0317ae`)
+
+| ID | Sev | Finding | Disposition | Return to |
+|---|---|---|---|---|
+| COH-020 | low | C's `up_to_spec` checker does not resolve Markdown reference-style links (`[board]: path`). It reported 4 evidenced S-004 lines as unknown. | accepted-open (S-013 Up to Spec) | C: resolve reference links, with a fixture test |
+| COH-021 | high | `dev` is 84 commits ahead of `main` and 62 behind, which breaches the 20-commit threshold. See [DRIFT-2026-11-01-wrap](DRIFT-2026-11-01-wrap.md). | diagnostic (`ams.coherence.drift`) | Owner: merge `dev` -> `main`, the site gate. C raises no Grill Board item until S-013 TK-005 lands. |
+| COH-022 | med | Recording a review verdict pushes Specs over 8,000 characters: S-004 is at 8,218 and S-006 at 8,183. Both were near the limit before review. | diagnostic | B: prune both. The process needs room for verdict rows. |
+| COH-023 | low | S-013 TK-004 still shows `blocked` by TK-002, which is done. | diagnostic | The next C session updates the blocker when it claims TK-004. |
+
+Status of the earlier findings at this commit:
+- COH-001 (README at 4,245 characters) is still open.
+- COH-003 (RUNBOOK at 2,986 characters) is still open, so there is still no room for the coherence commands.
+- COH-004, COH-007 to COH-011 and COH-013 still have their original dispositions. C has not verified any change.
+- COH-005, 006, 016 and 019 are repaired or declined, as recorded above.
