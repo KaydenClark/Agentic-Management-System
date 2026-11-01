@@ -7,7 +7,7 @@ not; exit 2 means the check could not measure.
 Days = whole days from the oldest commit one side lacks (committer date) to the
 measurement time, i.e. how long unmerged work has waited.
 
-Run: PYTHONPATH=src python3 -m ams.coherence.drift [--write PATH] [--json]
+Run: uv run python -m ams.coherence.drift [--write PATH] [--json]
 """
 
 from __future__ import annotations
@@ -81,7 +81,7 @@ def render_report(r: dict) -> str:
         f"- **`{b}`:** `{r['base_sha']}` ({r['base_ref']})",
         f"- **`{h}`:** `{r['head_sha']}` ({r['head_ref']})",
         f"- **Threshold:** more than {t['commits']} commits or {t['days']} days ahead. **Result:** {verdict}",
-        "- **Check:** `PYTHONPATH=src python3 -m ams.coherence.drift` (S-013 TK-001, non-blocking)",
+        "- **Check:** `uv run python -m ams.coherence.drift` (S-013 TK-001, non-blocking)",
         "",
         "| Direction | Commits | Days | Oldest unmerged commit |",
         "|---|---|---|---|",
