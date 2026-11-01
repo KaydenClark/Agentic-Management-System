@@ -65,7 +65,7 @@
 | [002E](002E-runbook-commands-are-the-commands-graders-call.md) | Runbook commands are the commands graders call | accepted | 2026-11-01 | RUNBOOK.md, evals |
 | [002F](002F-the-rsi-loop-design.md) | The RSI loop design | accepted | 2026-11-01 | evals, supabase |
 | [002G](002G-measure-the-noise-floor-before-trusting-a-change.md) | Measure the noise floor before trusting a change | accepted | 2026-11-01 | evals |
-| [002H](proposed/002H-every-round-runs-two-control-arms.md) | Every round runs two control arms | proposed | 2026-11-01 | evals |
+| [002H](002H-every-round-runs-two-control-arms.md) | Every round runs two control arms | accepted | 2026-11-01 | evals |
 | [002I](proposed/002I-comparisons-use-paired-per-task-statistics.md) | Comparisons use paired per-task statistics | proposed | 2026-11-01 | evals |
 | [002J](proposed/002J-every-ledger-row-records-cost-and-run-state.md) | Every ledger row records cost and run state | proposed | 2026-11-01 | evals, supabase |
 | [002K](proposed/002K-graders-come-from-the-accepted-version.md) | Graders come from the accepted version | proposed | 2026-11-01 | evals |

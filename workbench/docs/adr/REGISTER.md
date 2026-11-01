@@ -65,3 +65,4 @@
 | [002E](002E-runbook-commands-are-the-commands-graders-call.md) | Runbook commands are the commands graders call | accepted | 2026-11-01 | RUNBOOK.md, evals |
 | [002F](002F-the-rsi-loop-design.md) | The RSI loop design | accepted | 2026-11-01 | evals, supabase |
 | [002G](002G-measure-the-noise-floor-before-trusting-a-change.md) | Measure the noise floor before trusting a change | accepted | 2026-11-01 | evals |
+| [002H](002H-every-round-runs-two-control-arms.md) | Every round runs two control arms | accepted | 2026-11-01 | evals |
