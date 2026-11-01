@@ -56,7 +56,8 @@ export function parseRules(css) {
   return rules;
 }
 
-const norm = (v) => v.replace(/\s+/g, ' ').replace(/\s*([,()])\s*/g, '$1').trim().toUpperCase();
+// Only hex digits are case-insensitive; custom-property names and keywords keep their case.
+const norm = (v) => v.replace(/\s+/g, ' ').replace(/\s*([,()])\s*/g, '$1').trim().replace(/#[0-9a-f]{3,8}\b/gi, (h) => h.toUpperCase());
 const isColorish = (v) => COLOR_VALUE.test(v) || (/^[a-z]+$/i.test(v) && !NON_COLOR_WORD.test(v));
 
 function themeOf(rule) {
