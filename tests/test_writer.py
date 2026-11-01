@@ -4,6 +4,7 @@ Keys here are fake. The HTTP and Git layers are stubbed, so no test reaches
 Supabase. The live round trip runs only with AMS_LIVE=1 (see the end).
 """
 
+import base64
 import json
 import os
 import random
@@ -145,7 +146,9 @@ def test_record_merge_posts_with_service_key_and_prints_no_key(capsys):
 
 
 def test_record_merge_with_legacy_jwt_sends_bearer(capsys):
-    jwt = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoic2VydmljZV9yb2xlIn0.c2lnbmF0dXJlLXZhbHVlLWhlcmU"
+    seg = lambda obj: base64.urlsafe_b64encode(json.dumps(obj).encode()).rstrip(b"=").decode()
+    jwt = ".".join([seg({"alg": "HS256"}), seg({"role": "service_role"}),
+                    "".join(_rng.choice(_ALPHA) for _ in range(43))])  # fake, built at run time
     http = StubHttp({"POST": (201, [{"id": 1}])})
     env = dict(ENV, SUPABASE_SERVICE_ROLE_KEY=jwt)
     code, out, err = run(capsys, ["record-merge", SHA], http, env=env)
