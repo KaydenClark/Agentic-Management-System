@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000S claimed by codex-assessment-writer.
-**Next gate:** Close TK-000S with verification and documentation proof.
+**Latest event:** TK-000S closed with proof.
+**Next gate:** Checked exact-identity PR delivery, whole Review, and actual native owner QA.
 
 ## Intent and authority
 
@@ -30,7 +30,7 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 - Verified candidate: `5aa2621ec03a1d419615374ec31e4c3db12069b6`, dev `c0f6c67687f432cd75b55e7d4fdad460ea2f77db`; 943 history rows, missing/extra/content mismatches/unsourced all 0. [TK-000L](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01) owns live proof and limits. No real trial or assessment storage completion claimed.
 - TK-000P adds explicit unknown metrics with reasons/sources and preserves known zero; remote migration `20261101192328` and live tagged roundtrip pass. See [trial consumer contract](../../../../../evals/TRIAL-ROWS.md). TK-000R corrects the failed TK-000Q numeric roundtrip: source `d98a770`, additive migration `20261101195609`, exact TEXT artifacts/hash and JSONB projection checks. Full local/fresh495 passed/4 skipped,62 focused, source CI53 pass; tagged numeric/retry/client-denial probes cleanup0. Earlier FAIL remains recorded; checked delivery/whole Review/owner QA remain separate.
 
-- Exact-source synthetic proof at `110bb7a` identifies Python-equal scalar changes silently accepted by immutable remote/local comparison shortcuts. TK-000S corrects this unmet existing storage/frozen-input contract. Earlier candidate reviews remain retained; no formal Spec acceptance is claimed.
+- TK-000S corrects the exact-source `110bb7a` identity defect with source `ad7fa28`:84 focused, full local/fresh517 passed/4 skipped, live scalar conflicts refused with0 mutation requests and cleanup0. Earlier candidate reviews remain retained; checked merge and current whole Review are separate from formal owner QA/acceptance.
 
 ## Desired Behavior
 
@@ -131,6 +131,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | TK-000R | Task closed | 62 focused; full local/fresh495 passed,4 skipped; migration20261101195609; exact numeric TEXT roundtrip/retry/client denial/cleanup0; source CI53pass; scoped rereview no blockers | ASSESSMENTS; TRIAL-ROWS; S-006 SPEC/TK-000R | Final CI/merge; whole assembled Review; actual owner QA; safe S007 projection and real S002 trials; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
 | 2026-11-01 | review | Review verdict: pass at 906f71f936ccbb4ccc777cbea5643ca2668d3a85 [079d355dd065] #4 | none | s006_review, independent Codex context, noncontributor | none |
 | 2026-11-01 | review-detail | Independent PASS receipt at 906f71f | [Scope, evidence and limits](../../../../feedback/REVIEW-S-006-906f71f.md) | s006_review direct handback | Actual owner QA and checked delivery remain separate |
+| 2026-11-01 | TK-000S | Task closed | 84 focused; full local/fresh517 passed,4 skipped; sourceCI61pass; live4scalarpairs refused with0mutationrequests/exactretry/originalretention/cleanup0; scoped review no blockers | ASSESSMENTS; S-006 SPEC/TK-000S; S-002 local CLI impact | FinalCI/checkedmerge; exact whole Review; actual ownerQA; safe S007projection/realS002trials Git state at close: dirty-tree (1 file: ams_skills_by_workbench_verb.svg); recorded reason: Unowned untracked ams_skills_by_workbench_verb.svg appeared during execution and is retained untouched, excluded from owned commits; all owned tracked changes committed and pushed; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
 
 ## Review and Human QA
 
@@ -139,7 +140,7 @@ Spec review only; presentation gets Human QA in S-007.
 ## Completion Result
 
 Implementation delivered: schema/local writers, real build history, explicit
-unknown trial metrics and private assessment append/replay. TK-000L/P/Q/R retain
+unknown trial metrics and private assessment append/replay. TK-000L/P/Q/R/S retain
 candidate-specific live checks and test evidence. Private packets remain
 inaccessible to site clients; no trial result or evaluator qualification is
 inferred. Checked PR delivery, independent assembled Review and the native

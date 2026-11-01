@@ -3,12 +3,13 @@
 **Task ID:** TK-000S
 **Spec ID:** S-006
 **Slice:** Changed exact assessment artifacts cannot masquerade as retries
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Private assessment persistence
 **Planned verification:** Red-first remote/local identity, prefix, replay and frozen-metadata fixtures; no-write refusal and exact retries; full/fresh checks and marked live conflict/cleanup.
 **Claimed by:** codex-assessment-writer
 **Current claimant:** codex-assessment-writer
+**Proof:** 84 focused; full local/fresh517 passed,4 skipped; sourceCI61pass; live4scalarpairs refused with0mutationrequests/exactretry/originalretention/cleanup0; scoped review no blockers
 
 ## Assignment
 
@@ -35,3 +36,9 @@ Independent scoped review of a95f629 found the same equality issue in retained h
 Source `ad7fa2837145376a99029719056cda0d450863d5`:84 focused tests passed, full local517 passed/4 skipped and full fresh-clone517 passed/4 skipped. Source CI61 passed. Independent scoped reviewer repeated84 focused tests and found no remaining blockers after auditing all identity comparisons; final whole owner-bound Review remains pending.
 
 Live marked probes for all four scalar pairs rejected changed prefix and duplicate inputs with zero mutation requests, accepted exact retries and retained original canonical readback. Cleanup0; actual remote assessment rows0 before/after, so the changed scorer-source digest needs no invented backfill. No schema or scoring-formula change occurred. Source room checks retain only the two pre-existing informational host findings. An unowned untracked SVG appeared during execution; it is retained untouched and excluded from all owned commits.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s006-exact-identity | 30adf0d28c46ffca70d60a4a9966c1cded8e4980 | ahead 0 behind 0 | 1 | 84 focused; full local/fresh517 passed,4 skipped; sourceCI61pass; live4scalarpairs refused with0mutationrequests/exactretry/originalretention/cleanup0; scoped review no blockers | ASSESSMENTS; S-006 SPEC/TK-000S; S-002 local CLI impact | FinalCI/checkedmerge; exact whole Review; actual ownerQA; safe S007projection/realS002trials Git state at close: dirty-tree (1 file: ams_skills_by_workbench_verb.svg); recorded reason: Unowned untracked ams_skills_by_workbench_verb.svg appeared during execution and is retained untouched, excluded from owned commits; all owned tracked changes committed and pushed; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} | 7eb413daedcb6d3951d62364e06a963665e71d5c8fb813740cf57a03716be247 |
