@@ -18,6 +18,6 @@ workbench/sessions/*
 .env.*
 !.env.example
 
-# Python bytecode
+# Python build and test byproducts
 __pycache__/
 *.pyc
