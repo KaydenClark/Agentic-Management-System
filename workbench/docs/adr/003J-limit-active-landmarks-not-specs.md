@@ -15,4 +15,4 @@ Considered and rejected: counting every Spec against six slots, which locked out
 
 Consequences: AGENTS counts Landmarks. S-001 separates readiness from acceptance. Retire the slot-transfer queue; keep real Task inputs, scoped execution authority, owner stops, review, Human QA and publication gates. No outcome is accepted and no A/B product work resumes through this correction. Replaces ADR-002S, retained in history.
 
-Provenance: Kayden's AMS chat corrections, 2026-11-01: "You cant have landmarks below a spec" and "Parent specs should be Landmarks". Captured as [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../../wiki/context-active-spec-approvals.md).
+Provenance: Kayden's AMS chat corrections, 2026-11-01: "You cant have landmarks below a spec" and "Parent specs should be Landmarks". Captured as [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md).

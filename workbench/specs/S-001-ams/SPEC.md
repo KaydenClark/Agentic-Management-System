@@ -44,7 +44,7 @@ The owner needs one auditable account of what is done and what remains.
 - Non-site work goes feature -> `main`, merged by agents once current and checked. Site work goes feature -> `dev` -> `main`; only the owner approves `dev` -> `main`.
 - Specs, Tasks and Landmarks are at most 8,000 characters; root controls at most 3,000. Over the limit means prune and revise, never split or truncate.
 - Three strikes: a run, a failed test, a second failed test, then stop and report.
-- At most six active Landmarks; the hierarchy is Landmark -> Spec -> Task ([ADR-003J](../../docs/adr/proposed/003J-limit-active-landmarks-not-specs.md)). Specs need no slots; only actual required inputs block their Tasks.
+- At most six active Landmarks; the hierarchy is Landmark -> Spec -> Task ([ADR-003J](../../docs/adr/003J-limit-active-landmarks-not-specs.md)). Specs need no slots; only actual required inputs block their Tasks.
 - No public claim of improved outcomes without held-out rows, controls, the prior version and an interval.
 - Secrets live only in Vercel and Supabase settings. Private evidence and traces stay out of this public repository.
 - License: MIT, copyright Kayden Clark (the license file is the owner's to add).
