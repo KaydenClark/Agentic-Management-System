@@ -27,8 +27,7 @@ Priority and Value are how the owner decides what needs attention; without them 
 
 ## Current Verified State
 
-- TK-001 serves committed cards with Priority, Value and reasons on 127.0.0.1, unstyled.
-- The owner's design artifact "Grilling Board Redesign" (version 1793538932-43c3) is the board's design guide ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
+- The board serves committed cards with Priority, Value and reasons on 127.0.0.1 in the artifact's layout and colors (TK-001, TK-004, TK-000A); answering, rating and the flag are inert.
 
 ## Desired Behavior
 
@@ -40,14 +39,14 @@ Priority and Value are how the owner decides what needs attention; without them 
 - Flags, ratings and comments are committed records the loop reads, never ignored local files.
 - A write refuses when the target changed since it was read; nothing is deleted or renumbered.
 - Colors are signals, each with one stated meaning; there is no fixed count of hues.
-- The board looks like the artifact: its layout, formatting and colors, in dark and light, with token values from `grill-board/theme/tokens.json`. It loads nothing from other hosts.
+- The board looks like the owner's "Grilling Board Redesign" artifact in dark and light and loads nothing from other hosts.
 
 ## Decisions And Contracts
 
 - The decision journey on the board is tracked apart from delivery (Specs and Tasks).
 - The board is local only; Vercel never serves it.
 - Card data lives in plain files in Git; the owner's answer is the source, the owning record the destination.
-- The theme follows the artifact; tokens live once in `grill-board/theme/tokens.json` ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
+- The theme follows the artifact; tokens live in `grill-board/theme/tokens.json` ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
 
 ## Non-Goals
 
@@ -74,7 +73,7 @@ Each Task is one fresh-session run from a clean clone, landed feature -> `main` 
 - [ ] **Not a drafting surface.** The board offers no editor for pages or routine content. *Must fail:* a page draft posted as a card.
 - [ ] **Colors mean one thing.** Each color has one documented meaning used consistently. *Must fail:* one color used for two meanings.
 - [ ] **Local only.** The board starts with one documented local command and no Vercel deployment serves it.
-- [ ] **Looks like the artifact.** The board reproduces the artifact's layout, formatting and colors in dark and light. *Check:* a test that every served CSS token equals `grill-board/theme/tokens.json`; committed side-by-side screenshots (artifact vs board, dark and light) under `grill-board/qa/`; no request to another host; desktop width and 375px. *Must fail:* a token that differs from tokens.json, or a third-party resource.
+- [ ] **Looks like the artifact.** Layout, formatting and colors match the artifact, dark and light. *Check:* served tokens equal `grill-board/theme/tokens.json`; side-by-side screenshots in `grill-board/qa/`; no third-party request; 375px holds. *Must fail:* a drifted token or a third-party resource.
 
 ## RSI and website connection
 

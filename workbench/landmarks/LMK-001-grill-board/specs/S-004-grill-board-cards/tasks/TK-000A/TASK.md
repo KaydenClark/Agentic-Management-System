@@ -26,8 +26,8 @@ Hand back to S-004 with `close`.
 
 ## Acceptance
 
-- [ ] Every CSS custom-property value the board serves equals `grill-board/theme/tokens.json`, in dark and light; a test fails on any drift.
-- [ ] Side-by-side screenshots (artifact vs built board, dark and light) are committed under `grill-board/qa/`; the board is rendered from a generic fixture.
-- [ ] The page loads no third-party resources; a test fails on any external URL.
-- [ ] The board works at desktop width and holds at 375px with no horizontal scroll.
-- [ ] `uv run pytest` passes.
+- [x] Every CSS custom-property value the board serves equals `grill-board/theme/tokens.json`, in dark and light; a test fails on any drift.
+- [x] Side-by-side screenshots (artifact vs built board, dark and light) are committed under `grill-board/qa/`; the board is rendered from a generic fixture.
+- [x] The page loads no third-party resources; a test fails on any external URL.
+- [x] The board works at desktop width and holds at 375px with no horizontal scroll.
+- [x] `uv run pytest` passes.
