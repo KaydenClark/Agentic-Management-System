@@ -2,8 +2,10 @@
 // build). Starts `next start` on a free port and opens every route the build
 // produces (read from .next/app-path-routes-manifest.json, so new pages are
 // covered without editing this file), plus the not-found page, in Chromium at
-// 375 px and 1280 px in both themes. For each it checks:
+// 375, 1280 and 1440 px in both themes. For each it checks:
 //   - no horizontal scroll;
+//   - layout: the reading-order nav is in the header, no side navigation
+//     exists, and the header and <main> share one centred container edge;
 //   - an automated WCAG 2.x A/AA pass with axe-core (contrast included),
 //     injected from node_modules, never a CDN;
 //   - keyboard: Tab reaches every visible interactive element and each one
@@ -31,7 +33,7 @@ import { allowedHost } from './hygiene.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : undefined; };
-const WIDTHS = [375, 1280];
+const WIDTHS = [375, 1280, 1440];
 const HEIGHT = 812;
 const THEMES = ['light', 'dark'];
 const GROUND = { light: 'rgb(247, 247, 247)', dark: 'rgb(10, 10, 10)' };
@@ -91,6 +93,45 @@ const check = (name, ok, detail = '') => { results.push({ name, ok, detail }); c
 async function horizontalScroll(page) {
   const { scrollWidth, clientWidth } = await page.evaluate(() => ({ scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth }));
   return scrollWidth > clientWidth ? [`scrollWidth ${scrollWidth} > ${clientWidth}`] : [];
+}
+
+// Owner feedback 11/01/2026 ("align better", "navigation in the top bar"):
+// the reading-order nav sits in the header and no side navigation exists; the
+// header's content box and <main>'s content box share both edges; and that
+// container is centred, with even gutters of at least 16 px.
+async function layoutProblems(page) {
+  return page.evaluate(() => {
+    const out = [];
+    const header = document.querySelector('header');
+    const main = document.querySelector('main');
+    if (!header || !main) return ['no <header> or no <main>'];
+    if (!header.querySelector('nav[aria-label="Reading order"]')) out.push('reading-order nav is not in the header');
+    if (document.querySelector('aside, .sidebar')) out.push('a side navigation (aside or .sidebar) exists');
+    // The content box of the header's container (its first element child)
+    // and of <main>.
+    const box = (el) => {
+      const r = el.getBoundingClientRect();
+      const s = getComputedStyle(el);
+      return { left: r.left + parseFloat(s.paddingLeft) + parseFloat(s.borderLeftWidth), right: r.right - parseFloat(s.paddingRight) - parseFloat(s.borderRightWidth) };
+    };
+    const inner = header.firstElementChild ?? header;
+    const h = box(inner);
+    const m = box(main);
+    const near = (a, b) => Math.abs(a - b) <= 1;
+    if (!near(h.left, m.left)) out.push(`header content left ${h.left.toFixed(1)} != main content left ${m.left.toFixed(1)}`);
+    if (!near(h.right, m.right)) out.push(`header content right ${h.right.toFixed(1)} != main content right ${m.right.toFixed(1)}`);
+    const vw = document.documentElement.clientWidth;
+    const gutterL = m.left;
+    const gutterR = vw - m.right;
+    if (!near(gutterL, gutterR)) out.push(`main is not centred: gutters ${gutterL.toFixed(1)} / ${gutterR.toFixed(1)}`);
+    if (Math.min(gutterL, gutterR) < 16 - 0.5) out.push(`gutter under 16px: ${Math.min(gutterL, gutterR).toFixed(1)}`);
+    const brand = header.querySelector('a');
+    const first = main.firstElementChild;
+    if (brand && first && !near(brand.getBoundingClientRect().left, first.getBoundingClientRect().left)) {
+      out.push(`site title left ${brand.getBoundingClientRect().left.toFixed(1)} != page content left ${first.getBoundingClientRect().left.toFixed(1)}`);
+    }
+    return out;
+  });
 }
 
 async function axeProblems(page) {
@@ -228,6 +269,9 @@ async function selfTest(browser, server, origin) {
     ['a transparent focus outline', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline-color: transparent !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
     ['a decorative box-shadow that does not change on focus', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline: none !important; } a, button { box-shadow: 0 0 0 2px #000 !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
     ['a control taken out of the tab order', keyboardProblems, (p) => p.evaluate(() => { const b = document.createElement('button'); b.textContent = 'Planted'; b.tabIndex = -1; document.querySelector('main').append(b); }), (x) => x.some((m) => m.startsWith('not reachable'))],
+    ['main pushed off the header edge', layoutProblems, (p) => p.addStyleTag({ content: 'main { margin-left: 40px !important; }' }), (x) => x.some((m) => m.startsWith('header content left'))],
+    ['a side navigation', layoutProblems, (p) => p.evaluate(() => { const a = document.createElement('aside'); a.textContent = 'Planted'; document.body.prepend(a); }), (x) => x.some((m) => m.startsWith('a side navigation'))],
+    ['an off-centre page', layoutProblems, (p) => p.addStyleTag({ content: 'header > *, main { padding-left: 56px !important; }' }), (x) => x.some((m) => m.startsWith('main is not centred'))],
     ['a transition ignoring reduced motion', motionProblems, (p) => p.addStyleTag({ content: '.card, h1 { transition: transform 1s ease; }' })],
     ['an animation ignoring reduced motion', motionProblems, (p) => p.addStyleTag({ content: '@keyframes qa-spin { to { transform: rotate(1turn); } } h1 { animation: qa-spin 2s infinite; }' })],
   ];
@@ -269,6 +313,8 @@ try {
         check(`${tag}: renders in the ${theme} theme`, ground === GROUND[theme], ground);
         let p = await horizontalScroll(page);
         check(`${tag}: no horizontal scroll`, !p.length, p.join('; '));
+        p = await layoutProblems(page);
+        check(`${tag}: nav in the top bar; header and main share a centred container edge`, !p.length, p.join(' | '));
         p = await axeProblems(page);
         check(`${tag}: axe WCAG A/AA (contrast included)`, !p.length, p.join(' | '));
         p = await keyboardProblems(page);
