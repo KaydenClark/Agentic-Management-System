@@ -6,3 +6,4 @@
 
 | DDR | Title | Status | Date | Canonicalized in |
 |---|---|---|---|---|
+| [000A](000A-the-ams-is-the-owner-s-agent-management-system.md) | The AMS is the owner's agent-management system | accepted | 2026-11-01 | BLUEPRINT.md, GLOSSARY.md |
