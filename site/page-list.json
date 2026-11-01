@@ -1,0 +1,14 @@
+{
+  "about": "Every page live on the dev deployment, one entry each, for orchestrator B's Grill Board page review cards (S-005). Orchestrator A is the only writer. The review card computes the content hash from the built page; this list names the page and where it came from.",
+  "pages": [
+    {
+      "path": "/",
+      "title": "Home",
+      "spec": "S-003",
+      "task": "TK-001",
+      "landed": { "branch": "dev", "commit": "c529821de4f8f9b8db916dfc9988e365ab06c134", "pr": 13 },
+      "sources": ["site/app/page.tsx", "site/app/layout.tsx", "site/app/shell/", "site/app/theme/tokens.css"],
+      "status": "draft"
+    }
+  ]
+}

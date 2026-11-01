@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 claimed by orchestrator-A-dispatcher-S003.
-**Next gate:** Close TK-001 with verification and documentation proof.
+**Latest event:** TK-001 closed with proof.
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
@@ -103,6 +103,7 @@ node workbench/tools/spec-workbench.mjs show S-003
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Ported and rewritten from confirmed decisions | render, doctor | this Spec | Every criterion |
+| 2026-11-01 | TK-001 | Task closed | PR #13 merged into dev as c529821; npm ci && npm run build && npm test 14/14 pass from a fresh clone (red 10/14 at 90559c8 first); check:browser 15/15 at 375px both themes, toggle overrides system and persists, self-hosted fonts, no off-site requests, home text without JS; Vercel dev deployment dpl_71NzXZ7rd77HgFsxAbgA1oVu7qsd READY at c529821; Codex code and security review no findings at 1fd680b | site/README.md documents npm ci, build, test, check:browser; tokens.css header cites the owner design canvas Color system v2.2 | Deployed footer SHA and home text not fetched from the dev deployment: the Vercel connector's web_fetch refuses this project (owner to extend connector access); contrast, keyboard and automated a11y pass belong to TK-005; tokens unverified against B's theme CDR until TK-007; close attribution: {"agent":"orchestrator-A","claimant":"orchestrator-A-dispatcher-S003","onBehalfOf":"orchestrator-A-dispatcher-S003"} |
 
 ## Review and Human QA
 
