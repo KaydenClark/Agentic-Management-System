@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; five Tasks planned.
-**Next gate:** Claim TK-001 or TK-002 in orchestrator C's lane.
+**Latest event:** TK-002 closed with proof.
+**Next gate:** Complete TK-003.
 
 ## Intent and authority
 
@@ -92,6 +92,9 @@ node workbench/tools/spec-workbench.mjs doctor
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
+| 2026-11-01 | TK-001 | Task closed | node --test workbench/tools/coherence-drift.test.mjs: 4 pass at 6848b75; clean-clone run with only git; report workbench/feedback/coherence/DRIFT-2026-11-01.md (main 0a7d04e, dev b06d7db, 3 ahead, 0 behind) | workbench/feedback/coherence/DRIFT-2026-11-01.md; RUNBOOK not updated (at 2,996 of 3,000 chars, finding COH-005) | Grill Board item on breach (TK-005); thresholds 20 commits / 7 days are C's default pending owner choice; close attribution: {"agent":"orchestrator-C","claimant":"orchestrator-C","onBehalfOf":null} |
+| 2026-11-01 | TK-001 | Correction: check moved from `workbench/tools/` (managed runtime refused unreceipted files, `tools-receipt-missing`) to `src/ams/coherence/drift.py` on pinned Python 3.14; same fixture | `PYTHONPATH=src python3.14 -m unittest discover -s tests`: 4 pass; report regenerated (main 0a7d04e, dev 87a3576, 5 ahead, 0 behind) | workbench/feedback/coherence/DRIFT-2026-11-01.md | Receipt row 1 cites the removed Node path; superseded by this row |
+| 2026-11-01 | TK-002 | Task closed | uv run pytest: 47 pass at 206fa51 (6 up-to-Spec fixture tests incl. must-fail invariant; mutation forcing met-without-evidence fails 4 tests); report workbench/feedback/coherence/UP-TO-SPEC-S-004-2026-11-01.md for S-004 at main 8b70874 (0 met, 7 not met) | workbench/feedback/coherence/UP-TO-SPEC-S-004-2026-11-01.md; RUNBOOK line blocked by COH-003 | Specs do not yet use an Evidence: clause on acceptance lines; checked lines without one report unknown by design; close attribution: {"agent":"orchestrator-C","claimant":"orchestrator-C","onBehalfOf":null} |
 
 ## Review and Human QA
 
