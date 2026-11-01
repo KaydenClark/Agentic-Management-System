@@ -3,7 +3,7 @@
 **Task ID:** TK-000A
 **Spec ID:** S-004
 **Slice:** The board reproduces the artifact's layout, formatting and colors in dark and light
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-004
 **Destination:** spec-acceptance: Looks like the artifact
 **Planned verification:** pytest comparing served CSS tokens with grill-board/theme/tokens.json and checking for third-party resources; Playwright screenshots of the artifact and the board, dark and light, at desktop width and 375px
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`.
+**Claimed by:** claude-s004-theme
+**Current claimant:** claude-s004-theme
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), the theme decision record it cites, DDR-000K, DDR-000L, DDR-000M and DDR-000P, and the board code under `src/ams/grill_board/`.
 
