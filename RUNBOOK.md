@@ -4,9 +4,9 @@
 
 ## Get oriented
 
-1. Run `git status --short --branch`; preserve other work.
-2. Read [AGENTS](AGENTS.md), [ARCHITECTURE](ARCHITECTURE.md#routes), [GLOSSARY](GLOSSARY.md) and relevant [Wiki context](workbench/wiki/MEMORY.md).
-3. Read [TASKBOARD](TASKBOARD.md); follow its Spec/Task owners for scope, claimant, blockers and next gate. Recover settled answers; load the owning skill.
+1. Run `git status --short --branch`; preserve others' work.
+2. Read [AGENTS](AGENTS.md), [ARCHITECTURE](ARCHITECTURE.md#routes), [GLOSSARY](GLOSSARY.md) and the relevant [Wiki](workbench/wiki/MEMORY.md).
+3. Read [TASKBOARD](TASKBOARD.md); follow its Spec/Task owners for scope, claimant, blockers and next gate. [S-001](workbench/specs/S-001-ams/SPEC.md) answers "Are we there yet?". Load the owning skill.
 
 ## Workflows
 
@@ -17,15 +17,15 @@
 
 ### RSI during website work
 
-Capture friction in a [feedback report](workbench/feedback/REPORT_FORMAT.md) or [evidence audit](workbench/research/EVIDENCE-AUDIT-TEMPLATE.md); test a bounded hypothesis with an [improvement record](workbench/research/IMPROVEMENT-TEMPLATE.md), [eval tasks](evals/EVAL-TASK-TEMPLATE.md), [results](evals/EVAL-RESULT-TEMPLATE.md) and a [comparison](evals/EVAL-COMPARISON-TEMPLATE.md). Explain verified behavior with the [page template](site/PAGE-TEMPLATE.md); recheck later use.
+Capture friction in a [feedback report](workbench/feedback/REPORT_FORMAT.md); test a bounded hypothesis with an [improvement record](workbench/research/IMPROVEMENT-TEMPLATE.md), [eval tasks](evals/EVAL-TASK-TEMPLATE.md), [results](evals/EVAL-RESULT-TEMPLATE.md) and a [comparison](evals/EVAL-COMPARISON-TEMPLATE.md). Explain verified behavior with the [page template](site/PAGE-TEMPLATE.md).
 
 ## Preserve knowledge as it happens
 
-Use existing topic owners; grow flat Wiki notes through [MEMORY](workbench/wiki/MEMORY.md) under its [schema](workbench/wiki/SCHEMA.md). Record source, speaker, date, status and corrections.
+Use existing topic owners; grow flat Wiki notes through [MEMORY](workbench/wiki/MEMORY.md) under its [schema](workbench/wiki/SCHEMA.md), with source, speaker, date, status and corrections.
 
 ## Test And Build
 
-No application, test suite or eval runner exists yet. Room checks, run from the root:
+No application, test suite or eval runner exists yet. Room checks, from the root:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render
@@ -37,12 +37,12 @@ git diff --check
 
 `render` must leave no diff; `doctor` must report no blocking finding.
 
-Fresh-clone check: `git clone https://github.com/KaydenClark/Agentic-Management-System.git CLONE && cd CLONE`, check out the recorded commit, then rerun the room checks.
+Fresh-clone check: clone `https://github.com/KaydenClark/Agentic-Management-System.git`, check out the recorded commit, rerun the room checks.
 
 ## Version control and publication
 
-`main` is the only long-lived branch: branch, commit each step, push, open a PR into `main`, merge with a merge commit once up to date and checked, confirm `main` has it, delete the branch. No deployment is configured; report local, pushed, merged and deployed states separately.
+Non-site work: branch, commit each step, push, PR into `main`, merge with a merge commit once current and checked, confirm `main` has it; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev`, only the owner merges `dev` -> `main`. S-013 measures how far `dev` is ahead of `main`. Report local, pushed, merged and deployed states separately.
 
 ## Recovery
 
-Reopen the owning Spec/Task and Wiki history; verify live state before resuming. Adoption rollback: `workbench/sessions/recovery/adoption-recovery.json` (local).
+Reopen the owning Spec/Task and Wiki history; verify live state. Adoption rollback: `workbench/sessions/recovery/adoption-recovery.json` (local).
