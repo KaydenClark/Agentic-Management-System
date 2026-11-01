@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-002 and TK-005 claimed by orchestrator A Dispatchers; both delivered and merged into the demo batch with TK-007.
-**Next gate:** Close TK-002, TK-005 and TK-007 with verification and documentation proof.
+**Latest event:** TK-007 claimed by orchestrator-A.
+**Next gate:** Close TK-007 with verification and documentation proof.
 
 ## Intent and authority
 
