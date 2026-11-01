@@ -27,8 +27,8 @@ Outside research does not settle whether shaping an agent's environment improves
 
 ## Current Verified State
 
-- The loop runner and fixed eval task set are not implemented. S-006 has the RSI writer and live tables, but the 2026-11-01 read-only check found 0 non-test runs/results. The owner's reported completed baseline has not yet been located; no baseline score is inferred.
-- Loop #1 now includes fitness level, Alignment Score, Stable/Excellent-only acceptance, an initial attempt plus at most two retries, Supabase results and visibility on the Vercel dev site. The exact owner wording, recovered sources, proposed scoring/counter interpretation and unanswered questions are in [the existing RSI context](../../../../wiki/context-ams-purpose.md#loop-1-preparation-recovered-design-and-open-decisions). Preparation is authorized; no paid-campaign limit or assessment result is supplied by this record.
+- The loop runner and fixed eval task set are not implemented. S-006 has the RSI writer and live tables, but the 2026-11-01 read-only check found 0 non-test runs/results. Baseline means the current AMS repository implementation; no scored assessment exists yet.
+- Loop #1 now includes fitness level, Alignment Score, Stable/Excellent-only acceptance, an initial attempt plus at most two retries, Supabase results and visibility on the Vercel dev site. The exact owner wording, recovered sources, proposed scoring/counter interpretation and unanswered questions are in [the existing RSI context](../../../../wiki/context-ams-purpose.md#loop-1-preparation-recovered-design-and-open-decisions). The owner confirmed r1, three attempts per candidate and paid-plan meter use instead of API tokens or a campaign budget; the design interview continues.
 
 ## Desired Behavior
 
@@ -64,7 +64,7 @@ Safeguards, each required:
 ## Dependencies And Blockers
 
 - S-006 for rows; sandboxed run hosts.
-- Open owner choice `rsi-campaign-approval`: the one standing campaign approval (budget and stop condition) before any paid trial run. The build readback approval of 2026-11-01 authorizes building the loop, not its spend.
+- Owner correction, 2026-11-01: use the paid-plan meter, not API tokens or a campaign budget. Finish the design interview, including exact baseline pins; reconcile TK-002's older campaign gate during planning.
 - Seed sources are real only: this build's own history (S-006 build-history rows) and the before/after notes the owner's skills repository records. That repository is private, so a row carries a summary and a commit pointer, never its text.
 
 ## Vertical Implementation Slices
@@ -110,7 +110,11 @@ node workbench/tools/spec-workbench.mjs show S-002
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion; campaign approval |
-| 2026-11-01 | none | Owner requested Loop #1 preparation and the first improvement wave, with fitness/alignment results, Stable/Excellent-only acceptance and a three-attempt stop. Captured source and interview frontier in the linked RSI context. | Read-only Supabase counts; dev source and READY deployment metadata inspected | Current Verified State; existing RSI context | Baseline artifact/findings; campaign scoring/counter answers; paid budget if needed; Supabase-to-site reader and actual trials |
+| 2026-11-01 | none | Owner requested Loop #1 preparation and the first improvement wave, with fitness/alignment results, Stable/Excellent-only acceptance and a three-attempt stop. Captured source and interview frontier in the linked RSI context. | Read-only Supabase counts; dev source and READY deployment metadata inspected | Current Verified State; existing RSI context | Exact baseline pins; remaining design answers; Supabase-to-site reader and actual trials |
+
+### Interview correction, 2026-11-01
+
+Kayden reported the lost grilling flow as a failure. Resume the ready decision round and wait; the linked context preserves his corrections.
 
 ## Review and Human QA
 

@@ -35,7 +35,7 @@ This supersedes reducing the assignment to a judgment about whether it is “reb
 
 ## Loop #1 preparation: recovered design and open decisions
 
-Status: preparation; owner answers pending. Source: Kayden's request in the
+Status: design interview in progress; settled answers below. Source: Kayden's request in the
 2026-11-01 “Prepare GPT_OS AMS RSI loop” chat and the checks below. This is a
 continuation record, not evidence of a completed improvement or a paid campaign.
 
@@ -74,32 +74,17 @@ continuation record, not evidence of a completed improvement or a paid campaign.
   `dev` SHA. An authenticated fetch of `/rsi` failed to resolve/access it;
   this is deployment metadata plus source inspection, not rendered-page QA.
 
-### Interview frontier
+### Settled answers and next interview question
 
-1. Recover the completed baseline's report/chat/file/assessment ID and exact
-   candidate, findings and rubric. Requested from Kayden; no replacement baseline
-   or invented numeric score.
-2. Proposed: reuse approved Alignment Check r1. Each assessment has three runs;
-   Excellent means three passing runs, Stable two. Alignment Score pools passed
-   and applicable checks across the runs. Complete evidence and no unresolved
-   Critical/Regression findings remain necessary; a numeric score alone cannot
-   pass a candidate. Applying that contract to this campaign awaits an answer.
-3. Proposed: baseline is attempt 0; each improvement candidate has at most three
-   assessed versions: initial improvement, retry, retry, then stop/report.
-   Assessment runs do not consume separate improvement attempts. Counter scope
-   and baseline treatment await an answer; renaming must not erase failures.
-4. Proposed: prepare and check locally, then declare one budget before any paid
-   evaluation campaign. No campaign spending limit is recorded yet.
+- Baseline means the current AMS repository implementation, not an existing scored report.
+- Use approved Alignment Check r1: three assessment runs per attempt, pooled Alignment Score and the r1 fitness/acceptance rules.
+- Each improvement candidate has three attempts maximum; baseline is outside the counter.
+- Use the owner's paid-plan meter, not API tokens or an API campaign budget. Unknown usage measurements stay unknown.
+- Next question: pin main for system records and dev for the website, assessing both as separate baseline components without merging first? Recommended: yes.
 
-After answers: select the earliest evidenced gap from the baseline, freeze the
-candidate scope, task/check inventory, grader/model/host identities and useful
-effect before the deciding comparison. Record each attempt and failure, evidence,
-counts, level, score, qualification/acceptance state, disposition and stop reason
-in Supabase through the existing writer. Extend the row contract only where the
-current fields cannot carry those meanings. Connect and verify the dev results
-page against read-back rows, including missing evidence and stopped candidates.
-Keep local completion, merge, deployment, retention and demonstrated benefit
-separate. Reusable skill changes retain their catalog's own delivery process.
+### Grilling failure reported by the owner
+
+The agent let investigation and documentation displace the interview and inferred a missing report. Kayden asked what happened to the grilling session and called it a skill failure. Resume the ready decision round, wait for answers and preserve settled choices. No skill-text repair or assessment result is claimed.
 
 <!-- jot-entry -->
 ### JOT-d91455d4-48d8-4b89-b3c6-0c6a7025c8e2
@@ -112,4 +97,17 @@ Topic: ams-purpose
 Supersedes: none
 
 Kayden requests Loop #1 for GPT_OS/AMS: recover the RSI design and the baseline he says was just completed, perform the first wave of improvement, log actual results in Supabase and make them viewable on the Vercel dev site while building the website that explains the system. Exact owner wording: "Only stable or excelent skills or other AMS improvements pass. otherwise it gets sent back for another RSI loop until it does or hits the 3 strikes your out rule." Exact sequence: "(1) initial run -> (2) retry -> (3) retry -> stop". He invokes grill-with-docs to get ready to implement and record understanding as building continues. This is real AMS improvement work, not a demo batch or a reduced website cutoff. The baseline artifact, findings and assessment identity have not yet been located; the owner's statement does not supply a score or measured result. Unresolved: applying Alignment Check r1 to this campaign, the scope of the attempt counter and whether baseline is outside it, the initial improvement targets once baseline is recovered, and any paid-campaign budget. Preserve existing safeguards and do not invent assessment results.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-6e1500aa-cbde-41c2-b638-f10fa9ef83e3
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T16:46:14.011Z
+Author: Kayden
+Source: Kayden, this chat, 2026-11-01 corrections
+Topic: ams-purpose
+Supersedes: JOT-d91455d4-48d8-4b89-b3c6-0c6a7025c8e2
+
+Kayden corrected the baseline: it is the current AMS repository implementation (branches URL supplied), not an existing scored report. He confirmed approved r1 and three improvement attempts per candidate, baseline excluded. Execution uses his paid-plan meter, not API tokens or an API campaign budget. He reported the missing grilling flow as a skill failure. Resume the interview; settle the exact main/dev baseline, wait for answers, and document settled choices. No assessment has been performed.
 <!-- /jot-entry -->
