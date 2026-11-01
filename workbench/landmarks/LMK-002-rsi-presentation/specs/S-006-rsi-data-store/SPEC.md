@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000Q claimed by codex-assessment-writer.
-**Next gate:** Close TK-000Q with verification and documentation proof.
+**Latest event:** TK-000Q closed with proof.
+**Next gate:** Checked PR delivery, fresh assembled Review, then actual owner QA required by native completion.
 
 ## Intent and authority
 
@@ -124,6 +124,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | TK-000L | B review FAIL d6d4a6d: N1-N6, legacy key | live half | Spec | TK-000L |
 | 2026-11-01 | TK-000L | Task closed | 5aa2621/dev c0f6c67: history 943 rows; missing/extra/mismatch/unsourced 0; live summary edit detected/restored; key/writer/RSI/source checks pass; pytest 433 passed,4 skipped; layout valid; doctor no blocking finding | S-006 SPEC and TK-000L pinned live verification | Fresh independent assembled Review; S-002 assessment persistence and unknown metrics compatibility; close attribution: {"agent":"codex-local-writer","claimant":"orch-b","onBehalfOf":"orch-b"} |
 | 2026-11-01 | TK-000P | Task closed | 475 passed,4 skipped; focused99/1; migration20261101192328; live null and zero roundtrip; DB bad availability23514; client writes401/test hiding; cleanup0; advisors empty | TRIAL-ROWS; template; rsi_rows; S-006 SPEC/TK-000P | Fresh assembled Review; private assessment storage; real qualified S-002 trials; close attribution: {"agent":"codex-local-writer","claimant":"codex-local-writer","onBehalfOf":null} |
+| 2026-11-01 | TK-000Q | Task closed | 56 focused; fresh source489 passed,4 skipped; private migration20261101193603; live duplicate200/conflict409/concurrent200-409/client401/update403/cleanup0; source CI45 pass | ASSESSMENTS; RUNBOOK; ARCHITECTURE; S-006 SPEC/TK-000Q | Final CI/checked merge; fresh assembled Review; native owner QA; safe S007 presentation and real S002 trials; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
 
 ## Review and Human QA
 
