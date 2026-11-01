@@ -1,0 +1,43 @@
+/* Back and forward links at the end of every page in the reading order.
+   Page furniture, so greys only; every value comes from app/theme/tokens.css. */
+
+.order {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+  padding-top: var(--space-24);
+  border-top: var(--border-width) solid var(--line);
+}
+
+.link {
+  flex: 1 1 var(--content-basis);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-height: var(--control-min-height);
+  padding: var(--space-12) var(--space-14);
+  background: var(--surface);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-control);
+  color: var(--ink);
+  font-weight: var(--weight-semibold);
+  text-decoration: none;
+}
+
+.link:hover {
+  border-color: var(--ink);
+  background: var(--raised);
+}
+
+.next {
+  text-align: right;
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  font-weight: var(--weight-regular);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
