@@ -48,7 +48,7 @@ Each is one click on the open card, with an optional comment, and is saved on th
 - **Too taxing** POSTs to `/flag` and appends `## Flag`, `**Too taxing:** yes`, `**Flagged:**` in UTC, then the comment. A flagged card leaves the queue, held for rewrite, and cannot be answered or flagged again.
 - Each is one commit of the card alone, subject `Grill Board: rate NAME N of 5` or `Grill Board: flag NAME too taxing`. These committed sections are what the RSI loop reads (S-002).
 
-**Re-asking.** An agent posts the rewrite as a new card file. The page lists as refused, never asks, a card that repeats a flagged question line (ignoring case and spacing), or a card that was flagged and whose flag is gone. Flags are read from every flag commit in the branch history, so a copy, a deletion or a reverted flag does not bring the question back.
+**Re-asking.** An agent posts the rewrite as a new card file. The page lists as refused, never asks, a card that repeats a flagged question line, compared after Unicode NFKC, removing format characters (Unicode category Cf, such as zero-width spaces and joiners), reading punctuation as spacing, folding case and collapsing spacing (TK-000H), or a card that was flagged and whose flag is gone. Flags are read from every flag commit in the branch history, so a copy, a deletion or a reverted flag does not bring the question back.
 
 ## Layout and theme
 

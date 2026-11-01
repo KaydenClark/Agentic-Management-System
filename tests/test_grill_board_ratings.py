@@ -153,6 +153,11 @@ def test_a_flagged_card_cannot_be_answered(board, repo):
 @pytest.mark.parametrize("question", [
     "Fixture: should the board keep one card per file?",
     "  fixture:   SHOULD the board keep one card per file?  ",
+    "Fixture: should the board keep one card per file ?",  # review TK-000H: C's 'too taxing ?' case
+    "Fixture - should the board keep one card, per file!?",
+    "Fixture: should the bo\u200bard keep one\u200d card per file?",  # zero-width space and joiner
+    "Fixture: should the board keep one card per file\u2060?",  # word joiner (format character)
+    "\uff26ixture: should the board keep one card per file\uff1f",  # fullwidth forms, folded by NFKC
 ])
 def test_a_new_card_repeating_a_flagged_question_is_refused(board, repo, question):
     """Must fail: a flagged card re-posted with the same text."""
@@ -166,6 +171,15 @@ def test_a_new_card_repeating_a_flagged_question_is_refused(board, repo, questio
     assert "repost.md" not in queue(html)
     status, body = post(server, {"card": "repost.md", "card_sha": "0" * 64, "record_sha": "", "verdict": "confirm"})
     assert status == 409 and "no committed card" in body
+
+
+def test_question_key_ignores_case_spacing_punctuation_and_invisible_characters():
+    from ams.grill_board.cards import question_key
+
+    plain = question_key("Is this too taxing?")
+    for variant in ("is this too taxing ?", "Is this, too taxing?!", "Is\u200b this too\u00a0taxing?", "IS THIS TOO TAXING"):
+        assert question_key(variant) == plain, variant
+    assert question_key("Is this too costly?") != plain
 
 
 def test_a_rewritten_question_is_accepted(board, repo):

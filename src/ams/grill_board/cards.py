@@ -11,10 +11,11 @@ format without breaking older cards. The board appends `## Answer`,
 committed records the RSI loop reads (DDR-000J).
 
 A card flagged too taxing is held for rewrite. A card that asks a flagged
-question again unchanged (same question line, ignoring case and spacing) is
-refused, whether it is a new file, a copy, or the same card with its flag
-undone: the flagged questions come from every card and every flag the
-board ever committed in this branch's history.
+question again unchanged (same question line, ignoring case, spacing,
+punctuation and invisible characters; see question_key) is refused, whether
+it is a new file, a copy, or the same card with its flag undone: the flagged
+questions come from every card and every flag the board ever committed in
+this branch's history.
 """
 
 import functools
@@ -22,6 +23,7 @@ import functools
 import hashlib
 import re
 import subprocess
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -118,8 +120,16 @@ def parse_card(name, text):
 
 
 def question_key(question):
-    """The form of a question that a rewrite must change: case and spacing aside."""
-    return " ".join(question.split()).casefold()
+    """The form of a question that a rewrite must change (S-004 TK-000H):
+    Unicode NFKC, format characters (category Cf, such as zero-width spaces
+    and joiners) removed, punctuation read as spacing, case folded and
+    spacing collapsed. Only a change of words or symbols is a rewrite."""
+    text = unicodedata.normalize("NFKC", question)
+    text = "".join(
+        "" if (kind := unicodedata.category(char)) == "Cf" else " " if kind[0] == "P" else char
+        for char in text
+    )
+    return " ".join(text.casefold().split())
 
 
 class CardSourceError(Exception):
