@@ -23,7 +23,7 @@ Pinned Skill/AMS baselines, fitness/alignment scores, behavioral evals, retests 
 
 ## Why It Matters
 
-Build first, then loop until meter/stop. Static scores prove no benefit.
+Build, then loop until meter/stop. Static scores prove no benefit.
 
 ## Current Verified State
 
@@ -67,7 +67,7 @@ Close only on three-run repaired-revision original/affected-regression passes
 
 ## Decisions And Contracts
 
-- Retain only qualified Stable/Excellent candidates with useful benefit declared
+- Retain only qualified Stable/Excellent candidates with demonstrated useful benefit declared
   before comparison. First case: grilling failure; coordinate with existing redesign.
 - Start rounds from failed results, never retro ideas. Check prior ineffective
   fixes on recurrence; one change/version.
@@ -137,7 +137,7 @@ RUNBOOK; S-006/S-007; Wiki/Tasks.
 
 ### Interview correction, 2026-11-01
 
-Kayden reported the lost grilling flow as a failure. Resume the ready decision round and wait; the linked context preserves his corrections.
+Kayden reported lost grilling as a failure; the linked context preserves the interview correction.
 
 ## Review and Human QA
 
@@ -149,7 +149,7 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- The retro improvement loop needs its own improvement before it is used in force.
+- Qualify the manual loop before using it in force.
 
 ## Supersession
 
