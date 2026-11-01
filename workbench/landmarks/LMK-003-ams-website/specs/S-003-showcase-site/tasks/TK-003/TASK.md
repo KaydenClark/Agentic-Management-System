@@ -1,8 +1,8 @@
-# TK-003 - Why, Limits, Glossary, quickstart and About pages complete the tour, and the quickstart replays on a fresh clone
+# TK-003 - Why, Glossary, quickstart and About pages complete the tour, and the quickstart replays on a fresh clone
 
 **Task ID:** TK-003
 **Spec ID:** S-003
-**Slice:** Why, Limits, Glossary, quickstart and About pages complete the tour, and the quickstart replays on a fresh clone
+**Slice:** Why, Glossary, quickstart and About pages complete the tour, and the quickstart replays on a fresh clone
 **Status:** in-progress
 **Blockers:** TK-002
 **Destination:** spec-acceptance: Pages exist; Quickstart replays; Owner words
@@ -16,7 +16,7 @@
 
 Read `AGENTS.md`, `site/PAGE-TEMPLATE.md` on `origin/main`, `GLOSSARY.md`, `LICENSE` and the tour pages on `origin/dev`.
 
-Deliver the rest of the tour: Why, Limits, Glossary (from `GLOSSARY.md`), a short quickstart and About (about the AMS project, no resume summary: owner correction in chat 2026-11-01), all in the reading order. Add a replay test that runs the quickstart's commands on a fresh clone and compares the shown output.
+Deliver the rest of the tour: Why, Glossary (from `GLOSSARY.md`), a short quickstart and About (about the AMS project, no resume summary: owner correction in chat 2026-11-01), all in the reading order. Add a replay test that runs the quickstart's commands on a fresh clone and compares the shown output.
 
 Out of scope: video walkthroughs (open owner choice).
 

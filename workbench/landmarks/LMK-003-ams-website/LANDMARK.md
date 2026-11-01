@@ -20,7 +20,7 @@ Site work goes feature -> `dev` -> `main`. `dev` is the protected staging deploy
 
 ## Why It Matters
 
-The site is how the owner shows the AMS to friends, a manager or a CTO, and how the owner relearns the system. Because it is built with the AMS while the RSI loop measures that build, the site is its own evidence, as long as every claim on it links to something real.
+The site is how the owner shows the AMS to friends or a manager, and how the owner relearns the system. Because it is built with the AMS while the RSI loop measures that build, the site is its own evidence, as long as every claim on it links to something real.
 
 ## What Success Looks Like
 

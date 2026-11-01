@@ -19,7 +19,7 @@ The owner asked for a public site that shows off the system, explains how and wh
 
 ## Outcome
 
-A blog-style site with a reading order. Each page opens with a plain-language summary a non-engineer can follow, then goes deeper, so a CTO finds the architecture, guarantees, limits and evidence. This Spec owns the shell every page uses and the tour pages; other pages are sibling Specs.
+A blog-style site with a reading order. Each page opens with a plain-language summary a non-engineer can follow, then goes deeper. This Spec owns the shell every page uses and the tour pages; other pages are sibling Specs.
 
 ## Why It Matters
 
@@ -32,7 +32,7 @@ The site is the owner's public piece and the owner's way back into the system. B
 ## Desired Behavior
 
 - **Shell.** Navigation with reading position, light and dark following the system with a manual toggle, the old Grill Board's theme tokens, the deployed commit SHA on every page.
-- **Tour pages.** Start here (what the AMS is and refuses to do); Why; How it works (records, lifecycle, one real Spec and Task); a short quickstart; Limits; Glossary; About (the AMS project, not the owner; no resume summary, owner correction in chat 2026-11-01).
+- **Tour pages.** Start here (what the AMS is and refuses to do); Why; How it works (records, lifecycle, one real Spec and Task); a short quickstart; Glossary; About (the AMS project, not the owner; no resume summary, owner correction in chat 2026-11-01).
 - **Links to siblings.** RSI charts (S-007), skills wiki (S-008), demo Grill Board (S-009), governance stack and flow charts (S-010).
 - **Data.** Anything dynamic is read from Supabase with the publishable key.
 - **Under the hood.** A page rendered from S-006's build-history rows shows how the AMS built this site: Specs, Tasks, PRs and commits in order, returns and corrections included. No history is hand-written, so the page is the site's proof it was made with the system.
