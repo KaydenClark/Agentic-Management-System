@@ -86,6 +86,6 @@
 | [002Z](002Z-three-orchestrators-split-the-work-by-risk.md) | Three orchestrators split the work by risk | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [003A](003A-implementors-run-on-opus-or-sonnet.md) | Implementors run on Opus or Sonnet | accepted | 2026-11-01 | AGENTS.md |
 | [003B](003B-the-dev-site-is-visible-only-to-the-owner-claude-and-codex.md) | The dev site is visible only to the owner, Claude and Codex | accepted | 2026-11-01 | site |
-| [003C](proposed/003C-the-supabase-project-and-its-read-only-baseline.md) | The Supabase project and its read-only baseline | proposed | 2026-11-01 | supabase |
+| [003C](003C-the-supabase-project-and-its-read-only-baseline.md) | The Supabase project and its read-only baseline | accepted | 2026-11-01 | supabase |
 | [003D](proposed/003D-python-3-14-5-pinned-with-uv.md) | Python 3.14.5 pinned with uv | proposed | 2026-11-01 | .python-version, pyproject.toml |
 | [003E](proposed/003E-the-adr-and-ddr-collections-are-the-cdr-s-two-kinds.md) | The adr and ddr collections are the CDR's two kinds | proposed | 2026-11-01 | ARCHITECTURE.md, workbench/manifest.json |
