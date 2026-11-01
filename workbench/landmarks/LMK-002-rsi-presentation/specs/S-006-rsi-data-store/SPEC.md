@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-004 claimed by claude-s006-tk004; TK-003 claimed by claude-s006-tk003.
-**Next gate:** Close TK-003 and TK-004 with verification and documentation proof.
+**Latest event:** TK-003 closed with proof.
+**Next gate:** Complete TK-004.
 
 ## Intent and authority
 
@@ -28,7 +28,8 @@ Charts can only be honest if each number has a row behind it with its provenance
 ## Current Verified State
 
 - `supabase/migrations/` holds a read-only baseline: clients cannot insert, update or delete, and every new public table starts with row-level security on.
-- `build_events` (migration `20261101132456`) holds one real row, the merge of PR #15 (884d021); the publishable key reads it and is refused (401) on insert, update and delete. `ams-writer` writes it. No RSI result or run tables exist.
+- `build_events` (migration `20261101132456`) holds one real row, the merge of PR #15 (884d021); the publishable key reads it and is refused (401) on insert, update and delete. `ams-writer` writes it.
+- `rsi_runs` and `rsi_results` (migration `20261101134221`) exist and are empty: no real trial has run. Each requires the skills, runtime, controls and grader commits; a version trigger refuses stale updates (409). `ams-rsi livecheck` proves both refusals with test rows, which the publishable key cannot see or write, then deletes them.
 
 ## Desired Behavior
 
@@ -98,6 +99,7 @@ node workbench/tools/spec-workbench.mjs show S-006
 | 2026-11-01 | none | Mapped as planned; baseline migration noted | render, doctor | this Spec | Every criterion |
 | 2026-11-01 | TK-001 | Task closed | PR #15 merged as 884d021: uv run pytest 37 passed (red run 36 failed first); env -u SUPABASE_SERVICE_ROLE_KEY uv run ams-keycheck printed loaded: no, exit 1; live uv run --directory <main checkout> ams-keycheck printed loaded: yes / format: sb_secret / authenticated: yes / http status: 200, exit 0, no key value; hygiene grep found no key in tracked files or diff; render no diff, doctor no blocking finding | RUNBOOK names uv run pytest and ams-keycheck; ARCHITECTURE names src/ams/keycheck.py | Legacy-JWT path proven only with fakes; the live key is sb_secret. Tables, inserts and the publishable-key read path remain for TK-002 onward; close attribution: {"agent":"claude-s006-tk001","claimant":"claude-s006-tk001","onBehalfOf":null} |
 | 2026-11-01 | TK-002 | Task closed | PR #18 merged as d279ae1: migration 20261101132456_build_events applied to hqvtnpvwwppbeurponnn, security advisors no finding; uv run pytest 108 passed, 1 skipped (writer tests red first: import error, then 9 failing inconclusive-probe tests after Codex P2 finding 4435825468, fixed and resolved); live from main checkout: ams-writer record-merge 884d021 printed inserted: id=1 kind=merge subject=PR #15 strength=recorded_fact is_test=False, rerun printed already recorded; ams-writer readcheck with the publishable key printed rows: 1, insert/update/delete refused (http status 401), row unchanged: yes, exit 0; AMS_LIVE=1 live test passed; hygiene grep found no key in the diff; render no diff, doctor no blocking finding | RUNBOOK names ams-writer record-merge/readcheck and AMS_LIVE=1; ARCHITECTURE names ams-writer and the build_events migration; both at or under 3,000 chars | Only build_events exists, with one row; the is_test filter is proven by policy text and stubs, not by a live test row. RSI result and run tables, stale-update refusal (TK-003) and the full build-history import (TK-004) remain; legacy-JWT path still proven only with fakes; close attribution: {"agent":"claude-s006-tk002","claimant":"claude-s006-tk002","onBehalfOf":null} |
+| 2026-11-01 | TK-003 | Task closed | PR #29 merged as 74b446e: migration 20261101134221_rsi_rows (rsi_runs, rsi_results) applied to hqvtnpvwwppbeurponnn, security advisors no lints; uv run pytest 212 passed, 2 skipped (rsi_rows tests red first: import error; Codex P2 findings 4435897333 and 4435926325 each fixed test-first, replied and resolved; final head 6aea2dc reviewed with no unresolved finding); live from main checkout: uv run ams-rsi livecheck exit 0, writer and database each refused a missing skills_commit (code 23502, column skills_commit) and a stale update (http 409, PT409), row unchanged: yes, site key saw 0 of 1 test runs and 0 of 1 test results, client insert/update/delete refused (401) on both tables, cleanup remaining 0; AMS_LIVE=1 test_live_livecheck passed; SQL count rsi_runs 0, rsi_results 0; hygiene grep found no key in the diff; render no diff, doctor no blocking finding | RUNBOOK names uv run ams-rsi livecheck; ARCHITECTURE names ams-rsi and the rsi_* migration; both at 2,999 chars; module docstring in src/ams/rsi_rows.py documents the Store API and livecheck | No non-test RSI row exists (none may be fabricated), so a site-key read of a visible RSI row is proven by grant, policy and a 200 select, not by a live visible row; first real rows come from S-002. Legacy-JWT path still proven only with fakes; close attribution: {"agent":"claude-s006-tk003","claimant":"claude-s006-tk003","onBehalfOf":null} |
 
 ## Review and Human QA
 
