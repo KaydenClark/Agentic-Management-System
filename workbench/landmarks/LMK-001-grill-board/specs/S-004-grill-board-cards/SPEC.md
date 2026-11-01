@@ -10,42 +10,43 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-003 closed with proof.
+**Latest event:** TK-000F closed with proof.
 **Next gate:** Confirm acceptance criteria and completion result.
 
 ## Intent and authority
 
-The owner named "make the Grill Board cards" as an example Spec of LMK-001 and confirmed the card rules on 2026-11-01. Orchestrator B builds it locally; it holds the only Supabase keys and never deploys.
+The owner named "make the Grill Board cards" as an LMK-001 Spec and confirmed the card rules on 2026-11-01. Orchestrator B builds locally, holds the only Supabase keys and never deploys.
 
 ## Outcome
 
-The owner opens one local page and sees every item waiting on them, sorted by the signals the owner already uses. Answering an item updates the record that owns it.
+One local page shows every item waiting on the owner, sorted by the owner's signals. Answering an item updates its owning record.
 
 ## Why It Matters
 
-Priority and Value are how the owner decides what needs attention; without them the queue is noise. Questions that cost too much to answer waste the scarcest input, so the owner can flag them and force a rewrite.
+Priority and Value are how the owner decides what needs attention. Costly questions waste the scarcest input, so the owner can flag them for rewrite.
 
 ## Current Verified State
 
-- The board serves committed cards with Priority, Value and reasons on 127.0.0.1 in the artifact's layout and colors (TK-001, TK-004, TK-000A). Confirm writes into the owning record in one commit, refusing a changed target (TK-002). Rating and flag commit on the card (TK-003).
+- Every acceptance line holds at its linked evidence (TK-001 to TK-000J). Owner Human QA and a fresh review are pending.
 
 ## Desired Behavior
 
-- A Python server runs the board locally. It reads durable records and is never the record itself.
-- Agents post only items that need an answer: owner gates, open choices, page approvals and decision texts. Routine content and drafting never go on the board.
-- Each card shows Priority and Value, each with a one-line reason, a 1-5 rating and a one-click "too taxing" flag.
-- A flagged card is rewritten before it is asked again.
-- A confirmed answer is written straight into its owning record, with no bookkeeping step and no re-confirmation.
-- Flags, ratings and comments are committed records the loop reads, never ignored local files.
-- A write refuses when the target changed since it was read; nothing is deleted or renumbered.
-- Colors are signals, each with one stated meaning; there is no fixed count of hues.
-- The board looks like the owner's "Grilling Board Redesign" artifact in dark and light and loads nothing from other hosts.
+- A local Python server reads durable records and is never the record.
+- Agents post only items needing an answer (owner gates, open choices, page approvals, decision texts), never routine content or drafts.
+- Each card shows Priority and Value with one-line reasons, a 1-5 rating and a one-click "too taxing" flag; a flagged card is rewritten before it is re-asked.
+- A confirmed answer goes straight into its owning record, with no re-confirmation.
+- Flags, ratings and comments are committed records the loop reads.
+- A write refuses a target changed since it was read; nothing is deleted or renumbered.
+- Each color is a signal with one stated meaning.
+- It matches the owner's "Grilling Board Redesign" artifact, dark and light, loading nothing from other hosts.
 
 ## Decisions And Contracts
 
-- The decision journey on the board is tracked apart from delivery (Specs and Tasks).
+- Board decisions are tracked apart from delivery (Specs, Tasks).
 - The board is local only; Vercel never serves it.
-- Card data lives in plain files in Git; the owner's answer is the source, the owning record the destination.
+- Card Context is a note of at most 1,000 characters with no heading or `---` line; else it is refused as page content (TK-000I).
+- Card data is plain files in Git; an answer lands in its owning record.
+- An owning record is a `.md` file under `workbench/` `specs/`, `landmarks/`, `docs/adr/`, `docs/ddr/` or `wiki/`, or `grill-board/page-approvals.md`; any other path is refused (TK-000G).
 - The theme follows the artifact; tokens live in `grill-board/theme/tokens.json` ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
 
 ## Non-Goals
@@ -55,61 +56,73 @@ Priority and Value are how the owner decides what needs attention; without them 
 
 ## Dependencies And Blockers
 
-- A pinned current Python version in the repository: Python 3.14.5 with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
+- Python 3.14.5 pinned with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
 
 ## Vertical Implementation Slices
 
-Each Task is one fresh-session run, landed feature -> `main` through a checked PR. Stack: committed card and record files, a Python server on the pinned Python ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)), the local page, and pytest against a temporary Git repository.
+Each Task is one run landed on `main` by a checked PR.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
 
 ## Acceptance Criteria
 
-- [ ] **Signals on every card.** Every card shows Priority and Value with a one-line reason each. *Check:* render a fixture card set. *Must fail:* a card with a grade and no reason.
-- [ ] **Answer lands in its owner.** Confirming an answer changes the owning record and needs no second confirmation. *Check:* test against a fixture record. *Must fail:* an answer that only changes board state.
-- [ ] **Conflict refusal.** A write against a record changed since it was read is refused and nothing is written. *Must fail:* a silent overwrite.
-- [ ] **Rating and flag.** A 1-5 rating and a "too taxing" flag are each one click and saved as committed records. A flagged card cannot be re-asked unchanged. *Must fail:* a flagged card re-posted with the same text.
-- [ ] **Not a drafting surface.** The board offers no editor for pages or routine content. *Must fail:* a page draft posted as a card.
-- [ ] **Colors mean one thing.** Each color has one documented meaning used consistently. *Must fail:* one color used for two meanings.
-- [ ] **Local only.** The board starts with one documented local command and no Vercel deployment serves it.
-- [ ] **Looks like the artifact.** Layout, formatting and colors match the artifact, dark and light. *Check:* served tokens equal `grill-board/theme/tokens.json`; side-by-side screenshots in `grill-board/qa/`; no third-party request; 375px holds. *Must fail:* a drifted token or a third-party resource.
+- [x] **Signals on every card.** Every card shows Priority and Value with a one-line reason each. *Check:* render a fixture card set. *Must fail:* a card with a grade and no reason. *Evidence:* [board] (TK-001, PR #16).
+- [x] **Answer lands in its owner.** Confirming an answer changes the owning record and needs no second confirmation. *Check:* test against a fixture record. *Must fail:* an answer that only changes board state. *Evidence:* [answers] (TK-000G, 3e557c0).
+- [x] **Conflict refusal.** A write against a record changed since it was read is refused and nothing is written. *Must fail:* a silent overwrite. *Evidence:* [answers] (TK-002).
+- [x] **Rating and flag.** A 1-5 rating and a "too taxing" flag are each one click and saved as committed records. A flagged card cannot be re-asked unchanged. *Must fail:* a flagged card re-posted with the same text. *Evidence:* [ratings] (TK-003; TK-000H, 0356d08).
+- [x] **Not a drafting surface.** The board offers no editor for pages or routine content. *Must fail:* a page draft posted as a card. *Evidence:* [ratings] (TK-000I, a06d530).
+- [x] **Colors mean one thing.** Each color has one documented meaning used consistently. *Must fail:* one color used for two meanings. *Evidence:* [theme] (TK-004, PR #24).
+- [x] **Local only.** The board starts with one documented local command and no Vercel deployment serves it. *Evidence:* [board].
+- [x] **Looks like the artifact.** Layout, formatting and colors match the artifact, dark and light. *Check:* served tokens equal `grill-board/theme/tokens.json`; side-by-side screenshots in `grill-board/qa/`; no third-party request; 375px holds. *Must fail:* a drifted token or a third-party resource. *Evidence:* [theme], [qa shots], [375px] (TK-000J, 00b0aa0).
+
+[board]: ../../../../../tests/test_grill_board.py
+[answers]: ../../../../../tests/test_grill_board_answers.py
+[ratings]: ../../../../../tests/test_grill_board_ratings.py
+[theme]: ../../../../../tests/test_grill_board_theme.py
+[qa shots]: ../../../../../grill-board/qa/
+[375px]: ../../../../../tests/test_grill_board_phone.py
 
 ## RSI and website connection
 
-Ratings and flags are loop inputs: a low-rated or flagged question is a failed result the loop may study (S-002). The public demo (S-009) shows the board's shape with sample cards.
+A low-rated or flagged question is a failed result the loop may study (S-002). The demo (S-009) shows the board with sample cards.
 
 ## Testing Seams
 
-- The Python server's HTTP interface against fixture records in a temporary Git repository.
+- The server's HTTP interface on fixture records in a temporary Git repository.
 
 ## Verification Procedure
 
 ```bash
 node workbench/tools/spec-workbench.mjs show S-004
-# Python test command named at Task planning
+uv run pytest
+uv run --with playwright pytest tests/test_grill_board_phone.py
 ```
 
 ## Documentation Impact
 
-- RUNBOOK gains the command that starts the board.
-- `grill-board/README.md` holds the board's format, theme and QA detail.
+- RUNBOOK: the start command. `grill-board/README.md`: format, theme, QA.
 
 ## Append-Only Evidence And Execution Log
 
-Rows are condensed per Task; full proof is in each TASK.md Receipt and Git history.
+One row per Task; full proof and close attribution are in each TASK.md Receipt.
 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | TK-001 | Closed; candidate 1ba5df0, [PR #16](https://github.com/KaydenClark/Agentic-Management-System/pull/16) | pytest 12 passed; refusal mutation fails; 127.0.0.1 only | RUNBOOK, ARCHITECTURE, card-example.md | Answers, ratings, flags, colors |
-| 2026-11-01 | TK-004 | Closed; candidate 83747aa, [PR #24](https://github.com/KaydenClark/Agentic-Management-System/pull/24) | pytest 65 passed; color tests; drift mutation fails | DDR-000Y, grill-board/README.md | Agent and returned states await TK-002/TK-003 |
-| 2026-11-01 | TK-000A | Planned (blocked on TK-004; no fold), closed; candidate 63913a2, [PR #24](https://github.com/KaydenClark/Agentic-Management-System/pull/24) | pytest 121 passed; tokens equal tokens.json; no third-party URL; QA shots | DDR-000Y, grill-board/README.md | Controls inert until TK-002/TK-003 |
-| 2026-11-01 | TK-002 | Task closed | pytest 151 passed; conflict and path mutations fail; live 409/200/403 | grill-board/README.md, card-example.md | Rating, flag (TK-003); owner QA; close attribution: {"agent":"Claude implementor (Orchestrator B)","claimant":"Claude implementor (Orchestrator B)","onBehalfOf":null} |
-| 2026-11-01 | TK-003 | Task closed | pytest 321 passed; 7 mutations fail; live rate/flag 200, re-ask refused | grill-board/README.md, DDR-000Y, tokens.json | Owner QA; qa/ shots not regenerated; close attribution: {"agent":"Claude implementor (Orchestrator B)","claimant":"Claude implementor (Orchestrator B)","onBehalfOf":null} |
+| 2026-11-01 | TK-001 | Closed; candidate 1ba5df0, PR #16 | pytest 12 passed; 127.0.0.1 only | RUNBOOK, ARCHITECTURE | Answers, ratings, colors |
+| 2026-11-01 | TK-004 | Closed; candidate 83747aa, PR #24 | pytest 65 passed; drift mutation fails | DDR-000Y, README | none |
+| 2026-11-01 | TK-000A | Planned (blocked on TK-004; no fold), closed; candidate 63913a2, PR #24 | pytest 121 passed; no third-party URL | DDR-000Y, README | none |
+| 2026-11-01 | TK-002 | Task closed | pytest 151 passed; live 409/200/403 | README | none |
+| 2026-11-01 | TK-003 | Task closed | pytest 321 passed; 7 mutations fail | README, DDR-000Y | none |
+| 2026-11-01 | review | Review verdict: fail at dd52f705004aac5599a17935935d6fbc6d0a511c [d61980ae5d1c] #1 | new Tasks TK-000F to TK-000J ([receipt](../../../../feedback/coherence/REVIEW-S-004-dd52f70.md)) | Orchestrator C | 5 |
+| 2026-11-01 | TK-000G | Task closed | 3e557c0, PR #58; pytest 367 passed | README, Decisions | none |
+| 2026-11-01 | TK-000H | Task closed | 0356d08, PR #58; must-fail 4 cases | README | none |
+| 2026-11-01 | TK-000I | Task closed | a06d530, PR #58; must-fail 4 cases | README, Decisions | none |
+| 2026-11-01 | TK-000J | Task closed | 00b0aa0, PR #58; 3 mutations fail | README, qa/ | 375px check skips in default pytest |
 
 Owner Human QA has not been performed for any Task.
-| 2026-11-01 | review | Review verdict: fail at dd52f705004aac5599a17935935d6fbc6d0a511c [d61980ae5d1c] #1 | new Task: No S-004 acceptance line is checked or links its evidence (ADR-001F). Link each met line's test or receipt on the line itself; new Task: Confirm writes into any tracked file named as Owner record. A card naming .github/workflows/site-build.yml got its Recommendation committed into that workflow in one click. Restrict owner records to record paths; new Task: The re-ask guard compares only the question line and is defeated by punctuation or a zero-width character (C reproduced 'too taxing ?'). Normalize punctuation and invisible characters or compare more than the question line; new Task: A page draft with valid card headers is shown as a card (Not a drafting surface). Refuse cards whose body is page content and test that case; new Task: grill-board/qa screenshots predate the live rating and flag controls and the 375px layout is untested. Regenerate the shots at the candidate and add a 375px check | Orchestrator C, Claude cloud session, separate from B's build lanes, plus a fresh-context read-only subagent | 5 |
+| 2026-11-01 | TK-000F | Task closed | PR #58; 8 of 8 lines linked | this Spec | Fresh review |
 
 ## Review and Human QA
 

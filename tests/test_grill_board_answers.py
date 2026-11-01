@@ -24,7 +24,7 @@ CARD = """# Fixture: should the board keep one card per file?
 **Value reason:** One word answers it.
 **Topic:** Card format
 **Recommendation:** Keep one Markdown file per card.
-**Owner record:** records/decision.md
+**Owner record:** workbench/wiki/decision.md
 **Write after:** ## Owner answer
 
 Fixture context.
@@ -57,9 +57,9 @@ def head(repo):
 def repo(tmp_path):
     root = tmp_path / "room"
     (root / "grill-board" / "cards").mkdir(parents=True)
-    (root / "records").mkdir()
+    (root / "workbench" / "wiki").mkdir(parents=True)
     (root / "grill-board" / "cards" / "one-card.md").write_text(CARD)
-    (root / "records" / "decision.md").write_text(RECORD)
+    (root / "workbench" / "wiki" / "decision.md").write_text(RECORD)
     git(root, "init", "-q", "-b", "main")
     git(root, "config", "user.name", "fixture")
     git(root, "config", "user.email", "fixture@example.invalid")
@@ -114,7 +114,7 @@ def post(server, fields, headers=None):
 def snapshot(repo):
     return {
         "card": (repo / "grill-board" / "cards" / "one-card.md").read_bytes(),
-        "record": (repo / "records" / "decision.md").read_bytes(),
+        "record": (repo / "workbench" / "wiki" / "decision.md").read_bytes(),
         "head": head(repo),
     }
 
@@ -129,7 +129,7 @@ def test_the_open_card_offers_working_verdicts_with_render_time_hashes(board, re
     for verdict in ("confirm", "rework-wording", "change-the-why", "change"):
         button = re.search(rf'<button type="submit" name="verdict" value="{verdict}"[^>]*>', form)
         assert button and "disabled" not in button.group(0), verdict
-    assert 'name="note"' in form and "records/decision.md" in html
+    assert 'name="note"' in form and "workbench/wiki/decision.md" in html
 
 
 def test_confirm_writes_the_owning_record_and_the_card_in_one_commit(board, repo):
@@ -138,7 +138,7 @@ def test_confirm_writes_the_owning_record_and_the_card_in_one_commit(board, repo
     fields, _ = read_form(server)
     status, body = post(server, {**fields, "verdict": "confirm", "note": "Yes, and keep names short."})
     assert status == 200, body
-    record = (repo / "records" / "decision.md").read_text()
+    record = (repo / "workbench" / "wiki" / "decision.md").read_text()
     card = (repo / "grill-board" / "cards" / "one-card.md").read_text()
     # The answer lands in the owner, right after the named line; nothing is deleted.
     assert record.startswith(RECORD.split("## Owner answer")[0] + "## Owner answer\n\n**Owner answer")
@@ -149,12 +149,12 @@ def test_confirm_writes_the_owning_record_and_the_card_in_one_commit(board, repo
         assert line in record.splitlines()
     # The card records the answer; its question and header are untouched.
     assert card.startswith(CARD)
-    assert "## Answer" in card and "**Verdict:** Confirm" in card and "**Written to:** records/decision.md" in card
+    assert "## Answer" in card and "**Verdict:** Confirm" in card and "**Written to:** workbench/wiki/decision.md" in card
     # One commit, on the current branch, with exactly those two files.
     assert git(repo, "rev-parse", "HEAD~1").strip() == before
     assert git(repo, "rev-parse", "--abbrev-ref", "HEAD").strip() == "main"
     changed = git(repo, "show", "--name-only", "--format=%s", "HEAD").split()
-    assert sorted(changed[-2:]) == ["grill-board/cards/one-card.md", "records/decision.md"]
+    assert sorted(changed[-2:]) == ["grill-board/cards/one-card.md", "workbench/wiki/decision.md"]
     assert "confirm" in git(repo, "log", "-1", "--format=%s").lower()
     assert git(repo, "status", "--porcelain") == ""
     assert "Written and committed" in body
@@ -168,13 +168,13 @@ def test_an_answer_that_only_changes_board_state_is_not_a_confirm(board, repo):
     server = board()
     fields, _ = read_form(server)
     post(server, {**fields, "verdict": "confirm"})
-    assert (repo / "records" / "decision.md").read_bytes() != RECORD.encode()
+    assert (repo / "workbench" / "wiki" / "decision.md").read_bytes() != RECORD.encode()
 
 
 def test_a_target_changed_since_the_card_was_read_is_refused_and_nothing_is_written(board, repo):
     server = board()
     fields, _ = read_form(server)
-    record = repo / "records" / "decision.md"
+    record = repo / "workbench" / "wiki" / "decision.md"
     record.write_text(RECORD.replace("awaiting the owner", "edited by someone else"))
     git(repo, "commit", "-qam", "someone else edits the record")
     before = snapshot(repo)
@@ -187,7 +187,7 @@ def test_a_target_changed_since_the_card_was_read_is_refused_and_nothing_is_writ
 def test_uncommitted_edits_in_the_target_are_refused_and_kept(board, repo):
     server = board()
     fields, _ = read_form(server)
-    record = repo / "records" / "decision.md"
+    record = repo / "workbench" / "wiki" / "decision.md"
     record.write_text(RECORD + "\nan uncommitted edit\n")
     before = snapshot(repo)
     status, body = post(server, {**fields, "verdict": "confirm"})
@@ -209,15 +209,15 @@ def test_a_card_changed_since_it_was_read_is_refused(board, repo):
 
 @pytest.mark.parametrize(
     "target",
-    ["../outside.md", "/etc/hosts", ".git/config", "records/../../outside.md", "records/link.md", "linkdir/x.md"],
+    ["../outside.md", "/etc/hosts", ".git/config", "workbench/wiki/../../outside.md", "workbench/wiki/link.md", "linkdir/x.md"],
 )
 def test_owner_paths_that_escape_the_repository_are_refused(board, repo, target):
     outside = repo.parent / "outside.md"
     outside.write_text("outside\n")
-    os.symlink(outside, repo / "records" / "link.md")
+    os.symlink(outside, repo / "workbench" / "wiki" / "link.md")
     os.symlink(repo.parent, repo / "linkdir")
     card = repo / "grill-board" / "cards" / "one-card.md"
-    card.write_text(CARD.replace("records/decision.md", target))
+    card.write_text(CARD.replace("workbench/wiki/decision.md", target))
     git(repo, "add", "-A")
     git(repo, "commit", "-qm", "card points elsewhere")
     server = board()
@@ -242,7 +242,7 @@ def test_non_confirm_verdicts_are_recorded_on_the_card_as_returns_with_the_note(
     assert card.startswith(CARD)
     assert f"**Verdict:** {label}" in card and "**Returned:** yes" in card
     assert "> Say who reads it.\n> Then ask again." in card
-    assert (repo / "records" / "decision.md").read_text() == RECORD, "a return never writes the owner"
+    assert (repo / "workbench" / "wiki" / "decision.md").read_text() == RECORD, "a return never writes the owner"
     assert git(repo, "show", "--name-only", "--format=", "HEAD").split() == ["grill-board/cards/one-card.md"]
 
 
@@ -289,33 +289,33 @@ def test_other_dirty_files_are_left_alone_and_not_committed(board, repo):
 
 
 @pytest.mark.parametrize(
-    "target", ["../outside.md", "/etc/hosts", ".git/config", ".GIT/config", "records/./decision.md", "records/link.md", "linkdir/x.md", "records"],
+    "target", ["../outside.md", "/etc/hosts", ".git/config", ".GIT/config", "workbench/wiki/./decision.md", "workbench/wiki/link.md", "linkdir/x.md", "workbench/wiki"],
 )
 def test_the_path_guard_alone_refuses_every_escape(repo, target):
     from ams.grill_board.answers import AnswerRefused, owned_path
 
     (repo.parent / "x.md").write_text("outside\n")
-    os.symlink(repo / "records" / "decision.md", repo / "records" / "link.md")
+    os.symlink(repo / "workbench" / "wiki" / "decision.md", repo / "workbench" / "wiki" / "link.md")
     os.symlink(repo.parent, repo / "linkdir")
     with pytest.raises(AnswerRefused):
         owned_path(repo, target)
-    assert owned_path(repo, "records/decision.md") == repo / "records" / "decision.md"
+    assert owned_path(repo, "workbench/wiki/decision.md") == repo / "workbench" / "wiki" / "decision.md"
 
 
 def test_a_planted_temporary_symlink_never_redirects_the_write(board, repo):
     """Codex P1 on PR #38: a symlink at a predictable temp name must not be followed."""
     outside = repo.parent / "victim.md"
     outside.write_text("victim\n")
-    for folder, name in (("records", "decision.md"), ("grill-board/cards", "one-card.md")):
+    for folder, name in (("workbench/wiki", "decision.md"), ("grill-board/cards", "one-card.md")):
         os.symlink(outside, repo / folder / f".{name}.answer-tmp")
     server = board()
     fields, _ = read_form(server)
     status, body = post(server, {**fields, "verdict": "confirm"})
     assert status == 200, body
     assert outside.read_text() == "victim\n"
-    record = repo / "records" / "decision.md"
+    record = repo / "workbench" / "wiki" / "decision.md"
     assert not record.is_symlink() and "Confirmed:" in record.read_text()
-    tree = git(repo, "ls-tree", "HEAD", "records/decision.md", "grill-board/cards/one-card.md")
+    tree = git(repo, "ls-tree", "HEAD", "workbench/wiki/decision.md", "grill-board/cards/one-card.md")
     assert [line.split()[0] for line in tree.splitlines()] == ["100644", "100644"]
 
 
@@ -348,7 +348,7 @@ def test_the_form_hash_is_bound_to_the_card_text_the_page_showed(board, repo, mo
 def test_a_card_that_names_itself_as_its_owner_is_refused(board, repo):
     """Codex P2 on PR #38: two writes to one file would drop the owner's answer."""
     card = repo / "grill-board" / "cards" / "one-card.md"
-    card.write_text(CARD.replace("records/decision.md", "grill-board/cards/one-card.md").replace(
+    card.write_text(CARD.replace("workbench/wiki/decision.md", "grill-board/cards/one-card.md").replace(
         "**Write after:** ## Owner answer", "**Write after:** Fixture context."))
     git(repo, "commit", "-qam", "card owns itself")
     server = board()
@@ -374,7 +374,7 @@ def test_answers_wait_for_the_repository_lock_and_then_see_the_change(board, rep
         worker.start()
         time.sleep(1.0)
         assert not result, "the answer must wait for the repository lock"
-        record = repo / "records" / "decision.md"
+        record = repo / "workbench" / "wiki" / "decision.md"
         record.write_text(RECORD.replace("awaiting the owner", "answered by another board"))
         git(repo, "commit", "-qam", "another board instance writes first")
         before = snapshot(repo)
@@ -402,7 +402,7 @@ def test_two_boards_confirming_cards_for_one_record_never_lose_an_answer(board, 
     for worker in workers:
         worker.join(timeout=15)
     assert sorted(status for status, _ in results) == [200, 409]
-    record = (repo / "records" / "decision.md").read_text()
+    record = (repo / "workbench" / "wiki" / "decision.md").read_text()
     assert record.count("Confirmed:") == 1
     answered = [c for c in ("one-card.md", "two-card.md") if "## Answer" in (repo / "grill-board" / "cards" / c).read_text()]
     assert len(answered) == 1 and f"card `{answered[0]}`" in record
@@ -427,14 +427,14 @@ def test_head_moving_before_the_commit_refuses_and_restores_the_files(board, rep
     monkeypatch.setattr(answers, "_replace", replace_then_someone_commits)
     status, body = post(server, {**fields, "verdict": "confirm"})
     assert status == 409 and "HEAD moved" in body
-    assert (repo / "records" / "decision.md").read_text() == RECORD
+    assert (repo / "workbench" / "wiki" / "decision.md").read_text() == RECORD
     assert (repo / "grill-board" / "cards" / "one-card.md").read_text() == CARD
     assert git(repo, "log", "-1", "--format=%s").strip() == "another writer commits mid-answer"
     assert git(repo, "status", "--porcelain") == ""
 
 
 def test_a_record_that_is_not_utf8_text_is_refused(board, repo):
-    (repo / "records" / "decision.md").write_bytes(RECORD.encode() + b"\xff\xfe\n")
+    (repo / "workbench" / "wiki" / "decision.md").write_bytes(RECORD.encode() + b"\xff\xfe\n")
     git(repo, "commit", "-qam", "binary tail")
     server = board()
     fields, _ = read_form(server)
@@ -458,3 +458,42 @@ def test_malformed_posts_are_refused_without_a_write(board, repo, length):
     connection.endheaders()
     assert connection.getresponse().status == 400
     assert snapshot(repo) == before
+
+
+@pytest.mark.parametrize(
+    "target",
+    [".github/workflows/site-build.yml", "src/ams/module.py", "site/index.html", "supabase/config.toml",
+     "pyproject.toml", "uv.lock", "workbench/wiki/data.json", "AGENTS.md", "grill-board/README.md",
+     "workbench/tools/tool.md", "Workbench/wiki/decision.md"],
+)
+def test_confirm_refuses_an_owner_record_outside_the_record_roots_and_writes_nothing(board, repo, target):
+    """Review TK-000G: C committed a card's Recommendation into a workflow file in one click."""
+    path = repo / target
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if not path.exists():
+        path.write_text("## Owner answer\n")
+    card = repo / "grill-board" / "cards" / "one-card.md"
+    card.write_text(CARD.replace("workbench/wiki/decision.md", target))
+    git(repo, "add", "-A")
+    git(repo, "commit", "-qm", "card names a non-record owner")
+    server = board()
+    fields, html = read_form(server)
+    assert "Confirm needs an Owner record" in html
+    before, target_before = snapshot(repo), path.read_bytes()
+    status, body = post(server, {**fields, "verdict": "confirm"})
+    assert status == 409 and "Not written" in body and "record root" in body
+    assert snapshot(repo) == before and path.read_bytes() == target_before
+
+
+@pytest.mark.parametrize(
+    "target",
+    ["workbench/specs/S-1/SPEC.md", "workbench/landmarks/L/LANDMARK.md", "workbench/docs/adr/001-x.md",
+     "workbench/docs/ddr/001-x.md", "workbench/wiki/decision.md", "grill-board/page-approvals.md"],
+)
+def test_the_path_guard_accepts_each_record_root(repo, target):
+    from ams.grill_board.answers import owned_path
+
+    path = repo / target
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("## Owner answer\n")
+    assert owned_path(repo, target) == path

@@ -22,7 +22,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlencode, urlsplit
 
-from .answers import VERDICTS, AnswerRefused, AnswerWrittenIndexStale, render_hashes
+from .answers import VERDICTS, AnswerRefused, AnswerWrittenIndexStale, is_record_path, render_hashes
 from .answers import answer as write_answer
 from .answers import flag as write_flag
 from .answers import rate as write_rate
@@ -149,6 +149,8 @@ def render_verdicts(cards_dir, topic, card):
     target, anchor = card.fields.get("Owner record", ""), card.fields.get("Write after", "")
     if not (target and anchor):
         where, ready = "Confirm needs this card to name its Owner record and Write after line.", False
+    elif not is_record_path(target):
+        where, ready = "Confirm needs an Owner record that is a Markdown record under a record root (see grill-board/README.md).", False
     elif not card.fields.get("Recommendation"):
         where, ready = "Confirm needs a Recommendation on this card.", False
     else:
