@@ -3,7 +3,7 @@
 **Task ID:** TK-002
 **Spec ID:** S-013
 **Slice:** A committed up-to-Spec report lists each unmet acceptance criterion of one active Spec with evidence
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Up to Spec
 **Planned verification:** script test on a fixture Spec plus one real report
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Orchestrator C's cloud lane: read through Git and GitHub only, hold no Supabase or Vercel secret, write no product code. Reports go to `workbench/feedback/coherence/`.
+**Claimed by:** orchestrator-C
+**Current claimant:** orchestrator-C
 
 Read `AGENTS.md`, this Task, the parent Spec, ADR-001F under `workbench/docs/adr/`, and `node workbench/tools/spec-workbench.mjs show S-004 --json` (or another active Spec).
 
