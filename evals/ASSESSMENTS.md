@@ -47,7 +47,9 @@ The JSON example supplies the shape. Required fields:
 - `historicalFindings`: optional prior findings with `findingId`, `checkId`,
   `class`, original `candidate`, `sourceRunId` and observation. Unmapped historical
   classes or check mappings block acceptance. Later packets may fill missing
-  `checkId`/`class` fields; existing mappings and source facts cannot change.
+  `checkId`/`class` fields and a missing original `candidate` commit; existing
+  mappings and source facts cannot change. Closure also needs a known original
+  or latest failure commit, different from the repaired revision.
   A historical ID colliding with a current finding's different check/class is
   refused before writing; old metadata cannot hide a new Regression.
   Enrichment keeps the finding open until its normal retest. Recorded findings

@@ -15,19 +15,19 @@
 
 ## Intent and authority
 
-[Owner decisions/resume](../../../../wiki/context-ams-purpose.md): JOT-4fa672e3 resumes Journey. r1; Stable/Excellent; three attempts excluding baseline; subscription meter; bounded candidate/regressions separate from whole AMS.
+[Owner decisions/resume](../../../../wiki/context-ams-purpose.md): Journey resumed; r1, Stable/Excellent, three attempts excluding baseline, subscription meter; bounded candidate/regressions separate from whole AMS.
 
 ## Outcome
 
-Pinned baselines, scores, evals, retests and dispositions.
+Evidence-backed Skill/AMS improvements.
 
 ## Why It Matters
 
-Build, then loop until meter/stop. Static scores prove no benefit.
+Loop on real builds until meter/stop; static scores prove no benefit.
 
 ## Current Verified State
 
-[Local CLI proof](tasks/TK-000M/TASK.md); runner/trials/storage incomplete. [Main a3d014e baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken, 4/138, incomplete/unqualified; reviews, no strike/skill result.
+[CLI proof](tasks/TK-000M/TASK.md); runner/trials/storage incomplete. [Baseline a3d014e](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified reviews, not trials; no strike/skill result.
 
 ## Desired Behavior
 
@@ -35,11 +35,11 @@ Failure -> earliest gap/owner -> one change in its repository -> baseline/retest
 
 ### Audit scores
 
-Canonical method: `audit-workbench` r1 checks/scenarios/qualification, version 1,
+Canonical: `audit-workbench` r1 checks/scenarios/qualification, version 1,
 hash `96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578`.
 Freeze rubric, scope/inventory/exclusions, IDs/classes, baseline/candidate/skills
 commits, loaded artifacts, host/tools, evaluator model/prompt/qualification.
-No extra points or rubric changes.
+No rubric changes/extra points.
 
 Three runs/attempt: class, Yes/No/justified N/A, typed revision-bound
 evidence/qualification. Missing/Unknown/refused/interrupted stays No in its class
@@ -50,18 +50,18 @@ Run pass: all Critical/Regression Yes; Regression needs baseline pass proof.
 3/2/1/0 passing runs = Excellent/Stable/Functional/Broken; Critical No overrides
 Broken. Acceptance additionally requires complete qualified proof and no open
 Critical/Regression or unmapped historical finding. No QA/distribution/benefit
-implied. Whole fitness covers ten areas; bounded results cannot certify AMS.
+implied. Whole fitness: ten areas; bounded results cannot certify AMS.
 
 ### Skill evals and retests
 
-`evals/` pins case/failure, prompt/fixtures/reset, permissions, end state and
+`evals/` pins case/failure, prompt/fixtures/reset, permissions, end state,
 grader/model/host/loaded skill. Cover invocation/near misses, valid/adverse input,
-prerequisites/discovery/resume/authority. Map r1 IDs without extra points.
+prerequisites/discovery/resume/authority. Map r1 IDs; no extra points.
 Qualify good/bad/do-nothing cases; protect inputs/logs. Deterministic checks first;
 semantic judges need separate context, exact model, owner-labelled cases, no worker
 reasoning. Requalify model/prompt/rubric changes; manual trials until qualified.
 
-Findings retain ID/check/class, run/candidate/evidence, uncertain cause, owner/retest.
+Findings: ID/check/class, run/candidate/evidence, uncertain cause, owner/retest.
 Close only on three-run repaired-revision original/affected-regression passes
 (or justified regression exclusion). Merge/omission/score cannot close; retain recurrence/new failures.
 
@@ -87,28 +87,28 @@ Close only on three-run repaired-revision original/affected-regression passes
 
 ## Non-Goals
 
-Model weights; loop execution during mapping; presentation (S-007).
+Weights; running loops during mapping; presentation (S-007).
 
 ## Dependencies And Blockers
 
-S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests and behavioral links. S-007 presents scores/evals/failures/provenance. Integration missing; reviews are not trials.
+S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests, behavioral links. S-007 presents scores/evals/failures/provenance; integration missing.
 
 Real build-history/skills seeds, strength labels; private summary/commit only. Storage/qualified comparisons required.
 
 ## Vertical Implementation Slices
 
-TK-000M/N: local CLI/recovery only. Trial Tasks retain real inputs. B local; checked PRs to main.
+Local CLI/corrections: TK-000M/N/O; trials retain real inputs. B local; checked PRs to main.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
 
 ## Acceptance Criteria
 
-- [ ] **Cycle:** skill failure -> change -> three-run score -> retest/disposition/later use. Reject missing pin/retest.
-- [ ] **Scoring:** `8/10 + 1/2 + 1/2 = 10/14`; empty set has no score. Test all levels, Quality-only No, Critical/Regression/missing proof. Reject Broken acceptance or bounded-as-whole claims.
+- [ ] **Cycle:** failure -> change -> three-run score -> retest/disposition/later use; reject missing pin/retest.
+- [ ] **Scoring:** Pool `8/10 + 1/2 + 1/2 = 10/14`; empty: no score. Test all levels, Quality No, Critical/Regression/missing proof. Reject Broken acceptance and bounded-as-whole.
 - [ ] **Evals:** enforce comparison contracts; reject do-nothing passes, self-grading, anecdotal/static benefit, skipped permissions/below-floor lift.
 - [ ] **Stops:** omitted findings stay open; regressions visible; baseline excluded. Reject fourth attempt/reset.
-- [ ] **Readback:** S-006/S-007 retain assessment/trial distinctions, failures/evidence links. Reject false storage claims or test/private-data publication.
+- [ ] **Readback:** S-006/S-007 retain assessment/trial distinctions and failures/evidence. Reject false storage or test/private-data publication.
 
 ## RSI and website connection
 
@@ -120,7 +120,7 @@ CLI/runner/writer/readback fixtures: missing proof, recurrence, original-pass/re
 
 ## Verification Procedure
 
-RUNBOOK; [Task proof](tasks/TK-000M/TASK.md).
+RUNBOOK and [Task proof](tasks/TK-000M/TASK.md).
 
 ## Documentation Impact
 
@@ -143,7 +143,7 @@ Kayden reported lost grilling as a failure; the linked context preserves the int
 
 ## Review and Human QA
 
-Independent review per retained change; owner judges manual-round automation.
+Independent review per retained change; owner judges automation.
 
 ## Completion Result
 
@@ -151,7 +151,7 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- Qualify the manual loop before using it in force.
+- Qualify before running the manual loop in force.
 
 ## Supersession
 

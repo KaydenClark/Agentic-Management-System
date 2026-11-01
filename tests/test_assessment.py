@@ -367,3 +367,28 @@ def test_historical_quality_id_cannot_hide_current_regression_failure(tmp_path):
     with pytest.raises(assessment.Refused,match='collid'):
         assessment.record(p,tmp_path)
     assert not list(tmp_path.glob('*.json'))
+
+
+def test_historical_retest_needs_known_failure_revision_and_allows_missing_revision_enrichment(tmp_path):
+    p=packet(('A04-04',))
+    p['historicalFindings']=[{'findingId':'legacy','checkId':'A04-04','class':'Critical'}]
+    assessment.record(p,tmp_path)
+    p.update(assessmentId='unknown-failure-revision',attempt=1)
+    p['retests']=[{'findingId':'legacy','revision':REV,'originalCheckId':'A04-04',
+                   'regressionExclusionReason':'No affected regression in this synthetic case'}]
+    result=assessment.record(p,tmp_path)
+    assert result['findings'][0]['status']=='open' and not result['assessmentAccepted']
+    p.update(assessmentId='supply-same-failure-revision',attempt=2)
+    p['historicalFindings'][0]['candidate']=REV
+    result=assessment.record(p,tmp_path)
+    assert result['findings'][0]['candidate']==REV
+    assert result['findings'][0]['status']=='open' and not result['assessmentAccepted']
+    p.update(assessmentId='actual-repair',attempt=3,candidate='f'*40)
+    for run in p['runs']:
+        run['rows'][0]['evidence']=evidence('f'*40)
+    p['evaluator']['qualificationEvidence']=evidence('f'*40)
+    p['retests'][0]['revision']='f'*40
+    result=assessment.record(p,tmp_path)
+    assert result['findings'][0]['status']=='verified-resolved' and result['assessmentAccepted']
+    records=assessment.read_records(tmp_path)
+    assert 'candidate' not in records[0]['packet']['historicalFindings'][0]

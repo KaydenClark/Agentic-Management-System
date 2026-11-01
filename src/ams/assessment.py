@@ -165,8 +165,13 @@ def _findings(p, runs, previous):
                     merged[key] = old[key]
             # Mapping is enrichable; recorded source facts are not replaceable.
             for key in ('candidate','sourceRunId','observation'):
-                if key in old and key in retained:
+                if key in old and key in retained and retained[key] is not None:
                     require(old[key] == retained[key], 'historical source cannot change')
+            if retained.get('candidate') is None and old.get('candidate') is not None:
+                merged['candidate'] = old['candidate']
+        for key in ('candidate','lastCandidate'):
+            if merged.get(key) is not None:
+                revision(merged[key], 'historical ' + key)
         cid = merged.get('checkId')
         require(cid is None or cid in CHECKS, 'unknown historical check')
         cls = merged.get('class')
@@ -202,8 +207,10 @@ def _findings(p, runs, previous):
         require(isinstance(regressions,list) and len(set(regressions)) == len(regressions), 'invalid regression check list')
         require(bool(regressions) or bool(retest.get('regressionExclusionReason','').strip()), 'retest needs affected regressions or justified exclusion')
         checks = [original, *regressions]
+        failed_revision = finding.get('lastCandidate') or finding.get('candidate')
+        known_revision = isinstance(failed_revision,str) and re.fullmatch(r'[0-9a-f]{40}',failed_revision) is not None
         ok = (retest.get('revision') == p['candidate'] and original == finding.get('checkId')
-              and p['candidate'] != finding.get('lastCandidate',finding.get('candidate'))
+              and known_revision and p['candidate'] != failed_revision
               and finding.get('class') in ('Critical','Regression','Quality')
               and all(any(r['id']==cid and r['result']=='Yes' and r['complete'] and r['qualified']
                           for r in run['rows']) for run in runs for cid in checks))

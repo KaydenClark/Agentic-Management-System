@@ -1,8 +1,8 @@
-# TK-000O - Historical finding ID collisions cannot bypass Regression acceptance
+# TK-000O - Historical finding identity cannot bypass Regression or repaired-revision acceptance
 
 **Task ID:** TK-000O
 **Spec ID:** S-002
-**Slice:** Historical finding ID collisions cannot bypass Regression acceptance
+**Slice:** Historical finding identity cannot bypass Regression or repaired-revision acceptance
 **Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Scoring; Stops
@@ -19,3 +19,15 @@ Same authorized S-002 delivery, codex-s002 writer, `codex/s002-assessment-loop` 
 - [ ] A historical Quality finding cannot hide a current Regression failure through an ID collision; incompatible check IDs/classes cannot reuse the current finding identity.
 - [ ] Refused collisions leave stored history unchanged, and normal repeat findings, enrichment, retests and recurrence still work.
 - [ ] Focused tests, independent review and required CI pass before merge; native proof/closure retained.
+
+## Check and corrective review
+
+Source candidate `67fc14a0d8d4d30909c671353c4ec12e52d3bf2e`: regression observed red, then 41 focused tests passed. Both fresh-context reviewers report no findings; Spec reviewer independently repeated all 41 and probed matching Regression findings, distinct historical Quality findings, wrong-check and unmapped collisions. Fresh clone: 432 passed, 4 skipped. Render/doctor/layout/ADR/diff checks passed after the follow-up prose was separated from TK-000N's native Receipt table; its checksummed row was not changed. The collision review thread is resolved after repair and verification.
+
+S-006 and real trials remain blocked as recorded in the Spec. Required final-head CI is pending before merge, without any claimed model qualification, useful benefit or Human QA.
+
+## Same-run retest correction
+
+[Automated finding 4436904200](https://github.com/KaydenClark/Agentic-Management-System/pull/78#discussion_r4436904200) also showed unknown historical failure revisions could resolve after unchanged-candidate retests. This run additionally requires a known original/latest failing commit before resolution, permits validated enrichment of a missing original commit, preserves recorded sources and rejects the same failure revision. The new regression was observed red before repair.
+
+- [ ] Missing failure revision cannot close; supplying the unchanged revision remains open, while a distinct repaired revision can close after the normal qualified three-run retest.
