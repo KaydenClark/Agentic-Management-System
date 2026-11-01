@@ -68,6 +68,76 @@
         "site/app/shell/PageOrder.tsx"
       ],
       "status": "draft"
+    },
+    {
+      "path": "/why",
+      "title": "Why",
+      "spec": "S-003",
+      "task": "TK-003",
+      "landed": {
+        "branch": "dev",
+        "commit": "ea66a1bac7856933ae2fdbaab1ec6c44a5ef0d1b",
+        "pr": 84
+      },
+      "sources": [
+        "site/app/why/",
+        "site/app/tour/",
+        "site/app/nav.ts"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/quickstart",
+      "title": "Quickstart",
+      "spec": "S-003",
+      "task": "TK-003",
+      "landed": {
+        "branch": "dev",
+        "commit": "ea66a1bac7856933ae2fdbaab1ec6c44a5ef0d1b",
+        "pr": 84
+      },
+      "sources": [
+        "site/app/quickstart/",
+        "site/app/tour/",
+        "site/app/nav.ts"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/glossary",
+      "title": "Glossary",
+      "spec": "S-003",
+      "task": "TK-003",
+      "landed": {
+        "branch": "dev",
+        "commit": "ea66a1bac7856933ae2fdbaab1ec6c44a5ef0d1b",
+        "pr": 84
+      },
+      "sources": [
+        "site/app/glossary/",
+        "site/scripts/gen-glossary.mjs",
+        "GLOSSARY.md",
+        "site/app/tour/",
+        "site/app/nav.ts"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/about",
+      "title": "About",
+      "spec": "S-003",
+      "task": "TK-003",
+      "landed": {
+        "branch": "dev",
+        "commit": "63d9fbe0a6a5af415e7ee79d514a4f9d8e515628",
+        "pr": 84
+      },
+      "sources": [
+        "site/app/about/",
+        "site/app/tour/",
+        "site/app/nav.ts"
+      ],
+      "status": "draft"
     }
   ]
 }
