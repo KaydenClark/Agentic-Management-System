@@ -4,7 +4,7 @@
 **Spec ID:** S-002
 **Slice:** A noise-floor run of the current version against itself on a fixed task set records per-task flip rate and spread
 **Status:** blocked
-**Blockers:** S-006, owner:rsi-campaign-approval
+**Blockers:** S-006
 **Destination:** spec-acceptance: Noise floor first; Sandboxed; Graders independent
 **Planned verification:** rows from repeated same-version runs and the recorded floor
 
@@ -12,11 +12,11 @@
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Orchestrator B's local lane only: it holds the writer's key and the skills repository checkout.
 
-Blocked until the owner gives the standing campaign approval (`rsi-campaign-approval` in the Spec). Read `AGENTS.md`, this Task, the parent Spec, ADR-002G, ADR-002I, ADR-002L and ADR-002J under `workbench/docs/adr/`, and `evals/EVAL-TASK-TEMPLATE.md`.
+Uses the owner's existing paid-plan meter, not an API campaign budget (JOT-6e1500aa-cbde-41c2-b638-f10fa9ef83e3 in the linked AMS-purpose Wiki). The owner resumed S-002 Journey on 2026-11-01; the former campaign-budget blocker is superseded. S-006 remains a real input gate. Read `AGENTS.md`, this Task, the parent Spec, ADR-002G, ADR-002I, ADR-002L and ADR-002J under `workbench/docs/adr/`, and `evals/EVAL-TASK-TEMPLATE.md`.
 
 Deliver step zero of the loop: a small fixed task set under `evals/` (dev split, at least three tasks, each with a grader taken from the accepted version), a runner that executes a pinned version in a sandbox without skipped permission checks, and repeated same-version runs whose rows (with arm, version, skills pin, provider, model, effort, cost, tokens and completed state) are written through S-006. Compute and record the per-task flip rate and spread as the noise floor.
 
-Hand back to S-002 with `close`, including spend.
+Hand back to S-002 with `close`, including measured subscription usage, or unknown when unavailable.
 
 ## Acceptance
 

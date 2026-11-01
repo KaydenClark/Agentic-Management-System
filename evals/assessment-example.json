@@ -1,0 +1,104 @@
+{
+  "schema": 1,
+  "assessmentId": "synthetic-format-example",
+  "failureId": "synthetic-example-only",
+  "assessedAt": "2026-11-01T18:00:00Z",
+  "attempt": 0,
+  "scope": "bounded",
+  "rubric": {
+    "revision": "r1",
+    "sha256": "96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578",
+    "checkVersion": 1
+  },
+  "candidate": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "baseline": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "skillsCommit": "cccccccccccccccccccccccccccccccccccccccc",
+  "inventoryRevision": "dddddddddddddddddddddddddddddddddddddddd",
+  "conditions": {
+    "host": "synthetic-example",
+    "tools": [
+      "none"
+    ],
+    "workerModel": "unknown",
+    "effort": "unknown",
+    "loadedArtifacts": [
+      "synthetic:placeholder@cccccccccccccccccccccccccccccccccccccccc"
+    ]
+  },
+  "evaluator": {
+    "model": "unknown",
+    "promptRevision": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "qualification": "unqualified",
+    "qualificationEvidence": []
+  },
+  "inventory": [
+    {
+      "id": "A04-01",
+      "class": "Quality"
+    }
+  ],
+  "excludedChecks": {
+    "A01-01": "Outside this synthetic format example",
+    "A01-02": "Outside this synthetic format example",
+    "A01-03": "Outside this synthetic format example",
+    "A01-04": "Outside this synthetic format example",
+    "A01-05": "Outside this synthetic format example",
+    "A01-06": "Outside this synthetic format example",
+    "A01-07": "Outside this synthetic format example",
+    "A02-01": "Outside this synthetic format example",
+    "A02-02": "Outside this synthetic format example",
+    "A02-03": "Outside this synthetic format example",
+    "A02-04": "Outside this synthetic format example",
+    "A02-05": "Outside this synthetic format example",
+    "A02-06": "Outside this synthetic format example",
+    "A03-01": "Outside this synthetic format example",
+    "A03-02": "Outside this synthetic format example",
+    "A03-03": "Outside this synthetic format example",
+    "A03-04": "Outside this synthetic format example",
+    "A04-02": "Outside this synthetic format example",
+    "A04-03": "Outside this synthetic format example",
+    "A04-04": "Outside this synthetic format example",
+    "A04-05": "Outside this synthetic format example",
+    "A04-06": "Outside this synthetic format example",
+    "A04-07": "Outside this synthetic format example",
+    "A05-01": "Outside this synthetic format example",
+    "A05-02": "Outside this synthetic format example",
+    "A05-03": "Outside this synthetic format example",
+    "A05-04": "Outside this synthetic format example",
+    "A06-01": "Outside this synthetic format example",
+    "A06-02": "Outside this synthetic format example",
+    "A06-03": "Outside this synthetic format example",
+    "A06-04": "Outside this synthetic format example",
+    "A06-05": "Outside this synthetic format example",
+    "A07-01": "Outside this synthetic format example",
+    "A07-02": "Outside this synthetic format example",
+    "A07-03": "Outside this synthetic format example",
+    "A07-04": "Outside this synthetic format example",
+    "A08-01": "Outside this synthetic format example",
+    "A08-02": "Outside this synthetic format example",
+    "A08-03": "Outside this synthetic format example",
+    "A09-01": "Outside this synthetic format example",
+    "A09-02": "Outside this synthetic format example",
+    "A09-03": "Outside this synthetic format example",
+    "A09-04": "Outside this synthetic format example",
+    "A10-01": "Outside this synthetic format example",
+    "A10-02": "Outside this synthetic format example",
+    "A10-03": "Outside this synthetic format example"
+  },
+  "runs": [
+    {
+      "runId": "synthetic-1",
+      "rows": []
+    },
+    {
+      "runId": "synthetic-2",
+      "rows": []
+    },
+    {
+      "runId": "synthetic-3",
+      "rows": []
+    }
+  ],
+  "historicalFindings": [],
+  "retests": []
+}

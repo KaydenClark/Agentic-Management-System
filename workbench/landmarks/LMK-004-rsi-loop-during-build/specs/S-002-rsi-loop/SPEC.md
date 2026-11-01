@@ -10,99 +10,121 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Audit contract specified; unimplemented.
-**Next gate:** Resolve scope; reconcile Tasks before trials.
+**Latest event:** TK-000O closed with proof.
+**Next gate:** S-006 -> TK-001/TK-002.
 
 ## Intent and authority
 
-[Owner answers](../../../../wiki/context-ams-purpose.md): r1, Stable/Excellent, three attempts excluding baseline, paid-plan meter. JOT-5061e624-c5c2-421d-aae1-58b01a25a03c requests this Spec repair only.
+[Owner decisions/resume](../../../../wiki/context-ams-purpose.md): Journey resumed; r1, Stable/Excellent, three attempts excluding baseline, subscription meter; bounded candidate/regressions separate from whole AMS.
 
 ## Outcome
 
-Skill/AMS changes have pinned baselines, fitness/alignment scores, behavioral evals, retests and dispositions.
+Evidence-backed Skill/AMS improvements.
 
 ## Why It Matters
 
-Build first, then loop until meter/stop. Static scores prove no benefit.
+Loop on real builds until meter/stop; static scores prove no benefit.
 
 ## Current Verified State
 
-Runner/evals/storage reader incomplete. [Main a3d014e baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken, 4/138, incomplete/unqualified; reviews, no strike/skill result.
+[CLI proof](tasks/TK-000M/TASK.md); runner/trials/storage incomplete. [Baseline a3d014e](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified reviews, not trials; no strike/skill result.
 
 ## Desired Behavior
 
-Failed audit -> earliest gap/owner -> one hypothesis/change -> baseline comparison/retests -> retain, revise (variant) or remove -> record/later use. Owners repair through their repositories.
+Failure -> earliest gap/owner -> one change in its repository -> baseline/retest -> disposition/later use.
 
 ### Audit scores
 
-Use `audit-workbench` Alignment Check r1, check version 1, hash `96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578`; its checks/scenarios/qualification remain canonical. Freeze rubric, scope/inventory/exclusions, IDs/classes, baseline/candidate/skills commits, loaded artifacts, host/tools and evaluator model/prompt/qualification. No extra points/rubric changes.
+Canonical: `audit-workbench` r1 checks/scenarios/qualification, version 1,
+hash `96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578`.
+Freeze rubric, scope/inventory/exclusions, IDs/classes, baseline/candidate/skills
+commits, loaded artifacts, host/tools, evaluator model/prompt/qualification.
+No rubric changes/extra points.
 
-Three runs per attempt. Each check keeps Yes/No/justified N/A, class, typed revision-bound evidence/qualification. Missing proof, Unknown, refusal/interruption stay No in original class/denominator. Justify N/A; label static/unqualified proof.
+Three runs/attempt: class, Yes/No/justified N/A, typed revision-bound
+evidence/qualification. Missing/Unknown/refused/interrupted stays No in its class
+and denominator. Label static/unqualified proof. Pool exact counts:
+`100 × Yes / applicable`; no weights/partial credit/rounding; empty means no percentage.
 
-Score = `100 × pooled Yes / pooled applicable`; keep exact counts/ratio, no weights/partial credit/rounding default. Empty set has no percentage. Run pass requires all Critical/Regression checks; Regression needs baseline pass proof. 3/2/1/0 passing runs = Excellent/Stable/Functional/Broken; any Critical failure overrides to Broken.
-
-Separate level/score, acceptance, evidence and qualification. Pass only Stable/Excellent with complete proof, no open Critical/Regression or unmapped historical finding. No QA/distribution/benefit implied. Whole fitness covers ten areas; bounded scores cannot certify AMS. Candidate and whole-AMS scores remain separate, per the owner answers in the Wiki.
+Run pass: all Critical/Regression Yes; Regression needs baseline pass proof.
+3/2/1/0 passing runs = Excellent/Stable/Functional/Broken; Critical No overrides
+Broken. Acceptance additionally requires complete qualified proof and no open
+Critical/Regression or unmapped historical finding. No QA/distribution/benefit
+implied. Whole fitness: ten areas; bounded results cannot certify AMS.
 
 ### Skill evals and retests
 
-Use `evals/` templates: versioned case/failure, prompt/fixtures/reset, permissions, end state, grader/model/host/loaded skill pin. Cover invocation/near misses, valid/adverse input, prerequisites/discovery/resume/authority. Map r1 IDs; extra criteria add no points.
+`evals/` pins case/failure, prompt/fixtures/reset, permissions, end state,
+grader/model/host/loaded skill. Cover invocation/near misses, valid/adverse input,
+prerequisites/discovery/resume/authority. Map r1 IDs; no extra points.
+Qualify good/bad/do-nothing cases; protect inputs/logs. Deterministic checks first;
+semantic judges need separate context, exact model, owner-labelled cases, no worker
+reasoning. Requalify model/prompt/rubric changes; manual trials until qualified.
 
-Qualify with good/bad/do-nothing cases; protect inputs/logs. Prefer deterministic checks; semantic judges: separate context, exact model, owner-labelled cases, no worker reasoning. Requalify model/prompt/rubric changes; manual trials until runner qualified.
-
-Findings: ID/check/class, run/candidate/evidence, uncertain cause, owner/retest. Close only on repaired-revision original/affected-regression passes in three runs (or justified regression exclusion). Merge/omission/score cannot close; keep new failures/recurrence.
+Findings: ID/check/class, run/candidate/evidence, uncertain cause, owner/retest.
+Close only on three-run repaired-revision original/affected-regression passes
+(or justified regression exclusion). Merge/omission/score cannot close; retain recurrence/new failures.
 
 ## Decisions And Contracts
 
-- Retain only qualified Stable/Excellent candidates with demonstrated useful benefit declared before comparison. First case: the grilling failure; coordinate with the owner-reported redesign already underway.
-
-- Failed results start rounds, never retro ideas; check earlier ineffective fixes on recurrence. One change/version.
-- Fixed provider/model/effort; accepted-version runner/graders/scoring, never candidate. Grader changes start new series, judged by predecessor.
-- Same-version noise floor first; fixed-task AMS/no-AMS/plain-instruction arms, three trials each; predeclared effect/margin, per-task paired intervals. Inside-margin is inconclusive; audit delta proves no benefit.
-- Public lift requires >2 fresh held-out tasks, controls, baseline/interval. Studied cases retire to dev; audit scores are not lift.
-- Sandbox without skipped permissions. No automated proposer before trusted grader, measured trial cost and owner-judged manual round.
-- Baseline 0 consumes no strike. Candidate: initial -> retry -> retry -> stop/report unless accepted. Repair/rename never resets; retain failures/harm.
-- Trial rows: task/arm, version/skills pin, provider/model/effort, completion, cost/tokens availability, source. Paid-plan meter; unknown is not zero.
+- Retain only qualified Stable/Excellent with demonstrated useful benefit
+  predeclared before comparison. First case: grilling failure; coordinate existing redesign.
+- Rounds start from failures, never retro ideas. On recurrence check ineffective
+  prior fixes. One change/version.
+- Fixed provider/model/effort. Accepted-version runner/graders/scoring, never
+  candidate-owned. Grader changes start a new series judged by its predecessor.
+- Same-version noise floor first. Fixed-task AMS/no-AMS/plain-instruction arms,
+  three trials each; predeclared effect/margin, paired per-task intervals.
+  Inside-margin is inconclusive; audit delta proves no benefit.
+- Public lift needs >2 fresh held-out tasks, controls, baseline/interval.
+  Studied cases retire to dev; scores are not lift.
+- Sandbox, no skipped permissions. No automatic proposer before trusted grader,
+  measured trial cost and owner-judged manual round.
+- Baseline 0: no strike. Candidate initial -> retry -> retry -> stop/report unless
+  accepted. Repair/rename never resets; retain failures/harm.
+- Trial rows: task/arm, version/skills pin, provider/model/effort, completion,
+  cost/tokens availability, source. Subscription meter; unknown is not zero.
 
 ## Non-Goals
 
-Model weights; loop execution during mapping; presentation (S-007).
+Weights; running loops during mapping; presentation (S-007).
 
 ## Dependencies And Blockers
 
-S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests and behavioral-row links; S-007 shows scores/evals/failures with provenance. Integration gaps remain; reviews are not trials.
+S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests, behavioral links. S-007 presents scores/evals/failures/provenance; integration missing.
 
-Seeds: real build-history/skills sources, strength-labelled; private skills summary/commit pointer only. Reconcile TK-002/older budget consumers before trials.
+Real build-history/skills seeds, strength labels; private summary/commit only. Storage/qualified comparisons required.
 
 ## Vertical Implementation Slices
 
-Reconcile existing Tasks: B local, checked PRs to main; evals/runner/writer/queries.
+Local CLI/corrections: TK-000M/N/O; trials retain real inputs. B local; checked PRs to main.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
 
 ## Acceptance Criteria
 
-- [ ] **Cycle:** skill failure -> change -> three-run score -> retest/disposition/later use. Reject missing pin/retest.
-- [ ] **Scoring:** `8/10 + 1/2 + 1/2 = 10/14`; empty set has no score. Test all levels, Quality-only No, Critical/Regression/missing proof. Reject Broken acceptance or bounded-as-whole claims.
+- [ ] **Cycle:** failure -> change -> three-run score -> retest/disposition/later use; reject missing pin/retest.
+- [x] **Scoring:** Pool `8/10 + 1/2 + 1/2 = 10/14`; empty: no score. Test all levels, Quality No, Critical/Regression/missing proof. Reject Broken acceptance and bounded-as-whole.
 - [ ] **Evals:** enforce comparison contracts; reject do-nothing passes, self-grading, anecdotal/static benefit, skipped permissions/below-floor lift.
 - [ ] **Stops:** omitted findings stay open; regressions visible; baseline excluded. Reject fourth attempt/reset.
-- [ ] **Readback:** S-006/S-007 retain assessment/trial distinctions, failures/evidence links. Reject false storage claims or test/private-data publication.
+- [ ] **Readback:** S-006/S-007 retain assessment/trial distinctions and failures/evidence. Reject false storage or test/private-data publication.
 
 ## RSI and website connection
 
-S-006 stores; S-007 presents.
+See dependencies.
 
 ## Testing Seams
 
-Scoring/finding fixtures; runner known outcomes; writer/readback/render. Include missing proof, recurrence and original-pass/regression-fail.
+CLI/runner/writer/readback fixtures: missing proof, recurrence, original-pass/regression-fail.
 
 ## Verification Procedure
 
-`node workbench/tools/spec-workbench.mjs show S-002`; planning names runner/tests.
+RUNBOOK and [Task proof](tasks/TK-000M/TASK.md).
 
 ## Documentation Impact
 
-RUNBOOK; S-006/S-007; Wiki/Tasks.
+RUNBOOK, S-006/S-007, Wiki/Tasks.
 
 ## Append-Only Evidence And Execution Log
 
@@ -115,11 +137,14 @@ RUNBOOK; S-006/S-007; Wiki/Tasks.
 
 ### Interview correction, 2026-11-01
 
-Kayden reported the lost grilling flow as a failure. Resume the ready decision round and wait; the linked context preserves his corrections.
+Kayden reported lost grilling as a failure; the linked context preserves the interview correction.
+| 2026-11-01 | TK-000M | Task closed | 36 focused; 427 suite/4 skip; QA/reviews in Task | RUNBOOK; evals; Wiki | S-006 and real trials remain; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
+| 2026-11-01 | TK-000N | Task closed | 40 focused; fresh 431/4 skip; CI #32 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
+| 2026-11-01 | TK-000O | Task closed | 42 focused; CI #38 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
 
 ## Review and Human QA
 
-Each retained change gets independent review; the owner judges whether a manual round is worth automating.
+Independent review per retained change; owner judges automation.
 
 ## Completion Result
 
@@ -127,7 +152,7 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- The retro improvement loop needs its own improvement before it is used in force.
+- Qualify before running the manual loop in force.
 
 ## Supersession
 

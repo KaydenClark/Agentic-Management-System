@@ -11,6 +11,7 @@ ams-keycheck = "ams.keycheck:main"
 ams-writer = "ams.writer:main"
 ams-history = "ams.build_history:main"
 ams-rsi = "ams.rsi_rows:main"
+ams-assess = "ams.assessment:main"
 ams-sources = "ams.source_rules:main"
 
 [build-system]
