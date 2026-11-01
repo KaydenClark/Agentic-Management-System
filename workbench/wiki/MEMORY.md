@@ -78,6 +78,7 @@ an AMS glossary entry.
 | Which Specs are active, and who approved them? | [Active Spec approvals](context-active-spec-approvals.md) — the owner's confirmed Jot entries each active Spec cites for Confirmation and Execution approval. |
 | Who approves merges, where does the Supabase service key live, and may C use the shared connectors? | [Owner answers to coherence findings](context-owner-answers-coherence.md) — owner corrections of 2026-11-01: agents merge non-site work, the key stays local, C never calls the connectors. |
 | Which research informed the templates? | [Research basis](../research/template-research-basis.md) — inspected sources, design implications and limits. |
+| Where does AMS CI run? | [Shared CI](context-shared-ci.md) — owner requirement, workflow routing and VM operation. |
 
 Add a row only when a durable note exists to route to. Grow flat notes beside
 this router and inside the declared collections; only `archive/` may nest.
