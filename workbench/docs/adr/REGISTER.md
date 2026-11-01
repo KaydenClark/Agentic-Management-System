@@ -30,3 +30,4 @@
 | [000V](000V-the-taskboard-is-generated-and-shows-active-work.md) | The Taskboard is generated and shows active work | accepted | 2026-11-01 | TASKBOARD.md |
 | [000W](000W-read-commands-use-the-same-words-for-every-kind.md) | Read commands use the same words for every kind | accepted | 2026-11-01 | RUNBOOK.md |
 | [000X](000X-the-ams-runtime-is-a-small-python-cli.md) | The AMS runtime is a small Python CLI | accepted | 2026-11-01 | RUNBOOK.md, pyproject.toml |
+| [000Y](000Y-one-manifest-names-every-path.md) | One manifest names every path | accepted | 2026-11-01 | workbench/manifest.json |
