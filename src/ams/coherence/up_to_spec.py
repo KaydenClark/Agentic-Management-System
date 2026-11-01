@@ -24,7 +24,7 @@ import sys
 from pathlib import Path
 
 LINE = re.compile(r"^- \[(?P<mark>[ xX])\] \*\*(?P<name>.+?)\.?\*\*(?P<rest>.*)$")
-EVIDENCE = re.compile(r"\*?Evidence:\*?(?P<text>.*?)(?=\*(?:Check|Must fail):|$)")
+EVIDENCE = re.compile(r"\*?Evidence:\*?(?P<text>.*?)(?=\*?(?:Check|Must fail):|$)")
 SHA = re.compile(r"\b[0-9a-f]{7,40}\b")
 PATH = re.compile(r"\]\(([^)\s#]+)|`([^`\s]+/[^`\s]+|[^`\s]+\.[A-Za-z0-9]+)`")
 FIELD = lambda name: re.compile(rf"^\*\*{name}:\*\*\s*(.*)$", re.M)

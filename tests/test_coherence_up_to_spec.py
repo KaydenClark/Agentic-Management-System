@@ -26,6 +26,7 @@ SPEC_TEMPLATE = """# S-900 - Fixture
 - [ ] **Open.** Not done yet. *Check:* `tests/test_thing.py`.
 - [x] **Sibling link.** *Evidence:* [result](evidence.md) and [up](../../../../../tests/test_thing.py).
 - [x] **Side branch.** *Evidence:* `{side}`.
+- [x] **Plain check.** Evidence: missing. Check: `tests/test_thing.py`. Must fail: `tests/test_thing.py`.
 
 ## RSI and website connection
 
@@ -98,6 +99,10 @@ class UpToSpecTest(unittest.TestCase):
         # Codex review on PR #11: an unmerged commit must not make a line met.
         self.assertEqual(self.by_name["Side branch"]["status"], "unknown")
 
+    def test_plain_check_clause_is_not_evidence(self):
+        # Codex review on PR #11: unformatted Check:/Must fail: must end the clause.
+        self.assertEqual(self.by_name["Plain check"]["status"], "unknown")
+
     def test_unchecked_is_not_met_and_check_text_is_not_evidence(self):
         self.assertEqual(self.by_name["Open"]["status"], "not met")
         self.assertEqual(self.by_name["Open"]["evidence"], [])
@@ -118,7 +123,7 @@ class UpToSpecTest(unittest.TestCase):
         self.assertIn("S-900", md)
         for name in ("Unevidenced", "Bogus evidence", "Open"):
             self.assertIn(name, md)
-        self.assertEqual(self.report["summary"], {"met": 2, "not met": 1, "unknown": 3})
+        self.assertEqual(self.report["summary"], {"met": 2, "not met": 1, "unknown": 4})
 
 
 if __name__ == "__main__":
