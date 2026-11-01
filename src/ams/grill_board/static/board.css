@@ -140,7 +140,9 @@ details.grade-why>summary::before{display:none}
 .box-head{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--tone-ink)}
 .box p{margin:0;font-size:16px;line-height:1.65;color:var(--ink)}
 .verdict-area{display:flex;flex-direction:column;gap:10px}
-.inert-note{margin:0;font-size:13px;color:var(--muted)}
+.inert-note,.verdict-note{margin:0;font-size:13px;color:var(--muted)}
+.answer{display:flex;flex-direction:column;gap:10px}
+.notice{border-bottom:1px solid var(--line)}
 .verdicts{display:flex;flex-wrap:wrap;gap:8px}
 .verdict{background:transparent;border:1px solid var(--line-strong);color:var(--ink);padding:10px 16px;border-radius:10px;font-weight:500;min-height:44px}
 .verdict.confirm{border:2px solid var(--tone-line);font-weight:700;padding:10px 18px}

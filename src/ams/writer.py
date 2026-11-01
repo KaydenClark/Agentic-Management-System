@@ -33,7 +33,7 @@ import urllib.request
 from pathlib import Path
 from typing import Callable, Mapping, Sequence
 
-from ams import keycheck
+from ams import keycheck, source_rules
 
 REPO_ROOT = keycheck.REPO_ROOT
 REPO_URL = "https://github.com/KaydenClark/Agentic-Management-System"
@@ -122,6 +122,12 @@ def _call(http: Http, method: str, url: str, key: str, payload=None):
         return status, None
 
 
+def insert_event(url: str, key: str, http: Http, row: Mapping):
+    """Insert one build_events row after the shared source rule; raises ValueError first."""
+    source_rules.check_source(row)
+    return _call(http, "POST", _rest(url), key, dict(row))
+
+
 def _ok(status) -> bool:
     return status is not None and 200 <= status < 300
 
@@ -141,7 +147,7 @@ def record_merge(sha: str, is_test: bool, settings: keycheck.Settings, http: Htt
     except (ValueError, subprocess.CalledProcessError) as error:
         print(f"refused: {error}" if isinstance(error, ValueError) else f"refused: no commit {sha}")
         return 1
-    status, body = _call(http, "POST", _rest(settings.url), settings.key, row)
+    status, body = insert_event(settings.url, settings.key, http, row)
     if status == 201 and isinstance(body, list) and body:
         saved = body[0]
         print(f"inserted: id={saved.get('id')} kind={row['kind']} subject={row['subject']} "
