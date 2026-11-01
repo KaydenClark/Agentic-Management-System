@@ -15,7 +15,11 @@
 //     to any other host are recorded and aborted, so the check itself never
 //     contacts a third party.
 // Plus TK-001's home checks (theme follows the system, toggle overrides and
-// persists, fonts self-hosted) and page text readable with scripts disabled.
+// persists, fonts self-hosted) and page text readable with scripts disabled,
+// and S-009's demo Grill Board check: rating, flagging, answering and
+// switching topics on every card makes no request at all and changes no
+// cookie or storage, and every card shows Sample, Priority and Value with
+// reasons, a 1-5 rating and a too-taxing flag.
 // Before the real pass it plants each fault into a live page and requires the
 // matching check to fail, so a check that cannot fail is reported.
 // Needs Playwright with Chromium installed (not a site dependency) and the
@@ -218,6 +222,133 @@ async function openPage(browser, url, { width, theme, origin }) {
   return { context, page, log };
 }
 
+// --- S-009: the demo Grill Board sends and stores nothing on interaction. ---
+
+const BOARD_PATH = '/grill-board-demo';
+
+// What the page has stored: cookies (the browser's and document.cookie) and
+// Web Storage. Compared before and after interacting.
+async function storedState(page) {
+  const cookies = (await page.context().cookies()).map((c) => `${c.name}@${c.domain}`);
+  const web = await page.evaluate(() => ({
+    cookie: document.cookie,
+    local: JSON.stringify(Object.entries(localStorage).sort()),
+    session: JSON.stringify(Object.entries(sessionStorage).sort()),
+  }));
+  return { cookies: JSON.stringify(cookies.sort()), ...web };
+}
+
+// Lets the page finish what it does on its own before interaction starts:
+// Next prefetches the shell's links as they scroll into view, and the browser
+// fetches each font face the first time text uses it. Both are first-party
+// loads of public files, so they are done up front; anything after this is
+// caused by interacting with the board.
+async function settleBoard(page) {
+  await page.evaluate(async () => {
+    const step = Math.max(200, Math.floor(window.innerHeight / 2));
+    for (let y = 0; y <= document.documentElement.scrollHeight; y += step) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 30)); }
+    window.scrollTo(0, 0);
+    await Promise.all([...document.fonts].map((f) => f.load().catch(() => {})));
+  });
+  await page.waitForLoadState('networkidle');
+}
+
+// Interacts with the board: every topic, every card (rating, too-taxing flag,
+// an alternative, Confirm, a typed note, a reason opened), then the lanes,
+// grade filters, more filters, batch, comment, verdicts, paging and the
+// banner. Returns problems: any request at all, any cookie or storage change,
+// a card missing part of its shape, or an interaction that did not take.
+// `quick` stops after the first card (for the self-test).
+async function boardInteractionProblems(page, { quick = false } = {}) {
+  const problems = [];
+  const requests = [];
+  const onRequest = (r) => requests.push(`${r.method()} ${r.url()}`);
+  const before = await storedState(page);
+  page.on('request', onRequest);
+  try {
+    const topics = page.locator('.gb-topic');
+    const nTopics = await topics.count();
+    if (nTopics < 2) problems.push(`only ${nTopics} topic(s)`);
+    let cards = 0;
+    outer: for (let t = 0; t < nTopics; t += 1) {
+      await topics.nth(t).click();
+      const rows = page.locator('.gb-rowwrap:not([hidden]) [data-card-row]');
+      const n = await rows.count();
+      if (!n) problems.push(`topic ${t + 1}: no cards`);
+      for (let i = 0; i < n; i += 1) {
+        const row = rows.nth(i);
+        const id = await row.getAttribute('data-card-row');
+        await row.click();
+        const card = page.locator(`[data-open-card="${id}"]`);
+        if (!(await card.count())) { problems.push(`${id}: clicking its row did not open it`); continue; }
+        const shape = await card.evaluate((el) => ({
+          sample: [...el.querySelectorAll('.gb-cardmeta .sample')].some((s) => s.textContent.trim() === 'Sample' && s.getClientRects().length > 0),
+          grades: [...el.querySelectorAll('.gb-whygrade')].map((d) => ({
+            grade: d.querySelector('.grade')?.textContent ?? '',
+            label: d.querySelector('summary > span:last-child')?.textContent ?? '',
+            why: d.querySelector('p')?.textContent?.trim() ?? '',
+          })),
+          stars: el.querySelectorAll('[role="group"][aria-label="Rate this question, one to five"] button').length,
+          taxing: el.querySelectorAll('button.taxing').length,
+        }));
+        if (!shape.sample) problems.push(`${id}: open card not labeled Sample`);
+        const [p, v] = shape.grades;
+        if (!p || !/^P[1-4]$/.test(p.grade) || !/^Priority/.test(p.label) || !p.why) problems.push(`${id}: no Priority grade with a reason`);
+        if (!v || !/^V[1-4]$/.test(v.grade) || !/^Value/.test(v.label) || !v.why) problems.push(`${id}: no Value grade with a reason`);
+        if (shape.stars !== 5) problems.push(`${id}: ${shape.stars} rating buttons, not 5`);
+        if (shape.taxing !== 1) problems.push(`${id}: no too-taxing flag`);
+
+        await card.locator('.gb-whygrade summary').first().click();
+        await card.locator('button.star').nth(2).click();
+        await card.locator('button.taxing').click();
+        await card.locator('button.gb-opt').last().click();
+        await card.locator('button.verdict.confirm').click();
+        await card.locator('#gb-note').fill('A sample answer typed in the demo.');
+        const took = await card.evaluate((el) => ({
+          rated: el.querySelectorAll('button.star[aria-pressed="true"]').length,
+          flagged: el.querySelector('button.taxing')?.getAttribute('aria-pressed'),
+          confirmed: el.querySelector('button.verdict.confirm')?.getAttribute('aria-pressed'),
+        }));
+        if (took.rated !== 3 || took.flagged !== 'true' || took.confirmed !== 'true') problems.push(`${id}: interaction did not take (${JSON.stringify(took)})`);
+        cards += 1;
+        if (quick) break outer;
+      }
+    }
+    if (!quick) {
+      if (cards < 6) problems.push(`only ${cards} cards interacted with`);
+      const lanes = page.locator('.gb-lane');
+      for (let i = (await lanes.count()) - 1; i >= 0; i -= 1) await lanes.nth(i).click();
+      for (const g of ['P1', 'V2']) { await page.locator('.gb-chips .chip', { hasText: g }).click(); await page.locator('.gb-chips .chip', { hasText: g }).click(); }
+      await page.locator('.gb-more summary').click();
+      await page.locator('#gb-scale').selectOption('Spec');
+      await page.locator('#gb-kind').selectOption({ index: 1 });
+      await page.locator('#gb-qsearch').fill('venue');
+      await page.locator('.gb-clear').click();
+      await page.locator('.gb-rowwrap:not([hidden]) .gb-pick .check').first().check();
+      await page.locator('#gb-batch').selectOption('3');
+      await page.locator('.gb-batch .inkbtn').click();
+      await page.locator('#gb-sort').selectOption('pv');
+      await page.locator('.gb-comment summary').click();
+      await page.locator('#gb-qcomment').fill('A sample comment.');
+      await page.locator('.gb-comment-in .ghost').click();
+      for (const v of ['Rework wording', 'Change the why', 'Not now']) await page.locator('.gb-verdicts .verdict', { hasText: v }).click();
+      await page.locator('.gb-foot .inkbtn').click();
+      await page.locator('.gb-foot .ghost').click();
+      await page.locator('.gb-round .ghost').first().click();
+      await page.locator('.gb-strip-btn').click();
+    }
+    await page.waitForTimeout(500);
+  } catch (e) {
+    problems.push(`interaction failed: ${String(e.message ?? e).split('\n')[0]}`);
+  } finally {
+    page.off('request', onRequest);
+  }
+  const after = await storedState(page);
+  for (const r of requests) problems.push(`request on interaction: ${r}`);
+  for (const k of Object.keys(before)) if (before[k] !== after[k]) problems.push(`${k === 'cookies' || k === 'cookie' ? 'cookie' : `${k}Storage`} changed on interaction: ${before[k]} -> ${after[k]}`);
+  return problems;
+}
+
 // --- Planted faults: each must make its detector fail. ---
 
 async function selfTest(browser, server, origin) {
@@ -247,6 +378,26 @@ async function selfTest(browser, server, origin) {
   await page.waitForTimeout(200);
   check('self-test: planted external font request is caught', before === 0 && foreign(log).length > 0, foreign(log).join(', ') || 'not caught');
   await context.close();
+
+  // S-009: a request, a cookie or a stored value on rating must be caught,
+  // and so must a rating that does nothing.
+  const boardPlants = [
+    ['a request on rating', (p) => p.evaluate(() => document.addEventListener('click', (e) => { if (e.target.closest('.star')) fetch('/qa-planted-rating').catch(() => {}); }, true)), /^request on interaction/],
+    ['a cookie set on rating', (p) => p.evaluate(() => document.addEventListener('click', (e) => { if (e.target.closest('.star')) document.cookie = 'qa-planted=1; path=/'; }, true)), /^cookie changed/],
+    ['a value stored on rating', (p) => p.evaluate(() => document.addEventListener('click', (e) => { if (e.target.closest('.star')) localStorage.setItem('qa-planted', '1'); }, true)), /^localStorage changed/],
+    ['a rating that does not take', (p) => p.evaluate(() => document.addEventListener('click', (e) => { if (e.target.closest('.star')) e.stopPropagation(); }, true)), /did not take/],
+  ];
+  for (const [what, plant, pattern] of boardPlants) {
+    const { context: c, page: p } = await openPage(browser, `${server.url}${BOARD_PATH}`, { width: 1280, theme: 'light', origin });
+    await settleBoard(p);
+    const clean = await boardInteractionProblems(p, { quick: true });
+    await p.reload({ waitUntil: 'networkidle' });
+    await settleBoard(p);
+    await plant(p);
+    const caught = await boardInteractionProblems(p, { quick: true });
+    check(`self-test: planted ${what} on the demo board is caught`, clean.length === 0 && caught.some((m) => pattern.test(m)), (clean.length ? `clean run: ${clean.join(' | ')}` : caught.slice(0, 2).join(' | ')) || 'not caught');
+    await c.close();
+  }
 }
 
 // --- The pass over every route. ---
@@ -316,6 +467,15 @@ try {
     s = await state();
     check(`home ${scheme} system: ${other} choice persists after reload`, s.ground === GROUND[other] && s.attr === other, s.ground);
     check(`home ${scheme} system: requests only to the site, Supabase or GitHub`, !foreign(log).length, foreign(log).join(', '));
+    await context.close();
+  }
+
+  // S-009: every card, interacted with, sends nothing and stores nothing.
+  for (const [theme, width] of [['light', 1280], ['dark', 375]]) {
+    const { context, page } = await openPage(browser, `${server.url}${BOARD_PATH}`, { width, theme, origin });
+    await settleBoard(page);
+    const p = await boardInteractionProblems(page);
+    check(`grill-board-demo ${theme} ${width}px: rating, flag, answer and topic switch make no request and store nothing; every card shows its shape`, !p.length, p.join(' | '));
     await context.close();
   }
 } finally {
