@@ -79,6 +79,7 @@ continuation record, not evidence of a completed improvement or a paid campaign.
 - Baseline means the current AMS repository implementation, not an existing scored report.
 - Use approved Alignment Check r1: three assessment runs per attempt, pooled Alignment Score and the r1 fitness/acceptance rules.
 - Each improvement candidate has three attempts maximum; baseline is outside the counter.
+- Confirmed: each candidate has a bounded r1 scope plus affected regressions; whole-AMS fitness is separate. A candidate pass never confers a system pass.
 - Use the owner's paid-plan meter, not API tokens or an API campaign budget. Unknown usage measurements stay unknown.
 - Confirmed next action: merge the current website and system work into main, then assess only the resulting pinned main revision. This specific promotion is authorized; future website promotions retain their owner gate.
 
@@ -136,4 +137,17 @@ Topic: ams-purpose
 Supersedes: none
 
 Merged-main baseline a3d014e assessed in three separate read-only r1 evidence-review contexts: Broken,4/138 passing checks (approximately2.90%); evidence incomplete,evaluators unqualified,not accepted. This is evidence coverage,not observed implementation failure rate or behavioral trials. The report and evals/rsi-loop-1/baseline-20261101 own counts and ledgers. No improvement strike consumed. Next interview question pending: bounded r1 scope plus affected regressions for each improvement,keeping whole-AMS fitness separate. Supabase assessment recording and the dev reader are still unimplemented; do not label these reviews as controlled trial rows.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-06bf6d6a-5403-451f-b8b7-5a75f34b49dc
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T17:10:53.905Z
+Author: Kayden
+Source: chat:01a197f8-e175-76e1-8c2f-8c8be5420dc4
+Topic: ams-purpose
+Supersedes: none
+
+Kayden answered: "Yes—separate candidate and whole-AMS results". Each skill or AMS improvement receives a bounded r1 assessment of its affected scope plus regression checks; the whole-AMS baseline retains its separate fitness result. One passing candidate never confers a whole-system pass. Both result scopes must remain identifiable in records and the site. The existing Stable/Excellent evidence requirements and three-attempt limit per candidate remain unchanged.
 <!-- /jot-entry -->

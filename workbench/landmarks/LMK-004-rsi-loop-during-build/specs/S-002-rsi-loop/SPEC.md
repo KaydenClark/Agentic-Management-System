@@ -29,7 +29,7 @@ Outside research does not settle whether shaping an agent's environment improves
 
 - Runner/fixed eval set absent; S-006 has tables/writer; S-007 uses an empty fixture.
 - Main `a3d014e` baseline: Broken, 4/138; incomplete evidence and unqualified evaluators. [Report](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md). Three evidence reviews, no behavioral-trial or improvement claim; no strike consumed.
-- Owner answers and the pending bounded-scope question remain in the [RSI context](../../../../wiki/context-ams-purpose.md).
+- Candidates use bounded r1 plus affected regressions; whole-AMS fitness stays separate. [Owner answers](../../../../wiki/context-ams-purpose.md).
 
 ## Desired Behavior
 
