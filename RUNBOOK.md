@@ -25,7 +25,7 @@ Use existing topic owners; grow flat Wiki notes via [MEMORY](workbench/wiki/MEMO
 
 ## Test And Build
 
-From the root: `uv run pytest` tests (`AMS_LIVE=1` adds a live test); `uv run ams-board` serves the Grill Board (committed `grill-board/cards/`) on 127.0.0.1 only. Supabase, from orchestrator B's main checkout (key held, never printed): `uv run ams-keycheck` checks it; `uv run ams-writer record-merge|readcheck SHA` writes a merge; the site key reads, never writes; `uv run ams-history import|readcheck` imports build history idempotently. Room checks:
+From the root: `uv run pytest` tests (`AMS_LIVE=1` adds a live test); `uv run ams-board` serves the [Grill Board](grill-board/README.md) on 127.0.0.1 only. Supabase, from orchestrator B's main checkout (key held, never printed): `uv run ams-keycheck` checks it; `uv run ams-writer record-merge|readcheck SHA` writes a merge; the site key reads, never writes; `uv run ams-history import|readcheck` imports build history idempotently. Room checks:
 
 ```bash
 node workbench/tools/spec-workbench.mjs render

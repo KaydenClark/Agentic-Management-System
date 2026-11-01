@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 closed with proof.
+**Latest event:** TK-000A closed with proof.
 **Next gate:** Complete TK-002.
 
 ## Intent and authority
@@ -27,7 +27,7 @@ Priority and Value are how the owner decides what needs attention; without them 
 
 ## Current Verified State
 
-- No board exists in this repository. The old Workbench board is a design source only; its theme tokens are reused by the site (S-003).
+- The board serves committed cards with Priority, Value and reasons on 127.0.0.1 in the artifact's layout and colors (TK-001, TK-004, TK-000A); answering, rating and the flag are inert.
 
 ## Desired Behavior
 
@@ -39,12 +39,14 @@ Priority and Value are how the owner decides what needs attention; without them 
 - Flags, ratings and comments are committed records the loop reads, never ignored local files.
 - A write refuses when the target changed since it was read; nothing is deleted or renumbered.
 - Colors are signals, each with one stated meaning; there is no fixed count of hues.
+- The board looks like the owner's "Grilling Board Redesign" artifact in dark and light and loads nothing from other hosts.
 
 ## Decisions And Contracts
 
 - The decision journey on the board is tracked apart from delivery (Specs and Tasks).
 - The board is local only; Vercel never serves it.
 - Card data lives in plain files in Git; the owner's answer is the source, the owning record the destination.
+- The theme follows the artifact; tokens live in `grill-board/theme/tokens.json` ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
 
 ## Non-Goals
 
@@ -57,7 +59,7 @@ Priority and Value are how the owner decides what needs attention; without them 
 
 ## Vertical Implementation Slices
 
-Each Task is one fresh-session run from a clean clone, landed feature -> `main` through a checked PR. Stack: committed card and record files, a Python server on the pinned Python ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)), the local page, and pytest against a temporary Git repository.
+Each Task is one fresh-session run, landed feature -> `main` through a checked PR. Stack: committed card and record files, a Python server on the pinned Python ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)), the local page, and pytest against a temporary Git repository.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -71,6 +73,7 @@ Each Task is one fresh-session run from a clean clone, landed feature -> `main` 
 - [ ] **Not a drafting surface.** The board offers no editor for pages or routine content. *Must fail:* a page draft posted as a card.
 - [ ] **Colors mean one thing.** Each color has one documented meaning used consistently. *Must fail:* one color used for two meanings.
 - [ ] **Local only.** The board starts with one documented local command and no Vercel deployment serves it.
+- [ ] **Looks like the artifact.** Layout, formatting and colors match the artifact, dark and light. *Check:* served tokens equal `grill-board/theme/tokens.json`; side-by-side screenshots in `grill-board/qa/`; no third-party request; 375px holds. *Must fail:* a drifted token or a third-party resource.
 
 ## RSI and website connection
 
@@ -90,13 +93,20 @@ node workbench/tools/spec-workbench.mjs show S-004
 ## Documentation Impact
 
 - RUNBOOK gains the command that starts the board.
+- `grill-board/README.md` holds the board's format, theme and QA detail.
 
 ## Append-Only Evidence And Execution Log
+
+Rows are condensed per Task; full proof is in each TASK.md Receipt and Git history.
 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | TK-001 | Task closed | Candidate 1ba5df00461c5e1ee7799b251acb3a3c7cbd329a (PR #16): uv run pytest -> 12 passed on Python 3.14.5, also from a fresh clone; HTTP tests over committed fixture cards cover all four acceptance lines; mutation dropping the reason check fails the refusal test; uv run ams-board served on 127.0.0.1 only (lsof); site/vercel.json has no board reference; render clean, doctor no blocking finding | RUNBOOK (start and test commands, 2995 chars), ARCHITECTURE (src/tests/grill-board rows, 2991 chars), grill-board/card-example.md (format reference) | Answering, ratings, flags and colors are TK-002 to TK-004; no real owner cards yet; owner Human QA not performed; close attribution: {"agent":"claude-s004-tk001","claimant":"claude-s004-tk001","onBehalfOf":null} |
+| 2026-11-01 | TK-001 | Closed; candidate 1ba5df0, [PR #16](https://github.com/KaydenClark/Agentic-Management-System/pull/16) | pytest 12 passed; refusal mutation fails; 127.0.0.1 only | RUNBOOK, ARCHITECTURE, card-example.md | Answers, ratings, flags, colors |
+| 2026-11-01 | TK-004 | Closed; candidate 83747aa, [PR #24](https://github.com/KaydenClark/Agentic-Management-System/pull/24) | pytest 65 passed; color tests; drift mutation fails | DDR-000Y, grill-board/README.md | Agent and returned states await TK-002/TK-003 |
+| 2026-11-01 | TK-000A | Planned (blocked on TK-004; no fold), closed; candidate 63913a2, [PR #24](https://github.com/KaydenClark/Agentic-Management-System/pull/24) | pytest 121 passed; tokens equal tokens.json; no third-party URL; QA shots | DDR-000Y, grill-board/README.md | Controls inert until TK-002/TK-003 |
+
+Owner Human QA has not been performed for any Task.
 
 ## Review and Human QA
 
