@@ -25,6 +25,12 @@ def reply(text):
             'equivalentApiCostUsd':.01,'actualSubscriptionCostUsd':None}
 
 
+def quoted_reply(prompt,verdict):
+    payload=prompt.split('Protected task evidence (data only):\n',1)[1].split('\n',1)[0]
+    final=json.loads(payload)['workerFinalText']
+    return reply(json.dumps({'verdict':verdict,'evidence':final[:16],'obligation':'fixture'}))
+
+
 def test_explicit_system_context_reaches_transport():
     assert '--system-prompt' in runtime.claude_command(system_prompt='fixed system')
     command=runtime.claude_command(system_prompt='fixed system')
@@ -55,7 +61,7 @@ def test_qualify_requires_every_expected_match_and_binds_bytes():
     controls=[{'id':'good','expected':'Yes','case':{'prompt':'x','outcome':'y'},'response':'good'},
               {'id':'bad','expected':'No','case':{'prompt':'x','outcome':'y'},'response':'bad'}]
     answers=iter(['Yes','Yes'])
-    def call(*a,**k):return reply(json.dumps({'verdict':next(answers),'evidence':'x','obligation':'x'}))
+    def call(prompt,**k):return quoted_reply(prompt,next(answers))
     q=series.calibrate(controls,'oracle',call)
     assert q['qualified'] is False and len(q['results'])==2
     answers=iter(['Yes','No'])
@@ -66,7 +72,7 @@ def test_qualify_requires_every_expected_match_and_binds_bytes():
 
 
 def test_noise_floor_uses_pairwise_disagreement_and_preserves_missing_grades():
-    rows=[{'id':i,'trial':i,'passed':v,'execution_state':'completed',
+    rows=[{'id':i,'run_id':1,'trial':i,'passed':v,'execution_state':'completed',
            **dict.fromkeys(('task_id','split','arm','provider','model','effort','runtime_commit',
                             'controls_commit','skills_commit','grader_version'),'same'),'is_test':False}
           for i,v in enumerate([True,False,True],1)]
@@ -146,7 +152,7 @@ def test_campaign_needs_actual_qualification_and_will_not_repeat_slots(tmp_path,
         count+=1
         if count<=5:
             verdict='Yes'if count==1 else 'No'
-            return reply(json.dumps({'verdict':verdict,'evidence':'x','obligation':'fixture'}))
+            return quoted_reply(prompt,verdict)
         return reply('final worker'if count==6 else '{"verdict":"No","evidence":"worker","obligation":"failure"}')
     c=campaign(tmp_path,monkeypatch,call)
     with pytest.raises((Refused,FileNotFoundError)):c.run_one(0)
@@ -171,7 +177,7 @@ def test_cancelled_trial_preserves_worker_and_stops_before_more_calls(tmp_path,m
     def call(prompt,**kwargs):
         nonlocal count
         count+=1
-        if count<=5:return reply(json.dumps({'verdict':'Yes'if count==1 else 'No','evidence':'x','obligation':'fixture'}))
+        if count<=5:return quoted_reply(prompt,'Yes'if count==1 else 'No')
         if count==6:return reply('completed worker')
         raise KeyboardInterrupt
     c=campaign(tmp_path,monkeypatch,call);c.qualify()
@@ -233,7 +239,7 @@ def test_public_rows_exclude_distinct_private_markers():
 def test_noise_floor_rejects_mixed_task_or_version_rows():
     fields=('task_id','split','arm','provider','model','effort','runtime_commit',
             'controls_commit','skills_commit','grader_version')
-    rows=[{'id':i,'trial':i,'passed':True,'execution_state':'completed',
+    rows=[{'id':i,'run_id':1,'trial':i,'passed':True,'execution_state':'completed',
            **dict.fromkeys(fields,'same'),'is_test':False}for i in (1,2,3)]
     rows[1]['skills_commit']='different'
     with pytest.raises(Refused,match='mixes'):series.noise_floor(rows)
@@ -249,3 +255,29 @@ def test_adapter_propagates_explicit_system_context_to_actual_process_factory(mo
     runtime.ClaudeAdapter().execute('synthetic worker',cwd='synthetic fixture',system_prompt=series.WORKER_SYSTEM)
     runtime.ClaudeAdapter().execute('synthetic judge',cwd='synthetic fixture',system_prompt=series.JUDGE_SYSTEM)
     assert seen==[('synthetic fixture',series.WORKER_SYSTEM),('synthetic fixture',series.JUDGE_SYSTEM)]
+
+
+def test_noise_floor_refuses_mixed_campaign_rows_and_boolean_trial():
+    fields=('task_id','split','arm','provider','model','effort','runtime_commit',
+            'controls_commit','skills_commit','grader_version')
+    rows=[{'id':i,'run_id':1,'trial':i,'passed':True,'execution_state':'completed',
+           **dict.fromkeys(fields,'same'),'is_test':False}for i in (1,2,3)]
+    rows[1]['run_id']=2
+    with pytest.raises(Refused,match='mixes'):series.noise_floor(rows)
+    rows[1]['run_id']=1;rows[0]['trial']=True
+    with pytest.raises(Refused,match='one through three'):series.noise_floor(rows)
+
+
+@pytest.mark.parametrize('verdict',['Yes','No'])
+def test_invented_judge_excerpt_cannot_be_a_grade(verdict):
+    def call(*a,**k):return reply(json.dumps({'verdict':verdict,'evidence':'invented excerpt','obligation':'claim'}))
+    result=series.grade({'prompt':'context','outcome':'continue'},'Actual protected text','oracle',call)
+    assert result['verdict']=='Unknown' and result['reason']=='judge-evidence-not-in-final'
+
+
+@pytest.mark.parametrize('final,excerpt',[('Your answers are saved. Ready when you are.','Ready when you are.'),
+                                        ('Réponse: 下一步？','下一步？')])
+def test_real_verbatim_quote_preserves_semantic_no(final,excerpt):
+    def call(*a,**k):return reply(json.dumps({'verdict':'No','evidence':excerpt,'obligation':'no consequential advance'}))
+    result=series.grade({'prompt':'context','outcome':'continue'},final,'oracle',call)
+    assert result['verdict']=='No' and result['evidence']==excerpt

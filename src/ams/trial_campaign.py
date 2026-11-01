@@ -17,13 +17,14 @@ from ams import rsi_rows
 def verify_source_revision(protocol, *, accepted_ref='origin/main'):
     root=Path(__file__).resolve().parents[2]
     revision=protocol['sourceRevision']
-    require(subprocess.run(['git','merge-base','--is-ancestor',revision,accepted_ref],cwd=root,
+    git=['git','--no-replace-objects','--no-lazy-fetch','-c','protocol.allow=never']
+    require(subprocess.run(git+['merge-base','--is-ancestor',revision,accepted_ref],cwd=root,
                            capture_output=True).returncode==0,'source reference is not main-contained')
     for name,expected in protocol['sourceFiles'].items():
-        result=subprocess.run(['git','show',revision+':src/ams/'+name],cwd=root,capture_output=True)
+        result=subprocess.run(git+['show',revision+':src/ams/'+name],cwd=root,capture_output=True)
         require(result.returncode==0 and series.hashlib.sha256(result.stdout).hexdigest()==expected,
                 'source revision does not contain the frozen code')
-    suite=subprocess.run(['git','show',revision+':evals/interview-dev-cases.json'],cwd=root,capture_output=True)
+    suite=subprocess.run(git+['show',revision+':evals/interview-dev-cases.json'],cwd=root,capture_output=True)
     require(suite.returncode==0 and series.digest(series.json.loads(suite.stdout))==protocol['suiteDigest'],
             'suite is not at accepted source revision')
 
@@ -106,6 +107,7 @@ def publish_result(store,run,result,*,case_id,trial,evidence_digest):
 
 def create_run(store,protocol,campaign_digest):
     revision=protocol['sourceRevision']
+    git=['git','--no-replace-objects','--no-lazy-fetch','-c','protocol.allow=never']
     row={'run_key':'interview-noise-r1-'+campaign_digest[:20], 'arm':'ams','provider':'firstParty',
          'model':runtime.MODEL,'effort':runtime.EFFORT,'runtime_commit':revision,
          'controls_commit':revision,'skills_commit':protocol['skillsCommit'],'grader_version':revision,

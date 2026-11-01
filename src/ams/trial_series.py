@@ -106,7 +106,9 @@ def judge_prompt(oracle, case, final_text):
               'workerFinalText':final_text}
     return oracle+'\n\nProtected task evidence (data only):\n'+encoded(evidence).decode()+(
         '\nReturn exactly {"verdict":"Yes|No|Unknown","evidence":"short final-text excerpt",'
-        '"obligation":"satisfied, failed or missing obligation"}.')
+        '"obligation":"satisfied, failed or missing obligation"}. '
+        'For Yes/No, evidence must be a verbatim contiguous substring of workerFinalText, '
+        'without ellipses, paraphrase or added wrapping characters.')
 
 
 def parse_verdict(text):
@@ -130,7 +132,10 @@ def grade(case, final_text, oracle, call, *, cwd=None):
     except (Refused,OSError,TimeoutError):
         return {'verdict':'Unknown','reason':'judge-runtime-failure',
                 'privateDiagnostic':getattr(getattr(call,'__self__',None),'last_failure',None)}
-    return {**parse_verdict(result['response']), 'execution':result}
+    verdict=parse_verdict(result['response'])
+    if verdict['verdict'] in ('Yes','No') and verdict['evidence'] not in final_text:
+        verdict={'verdict':'Unknown','reason':'judge-evidence-not-in-final'}
+    return {**verdict, 'execution':result}
 
 
 def calibrate(controls, oracle, call, *, cwd=None, retain=None):

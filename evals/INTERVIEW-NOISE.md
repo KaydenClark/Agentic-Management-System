@@ -21,6 +21,8 @@ three-case suite and skill manifest, protected oracle prompt/examples hashes,
 Claude binary hash/version, exact `claude-opus-5-5`, medium effort, explicit worker
 and judge system prompt bytes, command flags, fresh one-turn sessions and fixed
 order. `Campaign` verifies these identities before starting each phase/slot.
+Git ancestry/blob checks ignore replace objects and disable lazy fetching/outward
+protocols. Missing/promisor objects are unavailable evidence, never fetched.
 Source revision must contain the exact code and cases; changed bytes require a new
 series and qualification. Labels are qualification inputs, never proof themselves.
 
@@ -43,7 +45,9 @@ These bytes and the protected oracle prompt are frozen, not tuned against result
 The judge sees starting conversation, criterion and worker final text, never arm,
 skill bodies, worker reasoning or expected label. Output is exactly a JSON object
 with `verdict` (`Yes`, `No`, `Unknown`), `evidence` and `obligation`. Extra/duplicate
-fields, malformed data or refusal yield Unknown, never a guessed pass.
+fields, malformed data or refusal yield Unknown, never a guessed pass. Yes/No
+evidence must be a nonempty verbatim contiguous substring of protected final text;
+invented quotations become Unknown. This deterministic guard adds no scored check.
 
 ## Qualification phase: five calls, then hold
 
@@ -100,7 +104,8 @@ and observed pipeline wall time remain distinct. Judge usage/cost are in private
 execution evidence; full campaign totals must include both roles and explicitly
 report unavailable subscription spend. No partial-cost/full-pass division.
 
-For each case cite the three database row IDs. Pairwise flip rate is disagreeing
+For each case cite the three database row IDs from one strict positive run ID;
+reject mixed campaigns/conditions and require integer trial indices 1, 2 and 3. Pairwise flip rate is disagreeing
 unordered pairs divided by three pairs; binary spread is max minus min; success is
 passes/three; `passCubed` requires all three passes. Any required grade missing
 makes the case floor Unknown (retain graded coverage and observed passes). These

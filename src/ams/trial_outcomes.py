@@ -24,12 +24,14 @@ def metrics(result):
 
 def noise_floor(rows):
     require(len(rows)==3, 'three required trial rows per case')
-    required=('task_id','split','arm','provider','model','effort','runtime_commit',
+    required=('run_id','task_id','split','arm','provider','model','effort','runtime_commit',
               'controls_commit','skills_commit','grader_version','is_test')
     require(all(all(key in row for key in required)for row in rows), 'floor provenance missing')
     require(all(all(row[key]==rows[0][key]for key in required)for row in rows),
             'floor mixes tasks, versions or conditions')
-    require({row['trial']for row in rows}=={1,2,3}, 'floor needs trials one through three')
+    require(all(type(row.get('trial'))is int for row in rows)
+            and {row['trial']for row in rows}=={1,2,3}, 'floor needs trials one through three')
+    require(all(type(row['run_id'])is int and row['run_id']>0 for row in rows), 'valid run ID required')
     ids=[row['id']for row in rows]
     require(len(set(ids))==3, 'duplicate trial row')
     grades=[row.get('passed')for row in rows if row.get('execution_state')=='completed'
@@ -51,7 +53,7 @@ def safe_detail(result,evidence_digest):
         'worker-runtime-unavailable' if not result['workerCompleted'] else
         (result.get('grade') or {}).get('reason','semantic-verdict-unknown'))
     require(reason in (None,'worker-runtime-unavailable','judge-parse-failure','missing-final-text',
-                       'judge-runtime-failure','semantic-verdict-unknown','cancelled'), 'unsafe grade reason')
+                       'judge-runtime-failure','judge-evidence-not-in-final','semantic-verdict-unknown','cancelled'), 'unsafe grade reason')
     require(type(result['workerCompleted']) is bool and result['failureStage'] in
             (None,'worker','grader'), 'invalid completion summary')
     cost=worker['equivalentApiCostUsd'] if worker else None
@@ -65,4 +67,3 @@ def safe_detail(result,evidence_digest):
             'actualSubscriptionCostUsd':None,
             'inputTokensDefinition':'uncached plus cache-read plus cache-creation',
             'nativeInstallation':False,'tools':[],'mcpServers':[]}
-
