@@ -10,6 +10,7 @@ color) extend the format without breaking older cards. An answered card
 ends with a `## Answer` section the board appended (see answers.py).
 """
 
+import hashlib
 import re
 import subprocess
 from dataclasses import dataclass, field
@@ -31,6 +32,8 @@ class Card:
     fields: dict = field(default_factory=dict)
     context: str = ""
     answer: dict | None = None
+    sha: str = ""  # SHA-256 of the exact committed bytes this Card was parsed from
+    commit: str = ""  # the commit those bytes were read at
 
     @property
     def sort_key(self):
@@ -86,16 +89,24 @@ class CardSourceError(Exception):
     """The card directory cannot be read as committed records."""
 
 
-def _git(cwd, *args):
-    result = subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=True)
+def _git(cwd, *args, binary=False):
+    result = subprocess.run(["git", *args], cwd=cwd, capture_output=True, text=not binary)
     if result.returncode != 0:
-        raise CardSourceError(result.stderr.strip() or f"git {args[0]} failed")
+        error = result.stderr.decode("utf-8", "replace") if binary else result.stderr
+        raise CardSourceError(error.strip() or f"git {args[0]} failed")
     return result.stdout
 
 
 def committed_cards(cards_dir):
     """Return [(name, text)] for each `*.md` card committed at HEAD directly
     in cards_dir. Uncommitted edits and untracked or staged files are ignored."""
+    _, cards = committed_snapshot(cards_dir)
+    return [(name, data.decode("utf-8")) for name, data in cards]
+
+
+def committed_snapshot(cards_dir):
+    """Return (commit, [(name, bytes)]): HEAD resolved once, and each card's
+    exact bytes at that commit, so a page and its hashes show one snapshot."""
     cards_dir = Path(cards_dir)
     if not cards_dir.is_dir():
         raise CardSourceError(f"card directory not found: {cards_dir}")
@@ -104,24 +115,27 @@ def committed_cards(cards_dir):
     except CardSourceError:
         raise CardSourceError(f"{cards_dir} is not in a Git repository; the board reads committed cards only") from None
     try:
-        _git(root, "rev-parse", "--verify", "--quiet", "HEAD^{commit}")
+        commit = _git(root, "rev-parse", "--verify", "--quiet", "HEAD^{commit}").strip()
     except CardSourceError:
-        return []
+        return "", []
     prefix = cards_dir.resolve().relative_to(root.resolve()).as_posix()
     prefix = "" if prefix == "." else prefix + "/"
-    listed = _git(root, "ls-tree", "--name-only", "-z", "HEAD", "--", prefix or ".")
+    listed = _git(root, "ls-tree", "--name-only", "-z", commit, "--", prefix or ".")
     cards = []
     for path in sorted(name for name in listed.split("\0") if name.endswith(".md")):
         if "/" in path[len(prefix):]:
             continue
-        cards.append((path[len(prefix):], _git(root, "show", f"HEAD:{path}")))
-    return cards
+        cards.append((path[len(prefix):], _git(root, "cat-file", "blob", f"{commit}:{path}", binary=True)))
+    return commit, cards
 
 
 def load_cards(cards_dir):
     """Read every committed `*.md` card in cards_dir: sorted Cards and Refusals."""
     cards, refusals = [], []
-    for name, text in committed_cards(cards_dir):
-        result = parse_card(name, text)
+    commit, snapshot = committed_snapshot(cards_dir)
+    for name, data in snapshot:
+        result = parse_card(name, data.decode("utf-8"))
+        if isinstance(result, Card):
+            result.sha, result.commit = hashlib.sha256(data).hexdigest(), commit
         (cards if isinstance(result, Card) else refusals).append(result)
     return sorted(cards, key=lambda card: card.sort_key), refusals

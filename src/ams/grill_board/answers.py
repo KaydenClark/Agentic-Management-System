@@ -15,7 +15,9 @@ or renumbered: answers are inserted, never replaced.
 
 import hashlib
 import os
+import stat
 import subprocess
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
 
@@ -54,16 +56,16 @@ def card_path(root, cards_dir, name):
     return name if prefix == "." else f"{prefix}/{name}"
 
 
-def committed_blob(root, relative):
-    """Bytes of a regular file committed at HEAD, or None if it is not one."""
-    listed = _git(root, "ls-tree", "-z", "HEAD", "--", relative)
+def committed_blob(root, relative, rev="HEAD"):
+    """Bytes of a regular file committed at rev, or None if it is not one."""
+    listed = _git(root, "ls-tree", "-z", rev, "--", relative)
     entry = listed.split("\0", 1)[0]
     if not entry or "\t" not in entry:
         return None
     mode, kind, _ = entry.split("\t", 1)[0].split(" ")
     if kind != "blob" or mode not in REGULAR_MODES:
         return None
-    return _git(root, "cat-file", "blob", f"HEAD:{relative}", binary=True)
+    return _git(root, "cat-file", "blob", f"{rev}:{relative}", binary=True)
 
 
 def owned_path(root, relative):
@@ -88,19 +90,18 @@ def owned_path(root, relative):
 
 
 def render_hashes(cards_dir, card):
-    """SHA-256 of the committed card and owning record, captured when the
-    page shows the card; a later write is checked against them."""
+    """SHA-256 of the card the page shows and of its owning record at the
+    same commit; a later write is checked against them."""
     root = repo_root(cards_dir)
-    card_blob = committed_blob(root, card_path(root, cards_dir, card.file)) or b""
     target = card.fields.get("Owner record", "")
     record_blob = None
     if target:
         try:
             owned_path(root, target)
-            record_blob = committed_blob(root, target)
+            record_blob = committed_blob(root, target, card.commit or "HEAD")
         except AnswerRefused:
             record_blob = None
-    return sha256(card_blob), sha256(record_blob) if record_blob is not None else ""
+    return card.sha, sha256(record_blob) if record_blob is not None else ""
 
 
 def _unchanged(root, relative, path, expected_sha, what):
@@ -131,6 +132,24 @@ def _insert_after(text, anchor, block):
     rest = lines[at:]
     tail = "" if rest and not rest[0].strip() else "\n" if rest else ""
     return "".join(lines[:at]) + "\n" + block + tail + "".join(rest)
+
+
+def _replace(path, data):
+    """Write data to a fresh, exclusively created temporary file beside path
+    (never following a planted name), keep path's mode, then swap it in."""
+    mode = stat.S_IMODE(path.stat().st_mode)
+    handle, tmp = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.", suffix=".answer-tmp")
+    try:
+        with os.fdopen(handle, "wb") as out:
+            out.write(data)
+        os.chmod(tmp, mode)
+        os.replace(tmp, path)
+        if not stat.S_ISREG(os.lstat(path).st_mode):
+            raise AnswerRefused(f"{path.name} is not a regular file after the write")
+    except BaseException:
+        if os.path.lexists(tmp):
+            os.unlink(tmp)
+        raise
 
 
 def answer(cards_dir, card, verdict, note, card_sha, record_sha, now=None):
@@ -182,12 +201,10 @@ def answer(cards_dir, card, verdict, note, card_sha, record_sha, now=None):
     writes.append((card_rel, card_file, card_blob, card_text.encode("utf-8")))
     try:
         for _, path, _, new in writes:
-            tmp = path.with_name(f".{path.name}.answer-tmp")
-            tmp.write_bytes(new)
-            os.replace(tmp, path)
+            _replace(path, new)
         _git(root, "commit", "-q", "--only", "-m", subject, "-m", body, "--", *[rel for rel, *_ in writes])
     except (AnswerRefused, OSError) as error:
         for _, path, old, _ in writes:  # put back exactly the committed bytes this call replaced
-            path.write_bytes(old)
+            _replace(path, old)
         raise AnswerRefused(f"the commit failed, so nothing was kept: {error}") from None
     return _git(root, "rev-parse", "HEAD").strip()

@@ -300,3 +300,46 @@ def test_the_path_guard_alone_refuses_every_escape(repo, target):
     with pytest.raises(AnswerRefused):
         owned_path(repo, target)
     assert owned_path(repo, "records/decision.md") == repo / "records" / "decision.md"
+
+
+def test_a_planted_temporary_symlink_never_redirects_the_write(board, repo):
+    """Codex P1 on PR #38: a symlink at a predictable temp name must not be followed."""
+    outside = repo.parent / "victim.md"
+    outside.write_text("victim\n")
+    for folder, name in (("records", "decision.md"), ("grill-board/cards", "one-card.md")):
+        os.symlink(outside, repo / folder / f".{name}.answer-tmp")
+    server = board()
+    fields, _ = read_form(server)
+    status, body = post(server, {**fields, "verdict": "confirm"})
+    assert status == 200, body
+    assert outside.read_text() == "victim\n"
+    record = repo / "records" / "decision.md"
+    assert not record.is_symlink() and "Confirmed:" in record.read_text()
+    tree = git(repo, "ls-tree", "HEAD", "records/decision.md", "grill-board/cards/one-card.md")
+    assert [line.split()[0] for line in tree.splitlines()] == ["100644", "100644"]
+
+
+def test_the_form_hash_is_bound_to_the_card_text_the_page_showed(board, repo, monkeypatch):
+    """Codex P2 on PR #38: a card committed between reading and hashing is refused."""
+    from ams.grill_board import server as board_server
+
+    original, raced = board_server.load_cards, []
+
+    def load_then_race(cards_dir):
+        result = original(cards_dir)
+        if not raced:
+            raced.append(True)
+            card = repo / "grill-board" / "cards" / "one-card.md"
+            card.write_text(CARD.replace("Keep one Markdown file per card.", "Keep every card in one file."))
+            git(repo, "commit", "-qam", "another agent rewrites the recommendation")
+        return result
+
+    monkeypatch.setattr(board_server, "load_cards", load_then_race)
+    server = board()
+    fields, html = read_form(server)
+    assert "Keep one Markdown file per card." in html  # the page shows the old text
+    monkeypatch.setattr(board_server, "load_cards", original)
+    before = snapshot(repo)
+    status, body = post(server, {**fields, "verdict": "confirm"})
+    assert status == 409 and "changed since" in body
+    assert snapshot(repo) == before
