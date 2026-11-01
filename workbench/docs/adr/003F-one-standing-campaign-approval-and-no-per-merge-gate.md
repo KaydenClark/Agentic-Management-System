@@ -3,6 +3,8 @@ date: 2026-11-01
 canonicalized_in:
   - evals
   - grill-board
+supersedes:
+  - 002O-one-standing-campaign-approval.md
 ---
 
 # One standing campaign approval and no per-merge gate

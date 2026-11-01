@@ -46,7 +46,7 @@ The decision records under this landmark, one line each, linked to their record.
 - [Trials run in a sandbox](../../docs/adr/002L-trials-run-in-a-sandbox.md)
 - [More than two held-out tasks before a public number](../../docs/adr/002M-more-than-two-held-out-tasks-before-a-public-number.md)
 - [Studied held-out tasks retire to the dev set](../../docs/adr/002N-studied-held-out-tasks-retire-to-the-dev-set.md)
-- [One standing campaign approval](../../docs/adr/002O-one-standing-campaign-approval.md)
+- [One standing campaign approval](../../docs/adr/archive/002O-one-standing-campaign-approval.md)
 - [Each RSI run pins the skills commit](../../docs/adr/002R-each-rsi-run-pins-the-skills-commit.md)
 - [Three strikes, then stop](../../docs/adr/002W-three-strikes-then-stop.md)
 - [Measure how far dev runs ahead of main](../../docs/adr/002T-measure-how-far-dev-runs-ahead-of-main.md)
