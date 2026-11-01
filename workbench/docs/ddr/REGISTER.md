@@ -22,3 +22,4 @@
 | [000N](000N-setup-drafts-the-blueprint-and-starts-a-grilling.md) | Setup drafts the Blueprint and starts a grilling | accepted | 2026-11-01 | BLUEPRINT.md, RUNBOOK.md |
 | [000O](000O-the-public-site-only-presents-and-reads-supabase.md) | The public site only presents and reads Supabase | accepted | 2026-11-01 | BLUEPRINT.md, site |
 | [000P](000P-the-grill-board-is-local-with-a-python-server.md) | The Grill Board is local, with a Python server | accepted | 2026-11-01 | grill-board |
+| [000Q](000Q-landmarks-are-the-prds.md) | Landmarks are the PRDs | accepted | 2026-11-01 | workbench/landmarks, BLUEPRINT.md |
