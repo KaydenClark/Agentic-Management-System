@@ -1,15 +1,17 @@
 # S-007 - RSI chart pages
 
 **Spec ID:** S-007
-**Status:** planned
+**Status:** active
 **Priority:** 2
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
 **Updated:** 2026-11-01
 **Catalog description:** Website pages that chart RSI results from Supabase, present and honestly empty from the first deploy, with every number linked to its rows.
-**Blockers:** S-003
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning after the site shell (S-003) exists.
+**Blockers:** none
+**Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
+**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; three Tasks planned on `dev`.
+**Next gate:** Claim TK-001 in orchestrator A's lane.
 
 ## Intent and authority
 
@@ -50,33 +52,14 @@ The site exists partly to show whether the loop works. Only traceable, labeled n
 
 ## Dependencies And Blockers
 
-- S-003 (site shell); S-006 (data store) for non-empty states.
+- The Next scaffold on `dev` (enough for TK-001); S-003's shell styles the page once it lands. S-006 (data store) for non-empty states (TK-002, TK-003).
 
 ## Vertical Implementation Slices
 
+Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the owner merges `dev` -> `main`. Stack: a Next.js route in `site/`, Supabase reads with the publishable key, the build, render tests on labeled fixtures and the protected `dev` deployment.
+
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Chart page with every series place and the honest empty state, deployed to `dev` | ready | none | pending |
-| TK-002 | Render rows from Supabase per task and version with links and strength labels | ready | TK-001 | pending |
-| TK-003 | Held-out headline with interval and baseline; zero-crossing wording | ready | TK-002 | pending |
-
-### TK-001 - Empty but present
-
-**Stance:** Builder
-
-Proves the empty-state criterion.
-
-### TK-002 - Rows to charts
-
-**Stance:** Builder
-
-Proves the link, provenance and synthetic-row criteria.
-
-### TK-003 - Headline rules
-
-**Stance:** Builder
-
-Proves the headline criterion.
 
 ## Acceptance Criteria
 
