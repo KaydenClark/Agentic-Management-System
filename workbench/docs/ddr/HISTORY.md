@@ -11,7 +11,7 @@
 | [000C](000C-the-ams-changes-runtime-controls-and-skills-never-weights.md) | The AMS changes runtime, controls and skills, never weights | accepted | 2026-11-01 | BLUEPRINT.md, evals |
 | [000D](000D-the-blueprint-is-one-short-four-part-page.md) | The Blueprint is one short four-part page | accepted | 2026-11-01 | BLUEPRINT.md |
 | [000E](000E-a-release-is-proven-by-building-the-site-from-one-confirmed-concept.md) | A release is proven by building the site from one confirmed concept | accepted | 2026-11-01 | BLUEPRINT.md, evals |
-| [000F](proposed/000F-delivery-runs-in-rounds-the-owner-approves-or-returns.md) | Delivery runs in rounds the owner approves or returns | proposed | 2026-11-01 | BLUEPRINT.md |
+| [000F](000F-delivery-runs-in-rounds-the-owner-approves-or-returns.md) | Delivery runs in rounds the owner approves or returns | accepted | 2026-11-01 | BLUEPRINT.md |
 | [000G](proposed/000G-nothing-is-built-before-the-owner-confirms-a-readback.md) | Nothing is built before the owner confirms a readback | proposed | 2026-11-01 | AGENTS.md |
 | [000H](proposed/000H-confirmation-approval-and-the-two-delivery-paths.md) | Confirmation, approval and the two delivery paths | proposed | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [000I](proposed/000I-the-decision-journey-is-tracked-apart-from-delivery.md) | The decision journey is tracked apart from delivery | proposed | 2026-11-01 | BLUEPRINT.md |
