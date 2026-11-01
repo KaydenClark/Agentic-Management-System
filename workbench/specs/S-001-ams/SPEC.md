@@ -28,7 +28,7 @@ The owner needs one auditable account of what is done and what remains.
 ## Current Verified State
 
 - Workbench v3.2.2 is adopted: controls, lanes, Node lifecycle and generated Taskboard.
-- Six capability Specs were active before this correction. Specs consume no Landmark slots; A/B product work remains stopped.
+- Six capability Specs were active before this correction. Specs consume no Landmark slots.
 - Site code, Supabase migrations and `dev` exist; see child Specs for scoped proof.
 
 ## Desired Behavior
@@ -105,7 +105,7 @@ To answer "Are we there yet?": name the commit; run each check; report met, not 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Ported and rewritten; the Workbench adoption of 2026-11-01 recorded as this Spec's first room evidence | render, doctor | this Spec; adoption Wiki page | Every criterion |
-| 2026-11-01 | none | Owner unblocked S-001; the limit applies to Landmarks, above Specs | Linked confirmed owner correction; activation/readiness verification in the delivery PR | Landmark cap and start/acceptance distinction | Acceptance remains open; A/B work stays stopped |
+| 2026-11-01 | none | Owner unblocked S-001; the limit applies to Landmarks, above Specs | Linked confirmed owner correction; activation/readiness verification in the delivery PR | Landmark cap and start/acceptance distinction | Acceptance remains open |
 
 ## Review and Human QA
 
