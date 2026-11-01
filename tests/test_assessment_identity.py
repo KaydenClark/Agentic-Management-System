@@ -75,3 +75,16 @@ def test_schema_identifier_requires_the_exact_approved_integer(version):
     p=packet();p['schema']=version
     with pytest.raises(assessment.Refused,match='schema'):
         assessment.score(p)
+
+
+@pytest.mark.parametrize('before,after',PAIRS)
+def test_recorded_historical_observation_cannot_change_scalar_identity(tmp_path,before,after):
+    p=packet();p['historicalFindings']=[{'findingId':'historical-quality','checkId':'A01-04',
+        'class':'Quality','candidate':'b'*40,'sourceRunId':'historical-run','observation':{'observed':before}}]
+    assessment.record(p,tmp_path)
+    saved=assessment._encoded(assessment.read_records(tmp_path))
+    changed=copy.deepcopy(p);changed.update(assessmentId='changed-source',attempt=1)
+    changed['historicalFindings'][0]['observation']['observed']=after
+    with pytest.raises(assessment.Refused,match='historical source'):
+        assessment.record(changed,tmp_path)
+    assert assessment._encoded(assessment.read_records(tmp_path))==saved

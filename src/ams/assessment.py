@@ -166,7 +166,7 @@ def _findings(p, runs, previous):
             # Mapping is enrichable; recorded source facts are not replaceable.
             for key in ('candidate','sourceRunId','observation'):
                 if key in old and key in retained and retained[key] is not None:
-                    require(old[key] == retained[key], 'historical source cannot change')
+                    require(same_artifact(old[key], retained[key]), 'historical source cannot change')
             if retained.get('candidate') is None and old.get('candidate') is not None:
                 merged['candidate'] = old['candidate']
         for key in ('candidate','lastCandidate'):

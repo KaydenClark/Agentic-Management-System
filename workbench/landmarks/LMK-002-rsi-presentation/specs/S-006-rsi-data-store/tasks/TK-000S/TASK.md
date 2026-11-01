@@ -25,3 +25,7 @@ Use exact canonical artifact comparisons at remote prefix/duplicate and local im
 ## Red/green proof
 
 Synthetic public-seam reproduction against delivered110bb7a independently observed changed canonical evidence accepted by remote prefix/duplicate, local duplicate, typed saved-result replay and frozen metadata. Twelve new pytest fixtures initially failed (DID NOT RAISE); schema true/1.0 protocol fixtures separately failed before the explicit exact-identifier repair. A shared canonical identity helper now guards only immutable packet/result/frozen/approved-protocol comparisons; remote prefix/duplicate compare preserved canonical TEXT. Scoring formulas, check classes, qualification and database schema are unchanged. Independent frozen-type fixtures cover the same comparisons separately. Full/live/fresh verification and independent review remain pending.
+
+## Same-run historical-source correction
+
+Independent scoped review of a95f629 found the same equality issue in retained historical source facts. Four valid Quality-finding observation fixtures (true/int, exponent/int, float/int and negative-zero sign) were observed red before applying the same canonical helper there. Source-run/candidate/observation fact strings keep their existing meaning. Audit of remaining equality sites distinguishes validated scalar IDs/classes and typed attempt counters from artifact identity; JSONB projection comparison intentionally remains type-aware semantic comparison because JSONB normalizes number spelling.
