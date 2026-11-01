@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-004 closed with proof.
-**Next gate:** Complete TK-005.
+**Latest event:** TK-005 claimed by orchestrator-b-tk005-implementor.
+**Next gate:** Close TK-005 with verification and documentation proof.
 
 ## Intent and authority
 
