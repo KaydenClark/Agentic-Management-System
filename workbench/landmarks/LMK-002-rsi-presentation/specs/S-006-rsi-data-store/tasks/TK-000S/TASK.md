@@ -3,10 +3,12 @@
 **Task ID:** TK-000S
 **Spec ID:** S-006
 **Slice:** Changed exact assessment artifacts cannot masquerade as retries
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Private assessment persistence
 **Planned verification:** Red-first remote/local identity, prefix, replay and frozen-metadata fixtures; no-write refusal and exact retries; full/fresh checks and marked live conflict/cleanup.
+**Claimed by:** codex-assessment-writer
+**Current claimant:** codex-assessment-writer
 
 ## Assignment
 
