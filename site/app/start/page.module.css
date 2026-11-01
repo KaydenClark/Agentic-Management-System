@@ -1,6 +1,7 @@
 /* /start styles. Greys are the page. The only hues are the four holder
    signals, each through the .tone mixes of its .h-* class (DDR-000M,
    DDR-000Y): blue owner, green agents, purple returned, grey done.
+   The skills diagram (screen 3) uses no hue.
    Every value comes from app/theme/tokens.css. */
 
 .page {
@@ -218,92 +219,135 @@
   color: var(--muted);
 }
 
-/* 3. The lifecycle: numbered nodes in their holder's colour, and the loop. */
+/* 3. The skills by stage: one card per stage, main-flow chips solid in
+   order, the other skills outlined. Neutral greys only: on this page a hue
+   means who holds the work, and a skill holds nothing. */
 
-.flow {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-14);
-}
-
-.flowPath,
-.loopPath {
+.skillStages {
   margin: 0;
   padding: 0;
   list-style: none;
-}
-
-.flowPath {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(var(--node-basis), 1fr));
-  gap: var(--space-14) var(--space-18);
-}
-
-.node {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  padding: var(--space-8) var(--space-10);
-  background: var(--tone-soft);
-  border: var(--border-width) solid var(--tone-line);
-  border-radius: var(--radius-control);
-}
-
-.flowPath .node:not(:last-child)::after {
-  content: "→";
-  position: absolute;
-  top: 50%;
-  right: calc(var(--space-18) * -1);
-  width: var(--space-18);
-  text-align: center;
-  transform: translateY(-50%);
-  color: var(--muted);
-}
-
-.nodeNo {
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  color: var(--muted);
-}
-
-.nodeName {
-  font-weight: var(--weight-bold);
-}
-
-.nodeWho {
-  font-size: var(--text-small);
-}
-
-.loop {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   gap: var(--space-10);
-  padding: var(--space-10) var(--space-14);
-  border: var(--border-width) dashed var(--line-strong);
+}
+
+.skillStage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8) var(--space-18);
+  padding: var(--space-12) var(--space-14);
+  background: var(--surface);
+  border: var(--border-width) solid var(--line);
   border-radius: var(--radius-card);
 }
 
-.loopFrom {
+@media (min-width: 720px) {
+  .skillStage {
+    grid-template-columns: calc(var(--node-basis) * 1.4) minmax(0, 1fr);
+  }
+}
+
+.skillStageName {
+  font-weight: var(--weight-bold);
+}
+
+.skillStageGloss {
   font-size: var(--text-small);
   color: var(--muted);
 }
 
-.legend {
+.skillStageBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.skillMain,
+.skillUsed,
+.skillKey {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-8) var(--space-18);
-  font-size: var(--text-small);
+  align-items: center;
+  gap: var(--space-6) var(--space-8);
 }
 
-.legend li {
+.skillMain li,
+.skillUsed li {
+  padding: var(--space-4) var(--space-10);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-badge);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  overflow-wrap: anywhere;
+}
+
+.skillMain li {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--ground);
+  font-weight: var(--weight-semibold);
+}
+
+.skillMain {
+  column-gap: var(--space-20);
+}
+
+.skillMain li {
+  position: relative;
+}
+
+.skillMain li + li::before {
+  content: "→";
+  position: absolute;
+  left: calc(var(--space-20) * -1);
+  width: var(--space-20);
+  text-align: center;
+  color: var(--muted);
+  font-weight: var(--weight-regular);
+}
+
+.skillUsed li {
+  background: var(--raised);
+  color: var(--ink);
+}
+
+.skillNote {
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.skillKey {
+  font-size: var(--text-small);
+  color: var(--muted);
+  gap: var(--space-8) var(--space-18);
+}
+
+.skillKey li {
   display: flex;
   align-items: center;
   gap: var(--space-6);
+}
+
+.keyMain,
+.keyUsed {
+  width: var(--space-14);
+  height: var(--space-14);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-pill);
+}
+
+.keyMain {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.keyUsed {
+  background: var(--raised);
 }
 
 /* 5. Who does what: the owner beside the agents, then the three orchestrators. */
