@@ -1,20 +1,21 @@
 // S-003 /start: the lifecycle diagram, the toy's no-JS fallback and the toy
-// itself all read one data file, app/start/flow.ts, so they cannot disagree.
-// Over the built output: every stage in flow.ts appears in the diagram and in
+// itself all read one data file, app/start/flow.mjs, so they cannot disagree.
+// Over the built output: every stage in flow.mjs appears in the diagram and in
 // the no-JS fallback; the returned branch exists and uses the returned token;
 // only the holder hues colour the page; the toy's source makes no request and
 // stores nothing. Keyboard play to the last stage, zero requests and empty
 // storage while playing are checked live in tests/browser.check.mjs.
-// Run `npm run build` first. flow.ts is loaded with Node's type stripping
-// (Node 22.18+ and 24, as CI runs).
+// Run `npm run build` first. The data is plain JavaScript (flow.mjs, typed
+// by flow.d.mts), so this runs on every Node that runs `npm test`.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { builtPage, siteDir, sourceFiles, visibleText } from './helpers.mjs';
 import { mainOf } from './tour-helpers.mjs';
 
-const flow = await import(join(siteDir, 'app', 'start', 'flow.ts'));
+const flow = await import(pathToFileURL(join(siteDir, 'app', 'start', 'flow.mjs')).href);
 
 // Inner HTML of the first element carrying `attr`, nesting of the same tag
 // included; null when there is none.
@@ -52,7 +53,7 @@ const hueOf = (holder) => flow.HOLDERS[holder].hue;
 const html = builtPage('start.html').html;
 const main = mainOf(html);
 
-test('flow.ts: a lifecycle from a request to done, with real stage names and sources', () => {
+test('flow.mjs: a lifecycle from a request to done, with real stage names and sources', () => {
   const ids = flow.stages.map((s) => s.id);
   assert.ok(flow.stages.length >= 8, 'too few stages for the lifecycle');
   assert.equal(new Set(ids).size, ids.length, 'duplicate stage ids');
@@ -83,11 +84,11 @@ test('the stage check catches a missing, unnamed or wrongly coloured stage (self
   assert.equal(elementWith('<ol data-x=""><li><ol><li>i</li></ol></li></ol><ol><li>after</li></ol>', 'data-x'), '<li><ol><li>i</li></ol></li>');
 });
 
-test('/start: every stage in flow.ts appears in the lifecycle diagram', () => {
+test('/start: every stage in flow.mjs appears in the lifecycle diagram', () => {
   assert.deepEqual(stageProblems(elementWith(main, 'data-flow-diagram'), flow.stages, hueOf, 'diagram'), []);
 });
 
-test('/start: every stage in flow.ts appears in the no-JS fallback, numbered and server-rendered', () => {
+test('/start: every stage in flow.mjs appears in the no-JS fallback, numbered and server-rendered', () => {
   const fallback = elementWith(main, 'data-toy-fallback');
   assert.deepEqual(stageProblems(fallback, flow.stages, hueOf, 'fallback'), []);
   assert.match(main, /<ol\b[^>]*data-toy-fallback/, 'the fallback is not a numbered list');
@@ -115,7 +116,7 @@ test('/start: only the holder hues colour the page, each through the tone tokens
 });
 
 test('/start: the toy source makes no request and stores nothing', () => {
-  const toy = sourceFiles('app/start', ['.tsx', '.ts']);
+  const toy = sourceFiles('app/start', ['.tsx', '.ts', '.mjs']);
   assert.ok(toy.some((f) => /"use client"/.test(f.text)), 'no client component for the toy');
   for (const f of toy) {
     assert.doesNotMatch(f.text, /\b(?:fetch|XMLHttpRequest|WebSocket|EventSource|sendBeacon|localStorage|sessionStorage|indexedDB|document\.cookie|caches)\b/, `${f.name}: network or storage API`);

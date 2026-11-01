@@ -358,6 +358,31 @@ async function returnedProblems(page) {
   });
 }
 
+// The returned branch by keyboard alone: Tab to the primary button, Enter
+// until a return choice appears, Tab to it and press Enter. Focus must land
+// back on the primary button (not drop to the page), and Enter from there
+// must carry the returned work on to its next stage.
+async function returnByKeyboardProblems(page) {
+  await page.evaluate(() => { document.activeElement?.blur?.(); window.scrollTo(0, 0); });
+  const on = (attr) => page.evaluate((a) => document.activeElement?.hasAttribute(a) ?? false, attr);
+  let ok = false;
+  for (let i = 0; i < 300 && !ok; i += 1) { await page.keyboard.press('Tab'); ok = await on('data-toy-primary'); }
+  if (!ok) return ['Tab never reaches the toy'];
+  for (let i = 0; i < 40 && !(await page.$('[data-toy-secondary]')); i += 1) await page.keyboard.press('Enter');
+  if (!(await page.$('[data-toy-secondary]'))) return ['no return choice reached by keyboard'];
+  await page.keyboard.press('Tab');
+  if (!(await on('data-toy-secondary'))) return ['Tab from the primary button does not reach the return choice'];
+  await page.keyboard.press('Enter');
+  const problems = [];
+  const holder = await page.$eval('[data-toy]', (el) => el.getAttribute('data-holder'));
+  if (holder !== 'returned') problems.push(`after the return choice the holder is ${holder}`);
+  if (!(await on('data-toy-primary'))) problems.push(`focus dropped to ${await page.evaluate(() => document.activeElement?.tagName.toLowerCase() ?? 'nothing')} after the return choice`);
+  await page.keyboard.press('Enter');
+  const after = await page.$eval('[data-toy]', (el) => el.getAttribute('data-holder'));
+  if (after === 'returned') problems.push('Enter after the return choice does not move the work on');
+  return problems;
+}
+
 async function toySelfTest(browser, server, origin) {
   const plants = [
     ['a toy that writes to storage', (p) => p.evaluate(() => document.querySelector('[data-toy-primary]').addEventListener('click', () => localStorage.setItem('qa-planted', '1'))), (x) => x.some((m) => m.startsWith('storage'))],
@@ -431,6 +456,10 @@ try {
       opened = await openPage(browser, `${server.url}/start`, { width, theme, origin });
       p = await returnedProblems(opened.page);
       check(`start toy ${theme} ${width}px: the returned branch shows in the returned token`, !p.length, p.join(' | '));
+      await opened.context.close();
+      opened = await openPage(browser, `${server.url}/start`, { width, theme, origin });
+      p = await returnByKeyboardProblems(opened.page);
+      check(`start toy ${theme} ${width}px: keyboard alone takes the returned branch and focus stays on the toy`, !p.length, p.join(' | '));
       if (shots && theme === 'dark' && width === 1280) {
         // One shot per toy step, from a fresh start, with the returned branch.
         await opened.context.close();
