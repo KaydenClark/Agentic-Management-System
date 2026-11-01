@@ -35,7 +35,7 @@ This supersedes reducing the assignment to a judgment about whether it is “reb
 
 ## Loop #1 preparation: recovered design and open decisions
 
-Status: design interview in progress; settled answers below. Source: Kayden's request in the
+Status: S-002 Journey resumed by the owner on 2026-11-01; settled answers below. Source: Kayden's request in the
 2026-11-01 “Prepare GPT_OS AMS RSI loop” chat and the checks below. This is a
 continuation record, not evidence of a completed improvement or a paid campaign.
 
@@ -82,13 +82,13 @@ continuation record, not evidence of a completed improvement or a paid campaign.
 - Confirmed: each candidate has a bounded r1 scope plus affected regressions; whole-AMS fitness is separate. A candidate pass never confers a system pass.
 - Confirmed retention gate: demonstrated useful benefit as well as a qualified Stable/Excellent result. Declare the intended benefit before comparison.
 - First RSI case: this chat’s grilling failure. The owner has already started the skill redesign elsewhere; resume by coordinating with that work.
-- Owner-requested stop: save these answers, then stop this chat. Further implementation and evaluation await resume.
+- Prior chat stopped after saving answers. The owner subsequently resumed S-002 Journey; the later resume entry below governs this run.
 - Use the owner's paid-plan meter, not API tokens or an API campaign budget. Unknown usage measurements stay unknown.
 - Confirmed next action: merge the current website and system work into main, then assess only the resulting pinned main revision. This specific promotion is authorized; future website promotions retain their owner gate.
 
 ### Skill-audit specification, 2026-11-01
 
-[S-002](../landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md) now owns the skill-audit contract requested in JOT-5061e624-c5c2-421d-aae1-58b01a25a03c: frozen r1 checks, pooled score, fitness acceptance, skill cases, finding retests and three attempts. S-006 storage and S-007 presentation must consume it; current implementations do not establish that contract. This specifies the loop; no new assessment or execution is claimed. Bounded-versus-whole scope remains open above.
+[S-002](../landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md) now owns the skill-audit contract requested in JOT-5061e624-c5c2-421d-aae1-58b01a25a03c: frozen r1 checks, pooled score, fitness acceptance, skill cases, finding retests and three attempts. S-006 storage and S-007 presentation must consume it; current implementations do not establish that contract. This specifies the loop; no new assessment or execution is claimed. Bounded candidate scope plus affected regressions is confirmed above; whole-AMS fitness stays separate.
 
 ### Grilling failure reported by the owner
 
@@ -183,4 +183,17 @@ Topic: ams-purpose
 Supersedes: none
 
 Kayden answered "Yes to both. It needs to actually improve, and let's use the grilling failure as the first RSI case. I already started the redesign on the grill with docs skill. record the answers and stop here". Confirmed: retaining a candidate requires demonstrated useful benefit against its frozen baseline as well as a qualified Stable/Excellent bounded r1 result with required evidence and affected regression checks. Declare the intended benefit before comparison; inconclusive results return for revision within the existing three-attempt cap. The first end-to-end RSI case is the grilling failure observed in this chat; diagnose the cause rather than assume skill text caused it. The owner reports that redesign of grill-with-docs has already started elsewhere; coordinate with that existing work on resume instead of duplicating it. This chat stops after saving these answers. No skill repair, evaluation, Supabase write or site change is performed by this capture.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-4fa672e3-ed35-4aee-9364-902039ce4b81
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T18:17:35.231Z
+Author: Kayden
+Source: Kayden, carry the journey of S-002, AMS chat 2026-11-01; existing meter and bounded-scope decisions in this article
+Topic: ams-purpose
+Supersedes: none
+
+The owner requested carrying S-002 through Journey. This resumes its scoped implementation and normal checked delivery. Existing settled decisions apply: use the paid-plan meter rather than an API campaign budget; candidate assessments have bounded r1 scope plus affected regressions, separate from whole-AMS fitness. The old campaign-budget wording and unresolved-scope summaries are stale. This supplies no new paid-service purchase, website promotion, skill-redesign duplication, evaluator qualification or outcome acceptance. Implement deterministic assessment safeguards while recovering inputs for the manual grilling-failure round.
 <!-- /jot-entry -->

@@ -10,12 +10,12 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Audit contract specified; unimplemented.
-**Next gate:** Resolve scope; reconcile Tasks before trials.
+**Latest event:** Owner resumed S-002 Journey; deterministic assessment slice prepared.
+**Next gate:** Implement TK-000M; recover storage and manual-trial inputs independently.
 
 ## Intent and authority
 
-[Owner answers](../../../../wiki/context-ams-purpose.md): r1, Stable/Excellent, three attempts excluding baseline, paid-plan meter. JOT-5061e624-c5c2-421d-aae1-58b01a25a03c requests this Spec repair only.
+[Owner answers](../../../../wiki/context-ams-purpose.md): r1, Stable/Excellent, three attempts excluding baseline, paid-plan meter. The earlier JOT-5061e624-c5c2-421d-aae1-58b01a25a03c requested only Spec repair. [Owner resume](../../../../wiki/context-ams-purpose.md#jot-4fa672e3-ed35-4aee-9364-902039ce4b81) now requests S-002 Journey; retain the subscription meter and bounded-candidate/whole-AMS distinction.
 
 ## Outcome
 
@@ -71,11 +71,11 @@ Model weights; loop execution during mapping; presentation (S-007).
 
 S-006 must retain assessment/attempt/run IDs, frozen metadata, check ledgers, counts/levels, acceptance/evidence/qualification, findings/retests and behavioral-row links; S-007 shows scores/evals/failures with provenance. Integration gaps remain; reviews are not trials.
 
-Seeds: real build-history/skills sources, strength-labelled; private skills summary/commit pointer only. Reconcile TK-002/older budget consumers before trials.
+Seeds: real build-history/skills sources, strength-labelled; private skills summary/commit pointer only. TK-002 uses the existing subscription meter; no API campaign budget. Actual storage input and qualified comparison prerequisites remain.
 
 ## Vertical Implementation Slices
 
-Reconcile existing Tasks: B local, checked PRs to main; evals/runner/writer/queries.
+Existing trial Tasks retain their storage/comparison dependencies. TK-000M independently delivers local assessment intake, scoring, retest and stop safeguards through the CLI; it supplies no trial or storage acceptance. B local, checked PRs to main; evals/runner/writer/queries.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
