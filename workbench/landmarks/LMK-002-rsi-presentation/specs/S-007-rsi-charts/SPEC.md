@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 claimed by orchestrator-A-dispatcher-S007.
-**Next gate:** Close TK-001 with verification and documentation proof.
+**Latest event:** TK-001 closed with proof.
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
@@ -94,6 +94,7 @@ node workbench/tools/spec-workbench.mjs show S-007
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
+| 2026-11-01 | TK-001 | Task closed | PR #14 merged into dev as fceec12; red: 6/6 rsi tests failed at 66f04e1 with no route; green: npm test 33/33 at bb2b3a4 after merging dev; 11 planted faults (dropped place, merged sections, missing empty message/explanation/next event, digit in a place or intro, drawn SVG, hidden/display:none/aria-hidden) each fail their check; Playwright at 375px light and dark: scrollWidth 375, zero off-site requests; Vercel preview READY at bb2b3a4; Codex code and security review no findings | site/README.md section RSI charts (/rsi); site/page-list.json entry /rsi | Page not fetched on the dev deployment: the Vercel connector's web_fetch refuses this project (owner to extend connector access); hidden-content test cannot see hiding from global or shell CSS classes; live Supabase reads are TK-002; close attribution: {"agent":"orchestrator-A","claimant":"orchestrator-A-dispatcher-S007","onBehalfOf":"orchestrator-A-dispatcher-S007"} |
 
 ## Review and Human QA
 
