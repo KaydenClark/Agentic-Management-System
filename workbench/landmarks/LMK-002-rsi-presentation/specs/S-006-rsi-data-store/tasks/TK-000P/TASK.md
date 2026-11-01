@@ -3,12 +3,13 @@
 **Task ID:** TK-000P
 **Spec ID:** S-006
 **Slice:** Trial metrics preserve explicit unknown values and their sources
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Schema and provenance; Writer works end to end; Real sources only
 **Planned verification:** Public writer roundtrip and rejection tests; live tagged test row readback and cleanup; database constraint probes; full room checks
 **Claimed by:** codex-local-writer
 **Current claimant:** codex-local-writer
+**Proof:** 475 passed,4 skipped; focused99/1; migration20261101192328; live null and zero roundtrip; DB bad availability23514; client writes401/test hiding; cleanup0; advisors empty
 
 ## Assignment
 
@@ -57,3 +58,4 @@ contract is explicit. S-002 assessment storage and real qualified trials remain.
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | codex/s006-unknown-metrics | 70538664906d66a3f7597f1e3228e3b1ab697379 | none | 9 | 475 passed,4 skipped; focused99/1; live unknown and zero roundtrip; raw DB invalid availability23514; site writes401/test rows hidden; cleanup0; security advisors empty; room checks valid | TRIAL-ROWS; result template; rsi_rows docstring; S-006 SPEC/TK-000P | Fresh assembled Review; distinct private assessment persistence and S-002 real trials | 55393812c472e057b065d0dd16e9b51ba44491fb741287a2fcb49e0e0df726be |
+| 2 | codex/s006-unknown-metrics | 9afdb9ee7e0be510777c61a3c38eca1f66dadf71 | ahead 0 behind 0 | 0 | 475 passed,4 skipped; focused99/1; migration20261101192328; live null and zero roundtrip; DB bad availability23514; client writes401/test hiding; cleanup0; advisors empty | TRIAL-ROWS; template; rsi_rows; S-006 SPEC/TK-000P | Fresh assembled Review; private assessment storage; real qualified S-002 trials; close attribution: {"agent":"codex-local-writer","claimant":"codex-local-writer","onBehalfOf":null} | 2ff206112497a20fe907b0c6b513a3d81ff2b615d3832d8fedaca16469308224 |
