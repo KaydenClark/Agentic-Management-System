@@ -30,13 +30,14 @@ Charts are honest only if each number has a row with provenance; local writes an
 - `supabase/migrations/`: read-only baseline; new public tables start with RLS on, no client write.
 - `build_events` (`20261101132456`): 463 rows `ams-history` imported from Git, `gh` and the records, incl. ams-writer's PR #15 row; the site key reads them, its writes get 401.
 - `rsi_runs`, `rsi_results` (`20261101134221`): empty, since no real trial has run. Each requires skills, runtime, controls and grader commits; a version trigger refuses stale updates (409). `ams-rsi livecheck` proves both refusals with hidden test rows, then deletes them.
+- Writers (`ams.source_rules`) and database refuse a row lacking source kind and ref or a listed strength; `ams-sources livecheck` proves it, test rows hidden.
 
 ## Desired Behavior
 
 - Tables for RSI trial results, build history and run metadata. Each result row names: task, held-out or dev, trial arm (AMS, no-AMS or plain instructions), system version (runtime, controls and skills commits), provider, model, effort, pass, cost, tokens, completed state and source.
 - Every table has a SELECT policy for the site and no client write path.
 - A local Python writer with the service key inserts rows and refuses a write that conflicts with a newer row.
-- Seed rows come only from real sources (the site build, later improvements, the skills repository's recorded fixes), each with a strength label (anecdote, single trial, repeated trials, held-out with interval).
+- Seed rows come only from real sources (the site build, later improvements, the skills repository's recorded fixes), each with a strength label (anecdote, single trial, repeated trials, held-out with interval). `recorded_fact` stays listed: build history is read from Git, GitHub and records, not graded.
 - Test and synthetic rows are marked; the site never shows them.
 - **Build history.** Rows for this build's Spec, Task, PR and commit events from the real records, returns and corrections included, showing how the AMS built itself.
 
@@ -57,7 +58,7 @@ Charts are honest only if each number has a row with provenance; local writes an
 
 ## Vertical Implementation Slices
 
-Each Task is one fresh-session run in orchestrator B's lane (the only service-key holder), landed feature -> `main` by checked PR. TK-001 to TK-004 are done; TK-005 (seed and test rows) remains.
+Each Task is one fresh-session run in orchestrator B's lane (the only service-key holder), landed feature -> `main` by checked PR. TK-001 to TK-005 are done.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -85,7 +86,7 @@ S-002 writes its rows here; S-007 reads them.
 
 ```bash
 node workbench/tools/spec-workbench.mjs show S-006
-# migration and Python test commands named at Task planning
+uv run pytest  # AMS_LIVE=1 adds the live checks
 ```
 
 ## Documentation Impact
@@ -94,15 +95,15 @@ node workbench/tools/spec-workbench.mjs show S-006
 
 ## Append-Only Evidence And Execution Log
 
-Condensed 2026-11-01 to one row per closed Task; the full proof lives in each TASK.md Receipt and in Git history.
+Condensed 2026-11-01 to one row per closed Task; each TASK.md Receipt holds the full proof.
 
 | Date | Task | Event | Verification | Docs | Remaining gap |
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Mapped as planned; baseline migration noted | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | TK-001 | Task closed | PR [#15](https://github.com/KaydenClark/Agentic-Management-System/pull/15) merged as 884d021; receipt [c1f4182](https://github.com/KaydenClark/Agentic-Management-System/commit/c1f4182): live `ams-keycheck` authenticated, no key printed | RUNBOOK, ARCHITECTURE | Legacy-JWT path proven only with fakes |
-| 2026-11-01 | TK-002 | Task closed | PR [#18](https://github.com/KaydenClark/Agentic-Management-System/pull/18) merged as d279ae1; receipt [0371288](https://github.com/KaydenClark/Agentic-Management-System/commit/0371288): `build_events` applied; `ams-writer` wrote PR #15's row; site key reads, writes 401 | RUNBOOK, ARCHITECTURE | `is_test` filter proven by stubs |
-| 2026-11-01 | TK-003 | Task closed | PR [#29](https://github.com/KaydenClark/Agentic-Management-System/pull/29) merged as 74b446e; receipt [4f0f73e](https://github.com/KaydenClark/Agentic-Management-System/commit/4f0f73e): `rsi_*` applied; `ams-rsi livecheck` refused a missing skills commit and a stale update | RUNBOOK, ARCHITECTURE | No real RSI row until S-002 |
-| 2026-11-01 | TK-004 | Task closed | PRs [#31](https://github.com/KaydenClark/Agentic-Management-System/pull/31) (4d74e90) and [#37](https://github.com/KaydenClark/Agentic-Management-System/pull/37) (d26bb8c); receipt [ab2118c](https://github.com/KaydenClark/Agentic-Management-System/commit/ab2118c): `ams-history` imported 463 rows matching record counts; rerun added 0 | RUNBOOK, ARCHITECTURE | Dev-only records not imported; no scheduled re-import |
+| 2026-11-01 | TK-001 | Task closed | PR #15 merged as 884d021; receipt c1f4182: live `ams-keycheck` authenticated, no key printed | RUNBOOK, ARCHITECTURE | Legacy-JWT path proven only with fakes |
+| 2026-11-01 | TK-002 | Task closed | PR #18 merged as d279ae1; receipt 0371288: `build_events` applied; `ams-writer` wrote PR #15's row; site key reads, writes 401 | RUNBOOK, ARCHITECTURE | `is_test` filter proven by stubs |
+| 2026-11-01 | TK-003 | Task closed | PR #29 merged as 74b446e; receipt 4f0f73e: `rsi_*` applied; `ams-rsi livecheck` refused a missing skills commit and a stale update | RUNBOOK, ARCHITECTURE | No real RSI row until S-002 |
+| 2026-11-01 | TK-004 | Task closed | PRs #31 (4d74e90) and #37 (d26bb8c); receipt ab2118c: `ams-history` imported 463 rows matching record counts; rerun added 0 | RUNBOOK, ARCHITECTURE | Dev-only records not imported; no scheduled re-import |
 
 ## Review and Human QA
 
