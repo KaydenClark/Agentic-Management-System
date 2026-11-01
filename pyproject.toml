@@ -7,6 +7,7 @@ dependencies = []
 
 [project.scripts]
 ams-keycheck = "ams.keycheck:main"
+ams-writer = "ams.writer:main"
 
 [build-system]
 requires = ["uv_build>=0.9,<1"]
