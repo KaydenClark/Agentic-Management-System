@@ -19,12 +19,13 @@ import { siteDir } from './helpers.mjs';
 const CSS_PATH = join(siteDir, 'app', 'theme', 'tokens.css');
 const JSON_PATH = join(siteDir, '..', 'grill-board', 'theme', 'tokens.json');
 
-const COLOR_VALUE = /#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch|color|color-mix)\(|\bvar\(--[\w-]+\)/i;
+const COLOR_VALUE = /#[0-9a-f]{3,8}\b|\b(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch|color|color-mix)\(|\bvar\(\s*--[\w-]+\s*[,)]/i;
 // CSS named colors would also count; a bare word as a custom property value
 // in tokens.css is treated as a color unless it is a known non-color keyword.
 const NON_COLOR_WORD = /^(?:light|dark|normal|none|inherit|initial|unset|revert)$/i;
 
-// Parse top-level and @media-nested rules into { selector, media, decls }.
+// Parse top-level and @media-nested rules into { selector, media, decls, list }:
+// decls keeps the last value per name, list keeps every declaration in order.
 export function parseRules(css) {
   const src = css.replace(/\/\*[\s\S]*?\*\//g, '');
   const rules = [];
@@ -45,9 +46,8 @@ export function parseRules(css) {
       const body = text.slice(open + 1, j - 1);
       if (head.startsWith('@')) walk(body, head);
       else {
-        const decls = {};
-        for (const m of body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);?/g)) decls[m[1]] = m[2].trim();
-        rules.push({ selector: head.replace(/\s+/g, ' '), media, decls });
+        const list = [...body.matchAll(/(--[\w-]+)\s*:\s*([^;]+);?/g)].map((m) => [m[1], m[2].trim()]);
+        rules.push({ selector: head.replace(/\s+/g, ' '), media, decls: Object.fromEntries(list), list });
       }
       i = j;
     }
@@ -79,6 +79,19 @@ function compareDecls(where, actual, expected, out) {
   }
 }
 
+// A color token may be declared once per rule and never with !important: the
+// browser applies an !important or earlier duplicate the last-value compare would miss.
+function checkDeclarations(where, rule, expected, out) {
+  const isColor = (name, value) => name in expected || isColorish(value.replace(/!\s*important\s*$/i, '').trim());
+  const counts = {};
+  for (const [name, value] of rule.list) {
+    if (!isColor(name, value)) continue;
+    counts[name] = (counts[name] || 0) + 1;
+    if (/!\s*important/i.test(value)) out.push(`${where}: ${name}: ${value} uses !important`);
+  }
+  for (const [name, n] of Object.entries(counts)) if (n > 1) out.push(`${where}: ${name} is declared ${n} times in one rule`);
+}
+
 // Every difference between a tokens.css text and a parsed tokens.json.
 export function differences(css, json) {
   const out = [];
@@ -87,6 +100,8 @@ export function differences(css, json) {
   for (const rule of parseRules(css)) {
     const theme = themeOf(rule);
     const where = rule.media ? `${rule.media} ${rule.selector}` : rule.selector;
+    const mix = !theme && !rule.media && rule.selector in json.mixes ? json.mixes[rule.selector] : null;
+    checkDeclarations(where, rule, theme ? json.themes[theme] : mix || {}, out);
     if (theme) {
       if (rule.media) seen.mediaDark++;
       else seen[theme]++;
