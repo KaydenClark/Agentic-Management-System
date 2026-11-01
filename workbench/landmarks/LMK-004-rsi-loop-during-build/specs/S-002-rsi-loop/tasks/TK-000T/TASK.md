@@ -22,13 +22,23 @@ The prior single inert provider smoke is external CLI capability evidence, not e
 
 ## Acceptance
 
-- [ ] A caller validates exact pinned artifact hashes and paths, creates a clean private fixture and resets it without touching unrelated data; traversal, symlinks, extra files and hash drift are refused.
-- [ ] Three dev cases retain start, branch-context interruption and correction/resume outcomes; qualification references remain protected and cannot be mistaken for worker inputs.
-- [ ] Exact Claude model/effort and empty-tool/MCP configuration are fixed; adapter tests reject runtime/model/result/usage mismatches, tool use, fallback, malformed output and errors without inventing success.
-- [ ] Callable shell preflight exercises actual inside/outside read/write and network boundaries, reports unsupported/unavailable observations honestly, and never launches a model.
-- [ ] Immutable safe local evidence/readback preserves provenance, limitations, unknown subscription usage and distinct actual execution facts; forged or changed totals/identities and unsafe evidence fields are refused.
-- [ ] Focused tests, required room checks, full pytest and fresh-clone verification pass; implementor QA and checked delivery are recorded.
+- [x] A caller validates exact pinned artifact hashes and paths, creates a clean private fixture and resets it without touching unrelated data; traversal, symlinks, extra files and hash drift are refused.
+- [x] Three dev cases retain start, branch-context interruption and correction/resume outcomes; qualification references remain protected and cannot be mistaken for worker inputs.
+- [x] Exact Claude model/effort and empty-tool/MCP configuration are fixed; adapter tests reject runtime/model/result/usage mismatches, tool use, fallback, malformed output and errors without inventing success.
+- [x] Callable shell preflight exercises actual inside/outside read/write and network boundaries, reports unsupported/unavailable observations honestly, and never launches a model.
+- [x] Immutable safe local evidence/readback preserves provenance, limitations, unknown subscription usage and distinct actual execution facts; forged or changed totals/identities and unsafe evidence fields are refused.
+- [x] Focused tests, required room checks, full pytest and fresh-clone verification pass; implementor QA and checked delivery are recorded.
 
 ## Continuing work
 
 Original TK-002 remains open for actual qualified same-version trials and measured noise. The orchestrator selects the immutable bootstrap/grader reference only after reviewing evidence; a merge alone is not acceptance. Narrow owner-labelled examples are qualification inputs, not certification. Controlled series, comparisons, r1 retests, useful benefit, later use and S-007 presentation remain pending.
+
+## Check, QA and delivery candidate
+
+Runtime source `5d3632098d4316a8b34ed85a82466aacf9de5bb1`: 45 focused tests; fresh clone 562 passed, 4 skipped. Room/layout/ADR and cumulative diff checks pass. Current branch `e628265` incorporates main `a4d58dd` (only S-008 Spec/chart changes); runtime source is unchanged. CI workflow `41350647793` (run 70) passed. Final closure records still require their own final-head CI before PR #89 merges.
+
+Observed red then green: unlisted recovery-file deletion, non-socket PermissionError false positives, scalar input/validation ordering, numeric Boolean/non-finite cost acceptance, retained stderr shutdown and early-exit diagnostics. The stderr descendant regression took about three seconds before correction and returns within one second afterward. The ancestor-reference/inside-worker examples test confirms an existing guard; no missing-guard failure is claimed. Earlier full tests in the enclosing sandbox had 97 failures/9 errors from loopback bind denial; the authorized host run established the final pass. An intermediate host run captured five newly added input regressions before their repair, retained in the execution log rather than counted as a green run.
+
+QA materialized both exact private source packs, verified all Git blob/SHA-256 identities, preserved approved owner-example bytes outside worker inputs, and read back safe immutable facts. Actual corrected host command canaries passed all five checks; enclosed nested Seatbelt remains honestly unavailable. The separately authorized single actual adapter call at source `5d36320` returned exactly `PREFLIGHT_OK` with model `claude-opus-5-5`, medium effort and empty runtime tools/MCP. Tokens: input 2, cache creation 1649, cache read 649, output 13. API list-equivalent cost was 0.0135898 USD; actual subscription spend is unknown. Safe local fact digest `9f228f51095def00c18f8cfb54aafea274560859352a71d66deee35ebe9827ed` matches readback. No database facts or controlled skill trials were written.
+
+A separate noncontributor context inspected the bounded bootstrap source and independently repeated all 45 focused tests with no unresolved finding. This is not a whole-S-002 Review or semantic grader qualification. The orchestrator must select the exact reviewed/main-contained bootstrap reference before releasing calibration or measured trials. Oracle inputs remain unqualified.
