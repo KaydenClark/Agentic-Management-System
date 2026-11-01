@@ -19,6 +19,7 @@ export const READING_ORDER = [
   '/quickstart',
   '/rsi',
   '/glossary',
+  '/about',
 ];
 
 // Every tour page the Spec names (S-003 Desired Behavior, Tour pages).
@@ -28,6 +29,7 @@ export const TOUR = [
   { href: '/how-it-works', title: 'How it works' },
   { href: '/quickstart', title: 'Quickstart' },
   { href: '/glossary', title: 'Glossary' },
+  { href: '/about', title: 'About' },
 ];
 
 // Route -> prerendered file name under .next/server/app/.
