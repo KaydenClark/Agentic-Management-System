@@ -33,6 +33,7 @@ The verdict buttons and note POST to `/answer` (ADR-000B, ADR-002U, S-004 TK-002
 - The card or owning record changed since the page showed it: the page carries each file's SHA-256 at HEAD, captured at render, and the write compares them.
 - Either file has uncommitted changes.
 - The owning path is absolute, uses `..` or `.`, names `.git`, goes through a symlink, resolves outside the repository, or is not a committed regular file.
+- The card names itself as its owning record.
 - The `Write after` line is missing or appears more than once; the card is already answered; a return has no note.
 - The POST does not come from the board's own page: the `Host` must be `127.0.0.1:PORT` and the `Origin` (or, without one, the `Referer`) that same origin; otherwise 403.
 

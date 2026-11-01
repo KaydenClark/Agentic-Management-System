@@ -180,6 +180,8 @@ def answer(cards_dir, card, verdict, note, card_sha, record_sha, now=None):
         if not recommendation:
             raise AnswerRefused("this card has no Recommendation to confirm")
         record_file = owned_path(root, target)
+        if record_file.resolve() == card_file.resolve():
+            raise AnswerRefused("this card names itself as its owning record; an answer must land in another record")
         record_blob = _unchanged(root, target, record_file, record_sha, "owning record")
         block = f"**Owner answer ({when[:10]}, Grill Board card `{card.file}`):** Confirmed: {recommendation}\n"
         if note:
@@ -199,6 +201,8 @@ def answer(cards_dir, card, verdict, note, card_sha, record_sha, now=None):
     card_text = card_blob.decode("utf-8")
     card_text += ("" if card_text.endswith("\n") else "\n") + "\n" + section
     writes.append((card_rel, card_file, card_blob, card_text.encode("utf-8")))
+    if len({path.resolve() for _, path, _, _ in writes}) != len(writes):
+        raise AnswerRefused("two writes would land in one file, so neither is written")
     try:
         for _, path, _, new in writes:
             _replace(path, new)

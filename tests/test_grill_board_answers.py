@@ -343,3 +343,17 @@ def test_the_form_hash_is_bound_to_the_card_text_the_page_showed(board, repo, mo
     status, body = post(server, {**fields, "verdict": "confirm"})
     assert status == 409 and "changed since" in body
     assert snapshot(repo) == before
+
+
+def test_a_card_that_names_itself_as_its_owner_is_refused(board, repo):
+    """Codex P2 on PR #38: two writes to one file would drop the owner's answer."""
+    card = repo / "grill-board" / "cards" / "one-card.md"
+    card.write_text(CARD.replace("records/decision.md", "grill-board/cards/one-card.md").replace(
+        "**Write after:** ## Owner answer", "**Write after:** Fixture context."))
+    git(repo, "commit", "-qam", "card owns itself")
+    server = board()
+    fields, _ = read_form(server)
+    before = snapshot(repo)
+    status, body = post(server, {**fields, "verdict": "confirm"})
+    assert status == 409 and "Not written" in body and "itself" in body
+    assert snapshot(repo) == before
