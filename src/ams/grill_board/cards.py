@@ -104,6 +104,10 @@ def parse_card(name, text):
     flags = [f for h, f in sections if h == "## Flag" and f.get("Too taxing") == "yes"]
     if starts:
         rest = rest[:starts[0]]
+    context = "\n".join(rest).strip()
+    if draft := page_content(context):
+        return Refusal(name, [f"its context {draft}; the board is not a drafting surface, so post the page "
+                              "elsewhere and ask only the question about it (S-004 TK-000I)"])
     return Card(
         file=name,
         question=question,
@@ -112,11 +116,30 @@ def parse_card(name, text):
         value=fields["Value"],
         value_reason=fields["Value reason"],
         fields=fields,
-        context="\n".join(rest).strip(),
+        context=context,
         answer=answers[0] if answers else None,
         ratings=ratings,
         flag=flags[0] if flags else None,
     )
+
+
+CONTEXT_LIMIT = 1000
+HEADING = re.compile(r"^ {0,3}(#{1,6}(\s|$)|=+\s*$)")
+FENCE = re.compile(r"^ {0,3}-{3,}\s*$")
+
+
+def page_content(context):
+    """Why a card's context is page content, or "" (S-004 TK-000I). Context is
+    a short note: at most CONTEXT_LIMIT characters, with no Markdown heading
+    and no `---` line (front matter, a rule or a heading underline)."""
+    lines = context.splitlines()
+    if any(HEADING.match(line) for line in lines):
+        return "has a Markdown heading"
+    if any(FENCE.match(line) for line in lines):
+        return "has a '---' line (front matter, a rule or a heading underline)"
+    if len(context) > CONTEXT_LIMIT:
+        return f"is {len(context)} characters, over the {CONTEXT_LIMIT} characters a note may take"
+    return ""
 
 
 def question_key(question):

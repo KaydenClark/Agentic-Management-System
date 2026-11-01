@@ -45,6 +45,7 @@ Priority and Value are how the owner decides what needs attention; without them 
 
 - The decision journey on the board is tracked apart from delivery (Specs and Tasks).
 - The board is local only; Vercel never serves it.
+- A card's Context is a note of at most 1,000 characters with no heading or `---` line; otherwise it is page content and refused (TK-000I).
 - Card data lives in plain files in Git; the owner's answer is the source, the owning record the destination.
 - An owning record is a `.md` file under `workbench/specs/`, `workbench/landmarks/`, `workbench/docs/adr/`, `workbench/docs/ddr/` or `workbench/wiki/`, or `grill-board/page-approvals.md`; Confirm refuses any other path (TK-000G).
 - The theme follows the artifact; tokens live in `grill-board/theme/tokens.json` ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).

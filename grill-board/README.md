@@ -18,7 +18,7 @@ Optional header fields the page shows:
 
 **Owner records.** Confirm writes only into a `.md` file under `workbench/specs/`, `workbench/landmarks/`, `workbench/docs/adr/`, `workbench/docs/ddr/` or `workbench/wiki/`, or into `grill-board/page-approvals.md`, matched exactly, case included (S-004 TK-000G). Everything else is refused before any write: workflows (`.github/`), code (`src/`, `site/`, `supabase/`), config (`pyproject.toml`, `uv.lock`, `*.json`) and root controls such as `AGENTS.md`. The page disables Confirm for such a card.
 
-Text below the header is shown as Context. A card without `Owner record`, `Write after` and `Recommendation` can be returned but not confirmed; the page says which is missing.
+Text below the header is shown as Context. **Not a drafting surface** (TK-000I): Context is a short note of at most 1,000 characters, with no Markdown heading (`#` to `######`, or a `===` underline) and no `---` line (front matter, a rule or a heading underline). A card whose Context breaks that rule is page content and is refused, listed in the alert, never shown; post the page elsewhere and ask only the question about it. A card without `Owner record`, `Write after` and `Recommendation` can be returned but not confirmed; the page says which is missing.
 
 ## Answers
 

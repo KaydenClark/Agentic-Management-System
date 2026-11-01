@@ -299,6 +299,35 @@ def test_the_board_is_not_a_drafting_surface(board, repo):
     assert before["record"] == (repo / "workbench" / "wiki" / "decision.md").read_bytes()
 
 
+PAGE_DRAFT_HEADER = CARD.split("\n\nFixture context.", 1)[0].replace(
+    "# Fixture: should the board keep one card per file?", "# Page draft: About us")
+
+
+@pytest.mark.parametrize("body, problem", [
+    ("## About us\n\nWe build agents.\n\n## Our team\n\nThree people.\n", "heading"),
+    ("About us\n========\n\nWe build agents.\n", "heading"),
+    ("---\nlayout: page\ntitle: About us\n---\n\nWe build agents.\n", "front matter"),
+    ("We build agents. " * 80, "1000 characters"),
+])
+def test_a_page_draft_with_valid_card_headers_is_refused_not_shown(board, repo, body, problem):
+    """Review TK-000I: C posted 'Page draft: About us' with a page body and valid headers; it showed as a card."""
+    server = board()
+    post_card(repo, "page-draft.md", PAGE_DRAFT_HEADER + "\n\n" + body, "an agent posts a page draft as a card")
+    html = get(server, {"topic": "Card format"})
+    alert = html.split('aria-label="Refused cards"', 1)[1].split("</section>", 1)[0]
+    assert "page-draft.md" in alert and "not a drafting surface" in alert and problem in alert
+    assert "page-draft.md" not in queue(html) and "About us" not in queue(html)
+    status, body = post(server, {"card": "page-draft.md", "card_sha": "0" * 64, "record_sha": "", "verdict": "confirm"})
+    assert status == 409
+
+
+def test_a_short_plain_context_is_still_a_card():
+    from ams.grill_board.cards import Card, parse_card
+
+    note = "A short note. " * 70  # 980 characters: under the limit
+    assert isinstance(parse_card("ok.md", PAGE_DRAFT_HEADER + "\n\n" + note.strip() + "\n"), Card)
+
+
 def test_rewriting_a_flagged_card_in_place_is_refused_so_the_flag_record_stays(board, repo):
     server = board()
     flag(server)
