@@ -3,10 +3,12 @@
 **Task ID:** TK-000R
 **Spec ID:** S-006
 **Slice:** JSONB numeric normalization cannot poison private assessment history
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Private assessment persistence
 **Planned verification:** Red-first exponent/negative-zero JSONB transport normalization; exact payload text replay, duplicate/lost-response retries; live tagged normalization probe; focused/full/fresh checks and rereview.
+**Claimed by:** codex-assessment-writer
+**Current claimant:** codex-assessment-writer
 
 ## Assignment
 
