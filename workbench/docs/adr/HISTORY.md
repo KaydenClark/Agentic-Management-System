@@ -78,7 +78,7 @@
 | [002R](002R-each-rsi-run-pins-the-skills-commit.md) | Each RSI run pins the skills commit | accepted | 2026-11-01 | evals, .agents/skills |
 | [002S](002S-at-most-six-active-specs.md) | At most six active Specs | accepted | 2026-11-01 | workbench/specs |
 | [002T](002T-measure-how-far-dev-runs-ahead-of-main.md) | Measure how far dev runs ahead of main | accepted | 2026-11-01 | RUNBOOK.md |
-| [002U](proposed/002U-writes-to-shared-stores-refuse-on-conflict.md) | Writes to shared stores refuse on conflict | proposed | 2026-11-01 | supabase, grill-board |
+| [002U](002U-writes-to-shared-stores-refuse-on-conflict.md) | Writes to shared stores refuse on conflict | accepted | 2026-11-01 | supabase, grill-board |
 | [002V](proposed/002V-artifacts-have-character-limits.md) | Artifacts have character limits | proposed | 2026-11-01 | workbench/artifact-budgets.json |
 | [002W](proposed/002W-three-strikes-then-stop.md) | Three strikes, then stop | proposed | 2026-11-01 | AGENTS.md |
 | [002X](proposed/002X-next-js-front-end-python-backends-node-only-as-tooling.md) | Next.js front end, Python backends, Node only as tooling | proposed | 2026-11-01 | ARCHITECTURE.md, site, pyproject.toml |
