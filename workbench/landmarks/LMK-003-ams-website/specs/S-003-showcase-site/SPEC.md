@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-007 claimed by orchestrator-A.
-**Next gate:** Close TK-007 with verification and documentation proof.
+**Latest event:** TK-007 closed with proof.
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
@@ -104,6 +104,7 @@ node workbench/tools/spec-workbench.mjs show S-003
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Ported and rewritten from confirmed decisions | render, doctor | this Spec | Every criterion |
 | 2026-11-01 | TK-001 | Task closed | PR #13 merged into dev as c529821; npm ci && npm run build && npm test 14/14 pass from a fresh clone (red 10/14 at 90559c8 first); check:browser 15/15 at 375px both themes, toggle overrides system and persists, self-hosted fonts, no off-site requests, home text without JS; Vercel dev deployment dpl_71NzXZ7rd77HgFsxAbgA1oVu7qsd READY at c529821; Codex code and security review no findings at 1fd680b | site/README.md documents npm ci, build, test, check:browser; tokens.css header cites the owner design canvas Color system v2.2 | Deployed footer SHA and home text not fetched from the dev deployment: the Vercel connector's web_fetch refuses this project (owner to extend connector access); contrast, keyboard and automated a11y pass belong to TK-005; tokens unverified against B's theme CDR until TK-007; close attribution: {"agent":"orchestrator-A","claimant":"orchestrator-A-dispatcher-S003","onBehalfOf":"orchestrator-A-dispatcher-S003"} |
+| 2026-11-01 | TK-007 | Task closed | PR #32 (9c37ebf) merged into demo batch site/demo-batch-20261102 for one dev merge; scripts/gen-tokens.mjs generates the tokens.css theme block from grill-board/theme/tokens.json (DDR-000Y); tests/tokens-json.test.mjs requires the block byte-equal to the generator, markers once at stylesheet top level, nothing recorded or color-like outside; red/green per Codex finding; Codex code and security clean at 9c37ebf; batch npm test 59/59, check:browser 149/149 | site/README.md Theme token check; npm run tokens:gen | Type and spacing tokens not in tokens.json so not compared; five mix meanings supplied by the generator until S-004 TK-003 records them; check runs in npm test and CI, not in the Vercel build; dev deployment content to be verified on the owner's machine; close attribution: {"agent":"orchestrator-A","claimant":"orchestrator-A","onBehalfOf":"orchestrator-A"} |
 
 ## Review and Human QA
 
