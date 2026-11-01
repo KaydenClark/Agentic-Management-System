@@ -46,13 +46,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, Iterable, Mapping, Sequence
 
-from ams import keycheck, writer
+from ams import keycheck, source_rules, writer
 
 REPO_ROOT = writer.REPO_ROOT
 REPO_URL = writer.REPO_URL
 REPO_SLUG = REPO_URL.removeprefix("https://github.com/")
 STRENGTH = "recorded_fact"
-SOURCE_KINDS = ("commit", "pr", "path", "jot")
+SOURCE_KINDS = source_rules.SOURCE_KINDS
 DEFAULT_REFS = ("origin/main", "origin/dev")
 CONFLICT_KEY = "kind,source_kind,source_ref"
 BATCH = 200
@@ -138,6 +138,7 @@ def validate(row: Mapping) -> None:
     for name in ("subject", "summary"):
         if not isinstance(row.get(name), str) or not row[name].strip():
             raise ValueError(f"row without {name}: {row.get('kind')}")
+    source_rules.check_source(row)  # the rule every site table shares (TK-005)
     if row.get("source_kind") not in SOURCE_KINDS:
         raise ValueError(f"row without a source kind: {row.get('kind')}")
     if not isinstance(row.get("source_ref"), str) or not row["source_ref"].strip():
