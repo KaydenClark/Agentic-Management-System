@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000S closed with proof.
-**Next gate:** Checked exact-identity PR delivery and actual native owner QA; independent Review PASS at e5a8c33.
+**Latest event:** TK-000U claimed by codex-history-consumer.
+**Next gate:** Close TK-000U with verification and documentation proof.
 
 ## Intent and authority
 

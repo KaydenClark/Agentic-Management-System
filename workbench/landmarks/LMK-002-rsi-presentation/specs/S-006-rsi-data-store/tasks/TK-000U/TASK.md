@@ -3,10 +3,12 @@
 **Task ID:** TK-000U
 **Spec ID:** S-006
 **Slice:** Pinned history readback retains Wiki-routed historical Spec events
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Build history from real records
 **Planned verification:** Red-first relocated-history collector/readcheck fixture; original eight rows rederived from declared immutable Wiki source; tampered/missing/unsupported/future/orphan source cases; focused/full/fresh checks and independent source review.
+**Claimed by:** codex-history-consumer
+**Current claimant:** codex-history-consumer
 
 ## Assignment
 
