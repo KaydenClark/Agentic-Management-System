@@ -481,13 +481,21 @@ class StubSupabase:
                 existing.add(self.key(row))
                 inserted.append(saved)
             return 201, json.dumps(inserted).encode()
+        if method == "PATCH":
+            assert headers["apikey"] == FAKE_SECRET
+            target = int(query["id"][0].removeprefix("eq."))
+            row = next(r for r in self.rows if r["id"] == target)
+            row.update(json.loads(body))
+            return 200, json.dumps([row]).encode()
         if method == "GET":
-            assert headers["apikey"] == FAKE_PUBLISHABLE
+            assert headers["apikey"] in (FAKE_PUBLISHABLE, FAKE_SECRET)
             visible = [r for r in self.rows if not r.get("is_test")]
             visible.sort(key=lambda r: (bh.parse_time(r["occurred_at"]), r["id"]))
             offset = int(query.get("offset", ["0"])[0])
             limit = int(query.get("limit", ["1000"])[0])
             cols = query["select"][0].split(",")
+            if headers["apikey"] == FAKE_PUBLISHABLE:
+                assert "detail" not in cols
             page = [{c: r.get(c) for c in cols} for r in visible[offset:offset + limit]]
             return 200, json.dumps(page).encode()
         return 405, b""
@@ -570,6 +578,175 @@ def test_readcheck_fails_on_a_hand_typed_row_no_record_derives(rows, capsys):
     out = capsys.readouterr().out
     assert "missing: 0" in out and "extra: 1" in out
     assert f"extra: commit commit {fake_sha}" in out
+
+
+# --- pinned readcheck (review N1, N2 at d6d4a6d) ------------------------------
+
+
+def _later_merge():
+    sha = "".join(_rng.choice("0123456789abcdef") for _ in range(40))
+    return {"kind": "merge", "subject": "PR #9", "summary": "Merged after the candidate",
+            "occurred_at": "2026-11-02T09:00:00Z", "source_kind": "commit", "source_ref": sha,
+            "source_url": bh._commit_url(sha), "strength": bh.STRENGTH, "is_test": False,
+            "detail": {}}
+
+
+CUTOFF = bh.parse_time("2026-11-01T23:00:00Z")
+
+
+def test_a_pinned_readcheck_is_not_failed_by_a_merge_after_the_ref(rows, capsys):
+    store = StubSupabase([*rows, _later_merge()])
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 0
+    out = capsys.readouterr().out
+    assert "missing: 0" in out and "extra: 0" in out and "newer than ref: 1" in out
+    assert "content mismatches: 0" in out
+
+
+def test_a_pinned_readcheck_fails_on_a_missing_pre_ref_row_and_names_it(rows, capsys):
+    gone = next(r for r in rows if r["kind"] == "spec_event")
+    store = StubSupabase([r for r in rows if r is not gone])
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 1
+    out = capsys.readouterr().out
+    assert "missing: 1" in out
+    assert f"missing: spec_event path {gone['source_ref']}" in out
+
+
+def test_a_row_before_the_ref_that_no_record_derives_is_extra_not_newer(rows, capsys):
+    early = dict(_later_merge(), occurred_at="2026-11-01T10:05:00Z")
+    store = StubSupabase([*rows, early])
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 1
+    out = capsys.readouterr().out
+    assert "extra: 1" in out and "newer than ref: 0" in out
+
+
+def test_readcheck_names_at_most_twenty_keys_then_counts_the_rest(rows, capsys):
+    store = StubSupabase()
+    assert bh.readcheck(rows * 1, URL, FAKE_PUBLISHABLE, store) == 1
+    out = capsys.readouterr().out
+    named = [line for line in out.splitlines()
+             if line.startswith("missing: ") and " " in line[9:] and "... and" not in line]
+    assert len(named) == min(20, len(rows))
+    if len(rows) > 20:
+        assert f"missing: ... and {len(rows) - 20} more" in out
+
+
+def test_a_service_key_edit_to_a_real_row_fails_readcheck_and_is_named(rows, capsys):
+    store = StubSupabase(rows)
+    victim = next(r for r in store.rows if r["kind"] == "commit")
+    victim["summary"] = "Rewritten by hand"
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store) == 1
+    out = capsys.readouterr().out
+    assert "content mismatches: 1" in out
+    assert f"mismatch: commit commit {victim['source_ref']}: summary" in out
+
+
+@pytest.mark.parametrize("field,value", [("subject", "other"),
+                                         ("source_url", "https://example.com/elsewhere"),
+                                         ("occurred_at", "2026-11-01T00:00:01Z")])
+def test_each_compared_field_is_checked(rows, capsys, field, value):
+    store = StubSupabase(rows)
+    victim = next(r for r in store.rows if r["kind"] == "task")
+    victim[field] = value
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store) == 1
+    assert f": {field}" in capsys.readouterr().out
+
+
+def test_times_are_compared_as_instants_not_spellings(rows, capsys):
+    store = StubSupabase(rows)
+    for row in store.rows:
+        row["occurred_at"] = row["occurred_at"].replace("Z", "+00:00")
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store) == 0
+    assert "content mismatches: 0" in capsys.readouterr().out
+
+
+def test_import_reports_a_changed_row_and_leaves_it_without_the_flag(rows, capsys):
+    store = StubSupabase(rows)
+    victim = next(r for r in store.rows if r["kind"] == "spec_event")
+    victim["summary"] = "Older wording"
+    assert bh.import_rows(rows, _settings(), store) == 0
+    out = capsys.readouterr().out
+    assert "changed: 1 (not updated; run with --refresh-changed)" in out
+    assert victim["summary"] == "Older wording"
+    assert not any(c[0] == "PATCH" for c in store.calls)
+
+
+def test_refresh_changed_updates_each_changed_row_and_logs_its_old_values(rows, capsys):
+    store = StubSupabase(rows)
+    victim = next(r for r in store.rows if r["kind"] == "spec_event")
+    victim["summary"] = "Older wording"
+    want = next(r for r in rows if bh._key(r) == bh._key(victim))
+    assert bh.import_rows(rows, _settings(), store, refresh_changed=True) == 0
+    out = capsys.readouterr().out
+    assert f"refreshed: spec_event path {victim['source_ref']}: summary" in out
+    assert "refreshed: 1" in out
+    assert victim["summary"] == want["summary"]
+    assert victim["detail"]["refreshed"]["previous"] == {"summary": "Older wording"}
+    patches = [c for c in store.calls if c[0] == "PATCH"]
+    assert len(patches) == 1 and f"id=eq.{victim['id']}" in patches[0][1]
+    assert bh.readcheck(rows, URL, FAKE_PUBLISHABLE, store) == 0
+    capsys.readouterr()
+    assert bh.import_rows(rows, _settings(), store, refresh_changed=True) == 0
+    assert "refreshed: 0" in capsys.readouterr().out
+
+
+def test_collect_at_a_cutoff_drops_github_events_after_it(fixture_repo):
+    repo, shas = fixture_repo
+    cutoff = bh.parse_time("2026-11-01T10:20:00Z")
+    pinned = bh.collect(bh.Sources(git=git_runner(repo), gh=gh_stub(shas),
+                                   lifecycle=lifecycle_stub, refs=("main",), cutoff=cutoff))
+    github = [r for r in pinned if r["kind"] in ("pr_opened", "merge", "correction_fix")
+              or (r["kind"] in ("return", "correction") and r["source_kind"] == "pr")]
+    assert github and all(bh.parse_time(r["occurred_at"]) <= cutoff for r in github)
+    assert {r["source_ref"] for r in pinned if r["kind"] == "pr_opened"} == {"#1", "#2"}
+    assert not [r for r in pinned if r["kind"] == "merge"]
+
+
+def test_dev_only_rows_are_extra_unless_the_dev_ref_is_named(fixture_repo, rows, capsys):
+    repo, shas = fixture_repo
+    main_only = bh.collect(bh.Sources(git=git_runner(repo), gh=gh_stub(shas),
+                                      lifecycle=lifecycle_stub, refs=("main",), cutoff=CUTOFF))
+    store = StubSupabase(rows)  # imported from main and dev
+    assert bh.readcheck(main_only, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 1
+    assert f"extra: commit commit {shas['dev']}" in capsys.readouterr().out
+    with_dev = bh.collect(bh.Sources(git=git_runner(repo), gh=gh_stub(shas),
+                                     lifecycle=lifecycle_stub, refs=("main", "dev"),
+                                     cutoff=CUTOFF))
+    assert bh.readcheck(with_dev, URL, FAKE_PUBLISHABLE, store, cutoff=CUTOFF) == 0
+
+
+def test_main_readcheck_pins_to_ref_and_dev_ref(fixture_repo, rows, capsys):
+    repo, shas = fixture_repo
+    store = StubSupabase([*rows, _later_merge()])
+    code = bh.main(["readcheck", "--ref", shas["close"], "--dev-ref", shas["dev"]], environ=ENV,
+                   dotenv_path=Path("/nonexistent/ams-test-dotenv"), http=store,
+                   git=git_runner(repo), gh=gh_stub(shas), lifecycle=lifecycle_stub)
+    out = capsys.readouterr().out
+    assert code == 0, out
+    assert f"ref: {shas['close']}" in out and f"dev ref: {shas['dev']}" in out
+    assert "newer than ref: 1" in out
+
+
+def test_resolved_threads_page_past_one_hundred_pull_requests():
+    pages = [{"data": {"repository": {"pullRequests": {
+                 "pageInfo": {"hasNextPage": True, "endCursor": "C1"},
+                 "nodes": [{"number": n, "reviewThreads": {"pageInfo": {"hasNextPage": False},
+                            "nodes": [{"isResolved": True,
+                                       "comments": {"nodes": [{"databaseId": n}]}}]}}
+                           for n in range(1, 101)]}}}},
+             {"data": {"repository": {"pullRequests": {
+                 "pageInfo": {"hasNextPage": False, "endCursor": None},
+                 "nodes": [{"number": 101, "reviewThreads": {"pageInfo": {"hasNextPage": False},
+                            "nodes": [{"isResolved": False,
+                                       "comments": {"nodes": [{"databaseId": 101}]}}]}}]}}}}]
+    calls = []
+
+    def gh(args):
+        calls.append(list(args))
+        return json.dumps(pages[len(calls) - 1])
+    resolved = bh._resolved_threads(gh)
+    assert len(resolved) == 101 and resolved[1] is True and resolved[101] is False
+    assert any("after=C1" in a for a in calls[1])
+    assert not any(a.startswith("after=") for a in calls[0])
 
 
 def test_readcheck_refuses_a_secret_key(rows, capsys):

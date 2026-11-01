@@ -27,22 +27,31 @@ re-import adds no rows. Rows are sorted and inserted in the order the events
 occurred. Records must be committed: uncommitted changes under ``workbench/``
 are refused, because a row must link a source others can open.
 
-Commands: ``ams-history import [--dry-run] [--ref REF ...]`` writes with the
-service key; ``ams-history readcheck [--ref REF ...]`` reads every row back with
-the publishable key and compares it with the records; it fails on any record
-without a row and on any row no record derives (``extra``), so a hand-typed row
-fails it. No key is ever printed.
+Commands: ``ams-history import [--dry-run] [--ref REF ...] [--refresh-changed]``
+writes with the service key and reports stored rows whose subject, summary, time
+or link no longer match the records; ``--refresh-changed`` updates them, logging
+each and keeping the old values in ``detail.refreshed``.
+``ams-history readcheck [--ref SHA] [--dev-ref REF]`` reads the records in a
+temporary worktree at SHA (default HEAD), keeps GitHub events up to SHA's commit
+time, and compares every row the publishable key reads: it fails on a missing
+row, an extra row (one no record derives, so a hand-typed row fails it), a
+content mismatch, an unsourced row or rows out of order, naming up to 20 keys of
+each. Rows after SHA that it does not derive count as newer than the ref.
+Dev-only commits are expected only when ``--dev-ref`` names the dev branch.
+No key is ever printed.
 """
 
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import os
 import posixpath
 import re
 import subprocess
 import sys
+import tempfile
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -65,6 +74,10 @@ PR_FIELDS = ("number,title,state,url,createdAt,closedAt,mergedAt,mergeCommit,"
 EVIDENCE_HEADING = "## Append-Only Evidence And Execution Log"
 RECEIPT_HEADING = "## Receipt"
 READ_COLUMNS = "id,kind,source_kind,source_ref,occurred_at,source_url,strength,subject,summary"
+# The fields readcheck compares with the re-derived records (review N1); detail is
+# bookkeeping (refs, PR numbers, receipt cells) and is not compared.
+CONTENT_FIELDS = ("subject", "summary", "occurred_at", "source_url")
+SHOWN = 20  # keys printed per list before the rest are counted
 
 Runner = Callable[[Sequence[str]], str]
 
@@ -89,6 +102,9 @@ class Sources:
     gh: Runner
     lifecycle: Runner
     refs: tuple[str, ...] = DEFAULT_REFS
+    # A pinned readcheck keeps GitHub events (PRs, merges, review threads) that
+    # occurred at or before this instant: the pinned ref's commit time.
+    cutoff: datetime | None = None
 
 
 # --- small helpers -----------------------------------------------------------
@@ -496,8 +512,11 @@ def collect(sources: Sources) -> list[dict]:
     comments = [json.loads(line) for line in sources.gh(
         ["api", "--paginate", f"repos/{REPO_SLUG}/pulls/comments?per_page=100", "--jq", ".[]"]
     ).splitlines() if line.strip()]
-    rows = [*commit_rows(commits, prs_of), *pr_rows(prs, sources.git),
-            *review_rows(prs, comments, _resolved_threads(sources.gh), sources.git),
+    github = [*pr_rows(prs, sources.git),
+              *review_rows(prs, comments, _resolved_threads(sources.gh), sources.git)]
+    if sources.cutoff is not None:
+        github = [r for r in github if parse_time(r["occurred_at"]) <= sources.cutoff]
+    rows = [*commit_rows(commits, prs_of), *github,
             *record_rows(sources.git, sources.lifecycle), *wiki_rows(sources.git)]
     seen = set()
     for row in rows:
@@ -519,11 +538,12 @@ def sort_rows(rows: Iterable[dict]) -> list[dict]:
                                        KIND_ORDER.get(r["kind"], 99), r["source_ref"]))
 
 
-_THREADS_QUERY = """query($owner: String!, $name: String!) {
+_THREADS_QUERY = """query($owner: String!, $name: String!, $after: String) {
   repository(owner: $owner, name: $name) {
-    pullRequests(first: 100, orderBy: {field: CREATED_AT, direction: ASC}) {
-      pageInfo { hasNextPage }
+    pullRequests(first: 100, after: $after, orderBy: {field: CREATED_AT, direction: ASC}) {
+      pageInfo { hasNextPage endCursor }
       nodes { number reviewThreads(first: 100) {
+        pageInfo { hasNextPage }
         nodes { isResolved comments(first: 1) { nodes { databaseId } } } } }
     }
   }
@@ -531,18 +551,25 @@ _THREADS_QUERY = """query($owner: String!, $name: String!) {
 
 
 def _resolved_threads(gh: Runner) -> dict[int, bool]:
+    """Each review thread's first comment id -> resolved, over every page of PRs."""
     owner, name = REPO_SLUG.split("/")
-    data = json.loads(gh(["api", "graphql", "-f", f"query={_THREADS_QUERY}",
-                          "-F", f"owner={owner}", "-F", f"name={name}"]))
-    pulls = data["data"]["repository"]["pullRequests"]
-    if pulls["pageInfo"]["hasNextPage"]:
-        raise RefusedError("more than 100 pull requests; review-thread paging is not implemented")
-    resolved = {}
-    for pr in pulls["nodes"]:
-        for thread in pr["reviewThreads"]["nodes"]:
-            for comment in thread["comments"]["nodes"]:
-                resolved[comment["databaseId"]] = thread["isResolved"]
-    return resolved
+    resolved, after = {}, None
+    while True:
+        args = ["api", "graphql", "-f", f"query={_THREADS_QUERY}",
+                "-F", f"owner={owner}", "-F", f"name={name}"]
+        if after:
+            args += ["-f", f"after={after}"]
+        pulls = json.loads(gh(args))["data"]["repository"]["pullRequests"]
+        for pr in pulls["nodes"]:
+            threads = pr["reviewThreads"]
+            if (threads.get("pageInfo") or {}).get("hasNextPage"):
+                raise RefusedError(f"PR #{pr['number']} has more than 100 review threads")
+            for thread in threads["nodes"]:
+                for comment in thread["comments"]["nodes"]:
+                    resolved[comment["databaseId"]] = thread["isResolved"]
+        if not pulls["pageInfo"]["hasNextPage"]:
+            return resolved
+        after = pulls["pageInfo"]["endCursor"]
 
 
 # --- Supabase ----------------------------------------------------------------
@@ -567,7 +594,47 @@ def _send(http, method: str, url: str, headers: Mapping[str, str], payload=None)
         return status, None
 
 
-def import_rows(rows: Sequence[dict], settings: keycheck.Settings, http: writer.Http) -> int:
+def _differences(have: Mapping, want: Mapping) -> list[str]:
+    """The compared fields whose stored value differs from the re-derived record."""
+    changed = []
+    for field in CONTENT_FIELDS:
+        if field == "occurred_at":
+            try:
+                same = parse_time(have.get(field) or "") == parse_time(want[field])
+            except ValueError:
+                same = False
+        else:
+            same = have.get(field) == want[field]
+        if not same:
+            changed.append(field)
+    return changed
+
+
+def _named(label: str, items: Sequence[str]) -> None:
+    for item in items[:SHOWN]:
+        print(f"{label}: {item}")
+    if len(items) > SHOWN:
+        print(f"{label}: ... and {len(items) - SHOWN} more")
+
+
+def _read_all(http, url: str, key: str, columns: str, page: int = 1000):
+    headers = writer._headers(key)
+    rows, offset = [], 0
+    while True:
+        query = (f"{writer._rest(url)}?select={columns}&is_test=eq.false"
+                 f"&order=occurred_at.asc,id.asc&limit={page}&offset={offset}")
+        status, body = _send(http, "GET", query, headers)
+        if status != 200 or not isinstance(body, list):
+            print(f"select failed: http status {status if status is not None else 'none'}")
+            return None
+        rows.extend(body)
+        if len(body) < page:
+            return rows
+        offset += page
+
+
+def import_rows(rows: Sequence[dict], settings: keycheck.Settings, http: writer.Http,
+                refresh_changed: bool = False) -> int:
     if settings.key is None:
         print("loaded: no")
         return 1
@@ -596,29 +663,64 @@ def import_rows(rows: Sequence[dict], settings: keycheck.Settings, http: writer.
     for kind, count in _counts(ordered).items():
         print(f"{kind}: records {count}, inserted {made.get(kind, 0)}")
     print(f"inserted: {len(inserted)}\nalready recorded: {len(ordered) - len(inserted)}")
+    return _refresh(ordered, settings, http, refresh_changed)
+
+
+def _refresh(rows: Sequence[dict], settings: keycheck.Settings, http, apply: bool) -> int:
+    """Find stored rows whose compared fields differ from the records; update them only
+    when asked, logging each one and keeping the old values in detail.refreshed."""
+    stored = _read_all(http, settings.url, settings.key, "id,detail," + READ_COLUMNS)
+    if stored is None:
+        return 1
+    want = {_key(r): r for r in rows}
+    changed = [(r, want[_key(r)], _differences(r, want[_key(r)]))
+               for r in stored if _key(r) in want]
+    changed = [c for c in changed if c[2]]
+    if not apply:
+        print(f"changed: {len(changed)} (not updated; run with --refresh-changed)")
+        _named("changed", [f"{' '.join(_key(r))}: {', '.join(f)}" for r, _, f in changed])
+        return 0
+    headers = writer._headers(settings.key)
+    at = utc(datetime.now(timezone.utc))
+    for row, record, fields in changed:
+        patch = {f: record[f] for f in fields}
+        patch["detail"] = dict(record["detail"],
+                               refreshed={"at": at, "previous": {f: row.get(f) for f in fields}})
+        status, _ = _send(http, "PATCH", f"{writer._rest(settings.url)}?id=eq.{row['id']}",
+                          headers, patch)
+        if status not in (200, 204):
+            print(f"refresh failed: http status {status if status is not None else 'none'} "
+                  f"at {' '.join(_key(row))}")
+            return 1
+        print(f"refreshed: {' '.join(_key(row))}: {', '.join(fields)}")
+    print(f"refreshed: {len(changed)}")
     return 0
 
 
-def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page: int = 1000) -> int:
+def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page: int = 1000,
+              cutoff: datetime | None = None) -> int:
+    """Compare every row the site key reads with the records re-derived at one ref.
+
+    Fails on a record without a row (missing), a row before the ref that no record
+    derives (extra), a compared field that differs (content mismatch), an unsourced
+    row or rows out of time order. A row after ``cutoff`` that the ref does not
+    derive is counted as newer than the ref, not as extra.
+    """
     if keycheck.key_format(key) != "unrecognized" or not key.startswith("sb_publishable_"):
         print("refused: the publishable slot holds a key that is not a publishable key")
         return 1
-    headers = writer._headers(key)
-    visible, offset = [], 0
-    while True:
-        query = (f"{writer._rest(url)}?select={READ_COLUMNS}&order=occurred_at.asc,id.asc"
-                 f"&limit={page}&offset={offset}")
-        status, body = _send(http, "GET", query, headers)
-        if status != 200 or not isinstance(body, list):
-            print(f"select failed: http status {status if status is not None else 'none'}")
-            return 1
-        visible.extend(body)
-        if len(body) < page:
-            break
-        offset += page
-    have = {_key(r) for r in visible}
-    want = {_key(r) for r in rows}
-    missing, extra = want - have, have - want
+    visible = _read_all(http, url, key, READ_COLUMNS, page)
+    if visible is None:
+        return 1
+    have = {_key(r): r for r in visible}
+    want = {_key(r): r for r in rows}
+    missing = sorted(want.keys() - have.keys())
+    unexpected = sorted(have.keys() - want.keys())
+    newer = {k for k in unexpected
+             if cutoff is not None and parse_time(have[k]["occurred_at"]) > cutoff}
+    extra = [k for k in unexpected if k not in newer]
+    mismatches = [(k, _differences(have[k], want[k])) for k in sorted(want.keys() & have.keys())]
+    mismatches = [(k, f) for k, f in mismatches if f]
     unsourced = [r for r in visible if not (r.get("source_ref") or "").strip()
                  or not (r.get("source_url") or "").startswith("https://")
                  or r.get("strength") != STRENGTH]
@@ -627,24 +729,40 @@ def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page:
     seen = _counts(r for r in visible if _key(r) in want)
     for kind, count in _counts(rows).items():
         print(f"{kind}: records {count}, rows {seen.get(kind, 0)}")
-    print(f"missing: {len(missing)}\nextra: {len(extra)}\nunsourced: {len(unsourced)}")
+    print(f"missing: {len(missing)}\nextra: {len(extra)}\nnewer than ref: {len(newer)}")
+    print(f"content mismatches: {len(mismatches)}\nunsourced: {len(unsourced)}")
     print(f"in time order: {'yes' if times == sorted(times) else 'no'}")
-    for key in sorted(extra):  # a row no record derives: hand-typed, fabricated or stale
-        print("extra: " + " ".join(key))
+    _named("missing", [" ".join(k) for k in missing])
+    _named("extra", [" ".join(k) for k in extra])  # hand-typed, fabricated or stale rows
+    _named("mismatch", [f"{' '.join(k)}: {', '.join(f)}" for k, f in mismatches])
     for row in visible:
         if row["kind"] in ("return", "correction", "correction_fix"):
             print(f"{row['kind']}: {row['occurred_at']} {row['source_ref']} {row.get('summary', '')}")
-    return 0 if not (missing or extra or unsourced) and times == sorted(times) else 1
+    ok = not (missing or extra or mismatches or unsourced) and times == sorted(times)
+    return 0 if ok else 1
 
 
 # --- command line ------------------------------------------------------------
 
 
-def _runner(prefix: Sequence[str]) -> Runner:
+def _runner(prefix: Sequence[str], cwd: Path = REPO_ROOT) -> Runner:
     def run(args: Sequence[str]) -> str:
-        return subprocess.run([*prefix, *args], cwd=REPO_ROOT, check=True, capture_output=True,
+        return subprocess.run([*prefix, *args], cwd=cwd, check=True, capture_output=True,
                               text=True).stdout
     return run
+
+
+@contextlib.contextmanager
+def _checkout_at(sha: str):
+    """A detached temporary worktree at sha, so records are read as they stood there."""
+    folder = tempfile.mkdtemp(prefix="ams-history-")
+    subprocess.run(["git", "-C", str(REPO_ROOT), "worktree", "add", "-q", "--detach", folder, sha],
+                   check=True, capture_output=True)
+    try:
+        yield Path(folder)
+    finally:
+        subprocess.run(["git", "-C", str(REPO_ROOT), "worktree", "remove", "--force", folder],
+                       capture_output=True)
 
 
 def main(
@@ -659,38 +777,63 @@ def main(
 ) -> int:
     parser = argparse.ArgumentParser(prog="ams-history", description=__doc__.split("\n")[0])
     sub = parser.add_subparsers(dest="command", required=True)
-    for name, text in (("import", "derive build-history rows and insert the new ones"),
-                       ("readcheck", "read every row with the publishable key; compare to records")):
-        command = sub.add_parser(name, help=text)
-        command.add_argument("--ref", action="append", default=[],
-                             help="Git ref whose commits are history (default: origin/main, origin/dev)")
-        if name == "import":
-            command.add_argument("--dry-run", action="store_true", help="print counts; send nothing")
+    imp = sub.add_parser("import", help="derive build-history rows and insert the new ones")
+    imp.add_argument("--ref", action="append", default=[],
+                     help="Git ref whose commits are history (default: origin/main, origin/dev)")
+    imp.add_argument("--dry-run", action="store_true", help="print counts; send nothing")
+    imp.add_argument("--refresh-changed", action="store_true",
+                     help="update stored rows whose subject, summary, time or link differ "
+                          "from the records, logging each and keeping the old values")
+    check = sub.add_parser("readcheck",
+                           help="read every row with the publishable key; compare to the records at one ref")
+    check.add_argument("--ref", default="HEAD", help="commit the records are read at (default HEAD)")
+    check.add_argument("--dev-ref", help="also expect the commits of this ref (the dev branch)")
     args = parser.parse_args(argv)
-    sources = Sources(git=git or _runner(["git", "-C", str(REPO_ROOT)]),
-                      gh=gh or _runner(["gh"]),
-                      lifecycle=lifecycle or _runner(["node", "workbench/tools/spec-workbench.mjs"]),
-                      refs=tuple(args.ref) or DEFAULT_REFS)
+    git_here = git or _runner(["git", "-C", str(REPO_ROOT)])
+    gh = gh or _runner(["gh"])
+    environ = os.environ if environ is None else environ
+    dotenv_path = keycheck.DOTENV_PATH if dotenv_path is None else dotenv_path
+    http = http or writer.urllib_http
     try:
-        rows = collect(sources)
+        if args.command == "readcheck":
+            return _pinned_readcheck(args, git, git_here, gh, lifecycle, environ, dotenv_path, http)
+        rows = collect(Sources(git=git_here, gh=gh,
+                               lifecycle=lifecycle or _runner(["node", "workbench/tools/spec-workbench.mjs"]),
+                               refs=tuple(args.ref) or DEFAULT_REFS))
     except RefusedError as error:
         print(f"refused: {error}")
         return 1
     except subprocess.CalledProcessError as error:
         print(f"refused: {Path(str(error.cmd[0])).name} failed (exit {error.returncode})")
         return 1
-    environ = os.environ if environ is None else environ
-    dotenv_path = keycheck.DOTENV_PATH if dotenv_path is None else dotenv_path
-    http = http or writer.urllib_http
-    if args.command == "readcheck":
-        settings = keycheck.load_settings(environ, dotenv_path)
-        return readcheck(rows, settings.url, writer.publishable_key(environ, dotenv_path), http)
     if args.dry_run:
         for kind, count in _counts(rows).items():
             print(f"{kind}: {count}")
         print(f"total: {len(rows)}")
         return 0
-    return import_rows(rows, keycheck.load_settings(environ, dotenv_path), http)
+    return import_rows(rows, keycheck.load_settings(environ, dotenv_path), http,
+                       refresh_changed=args.refresh_changed)
+
+
+def _pinned_readcheck(args, git, git_here, gh, lifecycle, environ, dotenv_path, http) -> int:
+    sha = git_here(["rev-parse", "--verify", f"{args.ref}^{{commit}}"]).strip()
+    dev = git_here(["rev-parse", "--verify", f"{args.dev_ref}^{{commit}}"]).strip() if args.dev_ref else None
+    cutoff = parse_time(git_here(["show", "-s", "--format=%cI", sha, "--"]).strip())
+    print(f"ref: {sha}\nref time: {utc(cutoff)}")
+    print(f"dev ref: {dev}" if dev else "dev ref: none (dev-only rows read as extra)")
+    refs = (sha, dev) if dev else (sha,)
+
+    def check(git_at: Runner, lifecycle_at: Runner) -> int:
+        rows = collect(Sources(git=git_at, gh=gh, lifecycle=lifecycle_at, refs=refs, cutoff=cutoff))
+        settings = keycheck.load_settings(environ, dotenv_path)
+        return readcheck(rows, settings.url, writer.publishable_key(environ, dotenv_path), http,
+                         cutoff=cutoff)
+
+    if git is not None:  # injected runners (tests) already read the records at the ref
+        return check(git, lifecycle)
+    with _checkout_at(sha) as folder:
+        return check(_runner(["git", "-C", str(folder)], folder),
+                     _runner(["node", "workbench/tools/spec-workbench.mjs"], folder))
 
 
 if __name__ == "__main__":
