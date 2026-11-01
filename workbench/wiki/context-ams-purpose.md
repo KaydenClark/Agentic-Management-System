@@ -80,7 +80,7 @@ continuation record, not evidence of a completed improvement or a paid campaign.
 - Use approved Alignment Check r1: three assessment runs per attempt, pooled Alignment Score and the r1 fitness/acceptance rules.
 - Each improvement candidate has three attempts maximum; baseline is outside the counter.
 - Use the owner's paid-plan meter, not API tokens or an API campaign budget. Unknown usage measurements stay unknown.
-- Next question: pin main for system records and dev for the website, assessing both as separate baseline components without merging first? Recommended: yes.
+- Confirmed next action: merge the current website and system work into main, then assess only the resulting pinned main revision. This specific promotion is authorized; future website promotions retain their owner gate.
 
 ### Grilling failure reported by the owner
 
@@ -110,4 +110,17 @@ Topic: ams-purpose
 Supersedes: JOT-d91455d4-48d8-4b89-b3c6-0c6a7025c8e2
 
 Kayden corrected the baseline: it is the current AMS repository implementation (branches URL supplied), not an existing scored report. He confirmed approved r1 and three improvement attempts per candidate, baseline excluded. Execution uses his paid-plan meter, not API tokens or an API campaign budget. He reported the missing grilling flow as a skill failure. Resume the interview; settle the exact main/dev baseline, wait for answers, and document settled choices. No assessment has been performed.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-4e2eecfd-100e-4964-91d3-93115b47a8ff
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T16:50:23.236Z
+Author: Kayden
+Source: chat:01a197f8-e175-76e1-8c2f-8c8be5420dc4
+Topic: ams-purpose
+Supersedes: none
+
+Kayden directs merging current website and system work into main, then assessing main alone to save tokens. This authorizes this specific website promotion, not future dev-to-main promotions. The pre-build readback he supplies (planning revision 8756b29) preserves four landmarks, full website and local Grill Board scope, real Supabase-backed RSI presentation, six active Specs and meter-based execution. It was proposed then, so later decisions and corrections still govern, including the local writer secret and read-only website. Pin the checked resulting main revision as the baseline.
 <!-- /jot-entry -->
