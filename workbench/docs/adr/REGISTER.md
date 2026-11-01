@@ -46,3 +46,4 @@
 | [001L](001L-verify-runs-the-full-suite-on-one-commit.md) | Verify runs the full suite on one commit | accepted | 2026-11-01 | RUNBOOK.md |
 | [001M](001M-a-claim-is-a-pushed-branch-and-a-draft-pr.md) | A claim is a pushed branch and a draft PR | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
 | [001N](001N-the-wiki-is-a-small-linked-synthesis.md) | The Wiki is a small linked synthesis | accepted | 2026-11-01 | workbench/wiki |
+| [001O](001O-links-and-grep-before-any-vector-index.md) | Links and grep before any vector index | accepted | 2026-11-01 | ARCHITECTURE.md |
