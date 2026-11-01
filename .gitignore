@@ -3,3 +3,8 @@
 .worktrees/
 workbench/sessions/*
 !workbench/sessions/.gitkeep
+!workbench/sessions/HANDOFF-TEMPLATE.md
+!workbench/sessions/notepad.schema.json
+!workbench/sessions/work.example.json
+!workbench/sessions/handoff.example.json
+!workbench/sessions/grilling.example.json
