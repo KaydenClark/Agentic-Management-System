@@ -36,3 +36,4 @@
 | [001B](001B-readme-orients-people-and-the-runbook-orients-agents.md) | README orients people and the Runbook orients agents | accepted | 2026-11-01 | README.md, RUNBOOK.md |
 | [001C](001C-current-state-files-say-what-is-true-now.md) | Current-state files say what is true now | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [001D](001D-each-kind-of-truth-has-one-home.md) | Each kind of truth has one home | accepted | 2026-11-01 | ARCHITECTURE.md |
+| [001E](001E-a-spec-needs-fresh-context-review-of-the-exact-commit.md) | A Spec needs fresh-context review of the exact commit | accepted | 2026-11-01 | AGENTS.md, workbench/specs |
