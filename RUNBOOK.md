@@ -5,24 +5,25 @@
 ## Get oriented
 
 Run `git status --short --branch`; preserve others' work. Read [AGENTS](AGENTS.md),
-[Architecture routes](ARCHITECTURE.md#routes), [Glossary](GLOSSARY.md), relevant
+[Architecture](ARCHITECTURE.md#routes), [Glossary](GLOSSARY.md), relevant
 [Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md) and assigned Spec/Task.
-[S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick; load the
+Use [S-001](workbench/specs/S-001-ams/SPEC.md) as yardstick; load the
 [owning skill](workbench/docs/SKILLS.md).
 
 ## Workflows
 
-Capture sourced intent/corrections with `jot` in the existing Wiki owner;
-requirements belong in the Spec. Use `map`, `plan`, then `journey` for one Task
+Jot sourced intent/corrections in the Wiki owner;
+requirements go in the Spec. Use `map`, `plan`, then `journey` for one Task
 or `orchestrate` for authorized coordination. Retain proof/failures. Record
 [Review](workbench/specs/REVIEW-RECEIPT-TEMPLATE.md) and
 [Human QA](workbench/specs/HUMAN-QA-RECEIPT-TEMPLATE.md) only when performed.
-Update owners and render before departure; leave a
+Update owners and render; leave a
 [handoff](workbench/sessions/HANDOFF-TEMPLATE.md) when needed.
 
-For website RSI, connect [feedback](workbench/feedback/REPORT_FORMAT.md),
-[improvement records](workbench/research/IMPROVEMENT-TEMPLATE.md), [evals](evals/)
-and [page evidence](site/PAGE-TEMPLATE.md). Static scores prove no benefit.
+Website RSI: [record workflow/process issues](workbench/feedback/REPORT_FORMAT.md),
+fix shared skills, prove before/after here in [RSI records](workbench/research/IMPROVEMENT-TEMPLATE.md)
+and [evals](evals/), then [show the log](site/PAGE-TEMPLATE.md).
+This project improves skills; it never installs them elsewhere.
 
 ## Test And Build
 
@@ -38,8 +39,8 @@ git diff --check
 uv run ams-hygiene [--site site]
 ```
 
-Render: no diff; doctor: no blockers. Repeat these and pytest
-on a fresh clone at the recorded candidate.
+Render: no diff; doctor: no blockers. Repeat checks and pytest
+on a fresh clone at the candidate.
 
 In B's checkout (keys never printed): `uv run ams-keycheck`;
 `ams-writer record-merge|readcheck SHA`; after each merge `ams-history import`,
@@ -55,9 +56,8 @@ subscription meter; unknown stays unknown.
 
 ### Shared CI
 
-CI uses `workbench-ci` and
-`workbench-runner-ams` service, never a GitHub-hosted fallback. Fork jobs skip;
-inspect before internal execution.
+CI uses `workbench-ci` and `workbench-runner-ams`, never a GitHub-hosted fallback.
+Fork jobs skip; inspect before internal execution.
 [Shared CI](workbench/wiki/context-shared-ci.md) owns setup/operation details.
 Keep keys and `AMS_LIVE` out of CI.
 
