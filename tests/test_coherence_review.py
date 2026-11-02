@@ -231,6 +231,20 @@ class StatusTest(unittest.TestCase):
         self.assertRegex(v["candidate"], r"^[0-9a-f]{40}$")
         self.assertEqual(v["status"], "stale", v)
 
+    def test_a_split_spec_record_is_refused_not_read_as_no_verdicts(self):
+        # Codex P2 on PR #97: this room never splits records, so a paginated
+        # evidence section is an error, never zero verdicts.
+        self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}")
+        spec = Path(self.repo, SPEC_DIR, "SPEC.md")
+        head, _, _ = spec.read_text().partition("## Append-Only Evidence And Execution Log")
+        spec.write_text(head + "## Append-Only Evidence And Execution Log\n\n"
+                        "<!-- workbench-record-section max=4000 -->\n- [Part 1](SPEC.part-1.md)\n"
+                        "<!-- /workbench-record-section -->\n")
+        Path(self.repo, SPEC_DIR, "SPEC.part-1.md").write_text(_verdict_row(self.candidate, "x"))
+        commit = _commit(self.repo, "Split the S-900 evidence")
+        with self.assertRaisesRegex(ValueError, r"split record.*SPEC\.md"):
+            self._status(commit)
+
     def test_verdict_by_the_building_session_is_reported_refused(self):
         head = self._append_verdict(f"model; agent: reviewer-b; context: {BUILD_CTX}")
         [v] = self._status(head)
