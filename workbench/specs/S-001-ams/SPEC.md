@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-002 claimed by claude-impl-s001-tk002.
-**Next gate:** Close TK-002 with verification and documentation proof.
+**Latest event:** TK-002 closed with proof.
+**Next gate:** Complete TK-001.
 
 ## Intent and authority
 
@@ -106,6 +106,7 @@ To answer "Are we there yet?": name the commit; run each check; report met, not 
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Ported and rewritten; the Workbench adoption of 2026-11-01 recorded as this Spec's first room evidence | render, doctor | this Spec; adoption Wiki page | Every criterion |
 | 2026-11-01 | none | Owner unblocked S-001; the limit applies to Landmarks, above Specs | Linked confirmed owner correction; activation/readiness verification in the delivery PR | Landmark cap and start/acceptance distinction | Acceptance remains open |
+| 2026-11-02 | TK-002 | Task closed | ams-hygiene at 1c77317: planted/valid tests pass; built site 0 findings; real repo 12 findings fail; pytest 629 pass, 1 fail (real repo); site npm test 70 pass; render, doctor, validate, diff --check ok | RUNBOOK Test And Build; ARCHITECTURE codemap; CI workflows | 12 real findings fail CI, owned outside TK-002: S-002, S-002 TK-002, S-006, S-008 over 8,000; GLOSSARY, README, TASKBOARD over 3,000; host paths and session IDs in orchestrator A/B handoffs; a host path in site/tests/hygiene.test.mjs. Not merged until fixed.; close attribution: {"agent":"claude-impl-s001-tk002","claimant":"claude-impl-s001-tk002","onBehalfOf":null} |
 
 ## Review and Human QA
 
