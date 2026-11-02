@@ -35,19 +35,15 @@ export function ThemeToggle() {
     setTheme(next);
   }
 
+  // Icon only, so the top bar fits one row at the reading width; the label
+  // names the current theme for assistive tech and as a hover tooltip.
+  const label = theme ? `Theme: ${theme}. Switch to ${theme === "dark" ? "light" : "dark"}` : "Switch light or dark theme";
   return (
-    <button
-      type="button"
-      className="theme-toggle"
-      data-theme-toggle=""
-      onClick={toggle}
-      aria-label={theme ? `Theme: ${theme}. Switch to ${theme === "dark" ? "light" : "dark"}` : "Switch light or dark theme"}
-    >
+    <button type="button" className="theme-toggle" data-theme-toggle="" onClick={toggle} aria-label={label} title={label}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
         <circle cx="12" cy="12" r="9" />
         <path d="M12 3a9 9 0 0 0 0 18z" fill="currentColor" />
       </svg>
-      <span>{theme === "dark" ? "Dark" : theme === "light" ? "Light" : "Theme"}</span>
     </button>
   );
 }

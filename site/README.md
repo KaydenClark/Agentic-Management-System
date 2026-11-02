@@ -28,7 +28,8 @@ node tests/browser.check.mjs --url http://host:port    # check a running server 
 
 ## Shell
 
-- `app/layout.tsx` wraps every route in `app/shell/Shell.tsx`: a top bar with the site title, the reading-order links and the theme toggle; the page in `<main>`; and the commit footer. Header, main and footer share one centred `.container` (`--container` in `app/theme/tokens.css`); a wide page adds `.container-wide` (`--container-wide`). A page renders only its own content.
+- `app/layout.tsx` wraps every route in `app/shell/Shell.tsx`: a top bar with the site title, the reading-order links and the theme toggle; the page in `<main>`; and the commit footer. Header, main and footer share one centred `.container` (`--container` in `app/theme/tokens.css`), a reading width that every block in `<main>` fills, so text, cards and the header share both edges; a wide page adds `.container-wide` (`--container-wide`). A page renders only its own content.
+- Top bar: the wordmark over its tagline and an icon-only theme toggle on the first row; the reading-order links on the row below, each stretched so the row spans the column. Below 768 px the links wrap three a row.
 - `app/nav.ts` is the one reading-order list; order is reading order. Add an entry only for a route that exists.
 - `app/theme/tokens.css` is the only file with color, type and spacing values (Color system v2.2 from the owner's Grilling Board Redesign canvas). Everything else uses `var(--token)`; `tests/tokens.test.mjs` enforces it.
 - Theme: follows the system; the toggle overrides it and is stored in `localStorage` (`ams-theme`); a first-party inline script in `<head>` reapplies the stored choice before first paint.

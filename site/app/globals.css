@@ -70,18 +70,23 @@ a {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-10) var(--space-20);
-  padding-block: var(--space-10);
+  gap: var(--space-6) var(--space-12);
+  padding-block: var(--space-6);
 }
 
+/* The wordmark over its tagline, on the first row with the theme toggle. */
 .brand {
-  flex: var(--brand-flex);
+  flex: 1 1 0;
   min-width: 0;
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-4) var(--space-10);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--brand-gap);
   text-decoration: none;
+}
+
+.brand .eyebrow {
+  font-size: var(--text-tagline);
 }
 
 .brand-name {
@@ -104,15 +109,14 @@ a {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  justify-content: center;
+  min-width: var(--control-min-height);
   min-height: var(--control-min-height);
-  padding: var(--space-8) var(--space-12);
+  padding: 0;
   background: transparent;
   border: var(--border-width) solid var(--line-strong);
   border-radius: var(--radius-control);
   color: var(--muted);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
   cursor: pointer;
 }
 
@@ -126,11 +130,12 @@ a {
   height: var(--icon-size);
 }
 
-/* Reading-order links in the top bar: after the title on one row where they
-   fit; on narrow screens a row of their own that wraps (tokens.css). */
+/* Reading-order links in the top bar: a row of their own under the title
+   and toggle, each link stretched so the row spans the column; on narrow
+   screens three links a row (tokens.css). */
 .topnav {
-  order: var(--topnav-order);
-  flex: var(--topnav-flex);
+  order: 2;
+  flex: 1 1 100%;
   min-width: 0;
 }
 
@@ -143,11 +148,19 @@ a {
   gap: var(--space-4);
 }
 
+.topnav li {
+  flex: var(--navitem-flex);
+  display: flex;
+}
+
 .navlink {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: var(--control-min-height);
-  padding: var(--space-8) var(--space-12);
+  padding: var(--space-8);
+  white-space: nowrap;
   border: var(--border-width) solid transparent;
   border-radius: var(--radius-nav);
   color: var(--muted);
@@ -174,10 +187,6 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--space-24);
-}
-
-.content > * {
-  max-width: var(--measure);
 }
 
 h1,
