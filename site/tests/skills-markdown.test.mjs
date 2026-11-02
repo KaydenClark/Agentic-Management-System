@@ -111,7 +111,7 @@ const article = [
   ['a summary over 160 characters', grilling.replace(/summary: .*/, `summary: ${'x'.repeat(161)}`), /at most 160/],
   ['a link to the private skills repository', grilling.replace('https://example.com/skills', 'https://github.com/KaydenClark/skills'), /private skills repository/],
   ['a link to a skill not on the chart', grilling.replace('(/skills/map)', '(/skills/teach)'), /not a chart skill/],
-  ['a link to an unknown site route', grilling.replace('(/start)', '(/glossary)'), /not a site route/],
+  ['a link to an unknown site route', grilling.replace('(/start)', '(/limits)'), /not a site route/],
   ['an http link', grilling.replace('https://example.com/skills', 'http://example.com/skills'), /only \/skills\/<name>/],
   ['a # title in the body', grilling.replace('## What it does\n', '# grilling\n\n## What it does\n'), /# headings/],
   ['text before the first section', grilling.replace('## What it does\n', 'Intro.\n\n## What it does\n'), /open with a ## section/],

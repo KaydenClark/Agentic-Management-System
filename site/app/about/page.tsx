@@ -10,7 +10,7 @@ import styles from "../tour/tour.module.css";
 
 export const metadata: Metadata = {
   title: "About | Agentic Management System",
-  description: "What the Agentic Management System repository holds, its license, where it stands and how this site was built with it.",
+  description: "What the Agentic Management System repository holds, its license, where it stands and how the system produced this site.",
 };
 
 const ADR = "workbench/docs/adr/";
@@ -35,8 +35,8 @@ export default function About() {
         <p className="lede" data-opener="">
           This site and the Agentic Management System, or <dfn id="ams">AMS</dfn>, live in one public{" "}
           <dfn id="repository">repository</dfn>, a folder of files with its full history kept on GitHub. This page
-          says what that folder holds, who may reuse it, how far along it is, and how this site was built with the
-          system it describes.
+          says what that folder holds, who may reuse it, how far along it is, and how the system it describes
+          produced this site.
         </p>
       </header>
 
@@ -82,10 +82,10 @@ export default function About() {
       </section>
 
       <section className={styles.section} aria-labelledby="built">
-        <h2 id="built">How this site was built</h2>
+        <h2 id="built">Building this site</h2>
         <p>
-          With the AMS itself, as its first trial: the build is the first round of the improvement loop, recorded
-          from the start.
+          The AMS itself produced it, as its first trial: the build is the first round of the improvement loop,
+          recorded from the start.
           <Source path={`${DDR}000W-the-first-rsi-trial-is-building-the-site.md`}>DDR-000W</Source>
         </p>
         <ul className={styles.list}>
