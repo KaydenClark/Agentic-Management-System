@@ -18,7 +18,7 @@ One writer: AMS records/site implementor. Source base `da27cc79474622613b75147b8
 - [x] Owner corrections and personal installation scope are preserved in their owners.
 - [x] Existing S-011 owns the broader repair without a duplicate Spec.
 - [x] Baseline, contract digest and predeclared benefit/regression criteria are recorded before candidate trials.
-- [ ] Worker/grader inventory and baseline evidence are read back at exact identities.
+- [x] Worker/grader inventory and baseline evidence are read back at exact identities.
 - [ ] Owner records are checked and published to main.
 
 ## Interrupted verification
@@ -40,3 +40,5 @@ The owner's later direction supersedes the ceiling-shaving approach: recover all
 Current local RUNBOOK is1193 Unicode codepoints, with all11 declared AMS entrypoints and actual project checks retained. Root inspected the draft. Permission-capable focused verification passed38 tests (hygiene and actual board startup); Wiki/layout/doctor/render/diff checks passed, with pre-existing informational findings and expected Task dependencies. Candidate-bound full-suite verification and published record readback are next; no complete Task, whole-AMS fitness or skill benefit is claimed.
 
 The later current-state reconciliation briefly grew S-011 to8025 characters; hygiene caught that new documentation regression. Removing duplicated Task explanations already owned by converted TASK.md records reduced it to7312 before the approved pruning-skill contract was added. The original acceptance and failed evidence were retained; hygiene then returned zero findings.
+
+Baseline readback: three source-injected Terra runs completed at the pinned baseline;29/33 deterministic predicates, not an Alignment Score. The comparison record retains inventory/grader/control/artifact digests, unknown effort and unqualified authority interpretation. Candidate and true consecutive-Task evidence remain missing; this is no accepted repair or skill fitness verdict.

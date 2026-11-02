@@ -30,7 +30,11 @@ Repair the earliest shared procedure owners so agents resolve project branch own
 
 ## Results and interpretation
 
-Pending fresh trials and candidate-bound audit. No Stable/Excellent result, accepted improvement, installation or later use exists yet. The earlier stopped S-002 experiment and its specific call/row holds are unchanged; this record does not resume it or reset its history.
+Baseline only: three fresh local runs completed with source-injected skills at `fb7ad23c963e183b930b23bc5fdf4d309dff292a`, using requested GPT-6.1 Terra; exposed reasoning effort is unknown. Deterministic end-state predicates passed 9/11, 10/11 and 10/11 (29/33 pooled). These are trial predicates, not an Alignment Score. All completed the assigned Task and retained protected unrelated/ignored evidence. Fixture ref retention and command ordering need authority/trace review; they are not automatically skill defects. True consecutive-Task behavior remains untested. Source injection is not native activation.
+
+Inventory SHA-256: `1b73ea4d8db8a49df81a7ed15153deefec85924a527e0ad82ca1fcfdd1c3e3de`; deterministic grader SHA-256: `bec7faac3c1fb91613d1640990feff7cb9d69e9c002b9439fb0942ed5596ba79`; controls-result SHA-256: `7c991e41b0fc0cfd4070470a2ee29099451dc1efb5cf323b47628fe038184b0d`. Safe returned Task-artifact digests by run: `faad8b3c38676b7d394a57fcddc02683f2c1b3d18e27a2a05416f085d9a2f53a`, `4a555d4776fe15320c136d95f70df068218c2680da48f663a37a94888be1725c`, `10179fa6e11ef3fae0cc2a62806681fdf0267bec89411d5afb197129f0e21f7d`. Digests establish identity, not truth or public access to the private artifacts.
+
+Candidate trials and audit remain pending. Safety/authority interpretation is unqualified pending trace review. No regression, improvement, complete audit, Stable/Excellent result, accepted repair, installation, later use or Human QA is claimed. The earlier stopped S-002 experiment and its specific call/row holds are unchanged; this record does not resume it or reset its history.
 
 ## Disposition and next loop
 
