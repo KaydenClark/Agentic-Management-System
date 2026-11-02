@@ -17,6 +17,14 @@ At checkout HEAD `dcad9c4` on `Feature/S-011-shared-skill-repair`, `git ls-tree 
 - [S-005](../landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/SPEC.md) calls for page review cards, but is recorded as planned and not activated. The S-008 taskboard row names owner page reviews as a later gate; this does not establish that all pages are ready for review.
 - [S-013 TK-005](../landmarks/LMK-004-rsi-loop-during-build/specs/S-013-coherence-checks/tasks/TK-005/TASK.md) is blocked and would create a card for a threshold breach. The cited drift reports are historical, not proof of a present breach.
 
+## Owner correction and dependency loop
+
+On 2026-11-02 Kayden clarified in this chat: "S-004 had things blocked by it." The records confirm that [S-005](../landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/SPEC.md) names S-004 as a blocker and that S-013 TK-005 names S-004 and TK-001. S-005's generator Task is marked ready, but its Spec says to confirm scoped authority and required inputs before activation. S-013 says its card Task needs the S-004 card format; [ADR-003J](../docs/adr/003J-limit-active-landmarks-not-specs.md) says to block work only on missing outputs, not whole-Spec closure for its own sake. These records must be reconciled against actual inputs and authority; do not silently delete blockers or treat this correction as acceptance.
+
+There is a circularity in the recorded path: S-004 asks the owner to perform Human QA using real items; S-005, which would generate page review cards, is blocked on S-004. Other valid real cards might permit QA; none was present in the served checkout. Unblock a safe, genuinely actionable real item or the specific card-producing work based on its actual inputs, then verify the end-to-end path.
+
+The S-004 Spec records an independent pass at `4d49bfc`; a later [review-status report](coherence/REVIEW-STATUS-S-004-2026-11-02.md) at `84756aca3063` calls the verdict unbound and says there is no current independent verdict. This is a material discrepancy to resolve at the actual candidate, not evidence of owner approval or a reason to declare acceptance.
+
 ## Diagnosis and next action
 
 The immediate mechanism is that no committed card was available in the served checkout. The evidence does not yet establish why each purported question was not posted, whether a separate current source contains it, or whether automation, handoff, branch routing, or multiple failures caused the omission. A functioning empty-card renderer is not an end-to-end owner-attention queue.
