@@ -26,6 +26,9 @@ Rewriting a working runtime on preference alone is the kind of change the loop e
 ## Current Verified State
 
 - The Node lifecycle tools in `workbench/tools/` run the room (`render`, `doctor`, `next`, `show`, `claim`, `close`). No Python CLI exists. The system Python is older than current; Python 3.14.5 is pinned with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
+- No criterion is met.
+
+History: [S-012 history](../../../../wiki/history/S-012.md).
 
 ## Desired Behavior
 
@@ -102,12 +105,6 @@ node workbench/tools/spec-workbench.mjs render
 ## Documentation Impact
 
 - RUNBOOK lists each Python command only once it exists.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
 
 ## Review and Human QA
 

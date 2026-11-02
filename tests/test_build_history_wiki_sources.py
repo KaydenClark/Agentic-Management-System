@@ -174,3 +174,25 @@ def test_archive_must_be_available_ancestor_with_expected_identity_and_past_time
     commit(repo, "Declare invalid archive", "2026-11-01T12:00:00Z")
     with pytest.raises(bh.RefusedError, match="future|non-ancestor|unavailable|identity differs|no evidence"):
         bh.record_rows(git_runner(repo), lifecycle)
+
+
+def test_history_page_rows_are_derived_once_and_new_rows_from_the_page(relocated):
+    repo, archive, original = relocated
+    history = "workbench/wiki/history/S-007.md"
+    # The page repeats the two rows its Spec carried, then one row a native tool appended.
+    _write(repo, history, "---\nsource_paths:\n  - " + PATHS["S-007"] + "\n---\n\n# S-007 history\n\n" +
+           f"[previous S-007 at {archive[:7]}]({bh.REPO_URL}/blob/{archive[:7]}/{PATHS['S-007']})\n\n" +
+           bh.EVIDENCE_HEADING + "\n\n| Date | Task | Event | Verification |\n|---|---|---|---|\n" +
+           "".join(f"| 2026-11-01 | none | Real event {n} | check {n} |\n" for n in range(2)) +
+           "| 2026-11-02 | TK-001 | Task closed | pytest |\n")
+    _write(repo, "workbench/wiki/MEMORY.md",
+           "# Router\n\n[Website](context-website.md)\n[S-007 history](history/S-007.md)\n")
+    commit(repo, "Close S-007 TK-001", "2026-11-02T09:00:00Z")
+    current = bh.record_rows(git_runner(repo), lifecycle)
+    retained = [r for r in current if "#evidence-" in r["source_ref"]]
+    assert [r for r in retained if r["source_ref"].startswith("workbench/specs/")] == \
+        [r for r in original if "#evidence-" in r["source_ref"]]
+    [new] = [r for r in retained if r["source_ref"].startswith(history)]
+    assert new["source_ref"] == history + "#evidence-3"
+    assert new["subject"] == "S-007 TK-001"
+    assert new["summary"] == "Task closed"

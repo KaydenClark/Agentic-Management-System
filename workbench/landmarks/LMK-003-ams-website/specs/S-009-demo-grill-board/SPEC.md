@@ -27,6 +27,8 @@ The board is the part of the AMS a non-developer is most likely to use. Showing 
 
 - No demo page exists. The real board's card rules are specified in S-004.
 
+History: [S-009 history](../../../../wiki/history/S-009.md).
+
 ## Desired Behavior
 
 - A page with a small set of sample cards, each clearly labeled as a sample.
@@ -93,12 +95,6 @@ node workbench/tools/spec-workbench.mjs show S-009
 ## Documentation Impact
 
 - The tour links the demo from the Grill Board explanation.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
 
 ## Review and Human QA
 

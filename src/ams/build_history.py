@@ -54,6 +54,11 @@ each. Rows after SHA that it does not derive count as newer than the ref.
 Dev-only commits are expected only when ``--dev-ref`` names the dev branch.
 No key is ever printed.
 
+A Spec carries no history (owner ruling, 2026-11-02): the native tools append
+its rows to ``workbench/wiki/history/<ID>.md``. A page row whose Date, Task and
+Event match a row retained from the Spec is that same fact and is not derived
+twice; every other page row is derived from the page, ``<page>#evidence-N``.
+
 Relocated Spec evidence is still derived from explicitly declared Wiki history:
 MEMORY.md must link the article; its frontmatter source_paths block list must
 name the registered Spec path; a visible [previous S-ID at HEX](URL) link must
@@ -103,6 +108,7 @@ BATCH = 200
 PR_FIELDS = ("number,title,state,url,createdAt,closedAt,mergedAt,mergeCommit,"
              "headRefName,baseRefName,reviews")
 EVIDENCE_HEADING = "## Append-Only Evidence And Execution Log"
+HISTORY_DIR = "workbench/wiki/history"
 RECEIPT_HEADING = "## Receipt"
 READ_COLUMNS = "id,kind,source_kind,source_ref,occurred_at,source_url,strength,subject,summary"
 # The fields readcheck compares with the re-derived records (review N1); detail is
@@ -812,6 +818,7 @@ def record_rows(git: Runner, lifecycle: Runner) -> list[dict]:
         for task in [*shown.get("tasks", []), *shown.get("retiredTasks", [])]:
             rows.extend(_task_receipts(git, spec_id, path, task))
     rows.extend(_wiki_spec_events(git, listed_specs, rows))
+    rows.extend(_history_page_events(git, listed_specs, rows))
     return rows
 
 
@@ -925,6 +932,30 @@ def _wiki_spec_events(git: Runner, specs: Sequence[dict], current: Sequence[dict
                     known[key] = row
                     retained.append(row)
     return retained
+
+
+def _history_page_events(git: Runner, specs: Sequence[dict], current: Sequence[dict]) -> list[dict]:
+    """Rows the native tools append to a Spec's Wiki history page, ``history/<ID>.md``.
+
+    A page opens with the rows moved out of its Spec; its ``previous S-ID at HEX``
+    declaration already derives those with their original identity, dates and
+    links. A page row is that same fact when its append-only identity (Date,
+    Task, Event) matches a retained row of the Spec, so it is not derived twice.
+    Every other page row is derived from the page itself.
+    """
+    files = set(git(["ls-tree", "-r", "--name-only", "HEAD", "--", HISTORY_DIR]).splitlines())
+    rows = []
+    for listed in specs:
+        spec_id, path = listed["id"], listed["path"]
+        page = f"{HISTORY_DIR}/{spec_id}.md"
+        if page not in files:
+            continue
+        retained = {(r["detail"].get("date"), r["detail"].get("task"), r["detail"].get("event"))
+                    for r in current if r["source_ref"].startswith(path + "#evidence-")}
+        for row in _spec_events(spec_id, page, _blame(git, page)):
+            if (row["detail"].get("date"), row["detail"].get("task"), row["detail"].get("event")) not in retained:
+                rows.append(row)
+    return rows
 
 
 def _task_receipts(git: Runner, spec_id: str, spec_path: str, task: Mapping) -> list[dict]:

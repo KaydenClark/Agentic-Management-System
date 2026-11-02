@@ -25,6 +25,12 @@ Visitors come for understanding: what AMS manages, why, how intent becomes work/
 
 The site preserves the owner’s explanation of AMS and lets visitors examine whether its real work supports its claims.
 
+## Current Verified State
+
+No criterion is verified; none is audited at a named deployment.
+
+History: [S-003 history](../../../../wiki/history/S-003.md).
+
 ## Desired Behavior
 
 Pages open plainly, define/link unfamiliar terms, then offer detail/sources. Explain ideas before IDs. Agents draft from approved records and owner feedback, without requiring owner-written copy.
@@ -98,7 +104,7 @@ Bind evidence and Kayden’s Grill Board judgments to the candidate. Checks, mer
 
 ## Completion Result
 
-Pending audit and Kayden's judgments. History is in the [website Wiki](../../../../wiki/context-website-presentation.md), not acceptance of this destination.
+Pending audit and Kayden's judgments.
 
 ## Remaining Limitations Or Follow-Up Specs
 

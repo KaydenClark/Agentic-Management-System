@@ -35,6 +35,7 @@ from typing import Callable
 from ams.coherence.up_to_spec import _find_spec, _git, _section, _show
 
 NATIVE = ["node", "workbench/tools/spec-workbench.mjs"]
+HISTORY_DIR = "workbench/wiki/history"
 CONTEXT = re.compile(r"^[0-9a-f]{12}$")
 FULL_SHA = re.compile(r"^[0-9a-f]{40}$")
 TRAILER = re.compile(r"^AMS-Context:\s*([0-9a-f]{12})\s*$", re.M)
@@ -45,6 +46,7 @@ CELL_AGENT = re.compile(r"\bagent:\s*([^;]+)")
 CELL_CONTEXT = re.compile(r"\bcontext:\s*([0-9a-f]{12})\b")
 NOT_A_NAME = {"", "none", "null", "unclaimed", "n-a"}
 REVIEW_ROW = re.compile(r"^\|\s*\d{4}-\d{2}-\d{2}\s*\|\s*review\s*\|\s*Review verdict: ")
+HISTORY_TABLE_HEAD = re.compile(r"^\|\s*(?:Date\s*\||-)")
 REVIEW_HEADER = re.compile(r"^\*\*(?:Updated|Latest event|Next gate):\*\*")
 SPLIT_MARK = "<!-- workbench-record-section"
 
@@ -68,9 +70,9 @@ def agent_key(name: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", name.lower()).strip("-")
 
 
-def _spec_paths(spec_id: str) -> str:
-    # Matches the Spec's folder wherever it has lived (moves between landmarks).
-    return f":(glob)**/{spec_id}-*/**"
+def _spec_paths(spec_id: str) -> tuple[str, str]:
+    # The Spec's folder wherever it has lived (moves between landmarks), and its Wiki history page.
+    return f":(glob)**/{spec_id}-*/**", _history_page(spec_id)
 
 
 def _review_line(line: str) -> bool:
@@ -88,6 +90,14 @@ def _review_only(repo: str, spec_id: str, sha: str) -> bool:
     for entry in changes.splitlines():
         state, path = entry.split("\t")[0], entry.split("\t")[-1]
         if _report_path(path):
+            continue
+        if path == _history_page(spec_id):
+            # Only its table rows can record building; a review commit adds verdict rows alone.
+            diff = _git(repo, "show", "--no-color", "--format=", "-U0", sha, "--", path).stdout
+            rows = [l[1:] for l in diff.splitlines()
+                    if l[:1] in "+-" and not l.startswith(("+++", "---")) and l[1:].startswith("|")]
+            if not all(REVIEW_ROW.match(l) or HISTORY_TABLE_HEAD.match(l) for l in rows):
+                return False
             continue
         if not folder.search(path):
             return False
@@ -112,7 +122,7 @@ def builders(spec_id: str, repo: str = ".", commit: str = "HEAD") -> dict:
     # Session contexts: trailers on commits that touched the Spec folder or name the Spec,
     # except commits that only record a review (a reviewer's own bookkeeping).
     fmt = "--format=%H%x1f%B%x1e"
-    log = _git(repo, "log", fmt, commit, "--", paths).stdout + _git(
+    log = _git(repo, "log", fmt, commit, "--", *paths).stdout + _git(
         repo, "log", "-E", f"--grep={re.escape(spec_id)}([^0-9]|$)", fmt, commit).stdout
     contexts: set[str] = set()
     seen: set[str] = set()
@@ -124,7 +134,7 @@ def builders(spec_id: str, repo: str = ".", commit: str = "HEAD") -> dict:
         seen.add(sha)
         if not _review_only(repo, spec_id, sha):
             contexts |= found
-    patch = _git(repo, "log", "-p", "--no-color", "--format=", commit, "--", paths).stdout
+    patch = _git(repo, "log", "-p", "--no-color", "--format=", commit, "--", *paths).stdout
     agents: set[str] = set()
     for line in patch.splitlines():
         if not line.startswith("+") or line.startswith("+++"):
@@ -215,6 +225,11 @@ def _report_path(path: str) -> bool:
     return path == "TASKBOARD.md" or path.startswith("workbench/feedback/coherence/REVIEW-")
 
 
+def _history_page(spec_id: str) -> str:
+    """The Spec's Wiki history page: its closes and verdicts, never its destination."""
+    return f"{HISTORY_DIR}/{spec_id}.md"
+
+
 def _digest_records(repo: str, spec_id: str, commit: str) -> set[str]:
     """Paths the native content digest covers: SPEC.md and each tasks/[retired/]ID/TASK.md.
     Their substantive changes move the digest. Split records are refused in `status`."""
@@ -244,7 +259,10 @@ def status(spec_id: str, repo: str = ".", commit: str = "HEAD",
         # This room never splits records; reading only the stub would report zero verdicts.
         raise ValueError(f"{spec_path} at {sha[:12]} is a split record (workbench-record-section); "
                          "review status refuses it rather than read its verdicts as none")
-    for v in _verdicts(spec_text):
+    # Verdict rows live on the Spec's Wiki history page; a legacy Spec may still carry some.
+    history = _history_page(spec_id)
+    history_text = _show(repo, sha, history) if history in files else ""
+    for v in _verdicts(spec_text) + _verdicts(history_text):
         refused = _builder_reasons(v["agent"], v["context"], built)
         stale = []
         if not FULL_SHA.match(v["candidate"]):
@@ -254,7 +272,7 @@ def status(spec_id: str, repo: str = ".", commit: str = "HEAD",
         else:
             covered = _digest_records(repo, spec_id, v["candidate"]) | _digest_records(repo, spec_id, sha)
             changed = [p for p in _git(repo, "diff", "--name-only", v["candidate"], sha).stdout.splitlines()
-                       if not (_report_path(p) or p in covered)]
+                       if not (_report_path(p) or p in covered or p.startswith(HISTORY_DIR + "/"))]
             if changed:
                 shown = ", ".join(changed[:5]) + (f" and {len(changed) - 5} more" if len(changed) > 5 else "")
                 stale.append(f"commit changed since review: {len(changed)} path(s) differ ({shown})")

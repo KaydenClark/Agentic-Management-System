@@ -27,7 +27,16 @@ An earlier Workbench let its development trunk run thousands of commits ahead of
 
 ## Current Verified State
 
-- `doctor` reports structural findings. No up-to-Spec, skills-sync or `dev`-ahead check exists. `dev` exists on the remote.
+No criterion is checked off.
+
+- **Drift measured:** the drift check and report exist ([TK-001 receipt](tasks/TK-001/TASK.md#receipt)); the Grill Board item on breach is blocked ([TK-005](tasks/TK-005/TASK.md)).
+- **Up to Spec:** the check and an S-004 report exist ([TK-002 receipt](tasks/TK-002/TASK.md#receipt)).
+- **Skills in sync:** blocked on S-006 rows ([TK-003](tasks/TK-003/TASK.md)).
+- **Independent review:** the procedure and checker exist ([TK-004 receipt](tasks/TK-004/TASK.md#receipt)); the checker is not in the native verdict gate.
+- **No secrets:** no evidence recorded.
+- `doctor` reports structural findings. `dev` exists on the remote. RUNBOOK does not name the coherence commands.
+
+History: [S-013 history](../../../../wiki/history/S-013.md).
 
 ## Desired Behavior
 
@@ -86,21 +95,6 @@ node workbench/tools/spec-workbench.mjs doctor
 ## Documentation Impact
 
 - RUNBOOK names the coherence commands; reports get a home in the Workbench.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | TK-001 | Task closed | node --test workbench/tools/coherence-drift.test.mjs: 4 pass at 6848b75; clean-clone run with only git; report workbench/feedback/coherence/DRIFT-2026-11-01.md (main 0a7d04e, dev b06d7db, 3 ahead, 0 behind) | workbench/feedback/coherence/DRIFT-2026-11-01.md; RUNBOOK not updated (at 2,996 of 3,000 chars, finding COH-005) | Grill Board item on breach (TK-005); thresholds 20 commits / 7 days are C's default pending owner choice; close attribution: {"agent":"orchestrator-C","claimant":"orchestrator-C","onBehalfOf":null} |
-| 2026-11-01 | TK-001 | Correction: check moved from `workbench/tools/` (managed runtime refused unreceipted files, `tools-receipt-missing`) to `src/ams/coherence/drift.py` on pinned Python 3.14; same fixture | `PYTHONPATH=src python3.14 -m unittest discover -s tests`: 4 pass; report regenerated (main 0a7d04e, dev 87a3576, 5 ahead, 0 behind) | workbench/feedback/coherence/DRIFT-2026-11-01.md | Receipt row 1 cites the removed Node path; superseded by this row |
-| 2026-11-01 | TK-002 | Task closed | uv run pytest: 47 pass at 206fa51 (6 up-to-Spec fixture tests incl. must-fail invariant; mutation forcing met-without-evidence fails 4 tests); report workbench/feedback/coherence/UP-TO-SPEC-S-004-2026-11-01.md for S-004 at main 8b70874 (0 met, 7 not met) | workbench/feedback/coherence/UP-TO-SPEC-S-004-2026-11-01.md; RUNBOOK line blocked by COH-003 | Specs do not yet use an Evidence: clause on acceptance lines; checked lines without one report unknown by design; close attribution: {"agent":"orchestrator-C","claimant":"orchestrator-C","onBehalfOf":null} |
-| 2026-11-01 | none | Owner answers to COH-005, COH-006 and COH-016 recorded; No secrets line reworded per COH-016 (connectors stay attached, C never uses them); ADR-003F/003G/003H supersede 002O/002F/002Y | `adr.mjs validate` ok | [owner answers](../../../../wiki/context-owner-answers-coherence.md), [sweep](../../../../feedback/coherence/COHERENCE-2026-11-01.md) | No secrets still needs evidence |
-| 2026-11-01 | none | Wrap-up: C reviewed S-006 (fail `c87bf4e`, repo-half pass `d6d4a6d`) and S-004 (fail `dd52f70`, pass `4d49bfc`); COH-020 to COH-023 recorded; `dev` 84 ahead of `main` (COH-021) | `ams.coherence.drift`, `up_to_spec` | [handoff](../../../../handoffs/orchestrator-C-coherence.md) | TK-003, TK-004, TK-005, RUNBOOK line, No secrets evidence |
-| 2026-11-02 | TK-004 | Task closed | uv run pytest: 606 passed, 4 skipped at dd1e2e8 (11 in tests/test_coherence_review.py: builder session/agent/closed-Task claimant refused before native verdict; verdict stale after a code change or Spec digest change); end-to-end probe in a throwaway clone: record -> native verdict -> status current, then stale after a README change; render no diff, doctor no blockers, layout valid, git diff --check clean | workbench/specs/REVIEW-RECEIPT-TEMPLATE.md (Independent Spec review procedure; Reviewing context field); workbench/feedback/coherence/REVIEW-STATUS-S-004-2026-11-02.md; RUNBOOK unchanged (2,995 of 3,000 chars; it already points Review at the template) | Checker lives at src/ams/coherence/review.py, not in the native gate: bare spec-workbench verdict and complete still accept a builder or stale-commit verdict until setup-workbench adopts the check; builder sessions are known only from AMS-Context trailers (earlier commits carry none, so older builders are matched by agent name only); S-013 itself has orchestrator-C as a builder, so its review must come from another context; close attribution: {"agent":"claude-impl-s013-tk004","claimant":"claude-impl-s013-tk004","onBehalfOf":null} |
-| 2026-11-02 | TK-004 | Correction after Codex P2 review on PR #97: reviewer verdict-only commits no longer count as building; staleness exempts only digest-covered Spec records, TASKBOARD and review reports | uv run pytest: 713 passed, 4 skipped at 82247e3 (14 in tests/test_coherence_review.py, incl. reviewer verdict commit stays current and a Spec-folder SVG added after review is stale) | src/ams/coherence/review.py; workbench/feedback/coherence/REVIEW-STATUS-S-004-2026-11-02.md | Same limits as the TK-004 close row |
-| 2026-11-02 | TK-004 | Correction after Codex P2 review on PR #97: record binds --candidate to its full commit SHA; status reports a non-SHA candidate stale | uv run pytest: 714 passed, 4 skipped at 132b1ac (15 in tests/test_coherence_review.py, incl. a review recorded at HEAD goes stale after a code commit) | src/ams/coherence/review.py | Same limits as the TK-004 close row |
-| 2026-11-02 | TK-004 | Correction after Codex P2 review on PR #97: status refuses a split Spec record (workbench-record-section) rather than report zero verdicts; part links are not followed because this room never splits records | uv run pytest: 715 passed, 4 skipped at 5f84888 (16 in tests/test_coherence_review.py) | src/ams/coherence/review.py | Same limits as the TK-004 close row |
 
 ## Review and Human QA
 

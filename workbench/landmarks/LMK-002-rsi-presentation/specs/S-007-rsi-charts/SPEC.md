@@ -25,6 +25,13 @@ A reader sees how skills and the build changed over time, per task and per versi
 
 The site exists partly to show whether the loop works. Only traceable, labeled numbers can show that without overclaiming.
 
+## Current Verified State
+
+- **Not met:** every acceptance criterion. [TK-001](tasks/TK-001/TASK.md#receipt) (honest empty state slice) is done with its receipt; the criterion is not yet checked here.
+- **Blocked:** [TK-002](tasks/TK-002/TASK.md) and [TK-003](tasks/TK-003/TASK.md), as their records state.
+
+History: [S-007 history](../../../../wiki/history/S-007.md).
+
 ## Desired Behavior
 
 - Follow S-003's shared data contract: distinguish populated, successful-empty, loading and unavailable states; identify the last successful read and any retained data. A failed read never becomes “no trials.” Static explanations and chart spaces remain visible.

@@ -256,5 +256,84 @@ class StatusTest(unittest.TestCase):
         self.assertEqual(v["status"], "unbound", v)
 
 
+HISTORY = "workbench/wiki/history/S-900.md"
+HISTORY_PAGE = """---
+type: history
+---
+
+# S-900 history
+
+## Append-Only Evidence And Execution Log
+
+| Date | Task | Event | Verification | Docs | Remaining gap |
+|---|---|---|---|---|---|
+| 2026-11-01 | none | Mapped | doctor | this Spec | all |
+"""
+
+
+def _history_fixture():
+    """As `_fixture`, but the Spec carries no history: closes and verdicts go to its Wiki page."""
+    repo = tempfile.mkdtemp(prefix="review-history-")
+    _git(repo, "init", "-q", "-b", "main")
+    Path(repo, "src").mkdir()
+    Path(repo, "src/thing.py").write_text("v = 1\n")
+    spec = Path(repo, SPEC_DIR)
+    (spec / "tasks/TK-001").mkdir(parents=True)
+    (spec / "SPEC.md").write_text(SPEC.partition("## Append-Only Evidence And Execution Log")[0])
+    (spec / "tasks/TK-001/TASK.md").write_text(TASK)
+    Path(repo, HISTORY).parent.mkdir(parents=True)
+    Path(repo, HISTORY).write_text(HISTORY_PAGE)
+    _commit(repo, "Claim S-900 TK-001")
+    Path(repo, "src/thing.py").write_text("v = 1  # built\n")
+    _commit(repo, "Build the slice")
+    # The closing session writes only to the history page and deletes the Task scaffold.
+    (spec / "tasks/TK-001/TASK.md").unlink()
+    with Path(repo, HISTORY).open("a") as f:
+        f.write('| 2026-11-01 | TK-001 | Task closed | pytest | none | '
+                'close attribution: {"agent":"closer-a","claimant":"impl-a","onBehalfOf":null} |\n')
+    candidate = _commit(repo, f"Close the slice\n\nAMS-Context: {BUILD_CTX}")
+    return repo, candidate
+
+
+class HistoryPageTest(unittest.TestCase):
+    """Closes and verdicts on the Spec's Wiki history page count exactly as Spec rows did."""
+
+    def setUp(self):
+        self.repo, self.candidate = _history_fixture()
+        self.digest = lambda commit: "a" * 64
+
+    def _append_verdict(self, reviewer, trailer=""):
+        with Path(self.repo, HISTORY).open("a") as f:
+            f.write(_verdict_row(self.candidate, reviewer))
+        return _commit(self.repo, "Record S-900 review verdict" + (f"\n\nAMS-Context: {trailer}" if trailer else ""))
+
+    def _status(self, commit):
+        return status("S-900", repo=self.repo, commit=commit, digest_at=self.digest)["verdicts"]
+
+    def test_closers_and_closing_contexts_on_the_history_page_are_builders(self):
+        built = builders("S-900", repo=self.repo, commit=self.candidate)
+        self.assertIn("closer-a", built["agents"])
+        self.assertIn("impl-a", built["agents"])
+        self.assertIn(BUILD_CTX, built["contexts"])
+
+    def test_verdict_on_the_history_page_is_read_and_current(self):
+        head = self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}",
+                                    trailer=REVIEW_CTX)
+        self.assertNotIn(REVIEW_CTX, builders("S-900", repo=self.repo, commit=head)["contexts"])
+        [v] = self._status(head)
+        self.assertEqual(v["status"], "current", v)
+
+    def test_verdict_by_a_closer_named_only_on_the_history_page_is_refused(self):
+        head = self._append_verdict(f"model; agent: closer-a; context: {REVIEW_CTX}")
+        [v] = self._status(head)
+        self.assertEqual(v["status"], "refused", v)
+
+    def test_review_reused_after_the_commit_changed_is_stale(self):
+        self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}")
+        Path(self.repo, "src/thing.py").write_text("v = 2\n")
+        [v] = self._status(_commit(self.repo, "Change delivered code after review"))
+        self.assertEqual(v["status"], "stale", v)
+
+
 if __name__ == "__main__":
     unittest.main()

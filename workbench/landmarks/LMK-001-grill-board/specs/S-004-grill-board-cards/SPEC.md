@@ -27,7 +27,11 @@ Priority and Value are how the owner decides what needs attention. Costly questi
 
 ## Current Verified State
 
-- Every acceptance line holds at its linked evidence (TK-001 to TK-000J). Owner Human QA and a fresh review are pending.
+- Met: every acceptance criterion, each at its linked evidence (TK-001 to TK-000J).
+- Review: passed at `4d49bfc` (Orchestrator C); proof in [S-004 history](../../../../wiki/history/S-004.md).
+- Not met: owner approval and Human QA.
+
+History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Desired Behavior
 
@@ -102,28 +106,6 @@ uv run --with playwright pytest tests/test_grill_board_phone.py
 ## Documentation Impact
 
 - RUNBOOK: the start command. `grill-board/README.md`: format, theme, QA.
-
-## Append-Only Evidence And Execution Log
-
-One row per Task; full proof and close attribution are in each TASK.md Receipt.
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | TK-001 | Closed; 1ba5df0, PR #16 | pytest 12 passed | RUNBOOK | Answers, ratings |
-| 2026-11-01 | TK-004 | Closed; candidate 83747aa, PR #24 | pytest 65 passed; drift mutation fails | DDR-000Y, README | none |
-| 2026-11-01 | TK-000A | Closed; 63913a2, PR #24 | pytest 121 passed | DDR-000Y, README | none |
-| 2026-11-01 | TK-002 | Task closed | pytest 151 passed; live 409/200/403 | README | none |
-| 2026-11-01 | TK-003 | Task closed | pytest 321 passed; 7 mutations fail | README, DDR-000Y | none |
-| 2026-11-01 | review | Review verdict: fail at dd52f705004aac5599a17935935d6fbc6d0a511c [d61980ae5d1c] #1 | TK-000F to TK-000J ([receipt](../../../../feedback/coherence/REVIEW-S-004-dd52f70.md)) | C | 5 |
-| 2026-11-01 | TK-000G | Task closed | 3e557c0, PR #58 | README | none |
-| 2026-11-01 | TK-000H | Task closed | 0356d08, PR #58; must-fail 4 cases | README | none |
-| 2026-11-01 | TK-000I | Task closed | a06d530, PR #58 | README | none |
-| 2026-11-01 | TK-000J | Task closed | 00b0aa0, PR #58 | README, qa/ | 375px needs Playwright |
-
-Owner Human QA has not been performed for any Task.
-| 2026-11-01 | TK-000F | Task closed | PR #58; 8 of 8 lines linked | this Spec | Fresh review |
-| 2026-11-01 | review | Review verdict: pass at 4d49bfc75efaa81fb3d0ccde07b773ef5af50b05 [3e475711fb57] #2 | none | Orchestrator C (cloud); suite, 375px, live board | none |
 
 ## Review and Human QA
 

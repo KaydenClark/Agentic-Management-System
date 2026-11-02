@@ -27,6 +27,8 @@ The governance stack is what makes the AMS auditable rather than a set of prompt
 
 - No pages or diagrams exist. The lifecycle states and transitions live in the Workbench tools in `workbench/tools/`.
 
+History: [S-010 history](../../../../wiki/history/S-010.md).
+
 ## Desired Behavior
 
 - **Governance stack page.** In plain words with one worked example each: the authority order (platform safety, the owner's current request, `AGENTS.md`, the assigned Spec or Task); confirmation versus approval; a check blocks only what it evaluates; the planes as roles a claim plays in one operation, never folders.
@@ -106,12 +108,6 @@ node workbench/tools/spec-workbench.mjs show S-010
 ## Documentation Impact
 
 - The glossary links the governance page for each governance term.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
 
 ## Review and Human QA
 

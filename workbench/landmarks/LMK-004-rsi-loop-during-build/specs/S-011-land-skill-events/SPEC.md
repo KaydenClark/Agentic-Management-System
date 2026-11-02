@@ -25,7 +25,9 @@ A missed landing event turns into lost or unverified work that looks done. It is
 
 ## Current Verified State
 
-- No recorded failing case exists in this repository yet; the first Task records one.
+- No criterion is met. No recorded failing case exists in this repository yet; the first Task records one.
+
+History: [S-011 history](../../../../wiki/history/S-011.md).
 
 ## Desired Behavior
 
@@ -98,12 +100,6 @@ node workbench/tools/spec-workbench.mjs show S-011
 ## Documentation Impact
 
 - The skills wiki entry for land is updated at the new pin (S-008).
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
 
 ## Review and Human QA
 
