@@ -1,65 +1,38 @@
-# AMS - Runbook
-
-> From LLM Workbench v3.2.2.
+# AMS Runbook
 
 ## Get oriented
 
-Run `git status --short --branch`; preserve others' work. Read [AGENTS](AGENTS.md),
-[GLOSSARY](GLOSSARY.md), relevant [Wiki](workbench/wiki/MEMORY.md),
-[TASKBOARD](TASKBOARD.md) and assigned Spec/Task. [ARCHITECTURE](ARCHITECTURE.md#routes)
-routes owners. Load the [owning skill](workbench/docs/SKILLS.md).
+`git status --short --branch`; read [AGENTS](AGENTS.md) and assigned Spec/Task.
 
 ## Workflows
 
-Jot sourced intent/corrections in the Wiki owner; requirements go in the Spec.
-Use `map`, `plan`, then `journey` for one Task or `orchestrate` for authorized
-coordination. Retain proof/failures.
-
-Website RSI: [record workflow/process issues](workbench/feedback/REPORT_FORMAT.md),
-fix shared skills, prove before/after here in [RSI records](workbench/research/IMPROVEMENT-TEMPLATE.md)
-and [evals](evals/), then [show the log](site/PAGE-TEMPLATE.md).
-This project improves skills; it never installs them elsewhere.
+`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in Wiki.
 
 ## Test And Build
 
-`uv run pytest`; `AMS_LIVE=1` adds live Supabase tests. `uv run ams-board`
-serves the [Grill Board](grill-board/README.md) on loopback only. Room checks:
-
-```bash
+```sh
+uv run pytest
 node workbench/tools/spec-workbench.mjs render
 node workbench/tools/spec-workbench.mjs doctor
 node workbench/tools/spec-workbench.mjs next --json
-node workbench/tools/workbench-layout.mjs validate --project "$PWD"
+node workbench/tools/workbench-layout.mjs validate --project .
 git diff --check
-uv run ams-hygiene [--site site]
+uv run ams-hygiene
 ```
 
-Render: no diff; doctor: no blockers. Repeat checks and pytest
-on a fresh clone at the candidate.
+Repeat on a fresh candidate checkout. `site/`: `npm run build`, `npm test`.
+Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
-B's checks (keys never printed): `uv run ams-keycheck`;
-`ams-writer record-merge|readcheck SHA`; after each merge `ams-history import`,
-then `ams-history readcheck --ref SHA --dev-ref origin/dev`. Refresh rows
-with `ams-history import --refresh-changed` before readcheck. `ams-rsi livecheck`
-and `ams-sources livecheck` check RSI/source rules.
+`uv run ams-board` (loopback). Other commands use `uv run`:
 
-`ams-assess score|record|list` handles local r1 packets;
-`ams-assessment-store import|readcheck|livecheck` verifies private Supabase storage
-([contract](evals/ASSESSMENTS.md)). Storage proves no benefit. Trials use the
-subscription meter; unknown stays unknown.
-[Trial preparation](evals/TRIALS.md) never calls a model.
+- `ams-keycheck`; `ams-writer record-merge|readcheck SHA`
+- `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
+- `ams-rsi livecheck`; `ams-sources livecheck`
+- `ams-assess score|record|list`; `ams-assessment-store import|readcheck|livecheck`
+- `ams-trials materialize|preflight|readback`; `ams-series`
+
+[Trial contracts](evals/TRIALS.md); stopped series stay stopped.
 
 ## Clean up
 
-Follow `land` and [AGENTS' delivery rules](AGENTS.md#delivery-and-recovery):
-
-1. Inspect `git status --short --branch -uall`, index, refs and `git worktree list`;
-   inventory ignored evidence in owned checkouts.
-2. Commit owned changes, push the exact branch and verify its remote SHA.
-   Merge checked work to its authorized target; fetch and prove containment.
-   Keep unfinished work pushed on its Spec's Feature branch with draft PR and next action.
-3. Use guarded cleanup for contained temporary branches/worktrees. Preserve
-   active writers, unique commits and needed ignored recovery material.
-4. Reconcile owners and next actions, render TASKBOARD and rerun affected checks.
-   Verify owned checkouts are clean; account for retained items with owner/reason.
-   Report blocked publication or cleanup. Never stash/discard or commit others' work.
+Use shared `land` under [project delivery](AGENTS.md#delivery-and-recovery).

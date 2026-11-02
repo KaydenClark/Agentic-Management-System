@@ -24,7 +24,7 @@ The website explains and demonstrates AMS. Visitors come for understanding; it i
 
 Confirmed by Kayden in chat, 2026-11-02; the [sourced correction](#jot-052e2b9a-85fc-4813-bad1-6039aa017f9c) preserves the intent. This AMS project develops and proves shared skill improvements through the website build. Workflow and process issues found during that work feed the RSI loop: record the issue and baseline, repair the owning skills, compare before and after here, log the evidence and disposition, and display the RSI log on the website. Retain failures, regressions and unknowns; an issue report or merged repair alone proves no improvement.
 
-For each issue, ask how the skill correction prevents recurrence in any project. This project is the proving ground for improving the whole workflow and system. It improves the skills; installing them into other projects is outside its scope and is not an additional proof gate. [Blueprint](../../BLUEPRINT.md) owns this purpose, [S-002](../landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md) owns comparisons, S-006 owns stored results, and S-007 owns their presentation.
+For each issue, ask how the skill correction prevents recurrence in any project. This project is the proving ground for improving the whole workflow and system. Shared methods live in `KaydenClark/skills`; the [later owner instruction](#jot-8c178984-eede-44cc-8c58-33f137a551c6) authorizes installing qualifying repairs in this machine's personal catalog. Installing them into other projects remains outside scope and is not an additional proof gate. [Blueprint](../../BLUEPRINT.md) owns this purpose, [S-002](../landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md) owns comparisons, S-006 owns stored results, and S-007 owns their presentation.
 
 ## Owner brief and corrections, 2026-11-01
 
@@ -118,4 +118,17 @@ Topic: website-presentation
 Supersedes: none
 
 Kayden confirms that this AMS project is where shared skill improvements are developed and proved through actual website work. Find workflow and process issues while building, record each issue, repair the owning skills, compare before and after here, record the evidence and disposition in the RSI log, and display that log on the website. Recurring failures are inputs to improving the whole workflow and system for use in any project. The question of preventing recurrence in any project governs how the shared skills are repaired; proving the repair belongs to this project. This project improves the skills and does not install them into other projects. Cross-project installation or rollout is not this project's work or proof gate. This corrects the agent's proposed portfolio rollout and separate proof-project framing. The requested action is documentation correction; this entry claims no skill repair, measured result, database write, website implementation or deployment.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8c178984-eede-44cc-8c58-33f137a551c6
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T20:40:20.003Z
+Author: Kayden
+Source: Kayden, shared-skill repair instruction in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+The shared handoff, branch and cleanup repairs must be logged and displayed with their actual RSI test and audit results on dev. Terra 6.1 tests and audits govern the requested Stable or Excellent skill merge gate. The owner explicitly authorizes updating this machine personal skills folder after a qualifying repair. The earlier exclusion of installation into other projects remains: personal-catalog installation is a different action. Keep handoffs local and ignored; publish Tasks and safe evidence summaries, never the private source text or raw evaluation material. A measured audit score is separate from demonstrated behavioral benefit and whole-AMS fitness.
 <!-- /jot-entry -->
