@@ -9,7 +9,7 @@ import styles from "./page-order.module.css";
 // every page in it, with the reader's "n of N" position. Server-rendered at build time for each route; a page
 // outside the reading order (such as not-found) gets none. Shell navigation,
 // not page content: data-review-exclude keeps it out of the content hash, so
-// adding a page to the reading order clears no other page's approval.
+// adding a page to the reading order changes no other page's hash.
 export function PageOrder() {
   const index = readingIndex(usePathname());
   if (index < 0) return null;

@@ -56,12 +56,15 @@ export default function RsiPage() {
         <p className="eyebrow">Results</p>
         <h1>RSI results</h1>
         <p className="lede">
-          This page will show what the RSI loop measures: how each task and each version of the system did, including
-          no change and regressions, with every number linked to the rows behind it. Nothing has been measured yet, so
-          every place below is empty on purpose. No sample or placeholder data is shown.
+          RSI, recursive self-improvement, is the loop in which the system tries one bounded change at a time on real
+          work and keeps only what helps. This page shows what that loop measures: how each task and each version of
+          the system did, including no change and regressions, with every number linked to the rows behind it.
+          Nothing has been measured yet, so every chart below is empty on purpose, and no sample or invented data
+          stands in for results.
         </p>
         <p className={styles.muted}>
-          Colors: this page uses no signal colors yet. A grey dashed frame marks a chart place with nothing in it.
+          A grey dashed frame marks a chart with nothing in it yet. No color on this page carries a meaning until
+          results arrive.
         </p>
       </header>
       {SPLITS.map(({ split, title, about }) => (

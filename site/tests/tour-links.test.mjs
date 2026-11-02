@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { builtPage, builtPages, siteDir } from './helpers.mjs';
-import { routeOf } from '../scripts/draft-marks.mjs';
+import { routeOf } from '../scripts/page-hash.mjs';
 import { READING_ORDER, builtName, childProblems, mainOf, orderProblems } from './tour-helpers.mjs';
 
 const nav = (links) => `<nav aria-label="Page order">${links}</nav>`;

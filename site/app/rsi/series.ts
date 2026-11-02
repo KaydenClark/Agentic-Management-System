@@ -39,7 +39,7 @@ export const SPLITS: { split: Split; title: string; about: string }[] = [
     split: "dev",
     title: "Dev tasks",
     about:
-      "Dev tasks are the working set: the loop studies their failures to choose its next change. They show where it is learning, not whether the change generalises.",
+      "Dev tasks are the working set: the loop studies their failures to choose its next change. They show where it is learning, not whether the change generalizes.",
   },
 ];
 
@@ -51,7 +51,7 @@ export const SERIES: SeriesPlan[] = [
     title: "Held-out results per task",
     shows: "Each held-out task's pass results, one line per task, across versions.",
     nextEvent: {
-      text: "No Task to create or run held-out tasks is planned yet. The RSI loop shows no public number until several held-out tasks have rows from repeated trials, so this place stays empty until then.",
+      text: "Nothing is planned yet to create or run held-out tasks. The RSI loop shows no public number until several held-out tasks have rows from repeated trials, so this place stays empty until then.",
       source: { label: "the RSI loop Spec (held-out before public)", href: `${S002}/SPEC.md` },
     },
   },
@@ -62,7 +62,7 @@ export const SERIES: SeriesPlan[] = [
     title: "Held-out results per version",
     shows: "Each system version's pass results over the held-out tasks, with the prior version and the control arms beside it.",
     nextEvent: {
-      text: "Also waiting on held-out tasks, which no Task plans yet. A version comparison here needs held-out rows, the control arms, the prior version and an interval.",
+      text: "This chart also waits on held-out tasks, which nothing plans yet. A version comparison here needs held-out rows, the control arms, the prior version and an interval.",
       source: { label: "the RSI loop Spec (held-out before public)", href: `${S002}/SPEC.md` },
     },
   },

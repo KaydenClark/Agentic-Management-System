@@ -479,3 +479,27 @@
   border-radius: var(--radius-control);
   background: var(--ground);
 }
+
+/* Screen 8, the quickstart: a numbered reading route, then the setup step. */
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-14);
+}
+
+.route {
+  margin: 0;
+  padding-left: var(--space-24);
+  display: grid;
+  gap: var(--space-10);
+}
+
+.setup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-14);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--ground);
+}

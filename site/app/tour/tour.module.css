@@ -1,4 +1,4 @@
-/* Shared layout for the prose tour pages (Why, Quickstart, Glossary, About).
+/* Shared layout for the prose tour pages (Why, Glossary, About).
    Page furniture only, so greys; no signal hue applies here. Every value
    comes from app/theme/tokens.css. */
 
@@ -43,54 +43,3 @@
   font-size: var(--text-small);
 }
 
-.quote {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-}
-
-.quote blockquote {
-  margin: 0;
-  padding-left: var(--space-14);
-  border-left: var(--border-width) solid var(--line);
-}
-
-.quote figcaption {
-  color: var(--muted);
-  font-size: var(--text-small);
-}
-
-/* Commands and their output wrap instead of scrolling, so nothing scrolls
-   sideways at 375 px and no scroll region needs a keyboard stop. */
-.terminal {
-  margin: 0;
-  padding: var(--space-12) var(--space-14);
-  background: var(--surface);
-  border: var(--border-width) solid var(--line);
-  border-radius: var(--radius-panel);
-  font-family: var(--font-mono);
-  font-size: var(--text-small);
-  line-height: var(--leading-body);
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.prompt {
-  color: var(--muted);
-  user-select: none;
-}
-
-.steps {
-  margin: 0;
-  padding-left: var(--space-20);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-24);
-}
-
-.steps > li {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-}

@@ -1,12 +1,14 @@
-// Draft marks (S-003 TK-004): a page's content hash and the committed approval
-// records that can remove its draft mark. Plain JavaScript so the build script,
-// the hash printer and the tests share it without a TypeScript loader.
+// Page hashes: each built page's content hash, for the S-005 Grill Board,
+// which binds the owner's review of a page to the exact content it saw. The
+// public site shows no review state; nothing here changes what a page shows.
+// Plain JavaScript so the hash printer and the tests share it without a
+// TypeScript loader.
 //
 // Content hash (the S-005 page-hash contract): "sha256:" + SHA-256 hex of the
 // canonical content of the served page's <main id="main">:
 //   - drop <script> and <style> elements, comments, and every subtree whose
-//     element carries data-review-mark (the draft mark) or data-review-exclude
-//     (live or generated regions);
+//     element carries data-review-exclude (live or generated regions) or
+//     data-review-mark (kept in the contract; no page carries one);
 //   - take, in document order, each text node and each href, src and alt
 //     attribute value (attributes in the order written, before the element's
 //     content), with character references decoded;
@@ -20,7 +22,6 @@ import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const siteDir = fileURLToPath(new URL('..', import.meta.url));
-export const APPROVALS_FILE = join(siteDir, 'approvals.json');
 
 const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr']);
 const RAW = new Set(['script', 'style']);
@@ -71,7 +72,7 @@ function* tokens(html) {
 }
 
 // The pieces of <main id="main"> that the hash covers, plus whether it holds a
-// draft mark. Throws when the page has no <main id="main">.
+// review mark. Throws when the page has no <main id="main">.
 function readMain(html) {
   const pieces = [];
   let depth = -1; // depth inside <main id="main">; -1 = not yet inside
@@ -119,7 +120,7 @@ export function contentHash(html) {
 }
 
 // True when <main id="main"> holds an element carrying data-review-mark.
-export function hasDraftMark(html) {
+export function hasReviewMark(html) {
   return readMain(html).mark;
 }
 
@@ -129,59 +130,6 @@ export function routeOf(name) {
   const path = name.replace(/\\/g, '/').replace(/\.html$/, '');
   if (path === 'index') return '/';
   return `/${path.replace(/\/index$/, '')}`;
-}
-
-// The not-found page is served at every unknown address, so its mark cannot
-// depend on a route; it stays a draft.
-export const UNAPPROVABLE = new Set(['/_not-found']);
-const FIELDS = ['route', 'hash', 'approver', 'date', 'source'];
-const REPO_LINK = /^https:\/\/github\.com\/KaydenClark\/Agentic-Management-System\/\S+$/;
-
-// Problems with an approvals document ({ approvals: [...] }); [] when valid.
-export function validateApprovals(doc) {
-  if (!doc || !Array.isArray(doc.approvals)) return ['approvals file has no "approvals" list'];
-  const problems = [];
-  doc.approvals.forEach((a, i) => {
-    const at = `approval ${i + 1}${a && a.route ? ` (${a.route})` : ''}`;
-    if (!a || typeof a !== 'object') return problems.push(`${at}: not an object`);
-    for (const k of Object.keys(a)) if (!FIELDS.includes(k)) problems.push(`${at}: unknown field "${k}"`);
-    if (typeof a.route !== 'string' || !a.route.startsWith('/')) problems.push(`${at}: route must start with /`);
-    else if (UNAPPROVABLE.has(a.route)) problems.push(`${at}: ${a.route} cannot be approved`);
-    if (typeof a.hash !== 'string' || !/^sha256:[0-9a-f]{64}$/.test(a.hash)) problems.push(`${at}: hash must be sha256: plus 64 hex digits`);
-    if (typeof a.approver !== 'string' || !a.approver.trim()) problems.push(`${at}: no approver`);
-    if (typeof a.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(a.date) || Number.isNaN(Date.parse(a.date))) problems.push(`${at}: date must be YYYY-MM-DD`);
-    if (typeof a.source !== 'string' || !REPO_LINK.test(a.source)) problems.push(`${at}: source must link the dated record of the approval in this repository on GitHub`);
-  });
-  return problems;
-}
-
-export function readApprovals(file = APPROVALS_FILE) {
-  return JSON.parse(readFileSync(file, 'utf8'));
-}
-
-// Routes approved at their current hash. pages: [{ route, hash }].
-export function approvedRoutes(pages, records) {
-  const approved = new Set();
-  for (const { route, hash } of pages) {
-    if (UNAPPROVABLE.has(route)) continue;
-    if (records.some((a) => a.route === route && a.hash === hash)) approved.add(route);
-  }
-  return approved;
-}
-
-// Disagreements between built pages ([{ route, html }]) and the approval
-// records: a page without its mark needs an approval at its current hash, and
-// an approved page must not show the mark.
-export function markProblems(pages, records) {
-  const problems = [];
-  for (const p of pages) {
-    const hash = contentHash(p.html);
-    const approved = approvedRoutes([{ route: p.route, hash }], records).has(p.route);
-    const marked = hasDraftMark(p.html);
-    if (!marked && !approved) problems.push(`${p.route}: no draft mark, but no approval names its current hash ${hash}`);
-    if (marked && approved) problems.push(`${p.route}: approved at ${hash} but still shows the draft mark`);
-  }
-  return problems;
 }
 
 // Every prerendered page in a build: [{ name, route, html }]. Next's own

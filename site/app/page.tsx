@@ -11,9 +11,9 @@ export default function Home() {
       <section className="card" aria-labelledby="this-site">
         <h2 id="this-site">This site</h2>
         <p>
-          The AMS is building this site, and the site shows the real records rather than describing them. The
-          tour pages arrive one reviewed change at a time. The footer of every page names the exact commit it
-          was built from, linked to the code on GitHub.
+          The AMS is building this site, and the site shows the real records rather than describing them. Each
+          page arrives as its own reviewed change, and the footer of every page names the exact commit it was
+          built from, linked to the code on GitHub.
         </p>
       </section>
     </>
