@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** Resolve the reported RUNBOOK budget stop before records merge; finish Terra trials and candidate audit.
+**Next gate:** Resolve repeated focused RUNBOOK budget stop (3025/3000); Terra trials/audit remain independent.
 
 ## Intent and authority
 

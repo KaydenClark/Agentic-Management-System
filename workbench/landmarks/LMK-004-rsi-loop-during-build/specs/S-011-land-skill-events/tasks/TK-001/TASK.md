@@ -24,3 +24,11 @@ One writer: AMS records/site implementor. Source base `da27cc79474622613b75147b8
 ## Interrupted verification
 
 Two hygiene attempts failed: first AGENTS 3017/RUNBOOK 3336 characters against 3000; after faithful compression, AGENTS 2995 passed and RUNBOOK 3116 still failed. The room three-strike rule stops further budget-repair attempts. Preserve this unfinished Task and request the scoped next decision; do not merge or close it as complete. Wiki validation, layout validation, doctor (no global blockers) and diff check passed. Doctor retains existing legibility/permission findings and expected TK-002/TK-003 dependency findings. Full pytest was still running at preservation time; no passing result is asserted.
+
+### Authorized resumption and suite result
+
+The owner explicitly answered “Resume the focused documentation fix” on 2026-11-02; the earlier failed hygiene attempts remain above. The same full pytest run completed: 703 passed, 98 failed, 4 skipped, 9 errors in 137.75 seconds. Observed failures include the sandbox refusing local socket binds and the known document-budget failure; no Python source changed. No duplicate suite was launched. A permission-capable suite run remains needed to distinguish all environment failures; no passing full suite is claimed.
+
+### Repeated focused budget stop
+
+After the owner's explicit resumption, hygiene still failed at RUNBOOK 3036 then 3025 characters (limit 3000; AGENTS 2995 passes). The implementor stops this repair again and reports the avoidable incomplete reduction. No further retry or merge is performed. Current remaining budget gap: 25 characters. Preserve earlier failures and the full-suite result above.
