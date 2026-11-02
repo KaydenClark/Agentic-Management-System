@@ -3,175 +3,123 @@
 **Spec ID:** S-006
 **Status:** active
 **Priority:** 1
-**Owner:** Kayden; orchestrator B (local, holds the Supabase keys)
+**Owner:** Kayden; orchestrator B (local keys)
 **Stance:** Builder
 **Updated:** 2026-11-02
-**Catalog description:** Supabase schema and local Python writer for RSI results, build history, cost and tokens; the site reads under RLS.
+**Catalog description:** Sourced Supabase data and local writers.
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000Z closed with proof.
-**Next gate:** Complete TK-000W.
+**Latest event:** Approved pinned import/readback passed.
+**Next gate:** Coverage/W disposition, whole Review, actual owner QA.
+
+[a]: ../../../../wiki/context-active-spec-approvals.md
+[b]: tasks/TK-000Z/approved-history-import-771bd1e.md
+[p]: tasks/TK-000B/TASK.md#proof
 
 ## Intent and authority
 
-The owner decided that Python pushes RSI results to Supabase as they arrive and the site reads from it; everything the site shows, build history included, lives there. Token counts go with the RSI data. The service key stays in the gitignored local environment; the site receives only its publishable key (owner coherence correction).
+Python pushes RSI/history/cost/tokens to Supabase; site only reads. Gitignored local service key; site publishable key. [Approvals][a] govern.
 
 ## Outcome
 
-One Supabase project holds every row the site presents; a local Python writer fills it; the site reads with the publishable key, never writes.
+One sourced store, local writers, site reads under RLS.
 
 ## Why It Matters
 
-Charts are honest only if each number has a sourced row; local writes keep credentials off the site.
+Sourced charts; local credentials.
 
 ## Current Verified State
 
-- Verified candidate: `5aa2621ec03a1d419615374ec31e4c3db12069b6`, dev `c0f6c67687f432cd75b55e7d4fdad460ea2f77db`; 943 history rows, missing/extra/content mismatches/unsourced all 0. [TK-000L](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01) owns live proof and limits. No real trial or assessment storage completion claimed.
-- TK-000P adds explicit unknown metrics with reasons/sources and preserves known zero; remote migration `20261101192328` and live tagged roundtrip pass. See [trial consumer contract](../../../../../evals/TRIAL-ROWS.md). TK-000R corrects the failed TK-000Q numeric roundtrip: source `d98a770`, additive migration `20261101195609`, exact TEXT artifacts/hash and JSONB projection checks. Full local/fresh495 passed/4 skipped,62 focused, source CI53 pass; tagged numeric/retry/client-denial probes cleanup0. Earlier FAIL remains recorded; checked delivery/whole Review/owner QA remain separate.
+W remains stopped/unaccepted: failed 813465d/5e02ead;550 recovery retained. X/Z proofs below retain setext corrections and original3 S008+8 archives/F→K/R/CAS.
 
-- TK-000S corrects the exact-source `110bb7a` identity defect with source `ad7fa28`:84 focused, full local/fresh517 passed/4 skipped, live scalar conflicts refused with0 mutation requests and cleanup0. Earlier candidate reviews remain retained; checked merge and current whole Review are separate from formal owner QA/acceptance.
-
-- Post-merge pinned readcheck at `6e30c87`/dev `8ba15e0`:1,030 rows, missing0/extra8/mismatches0/unsourced0. PR #85 relocated two S-007 and six S-003 history rows to the Wiki; all8 match original ancestor blobs and the declared97bfcaa archive. TK-000U owns consumer maintenance; no retained history is deleted and the earlier successful checks remain scoped history.
-
-- Fresh owner-approved [TK-000X](tasks/TK-000X/TASK.md) replaces the custom scanner with pinned CommonMark link tokens. PR #91 merged as `771bd1e264ff15ab89217c8f91f79fc38c57f96b`; local/fresh699 passed/4 skipped,166 focused, exact independent source/owner binding and final CI passed. U receipts and W stopped/unaccepted failures remain; no formal acceptance is inferred.
-- Actual GET-only readcheck at `771bd1e`/dev `fe9870f`:1,030 visible, missing130/extra1/content mismatches2/unsourced0, ordered. Original eight retained S-003/S-007 facts match remote exactly once, including UTC time/source/recorded commit under the reader contract. Remaining extra is `task path S-008/TK-003`; mismatches are S-008/TK-001 and TK-002 (summary/time/source URL). All three are valid original table declarations at `e0ca3a8` (Spec lines56–58), ancestors of checked/current main and dev. Main replaced the table with native Task1/2 at `e8135ef`; Task3 is no longer derived there, while dev still derives all three exactly. S-008 is unchanged between checked771 and currentmain `a35ef0f`; this is prior record migration/branch divergence, not corrupt data or later snapshot drift. The [original table declarations](https://github.com/KaydenClark/Agentic-Management-System/blob/e0ca3a844dea29bc74623c3594069f39f4222d38/workbench/landmarks/LMK-003-ams-website/specs/S-008-skills-wiki/SPEC.md#L56) retain valid creation provenance. No row was deleted or ignored. That observation remains the historical failed receipt; TK-000Z below repairs the source consumer without rewriting those originals.
-- Actual import did not run: automatic approval review refused the credential-backed external write twice before execution. Retrieved earlier owner evidence was not accepted by that review as trusted authorization in this context. Fresh explicit history-import approval is pending. Import is also held for correctness: the original S-008 creation provenance must not be rewritten via `--refresh-changed` merely to match the native-file projection; permission alone is not a correctness waiver. The authorized source correction is now verified in TK-000Z; final checked engineering delivery and actual live verification are distinct. Read-only verification used repository public-key/URL constants only and GET requests, no environment-file/service-key load and zero writes. Build-history remains unchecked; W lifecycle disposition, actual current-history proof and owner Human QA remain open.
-
-- [TK-000Z](tasks/TK-000Z/TASK.md) source `3a25cacf797743ca8189739a46661ec4e3a76a09` derives original Spec/Task identity declarations from registered, verified local Git lineage. Native migration, removal, renumbering and mutable execution metadata preserve their real creation sources; no old Task is reactivated. The exact three S008 and eight archived facts derive once. Generic native-claim/explicit-merge evidence reconciles R; unsupported or contradictory execution refuses. Task-only six-key metadata refresh preserves annotations/audit and bounded undo and requires full original-detail CAS plus direct current response verification.
-- Z full local/fresh764 passed/four skipped, independent215 history/49 affected, sealed complete-output replay/classification and exact-source CI pass. The 1,232→1,234 comparison has two retained identity declarations, no deletion and 59 Task-only corrections (33 core, 26 birth-status metadata). F and renumbered K identify the same coverage assignment, not two independent executions. Independent bounded source-readiness PASS is source-specific, not whole-Spec acceptance. Anonymous exact/mismatched JSONB GET filters returned HTTP200 with one/zero rows; that proves protocol compatibility only. Real import, repaired current canonical database readback and new global live readcheck have **not** run; the prior failed live receipt and explicit permission hold remain.
+JOT-ada1ea57-1afe-40b0-986d-eb4567bc2884 approved only main771bd1e264ff15ab89217c8f91f79fc38c57f96b/devfe9870fe93f715c859fc5059b0b4c52f38f4a640. [Actual batch][b]:one call;131 inserted/1030 existing/41 refreshed;1161 unique;74 current Task projections match; global missing/extra/newer/mismatch/unsourced 0, ordered. 3+8 originals/1030 IDs retained;989 untouched;41 audit/annotation/undo checks pass. No delete/key leak. Earlier 2 write refusals ran no key/write; failed GET retained. Later history unimported; no second batch/latest coverage claim.
 
 ## Desired Behavior
 
-- Tables for RSI results, build history and run metadata. Each result names task, held-out or dev, arm (AMS, no-AMS or plain instructions), system version (runtime, controls and skills commits), provider, model, effort, pass, cost, tokens, completed state and source.
-- Site presentation tables have a site SELECT policy and no client write path; raw assessment envelopes remain private.
-- A local writer with the service key inserts rows and refuses a write conflicting with a newer row.
-- Trial metrics preserve known values versus explicit unknowns with reasons/sources; unknown is never zero ([S-002 contract](../../../LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md), [consumer rules](../../../../../evals/TRIAL-ROWS.md)).
-- Seed rows come only from real sources (site build, later improvements, the skills repository's fixes), each labelled anecdote, single trial, repeated trials or held-out with interval; `recorded_fact` is for build history only.
-- Test and synthetic rows are marked; the site never shows them.
-- **Build history.** Rows for this build's Spec, Task, PR and commit events from real records, returns and corrections included, showing how the AMS built itself.
+Results:task, held-out/dev, arm(AMS/no-AMS/plain),runtime/controls/skills commits, provider/model/effort,pass,cost/tokens, state/source. Completed needs `passed`; score optional(ADR-002J). Unknown needs reason/source,never zero([rules](../../../../../evals/TRIAL-ROWS.md)). Real build/improvement/skills-fix seeds; strength:anecdote/single/repeated/held-out with interval. `recorded_fact` only history. Mark/hide synthetic; empty valid.
 
-- Private assessment envelopes retain S-002 frozen packets, attempt/run IDs, findings/retests and recomputable results, separately from behavioral trial rows.
-
-## Decisions And Contracts
-
-- The site only presents; it never writes.
-- The service key stays out of Git and the site; writers read `SUPABASE_SERVICE_ROLE_KEY` from the gitignored env file.
-- Never fabricate data; an empty table is valid.
-- A completed result needs `passed` ([ADR-002J](../../../../docs/adr/002J-every-ledger-row-records-cost-and-run-state.md)); `score` is optional.
+History:Spec/Task/PR/commit/return/correction; immutable IDs,idempotence,stale/conflict refusal. Private assessments:frozen packets/run IDs/attempts/findings/retests,recomputable results; no client reads/RPC writes. Presentation SELECT only; key never Git/site.
 
 ## Non-Goals
 
-- Chart pages (S-007).
-- Running trials (S-002).
+Charts:S007; trials:S002; no benefit claims.
 
 ## Dependencies And Blockers
 
-- Supabase project `hqvtnpvwwppbeurponnn` ([ADR-003C](../../../../docs/adr/003C-the-supabase-project-and-its-read-only-baseline.md)); Python 3.14.5 with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
+Project hqvtnpvwwppbeurponnn(ADR-003C); uv/Python3.14.5(ADR-003D).
 
 ## Vertical Implementation Slices
 
-One run per Task in B's lane, by checked PR. Tasks are records under `tasks/` (the tool refuses table rows beside them): TK-001 to TK-005, TK-000B to TK-000E done; TK-000L closed with live verification. Native Task records own slices; duplicate table rows are not permitted.
-
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
+Native `tasks/` own proof/Receipts; no duplicate table.
 
 ## Acceptance Criteria
 
-- [x] **Schema and provenance.** Every result row has the fields named above, enforced as non-null where required. *Check:* insert a row missing its skills commit. *Must fail:* the insert succeeds. [Proof][p].
-- [x] **No client writes.** With the publishable key, insert, update and delete fail on every table; presentation-table SELECT works and private assessment SELECT is refused. *Check:* a test using the publishable key. *Must fail:* any client write accepted. [Proof][p].
-- [x] **Writer works end to end.** The writer inserts a real build event and the site's key reads it back. *Must fail:* a row written only to a local file. [Proof][p].
-- [x] **Conflict refusal.** A writer update against a row changed since it was read is refused. *Must fail:* a silent overwrite. [Proof][p].
-- [x] **Real sources only.** Each seed row names its source and strength label. *Must fail:* a row with no source, or a sample value presented as real. [Proof][p].
-- [x] **Key loads and authenticates.** A check reports only whether `SUPABASE_SERVICE_ROLE_KEY` loaded and whether Supabase accepted it, for `sb_secret_` and legacy keys. *Must fail:* any output, log or file containing the value. [Proof][p]; legacy JWT by fakes only (see limits).
-- [ ] **Build history from real records.** Supabase holds build-history rows from this build's real Spec, Task, PR and commit records, each naming its source (path, PR number or commit SHA); returns and corrections are rows. Re-importing adds no duplicates. *Must fail:* a hand-typed row or a row with no source. [Proof][p].
-- [x] **No secrets in Git.** The hygiene check finds no service key in the repository. *Must fail:* a committed key. [Proof][p].
-
-[p]: tasks/TK-000B/TASK.md#proof
-
-- [x] **Private assessment persistence.** Private remote append/readback retains the canonical assessment history with idempotence and conflict refusal; clients cannot read raw packets or write. *Must fail:* tampered totals, reset attempts, exposed private evidence or a silent overwrite.
+- [x] **Schema/provenance:** required fields; missing skills commit fails.[p]
+- [x] **No client writes:** insert/update/delete denied; presentation SELECT/private denial.[p]
+- [x] **Writer:** real remote event/site-key readback.[p]
+- [x] **Conflicts:** no silent concurrent overwrite.[p]
+- [x] **Real sources:** strength labels; no samples as real.[p]
+- [x] **Key authentication:** secret/legacy formats; no value output; legacy fakes only.[p]
+- [ ] **Build history:** sourced real events above; no duplicate reimport/handtyped/unsourced row. Approved pinned proof[b]; latest coverage open.
+- [x] **Secret hygiene:** tree/history scan.[p]
+- [x] **Private assessments:** canonical remote replay/idempotence; tamper/reset/conflict/client denial(Q/R/S).
 
 ## RSI and website connection
 
-S-002 writes its rows here; S-007 reads them.
-
-## Testing Seams
-
-- Branch database; writer insert interface; publishable-key queries.
+S002 writes; S007 reads; RUNBOOK/ARCHITECTURE own commands/path.
 
 ## Verification Procedure
 
-```bash
-node workbench/tools/spec-workbench.mjs show S-006
-uv run pytest
-# before close, in B's checkout after merge
-uv run ams-history import --refresh-changed
-uv run ams-history readcheck --ref SHA --dev-ref origin/dev
-```
-
-## Documentation Impact
-
-- RUNBOOK names the writer commands; ARCHITECTURE the data path.
+Native show/doctor; locked pytest; DB/writer/site-key checks. Import/readcheck only approved pins.
 
 ## Append-Only Evidence And Execution Log
 
-TASK.md Receipts hold full proof.
+All 28 events retained; Receipts/Git own full proof/attribution. Gaps are historical.
 
-| Date | Task | Event | Verification | Docs | Remaining gap |
+|Date|Task|Event|Verification|Docs|Remaining gap|
 |---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned; baseline migration noted | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | TK-001 | Task closed | PR #15 (884d021) | RUNBOOK, ARCH | Legacy JWT: fakes only |
-| 2026-11-01 | TK-002 | Task closed | PR #18 (d279ae1) | RUNBOOK, ARCH | none |
-| 2026-11-01 | TK-003 | Task closed | PR #29 (74b446e) | RUNBOOK, ARCH | No RSI row until S-002 |
-| 2026-11-01 | TK-004 | Task closed | PRs #31 (4d74e90), #37 (d26bb8c) | RUNBOOK, ARCH | Dev-only records not imported |
-| 2026-11-01 | TK-005 | Task closed | PR #42 (55c3856) | RUNBOOK, ARCHITECTURE, Spec | S-002 picks seed rows |
-| 2026-11-01 | review | Review verdict: fail at c87bf4ec86206bd5f734af7b828c81c3d3356a00 [a2124994b4d9] #1 | new Tasks TK-000B, TK-000C, TK-000D | C, repo half | 3 |
-| 2026-11-01 | TK-000E | B review FAIL c87bf4e: H1, M1-M3, L1, L2 | live half | Spec | TK-000E |
-| 2026-11-01 | TK-000E | Task closed | PR #49 (a03d739): readcheck missing 0, extra 0; livechecks pass | Spec, RUNBOOK | Fresh review |
-| 2026-11-01 | TK-000C | Task closed | TK-000E, a4470a4: tests/test_secret_scan.py scans tree and history | Spec | none |
-| 2026-11-01 | TK-000D | Task closed | TK-000E, a4470a4: test_recorded_fact_is_for_build_history_only; DB check 20261101144510 | Spec | none |
-| 2026-11-01 | TK-000B | Task closed | 8 lines checked, proof in TK-000B at a4470a4 | Spec | Fresh review |
-| 2026-11-01 | review | Review verdict: pass at d6d4a6d65cc6287b667fe78ee5db937440972a5e [213a7241e512] #2 | none | C, repo half | none |
-| 2026-11-01 | TK-000L | B review FAIL d6d4a6d: N1-N6, legacy key | live half | Spec | TK-000L |
-| 2026-11-01 | TK-000L | Task closed | 5aa2621/dev c0f6c67: history 943 rows; missing/extra/mismatch/unsourced 0; live summary edit detected/restored; key/writer/RSI/source checks pass; pytest 433 passed,4 skipped; layout valid; doctor no blocking finding | S-006 SPEC and TK-000L pinned live verification | Fresh independent assembled Review; S-002 assessment persistence and unknown metrics compatibility; close attribution: {"agent":"codex-local-writer","claimant":"orch-b","onBehalfOf":"orch-b"} |
-| 2026-11-01 | TK-000P | Task closed | 475 passed,4 skipped; focused99/1; migration20261101192328; live null and zero roundtrip; DB bad availability23514; client writes401/test hiding; cleanup0; advisors empty | TRIAL-ROWS; template; rsi_rows; S-006 SPEC/TK-000P | Fresh assembled Review; private assessment storage; real qualified S-002 trials; close attribution: {"agent":"codex-local-writer","claimant":"codex-local-writer","onBehalfOf":null} |
-| 2026-11-01 | TK-000Q | Task closed | 56 focused; fresh source489 passed,4 skipped; private migration20261101193603; live duplicate200/conflict409/concurrent200-409/client401/update403/cleanup0; source CI45 pass | ASSESSMENTS; RUNBOOK; ARCHITECTURE; S-006 SPEC/TK-000Q | Final CI/checked merge; fresh assembled Review; native owner QA; safe S007 presentation and real S002 trials; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
-| 2026-11-01 | review | Review verdict: fail at 977ac08fed4a269182b67d6ada990042e2ceee88 [cfc6d944ca57] #3 | new Task: P1 JSONB numeric normalization changes valid packet digest after append and blocks immutable namespace readback. Preserve exact canonical text and verify projection before rereview. | s006_review, independent Codex context | 1 |
-| 2026-11-01 | TK-000R | Task closed | 62 focused; full local/fresh495 passed,4 skipped; migration20261101195609; exact numeric TEXT roundtrip/retry/client denial/cleanup0; source CI53pass; scoped rereview no blockers | ASSESSMENTS; TRIAL-ROWS; S-006 SPEC/TK-000R | Final CI/merge; whole assembled Review; actual owner QA; safe S007 projection and real S002 trials; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
-| 2026-11-01 | review | Review verdict: pass at 906f71f936ccbb4ccc777cbea5643ca2668d3a85 [079d355dd065] #4 | none | s006_review, independent Codex context, noncontributor | none |
-| 2026-11-01 | review-detail | Independent PASS receipt at 906f71f | [Scope, evidence and limits](../../../../feedback/REVIEW-S-006-906f71f.md) | s006_review direct handback | Actual owner QA and checked delivery remain separate |
-| 2026-11-01 | TK-000S | Task closed | 84 focused; full local/fresh517 passed,4 skipped; sourceCI61pass; live4scalarpairs refused with0mutationrequests/exactretry/originalretention/cleanup0; scoped review no blockers | ASSESSMENTS; S-006 SPEC/TK-000S; S-002 local CLI impact | FinalCI/checkedmerge; exact whole Review; actual ownerQA; safe S007projection/realS002trials Git state at close: dirty-tree (1 file: ams_skills_by_workbench_verb.svg); recorded reason: Unowned untracked ams_skills_by_workbench_verb.svg appeared during execution and is retained untouched, excluded from owned commits; all owned tracked changes committed and pushed; close attribution: {"agent":"codex-assessment-writer","claimant":"codex-assessment-writer","onBehalfOf":null} |
-| 2026-11-01 | review | Review verdict: pass at e5a8c33a24226fd1f3eb595fa227f385a04934bd [6df68e2822de] #5 | none | s006_review, independent Codex context, noncontributor | none |
-| 2026-11-01 | review-detail | Independent whole PASS receipt at e5a8c33 | [Scope, evidence and limits](../../../../feedback/REVIEW-S-006-e5a8c33.md) | s006_review direct handback | Actual owner QA and checked delivery remain separate |
-| 2026-11-01 | TK-000U | Task closed | Source9f3a6ca reconciles main17293a0; local and fresh590 passed4 skipped; focused85 passed; direct independent source review d50 PASS; all8 retained facts rederived exactly. Final CI/current-owner binding then postmerge live proof remain required. | src/ams/build_history.py module contract; S006 TaskU and Spec; TASKBOARD | Postmerge history import/readcheck and durable Spec proof pending in same run; Build-history criterion remains unchecked. Owner HumanQA/formal Spec acceptance pending.; close attribution: {"agent":"codex-history-consumer","claimant":"codex-history-consumer","onBehalfOf":null} |
-| 2026-11-02 | TK-000X | Task closed | Source3cd0637 CommonMark token parser;166focused; local/fresh699passed4skipped; exact8real facts once; source CI and direct independent scopedPASS. Two setext expected-value corrections documented; final owner binding/currentCI and postmerge proof remain. | build_history module contract; pinned pyproject/uv.lock; TaskX; approval Wiki; TASKBOARD | Actual postmerge history import/readcheck and durable Spec proof pending in same run. W remains stopped/unaccepted; owner HumanQA/formal S006 completion open.; close attribution: {"agent":"codex-history-parser","claimant":"codex-history-parser","onBehalfOf":null} |
-| 2026-11-02 | TK-000X | Checked source delivered; live verification incomplete | PR #91 merge771bd1e; locked local/fresh699 passed4 skipped; independent166/source binding. GET-only snapshot1030: missing130 extra1 mismatches2 unsourced0 ordered; original8 facts exact. Import rejected before execution twice; no writes | TaskX; Current Verified State | Direct import approval and correctness-preserving S008 lineage disposition, stopped W lifecycle and owner HumanQA remain open |
-| 2026-11-02 | TK-000Z | Task closed | Source3a25cac: local/fresh764 passed,4 skipped; independent215 history and49 affected; strict1232-to1234 full replay,61 source classifications; exact3S008+8archives/R; Task metadata applying-fake undo/CAS/current readback; real GET exact200-one/mismatch200-zero; source CI41435710340 pass | build_history module contract; S006 Spec/TK000Z; history regression tests; scoped independent source review and frozen comparison | Final owner-record CI and checked PR104 merge; real history import requires explicit approval and has not run; current canonical DB repair/readback and global live readcheck unrun; stopped W, whole-S006 binding and actual owner HumanQA remain open; close attribution: {"agent":"codex-task-provenance","claimant":"codex-task-provenance","onBehalfOf":null} |
+|2026-11-01|none|Mapped as planned; baseline migration noted|render/doctor|Spec|All criteria|
+|2026-11-01|TK-001|Task closed|PR15 884d021|RUNBOOK/ARCH|Legacy JWT fakes only|
+|2026-11-01|TK-002|Task closed|PR18 d279ae1|RUNBOOK/ARCH|none|
+|2026-11-01|TK-003|Task closed|PR29 74b446e|RUNBOOK/ARCH|RSI awaits S002|
+|2026-11-01|TK-004|Task closed|PR31/37 4d74e90/d26bb8c|RUNBOOK/ARCH|Dev not imported|
+|2026-11-01|TK-005|Task closed|PR42 55c3856|RUNBOOK/ARCH|S002 seeds|
+|2026-11-01|review|Review verdict: fail at c87bf4ec86206bd5f734af7b828c81c3d3356a00 [a2124994b4d9] #1|Tasks B/C/D|C repo review|3|
+|2026-11-01|TK-000E|B review FAIL c87bf4e: H1, M1-M3, L1, L2|live review|Spec|Task E|
+|2026-11-01|TK-000E|Task closed|PR49 a03d739; live/readcheck0|Task E|Fresh Review|
+|2026-11-01|TK-000C|Task closed|a4470a4 secret tree/history scan|Task C|none|
+|2026-11-01|TK-000D|Task closed|a4470a4; DB20261101144510|Task D|none|
+|2026-11-01|TK-000B|Task closed|a4470a4;8 criteria|Task B|Fresh Review|
+|2026-11-01|review|Review verdict: pass at d6d4a6d65cc6287b667fe78ee5db937440972a5e [213a7241e512] #2|none|C repo review|none|
+|2026-11-01|TK-000L|B review FAIL d6d4a6d: N1-N6, legacy key|live review|Spec|Task L|
+|2026-11-01|TK-000L|Task closed|5aa2621/c0f6c67;943 rows/0 gaps;433/4|[Task L](tasks/TK-000L/TASK.md)|Review; assessments/metrics|
+|2026-11-01|TK-000P|Task closed|475/4; migration20261101192328; live cleanup0|[Task P](tasks/TK-000P/TASK.md)|Review; assessments/trials|
+|2026-11-01|TK-000Q|Task closed|56 focused;489/4; migration20261101193603; live|[Task Q](tasks/TK-000Q/TASK.md)|Delivery/Review/QA; S007/S002|
+|2026-11-01|review|Review verdict: fail at 977ac08fed4a269182b67d6ada990042e2ceee88 [cfc6d944ca57] #3|P1 JSONB normalization poisons digest; exact TEXT repair|s006_review independent|1|
+|2026-11-01|TK-000R|Task closed|62 focused;495/4; migration20261101195609; live/CI53|[Task R](tasks/TK-000R/TASK.md)|Delivery/Review/QA; S007/S002|
+|2026-11-01|review|Review verdict: pass at 906f71f936ccbb4ccc777cbea5643ca2668d3a85 [079d355dd065] #4|none|s006_review independent|none|
+|2026-11-01|review-detail|Independent PASS receipt at 906f71f|[receipt](../../../../feedback/REVIEW-S-006-906f71f.md)|direct reviewer|Owner QA/delivery separate|
+|2026-11-01|TK-000S|Task closed|84 focused;517/4;CI61;4 live pairs/0 mutation; cleanup0|[Task S](tasks/TK-000S/TASK.md)|Review/QA/S007/S002; unowned SVG retained|
+|2026-11-01|review|Review verdict: pass at e5a8c33a24226fd1f3eb595fa227f385a04934bd [6df68e2822de] #5|none|s006_review independent|none|
+|2026-11-01|review-detail|Independent whole PASS receipt at e5a8c33|[receipt](../../../../feedback/REVIEW-S-006-e5a8c33.md)|direct reviewer|Owner QA/delivery separate|
+|2026-11-01|TK-000U|Task closed|9f3a6ca/main172;590/4;85 focused;d50 scoped PASS;8 facts|[Task U](tasks/TK-000U/TASK.md)|CI/binding/live/QA|
+|2026-11-02|TK-000X|Task closed|3cd0637;699/4;166 focused;8 facts; scoped PASS;2 setext oracles corrected|[Task X](tasks/TK-000X/TASK.md)|Binding/CI/live; W/owner QA open|
+|2026-11-02|TK-000X|Checked source delivered; live verification incomplete|PR91 771; GET 1030:missing130/extra1/mismatch2/unsourced0;8 exact;2 rejected writes unrun|Task X|Approval/S008 lineage/W/owner QA then held|
+|2026-11-02|TK-000Z|Task closed|3a25cac;764/4;215+49;1232→1234/61;3+8/R;fake CAS/undo/current;GET1/0;CI41435710340|[Task Z](tasks/TK-000Z/TASK.md)|At close:CI/merge/import/current DB/live unrun; W/whole Review/QA|
 
 ## Review and Human QA
 
-Presentation Human QA belongs to S-007. The installed native completion gate still requires actual candidate owner Human QA; it remains open and is not supplied by engineering or independent source review.
+Verdicts bind candidates. Presentation QA:S007; native completion needs actual owner HumanQA.
 
 ## Completion Result
 
-Implementation delivered: schema/local writers, explicit unknown trial metrics,
-private assessment append/replay, CommonMark-routed archived evidence and the
-Task-identity history consumer/metadata correction. Candidate-bound Task proofs
-retain earlier live checks, failures and corrected source verification. Private
-packets remain inaccessible to site clients; no trial result or evaluator
-qualification is inferred. Real current history import/canonical-row readback
-and global live verification remain held for explicit permission. Build-history
-acceptance, stopped W disposition, independent whole-Spec binding and actual
-owner-QA completion remain open; the Spec is not accepted.
+Implemented; approved batch passes. NOT accepted:latest coverage/W/whole Review/owner QA open. No trial/evaluator qualification.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- Region: nearest US default unless the owner chooses.
-- Rows key on table index: a condensed row is re-dated; `import --refresh-changed` updates it, logged, old values in `detail.refreshed`.
-- Legacy JWT: fakes only; the project has only an `sb_secret_` key.
-- Baseline migration version: repo `20261101000000`, DB `20261101123819`; not renamed.
+Region:nearest US unless chosen. Table-index condensation re-dates; refresh logs prior values. Legacy JWT:fakes only. Baseline migration repo20261101000000/DB20261101123819 unchanged.
 
 ## Supersession
 
-- Supersedes: the earlier draft's JSONL ledger files.
-- Superseded by: none
+Draft JSONL superseded; no successor.
