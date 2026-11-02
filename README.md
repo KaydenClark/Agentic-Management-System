@@ -2,9 +2,9 @@
 
 > Generated from LLM Workbench v3.2.2.
 
-AMS is a reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. This project adds recursive self-improvement (RSI), testing and improving those methods through real work on the Workbench. [Blueprint](BLUEPRINT.md) describes the destination; [S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick for whether AMS is built.
+AMS is a reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. [Blueprint](BLUEPRINT.md) describes the final product; [S-001](workbench/specs/S-001-ams/SPEC.md) assesses the current build against its bounded criteria.
 
-The first loop builds a website that explains and demonstrates AMS; its code lives in [`site/`](site/README.md), with Vercel hosting planned. This repository also holds the Workbench controls, lifecycle tools and artifact templates. Application behavior, deployment and measured improvements remain to be implemented and verified.
+This room builds the public website, runs the recursive self-improvement (RSI) loop and improves shared skills already used across projects. The website explains AMS and shows verified results from its own build and skill improvements, with room for evidence from other projects later. Its code lives in [`site/`](site/README.md). Projects needing setup or Workbench adjustments use `setup-workbench` in their own folder. Current implementation and proof live in the linked Spec and Task records.
 
 ## Get Oriented
 

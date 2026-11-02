@@ -1,34 +1,25 @@
 # Agentic Management System - Blueprint
 
-Destination from the owner’s 2026-11-02 correction. Implementation and outcome claims require evidence.
+## The destination
 
-## What it is
+AMS is a reusable system of workflows, rules, skills and tools that helps people develop intent with AI and have agents carry it into verified outcomes. Its shared skills improve through evidence from real work, so learning from one project can improve how other projects work.
 
-AMS is a reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. Its operating methods are packaged for anyone to reuse, with intent, decisions, corrections and evidence preserved from request through delivery. The Workbench provides the environment in which the system operates.
+This room brings together the work that makes that possible: building the public AMS website, creating and running the recursive self-improvement (RSI) loop, and improving the shared skills already used across projects. The website is AMS's public explanation and evidence surface. AMS itself is the system people and agents use to do the work.
 
-This project adds recursive self-improvement (RSI): use actual work to find failures, test bounded repairs and retain improvements supported by evidence. It develops the system while repairing demonstrated failures in the Workbench beneath it.
+## What people can understand and verify
 
-This project develops and proves improvements to the shared skills while building a website that explains and shows AMS. Website development continually exposes workflow and process issues: record them, fix the owning skills, compare before and after here, record the evidence and disposition in the RSI log, and display that log on the website. Failed and inconclusive attempts remain visible.
+Visitors can understand what AMS does, why it exists and how its parts work together. An orientation tour, skills wiki, governance explanations, flow charts and a demonstration Grill Board make its methods understandable to people who do not already know the project. The real Grill Board gives the owner a local place to answer questions, review work and give feedback.
 
-Each workflow or process issue asks how the skill correction prevents recurrence in any project. AMS is the project where those improvements are proved through real work; the resulting skill improvements serve the whole workflow and system.
+The website shows verified results of AMS at work. Its own creation supplies the first body of evidence: what was built, which workflow failures appeared, what changed in the skills and whether the changes helped. Readers can follow a result to its baseline, comparison, evidence and limits. Failed attempts, regressions and inconclusive results remain part of the account; a merged change or a static score alone cannot establish improvement.
 
-## Who it serves
+As evidence becomes available, the website can also show results and improvements from other projects using AMS. Each result retains its project, version, context and limits, so a benefit demonstrated in one setting is not presented as proof everywhere.
 
-AMS serves people who want to turn intent into outcomes with AI using reusable operating methods. Agents need clear intent, scoped assignments, available methods and recoverable evidence. Website visitors need an understandable account of the system and demonstrations that distinguish intended behavior from verified capability.
+## A system that improves through use
 
-## Promised outcomes
+The RSI loop connects observed problems to bounded skill changes, before-and-after comparisons and evidence-based decisions about what to retain. Recorded intent, decisions and corrections survive the work and inform later use. The website makes that learning visible while the shared skills carry supported improvements into everyday project work.
 
-- Preserve intent, reasons and corrections from request through delivered outcome.
-- Connect agents, workflows, skills and tools with clear ownership and usable context.
-- Repair demonstrated Workbench failures while building useful capabilities above it.
-- Improve shared skills through actual work: record issues, prove bounded repairs here, log before/after evidence and carry supported learning into the next loop.
-- Display the RSI log on the website, connecting each issue and skill change to its evidence, result and remaining limits.
-- Explain AMS through a website whose claims link to suitable evidence and whose interactions demonstrate the claimed behavior.
+Projects already use those shared skills; improving them does not require a separate AMS delivery or an installation into every project. When a substantial change requires a project's Workbench to be corrected, or an existing or new project needs setup, someone runs `setup-workbench` in that project's folder.
 
-## Non-goals
+## How this document is used
 
-- Treating a template, dashboard, screenshot or passing structural check as proof of operational reliability.
-- Turning historical research proposals into adopted policy without a current decision.
-- Replacing independently owned personal skills merely because AMS uses them.
-- Installing improved skills into other projects or making cross-project rollout a proof requirement for this project.
-- Publishing private source material or treating website creation as automatic deployment authority.
+This Blueprint describes the final product and its enduring direction. Landmarks and Specs define bounded destinations toward it; assessment records report progress against it. Current status, implementation plans and proof live in their own records. Private material stays private; public claims use evidence suitable for publication.
