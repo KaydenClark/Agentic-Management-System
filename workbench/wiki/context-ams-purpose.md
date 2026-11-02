@@ -227,3 +227,29 @@ Kayden corrected the proposed percentage margin: "It should actually work, if it
 ### TK-002 preparation, 2026-11-01
 
 The sole primary writer resumed original TK-002 after reviewed S-006 private/trial inputs and accepted bootstrap merge `17293a09d55806342442e57e6253984e20cdb7b8`. Formal S-006 QA remains separate. [Frozen protocol](../../evals/INTERVIEW-NOISE.md) defines exact narrow calibration, same-version noise, protected evidence, cancellation and honest Unknown handling. Code delivery alone releases no model series or candidate retention. No qualification, measured floor or improvement is claimed by this preparation.
+
+<!-- jot-entry -->
+### JOT-0c0a5d6f-52e6-450a-aaa4-4c59c5351112
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T08:16:31.370Z
+Author: Kayden
+Source: Kayden, AMS chat 01a19887-118e-7dd2-88ad-676598f589ef, user message 01a19b53-08e5-7082-9078-99826dfa1f4b, 2026-11-02; reply to call_175250c8b21b436f9755ae6f4eea487f
+Topic: ams-purpose
+Supersedes: none
+
+Kayden answered “Approve these scoped sends” to sending S-002 frozen interview fixtures, grader instructions/control examples and private baseline/candidate skill files listed in the d78b663 pinned interview-artifacts inventory to Anthropic through the subscribed Claude CLI for qualification and authorized trials. This explicit payload/destination approval resolves the prior automatic approval rejection; preserve that rejected-before-process incident and its zero-call state. It does not authorize a new paid service, expanded payload/destination, skill installation or modification, automatic proposing, qualification/outcome acceptance, retention, Human QA or website publication. The orchestrator currently releases only five distinct frozen qualification controls at accepted source 921cb3e with fixed model/effort and immediate runtime hold; nine baseline worker/judge slots and trial-store rows remain unreleased pending actual-result inspection.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-680649a1-afb4-48a4-99e4-991cf3126be0
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T08:43:04.076Z
+Author: Kayden
+Source: Kayden, chat 01a197f8-e175-76e1-8c2f-8c8be5420dc4, turn 01a197f8-e4ca-7db0-90a3-46b0d1821c7f, user message 01a197f8-ec2b-72c0-9db7-4712043972d4; directly recovered 2026-11-02
+Topic: ams-purpose
+Supersedes: none
+
+The owner explicitly requested running AMS through the RSI loop, making results viewable on the Vercel dev site, and “log the results in supabase.” The current owner request resumes S-006 approved local writer work and S-002. This is existing Supabase result-publication authority, separate from the later Anthropic payload approval; it corrects the premise of the first rejected old-baseline storage request. The bounded current publication is only one observed stopped old-source921 run and its Unknown slot0 result, safe metadata/hashes/counts only, through the existing local-key writer with exact readback. No raw private response, path, skill text or rationale is published; no schema, deployment, extra trial or row deletion is authorized. Preserve the rejected-before-process incident and the incomplete baseline.
+<!-- /jot-entry -->
