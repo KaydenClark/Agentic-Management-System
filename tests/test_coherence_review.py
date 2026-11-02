@@ -215,6 +215,22 @@ class StatusTest(unittest.TestCase):
         self.assertEqual(v["status"], "stale", v)
         self.assertIn("diagram.svg", " ".join(v["reasons"]))
 
+    def test_review_recorded_at_a_symbolic_ref_goes_stale_after_a_code_commit(self):
+        # Codex P2 on PR #97: `--candidate HEAD` must bind the commit, not the ref.
+        def native(argv):
+            candidate = argv[argv.index("--candidate") + 1]
+            reviewer = argv[argv.index("--reviewer") + 1]
+            with Path(self.repo, SPEC_DIR, "SPEC.md").open("a") as f:
+                f.write(_verdict_row(candidate, reviewer).replace(self.candidate, candidate))
+        record("S-900", "HEAD", "pass", "none", "model fresh", "reviewer-b", context=REVIEW_CTX,
+               repo=self.repo, run_verdict=native)
+        _commit(self.repo, "Record S-900 review verdict")
+        Path(self.repo, "src/thing.py").write_text("v = 4\n")
+        head = _commit(self.repo, "Change delivered code after review")
+        [v] = self._status(head)
+        self.assertRegex(v["candidate"], r"^[0-9a-f]{40}$")
+        self.assertEqual(v["status"], "stale", v)
+
     def test_verdict_by_the_building_session_is_reported_refused(self):
         head = self._append_verdict(f"model; agent: reviewer-b; context: {BUILD_CTX}")
         [v] = self._status(head)
