@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000Y claimed by s002-structured-judge.
-**Next gate:** Close TK-000Y with verification and documentation proof.
+**Latest event:** TK-000Y closed with proof.
+**Next gate:** Deliver checked TK-000Y source via PR101; root selection/release of actual compatibility and changed-source qualification remain pending. TK-002 is incomplete.
 
 ## Intent and authority
 
@@ -24,6 +24,8 @@
 Exact-identity repair: S-006/TK-000S.
 
 [Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise. Its reviewed engineering reference `921cb3e` (PR #92; CI87; 177 affected checks) freezes the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md). PR #92 merged at `d78b663`; the orchestrator selected main-contained source `921cb3e` after direct model-free import/protocol verification. The released qualification command was rejected by automatic approval review before process creation. The owner explicitly approved scoped Anthropic/subscribed-Claude sends on 2026-11-02. The first five-control qualification phase then executed once and all expected outcomes matched; the root inspected private evidence digest `f6938f3...` and accepted only that narrow qualification. The first baseline worker process completed, but its judge returned fenced JSON and the strict parser retained Unknown (`3a2637ba...`); task success is unestablished. Further model slots are held. The root released only publication of the old incomplete observation, now run28/result41 with exact readback below. Noise and benefit remain unproven. [TK-002](tasks/TK-002/TASK.md) owns the exact hold and preserved identities.
+
+[TK-000Y](tasks/TK-000Y/TASK.md) completed only the bounded structured-output/neutral-context engineering correction at independently reviewed source `c3e1fd9`; private model-free recorde9c08d/protocol720869 binds unchanged semantic inputs and prior actual labels. Current/fresh/independent affected231/1skip and predecessor ed5 full local/fresh761/4skip are source-bound in its receipt; CI117 passed runtime-identical head489. PR101 checked delivery remains separate from root source selection and actual restricted-CLI compatibility/new qualification. Corrective model queries and additional store writes remain zero; old source921 evidence is unchanged.
 
 ## Desired Behavior
 
@@ -123,6 +125,7 @@ Kayden reported lost grilling as a failure; the linked context preserves the int
 | 2026-11-01 | TK-000O | Task closed | 42 focused; CI #38 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
 | 2026-11-01 | TK-000T | Task closed | 45 focused; fresh 562/4 skip; CI70; actual adapter smoke | evals, Runbook, Wiki | Oracle calibration, noise, controls, benefit; close attribution: {"agent":"s002-bootstrap","claimant":"s002-bootstrap","onBehalfOf":null} |
 | 2026-11-01 | TK-000V | Task closed | 50 focused; fresh 567/4 skip; actual inert adapter | evals/TRIALS.md | Oracle/noise/controls/benefit; close attribution: {"agent":"s002-transport","claimant":"s002-transport","onBehalfOf":null} |
+| 2026-11-02 | TK-000Y | Task closed | Engineering source c3e1fd9: primary/fresh/independent 231 passed/1 skipped; predecessor ed5 local/fresh full761 passed/4 skipped; current room/layout/render/diff checks; direct scoped independent source/binding PASS; CI117 passed exact489 runtime-identical head; model-free recorde9c08d/protocol720869 releasedfalse. | evals/INTERVIEW-NOISE.md; TK-000Y; S-002; TASKBOARD | Only bounded serialization/neutral-context engineering is complete. Actual restricted CLI compatibility and changed-source qualification are unverified/unreleased; TK-002 and floor remain incomplete. Old run28/result41 and original campaign evidence preserved; corrective model/store calls0. Current final-record CI and checked PR101 main delivery pending.; close attribution: {"agent":"s002-structured-judge","claimant":"s002-structured-judge","onBehalfOf":null} |
 
 ## Old incomplete baseline publication
 

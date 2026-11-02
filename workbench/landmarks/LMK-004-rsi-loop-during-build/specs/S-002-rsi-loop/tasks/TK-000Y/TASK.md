@@ -3,12 +3,13 @@
 **Task ID:** TK-000Y
 **Spec ID:** S-002
 **Slice:** A judge requests the fixed JSON schema through a bounded serialization-only transport
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Evals; Readback
 **Planned verification:** Causal inert structured-protocol red/green tests; unchanged worker regressions; full/fresh/room/CI; independent exact-source review; private new-series manifest, without model execution
 **Claimed by:** s002-structured-judge
 **Current claimant:** s002-structured-judge
+**Proof:** Engineering source c3e1fd9: primary/fresh/independent 231 passed/1 skipped; predecessor ed5 local/fresh full761 passed/4 skipped; current room/layout/render/diff checks; direct scoped independent source/binding PASS; CI117 passed exact489 runtime-identical head; model-free recorde9c08d/protocol720869 releasedfalse.
 
 ## Assignment
 
@@ -43,6 +44,7 @@ At initial source `7587fb2`, local/fresh full suites both passed 742/4 skipped. 
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | feature/s002-structured-judge | 7070066bfb177f4fc5aac2c182ea4b3d6f7883c1 | ahead 0 behind 0 | 0 | Source c3e1fd9: 231 affected passed/1 skipped in primary and clean verification snapshot; seven malformed-handshake cases reproduced red then green; campaign preserves controlled Unknown without prompt. Prior exact ed5f415 local/fresh full both 761 passed/4 skipped. Current doctor/layout/render/diff checks pass; two existing informational doctor findings. | evals/INTERVIEW-NOISE.md; TK-000Y; S-002; TASKBOARD | Independent final-source review and current-head CI/checked delivery pending; actual structured-output compatibility and new qualification remain unreleased. TK-002 incomplete; old stopped run28/result41 preserved; no new model or store calls. | 3d13edc9a634138e547b521bee5bbfca755bc7cabd6a335f44bff74c5c529431 |
+| 2 | feature/s002-structured-judge | b8ca5902fbb417f3c8cb6b88f9e50b313adb9f57 | ahead 0 behind 0 | 0 | Engineering source c3e1fd9: primary/fresh/independent 231 passed/1 skipped; predecessor ed5 local/fresh full761 passed/4 skipped; current room/layout/render/diff checks; direct scoped independent source/binding PASS; CI117 passed exact489 runtime-identical head; model-free recorde9c08d/protocol720869 releasedfalse. | evals/INTERVIEW-NOISE.md; TK-000Y; S-002; TASKBOARD | Only bounded serialization/neutral-context engineering is complete. Actual restricted CLI compatibility and changed-source qualification are unverified/unreleased; TK-002 and floor remain incomplete. Old run28/result41 and original campaign evidence preserved; corrective model/store calls0. Current final-record CI and checked PR101 main delivery pending.; close attribution: {"agent":"s002-structured-judge","claimant":"s002-structured-judge","onBehalfOf":null} | 03044f2bf626c7a0fac40bc9272216bcbda5f8216eaf15f80e4e0f36533374c3 |
 
 ## Final engineering checks
 
