@@ -48,4 +48,12 @@ Ref retention alone is not an established source defect when trusted execution o
 
 ## Next Action And Review Boundary
 
+### Later trace readback (same attempt; original ledgers retained)
+
+The evaluator's later private trace readback established actual controlled worker model `gpt-6.1-terra`, high effort, superseding the initial unknown-effort observation without altering that history. It confirms selected supplied skill reads, an independent P2 pruner/write and author same-case retest, and the third workflow run's actual dirty-tree refusal. It does not establish native activation or useful benefit.
+
+Additional evidence revises the reported workflow r1 tally to **11/78**, with per-run counts 4/26, 3/26 and 4/26; **Broken**, acceptance false. Addendum SHA-256: `1226de032b0d257e635b7f982479675455b2ac869906b57007293fb8ca9b1650`. The original provisional 6/78 ledger remains above.
+
+The separate pruning tally becomes **6/51**, with per-run counts 1/17, 4/17 and 1/17; **Broken**, acceptance false. Addendum SHA-256: `4581599d7f7e3b36b87bf16a66258b4e7d84da58e70312335ea8daf8fa2e13e7`. The original provisional 3/51 ledger remains above. Most unresolved rows still lack full-check evidence; qualification remains limited to objective checks, not complete semantic equivalence. These are evidence addenda to attempt one, not new candidates, a reset, pooled inventories or acceptance.
+
 Keep this attempt and source identity. The skills implementor receives the actual failed obligation; a later immutable candidate needs applicable retests, the unchanged attempt history and qualifying evidence. No skill merge, installation, later-use benefit or Human QA is established. The public site may display this bounded failed evidence with its limitations; dev-to-main remains the owner's action.
