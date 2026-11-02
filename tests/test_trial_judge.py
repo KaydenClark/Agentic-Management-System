@@ -120,3 +120,21 @@ def test_malformed_nested_protocol_is_a_refusal_not_an_uncaptured_bug(fault):
     if fault=='result-message':stream[2]['message']='malformed'
     if fault=='usage-model-object':stream[-1]['modelUsage'][runtime.MODEL]=None
     with pytest.raises(Refused):judge.ClaudeJudgeAdapter().execute('criterion',transport=Transport(stream))
+
+
+@pytest.mark.parametrize('value',[None,[],True])
+def test_malformed_initialize_is_refused_before_any_prompt(value):
+    t=Transport(events());t.initialize=lambda:value
+    adapter=judge.ClaudeJudgeAdapter()
+    with pytest.raises(Refused):adapter.execute('criterion',transport=t)
+    assert t.closed and t.prompts==[] and adapter.last_failure is not None
+
+
+@pytest.mark.parametrize('response',[None,{'type':'control_response','response':None},
+    {'type':'control_response','response':{'request_id':'initialize','subtype':'success','response':None}},
+    {'type':'control_response','response':{'request_id':'initialize','subtype':'success','response':[]}}])
+def test_actual_control_body_malformed_shapes_are_declared_refusals(response):
+    from ams.trial_transport import ClaudeProcess
+    stream=ClaudeProcess.__new__(ClaudeProcess)
+    stream._send=lambda *args:None;stream._receive=lambda *args:response
+    with pytest.raises(Refused):stream._control('initialize')

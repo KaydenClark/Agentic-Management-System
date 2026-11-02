@@ -104,3 +104,17 @@ def test_rehashed_oracle_prompt_change_cannot_reuse_predecessor_labels(tmp_path,
     ref=json.loads(c.reference.read_text());ref['promptSha256']=hashlib.sha256(prompt.read_bytes()).hexdigest()
     c.reference.write_text(json.dumps(ref))
     with pytest.raises(Refused,match='semantic'):c.qualify()
+
+
+def test_malformed_handshake_becomes_controlled_unknown_without_prompt(tmp_path,monkeypatch):
+    from ams import trial_judge,trial_transport
+    from ams.trial_campaign import RuntimeHalt
+    from test_trial_runtime import Transport
+    stream=Transport();stream.initialize=lambda:None
+    monkeypatch.setattr(trial_transport,'ClaudeProcess',lambda *a,**k:stream)
+    c=campaign(tmp_path,monkeypatch,trial_judge.InterviewAdapter().execute)
+    with pytest.raises(RuntimeHalt):c.qualify()
+    row=series.read_private(c.store,'qualification-owner-positive-r1')['evidence']
+    assert row['verdict']=='Unknown' and row['reason']=='runtime-refused' and row['ownerCancellation']is False
+    assert not stream.prompts and stream.closed and c.last_failure is not None
+    assert not (c.store/'qualification-final.json').exists()

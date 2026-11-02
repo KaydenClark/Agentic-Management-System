@@ -118,11 +118,15 @@ class ClaudeProcess:
         deadline = time.monotonic() + CONTROL_TIMEOUT
         self._send({'type': 'control_request', 'request_id': subtype, 'request': {'subtype': subtype}}, deadline)
         response = self._receive(deadline)
+        require(isinstance(response, dict), 'malformed Claude control envelope')
         require(response.get('type') == 'control_response', 'unexpected pre-prompt runtime message')
         data = response.get('response', {})
+        require(isinstance(data, dict), 'malformed Claude control response')
         require(data.get('request_id') == subtype and data.get('subtype') == 'success',
                 'Claude initialization/control refused')
-        return data.get('response', {})
+        body = data.get('response', {})
+        require(isinstance(body, dict), 'malformed Claude control body')
+        return body
 
     def initialize(self):
         return self._control('initialize')

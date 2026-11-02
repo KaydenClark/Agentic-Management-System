@@ -40,7 +40,9 @@ class ClaudeJudgeAdapter:
         else:stream=transport
         initialized=False;use_id=None;value=None;tool_result=False;completed=None;messages=set();uses=0
         try:
-            require(stream.initialize().get('commands')==[],'unexpected commands')
+            control=stream.initialize()
+            require(isinstance(control,dict),'judge initialize body malformed')
+            require(control.get('commands')==[],'unexpected commands')
             require(stream.mcp_status()==[],'unexpected MCP channels')
             for event in stream.responses(prompt):
                 require(isinstance(event,dict),'malformed judge message')
