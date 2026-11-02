@@ -91,4 +91,4 @@ Unrun tests are not a pass: static inspection is labeled as such, and behavioral
 
 ## Where it fits in the workflow
 
-Stage: **Improve** (learn and fix). It usually follows [setup-workbench](/skills/setup-workbench), which creates the Workbench and points outcome comparisons here. [improve-workbench](/skills/improve-workbench) hands broader or comparative claims here. Its evidence goes to [audit-workbench](/skills/audit-workbench) for scoring and back to the owners of any findings.
+Stage: **Improve** (Learn and fix). It usually follows [setup-workbench](/skills/setup-workbench), which creates the Workbench and points outcome comparisons here. [improve-workbench](/skills/improve-workbench) hands broader or comparative claims here. Its evidence goes to [audit-workbench](/skills/audit-workbench) for scoring and back to the owners of any findings.

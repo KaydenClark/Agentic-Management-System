@@ -106,6 +106,6 @@ It should not. Settled answers are recorded, and a resumed run picks up unresolv
 
 ## Where it fits in the workflow
 
-It belongs to the Align stage (shared concept), as an extra alongside the main flow of [grilling](/skills/grilling) and [readback](/skills/readback). It builds on those two and on [jot](/skills/jot), and its sibling [align-docs](/skills/align-docs) extends it for documentation work.
+It belongs to the Align stage (Shared concept), as an extra alongside the main flow of [grilling](/skills/grilling) and [readback](/skills/readback). It builds on those two and on [jot](/skills/jot), and its sibling [align-docs](/skills/align-docs) extends it for documentation work.
 
 You invoke it yourself, after [setup-workbench](/skills/setup-workbench) has created the Workbench. It hands off a confirmed readback and a saved-note pointer. Prepare, with [map](/skills/map) and [plan](/skills/plan), counts as execution here, so it starts only after you authorize it.

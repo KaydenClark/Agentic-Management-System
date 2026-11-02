@@ -28,7 +28,7 @@ The agent writes up the reproduction, the root cause and how it was verified. Th
 
 Reach for it when behavior is wrong and the cause is unknown: a failure you do not understand, or a result that contradicts what the code seems to say. You want evidence before anyone edits source.
 
-Several neighbours are close, so pick by what you already have. A **Workbench** is a project set up with this catalog's records and skills, and a **Task** is one assigned unit of work in it.
+Several neighbors are close, so pick by what you already have. A **Workbench** is a project set up with this catalog's records and skills, and a **Task** is one assigned unit of work in it.
 
 | What you have | Reach for |
 | --- | --- |
@@ -41,7 +41,7 @@ Several neighbours are close, so pick by what you already have. A **Workbench** 
 
 Triage is a step you invoke yourself to sort reports, and it includes a quick check that the reported bug reproduces. This skill is where the reproduction is reduced and the cause is proven.
 
-[Journey](/skills/journey), the skill that takes a Task through Implement, Check, QA and Submit, names `diagnosing-bugs` for an unknown cause during Implement.
+[journey](/skills/journey), the skill that takes a Task through Implement, Check, QA and Submit, names `diagnosing-bugs` for an unknown cause during Implement.
 
 ## Example request
 

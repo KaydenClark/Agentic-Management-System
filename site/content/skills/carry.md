@@ -22,7 +22,7 @@ The skill is a single file with no scripts or reference documents. It is a set o
 
 Reach for `carry` when you have a clear goal, you have said how far the agent may take it, and you want it finished without a stream of check-in questions.
 
-It is a stance you ask for, not an engine. It defines no stages, roles or record formats, so pair it with the skill that does when you need those. The skill itself names no neighbour except orchestration; the placement below comes from the catalog's chart.
+It is a stance you ask for, not an engine. It defines no stages, roles or record formats, so pair it with the skill that does when you need those. The skill itself names no neighbor except orchestration; the placement below comes from the catalog's chart.
 
 | What you have | Reach for |
 |---|---|

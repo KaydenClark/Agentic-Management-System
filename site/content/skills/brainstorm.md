@@ -27,7 +27,7 @@ Reach for it when you are weighing options or testing an idea before you commit,
 
 | What you have | Reach for |
 |---|---|
-| An idea or plan you want questioned, with trade-offs shown for each recommendation | `brainstorm` |
+| An idea or plan you want questioned, with tradeoffs shown for each recommendation | `brainstorm` |
 | A plan to stress-test until you and the agent share one confirmed understanding | [grilling](/skills/grilling) |
 | An idea you want judged by a domain expert who gives its own verdict and tells you where it is wrong | [oracle](/skills/oracle) |
 | A saved interview whose confirmed intent should be preserved for later | [align-concept](/skills/align-concept) |
@@ -93,4 +93,4 @@ Agreement alone starts nothing. Turning the outcome into documentation, a handof
 
 ## Where it fits in the workflow
 
-Brainstorm sits in the Align stage (shared concept), where the main flow is [grilling](/skills/grilling) followed by [readback](/skills/readback). It is an optional side tool there, used when you want opposing cases surfaced during the interview. It leans on grilling for its protocol. Its summary of settled direction is something you can carry into the next stage, but it does not start that stage on its own: mapping, planning or building follows only if you ask for it and the authorization exists. If the work needs a durable saved record of confirmed intent, [align-concept](/skills/align-concept) is the neighbour built for that.
+Brainstorm sits in the Align stage (Shared concept), where the main flow is [grilling](/skills/grilling) followed by [readback](/skills/readback). It is an optional side tool there, used when you want opposing cases surfaced during the interview. It leans on grilling for its protocol. Its summary of settled direction is something you can carry into the next stage, but it does not start that stage on its own: mapping, planning or building follows only if you ask for it and the authorization exists. If the work needs a durable saved record of confirmed intent, [align-concept](/skills/align-concept) is the neighbor built for that.

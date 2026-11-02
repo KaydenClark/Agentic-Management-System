@@ -64,7 +64,7 @@ If a change turns out to be material, the agent keeps your confirmed intent, rec
 
 ## Decision records, offered sparingly
 
-A decision record (called CDR, ADR or DDR; the same thing) holds the rationale behind a choice. The agent offers one only if the choice is hard to reverse, would surprise a future reader, and came from a real trade-off with genuine alternatives. If any test fails, it skips the record and says which one.
+A decision record (called CDR, ADR or DDR; the same thing) holds the rationale behind a choice. The agent offers one only if the choice is hard to reverse, would surprise a future reader, and came from a real tradeoff with genuine alternatives. If any test fails, it skips the record and says which one.
 
 Offering is not writing. After you accept, the agent links an existing record if the index already has one; otherwise it writes a numbered record in the Workbench's decision collection, adds it to the index and reads both back. A record stays `proposed` until its cited source supports acceptance. To change a decision, it writes a new record and marks the old one superseded.
 

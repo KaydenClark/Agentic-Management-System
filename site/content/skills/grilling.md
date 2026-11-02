@@ -28,7 +28,7 @@ Two rules keep it honest. Facts are the agent's job and decisions are yours: it 
 
 Reach for grilling when you want a plan, decision or idea challenged before anyone builds on it, or when you simply ask to be grilled. It is the plain interview engine and works in any conversation. It needs no Workbench (the project structure of records and tools that the Workbench skills maintain).
 
-The neighbours below wrap it or sit beside it. The saved-interview, docs-editing and domain-model rows require a Workbench, a project set up by `setup-workbench`, and `align-concept` and `align-docs` run only when you ask for them. Plain grilling needs none of that.
+The neighbors below wrap it or sit beside it. The saved-interview, docs-editing and domain-model rows require a Workbench, a project set up by `setup-workbench`, and `align-concept` and `align-docs` run only when you ask for them. Plain grilling needs none of that.
 
 | What you have | Reach for |
 |---|---|
@@ -99,6 +99,6 @@ No. Confirming the readback settles what you mean. It does not start mapping, pl
 
 ## Where it fits in the workflow
 
-Grilling is the first main step of the Align stage ("Shared concept"), followed by [readback](/skills/readback), which is how its result gets confirmed. [brainstorm](/skills/brainstorm) builds on it, and [align-concept](/skills/align-concept) and [align-docs](/skills/align-docs) wrap it when the outcome should be saved or documented. [domain-modeling](/skills/domain-modeling) can run beside it when terminology is being reworked, though grilling completes without it. When you are unsure which skill fits, [ask-workbench](/skills/ask-workbench) routes you.
+Grilling is the first main step of the Align stage (Shared concept), followed by [readback](/skills/readback), which is how its result gets confirmed. [brainstorm](/skills/brainstorm) builds on it, and [align-concept](/skills/align-concept) and [align-docs](/skills/align-docs) wrap it when the outcome should be saved or documented. [domain-modeling](/skills/domain-modeling) can run beside it when terminology is being reworked, though grilling completes without it. When you are unsure which skill fits, [ask-workbench](/skills/ask-workbench) routes you.
 
 It hands off confirmed meaning. The next stage, Prepare, begins with [map](/skills/map), which describes a destination from established intent. That counts as execution, so it starts only with your explicit scope.

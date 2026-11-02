@@ -46,7 +46,7 @@ Tests should check observable outcomes and survive internal refactors. A stand-i
 
 ## When to use it
 
-Ask for it by name when an interface needs designing or improving, when you want to find modules worth deepening or decide where a seam goes, or when you want code that is easier to test and for an agent to navigate. Skills such as [Journey](/skills/journey) and [improve-codebase-architecture](/skills/improve-codebase-architecture) also load it for the vocabulary. It needs no setup of its own.
+Ask for it by name when an interface needs designing or improving, when you want to find modules worth deepening or decide where a seam goes, or when you want code that is easier to test and for an agent to navigate. Skills such as [journey](/skills/journey) and [improve-codebase-architecture](/skills/improve-codebase-architecture) also load it for the vocabulary. It needs no setup of its own.
 
 | What you have | Reach for |
 | --- | --- |
@@ -104,4 +104,4 @@ Not on its own. A test goes only when new interface checks preserve its coverage
 
 ## Where it fits in the workflow
 
-Codebase design is a supporting skill in the Journey stage (build each Task), not a step in the main flow. [Journey](/skills/journey) points to it when an interface is unsettled during implementation, within the design authority you have granted. [improve-codebase-architecture](/skills/improve-codebase-architecture), from the Improve stage, relies on it for vocabulary, dependency classification and any interface alternatives you request. Once a design is accepted, it hands off to [tdd](/skills/tdd) or the project's task workflow, carrying unresolved interface choices.
+Codebase design is a supporting skill in the Journey stage (Build each Task), not a step in the main flow. [journey](/skills/journey) points to it when an interface is unsettled during implementation, within the design authority you have granted. [improve-codebase-architecture](/skills/improve-codebase-architecture), from the Improve stage, relies on it for vocabulary, dependency classification and any interface alternatives you request. Once a design is accepted, it hands off to [tdd](/skills/tdd) or the project's task workflow, carrying unresolved interface choices.
