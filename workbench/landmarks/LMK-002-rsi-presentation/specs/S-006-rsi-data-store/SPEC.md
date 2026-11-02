@@ -5,13 +5,13 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local, holds the Supabase keys)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-02
 **Catalog description:** Supabase schema and local Python writer for RSI results, build history, cost and tokens; the site reads under RLS.
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000W claimed by codex-history-consumer.
-**Next gate:** Close TK-000W with verification and documentation proof.
+**Latest event:** TK-000X claimed by codex-history-parser.
+**Next gate:** Close TK-000X with verification and documentation proof.
 
 ## Intent and authority
 

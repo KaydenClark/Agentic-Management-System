@@ -3,10 +3,12 @@
 **Task ID:** TK-000X
 **Spec ID:** S-006
 **Slice:** CommonMark tokens govern historical archive declarations
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Build history from real records
 **Planned verification:** Existing six causal list cases red before repair; all historical visibility/provenance tests; exact eight real facts; full/fresh/room/CI and independent pinned delta review; authorized postmerge import/readcheck and owner proof.
+**Claimed by:** codex-history-parser
+**Current claimant:** codex-history-parser
 
 ## Assignment
 
