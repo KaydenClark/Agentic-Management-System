@@ -148,7 +148,9 @@ export default function StartHere() {
                   <ul className={styles.skillMain} aria-label={`${st.name}: main flow`}>
                     {st.main.map((k) => (
                       <li key={k} data-skill={k} data-main="">
-                        {k}
+                        <Link className={styles.skillLink} href={`/skills/${k}`}>
+                          {k}
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -156,7 +158,9 @@ export default function StartHere() {
                     <ul className={styles.skillUsed} aria-label={`${st.name}: also used`}>
                       {st.used.map((k) => (
                         <li key={k} data-skill={k}>
-                          {k}
+                          <Link className={styles.skillLink} href={`/skills/${k}`}>
+                            {k}
+                          </Link>
                         </li>
                       ))}
                     </ul>

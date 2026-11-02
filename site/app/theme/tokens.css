@@ -180,6 +180,9 @@
   --container: 784px;
   --container-wide: 1280px;
   --page-gutter: clamp(16px, 4vw, 24px);
+  /* Skills wiki: the navigation pane's width left of the reading column
+     (S-008, after aihero.dev/skills); the column keeps its measure. */
+  --wiki-nav-width: 232px;
 
   /* Top bar: title over its tagline and the theme toggle on the first row,
      the reading-order links stretched across the row below. */
