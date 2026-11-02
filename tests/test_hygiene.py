@@ -24,6 +24,8 @@ PLANTED = [
     ("credential", J(["sb_", "secret_", "AbCdEf0123456789"])),
     ("credential", J(["sk-", "ant-", "a" * 30])),
     ("credential", J(["sk-", "b" * 32])),
+    ("credential", J(["sk-", "proj-", "Ab_c-" * 20])),
+    ("credential", J(["sk-", "svcacct-", "Ab_c-" * 20])),
     ("credential", J(["gh", "p_", "c" * 36])),
     ("credential", J(["github", "_pat_", "d" * 30])),
     ("credential", J(["xox", "b-", "1234567890-abcdef"])),
