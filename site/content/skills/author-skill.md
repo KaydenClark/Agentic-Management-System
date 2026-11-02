@@ -14,17 +14,17 @@ credit_license: MIT and Apache-2.0
 The work runs in four passes.
 
 1. **Recover the job.** The agent reads the conversation, sources, review comments (with replies) and any existing skill, and recovers who the skill is for, the problem, what a good result looks like, the vocabulary, the scope and where to stop. The newest correction wins, untouched decisions stay, and named conflicts are reported while unaffected work continues. When revising, every useful responsibility in the old skill ends up **retained**, **repaired**, **moved** to an owner that can still be reached, or **explicitly retired**. The agent asks only about gaps that would change the process.
-2. **Develop the method.** The agent walks one concrete request from inputs to result. At each consequential decision it settles the evidence, the choice, the next action and what happens on failure. Vague verbs such as plan, coordinate or reconcile become operating instructions naming real artifacts, owners and handoffs. It also checks neighbouring skills so no work is duplicated or left unowned.
+2. **Develop the method.** The agent walks one concrete request from inputs to result. At each consequential decision it settles the evidence, the choice, the next action and what happens on failure. Vague verbs such as plan, coordinate or reconcile become operating instructions naming real artifacts, owners and handoffs. It also checks neighboring skills so no work is duplicated or left unowned.
 3. **Write the full procedure.** Shared steps go in `SKILL.md`; large conditional methods go in supporting files, each with a stated condition for reading it. The agent says where output goes and how to tell it is finished, using formats and commands it has verified. It also decides the **invocation policy**: should the agent pick the skill on its own, or only when someone asks? The catalog requires a description, and deleting one is not a portable way to hide a skill, so the agent checks real host behavior. The description names the job and its distinct triggers, and attribution is kept.
 4. **Test, prune, test again.** The agent exercises the whole draft and keeps the draft, cases and results as the **baseline**. A separate fresh-context subagent then prunes it using the writing-for-agents skill. The author never prunes its own draft. If a retest shows meaning lost in compression, the author returns the failing case to the pruner instead of patching it. If the author repairs a real gap in the method, that is a new baseline and goes back to the pruner. The behavior a passage protects settles any dispute, not brevity. This repeats until the required behavior survives.
 
-Test cases include a normal request, one with incomplete or conflicting inputs, a neighbouring request, the exception most likely to be lost in compression, and near misses that check the description does not trigger the wrong method. If independent trials claim added value, they include a no-skill run.
+Test cases include a normal request, one with incomplete or conflicting inputs, a neighboring request, the exception most likely to be lost in compression, and near misses that check the description does not trigger the wrong method. If independent trials claim added value, they include a no-skill run.
 
 Before handing over, the agent checks frontmatter, links, names, dependencies and size budgets.
 
 ## When to use it
 
-Use it when you have an agreed workflow to teach as a skill, a skill that works poorly, or several skills to merge without losing any distinct job. Investigating whether a capability exists at all needs your request; ordinary source reading does not.
+Use it when you have an agreed workflow to teach as a skill, a skill that works poorly, or several skills to merge without losing any distinct job. Researching whether a capability already exists is a separate step that needs your request; ordinary reading of your sources does not.
 
 | What you have | Reach for |
 |---|---|
@@ -50,7 +50,7 @@ The agent would read the old skill and comments, walk a real flaky test through 
 ## What it does not authorize
 
 - **Delegation or extra agents.** Authoring never grants permission to launch them.
-- **Rewriting other skills.** Needed changes elsewhere are reported, not made, and approved neighbours are preserved.
+- **Rewriting other skills.** Needed changes elsewhere are reported, not made, and approved neighbors are preserved.
 - **Publishing or installing.** The agent states whether the result is local, published or installed, and stops at the endpoint you authorized.
 - **Claims of proof.** A format check shows neither behavior nor **host activation**, meaning whether the agent runtime really loads and selects the skill. A self-walkthrough cannot establish reliability, and a passing trial cannot promise you will never need to correct the skill again.
 
@@ -70,7 +70,7 @@ The skill treats a bare label as a gap. The agent derives a procedure from your 
 
 ## It's working when
 
-- The job, audience and stopping point are recovered from your sources, and questions asked would change the process.
+- The job, audience and stopping point are recovered from your sources, and the only questions asked are ones whose answers would change the process.
 - Every useful responsibility in an old skill is retained, repaired, moved or retired.
 - The draft names real artifacts, owners and handoffs, with failure paths, instead of bare verbs.
 - Invocation policy and the description are deliberate, attribution is kept, and near misses were tested.
@@ -80,4 +80,6 @@ The skill treats a bare label as a gap. The agent derives a procedure from your 
 
 ## Where it fits in the workflow
 
-`author-skill` is a supporting skill in the Improve stage (Learn and fix). The main flow there is [improve-workbench](/skills/improve-workbench) and retro; the chart lists this skill beside [audit-workbench](/skills/audit-workbench), [diagnose-and-propose](/skills/diagnose-and-propose) and [writing-for-agents](/skills/writing-for-agents). The skill does not name its callers, but a typical trigger is a finding from an improvement loop or audit that points at a weak skill. It uses writing-for-agents through the separate pruner, then hands back the skill, material changes, before-and-after validation and remaining limits. Review, landing and publishing stay with whoever is authorized.
+`author-skill` is a supporting skill in the Improve stage (Learn and fix). The main flow there is [retro](/skills/retro) and [improve-workbench](/skills/improve-workbench), and this skill sits beside [audit-workbench](/skills/audit-workbench), [diagnose-and-propose](/skills/diagnose-and-propose) and [writing-for-agents](/skills/writing-for-agents). A typical trigger is a finding from an improvement loop or an audit that points at a weak skill.
+
+It uses writing-for-agents through the separate pruner, then hands back the skill, its material changes, before-and-after validation and any remaining limits. Review, landing and publishing stay with whoever is authorized.

@@ -32,13 +32,13 @@ Use it to ask whether a room is healthy, whether a skill truly activates in a gi
 
 ## Example request
 
-> Our new journey skill revision is on a branch. Check that the room still validates, confirm the skill actually loads in the agent host we ship for, and run a small comparison against the previous revision so we know whether it helped or hurt.
+> We revised one of our agent skills on a branch. Check that the room still validates, confirm the skill actually loads in the agent host we ship for, and run a small comparison against the previous revision so we know whether it helped or hurt.
 
 The skill pins that branch as the candidate, runs the existing checks, watches a real load in the named host, freezes a task set, and reports regression, benefit or an inconclusive result with evidence.
 
 ## What it requires
 
-- **A Workbench from the setup skill.** If the manifest or spec tool is missing, it stops and points you to [setup-workbench](/skills/setup-workbench); it never builds Workbench records by hand.
+- **A Workbench from the setup skill.** If the Workbench manifest or the `spec-workbench` tool is missing, it stops and points you to [setup-workbench](/skills/setup-workbench); it never builds Workbench records by hand.
 - **Checks and runners that already exist.** A missing tool is logged as a gap, with a manual check where one can settle the point. It won't invent a runner to look thorough.
 - **audit-workbench, for scoring only.** Without it you get the evidence and a note that scoring is pending, never a score from memory.
 - **Spending authority.** Paid trial campaigns need authority already in place covering projects, models, trial counts, an attempt cap and a spending limit. Without it, paid work waits while static checks continue.
@@ -69,7 +69,7 @@ It saves the real failing output before retrying. An unreachable repository, pro
 
 ### Can it give me an Alignment score, or does a guardrail score count?
 
-Only audit-workbench scores, and an older static, guardrail or HFI score never substitutes for its Alignment Score. A static evaluator only tests control coverage, and a guardrail score is a rough diagnostic, not proof of repeated outcomes. Read the Alignment Check first so your evidence maps to its check IDs.
+Only audit-workbench scores, and an older static, guardrail or other legacy score never substitutes for its Alignment score. A static evaluator only tests control coverage, and a guardrail score is a rough diagnostic, not proof of repeated outcomes. Read the Alignment Check first so your evidence maps to its check IDs.
 
 ### How does it decide a change helped?
 
@@ -77,7 +77,7 @@ It compares runs against runs under frozen conditions. If the baseline passed a 
 
 ### The tests could not run, or a repaired revision came back. What carries over?
 
-Unrun tests are not a pass: static inspection is labeled as such, and behavioral claims stay unverified. A repaired revision gets no inherited approval; it is tested on the original case plus affected regressions with the rubric and baseline unchanged, and a fresh case decides because the tuning case is spent.
+Unrun tests are not a pass: static inspection is labeled as such, and behavioral claims stay unverified. A repaired revision inherits no approval. It is retested on the original case and the regressions it could affect, with the rubric and baseline unchanged, and a fresh case decides the result because the case used for tuning is already spent.
 
 ## It's working when
 
@@ -91,4 +91,4 @@ Unrun tests are not a pass: static inspection is labeled as such, and behavioral
 
 ## Where it fits in the workflow
 
-Stage: **Improve** (learn and fix). It usually follows [setup-workbench](/skills/setup-workbench), which creates the Workbench and points outcome comparisons here. [improve-workbench](/skills/improve-workbench) hands broader or comparative claims here. Its evidence goes to [audit-workbench](/skills/audit-workbench) for scoring and back to the owners of any findings.
+It belongs to the **Improve** stage (Learn and fix) and usually follows [setup-workbench](/skills/setup-workbench), which creates the Workbench and points outcome comparisons here. [improve-workbench](/skills/improve-workbench) hands broader or comparative claims here. Its evidence goes to [audit-workbench](/skills/audit-workbench) for scoring and back to the owners of any findings.

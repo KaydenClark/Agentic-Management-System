@@ -22,7 +22,7 @@ The skill is a single file with no scripts or reference documents. It is a set o
 
 Reach for `carry` when you have a clear goal, you have said how far the agent may take it, and you want it finished without a stream of check-in questions.
 
-It is a stance you ask for, not an engine. It defines no stages, roles or record formats, so pair it with the skill that does when you need those. The skill itself names no neighbour except orchestration; the placement below comes from the catalog's chart.
+It is a stance you ask for, not an engine. It defines no stages, roles or record formats, so pair it with the skill that does when you need those.
 
 | What you have | Reach for |
 |---|---|
@@ -40,11 +40,11 @@ The agent treats the pull request as the endpoint and comes back only for a real
 
 ## What it requires
 
-The skill file names no tools, records or other skills as prerequisites. It relies on an objective specific enough to act on, an endpoint you have already authorized, and the project's existing records and conversation, which it searches for answers and uses to log hand-backs. It does not say a Workbench (a project's structured set of records and skills) is required.
+`carry` needs no particular tools, records or other skills, and no Workbench (a project's structured set of records and skills). It relies on an objective specific enough to act on, an endpoint you have already authorized, and the project's existing records and conversation, which it searches for answers and uses to log hand-backs.
 
 ## What it does not authorize
 
-Running `carry` adds nothing to your agent's permissions. The skill rules out inventing a substitute objective, expanding authorization, and bypassing your intent. As an illustration of the middle one, if you approved a pull request, `carry` does not turn that into a merge. It also does not let the agent fill in a missing preference, tradeoff, authorization or resource on its own; those are exactly what it asks you about.
+Running `carry` adds nothing to your agent's permissions. The skill rules out inventing a substitute objective, expanding authorization and bypassing your intent. For example, if you approved a pull request, `carry` does not stretch that into a merge. It also does not let the agent fill in a missing preference, tradeoff, authorization or resource on its own; those are exactly what it asks you about.
 
 ## FAQs
 
@@ -62,7 +62,7 @@ That is a miss against the skill, which requires checking the conversation and p
 
 ### How does this differ from orchestrate or journey, and will it merge for me?
 
-`carry` is about ownership and when to ask. [orchestrate](/skills/orchestrate) coordinates implementors and [journey](/skills/journey) moves one Task through its stages; since the skill allows orchestration where useful, `carry` can sit above them. It merges or publishes only if you already authorized that endpoint.
+`carry` is about ownership and when to ask. [orchestrate](/skills/orchestrate) coordinates implementors and [journey](/skills/journey) moves one Task through its stages. Because `carry` may use orchestration where it helps, it can sit above both. It merges or publishes only if you already authorized that endpoint.
 
 ## It's working when
 
@@ -74,4 +74,4 @@ That is a miss against the skill, which requires checking the conversation and p
 
 ## Where it fits in the workflow
 
-`carry` belongs to the Journey stage (the build stage, where each Task gets built), alongside [orchestrate](/skills/orchestrate) and [journey](/skills/journey). In the catalog's general flow, that stage follows alignment and planning work such as [grilling](/skills/grilling), [readback](/skills/readback), [map](/skills/map) and [plan](/skills/plan), but `carry` itself does not require any of them. It can use [orchestrate](/skills/orchestrate) for execution. If your authorized endpoint stops short of merging, [land](/skills/land) takes finished work onto its target branch.
+`carry` belongs to the Journey stage (the build stage, where each Task gets built), alongside [orchestrate](/skills/orchestrate) and [journey](/skills/journey). In the general flow, that stage follows alignment and planning work such as [grilling](/skills/grilling), [readback](/skills/readback), [map](/skills/map) and [plan](/skills/plan), but `carry` itself does not require any of them. It can use [orchestrate](/skills/orchestrate) for execution. If your authorized endpoint stops short of merging, [land](/skills/land) takes finished work onto its target branch.

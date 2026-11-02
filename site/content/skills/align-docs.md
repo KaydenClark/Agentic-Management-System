@@ -35,19 +35,20 @@ You invoke it yourself, by name. Agents will not pick it up on their own. Use it
 
 ## Example request
 
-> We keep using "landing" to mean three different things across the docs. Align this concept with the documentation: interview me, fix the glossary once I confirm the terms, and read back what we agreed before anyone starts building.
+> We keep using "release" to mean three different things across the docs. Align this concept with the documentation: interview me, fix the glossary once I confirm the terms, and read back what we agreed before anyone starts building.
 
+The agent puts the three meanings of "release" into one question tree, edits the glossary only for the terms you confirm, and ends with a readback that waits for your explicit confirmation.
 
 ## What it requires
 
-- **A Workbench.** The agent first looks for the Workbench manifest and the `spec-workbench` tool. If either is missing, it stops and sends you to run `setup-workbench`. It will not invent Workbench folders or records itself, or swap in a different tracker.
+- **A Workbench.** The agent first looks for the Workbench manifest and the `spec-workbench` tool. If either is missing, it stops and sends you to run [setup-workbench](/skills/setup-workbench). It will not invent Workbench folders or records itself, or swap in a different tracker.
 - **The align-concept method.** That skill supplies the interview, the knowledge-base capture, the readback confirmation and the execution boundary. It builds on [grilling](/skills/grilling), [readback](/skills/readback) and [jot](/skills/jot).
-- **domain-modeling.** The agent reads it before touching domain terms or decision records.
+- **The domain-modeling skill.** The agent reads [domain-modeling](/skills/domain-modeling) before touching domain terms or decision records.
 - **Your answers.** Documents inform the interview but never replace what only you can say.
 
 ## What it does not authorize
 
-- **Execution.** Drafting a map, a plan or a design, or reviewing one, is execution even though it is only text. Permission to edit docs does not cover it, nor does it cover the later stages: Prepare, Journey and Judge.
+- **Execution.** Drafting a map, a plan or a design, or reviewing one, is execution even though it is only text. Permission to edit docs covers neither that nor the later stages: Prepare, Journey and Judge.
 - **Whole-intent confirmation.** Confirming a definition or approving a record permits that one recording, not the assembled intent.
 - **Confirmation by silence or edits.** Silence, interview answers, approving a definition and accepting a doc edit never confirm the readback. Only your explicit statement about it does.
 - **Implied permission to proceed.** Taking part in alignment grants no authority to execute. If the readback lists bounded steps and you confirm it, those steps can be authorized together. A readback that only records meaning grants no execution scope.
@@ -77,7 +78,7 @@ The conflict goes into the question tree to be investigated and resolved. The ag
 
 ### The note could not be saved. Is the work lost?
 
-It should not be. When writing fails, the content stays in the chat and the closing report names what remains unsaved. Check the stated save state before assuming the record exists.
+No. When writing fails, the content stays in the chat and the closing report names what remains unsaved. Check the stated save state before assuming the record exists.
 
 ## It's working when
 
