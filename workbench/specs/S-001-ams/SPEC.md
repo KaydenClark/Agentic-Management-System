@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 claimed by claude-impl-s001-tk001.
-**Next gate:** Close TK-001 with verification and documentation proof.
+**Latest event:** TK-001 closed with proof.
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
@@ -105,6 +105,7 @@ To answer "Are we there yet?": name the commit; run each check; report met, not 
 |---|---|---|---|---|---|
 | 2026-11-01 | none | Ported and rewritten; the Workbench adoption of 2026-11-01 recorded as this Spec's first room evidence | render, doctor | this Spec; adoption Wiki page | Every criterion |
 | 2026-11-01 | none | Owner unblocked S-001; the limit applies to Landmarks, above Specs | Linked confirmed owner correction; activation/readiness verification in the delivery PR | Landmark cap and start/acceptance distinction | Acceptance remains open |
+| 2026-11-02 | TK-001 | Task closed | No at 325b422 ([assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)); render x2 same, doctor 0 blockers, pytest 715/4 skip, ams-hygiene 13 findings | TK-001; Remaining Limitations | S-001 acceptance; see Remaining Limitations; close attribution: {"agent":"claude-impl-s001-tk001","claimant":"claude-impl-s001-tk001","onBehalfOf":null} |
 
 ## Review and Human QA
 

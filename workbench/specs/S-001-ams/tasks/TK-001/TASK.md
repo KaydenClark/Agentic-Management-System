@@ -3,11 +3,12 @@
 **Task ID:** TK-001
 **Spec ID:** S-001
 **Slice:** Run the "Are we there yet?" check at a named commit and record the answer in this Spec's log
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Assess all S-001 criteria and landmark success checks; report met, not met or unknown with evidence and remaining steps.
 **Claimed by:** claude-impl-s001-tk001
 **Current claimant:** claude-impl-s001-tk001
+**Proof:** No at 325b422 ([assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)); render x2 same, doctor 0 blockers, pytest 715/4 skip, ams-hygiene 13 findings
 
 ## Assignment
 
@@ -15,8 +16,8 @@ Assess every S-001 criterion and all four landmarks at one named commit. Record 
 
 ## Acceptance
 
-- [ ] Every criterion and landmark success check has a sourced result or an explicit evidence gap.
-- [ ] The assessment records the candidate, overall answer and remaining steps. A truthful No completes this Task; it never completes S-001.
+- [x] Every criterion and landmark success check has a sourced result or an explicit evidence gap.
+- [x] The assessment records the candidate, overall answer and remaining steps. A truthful No completes this Task; it never completes S-001.
 
 ## Assessment at 325b422 (2026-11-02)
 
@@ -59,7 +60,8 @@ There is no `.part-` file. Values are not reproduced here.
 | LMK-004 3-4 | not met | S-011 and S-012 planned, unapproved |
 | LMK-004 5 | not met | S-013 TK-003/TK-005 blocked; criteria unticked |
 
-**Findings:**
+### Findings
+
 - **F-001 High:** private data on public `main` (handoffs). PR #98 removes it from the tree, but history keeps it; any history rewrite is the owner's call. Accepted-open: S-001 TK-002.
 - **F-002 Medium:** the records over the limit above. Accepted-open: TK-002 owns the check; S-006, S-008, S-002 and S-013 prune their own records; TASKBOARD shrinks through Spec fields only.
 - **F-003 Medium:** no owner gate is recorded. Owner: Kayden.
@@ -67,14 +69,18 @@ There is no `.part-` file. Values are not reproduced here.
 
 Rejected: the fixture match. The `repaired` feedback disposition does not satisfy LMK-004 2: it has no rerun rows and no retain/revise/remove. S-004 and S-008 ticks are not completion.
 
-**Remaining, agent-workable:**
+### Remaining steps
+
+Agent-workable:
+
 - Update PR #98 from `main`, prune the over-limit records, and land it.
 - Run TK-003 cold start in a fresh session.
 - S-002 TK-000Y, then TK-002 to TK-004 (approved sends only).
 - S-006 TK-000W, then S-007 TK-002/TK-003 and S-013 TK-003/TK-005.
 - Fetch `/rsi` on `dev`.
 
-**Owner gates:**
+Owner gates:
+
 - Confirm and approve S-005, S-009, S-010, S-011 and S-012.
 - Decide the S-003 TK-003 conflict.
 - Human QA and approval for S-004 and the 40 S-008 pages.
@@ -84,3 +90,9 @@ Rejected: the fixture match. The `repaired` feedback disposition does not satisf
 - Grant `dev` fetch access.
 
 Self-assessment only, not independent review. Evaluated model: not-applicable.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | feature/s001-tk001-assessment | 359da1ca0ff92c7b53a4ec3e199b844febc08282 | ahead 0 behind 0 | 0 | No at 325b422 ([assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)); render x2 same, doctor 0 blockers, pytest 715/4 skip, ams-hygiene 13 findings | TK-001; Remaining Limitations | S-001 acceptance; see Remaining Limitations; close attribution: {"agent":"claude-impl-s001-tk001","claimant":"claude-impl-s001-tk001","onBehalfOf":null} | c20522fa7c7931048272b77fbe584829f724d60cdfdc40f6160bea2fd98d45af |
