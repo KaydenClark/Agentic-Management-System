@@ -7,7 +7,7 @@
 
 ## Bird's-Eye View
 
-AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one RSI loop on the Workbench it repairs. [Blueprint](BLUEPRINT.md) owns the destination; AGENTS owns authority.
+AMS carries recorded intent into outcomes with AI on a Workbench. This project adds RSI to improve its reusable methods. [Blueprint](BLUEPRINT.md) owns the destination; AGENTS owns authority.
 
 ## Codemap
 

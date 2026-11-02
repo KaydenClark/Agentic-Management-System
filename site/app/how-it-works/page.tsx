@@ -35,7 +35,7 @@ export default function HowItWorks() {
           In the Agentic Management System, or <dfn id="ams">AMS</dfn>, work is written down before it is done. A request becomes a <dfn id="spec">Spec</dfn>: a short
           written plan for one change, with the conditions that will show it worked. Each Spec is cut into{" "}
           <dfn id="task">Tasks</dfn>, each small enough for one <dfn id="agent">agent</dfn>, an AI assistant that
-          carries out work, to finish in a single run. The agent hands back proof, and only Kayden, the owner, moves
+          carries out work, to finish in a single run. The agent hands back proof, and only the owner moves
           finished work into the main version of the site.
         </p>
       </header>
@@ -133,7 +133,7 @@ export default function HowItWorks() {
           <strong>
             Spec <a href={`${REPO_BLOB}${S003}SPEC.md`}>S-003, Showcase site shell and orientation tour</a>
           </strong>{" "}
-          is the Spec for this site. It is active, at priority 1, owned by Kayden with orchestrator A. It sets eleven
+          is the Spec for this site. It is active, at priority 1, owned by the project owner with orchestrator A. It sets eleven
           acceptance conditions, from every tour page having a plain-language opener to a quickstart that replays on a
           fresh copy of the repository, and it plans seven Tasks, TK-001 to TK-007. None of its conditions is checked
           off yet.

@@ -2,14 +2,14 @@
 
 > Generated from LLM Workbench v3.2.2.
 
-Shared AMS terms, defined per Kayden's 2026-10-31 instruction and the [research basis](workbench/research/template-research-basis.md).
+Shared AMS terms; [Blueprint](BLUEPRINT.md) owns the destination.
 
 ## Language
 
 ### AMS
 
 **AMS**:
-Kayden's system for managing agents, workflows, intent capture, skills and AI tools in one RSI loop. It builds on, operates and repairs the Workbench.
+A reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. Its methods can be packaged for anyone to reuse; this project adds RSI to improve them through actual work.
 
 **RSI loop**:
 Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record proves no improvement.
@@ -27,7 +27,7 @@ The r1 classification: Excellent at three passing runs, Stable at two, Functiona
 One assessed version of an improvement candidate; each candidate gets at most three, excluding baseline.
 
 **Workbench**:
-The working foundation AMS uses and repairs. AMS also includes the system and tool belt operating above it.
+The environment where AMS operates, bringing together people, agents, project records, working artifacts and tools.
 
 **Intent**:
 What the owner wants, with reasons, boundaries and corrections. Retain whether confirmed or unresolved.

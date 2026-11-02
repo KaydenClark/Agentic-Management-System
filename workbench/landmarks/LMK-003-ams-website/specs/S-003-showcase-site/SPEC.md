@@ -22,7 +22,7 @@ Visitors come for understanding: what AMS manages, why, how intent becomes work/
 
 ## Why It Matters
 
-The site preserves the owner’s explanation of AMS and lets visitors examine whether its real work supports its claims.
+Visitors can examine whether real work supports AMS claims.
 
 ## Current Verified State
 
@@ -36,7 +36,7 @@ Pages open plainly, define/link unfamiliar terms, then offer detail/sources. Exp
 
 ### Orientation content
 
-- **Start here** (`/start`, includes Quickstart): define AMS: managing Kayden's agents, workflows, intent, skills and AI tools. Explain the problem, identify this website as its first outside product, and orient visitors to the tour, demonstrations and evidence. Distinguish presentation from live controls. Give the reading route (introduction, real-work example, demonstration or skill summary, RSI evidence/limits), what each stop teaches, and that the `setup-workbench` skill sets up a Workbench. No command replay.
+- **Start here** (`/start`, includes Quickstart): define AMS per the glossary: reusable methods carrying intent into outcomes with AI. Explain this project’s RSI addition; use roles. Explain the problem, identify this website as its first outside product, and orient visitors to the tour, demonstrations and evidence. Distinguish presentation from live controls. Give the reading route (introduction, real-work example, demonstration or skill summary, RSI evidence/limits), what each stop teaches, and that the `setup-workbench` skill sets up a Workbench. No command replay.
 - **Why:** explain preserving intent/corrections, organizing delegated work and learning from failures. Connect these purposes to this build. Separate intended benefits from measured results; link RSI evidence.
 - **How it works:** explain intent -> Landmark -> Spec -> Task, then implementation, checks, review, human judgment and delivery. Walk through one real, sourced Spec/Task. Explain feedback returning to its durable owner and failed results starting bounded RSI comparisons. Link governance/flow charts; do not imply every step has succeeded.
 - **Limits:** explain that the site runs no agents or record writes. Distinguish demonstrations, build activity, assessments and demonstrated improvement. Source incomplete/unsupported capabilities and explain where human judgment remains necessary.

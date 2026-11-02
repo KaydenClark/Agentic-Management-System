@@ -2,7 +2,7 @@
 
 > Generated from LLM Workbench v3.2.2.
 
-AMS brings Kayden's agents, workflows, intent capture, skills and AI tools into one RSI loop, using and repairing the Workbench beneath it. [Blueprint](BLUEPRINT.md) describes the destination; [S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick for whether AMS is built.
+AMS is a reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. This project adds recursive self-improvement (RSI), testing and improving those methods through real work on the Workbench. [Blueprint](BLUEPRINT.md) describes the destination; [S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick for whether AMS is built.
 
 The first loop builds a website that explains and demonstrates AMS; its code lives in [`site/`](site/README.md), with Vercel hosting planned. This repository also holds the Workbench controls, lifecycle tools and artifact templates. Application behavior, deployment and measured improvements remain to be implemented and verified.
 
