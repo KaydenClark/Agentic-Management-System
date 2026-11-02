@@ -75,6 +75,5 @@ Continue authorized Tasks against their current Specs and actual inputs. S-003 T
 
 ## Peers
 
-- Coordinator (owner's machine): session_01UmLJaYpvFNgdMtECMorgKY
-- Orchestrator B: session_01UmLJaZDjSkp781nt5p2jr1
+- Coordinator (owner's machine) and Orchestrator B: reach them through the owner; their session IDs are private traces and stay out of this public repository.
 - Vercel: project prj_AW53nWMo9WMHfLujOjUOjMH51frE, team team_xTKOSRO3aHZzt794rxYLiODN
