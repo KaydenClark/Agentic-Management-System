@@ -168,3 +168,16 @@ Supersedes: none
 
 S-008: The owner confirms S-008 (Skills wiki) as specified and approves executing its Tasks: "I authorize you to /orchestrate S-008, and /carry it to completion." Method set by the owner: Sonnet writes each skill article, a second Sonnet audits it and the feedback goes through the orchestrator to the final writer, the orchestrator judges the final copy (a failed article returns to Sonnet for a revision that comes back only to the orchestrator), and Opus builds the wiki architecture in the website. Endpoint: "I authorize you to merge into dev once you have thoroughly reviewed and approved everything matches the spec, and the actual purpose and capabilities of the skills." Then clean up the run's worktrees and uncommitted work. Site route stays feature -> dev; only the owner merges dev -> main. Page approvals, Human QA and publication to main stay with the owner.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-67a67a84-6596-4dca-83c2-246f8cfa61a2
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T08:17:04.020Z
+Author: Kayden
+Source: Kayden approval relayed by orchestrator, AMS chat, 2026-11-02
+Topic: active-spec-approvals
+Supersedes: none
+
+S-006: On 2026-11-02 Kayden explicitly approved: "Approve fresh parser repair". This authorizes a fresh bounded corrective Task replacing the custom Markdown visibility scanner with pinned markdown-it-py CommonMark token parsing, preserving all provenance/ancestor/no-network guards and the eight retained historical facts. Preserve W stopped/unaccepted, both failed pins and recovery. Checked main delivery, actual local history import/readcheck, truthful durable Spec proof and independent assembled review remain authorized. This grants no model calls, destructive history repair, formal Spec acceptance or owner Human QA.
+<!-- /jot-entry -->
