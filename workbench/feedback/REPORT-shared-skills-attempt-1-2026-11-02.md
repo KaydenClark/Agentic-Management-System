@@ -1,8 +1,8 @@
-# Shared workflow repair: first candidate evidence
+# Shared workflow repair: failed assessments and continuation
 
 ## Target And Scope
 
-S-011's bounded development comparison. Baseline source `fb7ad23c963e183b930b23bc5fdf4d309dff292a`; first candidate `6f84573de47cbc7675876777e22e903ecd4783d1`. Evaluated and reviewing model: requested GPT-6.1 Terra; exposed reasoning effort unknown. Source-injected skills in controlled local fixtures, not native activation. The separate pruning-skill suite is pending.
+S-011's bounded development comparison. Baseline source `fb7ad23c963e183b930b23bc5fdf4d309dff292a`; first candidate `6f84573de47cbc7675876777e22e903ecd4783d1`. Evaluated and reviewing model: requested GPT-6.1 Terra; exposed reasoning effort unknown. Source-injected skills in controlled local fixtures, not native activation. The first-context pruning suite and later contexts are recorded below; no qualifying result is established.
 
 ## Evidence And Limitations
 
@@ -57,3 +57,34 @@ Additional evidence revises the reported workflow r1 tally to **11/78**, with pe
 The separate pruning tally becomes **6/51**, with per-run counts 1/17, 4/17 and 1/17; **Broken**, acceptance false. Addendum SHA-256: `4581599d7f7e3b36b87bf16a66258b4e7d84da58e70312335ea8daf8fa2e13e7`. The original provisional 3/51 ledger remains above. Most unresolved rows still lack full-check evidence; qualification remains limited to objective checks, not complete semantic equivalence. These are evidence addenda to attempt one, not new candidates, a reset, pooled inventories or acceptance.
 
 Keep this attempt and source identity. The skills implementor receives the actual failed obligation; a later immutable candidate needs applicable retests, the unchanged attempt history and qualifying evidence. No skill merge, installation, later-use benefit or Human QA is established. The public site may display this bounded failed evidence with its limitations; dev-to-main remains the owner's action.
+
+
+## Continuation checkpoint: later contexts, no reset
+
+Source: the assigned Terra evaluator and source implementor hand-backs to the S-011 orchestrator, 2026-11-02. These are safe summaries of private evidence, not a native assessment-checker PASS.
+
+### Workflow v2 setup and corrected v2b
+
+The initial v2 paired exercise failed setup: Doctor could not resolve the required personal catalog. Both run states remain retained. This is a harness setup failure, not a proven skill-source defect or a completed comparison. Corrected v2b supplied a separately pinned full personal-catalog support profile (`f2354fd`); Doctor reported no blocking findings across six inputs and retained four informational findings.
+
+V2b compared baseline `fb7ad23c963e183b930b23bc5fdf4d309dff292a` against candidate `6f84573de47cbc7675876777e22e903ecd4783d1`, using fresh GPT-6.1 Terra/high workers, explicit local bare-remote publication authority and a real prior completed Task followed by a second Task. All six completed the second Task with exact bytes and local feature publication, preserving prior Task, other-writer/site work and ignored recovery. State predicates totaled baseline **35/39**, candidate **37/39**. These are not Alignment Scores or useful-benefit proof.
+
+The separately reported bounded r1 **attempt two is Broken**, acceptance false: candidate runs **8/26, 8/26, 12/26**, pooled **28/78**. Ledger SHA-256: `c9265a49b42a9aa66a1d800e4e6dc2cfbad6ccc2265dbfc6202e5fd1e4b56932`. Candidate runs one/two executed shell extracted from the writable source catalog despite the no-candidate-program condition; baseline run two did likewise. Matching recipe bytes after execution does not prove a protected launch. Candidate run three retained cleanup pending. Missing stale-write and full-original-retest proof remain Critical gaps. The supplied native snapshot had invalid format/binding; no native checker PASS, safe full cleanup, source cause, improvement or Human QA is inferred. V1, its trace addenda, the failed v2 setup pair and v2b remain separate conditions and histories.
+
+### Matched pruning and pending second attempt
+
+A matched full-context development pair supplied the same 2983-character historical RUNBOOK, all 14 direct-link sources and actual budget: baseline `0838cfb` returned **2916** characters; candidate `6f84573` returned **2907**. Neither met the 900–1500 target or near-900 goal; nine characters difference establishes no useful benefit. This observed weak reduction is distinct from the earlier missing-context fixture.
+
+The source author's later `6e4c06dc41b3ba2e617e7d364326c2df505bdeb0` development repair discovered the actual incoming consumer requiring literal `uv run ams-board`. An extracted AST assertion from the actual AMS test failed the earlier 1498-character prototype and passed a corrected 1500-character prototype. That is a literal assertion replay only: the complete server test was not run. At 1500 the prototype reaches the target's upper edge; near-900 goal and optimum remain unproved. The author reported 169 other workflow files and Author Skill/Writing for Agents unchanged; source development checks do not supply qualification.
+
+Independent repruning then hit agent capacity and left a two-file partial draft. This is not a successful independent prune or author same-case retest. Preserve the prior complete source and partial draft separately; the next source checkpoint must identify both. No final second-attempt candidate chats ran. The private second-attempt pruning contract SHA-256 is `845ed0ebc3a11ddbe2ad0d0ed0d77ba78393c1029304b8b683348f2c8605b871`: contract/controls cover the original document plus two duplicated real AMS sections, with feasible 1193-character reference evidence. Requested consumer test/pyproject fixture preparation is not confirmed complete. Prepared controls are not outcomes. A third workflow harness guard route was proposed only, not prepared or executed.
+
+### Current disposition and smallest next action
+
+**F-003 — Writable-program execution and proof gaps. Disposition: accepted-open**, owner S-011/TK-002. Preserve attempt-two Broken evidence; establish an independently trusted execution boundary before any new workflow trial. A proposed guard is not a repaired harness.
+
+**F-004 — Pruning unfinished after capacity failure. Disposition: accepted-open**, owner S-011/TK-002. Resume independent pruning of the checkpointed draft with capacity available, inspect preservation, then have the author repeat the same development cases before pinning a final candidate for the prepared fresh tests. Preserve failed target outcomes and literal-consumer RED; no retroactive pass or counter reset.
+
+The owner now requests continuation by handoff, not another campaign in this run. The source checkpoint is `6f2277eaaffef2d6640860d6d257bf101107c10c` in draft [skills PR58](https://github.com/KaydenClark/skills/pull/58), reported pushed and clean by its implementor: only the two Prune source files changed, an unreviewed capacity-interrupted partial draft. Catalog44/diff/local links pass only; no behavior/fidelity claim. Preserve full author baseline6e4c06d separately. No candidate has eligible Stable/Excellent evidence; no skill merge or installation is established. The actual global personal catalog remains at the previously reported `f2354fd`, untouched by this repair. Installation, activation and later AMS use remain distinct future gates. Owner calibration labels require actual tests of all three examples; example one is not accepted by silence.
+
+The safe first-context snapshot is already on `dev` through [PR128](https://github.com/KaydenClark/Agentic-Management-System/pull/128), merge `12f896395ff4320cf87e203f049a4fe19f00d456`. Its production build and 203 site tests passed at candidate `3f2de6e038e968099c65f58f8163afdc38ba1bf2`; Vercel reported READY at the merged dev SHA, but protected HTML/live-store readback was denied by connection access. This continuation does not change that snapshot or claim later results are already graphed. No dev-to-main promotion occurred.

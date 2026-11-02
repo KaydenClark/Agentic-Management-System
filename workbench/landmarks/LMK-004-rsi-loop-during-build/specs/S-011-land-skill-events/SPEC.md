@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** Complete TK-002.
+**Next gate:** TK-002: independently reprune PR58 checkpoint6f2277e, then author same-case retest before final candidate trials. Handoff only this run.
 
 ## Intent and authority
 
@@ -18,17 +18,18 @@ The owner's 2026-11-02 instruction expands the earlier land-only destination to 
 
 ## Outcome
 
-Agents using the shared skills preserve one coherent work branch, deliver to the authorized target, account truthfully for cleanup and keep handoffs local in ignored sessions. Subsequent AMS work uses the repaired personal catalog. Readers can trace the repair, failures, comparisons and disposition without access to private source or raw evidence.
+Shared skills preserve one work branch, authorized delivery, truthful cleanup and local ignored handoffs. Later AMS work uses the repaired personal catalog; readers trace safe evidence without private source.
 
 ## Why It Matters
 
-Misnamed branches and false cleanup completion hide unfinished work; published handoffs expose session context. Repair the shared owner so later projects benefit.
+Misnamed branches hide unfinished work; published handoffs expose session context. Repair their shared owner.
 
 ## Current Verified State
 
-- The local handoff reports branch proliferation, conflicting workflow behavior, a root-handoff publication default and an app refusal to archive a primary checkout. It reports no completed shared-skill repair or before/after trial.
-- Current controls distinguish the authorized personal catalog from other-project rollout; handoffs remain local. RUNBOOK is a concise command surface, with detailed failure evidence in [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md).
-- Baseline/candidate trials, qualifying audit, installation and later use remain unestablished.
+- Controls now distinguish personal installation and local handoffs. RUNBOOK1193 retains commands; [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) preserves pruning failures.
+- Private PR58 checkpoint `6f2277eaaffef2d6640860d6d257bf101107c10c`: unreviewed partial pruning draft, not merge/install eligible. Full author baseline6e4c06d is retained.
+- [Current evidence and continuation](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md#continuation-checkpoint-later-contexts-no-reset): workflow v2b attempt two Broken28/78; pruning attempt two not run after independent-pruner capacity failure. Native-checker PASS, useful benefit, installation and later use remain unestablished.
+- PR128 merged the truthful first-context RSI snapshot into dev12f8963; later outcomes are not yet graphed. Protected deployment HTML/live-store readback remains unavailable.
 
 History: [S-011 history](../../../../wiki/history/S-011.md).
 
@@ -46,7 +47,7 @@ History: [S-011 history](../../../../wiki/history/S-011.md).
 
 - S-002's r1 scoring, three-run evidence, qualification, attempt and benefit safeguards remain. Its stopped PR 101 experiment and specific call/row holds are unchanged; this separately authorized repair does not resume it.
 - Frozen baseline precedes repairs. Cases studied during repair remain development evidence. Missing evidence stays missing and cannot qualify a Stable/Excellent merge.
-- Shared skills are authored/reviewed in their repository. Source text and raw trial/audit material stay private; public summaries carry only safe claims, counts and identities.
+- Author/review in the skills repository; private source/raw evidence stay private. Publish safe claims, counts and identities only.
 - Personal installation enables later AMS work; no project-specific copy or portfolio rollout.
 - The [approved prune-artifact addition](../../../../wiki/context-owner-answers-coherence.md#jot-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf) has a separate finite test suite; the original frozen comparison and its attempts remain unchanged.
 
@@ -75,7 +76,7 @@ The skills repository's process governs repair delivery. Candidate merge/install
 
 ## Testing Seams
 
-Controlled skill exercises and public site render/data tests. Native assessment scorer and private persistence when qualifying packets exist. Project RUNBOOK checks; skills Catalog check. Original and adverse cases can falsify each claimed outcome.
+Controlled original/adverse skill exercises, Catalog and RUNBOOK checks, site render/data tests; native scorer/private persistence only with qualifying packets.
 
 ## Verification Procedure
 
@@ -95,7 +96,7 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-Benefit, qualification, installation and deployment remain unestablished.
+Qualification, benefit, installation/use and protected deployment readback remain unestablished. TK-002/TK-003 are ready and unclaimed; handoff supplies no lifecycle completion.
 
 ## Supersession
 
