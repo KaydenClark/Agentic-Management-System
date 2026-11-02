@@ -32,3 +32,9 @@ The owner explicitly answered “Resume the focused documentation fix” on 2026
 ### Repeated focused budget stop
 
 After the owner's explicit resumption, hygiene still failed at RUNBOOK 3036 then 3025 characters (limit 3000; AGENTS 2995 passes). The implementor stops this repair again and reports the avoidable incomplete reduction. No further retry or merge is performed. Current remaining budget gap: 25 characters. Preserve earlier failures and the full-suite result above.
+
+### Goal corrected after source recovery
+
+The owner's later direction supersedes the ceiling-shaving approach: recover all actual rules, preserve the command surface and produce a small RUNBOOK near the existing 900–1500-character target. The four failed attempts remain above. [Separate failure report](../../../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) records the owner interventions, Unicode/full-source/no-split rules and diagnostic mismatch; it does not change the frozen trial criteria.
+
+Current local RUNBOOK is1193 Unicode codepoints, with all11 declared AMS entrypoints and actual project checks retained. Root inspected the draft. Permission-capable focused verification passed38 tests (hygiene and actual board startup); Wiki/layout/doctor/render/diff checks passed, with pre-existing informational findings and expected Task dependencies. Candidate-bound full-suite verification and published record readback are next; no complete Task, whole-AMS fitness or skill benefit is claimed.

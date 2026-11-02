@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** Resolve repeated focused RUNBOOK budget stop (3025/3000); Terra trials/audit remain independent.
+**Next gate:** Publish verified owner records; finish Terra baseline/candidate evidence and audit.
 
 ## Intent and authority
 
@@ -27,7 +27,7 @@ Misnamed branches and false cleanup completion hide unfinished work; published h
 ## Current Verified State
 
 - The local handoff reports branch proliferation, conflicting workflow behavior, a root-handoff publication default and an app refusal to archive a primary checkout. It reports no completed shared-skill repair or before/after trial.
-- Existing project controls require cleanup but contain overbroad no-install wording. The current owner instruction authorizes the personal catalog only.
+- Current controls distinguish the authorized personal catalog from other-project rollout; handoffs remain local. RUNBOOK is a concise command surface, with detailed failure evidence in [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md).
 - Baseline/candidate trials, qualifying audit, installation and later use remain unestablished.
 
 History: [S-011 history](../../../../wiki/history/S-011.md).

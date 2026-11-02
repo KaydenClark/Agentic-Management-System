@@ -109,3 +109,29 @@ Supersedes: JOT-3ac3966d-b26f-4212-894f-011e5e2410ad
 
 For S-011 shared-skill repair, Kayden confirms the destination and directs implementation: fix local handoff storage and the branch/cleanup failures, using source KaydenClark/skills. Handoffs stay in ignored workbench/sessions and never go to GitHub; Tasks are published. Test and audit with Terra 6.1, merge skills only with eligible Stable or Excellent results, then update this machine personal skills folder so subsequent AMS website work uses the repairs. Never install reusable methods in an AMS-specific skills folder. Log actual comparisons and disposition and display them in RSI charts on dev. This authorizes S-011 execution and personal-catalog installation, not cross-project rollout, dev-to-main promotion or fabricated qualification/benefit.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-08cbbb7a-b88b-4ecc-962e-88d1578bce53
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T20:54:13.949Z
+Author: Kayden
+Source: Kayden, RUNBOOK size and limits-versus-goal corrections in AMS chat, 2026-11-02
+Topic: owner-answers-coherence
+Supersedes: none
+
+For S-011, Kayden rejects repeatedly shaving RUNBOOK toward its ceiling: the requested goal is a small operating entrypoint near900 characters, with a short cleanup line after verification. Characters, not words. The owner requires checking all existing rules before recording the correction. The actual policy already targets900–1500 Unicode codepoints with a3000 ceiling and forbids splitting/truncation; full-source counting normalizes line endings. Preserve the real command surface and use shared skill procedures rather than duplicating cleanup. Limits do not replace the requested goal. Log this execution failure and owner interventions separately from the frozen shared-skills comparison; do not change that series criteria or restart failed attempts.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8a72da2b-8f02-45c8-8df5-4ae2a339df45
+Kind: proposal
+State: unresolved
+Recorded: 2026-11-02T20:54:43.528Z
+Author: Kayden
+Source: Kayden, possible prune-artifact skill in AMS chat, 2026-11-02; coordinating agent boundary suggestion remains proposed
+Topic: owner-answers-coherence
+Supersedes: none
+
+Kayden proposes a single prune-artifact skill to do pruning for author-skill and writing-for-agents and reduce overlap. A suggested boundary leaves method development and behavior validation with author-skill, composition/prose quality with writing-for-agents, and meaning-preserving pruning against actual owner goals, target ranges and ceilings with prune-artifact. Author-skill would still delegate independent pruning and retest behavior. This is a proposal, not implementation or installation approval; keep it outside the current repair and use the observed RUNBOOK failure as a possible future trial.
+<!-- /jot-entry -->
