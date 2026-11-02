@@ -32,3 +32,16 @@ Supersedes: none
 
 Kayden ruled: "Specs should not have any history on them, that goes into the wiki, or to supabase so we can show it on the RSI Tracker". Meaning: a Spec holds current destination, contracts, acceptance and state, not its event history; history (evidence-log rows, closes, verdicts, corrections) belongs in the Wiki or in Supabase build history, which the RSI Tracker reads. This answers the evidence-log question for S-006, S-008 and S-013 (over 8,000 mainly through their logs). It does not by itself authorize changing the native lifecycle tools (setup-workbench owns workbench/tools/), changing Supabase row identity, or a live import; those routes remain to be chosen and approved. ADR-002V's limit is unchanged.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-60427aea-2242-4a67-b929-21cac8c92a9a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T14:29:21.801Z
+Author: Kayden
+Source: Kayden, AMS chat (Claude Code orchestration session), 2026-11-02, follow-up to JOT-5ee25ca7
+Topic: spec-history
+Supersedes: none
+
+Kayden gave the reason: "SPECs describe a destination. History about how we got to that destination does not belong in the description of it. It does not help us verify we reached the destination." A Spec keeps only what verifies arrival: destination, contracts, acceptance criteria with their checks, and current state and next gate. Event history (closes, verdict rows, corrections, intermediate proof) lives in the Wiki or Supabase build history.
+<!-- /jot-entry -->
