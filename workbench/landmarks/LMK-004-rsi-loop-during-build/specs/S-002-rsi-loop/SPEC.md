@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001B claimed by s002-interruption-evidence.
-**Next gate:** Close TK-001B with verification and documentation proof.
+**Latest event:** TK-001B second private-evidence correction failed independent cleanup-interruption review; repair STOPPED.
+**Next gate:** Report001A/001B failures and await fresh user authorization; PR101 DRAFT/unmerged. No further repair, model/store calls or merge.
 
 ## Intent and authority
 
@@ -30,6 +30,8 @@ Exact-identity repair: S-006/TK-000S.
 PR101 remained held after later automated review proved halted private diagnostic metadata could be lost. [TK-001A](tasks/TK-001A/TASK.md) completed the native fresh correction for that narrow retention gap, verified by affected239/1skip, exactb9 CI120 and independent delta PASS; Y’s closed receipt and scoped PASS remain historical. No actual corrective query or extra database write occurred.
 
 Later PR101 review proved actual adapter interruption and post-return drift still lost evidence; [TK-001B](tasks/TK-001B/TASK.md) owns the fresh second private-retention correction with actual-adapter integration tests and an explicit stop-on-repeated-failure rule. Earlier Y/001A source-specific receipts remain unchanged.
+
+TK-001B stopped at source179 after independent review proved valid-terminal evidence is lost when finally-close is interrupted (proof1aaf62e...). Passing786/4skip full local/fresh suites and CI123 do not satisfy the failed requirement. Acceptance remains unmet; [the stopped checkpoint](tasks/TK-001B/TASK.md) records both correction attempts and the unexecuted next proposal. No new source was selected or actual corrective query/storage action released.
 
 ## Desired Behavior
 
