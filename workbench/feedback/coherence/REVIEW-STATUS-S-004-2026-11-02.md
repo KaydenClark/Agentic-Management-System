@@ -11,4 +11,4 @@
 | #1 | fail | `dd52f705004a` | none | none | **unbound** | names no reviewing context; commit changed since review: 178 path(s) differ (.github/workflows/python-tests.yml, .github/workflows/site-build.yml, .gitignore, AGENTS.md, ARCHITECTURE.md and 173 more); Spec content changed: reviewed digest d61980ae5d1c, now 3e475711fb57 |
 | #2 | pass | `4d49bfc75efa` | none | none | **unbound** | names no reviewing context; commit changed since review: 154 path(s) differ (.github/workflows/python-tests.yml, .github/workflows/site-build.yml, .gitignore, AGENTS.md, ARCHITECTURE.md and 149 more) |
 
-Current means the verdict's context did not build the Spec and neither the assembled commit (outside the Spec's own records) nor the Spec's content digest has changed since review.
+Current means the verdict's context did not build the Spec and neither the assembled commit (outside digest-covered Spec records, TASKBOARD and review reports) nor the Spec's content digest has changed since review.

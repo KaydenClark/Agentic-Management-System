@@ -25,6 +25,7 @@ import argparse
 import hashlib
 import json
 import os
+import posixpath
 import re
 import subprocess
 import sys
@@ -42,6 +43,9 @@ VERDICT = re.compile(r"^Review verdict: (pass|fail) at (\S+) \[([0-9a-f]{12})\] 
 CELL_AGENT = re.compile(r"\bagent:\s*([^;]+)")
 CELL_CONTEXT = re.compile(r"\bcontext:\s*([0-9a-f]{12})\b")
 NOT_A_NAME = {"", "none", "null", "unclaimed", "n-a"}
+REVIEW_ROW = re.compile(r"^\|\s*\d{4}-\d{2}-\d{2}\s*\|\s*review\s*\|\s*Review verdict: ")
+REVIEW_HEADER = re.compile(r"^\*\*(?:Updated|Latest event|Next gate):\*\*")
+PART_BLOCK = re.compile(r"<!-- workbench-record-section.*?<!-- /workbench-record-section -->", re.S)
 
 
 class Refused(Exception):
@@ -68,12 +72,57 @@ def _spec_paths(spec_id: str) -> str:
     return f":(glob)**/{spec_id}-*/**"
 
 
+def _review_line(line: str) -> bool:
+    return bool(REVIEW_ROW.match(line) or REVIEW_HEADER.match(line))
+
+
+def _review_only(repo: str, spec_id: str, sha: str) -> bool:
+    """A commit that only records a review: verdict rows, the header fields `verdict`
+    rewrites, a fail verdict's corrective Task records, TASKBOARD and review reports.
+    Merges and anything else count as building."""
+    if len(_git(repo, "rev-list", "--parents", "-n1", sha).stdout.split()) > 2:
+        return False
+    folder = re.compile(rf"(^|/){re.escape(spec_id)}-[^/]+/")
+    changes = _git(repo, "diff-tree", "--no-commit-id", "-r", "--root", "--name-status", sha).stdout
+    for entry in changes.splitlines():
+        state, path = entry.split("\t")[0], entry.split("\t")[-1]
+        if _report_path(path):
+            continue
+        if not folder.search(path):
+            return False
+        if state == "A" and re.search(r"/tasks/[^/]+/TASK\.md$", path):
+            body = _show(repo, sha, path)
+            if re.search(r"^\*\*Planned verification:\*\* Answers evidence row \d+ \(fail verdict", body, re.M):
+                continue
+            return False
+        if not path.endswith("/SPEC.md") or state != "M":
+            return False
+        diff = _git(repo, "show", "--no-color", "--format=", "-U0", sha, "--", path).stdout
+        lines = [l[1:] for l in diff.splitlines()
+                 if l[:1] in "+-" and not l.startswith(("+++", "---"))]
+        if not all(_review_line(l) for l in lines):
+            return False
+    return True
+
+
 def builders(spec_id: str, repo: str = ".", commit: str = "HEAD") -> dict:
     """Agents and contexts that built the Spec, from its whole history up to `commit`."""
     paths = _spec_paths(spec_id)
-    # Session contexts: trailers on commits that touched the Spec folder or name the Spec.
-    messages = _git(repo, "log", "--format=%B", commit, "--", paths).stdout + _git(
-        repo, "log", "-E", f"--grep={re.escape(spec_id)}([^0-9]|$)", "--format=%B", commit).stdout
+    # Session contexts: trailers on commits that touched the Spec folder or name the Spec,
+    # except commits that only record a review (a reviewer's own bookkeeping).
+    fmt = "--format=%H%x1f%B%x1e"
+    log = _git(repo, "log", fmt, commit, "--", paths).stdout + _git(
+        repo, "log", "-E", f"--grep={re.escape(spec_id)}([^0-9]|$)", fmt, commit).stdout
+    contexts: set[str] = set()
+    seen: set[str] = set()
+    for entry in filter(str.strip, log.split("\x1e")):
+        sha, _, body = entry.strip().partition("\x1f")
+        found = set(TRAILER.findall(body))
+        if sha in seen or not found:
+            continue
+        seen.add(sha)
+        if not _review_only(repo, spec_id, sha):
+            contexts |= found
     patch = _git(repo, "log", "-p", "--no-color", "--format=", commit, "--", paths).stdout
     agents: set[str] = set()
     for line in patch.splitlines():
@@ -84,7 +133,7 @@ def builders(spec_id: str, repo: str = ".", commit: str = "HEAD") -> dict:
         if claim:
             names += re.split(r",|;|\band\b", claim.group(1))
         agents |= {agent_key(n) for n in names} - NOT_A_NAME
-    return {"agents": agents, "contexts": set(TRAILER.findall(messages))}
+    return {"agents": agents, "contexts": contexts}
 
 
 def _builder_reasons(agent: str | None, context: str | None, built: dict) -> list[str]:
@@ -155,10 +204,29 @@ def _verdicts(spec_text: str) -> list[dict]:
     return rows
 
 
-def _record_path(spec_id: str, path: str) -> bool:
-    """Records whose change does not alter the reviewed assembly (their content is digest-bound)."""
-    return (re.search(rf"(^|/){re.escape(spec_id)}-[^/]+/", path) is not None
-            or path == "TASKBOARD.md" or path.startswith("workbench/feedback/coherence/REVIEW-"))
+def _report_path(path: str) -> bool:
+    """Generated projection and review reports: records that never alter the assembly."""
+    return path == "TASKBOARD.md" or path.startswith("workbench/feedback/coherence/REVIEW-")
+
+
+def _digest_records(repo: str, spec_id: str, commit: str) -> set[str]:
+    """Paths the native content digest covers: SPEC.md, each tasks/[retired/]ID/TASK.md
+    and their linked record parts. Their substantive changes move the digest."""
+    folder_re = re.compile(rf"(^|/){re.escape(spec_id)}-[^/]+/")
+    files = [f for f in _git(repo, "ls-tree", "-r", "--name-only", commit).stdout.splitlines()
+             if folder_re.search(f)]
+    specs = [f for f in files if re.search(rf"(^|/){re.escape(spec_id)}-[^/]+/SPEC\.md$", f)]
+    if len(specs) != 1:
+        return set()
+    folder = posixpath.dirname(specs[0])
+    records = {specs[0]} | {f for f in files
+                            if re.fullmatch(re.escape(folder) + r"/tasks/(?:retired/)?[^/]+/TASK\.md", f)}
+    parts = set()
+    for record in records:
+        for block in PART_BLOCK.findall(_show(repo, commit, record)):
+            for link in re.findall(r"\]\(([^)\s]+)\)", block):
+                parts.add(posixpath.normpath(posixpath.join(posixpath.dirname(record), link)))
+    return records | (parts & set(files))
 
 
 def status(spec_id: str, repo: str = ".", commit: str = "HEAD",
@@ -176,8 +244,9 @@ def status(spec_id: str, repo: str = ".", commit: str = "HEAD",
         if _git(repo, "cat-file", "-e", f"{v['candidate']}^{{commit}}", check=False).returncode:
             stale.append(f"reviewed commit {v['candidate']} is not in this repository")
         else:
+            covered = _digest_records(repo, spec_id, v["candidate"]) | _digest_records(repo, spec_id, sha)
             changed = [p for p in _git(repo, "diff", "--name-only", v["candidate"], sha).stdout.splitlines()
-                       if not _record_path(spec_id, p)]
+                       if not (_report_path(p) or p in covered)]
             if changed:
                 shown = ", ".join(changed[:5]) + (f" and {len(changed) - 5} more" if len(changed) > 5 else "")
                 stale.append(f"commit changed since review: {len(changed)} path(s) differ ({shown})")
@@ -216,7 +285,8 @@ def render_report(r: dict) -> str:
         *rows,
         "",
         "Current means the verdict's context did not build the Spec and neither the assembled commit "
-        "(outside the Spec's own records) nor the Spec's content digest has changed since review.",
+        "(outside digest-covered Spec records, TASKBOARD and review reports) nor the Spec's content "
+        "digest has changed since review.",
         "",
     ])
 
