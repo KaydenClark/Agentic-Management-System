@@ -55,9 +55,9 @@ Very little. The verdict is only as good as the primary evidence, observed behav
 
 ## What it does not authorize
 
-The skill states two limits. Running it gives no right to implement anything or to edit project records, so the agent answers where you asked and stops at the verdict. Separately approved work can continue within its own scope, but the Oracle run adds nothing to it. And it leaves your open choices open.
+The skill states two limits. First, running it gives no right to implement anything or to edit project records, so the agent answers where you asked and stops at the verdict. Separately approved work can continue within its own scope, but the Oracle run adds nothing to it. Second, it leaves your open choices open.
 
-A consequence for you, not a statement from the skill: a supported verdict judges evidence. Do not read it as approval to merge, publish or deploy, or as a substitute for a review your project requires.
+One consequence follows for you, though the skill does not spell it out: a supported verdict judges evidence. Do not read it as approval to merge, publish or deploy, or as a substitute for a review your project requires.
 
 ## FAQs
 

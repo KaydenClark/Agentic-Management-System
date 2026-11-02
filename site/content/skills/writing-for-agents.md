@@ -42,7 +42,7 @@ The agent would look up the limit for that file type, drop what the repository a
 
 - The document to write or revise, plus who reads it and who owns its content.
 - A size limit. The skill says to find the one that applies and not invent it. The folder includes a budgets file counting characters (Unicode code points), not words. `AGENTS.md`, `BLUEPRINT.md`, `ARCHITECTURE.md` and `RUNBOOK.md` target 900 to 1,500 with a maximum of 3,000. `LANDMARK.md`, `SPEC.md`, `TASK.md` and `TASKS.md` max out at 8,000. Anything else falls back to 15,000.
-- The plain-language guide in the author-skill folder, reached by a relative link, so the two skills sit side by side.
+- The plain-language guide in the author-skill folder, reached by a relative link, so the two skills need to be installed side by side.
 - For skills only: the skill-mechanics and invocation notes in the writing-for-agents folder.
 
 It names no other prerequisite and never says it needs a Workbench (the project records and tools most catalog skills work against).

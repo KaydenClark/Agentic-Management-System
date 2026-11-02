@@ -26,7 +26,7 @@ A pass has four parts.
 
 **Regenerate and read back.** The board is regenerated, records are published only as far as the assignment allows, and the skill rereads the owners as a stranger would. A cold reader must be able to say which revision was achieved and where it sits, what was checked and what was not, which acceptance lines remain open, and the single next action with its owner. If they cannot, the skill repairs the records rather than writing a longer report.
 
-For Git proof it documents a protected-read helper that clears inherited `GIT_*` variables and disables replacement refs, so a stray setting cannot redirect a check to the wrong commit. Containment proves ancestry only.
+For Git proof it documents a protected-read helper that clears inherited `GIT_*` variables and disables replacement refs, so a stray setting cannot redirect a check to the wrong commit. Even then, a containment check proves ancestry and nothing more.
 
 ## When to use it
 
@@ -50,7 +50,7 @@ The skill pins the returned commit, checks the claimed result at that revision a
 ## What it requires
 
 - A Workbench. If `workbench/manifest.json` or `workbench/tools/spec-workbench.mjs` is missing, the skill stops and sends you to set one up. It will not create records by hand or use another tracker.
-- The room's own `AGENTS.md`, runbook, glossary and manifest, read before anything is written. Room policy wins.
+- The project's own `AGENTS.md`, runbook, glossary and manifest, read before anything is written. Project policy wins.
 - The native `spec-workbench` commands, such as `doctor`, `report`, `receipt`, `close`, `record-landing` and `render`. Their refusals are recorded, not worked around.
 - For cited Git proof, a trusted `git` and `bash` and a fresh fetch, since a local ref says nothing reliable about the remote.
 - A single writer per record. If another writer owns one, the skill prepares the exact correction instead of editing it.
@@ -79,7 +79,7 @@ A green run shows a check passed, not that the Task's acceptance was met. The sk
 
 A box gets ticked only when evidence exists for that exact line. Per-run progress goes in the evidence log, and the boxes are checked during whole-Spec QA.
 
-### A helper skill it mentions is not installed. What then?
+### What if a helper skill it mentions is not installed?
 
 It uses whatever procedure the project documents for that step. If none exists, it prepares the proposed edit with its evidence, records the missing procedure and who is responsible, and holds only the dependent work.
 

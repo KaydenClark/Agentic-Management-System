@@ -11,7 +11,7 @@ credit_license: MIT
 
 Map turns intent you have already settled into a written **destination**: a description of the finished result precise enough that someone else can later say whether the work reached it. It describes where you are going, never how to get there. The route belongs to [plan](/skills/plan).
 
-A **Workbench** is the structured project folder, created by [setup-workbench](/skills/setup-workbench), that holds the project's records. A **Spec** is the record that owns one capability and its acceptance criteria. A **Task** is one assignment that carries out part of a Spec. Map writes or revises the destination owner at the right scale: a Spec, a **PRD** (what users or the product need), a **landmark** (a direction spanning several related capabilities), or the **Blueprint** (the project's audience, promised outcomes and boundaries, holding enduring direction rather than a list of current work).
+A **Workbench** is the structured project folder, created by [setup-workbench](/skills/setup-workbench), that holds the project's records. A **Spec** is the record that owns one capability and its acceptance criteria. A **Task** is one assignment that carries out part of a Spec. Map writes or revises the record that owns the destination, at the right scale: a Spec, a **PRD** (what users or the product need), a **landmark** (a direction spanning several related capabilities), or the **Blueprint** (the project's audience, promised outcomes and boundaries, holding enduring direction rather than a list of current work).
 
 The work runs in three moves.
 
@@ -19,9 +19,9 @@ The work runs in three moves.
 2. **Pick the existing owner.** It reuses the record that already owns the capability, rather than spawning a Spec per file or verb, a parallel requirements list, or an oversized template.
 3. **Write something auditable.** The result covers the problem and why it matters, evidence for current behavior, requirements and non-goals, accepted decisions and public contracts, checkable acceptance examples, dependencies, assumptions and open choices.
 
-Two habits matter. Every requested requirement must land in acceptance or a named dependency; unfinished work may not quietly become an exclusion. And acceptance includes a plausible wrong result that must fail, so the check can tell success from near-success. Map prefers the highest practical public test seam, reuses approved testing decisions, and takes any materially new seam choice to the owner.
+Two habits matter. Every requested requirement must land in acceptance or a named dependency; unfinished work may not quietly become an exclusion. And acceptance includes a plausible wrong result that must fail, so the check can tell success from near-success. Map prefers testing at the highest practical public seam (the outermost entry point a real caller uses), reuses approved testing decisions, and takes any materially new seam choice to the owner.
 
-A new Spec starts with the template's sample Task rows removed, evidence only appended to, and its completion result left pending. Map never records tests or implementation that did not happen. If the code lacks something a newer accepted requirement asks for, that is an implementation gap, not a reason to weaken the destination.
+A new Spec starts with the template's sample Task rows removed, an evidence section that is only ever appended to, and its completion result left pending. Map never records tests or implementation that did not happen. If the code lacks something a newer accepted requirement asks for, that is an implementation gap, not a reason to weaken the destination.
 
 ## When to use it
 
@@ -43,7 +43,7 @@ Map would find the existing owner, write the outcome, the scheduling non-goal an
 
 ## What it requires
 
-- A Workbench. Map first checks for the manifest and the Workbench tool; if either is missing it stops and tells you to run setup-workbench. It will not create records by hand or use another tracker.
+- A Workbench. Map first checks for the manifest and the Workbench tool; if either is missing it stops and tells you to run [setup-workbench](/skills/setup-workbench). It will not create records by hand or use another tracker.
 - Settled intent and an agreed place to save or publish.
 - For a new Spec, an ID proposed by the Workbench tool's read-only next-id command. A proposal does not claim the ID, so Map rechecks for concurrent allocation and saves through the project's authorized writer.
 - Existing validators, run through that same writer, to check IDs, structure, links, status and fidelity to sources.
@@ -53,7 +53,7 @@ Map would find the existing owner, write the outcome, the scheduling non-goal an
 - No Tasks. A new Spec is created as planned, with no owner claim, no Task and an empty tasks folder.
 - No activation, claim or **Journey** (the run that takes one Task through implementation and checks). Starting build work needs separate authorization.
 - No confirmation or execution approval the project hasn't given. Those stay distinct from each other and from review and **Human QA** (a person's hands-on quality check).
-- No planning by implication. If both are authorized, the Map is preserved at its required publication boundary before Plan starts.
+- No planning by implication. Even when mapping and planning are both authorized, the Map is preserved at its required publication boundary before Plan starts.
 - A local file or a draft pull request is not proof the Spec arrived on the target branch. Map separates local work, review-branch publication and checked integration.
 
 ## Checking before it returns
@@ -80,11 +80,11 @@ Map revises the existing owner and keeps its decisions and history. It does not 
 
 ### Why did it stop and tell me to run setup-workbench?
 
-The manifest or tool file was missing. Map refuses to improvise records, so set up the Workbench and run Map again.
+The Workbench manifest or tool file was missing. Map refuses to improvise records, so set up the Workbench and run Map again.
 
-### Review failed. What now?
+### What happens if review fails?
 
-The work returns to the still-open owner, and the revision keeps open choices, handoff dependencies and correction history.
+The work goes back to the destination's owning record, which stays open, and the revision keeps its open choices, handoff dependencies and correction history.
 
 ## It's working when
 

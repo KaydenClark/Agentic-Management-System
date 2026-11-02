@@ -69,11 +69,11 @@ The skill lists the three buckets with counts and one-line summaries. You pick a
 
 ## What it does not authorize
 
-- Unusual state transitions. You can override any state, but it flags odd moves and asks first.
-- Silent forced states. Even on a quick override, it lists the role changes, comment and close it is about to make before acting. If you force `ready-for-agent`, it also asks whether you still want a brief.
-- Unmarked posts. Every comment or issue it creates must begin with a one-line notice that AI generated the text during triage.
-- Recording built features as rejections. Closing as already implemented never writes to the out-of-scope folder.
-- Writing bugs into the out-of-scope folder. Only rejected enhancements go there, whether they came in as issues or pull requests.
+- **Unusual state transitions.** You can override any state, but it flags odd moves and asks first.
+- **Silent forced states.** Even on a quick override, it lists the role changes, comment and close it is about to make before acting. If you force `ready-for-agent`, it also asks whether you still want a brief.
+- **Unmarked posts.** Every comment or issue it creates must begin with a one-line notice that AI generated the text during triage.
+- **Recording built features as rejections.** Closing as already implemented never writes to the out-of-scope folder.
+- **Writing bugs into the out-of-scope folder.** Only rejected enhancements go there, whether they came in as issues or pull requests.
 
 ## The out-of-scope knowledge base
 
@@ -93,7 +93,7 @@ It reports a failed attempt or insufficient detail. Thin reports usually belong 
 
 ### Why did it not list a teammate's pull request?
 
-Discovery only surfaces external pull requests, as your tracker configuration defines them. A collaborator's in-flight work is not triage work. If you name a pull request explicitly, it is triaged regardless of author.
+Discovery surfaces only external pull requests, as your tracker configuration defines them. A collaborator's in-flight work is not triage work. If you name a pull request explicitly, it is triaged regardless of author.
 
 ## It's working when
 

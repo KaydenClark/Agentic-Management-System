@@ -10,7 +10,7 @@ credit_text: Original to Kayden Clark.
 
 Understanding usually lands first in working material such as notes or a Wiki page, and that is a poor place for it to stay. `promote` takes a chosen set of claims from that material and writes them into the durable record that must retain them. Each claim keeps its source, status and corrections, so the result shows where it came from and how settled it is.
 
-Some terms. A **Workbench** is the folder of records, tools and rules that `setup-workbench` creates in a project. A **Spec** states what a capability must do and how it is accepted, and a **Task** is one assigned unit of work under it. An **owner** is the single existing record responsible for a kind of claim: the glossary, a Spec, the Runbook (operating procedures), a decision record (a consequential choice and its rationale) or a Wiki article (maintained explanation). **Claim promotion** means moving understanding into an owner. It is not promoting a Git branch into `main`, and the skill keeps the two apart.
+A few terms first. A **Workbench** is the folder of records, tools and rules that `setup-workbench` creates in a project. A **Spec** states what a capability must do and how it is accepted, and a **Task** is one assigned unit of work under it. An **owner** is the single existing record responsible for a kind of claim: the glossary, a Spec, the Runbook (operating procedures), a decision record (a consequential choice and its rationale) or a Wiki article (maintained explanation). **Claim promotion** means moving understanding into an owner. It is not promoting a Git branch into `main`, and the skill keeps the two apart.
 
 The work runs in five steps.
 
@@ -22,7 +22,7 @@ The work runs in five steps.
 
 Your endpoint can be local recording, branch recovery, a draft PR, or published, checked work on a named target branch. Recording does not imply publishing. A publishing PR carries the already-promoted result, so nothing is promoted twice, and after the merge the skill confirms the target holds the change and reads the landed owner before calling it published.
 
-If an owner's text carries a confirmed **readback** (your own words, confirmed as an accurate statement of your intent), `promote` keeps them exactly and wraps them in marker comments tied to a shared Jot entry, a source-linked record kept through `jot`. A later check can compare that region with the confirmation, and an agent's rewrite cannot inherit it.
+If an owner's text carries a confirmed **readback** (your own words, confirmed as an accurate statement of your intent), `promote` keeps the words exactly and wraps them in marker comments tied to a shared Jot entry, a source-linked record kept through `jot`. A later check can compare that region with the confirmation, and an agent's rewrite cannot inherit it.
 
 ## When to use it
 
@@ -56,7 +56,7 @@ The skill selects the confirmed claims and the correction, leaves open questions
 - **No acceptance or wider permission.** A proposal stays a proposal until its real acceptance route is met, confirmed intent is not delivered work, and a note cannot widen scope or safety rules.
 - **No exposure.** A private or ignored source does not license tracked or shared publication.
 - **No cleanup of the source.** Trimming or deleting a note is a separate step needing its own approval, after checking that nothing depends on it.
-- **No audit, trial or paid campaign.** The local check starts no whole-Workbench audit. Scoring belongs to `audit-workbench`.
+- **No audit, trial or paid evaluation campaign.** The local check starts no whole-Workbench audit. Scoring belongs to `audit-workbench`.
 - **No release acceptance.** Finishing locally does not mean the change is accepted for release, confirmed on the target branch, installed or in real use.
 
 ## Preserved legacy notes
@@ -77,9 +77,9 @@ Nothing is added. It checks that the existing text still carries the right meani
 
 Only the settled, supported claims move. If destination, ordering or exposure is unresolved, it holds that part, continues with the independent claims, and asks only about the decision other work depends on.
 
-### My readback check fails. What now?
+### What if my readback check fails?
 
-This marker and check exist only where the installed owner procedure asks for a readback region. In a Workbench generation that provides the check, `doctor` reports `readback-mismatch` when the cited region is absent, malformed, private, unconfirmed or reworded. Restore the confirmed wording, or get a newly confirmed readback, record it and cite that. Deleting the marker or weakening the check is not a fix.
+This marker and check exist only where the installed owner procedure asks for a readback region. In a Workbench version that provides the check, `doctor` reports `readback-mismatch` when the cited region is absent, malformed, private, unconfirmed or reworded. Restore the confirmed wording, or get a newly confirmed readback, record it and cite that. Deleting the marker or weakening the check is not a fix.
 
 ### Will it leave my edits uncommitted, or merge them?
 
@@ -96,4 +96,4 @@ It never leaves them uncommitted: even a record-only request ends with a verifie
 
 ## Where it fits in the workflow
 
-`promote` belongs to the Complete stage (Land, preserve). It usually follows [jot](/skills/jot) or [domain-modeling](/skills/domain-modeling), which produce the settled understanding, and sits beside [land](/skills/land) and [reconcile](/skills/reconcile). It opens and merges its own PR within your endpoint, so reach for [land](/skills/land) only when a merge gets stuck. It hands its evidence to [audit-workbench](/skills/audit-workbench) when the promotion feeds an Alignment Check, and hands the settled source to the room's [map](/skills/map) and [plan](/skills/plan) route when preparation was also authorized.
+`promote` belongs to the Complete stage (Land, preserve). It usually follows [jot](/skills/jot) or [domain-modeling](/skills/domain-modeling), which produce the settled understanding, and sits beside [land](/skills/land) and [reconcile](/skills/reconcile). It opens and merges its own PR within your endpoint, so reach for [land](/skills/land) only when a merge gets stuck. It hands its evidence to [audit-workbench](/skills/audit-workbench) when the promotion feeds an Alignment Check, and hands the settled source to the project's [map](/skills/map) and [plan](/skills/plan) route when preparation was also authorized.

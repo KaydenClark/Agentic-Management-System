@@ -15,7 +15,7 @@ The agent works in roughly this order.
 
 1. **Read both sides before editing.** That means the conflicting changes themselves and the tests around them.
 2. **State each side's intent.** A **change intent** is a plain statement of the purpose behind one branch's edit, for example *this side renames a setting* or *that side adds a retry*. Writing intents out first makes the agent understand both edits before it touches either.
-3. **Find the overlap.** Some of the two intents may truly collide. Often much of them does not, and Git simply cannot tell.
+3. **Find the overlap.** Parts of the two intents may truly collide. Often most of them do not, and Git simply cannot tell the difference.
 4. **Preserve compatible behavior.** Where both intents can hold at once, the result keeps both. The skill rules out choosing by line order, which is the failure where one block silently wins and the other side's work disappears.
 5. **Escalate only a real product choice.** If the intents cannot both be true and the choice is about what the product should do, the agent stops and asks. Anything short of that, it resolves itself.
 6. **Verify.** It runs focused tests for the touched area, then the project's relevant checks, and inspects the final diff.
@@ -53,7 +53,7 @@ The skill file names no tools and no Workbench. You need:
 - Tests near the changed code, plus the project's usual checks, so the result can be verified.
 - An owner you can reach, in case the conflict turns out to be a real product choice.
 
-Its neighbor `land` does require a **Workbench**, a project's set of structured work records, created with [setup-workbench](/skills/setup-workbench). Reaching this skill through `land` therefore happens inside one; the skill itself has no Workbench step.
+Its neighbor `land` does require a **Workbench**, a project's set of structured work records, created with [setup-workbench](/skills/setup-workbench). So when you reach this skill through `land`, you are already inside one; the skill itself has no Workbench step.
 
 ## What it does not authorize
 
@@ -69,7 +69,7 @@ The skill's job ends at a verified resolution. It grants none of the following, 
 
 Then it is no longer a mechanical merge. If the two intents contradict and the choice is about what the product should do, the skill says to escalate. Bring the owner the two intents, the options and a recommendation. Do not let the agent pick quietly.
 
-### The tests pass. Am I done?
+### If the tests pass, am I done?
 
 Not yet. The skill also asks for the project's relevant checks and a look at the final diff. A clean text merge shows only that the text combined, not that the combined code works, and `land` says as much in its own limits. Reading the diff and running the checks are how you verify the result.
 

@@ -23,7 +23,7 @@ The seven categories:
 - **No-ops**: steering lines that change nothing about what the agent does.
 - **Information access**: facts the agent could not reach, such as dev server logs or read-only access to a third-party service.
 
-A short reference in the skill says where fixes should live. The implementation agent carries the most **context pressure**, since it explores, writes and debugs. The review agent gets only a diff, so standards are best enforced there. Steering files like `CLAUDE.md` and `AGENTS.md` load into every agent's context and should hold little beyond navigation pointers. `CODING_STANDARDS.md` is read at review time and should gain pointers into docs folders past about a thousand lines. Docs are reference files that other files point to, and existing docs come before new ones.
+A short reference in the skill says where fixes should live. The implementation agent carries the most **context pressure**, since it explores, writes and debugs. The review agent gets only a diff, so standards are best enforced there. Steering files like `CLAUDE.md` and `AGENTS.md` load into every agent's context and should hold little beyond navigation pointers. `CODING_STANDARDS.md` is read at review time; once it passes about a thousand lines, it should point into docs folders instead of growing. Docs are reference files that other files point to, and existing docs come before new ones.
 
 ## When to use it
 

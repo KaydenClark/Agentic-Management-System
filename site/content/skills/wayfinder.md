@@ -15,9 +15,9 @@ A decision map records open questions and how they depend on each other. It is n
 
 **Recover the destination and the language.** Before asking anything, the agent reads your request, the project's controls, any existing map and earlier answers, and extracts the destination, its purpose, the limits, what is out of scope, the endpoint, and what is settled or paused. An existing map is resumed only after checking who owns it and whether anyone changed it. The agent also loads the project's glossary (or its index plus relevant sections, stating the coverage) and follows term links to accepted decisions. Questions those already answer are not asked again. If your wording clashes with an accepted term, the agent cites both sources and tests the difference with a concrete example. A proposed change of meaning goes through [domain-modeling](/skills/domain-modeling) and stays pending until the term's **owner**, the person or record with authority over that choice, confirms it. If the destination itself is unsettled, [grilling](/skills/grilling) comes first: the agent asks you the one consequential open question, with a recommendation and its tradeoff.
 
-**Chart only the knowable frontier.** The map indexes the destination, constraints, sources, decisions, questions, fuzzy areas still in scope, and stated exclusions. A **sharp question** is well specified and answerable, as opposed to a vague area. It can still be blocked, and the map records exactly what blocks it. Each records what must come first, the options, the agent's recommendation, the evidence it needs, where it stands and what its answer touches, and is sized for one agent session. Vague areas stay rough until an answer firms them up. Rejected options are kept with reasons. Outside the endpoint, the map comes back in chat instead of being written anywhere.
+**Chart only the knowable frontier.** The map indexes the destination, constraints, sources, decisions, questions, fuzzy areas still in scope, and stated exclusions. A **sharp question** is well specified and answerable, as opposed to a vague area. It can still be blocked, and the map records exactly what blocks it. Each sharp question records what must come first, the options, the agent's recommendation, the evidence it needs, where it stands and what its answer touches, and is sized for one agent session. Vague areas stay rough until an answer firms them up. Rejected options are kept with reasons. Outside the endpoint, the map comes back in chat instead of being written anywhere.
 
-**Work one ready decision.** A question is **ready** when what it depends on is settled, someone has authority to act, and the evidence is enough to start. It takes the question you named if ready, or else the first unblocked, unclaimed one that serves the destination. Method follows the kind of uncertainty:
+**Work one ready decision.** A question is **ready** when what it depends on is settled, someone has authority to act, and the evidence is enough to start. The agent takes the question you named if it is ready, or else the first unblocked, unclaimed one that serves the destination. Method follows the kind of uncertainty:
 
 - Facts you can look up are researched with whichever installed research method fits, not asked of you.
 - Behavior or design that needs a test goes to [prototype](/skills/prototype). The map records where the disposable artifact lives and what it showed.
@@ -61,7 +61,7 @@ Wayfinder would write or resume a map, work one ready question and report what i
 ## What it does not authorize
 
 - **Implementation or publication.** Creating Tasks and building anything need their own authorization.
-- **Writes outside the map.** Maintaining the map does not allow running Jot (the Workbench's note-capture skill), updating the Wiki (its shared project knowledge), publishing issues, or editing other knowledge owners.
+- **Writes outside the map.** Maintaining the map does not allow running [jot](/skills/jot) (the Workbench's note-capture skill), updating the Wiki (its shared project knowledge), publishing issues, or editing other knowledge owners.
 - **Provisioning or spending.** A pending access request blocks only the decisions that depend on it. The map authorizes neither setting up access nor paid services.
 - **Throwaway branches.** Optional parallel research does not permit creating or pushing temporary branches.
 - **Answering for you.** Preferences and tradeoffs belong to the actual owner, and a prototype that runs cannot stand in for one.
@@ -87,7 +87,7 @@ No. Wayfinder settles what must be known; planning turns an accepted destination
 
 ### Do I need a formal Alignment Check?
 
-Not for ordinary planning. The comparison of each answer against your sources, the glossary and the evidence is enough. Formal Alignment qualification is required only when assigned.
+Not for ordinary planning. Comparing each answer against your sources, the glossary and the evidence is enough. Formal Alignment qualification is required only when someone assigns it.
 
 ## It's working when
 

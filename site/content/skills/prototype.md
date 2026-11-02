@@ -41,9 +41,9 @@ The agent restates the question and the verdict you will judge by, builds the lo
 
 Very little. The skill names no Workbench, no companion skills and no special tools. It needs:
 
-- a question you can state, with a verdict you can observe;
-- somewhere to build the artifact that is separate from real code and fits local conventions;
-- a record to write the outcome into, or the chat if there is none.
+- A question you can state, with a verdict you can observe.
+- Somewhere to build the artifact that is separate from real code and fits local conventions.
+- A record to write the outcome into, or the chat if there is none.
 
 ## What it does not authorize
 
@@ -51,7 +51,7 @@ The skill covers building a temporary artifact and recording the result. Nothing
 
 - **Removal is the default.** Keeping the artifact needs an explicit reason: the record has to want it as proof.
 - **A working prototype is not the feature.** The skill describes the artifact as isolated and temporary. Moving any of it into real code is separate work.
-- **Running it is not a preference.** When the choice depends on the owner's taste, [wayfinder](/skills/wayfinder) leaves that decision pending until the owner reacts. A prototype that runs cleanly cannot supply it.
+- **A clean run is not a preference.** When the choice depends on the owner's taste, [wayfinder](/skills/wayfinder) leaves that decision pending until the owner reacts. A prototype that runs cleanly cannot supply it.
 
 ## FAQs
 
