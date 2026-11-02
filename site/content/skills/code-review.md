@@ -52,7 +52,7 @@ Reach for it when you have a branch, a PR, workspace changes or a range since a 
 
 ## Example request
 
-> Review the changes on this branch against main. Check them against our coding standards and against Task TK-0042, and give me the two reports separately.
+> Review the changes on this branch against main. Check them against our coding standards and against the Task for the retry fix, and give me the two reports separately.
 
 The skill records both SHAs in the report, then returns a Standards report and a Spec report with a closing tally of findings and the worst issue on each side.
 

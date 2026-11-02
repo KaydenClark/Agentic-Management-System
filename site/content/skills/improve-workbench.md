@@ -40,7 +40,7 @@ A failed review verdict is first captured with [jot](/skills/jot) under a `revie
 
 ## Example request
 
-> Our last three Journeys on this repo each stalled because the agent picked the wrong test command. Run improve-workbench on that: baseline one of the runs, find where the agent first lacked what it needed, and give me the smallest change with a prediction. Don't change anything yet.
+> Our last three agent runs on this repo each stalled because the agent picked the wrong test command. Run improve-workbench on that: baseline one of the runs, find where the agent first lacked what it needed, and give me the smallest change with a prediction. Don't change anything yet.
 
 Because you asked for no changes, the skill stays read-only and returns the job contract, the earliest gap and a prediction to review.
 

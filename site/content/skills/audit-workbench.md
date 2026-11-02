@@ -46,7 +46,7 @@ The **Template** is the Workbench template distributed to other projects. A Temp
 
 ## Example request
 
-> Do a drift audit of this Workbench. Check whether our rules about who may merge match what the feedback log and the repository show, and give me a Harness Feedback Review. Don't change anything.
+> Do a drift audit of this Workbench. Check whether our rules about which checks must pass before a release match what the feedback log and the repository show, and give me a Harness Feedback Review. Don't change anything.
 
 It first records the target, question, revision, evidence window and what it may observe, then returns the report in chat.
 

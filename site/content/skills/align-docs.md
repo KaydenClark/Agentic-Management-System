@@ -35,9 +35,9 @@ You invoke it yourself, by name. Agents will not pick it up on their own. Use it
 
 ## Example request
 
-> We keep using "landing" to mean three different things across the docs. Align this concept with the documentation: interview me, fix the glossary once I confirm the terms, and read back what we agreed before anyone starts building.
+> We keep using "release" to mean three different things across the docs. Align this concept with the documentation: interview me, fix the glossary once I confirm the terms, and read back what we agreed before anyone starts building.
 
-The agent puts the three meanings of "landing" into one question tree, edits the glossary only for the terms you confirm, and ends with a readback that waits for your explicit confirmation.
+The agent puts the three meanings of "release" into one question tree, edits the glossary only for the terms you confirm, and ends with a readback that waits for your explicit confirmation.
 
 ## What it requires
 

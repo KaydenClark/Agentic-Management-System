@@ -32,7 +32,7 @@ Use it to ask whether a room is healthy, whether a skill truly activates in a gi
 
 ## Example request
 
-> Our new journey skill revision is on a branch. Check that the room still validates, confirm the skill actually loads in the agent host we ship for, and run a small comparison against the previous revision so we know whether it helped or hurt.
+> We revised one of our agent skills on a branch. Check that the room still validates, confirm the skill actually loads in the agent host we ship for, and run a small comparison against the previous revision so we know whether it helped or hurt.
 
 The skill pins that branch as the candidate, runs the existing checks, watches a real load in the named host, freezes a task set, and reports regression, benefit or an inconclusive result with evidence.
 

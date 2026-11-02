@@ -49,9 +49,9 @@ Say "jot this" when the owner answers a question, corrects an agent, or reveals 
 
 ## Example request
 
-> The owner just told me the dashboard should only show shared pages, never private ones, and that this replaces what we assumed last week. Jot that so the next session doesn't redo the question.
+> I've decided the weekly report should list only closed tickets, never open ones, and that replaces what we assumed last week. Jot that so the next session doesn't ask again.
 
-Because the meaning changed, Jot does not just append a note. It finds the smallest existing owner for the dashboard topic (or a new Wiki topic if none covers it) and records a pending correction, then asks the owner to confirm a revised readback. Until they do, the earlier confirmed intent stands and dependent work is blocked. After confirmation, Jot saves the confirmed text exactly, moves the current-intent pointer, links old to new, reads it back, and reports where it saved and whether anything is unpublished.
+Because the meaning changed, Jot does not just append a note. It finds the smallest existing owner for the weekly-report topic (or a new Wiki topic if none covers it) and records a pending correction, then asks you to confirm a revised readback. Until you do, the earlier confirmed intent stands and dependent work is blocked. After confirmation, Jot saves the confirmed text exactly, moves the current-intent pointer, links old to new, reads it back, and reports where it saved and whether anything is unpublished.
 
 ## What it requires
 
