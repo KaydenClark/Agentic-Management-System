@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
-**Next gate:** Complete TK-002.
+**Next gate:** Land TK-002 on `main`, then run TK-003 in a separate session.
 
 ## Intent and authority
 

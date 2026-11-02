@@ -13,24 +13,18 @@ line, never the value.
 import base64
 import json
 import random
-import re
 import string
 import subprocess
 from pathlib import Path
 
 import pytest
 
+from ams import hygiene
+
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SB_SECRET = re.compile(r"sb_secret_[A-Za-z0-9_-]{8,}")
-JWT = re.compile(r"\beyJ[A-Za-z0-9_-]+\.([A-Za-z0-9_-]+)\.[A-Za-z0-9_-]+")
-
-
-def _has_role(segment: str) -> bool:
-    try:
-        payload = json.loads(base64.urlsafe_b64decode(segment + "=" * (-len(segment) % 4)))
-    except (ValueError, UnicodeDecodeError):
-        return False
-    return isinstance(payload, dict) and "role" in payload
+# The key shapes are owned by the public hygiene check (S-001 TK-002), which
+# also scans the tree for other credentials; this file keeps the history scan.
+SB_SECRET, JWT, _has_role = hygiene.SB_SECRET, hygiene.JWT, hygiene.has_role_claim
 
 
 def secret_hits(text: str) -> list[int]:

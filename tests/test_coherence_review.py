@@ -174,6 +174,13 @@ class StatusTest(unittest.TestCase):
         [v] = self._status(head)
         self.assertEqual(v["status"], "current", v)
 
+    def test_review_stays_current_when_only_a_taskboard_continuation_page_changes(self):
+        head = self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}")
+        Path(self.repo, "TASKBOARD.page-001.md").write_text("regenerated continuation\n")
+        head = _commit(self.repo, "Render")
+        [v] = self._status(head)
+        self.assertEqual(v["status"], "current", v)
+
     def test_review_reused_after_the_commit_changed_is_stale(self):
         self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}")
         Path(self.repo, "src/thing.py").write_text("v = 2\n")
