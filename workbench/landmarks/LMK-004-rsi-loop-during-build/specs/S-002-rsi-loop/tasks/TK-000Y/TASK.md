@@ -3,10 +3,12 @@
 **Task ID:** TK-000Y
 **Spec ID:** S-002
 **Slice:** A judge requests the fixed JSON schema through a bounded serialization-only transport
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Evals; Readback
 **Planned verification:** Causal inert structured-protocol red/green tests; unchanged worker regressions; full/fresh/room/CI; independent exact-source review; private new-series manifest, without model execution
+**Claimed by:** s002-structured-judge
+**Current claimant:** s002-structured-judge
 
 ## Assignment
 
@@ -27,3 +29,9 @@ Official references: [CLI structured output](https://code.claude.com/docs/en/hea
 ## Continuing gate
 
 Task002 noise, qualification for changed bytes and any useful-benefit/retention claim remain separate. No actual rerun is authorized until root selects the reviewed merged reference and releases the phase.
+
+## Engineering progress
+
+Implemented the bounded judge adapter and neutral context/predecessor binding; no actual corrective query has run. Initial focused collection failed because these seams were absent, then 220 affected tests passed/1 skipped. A duplicate-key test initially expected an overly specific error string; the transport correctly classified it as malformed JSONL, and the test now asserts that actual refusal. Worker command/default adapter regressions remain green. Local --help parsed the schema/max-turns flags with exit0, without authentication/model execution. No supported documented retry-disable control was found; the client refuses first invalid/error/duplicate and enforces the two-turn ceiling. Real runtime shape remains an explicit compatibility gate.
+
+Both roles/all arms use one owned neutral non-Git cwd, outside source/oracle/log directories; pre/post-query drift halts without deleting data. The new private protocol identifies actual predecessor record/qualification, unchanged five labels, source pins and distinct query/provider-turn limits. Unknown previous slots cannot continue; controlled runtime halts are distinguished from owner cancellation. Full/fresh/independent review and model-free real-artifact preparation are next; actual calls remain held.

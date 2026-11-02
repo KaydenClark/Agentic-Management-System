@@ -5,13 +5,13 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-02
 **Catalog description:** Skill/AMS audit loop.
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-002 narrow qualification accepted; first baseline slot held as Unknown on strict judge-format failure.
-**Next gate:** TK-000Y bounded structured-output correction; no further model calls or additional trial-store rows are released.
+**Latest event:** TK-000Y claimed by s002-structured-judge.
+**Next gate:** Close TK-000Y with verification and documentation proof.
 
 ## Intent and authority
 

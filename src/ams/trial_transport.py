@@ -20,7 +20,9 @@ EXECUTION_TIMEOUT = 55
 
 class ClaudeProcess:
     """JSONL control handshake before sending the one authorized caller prompt."""
-    def __init__(self, cwd, *, system_prompt=None):
+    def __init__(self, cwd, *, system_prompt=None, structured_output=False):
+        require(type(structured_output) is bool, 'explicit transport mode required')
+        self.structured_output = structured_output
         self.process = None
         self.selector = None
         self.stderr = b''
@@ -37,7 +39,11 @@ class ClaudeProcess:
                     and auth.get('authMethod') in ('claude.ai', 'oauth', 'subscription')
                     and not auth.get('apiKeySource'), 'subscription-only authentication unavailable')
             self.stage = 'startup'
-            self.process = subprocess.Popen(claude_command(system_prompt=system_prompt), cwd=cwd, env=env, stdin=subprocess.PIPE,
+            command = claude_command(system_prompt=system_prompt)
+            if structured_output:
+                from ams.trial_judge import judge_command
+                command = judge_command(system_prompt=system_prompt)
+            self.process = subprocess.Popen(command, cwd=cwd, env=env, stdin=subprocess.PIPE,
                                             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                             start_new_session=(os.name == 'posix'))
         except (OSError, ValueError, subprocess.TimeoutExpired) as error:
@@ -63,7 +69,12 @@ class ClaudeProcess:
         while b'\n' in self.buffer:
             line, self.buffer = self.buffer.split(b'\n', 1)
             try:
-                self.pending.append(json.loads(line))
+                if self.structured_output:
+                    from ams.trial_inputs import _unique
+                    value = json.loads(line, object_pairs_hook=_unique)
+                else:
+                    value = json.loads(line)
+                self.pending.append(value)
             except ValueError:
                 raise Refused('malformed Claude JSONL') from None
 
