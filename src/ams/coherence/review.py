@@ -36,6 +36,7 @@ from ams.coherence.up_to_spec import _find_spec, _git, _section, _show
 
 NATIVE = ["node", "workbench/tools/spec-workbench.mjs"]
 CONTEXT = re.compile(r"^[0-9a-f]{12}$")
+FULL_SHA = re.compile(r"^[0-9a-f]{40}$")
 TRAILER = re.compile(r"^AMS-Context:\s*([0-9a-f]{12})\s*$", re.M)
 CLAIM = re.compile(r"\*\*(?:Claimed by|Current claimant):\*\*\s*(.+)$")
 ATTRIBUTION = re.compile(r'"(?:agent|claimant|onBehalfOf)"\s*:\s*"([^"]+)"')
@@ -159,6 +160,11 @@ def record(spec_id: str, candidate: str, result: str, findings: str, reviewer: s
                       "from `review context` in the reviewing session, or --session")
     if not agent or not agent.strip():
         raise Refused("the review names no reviewing agent (--agent)")
+    # Bind the exact commit: a ref such as HEAD would re-resolve later and hide staleness.
+    resolved = _git(repo, "rev-parse", "--verify", "--quiet", f"{candidate}^{{commit}}", check=False)
+    if resolved.returncode:
+        raise Refused(f"candidate {candidate} is not a commit in this repository")
+    candidate = resolved.stdout.strip()
     built = builders(spec_id, repo, candidate)
     head = builders(spec_id, repo, "HEAD")
     built = {k: built[k] | head[k] for k in built}
@@ -241,7 +247,9 @@ def status(spec_id: str, repo: str = ".", commit: str = "HEAD",
     for v in _verdicts(_show(repo, sha, spec_path)):
         refused = _builder_reasons(v["agent"], v["context"], built)
         stale = []
-        if _git(repo, "cat-file", "-e", f"{v['candidate']}^{{commit}}", check=False).returncode:
+        if not FULL_SHA.match(v["candidate"]):
+            stale.append(f"reviewed candidate {v['candidate']} is not a full commit SHA, so it names no exact commit")
+        elif _git(repo, "cat-file", "-e", f"{v['candidate']}^{{commit}}", check=False).returncode:
             stale.append(f"reviewed commit {v['candidate']} is not in this repository")
         else:
             covered = _digest_records(repo, spec_id, v["candidate"]) | _digest_records(repo, spec_id, sha)
