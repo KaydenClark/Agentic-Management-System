@@ -17,7 +17,9 @@ TDD (test-driven development) puts the test before the code. This skill is a sho
 
 Before the first test, you name the behavior and its **public seam**: the stable place where the behavior can be observed from outside, such as a function others call, a command's output or an API response. Tests are kept **behavioral** (they check what the code does) and **deterministic** (same result every run).
 
-Some seams cannot be tested. The skill does not let you skip the proof quietly. You explain why, then use the strongest alternative you can repeat. For delivery work, meaning work that ends in a PR or a recorded handoff, you note the meaningful proof in the PR description or the task record (the written record of the assigned Task, defined below).
+Some seams cannot be tested. The skill does not let you skip the proof quietly. You explain why, then use the strongest alternative you can repeat. For delivery work, meaning work that ends in a PR or a recorded handoff, you note the meaningful proof in the PR description or the Task record.
+
+Inside a **Workbench** (the project folder that holds Specs and Tasks), a **Task** is one bounded unit of assigned work, and a **Spec** is the agreed description of what that work should achieve. A Task run can reach for TDD; the last section shows where.
 
 ## When to use it
 
@@ -25,13 +27,13 @@ Reach for it when you are adding or changing behavior and a test at a public sea
 
 | What you have | Reach for |
 |---|---|
-| A behavior to build or change, with a testable seam | tdd |
+| A behavior to build or change, with a testable seam | `tdd` |
 | A bug with an unknown cause | [diagnosing-bugs](/skills/diagnosing-bugs) |
 | An unsettled module interface or seam to design | [codebase-design](/skills/codebase-design) |
 | A whole assigned Task to take from start to submission | [journey](/skills/journey) |
 | A PR body to write after the work is done | [pr](/skills/pr) |
 
-Diagnosing-bugs overlaps at one point: if you ask it to repair a bug, it adds a regression test first. The starting question differs. TDD starts from a behavior you want. Diagnosing-bugs starts from a failure you do not yet understand.
+One neighbor overlaps: if you ask [diagnosing-bugs](/skills/diagnosing-bugs) to repair a bug, it adds a regression test first. The starting point differs. TDD starts from a behavior you want; diagnosing-bugs starts from a failure you do not yet understand.
 
 ## Example request
 
@@ -42,9 +44,9 @@ Diagnosing-bugs overlaps at one point: if you ask it to repair a bug, it adds a 
 - A behavior you can state and a public seam where it can be observed.
 - A way to run tests, so the red and green results are real runs.
 - The project's own required checks. The skill defers to them and does not define them.
-- For delivery work, a place to record proof: the PR description or the task record.
+- For delivery work, a place to record proof: the PR description or the Task record.
 
-The skill is one short file with no helper files. Inside a Workbench (the project folder that holds Specs and Tasks), a **Task** is one bounded unit of assigned work, and a **Spec** is the agreed description of what that work should achieve. TDD is something a Task run reaches for; see the last section.
+The skill is one short file with no helper files.
 
 ## What it does not authorize
 
@@ -62,7 +64,7 @@ That is not yet the failure the loop calls for. A broken setup or a typo, for ex
 
 ### What if the thing I need to change has no testable seam?
 
-Say so and explain why. Then use the strongest check you can repeat, and for delivery work record that proof in the PR description or task record.
+Say so and explain why. Then use the strongest check you can repeat, and for delivery work record that proof in the PR description or Task record.
 
 ### Does a passing new test mean I am done?
 

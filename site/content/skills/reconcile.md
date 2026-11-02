@@ -26,14 +26,14 @@ A pass has four parts.
 
 **Regenerate and read back.** The board is regenerated, records are published only as far as the assignment allows, and the skill rereads the owners as a stranger would. A cold reader must be able to say which revision was achieved and where it sits, what was checked and what was not, which acceptance lines remain open, and the single next action with its owner. If they cannot, the skill repairs the records rather than writing a longer report.
 
-For Git proof it documents a protected-read helper that clears inherited `GIT_*` variables and disables replacement refs, so a stray setting cannot redirect a check to the wrong commit. Containment proves ancestry only.
+For Git proof it documents a protected-read helper that clears inherited `GIT_*` variables and disables replacement refs, so a stray setting cannot redirect a check to the wrong commit. Even then, a containment check proves ancestry and nothing more.
 
 ## When to use it
 
 Reach for it when records and reality may have drifted apart: a run came back, a reviewer or the owner's **Human QA** (their own hands-on check) rejected a candidate, a candidate landed, the owner corrected a decision that running work depends on, a record disagrees with the code, or work stopped early.
 
 | What you have | Reach for |
-| --- | --- |
+|---|---|
 | A read-only status report on the board | [sitrep](/skills/sitrep) |
 | A finished candidate that must reach its target branch | [land](/skills/land) |
 | Working notes that should become durable docs | [promote](/skills/promote) |
@@ -43,14 +43,14 @@ Reach for it when records and reality may have drifted apart: a run came back, a
 
 ## Example request
 
-> TK-014 just came back with a green test run and a note saying it merges cleanly. Reconcile S-005: check what was delivered against the Task's acceptance, update the records, and tell me the next gate.
+> The CSV export Task just came back with a green test run and a note saying it merges cleanly. Reconcile its Spec: check what was delivered against the Task's acceptance, update the records, and tell me the next gate.
 
 The skill pins the returned commit, checks the claimed result at that revision and records the outcome. If the Task's acceptance is met, it closes the run through the project's lifecycle command. If not, it leaves the Task open and records the gap. Either way it replaces the generic next gate with the real one.
 
 ## What it requires
 
 - A Workbench. If `workbench/manifest.json` or `workbench/tools/spec-workbench.mjs` is missing, the skill stops and sends you to set one up. It will not create records by hand or use another tracker.
-- The room's own `AGENTS.md`, runbook, glossary and manifest, read before anything is written. Room policy wins.
+- The project's own `AGENTS.md`, runbook, glossary and manifest, read before anything is written. Project policy wins.
 - The native `spec-workbench` commands, such as `doctor`, `report`, `receipt`, `close`, `record-landing` and `render`. Their refusals are recorded, not worked around.
 - For cited Git proof, a trusted `git` and `bash` and a fresh fetch, since a local ref says nothing reliable about the remote.
 - A single writer per record. If another writer owns one, the skill prepares the exact correction instead of editing it.
@@ -79,7 +79,7 @@ A green run shows a check passed, not that the Task's acceptance was met. The sk
 
 A box gets ticked only when evidence exists for that exact line. Per-run progress goes in the evidence log, and the boxes are checked during whole-Spec QA.
 
-### A helper skill it mentions is not installed. What then?
+### What if a helper skill it mentions is not installed?
 
 It uses whatever procedure the project documents for that step. If none exists, it prepares the proposed edit with its evidence, records the missing procedure and who is responsible, and holds only the dependent work.
 
@@ -93,7 +93,7 @@ It uses whatever procedure the project documents for that step. If none exists, 
 
 ## Where it fits in the workflow
 
-`reconcile` belongs to the **Complete** stage (land and preserve), beside [land](/skills/land). [orchestrate](/skills/orchestrate) calls it to record the hand-backs it accepts.
+`reconcile` belongs to the **Complete** stage (Land, preserve), beside [land](/skills/land). [orchestrate](/skills/orchestrate) calls it to record the hand-backs it accepts.
 
 - **Before it:** [journey](/skills/journey) delivers a run, [land](/skills/land) merges and proves containment, and a reviewer or the owner may return findings.
 - **After it:** [plan](/skills/plan) writes the next Task records, [map](/skills/map) rewrites a destination when intent changed, and [land](/skills/land) sends a finished candidate to its target.

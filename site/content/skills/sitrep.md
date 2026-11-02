@@ -54,9 +54,9 @@ Ask for a sitrep, status or situation report by name. Models never invoke it on 
 ## What it requires
 
 - A Workbench created by [setup-workbench](/skills/setup-workbench). The skill first checks for the Workbench manifest and the `spec-workbench` tool. If either is missing, it stops and tells you to run setup rather than building records by hand.
-- Read access to the Markdown board, following each Next page link for a whole-room report. A JSON board is planned but not delivered at the pinned revision, and `render --format json` is no substitute, since it only writes a preview file and can refuse a room.
+- Read access to the Markdown board, following each Next page link for a whole-board report. The pinned revision has no JSON board yet, and `render --format json` is no substitute, since it only writes a preview file and can refuse a Workbench.
 - The read-only `spec-workbench` commands. `doctor` flags a stale board, stale claims and Tasks blocked on other Tasks. `next` shows what is ready, and with `--review` what awaits review; it never claims anything and takes no Spec scope, so a scoped report uses `show`. `list` supplies counts. If a command refuses, the skill says so and falls back to the board files and `show`.
-- A Grill Board, only if the project has one. Its pending items go under Needs your review.
+- A Grill Board (a board of questions waiting on the owner's answers), only if the project has one. Its pending items go under Needs your review.
 - Git access to fetch remote references, the only write-adjacent action allowed.
 
 The Markdown board has no review or Backlog lane and no Task-level Complete totals, so the skill derives these itself and says the counts are Spec-level.
@@ -93,6 +93,6 @@ No. When you are behind, the skill reads the board at the remote tip. Dirty or u
 
 ## Where it fits in the workflow
 
-`sitrep` lives in the **Route** stage (Choose a path), as an also-used skill beside the main entry point [ask-workbench](/skills/ask-workbench). Only a Workbench from [setup-workbench](/skills/setup-workbench) must exist first.
+`sitrep` lives in the **Route** stage (Choose a path), as a supporting skill beside the main entry point [ask-workbench](/skills/ask-workbench). Only a Workbench from [setup-workbench](/skills/setup-workbench) must exist first.
 
 It hands off rather than doing other stages' work. Ready Tasks go to [journey](/skills/journey) or [orchestrate](/skills/orchestrate) in the Journey stage, and blocked merges to [land](/skills/land) in the Complete stage. Records that drifted go to [reconcile](/skills/reconcile), the writing counterpart that updates the owning records and regenerates the board. Durable findings go to [jot](/skills/jot).

@@ -23,7 +23,7 @@ A run has four moves.
 Key terms:
 
 - A **finding** is one factual claim with a precise citation, an evidence type, the version or date checked, and a confidence level with its reason and limit. Each has a stable ID.
-- A **record-plus-finding reference** such as `R-0001 F-CC5` lets a decision record or Spec cite one claim in one paper.
+- A **record-plus-finding reference** such as `R-0042 F-A1` lets a decision record or Spec cite one claim in one paper.
 - An **inference** is the agent's reasoning from findings, labeled apart and linked to them.
 - A **candidate decision** is a recommendation to the decision owner, and stays one until that owner accepts it elsewhere.
 
@@ -50,7 +50,7 @@ The agent would find an unused ID, state its subquestions and source rules, read
 
 ## What it requires
 
-- A Workbench. The agent first looks for the manifest and the Workbench tooling at the project root. If either is missing it stops and sends you to the setup skill. It will not hand-build Workbench folders or records, and will not fall back to some other tracker.
+- A Workbench. The agent first looks for the manifest and the Workbench tooling at the project root. If either is missing it stops and sends you to [setup-workbench](/skills/setup-workbench). It will not hand-build Workbench folders or records, and will not fall back to some other tracker.
 - The project's research collection, whose README, formats and index decide file layout, ID scheme and confidence scale.
 - Access to sources. If one cannot be reached, the agent tries one bounded primary alternative, then narrows the claim or reports the gap.
 - Authority for checks. Checks run within the authority you have, in isolated fixtures, without credentials or private data. Spending money, running model campaigns, delegating reading and sending outside messages each need authorization granted beforehand. If delegation is allowed, the brief is bounded and the agent verifies returned claims against sources itself.
@@ -59,7 +59,7 @@ The agent would find an unused ID, state its subquestions and source rules, read
 
 - A research paper never accepts a CDR, ADR or DDR, changes requirements or authorizes implementation. Candidate decisions stay candidates.
 - It does not edit decisions or Specs that cite an older record. It lists them and suggests re-evaluation, and changes them only if you separately authorize it.
-- It supplies no fitness score, audit sign-off or approval to distribute. A real Workbench fitness or release-qualification investigation follows the project's audit and release owners.
+- It supplies no fitness score, audit sign-off or approval to distribute. A real Workbench fitness or release-qualification investigation is governed by the project's audit and release owners.
 - It does not publish beyond the destination you named, and its report separates local, committed, pushed and accepted states.
 - It never rewrites a published finding's meaning in place. New evidence gets a new record or a dated note pointing to it, the original ID, claim and history stay, and the decisions and Specs citing the old finding are listed for their owners.
 - It does not update the Wiki, the project's separate knowledge area, by default. Nor does it treat a gain published for someone else's model, task or budget as proof of improvement in your project.
@@ -74,7 +74,7 @@ The agent tries one bounded primary alternative. If that fails, it narrows the c
 
 No. Mutable findings are reverified before reuse under the collection's freshness rule, which says how old is too old. The collection this skill was derived from used a threshold of more than one minor release, but the owning project's rule governs. The paper also lists what would reverse its conclusion.
 
-### An audit found a claim or check failing. What happens?
+### What happens if an audit finds a failing claim or check?
 
 The failure goes back to the evidence behind it. The agent makes a scoped correction or a bounded follow-up, then tests that exact finding and citation, or the failed check, again on the repaired version. Inferences, candidate decisions and earlier findings that leaned on the same evidence get rechecked too.
 

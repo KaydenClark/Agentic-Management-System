@@ -70,7 +70,7 @@ Expect an Adopt verdict, a Port, Fold, Keep or Retire label on each existing doc
 
 ### How do I know which mode I am in?
 
-The classifier's verdict decides: genesis means Create, adoption means Adopt, upgrade means Update, and Check is the read-only route for an installed Workbench. A scaffold with all the right file names but no installation record is still Adopt, and a real project is never relabeled a template copy to skip Adoption.
+The classifier's verdict decides: genesis means Create, adoption means Adopt, upgrade means Update, and Check is the read-only route for an installed Workbench. A scaffold with all the right file names but no installation record is still Adopt, and a real project is never relabeled a template copy to skip adoption.
 
 ### Why did setup refuse to start with a dirty working tree?
 
@@ -92,7 +92,7 @@ No. Package checks and skill listings do not show that your host loads the skill
 
 - Classification only reads, and the mode you are told matches the project's actual state.
 - Before any write, you see the changes and the choices that block them.
-- Existing controls, IDs, decisions and evidence are intact afterwards.
+- Existing controls, IDs, decisions and evidence are intact afterward.
 - `render` is deterministic, `doctor` reports nothing blocking, and `next --json` returns an eligible Task or `null` for a named gate.
 - Tool and catalog verification pass, with no clash between project and personal skill names.
 - The closing report separates local, committed, pushed, reviewed and merged states and names every missing condition.
@@ -101,4 +101,4 @@ No. Package checks and skill listings do not show that your host loads the skill
 
 Setup-workbench sits in the Route stage as a supporting skill, and it comes before everything else in a project. [ask-workbench](/skills/ask-workbench) checks for the Workbench before routing and tells you to run this skill if the manifest or lifecycle tool is missing. [map](/skills/map), [plan](/skills/plan), [orchestrate](/skills/orchestrate) and [journey](/skills/journey) carry the same requirement.
 
-After setup, work moves to that ordinary loop. The wider fitness review goes to [audit-workbench](/skills/audit-workbench), outcome comparisons to [evaluate-workbench](/skills/evaluate-workbench), and measured repair of a reusable gap to [improve-workbench](/skills/improve-workbench). A change to the setup package itself belongs in the shared catalog, through improve-workbench and [author-skill](/skills/author-skill).
+After setup, work moves into the ordinary loop those skills run. The wider fitness review goes to [audit-workbench](/skills/audit-workbench), outcome comparisons to [evaluate-workbench](/skills/evaluate-workbench), and measured repair of a reusable gap to [improve-workbench](/skills/improve-workbench). A change to the setup package itself belongs in the shared catalog, through improve-workbench and [author-skill](/skills/author-skill).

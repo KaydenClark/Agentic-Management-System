@@ -1,6 +1,6 @@
 ---
 name: triage
-summary: Sorts incoming issues and outside pull requests into labelled states, checks each claim against the code, and leaves an agent-ready brief or a reason to stop.
+summary: Sorts incoming issues and outside pull requests into labeled states, checks each claim against the code, and leaves an agent-ready brief or a reason to stop.
 pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
 credit: adapted
 credit_text: Adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills), MIT License, with the glossary file and the way the tracker is queried changed.
@@ -9,7 +9,7 @@ credit_license: MIT
 
 ## What it does
 
-Triage is a maintainer's sorting desk for your issue tracker. It moves each item through a small set of labelled states, checking facts before it recommends anything. If your repository treats outside pull requests as a request surface, they get the same handling, because a pull request is an issue that carries code.
+Triage is a maintainer's sorting desk for your issue tracker. It moves each item through a small set of labeled states, checking facts before it recommends anything. If your repository treats outside pull requests as a request surface, they get the same handling, because a pull request is an issue that carries code.
 
 Each triaged item is meant to hold exactly one **category role** plus one **state role**. These are canonical names, and your tracker's real labels may differ, so the skill asks for the mapping if you have not supplied one.
 
@@ -69,11 +69,11 @@ The skill lists the three buckets with counts and one-line summaries. You pick a
 
 ## What it does not authorize
 
-- Unusual state transitions. You can override any state, but it flags odd moves and asks first.
-- Silent forced states. Even on a quick override, it lists the role changes, comment and close it is about to make before acting. If you force `ready-for-agent`, it also asks whether you still want a brief.
-- Unmarked posts. Every comment or issue it creates must begin with a one-line notice that AI generated the text during triage.
-- Recording built features as rejections. Closing as already implemented never writes to the out-of-scope folder.
-- Writing bugs into the out-of-scope folder. Only rejected enhancements go there, whether they came in as issues or pull requests.
+- **Unusual state transitions.** You can override any state, but it flags odd moves and asks first.
+- **Silent forced states.** Even on a quick override, it lists the role changes, comment and close it is about to make before acting. If you force `ready-for-agent`, it also asks whether you still want a brief.
+- **Unmarked posts.** Every comment or issue it creates must begin with a one-line notice that AI generated the text during triage.
+- **Recording built features as rejections.** Closing as already implemented never writes to the out-of-scope folder.
+- **Writing bugs into the out-of-scope folder.** Only rejected enhancements go there, whether they came in as issues or pull requests.
 
 ## The out-of-scope knowledge base
 
@@ -93,7 +93,7 @@ It reports a failed attempt or insufficient detail. Thin reports usually belong 
 
 ### Why did it not list a teammate's pull request?
 
-Discovery only surfaces external pull requests, as your tracker configuration defines them. A collaborator's in-flight work is not triage work. If you name a pull request explicitly, it is triaged regardless of author.
+Discovery surfaces only external pull requests, as your tracker configuration defines them. A collaborator's in-flight work is not triage work. If you name a pull request explicitly, it is triaged regardless of author.
 
 ## It's working when
 
@@ -106,4 +106,4 @@ Discovery only surfaces external pull requests, as your tracker configuration de
 
 ## Where it fits in the workflow
 
-Triage sits in the **Route** stage (choose a path) as a supporting skill. The main flow there is [ask-workbench](/skills/ask-workbench), with [sitrep](/skills/sitrep), [handoff](/skills/handoff) and [setup-workbench](/skills/setup-workbench) alongside it. It works on the tracker's inbox, decides what each item is and whether it is ready, and calls [grilling](/skills/grilling) and [domain-modeling](/skills/domain-modeling) when an item needs shaping. Its output is a labelled, briefed item that a person or an agent can pick up next.
+Triage sits in the **Route** stage (Choose a path) as a supporting skill. The main flow there is [ask-workbench](/skills/ask-workbench), with [sitrep](/skills/sitrep), [handoff](/skills/handoff) and [setup-workbench](/skills/setup-workbench) alongside it. It works on the tracker's inbox, decides what each item is and whether it is ready, and calls [grilling](/skills/grilling) and [domain-modeling](/skills/domain-modeling) when an item needs shaping. Its output is a labeled, briefed item that a person or an agent can pick up next.
