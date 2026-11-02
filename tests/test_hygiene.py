@@ -19,8 +19,8 @@ J = "".join
 PLANTED = [
     ("host path", J(["/ho", "me/someone/project/notes.md"])),
     ("host path", J(["/Us", "ers/someone/Code/AMS"])),
-    ("host path", J(["C:", "\\Users\\someone\\AMS"])),
-    ("host path", J(["file:", "///C:/Users/someone/AMS"])),
+    ("host path", J(["C:", "\\Users\\some", "one\\AMS"])),
+    ("host path", J(["file:", "///C:/Us", "ers/someone/AMS"])),
     ("credential", J(["sb_", "secret_", "AbCdEf0123456789"])),
     ("credential", J(["sk-", "ant-", "a" * 30])),
     ("credential", J(["sk-", "b" * 32])),
