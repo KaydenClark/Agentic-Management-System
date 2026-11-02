@@ -18,6 +18,8 @@ As evidence becomes available, the website can also show results and improvement
 
 The RSI loop connects observed problems to bounded skill changes, before-and-after comparisons and evidence-based decisions about what to retain. Recorded intent, decisions and corrections survive the work and inform later use. The website makes that learning visible while the shared skills carry supported improvements into everyday project work.
 
+Skills teach concrete methods for distinct jobs; greater reliability is an improvement.
+
 Projects already use those shared skills; improving them does not require a separate AMS delivery or an installation into every project. When a substantial change requires a project's Workbench to be corrected, or an existing or new project needs setup, someone runs `setup-workbench` in that project's folder.
 
 ## How this document is used

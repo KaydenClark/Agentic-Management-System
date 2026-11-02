@@ -4,6 +4,18 @@ The shared personal catalog owns the methods; project skills are extensions.
 Read the installed personal skill and its reached references before the operation.
 The manifest and this project's controls bind paths, authority and delivery.
 
+## Changes to the shared catalog
+
+A shared-skill change is still AMS work even when its source is in another
+repository. Recover intent and current records, use map for the destination
+and plan for bounded Tasks, and reconcile affected Wiki/docs before source
+implementation. Respect the requested phase: Prepare-only work leaves a
+planned, unclaimed destination and grants no activation or trial authority.
+Author reusable source in KaydenClark/skills through author-skill; this
+project's skill lane is not its replacement. See the [catalog refocus](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md)
+and [preparation-bypass failure](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md).
+This routing clarification is not proof that the systemic failure is fixed.
+
 | Operation | Personal method |
 |---|---|
 | Prepare, adopt, update or check the Workbench | setup-workbench |

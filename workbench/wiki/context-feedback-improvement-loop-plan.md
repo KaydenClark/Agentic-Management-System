@@ -46,3 +46,7 @@ Give one feedback item once. Observe capture, diagnosis, assignment, bounded rep
 Reuse existing records, board, runner, writer, Supabase and website. No new service is selected. Verify the execution host and continuation facility during the assembled Task; use a bounded existing heartbeat only under subsequent execution authority. Automatic proposing remains behind the existing trusted-grader/cost/manual-round gate. Human QA and dev-to-main promotion remain owner actions. Current records and code demonstrate incomplete connections, not completed behavior. Planned verification is not proof.
 
 Native dependency limitation: qualified cross-Spec Task edges are unsupported. The assembly Task retains its execution hold until its named artifact prerequisites are verified; no whole-Spec completion gate is substituted.
+
+## Later catalog-refocus correction
+
+The owner-recorded [preparation bypass](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) is a concrete recurrence case for S-013/TK-001D. [S-000A](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) separately owns the newly requested catalog-wide destination and repair side. The earlier statement that this feedback-loop mapping needed no new Spec applies to that earlier scope, not all future skill work. Both additions remain Prepare-only; existing holds, campaigns and evidence are unchanged.
