@@ -90,8 +90,8 @@ export default function About() {
         </p>
         <ul className={styles.list}>
           <li>
-            The site is one Spec, <a href={`${REPO_BLOB}${S003}`}>S-003</a>, with its acceptance conditions and an
-            evidence log of every finished Task.
+            The site is one Spec, <a href={`${REPO_BLOB}${S003}`}>S-003</a>: its destination and acceptance
+            conditions. The record of each finished Task is kept in its Wiki history page.
             <Source path={S003}>S-003</Source>
           </li>
           <li>
