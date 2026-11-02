@@ -62,10 +62,11 @@ export default function StartHere() {
         <p className="eyebrow">Tour</p>
         <h1>Start here</h1>
         <p className="lede" data-opener="">
-          The Agentic Management System, or <dfn id="ams">AMS</dfn>, is how Kayden runs his{" "}
-          <dfn id="agent">agents</dfn>: AI assistants that carry out a piece of work on their own. This page shows it
-          in pictures, then hands you a toy: move one piece of work from an idea to done and see who holds it at each
-          step.
+          The Agentic Management System, or <dfn id="ams">AMS</dfn>, is a reusable system for turning
+          <dfn id="intent">intent</dfn>—what you want, why and within what boundaries—into outcomes with AI.
+          People develop and write down what they want; <dfn id="agent">agents</dfn>,
+          AI assistants that carry out work, deliver it with checks and evidence. Explore the system in pictures,
+          then move one sample piece of work from an idea to done.
         </p>
         <p className={styles.jump}>
           <a href="#try">Skip to the toy</a>
@@ -74,8 +75,8 @@ export default function StartHere() {
 
       <Screen id="what-it-is" n={1} title="What the AMS is">
         <p className={styles.say}>
-          One system for everything Kayden uses to work with AI, run as one loop that improves itself through real
-          work.
+          Workflows, rules, skills and tools that anyone can reuse to carry intent through AI work into reality.
+          This project adds RSI to test and improve those methods through real work.
         </p>
         <figure className={styles.figure}>
           <div className={styles.hub}>
@@ -147,7 +148,7 @@ export default function StartHere() {
 
       <Screen id="flow" n={3} title="How a piece of work moves">
         <p className={styles.say}>
-          Every change takes the same path. Colour shows who holds it; work that fails a review or Kayden&apos;s look
+          Every change takes the same path. Colour shows who holds it; work that fails a review or the owner&apos;s evaluation
           comes back and goes round again.
         </p>
         <figure className={styles.figure}>
@@ -195,7 +196,7 @@ export default function StartHere() {
 
       <Screen id="who" n={5} title="Who does what">
         <p className={styles.say}>
-          Kayden decides what and whether. Agents do everything in between, and three of them split the risky parts
+          The owner sets the intent and makes the approval decisions. Agents do everything in between, and three of them split the risky parts
           so none holds them all.
         </p>
         <figure className={styles.figure}>
@@ -203,7 +204,7 @@ export default function StartHere() {
             <div className={`tone h-owner ${styles.side}`}>
               <p className={styles.sideName}>
                 <span className={styles.dot} aria-hidden="true" />
-                Kayden
+                Owner
               </p>
               <ul>
                 {ownerStages.map((s) => (
@@ -233,7 +234,7 @@ export default function StartHere() {
               </ul>
             </div>
           </div>
-          <figcaption>What Kayden does, and the lifecycle stages agents carry.</figcaption>
+          <figcaption>What the owner does, and the lifecycle stages agents carry.</figcaption>
         </figure>
         <SourceLinks sources={[S.ddr000G, S.ddr000H, S.ddr000F, S.adr003F]} />
 
@@ -241,7 +242,7 @@ export default function StartHere() {
           <div className={styles.tree}>
             <p className={`tone h-owner ${styles.treeTop}`}>
               <span className={styles.dot} aria-hidden="true" />
-              Kayden, the owner
+              The owner
             </p>
             <ul className={styles.treeRow}>
               {orchestrators.map((o) => (
@@ -256,7 +257,7 @@ export default function StartHere() {
             </ul>
           </div>
           <figcaption>
-            Three orchestrators, all Claude, work for Kayden. No session holds untrusted input, secrets and the power
+            Three orchestrators, all Claude, work for the owner in this project. No session holds untrusted input, secrets and the power
             to act in the outside world all at once.
           </figcaption>
         </figure>
@@ -306,7 +307,7 @@ export default function StartHere() {
             No improvement has been measured yet, so the <Link href="/rsi">RSI results</Link> page is empty on purpose.
           </li>
           <li>
-            Every page of this site, this one included, is a draft until Kayden approves it.
+            Every page of this site, this one included, is a draft until the owner approves it.
             <SourceLinks sources={[S003]} />
           </li>
         </ul>
