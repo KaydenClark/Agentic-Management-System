@@ -5,13 +5,19 @@ sensitivity: normal
 knowledge_role: curated
 provenance:
   - /jot capture; each claim names its source and date
-source_paths: []
-last_verified: 2026-11-01
+source_paths:
+  - AGENTS.md
+  - RUNBOOK.md
+last_verified: 2026-11-02
 ---
 
 # Owner answers to coherence findings
 
 Captured context. Claim labels preserve intent and uncertainty; capture alone supplies neither Canon nor implementation proof. The date above checks this page's capture format, not every claim.
+
+## Cleanup responsibilities, 2026-11-02
+
+The [owner correction](#jot-fdaea0bd-5afa-4a88-ad43-dc8b41656c17) assigns the cleanup obligation, shared CI, delivery and recovery rules to [AGENTS](../../AGENTS.md#delivery-and-recovery). [RUNBOOK Clean up](../../RUNBOOK.md#clean-up) owns the actions after Test And Build: inspect owned state, publish and verify the authorized target, remove contained temporary scaffolding, and leave clean owned checkouts with explicit retained items or blockers. Earlier merge authority and recovery protections remain.
 
 <!-- jot-entry -->
 ### JOT-eadaca6e-98eb-4872-bfbc-fdaf9c3a4b06
@@ -63,4 +69,17 @@ Topic: owner-answers-coherence
 Supersedes: none
 
 Kayden corrected this run: "Report failure, you mislabled that branch. Codex/ is not a feature." Use feature/s002-trial-preflight for this work. The agent had used the harness default codex/ prefix and called it a feature branch. This entry records the current owner correction; it does not invent proof of a previously recorded prefix rule. Rename/push must preserve the exact commits and dirty work. Retain the old remote ref as recovery until main contains it; then clean up with containment checks.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-fdaea0bd-5afa-4a88-ad43-dc8b41656c17
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T17:30:51.085Z
+Author: Owner
+Source: Owner, AGENTS and RUNBOOK cleanup responsibilities in chat, 2026-11-02
+Topic: owner-answers-coherence
+Supersedes: none
+
+The owner directs AGENTS.md to require cleanup and own shared CI, delivery and recovery rules. RUNBOOK.md owns where and how agents clean up, with a Clean up section after Test And Build. After verification, publish work to its authorized target, verify remote containment and leave no owned uncommitted or dirty work for the next agent on cold start. Preserve other writers and needed recovery material; any blocked publication or cleanup remains explicitly reported. This changes the operating documentation; it supplies no permission to publish unfinished site work to main or discard unrelated state.
 <!-- /jot-entry -->
