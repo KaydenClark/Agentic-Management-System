@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Owner page approvals and Human QA of the 40 draft-marked pages on protected `dev`; only the owner merges `dev` -> `main`; then `complete`.
+**Next gate:** Owner page approvals and Human QA of the 40 pages on protected `dev`; only the owner merges `dev` -> `main`; then `complete`.
 
 ## Intent and authority
 

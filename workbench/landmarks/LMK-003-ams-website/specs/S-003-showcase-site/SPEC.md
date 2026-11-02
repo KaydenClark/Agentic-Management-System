@@ -5,7 +5,7 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-02
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
 **Next gate:** Reconcile assignments.
@@ -36,10 +36,9 @@ Pages open plainly, define/link unfamiliar terms, then offer detail/sources. Exp
 
 ### Orientation content
 
-- **Start here:** define AMS: managing Kayden's agents, workflows, intent, skills and AI tools. Explain the problem, identify this website as its first outside product, and orient visitors to the tour, demonstrations and evidence. Distinguish presentation from live controls.
+- **Start here** (`/start`, includes Quickstart): define AMS: managing Kayden's agents, workflows, intent, skills and AI tools. Explain the problem, identify this website as its first outside product, and orient visitors to the tour, demonstrations and evidence. Distinguish presentation from live controls. Give the reading route (introduction, real-work example, demonstration or skill summary, RSI evidence/limits), what each stop teaches, and that the `setup-workbench` skill sets up a Workbench. No command replay.
 - **Why:** explain preserving intent/corrections, organizing delegated work and learning from failures. Connect these purposes to this build. Separate intended benefits from measured results; link RSI evidence.
 - **How it works:** explain intent -> Landmark -> Spec -> Task, then implementation, checks, review, human judgment and delivery. Walk through one real, sourced Spec/Task. Explain feedback returning to its durable owner and failed results starting bounded RSI comparisons. Link governance/flow charts; do not imply every step has succeeded.
-- **Quickstart:** a reading route through the introduction, real-work example, demonstration or skill summary, then RSI evidence/limits. Explain what each stop teaches. No installation, credentials or command replay.
 - **Limits:** explain that the site runs no agents or record writes. Distinguish demonstrations, build activity, assessments and demonstrated improvement. Source incomplete/unsupported capabilities and explain where human judgment remains necessary.
 - **Glossary:** define tour terms consistently with the root glossary, including implementation Tasks versus evaluation tasks/trials. Link definitions from their uses and back to the explanation.
 - **About AMS:** explain the project, who made it, why it exists and its relationship to this website. Project context, not employment history; no CV/resume request.
@@ -61,7 +60,7 @@ Read-only Supabase with publishable key; Python writes under S-006; service key 
 - **Pending/failed:** distinguish loading from unavailable and from zero results. Label retained data with its last successful read time. Static explanations remain readable.
 - Test/synthetic rows never appear as real evidence. S-007 owns result labels/comparisons; S-006 owns storage/access.
 
-Draft until Kayden approves via S-005 (chat fallback). Approval binds content hash/dated source; edits restore draft. Owner quotations are verbatim/sourced.
+No page shows draft, approval or review status; page review stays on S-005's Grill Board cards (DDR-001B). No page quotes Kayden or uses his agent instructions as examples; paraphrase and link sources (DDR-001A).
 
 ## Decisions And Contracts
 
@@ -71,7 +70,7 @@ Draft until Kayden approves via S-005 (chat fallback). Approval binds content ha
 
 ## Non-Goals
 
-CMS, accounts, comments, analytics, newsletter, custom domain, live dashboard, installation guide, CV, Under the hood page.
+CMS, accounts, comments, analytics, newsletter, custom domain, live dashboard, installation guide, CV, Under the hood or `/quickstart` page.
 
 ## Dependencies And Blockers
 
@@ -82,12 +81,12 @@ S-005 owns reviews; S-006 data; S-007/008/009/010 linked capabilities. Missing r
 Audit a named deployment. CI cannot establish editorial meaning.
 
 - [ ] **Content:** rendered pages satisfy every brief. A reviewer can locate purpose, workflow, evidence limits and project identity; titles/slogans alone fail.
-- [ ] **Route:** follow Quickstart without setup, reach example/evidence and return. Public revision-pinned Spec/Task sources survive record moves.
+- [ ] **Route:** follow Start here's route without setup, reach example/evidence and return; it names `setup-workbench`. Public revision-pinned Spec/Task sources survive record moves.
 - [ ] **Scope:** sibling subjects have meaningful introductions/working links. No CV dependency, separate build-history page or live controls.
 - [ ] **Data:** inspect populated, empty, pending and failed reads. Empty/unavailable differ; retained data has its read time; no fabricated/test evidence. S-007 also meets its own criteria.
 - [ ] **Presentation:** at 375px and desktop, both themes, text/controls are readable without horizontal page overflow. Keyboard operation has visible focus; contrast meets WCAG AA; reduced motion is respected. Shared tokens match their source.
 - [ ] **Trust:** SHA matches deployment; core text works without scripts; sources resolve; public output has no secrets, host paths or private evidence. Only permitted resource loads.
-- [ ] **Approval:** unapproved/changed content is draft; only sourced owner approval removes it for bound content. Human QA and promotion remain separate.
+- [ ] **Owner presentation:** no page shows review status, owner quotations or owner instructions as examples.
 
 ## Verification Procedure
 

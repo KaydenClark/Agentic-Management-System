@@ -4,7 +4,7 @@
 **Status:** planned
 **Priority:** 1
 **Owner:** Kayden
-**Updated:** 2026-11-01
+**Updated:** 2026-11-02
 **Catalog description:** The public presentation website for the AMS, a Next.js app in `site/` on Vercel, built with the AMS as its first outside product.
 **Blockers:** none
 **Next gate:** Task planning for S-003.
@@ -24,7 +24,7 @@ The site is how the owner shows the AMS to friends, a manager or a CTO, and how 
 ## What Success Looks Like
 
 - [ ] The site shell and orientation tour are on the protected `dev` deployment, in the old Grill Board's theme tokens, light and dark, usable at 375 px (S-003).
-- [ ] Every page shows its deployed commit SHA, linked to GitHub, and carries a draft mark until the owner approves it (S-003).
+- [ ] Every page shows its deployed commit SHA, linked to GitHub, and no draft, approval or review status or owner quotation ([DDR-001B](../../docs/ddr/001B-the-public-site-shows-no-review-status.md), [DDR-001A](../../docs/ddr/001A-the-public-site-shows-no-owner-quotations.md); S-003).
 - [ ] The skills wiki presents site-written summaries of the owner's skills (S-008).
 - [ ] A demo Grill Board page shows sample cards with non-engineering questions (S-009).
 - [ ] The governance stack and flow charts are drawn from, or tested against, the code they depict (S-010).
@@ -44,6 +44,8 @@ The decision records under this landmark, one line each, linked to their record.
 - [The site uses a free vercel.app domain](../../docs/ddr/000S-the-site-uses-a-free-vercel-app-domain.md)
 - [The skills wiki is site-written summaries](../../docs/ddr/000U-the-skills-wiki-is-site-written-summaries.md)
 - [The demo Grill Board uses sample non-engineering questions](../../docs/ddr/000V-the-demo-grill-board-uses-sample-non-engineering-questions.md)
+- [The public site shows no owner quotations](../../docs/ddr/001A-the-public-site-shows-no-owner-quotations.md)
+- [The public site shows no review status](../../docs/ddr/001B-the-public-site-shows-no-review-status.md)
 
 ## Child Specs
 
