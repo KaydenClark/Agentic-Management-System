@@ -46,7 +46,7 @@ CELL_CONTEXT = re.compile(r"\bcontext:\s*([0-9a-f]{12})\b")
 NOT_A_NAME = {"", "none", "null", "unclaimed", "n-a"}
 REVIEW_ROW = re.compile(r"^\|\s*\d{4}-\d{2}-\d{2}\s*\|\s*review\s*\|\s*Review verdict: ")
 REVIEW_HEADER = re.compile(r"^\*\*(?:Updated|Latest event|Next gate):\*\*")
-PART_BLOCK = re.compile(r"<!-- workbench-record-section.*?<!-- /workbench-record-section -->", re.S)
+SPLIT_MARK = "<!-- workbench-record-section"
 
 
 class Refused(Exception):
@@ -216,8 +216,8 @@ def _report_path(path: str) -> bool:
 
 
 def _digest_records(repo: str, spec_id: str, commit: str) -> set[str]:
-    """Paths the native content digest covers: SPEC.md, each tasks/[retired/]ID/TASK.md
-    and their linked record parts. Their substantive changes move the digest."""
+    """Paths the native content digest covers: SPEC.md and each tasks/[retired/]ID/TASK.md.
+    Their substantive changes move the digest. Split records are refused in `status`."""
     folder_re = re.compile(rf"(^|/){re.escape(spec_id)}-[^/]+/")
     files = [f for f in _git(repo, "ls-tree", "-r", "--name-only", commit).stdout.splitlines()
              if folder_re.search(f)]
@@ -227,12 +227,7 @@ def _digest_records(repo: str, spec_id: str, commit: str) -> set[str]:
     folder = posixpath.dirname(specs[0])
     records = {specs[0]} | {f for f in files
                             if re.fullmatch(re.escape(folder) + r"/tasks/(?:retired/)?[^/]+/TASK\.md", f)}
-    parts = set()
-    for record in records:
-        for block in PART_BLOCK.findall(_show(repo, commit, record)):
-            for link in re.findall(r"\]\(([^)\s]+)\)", block):
-                parts.add(posixpath.normpath(posixpath.join(posixpath.dirname(record), link)))
-    return records | (parts & set(files))
+    return records
 
 
 def status(spec_id: str, repo: str = ".", commit: str = "HEAD",
@@ -244,7 +239,12 @@ def status(spec_id: str, repo: str = ".", commit: str = "HEAD",
     digest_at = digest_at or native_digest(repo, spec_id)
     current_digest: str | None = None
     out = []
-    for v in _verdicts(_show(repo, sha, spec_path)):
+    spec_text = _show(repo, sha, spec_path)
+    if SPLIT_MARK in spec_text:
+        # This room never splits records; reading only the stub would report zero verdicts.
+        raise ValueError(f"{spec_path} at {sha[:12]} is a split record (workbench-record-section); "
+                         "review status refuses it rather than read its verdicts as none")
+    for v in _verdicts(spec_text):
         refused = _builder_reasons(v["agent"], v["context"], built)
         stale = []
         if not FULL_SHA.match(v["candidate"]):

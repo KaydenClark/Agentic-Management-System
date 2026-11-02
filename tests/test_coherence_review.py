@@ -242,7 +242,7 @@ class StatusTest(unittest.TestCase):
                         "<!-- /workbench-record-section -->\n")
         Path(self.repo, SPEC_DIR, "SPEC.part-1.md").write_text(_verdict_row(self.candidate, "x"))
         commit = _commit(self.repo, "Split the S-900 evidence")
-        with self.assertRaisesRegex(ValueError, r"split record.*SPEC\.md"):
+        with self.assertRaisesRegex(ValueError, r"SPEC\.md.*split record"):
             self._status(commit)
 
     def test_verdict_by_the_building_session_is_reported_refused(self):
