@@ -17,7 +17,14 @@
 // no SHA, date, path or timing. A step the page shows no output for (the
 // clone, whose progress lines vary with the network, and `cd`) must succeed
 // but its output is not compared.
-import { execFileSync } from 'node:child_process';
+//
+// Reader's environment: the page's commands run as on a reader's computer,
+// which has no personal skill catalog (Kayden's skills live in his home
+// directory, not in the repository). Each command runs with HOME and
+// USERPROFILE set to a new empty directory and WORKBENCH_SKILLS_ROOT unset,
+// so the output does not depend on the machine running the test. Each step's
+// exit status is recorded and compared with the page's (exitCode, default 0).
+import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -35,8 +42,18 @@ const git = (cwd, ...args) => execFileSync('git', args, { cwd, encoding: 'utf8',
 // the replay runs.
 const PLAIN = /^[\w./:@=+-]+(?: [\w./:@=+-]+)*$/;
 
+// The environment the page's commands run in: `env` with HOME and
+// USERPROFILE pointing at `home` and no WORKBENCH_SKILLS_ROOT.
+export function readerEnv(home, env = process.env) {
+  const out = { ...env, HOME: home, USERPROFILE: home };
+  delete out.WORKBENCH_SKILLS_ROOT;
+  return out;
+}
+
 export function replay({ steps, CLONE_URL, REPO_DIR } = quickstart) {
   const home = mkdtempSync(join(tmpdir(), 'ams-quickstart-'));
+  const readerHome = mkdtempSync(join(tmpdir(), 'ams-quickstart-home-'));
+  const env = readerEnv(readerHome);
   const head = git(repoRoot, 'rev-parse', 'HEAD');
   let cwd = home;
   const results = [];
@@ -45,6 +62,7 @@ export function replay({ steps, CLONE_URL, REPO_DIR } = quickstart) {
       if (!PLAIN.test(step.command)) throw new Error(`step ${step.id}: "${step.command}" is not a plain command`);
       const [cmd, ...args] = step.command.split(' ');
       let out;
+      let exitCode = 0;
       if (cmd === 'cd') {
         if (args.length !== 1) throw new Error(`step ${step.id}: cd takes one directory`);
         cwd = join(cwd, args[0]);
@@ -64,12 +82,19 @@ export function replay({ steps, CLONE_URL, REPO_DIR } = quickstart) {
         out = '';
       } else {
         const file = cmd === 'node' ? process.execPath : cmd;
-        out = execFileSync(file, args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+        const run = spawnSync(file, args, { cwd, env, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+        if (run.error) throw run.error;
+        if (run.status === null) throw new Error(`step ${step.id}: ended by signal ${run.signal}`);
+        out = run.stdout;
+        exitCode = run.status;
+        // An unexpected exit status shows its stderr, so the failure is legible.
+        if (exitCode !== (step.exitCode ?? 0) && run.stderr) out += `\n[stderr]\n${run.stderr}`;
       }
-      results.push({ id: step.id, command: step.command, output: normalise(out) });
+      results.push({ id: step.id, command: step.command, output: normalise(out), exitCode });
     }
   } finally {
     rmSync(home, { recursive: true, force: true });
+    rmSync(readerHome, { recursive: true, force: true });
   }
   return { head, results };
 }
@@ -77,5 +102,5 @@ export function replay({ steps, CLONE_URL, REPO_DIR } = quickstart) {
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
   const { head, results } = replay();
   console.log(`# replayed at ${head}`);
-  for (const r of results) console.log(`$ ${r.command}\n${r.output}`);
+  for (const r of results) console.log(`$ ${r.command}\n${r.output}${r.exitCode ? `\n# exit status ${r.exitCode}` : ''}`);
 }

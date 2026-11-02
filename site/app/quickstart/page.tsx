@@ -25,8 +25,8 @@ const SAY: Record<string, ReactNode> = {
   cd: <>Move into the copy. This prints nothing.</>,
   doctor: (
     <>
-      Run the health check. It reads the project&apos;s records and settings and reports anything wrong with them.
-      You should see exactly this:
+      Run the health check. It reads the project&apos;s records and settings, and how your computer is set up to
+      work on them, and reports anything wrong. On any computer but the owner&apos;s, you should see exactly this:
     </>
   ),
 };
@@ -41,7 +41,8 @@ export default function Quickstart() {
           The quickest way to see the Agentic Management System, or <dfn id="ams">AMS</dfn>, for yourself is to copy
           it to your own computer and run its health check. That takes three commands typed into a terminal, the
           text window where you give your computer commands. Nothing is installed, nothing is changed outside the
-          copy, and the check only reports.
+          copy, and the check only reports. On your computer it reports one problem that blocks work until it is
+          repaired; this page shows it and explains why.
         </p>
       </header>
 
@@ -71,12 +72,19 @@ export default function Quickstart() {
                   {step.output}
                 </pre>
               ) : null}
+              {step.exitCode ? (
+                <p data-exit={step.id}>
+                  It then stops with exit status {step.exitCode}. Your terminal does not usually print this, but any
+                  status other than 0 means the command found something wrong.
+                </p>
+              ) : null}
             </li>
           ))}
         </ol>
         <p>
           The site&apos;s tests run these same commands on a fresh copy of the version you are reading and fail if
-          the output differs from what is shown here.
+          the output or the exit status differs from what is shown here. They run them as a reader&apos;s computer
+          would, with an empty home folder, so the result does not depend on whose computer runs the test.
           <Source path="site/tests/quickstart-replay.test.mjs">the replay test</Source>
         </p>
       </section>
@@ -85,13 +93,26 @@ export default function Quickstart() {
         <h2 id="read">Reading the result</h2>
         <p>
           Each indented line is a finding: a short name, how much it blocks, how serious it is, and what to do about
-          it. The first line counts the findings that are reported only. The last line is the one that matters
-          first: when it starts with ok, nothing found blocks work, and that is what a healthy copy shows.
+          it. The findings come in groups, each headed by a count: first those that block work, then those that are
+          reported only. A healthy copy shows no blocking group, ends with a line starting with ok, and exits with
+          status 0.
           <Source path="README.md">README, Getting Started</Source>
           <Source path="AGENTS.md">AGENTS.md, Testing instructions</Source>
         </p>
         <p>
-          The findings shown are real and open. They block nothing, and the check keeps them
+          Your copy is not healthy yet, and that is not a fault in it. The one blocking finding,
+          personal-catalog-unavailable, is marked blocks all: the check says to repair it before any work is picked
+          up or claimed. Below it, each skill-lane-missing line names one skill the tools looked for and did
+          not find. A skill is a written method an agent loads before doing a kind of work; the{" "}
+          <Link href="/skills">Skills</Link> page describes them. The tools expect the owner&apos;s own skills
+          installed in the home folder of the computer that runs them, and the project deliberately keeps them out
+          of the repository, so the check reports this on a fresh copy anywhere else today.
+          <Source path="workbench/tools/personal-skills.mjs">the skills check</Source>
+          <Source path="workbench/manifest.json">the manifest, skillPolicy</Source>
+        </p>
+        <p>
+          What you can do with the copy now is read it: every record, decision and check the site describes is in
+          it. The other findings shown are real and open as well. They block nothing, and the check keeps them
           visible rather than hiding them, so that nothing reported is quietly forgotten.
         </p>
       </section>

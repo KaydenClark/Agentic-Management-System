@@ -6,9 +6,9 @@
 // the status the command must end with; the page shows a non-zero one.
 // The output is what a reader's computer prints: one without Kayden's
 // personal skill catalog in its home directory (the replay runs the commands
-// with an empty HOME). If a replay fails
-// because the room's state changed, update `output` here from
-// `node tests/quickstart-replay.mjs`, and the page's words if they no longer fit.
+// with an empty HOME and no WORKBENCH_SKILLS_ROOT). If a replay fails because
+// the room's state changed, update `output` here from
+// `npm run quickstart:replay`, and the page's words if they no longer fit.
 
 export const CLONE_URL = "https://github.com/KaydenClark/Agentic-Management-System.git";
 export const REPO_DIR = "Agentic-Management-System";
