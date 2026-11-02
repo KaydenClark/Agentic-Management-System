@@ -1,0 +1,106 @@
+{
+  "intro": "AMS manages Kayden's agents, workflows, intent capture, skills and AI tools in one RSI loop; these are its shared terms. Definitions follow Kayden's 2026-10-31 instruction and the [research basis](workbench/research/template-research-basis.md).",
+  "sections": [
+    {
+      "heading": "Language",
+      "groups": [
+        {
+          "heading": "AMS",
+          "id": "group-ams",
+          "note": "",
+          "terms": [
+            {
+              "term": "AMS",
+              "id": "ams",
+              "definition": "Kayden's system for managing agents, workflows, intent capture, skills and AI tools in one RSI loop. It is built on and operates the Workbench while repairing it."
+            },
+            {
+              "term": "RSI loop",
+              "id": "rsi-loop",
+              "definition": "Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record does not prove improvement."
+            },
+            {
+              "term": "Workbench",
+              "id": "workbench",
+              "definition": "The working foundation AMS uses and repairs. AMS also encompasses the system and tool belt that operates above it."
+            },
+            {
+              "term": "Intent",
+              "id": "intent",
+              "definition": "What the owner wants, with reasons, boundaries and corrections. Retain whether it is confirmed or unresolved."
+            }
+          ]
+        },
+        {
+          "heading": "Records",
+          "id": "group-records",
+          "note": "",
+          "terms": [
+            {
+              "term": "Implementation Task",
+              "id": "implementation-task",
+              "definition": "A bounded assigned slice under a Spec, owning execution state and proof."
+            },
+            {
+              "term": "Evaluation task",
+              "id": "evaluation-task",
+              "definition": "A repeatable test case; one attempt at it is a trial. Neither is an implementation assignment."
+            },
+            {
+              "term": "Evidence audit",
+              "id": "evidence-audit",
+              "definition": "A maintained assessment of claims against dated, candidate-specific evidence, preserving reassessment history."
+            },
+            {
+              "term": "Improvement record",
+              "id": "improvement-record",
+              "definition": "The connection from an observed problem through a hypothesis and comparison to an actual disposition and later-use check."
+            },
+            {
+              "term": "Review receipt",
+              "id": "review-receipt",
+              "definition": "An actual assessment of a named candidate and scope, recording reviewer involvement, findings and limits."
+            },
+            {
+              "term": "Human QA receipt",
+              "id": "human-qa-receipt",
+              "definition": "Sourced human judgment of the named experience or candidate. Agent checks cannot supply it."
+            }
+          ]
+        },
+        {
+          "heading": "Feedback dispositions",
+          "id": "group-feedback-dispositions",
+          "note": "A disposition describes how a finding was handled and grants no execution or release authority; without an established one, keep it pending and name the missing owner or evidence.",
+          "terms": [
+            {
+              "term": "diagnostic",
+              "id": "diagnostic",
+              "definition": "Names the diagnostic that makes the condition visible, and whether it is implemented or proposed."
+            },
+            {
+              "term": "test",
+              "id": "test",
+              "definition": "Names the test that detects the condition, with its actual result or implementation gap."
+            },
+            {
+              "term": "repaired",
+              "id": "repaired",
+              "definition": "Names the implementing revision and its verification. Later-use benefit remains a separate claim."
+            },
+            {
+              "term": "declined",
+              "id": "declined",
+              "definition": "Names the actual decision source and reason for declining the proposed action."
+            },
+            {
+              "term": "accepted-open",
+              "id": "accepted-open",
+              "definition": "Names the actual acceptance of follow-up work and its owning Spec. The problem remains open."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
