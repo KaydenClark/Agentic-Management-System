@@ -5,13 +5,13 @@
 **Priority:** 1
 **Owner:** Kayden
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-02
 **Catalog description:** One "Are we there yet?" check across landmarks, room, skills, runtime and owner gates.
 **Blockers:** none
 **Confirmation:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
-**Latest event:** Owner set the cap to six active Landmarks; S-001 activated without waiting for another Spec to close.
-**Next gate:** Run TK-001 now; unfinished assessed capabilities are findings, not a start gate.
+**Latest event:** TK-002 claimed by claude-impl-s001-tk002.
+**Next gate:** Close TK-002 with verification and documentation proof.
 
 ## Intent and authority
 

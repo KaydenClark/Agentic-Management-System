@@ -3,9 +3,11 @@
 **Task ID:** TK-002
 **Spec ID:** S-001
 **Slice:** Add a public hygiene and character-limit check over records, controls and the built site
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Limits; Hygiene.
+**Claimed by:** claude-impl-s001-tk002
+**Current claimant:** claude-impl-s001-tk002
 
 ## Assignment
 
