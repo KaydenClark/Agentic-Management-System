@@ -35,8 +35,11 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 - Post-merge pinned readcheck at `6e30c87`/dev `8ba15e0`:1,030 rows, missing0/extra8/mismatches0/unsourced0. PR #85 relocated two S-007 and six S-003 history rows to the Wiki; all8 match original ancestor blobs and the declared97bfcaa archive. TK-000U owns consumer maintenance; no retained history is deleted and the earlier successful checks remain scoped history.
 
 - Fresh owner-approved [TK-000X](tasks/TK-000X/TASK.md) replaces the custom scanner with pinned CommonMark link tokens. PR #91 merged as `771bd1e264ff15ab89217c8f91f79fc38c57f96b`; local/fresh699 passed/4 skipped,166 focused, exact independent source/owner binding and final CI passed. U receipts and W stopped/unaccepted failures remain; no formal acceptance is inferred.
-- Actual GET-only readcheck at `771bd1e`/dev `fe9870f`:1,030 visible, missing130/extra1/content mismatches2/unsourced0, ordered. Original eight retained S-003/S-007 facts match remote exactly once, including UTC time/source/recorded commit under the reader contract. Remaining extra is `task path S-008/TK-003`; mismatches are S-008/TK-001 and TK-002 (summary/time/source URL). All three are valid original table declarations at `e0ca3a8` (Spec lines56–58), ancestors of checked/current main and dev. Main replaced the table with native Task1/2 at `e8135ef`; Task3 is no longer derived there, while dev still derives all three exactly. S-008 is unchanged between checked771 and currentmain `a35ef0f`; this is prior record migration/branch divergence, not corrupt data or later snapshot drift. The [original table declarations](https://github.com/KaydenClark/Agentic-Management-System/blob/e0ca3a844dea29bc74623c3594069f39f4222d38/workbench/landmarks/LMK-003-ams-website/specs/S-008-skills-wiki/SPEC.md#L56) retain valid creation provenance. No row was deleted or ignored; lineage disposition remains open.
-- Actual import did not run: automatic approval review refused the credential-backed external write twice before execution. Retrieved earlier owner evidence was not accepted by that review as trusted authorization in this context. Fresh explicit history-import approval is pending. Import is also held for correctness: the original S-008 creation provenance must not be rewritten via `--refresh-changed` merely to match the native-file projection; permission alone is not a correctness waiver. No source fix is authorized yet. Read-only verification used repository public-key/URL constants only and GET requests, no environment-file/service-key load and zero writes. Build-history remains unchecked; W lifecycle disposition, actual current-history proof and owner Human QA remain open.
+- Actual GET-only readcheck at `771bd1e`/dev `fe9870f`:1,030 visible, missing130/extra1/content mismatches2/unsourced0, ordered. Original eight retained S-003/S-007 facts match remote exactly once, including UTC time/source/recorded commit under the reader contract. Remaining extra is `task path S-008/TK-003`; mismatches are S-008/TK-001 and TK-002 (summary/time/source URL). All three are valid original table declarations at `e0ca3a8` (Spec lines56–58), ancestors of checked/current main and dev. Main replaced the table with native Task1/2 at `e8135ef`; Task3 is no longer derived there, while dev still derives all three exactly. S-008 is unchanged between checked771 and currentmain `a35ef0f`; this is prior record migration/branch divergence, not corrupt data or later snapshot drift. The [original table declarations](https://github.com/KaydenClark/Agentic-Management-System/blob/e0ca3a844dea29bc74623c3594069f39f4222d38/workbench/landmarks/LMK-003-ams-website/specs/S-008-skills-wiki/SPEC.md#L56) retain valid creation provenance. No row was deleted or ignored. That observation remains the historical failed receipt; TK-000Z below repairs the source consumer without rewriting those originals.
+- Actual import did not run: automatic approval review refused the credential-backed external write twice before execution. Retrieved earlier owner evidence was not accepted by that review as trusted authorization in this context. Fresh explicit history-import approval is pending. Import is also held for correctness: the original S-008 creation provenance must not be rewritten via `--refresh-changed` merely to match the native-file projection; permission alone is not a correctness waiver. The authorized source correction is now verified in TK-000Z; final checked engineering delivery and actual live verification are distinct. Read-only verification used repository public-key/URL constants only and GET requests, no environment-file/service-key load and zero writes. Build-history remains unchecked; W lifecycle disposition, actual current-history proof and owner Human QA remain open.
+
+- [TK-000Z](tasks/TK-000Z/TASK.md) source `3a25cacf797743ca8189739a46661ec4e3a76a09` derives original Spec/Task identity declarations from registered, verified local Git lineage. Native migration, removal, renumbering and mutable execution metadata preserve their real creation sources; no old Task is reactivated. The exact three S008 and eight archived facts derive once. Generic native-claim/explicit-merge evidence reconciles R; unsupported or contradictory execution refuses. Task-only six-key metadata refresh preserves annotations/audit and bounded undo and requires full original-detail CAS plus direct current response verification.
+- Z full local/fresh764 passed/four skipped, independent215 history/49 affected, sealed complete-output replay/classification and exact-source CI pass. The 1,232→1,234 comparison has two retained identity declarations, no deletion and 59 Task-only corrections (33 core, 26 birth-status metadata). F and renumbered K identify the same coverage assignment, not two independent executions. Independent bounded source-readiness PASS is source-specific, not whole-Spec acceptance. Anonymous exact/mismatched JSONB GET filters returned HTTP200 with one/zero rows; that proves protocol compatibility only. Real import, repaired current canonical database readback and new global live readcheck have **not** run; the prior failed live receipt and explicit permission hold remain.
 
 ## Desired Behavior
 
@@ -146,16 +149,19 @@ TASK.md Receipts hold full proof.
 
 ## Review and Human QA
 
-Spec review only; presentation gets Human QA in S-007.
+Presentation Human QA belongs to S-007. The installed native completion gate still requires actual candidate owner Human QA; it remains open and is not supplied by engineering or independent source review.
 
 ## Completion Result
 
-Implementation delivered: schema/local writers, real build history, explicit
-unknown trial metrics and private assessment append/replay. TK-000L/P/Q/R/S retain
-candidate-specific live checks and test evidence. Private packets remain
-inaccessible to site clients; no trial result or evaluator qualification is
-inferred. Checked PR delivery, independent assembled Review and the native
-owner-QA completion gate remain distinct and pending; the Spec is not accepted.
+Implementation delivered: schema/local writers, explicit unknown trial metrics,
+private assessment append/replay, CommonMark-routed archived evidence and the
+Task-identity history consumer/metadata correction. Candidate-bound Task proofs
+retain earlier live checks, failures and corrected source verification. Private
+packets remain inaccessible to site clients; no trial result or evaluator
+qualification is inferred. Real current history import/canonical-row readback
+and global live verification remain held for explicit permission. Build-history
+acceptance, stopped W disposition, independent whole-Spec binding and actual
+owner-QA completion remain open; the Spec is not accepted.
 
 ## Remaining Limitations Or Follow-Up Specs
 

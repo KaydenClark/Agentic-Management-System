@@ -20,10 +20,10 @@ Produce a deterministic complete expected-row comparison on identical pinned sou
 
 ## Acceptance
 
-- [ ] Full immutable creation row identity survives legacy-to-native migration, changed current slices and intentional removal; current native receipts appear once without resurrecting removed assignments.
-- [ ] Native-only, rename, pinned and conflicting/invalid lineage cases are correct and fail closed; exact3 original S008 and8 archived facts derive once with original fields/sources.
-- [ ] Task-only canonical birth metadata refresh preserves annotations/audit, logs bounded undo, rejects full-detail concurrent changes and verifies direct current readback.
-- [ ] Complete deterministic BEFORE/AFTER expected-row diff is reviewed; focused/full/fresh/room/CI and independent pinned delta review pass before checked merge, while actual live/acceptance gates stay truthful.
+- [x] Full immutable creation row identity survives legacy-to-native migration, changed current slices and intentional removal; current native receipts appear once without resurrecting removed assignments.
+- [x] Native-only, rename, pinned and conflicting/invalid lineage cases are correct and fail closed; exact3 original S008 and8 archived facts derive once with original fields/sources.
+- [x] Task-only canonical birth metadata refresh preserves annotations/audit, logs bounded undo, rejects full-detail concurrent changes and verifies direct current readback.
+- [x] Complete deterministic BEFORE/AFTER expected-row diff is reviewed; focused/full/fresh/room/CI and independent pinned delta review pass before checked merge, while actual live/acceptance gates stay truthful.
 
 ## Provenance reconciliation boundary
 
@@ -46,3 +46,11 @@ The approved Task-only correction compares the six birth-detail keys with presen
 The complete frozen comparison at a555 derives 1,220 versus 1,222 rows: two additions, no removals, and 59 Task-only changes. Every added/changed birth was verified against its exact original blob/line/time. Thirty-one restore original legacy declarations, O restores its original native Slice, K repairs an impossible old URL to its first matching-ID record, and 26 change only birth status metadata. F and K are first records of different Spec/Task identities; b7d explicitly renumbers the same coverage assignment. This does not claim two independent work executions, reactivate F, invent a Former ID field or add an alias allowlist. Strict offline replay uses 106 frozen public GitHub responses, 3,217 successful Git responses, 14 lifecycle responses and 13 genuine failed local-object reads; repeated complete rows are identical.
 
 The branch integrates checked main c96a991. Corrected history tests passed 213; the subsequent native-body Proof audit passes 49 focused birth/metadata cases. Fresh corrected full-suite verification, final frozen-input comparison and independent new source review follow the immutable corrected pin. Live history mutation remains unapproved and held; prior missing/global-readcheck receipts, W's stopped state and actual owner QA remain open.
+
+### Implementor QA and source submission
+
+Corrected immutable source `3a25cacf797743ca8189739a46661ec4e3a76a09` is pushed in PR #104. Full local/fresh checks pass 764 tests with four skips; the fresh clone is clean and room checks have no blockers. Exact-source CI run41435710340 passes. Source/test/dependency/schema bytes are frozen after this pin. The native-body audit adds two cases beyond the preceding 213-history run; the corrected independent history run passes all 215, with 49 affected cases.
+
+Actual eligible noncontributor `s002_bootstrap_review` supplied direct bounded engineering source-readiness PASS at that exact source, no blocking findings. The reviewer independently reran 215/49 tests, the original Proof refusal, real-source 208 records/76 births with exact three S008/eight archive facts and R ownership, and strict copied-map replay/classification. Final sealed corrected comparison is 1,232→1,234 rows, two additions/no removals/59 Task-only changes (33 core fields plus 26 status-only metadata); all 61 added/changed source rows are verified. Its 107 public GitHub, 3,264 Git and 14 lifecycle successful responses plus 13 genuine Git failures replay identically twice without fallback. The reviewer directly read both 764/4 logs and checked the fresh source clone. This supersedes only the scoped a555 finding/hold; earlier failures remain evidence.
+
+Judgment: the bounded source outcome is met. Migration/removal and mutable current fields cannot rewrite identity births; unsupported competing execution refuses; current native receipts remain separate; applying fake refreshes preserve unknown/audit data, bounded undo, exact key presence and race refusal. Direct current representations are checked, not merely historical readcheck matches. Real anonymous GET verifies object-filter syntax only. No real import or current canonical database repair/readback ran. Normal final owner-record CI/checked merge follow; actual history-import approval, global live verification, stopped W and formal owner HumanQA remain open. This is no evaluator qualification, trial benefit or whole-S006 acceptance.
