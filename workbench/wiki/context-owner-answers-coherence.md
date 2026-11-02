@@ -148,3 +148,16 @@ Supersedes: none
 
 Kayden approves the proposed ownership breakdown and explicitly authorizes adding prune-artifact. This follows the earlier unresolved proposal: one shared pruning owner, author-skill retaining method development and behavior validation, and writing-for-agents retaining composition. The new skill is part of the shared skills source repair, with independent pruning/testing and the same eligible Stable or Excellent merge gate. Approval to implement is not evidence of an implemented, installed or accepted skill. Its new finite suite stays distinct from the original frozen workflow comparison.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-d6f00913-7514-485e-9d55-fe69c6023838
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T22:37:45.341Z
+Author: Kayden
+Source: Kayden, AMS continuation and three-example calibration corrections in chat, 2026-11-02; relayed by owning orchestrator
+Topic: owner-answers-coherence
+Supersedes: none
+
+The owner requests a handoff to continue improving the skills, ending this campaign at a recoverable checkpoint. All three proposed examples still need actual tests. The owner identifies example 2 as losing the explicit owner-only dev-to-main approval gate and example 3 as losing the 900–1500 RUNBOOK target and near-900 goal in favor of the 3000 ceiling. These negative labels do not accept example 1, prove general skill behavior or impose a universal 900-character minimum. Preserve failed assessments and setup failures, source drafts and pending pruning; do not merge or install an unqualified candidate. Publish safe continuation records while handoff and raw evidence remain local and ignored.
+<!-- /jot-entry -->
