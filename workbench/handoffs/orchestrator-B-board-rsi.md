@@ -34,8 +34,8 @@ The owner's stop point is the full site on the protected `dev` deployment with a
 
 ## Local-only facts (a cloud agent can't see these)
 
-- The Supabase secret key lives only in the gitignored env file at the root of the owner's main checkout on Servitor (`/Users/kayden/GPT_OS/AMS`). It is never printed or committed. A hook blocks shell commands that name that file; the `ams-*` commands read it themselves.
-- Live commands must run there: `uv run --directory /Users/kayden/GPT_OS/AMS <cmd>`, after `git -C … pull --ff-only origin main` while that checkout is clean and on `main`. The commands are `ams-keycheck`, `ams-writer`, `ams-history import|readcheck`, `ams-rsi livecheck` and `ams-sources livecheck`.
+- The Supabase secret key lives only in the gitignored env file at the root of the owner's main checkout on Servitor (its host path stays out of this public repository). It is never printed or committed. A hook blocks shell commands that name that file; the `ams-*` commands read it themselves.
+- Live commands must run there: `uv run --directory MAIN_CHECKOUT <cmd>` (that checkout's path), after `git -C … pull --ff-only origin main` while that checkout is clean and on `main`. The commands are `ams-keycheck`, `ams-writer`, `ams-history import|readcheck`, `ams-rsi livecheck` and `ams-sources livecheck`.
 - The Grill Board runs locally on Servitor: `uv run ams-board` serves 127.0.0.1:8765. It is never deployed.
 - The owner's artifact copy for the QA screenshots is not in the repo. It is the "Grilling Board Redesign" artifact, version 1793538932-43c3.
 
