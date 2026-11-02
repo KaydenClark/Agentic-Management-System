@@ -36,8 +36,8 @@ export default function Why() {
         <p>
           Kayden describes the AMS as everything he uses to work with AI, brought together into a single loop that
           improves itself, and he gave that loop its first job: building a website that explains the system. He gives
-          the reason too: the work repairs the Workbench where it is broken, the working foundation underneath, and
-          builds on top of it the system that runs it. In this repository the Workbench is the controls, lifecycle
+          the reason too: the work repairs the broken parts of the Workbench, the working foundation underneath, and
+          builds the system on top of it that runs it. In this repository the Workbench is the controls, lifecycle
           tools and templates agents work with.
           <Source path={PURPOSE}>AMS purpose and first RSI loop</Source>
           <Source path="README.md">README</Source>

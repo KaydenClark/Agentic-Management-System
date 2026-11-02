@@ -114,7 +114,7 @@ export default function About() {
         </ul>
         <p>
           Agents write the words of this page, like every page, from those records.
-          <Source path={S003}>S-003, Voice</Source> Back to the{" "}
+          <Source path={S003}>S-003, Desired Behavior</Source> Back to the{" "}
           <Link href="/">home page</Link>, or <Link href="/start">start the tour</Link> again.
         </p>
       </section>
