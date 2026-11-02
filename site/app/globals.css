@@ -70,18 +70,24 @@ a {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-10) var(--space-20);
-  padding-block: var(--space-10);
+  gap: var(--space-6) var(--space-12);
+  padding-block: var(--space-6);
 }
 
+/* The wordmark over its tagline: one block as tall as the links, so the
+   title, links and toggle share a centre line. */
 .brand {
   flex: var(--brand-flex);
   min-width: 0;
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-4) var(--space-10);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--brand-gap);
   text-decoration: none;
+}
+
+.brand .eyebrow {
+  font-size: var(--text-tagline);
 }
 
 .brand-name {
@@ -104,15 +110,14 @@ a {
   margin-left: auto;
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  justify-content: center;
+  min-width: var(--control-min-height);
   min-height: var(--control-min-height);
-  padding: var(--space-8) var(--space-12);
+  padding: 0;
   background: transparent;
   border: var(--border-width) solid var(--line-strong);
   border-radius: var(--radius-control);
   color: var(--muted);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
   cursor: pointer;
 }
 
@@ -126,28 +131,41 @@ a {
   height: var(--icon-size);
 }
 
-/* Reading-order links in the top bar: after the title on one row where they
-   fit; on narrow screens a row of their own that wraps (tokens.css). */
+/* Reading-order links in the top bar: between the title and the toggle on one
+   row where they fit; on narrow screens rows of their own, each link
+   stretched so the rows fill the width (tokens.css). */
 .topnav {
   order: var(--topnav-order);
   flex: var(--topnav-flex);
   min-width: 0;
+  display: flex;
+  justify-content: var(--topnav-justify);
 }
 
 .topnav ol {
+  flex: var(--topnav-flex);
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: var(--topnav-justify);
   gap: var(--space-4);
 }
 
+.topnav li {
+  flex: var(--navitem-flex);
+  display: flex;
+}
+
 .navlink {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: var(--control-min-height);
-  padding: var(--space-8) var(--space-12);
+  padding: var(--space-8) var(--space-10);
+  white-space: nowrap;
   border: var(--border-width) solid transparent;
   border-radius: var(--radius-nav);
   color: var(--muted);
@@ -174,10 +192,6 @@ a {
   display: flex;
   flex-direction: column;
   gap: var(--space-24);
-}
-
-.content > * {
-  max-width: var(--measure);
 }
 
 h1,
