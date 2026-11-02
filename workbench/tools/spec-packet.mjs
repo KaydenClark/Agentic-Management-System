@@ -60,7 +60,9 @@ export function parseSpecPacket(content, filePath, root, options = {}) {
   // Activation must still satisfy the full active packet contract.
   const planned = fields.Status === 'planned';
   if (!titleMatch[1].trim()) throw new Error(`${id} has no title intent`);
-  const required = planned ? ['Status'] : ['Status', 'Priority', 'Owner', 'Updated', 'Catalog description', 'Blockers', 'Latest event', 'Next gate'];
+  // History lives on the Spec's Wiki history page; `Latest event` is no longer
+  // required (a legacy one is still read and reported by doctor).
+  const required = planned ? ['Status'] : ['Status', 'Priority', 'Owner', 'Updated', 'Catalog description', 'Blockers', 'Next gate'];
   for (const name of required) if (!fields[name]) throw new Error(`${id} is missing ${name}`);
   const baseline = fields.Baseline ? parseBaselineRecord(fields.Baseline, id) : null;
   // `rows` are the slice-table rows embedded in this Spec's own Markdown, as

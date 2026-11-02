@@ -2,14 +2,14 @@
 
 > Generated from LLM Workbench v3.2.2.
 
-AMS uses and repairs the Workbench while building the system in [Blueprint](BLUEPRINT.md); [S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick. Templates are shapes, not records.
+AMS builds the system in [Blueprint](BLUEPRINT.md); [S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick. Templates are shapes, not records.
 
 ## Dev environment tips
 
 - Run `git status --short --branch`; read [RUNBOOK](RUNBOOK.md#get-oriented), [GLOSSARY](GLOSSARY.md), the [Wiki](workbench/wiki/MEMORY.md) and the assigned Spec/Task. Load the personal skill ([methods](workbench/docs/SKILLS.md)) before using it.
 - Pre-repo planning lives in private GPT_OS branch `claude/ams-s003-map-20261031` under `AMS/`; read its `AMS/CONTINUE.md` before planning. Copy nothing here without owner go-ahead: this repository is public.
-- The owner request governs scope; these rules and an assigned Spec bound it. Distinguish intent confirmation, execution approval, review, Human QA and publication. Ask only for consequential unresolved choices. Delegate only when authorized.
-- At most six Specs are active; the rest wait in S-001's backlog.
+- Owner scope governs; rules and the assigned Spec bound it. Distinguish confirmation, execution approval, review, Human QA and publication. Ask only consequential unresolved choices. Delegate only when authorized.
+- At most six Landmarks are active. Hierarchy: Landmark -> Spec -> Task. Specs need no slots; only real inputs block Tasks (ADR-003J).
 - Edit `workbench/tools/` only via setup-workbench; author skills with author-skill.
 - Verify repository, branch, remote and locks before editing. Preserve decisions, corrections and others' edits; one writer per record; never switch a checkout another writer uses.
 - Ask before destructive actions, paid services, wider scope or unrequested external changes. License choice stays with the owner. Send no messages without authorization. Never commit secrets, host paths or private research.

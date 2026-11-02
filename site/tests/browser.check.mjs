@@ -2,8 +2,10 @@
 // build). Starts `next start` on a free port and opens every route the build
 // produces (read from .next/app-path-routes-manifest.json, so new pages are
 // covered without editing this file), plus the not-found page, in Chromium at
-// 375 px and 1280 px in both themes. For each it checks:
+// 375, 1280 and 1440 px in both themes. For each it checks:
 //   - no horizontal scroll;
+//   - layout: the reading-order nav is in the header, no side navigation
+//     exists, and the header and <main> share one centred container edge;
 //   - an automated WCAG 2.x A/AA pass with axe-core (contrast included),
 //     injected from node_modules, never a CDN;
 //   - keyboard: Tab reaches every visible interactive element and each one
@@ -16,6 +18,10 @@
 //     contacts a third party.
 // Plus TK-001's home checks (theme follows the system, toggle overrides and
 // persists, fonts self-hosted) and page text readable with scripts disabled.
+// Plus the /start toy: Tab and Enter alone reach its last stage, playing it
+// makes no request and changes no storage or cookie, and its returned branch
+// shows in the returned token (with --shots, one start-toy-NN-<stage>.png per
+// step at 1440 px dark).
 // Before the real pass it plants each fault into a live page and requires the
 // matching check to fail, so a check that cannot fail is reported.
 // Needs Playwright with Chromium installed (not a site dependency) and the
@@ -31,7 +37,7 @@ import { allowedHost } from './hygiene.mjs';
 
 const args = process.argv.slice(2);
 const opt = (name) => { const i = args.indexOf(name); return i >= 0 ? args[i + 1] : undefined; };
-const WIDTHS = [375, 1280];
+const WIDTHS = [375, 1280, 1440];
 const HEIGHT = 812;
 const THEMES = ['light', 'dark'];
 const GROUND = { light: 'rgb(247, 247, 247)', dark: 'rgb(10, 10, 10)' };
@@ -91,6 +97,45 @@ const check = (name, ok, detail = '') => { results.push({ name, ok, detail }); c
 async function horizontalScroll(page) {
   const { scrollWidth, clientWidth } = await page.evaluate(() => ({ scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth }));
   return scrollWidth > clientWidth ? [`scrollWidth ${scrollWidth} > ${clientWidth}`] : [];
+}
+
+// Owner feedback 11/01/2026 ("align better", "navigation in the top bar"):
+// the reading-order nav sits in the header and no side navigation exists; the
+// header's content box and <main>'s content box share both edges; and that
+// container is centred, with even gutters of at least 16 px.
+async function layoutProblems(page) {
+  return page.evaluate(() => {
+    const out = [];
+    const header = document.querySelector('header');
+    const main = document.querySelector('main');
+    if (!header || !main) return ['no <header> or no <main>'];
+    if (!header.querySelector('nav[aria-label="Reading order"]')) out.push('reading-order nav is not in the header');
+    if (document.querySelector('aside, .sidebar')) out.push('a side navigation (aside or .sidebar) exists');
+    // The content box of the header's container (its first element child)
+    // and of <main>.
+    const box = (el) => {
+      const r = el.getBoundingClientRect();
+      const s = getComputedStyle(el);
+      return { left: r.left + parseFloat(s.paddingLeft) + parseFloat(s.borderLeftWidth), right: r.right - parseFloat(s.paddingRight) - parseFloat(s.borderRightWidth) };
+    };
+    const inner = header.firstElementChild ?? header;
+    const h = box(inner);
+    const m = box(main);
+    const near = (a, b) => Math.abs(a - b) <= 1;
+    if (!near(h.left, m.left)) out.push(`header content left ${h.left.toFixed(1)} != main content left ${m.left.toFixed(1)}`);
+    if (!near(h.right, m.right)) out.push(`header content right ${h.right.toFixed(1)} != main content right ${m.right.toFixed(1)}`);
+    const vw = document.documentElement.clientWidth;
+    const gutterL = m.left;
+    const gutterR = vw - m.right;
+    if (!near(gutterL, gutterR)) out.push(`main is not centred: gutters ${gutterL.toFixed(1)} / ${gutterR.toFixed(1)}`);
+    if (Math.min(gutterL, gutterR) < 16 - 0.5) out.push(`gutter under 16px: ${Math.min(gutterL, gutterR).toFixed(1)}`);
+    const brand = header.querySelector('a');
+    const first = main.firstElementChild;
+    if (brand && first && !near(brand.getBoundingClientRect().left, first.getBoundingClientRect().left)) {
+      out.push(`site title left ${brand.getBoundingClientRect().left.toFixed(1)} != page content left ${first.getBoundingClientRect().left.toFixed(1)}`);
+    }
+    return out;
+  });
 }
 
 async function axeProblems(page) {
@@ -228,6 +273,9 @@ async function selfTest(browser, server, origin) {
     ['a transparent focus outline', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline-color: transparent !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
     ['a decorative box-shadow that does not change on focus', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline: none !important; } a, button { box-shadow: 0 0 0 2px #000 !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
     ['a control taken out of the tab order', keyboardProblems, (p) => p.evaluate(() => { const b = document.createElement('button'); b.textContent = 'Planted'; b.tabIndex = -1; document.querySelector('main').append(b); }), (x) => x.some((m) => m.startsWith('not reachable'))],
+    ['main pushed off the header edge', layoutProblems, (p) => p.addStyleTag({ content: 'main { margin-left: 40px !important; }' }), (x) => x.some((m) => m.startsWith('header content left'))],
+    ['a side navigation', layoutProblems, (p) => p.evaluate(() => { const a = document.createElement('aside'); a.textContent = 'Planted'; document.body.prepend(a); }), (x) => x.some((m) => m.startsWith('a side navigation'))],
+    ['an off-centre page', layoutProblems, (p) => p.addStyleTag({ content: 'header > *, main { padding-left: 56px !important; }' }), (x) => x.some((m) => m.startsWith('main is not centred'))],
     ['a transition ignoring reduced motion', motionProblems, (p) => p.addStyleTag({ content: '.card, h1 { transition: transform 1s ease; }' })],
     ['an animation ignoring reduced motion', motionProblems, (p) => p.addStyleTag({ content: '@keyframes qa-spin { to { transform: rotate(1turn); } } h1 { animation: qa-spin 2s infinite; }' })],
   ];
@@ -251,6 +299,109 @@ async function selfTest(browser, server, origin) {
 
 // --- The pass over every route. ---
 
+// --- The /start toy (S-003): keyboard only, no requests, no storage. ---
+
+// Plays the toy from its first stage to its last with the keyboard alone:
+// Tab until the primary button has focus, then Enter until the toy says it is
+// on its last stage. Every request and any storage or cookie change made
+// while playing is a problem. `plant` runs after load to inject a fault.
+async function toyProblems(page, plant) {
+  const problems = [];
+  if (!(await page.$('[data-toy]'))) return ['no interactive toy ([data-toy]) on the page'];
+  if (plant) await plant(page);
+  const store = () => page.evaluate(() => JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage), document.cookie]));
+  const before = await store();
+  const requests = [];
+  const onRequest = (r) => requests.push(r.url());
+  page.on('request', onRequest);
+  await page.evaluate(() => { document.activeElement?.blur?.(); window.scrollTo(0, 0); });
+  let focused = false;
+  for (let i = 0; i < 300 && !focused; i += 1) {
+    await page.keyboard.press('Tab');
+    focused = await page.evaluate(() => document.activeElement?.hasAttribute('data-toy-primary') ?? false);
+  }
+  if (!focused) problems.push('Tab never reaches the toy');
+  const last = await page.$eval('[data-toy]', (el) => el.getAttribute('data-last'));
+  const stagesSeen = [];
+  for (let i = 0; i < 40 && focused; i += 1) {
+    const stage = await page.$eval('[data-toy]', (el) => el.getAttribute('data-stage'));
+    stagesSeen.push(stage);
+    if (stage === last) break;
+    await page.keyboard.press('Enter');
+  }
+  if (focused && stagesSeen.at(-1) !== last) problems.push(`keyboard stopped at ${stagesSeen.at(-1)}, not the last stage ${last}`);
+  await page.waitForTimeout(200);
+  page.off('request', onRequest);
+  if (requests.length) problems.push(`requests while playing: ${requests.join(', ')}`);
+  if ((await store()) !== before) problems.push('storage or cookies changed while playing');
+  return problems;
+}
+
+// The returned branch: the secondary choice sends work back, the toy shows
+// the returned holder and its hue is the returned token.
+async function returnedProblems(page) {
+  for (let i = 0; i < 40; i += 1) {
+    if (await page.$('[data-toy-secondary]')) break;
+    await page.click('[data-toy-primary]');
+  }
+  if (!(await page.$('[data-toy-secondary]'))) return ['no choice that sends work back'];
+  await page.click('[data-toy-secondary]');
+  return page.evaluate(() => {
+    const toy = document.querySelector('[data-toy]');
+    const card = toy.querySelector('[data-toy-card]');
+    const out = [];
+    if (toy.getAttribute('data-holder') !== 'returned') out.push(`holder is ${toy.getAttribute('data-holder')}, not returned`);
+    const hue = getComputedStyle(card).getPropertyValue('--hue').trim().toLowerCase();
+    const token = getComputedStyle(document.documentElement).getPropertyValue('--returned').trim().toLowerCase();
+    if (!token || hue !== token) out.push(`card hue ${hue} is not the returned token ${token}`);
+    return out;
+  });
+}
+
+// The returned branch by keyboard alone: Tab to the primary button, Enter
+// until a return choice appears, Tab to it and press Enter. Focus must land
+// back on the primary button (not drop to the page), and Enter from there
+// must carry the returned work on to its next stage.
+async function returnByKeyboardProblems(page) {
+  await page.evaluate(() => { document.activeElement?.blur?.(); window.scrollTo(0, 0); });
+  const on = (attr) => page.evaluate((a) => document.activeElement?.hasAttribute(a) ?? false, attr);
+  let ok = false;
+  for (let i = 0; i < 300 && !ok; i += 1) { await page.keyboard.press('Tab'); ok = await on('data-toy-primary'); }
+  if (!ok) return ['Tab never reaches the toy'];
+  for (let i = 0; i < 40 && !(await page.$('[data-toy-secondary]')); i += 1) await page.keyboard.press('Enter');
+  if (!(await page.$('[data-toy-secondary]'))) return ['no return choice reached by keyboard'];
+  await page.keyboard.press('Tab');
+  if (!(await on('data-toy-secondary'))) return ['Tab from the primary button does not reach the return choice'];
+  await page.keyboard.press('Enter');
+  const problems = [];
+  const holder = await page.$eval('[data-toy]', (el) => el.getAttribute('data-holder'));
+  if (holder !== 'returned') problems.push(`after the return choice the holder is ${holder}`);
+  if (!(await on('data-toy-primary'))) problems.push(`focus dropped to ${await page.evaluate(() => document.activeElement?.tagName.toLowerCase() ?? 'nothing')} after the return choice`);
+  await page.keyboard.press('Enter');
+  const after = await page.$eval('[data-toy]', (el) => el.getAttribute('data-holder'));
+  if (after === 'returned') problems.push('Enter after the return choice does not move the work on');
+  return problems;
+}
+
+async function toySelfTest(browser, server, origin) {
+  const plants = [
+    ['a toy that writes to storage', (p) => p.evaluate(() => document.querySelector('[data-toy-primary]').addEventListener('click', () => localStorage.setItem('qa-planted', '1'))), (x) => x.some((m) => m.startsWith('storage'))],
+    ['a toy that makes a request', (p) => p.evaluate(() => document.querySelector('[data-toy-primary]').addEventListener('click', () => { fetch('/qa-planted-request').catch(() => {}); })), (x) => x.some((m) => m.startsWith('requests'))],
+    ['a toy the keyboard cannot reach', (p) => p.evaluate(() => { document.querySelector('[data-toy-primary]').tabIndex = -1; }), (x) => x.some((m) => m.startsWith('Tab never'))],
+  ];
+  for (const [what, plant, matches] of plants) {
+    const { context, page } = await openPage(browser, `${server.url}/start`, { width: 1280, theme: 'dark', origin });
+    const after = await toyProblems(page, plant);
+    check(`self-test: planted ${what} is caught`, matches(after), after.join(' | ') || 'not caught');
+    await context.close();
+  }
+  const { context, page } = await openPage(browser, `${server.url}/start`, { width: 1280, theme: 'dark', origin });
+  await page.addStyleTag({ content: '[data-toy-card] { --hue: var(--agent) !important; }' });
+  const p = await returnedProblems(page);
+  check('self-test: planted returned card in the agent hue is caught', p.some((m) => m.includes('not the returned token')), p.join(' | ') || 'not caught');
+  await context.close();
+}
+
 const server = opt('--url') ? { url: opt('--url'), stop() {} } : await startServer();
 const shots = opt('--shots');
 const browser = await chromium.launch();
@@ -269,6 +420,8 @@ try {
         check(`${tag}: renders in the ${theme} theme`, ground === GROUND[theme], ground);
         let p = await horizontalScroll(page);
         check(`${tag}: no horizontal scroll`, !p.length, p.join('; '));
+        p = await layoutProblems(page);
+        check(`${tag}: nav in the top bar; header and main share a centred container edge`, !p.length, p.join(' | '));
         p = await axeProblems(page);
         check(`${tag}: axe WCAG A/AA (contrast included)`, !p.length, p.join(' | '));
         p = await keyboardProblems(page);
@@ -289,6 +442,43 @@ try {
     const text = (await p.textContent('main')) ?? '';
     check(`${route.name}: page text readable with scripts disabled`, text.trim().length > 40 && (route.name !== 'home' || /Agentic Management System/.test(text)), `${text.trim().length} chars`);
     await noJs.close();
+  }
+
+  // The /start toy: keyboard to the last stage, no requests, no storage, and
+  // the returned branch in the returned token, at both widths and themes.
+  await toySelfTest(browser, server, origin);
+  for (const theme of THEMES) {
+    for (const width of WIDTHS) {
+      let opened = await openPage(browser, `${server.url}/start`, { width, theme, origin });
+      let p = await toyProblems(opened.page);
+      check(`start toy ${theme} ${width}px: keyboard alone reaches the last stage, with no request and nothing stored`, !p.length, p.join(' | '));
+      await opened.context.close();
+      opened = await openPage(browser, `${server.url}/start`, { width, theme, origin });
+      p = await returnedProblems(opened.page);
+      check(`start toy ${theme} ${width}px: the returned branch shows in the returned token`, !p.length, p.join(' | '));
+      await opened.context.close();
+      opened = await openPage(browser, `${server.url}/start`, { width, theme, origin });
+      p = await returnByKeyboardProblems(opened.page);
+      check(`start toy ${theme} ${width}px: keyboard alone takes the returned branch and focus stays on the toy`, !p.length, p.join(' | '));
+      if (shots && theme === 'dark' && width === 1280) {
+        // One shot per toy step, from a fresh start, with the returned branch.
+        await opened.context.close();
+        opened = await openPage(browser, `${server.url}/start`, { width: 1440, theme, origin });
+        const shoot = async (label) => { const el = await opened.page.$('[data-toy]'); await el.screenshot({ path: join(shots, `start-toy-${label}.png`) }); };
+        const last = await opened.page.$eval('[data-toy]', (el) => el.getAttribute('data-last'));
+        let n = 0;
+        let returned = false;
+        for (let i = 0; i < 40; i += 1) {
+          n += 1;
+          const stage = await opened.page.$eval('[data-toy]', (el) => el.getAttribute('data-stage'));
+          await shoot(`${String(n).padStart(2, '0')}-${stage}`);
+          if (stage === last) break;
+          if (!returned && (await opened.page.$('[data-toy-secondary]')) && stage === 'review') { returned = true; await opened.page.click('[data-toy-secondary]'); continue; }
+          await opened.page.click('[data-toy-primary]');
+        }
+      }
+      await opened.context.close();
+    }
   }
 
   // TK-001's home checks: system theme, toggle override and persistence,

@@ -7,16 +7,18 @@ export function Footer() {
   const known = /^[0-9a-f]{7,40}$/.test(sha);
   return (
     <footer className="site-footer">
-      <span>Built from commit</span>
-      {known ? (
-        <a className="mono" data-commit-sha={sha} href={`${REPO}/commit/${sha}`}>
-          {sha.slice(0, 7)}
-        </a>
-      ) : (
-        <span className="mono" data-commit-sha={sha}>
-          {sha}
-        </span>
-      )}
+      <div className="container site-footer-inner">
+        <span>Built from commit</span>
+        {known ? (
+          <a className="mono" data-commit-sha={sha} href={`${REPO}/commit/${sha}`}>
+            {sha.slice(0, 7)}
+          </a>
+        ) : (
+          <span className="mono" data-commit-sha={sha}>
+            {sha}
+          </span>
+        )}
+      </div>
     </footer>
   );
 }

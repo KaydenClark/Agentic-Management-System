@@ -15,6 +15,9 @@ import { Shell } from "./shell/Shell";
 import { themeScript } from "./shell/theme-script";
 
 export const metadata = {
+  // Production domain (serves main, public). Dev previews stay on their
+  // protected vercel.app URLs.
+  metadataBase: new URL("https://www.workbenchsystem.app"),
   title: "Agentic Management System",
   description: "What the Agentic Management System is, why it exists and how it works.",
 };

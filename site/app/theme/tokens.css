@@ -133,10 +133,11 @@
   --weight-bold: 700;
   --text-body: 16px; /* canvas page body */
   --text-ui: 15px; /* buttons */
-  --text-nav: 14px; /* sidebar links */
+  --text-nav: 14px; /* top-bar links */
   --text-small: 13px; /* eyebrows, pills, footer */
   --text-brand: 26px; /* header wordmark */
   --text-h2: 34px; /* section headings */
+  --text-h3: 20px; /* sub-section headings (first used for FAQ questions on /skills articles) */
   --text-h1: 48px; /* page title */
   --leading-body: 1.55;
   --leading-tight: 1;
@@ -167,8 +168,47 @@
   --focus-offset: 2px;
   --control-min-height: 44px;
   --icon-size: 16px;
-  --sidebar-basis: 264px;
   --content-basis: 320px;
-  --measure: 68ch;
   --page-min-height: 100vh;
+
+  /* Page container (owner feedback 11/01/2026): the header, <main> and the
+     footer share one centred column, so the page content lines up with the
+     header's edge. The column is a reading width (a 736px content box), and
+     every block in <main> fills it, so text, cards and the header share both
+     edges. --container-wide is for wide pages (the coming Grill Board page);
+     apply it with .container-wide. */
+  --container: 784px;
+  --container-wide: 1280px;
+  --page-gutter: clamp(16px, 4vw, 24px);
+
+  /* Top bar: title over its tagline and the theme toggle on the first row,
+     the reading-order links stretched across the row below. */
+  --text-tagline: 11px; /* the header tagline under the wordmark */
+  --brand-gap: 2px; /* wordmark to tagline */
+  --navitem-flex: 1 1 auto; /* every link on one row */
+
+  /* /start diagrams and toy. */
+  --node-basis: 112px; /* a lifecycle node's minimum width */
+  --stop-basis: 56px; /* a toy track stop's minimum width */
+  --dot-size: 10px; /* a holder dot */
+  --dot-size-live: 14px; /* the dot of the stage the work is on */
+  --hub-size: 300px; /* the What the AMS is picture */
+  --ring-width: 3; /* the loop ring's stroke, in picture units */
+  --motion-quick: 0.2s; /* a stage change; none under reduced motion */
+
+  /* /skills wiki. */
+  --text-h1-skill: clamp(30px, 7vw, var(--text-h1)); /* an article's title, the skill name: --text-h1 at most */
+  --text-h2-section: 28px; /* an article's section headings */
+  --text-code: 0.92em; /* inline code, relative to its text */
+  --step-size: 28px; /* a main-flow step number on the index */
+  --target-min: 24px; /* smallest link target (WCAG 2.2 target size) */
+  --rule-width: 4px; /* the request blockquote's leading rule */
+}
+
+/* Narrow screens: the reading-order links wrap three a row, each stretched
+   so every row spans the full width. */
+@media (max-width: 767px) {
+  :root {
+    --navitem-flex: 1 1 30%;
+  }
 }

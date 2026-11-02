@@ -32,8 +32,8 @@ export default function HowItWorks() {
         <p className="eyebrow">Tour</p>
         <h1>How it works</h1>
         <p className="lede" data-opener="">
-          In the Agentic Management System, or <dfn id="ams">AMS</dfn>, work is written down before it is done. A request becomes a <dfn id="spec">Spec</dfn>: a short
-          written plan for one change, with the conditions that will show it worked. Each Spec is cut into{" "}
+          In the Agentic Management System, or <dfn id="ams">AMS</dfn>, work is written down before it is done. A
+          request becomes a <dfn id="spec">Spec</dfn>: a short written plan for one change, with the conditions that will show it worked. Each Spec is cut into{" "}
           <dfn id="task">Tasks</dfn>, each small enough for one <dfn id="agent">agent</dfn>, an AI assistant that
           carries out work, to finish in a single run. The agent hands back proof, and only Kayden, the owner, moves
           finished work into the main version of the site.
@@ -56,8 +56,8 @@ export default function HowItWorks() {
           <dt>Spec</dt>
           <dd>
             One named change in what the system can do. It holds the intent and who authorized it, the behavior wanted,
-            and acceptance conditions, each with the check that proves it and a fault the check must catch, followed by
-            an append-only log of evidence. Small edits need no Spec.
+            and acceptance conditions, each with the check that proves it and a fault the check must catch. It describes
+            the destination only; how the work got there is kept in its Wiki history page. Small edits need no Spec.
             <Source path={`${ADR}000P-a-capability-change-gets-one-short-spec.md`}>ADR-000P</Source>
             <Source path={`${S003}SPEC.md`}>S-003, for the shape</Source>
           </dd>
@@ -91,33 +91,11 @@ export default function HowItWorks() {
 
       <section className={styles.section} aria-labelledby="lifecycle">
         <h2 id="lifecycle">The life of a piece of work</h2>
+        <p>
+          <Link href="/start#flow">Start here</Link> shows the path from a request to done, with who holds the work at
+          each stage, as a diagram and a toy. These are the rules behind its last steps.
+        </p>
         <ol className={styles.list}>
-          <li>
-            <strong>Capture.</strong> The request is written down with its reasons, corrections and intended end point.
-            <Source path="RUNBOOK.md">Runbook, Workflows</Source>
-          </li>
-          <li>
-            <strong>Specify.</strong> A Spec defines observable acceptance first. The owner confirms it and approves
-            its execution; the Spec links both records.
-            <Source path="RUNBOOK.md">Runbook, Workflows</Source>
-            <Source path={`${S003}SPEC.md`}>S-003, Confirmation and Execution approval</Source>
-          </li>
-          <li>
-            <strong>Plan.</strong> The Spec is cut into vertical Tasks: each a thin slice that works end to end, not one
-            Task per layer.
-            <Source path={`${ADR}000P-a-capability-change-gets-one-short-spec.md`}>ADR-000P</Source>
-          </li>
-          <li>
-            <strong>Claim.</strong> An agent claims a Task by pushing its branch with the Task marked in progress and
-            opening a draft pull request that names the Task and the agent. The owner confirmed this as a working rule,
-            and the RSI loop tests whether it holds.
-            <Source path={`${ADR}001M-a-claim-is-a-pushed-branch-and-a-draft-pr.md`}>ADR-001M</Source>
-          </li>
-          <li>
-            <strong>Build.</strong> Tests come first and fail; then the change makes them pass; then focused checks and
-            the project&apos;s suite run.
-            <Source path="AGENTS.md">AGENTS.md, Work and learn</Source>
-          </li>
           <li>
             <strong>Merge.</strong> A pull request merges only after it is brought up to date with its target branch and
             passes checks on that combined commit. Site work targets <code>dev</code>.
@@ -153,12 +131,12 @@ export default function HowItWorks() {
         <h2 id="example">One real Spec and one real Task</h2>
         <p>
           <strong>
-            Spec <a href={`${REPO_BLOB}${S003}SPEC.md`}>S-003, Showcase site shell and orientation tour</a>
+            Spec <a href={`${REPO_BLOB}${S003}SPEC.md`}>S-003</a>
           </strong>{" "}
-          is the Spec for this site. It is active, at priority 1, owned by Kayden with orchestrator A. It sets eleven
-          acceptance conditions, from every tour page having a plain-language opener to a quickstart that replays on a
-          fresh copy of the repository, and it plans seven Tasks, TK-001 to TK-007. None of its conditions is checked
-          off yet.
+          is the Spec for this site&apos;s shell and orientation tour. It is active, at priority 1, owned by Kayden with
+          orchestrator A. Its acceptance conditions run from every page opening in plain language to the commit shown
+          in each footer matching the deployment, and its work is split into seven Tasks, TK-001 to TK-007. None of
+          its conditions is checked off yet.
         </p>
         <p>
           <strong>
@@ -169,13 +147,14 @@ export default function HowItWorks() {
           failing 10 of 14, then 14 of 14 passing from a fresh copy; pull request #13 merged into <code>dev</code> as
           commit c529821; a browser check at 375 pixels wide in both themes passing 15 of 15; and a Codex code and
           security review with no findings. It also records what it could not check: the footer of the live{" "}
-          <code>dev</code> deployment was not fetched, because the connector refused, so that stays open.
+          <code>dev</code> deployment was not fetched, because the Vercel connector, the tool agents use to reach the web
+          host, refused the request, so that check stays open.
         </p>
         <p>
           This page is itself the work of{" "}
           <a href={`${REPO_BLOB}${S003}tasks/TK-002/TASK.md`}>Task TK-002</a>. Task files are scaffolding and are deleted
-          when their Spec closes, so these links will change; the site&apos;s tests fail on a link to a file that no
-          longer exists.
+          when their Spec closes, so these links will change then; the site&apos;s tests fail on any link to a file
+          that no longer exists.
         </p>
       </section>
 
@@ -183,8 +162,8 @@ export default function HowItWorks() {
         <h2 id="guarantees">Guarantees and limits</h2>
         <p>
           Code checks structure; agents carry judgment. A rule counts as enforced only when running code refuses the
-          operation and a test shows the refusal, so the steps above are decided rules, and this page does not claim
-          which of them code enforces today.
+          operation and a test shows the refusal, so the steps above are decided rules; this page does not claim which
+          of them code enforces today.
           <Source path={`${ADR}000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md`}>ADR-000G</Source>
         </p>
         <ul className={styles.list}>
@@ -199,8 +178,8 @@ export default function HowItWorks() {
             <Source path="ARCHITECTURE.md">Architecture, Bird&apos;s-eye view</Source>
           </li>
           <li>
-            No improvement has been measured yet; the <Link href="/rsi">RSI results</Link> page, next in the reading
-            order, shows where results will appear.
+            No improvement has been measured yet; the <Link href="/rsi">RSI results</Link> page shows where results
+            will appear.
           </li>
         </ul>
       </section>

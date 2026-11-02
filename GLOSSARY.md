@@ -2,23 +2,35 @@
 
 > Generated from LLM Workbench v3.2.2.
 
-AMS manages Kayden's agents, workflows, intent capture, skills and AI tools in one RSI loop; these are its shared terms. Definitions follow Kayden's 2026-10-31 instruction and the [research basis](workbench/research/template-research-basis.md).
+Shared AMS terms, defined per Kayden's 2026-10-31 instruction and the [research basis](workbench/research/template-research-basis.md).
 
 ## Language
 
 ### AMS
 
 **AMS**:
-Kayden's system for managing agents, workflows, intent capture, skills and AI tools in one RSI loop. It is built on and operates the Workbench while repairing it.
+Kayden's system for managing agents, workflows, intent capture, skills and AI tools in one RSI loop. It builds on, operates and repairs the Workbench.
 
 **RSI loop**:
-Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record does not prove improvement.
+Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record proves no improvement.
+
+**Alignment assessment**:
+Application of approved Alignment Check r1 to a named candidate and scope over three assessment runs.
+
+**Alignment Score**:
+The percentage of passed applicable checks pooled across the three assessment runs; distinct from fitness level and acceptance.
+
+**Fitness level**:
+The r1 classification: Excellent at three passing runs, Stable at two, Functional at one and Broken at none; any Critical failure overrides the count to Broken.
+
+**Improvement attempt**:
+One assessed version of an improvement candidate; each candidate gets at most three, excluding baseline.
 
 **Workbench**:
-The working foundation AMS uses and repairs. AMS also encompasses the system and tool belt that operates above it.
+The working foundation AMS uses and repairs. AMS also includes the system and tool belt operating above it.
 
 **Intent**:
-What the owner wants, with reasons, boundaries and corrections. Retain whether it is confirmed or unresolved.
+What the owner wants, with reasons, boundaries and corrections. Retain whether confirmed or unresolved.
 
 ### Records
 
@@ -29,10 +41,10 @@ A bounded assigned slice under a Spec, owning execution state and proof.
 A repeatable test case; one attempt at it is a trial. Neither is an implementation assignment.
 
 **Evidence audit**:
-A maintained assessment of claims against dated, candidate-specific evidence, preserving reassessment history.
+A maintained assessment of claims against dated, candidate-specific evidence, keeping reassessment history.
 
 **Improvement record**:
-The connection from an observed problem through a hypothesis and comparison to an actual disposition and later-use check.
+The link from an observed problem through hypothesis and comparison to an actual disposition and later-use check.
 
 **Review receipt**:
 An actual assessment of a named candidate and scope, recording reviewer involvement, findings and limits.
@@ -45,7 +57,7 @@ Sourced human judgment of the named experience or candidate. Agent checks cannot
 A disposition describes how a finding was handled and grants no execution or release authority; without an established one, keep it pending and name the missing owner or evidence.
 
 **diagnostic**:
-Names the diagnostic that makes the condition visible, and whether it is implemented or proposed.
+Names the diagnostic that makes the condition visible and whether it is implemented or proposed.
 
 **test**:
 Names the test that detects the condition, with its actual result or implementation gap.
@@ -57,4 +69,4 @@ Names the implementing revision and its verification. Later-use benefit remains 
 Names the actual decision source and reason for declining the proposed action.
 
 **accepted-open**:
-Names the actual acceptance of follow-up work and its owning Spec. The problem remains open.
+Names the actual acceptance of follow-up work and its owning Spec; the problem remains open.

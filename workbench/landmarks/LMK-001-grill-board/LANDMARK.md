@@ -7,7 +7,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** The owner's local attention queue, where agents post items that need an answer and confirmed answers land straight in their owning records.
 **Blockers:** none
-**Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning for S-004.
 
 ## Direction
@@ -63,17 +62,13 @@ node workbench/tools/spec-workbench.mjs show S-005
 node workbench/tools/spec-workbench.mjs doctor
 ```
 
-Each reached check is confirmed against what has landed on `main`, by running the child Spec's verification and reading its evidence log.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Landmark mapped from confirmed owner decisions; child Specs S-004 and S-005 written as planned | render and doctor on the mapping branch | this record | Task planning |
+Each reached check is confirmed against what has landed on `main`, by running the child Spec's verification and reading its Current Verified State and the proof it links.
 
 ## Reached Result
 
 Pending.
+
+History: [LMK-001 history](../../wiki/history/LMK-001.md).
 
 ## Supersession
 

@@ -13,6 +13,10 @@ last_verified: 2026-11-01
 
 Captured context. Claim labels preserve intent and uncertainty; capture alone supplies neither Canon nor implementation proof. The date above checks this page's capture format, not every claim.
 
+## Current rule
+
+The owner's final correction below replaces the all-Spec cap: at most six active Landmarks, with Specs and Tasks beneath them. Specs need no slots. S-001 is the cross-landmark yardstick under the Blueprint and may run its ready Tasks now; unfinished assessed capabilities affect final acceptance. Earlier parent-Spec interpretations below are corrected history.
+
 <!-- jot-entry -->
 ### JOT-5b41bab8-c88f-49c4-be9c-b438285490b0
 Kind: intent
@@ -89,4 +93,104 @@ Topic: active-spec-approvals
 Supersedes: none
 
 S-013: The owner confirms S-013 (coherence checks) as one of at most six active Specs and approves executing its Tasks, implemented and landed through checked PRs into main.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-6ebd3b6c-9030-438a-96a1-6cfe6915be52
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T18:02:29.905Z
+Author: Kayden
+Source: Owner request and clarification in AMS chat, 2026-11-01
+Topic: active-spec-approvals
+Supersedes: none
+
+S-001: The owner requested undoing the prerequisite lockout so Spec work can proceed, identified S-001 as the blocked Spec, and clarified: "We should have a limit on parent specs. We cant lock out parent specs like that." This authorizes repairing the activation policy and enabling S-001 work. Apply the existing limit of six to active parent Specs; their child Specs do not consume separate parent slots. S-001 is the AMS parent across its four landmarks and their child Specs. Unfinished children affect final acceptance, not permission to start S-001 checks. This supersedes the earlier all-Spec slot cap and completion-driven activation queue, retaining prior scoped execution approvals, real input dependencies and owner QA/publication gates. S-001 remains unfinished; no outcome is accepted by this correction.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-88d089a7-8f28-4167-b853-b1a7160d2c6b
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T18:05:20.089Z
+Author: Kayden
+Source: Owner request and hierarchy correction in AMS chat, 2026-11-01
+Topic: active-spec-approvals
+Supersedes: JOT-6ebd3b6c-9030-438a-96a1-6cfe6915be52
+
+S-001: The owner requested undoing the Spec prerequisite lockout, identified S-001 as the blocked Spec, clarified "We should have a limit on parent specs. We cant lock out parent specs like that.", then corrected "You cant have landmarks below a spec". Landmarks remain above Specs. The prior entry wrongly attributed an agent inference that S-001 parents the landmarks; that inference is withdrawn. S-001 remains a cross-landmark yardstick under the Blueprint, not a Landmark parent. Its own ready assessment/repair Tasks can start while the capabilities it assesses remain unfinished. Those outcomes still gate final system acceptance. The exact parent-counting boundary is being clarified; retain the requested limit without inventing hierarchy. No child outcome is accepted; owner QA/publication gates remain.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-abe54041-757d-443a-82f4-6bc011b3908f
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T18:05:49.725Z
+Author: Kayden
+Source: Owner final clarification in AMS chat, 2026-11-01
+Topic: active-spec-approvals
+Supersedes: JOT-88d089a7-8f28-4167-b853-b1a7160d2c6b
+
+S-001: The owner asked to undo the Spec lockout and identified S-001 as the blocked work. Final clarification: "Parent specs should be Landmarks". Apply the existing limit of six to active Landmarks. Use Landmark -> Spec -> Task; introduce no parent-Spec hierarchy and put no Landmark beneath a Spec. Specs do not consume Landmark slots or wait for sibling completion to free one. S-001 remains the cross-landmark yardstick under the Blueprint and is authorized to start its existing ready assessment/repair Tasks without waiting for unfinished capabilities. Final system acceptance still needs the required outcomes. This replaces the all-Spec cap and slot-transfer queue, retaining real Task inputs, scoped execution authority and QA/publication gates. No outcome is accepted by this repair.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-098ca81a-6d8f-410e-af85-20ed3818a0d4
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T18:12:28.027Z
+Author: Kayden
+Source: Owner correction of skill choice in AMS chat, 2026-11-01
+Topic: active-spec-approvals
+Supersedes: none
+
+For this S-001 lockout repair, use Jot, not domain-modeling. This corrects an existing operating rule; no domain-model or vocabulary change required the heavier skill. The final six-Landmark cap, hierarchy and S-001 readiness correction remain unchanged.
+<!-- /jot-entry -->
+
+## 2026-11-01: Record cleanup
+
+Kind: intent
+State: confirmed
+Source and speaker: Kayden, AMS chat, 2026-11-01
+Supersedes: blanket A/B continuation gates in Specs, handoffs and approval summaries
+Claim: Use neutral scope and continuation notes in project records; remove blanket continuation gates. Existing scoped execution approvals and actual Task inputs govern continued work.
+Effect and next action: Correct affected records and regenerate the Taskboard. Review, Human QA, page approvals and publication requirements remain in force.
+
+<!-- jot-entry -->
+### JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T21:18:59.392Z
+Author: Kayden
+Source: Owner instruction in AMS chat, 2026-11-01
+Topic: active-spec-approvals
+Supersedes: none
+
+S-008: The owner confirms S-008 (Skills wiki) as specified and approves executing its Tasks: "I authorize you to /orchestrate S-008, and /carry it to completion." Method set by the owner: Sonnet writes each skill article, a second Sonnet audits it and the feedback goes through the orchestrator to the final writer, the orchestrator judges the final copy (a failed article returns to Sonnet for a revision that comes back only to the orchestrator), and Opus builds the wiki architecture in the website. Endpoint: "I authorize you to merge into dev once you have thoroughly reviewed and approved everything matches the spec, and the actual purpose and capabilities of the skills." Then clean up the run's worktrees and uncommitted work. Site route stays feature -> dev; only the owner merges dev -> main. Page approvals, Human QA and publication to main stay with the owner.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-67a67a84-6596-4dca-83c2-246f8cfa61a2
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T08:17:04.020Z
+Author: Kayden
+Source: Kayden approval relayed by orchestrator, AMS chat, 2026-11-02
+Topic: active-spec-approvals
+Supersedes: none
+
+S-006: On 2026-11-02 Kayden explicitly approved: "Approve fresh parser repair". This authorizes a fresh bounded corrective Task replacing the custom Markdown visibility scanner with pinned markdown-it-py CommonMark token parsing, preserving all provenance/ancestor/no-network guards and the eight retained historical facts. Preserve W stopped/unaccepted, both failed pins and recovery. Checked main delivery, actual local history import/readcheck, truthful durable Spec proof and independent assembled review remain authorized. This grants no model calls, destructive history repair, formal Spec acceptance or owner Human QA.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-ada1ea57-1afe-40b0-986d-eb4567bc2884
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T13:53:49.762Z
+Author: Kayden
+Source: Kayden, direct scoped history-import question reply in AMS chat, 2026-11-02
+Topic: active-spec-approvals
+Supersedes: none
+
+S-006: The owner answered "Approve this history import" to the explicit question authorizing the local writer to import real AMS build-history rows from main771bd1e264ff15ab89217c8f91f79fc38c57f96b and devfe9870fe93f715c859fc5059b0b4c52f38f4a640 into existing Supabase project hqvtnpvwwppbeurponnn, refreshing changed sourced rows and retaining the eight archived facts, using the existing local service key. This resolves the fresh import-approval hold for these exact data pins and destination only. Use the corrected checked collector, preserve original three S008 facts and historical identity declarations, require direct current canonical metadata and pinned readcheck, and do not delete rows or expose/copy keys. Approval is not proof of a successful import, whole-S006 acceptance, owner Human QA, or authority to resume stopped W.
 <!-- /jot-entry -->
