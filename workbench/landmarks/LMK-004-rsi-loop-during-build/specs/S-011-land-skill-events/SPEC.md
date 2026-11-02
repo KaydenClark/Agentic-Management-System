@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** Publish verified owner records; finish Terra baseline/candidate evidence and audit.
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
