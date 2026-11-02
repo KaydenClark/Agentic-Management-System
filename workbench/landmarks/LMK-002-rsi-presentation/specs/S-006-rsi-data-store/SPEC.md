@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000Z claimed by codex-task-provenance.
-**Next gate:** Close TK-000Z with verification and documentation proof.
+**Latest event:** TK-000Z closed with proof.
+**Next gate:** Complete TK-000W.
 
 ## Intent and authority
 
@@ -146,6 +146,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | TK-000U | Task closed | Source9f3a6ca reconciles main17293a0; local and fresh590 passed4 skipped; focused85 passed; direct independent source review d50 PASS; all8 retained facts rederived exactly. Final CI/current-owner binding then postmerge live proof remain required. | src/ams/build_history.py module contract; S006 TaskU and Spec; TASKBOARD | Postmerge history import/readcheck and durable Spec proof pending in same run; Build-history criterion remains unchecked. Owner HumanQA/formal Spec acceptance pending.; close attribution: {"agent":"codex-history-consumer","claimant":"codex-history-consumer","onBehalfOf":null} |
 | 2026-11-02 | TK-000X | Task closed | Source3cd0637 CommonMark token parser;166focused; local/fresh699passed4skipped; exact8real facts once; source CI and direct independent scopedPASS. Two setext expected-value corrections documented; final owner binding/currentCI and postmerge proof remain. | build_history module contract; pinned pyproject/uv.lock; TaskX; approval Wiki; TASKBOARD | Actual postmerge history import/readcheck and durable Spec proof pending in same run. W remains stopped/unaccepted; owner HumanQA/formal S006 completion open.; close attribution: {"agent":"codex-history-parser","claimant":"codex-history-parser","onBehalfOf":null} |
 | 2026-11-02 | TK-000X | Checked source delivered; live verification incomplete | PR #91 merge771bd1e; locked local/fresh699 passed4 skipped; independent166/source binding. GET-only snapshot1030: missing130 extra1 mismatches2 unsourced0 ordered; original8 facts exact. Import rejected before execution twice; no writes | TaskX; Current Verified State | Direct import approval and correctness-preserving S008 lineage disposition, stopped W lifecycle and owner HumanQA remain open |
+| 2026-11-02 | TK-000Z | Task closed | Source3a25cac: local/fresh764 passed,4 skipped; independent215 history and49 affected; strict1232-to1234 full replay,61 source classifications; exact3S008+8archives/R; Task metadata applying-fake undo/CAS/current readback; real GET exact200-one/mismatch200-zero; source CI41435710340 pass | build_history module contract; S006 Spec/TK000Z; history regression tests; scoped independent source review and frozen comparison | Final owner-record CI and checked PR104 merge; real history import requires explicit approval and has not run; current canonical DB repair/readback and global live readcheck unrun; stopped W, whole-S006 binding and actual owner HumanQA remain open; close attribution: {"agent":"codex-task-provenance","claimant":"codex-task-provenance","onBehalfOf":null} |
 
 ## Review and Human QA
 

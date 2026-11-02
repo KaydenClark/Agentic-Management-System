@@ -3,12 +3,13 @@
 **Task ID:** TK-000Z
 **Spec ID:** S-006
 **Slice:** Task creation facts survive migration and removal
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Build history from real records
 **Planned verification:** Full creation-row identity across table/native migration and removal; native-only/rename/pin/conflict tests; exact3 S008 plus8 archive facts; deterministic complete expected-row BEFORE/AFTER diff; independent pinned delta review; full/fresh/room/current CI and checked merge.
 **Claimed by:** codex-task-provenance
 **Current claimant:** codex-task-provenance
+**Proof:** Source3a25cac: local/fresh764 passed,4 skipped; independent215 history and49 affected; strict1232-to1234 full replay,61 source classifications; exact3S008+8archives/R; Task metadata applying-fake undo/CAS/current readback; real GET exact200-one/mismatch200-zero; source CI41435710340 pass
 
 ## Assignment
 
@@ -54,3 +55,9 @@ Corrected immutable source `3a25cacf797743ca8189739a46661ec4e3a76a09` is pushed 
 Actual eligible noncontributor `s002_bootstrap_review` supplied direct bounded engineering source-readiness PASS at that exact source, no blocking findings. The reviewer independently reran 215/49 tests, the original Proof refusal, real-source 208 records/76 births with exact three S008/eight archive facts and R ownership, and strict copied-map replay/classification. Final sealed corrected comparison is 1,232→1,234 rows, two additions/no removals/59 Task-only changes (33 core fields plus 26 status-only metadata); all 61 added/changed source rows are verified. Its 107 public GitHub, 3,264 Git and 14 lifecycle successful responses plus 13 genuine Git failures replay identically twice without fallback. The reviewer directly read both 764/4 logs and checked the fresh source clone. This supersedes only the scoped a555 finding/hold; earlier failures remain evidence.
 
 Judgment: the bounded source outcome is met. Migration/removal and mutable current fields cannot rewrite identity births; unsupported competing execution refuses; current native receipts remain separate; applying fake refreshes preserve unknown/audit data, bounded undo, exact key presence and race refusal. Direct current representations are checked, not merely historical readcheck matches. Real anonymous GET verifies object-filter syntax only. No real import or current canonical database repair/readback ran. Normal final owner-record CI/checked merge follow; actual history-import approval, global live verification, stopped W and formal owner HumanQA remain open. This is no evaluator qualification, trial benefit or whole-S006 acceptance.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | feature/s006-task-birth-provenance | db9f23a5e2ca10488edd71df91e4c43bcc907bab | ahead 0 behind 0 | 0 | Source3a25cac: local/fresh764 passed,4 skipped; independent215 history and49 affected; strict1232-to1234 full replay,61 source classifications; exact3S008+8archives/R; Task metadata applying-fake undo/CAS/current readback; real GET exact200-one/mismatch200-zero; source CI41435710340 pass | build_history module contract; S006 Spec/TK000Z; history regression tests; scoped independent source review and frozen comparison | Final owner-record CI and checked PR104 merge; real history import requires explicit approval and has not run; current canonical DB repair/readback and global live readcheck unrun; stopped W, whole-S006 binding and actual owner HumanQA remain open; close attribution: {"agent":"codex-task-provenance","claimant":"codex-task-provenance","onBehalfOf":null} | 952983c237f6185838d20f26253d9eb24620ae09322dac1d2f67605f91ef74bc |
