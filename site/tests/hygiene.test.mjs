@@ -15,7 +15,7 @@ const PLANTED = [
   ['host path', ['/ho', 'me/someone/project/site/app/page.tsx'].join('')],
   ['host path', ['/Us', 'ers/someone/Code/site'].join('')],
   ['host path', ['C:', '\\Users\\someone\\site'].join('')],
-  ['host path', ['file:', '///C:/Users/someone/site'].join('')],
+  ['host path', ['file:', '///C:/Us', 'ers/someone/site'].join('')],
   ['host path', ['file:', '///tmp/build/site'].join('')],
   ['Supabase secret key', ['sb_', 'secret_', 'AbCdEf0123456789'].join('')],
   ['Supabase service role', ['service', '_role'].join('')],
