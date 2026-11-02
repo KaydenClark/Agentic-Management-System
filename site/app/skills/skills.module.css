@@ -276,8 +276,11 @@
 }
 
 /* Wiki frame: the navigation pane left of the page on wide screens, above it
-   on narrow ones. The frame widens past the reading column by the pane's
-   width, centred on it, so the page keeps the column's measure. */
+   on narrow ones. The pane sits in the column's left margin, so the page keeps
+   the column's measure. The breakpoint is the narrowest viewport whose margin
+   holds the pane, its gap and a gutter: (1296 - 784) / 2 + 24 - (232 + 24) =
+   24px from the edge (--container, --page-gutter, --wiki-nav-width,
+   --space-24); below it the pane would run off the left edge. */
 
 .wiki {
   display: flex;
@@ -289,7 +292,7 @@
   min-width: 0;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1296px) {
   .wiki {
     display: grid;
     grid-template-columns: var(--wiki-nav-width) minmax(0, 1fr);
@@ -305,7 +308,7 @@
   font-size: var(--text-nav);
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1296px) {
   .wikiNav {
     position: sticky;
     top: var(--space-24);
