@@ -3,7 +3,7 @@
 **Task ID:** TK-003
 **Spec ID:** S-001
 **Slice:** Cold-start trial: a fresh session given only the repository URL names the AMS, its active Specs and next Task
-**Status:** in-progress
+**Status:** done
 **Blockers:** TK-002
 **Destination:** spec-acceptance: Cold start.
 **Claimed by:** claude-orch-s001-tk003
@@ -34,6 +34,12 @@ After TK-002, record a cold-start trial in a separate session given only the rep
 | Next Task | S-002 TK-000Y, "A judge requests the fixed JSON schema through a bounded serialization-only transport" (ready, priority 1). Cited `next --json` and S-002's Next gate. | Accurate for the records on `main`; see the caveat |
 
 **Caveat (finding):** the session made a shallow, single-branch clone (`--depth 1`), so `next` saw no claim branches. It reported "no remote claims" and named a Task that another writer holds. Given the same clone, the orchestrator reproduced this answer; a full clone gives a different one. Claim coordination therefore depends on how the reader cloned, and `next` gives no warning. That code lives in `workbench/tools/` (owned by setup-workbench) and is not changed here.
+**Proof:** Separate headless claude -p session f080acae-5bc8-40a3-a257-30d90337f16c in an empty folder, given only the repository URL, at candidate 9655f3c: named AMS, the 8 active Specs and S-002 TK-000Y (ready, priority 1) as next Task; matches Taskboard and next --local
 
 The session also noticed that this Task's record on `main` still says `blocked` while the Taskboard says `ready`. That is true at the candidate, because the claim exists only on this Task's branch.
 
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | feature/s001-tk003-cold-start | de4443ef32ce4c6dde4f00c8d514f20805778f12 | ahead 0 behind 0 | 0 | Separate headless claude -p session f080acae-5bc8-40a3-a257-30d90337f16c in an empty folder, given only the repository URL, at candidate 9655f3c: named AMS, the 8 active Specs and S-002 TK-000Y (ready, priority 1) as next Task; matches Taskboard and next --local | TK-003 trial section | Shallow clones hide claim branches, so next can name a claimed Task without warning (workbench/tools, setup-workbench owned); S-001 acceptance remains open; close attribution: {"agent":"claude-orch-s001-tk003","claimant":"claude-orch-s001-tk003","onBehalfOf":null} | 5bc0b174f1d12fc2aab79a6a4092cad15f001b02e014f4a86143f5481af9eea9 |
