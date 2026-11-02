@@ -6,10 +6,10 @@
 **Owner:** Kayden; orchestrator B (local keys)
 **Stance:** Builder
 **Updated:** 2026-11-02
-**Catalog description:** RSI/metrics/history storage and local writers; site reads.
+**Catalog description:** Sourced Supabase data and local writers.
 **Blockers:** none
-**Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882][a]
-**Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882][a]
+**Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Latest event:** Approved pinned import/readback passed.
 **Next gate:** Coverage/W disposition, whole Review, actual owner QA.
 
@@ -31,7 +31,7 @@ Sourced charts; local credentials.
 
 ## Current Verified State
 
-W remains stopped/unaccepted: failed 813465d/5e02ead;550 recovery retained. X's two setext oracle corrections and Z's original3 S008+8 archives/F→K/R lineage/CAS proofs remain in Tasks.
+W remains stopped/unaccepted: failed 813465d/5e02ead;550 recovery retained. X/Z proofs below retain setext corrections and original3 S008+8 archives/F→K/R/CAS.
 
 JOT-ada1ea57-1afe-40b0-986d-eb4567bc2884 approved only main771bd1e264ff15ab89217c8f91f79fc38c57f96b/devfe9870fe93f715c859fc5059b0b4c52f38f4a640. [Actual batch][b]:one call;131 inserted/1030 existing/41 refreshed;1161 unique;74 current Task projections match; global missing/extra/newer/mismatch/unsourced 0, ordered. 3+8 originals/1030 IDs retained;989 untouched;41 audit/annotation/undo checks pass. No delete/key leak. Earlier 2 write refusals ran no key/write; failed GET retained. Later history unimported; no second batch/latest coverage claim.
 
@@ -43,7 +43,7 @@ History:Spec/Task/PR/commit/return/correction; immutable IDs,idempotence,stale/c
 
 ## Non-Goals
 
-Charts:S007; trials:S002; no qualification/benefit claims.
+Charts:S007; trials:S002; no benefit claims.
 
 ## Dependencies And Blockers
 
@@ -100,7 +100,7 @@ All 28 events retained; Receipts/Git own full proof/attribution. Gaps are histor
 |2026-11-01|TK-000R|Task closed|62 focused;495/4; migration20261101195609; live/CI53|[Task R](tasks/TK-000R/TASK.md)|Delivery/Review/QA; S007/S002|
 |2026-11-01|review|Review verdict: pass at 906f71f936ccbb4ccc777cbea5643ca2668d3a85 [079d355dd065] #4|none|s006_review independent|none|
 |2026-11-01|review-detail|Independent PASS receipt at 906f71f|[receipt](../../../../feedback/REVIEW-S-006-906f71f.md)|direct reviewer|Owner QA/delivery separate|
-|2026-11-01|TK-000S|Task closed|84 focused;517/4;CI61;4 live pairs/0 mutation; cleanup0|[Task S](tasks/TK-000S/TASK.md)|Review/QA/S007/S002; unowned SVG retained; attribution in Receipt|
+|2026-11-01|TK-000S|Task closed|84 focused;517/4;CI61;4 live pairs/0 mutation; cleanup0|[Task S](tasks/TK-000S/TASK.md)|Review/QA/S007/S002; unowned SVG retained|
 |2026-11-01|review|Review verdict: pass at e5a8c33a24226fd1f3eb595fa227f385a04934bd [6df68e2822de] #5|none|s006_review independent|none|
 |2026-11-01|review-detail|Independent whole PASS receipt at e5a8c33|[receipt](../../../../feedback/REVIEW-S-006-e5a8c33.md)|direct reviewer|Owner QA/delivery separate|
 |2026-11-01|TK-000U|Task closed|9f3a6ca/main172;590/4;85 focused;d50 scoped PASS;8 facts|[Task U](tasks/TK-000U/TASK.md)|CI/binding/live/QA|
@@ -122,4 +122,4 @@ Region:nearest US unless chosen. Table-index condensation re-dates; refresh logs
 
 ## Supersession
 
-Replaces draft JSONL ledgers; superseded by:none.
+Draft JSONL superseded; no successor.
