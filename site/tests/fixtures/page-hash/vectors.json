@@ -1,5 +1,5 @@
 {
-  "about": "Content-hash test vectors for the S-005 page-hash contract, matched by S-003 TK-004. Each expected hash is shasum -a 256 over the canonical string, computed independently of site/scripts/draft-marks.mjs.",
+  "about": "Content-hash test vectors for the S-005 page-hash contract, matched by S-003 TK-004. Each expected hash is shasum -a 256 over the canonical string, computed independently of site/scripts/page-hash.mjs.",
   "vectors": [
     {
       "name": "text, href, src and alt in document order; mark, script, style and footer dropped",

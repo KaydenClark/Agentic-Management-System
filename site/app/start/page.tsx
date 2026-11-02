@@ -304,11 +304,6 @@ export default function StartHere() {
           <li>
             No improvement has been measured yet, so the <Link href="/rsi">RSI results</Link> page is empty on purpose.
           </li>
-          <li>
-            Kayden approves every page of this site, this one included; until he approves a page&apos;s exact content,
-            it carries a mark saying so.
-            <SourceLinks sources={[S003]} />
-          </li>
         </ul>
         <p className={styles.say}>
           Next, <Link href="/why">Why</Link> says what the AMS is for; then{" "}
