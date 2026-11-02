@@ -21,6 +21,7 @@ from ams.coherence.review import (
 
 BUILD_CTX = context_id("session-that-built")
 REVIEW_CTX = context_id("fresh-review-session")
+PRODUCT_CTX = context_id("session-that-wrote-product-code")
 
 SPEC = """# S-900 - Fixture
 
@@ -79,6 +80,11 @@ def _fixture():
     (spec / "SPEC.md").write_text(SPEC)
     (spec / "tasks/TK-001/TASK.md").write_text(TASK)
     _commit(repo, f"Claim S-900 TK-001\n\nAMS-Context: {BUILD_CTX}")
+    # A product-code commit outside the Spec folder still names its Spec.
+    Path(repo, "src/thing.py").write_text("v = 1  # built\n")
+    _commit(repo, f"Build the S-900 slice\n\nAMS-Context: {PRODUCT_CTX}")
+    Path(repo, "src/other.py").write_text("x = 1\n")
+    _commit(repo, f"Unrelated S-9001 work\n\nAMS-Context: {REVIEW_CTX}")
     # Task scaffolding is deleted at close (ADR-000T); its claimant must still count.
     (spec / "tasks/TK-001/TASK.md").unlink()
     with (spec / "SPEC.md").open("a") as f:
@@ -95,7 +101,7 @@ class BuilderContextsTest(unittest.TestCase):
     def test_builders_come_from_claims_closes_and_commit_trailers(self):
         found = builders("S-900", repo=self.repo, commit=self.candidate)
         self.assertEqual(found["agents"], {"impl-a", "closer-a"})
-        self.assertEqual(found["contexts"], {BUILD_CTX})
+        self.assertEqual(found["contexts"], {BUILD_CTX, PRODUCT_CTX})
 
     def test_context_id_hashes_the_session_and_never_stores_it(self):
         self.assertRegex(BUILD_CTX, r"^[0-9a-f]{12}$")
