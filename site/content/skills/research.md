@@ -23,7 +23,7 @@ A run has four moves.
 Key terms:
 
 - A **finding** is one factual claim with a precise citation, an evidence type, the version or date checked, and a confidence level with its reason and limit. Each has a stable ID.
-- A **record-plus-finding reference** such as `R-0001 F-CC5` lets a decision record or Spec cite one claim in one paper.
+- A **record-plus-finding reference** such as `R-0042 F-A1` lets a decision record or Spec cite one claim in one paper.
 - An **inference** is the agent's reasoning from findings, labeled apart and linked to them.
 - A **candidate decision** is a recommendation to the decision owner, and stays one until that owner accepts it elsewhere.
 

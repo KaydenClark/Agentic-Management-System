@@ -40,7 +40,7 @@ Reach for it when you hold a Director or Dispatcher assignment: several Tasks, w
 
 ## Example request
 
-> You are the Dispatcher for S-012. Run the ready Tasks through implementors, check what each hands back, make sure the checked PRs land in main one at a time, and stop when the Spec is assembled and ready for independent review.
+> You're the Dispatcher for the billing Spec. Run its ready Tasks through implementors, check each result before accepting it, merge the checked PRs into main one by one, and stop once the Spec is assembled for an independent review.
 
 ## What it requires
 

@@ -48,7 +48,7 @@ Reach for `plan` when the destination is settled and you need work an agent can 
 
 ## Example request
 
-> The checkout Spec is accepted. Break S-004 into Tasks. Start with one demoable path from cart to saved order, keep the blockers honest, and show me the breakdown before you write any records.
+> The checkout Spec is accepted. Break it into Tasks. Start with one demoable path from cart to saved order, keep the blockers honest, and show me the breakdown before you write any records.
 
 The skill maps the layers checkout crosses, proposes a numbered breakdown with titles, blockers, delivered behavior and sizing rationale, and holds there for your go-ahead, as you asked.
 

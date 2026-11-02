@@ -43,7 +43,7 @@ Reach for it when records and reality may have drifted apart: a run came back, a
 
 ## Example request
 
-> TK-014 just came back with a green test run and a note saying it merges cleanly. Reconcile S-005: check what was delivered against the Task's acceptance, update the records, and tell me the next gate.
+> The CSV export Task just came back with a green test run and a note saying it merges cleanly. Reconcile its Spec: check what was delivered against the Task's acceptance, update the records, and tell me the next gate.
 
 The skill pins the returned commit, checks the claimed result at that revision and records the outcome. If the Task's acceptance is met, it closes the run through the project's lifecycle command. If not, it leaves the Task open and records the gap. Either way it replaces the generic next gate with the real one.
 
