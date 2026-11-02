@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Complete TK-000W.
+**Next gate:** Coverage/W disposition, whole Review, actual owner QA.
 
 ## Intent and authority
 
@@ -28,7 +28,7 @@ Charts are honest only if each number has a sourced row; local writes keep crede
 
 - **Met** (proof [TK-000B](tasks/TK-000B/TASK.md#proof); live checks and limits [TK-000L](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01)): schema and provenance, no client writes, writer end to end, conflict refusal, real sources only, key loads and authenticates, no secrets in Git.
 - **Met:** private assessment persistence ([TK-000Q](tasks/TK-000Q/TASK.md), [TK-000R](tasks/TK-000R/TASK.md), [TK-000S](tasks/TK-000S/TASK.md)); explicit unknown trial metrics ([TK-000P](tasks/TK-000P/TASK.md)).
-- **Not met:** build history from real records. Consumer source `3a25cac` is verified in [TK-000Z](tasks/TK-000Z/TASK.md) (source-specific, not Spec acceptance). Real import, canonical readback and a new global live readcheck have not run; the last live readcheck failed. Import waits for fresh explicit approval and must not rewrite original S-008 creation provenance via `--refresh-changed`.
+- **Not met:** build history from real records. The owner-approved pinned import at `771bd1e` and its canonical readback pass ([proof](tasks/TK-000Z/approved-history-import-771bd1e.md)); history recorded after that pin is not imported, and latest coverage is unverified. A further import needs fresh explicit approval and must not rewrite original S-008 creation provenance via `--refresh-changed`.
 - **Open:** [TK-000W](tasks/TK-000W/TASK.md) is stopped and unaccepted; whole-Spec binding and owner Human QA are open. The Spec is not accepted.
 
 History: [S-006 history](../../../../wiki/history/S-006.md).

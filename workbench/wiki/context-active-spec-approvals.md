@@ -181,3 +181,16 @@ Supersedes: none
 
 S-006: On 2026-11-02 Kayden explicitly approved: "Approve fresh parser repair". This authorizes a fresh bounded corrective Task replacing the custom Markdown visibility scanner with pinned markdown-it-py CommonMark token parsing, preserving all provenance/ancestor/no-network guards and the eight retained historical facts. Preserve W stopped/unaccepted, both failed pins and recovery. Checked main delivery, actual local history import/readcheck, truthful durable Spec proof and independent assembled review remain authorized. This grants no model calls, destructive history repair, formal Spec acceptance or owner Human QA.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-ada1ea57-1afe-40b0-986d-eb4567bc2884
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T13:53:49.762Z
+Author: Kayden
+Source: Kayden, direct scoped history-import question reply in AMS chat, 2026-11-02
+Topic: active-spec-approvals
+Supersedes: none
+
+S-006: The owner answered "Approve this history import" to the explicit question authorizing the local writer to import real AMS build-history rows from main771bd1e264ff15ab89217c8f91f79fc38c57f96b and devfe9870fe93f715c859fc5059b0b4c52f38f4a640 into existing Supabase project hqvtnpvwwppbeurponnn, refreshing changed sourced rows and retaining the eight archived facts, using the existing local service key. This resolves the fresh import-approval hold for these exact data pins and destination only. Use the corrected checked collector, preserve original three S008 facts and historical identity declarations, require direct current canonical metadata and pinned readcheck, and do not delete rows or expose/copy keys. Approval is not proof of a successful import, whole-S006 acceptance, owner Human QA, or authority to resume stopped W.
+<!-- /jot-entry -->
