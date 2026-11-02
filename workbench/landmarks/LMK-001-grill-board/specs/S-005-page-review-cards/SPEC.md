@@ -8,7 +8,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** A Grill Board review card for every website page, where the owner approves or criticizes the site and the criticism becomes the voice and taste record.
 **Blockers:** S-004
-**Latest event:** Four Tasks planned; the owner moved the cap to Landmarks, so no Spec slot is needed.
 **Next gate:** Confirm scoped authority and required S-004 inputs, then activate. S-004 closure supplies no slot.
 
 ## Intent and authority
@@ -25,8 +24,11 @@ Without a durable approval tied to exact content, the site cannot honestly show 
 
 ## Current Verified State
 
+- Not met: all four acceptance criteria; S-005 is planned and not activated.
 - The S-004 board serves committed cards from `grill-board/cards/` with Priority and Value; Confirm writes into an owning record; ratings and too-taxing flags commit on the card; every write holds one repository flock and moves the branch by compare-and-swap ([README](../../../../../grill-board/README.md)).
 - Orchestrator A, its only writer, keeps `site/page-list.json` on `dev`: path (stable), title, Spec, Task, `landed` {branch, commit, pr}, sources and status. It lists `/` and `/rsi`. No page shows a draft mark yet; that is S-003 TK-004.
+
+History: [S-005 history](../../../../wiki/history/S-005.md).
 
 ## Desired Behavior
 
@@ -41,7 +43,7 @@ Without a durable approval tied to exact content, the site cannot honestly show 
 - Approval is bound to a content hash, never to a page name or date alone.
 - The voice record is built from the owner's recorded feedback; it is not owner-written prose.
 - Owner words appear on the site verbatim only with their source.
-- **Approval storage: a Supabase row mirrored from a committed file.** Confirm writes the approval into `grill-board/page-approvals.md` (the committed record, DDR-000X); the Python writer copies it to a `page_approvals` row with the local service key, and the site reads the row with the publishable key. Chosen because the site only presents and reads Supabase ([DDR-000O](../../../../docs/ddr/000O-the-public-site-only-presents-and-reads-supabase.md)) and reading repository files at build time was rejected ([ADR-003H](../../../../docs/adr/003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md)). A page is approved only while a row names its path and current content hash, so an edit restores the draft mark (S-003) with nothing deleted.
+- **Approval storage: a Supabase row mirrored from a committed file.** Confirm writes the approval into `grill-board/page-approvals.md` (the committed record, DDR-000X); the Python writer copies it to a `page_approvals` row with the local service key, and the site reads the row with the publishable key. The site only presents and reads Supabase ([DDR-000O](../../../../docs/ddr/000O-the-public-site-only-presents-and-reads-supabase.md)) and does not read repository files at build time ([ADR-003H](../../../../docs/adr/003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md)). A page is approved only while a row names its path and current content hash, so an edit restores the draft mark (S-003) with nothing deleted.
 - **Content hash** is SHA-256 over the canonical content of the served page's `<main id="main">`, excluding the footer, the review mark and regions marked `data-review-exclude`. TK-001 commits the contract and test vectors; S-003 TK-004 matches them.
 - Page review cards target `main`; nothing here changes `site/`.
 
@@ -86,13 +88,6 @@ uv run ams-pages check   # TK-000K: every listed page has a current card
 
 - `grill-board/README.md` gains page cards, the hash contract and the voice record.
 - The voice and taste record lives at `grill-board/voice-and-taste.md`; orchestrator A adds the pointer from the site's contributing notes on `dev`.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
-| 2026-11-01 | none | Planned TK-001, TK-002, TK-003, TK-000K; approval storage chosen; not activated | render, doctor | this Spec, Task records | Every criterion |
 
 ## Review and Human QA
 

@@ -14,11 +14,11 @@ last_verified: 2026-11-02
 
 # Spec history lives outside Specs
 
-Specs, Tasks and Landmarks have an 8,000-character limit ([ADR-002V](../docs/adr/002V-artifacts-have-character-limits.md)). Several active Specs exceed it mainly through their append-only evidence logs. The owner ruled where that history belongs.
+Specs, Tasks and Landmarks have an 8,000-character limit ([ADR-002V](../docs/adr/002V-artifacts-have-character-limits.md)). Several active Specs exceeded it mainly through their append-only evidence logs. The owner ruled where that history belongs.
 
 ## Current state
 
-The native lifecycle tools (`close`, `verdict`, `complete` and related commands in `workbench/tools/`, shipped by setup-workbench) append evidence rows to each `SPEC.md`. `src/ams/build_history.py` imports those rows into Supabase keyed by table position. Until that design changes, Specs keep gaining history. The entries below record the intent and its open work.
+Each Spec and Landmark has one Wiki history page, [`history/<ID>.md`](history/), that holds its evidence log and any progress narrative. The Spec or Landmark holds only its destination, acceptance and current state, and links to that page. The native lifecycle tools (`close`, `verdict`, `complete` and related commands, shipped by setup-workbench) append new rows to the history page, never to the Spec. Each Spec page declares the last Spec version that carried rows in its body (`previous S-### at <commit>`), so `src/ams/build_history.py` imports those rows with unchanged identity, dates and links, and reads newer rows from the page.
 
 <!-- jot-entry -->
 ### JOT-5ee25ca7-6874-4266-a54c-567024e2be50

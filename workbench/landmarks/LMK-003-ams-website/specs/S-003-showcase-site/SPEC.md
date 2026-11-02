@@ -8,7 +8,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Latest event:** Destination clarified.
 **Next gate:** Reconcile assignments.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
@@ -24,6 +23,12 @@ Visitors come for understanding: what AMS manages, why, how intent becomes work/
 ## Why It Matters
 
 The site preserves the owner’s explanation of AMS and lets visitors examine whether its real work supports its claims.
+
+## Current Verified State
+
+No criterion is verified; none is audited at a named deployment.
+
+History: [S-003 history](../../../../wiki/history/S-003.md).
 
 ## Desired Behavior
 
@@ -98,7 +103,7 @@ Bind evidence and Kayden’s Grill Board judgments to the candidate. Checks, mer
 
 ## Completion Result
 
-Pending audit and Kayden's judgments. History is in the [website Wiki](../../../../wiki/context-website-presentation.md), not acceptance of this destination.
+Pending audit and Kayden's judgments.
 
 ## Remaining Limitations Or Follow-Up Specs
 

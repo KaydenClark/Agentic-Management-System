@@ -7,7 +7,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** The public presentation website for the AMS, a Next.js app in `site/` on Vercel, built with the AMS as its first outside product.
 **Blockers:** none
-**Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning for S-003.
 
 ## Direction
@@ -31,6 +30,8 @@ The site is how the owner shows the AMS to friends, a manager or a CTO, and how 
 - [ ] The governance stack and flow charts are drawn from, or tested against, the code they depict (S-010).
 - [ ] The public hygiene check passes on every candidate: no host paths, secrets, private research or traces (S-003).
 - [ ] Production on `main` changes only through an owner-approved `dev` -> `main` merge.
+
+History: [LMK-003 history](../../wiki/history/LMK-003.md).
 
 ## Decision Records
 
@@ -64,12 +65,6 @@ node workbench/tools/spec-workbench.mjs doctor
 ```
 
 Page checks run against the built output and the protected `dev` deployment at a named commit, not the source tree.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Landmark mapped from confirmed owner decisions; S-003 ported and rewritten; S-008, S-009 and S-010 written as planned | render and doctor on the mapping branch | this record | Next app; Task planning |
 
 ## Reached Result
 

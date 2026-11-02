@@ -18,7 +18,7 @@ import { parseSpecPacket } from './spec-packet.mjs';
 import { allocateWorkbenchId, isWorkbenchId } from './visible-ids.mjs';
 import { canonicalRoomFile, isGroupedVocabularyArticle, linkResolvesToRootControl, parseGlossary } from './glossary-format.mjs';
 import { templatePlaceholders } from './template-placeholders.mjs';
-import { ADDITIVE_COLLECTIONS, COLLECTIONS, LANES, PRE_DDR_COLLECTIONS, PRE_FEATURE_COLLECTIONS, PRE_LANDMARK_COLLECTIONS, SIX_LANES, LEGACY_SKILLS_LANE, LEGACY_SKILLS_LANES, SKILLS_LANE, isSkillsLane, SCHEMA_VERSION, IGNORED_COLLECTIONS, WIKI_PROFILES, collectionRelative, declaredGit, laneRelative, assertSafeReadPath, assertSafeWritePath, writeSafeFile, isBranchName, isMainModule, isSafeRelative, markdownLinkTargets, trackerDeclaration } from './workbench-paths.mjs';
+import { ADDITIVE_COLLECTIONS, COLLECTIONS, LANES, PRE_DDR_COLLECTIONS, PRE_FEATURE_COLLECTIONS, PRE_HISTORY_COLLECTIONS, PRE_LANDMARK_COLLECTIONS, SIX_LANES, LEGACY_SKILLS_LANE, LEGACY_SKILLS_LANES, SKILLS_LANE, isSkillsLane, SCHEMA_VERSION, IGNORED_COLLECTIONS, WIKI_PROFILES, collectionRelative, declaredGit, laneRelative, assertSafeReadPath, assertSafeWritePath, writeSafeFile, isBranchName, isMainModule, isSafeRelative, markdownLinkTargets, trackerDeclaration } from './workbench-paths.mjs';
 
 // Exported (not just used locally) so a test can build the exact historical
 // v3.0.0-v3.2.0 fixture rows from this frozen array directly, rather than
@@ -506,14 +506,16 @@ const legacyCollections = Object.fromEntries(Object.entries(notepadCollections).
 // S-00I TK-01U: every pre-feature shape stays valid exactly as stamped, and
 // each may carry the additive `features` collection appended at its declared
 // path. S-003X TK-004W: each may also carry `features` then `ddr`, the order a
-// room gains them. S-003Z TK-008D: and then `landmarks`. The live
+// room gains them. S-003Z TK-008D: and then `landmarks`, then the Wiki
+// `history` collection Spec and Landmark history moved into. The live
 // `collections` is the fully appended current shape.
 const allowedCollectionShapes = [PRE_FEATURE_COLLECTIONS, notepadCollections, legacyCollections]
   .flatMap((shape) => [
     shape,
     { ...shape, features: collections.features },
     { ...shape, features: collections.features, ddr: collections.ddr },
-    { ...shape, features: collections.features, ddr: collections.ddr, landmarks: collections.landmarks }
+    { ...shape, features: collections.features, ddr: collections.ddr, landmarks: collections.landmarks },
+    { ...shape, features: collections.features, ddr: collections.ddr, landmarks: collections.landmarks, history: collections.history }
   ]);
 // S-003X TK-004W: the decision-record lifecycle folders the `ddr` collection
 // is created with, the same closed set the ADR collection uses (ADR-000I):
@@ -2509,6 +2511,19 @@ function addLandmarksCollection(project) {
   return {};
 }
 
+// The additive Wiki history collection: an ordinary directory, adopted with
+// its pages untouched when it already exists.
+function addHistoryCollection(project) {
+  const relative = collections.history;
+  try { assertSafeWritePath(project, path.join(project, relative, '.gitkeep')); }
+  catch (error) { return fail('lane-collision', error.message); }
+  const entry = lstatOrNull(path.join(project, relative));
+  if (entry && (entry.isSymbolicLink() || !entry.isDirectory())) return fail('lane-collision', `${relative} must be an ordinary directory.`);
+  fs.mkdirSync(path.join(project, relative), { recursive: true });
+  if (!fs.readdirSync(path.join(project, relative)).length) fs.writeFileSync(path.join(project, relative, '.gitkeep'), '');
+  return {};
+}
+
 function validateManifestShape(manifest) {
   if (!/^v\d+\.\d+\.\d+$/.test(manifest.workbenchVersion ?? '')) return fail('invalid-version', 'Workbench version must use vMAJOR.MINOR.PATCH.');
   if (!['genesis', 'adoption', 'upgrade'].includes(manifest.provenance.lifecycle)) return fail('invalid-provenance', 'Provenance must be genesis, adoption, or upgrade.');
@@ -2737,9 +2752,10 @@ function migrateUnlocked(options) {
     // `ddr` and a room stamped with the pre-DDR set gains `ddr` onward.
     // S-003Z TK-008D: a room stamped with the current pre-landmark set gains
     // only `landmarks`. Every addition is checked before the first one writes.
-    const additive = JSON.stringify(manifest.collections) === JSON.stringify(PRE_FEATURE_COLLECTIONS) ? ['features', 'ddr', 'landmarks']
-      : JSON.stringify(manifest.collections) === JSON.stringify(PRE_DDR_COLLECTIONS) ? ['ddr', 'landmarks']
-      : JSON.stringify(manifest.collections) === JSON.stringify(PRE_LANDMARK_COLLECTIONS) ? ['landmarks'] : null;
+    const additive = JSON.stringify(manifest.collections) === JSON.stringify(PRE_FEATURE_COLLECTIONS) ? ['features', 'ddr', 'landmarks', 'history']
+      : JSON.stringify(manifest.collections) === JSON.stringify(PRE_DDR_COLLECTIONS) ? ['ddr', 'landmarks', 'history']
+      : JSON.stringify(manifest.collections) === JSON.stringify(PRE_LANDMARK_COLLECTIONS) ? ['landmarks', 'history']
+      : JSON.stringify(manifest.collections) === JSON.stringify(PRE_HISTORY_COLLECTIONS) ? ['history'] : null;
     if (additive) {
       const blocked = additivePreflight(project, additive);
       if (blocked) return blocked;
@@ -2753,8 +2769,12 @@ function migrateUnlocked(options) {
         const addedDdr = addDdrCollection(project);
         if (addedDdr.status) return addedDdr;
       }
-      const addedLandmarks = addLandmarksCollection(project);
-      if (addedLandmarks.status) return addedLandmarks;
+      if (additive.includes('landmarks')) {
+        const addedLandmarks = addLandmarksCollection(project);
+        if (addedLandmarks.status) return addedLandmarks;
+      }
+      const addedHistory = addHistoryCollection(project);
+      if (addedHistory.status) return addedHistory;
       ensurePrivateWikiIgnore(project);
       const updated = { ...manifest, collections };
       writeSafeFile(project, manifestPath, `${JSON.stringify(updated, null, 2)}\n`);
@@ -2961,6 +2981,7 @@ export const RUNTIME_TOOLS = Object.freeze([
   'sessions.mjs',
   'session-transport.mjs',
   'spec-packet.mjs',
+  'spec-history.mjs',
   'record-parts.mjs',
   'artifact-pagination.mjs',
   'artifact-budgets.mjs',

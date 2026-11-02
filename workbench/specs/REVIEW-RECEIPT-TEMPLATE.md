@@ -1,6 +1,6 @@
 # Review receipt: [scope]
 
-> AMS-authored template, adapted from the [feedback format](../feedback/REPORT_FORMAT.md). Copy into the owning Spec's evidence location when a review occurs.
+> AMS-authored template, adapted from the [feedback format](../feedback/REPORT_FORMAT.md). Store it beside the reviewed Task, or link it from the owning Spec's Wiki history page (`workbench/wiki/history/S-###.md`); never paste it into the Spec.
 
 **Reviewer / date:** [actual author]  
 **Review type:** [self-review / independent review; actual prior involvement and eligibility]  

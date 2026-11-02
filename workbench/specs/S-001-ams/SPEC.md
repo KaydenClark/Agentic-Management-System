@@ -10,7 +10,6 @@
 **Blockers:** none
 **Confirmation:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 closed with proof.
 **Next gate:** Complete TK-002.
 
 ## Intent and authority
@@ -27,8 +26,14 @@ The owner needs one auditable account of what is done and what remains.
 
 ## Current Verified State
 
+- Answer: **No** at `325b422` ([TK-001 assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)).
+- Met: Room.
+- Not met: Landmarks, Limits, Hygiene, Runtime baseline, Cold start, Owner gates.
+- Unknown: Skills pinned.
 - Workbench v3.2.2 is adopted: controls, lanes, Node lifecycle and generated Taskboard.
 - Site code, Supabase migrations and `dev` exist; see child Specs for scoped proof.
+
+History: [S-001 history](../../wiki/history/S-001.md).
 
 ## Desired Behavior
 
@@ -99,14 +104,6 @@ To answer "Are we there yet?": name the commit; run each check; report met, not 
 
 - README and RUNBOOK point here as the yardstick.
 
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Ported and rewritten; the Workbench adoption of 2026-11-01 recorded as this Spec's first room evidence | render, doctor | this Spec; adoption Wiki page | Every criterion |
-| 2026-11-01 | none | Owner unblocked S-001; the limit applies to Landmarks, above Specs | Linked confirmed owner correction; activation/readiness verification in the delivery PR | Landmark cap and start/acceptance distinction | Acceptance remains open |
-| 2026-11-02 | TK-001 | Task closed | No at 325b422 ([assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)); render x2 same, doctor 0 blockers, pytest 715/4 skip, ams-hygiene 13 findings | TK-001; Remaining Limitations | S-001 acceptance; see Remaining Limitations; close attribution: {"agent":"claude-impl-s001-tk001","claimant":"claude-impl-s001-tk001","onBehalfOf":null} |
-
 ## Review and Human QA
 
 None yet. Independent review needs a fresh-context reviewer at the exact commit; Human QA comes only from the owner.
@@ -117,7 +114,6 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- Current answer: **No** (2026-11-02, `325b422`, [assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)): 1/8 criteria, 8/23 landmark checks met.
 - Agent-workable: PR #98 with over-limit pruning; TK-003; blocked S-002, S-006, S-007, S-013 Tasks.
 - Owner gates: approve S-005, S-009 to S-012; S-003 TK-003; S-004/S-008 QA and approvals; `dev` -> `main`.
 
