@@ -46,12 +46,12 @@ Tests should check observable outcomes and survive internal refactors. A stand-i
 
 ## When to use it
 
-Ask for it by name when an interface needs designing or improving, when you want to find modules worth deepening or decide where a seam goes, or when you want code that is easier to test and for an agent to navigate. Skills such as [journey](/skills/journey) and [improve-codebase-architecture](/skills/improve-codebase-architecture) also load it for the vocabulary. It needs no setup of its own.
+Ask for it by name when an interface needs designing or improving, when you want to find modules worth deepening or decide where a seam goes, or when you want code that is easier to test and easier for an agent to navigate. Skills such as [journey](/skills/journey) and [improve-codebase-architecture](/skills/improve-codebase-architecture) also load it for the vocabulary. It needs no setup of its own.
 
 | What you have | Reach for |
 | --- | --- |
 | A codebase and no idea where the shallow modules are | [improve-codebase-architecture](/skills/improve-codebase-architecture), a request-only survey that produces a report and uses this skill's vocabulary |
-| One chosen module whose interface is unsettled | codebase-design |
+| One chosen module whose interface is unsettled | `codebase-design` |
 | An accepted design ready to build | [tdd](/skills/tdd) |
 | A bug with an unknown cause | [diagnosing-bugs](/skills/diagnosing-bugs) |
 | Disputed or overloaded business terms | [domain-modeling](/skills/domain-modeling) |
@@ -60,7 +60,7 @@ Ask for it by name when an interface needs designing or improving, when you want
 
 > The order-processing code is split across five tiny files and every test mocks half of them. Use codebase design to tell me whether these modules are shallow, and show me two or three different interface options before we touch anything.
 
-The agent should read callers and tests first, then present alternatives and stop at a recommendation.
+The agent reads callers and tests first, then presents alternatives and stops at a recommendation.
 
 ## What it requires
 
@@ -87,7 +87,7 @@ Not necessarily. A mock or local stand-in only exercises behavior at the test se
 
 ### The agent could not see the callers or tests. What then?
 
-It should state its assumptions and leave affected choices provisional rather than guess. Supply the missing call paths or tests and ask again.
+It states its assumptions and leaves affected choices provisional rather than guessing. Supply the missing call paths or tests and ask again.
 
 ### Will it delete my old tests once the new module exists?
 

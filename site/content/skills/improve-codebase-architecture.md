@@ -31,7 +31,7 @@ You have to ask for it. The skill is set so an agent never picks it up on its ow
 
 | What you have | Reach for |
 |---|---|
-| A codebase or subsystem that feels hard to test or navigate | This skill |
+| A codebase or subsystem that feels hard to test or navigate | `improve-codebase-architecture` |
 | One module whose interface you already want to design or compare | [codebase-design](/skills/codebase-design) |
 | A failing behavior and no known cause | [diagnosing-bugs](/skills/diagnosing-bugs) |
 | Conflicting or overloaded names for one concept | [domain-modeling](/skills/domain-modeling) |
@@ -86,4 +86,4 @@ Length is not friction. The agent looks for concepts that make you hop between m
 
 It lives in the **Improve** stage (Learn and fix), an on-request skill for when the code itself needs improving. Nothing earlier in the main flow calls it, and it leans on [codebase-design](/skills/codebase-design), [grilling](/skills/grilling) and [domain-modeling](/skills/domain-modeling).
 
-What comes out is a settled direction and, if you permit it, slices or a written design. To turn that into work, [plan](/skills/plan) cuts it into Tasks (each a small assignment in a Workbench, the project's record-keeping setup), and a [journey](/skills/journey) builds one Task. Both need a Workbench.
+What comes out is a settled direction and, if you permit it, slices or a written design. To turn that into work, [plan](/skills/plan) cuts it into Tasks (each a small assignment in a Workbench, the project's record-keeping setup), and [journey](/skills/journey) builds one Task. Both need a Workbench.

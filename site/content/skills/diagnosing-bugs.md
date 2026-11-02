@@ -51,9 +51,9 @@ Because this asks only for the cause, the run ends at the report. Adding "and fi
 
 ## What it requires
 
-Very little. The skill is one short instruction file with no references, scripts or agents folder. It needs access to the code and a way to run it, so a reproduction can be executed and seen failing. Telling it what you expected makes the first step quicker, though the agent defines expected behavior itself.
+Very little. It is a single short instruction file with no supporting references or scripts. It needs access to the code and a way to run it, so a reproduction can be executed and seen failing. Telling it what you expected makes the first step quicker, though the agent defines expected behavior itself.
 
-The skill does not require a Workbench on its own, but skills that call it, such as Journey, do.
+The skill does not require a Workbench on its own, but skills that call it, such as [journey](/skills/journey), do.
 
 ## What it does not authorize
 
@@ -69,11 +69,11 @@ Only if you ask. By default you get a reproduction, a root cause and the evidenc
 
 ### What if I cannot get it to fail reliably?
 
-The skill asks for a reproduction that fails on demand and goes red. Without one, the cause is not yet proven. Beyond that the skill gives no special handling for intermittent failures, so treat a report built on a guess as unconfirmed.
+The skill asks for a reproduction that fails on demand and goes red. Without one, the cause is not yet proven. Beyond that, the skill gives no special handling for intermittent failures, so treat a report built on a guess as unconfirmed.
 
 ### How is a root cause different from a symptom?
 
-A symptom is what you see: an exception, a wrong number, a missing row. The root cause is the broken assumption underneath it. The report is meant to name that assumption.
+A symptom is what you see: an exception, a wrong number, a missing row. The root cause is the broken assumption underneath it. The report names that assumption.
 
 ### Why add a test before the repair?
 
@@ -91,6 +91,6 @@ The test pins the failure down first, so the fix is judged against it. It also k
 
 ## Where it fits in the workflow
 
-It sits in the Journey stage (Build each Task) as a supporting skill, not a main step. The main flow there is [carry](/skills/carry), [orchestrate](/skills/orchestrate) and [journey](/skills/journey). Journey names this skill for an unknown cause and [tdd](/skills/tdd) for building behavior at a testable seam, as separate options for the Implement step. The skill's own repair order, test first and then a small change, matches the red-green habit in tdd.
+It sits in the Journey stage (Build each Task) as a supporting skill, not a main step. The main flow there is [carry](/skills/carry), [orchestrate](/skills/orchestrate) and [journey](/skills/journey). The journey skill names this one for an unknown cause and [tdd](/skills/tdd) for building behavior at a testable seam, as separate options for the Implement step. The skill's own repair order, test first and then a small change, matches the red-green habit in tdd.
 
 Other stages reach it too. [ask-workbench](/skills/ask-workbench) in Route points to it for broken behavior. [land](/skills/land) in Complete names it when a rejected candidate (the finished work proposed for landing) has wrong product logic and the person is authorized to implement. [improve-workbench](/skills/improve-workbench) in Improve points to it when the product, not the harness, is at fault.

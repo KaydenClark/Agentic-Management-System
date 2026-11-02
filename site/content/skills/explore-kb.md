@@ -42,7 +42,7 @@ A good run gives each answer a direct link, a pointer to the spot and the SDK ve
 
 - A question focused enough to have a source-backed answer. "Tell me everything about X" is a poor fit.
 - Access to primary sources through the session's tools. Having a search tool does not prove a source was opened.
-- No Workbench prerequisite is stated. A **Workbench** is the project's set of records and rules for agent work, and Explore KB works from the conversation and any findings you supply. If you name an issue or document, or ask for a saved artifact, it follows that place's existing format and reads the saved result back.
+- No Workbench. A **Workbench** is the project's set of records and rules for agent work; Explore KB does not need one and works from the conversation and any findings you supply. If you name an issue or document, or ask for a saved artifact, it follows that place's existing format and reads the saved result back.
 - Delegation is optional, used only for independent topics and only when your authority and tools allow it. Otherwise it investigates directly and never claims a background worker ran.
 
 ## What it does not authorize

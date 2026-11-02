@@ -24,7 +24,7 @@ Before handing over, the agent checks frontmatter, links, names, dependencies an
 
 ## When to use it
 
-Use it when you have an agreed workflow to teach as a skill, a skill that works poorly, or several skills to merge without losing any distinct job. Investigating whether a capability exists at all needs your request; ordinary source reading does not.
+Use it when you have an agreed workflow to teach as a skill, a skill that works poorly, or several skills to merge without losing any distinct job. Researching whether a capability already exists is a separate step that needs your request; ordinary reading of your sources does not.
 
 | What you have | Reach for |
 |---|---|
@@ -70,7 +70,7 @@ The skill treats a bare label as a gap. The agent derives a procedure from your 
 
 ## It's working when
 
-- The job, audience and stopping point are recovered from your sources, and questions asked would change the process.
+- The job, audience and stopping point are recovered from your sources, and the only questions asked are ones whose answers would change the process.
 - Every useful responsibility in an old skill is retained, repaired, moved or retired.
 - The draft names real artifacts, owners and handoffs, with failure paths, instead of bare verbs.
 - Invocation policy and the description are deliberate, attribution is kept, and near misses were tested.
@@ -80,4 +80,6 @@ The skill treats a bare label as a gap. The agent derives a procedure from your 
 
 ## Where it fits in the workflow
 
-`author-skill` is a supporting skill in the Improve stage (Learn and fix). The main flow there is [improve-workbench](/skills/improve-workbench) and retro; the chart lists this skill beside [audit-workbench](/skills/audit-workbench), [diagnose-and-propose](/skills/diagnose-and-propose) and [writing-for-agents](/skills/writing-for-agents). The skill does not name its callers, but a typical trigger is a finding from an improvement loop or audit that points at a weak skill. It uses writing-for-agents through the separate pruner, then hands back the skill, material changes, before-and-after validation and remaining limits. Review, landing and publishing stay with whoever is authorized.
+`author-skill` is a supporting skill in the Improve stage (Learn and fix). The main flow there is [retro](/skills/retro) and [improve-workbench](/skills/improve-workbench), and this skill sits beside [audit-workbench](/skills/audit-workbench), [diagnose-and-propose](/skills/diagnose-and-propose) and [writing-for-agents](/skills/writing-for-agents). A typical trigger is a finding from an improvement loop or an audit that points at a weak skill.
+
+It uses writing-for-agents through the separate pruner, then hands back the skill, its material changes, before-and-after validation and any remaining limits. Review, landing and publishing stay with whoever is authorized.

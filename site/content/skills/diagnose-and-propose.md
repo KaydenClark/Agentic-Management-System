@@ -40,7 +40,7 @@ The reply opens with a verdict on the cache theory, lays out the evidence for an
 
 ## What it requires
 
-Very little. The skill file names no required Workbench (a project setup with its own records and rules), no records and no companion skills. It does need access to the relevant sources and the current behavior, so it can check facts for itself, and it needs a concrete problem or claim to test. When evidence is missing, it says so and proposes the cheapest check that would resolve it, and it states plainly what is waiting on your input or approval.
+Very little. It needs no Workbench (a project setup with its own records and rules), no records and no companion skills. It does need access to the relevant sources and the current behavior, so it can check facts for itself, and it needs a concrete problem or claim to test. When evidence is missing, it says so and proposes the cheapest check that would resolve it, and it states plainly what is waiting on your input or approval.
 
 ## What it does not authorize
 
@@ -78,6 +78,6 @@ Not by itself. Without prior approval, the run ends at the proposal. If you have
 
 ## Where it fits in the workflow
 
-Diagnose and Propose is also used in the Improve stage (Learn and fix), whose main flow is [retro](/skills/retro) and [improve-workbench](/skills/improve-workbench). [author-skill](/skills/author-skill) is another skill used there. [sitrep](/skills/sitrep) points to it when you want to know why something fails, and [oracle](/skills/oracle) can hand a question over to it when a practical plan is needed, though that hand-off is optional.
+Diagnose and Propose is a supporting skill in the Improve stage (Learn and fix), whose main flow is [retro](/skills/retro) and [improve-workbench](/skills/improve-workbench); [author-skill](/skills/author-skill) is used there too. [sitrep](/skills/sitrep) points to it when you want to know why something fails, and [oracle](/skills/oracle) can hand a question over to it when a practical plan is needed, though that hand-off is optional.
 
 Its output is a proposal. Any follow-on work is authorized by your approval, not by the skill.

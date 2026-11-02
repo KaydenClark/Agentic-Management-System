@@ -56,17 +56,17 @@ Because the meaning changed, Jot does not just append a note. It finds the small
 ## What it requires
 
 - **A Workbench.** Jot looks for the Workbench manifest and the `spec-workbench` tool at the project root and stops if either is absent, telling you to run `setup-workbench` first.
-- **The capture tool.** The Workbench ships one, currently `workbench/tools/jot.mjs`, and Jot resolves its current interface before use. At this pin it offers `read`, `add`, `correct` and `search` for active Markdown Wiki topics. A write needs the page's current revision hash (from `read`), a visibility, kind, state, source and author, and design-concept pages also need an `--operation` naming the authorized operation. It cannot edit passages inside a Spec or decision record, so Jot uses those documents' own procedures there.
+- **The capture tool.** The Workbench ships one, currently `workbench/tools/jot.mjs`, and Jot resolves its current interface before use. At the skills commit this article describes, it offers `read`, `add`, `correct` and `search` for active Markdown Wiki topics. A write needs the page's current revision hash (from `read`), a visibility, kind, state, source and author, and design-concept pages also need an `--operation` naming the authorized operation. It cannot edit passages inside a Spec or decision record, so Jot uses those documents' own procedures there.
 - **Context to read first.** Project instructions, ownership routes, the glossary and the topic's sources and corrections. `read` returns entries and the revision but not the page's surrounding prose, so Jot reads that prose and its governing links too.
 - **A confirmed readback, for intent.** For concept intent, the owner's explicitly confirmed [readback](/skills/readback) is the record to save.
 
 ## What it does not authorize
 
-Saving a claim grants nothing beyond the save. Capture authorizes no:
+Saving a claim grants nothing beyond the save. In particular, capture does not authorize:
 
-- edit to a governing document, map or plan, implementation, verdict, publishing or merging;
-- execution of the intent it records. Confirming meaning, permitting an operation and accepting delivery are three separate things, even when they arrive together. A confirmation is reusable only for its own revision and scope, and execution needs an explicit owner grant of scope, either in that confirmation or in a separate instruction;
-- proof. Confirmed understanding can be saved before any code exists, and it shows neither working behavior nor accepted delivery.
+- **Further edits or actions.** No edit to a governing document, map or plan, and no implementation, verdict, publishing or merging.
+- **Execution of the recorded intent.** Confirming meaning, permitting an operation and accepting delivery are three separate things, even when they arrive together. A confirmation is reusable only for its own revision and scope, and execution needs an explicit owner grant of scope, either in that confirmation or in a separate instruction.
+- **Proof.** Confirmed understanding can be saved before any code exists, and it shows neither working behavior nor accepted delivery.
 
 An agent-written readback, a recommendation, silence or a bare command does not make intent confirmed. The `confirmed` flag only stores a supplied judgment, so the source must show a real owner confirmation.
 
@@ -96,7 +96,7 @@ Jot rechecks live state against the accepted claims. Newer Canon can reveal an i
 
 ### Will it re-ask questions I already answered?
 
-Not if they are sourced and confirmed. They stay settled unless a named premise, a contradiction or an owner correction reopens them. Note that individual answers can settle a choice or a fact, but only the owner's confirmed readback makes assembled intent confirmed. On resume Jot also reads omitted entries and the correction chain.
+Not if they are sourced and confirmed. They stay settled unless a named premise, a contradiction or an owner correction reopens them. Individual answers can settle a choice or a fact, but only the owner's confirmed readback makes assembled intent confirmed. On resume Jot also reads omitted entries and the correction chain.
 
 ## It's working when
 

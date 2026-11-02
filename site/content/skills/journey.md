@@ -13,7 +13,7 @@ Journey is the skill an implementing agent follows to carry **one Task** to a fi
 
 A run has four phases, always in this order.
 
-**Implement** changes the real source or product. Where the behavior can be expressed as a test, Journey sends you to [tdd](/skills/tdd): see the test fail, make the smallest change, tidy up while green. Unknown causes go to [diagnosing-bugs](/skills/diagnosing-bugs) and unsettled interfaces to [codebase-design](/skills/codebase-design). Never weaken a test to get green. Docs and records are checked for accuracy and links instead of forced into artificial failing tests. New scope or a changed meaning goes back to the Map or Plan that owns the intent (see [map](/skills/map) and [plan](/skills/plan)). Intent is never bent to fit the code.
+**Implement** changes the real source or product. Where the behavior can be expressed as a test, Journey sends you to [tdd](/skills/tdd): see the test fail, make the smallest change, tidy up while green. Unknown causes go to [diagnosing-bugs](/skills/diagnosing-bugs) and unsettled interfaces to [codebase-design](/skills/codebase-design). Never weaken a test to get green. Docs and records are checked for accuracy and links instead of forced into artificial failing tests. New scope or a changed meaning goes back to the map or plan that owns the intent (see [map](/skills/map) and [plan](/skills/plan)). Intent is never bent to fit the code.
 
 **Check** runs the project's automated tests, builds, linters and diagnostics against the exact candidate. Run focused checks while you work and the full required suite before you claim readiness. Reuse evidence for unchanged content, and rerun affected checks after any change. You write down the real commands, results, candidate and gaps. If a check cannot run, you say why and lean on the strongest other observation, never calling it a pass.
 
@@ -42,6 +42,8 @@ Reach for Journey when you hold an eligible implementor assignment: a ready, spe
 
 > Take the export Task under the export Spec through Journey. Implement it on its feature branch, run the full suite, QA it against the acceptance list, and hand it back with both answers.
 
+The agent confirms the Workbench and its claim on the Task, implements on the branch, records the real check results, QAs the acceptance list, and reports separately whether the candidate can merge and whether the Task is complete.
+
 ## What it requires
 
 - A Workbench, meaning that `workbench/manifest.json` and `workbench/tools/spec-workbench.mjs` both exist at the top level of the project. When one is absent, Journey halts and points you to [setup-workbench](/skills/setup-workbench). It will not create Workbench records by hand or use another tracker.
@@ -56,7 +58,7 @@ Reach for Journey when you hold an eligible implementor assignment: a ready, spe
 - A passing Task is not independent Review, owner approval, Human QA or a release, and neither is merging it.
 - Closing a Task does not complete the Spec and does not replace Task acceptance. A Task with unmet acceptance is never closed.
 - A refusal is a stop. A competing claimant, missing authority or a lifecycle refusal blocks that step, and editing records directly is not a way around it.
-- A local hand-back is not remote recovery.
+- A hand-back that exists only locally does not make the work recoverable from the remote.
 - Journey never deletes an uncontained branch, and it never merges a candidate that still awaits required review.
 
 ## Committing, pushing and merging
@@ -73,11 +75,11 @@ No. Check shows the tests pass, while QA asks whether the intended outcome and a
 
 ### What happens if the claim, push or close step is refused?
 
-Treat it as a stop, not an obstacle: report the gap and keep your progress. Close refuses dirty or unpushed state by default, so fix that or record a supported Git-state reason without inventing success.
+Treat it as a stop, not an obstacle to work around: report the gap and keep your progress. Close refuses dirty or unpushed state by default, so fix that or record a supported Git-state reason without inventing success.
 
 ### The review failed after I submitted. What now?
 
-Corrective work returns to the open Spec. A repair in the same run continues under this Task, while a later implementor run gets a new bounded Task after the records are reconciled. Existing IDs, status and recorded checks stay put, and a Task file being disposable scaffolding is never a reason to erase that history.
+Corrective work returns to the open Spec. A repair in the same run continues under this Task, while a later implementor run gets a new bounded Task after the records are reconciled. Existing IDs, status and recorded checks stay put. A Task file may be disposable scaffolding, but that is never a reason to erase its history.
 
 ### Why does the hand-back carry two answers?
 

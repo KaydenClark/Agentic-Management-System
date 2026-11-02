@@ -28,7 +28,7 @@ Two rules keep it honest. Facts are the agent's job and decisions are yours: it 
 
 Reach for grilling when you want a plan, decision or idea challenged before anyone builds on it, or when you simply ask to be grilled. It is the plain interview engine and works in any conversation. It needs no Workbench (the project structure of records and tools that the Workbench skills maintain).
 
-The neighbors below wrap it or sit beside it. The saved-interview, docs-editing and domain-model rows require a Workbench, a project set up by `setup-workbench`, and `align-concept` and `align-docs` run only when you ask for them. Plain grilling needs none of that.
+The neighbors below wrap it or sit beside it. The saved-interview, docs-editing and domain-model rows need a Workbench, a project set up by [setup-workbench](/skills/setup-workbench). `align-concept` and `align-docs` also run only when you ask for them. Plain grilling needs none of that.
 
 | What you have | Reach for |
 |---|---|
@@ -81,7 +81,7 @@ Check what is still open. It ends only when each relevant branch is resolved or 
 
 ### The agent asked me something it could have looked up. What went wrong?
 
-It should investigate available sources first and recover answers you already gave. Point it to the source, or say which facts it cannot reach. Missing evidence blocks only the dependent questions, so the rest should continue.
+It is meant to investigate available sources first and recover answers you already gave. Point it to the source, or say which facts it cannot reach. Missing evidence blocks only the dependent questions, so the rest should continue.
 
 ### Did my "yes" to the readback mean the work is approved?
 

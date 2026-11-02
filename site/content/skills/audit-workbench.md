@@ -24,7 +24,7 @@ A finding closes only through a **retest** of the repaired revision. A landed fi
 
 ### The Alignment Check
 
-The skill also owns the **Alignment Check**, a scored rubric for formally rating a whole Workbench. A **Workbench Fitness Assessment** applies it across ten areas, from fidelity to owner intent to upgrades and demonstrated benefit. Revision r1 has 47 yes/no checks: 14 **Critical** (lost confirmed intent, a fabricated approval, a false completion claim and similar) and 33 **Quality**. A third class, **Regression**, is assigned later to behavior an accepted baseline already passed. Quality misses lower the score but never fail a run.
+The skill also owns the **Alignment Check**, a scored rubric for formally rating a whole Workbench. A **Workbench Fitness Assessment** applies it across ten areas, from fidelity to owner intent to upgrades and demonstrated benefit. Revision r1 of the rubric has 47 yes/no checks: 14 **Critical** (lost confirmed intent, a fabricated approval, a false completion claim and similar) and 33 **Quality**. A third class, **Regression**, is assigned later to behavior an accepted baseline already passed. Quality misses lower the score but never fail a run.
 
 One audit is three **runs**, each a pass of evidence collection over the applicable checks. A run passes only if none of its applicable Critical or Regression checks fail. The score is total passed checks over total applicable checks, pooled across the three runs. The number of passing runs sets the level: three is Excellent, two Stable, one Functional, none Broken. A Critical failure, even one caused by missing evidence, makes the audit Broken whatever the count.
 
@@ -32,9 +32,9 @@ Missing required evidence counts as a No in its original class and stays in the 
 
 ## When to use it
 
-Use it when you need to know whether a Workbench's controls and evidence agree with reality, with no edits while you find out. The named occasions are a Harness Feedback Review, a Template audit, an adoption audit, a drift audit, and Alignment Check scoring.
+Use it when you need to know whether a Workbench's controls and evidence agree with reality, with no edits while you find out. It covers five occasions: a Harness Feedback Review, a Template audit, an adoption audit, a drift audit, and Alignment Check scoring.
 
-The **Template** is the Workbench template distributed to other projects. A Template audit runs on every change to it and is the only blocking occasion. A result is **release-eligible** when the level is Excellent or Stable, the evidence is complete and no Critical or Regression finding is open. After three audits without one, work stops and returns to the owner. An **adoption audit** follows an approved update landing in a receiving Workbench, at that Workbench's request. A **drift audit** runs periodically on a deployed one. Neither blocks.
+The **Template** is the Workbench template distributed to other projects. A Template audit runs on every change to it and is the only blocking occasion. A result is **release-eligible** when the level is Excellent or Stable, the evidence is complete and no Critical or Regression finding is open. After three audits without a release-eligible result, work stops and returns to the owner. An **adoption audit** follows an approved update landing in a receiving Workbench, at that Workbench's request. A **drift audit** runs periodically on a deployed one. Neither blocks.
 
 | What you have | Reach for |
 | --- | --- |
@@ -56,7 +56,7 @@ It first records the target, question, revision, evidence window and what it may
 - **An identifiable target and some Canon.** Without either, it stops with insufficient evidence. Missing direction inside controls it can find is a possible finding.
 - **Existing evidence.** It reads test output that already exists. It does not run tests or builds, fetch, generate, format or install. It uses a declared check only after reading the tool's source or help to confirm the check changes nothing.
 - **A scope.** It stays within assigned paths and reports anything excluded or inaccessible.
-- **For an Alignment assessment,** the r1 reference files for checks, scenarios and evaluator qualification. Trials and fixture runs need their own authority, such as an authorized evaluation through `evaluate-workbench`; until then that evidence is recorded as missing.
+- **Reference files, for an Alignment assessment.** The r1 files for checks, scenarios and evaluator qualification. Trials and fixture runs need their own authority, such as an authorized evaluation through `evaluate-workbench`; until then that evidence is recorded as missing.
 
 ## What it does not authorize
 
@@ -87,7 +87,7 @@ Missing evidence is a No that stays in the denominator. A read-only audit cannot
 
 ### Does a good Alignment level mean the Workbench improved?
 
-No. The level describes fitness at one frozen revision under the r1 rubric. Improvement is a separate claim that needs behavioral evidence: paired trials for a new Template feature, or a later real-use comparison for a repaired Workbench job. The skill also admits that at this pin there was no real fitness result yet.
+No. The level describes fitness at one frozen revision under the r1 rubric. Improvement is a separate claim that needs behavioral evidence: paired trials for a new Template feature, or a later real-use comparison for a repaired Workbench job. As of the skills commit this article describes, no real fitness result had been recorded yet.
 
 ## It's working when
 
@@ -101,6 +101,6 @@ No. The level describes fitness at one frozen revision under the r1 rubric. Impr
 
 ## Where it fits in the workflow
 
-This is an **Improve** stage skill, found beside [evaluate-workbench](/skills/evaluate-workbench), [improve-workbench](/skills/improve-workbench) and [diagnose-and-propose](/skills/diagnose-and-propose). You reach it on request; [ask-workbench](/skills/ask-workbench) routes explicit audit and scoring asks to it.
+It belongs to the **Improve** stage (Learn and fix), beside [evaluate-workbench](/skills/evaluate-workbench), [improve-workbench](/skills/improve-workbench) and [diagnose-and-propose](/skills/diagnose-and-propose). You reach it on request; [ask-workbench](/skills/ask-workbench) routes explicit audit and scoring asks to it.
 
 Findings go back to the owning Workbench as a review, not a repair. [improve-workbench](/skills/improve-workbench) can start from one and returns the repaired revision here for retest, and [evaluate-workbench](/skills/evaluate-workbench) collects the runs this skill scores.

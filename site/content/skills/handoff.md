@@ -42,20 +42,20 @@ You can add a short argument saying what the next session is for. The skill trea
 
 ## Example request
 
-> /handoff the next session will finish the failing export tests on this branch and open the pull request.
+> /handoff The next session will finish the failing export tests on this branch and open the pull request.
 
 The agent commits and pushes the work, writes `HANDOFF.md` aimed at fixing those tests, pushes it too, and checks that the remote has it.
 
 ## What it requires
 
 - A conversation with something worth continuing.
-- In a Git repository: a feature branch you can commit to and push, and a remote. The skill assumes the work already lives on a feature branch and says nothing about other cases, so if you are on `main` or have no branch, create or switch to a feature branch before invoking it.
+- In a Git repository: a feature branch you can commit to and push, and a remote. The skill expects the work to be on a feature branch already, so if you are on `main` or have no branch, create or switch to one before invoking it.
 - Outside Git: a writable temporary directory.
 - Nothing else. It does not need a **Workbench** (the structured project records of Specs and Tasks that much of this catalog works from). If a spec, plan or issue exists, the note links to it.
 
 ## What it does not authorize
 
-The skill grants one consequential thing: committing and pushing the work and the note on the feature branch, plus writing the document. It says nothing about merging, reviewing or approving, so none of those follow from running it.
+The skill grants one consequential thing: committing and pushing the work and the note on the feature branch, plus writing the document. Merging, reviewing and approving are not part of it, so none of those follow from running it.
 
 Redaction is part of the job, not an option, and stashing is ruled out because stashed work cannot be found from GitHub.
 
@@ -75,7 +75,7 @@ No. It is user-invoked only. If you want a handoff, you ask for it.
 
 ### What if the push fails or the remote lacks the file?
 
-The skill has the agent confirm that the remote branch contains `HANDOFF.md`. If the push failed or the file is missing, the handoff is not usable yet. As practical advice rather than skill behavior, fix the cause (credentials or branch protection are common ones) and check the remote again before pointing a new session at the note.
+The skill has the agent confirm that the remote branch contains `HANDOFF.md`. If the push failed or the file is missing, the handoff is not usable yet. Fix the cause (credentials or branch protection are common ones) and check the remote again before pointing a new session at the note.
 
 ## It's working when
 
@@ -91,4 +91,4 @@ The skill has the agent confirm that the remote branch contains `HANDOFF.md`. If
 
 Handoff is listed under the **Route** stage (Choose a path) as a supporting skill, alongside [sitrep](/skills/sitrep), [triage](/skills/triage) and [setup-workbench](/skills/setup-workbench). The main skill in that stage is [ask-workbench](/skills/ask-workbench). Handoff is user-invoked and is not tied to a fixed step, so you call it whenever one session ends and another begins.
 
-The note is what the next session starts from. If the right next step is unclear there, [ask-workbench](/skills/ask-workbench) is a sensible stop; that is advice, not something the skill routes to. To keep project records accurate across the pause, see [reconcile](/skills/reconcile) and [jot](/skills/jot).
+The note is what the next session starts from. If the right next step is unclear there, [ask-workbench](/skills/ask-workbench) can help choose it. To keep project records accurate across the pause, see [reconcile](/skills/reconcile) and [jot](/skills/jot).

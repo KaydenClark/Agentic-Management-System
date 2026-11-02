@@ -58,7 +58,7 @@ The skill records both SHAs in the report, then returns a Standards report and a
 
 ## What it requires
 
-- **A Workbench**, created by the [setup-workbench](/skills/setup-workbench) skill. The skill first checks for the Workbench manifest and its tool script. If either is missing, it stops and tells you to run setup. It won't create records by hand or substitute another tracker.
+- **A Workbench**, created by the [setup-workbench](/skills/setup-workbench) skill. The skill first checks for the Workbench manifest and its tool script. If either is missing, it stops and tells you to run setup-workbench. It won't create records by hand or substitute another tracker.
 - **Readable git history:** valid base and candidate refs and a non-empty diff.
 - **Spec and Task records**, or an explicit accepted request, for the Spec axis, recovered through the Workbench's own tools.
 - **Subagent delegation** for truly independent review. The FAQs cover what happens without it.

@@ -31,7 +31,7 @@ The run goes in four moves:
 1. **Prepare.** Before starting or resuming, the agent reads the three skills above plus the topic's sources, any confirmed readback and earlier corrections. It then shows the question tree, settled choices and first frontier.
 2. **Interview.** You can answer several questions at once. The agent processes each answer, keeps the unanswered ones, and recomputes the tree. It investigates facts and contradictions itself, but documents never stand in for your answers.
 3. **Record.** Useful answers, corrections, open questions and drafted readbacks are saved as **provisional context**: notes kept visibly apart from confirmed intent. One answer can settle an interview choice without confirming the whole intent.
-4. **Confirm and hand off.** Once every relevant branch is resolved or deliberately deferred, the agent presents the readback, covering scope, exclusions, constraints, decisions, uncertainty, a proposed next action and a stopping point. It waits for your explicit confirmation, saves the confirmed text through Jot, and ends at handoff.
+4. **Confirm and hand off.** Once every relevant branch is resolved or deliberately deferred, the agent presents the readback, covering scope, exclusions, constraints, decisions, uncertainty, a proposed next action and a stopping point. It waits for your explicit confirmation, saves the confirmed text with jot, and ends at handoff.
 
 ## When to use it
 
@@ -72,7 +72,7 @@ Alignment permits the interview, read-only investigation and scoped knowledge re
 
 ## Saving and changing intent
 
-The saved record is the exact text you confirmed, not a paraphrase. Jot stores it with its date, source, your confirmation, its scope and links to anything it replaces. Other notes link to it, and the agent checks the saved copy against what you confirmed.
+The saved record is the exact text you confirmed, not a paraphrase. The jot skill stores it with its date, source, your confirmation, its scope and links to anything it replaces. Other notes link to it, and the agent checks the saved copy against what you confirmed.
 
 If your intent changes, the agent drafts a revised readback and waits for your confirmation. The old version stays, linked as superseded. Until then, dependent execution is blocked, while unaffected decisions keep their standing.
 
@@ -106,6 +106,6 @@ It should not. Settled answers are recorded, and a resumed run picks up unresolv
 
 ## Where it fits in the workflow
 
-It belongs to the Align stage (Shared concept), as an extra alongside the main flow of [grilling](/skills/grilling) and [readback](/skills/readback). It builds on those two and on [jot](/skills/jot), and its sibling [align-docs](/skills/align-docs) extends it for documentation work.
+It belongs to the Align stage (Shared concept), as a supporting skill beside the main flow of [grilling](/skills/grilling) and [readback](/skills/readback). It builds on those two and on [jot](/skills/jot), and its sibling [align-docs](/skills/align-docs) extends it for documentation work.
 
 You invoke it yourself, after [setup-workbench](/skills/setup-workbench) has created the Workbench. It hands off a confirmed readback and a saved-note pointer. Prepare, with [map](/skills/map) and [plan](/skills/plan), counts as execution here, so it starts only after you authorize it.
