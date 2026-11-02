@@ -74,10 +74,9 @@ a {
   padding-block: var(--space-6);
 }
 
-/* The wordmark over its tagline: one block as tall as the links, so the
-   title, links and toggle share a centre line. */
+/* The wordmark over its tagline, on the first row with the theme toggle. */
 .brand {
-  flex: var(--brand-flex);
+  flex: 1 1 0;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -131,25 +130,21 @@ a {
   height: var(--icon-size);
 }
 
-/* Reading-order links in the top bar: between the title and the toggle on one
-   row where they fit; on narrow screens rows of their own, each link
-   stretched so the rows fill the width (tokens.css). */
+/* Reading-order links in the top bar: a row of their own under the title
+   and toggle, each link stretched so the row spans the column; on narrow
+   screens three links a row (tokens.css). */
 .topnav {
-  order: var(--topnav-order);
-  flex: var(--topnav-flex);
+  order: 2;
+  flex: 1 1 100%;
   min-width: 0;
-  display: flex;
-  justify-content: var(--topnav-justify);
 }
 
 .topnav ol {
-  flex: var(--topnav-flex);
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  justify-content: var(--topnav-justify);
   gap: var(--space-4);
 }
 
@@ -164,7 +159,7 @@ a {
   align-items: center;
   justify-content: center;
   min-height: var(--control-min-height);
-  padding: var(--space-8) var(--space-10);
+  padding: var(--space-8);
   white-space: nowrap;
   border: var(--border-width) solid transparent;
   border-radius: var(--radius-nav);

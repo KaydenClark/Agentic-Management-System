@@ -181,15 +181,11 @@
   --container-wide: 1280px;
   --page-gutter: clamp(16px, 4vw, 24px);
 
-  /* Top bar: one row (title over its tagline, links, toggle) where it fits;
-     the links sit against the toggle. */
+  /* Top bar: title over its tagline and the theme toggle on the first row,
+     the reading-order links stretched across the row below. */
   --text-tagline: 11px; /* the header tagline under the wordmark */
   --brand-gap: 2px; /* wordmark to tagline */
-  --topnav-order: 0;
-  --topnav-flex: 1 1 auto;
-  --topnav-justify: flex-end;
-  --navitem-flex: 0 0 auto;
-  --brand-flex: 0 1 auto;
+  --navitem-flex: 1 1 auto; /* every link on one row */
 
   /* /start diagrams and toy. */
   --node-basis: 112px; /* a lifecycle node's minimum width */
@@ -209,15 +205,10 @@
   --rule-width: 4px; /* the request blockquote's leading rule */
 }
 
-/* Narrow screens (below the one-row top bar's width): title and theme toggle
-   share the first row; the reading-order links take the rows below, each
-   link stretched so every row spans the full width. */
+/* Narrow screens: the reading-order links wrap three a row, each stretched
+   so every row spans the full width. */
 @media (max-width: 767px) {
   :root {
-    --topnav-order: 2;
-    --topnav-flex: 1 1 100%;
-    --topnav-justify: flex-start;
-    --navitem-flex: 1 1 30%; /* three links a row, stretched */
-    --brand-flex: 1 1 0;
+    --navitem-flex: 1 1 30%;
   }
 }
