@@ -28,6 +28,8 @@ For each issue, ask how the skill correction prevents recurrence in any project.
 
 ## Owner brief and corrections, 2026-11-01
 
+Later catalog direction: [S-000A](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) prepares distinct jobs/methods, Primitive/Compound composition, actual Setup Workbench prerequisites and retained adaptation credit. S-008's next accepted source pin must explain these faithfully. This changes the documentation destination; no rewritten skill, trial, public article update or deployment is established by preparation.
+
 Kind: intent. State: confirmed. Source: Kayden's opening brief and subsequent answers in the S-003 repair chat.
 
 The original brief requires the full first build, not a reduced website demo: local Python Grill Board; real-data RSI presentation with initially empty chart spaces; the Next.js website with tour, skills wiki, demo board, governance and flow charts; and the safeguarded RSI loop. Python writes results to Supabase and the site reads them. The later secret-location decision remains authoritative: ADR-003H keeps the service key local; the site uses only read access.
