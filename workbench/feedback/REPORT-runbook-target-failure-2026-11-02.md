@@ -31,4 +31,4 @@ No causal claim that shared skills alone caused the failed reductions is establi
 
 ## Next Action And Review Boundary
 
-Publish the checked small RUNBOOK with S-011 records, then display this separate failure in the safe RSI log. The possible prune-artifact skill remains an [unresolved proposal](../wiki/context-owner-answers-coherence.md#jot-8a72da2b-8f02-45c8-8df5-4ae2a339df45), not an installed repair. Root inspected the 1193-character draft; this is not a skill audit, Human QA or benefit verdict.
+Publish the checked small RUNBOOK with S-011 records, then display this separate failure in the safe RSI log. The earlier [prune-artifact proposal](../wiki/context-owner-answers-coherence.md#jot-8a72da2b-8f02-45c8-8df5-4ae2a339df45) now has [owner implementation approval](../wiki/context-owner-answers-coherence.md#jot-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf); its separate test suite and qualifying result remain pending. Root inspected the 1193-character draft; this is not a skill audit, Human QA or benefit verdict.

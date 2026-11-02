@@ -47,7 +47,8 @@ History: [S-011 history](../../../../wiki/history/S-011.md).
 - S-002's r1 scoring, three-run evidence, qualification, attempt and benefit safeguards remain. Its stopped PR 101 experiment and specific call/row holds are unchanged; this separately authorized repair does not resume it.
 - Frozen baseline precedes repairs. Cases studied during repair remain development evidence. Missing evidence stays missing and cannot qualify a Stable/Excellent merge.
 - Shared skills are authored/reviewed in their repository. Source text and raw trial/audit material stay private; public summaries carry only safe claims, counts and identities.
-- Personal installation enables later AMS work; no project-specific skill copy or portfolio rollout is required.
+- Personal installation enables later AMS work; no project-specific copy or portfolio rollout.
+- The [approved prune-artifact addition](../../../../wiki/context-owner-answers-coherence.md#jot-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf) has a separate finite test suite; the original frozen comparison and its attempts remain unchanged.
 
 ## Non-Goals
 
@@ -61,18 +62,6 @@ The skills repository's process governs repair delivery. Candidate merge/install
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-
-### TK-001 - Frozen comparison
-
-Record failure sources, exact source/installed identities, prediction, cases, criteria, worker and grader conditions before shared changes. Publish safe owners; keep handoffs private.
-
-### TK-002 - Qualified shared repair
-
-Repair through the skills repository, separately prune and test, audit the immutable candidate with Terra 6.1, merge only eligible Stable/Excellent, then verify personal installation and actual later use. Preserve any failed gate.
-
-### TK-003 - Evidence displayed
-
-Show the actual comparisons, failures and disposition on `dev`, with linked safe evidence and honest qualification and benefit limits. Preserve empty held-out trials without invented numbers.
 
 ## Acceptance Criteria
 

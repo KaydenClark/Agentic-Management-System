@@ -135,3 +135,16 @@ Supersedes: none
 
 Kayden proposes a single prune-artifact skill to do pruning for author-skill and writing-for-agents and reduce overlap. A suggested boundary leaves method development and behavior validation with author-skill, composition/prose quality with writing-for-agents, and meaning-preserving pruning against actual owner goals, target ranges and ceilings with prune-artifact. Author-skill would still delegate independent pruning and retest behavior. This is a proposal, not implementation or installation approval; keep it outside the current repair and use the observed RUNBOOK failure as a possible future trial.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T20:57:28.353Z
+Author: Kayden
+Source: Kayden, approval to add prune-artifact in AMS chat, 2026-11-02, after the proposed ownership breakdown
+Topic: owner-answers-coherence
+Supersedes: none
+
+Kayden approves the proposed ownership breakdown and explicitly authorizes adding prune-artifact. This follows the earlier unresolved proposal: one shared pruning owner, author-skill retaining method development and behavior validation, and writing-for-agents retaining composition. The new skill is part of the shared skills source repair, with independent pruning/testing and the same eligible Stable or Excellent merge gate. Approval to implement is not evidence of an implemented, installed or accepted skill. Its new finite suite stays distinct from the original frozen workflow comparison.
+<!-- /jot-entry -->
