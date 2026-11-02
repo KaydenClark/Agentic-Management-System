@@ -56,8 +56,8 @@ export default function HowItWorks() {
           <dt>Spec</dt>
           <dd>
             One named change in what the system can do. It holds the intent and who authorized it, the behavior wanted,
-            and acceptance conditions, each with the check that proves it and a fault the check must catch, followed by
-            an append-only log of evidence. Small edits need no Spec.
+            and acceptance conditions, each with the check that proves it and a fault the check must catch. It describes
+            the destination only; how the work got there is kept in its Wiki history page. Small edits need no Spec.
             <Source path={`${ADR}000P-a-capability-change-gets-one-short-spec.md`}>ADR-000P</Source>
             <Source path={`${S003}SPEC.md`}>S-003, for the shape</Source>
           </dd>
