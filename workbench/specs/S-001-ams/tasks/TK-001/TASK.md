@@ -3,9 +3,11 @@
 **Task ID:** TK-001
 **Spec ID:** S-001
 **Slice:** Run the "Are we there yet?" check at a named commit and record the answer in this Spec's log
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Assess all S-001 criteria and landmark success checks; report met, not met or unknown with evidence and remaining steps.
+**Claimed by:** claude-impl-s001-tk001
+**Current claimant:** claude-impl-s001-tk001
 
 ## Assignment
 
