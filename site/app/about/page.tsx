@@ -95,13 +95,14 @@ export default function About() {
             <Source path={S003}>S-003</Source>
           </li>
           <li>
-            Agents build it. The website belongs to orchestrator A, an agent that coordinates the website work; two
-            other orchestrators hold the local board with the improvement data, and the consistency checks, so no one agent holds every risk.
+            Agents build it. The website belongs to orchestrator A, an agent that coordinates the website work. A
+            second orchestrator holds the local board and its improvement data, and a third holds the consistency
+            checks, so no one agent holds every risk.
             <Source path={`${ADR}002Z-three-orchestrators-split-the-work-by-risk.md`}>ADR-002Z</Source>
           </li>
           <li>
-            Each change goes from its own branch into <code>dev</code> after the <code>site builds</code> check
-            passes: install, build and every test, the quickstart replay included. Only Kayden moves{" "}
+            Each change goes from its own branch into <code>dev</code> after the automated{" "}
+            <code>site builds</code> check passes: install, build and every test, the quickstart replay included. Only Kayden moves{" "}
             <code>dev</code> into <code>main</code>, the public version.
             <Source path={`${ADR}003I-only-main-dev-and-site-branches-deploy-to-vercel.md`}>ADR-003I</Source>
             <Source path="AGENTS.md">AGENTS.md, PR instructions</Source>
@@ -112,7 +113,7 @@ export default function About() {
           </li>
         </ul>
         <p>
-          The words of this page, like every page, are drafted by agents from those records.
+          Agents write the words of this page, like every page, from those records.
           <Source path={S003}>S-003, Voice</Source> Back to the{" "}
           <Link href="/">home page</Link>, or <Link href="/start">start the tour</Link> again.
         </p>

@@ -16,7 +16,14 @@ function Fallback() {
       {stages.map((s) => (
         <li key={s.id} data-stage={s.id} className={`tone ${HOLDERS[s.holder].hue} ${styles.fallbackItem}`}>
           <p className={styles.fallbackHead}>
-            <strong>{s.name}</strong> <span className={styles.who}>{HOLDERS[s.holder].label}</span>
+            <strong>{s.name}</strong>
+            {/* Returned and Done are their own holders; naming them twice reads as a typo. */}
+            {HOLDERS[s.holder].label !== s.name ? (
+              <>
+                {" "}
+                <span className={styles.who}>{HOLDERS[s.holder].label}</span>
+              </>
+            ) : null}
           </p>
           <p>{s.line}</p>
           {s.back ? (

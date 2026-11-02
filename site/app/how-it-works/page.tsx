@@ -32,8 +32,8 @@ export default function HowItWorks() {
         <p className="eyebrow">Tour</p>
         <h1>How it works</h1>
         <p className="lede" data-opener="">
-          In the Agentic Management System, or <dfn id="ams">AMS</dfn>, work is written down before it is done. A request becomes a <dfn id="spec">Spec</dfn>: a short
-          written plan for one change, with the conditions that will show it worked. Each Spec is cut into{" "}
+          In the Agentic Management System, or <dfn id="ams">AMS</dfn>, work is written down before it is done. A
+          request becomes a <dfn id="spec">Spec</dfn>: a short written plan for one change, with the conditions that will show it worked. Each Spec is cut into{" "}
           <dfn id="task">Tasks</dfn>, each small enough for one <dfn id="agent">agent</dfn>, an AI assistant that
           carries out work, to finish in a single run. The agent hands back proof, and only Kayden, the owner, moves
           finished work into the main version of the site.
@@ -147,13 +147,14 @@ export default function HowItWorks() {
           failing 10 of 14, then 14 of 14 passing from a fresh copy; pull request #13 merged into <code>dev</code> as
           commit c529821; a browser check at 375 pixels wide in both themes passing 15 of 15; and a Codex code and
           security review with no findings. It also records what it could not check: the footer of the live{" "}
-          <code>dev</code> deployment was not fetched, because the connector refused, so that stays open.
+          <code>dev</code> deployment was not fetched, because the Vercel connector, the tool agents use to reach the web
+          host, refused the request, so that check stays open.
         </p>
         <p>
           This page is itself the work of{" "}
           <a href={`${REPO_BLOB}${S003}tasks/TK-002/TASK.md`}>Task TK-002</a>. Task files are scaffolding and are deleted
-          when their Spec closes, so these links will change; the site&apos;s tests fail on a link to a file that no
-          longer exists.
+          when their Spec closes, so these links will change then; the site&apos;s tests fail on any link to a file
+          that no longer exists.
         </p>
       </section>
 
@@ -161,8 +162,8 @@ export default function HowItWorks() {
         <h2 id="guarantees">Guarantees and limits</h2>
         <p>
           Code checks structure; agents carry judgment. A rule counts as enforced only when running code refuses the
-          operation and a test shows the refusal, so the steps above are decided rules, and this page does not claim
-          which of them code enforces today.
+          operation and a test shows the refusal, so the steps above are decided rules; this page does not claim which
+          of them code enforces today.
           <Source path={`${ADR}000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md`}>ADR-000G</Source>
         </p>
         <ul className={styles.list}>

@@ -187,7 +187,7 @@ export default function StartHere() {
       <Screen id="try" n={4} title="Try it: move one piece of work">
         <p className={styles.say}>
           Press the big button to pass the work on. At Review and Approve you choose: pass it, or send it back and
-          watch it come round again.
+          watch it come around again.
         </p>
         <Toy />
       </Screen>
@@ -277,7 +277,7 @@ export default function StartHere() {
             <SourceLinks sources={[S.agents]} />
           </li>
           <li>
-            <strong>Mistake looks for proof.</strong> A screenshot or a passing structural check is not proof that it works.
+            <strong>Take appearances as proof.</strong> A screenshot or a passing structural check is not proof that it works.
             <SourceLinks sources={[S.blueprint]} />
           </li>
           <li>
@@ -305,7 +305,8 @@ export default function StartHere() {
             No improvement has been measured yet, so the <Link href="/rsi">RSI results</Link> page is empty on purpose.
           </li>
           <li>
-            Every page of this site, this one included, is a draft until Kayden approves it.
+            Kayden approves every page of this site, this one included; until he approves a page&apos;s exact content,
+            it carries a mark saying so.
             <SourceLinks sources={[S003]} />
           </li>
         </ul>
