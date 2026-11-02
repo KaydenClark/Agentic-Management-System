@@ -49,3 +49,7 @@ Candidate trials and audit remain pending. Safety/authority interpretation is un
 | Date | Change to hypothesis / criteria / candidate | Reason and source | Effect on comparability / next action |
 |---|---|---|---|
 | 2026-11-02 | Frozen bounded repair series recorded before candidate testing | Owner request and orchestrator contract digest above | Await baseline/candidate outcomes; preserve failed attempts |
+
+### First candidate readback
+
+Candidate `6f84573de47cbc7675876777e22e903ecd4783d1`: returned deterministic predicates9/11,8/11,7/11 (24/33), against baseline29/33. The [safe first-attempt report](../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md) preserves unpublished/dirty state, authority and refusal uncertainty, and true consecutive-Task evidence missing. The separate bounded r1 report is Broken6/78, incomplete/unqualified, acceptance false; its ledger digest is retained there. This is no qualifying merge, benefit or source-cause verdict. No history or attempt resets.
