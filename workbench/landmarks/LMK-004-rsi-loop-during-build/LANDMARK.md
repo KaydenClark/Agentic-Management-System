@@ -7,7 +7,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** The measured self-improvement loop, run on the website build and the work after it, with safeguards that keep its results honest.
 **Blockers:** none
-**Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning for S-002.
 
 ## Direction

@@ -7,7 +7,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** The owner's local attention queue, where agents post items that need an answer and confirmed answers land straight in their owning records.
 **Blockers:** none
-**Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning for S-004.
 
 ## Direction

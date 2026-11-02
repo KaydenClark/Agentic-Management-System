@@ -34,9 +34,10 @@ import { expandRecordText, planRecordWrite } from './record-parts.mjs';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { escapeMarkdownTableCell, parseMarkdownTableRow } from './markdown-table.mjs';
-import { appendEvidence, atomicWrite, findLandmarkParent, findSpec, isLandmarkId, loadRetiredSpecs, loadSpecs, occupiedIdentities, resolveIntegrationContainmentRef, slicesOf, updateFields } from './spec-workbench.mjs';
+import { findLandmarkParent, findSpec, isLandmarkId, loadRetiredSpecs, loadSpecs, occupiedIdentities, resolveIntegrationContainmentRef, slicesOf, updateFields } from './spec-workbench.mjs';
 import { appendContinuationToContent, formatTaskRecord, listTaskRecords, parseTaskRecord, readContinuations, taskStatus, updateTaskFields } from './task-record.mjs';
 import { readReceipt, readReceiptFromFile } from './task-receipt.mjs';
+import { appendHistory, historyText, planHistoryAppend, proposedHistory, withoutLegacyHistory } from './spec-history.mjs';
 import { assertSafeWritePath } from './workbench-paths.mjs';
 import { allocateArtifactId, compareVisibleIds, visibleIdKey } from './visible-ids.mjs';
 
@@ -56,13 +57,13 @@ export function assembleSpecReport(rootDir, specId, options = {}) {
 
   const tasks = mergedTasks(spec);
   const acceptance = parseAcceptance(spec.content);
-  const evidence = parseEvidence(spec.content);
+  const evidence = parseEvidence(historyText(spec));
   const completionResult = section(spec.content, 'Completion Result').trim();
   const candidate = candidateSha ? candidateBinding(root, candidateSha) : null;
   const specDigest = computeSpecDigest(root, spec);
   if (candidate) Object.assign(candidate, candidateContentBinding(root, spec, candidateSha, specDigest));
   const verdicts = parseVerdicts(evidence);
-  const latestVerdict = latestVerdictFor(verdicts, specDigest);
+  const latestVerdict = latestVerdictFor(verdicts, specDigest, specDigestReader(root, spec));
   // S-00J TK-005: owner Human QA on `integration`, read the same way a
   // review verdict is - every recorded `owner-qa` row, and whichever of them
   // (if any) binds to the Spec's CURRENT content digest. "content binds,
@@ -189,7 +190,7 @@ function candidateGit(root, args) {
   });
 }
 
-export function computeSpecDigest(root, spec, candidate = null) {
+export function computeSpecDigest(root, spec, candidate = null, options = {}) {
   const specDir = path.dirname(spec.filePath);
   // Each entry is hashed as its name, then its byte length, then its own
   // content, each on its own line: the length prefix is what keeps one
@@ -217,7 +218,7 @@ export function computeSpecDigest(root, spec, candidate = null) {
   const specFile = path.join(root, relativeDir, 'SPEC.md');
   const expand = (text, file) => expandRecordText(text, file, { root, ...(candidate ? { readPart: part => committed(['show', `${candidate}:${path.relative(root, part).split(path.sep).join('/')}`]) } : {}) });
   const specContent = candidate ? expand(committed(['show', `${candidate}:${relativeDir}/SPEC.md`]), specFile) : spec.content;
-  addEntry('SPEC.md', stripPostDeliveryAcceptanceState(stripVolatileSpecFields(stripEvidenceRows(specContent))));
+  addEntry('SPEC.md', stripPostDeliveryAcceptanceState(stripVolatileSpecFields(withoutHistory(specContent, options.legacy))));
   let taskNames;
   if (candidate) {
     taskNames = committed(['ls-tree', '-r', '--name-only', '-z', candidate, '--', `${relativeDir}/tasks/`])
@@ -410,6 +411,30 @@ function stripReceiptSection(content) {
 // Decisions, the Vertical Implementation Slices table (a table-backed Spec's
 // actual reviewed content, never an event log), Acceptance Criteria - is
 // left untouched, so a real change there still moves the digest.
+// History lives on the record's Wiki history page, never in SPEC.md or
+// LANDMARK.md. The digest therefore removes a legacy in-body log section
+// (heading included) and a legacy `Latest event` line outright, so migrating
+// them out of a record never moves its digest by itself. `legacy` selects the
+// earlier rule (data rows stripped, heading kept, `Latest event` blanked),
+// which verdict and approval rows recorded before this change were bound to;
+// `bindsLegacyRow` below honors those rows only when their candidate's content
+// still equals the current content under the current rule.
+function withoutHistory(content, legacy = false) {
+  return legacy ? stripEvidenceRows(content) : withoutLegacyHistory(content);
+}
+
+// A verdict or owner-qa row recorded under the legacy digest rule binds when
+// its candidate's legacy digest is the row's digest and the candidate's
+// current-rule digest is the current content's. `compute(candidate, legacy)`
+// returns the matching digest; any read failure is no binding.
+function bindsLegacyRow(row, currentDigest, compute) {
+  try {
+    return compute(row.candidate, true).slice(0, 12) === row.digest && compute(row.candidate, false) === currentDigest;
+  } catch {
+    return false;
+  }
+}
+
 function stripEvidenceRows(content) {
   const heading = 'Append-Only Evidence And Execution Log';
   const marker = new RegExp(`^## ${escapeRegExp(heading)}[ \t]*$`, 'm');
@@ -428,8 +453,8 @@ function stripEvidenceRows(content) {
 
 // S-00J TK-002 (redefined by TK-004): a reviewer records a pass or fail
 // verdict against the current candidate, appended to the Spec's append-only
-// evidence log through the same `appendEvidence` seam `closeTask` and
-// `completeSpec` already use (never a second append implementation).
+// Wiki history page through the same spec-history.mjs seam `closeTask` and
+// `completeSpec` use (never into the Spec, never a second append path).
 // "Current candidate" no longer means this checkout's exact `HEAD` (TK-002's
 // original binding, which the live review workflow cannot satisfy: a
 // reviewer's detached worktree, a dispatcher whose own HEAD is
@@ -494,7 +519,7 @@ export function recordReviewVerdict(rootDir, specId, options = {}) {
   // diagnostic gaps into verdict gates. No mutation has occurred here.
   if (result === 'pass') {
     const postDeliveryTasks = new Set(mergedTasks(spec).filter((task) => task.phase === 'post-delivery').map((task) => task.id));
-    const verificationGaps = collectVerificationGaps(parseAcceptance(spec.content), parseEvidence(spec.content), postDeliveryTasks);
+    const verificationGaps = collectVerificationGaps(parseAcceptance(spec.content), parseEvidence(historyText(spec)), postDeliveryTasks);
     if (verificationGaps.length > 0) {
       throw new Error(`A pass on ${specId} refuses a checked verification evidence gap: ${verificationGaps.join('; ')}. Record the post-close candidate/check evidence before requesting a new pass.`);
     }
@@ -530,7 +555,7 @@ export function recordReviewVerdict(rootDir, specId, options = {}) {
   // identity - meanwhile an exact repeat of an already-recorded verdict
   // (same candidate, result, digest, findings and reviewer) is refused
   // outright rather than recorded as a pointless new row.
-  const existingVerdicts = parseVerdicts(parseEvidence(spec.content));
+  const existingVerdicts = parseVerdicts(parseEvidence(historyText(spec)));
   const duplicate = existingVerdicts.find((verdict) =>
     verdict.candidate === candidate && verdict.result === result && verdict.digest === digest12
     && verdict.findings === findings && verdict.reviewer === reviewer);
@@ -543,10 +568,9 @@ export function recordReviewVerdict(rootDir, specId, options = {}) {
   const remainingGap = findingsGap(findings);
   const cells = [date, 'review', `Review verdict: ${result} at ${candidate} [${digest12}] #${ordinal}`, findings, reviewer, remainingGap];
   const row = `| ${cells.map(escapeMarkdownTableCell).join(' | ')} |`;
-  const updated = appendEvidence(spec.content, row);
   // Keep the durable row while planning its corrections. A synchronous failure
   // restores it only after every owned Task write has rolled back safely.
-  const correction = appendCorrectiveEvidence(root, spec, updated,
+  const correction = appendCorrectiveEvidence(root, spec, row,
     result === 'fail' ? parent => prepareCorrectiveTasks(root, specId, { candidate, findings }, parent) : null);
   const correctiveTasks = correction?.created;
   const continuedTasks = correction?.continued;
@@ -558,7 +582,7 @@ export function recordReviewVerdict(rootDir, specId, options = {}) {
 // the assembled behavior, distinct from the separate-context reviewer's
 // verdict above. Recorded as an approval naming who, when and the
 // `integration` SHA inspected, or as a finding, through the exact same
-// `appendEvidence` seam every other evidence row uses (never a new file -
+// history-page seam every other history row uses (never a new owner -
 // "the owner asked for accountability, not ceremony"). Unlike a review
 // verdict, the candidate must be contained in the declared integration
 // branch - never a lane tip, since `integration` is the one surface the
@@ -655,7 +679,7 @@ export function recordOwnerApproval(rootDir, specId, options = {}) {
   // since it always increments - while an exact repeat of an
   // already-recorded entry (same candidate, result, digest, findings and
   // owner) is refused outright rather than recorded as a pointless new row.
-  const existingApprovals = parseOwnerApprovals(parseEvidence(spec.content));
+  const existingApprovals = parseOwnerApprovals(parseEvidence(historyText(spec)));
   const duplicate = existingApprovals.find((entry) =>
     entry.candidate === candidate && entry.result === result && entry.digest === digest12
     && entry.findings === findingsCell && entry.owner === owner);
@@ -667,8 +691,7 @@ export function recordOwnerApproval(rootDir, specId, options = {}) {
   const date = new Date().toISOString().slice(0, 10);
   const cells = [date, 'owner-qa', `Owner QA: ${result} at ${candidate} [${digest12}] #${ordinal}`, findingsCell, owner, remainingGap];
   const row = `| ${cells.map(escapeMarkdownTableCell).join(' | ')} |`;
-  const updated = appendEvidence(spec.content, row);
-  const correction = appendCorrectiveEvidence(root, spec, updated,
+  const correction = appendCorrectiveEvidence(root, spec, row,
     result === 'finding' && !returnToAlign
       ? parent => prepareCorrectiveTasks(root, specId, { candidate, findings: findingsInput }, parent) : null);
   const correctiveTasks = correction?.created;
@@ -737,7 +760,7 @@ function prepareCorrectiveTasks(rootDir, specId, options = {}, proposedParent = 
   const spec = proposedParent ?? (isLandmarkId(specId) ? findLandmarkParent(root, specId) : findSpec(root, specId));
   const landmark = spec.kind === 'landmark';
   assertSpecOpenForCorrection(spec);
-  const evidence = parseEvidence(spec.content);
+  const evidence = parseEvidence(historyText(spec));
   const anchor = findCorrectiveAnchor(evidence, candidate);
   if (!anchor) {
     throw new Error(`No recorded fail verdict or owner QA finding for candidate ${candidate} exists on ${specId}; corrective Tasks are created only from one of those recorded rows.`);
@@ -943,7 +966,7 @@ function writeCorrectiveBatch(root, staged) {
   };
   for (const item of staged) {
     assertSafeWritePath(root, item.filePath);
-    if (item.originalContent === undefined && fs.existsSync(path.dirname(item.filePath))) throw new Error(`Corrective Task destination already exists: ${item.filePath}`);
+    if (item.originalContent === undefined && !item.newFile && fs.existsSync(path.dirname(item.filePath))) throw new Error(`Corrective Task destination already exists: ${item.filePath}`);
     const logical = item.content.endsWith('\n') ? item.content : `${item.content}\n`;
     const plan = planRecordWrite(item.filePath, logical, { root });
     const original = item.originalContent === undefined ? null : snapshot(item.filePath, plan.original);
@@ -1041,11 +1064,15 @@ function writeCorrectiveBatch(root, staged) {
   }
 }
 
-function appendCorrectiveEvidence(root, spec, updated, createTasks) {
+// The row goes to the record's Wiki history page, never into the record. A
+// changed record header (a landmark reaching) publishes in the same batch.
+function appendCorrectiveEvidence(root, spec, row, createTasks, recordContent = spec.content) {
+  const history = planHistoryAppend(spec, row, root);
   const proposed = Object.create(spec);
-  Object.defineProperty(proposed, 'content', { value: updated });
+  Object.defineProperty(proposed, 'historyOverride', { value: proposedHistory(spec, row, root) });
   const correction = createTasks ? createTasks(proposed) : null;
-  writeCorrectiveBatch(root, [{ filePath: spec.filePath, content: updated, originalContent: spec.content }, ...(correction?.staged ?? [])]);
+  const header = recordContent !== spec.content ? [{ filePath: spec.filePath, content: recordContent, originalContent: spec.content }] : [];
+  writeCorrectiveBatch(root, [...header, { filePath: history.filePath, content: history.content, originalContent: history.originalContent, newFile: history.newFile }, ...(correction?.staged ?? [])]);
   return correction?.result;
 }
 
@@ -1173,12 +1200,17 @@ function parseVerdicts(evidence) {
 // dispatcher's own checkout, or read after a merge commit that never equals
 // the reviewed tip, is recognized exactly the same as long as the Spec's own
 // files are unchanged.
-function latestVerdictFor(verdicts, specDigest) {
+function latestVerdictFor(verdicts, specDigest, compute = null) {
   const digest12 = specDigest.slice(0, 12);
   for (let index = verdicts.length - 1; index >= 0; index -= 1) {
     if (verdicts[index].digest === digest12) return verdicts[index];
+    if (compute && bindsLegacyRow(verdicts[index], specDigest, compute)) return verdicts[index];
   }
   return null;
+}
+
+function specDigestReader(root, spec) {
+  return (candidate, legacy) => computeSpecDigest(root, spec, candidate, { legacy });
 }
 
 // S-00J TK-005 (review corrective, Medium): an owner-qa row, parsed from its
@@ -1220,7 +1252,10 @@ function parseOwnerApprovals(evidence) {
 function latestOwnerApprovalFor(approvals, specDigest, root, spec) {
   const digest12 = specDigest.slice(0, 12);
   for (let index = approvals.length - 1; index >= 0; index -= 1) {
-    if (approvals[index].digest !== digest12) continue;
+    if (approvals[index].digest !== digest12) {
+      if (bindsLegacyRow(approvals[index], specDigest, specDigestReader(root, spec))) return approvals[index];
+      continue;
+    }
     // Earlier versions could record a local digest against unrelated Git content.
     // Retain those rows as history, but never treat one as valid authorization.
     try {
@@ -1700,7 +1735,7 @@ function landmarkChildren(root, parent) {
 // it is complete or retired.
 function childSpecEntry(root, spec) {
   const specDigest = computeSpecDigest(root, spec);
-  const verdicts = parseVerdicts(parseEvidence(spec.content));
+  const verdicts = parseVerdicts(parseEvidence(historyText(spec)));
   const retired = Boolean(spec.lifecycleFolder);
   return {
     id: spec.id,
@@ -1712,7 +1747,7 @@ function childSpecEntry(root, spec) {
     open: !(retired || spec.status === 'complete'),
     specDigest,
     verdictCount: verdicts.length,
-    latestVerdict: latestVerdictFor(verdicts, specDigest)
+    latestVerdict: latestVerdictFor(verdicts, specDigest, specDigestReader(root, spec))
   };
 }
 
@@ -1753,7 +1788,7 @@ function openChildReason(child) {
 // child Spec folders committed under the landmark must equal the working
 // tree's, so a child moved in or out after the candidate refuses rather than
 // matching by omission.
-export function computeLandmarkDigest(root, parent, children, candidate = null) {
+export function computeLandmarkDigest(root, parent, children, candidate = null, options = {}) {
   const hash = crypto.createHash('sha256');
   function addEntry(name, content) {
     hash.update(name);
@@ -1772,7 +1807,7 @@ export function computeLandmarkDigest(root, parent, children, candidate = null) 
   }
   const expand = (text, file) => expandRecordText(text, file, { root, ...(candidate ? { readPart: part => committed(['show', `${candidate}:${path.relative(root, part).split(path.sep).join('/')}`]) } : {}) });
   const landmarkContent = candidate ? expand(committed(['show', `${candidate}:${relativeDir}/LANDMARK.md`]), parent.filePath) : parent.content;
-  addEntry('LANDMARK.md', stripVolatileLandmarkFields(stripEvidenceRows(landmarkContent)));
+  addEntry('LANDMARK.md', stripVolatileLandmarkFields(withoutHistory(landmarkContent, options.legacy)));
   let taskNames;
   if (candidate) {
     taskNames = committed(['ls-tree', '-r', '--name-only', '-z', candidate, '--', `${relativeDir}/tasks/`])
@@ -1800,7 +1835,7 @@ export function computeLandmarkDigest(root, parent, children, candidate = null) 
       throw new Error(`The child Specs committed under ${parent.id} at ${candidate} (${committedChildren.join(', ') || 'none'}) differ from the working tree's (${currentChildren.join(', ') || 'none'})`);
     }
   }
-  for (const spec of children) addEntry(`spec ${spec.id}`, computeSpecDigest(root, spec, candidate));
+  for (const spec of children) addEntry(`spec ${spec.id}`, computeSpecDigest(root, spec, candidate, options));
   return hash.digest('hex');
 }
 
@@ -1834,7 +1869,7 @@ export function assembleLandmarkReport(rootDir, landmarkId, options = {}) {
   const landmarkDigest = computeLandmarkDigest(root, parent, children);
   const candidate = options.candidate ? candidateBinding(root, options.candidate) : null;
   if (candidate) Object.assign(candidate, landmarkContentBinding(root, parent, children, options.candidate, landmarkDigest));
-  const evidence = parseEvidence(parent.content);
+  const evidence = parseEvidence(historyText(parent));
   const verdicts = parseVerdicts(evidence);
   // S-003Z TK-008I: the owner's approval one size up, read exactly as a
   // Spec's - every owner-qa row, and the latest bound to the landmark's
@@ -1870,7 +1905,7 @@ export function assembleLandmarkReport(rootDir, landmarkId, options = {}) {
     decisionRecords: parent.decisionRecords,
     evidence,
     verdicts,
-    latestVerdict: latestVerdictFor(verdicts, landmarkDigest),
+    latestVerdict: latestVerdictFor(verdicts, landmarkDigest, (candidate, legacy) => computeLandmarkDigest(root, parent, children, candidate, { legacy })),
     ownerApproval,
     latestOwnerApproval,
     openChildren,
@@ -1958,7 +1993,7 @@ export function recordLandmarkVerdict(rootDir, landmarkId, options = {}) {
     throw new Error(`Candidate ${candidate} does not contain the reviewed committed content for ${parent.id}: ${committed.contentError ?? `candidate digest ${committed.contentDigest.slice(0, 12)} differs from reviewed content digest ${digest.slice(0, 12)}`}. Commit the assembled landmark and review that immutable candidate before recording a verdict.`);
   }
   const digest12 = digest.slice(0, 12);
-  const existingVerdicts = parseVerdicts(parseEvidence(parent.content));
+  const existingVerdicts = parseVerdicts(parseEvidence(historyText(parent)));
   const duplicate = existingVerdicts.find((verdict) =>
     verdict.candidate === candidate && verdict.result === result && verdict.digest === digest12
     && verdict.findings === findings && verdict.reviewer === reviewer);
@@ -1971,7 +2006,7 @@ export function recordLandmarkVerdict(rootDir, landmarkId, options = {}) {
   const remainingGap = findingsGap(findings);
   const cells = [date, 'review', `Review verdict: ${result} at ${candidate} [${digest12}] #${ordinal}`, findings, reviewer, remainingGap];
   const row = `| ${cells.map(escapeMarkdownTableCell).join(' | ')} |`;
-  let content = appendEvidence(parent.content, row);
+  let content = parent.content;
   let reached = false;
   let notReached = [];
   if (result === 'pass') {
@@ -1984,14 +2019,13 @@ export function recordLandmarkVerdict(rootDir, landmarkId, options = {}) {
       content = updateFields(content, {
         Status: 'reached',
         Updated: date,
-        'Latest event': `Whole-landmark review passed at ${candidate} by ${reviewer}; ${parent.id} reached.`,
         'Next gate': `Retire ${parent.id} into its Landmark Wiki page.`
       });
       reached = true;
     }
   }
-  const correction = appendCorrectiveEvidence(root, parent, content,
-    result === 'fail' ? proposed => prepareCorrectiveTasks(root, parent.id, { candidate, findings }, proposed) : null);
+  const correction = appendCorrectiveEvidence(root, parent, row,
+    result === 'fail' ? proposed => prepareCorrectiveTasks(root, parent.id, { candidate, findings }, proposed) : null, content);
   const correctiveTasks = correction?.created;
   const continuedTasks = correction?.continued;
 
@@ -2008,7 +2042,10 @@ export function recordLandmarkVerdict(rootDir, landmarkId, options = {}) {
 function latestLandmarkApprovalFor(approvals, landmarkDigest, root, parent, children) {
   const digest12 = landmarkDigest.slice(0, 12);
   for (let index = approvals.length - 1; index >= 0; index -= 1) {
-    if (approvals[index].digest !== digest12) continue;
+    if (approvals[index].digest !== digest12) {
+      if (bindsLegacyRow(approvals[index], landmarkDigest, (candidate, legacy) => computeLandmarkDigest(root, parent, children, candidate, { legacy }))) return approvals[index];
+      continue;
+    }
     try {
       if (computeLandmarkDigest(root, parent, children, approvals[index].candidate) === landmarkDigest) return approvals[index];
     } catch { /* Missing content or a moved child cannot prove approval. */ }
@@ -2057,7 +2094,7 @@ export function recordLandmarkApproval(rootDir, landmarkId, options = {}) {
     throw new Error(`Owner QA candidate content at ${candidate} does not match the current assembled landmark for ${parent.id}: ${committed.contentError ?? `candidate digest ${committed.contentDigest.slice(0, 12)} differs from current digest ${currentDigest.slice(0, 12)}`}; inspect and name the committed content being approved before recording Human QA.`);
   }
   const digest12 = currentDigest.slice(0, 12);
-  const existing = parseOwnerApprovals(parseEvidence(parent.content));
+  const existing = parseOwnerApprovals(parseEvidence(historyText(parent)));
   const duplicate = existing.find((entry) => entry.candidate === candidate && entry.result === 'approve' && entry.digest === digest12 && entry.owner === owner);
   if (duplicate) {
     throw new Error(`An identical owner QA entry (approve at ${candidate} [${digest12}], owner "${owner}") is already recorded for ${parent.id} as row #${duplicate.ordinal}; recording the exact same entry twice is refused rather than duplicated.`);
@@ -2067,7 +2104,7 @@ export function recordLandmarkApproval(rootDir, landmarkId, options = {}) {
   const date = new Date().toISOString().slice(0, 10);
   const cells = [date, 'owner-qa', `Owner QA: approve at ${candidate} [${digest12}] #${ordinal}`, 'none', owner, remainingGap];
   const row = `| ${cells.map(escapeMarkdownTableCell).join(' | ')} |`;
-  atomicWrite(parent.filePath, appendEvidence(parent.content, row));
+  appendHistory(parent, row, root);
   return { landmarkId: parent.id, candidate, owner, result: 'approve', findings: 'none', date, remainingGap, digest: currentDigest, digest12, ordinal, row, integrationContainment };
 }
 
@@ -2111,7 +2148,7 @@ function landmarkParticipation(parent, children, reviewer) {
 
   named(parent.owner, `${parent.id} Owner`);
   claimants(parent.latestEvent, `${parent.id} Latest event`);
-  parseEvidence(parent.content).rows.forEach(({ cells }, index) => {
+  parseEvidence(historyText(parent)).rows.forEach(({ cells }, index) => {
     if (cells[1] === 'review') return;
     claimants(cells.join(' | '), `${parent.id} evidence row ${index + 1}`);
     mentioned(cells.join(' | '), `${parent.id} evidence row ${index + 1}`);
@@ -2120,7 +2157,7 @@ function landmarkParticipation(parent, children, reviewer) {
   for (const spec of children) {
     named(spec.owner, `${spec.id} Owner`);
     claimants(spec.latestEvent, `${spec.id} Latest event`);
-    parseEvidence(spec.content).rows.forEach(({ cells }, index) => {
+    parseEvidence(historyText(spec)).rows.forEach(({ cells }, index) => {
       if (cells[1] === 'owner-qa') return;
       if (cells[1] === 'review' && VERDICT_PATTERN.test(cells[2] ?? '')) {
         named(cells[4], `${spec.id} review verdict row ${index + 1}`);

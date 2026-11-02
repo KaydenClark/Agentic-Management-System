@@ -8,7 +8,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** A public demo of the Grill Board with sample cards asking non-engineering questions, showing what a non-developer might use it for.
 **Blockers:** S-003
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning after the site shell (S-003) exists.
 
 ## Intent and authority

@@ -7,7 +7,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** The public presentation website for the AMS, a Next.js app in `site/` on Vercel, built with the AMS as its first outside product.
 **Blockers:** none
-**Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning for S-003.
 
 ## Direction

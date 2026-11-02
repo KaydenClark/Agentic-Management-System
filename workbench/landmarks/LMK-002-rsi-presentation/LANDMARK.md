@@ -7,7 +7,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** Website pages that chart skill and build improvement from real RSI data only, read from Supabase and labeled at the strength the data supports.
 **Blockers:** none
-**Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning for S-006.
 
 ## Direction

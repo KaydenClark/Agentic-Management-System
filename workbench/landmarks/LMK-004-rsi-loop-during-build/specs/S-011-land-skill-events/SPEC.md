@@ -8,7 +8,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** Improve the land skill so agents landing work no longer miss an event, measured as one RSI round from a failed result.
 **Blockers:** S-002
-**Latest event:** Mapped from the owner's example Spec of 2026-11-01.
 **Next gate:** Task planning once the loop (S-002) can run a round.
 
 ## Intent and authority

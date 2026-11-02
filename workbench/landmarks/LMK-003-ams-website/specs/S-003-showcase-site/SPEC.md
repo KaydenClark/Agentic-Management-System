@@ -8,7 +8,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Latest event:** Destination clarified.
 **Next gate:** Reconcile assignments.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)

@@ -8,7 +8,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** Site pages explaining the governance stack and drawing the AMS workflows as diagrams that match the code they depict.
 **Blockers:** S-003
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning after the site shell (S-003) exists.
 
 ## Intent and authority

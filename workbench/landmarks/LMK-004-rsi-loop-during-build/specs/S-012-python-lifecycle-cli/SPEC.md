@@ -8,7 +8,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** A small Python CLI for the AMS lifecycle, measured against the current Node lifecycle tools as the baseline before it replaces anything.
 **Blockers:** S-002
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning once the loop (S-002) can compare versions.
 
 ## Intent and authority
