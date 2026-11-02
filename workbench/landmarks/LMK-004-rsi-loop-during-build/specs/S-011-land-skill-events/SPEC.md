@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** Close TK-002 with verification and documentation proof.
+**Next gate:** TK-002: qualify immutable per-skill candidates before merge or personal installation; retain draft-only delivery limits.
 
 ## Intent and authority
 
@@ -27,8 +27,8 @@ Misnamed branches hide unfinished work; published handoffs expose session contex
 ## Current Verified State
 
 - Controls now distinguish personal installation and local handoffs. RUNBOOK1193 retains commands; [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) preserves pruning failures.
-- Private PR58 checkpoint `6f2277eaaffef2d6640860d6d257bf101107c10c`: unreviewed partial pruning draft, not merge/install eligible. Full author baseline6e4c06d is retained.
-- [Current evidence and continuation](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md#continuation-checkpoint-later-contexts-no-reset): workflow v2b attempt two Broken28/78; pruning attempt two not run after independent-pruner capacity failure. Native-checker PASS, useful benefit, installation and later use remain unestablished.
+- Separate skill draft PRs target `main`; [history](../../../../wiki/history/S-011.md#per-skill-draft-continuation) owns exact candidates and checks. PR58 checkpoint6f2277e and full author baseline6e4c06d remain retained.
+- [Failed histories](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md#continuation-checkpoint-later-contexts-no-reset) remain, including workflow v2b Broken28/78. Independent Prune return and author retest are development evidence; fresh candidate-bound trials/r1, useful benefit, installation and later use remain unestablished.
 - PR128 merged the truthful first-context RSI snapshot into dev12f8963; later outcomes are not yet graphed. Protected deployment HTML/live-store readback remains unavailable.
 
 History: [S-011 history](../../../../wiki/history/S-011.md).
@@ -96,7 +96,7 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-Qualification, benefit, installation/use and protected deployment readback remain unestablished. TK-002/TK-003 are ready and unclaimed; handoff supplies no lifecycle completion.
+Qualification, benefit, installation/use and protected deployment readback remain unestablished. TK-002 is in progress with source-author; TK-003 still waits on it. Draft PR publication supplies no lifecycle completion.
 
 ## Supersession
 
