@@ -23,7 +23,7 @@
 
 Exact-identity repair: S-006/TK-000S.
 
-[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise. Its reviewed engineering reference `921cb3e` (PR #92; CI87; 177 affected checks) freezes the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md). PR #92 merged at `d78b663`; the orchestrator selected main-contained source `921cb3e` after direct model-free import/protocol verification. The released qualification command was rejected by automatic approval review before process creation. The owner explicitly approved scoped Anthropic/subscribed-Claude sends on 2026-11-02. The first five-control qualification phase then executed once and all expected outcomes matched; the root inspected private evidence digest `f6938f3...` and accepted only that narrow qualification. The first baseline worker process completed, but its judge returned fenced JSON and the strict parser retained Unknown (`3a2637ba...`); task success is unestablished. Further model slots are held. The root released only publication of the old incomplete observation, now run28/result41 with exact readback below. Noise and benefit remain unproven. [TK-002](tasks/TK-002/TASK.md) owns the exact hold and preserved identities.
+TK-000V repairs blocked prompt writes; [bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. [TK-002](tasks/TK-002/TASK.md) owns noise state and exact identities under the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md): narrow qualification is accepted; baseline slot 0 stayed Unknown; later slots wait on TK-000Y's judge correction. Only old run28/result41 is [published](tasks/TK-002/TASK.md#old-incomplete-baseline-publication). Noise and benefit remain unproven.
 
 ## Desired Behavior
 
@@ -37,29 +37,21 @@ Freeze rubric, scope/inventory/exclusions, IDs/classes, baseline/candidate/skill
 pins, loaded artifacts, host/tools and evaluator model/prompt/qualification;
 no changes/extra points.
 
-Three runs/attempt: class, Yes/No/justified N/A, typed revision-bound
-evidence/qualification. Missing/Unknown/refused/interrupted stays No in its class
-and denominator. Label static/unqualified proof. Pool exact counts:
-`100 × Yes / applicable`; no weights/partial credit/rounding; empty means no percentage.
-
-Run pass: all Critical/Regression Yes; Regression needs baseline pass proof.
-3/2/1/0 passing runs = Excellent/Stable/Functional/Broken; Critical No overrides
-Broken. Acceptance additionally requires complete qualified proof and no open
-Critical/Regression or unmapped historical finding. No QA/distribution/benefit
-implied. Whole fitness covers ten areas; bounded results cannot certify AMS.
+r1 owns rows, pooled `100 × Yes / applicable`, run pass, levels (3/2/1/0 passing
+of three runs = Excellent/Stable/Functional/Broken; Critical No overrides) and
+eligibility; [assessments](../../../../../evals/ASSESSMENTS.md) implement them.
+Missing/Unknown/refused/interrupted stays No in class and denominator; label
+static/unqualified proof; no rounding; empty means no percentage. Acceptance
+implies no QA/distribution/benefit; bounded results cannot certify ten-area AMS.
 
 ### Skill evals and retests
 
 `evals/` pins case/failure, prompt/fixtures/reset, permissions, end state,
 grader/model/host/loaded skill. Cover invocation/near misses, valid/adverse input,
 prerequisites/discovery/resume/authority. Map r1 IDs; no extra points.
-Qualify good/bad/do-nothing cases; protect inputs/logs. Deterministic checks first;
-semantic judges need separate context, exact model, owner-labelled cases, no worker
-reasoning. Requalify model/prompt/rubric changes; manual trials until qualified.
-
-Findings: ID/check/class, run/candidate/evidence, uncertain cause, owner/retest.
-Close only on three-run repaired-revision original/affected-regression passes
-(or justified regression exclusion). Merge/omission/score cannot close; retain recurrence/new failures.
+Qualify good/bad/do-nothing cases and judges per r1; protect inputs/logs; manual
+trials until qualified. Findings close only by r1 three-run repaired-revision
+retest; merge/omission/score cannot close; retain recurrence/new failures.
 
 ## Decisions And Contracts
 
@@ -68,9 +60,8 @@ Close only on three-run repaired-revision original/affected-regression passes
 - Failure-led rounds; review ineffective prior fixes on recurrence. One change/version.
 - Fixed provider/model/effort. Accepted-version runner/graders/scoring, never
   candidate-owned. Grader changes start a new series judged by its predecessor.
-- Same-version noise floor first. Fixed-task AMS/no-AMS/plain-instruction arms,
-  three trials each; predeclared effect/margin, paired per-task intervals.
-  Inside-margin is inconclusive; audit delta proves no benefit.
+- Same-version noise floor first, then r1 paired trials: fixed-task
+  AMS/no-AMS/plain-instruction arms, paired per-task intervals. Audit delta proves no benefit.
 - Public lift needs >2 fresh held-out tasks, controls, baseline/interval.
   Studied cases retire to dev; scores are not lift.
 - Sandbox without skipped permissions. Automatic proposing waits for a trusted
@@ -86,9 +77,7 @@ Weights; running loops during mapping; presentation (S-007).
 
 ## Dependencies And Blockers
 
-S-006 retains assessment/attempt/run identities, metadata, ledgers, counts/levels, acceptance/evidence/qualification and finding/retest/behavior links. S-007 safe presentation is pending.
-
-Keep real build/skill seeds strength-labelled; private sources yield summaries/commits only. Require storage and qualified comparisons.
+S-006 retains assessment/attempt/run identities, metadata, ledgers, levels, acceptance/evidence/qualification and finding/retest/behavior links; S-007 safe presentation is pending. Strength-label real seeds; private sources yield summaries/commits only. Require storage and qualified comparisons.
 
 ## Vertical Implementation Slices
 
@@ -123,12 +112,6 @@ Kayden reported lost grilling as a failure; the linked context preserves the int
 | 2026-11-01 | TK-000O | Task closed | 42 focused; CI #38 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
 | 2026-11-01 | TK-000T | Task closed | 45 focused; fresh 562/4 skip; CI70; actual adapter smoke | evals, Runbook, Wiki | Oracle calibration, noise, controls, benefit; close attribution: {"agent":"s002-bootstrap","claimant":"s002-bootstrap","onBehalfOf":null} |
 | 2026-11-01 | TK-000V | Task closed | 50 focused; fresh 567/4 skip; actual inert adapter | evals/TRIALS.md | Oracle/noise/controls/benefit; close attribution: {"agent":"s002-transport","claimant":"s002-transport","onBehalfOf":null} |
-
-## Old incomplete baseline publication
-
-A first storage request was also rejected before process creation for alleged missing Supabase destination authority; no key/HTTP/row action occurred. The exact original owner message `01a197f8-ec2b-72c0-9db7-4712043972d4` was then directly recovered: “log the results in supabase.” One reconsideration of the same safe payload cleared review; no workaround or destination change occurred.
-
-Released old observation only: stopped/incomplete run **28**, Unknown result **41** (`passed:null`, `workerCompleted:true`, grader `runner_error`, strength `single_trial`). Exact readback digest `68a1512b25d62903df21e1080f2a635658b2fc489e8bdc902d2cf58d25de57c7`; validated safe payload `77674f9676b6bb16bbe0d0a2c35eff391784398a53394cc46829b91daab3b45a`. Historical start/finish use explicitly labelled journal filesystem mtimes; database recorded_at is publication time. Public wall seconds `23.362` follows numeric(12,3); the exact raw measurement stays private. Actual spend remains null with evidence source. A separate trusted publisher loaded only the safe payload and explicit local key; no raw transcript/host path/skill/rationale or credential was exposed. No other rows, source changes or model calls occurred. One ungraded row cannot establish a noise floor or complete TK-002.
 
 ## Review and Human QA
 
