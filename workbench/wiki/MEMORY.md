@@ -26,6 +26,8 @@ duplicates Task state.
 - [Wiki definition and maintenance rules](SCHEMA.md#purpose-and-ownership) - purpose, ownership, metadata and article maintenance.
 - [Runbook operation loop](../../RUNBOOK.md#preserve-knowledge-as-it-happens) - when to read and update existing articles.
 
+- [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — detection, feedback consumption, visible learning and later-use proof; planning only.
+
 ## Source Precedence
 
 Use AGENTS for authority, Blueprint or the assigned Spec for intended behavior,

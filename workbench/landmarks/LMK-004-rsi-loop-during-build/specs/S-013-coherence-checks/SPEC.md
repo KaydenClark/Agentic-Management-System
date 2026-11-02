@@ -70,6 +70,8 @@ Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, 
 
 ## Acceptance Criteria
 
+- [ ] **Feedback loop connection:** Detection closes the reporting gap: an orchestrator exercises acceptance beyond green checks, records an unreported mismatch with source/candidate identity, assigns its existing owner and next action, and preserves recurrence. A planted failure that reaches completion without a finding must fail.
+
 - [ ] **Drift measured.** The report gives commits and days `dev` is ahead of `main` at a named time, and a threshold breach creates a Grill Board item. *Must fail:* a breach with no item.
 - [ ] **Up to Spec.** The report lists each unmet criterion of the checked Spec with evidence. *Must fail:* a criterion reported met with no evidence.
 - [ ] **Skills in sync.** Rows without a skills commit, or behind the current skills `main`, are listed. *Must fail:* an unpinned row passing.
@@ -111,3 +113,7 @@ Pending.
 
 - Supersedes: none
 - Superseded by: none
+
+## Feedback-loop planning boundary
+
+Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
