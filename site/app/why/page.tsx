@@ -1,10 +1,10 @@
 // /why: Why, a tour page (S-003 TK-003). Why the AMS exists, what it
 // promises, why its first work is this site, and why it treats its own value
-// as unproven. Every claim links the committed record it comes from; the one
-// owner quote is verbatim with its dated source.
+// as unproven. Every claim links the committed record it comes from; the
+// owner's point is paraphrased, never quoted.
 import type { Metadata } from "next";
 import Link from "next/link";
-import { REPO_BLOB, Source } from "../tour/Source";
+import { Source } from "../tour/Source";
 import styles from "../tour/tour.module.css";
 
 export const metadata: Metadata = {
@@ -32,21 +32,14 @@ export default function Why() {
       </header>
 
       <section className={styles.section} aria-labelledby="words">
-        <h2 id="words">In Kayden&apos;s words</h2>
-        <figure className={styles.quote} data-owner-quote="">
-          <blockquote>
-            <p>my full tool belt I use to work with AI wrapped up into one RSI loop that builds a website explaining itself.</p>
-          </blockquote>
-          <figcaption>
-            Kayden, 2026-10-31, describing the AMS. Recorded in{" "}
-            <a href={`${REPO_BLOB}${PURPOSE}`}>AMS purpose and first RSI loop</a>.
-          </figcaption>
-        </figure>
+        <h2 id="words">What Kayden built it for</h2>
         <p>
-          The same record adds his reason: the work repairs the broken Workbench, the working foundation underneath,
-          and creates the system on top of it that runs it. In this repository the Workbench is the controls,
-          lifecycle tools and templates agents work with.
-          <Source path={PURPOSE}>AMS purpose</Source>
+          Kayden describes the AMS as everything he uses to work with AI, brought together into a single loop that
+          improves itself, and he gave that loop its first job: building a website that explains the system. He gives
+          the reason too: the work repairs the Workbench where it is broken, the working foundation underneath, and
+          builds on top of it the system that runs it. In this repository the Workbench is the controls, lifecycle
+          tools and templates agents work with.
+          <Source path={PURPOSE}>AMS purpose and first RSI loop</Source>
           <Source path="README.md">README</Source>
         </p>
         <p>

@@ -139,28 +139,21 @@ export function repoLinks(html) {
 
 const decode = (s) => s.replace(/&amp;/g, '&').replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 
-// Owner quotes: each <blockquote data-owner-quote> must carry a source link to
-// a committed record and a dated attribution, and its text must appear
-// verbatim in that record. Quote marks elsewhere in the page body would
-// present words as quoted without a source.
+// The site quotes no one: a tour page holds no owner-quote figure, no
+// <blockquote>, no <q> and no words in quote marks. A point from the owner is
+// paraphrased in plain prose and links the committed record it comes from.
 export function quoteProblems(html) {
   const problems = [];
   const main = mainOf(html);
-  const quotes = [...main.matchAll(/<figure\b[^>]*data-owner-quote[^>]*>([\s\S]*?)<\/figure>/gi)];
-  for (const [, inner] of quotes) {
-    const said = decode(visibleText(inner.match(/<blockquote\b[^>]*>([\s\S]*?)<\/blockquote>/i)?.[1] ?? ''));
-    const caption = inner.match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/i)?.[1] ?? '';
-    const link = repoLinks(caption)[0];
-    if (!said) { problems.push('owner quote with no <blockquote> text'); continue; }
-    if (!link) { problems.push(`quote "${said}" has no source link to a committed record`); continue; }
-    if (!link.exists) { problems.push(`quote source ${link.path} does not exist`); continue; }
-    if (!/\b20\d\d-\d\d-\d\d\b/.test(visibleText(caption))) problems.push(`quote "${said}" has no dated attribution`);
-    const source = readFileSync(join(repoRoot, link.path), 'utf8').replace(/\s+/g, ' ');
-    if (!source.includes(said)) problems.push(`quote "${said}" is not verbatim in ${link.path}`);
-  }
-  const rest = decode(visibleText(main.replace(/<figure\b[^>]*data-owner-quote[^>]*>[\s\S]*?<\/figure>/gi, ' ')));
-  const quoted = rest.match(/[“"][^”"]{12,}[”"]/);
-  if (quoted) problems.push(`quoted words outside an owner-quote figure: ${quoted[0]}`);
-  if (/<q\b/i.test(main.replace(/<figure\b[^>]*data-owner-quote[^>]*>[\s\S]*?<\/figure>/gi, ''))) problems.push('<q> outside an owner-quote figure');
+  if (/\sdata-owner-quote\b/i.test(main)) problems.push('an owner-quote figure (data-owner-quote); the site quotes no one');
+  if (/<blockquote\b/i.test(main)) problems.push('a <blockquote>; paraphrase instead of quoting');
+  if (/<q\b/i.test(main)) problems.push('a <q>; paraphrase instead of quoting');
+  const quoted = decode(visibleText(main)).match(/[“"][^”"]{12,}[”"]/);
+  if (quoted) problems.push(`quoted words: ${quoted[0]}`);
   return problems;
+}
+
+// Any built page (tour or not) carrying the owner-quote feature.
+export function ownerQuoteProblems(pages) {
+  return pages.filter(({ html }) => /\sdata-owner-quote\b/i.test(html)).map(({ name }) => `${name}: has data-owner-quote; the site quotes no one`);
 }

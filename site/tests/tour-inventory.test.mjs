@@ -1,12 +1,12 @@
 // S-003 TK-002 and TK-003 acceptance: every tour page the Spec names exists in the built output with a
 // plain-language opener that uses no undefined term, then go deeper; a
-// placeholder page fails. Owner quotes link their dated source and are
-// verbatim; a paraphrase is not shown as a quote. GitHub links name files that
-// exist. Run `npm run build` first.
+// placeholder page fails. The site quotes no one: no page carries an owner
+// quote, and a tour page holds no blockquote, <q> or quote marks. GitHub links
+// name files that exist. Run `npm run build` first.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { builtPage, builtPages, visibleText } from './helpers.mjs';
-import { TOUR, builtName, mainOf, pageProblems, quoteProblems, repoLinks } from './tour-helpers.mjs';
+import { TOUR, builtName, mainOf, ownerQuoteProblems, pageProblems, quoteProblems, repoLinks } from './tour-helpers.mjs';
 
 const filler = (n) => Array.from({ length: n }, (_, i) => `word${i}`).join(' ');
 const page = ({ h1 = '<h1>T</h1>', opener, body = `<h2>A</h2><p>${filler(150)}</p><h2>B</h2><p>${filler(150)}</p>` }) =>
@@ -23,15 +23,13 @@ test('the checks catch faults (self-test)', () => {
   assert.deepEqual(pageProblems(page({ opener: `${PLAIN} Each <a href="#spec">Spec</a> is reviewed.`, body: `<h2 id="spec">A</h2><p>${filler(150)}</p><h2>B</h2><p>${filler(150)}</p>` })), []);
   assert.ok(pageProblems(page({ opener: `${PLAIN} Each <a href="#nowhere">Spec</a> is reviewed.` })).length, 'link to a missing definition passes');
 
-  const src = 'https://github.com/KaydenClark/Agentic-Management-System/blob/dev/workbench/wiki/context-ams-purpose.md';
-  const fig = (said, caption) => `<main><figure data-owner-quote=""><blockquote><p>${said}</p></blockquote><figcaption>${caption}</figcaption></figure></main>`;
-  const real = 'my full tool belt I use to work with AI wrapped up into one RSI loop that builds a website explaining itself.';
-  assert.deepEqual(quoteProblems(fig(real, `Kayden, 2026-10-31, <a href="${src}">record</a>`)), []);
-  assert.ok(quoteProblems(fig(real, 'Kayden, 2026-10-31')).length, 'quote without source passes');
-  assert.ok(quoteProblems(fig(real, `Kayden, <a href="${src}">record</a>`)).length, 'undated quote passes');
-  assert.ok(quoteProblems(fig('a tidy paraphrase of what the owner meant', `Kayden, 2026-10-31, <a href="${src}">record</a>`)).length, 'paraphrase shown as quote passes');
+  const fig = (said) => `<main><figure data-owner-quote=""><blockquote><p>${said}</p></blockquote><figcaption>Kayden, 2026-10-31</figcaption></figure></main>`;
+  assert.ok(quoteProblems(fig('words the owner said, set out as a quotation')).length, 'an owner-quote figure passes');
+  assert.ok(quoteProblems('<main><blockquote><p>words set out as a quotation</p></blockquote></main>').length, 'a blockquote passes');
+  assert.ok(quoteProblems('<main><p>He called it <q>one loop for everything</q>.</p></main>').length, 'a <q> passes');
   assert.deepEqual(quoteProblems('<main><p>A page that quotes no one passes.</p></main>'), [], 'a page with no quote fails');
   assert.ok(quoteProblems('<main><p>Kayden called it “a tool belt wrapped in one loop”.</p></main>').length, 'loose quote marks pass');
+  assert.deepEqual(ownerQuoteProblems([{ name: 'a.html', html: '<main><p>No quotes.</p></main>' }]), []);
 });
 
 for (const { href, title } of TOUR) {
@@ -42,7 +40,7 @@ for (const { href, title } of TOUR) {
     assert.deepEqual(pageProblems(html), [], href);
   });
 
-  test(`${href}: owner quotes are verbatim with a dated source; no paraphrase is shown as a quote`, () => {
+  test(`${href}: quotes no one (no owner-quote figure, blockquote, <q> or quote marks)`, () => {
     assert.deepEqual(quoteProblems(builtPage(builtName(href)).html), [], href);
   });
 }
@@ -61,6 +59,13 @@ test('/how-it-works links one real Spec and one real Task to their files on GitH
   const links = repoLinks(builtPage('how-it-works.html').html);
   assert.ok(links.some((l) => /\/SPEC\.md$/.test(l.path) && l.exists), 'no link to an existing SPEC.md');
   assert.ok(links.some((l) => /\/TASK\.md$/.test(l.path) && l.exists), 'no link to an existing TASK.md');
+});
+
+test('no built page carries an owner quote (data-owner-quote), with a planted fault caught', () => {
+  const pages = builtPages();
+  assert.deepEqual(ownerQuoteProblems(pages), []);
+  const planted = pages.map((p, i) => (i === 0 ? { ...p, html: p.html.replace('</main>', '<figure data-owner-quote=""><blockquote><p>planted words</p></blockquote></figure></main>') } : p));
+  assert.equal(ownerQuoteProblems(planted).length, 1, 'a planted owner quote on a built page passes');
 });
 
 test('every GitHub link on a built page names a file that exists in this repository', () => {
