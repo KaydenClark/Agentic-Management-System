@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-004 claimed by claude-impl-s013-tk004.
-**Next gate:** Close TK-004 with verification and documentation proof.
+**Latest event:** TK-004 closed with proof.
+**Next gate:** Complete TK-003.
 
 ## Intent and authority
 
@@ -97,6 +97,7 @@ node workbench/tools/spec-workbench.mjs doctor
 | 2026-11-01 | TK-002 | Task closed | uv run pytest: 47 pass at 206fa51 (6 up-to-Spec fixture tests incl. must-fail invariant; mutation forcing met-without-evidence fails 4 tests); report workbench/feedback/coherence/UP-TO-SPEC-S-004-2026-11-01.md for S-004 at main 8b70874 (0 met, 7 not met) | workbench/feedback/coherence/UP-TO-SPEC-S-004-2026-11-01.md; RUNBOOK line blocked by COH-003 | Specs do not yet use an Evidence: clause on acceptance lines; checked lines without one report unknown by design; close attribution: {"agent":"orchestrator-C","claimant":"orchestrator-C","onBehalfOf":null} |
 | 2026-11-01 | none | Owner answers to COH-005, COH-006 and COH-016 recorded; No secrets line reworded per COH-016 (connectors stay attached, C never uses them); ADR-003F/003G/003H supersede 002O/002F/002Y | `adr.mjs validate` ok | [owner answers](../../../../wiki/context-owner-answers-coherence.md), [sweep](../../../../feedback/coherence/COHERENCE-2026-11-01.md) | No secrets still needs evidence |
 | 2026-11-01 | none | Wrap-up: C reviewed S-006 (fail `c87bf4e`, repo-half pass `d6d4a6d`) and S-004 (fail `dd52f70`, pass `4d49bfc`); COH-020 to COH-023 recorded; `dev` 84 ahead of `main` (COH-021) | `ams.coherence.drift`, `up_to_spec` | [handoff](../../../../handoffs/orchestrator-C-coherence.md) | TK-003, TK-004, TK-005, RUNBOOK line, No secrets evidence |
+| 2026-11-02 | TK-004 | Task closed | uv run pytest: 606 passed, 4 skipped at dd1e2e8 (11 in tests/test_coherence_review.py: builder session/agent/closed-Task claimant refused before native verdict; verdict stale after a code change or Spec digest change); end-to-end probe in a throwaway clone: record -> native verdict -> status current, then stale after a README change; render no diff, doctor no blockers, layout valid, git diff --check clean | workbench/specs/REVIEW-RECEIPT-TEMPLATE.md (Independent Spec review procedure; Reviewing context field); workbench/feedback/coherence/REVIEW-STATUS-S-004-2026-11-02.md; RUNBOOK unchanged (2,995 of 3,000 chars; it already points Review at the template) | Checker lives at src/ams/coherence/review.py, not in the native gate: bare spec-workbench verdict and complete still accept a builder or stale-commit verdict until setup-workbench adopts the check; builder sessions are known only from AMS-Context trailers (earlier commits carry none, so older builders are matched by agent name only); S-013 itself has orchestrator-C as a builder, so its review must come from another context; close attribution: {"agent":"claude-impl-s013-tk004","claimant":"claude-impl-s013-tk004","onBehalfOf":null} |
 
 ## Review and Human QA
 
