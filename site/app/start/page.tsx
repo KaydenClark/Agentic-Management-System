@@ -53,7 +53,7 @@ export default function StartHere() {
         <p className="eyebrow">Tour</p>
         <h1>Start here</h1>
         <p className="lede" data-opener="">
-          The Agentic Management System, or <dfn id="ams">AMS</dfn>, is a reusable system for turning
+          The Agentic Management System, or <dfn id="ams">AMS</dfn>, is a reusable system for turning{" "}
           <dfn id="intent">intent</dfn>—what you want, why and within what boundaries—into outcomes with AI.
           People develop and write down what they want; <dfn id="agent">agents</dfn>,
           AI assistants that carry out work, deliver it with checks and evidence. Explore the system in pictures,
