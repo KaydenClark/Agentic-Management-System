@@ -159,10 +159,10 @@ class StatusTest(unittest.TestCase):
         self.repo, self.candidate = _fixture()
         self.digest = lambda commit: "a" * 64
 
-    def _append_verdict(self, reviewer, digest="a" * 12, n=1):
+    def _append_verdict(self, reviewer, digest="a" * 12, n=1, trailer=""):
         with Path(self.repo, SPEC_DIR, "SPEC.md").open("a") as f:
             f.write(_verdict_row(self.candidate, reviewer, digest, n))
-        return _commit(self.repo, "Record review verdict")
+        return _commit(self.repo, "Record S-900 review verdict" + (f"\n\nAMS-Context: {trailer}" if trailer else ""))
 
     def _status(self, commit):
         return status("S-900", repo=self.repo, commit=commit, digest_at=self.digest)["verdicts"]
@@ -188,6 +188,32 @@ class StatusTest(unittest.TestCase):
         [v] = self._status(head)
         self.assertEqual(v["status"], "stale", v)
         self.assertIn("content", " ".join(v["reasons"]))
+
+    def test_reviewers_own_verdict_commit_does_not_make_it_a_builder(self):
+        # Codex P2 on PR #97: review bookkeeping is not building.
+        head = self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}",
+                                    trailer=REVIEW_CTX)
+        self.assertNotIn(REVIEW_CTX, builders("S-900", repo=self.repo, commit=head)["contexts"])
+        [v] = self._status(head)
+        self.assertEqual(v["status"], "current", v)
+        record("S-900", head, "pass", "none", "model fresh", "reviewer-b", context=REVIEW_CTX,
+               repo=self.repo, run_verdict=lambda argv: None)
+
+    def test_a_verdict_commit_that_also_changes_code_is_building(self):
+        with Path(self.repo, SPEC_DIR, "SPEC.md").open("a") as f:
+            f.write(_verdict_row(self.candidate, f"m; agent: reviewer-b; context: {REVIEW_CTX}"))
+        Path(self.repo, "src/thing.py").write_text("v = 3\n")
+        head = _commit(self.repo, f"Record S-900 verdict and patch code\n\nAMS-Context: {REVIEW_CTX}")
+        self.assertIn(REVIEW_CTX, builders("S-900", repo=self.repo, commit=head)["contexts"])
+
+    def test_supplementary_spec_artifact_changed_after_review_is_stale(self):
+        # Codex P2 on PR #97: only digest-covered records are exempt.
+        self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}")
+        Path(self.repo, SPEC_DIR, "diagram.svg").write_text("<svg/>\n")
+        head = _commit(self.repo, "Add a Spec diagram after review")
+        [v] = self._status(head)
+        self.assertEqual(v["status"], "stale", v)
+        self.assertIn("diagram.svg", " ".join(v["reasons"]))
 
     def test_verdict_by_the_building_session_is_reported_refused(self):
         head = self._append_verdict(f"model; agent: reviewer-b; context: {BUILD_CTX}")
