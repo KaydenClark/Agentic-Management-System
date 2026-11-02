@@ -88,6 +88,8 @@ TK-000M/N/O: scoring; TK-000T/V: bootstrap; TK-001..004: trials. B local; checke
 
 ## Acceptance Criteria
 
+- [ ] **Feedback loop connection:** Closed loop: one feedback occurrence reaches diagnosis, bounded repair, qualified comparison, disposition, accepted personal use and a later website task; safe progress is visible throughout. An introduced recurrence is detected without owner prompting. Interrupted coordination resumes the same records without duplicate claims, reset attempts or expansion of a scoped stop.
+
 - [ ] **Cycle:** failure -> change -> three-run score -> retest/disposition/later use; reject missing pin/retest.
 - [x] **Scoring:** Pool `8/10 + 1/2 + 1/2 = 10/14`; empty: no score. Test all levels, Quality No, Critical/Regression/missing proof. Reject Broken acceptance and bounded-as-whole.
 - [ ] **Evals:** enforce comparison contracts; reject do-nothing passes, self-grading, anecdotal/static benefit, skipped permissions/below-floor lift.
@@ -105,3 +107,7 @@ Independent review per retained change; owner judges automation.
 ## Completion Result
 
 Pending.
+
+## Feedback-loop planning boundary
+
+Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
