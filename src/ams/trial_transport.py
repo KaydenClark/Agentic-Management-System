@@ -48,6 +48,7 @@ class ClaudeProcess:
                                     capture_output=True, text=True, timeout=15, check=False)
             self.stderr = status.stderr.encode()[-16384:]
             auth = json.loads(status.stdout)
+            require(isinstance(auth, dict), 'subscription status object missing')
             require(status.returncode == 0 and auth.get('loggedIn') is True
                     and auth.get('authMethod') in ('claude.ai', 'oauth', 'subscription')
                     and not auth.get('apiKeySource'), 'subscription-only authentication unavailable')
@@ -60,8 +61,11 @@ class ClaudeProcess:
                                             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                             start_new_session=(os.name == 'posix'))
         except (OSError, ValueError, subprocess.TimeoutExpired) as error:
+            if isinstance(error, subprocess.TimeoutExpired) and error.stderr:
+                self.stderr = (error.stderr.encode() if isinstance(error.stderr, str) else error.stderr)[-16384:]
             if self.defer_start:
-                raise  # The adapter lifetime already owns cleanup and diagnostics.
+                # Preserve legacy controlled failure, while the owned lifetime retains its cause.
+                raise Refused('Claude runtime/authentication unavailable; inspect private trial diagnostics') from error
             self.failure_diagnostic(type(error).__name__, str(error))
             raise Refused('Claude runtime/authentication unavailable; inspect private trial diagnostics') from None
         self.selector = selectors.DefaultSelector()

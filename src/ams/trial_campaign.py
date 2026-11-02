@@ -71,7 +71,7 @@ class Campaign:
             return result
         except BaseException as error:
             failure=getattr(getattr(self.call,'__self__',None),'last_failure',None)
-            controlled=isinstance(error,(series.Refused,OSError,TimeoutError))
+            controlled=isinstance(error,Exception)
             self.last_failure={'cause':str(error),'runtimeDiagnostic':failure}if controlled else failure
             terminal=failure.get('terminalExecution')if isinstance(failure,dict)else None
             execution=result if result is not None else terminal

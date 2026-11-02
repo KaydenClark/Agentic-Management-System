@@ -3,7 +3,11 @@ from contextlib import contextmanager
 
 
 def _cause(error):
-    return None if error is None else {'errorClass':type(error).__name__,'reason':str(error)}
+    if error is None:return None
+    value={'errorClass':type(error).__name__,'reason':str(error)}
+    if error.__cause__ is not None:
+        value['causedBy']={'errorClass':type(error.__cause__).__name__,'reason':str(error.__cause__)}
+    return value
 
 
 @contextmanager

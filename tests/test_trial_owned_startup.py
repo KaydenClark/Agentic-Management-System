@@ -14,7 +14,7 @@ from test_trial_actual_halts import WireFactory,_assert_public_privacy
 
 
 @pytest.mark.parametrize('phase',['qualification','worker'])
-@pytest.mark.parametrize('fault',['auth-refusal','selector-interrupt'])
+@pytest.mark.parametrize('fault',['auth-refusal','auth-malformed','auth-scalar','auth-timeout','selector-interrupt'])
 def test_owned_real_transport_startup_retains_diagnostic_and_reaps_child(tmp_path,monkeypatch,phase,fault):
     c=campaign(tmp_path,monkeypatch,trial_judge.InterviewAdapter().execute)
     wires=WireFactory(phase,'no-fault');wires.campaign=c
@@ -26,6 +26,9 @@ def test_owned_real_transport_startup_retains_diagnostic_and_reaps_child(tmp_pat
     def auth(args,*a,**kwargs):
         if args[:3]==['claude','auth','status']:
             counts['auth']+=1
+            if fault=='auth-timeout':raise subprocess.TimeoutExpired(args,15,stderr=marker.encode())
+            if fault=='auth-scalar':return SimpleNamespace(returncode=0,stdout='[]',stderr=marker)
+            if fault=='auth-malformed':return SimpleNamespace(returncode=0,stdout='not-json',stderr=marker)
             return SimpleNamespace(returncode=0,stdout=json.dumps({'loggedIn':fault!='auth-refusal',
                 'authMethod':'subscription'}),stderr=marker)
         return real_run(args,*a,**kwargs)
@@ -47,7 +50,7 @@ def test_owned_real_transport_startup_retains_diagnostic_and_reaps_child(tmp_pat
         with pytest.raises(KeyboardInterrupt):c.qualify()if phase=='qualification'else c.run_one(0)
         identity='qualification-owner-positive-r1'if phase=='qualification'else'trial-1-cancelled'
         row=series.read_private(c.store,identity)['evidence'];private=row['privateDiagnostic']
-        facts=private['runtimeDiagnostic']if fault=='auth-refusal'else private
+        facts=private if fault=='selector-interrupt'else private['runtimeDiagnostic']
         pointer=facts['diagnostic'];assert isinstance(pointer,str)
         diagnostic=json.loads(Path(pointer).read_text())
         assert marker in diagnostic['stderr'] and marker not in json.dumps(row)
@@ -56,6 +59,9 @@ def test_owned_real_transport_startup_retains_diagnostic_and_reaps_child(tmp_pat
         assert all(child.poll()is not None for child in children)  # before fallback cleanup
         assert counts=={'auth':1,'starts':int(fault=='selector-interrupt')}
         assert row['ownerCancellation']is(fault=='selector-interrupt')
+        if fault in ('auth-malformed','auth-timeout'):
+            assert facts['failures']['body']['causedBy']['errorClass']==(
+                'JSONDecodeError'if fault=='auth-malformed'else'TimeoutExpired')
         assert facts['terminalExecution']is None and facts['observedProviderTurns']is None
         if phase=='qualification':
             assert row['verdict']=='Unknown'

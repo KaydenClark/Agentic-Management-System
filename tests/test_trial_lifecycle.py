@@ -8,7 +8,7 @@ from test_trial_actual_halts import WireFactory,_assert_public_privacy
 
 @pytest.mark.parametrize('phase',['qualification','worker','grader'])
 @pytest.mark.parametrize('fault',['cleanup-interrupt','body-refused-cleanup-interrupt',
-    'body-interrupt-cleanup-error','body-refused-cleanup-error','cleanup-interrupt-diagnostic-interrupt'])
+    'body-interrupt-cleanup-error','body-refused-cleanup-error','cleanup-interrupt-diagnostic-interrupt','cleanup-value-error'])
 def test_entire_actual_lifetime_preserves_both_causes_and_terminal(tmp_path,monkeypatch,phase,fault):
     wires=WireFactory(phase,'no-fault')
     target={'qualification':1,'worker':6,'grader':7}[phase]
@@ -27,6 +27,7 @@ def test_entire_actual_lifetime_preserves_both_causes_and_terminal(tmp_path,monk
         def cleanup():
             close()
             if 'cleanup-interrupt'in fault:raise KeyboardInterrupt('PRIVATE_CLEANUP_CANCEL')
+            if fault=='cleanup-value-error':raise ValueError('PRIVATE_CLEANUP_CAUSE')
             raise OSError('PRIVATE_CLEANUP_CAUSE')
         wire.close=cleanup
         if 'diagnostic-interrupt'in fault:
@@ -39,12 +40,13 @@ def test_entire_actual_lifetime_preserves_both_causes_and_terminal(tmp_path,monk
     with pytest.raises(KeyboardInterrupt):c.qualify()if phase=='qualification'else c.run_one(0)
     identity='qualification-owner-positive-r1'if phase=='qualification'else'trial-1-cancelled'
     row=series.read_private(c.store,identity)['evidence'];failure=row['privateDiagnostic']
-    controlled=fault=='body-refused-cleanup-error'
+    controlled=fault in ('body-refused-cleanup-error','cleanup-value-error')
     assert row['ownerCancellation']is(not controlled)
     assert row['reason']==('runtime-refused'if controlled else'cancelled')
     facts=failure['runtimeDiagnostic']if controlled else failure
     causes=facts['failures']
-    assert causes['cleanup']['errorClass']==('KeyboardInterrupt'if'cleanup-interrupt'in fault else'OSError')
+    assert causes['cleanup']['errorClass']==('KeyboardInterrupt'if'cleanup-interrupt'in fault else
+                                                 'ValueError'if fault=='cleanup-value-error'else'OSError')
     if fault.startswith('body-'):
         assert causes['body']['errorClass']==('Refused'if'body-refused'in fault else'KeyboardInterrupt')
         assert facts['terminalExecution']is None
