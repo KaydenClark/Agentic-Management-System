@@ -131,12 +131,12 @@ export default function HowItWorks() {
         <h2 id="example">One real Spec and one real Task</h2>
         <p>
           <strong>
-            Spec <a href={`${REPO_BLOB}${S003}SPEC.md`}>S-003, Showcase site shell and orientation tour</a>
+            Spec <a href={`${REPO_BLOB}${S003}SPEC.md`}>S-003</a>
           </strong>{" "}
-          is the Spec for this site. It is active, at priority 1, owned by Kayden with orchestrator A. It sets eleven
-          acceptance conditions, from every tour page having a plain-language opener to a quickstart that replays on a
-          fresh copy of the repository, and it plans seven Tasks, TK-001 to TK-007. None of its conditions is checked
-          off yet.
+          is the Spec for this site&apos;s shell and orientation tour. It is active, at priority 1, owned by Kayden with
+          orchestrator A. Its acceptance conditions run from every page opening in plain language to the commit shown
+          in each footer matching the deployment, and its work is split into seven Tasks, TK-001 to TK-007. None of
+          its conditions is checked off yet.
         </p>
         <p>
           <strong>

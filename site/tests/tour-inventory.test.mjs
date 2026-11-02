@@ -55,6 +55,39 @@ test('/start says what the AMS refuses to do', () => {
   for (const item of items) assert.ok(repoLinks(item).length, `refusal without a source record: ${visibleText(item)}`);
 });
 
+// The quickstart on /start (S-003 Quickstart): a reading route of at least
+// four linked stops with nothing to run, then a step telling the reader to use
+// the setup-workbench skill, linked to its article and sourced to a record.
+export function quickstartProblems(main) {
+  const problems = [];
+  const section = main.match(/<section\b[^>]*aria-labelledby="quickstart"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
+  if (!section) return ['no quickstart section (aria-labelledby="quickstart")'];
+  const route = section.match(/<ol\b[^>]*data-route[^>]*>([\s\S]*?)<\/ol>/i)?.[1] ?? '';
+  const stops = [...route.matchAll(/<li\b[\s\S]*?<\/li>/gi)].map((m) => m[0]);
+  if (stops.length < 4) problems.push(`the reading route has ${stops.length} stops, fewer than four`);
+  for (const s of stops) if (!/<a\b[^>]*href="[/#]/.test(s)) problems.push(`a route stop links nowhere on the site: ${visibleText(s).slice(0, 40)}`);
+  if (/<pre\b|data-command/i.test(section)) problems.push('the quickstart shows commands to run');
+  const setup = section.match(/<div\b[^>]*data-setup-step[^>]*>([\s\S]*?)<\/div>/i)?.[1] ?? '';
+  if (!/\buse the\b[\s\S]*setup-workbench/i.test(visibleText(setup))) problems.push('no step telling the reader to use setup-workbench');
+  if (!/href="\/skills\/setup-workbench"/.test(setup)) problems.push('the setup step does not link the setup-workbench article');
+  if (!repoLinks(setup).some((l) => l.exists)) problems.push('the setup step cites no committed record');
+  return problems;
+}
+
+test('the quickstart check catches faults (self-test)', () => {
+  const main = mainOf(builtPage('start.html').html);
+  assert.deepEqual(quickstartProblems(main), []);
+  assert.ok(quickstartProblems(main.replace(/aria-labelledby="quickstart"/, 'aria-labelledby="x"')).length, 'a page without the quickstart passes');
+  assert.ok(quickstartProblems(main.replace(/(<ol\b[^>]*data-route[^>]*>)<li\b[\s\S]*?<\/li>/i, '$1')).length, 'a three-stop route passes');
+  assert.ok(quickstartProblems(main.replace(/(<ol\b[^>]*data-route[^>]*>)/i, '$1<pre data-command="x">git clone</pre>')).length, 'a command in the quickstart passes');
+  assert.ok(quickstartProblems(main.replace(/href="\/skills\/setup-workbench"/g, 'href="/skills"')).length, 'a setup step without the article link passes');
+  assert.ok(quickstartProblems(main.replace(/(data-setup-step[^>]*>[\s\S]*?)use the/i, '$1see the')).length, 'a setup step that does not say to use it passes');
+});
+
+test('/start ends with the quickstart: a reading route and the setup-workbench step', () => {
+  assert.deepEqual(quickstartProblems(mainOf(builtPage('start.html').html)), []);
+});
+
 test('/how-it-works links one real Spec and one real Task to their files on GitHub', () => {
   const links = repoLinks(builtPage('how-it-works.html').html);
   assert.ok(links.some((l) => /\/SPEC\.md$/.test(l.path) && l.exists), 'no link to an existing SPEC.md');

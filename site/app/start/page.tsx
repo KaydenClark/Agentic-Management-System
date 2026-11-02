@@ -1,7 +1,9 @@
 // /start: Start here, the first tour page (S-003). The Blueprint's elevator
 // pitch as short screens, one idea and one picture each, then a toy that moves
-// one sample piece of work through the real lifecycle. The diagram, the toy
-// and its no-JS fallback all read app/start/flow.mjs. Every claim links the
+// one sample piece of work through the real lifecycle, then the quickstart:
+// a reading route through the site (S-003 Quickstart: no installation,
+// credentials or command replay) and the setup-workbench step. The diagram,
+// the toy and its no-JS fallback all read app/start/flow.mjs. Every claim links the
 // committed record it comes from; owner feedback 2026-11-01 asked for no
 // quote and no essay.
 import type { Metadata } from "next";
@@ -22,6 +24,9 @@ const S003 = { label: "S-003", path: "workbench/landmarks/LMK-003-ams-website/sp
 const ARCH = { label: "Architecture", path: "ARCHITECTURE.md" };
 const DDR000O = { label: "DDR-000O", path: "workbench/docs/ddr/000O-the-public-site-only-presents-and-reads-supabase.md" };
 const ADR000G = { label: "ADR-000G", path: "workbench/docs/adr/000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md" };
+const SKILLS_MD = { label: "Workbench skills", path: "workbench/docs/SKILLS.md" };
+const README_AGENTS = { label: "README, Working With Agents", path: "README.md" };
+const MANIFEST = { label: "the manifest, skillPolicy", path: "workbench/manifest.json" };
 
 const PARTS = ["Agents", "Workflows", "Intent capture", "Skills", "Tools"];
 const CARRIED = ["What you meant", "Why", "Corrections", "Proof"];
@@ -51,10 +56,11 @@ export default function StartHere() {
           The Agentic Management System, or <dfn id="ams">AMS</dfn>, is how Kayden runs his{" "}
           <dfn id="agent">agents</dfn>: AI assistants that carry out a piece of work on their own. This page shows it
           in pictures, then hands you a toy: move one piece of work from an idea to done and see who holds it at each
-          step.
+          step. It ends with a quickstart, a short route through the rest of the site and the first step to take
+          if you want a setup of your own.
         </p>
         <p className={styles.jump}>
-          <a href="#try">Skip to the toy</a>
+          <a href="#try">Skip to the toy</a> <a href="#quickstart">Skip to the quickstart</a>
         </p>
       </header>
 
@@ -305,9 +311,51 @@ export default function StartHere() {
             No improvement has been measured yet, so the <Link href="/rsi">RSI results</Link> page is empty on purpose.
           </li>
         </ul>
+      </Screen>
+
+      <Screen id="quickstart" n={8} title="Quickstart: where to go from here">
         <p className={styles.say}>
-          Next, <Link href="/why">Why</Link> says what the AMS is for; then{" "}
-          <Link href="/how-it-works">How it works</Link> opens the records behind each stage.
+          Four stops take you through the rest of the site, with nothing to install. Take them in order; each one
+          teaches one thing.
+        </p>
+        <ol className={styles.route} data-route="">
+          <li>
+            <strong>The introduction.</strong> You have just read it: the screens above say what the AMS is, the
+            problem it solves and how a piece of work moves. <Link href="/why">Why</Link> adds what the system is
+            for and what it promises.
+          </li>
+          <li>
+            <strong>A real piece of work.</strong> <Link href="/how-it-works#example">How it works</Link> follows
+            one real Spec, the written plan for a change, and one of its Tasks from this site to their files, so you
+            can see how a request is written down, split up and closed with proof.
+          </li>
+          <li>
+            <strong>A demonstration and the skills.</strong> The <a href="#try">toy</a> on this page shows who holds
+            the work at each step, and the <Link href="/skills">Skills</Link> wiki summarizes each written method an agent
+            loads before it acts.
+          </li>
+          <li>
+            <strong>The evidence and its limits.</strong> <Link href="/rsi">RSI results</Link> is where measured
+            results will appear, and <Link href="/why#bet">Why it calls itself a bet</Link> explains why no page
+            claims an improvement before they exist.
+          </li>
+        </ol>
+        <div className={styles.setup} data-setup-step="">
+          <p className={styles.say}>
+            Then, to set up a Workbench of your own, use the{" "}
+            <Link href="/skills/setup-workbench">setup-workbench</Link> skill.
+          </p>
+          <p>
+            A Workbench is the set of project files that tells agents the rules, holds the queue of work and says how
+            to check it. The setup-workbench skill is the method the project names for preparing, adopting, updating or
+            checking one. It belongs to Kayden&apos;s own skill collection rather than this repository, so the
+            Skills page describes what it does and what it needs.
+          </p>
+          <SourceLinks sources={[SKILLS_MD, README_AGENTS, MANIFEST]} />
+        </div>
+        <p>
+          New words along the way are in the <Link href="/glossary">Glossary</Link>, and{" "}
+          <Link href="/about">About</Link> says what the repository holds.
         </p>
       </Screen>
     </div>

@@ -102,7 +102,7 @@ export default function About() {
           </li>
           <li>
             Each change goes from its own branch into <code>dev</code> after the automated{" "}
-            <code>site builds</code> check passes: install, build and every test, the quickstart replay included. Only Kayden moves{" "}
+            <code>site builds</code> check passes: install, build and every test. Only Kayden moves{" "}
             <code>dev</code> into <code>main</code>, the public version.
             <Source path={`${ADR}003I-only-main-dev-and-site-branches-deploy-to-vercel.md`}>ADR-003I</Source>
             <Source path="AGENTS.md">AGENTS.md, PR instructions</Source>

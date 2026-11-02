@@ -17,7 +17,6 @@ export const READING_ORDER = [
   '/why',
   '/how-it-works',
   '/skills',
-  '/quickstart',
   '/rsi',
   '/glossary',
   '/about',
@@ -28,7 +27,6 @@ export const TOUR = [
   { href: '/start', title: 'Start here' },
   { href: '/why', title: 'Why' },
   { href: '/how-it-works', title: 'How it works' },
-  { href: '/quickstart', title: 'Quickstart' },
   { href: '/glossary', title: 'Glossary' },
   { href: '/about', title: 'About' },
 ];
