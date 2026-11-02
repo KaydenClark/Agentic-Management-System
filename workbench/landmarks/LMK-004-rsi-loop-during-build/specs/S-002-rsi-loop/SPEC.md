@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-002 claimed by s002-noise-floor.
-**Next gate:** Close TK-002 with verification and documentation proof.
+**Latest event:** TK-002 engineering delivered; qualification command rejected before process creation.
+**Next gate:** Explicit Anthropic payload/destination approval, then orchestrator phase release; preserve frozen source and zero-call hold.
 
 ## Intent and authority
 
@@ -23,7 +23,7 @@
 
 Exact-identity repair: S-006/TK-000S.
 
-[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise. Its reviewed engineering reference `921cb3e` (PR #92; CI87; 177 affected checks) freezes the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md). Actual calibration, rows and noise remain unrun pending selected main-contained source/release.
+[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise. Its reviewed engineering reference `921cb3e` (PR #92; CI87; 177 affected checks) freezes the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md). PR #92 merged at `d78b663`; the orchestrator selected main-contained source `921cb3e` after direct model-free import/protocol verification. The released qualification command was rejected by automatic approval review before process creation. Explicit Anthropic payload approval is pending with the owner; actual calls/journals/rows remain zero and calibration/noise remain unrun. [TK-002](tasks/TK-002/TASK.md) owns the exact hold and preserved identities.
 
 ## Desired Behavior
 
