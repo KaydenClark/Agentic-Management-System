@@ -10,7 +10,6 @@
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 closed with proof.
 **Next gate:** Complete TK-002.
 
 ## Intent and authority
@@ -24,6 +23,13 @@ A reader sees how skills and the build changed over time, per task and per versi
 ## Why It Matters
 
 The site exists partly to show whether the loop works. Only traceable, labeled numbers can show that without overclaiming.
+
+## Current Verified State
+
+- **Not met:** every acceptance criterion. [TK-001](tasks/TK-001/TASK.md#receipt) (honest empty state slice) is done with its receipt; the criterion is not yet checked here.
+- **Blocked:** [TK-002](tasks/TK-002/TASK.md) and [TK-003](tasks/TK-003/TASK.md), as their records state.
+
+History: [S-007 history](../../../../wiki/history/S-007.md).
 
 ## Desired Behavior
 

@@ -28,8 +28,11 @@ export const LANDMARK_STATUSES = Object.freeze(['planned', 'active', 'reached'])
 // The closed set of lifecycle subfolders beneath the collection's top level,
 // the same transient terminal folder a Spec has (SPEC_LIFECYCLE_FOLDERS).
 export const LANDMARK_LIFECYCLE_FOLDERS = Object.freeze(['retired']);
-export const REQUIRED_LANDMARK_FIELDS = Object.freeze(['Status', 'Priority', 'Owner', 'Updated', 'Catalog description', 'Blockers', 'Latest event', 'Next gate']);
-export const REQUIRED_LANDMARK_SECTIONS = Object.freeze(['Direction', 'What Success Looks Like', 'Decision Records', 'Append-Only Evidence And Execution Log', 'Reached Result']);
+// A landmark holds only its destination: its history (closes, verdicts,
+// approvals) lives on its Wiki history page, so neither a `Latest event`
+// field nor an in-body evidence log is required (a legacy one still reads).
+export const REQUIRED_LANDMARK_FIELDS = Object.freeze(['Status', 'Priority', 'Owner', 'Updated', 'Catalog description', 'Blockers', 'Next gate']);
+export const REQUIRED_LANDMARK_SECTIONS = Object.freeze(['Direction', 'What Success Looks Like', 'Decision Records', 'Reached Result']);
 // Sections the template ships and this reader parses when present.
 export const OPTIONAL_LANDMARK_SECTIONS = Object.freeze(['Why It Matters', 'Child Specs', 'Direct Tasks', 'Verification Procedure', 'Supersession']);
 const LANDMARK_ID = new RegExp(`^${LANDMARK_PREFIX}-[0-9A-Za-z]{3,}$`);
@@ -107,7 +110,7 @@ export function parseLandmarkArtifact(content, filePath, root) {
     updated: fields.Updated,
     description: fields['Catalog description'],
     blockers,
-    latestEvent: fields['Latest event'],
+    latestEvent: fields['Latest event'] ?? null,
     nextGate: fields['Next gate'],
     successChecks,
     decisionRecords: parseLinks(readSection('Decision Records')),

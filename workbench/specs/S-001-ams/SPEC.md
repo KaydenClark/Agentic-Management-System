@@ -10,8 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001 and TK-002 closed with proof.
-**Next gate:** Land TK-002 on `main`, then run TK-003.
+**Next gate:** Land TK-002 on `main`, then run TK-003 in a separate session.
 
 ## Intent and authority
 
@@ -27,16 +26,22 @@ The owner needs one auditable account of what is done and what remains.
 
 ## Current Verified State
 
+- Answer: **No** at `325b422` ([TK-001 assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)).
+- Met: Room.
+- Not met: Landmarks, Limits, Hygiene, Runtime baseline, Cold start, Owner gates.
+- Unknown: Skills pinned.
 - Workbench v3.2.2 is adopted: controls, lanes, Node lifecycle and generated Taskboard.
 - Site code, Supabase migrations and `dev` exist; see child Specs for scoped proof.
+
+History: [S-001 history](../../wiki/history/S-001.md).
 
 ## Desired Behavior
 
 - **Landmarks.** LMK-001 Grill Board, LMK-002 Presentation of the RSI, LMK-003 AMS website and LMK-004 RSI loop during the build each reach their success checks.
 - **Room and governance.** Root controls stay small and single-purpose within their character limits; decision records hold rationale, one decision each; records stay in visible folders; `TASKBOARD.md` is generated.
 - **Skills.** The owner's skills operate the AMS from the owner's skills repository, pinned per run; room-owned skills never shadow a personal skill name.
-- **Runtime.** The Node lifecycle tools run this build and are the baseline; S-012's Python CLI is measured against them before it replaces anything.
-- **Orchestration.** Three Claude orchestrators split the work by risk ([ADR-002Z](../../docs/adr/002Z-three-orchestrators-split-the-work-by-risk.md)); each decides its Dispatchers, and each Dispatcher its implementors.
+- **Runtime.** The current Node lifecycle tools run this build and are the baseline. A Python lifecycle CLI is its own Spec (S-012), measured against that baseline before it replaces anything.
+- **Orchestration.** Three Claude orchestrators: A (Website, cloud), B (Grill Board and RSI loop, local, holds the Supabase keys, never deploys) and C (Coherence, cloud, no secrets, writes no product code). Each orchestrator decides its Dispatchers; each Dispatcher decides its implementors.
 
 ## Decisions And Contracts
 
@@ -99,18 +104,9 @@ To answer "Are we there yet?": name the commit; run each check; report met, not 
 
 - README and RUNBOOK point here as the yardstick.
 
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Ported and rewritten; the Workbench adoption of 2026-11-01 recorded as this Spec's first room evidence | render, doctor | this Spec; adoption Wiki page | Every criterion |
-| 2026-11-01 | none | Owner unblocked S-001; the limit applies to Landmarks, above Specs | Linked confirmed owner correction; activation/readiness verification in the delivery PR | Landmark cap and start/acceptance distinction | Acceptance remains open |
-| 2026-11-02 | TK-002 | Task closed | ams-hygiene at 1c77317 ([proof](tasks/TK-002/TASK.md)): planted/valid inputs behave; site clean; real repo fails | RUNBOOK; ARCHITECTURE; CI workflows | Over-limit records owned elsewhere keep CI red (PR #98); close attribution: {"agent":"claude-impl-s001-tk002","claimant":"claude-impl-s001-tk002","onBehalfOf":null} |
-| 2026-11-02 | TK-001 | Task closed | No at 325b422 ([assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)); render x2 same, doctor 0 blockers, pytest 715/4 skip, ams-hygiene 13 findings | TK-001; Remaining Limitations | S-001 acceptance; see Remaining Limitations; close attribution: {"agent":"claude-impl-s001-tk001","claimant":"claude-impl-s001-tk001","onBehalfOf":null} |
-
 ## Review and Human QA
 
-None yet. Review follows S-013's procedure; Human QA comes only from the owner.
+None yet. Independent review needs a fresh-context reviewer at the exact commit; Human QA comes only from the owner.
 
 ## Completion Result
 
@@ -118,7 +114,6 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- Current answer: **No** (2026-11-02, `325b422`, [assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)): 1/8 criteria, 8/23 landmark checks met.
 - Agent-workable: PR #98 with over-limit pruning; TK-003; blocked S-002, S-006, S-007, S-013 Tasks.
 - Owner gates: approve S-005, S-009 to S-012; S-003 TK-003; S-004/S-008 QA and approvals; `dev` -> `main`.
 

@@ -28,7 +28,8 @@ This evolving synthesis is agent-written Markdown: summaries, entity pages,
 concept pages, comparisons and an overview, plus small source-linked jots with
 clearly labeled intent, findings, proposals and unresolved questions. A cold
 start retrieves relevant context rather than loading the corpus. Progress
-explanations link to live owners instead of copying Task rows or Spec evidence.
+explanations link to live owners; a Spec's or Landmark's history (closes,
+verdicts, approvals, corrections) is owned by its `history/<ID>.md` page.
 Legacy notepads remain readable sources and structured domain stores.
 
 In Governance Plane terms a wiki page is Enduring Context, this schema is
@@ -61,7 +62,9 @@ additional index service is required by this boundary.
 
 Declared collections are `design-concepts/` (required to exist, may be empty),
 `features/` (the maintained Feature catalog; capture at completion and update
-the owning capability article as knowledge changes; additive, may be empty), `guidebooks/` (ordered procedures), and
+the owning capability article as knowledge changes; additive, may be empty),
+`history/` (one append-only `history/<ID>.md` page per Spec or Landmark, type
+`history`, written by the native lifecycle tools; additive, may be empty), `guidebooks/` (ordered procedures), and
 `archive/` (historical, generated, superseded, and migration evidence). Every
 collection is flat; only `archive/` may nest. `MEMORY.md` is the only router.
 
@@ -213,8 +216,9 @@ last_verified: YYYY-MM-DD
 - Label inferred claims with `Inference:` and dated claims with their date.
 - Preserve unresolved contradictions explicitly until a higher-authority
   source is verified.
-- Never copy live task rows, spec evidence, or generated Taskboard state into
-  a note; link to the owner instead.
+- Never copy live task rows or generated Taskboard state into a note; link to
+  the owner instead. Spec and Landmark history belongs in `history/<ID>.md`,
+  which the native tools append to.
 
 ## Lint
 

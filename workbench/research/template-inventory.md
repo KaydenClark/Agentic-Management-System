@@ -66,8 +66,8 @@ These are AMS-authored adaptations grounded in the research basis, not falsely a
 | [Wiki note](../wiki/archive/ams-scaffold-templates/NOTE-TEMPLATE.md) (retired 2026-11-01) | Flat source-linked topic in workbench/wiki/; captures intent with status and corrections. |
 | [Wiki guidebook](../wiki/archive/ams-scaffold-templates/GUIDEBOOK-TEMPLATE.md) (retired 2026-11-01) | Flat extended procedure/explanation linked from the Runbook when applicable. |
 | [Wiki comparison](../wiki/archive/ams-scaffold-templates/COMPARISON-TEMPLATE.md) (retired 2026-11-01) | Flat qualitative comparison; measured trials remain in evals/. |
-| [Review receipt](../specs/REVIEW-RECEIPT-TEMPLATE.md) | Candidate-bound assessment in the owning Spec's evidence location. |
-| [Human QA receipt](../specs/HUMAN-QA-RECEIPT-TEMPLATE.md) | Actual human experience/judgment in the owning Spec's evidence location. |
+| [Review receipt](../specs/REVIEW-RECEIPT-TEMPLATE.md) | Candidate-bound assessment, linked from the owning Spec's Wiki history page. |
+| [Human QA receipt](../specs/HUMAN-QA-RECEIPT-TEMPLATE.md) | Actual human experience/judgment, linked from the owning Spec's Wiki history page. |
 | [Website page](../../site/PAGE-TEMPLATE.md) | Explanation, claim/evidence mapping and demo design under site/. |
 | [Skill skeleton](SKILL-TEMPLATE.md) | Inactive authoring reference; only a validated, authorized capability becomes .agents/skills/<name>/SKILL.md. |
 
