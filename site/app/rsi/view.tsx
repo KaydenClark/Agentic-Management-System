@@ -29,7 +29,16 @@ const STATE: Record<ExecutionState, string> = {
 };
 
 const short = (commit: string) => commit.slice(0, 7);
-const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
+// Numbers as a reader writes them: thousands separators, dollars to at least
+// two places (cost_usd is numeric(12, 6), so up to six), and the unbounded
+// score scale cut to three places. The read time is shown in UTC.
+const count = new Intl.NumberFormat("en-US");
+const usd = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 6 });
+const score = new Intl.NumberFormat("en-US", { maximumFractionDigits: 3 });
+const readTime = new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "UTC" });
+const plural = (n: number, one: string, many: string) => `${count.format(n)} ${n === 1 ? one : many}`;
+// numeric columns may arrive as strings; anything that is not a number is shown as stored.
+const numeric = (v: number | string, f: Intl.NumberFormat) => (Number.isFinite(Number(v)) ? f.format(Number(v)) : String(v));
 
 function Explanation() {
   return (
@@ -45,7 +54,7 @@ function Explanation() {
 }
 
 function countText(c: Count): string {
-  if (c.key === "passed") return `${c.passed} of ${plural(c.of, "graded trial", "graded trials")} passed`;
+  if (c.key === "passed") return `${count.format(c.passed ?? 0)} of ${plural(c.of, "graded trial", "graded trials")} passed`;
   return `${plural(c.of, "trial", "trials")} not graded`;
 }
 
@@ -53,7 +62,7 @@ function rowResult(r: RsiResult): string {
   if (r.execution_state !== "completed") return `not graded (${STATE[r.execution_state] ?? r.execution_state})`;
   if (r.passed === true) return "passed";
   if (r.passed === false) return "failed";
-  return `scored ${r.score}, no pass grade`;
+  return `scored ${r.score === null ? "unknown" : numeric(r.score, score)}, no pass grade`;
 }
 
 function Row({ row, placeId, runUrl }: { row: RsiResult; placeId: string; runUrl: string | null }) {
@@ -61,11 +70,11 @@ function Row({ row, placeId, runUrl }: { row: RsiResult; placeId: string; runUrl
   const tokens = row.input_tokens !== null && row.output_tokens !== null &&
     Number.isSafeInteger(row.input_tokens) && Number.isSafeInteger(row.output_tokens) &&
     Number.isSafeInteger(row.input_tokens + row.output_tokens)
-    ? row.input_tokens + row.output_tokens : "unknown";
+    ? count.format(row.input_tokens + row.output_tokens) : "unknown";
   return (
     <li data-row="" data-row-id={String(row.id)} id={`${placeId}-row-${row.id}`} className={styles.row}>
-      Row {row.id}: task <code data-label="">{row.task_id}</code>, trial {row.trial}, {rowResult(row)}; cost {row.cost_usd === null ? "unknown" : `$${row.cost_usd}`},{" "}
-      tokens {tokens}, turns {row.turns ?? "unknown"}. Strength: <span data-strength="" className={styles.strength}>{STRENGTH[row.strength] ?? row.strength}</span>.
+      Row {row.id}: task <code data-label="">{row.task_id}</code>, trial {row.trial}, {rowResult(row)}; cost {row.cost_usd === null ? "unknown" : numeric(row.cost_usd, usd)},{" "}
+      tokens {tokens}, turns {row.turns === null ? "unknown" : count.format(row.turns)}. Strength: <span data-strength="" className={styles.strength}>{STRENGTH[row.strength] ?? row.strength}</span>.
       Source: {href ? <a href={href}>{row.source_kind} {row.source_ref}</a> : <code>{row.source_kind} {row.source_ref}</code>}.
     </li>
   );
@@ -261,7 +270,7 @@ export function RsiView({ views, unavailable, readAt = null }: { views: readonly
             successful read is unknown for this response.
           </p>
         ) : null}
-        {readAt ? <p className={styles.muted}>Last successful read: <time dateTime={readAt}>{readAt}</time>.</p> : null}
+        {readAt ? <p className={styles.muted}>Last successful read: <time dateTime={readAt}>{Number.isFinite(Date.parse(readAt)) ? `${readTime.format(new Date(readAt))} UTC` : readAt}</time>.</p> : null}
         <p className={styles.muted}>
           Colors: this page uses no signal colors yet. A grey dashed frame marks a chart place with nothing in it; a
           square point marks a regression.

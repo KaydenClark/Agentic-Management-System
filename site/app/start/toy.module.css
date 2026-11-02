@@ -98,7 +98,7 @@
   border-radius: var(--radius-pill);
   border: var(--focus-width) solid var(--tone-line);
   background: transparent;
-  transition: background-color var(--motion-quick) ease, transform var(--motion-quick) ease;
+  transition: background-color var(--motion-quick) ease, transform var(--motion-quick) var(--ease-out);
 }
 
 .stop[data-past] .stopDot {
@@ -110,9 +110,10 @@
   font-weight: var(--weight-bold);
 }
 
+/* The live dot grows by transform, not width and height, so its stop keeps
+   its height and the label under it stays on the same line as the others. */
 .stop[data-now] .stopDot {
-  width: var(--dot-size-live);
-  height: var(--dot-size-live);
+  transform: scale(var(--dot-scale-live));
   background: var(--tone-dot);
   border-color: var(--ink);
 }
@@ -184,11 +185,11 @@
   font-size: var(--text-ui);
   font-weight: var(--weight-semibold);
   cursor: pointer;
+  transition: transform var(--motion-press) var(--ease-out);
 }
 
-.button:hover:not(:disabled) {
-  background: var(--raised);
-  border-color: var(--ink);
+.button:active:not(:disabled) {
+  transform: scale(var(--press-scale));
 }
 
 .button:disabled {
@@ -202,21 +203,30 @@
   color: var(--ground);
 }
 
-.primary:hover:not(:disabled) {
-  background: var(--ink);
-  color: var(--ground);
-  text-decoration: underline;
-}
-
 .returnButton {
   background: var(--tone-soft);
   border-color: var(--tone-line);
 }
 
-.returnButton:hover:not(:disabled) {
-  background: var(--tone-soft);
-  border-color: var(--tone-ink);
-  text-decoration: underline;
+/* Hover only where a pointer hovers: on touch a tap would leave the button
+   looking hovered after the stage has moved on. */
+@media (hover: hover) and (pointer: fine) {
+  .button:hover:not(:disabled) {
+    background: var(--raised);
+    border-color: var(--ink);
+  }
+
+  .primary:hover:not(:disabled) {
+    background: var(--ink);
+    color: var(--ground);
+    text-decoration: underline;
+  }
+
+  .returnButton:hover:not(:disabled) {
+    background: var(--tone-soft);
+    border-color: var(--tone-ink);
+    text-decoration: underline;
+  }
 }
 
 .visuallyHidden {
@@ -230,7 +240,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .stopDot,
-  .card {
+  .card,
+  .button {
     transition: none;
   }
 }

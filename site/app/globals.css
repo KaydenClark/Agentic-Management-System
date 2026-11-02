@@ -118,11 +118,24 @@ a {
   border-radius: var(--radius-control);
   color: var(--muted);
   cursor: pointer;
+  transition: transform var(--motion-press) var(--ease-out);
 }
 
-.theme-toggle:hover {
-  border-color: var(--ink);
-  color: var(--ink);
+.theme-toggle:active {
+  transform: scale(var(--press-scale));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle {
+    transition: none;
+  }
 }
 
 .theme-toggle svg {

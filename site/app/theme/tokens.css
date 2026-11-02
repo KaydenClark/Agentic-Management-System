@@ -195,6 +195,13 @@
   --hub-size: 300px; /* the What the AMS is picture */
   --ring-width: 3; /* the loop ring's stroke, in picture units */
   --motion-quick: 0.2s; /* a stage change; none under reduced motion */
+  --dot-scale-live: 1.4; /* --dot-size-live over --dot-size, as a transform so the label below never moves */
+
+  /* Press feedback on buttons: a slight shrink while held, eased out so it
+     answers at once. No transition under reduced motion. */
+  --motion-press: 160ms;
+  --press-scale: 0.97;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 
   /* /skills wiki. */
   --text-h1-skill: clamp(30px, 7vw, var(--text-h1)); /* an article's title, the skill name: --text-h1 at most */

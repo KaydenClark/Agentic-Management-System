@@ -33,6 +33,7 @@ node tests/browser.check.mjs --url http://host:port    # check a running server 
 - `app/nav.ts` is the one reading-order list; order is reading order. Add an entry only for a route that exists.
 - `app/theme/tokens.css` is the only file with color, type and spacing values (Color system v2.2 from the owner's Grilling Board Redesign canvas). Everything else uses `var(--token)`; `tests/tokens.test.mjs` enforces it.
 - Theme: follows the system; the toggle overrides it and is stored in `localStorage` (`ams-theme`); a first-party inline script in `<head>` reapplies the stored choice before first paint.
+- Press and hover: buttons (the theme toggle, the toy's controls) shrink slightly while pressed (`--press-scale`, `--motion-press`, `--ease-out`), and their hover styles apply only under `(hover: hover) and (pointer: fine)`, so a tap leaves no stuck hover. Under reduced motion the press has no transition.
 - Footer SHA: `next.config.ts` fixes it at build time from `VERCEL_GIT_COMMIT_SHA`, else `git rev-parse HEAD`, else `unknown`.
 - Fonts (IBM Plex Sans, IBM Plex Mono, Zilla Slab) are self-hosted through `@fontsource`; the site makes no third-party requests.
 
