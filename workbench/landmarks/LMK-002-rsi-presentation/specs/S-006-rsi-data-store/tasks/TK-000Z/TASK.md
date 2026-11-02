@@ -3,10 +3,12 @@
 **Task ID:** TK-000Z
 **Spec ID:** S-006
 **Slice:** Task creation facts survive migration and removal
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Build history from real records
 **Planned verification:** Full creation-row identity across table/native migration and removal; native-only/rename/pin/conflict tests; exact3 S008 plus8 archive facts; deterministic complete expected-row BEFORE/AFTER diff; independent pinned delta review; full/fresh/room/current CI and checked merge.
+**Claimed by:** codex-task-provenance
+**Current claimant:** codex-task-provenance
 
 ## Assignment
 

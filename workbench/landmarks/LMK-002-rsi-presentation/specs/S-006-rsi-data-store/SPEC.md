@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000X checked source merged; live history verification remains incomplete.
-**Next gate:** Resolve live import authorization and current history discrepancies; preserve stopped W and owner Human QA.
+**Latest event:** TK-000Z claimed by codex-task-provenance.
+**Next gate:** Close TK-000Z with verification and documentation proof.
 
 ## Intent and authority
 
