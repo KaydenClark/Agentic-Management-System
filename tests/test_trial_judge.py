@@ -111,3 +111,12 @@ def test_structured_jsonl_rejects_duplicate_keys_before_protocol_interpretation(
         key=SimpleNamespace(data='stdout',fileobj=SimpleNamespace(fileno=lambda:r))
         with pytest.raises(Refused,match='malformed'):process._read_ready(key)
     finally:os.close(r);os.close(w)
+
+
+@pytest.mark.parametrize('fault',['assistant-message','result-message','usage-model-object'])
+def test_malformed_nested_protocol_is_a_refusal_not_an_uncaptured_bug(fault):
+    stream=events()
+    if fault=='assistant-message':stream[1]['message']=None
+    if fault=='result-message':stream[2]['message']='malformed'
+    if fault=='usage-model-object':stream[-1]['modelUsage'][runtime.MODEL]=None
+    with pytest.raises(Refused):judge.ClaudeJudgeAdapter().execute('criterion',transport=Transport(stream))

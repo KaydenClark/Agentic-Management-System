@@ -53,7 +53,8 @@ class ClaudeJudgeAdapter:
                     initialized=True
                 elif kind=='assistant':
                     require(initialized and completed is None,'assistant outside judge turn')
-                    message=event.get('message',{})
+                    message=event.get('message')
+                    require(isinstance(message,dict),'judge message object missing')
                     require(message.get('model')==runtime.MODEL,'judge fallback/model drift')
                     identity=message.get('id')
                     require(isinstance(identity,str) and bool(identity),'provider message identity missing')
@@ -80,7 +81,9 @@ class ClaudeJudgeAdapter:
                 elif kind=='user':
                     require(initialized and use_id is not None and not tool_result
                             and completed is None,'unexpected/duplicate tool result')
-                    blocks=event.get('message',{}).get('content')
+                    message=event.get('message')
+                    require(isinstance(message,dict),'tool result message object missing')
+                    blocks=message.get('content')
                     require(isinstance(blocks,list) and len(blocks)==1,'tool result shape changed')
                     block=blocks[0]
                     require(isinstance(block,dict) and block.get('type')=='tool_result'
@@ -100,6 +103,9 @@ class ClaudeJudgeAdapter:
                     final=validate_value(event.get('structured_output'))
                     require(same_artifact(final,value),'terminal serialization identity changed')
                     require(isinstance(event.get('result'),str),'judge final text missing')
+                    models=event.get('modelUsage')
+                    require(isinstance(models,dict) and set(models)=={runtime.MODEL}
+                            and isinstance(models[runtime.MODEL],dict),'judge usage object missing')
                     usage,cost=runtime._usage(event)
                     completed={'model':runtime.MODEL,'provider':'firstParty','effort':runtime.EFFORT,
                         'tools':[TOOL],'mcpServers':[],'response':encoded(final).decode(),

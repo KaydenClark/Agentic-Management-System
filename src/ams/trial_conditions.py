@@ -57,14 +57,19 @@ def predecessor_binding(paths,controls,worker,execution,*,semantics):
     current_digest=digest(controls)
     require(record['controlsDigest']==digest(record['controls'])==current_digest
             and proof['controlsDigest']==current_digest,'semantic controls changed')
-    require(proof['qualified'] is True and len(proof['results'])==5 and len(controls)==5,
+    require(proof.get('qualified') is True and isinstance(proof.get('results'),list)
+            and len(proof['results'])==5 and all(isinstance(row,dict)for row in proof['results'])
+            and len(controls)==5,
             'actual five-control predecessor qualification missing')
     rows={row['id']:row for row in proof['results']}
     require(len(rows)==5,'duplicate predecessor outcome')
     labels=[]
     for control in controls:
         row=rows.get(control['id']);require(isinstance(row,dict),'predecessor case missing')
-        actual=row['actual'];execution_result=actual['execution']
+        actual=row.get('actual')
+        require(isinstance(actual,dict) and isinstance(actual.get('execution'),dict),
+                'predecessor execution proof missing')
+        execution_result=actual['execution']
         require(row['matches'] is True and row['expected']==control['expected']==actual['verdict'],
                 'predecessor outcome does not match frozen label')
         require(isinstance(actual.get('evidence'),str) and bool(actual['evidence'].strip())
