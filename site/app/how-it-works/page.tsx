@@ -177,8 +177,8 @@ export default function HowItWorks() {
             <Source path="ARCHITECTURE.md">Architecture, Bird&apos;s-eye view</Source>
           </li>
           <li>
-            No improvement has been measured yet; the <Link href="/rsi">RSI results</Link> page, next in the reading
-            order, shows where results will appear.
+            No improvement has been measured yet; the <Link href="/rsi">RSI results</Link> page shows where results
+            will appear.
           </li>
         </ul>
       </section>
