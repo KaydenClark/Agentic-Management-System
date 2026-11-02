@@ -80,13 +80,17 @@ class ClaudeAdapter:
     def execute(self, prompt, *, cwd=None, transport=None, system_prompt=None):
         require(isinstance(prompt, str) and bool(prompt.strip()), 'prompt required')
         self.last_failure = None
-        if transport is None:
-            from ams.trial_transport import ClaudeProcess
-            stream = ClaudeProcess(cwd, system_prompt=system_prompt)
-        else:
-            stream = transport
+        from ams.trial_lifecycle import lifetime
         completed = None; messages = set(); assistant_events = 0
-        try:
+        def create():
+            if transport is not None:return transport
+            from ams.trial_transport import ClaudeProcess
+            return ClaudeProcess(cwd, system_prompt=system_prompt)
+        def snapshot():
+            return {'observedProviderTurns':len(messages)or(1 if completed else None),
+                    'observedAssistantMessages':assistant_events,'turnCountComplete':False,
+                    'terminalExecution':({**completed,'providerTurns':1}if completed else None)}
+        with lifetime(self,create,snapshot) as stream:
             initialized = stream.initialize()
             require(initialized.get('commands') == [], 'custom commands unexpectedly available')
             require(stream.mcp_status() == [], 'MCP channels unexpectedly available')
@@ -135,19 +139,6 @@ class ClaudeAdapter:
                     raise Refused('unexpected runtime message; execution refused')
             require(completed is not None, 'provider result missing')
             return completed
-        except (Exception, KeyboardInterrupt) as error:
-            diagnostic = None
-            if hasattr(stream, 'failure_diagnostic'):
-                try:
-                    diagnostic = stream.failure_diagnostic(type(error).__name__, str(error))
-                except (OSError, Refused):
-                    diagnostic = {'recorded': False, 'reason': 'private diagnostics unavailable'}
-            self.last_failure = {'diagnostic': diagnostic, 'observedProviderTurns': len(messages) or None,
-                                 'observedAssistantMessages': assistant_events, 'turnCountComplete': False,
-                                 'terminalExecution': ({**completed, 'providerTurns': 1} if completed else None)}
-            raise
-        finally:
-            stream.close()
 
 
 def shell_preflight(worker):

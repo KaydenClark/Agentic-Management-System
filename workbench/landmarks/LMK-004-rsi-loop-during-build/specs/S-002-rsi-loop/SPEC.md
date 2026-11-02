@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001B second private-evidence correction failed independent cleanup-interruption review; repair STOPPED.
-**Next gate:** Report001A/001B failures and await fresh user authorization; PR101 DRAFT/unmerged. No further repair, model/store calls or merge.
+**Latest event:** TK-001C claimed by s002-lifecycle.
+**Next gate:** Close TK-001C with verification and documentation proof.
 
 ## Intent and authority
 
@@ -32,6 +32,8 @@ PR101 remained held after later automated review proved halted private diagnosti
 Later PR101 review proved actual adapter interruption and post-return drift still lost evidence; [TK-001B](tasks/TK-001B/TASK.md) owns the fresh second private-retention correction with actual-adapter integration tests and an explicit stop-on-repeated-failure rule. Earlier Y/001A source-specific receipts remain unchanged.
 
 TK-001B stopped at source179 after independent review proved valid-terminal evidence is lost when finally-close is interrupted (proof1aaf62e...). Passing786/4skip full local/fresh suites and CI123 do not satisfy the failed requirement. Acceptance remains unmet; [the stopped checkpoint](tasks/TK-001B/TASK.md) records both correction attempts and the unexecuted next proposal. No new source was selected or actual corrective query/storage action released.
+
+Kayden subsequently explicitly approved the fresh whole-lifecycle repair, captured in JOT-91c9d7c2. [TK-001C](tasks/TK-001C/TASK.md) owns that new bounded run; prior failed evidence remains retained, with no counter reset or actual call release.
 
 ## Desired Behavior
 

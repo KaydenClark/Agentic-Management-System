@@ -92,7 +92,7 @@ def test_actual_adapters_preserve_halted_facts_without_grade_or_next_query(tmp_p
     if fault=='post-return-drift':assert (c.execution/'unexpected').read_text()=='preserve'
 
 
-def _assert_public_privacy(result):
+def _assert_public_privacy(result,extra_markers=()):
     class Store:
         def __init__(self):self.rows={}
         def insert(self,table,value):
@@ -103,4 +103,4 @@ def _assert_public_privacy(result):
     row=trial_campaign.publish_result(store,run,result,case_id='case',trial=1,evidence_digest='d'*64)
     assert row['passed']is None and row['detail']['gradeState']=='unknown'
     public=json.dumps(store.rows)
-    assert all(marker not in public for marker in MARKERS)
+    assert all(marker not in public for marker in MARKERS+tuple(extra_markers))

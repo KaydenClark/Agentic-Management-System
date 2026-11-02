@@ -34,12 +34,16 @@ class ClaudeJudgeAdapter:
     def execute(self,prompt,*,cwd=None,transport=None,system_prompt=None):
         require(isinstance(prompt,str) and bool(prompt.strip()),'prompt required')
         self.last_failure=None
-        if transport is None:
-            from ams.trial_transport import ClaudeProcess
-            stream=ClaudeProcess(cwd,system_prompt=system_prompt,structured_output=True)
-        else:stream=transport
+        from ams.trial_lifecycle import lifetime
         initialized=False;use_id=None;value=None;tool_result=False;completed=None;messages=set();uses=0
-        try:
+        def create():
+            if transport is not None:return transport
+            from ams.trial_transport import ClaudeProcess
+            return ClaudeProcess(cwd,system_prompt=system_prompt,structured_output=True)
+        def snapshot():
+            return {'observedProviderTurns':len(messages)or None,'turnCountComplete':False,
+                    'serializationCalls':uses,'terminalExecution':completed}
+        with lifetime(self,create,snapshot) as stream:
             control=stream.initialize()
             require(isinstance(control,dict),'judge initialize body malformed')
             require(control.get('commands')==[],'unexpected commands')
@@ -119,15 +123,6 @@ class ClaudeJudgeAdapter:
                     raise Refused('unexpected judge event; no retry/fallback accepted')
             require(completed is not None,'judge terminal output missing')
             return completed
-        except (Exception,KeyboardInterrupt) as error:
-            diagnostic=None
-            if hasattr(stream,'failure_diagnostic'):
-                try:diagnostic=stream.failure_diagnostic(type(error).__name__,str(error))
-                except (OSError,Refused):diagnostic={'recorded':False}
-            self.last_failure={'diagnostic':diagnostic,'observedProviderTurns':len(messages)or None,
-                               'turnCountComplete':False,'serializationCalls':uses,'terminalExecution':completed}
-            raise
-        finally:stream.close()
 
 
 class InterviewAdapter:
