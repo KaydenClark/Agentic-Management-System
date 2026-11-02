@@ -47,7 +47,9 @@ name this repository's immutable blob at that same HEX/path. Only locally
 available ancestors of the record snapshot are eligible. The archived Spec ID
 and evidence table must match; original blame supplies every event's source
 commit, line and time. Exact duplicate rows coalesce; conflicting keys refuse.
-No external URL is fetched. Git must support --no-lazy-fetch (otherwise this
+CommonMark link tokens, not Markdown-shaped text, govern visibility; archive
+labels must be plain text. The pinned parser is used without rendering,
+plugins or URL fetching. Git must support --no-lazy-fetch (otherwise this
 read fails closed), and archived blame disables text conversion and replace
 objects. Orphan articles, code examples and comments authorize no events;
 unprovable retained DB rows continue to fail readcheck.
@@ -69,6 +71,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, Iterable, Mapping, Sequence
 from urllib.parse import quote, urlsplit
+
+from markdown_it import MarkdownIt
 
 from ams import keycheck, source_rules, writer
 
@@ -436,128 +440,33 @@ def record_rows(git: Runner, lifecycle: Runner) -> list[dict]:
     return rows
 
 
-_LINK = re.compile(r"\[([^]\n]+)\]\(([^)\s]+)\)")
 _PREVIOUS_SPEC = re.compile(r"previous (S-[A-Za-z0-9]+) at ([0-9a-f]{7,40})")
 
 
-def _mask_code_spans(text: str) -> str:
-    """Match exact backtick runs within one eligible paragraph (CommonMark6.1).
-
-    Escapes affect openers, but backslashes inside a code span are literal.
-    A sentinel prevents removing code from joining fragments into a declaration.
-    """
-    visible, index = [], 0
-    while index < len(text):
-        if text[index] == "\\" and index + 1 < len(text):
-            visible.append(text[index:index + 2])
-            index += 2
-        elif text[index] != "`":
-            visible.append(text[index])
-            index += 1
-        else:
-            end = index + 1
-            while end < len(text) and text[end] == "`":
-                end += 1
-            length = end - index
-            close = next((m for m in re.finditer(r"`+", text[end:])
-                          if len(m[0]) == length), None)
-            if close is None:
-                visible.append(text[index:end])  # unmatched runs remain literal
-                index = end
-            else:
-                visible.append("\0")
-                index = end + close.end()
-    return "".join(visible)
-
-
-def _visible_markdown(text: str) -> str:
-    """Exclude examples without carrying inline state across block boundaries.
-
-    This is the narrow history declaration grammar, not a Markdown renderer.
-    Preserve paragraph continuations (including quoted/lazy lines), isolating
-    headings, actual table rows, blank lines, fences and indented blocks.
-    Syntax: https://spec.commonmark.org/0.31.2/#code-spans and #precedence.
-    """
-    text = re.sub(r"<!--.*?(?:-->|\Z)", "", text, flags=re.S)
-    visible, paragraph, fence, quote_depth = [], [], None, 0
-    fence_depth, in_table = 0, False
-
-    def flush():
-        nonlocal quote_depth
-        if paragraph:
-            visible.append(_mask_code_spans("\n".join(paragraph)))
-            paragraph.clear()
-        quote_depth = 0
-
-    def parts(line):
-        quote = re.match(r"^ {0,3}(?:> ?)+", line)
-        return (quote[0].count(">"), line[quote.end():]) if quote else (0, line)
-
-    def table_separator(line):
-        cells = [cell.strip() for cell in line.strip().strip("|").split("|")]
-        return bool(cells) and all(re.fullmatch(r":?-{3,}:?", cell) for cell in cells)
-
-    lines = text.splitlines()
-    for number, line in enumerate(lines):
-        depth, logical = parts(line)
-        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", logical)
-        if fence is not None:
-            if logical.strip() and depth < fence_depth:
-                fence = None  # the quote container ended
-            else:
-                if (marker and depth == fence_depth and marker[1][0] == fence[0]
-                        and len(marker[1]) >= len(fence) and not marker[2].strip()):
-                    fence = None
-                continue
-        item = re.match(r"^ {0,3}(?:[-+*]|[0-9]+[.)])\s+(.*)$", logical)
-        if item:
-            marker = re.match(r"^(`{3,}|~{3,})(.*)$", item[1])
-        if marker:
-            flush()
-            fence, fence_depth, in_table = marker[1], depth, False
-            continue
-        if not logical.strip() or (not paragraph and logical.startswith(("    ", "\t"))):
-            flush()
-            visible.append("")
-            in_table = False
-            continue
-        # A pipe-prefixed paragraph continuation is not automatically a table.
-        # Only a header/separator pair starts the line-local router table scope.
-        following = parts(lines[number + 1])[1] if number + 1 < len(lines) else ""
-        if not paragraph and "|" in logical and table_separator(following):
-            in_table = True
-        if in_table and "|" not in logical:
-            in_table = False
-        if (in_table or re.match(r"^ {0,3}#{1,6}(?:[ \t]|$)", logical)
-                or re.fullmatch(r" {0,3}(?:(?:- *){3,}|(?:_ *){3,}|(?:\* *){3,})", logical)):
-            flush()
-            visible.append(_mask_code_spans(line))
-        else:
-            if depth > quote_depth or item:
-                flush()
-            paragraph.append(line)
-            # A lazy continuation may omit quote markers and then resume them.
-            quote_depth = max(quote_depth, depth)
-    flush()
-    return "\n".join(visible)
-
-
 def _markdown_links(text: str):
-    visible = _visible_markdown(text)
+    """Read genuine CommonMark links without rendering or interpreting examples.
 
-    def escaped(index):
-        start = index
-        while start > 0 and visible[start - 1] == "\\":
-            start -= 1
-        return (index - start) % 2 == 1
-
-    for match in _LINK.finditer(visible):
-        start = match.start()
-        if escaped(start):
-            continue  # a literal opening bracket is not a link
-        if start > 0 and visible[start - 1] == "!" and not escaped(start - 1):
-            continue  # image alt text is not a route; an escaped ! is literal
-        yield match.groups()
+    Only top-level inline children count: images' alt-text children, raw HTML,
+    comments and code tokens cannot supply links. An archive declaration label
+    must be plain text; formatting/code cannot be removed to forge its identity.
+    Router links need only a genuine link target, so their label is immaterial.
+    """
+    for block in MarkdownIt("commonmark").parse(text):
+        if block.type != "inline":
+            continue
+        children = block.children or []
+        for index, token in enumerate(children):
+            if token.type != "link_open":
+                continue
+            label = []
+            for child in children[index + 1:]:
+                if child.type == "link_close":
+                    break
+                label.append(child)
+            target = token.attrGet("href")
+            if target is not None:
+                plain = all(child.type == "text" for child in label)
+                yield "".join(child.content for child in label) if plain else "", target
 
 
 def _link_url(target: str):

@@ -114,13 +114,17 @@ def test_image_operator_and_escaped_literal_bang_are_distinct(relocated, locatio
 
 
 @pytest.mark.parametrize("location", ["article", "router"])
-@pytest.mark.parametrize("marker", ["2. continuation", "- ", "1234567890. continuation"])
-def test_literal_list_like_continuations_do_not_end_open_code_spans(relocated, location, marker):
+@pytest.mark.parametrize("marker, expected", [
+    ("2. continuation", 0),
+    ("- ", 8),  # CommonMark4.3: a setext underline ends the preceding heading.
+    ("1234567890. continuation", 0),
+])
+def test_commonmark_list_like_lines_preserve_real_block_boundaries(relocated, location, marker, expected):
     repo, sha, _ = relocated
     set_example(repo, sha, location,
                 lambda links: "Example `\n" + marker + "\n" + links + "\nend `")
-    assert not any("#evidence-" in r["source_ref"]
-                   for r in bh.record_rows(git_runner(repo), lifecycle))
+    assert sum("#evidence-" in r["source_ref"]
+               for r in bh.record_rows(git_runner(repo), lifecycle)) == expected
 
 
 @pytest.mark.parametrize("location", ["article", "router"])
