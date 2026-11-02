@@ -163,3 +163,45 @@ export const testRowCase: RsiData = {
     ...results(trTest, `${TEST_ROW_MARKER}-task-two`, "held_out", [true]),
   ],
 };
+
+// Worst case (break-ui): every value at a realistic extreme the schema
+// allows, spread across rows the way live data would arrive. numeric(12, 6)
+// costs with no trailing zero or six places, bigint token counts in the
+// millions, an unbounded score scale, an ams_label with no length cap, a
+// long model ID and stop note, and one count large enough to need a
+// thousands separator. Kept as the regression fixture for the row format.
+const WORST_TASK = "repair-shared-skill-delivery-after-handoff-conflicts-with-local-session-storage";
+const wc1 = run({
+  id: 61,
+  version: V1,
+  provider: "anthropic",
+  model: "claude-sonnet-5-5-20261015-extended-thinking",
+  effort: "xhigh",
+  started: "2026-11-01T10:00:00Z",
+  detail: { version: "skills-refocus-candidate-after-handoff-repair-round-two" },
+});
+const wc2 = run({
+  id: 62,
+  version: V2,
+  provider: "anthropic",
+  model: "claude-sonnet-5-5-20261015-extended-thinking",
+  effort: "xhigh",
+  started: "2026-11-02T10:00:00Z",
+  state: "stopped",
+  detail: {
+    stop_rule: "three_strikes",
+    stop_note:
+      "The same task failed on every attempt in this round: each trial left the handoff in local session storage instead of the committed record, so the candidate was stopped before a fourth attempt.",
+  },
+});
+export const worstCase: RsiData = {
+  runs: [wc1, wc2],
+  results: [
+    ...results(wc1, WORST_TASK, "dev", [true], { cost_usd: 1.5, input_tokens: 1284503, output_tokens: 98211, turns: 1 }),
+    ...results(wc1, WORST_TASK, "dev", [null], { cost_usd: 0.000412, input_tokens: 0, output_tokens: 0, turns: 0 }),
+    ...results(wc1, WORST_TASK, "dev", [false], { cost_usd: 1234.56789, input_tokens: 12, output_tokens: 7 }).map((r) => ({ ...r, trial: 3 })),
+    ...results(wc1, WORST_TASK, "dev", [null], { execution_state: "completed", score: 0.6666666666666666 }).map((r) => ({ ...r, trial: 4 })),
+    ...results(wc1, WORST_TASK, "dev", [true], { cost_usd: "12.500000" }).map((r) => ({ ...r, trial: 5 })),
+    ...results(wc2, WORST_TASK, "dev", Array.from({ length: 1284 }, (_, i) => i % 3 === 0)),
+  ],
+};

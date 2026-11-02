@@ -275,6 +275,18 @@ test('unknown metrics remain unknown rather than zero or partial totals', () => 
   assert.ok(!html.includes('12 tokens'), 'a partial token count is not a total');
 });
 
+// break-ui worst case: schema-allowed extremes render as a reader writes
+// numbers, never as raw floats or unseparated integers.
+test('worst-case numbers are formatted: dollars, separators, score places, read time', () => {
+  const html = renderToStaticMarkup(createElement(RsiView, { views: seriesViews(cases.worstCase), unavailable: false, readAt: '2026-11-02T16:34:12.123Z' }));
+  for (const shown of ['cost $1.50,', 'cost $0.000412,', 'cost $1,234.56789,', 'cost $12.50,', 'tokens 1,382,714,', 'scored 0.667, no pass grade', '428 of 1,284 graded trials passed', '2 Nov 2026, 16:34 UTC']) {
+    assert.ok(html.includes(shown), `missing ${shown}`);
+  }
+  for (const raw of ['$1.5,', '$1234.56789', 'tokens 1382714', '0.6666666', ' 1284 graded', '16:34:12.123Z<']) {
+    assert.ok(!html.includes(raw), `raw value ${raw}`);
+  }
+});
+
 // The Supabase read: plain fetch to PostgREST with the publishable key, test
 // rows filtered in the query and again on receipt, and any failure reported
 // as unavailable instead of thrown.
