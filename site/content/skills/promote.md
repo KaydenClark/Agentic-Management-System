@@ -29,7 +29,7 @@ If an owner's text carries a confirmed **readback** (your own words, confirmed a
 Reach for it when understanding has piled up in notes or a Wiki page and needs to become the record others rely on, including a decision you confirmed. A settled decision does not need a new Spec just to be recorded.
 
 | What you have | Reach for |
-| --- | --- |
+|---|---|
 | Vocabulary you are still shaping (terms confirmed there need no second promotion) | [domain-modeling](/skills/domain-modeling) |
 | A fact or correction to capture in a note right now | [jot](/skills/jot) |
 | Spec or Task records that disagree with what actually happened | [reconcile](/skills/reconcile) |

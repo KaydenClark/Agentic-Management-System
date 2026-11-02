@@ -25,7 +25,7 @@ Reach for it when you are adding or changing behavior and a test at a public sea
 
 | What you have | Reach for |
 |---|---|
-| A behavior to build or change, with a testable seam | tdd |
+| A behavior to build or change, with a testable seam | `tdd` |
 | A bug with an unknown cause | [diagnosing-bugs](/skills/diagnosing-bugs) |
 | An unsettled module interface or seam to design | [codebase-design](/skills/codebase-design) |
 | A whole assigned Task to take from start to submission | [journey](/skills/journey) |

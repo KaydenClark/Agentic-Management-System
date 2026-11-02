@@ -17,7 +17,7 @@ The seven categories:
 
 - **Navigation**: how hard it was to find the right files, and whether files depend on each other in ways nobody wrote down. A **navigation pointer** is a short link from a file the agent always reads to the place that holds the detail.
 - **Automated checks**: linting, typing, tests or filesystem linters that would have caught a mistake. The retro reads the repo's own check scripts and CI workflow first, so a check that exists but is unwired or silently broken becomes the finding. A **guardrail** is any automated gate, either a commit hook or a CI job, that runs the repo's lint, type or test command. A repo with none is a finding on its own.
-- **Coding standards**: whether the **reviewer agent** needs a new rule, or an old one removed or clarified. The retro sorts the violation first. If a program could detect it, such as a banned call, a wrong import form or a misplaced file, that is a **mechanical** violation, and it should get a custom lint rule, a pre-commit hook or a CI job. The written standards file is kept for **judgement calls**, like cross-file consistency.
+- **Coding standards**: whether the **reviewer agent** needs a new rule, or an old one removed or clarified. The retro sorts the violation first. If a program could detect it, such as a banned call, a wrong import form or a misplaced file, that is a **mechanical** violation, and it should get a custom lint rule, a pre-commit hook or a CI job. The written standards file is kept for **judgment calls**, like cross-file consistency.
 - **Global AGENTS.md**: steering text that belongs in coding standards or checks instead.
 - **Tool economy**: expensive tool calls, or custom CLIs and MCP servers that waste tokens.
 - **No-ops**: steering lines that change nothing about what the agent does.
@@ -29,7 +29,7 @@ A short reference in the skill says where fixes should live. The implementation 
 
 Use `retro` after a session that went badly, slowly or expensively, or after a stretch of work when you want the setup tuned. You have to ask for it. The skill file turns off model invocation, and its Codex metadata turns off implicit invocation, so the agent will not start it on its own.
 
-A **Workbench** is a project's set of records, rules and tools managed by the Workbench skills. The neighbours below mostly work on one.
+A **Workbench** is a project's set of records, rules and tools managed by the Workbench skills. The neighbors below mostly work on one.
 
 | What you have | Reach for |
 |---|---|
@@ -70,7 +70,7 @@ It defaults to the current session. If you meant an older one, name it, because 
 
 ### Why does it keep proposing a hook or lint rule instead of a written rule?
 
-By design. The skill says to default to building a check for anything a program can detect, and to keep written standards for judgement calls.
+By design. The skill says to default to building a check for anything a program can detect, and to keep written standards for judgment calls.
 
 ### What if the repo already has a lint or test command?
 

@@ -27,7 +27,7 @@ The skill says nothing about branches, merge strategy or delivery.
 
 Use it when a merge, or an update of a branch from its target, leaves conflicting text that someone has to decide. You can ask for it directly. The [land](/skills/land) skill also hands text conflicts to it, and uses it when a branch has diverged from its target.
 
-Neighbouring problems belong elsewhere:
+Neighboring problems belong elsewhere:
 
 | What you have | Reach for |
 |---|---|
@@ -53,7 +53,7 @@ The skill file names no tools and no Workbench. You need:
 - Tests near the changed code, plus the project's usual checks, so the result can be verified.
 - An owner you can reach, in case the conflict turns out to be a real product choice.
 
-Its neighbour `land` does require a **Workbench**, a project's set of structured work records, created with [setup-workbench](/skills/setup-workbench). Reaching this skill through `land` therefore happens inside one; the skill itself has no Workbench step.
+Its neighbor `land` does require a **Workbench**, a project's set of structured work records, created with [setup-workbench](/skills/setup-workbench). Reaching this skill through `land` therefore happens inside one; the skill itself has no Workbench step.
 
 ## What it does not authorize
 
@@ -92,4 +92,4 @@ You drift back toward choosing by line order, the habit the skill rules out. If 
 
 ## Where it fits in the workflow
 
-It sits in the **Complete** stage (land and preserve), as a helper rather than a main step. The main flow there is [land](/skills/land) and then [reconcile](/skills/reconcile). `land` hands it text conflicts and diverged branches, updating a diverged branch by merging the target in, not by rebasing. Once the conflict is resolved, work returns to `land` to verify and push the updated candidate. Any required review comes from [code-review](/skills/code-review), not from this skill.
+It sits in the **Complete** stage (Land, preserve), as a helper rather than a main step. The main flow there is [land](/skills/land) and then [reconcile](/skills/reconcile). `land` hands it text conflicts and diverged branches, updating a diverged branch by merging the target in, not by rebasing. Once the conflict is resolved, work returns to `land` to verify and push the updated candidate. Any required review comes from [code-review](/skills/code-review), not from this skill.

@@ -35,7 +35,7 @@ Reach for it when you have a behavior or design question that a test-like experi
 
 > We can't agree on how the retry button should behave when a request fails twice. Prototype the retry states as a small runnable loop I can step through, plus two or three variants of the button, so we can pick one. Throw it away when we've decided.
 
-The agent restates the question and the verdict you will judge by, builds the loop and the variants in an isolated, labelled spot, and shows you how to run them. After you choose, it records the chosen behavior and the evidence where the question came from, then deletes the experiment.
+The agent restates the question and the verdict you will judge by, builds the loop and the variants in an isolated, labeled spot, and shows you how to run them. After you choose, it records the chosen behavior and the evidence where the question came from, then deletes the experiment.
 
 ## What it requires
 
@@ -77,6 +77,6 @@ Into the ticket, pull request or decision write-up where the question came from,
 
 ## Where it fits in the workflow
 
-`prototype` sits in the Align stage ("Shared concept") as one of the supporting skills. Align's main flow is [grilling](/skills/grilling) and then [readback](/skills/readback), which get you and the agent to the same understanding. `prototype` covers the cases where that understanding depends on seeing a behavior or interaction rather than discussing it.
+`prototype` sits in the Align stage (Shared concept) as one of the supporting skills. Align's main flow is [grilling](/skills/grilling) and then [readback](/skills/readback), which get you and the agent to the same understanding. `prototype` covers the cases where that understanding depends on seeing a behavior or interaction rather than discussing it.
 
 Two skills reach for it directly. [wayfinder](/skills/wayfinder) uses it for uncertain behavior or design that needs a test, records the prototype's path and result, and moves on. [plan](/skills/plan) turns to it when evidence is too thin to plan responsibly, asking for a prototype with a named question and result instead of building on unknowns. In both cases the result goes back into the record that asked.

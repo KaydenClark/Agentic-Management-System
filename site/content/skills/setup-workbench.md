@@ -70,7 +70,7 @@ Expect an Adopt verdict, a Port, Fold, Keep or Retire label on each existing doc
 
 ### How do I know which mode I am in?
 
-The classifier's verdict decides: genesis means Create, adoption means Adopt, upgrade means Update, and Check is the read-only route for an installed Workbench. A scaffold with all the right file names but no installation record is still Adopt, and a real project is never relabeled a template copy to skip Adoption.
+The classifier's verdict decides: genesis means Create, adoption means Adopt, upgrade means Update, and Check is the read-only route for an installed Workbench. A scaffold with all the right file names but no installation record is still Adopt, and a real project is never relabeled a template copy to skip adoption.
 
 ### Why did setup refuse to start with a dirty working tree?
 
@@ -92,7 +92,7 @@ No. Package checks and skill listings do not show that your host loads the skill
 
 - Classification only reads, and the mode you are told matches the project's actual state.
 - Before any write, you see the changes and the choices that block them.
-- Existing controls, IDs, decisions and evidence are intact afterwards.
+- Existing controls, IDs, decisions and evidence are intact afterward.
 - `render` is deterministic, `doctor` reports nothing blocking, and `next --json` returns an eligible Task or `null` for a named gate.
 - Tool and catalog verification pass, with no clash between project and personal skill names.
 - The closing report separates local, committed, pushed, reviewed and merged states and names every missing condition.

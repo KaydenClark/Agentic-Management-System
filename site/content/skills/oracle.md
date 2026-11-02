@@ -34,7 +34,7 @@ Each issue follows with its evidence and the agent's confidence, with factual er
 Reach for Oracle when you want to be told where you are wrong, not helped to build the thing: a design claim you are about to commit to, a diagnosis you doubt, or a question that may point at the wrong target. An owner or an agent can call it. It gives a bounded judgment, though it may ask a clarifying question first.
 
 | What you have | Reach for |
-| --- | --- |
+|---|---|
 | A known problem needing a cause, or a specific fix you want proven right or wrong | [diagnose-and-propose](/skills/diagnose-and-propose) |
 | Doubt about the question or idea itself | Oracle |
 | A plan you want questioned until you and the agent share one understanding | [grilling](/skills/grilling) |

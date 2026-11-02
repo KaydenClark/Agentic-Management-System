@@ -85,7 +85,7 @@ That is the skill's rule. Each session records the answer, dated sources, doubts
 
 No. Wayfinder settles what must be known; planning turns an accepted destination into Tasks. Wayfinder hands settled intent to [map](/skills/map) or your project's planning route. [plan](/skills/plan) is the catalog's planning skill, but Wayfinder does not require it, and creating Tasks afterward needs its own authorization.
 
-### Do I need a formal Alignment check?
+### Do I need a formal Alignment Check?
 
 Not for ordinary planning. The comparison of each answer against your sources, the glossary and the evidence is enough. Formal Alignment qualification is required only when assigned.
 

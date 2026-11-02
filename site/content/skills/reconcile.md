@@ -33,7 +33,7 @@ For Git proof it documents a protected-read helper that clears inherited `GIT_*`
 Reach for it when records and reality may have drifted apart: a run came back, a reviewer or the owner's **Human QA** (their own hands-on check) rejected a candidate, a candidate landed, the owner corrected a decision that running work depends on, a record disagrees with the code, or work stopped early.
 
 | What you have | Reach for |
-| --- | --- |
+|---|---|
 | A read-only status report on the board | [sitrep](/skills/sitrep) |
 | A finished candidate that must reach its target branch | [land](/skills/land) |
 | Working notes that should become durable docs | [promote](/skills/promote) |
@@ -93,7 +93,7 @@ It uses whatever procedure the project documents for that step. If none exists, 
 
 ## Where it fits in the workflow
 
-`reconcile` belongs to the **Complete** stage (land and preserve), beside [land](/skills/land). [orchestrate](/skills/orchestrate) calls it to record the hand-backs it accepts.
+`reconcile` belongs to the **Complete** stage (Land, preserve), beside [land](/skills/land). [orchestrate](/skills/orchestrate) calls it to record the hand-backs it accepts.
 
 - **Before it:** [journey](/skills/journey) delivers a run, [land](/skills/land) merges and proves containment, and a reviewer or the owner may return findings.
 - **After it:** [plan](/skills/plan) writes the next Task records, [map](/skills/map) rewrites a destination when intent changed, and [land](/skills/land) sends a finished candidate to its target.
