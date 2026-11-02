@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** TK-002: independently reprune PR58 checkpoint6f2277e, then author same-case retest before final candidate trials. Handoff only this run.
+**Next gate:** Close TK-002 with verification and documentation proof.
 
 ## Intent and authority
 

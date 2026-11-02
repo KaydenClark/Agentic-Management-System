@@ -3,9 +3,11 @@
 **Task ID:** TK-002
 **Spec ID:** S-011
 **Slice:** Qualify and deliver shared repairs into the personal catalog
-**Status:** ready
+**Status:** in-progress
 **Blockers:** TK-001
 **Destination:** spec-acceptance: S-011 Acceptance Criteria
+**Claimed by:** source-author
+**Current claimant:** source-author
 
 ## Assignment
 
