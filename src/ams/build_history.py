@@ -14,7 +14,7 @@ Every row is derived, read-only, from a real record and names it:
   names a correction.
 - ``correction_fix``: the commit a reply names as the fix for a finding.
 - ``spec``: each currently registered Spec, dated by its file's creation.
-- ``task``: immutable creation facts from each registered Spec's verified local
+- ``task``: the first record of each Spec/Task identity, from its verified local
   ancestor/rename lineage. Original legacy table or native blob supplies every
   birth field; migration, removal and later Slice/Status edits do not rewrite it.
   Native execution and receipts remain with their current lifecycle owners.
@@ -39,8 +39,12 @@ are refused, because a row must link a source others can open.
 
 Commands: ``ams-history import [--dry-run] [--ref REF ...] [--refresh-changed]``
 writes with the service key and reports stored rows whose subject, summary, time
-or link no longer match the records; ``--refresh-changed`` updates them, logging
-each and keeping the old values in ``detail.refreshed``.
+or link no longer match the records; Task rows also compare the six canonical
+birth-detail keys, including absence. ``--refresh-changed`` updates them, logging
+old values in ``detail.refreshed``. Task refresh preserves annotations and audit,
+logs only bounded canonical previous detail, and requires the complete original
+detail plus core fields to still match. Direct returned Task fields must match;
+a historical-state readcheck alone does not prove current metadata was updated.
 ``ams-history readcheck [--ref SHA] [--dev-ref REF]`` reads the records in a
 temporary worktree at SHA (default HEAD), keeps GitHub events up to SHA's commit
 time, and compares every row the publishable key reads: it fails on a missing
@@ -104,6 +108,7 @@ READ_COLUMNS = "id,kind,source_kind,source_ref,occurred_at,source_url,strength,s
 # The fields readcheck compares with the re-derived records (review N1); detail is
 # bookkeeping (refs, PR numbers, receipt cells) and is not compared.
 CONTENT_FIELDS = ("subject", "summary", "occurred_at", "source_url")
+TASK_BIRTH_FIELDS = ("spec", "task", "status", "record", "created_commit", "recorded_commit")
 SHOWN = 20  # keys printed per list before the rest are counted
 
 Runner = Callable[[Sequence[str]], str]
@@ -430,17 +435,17 @@ def _spec_events(spec_id: str, path: str, blame) -> list[dict]:
     return rows
 
 
-def _birth_fields(text: str) -> tuple[dict, str]:
+def _birth_fields(text: str, *, native: bool = False) -> tuple[dict, str]:
     """Read canonical native fields from genuine CommonMark metadata tokens."""
     tokens = MarkdownIt("commonmark").parse(text)
     fields, title = {}, ""
     for index, token in enumerate(tokens):
-        if token.type == "heading_open" and token.level == 0 and token.tag != "h1":
+        if not native and token.type == "heading_open" and token.level == 0 and token.tag != "h1":
             break
         if token.type != "inline" or token.level != 1:
             continue
         previous = tokens[index - 1]
-        if previous.type == "heading_open" and previous.tag == "h1":
+        if previous.type == "heading_open" and previous.tag == "h1" and not title:
             title = token.content
         if previous.type != "paragraph_open":
             continue
@@ -454,14 +459,14 @@ def _birth_fields(text: str) -> tuple[dict, str]:
             if len(line) < 3 or [child.type for child in line[:3]] != ["strong_open", "text", "strong_close"]:
                 continue
             name = _field_name(line[1].content.removesuffix(":"))
-            if not line[1].content.endswith(":") or name not in {"spec_id", "task_id", "slice", "status", "claimed_by", "current_claimant"}:
+            if not line[1].content.endswith(":") or name not in {"spec_id", "task_id", "slice", "status", "claimed_by", "current_claimant", "proof"}:
                 continue
             # Tokens prove the label is real; raw spelling preserves Slice markup.
             # A code span's embedded newlines cannot impersonate metadata labels.
             raw = [match[2].strip() for raw_line in token.content.splitlines()
                    if (match := re.fullmatch(r"\*\*([^*\n]+):\*\*[ \t]*(.*)", raw_line))
                    and _field_name(match[1]) == name]
-            if len(raw) != 1 or (name != "slice" and any(child.type != "text" for child in line[3:])):
+            if len(raw) != 1 or (name not in {"slice", "proof"} and any(child.type != "text" for child in line[3:])):
                 raise RefusedError(f"unsupported historical metadata {name}")
             value = raw[0]
             if name in fields:
@@ -578,10 +583,11 @@ class _TaskBirthIndex:
         entries = self.tree(ref, path)
         return entries[0][1] if entries else None
 
-    def metadata(self, oid: str):
-        if oid not in self.fields:
-            self.fields[oid] = _birth_fields(self.text(oid))
-        return self.fields[oid]
+    def metadata(self, oid: str, *, native: bool = False):
+        key = oid, native
+        if key not in self.fields:
+            self.fields[key] = _birth_fields(self.text(oid), native=native)
+        return self.fields[key]
 
     def owns(self, ref: str, path: str):
         oid = self.spec_blob(ref, path)
@@ -651,7 +657,7 @@ class _TaskBirthIndex:
             task_id = match[1]
             self.native_paths.setdefault(task_id, {})[name] = path
             self.native_snapshots[task_id, ref, name] = oid
-            fields, title = self.metadata(oid)
+            fields, title = self.metadata(oid, native=True)
             if fields.get("task_id") != task_id or fields.get("spec_id", self.spec_id) != self.spec_id:
                 raise RefusedError(f"conflicting historical Task identity: {name}")
             if "status" not in fields:
@@ -675,7 +681,7 @@ class _TaskBirthIndex:
             if not any(self.ancestor(ref, bound) for bound in self.path_bounds[spec_path]):
                 continue
             if self.owns(ref, spec_path) and (oid := self.spec_blob(ref, name)) is not None:
-                records.append((name, oid, self.metadata(oid)[0]))
+                records.append((name, oid, self.metadata(oid, native=True)[0]))
         return records[0] if len(records) == 1 else None
 
     def reconcile(self, task_id: str, earliest):
@@ -730,9 +736,10 @@ class _TaskBirthIndex:
                     executed = False
                     for (identity, sha, _), oid in self.native_snapshots.items():
                         if identity == task_id and self.ancestor(sha, loser):
-                            fields = self.metadata(oid)[0]
+                            fields = self.metadata(oid, native=True)[0]
                             if (fields.get("status") != "ready" or fields.get("claimed_by")
-                                    or fields.get("current_claimant") or _has_native_receipt(self.text(oid))):
+                                    or fields.get("current_claimant") or fields.get("proof")
+                                    or _has_native_receipt(self.text(oid))):
                                 executed = True
                                 break
                     if not executed:
@@ -1090,6 +1097,13 @@ def _send(http, method: str, url: str, headers: Mapping[str, str], payload=None)
         return status, None
 
 
+def _task_birth_detail(row: Mapping):
+    detail = row.get("detail")
+    if not isinstance(detail, Mapping):
+        return None
+    return {key: detail[key] for key in TASK_BIRTH_FIELDS if key in detail}
+
+
 def _differences(have: Mapping, want: Mapping) -> list[str]:
     """The compared fields whose stored value differs from the re-derived record."""
     changed = []
@@ -1103,6 +1117,8 @@ def _differences(have: Mapping, want: Mapping) -> list[str]:
             same = have.get(field) == want[field]
         if not same:
             changed.append(field)
+    if want.get("kind") == "task" and _task_birth_detail(have) != _task_birth_detail(want):
+        changed.append("detail")
     return changed
 
 
@@ -1112,11 +1128,16 @@ def _states(row: Mapping) -> list[dict]:
     does not depend on refresh times, which are database write times, not source
     changes (Codex P2s on PR #65)."""
     stood = {f: row.get(f) for f in CONTENT_FIELDS}
+    if row.get("kind") == "task":
+        stood["detail"] = _task_birth_detail(row)
     states = [dict(stood)]
-    history = (row.get("detail") or {}).get("refreshed") or []
+    detail = row.get("detail") or {}
+    history = [] if row.get("kind") == "task" and not isinstance(detail, Mapping) else detail.get("refreshed") or []
     if isinstance(history, dict):
         history = [history]
-    for entry in sorted(history, key=lambda h: parse_time(h["at"]), reverse=True):
+    # Task refreshes can share a timestamp; append order breaks those ties.
+    ordered = reversed(history) if row.get("kind") == "task" else history
+    for entry in sorted(ordered, key=lambda h: parse_time(h["at"]), reverse=True):
         stood.update(entry.get("previous") or {})
         states.append(dict(stood))
     return states
@@ -1189,6 +1210,13 @@ def _refresh(rows: Sequence[dict], settings: keycheck.Settings, http, apply: boo
                for r in stored if _key(r) in want]
     # Backfill source-availability metadata on rows imported before this field existed.
     for row, record, fields in changed:
+        if record.get("kind") == "task":
+            detail = row.get("detail")
+            history = detail.get("refreshed") if isinstance(detail, Mapping) else None
+            if (not isinstance(detail, Mapping) or
+                    (history is not None and not isinstance(history, (dict, list)))):
+                print(f"refused: {' '.join(_key(row))} has unsupported stored Task detail")
+                return 1
         derived = record.get("detail", {}).get("derived_at")
         if derived and derived != (row.get("detail") or {}).get("derived_at"):
             fields.append("detail")
@@ -1205,10 +1233,22 @@ def _refresh(rows: Sequence[dict], settings: keycheck.Settings, http, apply: boo
         history = (row.get("detail") or {}).get("refreshed") or []
         if isinstance(history, dict):
             history = [history]
-        patch["detail"] = dict(record["detail"], refreshed=[
-            *history, {"at": at, "previous": {f: row.get(f) for f in fields}}])
+        previous = {f: row.get(f) for f in fields}
+        if record.get("kind") == "task":
+            # Only source-owned birth fields change; preserve annotations and
+            # keep undo snapshots bounded rather than recursively copying audit.
+            detail = {k: v for k, v in row["detail"].items() if k not in TASK_BIRTH_FIELDS}
+            detail.update(_task_birth_detail(record))
+            if "detail" in fields:
+                previous["detail"] = _task_birth_detail(row)
+        else:
+            detail = dict(record["detail"])
+        patch["detail"] = dict(detail, refreshed=[*history, {"at": at, "previous": previous}])
         # Conditional on the values read, so a write in between is refused, not lost.
         match = "".join(f"&{f}=eq.{quote(str(row.get(f)), safe='')}" for f in CONTENT_FIELDS)
+        if record.get("kind") == "task":
+            original = json.dumps(row["detail"], sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+            match += "&detail=eq." + quote(original, safe="")
         status, body = _send(http, "PATCH", f"{writer._rest(settings.url)}?id=eq.{row['id']}{match}",
                              headers, patch)
         if status not in (200, 204):
@@ -1217,6 +1257,10 @@ def _refresh(rows: Sequence[dict], settings: keycheck.Settings, http, apply: boo
             return 1
         if not body:
             print(f"refused: {' '.join(_key(row))} changed since it was read; rerun the import")
+            return 1
+        if record.get("kind") == "task" and (not isinstance(body, list) or len(body) != 1
+                or not isinstance(body[0], Mapping) or _differences(body[0], record)):
+            print(f"refused: {' '.join(_key(row))} current Task readback differs after refresh")
             return 1
         print(f"refreshed: {' '.join(_key(row))}: {', '.join(fields)}")
     print(f"refreshed: {len(changed)}")

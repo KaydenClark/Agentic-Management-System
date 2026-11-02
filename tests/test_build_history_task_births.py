@@ -173,7 +173,7 @@ def test_table_and_native_conflicting_same_commit_birth_refuses(repo):
         records(repo, [])
 
 
-def resolved_scaffold(repo, resolution='valid', competing=False):
+def resolved_scaffold(repo, resolution='valid', competing=False, proof=None, proof_form='field'):
     _write(repo, SPEC, spec())
     base = commit(repo, 'Register Spec')
     _git(repo, 'switch', '-qc', 'owner')
@@ -185,7 +185,11 @@ def resolved_scaffold(repo, resolution='valid', competing=False):
     _write(repo, TASK, claimed)
     commit(repo, 'Claim S-001 TK-001', '2026-11-01T11:00:00Z')
     _git(repo, 'switch', '-qc', 'scaffold', base)
-    _write(repo, TASK, native('Generated corrective scaffold'))
+    scaffold_text = native('Generated corrective scaffold')
+    if proof is not None:
+        field = '**Proof:** ' + proof + '\n'
+        scaffold_text += field if proof_form == 'field' else '\n## Check\n\n' + field if proof_form == 'bodyfield' else '```markdown\n' + field + '```\n'
+    _write(repo, TASK, scaffold_text)
     scaffold = commit(repo, 'Historical verdict scaffold', '2026-11-01T09:00:00Z')
     if competing:
         _write(repo, TASK, native('Generated corrective scaffold', 'in-progress') +
@@ -284,3 +288,22 @@ def test_missing_source_object_refuses_without_fetch(repo):
     (repo / '.git' / 'objects' / oid[:2] / oid[2:]).unlink()
     with pytest.raises(bh.RefusedError, match='unavailable'):
         records(repo, [])
+
+
+@pytest.mark.parametrize('proof', ['Completed corrective test execution: recorded success before merge.',
+                                 'Completed `pytest` successfully.'])
+@pytest.mark.parametrize('form', ['field', 'bodyfield'])
+def test_scaffold_with_canonical_recorded_proof_still_refuses(repo, proof, form):
+    resolved_scaffold(repo, proof=proof, proof_form=form)
+    with pytest.raises(bh.RefusedError, match='ambiguous|conflicting'):
+        records(repo, [])
+
+
+def test_literal_proof_example_does_not_claim_scaffold_execution(repo):
+    expected = resolved_scaffold(repo, proof='Example completed test output.', proof_form='fence')
+    assert births(records(repo, [])) == expected
+
+
+def test_empty_proof_field_does_not_claim_scaffold_execution(repo):
+    expected = resolved_scaffold(repo, proof='')
+    assert births(records(repo, [])) == expected

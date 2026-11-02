@@ -14,6 +14,7 @@ import re
 import string
 import subprocess
 from datetime import datetime
+from decimal import Decimal
 from pathlib import Path
 from urllib.parse import parse_qs, urlparse
 
@@ -486,7 +487,14 @@ class StubSupabase:
             target = int(query["id"][0].removeprefix("eq."))
             row = next(r for r in self.rows if r["id"] == target)
             for field, (value,) in query.items():
-                if field != "id" and str(row.get(field)) != value.removeprefix("eq."):
+                if field == "detail":
+                    # JSONB numbers compare numerically, while true is not 1.
+                    def jsonb(raw):
+                        number = lambda n: ("number", Decimal(n))
+                        return json.loads(raw, parse_int=number, parse_float=number)
+                    if jsonb(json.dumps(row.get(field))) != jsonb(value.removeprefix("eq.")):
+                        return 200, b"[]"
+                elif field != "id" and str(row.get(field)) != value.removeprefix("eq."):
                     return 200, b"[]"  # the conditional update matched no row
             row.update(json.loads(body))
             return 200, json.dumps([row]).encode()
