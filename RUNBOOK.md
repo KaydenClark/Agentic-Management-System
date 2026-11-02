@@ -5,20 +5,15 @@
 ## Get oriented
 
 Run `git status --short --branch`; preserve others' work. Read [AGENTS](AGENTS.md),
-[Architecture](ARCHITECTURE.md#routes), [Glossary](GLOSSARY.md), relevant
-[Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md) and assigned Spec/Task.
-Use [S-001](workbench/specs/S-001-ams/SPEC.md) as yardstick; load the
-[owning skill](workbench/docs/SKILLS.md).
+[GLOSSARY](GLOSSARY.md), relevant [Wiki](workbench/wiki/MEMORY.md),
+[TASKBOARD](TASKBOARD.md) and assigned Spec/Task. [ARCHITECTURE](ARCHITECTURE.md#routes)
+routes owners. Load the [owning skill](workbench/docs/SKILLS.md).
 
 ## Workflows
 
-Jot sourced intent/corrections in the Wiki owner;
-requirements go in the Spec. Use `map`, `plan`, then `journey` for one Task
-or `orchestrate` for authorized coordination. Retain proof/failures. Record
-[Review](workbench/specs/REVIEW-RECEIPT-TEMPLATE.md) and
-[Human QA](workbench/specs/HUMAN-QA-RECEIPT-TEMPLATE.md) only when performed.
-Update owners and render; leave a
-[handoff](workbench/sessions/HANDOFF-TEMPLATE.md) when needed.
+Jot sourced intent/corrections in the Wiki owner; requirements go in the Spec.
+Use `map`, `plan`, then `journey` for one Task or `orchestrate` for authorized
+coordination. Retain proof/failures.
 
 Website RSI: [record workflow/process issues](workbench/feedback/REPORT_FORMAT.md),
 fix shared skills, prove before/after here in [RSI records](workbench/research/IMPROVEMENT-TEMPLATE.md)
@@ -42,7 +37,7 @@ uv run ams-hygiene [--site site]
 Render: no diff; doctor: no blockers. Repeat checks and pytest
 on a fresh clone at the candidate.
 
-In B's checkout (keys never printed): `uv run ams-keycheck`;
+B's checks (keys never printed): `uv run ams-keycheck`;
 `ams-writer record-merge|readcheck SHA`; after each merge `ams-history import`,
 then `ams-history readcheck --ref SHA --dev-ref origin/dev`. Refresh rows
 with `ams-history import --refresh-changed` before readcheck. `ams-rsi livecheck`
@@ -54,16 +49,17 @@ and `ams-sources livecheck` check RSI/source rules.
 subscription meter; unknown stays unknown.
 [Trial preparation](evals/TRIALS.md) never calls a model.
 
-### Shared CI
+## Clean up
 
-CI uses `workbench-ci` and `workbench-runner-ams`, never a GitHub-hosted fallback.
-Fork jobs skip; inspect before internal execution.
-[Shared CI](workbench/wiki/context-shared-ci.md) owns setup/operation details.
-Keep keys and `AMS_LIVE` out of CI.
+Follow `land` and [AGENTS' delivery rules](AGENTS.md#delivery-and-recovery):
 
-## Delivery and recovery
-
-Non-site: feature -> checked PR -> merge commit into `main`; delete branch.
-Site: feature -> checked `dev`; only the owner merges `dev` -> `main`.
-Report push, merge and deploy separately. Reopen Spec/Task and Wiki for
-recovery; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+1. Inspect `git status --short --branch -uall`, index, refs and `git worktree list`;
+   inventory ignored evidence in owned checkouts.
+2. Commit owned changes, push the exact branch and verify its remote SHA.
+   Merge checked work to its authorized target; fetch and prove containment.
+   Keep unfinished work pushed on its Spec's Feature branch with draft PR and next action.
+3. Use guarded cleanup for contained temporary branches/worktrees. Preserve
+   active writers, unique commits and needed ignored recovery material.
+4. Reconcile owners and next actions, render TASKBOARD and rerun affected checks.
+   Verify owned checkouts are clean; account for retained items with owner/reason.
+   Report blocked publication or cleanup. Never stash/discard or commit others' work.

@@ -2,29 +2,35 @@
 
 > Generated from LLM Workbench v3.2.2.
 
-AMS proves shared skill improvements through this website build ([Blueprint](BLUEPRINT.md)); [S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick. Templates are shapes, not records.
+AMS proves shared skill improvements through this website build ([Blueprint](BLUEPRINT.md)); [S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick.
 
-## Dev environment tips
+## Start and scope
 
-- Run `git status --short --branch`; read [RUNBOOK](RUNBOOK.md#get-oriented), [GLOSSARY](GLOSSARY.md), the [Wiki](workbench/wiki/MEMORY.md) and assigned Spec/Task. Load personal skill ([methods](workbench/docs/SKILLS.md)) before use.
-- Pre-repo planning lives in private GPT_OS branch `claude/ams-s003-map-20261031` under `AMS/`; read its `AMS/CONTINUE.md` before planning. Copy nothing here without owner go-ahead: this repository is public.
-- Owner scope, rules and the assigned Spec govern. Distinguish confirmation, execution approval, review, Human QA and publication. Ask only consequential choices. Delegate only when authorized.
-- At most six active Landmarks. Hierarchy: Landmark -> Spec -> Task. Specs need no slots; only real inputs block Tasks (ADR-003J).
+- Verify repo, branch, remote, locks and dirty state. Follow [RUNBOOK](RUNBOOK.md#get-oriented) and assigned Spec/Task; load the [personal skill](workbench/docs/SKILLS.md).
+- For planning, read `AMS/CONTINUE.md` in private GPT_OS branch `claude/ams-s003-map-20261031`. This repo is public; copying needs owner go-ahead.
+- Owner scope and assigned Spec govern. Distinguish confirmation, execution approval, review, Human QA and publication. Ask consequential choices; delegate only when authorized.
+- At most six active Landmarks. Landmark -> Spec -> Task. Specs need no slots; only real inputs block Tasks (ADR-003J).
 - Edit `workbench/tools/` only via setup-workbench; author skills with author-skill.
-- Verify repo, branch, remote and locks before editing. Preserve decisions, corrections and others' edits; one writer per record; never switch another writer's checkout.
-- Ask before destructive actions, paid services, wider scope or unrequested external changes. Owner chooses the license. Send no messages without authorization. Never commit secrets, host paths or private research.
+- Preserve decisions, corrections and others' edits; one writer per record; never switch another writer's checkout. Jot sourced intent/corrections in their owner first.
+- Ask before destructive actions, paid services, scope expansion or unrequested external changes. Owner chooses license. No unauthorized messages or committed secrets, host paths or private research.
 - Never combine untrusted input, credentials and outward actions in one session.
-- Jot sourced intent and corrections into their owner first.
 
 ## Testing instructions
 
-- Run `node workbench/tools/spec-workbench.mjs doctor` and the [checks](RUNBOOK.md#test-and-build). Find causes before fixing; red/green/refactor. Never weaken checks; name unavailable ones.
-- Three strikes: the run, a failed test, a second failed test; then stop and report both attempts.
-- RSI proves skill improvements here: issue, baseline, hypothesis, before/after, failures, disposition; show the log with scoped evidence on the site. No installs into other projects. Static scores prove no benefit.
+- Run `node workbench/tools/spec-workbench.mjs doctor` and [checks](RUNBOOK.md#test-and-build). Diagnose; red/green/refactor. Never weaken checks; name unavailable ones.
+- Three strikes: run, failed test, second failed test; stop and report both attempts.
+- RSI here: issue, baseline, hypothesis, before/after, failures, disposition; show the scoped log on the site. Improve skills; never install elsewhere. Static scores prove no benefit.
 
-## PR instructions
+## Shared CI
 
-- Work on a short-lived branch named for the change; never commit to `main`. Started on `main`? Run `git switch -c BRANCH`.
-- Commit each coherent step before ending a turn, saying what and why; the [require-committed](.agents/hooks/require-committed.sh) Stop hook enforces this. Never stash, reset or discard to get a clean tree.
-- Push and confirm the remote has the commit. Non-site work: PR into `main`; once current and checked, merge it yourself with a merge commit. Site work: feature -> `dev` -> `main`; agents merge into `dev` only, never `dev` -> `main`. A merge is not Spec acceptance, Human QA or deployment.
-- Read back owners and diff; report candidate, checks, limits and delivery. Record review only from an eligible reviewer and Human QA only from a human.
+Use `workbench-ci` and `workbench-runner-ams`; no GitHub-hosted fallback.
+Forks skip; inspect before internal execution. No keys or `AMS_LIVE` in CI.
+CI details: [Shared CI](workbench/wiki/context-shared-ci.md).
+
+## Delivery and recovery
+
+- Commit coherent steps (what/why) before exit; the [guard](.agents/hooks/require-committed.sh) checks dirty files. Never commit to `main`, stash, reset or discard to get clean.
+- Merge current, checked non-site PRs into `main` yourself with a merge commit. Site: feature -> checked `dev`; only owner merges `dev` -> `main`. Merge is not acceptance, Human QA or deployment.
+- After Test And Build, complete [Clean up](RUNBOOK.md#clean-up). Verify remote publication and target containment; leave no owned dirty work for cold start. Unfinished work stays on its Spec's Feature branch. Report blockers and retained items.
+- Read back owners/diff; report candidate, target, checks and limits. Separate push/merge/deploy. Record only eligible review and actual human QA.
+- Recover from Spec/Task and Wiki; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
