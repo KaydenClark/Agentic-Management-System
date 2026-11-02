@@ -83,3 +83,29 @@ Supersedes: none
 
 The owner directs AGENTS.md to require cleanup and own shared CI, delivery and recovery rules. RUNBOOK.md owns where and how agents clean up, with a Clean up section after Test And Build. After verification, publish work to its authorized target, verify remote containment and leave no owned uncommitted or dirty work for the next agent on cold start. Preserve other writers and needed recovery material; any blocked publication or cleanup remains explicitly reported. This changes the operating documentation; it supplies no permission to publish unfinished site work to main or discard unrelated state.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-3ac3966d-b26f-4212-894f-011e5e2410ad
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T20:40:19.854Z
+Author: Kayden
+Source: Kayden, shared-skill repair instruction in AMS chat, 2026-11-02
+Topic: owner-answers-coherence
+Supersedes: none
+
+Handoffs belong in the local ignored workbench/sessions lane and are never pushed to GitHub. The reusable skill source is KaydenClark/skills. Repair the skills responsible for handoff storage, branch ownership and cleanup; update this machine personal skills folder after the accepted repair so AMS can use it. Use Terra 6.1 for skill tests and RSI audits; merge skills only with Stable or Excellent results. Log failures, comparisons and disposition and show them in RSI graphs and charts on dev. This authorizes personal-catalog installation, not installation into other projects, dev-to-main promotion or fabricated qualification and benefit claims.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T20:41:36.747Z
+Author: Kayden
+Source: Kayden, shared-skill repair instruction in AMS chat, 2026-11-02; routed to existing S-011 by assigned orchestrator
+Topic: owner-answers-coherence
+Supersedes: JOT-3ac3966d-b26f-4212-894f-011e5e2410ad
+
+For S-011 shared-skill repair, Kayden confirms the destination and directs implementation: fix local handoff storage and the branch/cleanup failures, using source KaydenClark/skills. Handoffs stay in ignored workbench/sessions and never go to GitHub; Tasks are published. Test and audit with Terra 6.1, merge skills only with eligible Stable or Excellent results, then update this machine personal skills folder so subsequent AMS website work uses the repairs. Never install reusable methods in an AMS-specific skills folder. Log actual comparisons and disposition and display them in RSI charts on dev. This authorizes S-011 execution and personal-catalog installation, not cross-project rollout, dev-to-main promotion or fabricated qualification/benefit.
+<!-- /jot-entry -->

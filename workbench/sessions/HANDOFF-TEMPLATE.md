@@ -4,6 +4,10 @@
 
 STATUS: [actual status] · [DATE] · by [AUTHOR]
 
+Save the filled handoff only in the ignored `workbench/sessions/handoffs/` lane.
+Verify it is ignored and untracked; never force-add or push it. Publish actionable
+work and safe proof through the owning Spec/Task instead of a root HANDOFF.md.
+
 Use this Markdown file as plain-language continuation instructions. Read the
 current Contract and verify live state before acting; this handoff preserves
 context but does not grant authority.

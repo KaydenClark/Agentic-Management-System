@@ -41,3 +41,5 @@ Record open, investigating, disposition-recorded or superseded; link the report 
 
 If a harness problem is also blocking this project right now, log it here **and**
 record a Task under its owning Spec for the local workaround, linking the two.
+
+| 2026-11-02 | Shared handoff and delivery procedures | Owner reports wrong handoff publication and recurring branch/cleanup failures; personal catalog identity was confused with project installation scope | Local continuity and reliable shared behavior need repair | [S-011](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/SPEC.md), [frozen comparison](../research/IMPROVEMENT-shared-skills-delivery-2026-11-02.md); accepted-open, no repaired claim | open |
