@@ -375,7 +375,7 @@ def test_spec_and_task_records(rows, fixture_repo):
     assert task["source_ref"] == "S-001/TK-001"  # one identity whichever record holds it
     assert task["detail"]["record"] == TASK_PATH
     assert task["source_url"].startswith(f"{writer.REPO_URL}/blob/{shas['map']}/{TASK_PATH}")
-    assert task["detail"]["status"] == "done"
+    assert task["detail"]["status"] == "ready"  # immutable birth, not current execution status
     planned = tasks["S-001 TK-002"]
     assert planned["source_ref"] == "S-001/TK-002"
     assert planned["detail"]["record"] == SPEC_PATH
@@ -894,7 +894,7 @@ def test_a_table_only_task_keeps_its_key_when_its_task_md_arrives(tmp_path, fixt
     repo, shas = fixture_repo
     clone = tmp_path / "clone"
     subprocess.run(["git", "clone", "-q", "-b", "main", str(repo), str(clone)], check=True)
-    _write(clone, "workbench/specs/S-001-demo/tasks/TK-002/TASK.md", "# TK-002 - Planned\n")
+    _write(clone, "workbench/specs/S-001-demo/tasks/TK-002/TASK.md", "# TK-002 - Planned\n\n**Task ID:** TK-002\n**Status:** ready\n")
     _git(clone, "add", "-A")
     _git(clone, "commit", "-q", "-m", "Materialise TK-002", when="2026-11-01T11:00:00Z")
     later = bh.collect(bh.Sources(git=git_runner(clone), gh=gh_stub(shas),
