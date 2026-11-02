@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-001A claimed by s002-halt-evidence.
-**Next gate:** Close TK-001A with verification and documentation proof.
+**Latest event:** TK-001A closed with proof.
+**Next gate:** Checked PR101 delivery, then root source selection and separate release of actual structured-output compatibility/new qualification. TK-002 remains incomplete.
 
 ## Intent and authority
 
@@ -27,7 +27,7 @@ Exact-identity repair: S-006/TK-000S.
 
 [TK-000Y](tasks/TK-000Y/TASK.md) completed only the bounded structured-output/neutral-context engineering correction at independently reviewed source `c3e1fd9`; private model-free recorde9c08d/protocol720869 binds unchanged semantic inputs and prior actual labels. Current/fresh/independent affected231/1skip and predecessor ed5 full local/fresh761/4skip are source-bound in its receipt; CI117 passed runtime-identical head489. PR101 checked delivery remains separate from root source selection and actual restricted-CLI compatibility/new qualification. Corrective model queries and additional store writes remain zero; old source921 evidence is unchanged.
 
-PR101 remained held after later automated review proved halted private diagnostic metadata could be lost. [TK-001A](tasks/TK-001A/TASK.md) is the native fresh corrective run for that narrow retention gap; Y’s closed receipt and scoped PASS remain historical. No actual corrective query or extra database write occurred.
+PR101 remained held after later automated review proved halted private diagnostic metadata could be lost. [TK-001A](tasks/TK-001A/TASK.md) completed the native fresh correction for that narrow retention gap, verified by affected239/1skip, exactb9 CI120 and independent delta PASS; Y’s closed receipt and scoped PASS remain historical. No actual corrective query or extra database write occurred.
 
 ## Desired Behavior
 
@@ -128,6 +128,7 @@ Kayden reported lost grilling as a failure; the linked context preserves the int
 | 2026-11-01 | TK-000T | Task closed | 45 focused; fresh 562/4 skip; CI70; actual adapter smoke | evals, Runbook, Wiki | Oracle calibration, noise, controls, benefit; close attribution: {"agent":"s002-bootstrap","claimant":"s002-bootstrap","onBehalfOf":null} |
 | 2026-11-01 | TK-000V | Task closed | 50 focused; fresh 567/4 skip; actual inert adapter | evals/TRIALS.md | Oracle/noise/controls/benefit; close attribution: {"agent":"s002-transport","claimant":"s002-transport","onBehalfOf":null} |
 | 2026-11-02 | TK-000Y | Task closed | Engineering source c3e1fd9: primary/fresh/independent 231 passed/1 skipped; predecessor ed5 local/fresh full761 passed/4 skipped; current room/layout/render/diff checks; direct scoped independent source/binding PASS; CI117 passed exact489 runtime-identical head; model-free recorde9c08d/protocol720869 releasedfalse. | evals/INTERVIEW-NOISE.md; TK-000Y; S-002; TASKBOARD | Only bounded serialization/neutral-context engineering is complete. Actual restricted CLI compatibility and changed-source qualification are unverified/unreleased; TK-002 and floor remain incomplete. Old run28/result41 and original campaign evidence preserved; corrective model/store calls0. Current final-record CI and checked PR101 main delivery pending.; close attribution: {"agent":"s002-structured-judge","claimant":"s002-structured-judge","onBehalfOf":null} |
+| 2026-11-02 | TK-001A | Task closed | Sourceb9 primary/fresh/independent239 passed/1 skipped; eight causal private journal/stop/privacy cases; current room/layout/render/diff checks; exactb9 CI120 passed; code review no findings/security completed; scoped independent delta PASS; unreleased record18e47/protocol48c882. | TK-001A; S-002; TASKBOARD; INTERVIEW-NOISE context | Bounded private halt-retention correction complete only. Actual structured-output compatibility/new qualification remain unverified/unreleased; TK-002 and floor incomplete, original stoppedrun28/result41 unchanged. Final records CI/reviews and checked PR101 main delivery pending. Corrective model/store calls0.; close attribution: {"agent":"s002-halt-evidence","claimant":"s002-halt-evidence","onBehalfOf":null} |
 
 ## Old incomplete baseline publication
 

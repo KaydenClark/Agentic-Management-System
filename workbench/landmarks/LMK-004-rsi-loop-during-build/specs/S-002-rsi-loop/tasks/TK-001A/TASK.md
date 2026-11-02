@@ -3,12 +3,13 @@
 **Task ID:** TK-001A
 **Spec ID:** S-002
 **Slice:** A controlled campaign halt retains exact private diagnostic and partial runtime facts
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Evals; Readback
 **Planned verification:** Causal private journal readback/stop tests; planted-marker public privacy regression; affected/current checks; scoped independent delta review; no models or storage
 **Claimed by:** s002-halt-evidence
 **Current claimant:** s002-halt-evidence
+**Proof:** Sourceb9 primary/fresh/independent239 passed/1 skipped; eight causal private journal/stop/privacy cases; current room/layout/render/diff checks; exactb9 CI120 passed; code review no findings/security completed; scoped independent delta PASS; unreleased record18e47/protocol48c882.
 
 ## Assignment
 
@@ -31,6 +32,7 @@ Eight causal tests first failed on absent privateDiagnostic in retained halt jou
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | feature/s002-structured-judge | b9ceee3af2ae3b019dc4a945833f60108117a546 | ahead 0 behind 0 | 0 | Exact sourceb9ceee3: primary/fresh/independent239 passed/1 skipped; eight causal private readback/stop/privacy tests red then green. Exactb9 CI120 passed; code review completed no findings; security review completed. Room/layout/render/diff checks pass; prior ed5 full local/fresh761 passed/4 skipped retained with source identity. | TK-001A; S-002; TASKBOARD; INTERVIEW-NOISE context | Only private halt evidence retention is verified; actual structured-output compatibility and new qualification unreleased, TK-002 incomplete. Final records/current checks and checked PR101 main delivery pending; no actual model/storage calls. | f6b8ee8b24b6962e96607effd1fc14f02208ef14d2b77c35dcdda3039d246c0a |
+| 2 | feature/s002-structured-judge | 61d8614b1ec3dd1aaa8188e1b993fe281f1aee8e | ahead 0 behind 0 | 0 | Sourceb9 primary/fresh/independent239 passed/1 skipped; eight causal private journal/stop/privacy cases; current room/layout/render/diff checks; exactb9 CI120 passed; code review no findings/security completed; scoped independent delta PASS; unreleased record18e47/protocol48c882. | TK-001A; S-002; TASKBOARD; INTERVIEW-NOISE context | Bounded private halt-retention correction complete only. Actual structured-output compatibility/new qualification remain unverified/unreleased; TK-002 and floor incomplete, original stoppedrun28/result41 unchanged. Final records CI/reviews and checked PR101 main delivery pending. Corrective model/store calls0.; close attribution: {"agent":"s002-halt-evidence","claimant":"s002-halt-evidence","onBehalfOf":null} | 586cabbb6559a046fd40fc77263ee878450be9c989cb4e62ced44fcd45c32cac |
 
 ## Engineering disposition
 
