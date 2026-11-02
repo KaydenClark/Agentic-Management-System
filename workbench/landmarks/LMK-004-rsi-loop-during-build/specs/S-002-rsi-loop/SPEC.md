@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000Y closed with proof.
-**Next gate:** Deliver checked TK-000Y source via PR101; root selection/release of actual compatibility and changed-source qualification remain pending. TK-002 is incomplete.
+**Latest event:** TK-001A claimed by s002-halt-evidence.
+**Next gate:** Close TK-001A with verification and documentation proof.
 
 ## Intent and authority
 
@@ -26,6 +26,8 @@ Exact-identity repair: S-006/TK-000S.
 [Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise. Its reviewed engineering reference `921cb3e` (PR #92; CI87; 177 affected checks) freezes the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md). PR #92 merged at `d78b663`; the orchestrator selected main-contained source `921cb3e` after direct model-free import/protocol verification. The released qualification command was rejected by automatic approval review before process creation. The owner explicitly approved scoped Anthropic/subscribed-Claude sends on 2026-11-02. The first five-control qualification phase then executed once and all expected outcomes matched; the root inspected private evidence digest `f6938f3...` and accepted only that narrow qualification. The first baseline worker process completed, but its judge returned fenced JSON and the strict parser retained Unknown (`3a2637ba...`); task success is unestablished. Further model slots are held. The root released only publication of the old incomplete observation, now run28/result41 with exact readback below. Noise and benefit remain unproven. [TK-002](tasks/TK-002/TASK.md) owns the exact hold and preserved identities.
 
 [TK-000Y](tasks/TK-000Y/TASK.md) completed only the bounded structured-output/neutral-context engineering correction at independently reviewed source `c3e1fd9`; private model-free recorde9c08d/protocol720869 binds unchanged semantic inputs and prior actual labels. Current/fresh/independent affected231/1skip and predecessor ed5 full local/fresh761/4skip are source-bound in its receipt; CI117 passed runtime-identical head489. PR101 checked delivery remains separate from root source selection and actual restricted-CLI compatibility/new qualification. Corrective model queries and additional store writes remain zero; old source921 evidence is unchanged.
+
+PR101 remained held after later automated review proved halted private diagnostic metadata could be lost. [TK-001A](tasks/TK-001A/TASK.md) is the native fresh corrective run for that narrow retention gap; Y’s closed receipt and scoped PASS remain historical. No actual corrective query or extra database write occurred.
 
 ## Desired Behavior
 

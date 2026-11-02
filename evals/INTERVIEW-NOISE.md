@@ -101,7 +101,7 @@ and starts no further calls. The adapter closes only its owned process group.
 Control exchanges are capped at 15 seconds and execution at 55 seconds per query.
 CLI --max-turns additionally hard-caps the judge at two turns. An Unknown previous
 slot mechanically blocks the next slot; a No with complete proof remains a real No.
-Progress may name slot/phase and owned process/session, never private text.
+Private halt journals retain the bound call owner’s actual last_failure before rethrow, including available diagnostic pointers and partial provider-turn/serialization facts. Missing facts stay missing; these diagnostics never enter public detail or metric reasons. Progress may name slot/phase and owned process/session, never private text.
 
 `publish_result` writes and reads back each real result through the existing S-006
 Store. `execution_state=completed` means a completed **graded evaluation**. An

@@ -162,7 +162,8 @@ def calibrate(controls, oracle, call, *, cwd=None, retain=None):
             verdict=grade(control['case'],control['response'],oracle,call,cwd=cwd)
         except KeyboardInterrupt as error:
             row={'id':control['id'],'verdict':'Unknown','reason':getattr(error,'reason','cancelled'),
-                 'matches':False,'ownerCancellation':not hasattr(error,'reason')}
+                 'matches':False,'ownerCancellation':not hasattr(error,'reason'),
+                 'privateDiagnostic':getattr(getattr(call,'__self__',None),'last_failure',None)}
             if retain:retain(row)
             raise
         row={'id':control['id'],'expected':control['expected'], 'actual':verdict,
@@ -188,6 +189,7 @@ def evaluate(case, prompt, oracle, call, *, cwd=None, retain=None):
     except KeyboardInterrupt as error:
         result['reason']=getattr(error,'reason','cancelled')
         result['ownerCancellation']=not hasattr(error,'reason')
+        result['privateDiagnostic']=getattr(getattr(call,'__self__',None),'last_failure',None)
         if retain:retain('cancelled',copy_result(result,start))
         raise
     except (Refused,OSError,TimeoutError):
