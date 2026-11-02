@@ -2,7 +2,7 @@
 
 > Generated from LLM Workbench v3.2.2.
 
-AMS proves shared skill improvements through this website build ([Blueprint](BLUEPRINT.md)); [S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick.
+[Blueprint](BLUEPRINT.md) owns the destination: website, RSI and shared skill improvement. [S-001](workbench/specs/S-001-ams/SPEC.md) assesses the build.
 
 ## Start and scope
 

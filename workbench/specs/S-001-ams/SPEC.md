@@ -1,4 +1,4 @@
-# S-001 - The AMS: yardstick for the whole system
+# S-001 - Assessment of the current AMS build
 
 **Spec ID:** S-001
 **Status:** active
@@ -14,11 +14,11 @@
 
 ## Intent and authority
 
-The owner wants one "Are we there yet?" Spec, with yes/no and remaining steps. S-001 sits under the Blueprint and assesses the four landmarks; it does not parent them. Their Specs own capabilities. The linked owner correction authorizes S-001 work while those capabilities remain unfinished.
+The Blueprint owns the final project destination. S-001 provides one "Are we there yet?" assessment of the current build, with yes/no and remaining steps against this Spec's criteria. It assesses the four landmarks without parenting them; their Specs own capabilities. The linked owner correction authorizes S-001 work while those capabilities remain unfinished.
 
 ## Outcome
 
-Claude Code and Codex deliver the owner's ideas through a Workbench, personal skills, a local Grill Board and a measured RSI loop. Its first outside product is the presentation website.
+An auditable assessment of the room, shared skills, local Grill Board, RSI loop and presentation website against this Spec's criteria. The website explains AMS and presents verified results; the room improves shared skills already used across projects.
 
 ## Why It Matters
 
@@ -102,7 +102,7 @@ To answer "Are we there yet?": name the commit; run each check; report met, not 
 
 ## Documentation Impact
 
-- README and RUNBOOK point here as the yardstick.
+- The Blueprint owns product direction; README and AGENTS link this Spec for the current-build assessment.
 
 ## Review and Human QA
 
