@@ -22,6 +22,6 @@ Hand back to S-013 with `close`.
 
 ## Acceptance
 
-- [ ] A review recorded by the building session is refused (test).
-- [ ] A review reused after the commit changed is reported stale (test).
-- [ ] The procedure is documented where RUNBOOK points.
+- [x] A review recorded by the building session is refused (test). Evidence: `tests/test_coherence_review.py` (`RecordRefusesBuilderTest`, `test_verdict_by_the_building_session_is_reported_refused`).
+- [x] A review reused after the commit changed is reported stale (test). Evidence: `tests/test_coherence_review.py` (`test_review_reused_after_the_commit_changed_is_stale`, `test_review_reused_after_spec_content_changed_is_stale`).
+- [x] The procedure is documented where RUNBOOK points. Evidence: [review receipt template](../../../../../../specs/REVIEW-RECEIPT-TEMPLATE.md), section Independent Spec review procedure.
