@@ -15,7 +15,7 @@ import { scanPrivacy } from './privacy.mjs';
 import { canonicalRoomFile, isGroupedVocabularyArticle, linkResolvesToRootControl, parseGlossary } from './glossary-format.mjs';
 import { versionStamp, wikiContractFiles } from './workbench-layout.mjs';
 
-export const NOTE_TYPES = Object.freeze(['memory', 'project', 'person', 'machine', 'guidebook', 'design-concept', 'feature', 'meta']);
+export const NOTE_TYPES = Object.freeze(['memory', 'project', 'person', 'machine', 'guidebook', 'design-concept', 'feature', 'meta', 'history']);
 // S-00I TK-01U: a features article is the readable knowledge a completed Spec
 // is captured into at its closure point. It lives only in the additive
 // `features` collection, which is not required to exist (earlier rooms never
@@ -57,7 +57,12 @@ const REQUIRED_COLLECTIONS = Object.freeze(['design-concepts', 'guidebooks', 'ar
 // evidence, the exact class SCHEMA.md already names, so a reconciliation
 // that pastes it must fail the same check a copied slice table already
 // does rather than passing silently.
-const LIVE_STATE_MARKERS = [/<!--\s*hot-specs:start\s*-->/, /<!--\s*spec-catalog:start\s*-->/, /^\|\s*TK-[0-9A-Za-z]+\s*\|.*\|\s*(?:ready|in-progress|blocked|done|deferred)\s*\|/m, /^\|\s*\d{4}-\d{2}-\d{2}\s*\|\s*(?:TK-[0-9A-Za-z]+|spec|review)\s*\|/m];
+// A Spec's or Landmark's Wiki history page (`history/<ID>.md`) is the owner of
+// exactly those rows - the native lifecycle tools append them there - so the
+// copied-evidence marker (the last one) never applies inside the history
+// collection; every other marker still does.
+const EVIDENCE_ROW_MARKER = /^\|\s*\d{4}-\d{2}-\d{2}\s*\|\s*(?:TK-[0-9A-Za-z]+|spec|review)\s*\|/m;
+const LIVE_STATE_MARKERS = [/<!--\s*hot-specs:start\s*-->/, /<!--\s*spec-catalog:start\s*-->/, /^\|\s*TK-[0-9A-Za-z]+\s*\|.*\|\s*(?:ready|in-progress|blocked|done|deferred)\s*\|/m, EVIDENCE_ROW_MARKER];
 
 function walkMarkdown(directory, files = []) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -346,6 +351,8 @@ export function validateWiki(root, options = {}) {
   const designConcepts = path.join(root, collectionRelative(root, 'design-concepts'));
   const featuresRelative = collectionRelative(root, 'features');
   const features = path.join(root, featuresRelative);
+  const historyRelative = collectionRelative(root, 'history');
+  const history = path.join(root, historyRelative);
   const archive = path.join(root, collectionRelative(root, 'archive'));
   const draftRoot = path.join(wikiRoot, DRAFT_COLLECTION);
   const draftRelative = `${wikiRelative}/${DRAFT_COLLECTION}`;
@@ -399,7 +406,8 @@ export function validateWiki(root, options = {}) {
     for (const target of liveTargets) {
       findings.push(finding('untracked-provenance', `${relative} cites live record ${target}; a notepad or handoff is working context even when committed, so cite the durable owner it was promoted into`, { note: relative, target }));
     }
-    if (LIVE_STATE_MARKERS.some((marker) => marker.test(content))) {
+    const inHistory = file.startsWith(history + path.sep);
+    if (LIVE_STATE_MARKERS.some((marker) => !(inHistory && marker === EVIDENCE_ROW_MARKER) && marker.test(content))) {
       findings.push(finding('copied-task-state', `${relative} copies live task state; link to the owner instead`, { note: relative }));
     }
     const hits = scanPrivacy(content).filter((hit) => hit.label !== 'email address' || data.sensitivity === 'normal');
@@ -432,6 +440,12 @@ export function validateWiki(root, options = {}) {
       }
     } else if (!inFeatures && data.type === 'feature') {
       findings.push(finding('invalid-note', `${relative} type feature belongs in ${featuresRelative}; move the article into the features collection`, { note: relative }));
+    }
+    if (inHistory && basename !== 'README') {
+      if (data.type !== 'history') findings.push(finding('invalid-note', `${relative} must declare type history; it lives in the history collection ${historyRelative}`, { note: relative }));
+      if (!new RegExp('^## Append-Only Evidence And Execution Log$', 'm').test(content)) findings.push(finding('invalid-note', `${relative} must carry an Append-Only Evidence And Execution Log section`, { note: relative }));
+    } else if (!inHistory && data.type === 'history') {
+      findings.push(finding('invalid-note', `${relative} type history belongs in ${historyRelative}; a history page is keyed by its Spec or Landmark ID there`, { note: relative }));
     }
   }
   for (const [basename, paths] of basenames) {
@@ -484,7 +498,7 @@ function noteFields(root, file, relative, date) {
 function inferredType(root, file) {
   if (path.basename(file) === 'MEMORY.md') return 'memory';
   if (file.startsWith(path.join(lanePath(root, 'wiki'), DRAFT_COLLECTION) + path.sep)) return 'memory';
-  for (const [collection, type] of [['guidebooks', 'guidebook'], ['design-concepts', 'design-concept'], ['features', 'feature']]) {
+  for (const [collection, type] of [['guidebooks', 'guidebook'], ['design-concepts', 'design-concept'], ['features', 'feature'], ['history', 'history']]) {
     if (file.startsWith(path.join(root, collectionRelative(root, collection)) + path.sep)) return type;
   }
   return 'meta';
@@ -503,6 +517,7 @@ const COLLECTION_TYPES = Object.freeze({
   'design-concepts': ['design-concept'],
   features: ['feature'],
   guidebooks: ['guidebook'],
+  history: ['history'],
   archive: null
 });
 

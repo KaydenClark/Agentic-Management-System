@@ -194,8 +194,8 @@ export function parseTaskRecord(content, filePath, root) {
 // agent into the Task record's own optional `**Claimed by:**` field, a
 // comma-separated list that accumulates every claimant across runs (a
 // continuation re-claim appends; a returning claimant is kept once). The
-// parent Spec's Owner and Latest event and a landmark's Latest event are
-// overwritten by the next claim or close, so the record is where the fact
+// parent Spec's Owner is overwritten by a later claim and no claim is written
+// into a Spec or landmark as history, so the record is where the fact
 // survives close, re-claim, retirement and moves; landmark participation
 // (spec-report.mjs) reads it. Like Status, it is part of the record's
 // reviewed bytes: a claim changes both in the same write.

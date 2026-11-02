@@ -90,7 +90,7 @@ def test_one_click_saves_a_rating_as_a_committed_record_on_the_card(board, repo)
     assert git(repo, "log", "-1", "--format=%s").strip() == "Grill Board: rate one-card.md 4 of 5"
     assert CARD_PATH in git(repo, "ls-files", "--", CARD_PATH)
     assert git(repo, "status", "--porcelain") == ""
-    assert (repo / "records" / "decision.md").read_text() == RECORD, "a rating never writes the owning record"
+    assert (repo / "workbench" / "wiki" / "decision.md").read_text() == RECORD, "a rating never writes the owning record"
     # The page shows the saved rating and the card stays in the queue to answer.
     assert "Written and committed" in body
     assert re.search(r'value="4"[^>]*aria-pressed="true"', rating_form(body)[1])
@@ -153,6 +153,11 @@ def test_a_flagged_card_cannot_be_answered(board, repo):
 @pytest.mark.parametrize("question", [
     "Fixture: should the board keep one card per file?",
     "  fixture:   SHOULD the board keep one card per file?  ",
+    "Fixture: should the board keep one card per file ?",  # review TK-000H: C's 'too taxing ?' case
+    "Fixture - should the board keep one card, per file!?",
+    "Fixture: should the bo\u200bard keep one\u200d card per file?",  # zero-width space and joiner
+    "Fixture: should the board keep one card per file\u2060?",  # word joiner (format character)
+    "\uff26ixture: should the board keep one card per file\uff1f",  # fullwidth forms, folded by NFKC
 ])
 def test_a_new_card_repeating_a_flagged_question_is_refused(board, repo, question):
     """Must fail: a flagged card re-posted with the same text."""
@@ -166,6 +171,15 @@ def test_a_new_card_repeating_a_flagged_question_is_refused(board, repo, questio
     assert "repost.md" not in queue(html)
     status, body = post(server, {"card": "repost.md", "card_sha": "0" * 64, "record_sha": "", "verdict": "confirm"})
     assert status == 409 and "no committed card" in body
+
+
+def test_question_key_ignores_case_spacing_punctuation_and_invisible_characters():
+    from ams.grill_board.cards import question_key
+
+    plain = question_key("Is this too taxing?")
+    for variant in ("is this too taxing ?", "Is this, too taxing?!", "Is\u200b this too\u00a0taxing?", "IS THIS TOO TAXING"):
+        assert question_key(variant) == plain, variant
+    assert question_key("Is this too costly?") != plain
 
 
 def test_a_rewritten_question_is_accepted(board, repo):
@@ -282,7 +296,52 @@ def test_the_board_is_not_a_drafting_surface(board, repo):
     post_card(repo, "page-draft.md", "---\ntitle: A page draft\n---\n\nBody of a page.\n", "a page draft posted as a card")
     html = get(server, {"topic": "Card format"})
     assert "page-draft.md" in html.split('aria-label="Refused cards"', 1)[1]
-    assert before["record"] == (repo / "records" / "decision.md").read_bytes()
+    assert before["record"] == (repo / "workbench" / "wiki" / "decision.md").read_bytes()
+
+
+PAGE_DRAFT_HEADER = CARD.split("\n\nFixture context.", 1)[0].replace(
+    "# Fixture: should the board keep one card per file?", "# Page draft: About us")
+
+
+@pytest.mark.parametrize("body, problem", [
+    ("## About us\n\nWe build agents.\n\n## Our team\n\nThree people.\n", "heading"),
+    ("About us\n========\n\nWe build agents.\n", "heading"),
+    ("---\nlayout: page\ntitle: About us\n---\n\nWe build agents.\n", "front matter"),
+    ("We build agents. " * 80, "1000 characters"),
+])
+def test_a_page_draft_with_valid_card_headers_is_refused_not_shown(board, repo, body, problem):
+    """Review TK-000I: C posted 'Page draft: About us' with a page body and valid headers; it showed as a card."""
+    server = board()
+    post_card(repo, "page-draft.md", PAGE_DRAFT_HEADER + "\n\n" + body, "an agent posts a page draft as a card")
+    html = get(server, {"topic": "Card format"})
+    alert = html.split('aria-label="Refused cards"', 1)[1].split("</section>", 1)[0]
+    assert "page-draft.md" in alert and "not a drafting surface" in alert and problem in alert
+    assert "page-draft.md" not in queue(html) and "About us" not in queue(html)
+    status, body = post(server, {"card": "page-draft.md", "card_sha": "0" * 64, "record_sha": "", "verdict": "confirm"})
+    assert status == 409
+
+
+def test_a_flag_on_a_card_that_now_breaks_the_context_rule_still_refuses_its_question(board, repo):
+    """Codex P2 on PR #58: a flag committed before the context rule must not be lost
+    because its card would now be refused as page content."""
+    server = board()
+    old_context = "## Background\n\n" + "Long background. " * 80
+    old = CARD.replace("Fixture context.", old_context) + "\n## Flag\n\n**Too taxing:** yes\n**Flagged:** 2026-10-01T00:00:00Z\n"
+    post_card(repo, "one-card.md", old, "a card flagged before the context rule existed")
+    (repo / "grill-board" / "cards" / "one-card.md").unlink()
+    git(repo, "commit", "-qam", "an agent deletes the flagged card")
+    post_card(repo, "repost.md", CARD, "an agent re-posts the flagged question with a short context")
+    html = get(server, {"topic": "Card format"})
+    alert = html.split('aria-label="Refused cards"', 1)[1].split("</section>", 1)[0]
+    assert "repost.md" in alert and "flagged too taxing" in alert
+    assert "repost.md" not in queue(html)
+
+
+def test_a_short_plain_context_is_still_a_card():
+    from ams.grill_board.cards import Card, parse_card
+
+    note = "A short note. " * 70  # 980 characters: under the limit
+    assert isinstance(parse_card("ok.md", PAGE_DRAFT_HEADER + "\n\n" + note.strip() + "\n"), Card)
 
 
 def test_rewriting_a_flagged_card_in_place_is_refused_so_the_flag_record_stays(board, repo):

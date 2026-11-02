@@ -3,7 +3,9 @@ name = "ams"
 version = "0.0.0"
 description = "Agentic Management System: Python runtime and backends (Grill Board, RSI loop, Supabase writer)."
 requires-python = "==3.14.*"
-dependencies = []
+dependencies = [
+    "markdown-it-py==4.2.0",
+]
 
 [project.scripts]
 ams-board = "ams.grill_board.server:main"
@@ -11,6 +13,10 @@ ams-keycheck = "ams.keycheck:main"
 ams-writer = "ams.writer:main"
 ams-history = "ams.build_history:main"
 ams-rsi = "ams.rsi_rows:main"
+ams-assess = "ams.assessment:main"
+ams-assessment-store = "ams.assessment_store:main"
+ams-trials = "ams.trials:main"
+ams-series = "ams.trial_series:main"
 ams-sources = "ams.source_rules:main"
 
 [build-system]

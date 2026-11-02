@@ -8,7 +8,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** A public demo of the Grill Board with sample cards asking non-engineering questions, showing what a non-developer might use it for.
 **Blockers:** S-003
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning after the site shell (S-003) exists.
 
 ## Intent and authority
@@ -26,6 +25,8 @@ The board is the part of the AMS a non-developer is most likely to use. Showing 
 ## Current Verified State
 
 - No demo page exists. The real board's card rules are specified in S-004.
+
+History: [S-009 history](../../../../wiki/history/S-009.md).
 
 ## Desired Behavior
 
@@ -93,12 +94,6 @@ node workbench/tools/spec-workbench.mjs show S-009
 ## Documentation Impact
 
 - The tour links the demo from the Grill Board explanation.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
 
 ## Review and Human QA
 

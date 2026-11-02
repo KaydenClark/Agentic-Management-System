@@ -1,33 +1,39 @@
 # S-001 - The AMS: yardstick for the whole system
 
 **Spec ID:** S-001
-**Status:** planned
+**Status:** active
 **Priority:** 1
 **Owner:** Kayden
 **Stance:** Builder
-**Updated:** 2026-11-01
-**Catalog description:** The single "Are we there yet?" check for the AMS across its four landmarks, its room and governance, its skills, its Python runtime and the owner's gates.
+**Updated:** 2026-11-02
+**Catalog description:** One "Are we there yet?" check across landmarks, room, skills, runtime and owner gates.
 **Blockers:** none
-**Latest event:** Ported from the pre-repository plan and rewritten from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Backlog; activate first when one of the six active Specs closes.
+**Confirmation:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
-The owner asked for one Spec to point at and ask "Are we there yet?", with a yes or no and the remaining steps. Ported 2026-11-01 and rewritten from the confirmed decisions, which win over the earlier draft. This Spec owns only cross-landmark checks; child Specs of the landmarks own the capabilities.
+The owner wants one "Are we there yet?" Spec, with yes/no and remaining steps. S-001 sits under the Blueprint and assesses the four landmarks; it does not parent them. Their Specs own capabilities. The linked owner correction authorizes S-001 work while those capabilities remain unfinished.
 
 ## Outcome
 
-The AMS is the management system Claude Code and Codex use to align and deliver the owner's ideas: a Workbench room operated by the owner's skills, with a local Grill Board and an RSI loop that measures the work. Its first outside product is the presentation website.
+Claude Code and Codex deliver the owner's ideas through a Workbench, personal skills, a local Grill Board and a measured RSI loop. Its first outside product is the presentation website.
 
 ## Why It Matters
 
-Agent management must be auditable while it is built, and the owner wants to stand behind every site claim; that needs one place saying what is done and what is not.
+The owner needs one auditable account of what is done and what remains.
 
 ## Current Verified State
 
-- The repository is adopted as a Workbench (v3.2.2): root controls, `workbench/` lanes, Node lifecycle tools, a generated Taskboard.
-- Six child Specs are active with Tasks (2026-11-01): S-003 and S-007 (orchestrator A), S-004, S-006 and S-002 (B), S-013 (C). The rest wait in the backlog below.
-- `site/` holds only a placeholder; a read-only Supabase baseline migration exists; a `dev` branch exists.
+- Answer: **No** at `325b422` ([TK-001 assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)).
+- Met: Room.
+- Not met: Landmarks, Limits, Hygiene, Runtime baseline, Cold start, Owner gates.
+- Unknown: Skills pinned.
+- Workbench v3.2.2 is adopted: controls, lanes, Node lifecycle and generated Taskboard.
+- Site code, Supabase migrations and `dev` exist; see child Specs for scoped proof.
+
+History: [S-001 history](../../wiki/history/S-001.md).
 
 ## Desired Behavior
 
@@ -42,14 +48,14 @@ Agent management must be auditable while it is built, and the owner wants to sta
 - Non-site work goes feature -> `main`, merged by agents once current and checked. Site work goes feature -> `dev` -> `main`; only the owner approves `dev` -> `main`.
 - Specs, Tasks and Landmarks are at most 8,000 characters; root controls at most 3,000. Over the limit means prune and revise, never split or truncate.
 - Three strikes: a run, a failed test, a second failed test, then stop and report.
-- At most six active Specs; the rest wait in the backlog.
+- At most six active Landmarks; the hierarchy is Landmark -> Spec -> Task ([ADR-003J](../../docs/adr/003J-limit-active-landmarks-not-specs.md)). Specs need no slots; only actual required inputs block their Tasks.
 - No public claim of improved outcomes without held-out rows, controls, the prior version and an interval.
 - Secrets live only in Vercel and Supabase settings. Private evidence and traces stay out of this public repository.
 - License: MIT, copyright Kayden Clark (the license file is the owner's to add).
 
-## Backlog order
+## Related scope and priorities
 
-Planned Specs activate in this order as active ones close: S-001 itself; S-005 page review cards; S-011 land skill events; S-010 governance flow charts; S-008 skills wiki; S-009 demo Grill Board; S-012 Python lifecycle CLI. The owner may reorder.
+See Intent and authority, and Dependencies And Blockers.
 
 ## Non-Goals
 
@@ -59,35 +65,15 @@ Planned Specs activate in this order as active ones close: S-001 itself; S-005 p
 
 ## Dependencies And Blockers
 
-- Every child Spec of LMK-001 to LMK-004, plus Vercel and Supabase projects on free tiers.
+- Final acceptance needs the landmark child outcomes and Vercel/Supabase projects. Missing capabilities are findings, not start gates.
+- TK-001/TK-002 need no prerequisite Spec; TK-003 needs TK-002. Block only a Task missing an input required to start.
 
 ## Vertical Implementation Slices
 
-Each slice is a cross-landmark check; capability work belongs to child Specs.
+Task records under `tasks/` own these checks; capability work belongs to the landmark Specs.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Run the "Are we there yet?" check at a named commit and record the answer in this Spec's log | ready | none | pending |
-| TK-002 | Add a public hygiene and character-limit check over records, controls and the built site | ready | none | pending |
-| TK-003 | Cold-start trial: a fresh session given only the repository URL names the AMS, its active Specs and next Task | ready | TK-002 | pending |
-
-### TK-001 - Are we there yet?
-
-**Stance:** Builder
-
-Run every acceptance check below and every landmark's success checks at one commit; record met, not met or unknown with evidence.
-
-### TK-002 - Hygiene and size check
-
-**Stance:** Builder
-
-A script that fails on host paths, credentials, private record IDs and any Spec, Task or Landmark over 8,000 characters; wired into the checks.
-
-### TK-003 - Cold-start trial
-
-**Stance:** Builder
-
-One recorded trial in a separate session, never simulated in the building session.
 
 ## Acceptance Criteria
 
@@ -118,12 +104,6 @@ To answer "Are we there yet?": name the commit; run each check; report met, not 
 
 - README and RUNBOOK point here as the yardstick.
 
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Ported and rewritten; the Workbench adoption of 2026-11-01 recorded as this Spec's first room evidence | render, doctor | this Spec; adoption Wiki page | Every criterion |
-
 ## Review and Human QA
 
 None yet. Independent review needs a fresh-context reviewer at the exact commit; Human QA comes only from the owner.
@@ -134,7 +114,8 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- Current answer: **No** (2026-11-01). Every landmark is planned.
+- Agent-workable: PR #98 with over-limit pruning; TK-003; blocked S-002, S-006, S-007, S-013 Tasks.
+- Owner gates: approve S-005, S-009 to S-012; S-003 TK-003; S-004/S-008 QA and approvals; `dev` -> `main`.
 
 ## Supersession
 

@@ -169,7 +169,15 @@ def test_key_goes_in_apikey_header_of_rest_root(capsys, caplog, tmp_path, label,
     [(url, headers)] = http.calls
     assert url == URL + "/rest/v1/"
     assert headers["apikey"] == key
-    assert "Authorization" not in headers
+    # Review N6 at d6d4a6d: the check authenticates the way the writers do, so a
+    # legacy JWT is also sent as a bearer token and a pass means the writers work.
+    if label == "legacy-jwt":
+        assert headers["Authorization"] == "Bearer " + key
+    else:
+        assert "Authorization" not in headers
+    from ams import writer
+    sent = {k: v for k, v in writer._headers(key).items() if k in ("apikey", "Authorization")}
+    assert headers == sent
     assert f"format: {label}" in out
     assert "authenticated: yes" in out
     assert "http status: 200" in out

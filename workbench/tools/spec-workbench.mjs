@@ -30,6 +30,7 @@ import { appendReceiptRow, appendReceiptRowToContent, readGitFacts, readReceipt,
 import { TASKBOARD_LANES, buildTaskboard, taskboardTaskEntry, taskboardSpecLane, compareTaskboardEntries } from './taskboard.mjs';
 import { NEW_SPEC_ROUTE, assembleLandmarkReport, assembleSpecReport, computeSpecDigest, formatLandmarkReport, formatSpecReport, isAncestorOfBranch, recordLandmarkApproval, recordLandmarkVerdict, recordOwnerApproval, recordReviewVerdict, verifyLandmark } from './spec-report.mjs';
 import { validateLandmarkArticle } from './landmark-wiki.mjs';
+import { appendHistory, hasLegacyHistory, historyPagePath, historyPageRelative, historyRelative, historyRows, planHistoryAppend } from './spec-history.mjs';
 
 // One closed status vocabulary for an execution slice, owned by the record
 // reader and re-exported here so the lifecycle commands and the record share
@@ -481,8 +482,8 @@ function claimInTree(rootDir, id, options, remoteClaims) {
   // A capability block this session now satisfies is cleared as it is claimed.
   // S-003Z TK-008H run 2: the claim also records its agent on the Task
   // record's accumulated `Claimed by` list (task-record.mjs `withClaimant`),
-  // the one place a claimant survives `close` overwriting the parent's
-  // Latest event; landmark participation reads it.
+  // the one place a claimant is recorded (no history is written into the
+  // parent); landmark participation reads it.
   const claimedBy = { 'Claimed by': withClaimant(task.record?.claimedBy, options.agent), 'Current claimant': options.agent };
   if (task.source === 'record') writeTaskStatus(task.record, task.missingCapabilities.length > 0 ? { Status: 'in-progress', 'Missing capabilities': 'none', ...claimedBy } : { Status: 'in-progress', ...claimedBy });
   if (spec.lifecycleFolder === 'retired') return withRouting(showSpec(rootDir, id));
@@ -500,7 +501,6 @@ function claimInTree(rootDir, id, options, remoteClaims) {
   const updated = updateFields(content, {
     ...(!landmark && !postDeliveryClaim && spec.owner === 'unassigned' ? { Owner: options.agent } : {}),
     Updated: date,
-    'Latest event': `${task.id} claimed by ${options.agent}.`,
     'Next gate': `Close ${task.id} with verification and documentation proof.`
   });
   atomicWrite(spec.filePath, updated);
@@ -651,9 +651,9 @@ export function closeTask(rootDir, id, options) {
       ...facts, testsRun: proof, docsTouched: docs, remainingGap: recordedGap
     }, task.record.filePath);
     const receipt = readReceipt(receipted, task.record.filePath).at(-1);
-    const row = `| ${[date, task.id, closeEvent(spec.content, task.id), receipt.testsRun, receipt.docsTouched, receipt.remainingGap].map(escapeCell).join(' | ')} |`;
-    // Validate the evidence destination before publishing the Task.
-    appendEvidence(spec.content, row);
+    const row = `| ${[date, task.id, closeEvent(spec, task.id), receipt.testsRun, receipt.docsTouched, receipt.remainingGap].map(escapeCell).join(' | ')} |`;
+    // Validate the history destination before publishing the Task.
+    planHistoryAppend(spec, row, root);
     const published = updateTaskFields(receipted, {
       Status: 'done', Proof: receipt.testsRun,
       'Close pending': JSON.stringify({ version: 2, row, receiptChecksum: receipt.checksum, attribution })
@@ -671,22 +671,24 @@ export function closeTask(rootDir, id, options) {
   const remaining = slices.find((item) => item.id !== task.id && item.declared !== 'done');
   if (spec.lifecycleFolder !== 'retired') content = updateFields(content, {
     Updated: date,
-    'Latest event': `${task.id} closed with proof.`,
     'Next gate': remaining ? `Complete ${remaining.id}.` : 'Confirm acceptance criteria and completion result.'
   });
-  content = appendEvidence(content, `| ${escapeCell(date)} | ${escapeCell(task.id)} | Task closed | ${escapeCell(proof)} | ${escapeCell(docs)} | ${escapeCell(recordedGap)} |`);
+  const row = `| ${escapeCell(date)} | ${escapeCell(task.id)} | Task closed | ${escapeCell(proof)} | ${escapeCell(docs)} | ${escapeCell(recordedGap)} |`;
+  planHistoryAppend(spec, row, root);
   atomicWrite(spec.filePath, content);
+  appendHistory(spec, row, root);
   return showSpec(rootDir, id);
 }
 
 // S-004F TK-005R (DDR-000Y): a Task a check found missed continues, so it can
 // close more than once. The first close keeps the event `Task closed`; each
 // later close is `Task closed (run N)`, N counting the close rows this Task
-// already has in the Spec's append-only log, so a second close on the same
-// day carries its own identity instead of conflicting with the first.
+// already has in the Spec's history (its Wiki history page, after any legacy
+// in-body rows), so a second close on the same day carries its own identity
+// instead of conflicting with the first.
 const CLOSE_EVENT_PATTERN = /^Task closed(?: \(run \d+\))?$/;
-function closeEvent(specContent, taskId) {
-  const prior = evidenceRows(specContent).map(splitRow).filter((cells) => cells[1] === taskId && CLOSE_EVENT_PATTERN.test(cells[2])).length;
+function closeEvent(spec, taskId) {
+  const prior = historyRows(spec).map(splitRow).filter((cells) => cells[1] === taskId && CLOSE_EVENT_PATTERN.test(cells[2])).length;
   return prior === 0 ? 'Task closed' : `Task closed (run ${prior + 1})`;
 }
 
@@ -754,10 +756,10 @@ function finishRecordClose(root, spec, task, slices, options) {
     }
   }
   const date = validDate(cells[0]);
-  // Inspect only the owning log. A conflicting row with the same identity is
-  // never overwritten; successful Spec publication followed by failed cleanup
-  // is idempotent, even across separate CLI processes.
-  const sameIdentity = evidenceRows(spec.content).filter((row) => {
+  // Inspect only the owning history. A conflicting row with the same identity
+  // is never overwritten; successful history publication followed by failed
+  // cleanup is idempotent, even across separate CLI processes.
+  const sameIdentity = historyRows(spec).filter((row) => {
     const existing = splitRow(row);
     return existing[0] === date && existing[1] === task.id && existing[2] === cells[2];
   });
@@ -769,11 +771,13 @@ function finishRecordClose(root, spec, task, slices, options) {
     const remaining = slices.find((item) => item.id !== task.id && item.declared !== 'done');
     if (spec.lifecycleFolder !== 'retired') content = updateFields(content, {
       Updated: date,
-      'Latest event': `${task.id} closed with proof.`,
       'Next gate': closedNextGate(spec, remaining)
     });
-    content = appendEvidence(content, pending.row);
-    writeRecordText(spec.filePath, content, { root });
+    planHistoryAppend(spec, pending.row, root);
+    // The header first: a retry after a failed history write sees no row and
+    // rewrites the same header values before appending it.
+    if (content !== spec.content) writeRecordText(spec.filePath, content, { root });
+    appendHistory(spec, pending.row, root);
   }
   const cleared = record.content.replace(/^\*\*Close pending:\*\* .+\r?\n?/m, '');
   parseTaskRecord(cleared, record.filePath, record.root);
@@ -1008,7 +1012,7 @@ export function completeSpec(rootDir, id, options = {}) {
   if (/^- \[ \]/m.test(section(spec.content, 'Acceptance Criteria'))) throw new Error(`${id} has unchecked acceptance criteria`);
   const completion = section(spec.content, 'Completion Result').trim();
   if (!completion || /^pending\.?$/i.test(completion)) throw new Error(`${id} has no completion result`);
-  if (evidenceRows(spec.content).length === 0) throw new Error(`${id} has no execution evidence`);
+  if (historyRows(spec).length === 0) throw new Error(`${id} has no execution evidence`);
   const report = assembleSpecReport(rootDir, id);
   // S-00J TK-01R: an unresolved durable Task decision (the report's
   // `decisionGaps`, also part of its `gaps` that `gate` consumes) refuses
@@ -1043,12 +1047,13 @@ export function completeSpec(rootDir, id, options = {}) {
   let content = updateFields(spec.content, {
     Status: 'complete',
     Updated: date,
-    'Latest event': 'Spec completed and removed from the hot board.',
     'Next gate': 'none'
   });
   const deliveryProof = `approved delivery verified: ${delivery.remoteRef} at ${delivery.observedSha} contains approved candidate ${delivery.candidate} [${delivery.digest12}]`;
-  content = appendEvidence(content, `| ${escapeCell(date)} | spec | Spec completed | ${escapeCell(`Acceptance gates satisfied; ${deliveryProof}`)} | Documentation impact recorded above | none |`);
+  const row = `| ${escapeCell(date)} | spec | Spec completed | ${escapeCell(`Acceptance gates satisfied; ${deliveryProof}`)} | Documentation impact recorded in the Spec | none |`;
+  planHistoryAppend(spec, row, rootDir);
   atomicWrite(spec.filePath, content);
+  appendHistory(spec, row, path.resolve(rootDir));
   return showSpec(rootDir, id);
 }
 
@@ -1274,16 +1279,14 @@ export function recordLanding(rootDir, specId, options = {}) {
   assertSafeWritePath(root, spec.filePath);
   const verification = `git merge-base --is-ancestor ${candidate} ${observed}: passed; ${containment.ref} observed at ${observed}; local refs only, fetch freshness is the caller's responsibility`;
   const docs = 'Current continuation recorded; render and publish the owner records, then read them back from fetched integration. No review, approval or completion inferred.';
-  const rows = evidenceRows(spec.content);
+  const rows = historyRows(spec);
   const prior = rows.map(splitRow).filter(cells => cells[1] === 'landing');
   const duplicate = prior.some(cells => cells[3] === verification && cells[4] === docs && cells[5] === nextGate);
-  const latestEvent = `Candidate ${candidate} observed contained in ${containment.ref} at ${observed}; continuation recorded.`;
-  let content = updateFields(spec.content, { Updated: today(), 'Latest event': latestEvent, 'Next gate': nextGate });
-  if (!duplicate) {
-    const row = `| ${[today(), 'landing', `Integration landing recorded (run ${prior.length + 1})`, verification, docs, nextGate].map(escapeCell).join(' | ')} |`;
-    content = appendEvidence(content, row);
-  }
+  const content = updateFields(spec.content, { Updated: today(), 'Next gate': nextGate });
+  const row = duplicate ? null : `| ${[today(), 'landing', `Integration landing recorded (run ${prior.length + 1})`, verification, docs, nextGate].map(escapeCell).join(' | ')} |`;
+  if (row) planHistoryAppend(spec, row, root);
   if (content !== spec.content) writeRecordText(spec.filePath, content, { root });
+  if (row) appendHistory(spec, row, root);
   return { specId: spec.id, candidate, integrationContainment: containment, nextGate, projectionPending: true, publicationPending: true, recorded: !duplicate };
 }
 
@@ -1438,6 +1441,7 @@ export function doctor(rootDir, options = {}) {
   const landmarks = readableLandmarkParents(root);
   issues.push(...packetFindings(specs, options, retired, root, landmarks));
   issues.push(...uncapturedCompleteFindings(root, specs.filter((spec) => !spec.sliceConflict)));
+  issues.push(...legacyHistoryFindings(root, [...specs, ...retired, ...landmarks]));
   try {
     assertSafeReadPath(root, path.join(root, 'TASKBOARD.md'));
     const taskboardText = fs.readFileSync(path.join(root, 'TASKBOARD.md'), 'utf8');
@@ -1451,6 +1455,24 @@ export function doctor(rootDir, options = {}) {
   issues.push(...remoteIdCollisionFindings(root, specs, retired, landmarks));
   issues.push(...readbackFindings(root));
   return issues;
+}
+
+// A Spec or Landmark holds only its destination. One that still carries the
+// legacy in-body log or `Latest event` field is named, never blocked: readers
+// still read those rows (legacy first, then the Wiki history page).
+function legacyHistoryFindings(root, records) {
+  const findings = [];
+  for (const record of records) {
+    const raw = record.sourceContent ?? record.content;
+    const carried = [
+      ...(hasLegacyHistory(raw) ? ['an Append-Only Evidence And Execution Log section'] : []),
+      ...(/^\*\*Latest event:\*\*/m.test(raw) ? ['a Latest event field'] : [])
+    ];
+    if (carried.length === 0) continue;
+    const page = historyPageRelative(root, record.id);
+    findings.push(finding('history-in-record', `${record.relativePath} still carries ${carried.join(' and ')}; ${record.kind === 'landmark' ? 'a Landmark' : 'a Spec'} holds only its destination. Move its rows to ${page} (the native tools append there) and remove the field`, { id: record.id, path: record.relativePath, historyPage: page }));
+  }
+  return findings;
 }
 
 // S-005O TK-00AB: `remote-id-collision`. `next-id` already folds every remote
@@ -2663,7 +2685,7 @@ export function slicesOf(spec) {
 function executionSlices(spec) {
   const slices = slicesOf(spec);
   if (spec.lifecycleFolder !== 'retired') return slices;
-  const rows = evidenceRows(spec.content).map(parseMarkdownTableRow);
+  const rows = historyRows(spec).map(parseMarkdownTableRow);
   return slices.filter(slice => {
     const task = slice.record;
     if (!task || task.destination.type !== 'spec-acceptance' || task.destination.reference !== `${spec.id} Acceptance Criteria`) return false;
@@ -3029,7 +3051,7 @@ function renderHotBoard(specs, retired = [], landmarks = []) {
     // cell here rather than calling `slicesOf` a second time and throwing
     // partway through rendering the rest of the board.
     if (spec.sliceConflict) {
-      lines.push(`| [${spec.id}](${spec.relativePath}) | Acceptance / owner gate | ${escapeCell(spec.owner)} | ${escapeCell(spec.blockers)} | ${escapeCell(spec.latestEvent)} | ${escapeCell(spec.nextGate)} |`);
+      lines.push(`| [${spec.id}](${spec.relativePath}) | Acceptance / owner gate | ${escapeCell(spec.owner)} | ${escapeCell(spec.blockers)} | ${escapeCell(boardEvent(spec))} | ${escapeCell(spec.nextGate)} |`);
       continue;
     }
     const slices = executionSlices(spec).map((item) => ({ ...item, status: effectiveStatus(item, satisfiedIds(spec, completed)) }));
@@ -3060,11 +3082,26 @@ function renderHotBoard(specs, retired = [], landmarks = []) {
     const capabilityNotes = slices.filter((item) => item.missingCapabilities.length > 0).map((item) => `${item.id} missing capability ${item.missingCapabilities.join(', ')}`);
     const blocker = capabilityNotes.length === 0 ? baseBlocker
       : [...(baseBlocker && baseBlocker !== 'none' ? [baseBlocker] : []), ...capabilityNotes].join('; ');
-    const event = spec.lifecycleFolder === 'retired' ? `Corrective work against retired ${spec.id}; historical completion preserved.` : spec.latestEvent;
+    const event = spec.lifecycleFolder === 'retired' ? `Corrective work against retired ${spec.id}; historical completion preserved.` : boardEvent(spec);
     const nextGate = spec.lifecycleFolder === 'retired' ? `Close ${task.id} with verification and documentation proof.` : spec.nextGate;
     lines.push(`| [${spec.id}](${spec.relativePath}) | ${escapeCell(slice)} | ${escapeCell(spec.owner)} | ${escapeCell(blocker)} | ${escapeCell(event)} | ${escapeCell(nextGate)} |`);
   }
   return lines.join('\n');
+}
+
+// The board's latest meaningful event, derived from the record's history (its
+// Wiki history page, after any legacy in-body rows) - never a header field a
+// command writes. A legacy `Latest event` field is the fallback for a record
+// with no history row yet. An unreadable page never crashes the board; doctor
+// reports the page through the Wiki checks.
+function boardEvent(spec) {
+  let last = null;
+  try { last = historyRows(spec).at(-1) ?? null; } catch { last = null; }
+  if (last) {
+    const cells = parseMarkdownTableRow(last);
+    return `${cells[1]}: ${cells[2]} (${cells[0]})`;
+  }
+  return spec.latestEvent ?? 'No history recorded yet.';
 }
 
 // The board's derived Receipt signal for one selected Task: the run count
@@ -3848,10 +3885,13 @@ function recoverTaskCollision(rootDir, specId, taskId, folder, options) {
       const { prefix, evidence, suffix } = splitEvidenceSection(content);
       const replace = text => text.replace(new RegExp(`\\b${escapeRegExp(taskId)}\\b`, 'g'), options.replacement);
       content = replace(prefix) + evidence + replace(suffix);
-      content = appendEvidence(content, `| ${today()} | ${escapeCell(specId + '/' + taskId)} | Collision identity recovered to ${options.replacement} | ${escapeCell(provenance)} | ${escapeCell(options.reason)} | Identity repair only; no review or owner approval transferred. |`);
     }
     if (content !== original) { assertSafeWritePath(root, file); assertSafeWritePath(root, destination); writes.set(destination, content); }
   }
+  // The recovery row goes to the Spec's Wiki history page, never the Spec.
+  const historyFile = historyPagePath(root, spec.id);
+  const recoveryRow = `| ${today()} | ${escapeCell(specId + '/' + taskId)} | Collision identity recovered to ${options.replacement} | ${escapeCell(provenance)} | ${escapeCell(options.reason)} | Identity repair only; no review or owner approval transferred. |`;
+  writes.set(historyFile, planHistoryAppend(spec, recoveryRow, root, writes.get(historyFile)).content);
   // JSON source references need their owning runtime; never silently leave a
   // current path dangling or rewrite unknown schemas during this operation.
   for (const file of git('ls-files', '--', '*.json').split('\n').filter(Boolean)) {
@@ -4330,7 +4370,7 @@ function capturedFeatureArticle(root, spec) {
 // completed under the closure-capture contract. Specs completed before it
 // carry no such row and are never reported.
 function completedUnderCaptureContract(spec) {
-  return evidenceRows(spec.content).some((line) => {
+  return historyRows(spec).some((line) => {
     const cells = parseMarkdownTableRow(line);
     return cells[1] === 'spec' && cells[2] === 'Spec completed' && /approved delivery verified: \S+ at [0-9a-f]{7,40}\b/.test(cells[3] ?? '');
   });
@@ -4494,8 +4534,7 @@ export function retireSpec(rootDir, specId, options = {}) {
   const branchesCleanedCell = branches.cleaned.length > 0 ? branches.cleaned.join(', ') : 'none';
   const date = today();
   const row = `| ${escapeCell(date)} | spec | Spec retired to ${escapeCell(`${moveResult.to}/SPEC.md`)} | ${escapeCell(wikiNoteRelative)} | ${escapeCell(branchesCleanedCell)} | ${escapeCell(String(referencesRewrittenCount))} |`;
-  const updatedContent = appendEvidence(movedSpec.content, row);
-  atomicWrite(movedSpec.filePath, updatedContent);
+  appendHistory(movedSpec, row, root);
 
   render(root);
   writeDecisionRegisters(root);
@@ -4599,12 +4638,13 @@ export function retireLandmark(rootDir, landmarkId, options = {}) {
   const referencesRewrittenCount = Object.values(moveResult.referencesRewritten).reduce((a, b) => a + b, 0);
   const date = today();
   const row = `| ${escapeCell(date)} | landmark | Landmark retired to ${escapeCell(historicalRoute)} | ${escapeCell(wikiNoteRelative)} | ${escapeCell(`owner approval by ${ownerApproval.approvedBy} [${digest12}]`)} | ${escapeCell(String(referencesRewrittenCount))} |`;
-  const content = updateFields(appendEvidence(moved.content, row), {
+  const content = updateFields(moved.content, {
     Updated: date,
-    'Latest event': `Retired into its Landmark Wiki page ${wikiNoteRelative}.`,
     'Next gate': 'none'
   });
+  planHistoryAppend(moved, row, root);
   atomicWrite(moved.filePath, content);
+  appendHistory(moved, row, root);
 
   render(root);
   writeDecisionRegisters(root);
@@ -4943,7 +4983,11 @@ function discardedReferences(root) {
   const isDiscarded = (candidate) => discardedPaths.some((entry) => candidate === entry || candidate.startsWith(entry + path.sep));
   const adrCollection = collectionPath(root, 'adr');
   const findings = [];
+  // A Wiki history page is history: its link to the record it describes may
+  // outlive that record (a discard), exactly as an evidence row's link may.
+  const historyDir = path.join(root, historyRelative(root));
   for (const file of collectSpecReferenceFiles(root)) {
+    if (file.startsWith(historyDir + path.sep)) continue;
     const original = fs.readFileSync(file, 'utf8');
     const { prefix, suffix } = splitEvidenceSection(original);
     const relative = path.relative(root, file).split(path.sep).join('/');
@@ -5181,7 +5225,11 @@ export function scanReferences(rootDir) {
   const root = path.resolve(rootDir);
   const adrCollection = collectionPath(root, 'adr');
   const findings = [];
+  // A Wiki history page is history: its link to the record it describes may
+  // outlive that record (a discard), exactly as an evidence row's link may.
+  const historyDir = path.join(root, historyRelative(root));
   for (const file of collectSpecReferenceFiles(root)) {
+    if (file.startsWith(historyDir + path.sep)) continue;
     const original = fs.readFileSync(file, 'utf8');
     const { prefix, suffix } = splitEvidenceSection(original);
     const relative = path.relative(root, file).split(path.sep).join('/');
@@ -5238,8 +5286,9 @@ export function referencesToPath(rootDir, targetPath, options = {}) {
   const adrCollection = collectionPath(root, 'adr');
   const findings = [];
   const underTarget = (candidate) => candidate === target || candidate.startsWith(target + path.sep);
+  const historyDir = path.join(root, historyRelative(root));
   for (const file of collectSpecReferenceFiles(root, target)) {
-    if (excludeFiles.has(file)) continue;
+    if (excludeFiles.has(file) || file.startsWith(historyDir + path.sep)) continue;
     const original = options.contentOverrides?.get(file) ?? fs.readFileSync(file, 'utf8');
     const { prefix, suffix } = splitEvidenceSection(original);
     const relative = path.relative(root, file).split(path.sep).join('/');
@@ -5318,10 +5367,10 @@ function updateTaskRow(content, taskId, transform) {
   return updated;
 }
 
-// Exported so spec-report.mjs's `recordReviewVerdict` (S-00J TK-002) appends
-// a review-verdict row through this exact same seam `closeTask` and
-// `completeSpec` already use, rather than a second append implementation
-// that could drift from it.
+// Appends one row to a file's own append-only log table, keeping every other
+// byte. Spec and Landmark history no longer goes through here: it is appended
+// to the record's Wiki history page (spec-history.mjs). The discards register
+// keeps its own log and still uses this seam.
 export function appendEvidence(content, row) {
   const heading = '## Append-Only Evidence And Execution Log';
   const start = content.indexOf(heading);
@@ -5335,10 +5384,6 @@ export function appendEvidence(content, row) {
   const trailing = content.slice(0, end).match(/(?:\n[ \t\r]*)+$/)?.[0] ?? '';
   const insertion = end - trailing.length;
   return `${content.slice(0, insertion)}\n${row}${content.slice(insertion)}`;
-}
-
-function evidenceRows(content) {
-  return section(content, 'Append-Only Evidence And Execution Log').split('\n').filter((line) => /^\|\s*\d{4}-\d{2}-\d{2}\s*\|/.test(line));
 }
 
 function section(content, heading) {
@@ -5399,9 +5444,8 @@ function localLinks(content) {
   return links;
 }
 
-// Exported for the same reason as `appendEvidence` above: `recordReviewVerdict`
-// in spec-report.mjs writes its Spec file through this one temp-file-plus-
-// rename discipline rather than a second write path.
+// Exported so the lifecycle writers in spec-report.mjs write a record through
+// this one temp-file-plus-rename discipline rather than a second write path.
 export function atomicWrite(filePath, content) {
   return writeRecordText(filePath, content.endsWith('\n') ? content : `${content}\n`);
 }

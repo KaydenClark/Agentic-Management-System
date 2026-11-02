@@ -2,6 +2,7 @@
 date: 2026-11-01
 canonicalized_in:
   - workbench/specs
+superseded_by: 003J-limit-active-landmarks-not-specs.md
 ---
 
 # At most six active Specs

@@ -11,10 +11,11 @@ format without breaking older cards. The board appends `## Answer`,
 committed records the RSI loop reads (DDR-000J).
 
 A card flagged too taxing is held for rewrite. A card that asks a flagged
-question again unchanged (same question line, ignoring case and spacing) is
-refused, whether it is a new file, a copy, or the same card with its flag
-undone: the flagged questions come from every card and every flag the
-board ever committed in this branch's history.
+question again unchanged (same question line, ignoring case, spacing,
+punctuation and invisible characters; see question_key) is refused, whether
+it is a new file, a copy, or the same card with its flag undone: the flagged
+questions come from every card and every flag the board ever committed in
+this branch's history.
 """
 
 import functools
@@ -22,6 +23,7 @@ import functools
 import hashlib
 import re
 import subprocess
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -102,6 +104,10 @@ def parse_card(name, text):
     flags = [f for h, f in sections if h == "## Flag" and f.get("Too taxing") == "yes"]
     if starts:
         rest = rest[:starts[0]]
+    context = "\n".join(rest).strip()
+    if draft := page_content(context):
+        return Refusal(name, [f"its context {draft}; the board is not a drafting surface, so post the page "
+                              "elsewhere and ask only the question about it (S-004 TK-000I)"])
     return Card(
         file=name,
         question=question,
@@ -110,16 +116,43 @@ def parse_card(name, text):
         value=fields["Value"],
         value_reason=fields["Value reason"],
         fields=fields,
-        context="\n".join(rest).strip(),
+        context=context,
         answer=answers[0] if answers else None,
         ratings=ratings,
         flag=flags[0] if flags else None,
     )
 
 
+CONTEXT_LIMIT = 1000
+HEADING = re.compile(r"^ {0,3}(#{1,6}(\s|$)|=+\s*$)")
+FENCE = re.compile(r"^ {0,3}-{3,}\s*$")
+
+
+def page_content(context):
+    """Why a card's context is page content, or "" (S-004 TK-000I). Context is
+    a short note: at most CONTEXT_LIMIT characters, with no Markdown heading
+    and no `---` line (front matter, a rule or a heading underline)."""
+    lines = context.splitlines()
+    if any(HEADING.match(line) for line in lines):
+        return "has a Markdown heading"
+    if any(FENCE.match(line) for line in lines):
+        return "has a '---' line (front matter, a rule or a heading underline)"
+    if len(context) > CONTEXT_LIMIT:
+        return f"is {len(context)} characters, over the {CONTEXT_LIMIT} characters a note may take"
+    return ""
+
+
 def question_key(question):
-    """The form of a question that a rewrite must change: case and spacing aside."""
-    return " ".join(question.split()).casefold()
+    """The form of a question that a rewrite must change (S-004 TK-000H):
+    Unicode NFKC, format characters (category Cf, such as zero-width spaces
+    and joiners) removed, punctuation read as spacing, case folded and
+    spacing collapsed. Only a change of words or symbols is a rewrite."""
+    text = unicodedata.normalize("NFKC", question)
+    text = "".join(
+        "" if (kind := unicodedata.category(char)) == "Cf" else " " if kind[0] == "P" else char
+        for char in text
+    )
+    return " ".join(text.casefold().split())
 
 
 class CardSourceError(Exception):
@@ -189,10 +222,24 @@ def _flagged_in_history(root, commit, prefix):
                 data = _git(Path(root), "cat-file", "blob", f"{sha}:{path}", binary=True)
             except CardSourceError:
                 continue  # this commit removed the file; the commit that added the flag lists it too
-            card = parse_card(name, data.decode("utf-8", "replace"))
-            if isinstance(card, Card) and card.flag is not None:
-                flagged.append((question_key(card.question), name))
+            question = flagged_question(data.decode("utf-8", "replace"))
+            if question:
+                flagged.append((question_key(question), name))
     return tuple(flagged)
+
+
+def flagged_question(text):
+    """The question line of a card version that carries a `## Flag` section with
+    the flag line, or "". Read apart from parse_card's acceptance rules, so a
+    flag stays binding when a later rule (such as TK-000I's) would refuse its card."""
+    lines = text.splitlines()
+    if not lines or not lines[0].startswith("# "):
+        return ""
+    starts = [at for at, line in enumerate(lines) if line in SECTIONS]
+    for at, end in zip(starts, starts[1:] + [len(lines)]):
+        if lines[at] == "## Flag" and FLAG_LINE in (line.strip() for line in lines[at + 1:end]):
+            return lines[0][2:].strip()
+    return ""
 
 
 def load_cards(cards_dir):

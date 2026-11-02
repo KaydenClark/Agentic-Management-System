@@ -13,7 +13,7 @@ AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one 
 
 | Path | What lives there |
 |---|---|
-| `src/`, `tests/` | Package `ams`, pytest suite (uv); `ams-keycheck` checks the key; `ams-writer`, `ams-history`, `ams-rsi` write under one source rule (`ams-sources`); the site key only reads |
+| `src/`, `tests/` | Package `ams`, pytest (uv); keycheck; writer/history/rsi source rules; assessment-store keeps raw r1 packets private; site key only reads presentation rows |
 | `supabase/` | Migrations: read-only baseline, `build_events`, `rsi_*` |
 | `site/` | Public website; planned Vercel hosting, Supabase data |
 | `grill-board/` | Owner's [cards](grill-board/README.md), theme, QA; local `ams-board` only |

@@ -74,7 +74,6 @@
 | [002P](002P-no-session-holds-untrusted-input-secrets-and-outward-actions-together.md) | No session holds untrusted input, secrets and outward actions together | accepted | 2026-11-01 | AGENTS.md |
 | [002Q](002Q-the-workbench-folder-stays-visible.md) | The workbench folder stays visible | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [002R](002R-each-rsi-run-pins-the-skills-commit.md) | Each RSI run pins the skills commit | accepted | 2026-11-01 | evals, .agents/skills |
-| [002S](002S-at-most-six-active-specs.md) | At most six active Specs | accepted | 2026-11-01 | workbench/specs |
 | [002T](002T-measure-how-far-dev-runs-ahead-of-main.md) | Measure how far dev runs ahead of main | accepted | 2026-11-01 | RUNBOOK.md |
 | [002U](002U-writes-to-shared-stores-refuse-on-conflict.md) | Writes to shared stores refuse on conflict | accepted | 2026-11-01 | supabase, grill-board |
 | [002V](002V-artifacts-have-character-limits.md) | Artifacts have character limits | accepted | 2026-11-01 | workbench/artifact-budgets.json |
@@ -90,3 +89,4 @@
 | [003G](003G-the-rsi-loop-design-with-one-owner-gate.md) | The RSI loop design with one owner gate | accepted | 2026-11-01 | evals, supabase |
 | [003H](003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md) | Supabase holds the RSI data and the service key stays local | accepted | 2026-11-01 | supabase |
 | [003I](003I-only-main-dev-and-site-branches-deploy-to-vercel.md) | Only main, dev and site branches deploy to Vercel | accepted | 2026-11-01 | site/vercel.json |
+| [003J](003J-limit-active-landmarks-not-specs.md) | Limit active Landmarks, not Specs | accepted | 2026-11-01 | AGENTS.md, workbench/specs/S-001-ams/SPEC.md |

@@ -38,6 +38,10 @@ VERDICTS = {
     "change": "Change",
 }
 REGULAR_MODES = {"100644", "100755"}
+# The only places a confirmed answer may land: Markdown records, never
+# workflow, code, config or root-control files (S-004 TK-000G).
+RECORD_ROOTS = ("workbench/specs/", "workbench/landmarks/", "workbench/docs/adr/", "workbench/docs/ddr/", "workbench/wiki/")
+RECORD_FILES = ("grill-board/page-approvals.md",)
 
 
 class AnswerRefused(Exception):
@@ -93,6 +97,14 @@ def committed_blob(root, relative, rev="HEAD"):
     return entry and entry[1]
 
 
+def is_record_path(relative):
+    """True for a `.md` file under RECORD_ROOTS, or one of RECORD_FILES, compared
+    exactly (case included), so no other tracked file can be an owner."""
+    if relative in RECORD_FILES:
+        return True
+    return relative.endswith(".md") and any(relative.startswith(prefix) for prefix in RECORD_ROOTS)
+
+
 def owned_path(root, relative):
     """Resolve a card's `Owner record` inside the repository, or refuse."""
     if not relative or "\\" in relative or "\0" in relative:
@@ -102,6 +114,10 @@ def owned_path(root, relative):
         raise AnswerRefused(f"the owning record {relative!r} escapes the repository")
     if any(part.lower() == ".git" for part in parts):
         raise AnswerRefused(f"the owning record {relative!r} is inside .git")
+    if not is_record_path(relative):
+        raise AnswerRefused(
+            f"the owning record {relative!r} is not a Markdown file under a record root "
+            f"({', '.join(RECORD_ROOTS + RECORD_FILES)})")
     path = root
     for part in PurePosixPath(relative).parts:
         path = path / part
@@ -344,6 +360,8 @@ def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
             raise AnswerRefused("this card names no owning record and place (Owner record, Write after)")
         if not recommendation:
             raise AnswerRefused("this card has no Recommendation to confirm")
+        if target == card_rel:
+            raise AnswerRefused("this card names itself as its owning record; an answer must land in another record")
         record_file = owned_path(root, target)
         if record_file.resolve() == card_file.resolve():
             raise AnswerRefused("this card names itself as its owning record; an answer must land in another record")

@@ -13,10 +13,12 @@ Optional header fields the page shows:
 | `Topic` | The topic in the left rail; cards without one go under "Other topics" |
 | `Why it matters` | The yellow "Why this choice matters" box |
 | `Recommendation` | The green "Agent recommendation" box; the text Confirm writes |
-| `Owner record` | The repository-relative file the confirmed answer is written into |
+| `Owner record` | The repository-relative record the confirmed answer is written into; it must be a record (below) |
 | `Write after` | One exact, unique line in that record; the answer is inserted below it |
 
-Text below the header is shown as Context. A card without `Owner record`, `Write after` and `Recommendation` can be returned but not confirmed; the page says which is missing.
+**Owner records.** Confirm writes only into a `.md` file under `workbench/specs/`, `workbench/landmarks/`, `workbench/docs/adr/`, `workbench/docs/ddr/` or `workbench/wiki/`, or into `grill-board/page-approvals.md`, matched exactly, case included (S-004 TK-000G). Everything else is refused before any write: workflows (`.github/`), code (`src/`, `site/`, `supabase/`), config (`pyproject.toml`, `uv.lock`, `*.json`) and root controls such as `AGENTS.md`. The page disables Confirm for such a card.
+
+Text below the header is shown as Context. **Not a drafting surface** (TK-000I): Context is a short note of at most 1,000 characters, with no Markdown heading (`#` to `######`, or a `===` underline) and no `---` line (front matter, a rule or a heading underline). A card whose Context breaks that rule is page content and is refused, listed in the alert, never shown; post the page elsewhere and ask only the question about it. A card without `Owner record`, `Write after` and `Recommendation` can be returned but not confirmed; the page says which is missing.
 
 ## Answers
 
@@ -32,7 +34,7 @@ The verdict buttons and note POST to `/answer` (ADR-000B, ADR-002U, S-004 TK-002
 
 - The card or owning record changed since the page showed it: the page carries each file's SHA-256 at HEAD, captured at render, and the write compares them.
 - Either file has uncommitted changes.
-- The owning path is absolute, uses `..` or `.`, names `.git`, goes through a symlink, resolves outside the repository, or is not a committed regular file.
+- The owning path is absolute, uses `..` or `.`, names `.git`, is not an owner record (above), goes through a symlink, resolves outside the repository, or is not a committed regular file.
 - The card names itself as its owning record.
 - The `Write after` line is missing or appears more than once; the card is already answered; a return has no note.
 - A rating is not a whole number from 1 to 5; the card is already flagged; an answer targets a flagged card.
@@ -46,7 +48,7 @@ Each is one click on the open card, with an optional comment, and is saved on th
 - **Too taxing** POSTs to `/flag` and appends `## Flag`, `**Too taxing:** yes`, `**Flagged:**` in UTC, then the comment. A flagged card leaves the queue, held for rewrite, and cannot be answered or flagged again.
 - Each is one commit of the card alone, subject `Grill Board: rate NAME N of 5` or `Grill Board: flag NAME too taxing`. These committed sections are what the RSI loop reads (S-002).
 
-**Re-asking.** An agent posts the rewrite as a new card file. The page lists as refused, never asks, a card that repeats a flagged question line (ignoring case and spacing), or a card that was flagged and whose flag is gone. Flags are read from every flag commit in the branch history, so a copy, a deletion or a reverted flag does not bring the question back.
+**Re-asking.** An agent posts the rewrite as a new card file. The page lists as refused, never asks, a card that repeats a flagged question line, compared after Unicode NFKC, removing format characters (Unicode category Cf, such as zero-width spaces and joiners), reading punctuation as spacing, folding case and collapsing spacing (TK-000H), or a card that was flagged and whose flag is gone. Flags are read from every flag commit in the branch history, so a copy, a deletion or a reverted flag does not bring the question back.
 
 ## Layout and theme
 
@@ -65,6 +67,8 @@ Dark is the default; the system preference picks light, and the header toggle ov
 uv run --with playwright python grill-board/qa/capture.py --artifact PATH/TO/ARTIFACT
 ```
 
-Both pages render the generic fixture cards in `tests/fixtures/grill_board/showcase/`, so no artifact sample text is published. The script fails if the board requests any host but its own or scrolls sideways.
+Both pages render the generic fixture cards in `tests/fixtures/grill_board/showcase/`, so no artifact sample text is published. The script fails if the board requests any host but its own or scrolls sideways. The shots were regenerated at S-004 TK-000J, with the live rating and flag controls, from the artifact at version 1793538932-43c3.
+
+**375px check** (TK-000J): `uv run --with playwright pytest tests/test_grill_board_phone.py` fails if the page is wider than 375px, if reaching a control scrolls sideways, or if any visible control (verdicts, note, stars, Too taxing, comment, links, theme toggle) is off-screen or covered, in dark and light; a star tapped at 375px must commit its rating. The default `uv run pytest` skips it, because Playwright and a browser are not project dependencies.
 
 Differences from the artifact, by choice: the artifact's other Dashboard sections, search, filters, batch, rounds, lanes other than "To answer", a flags view and history are left out until real records back them; queue rows also show each grade's reason, because DDR-000K keeps reasons on every card; the brand reads "AMS · Grill Board".

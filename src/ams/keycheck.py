@@ -3,8 +3,8 @@
 Reads ``SUPABASE_URL`` and ``SUPABASE_SERVICE_ROLE_KEY`` from the process
 environment; a variable that is unset there is read from the gitignored local
 environment file at the repository root. Sends one GET to the REST root
-(``/rest/v1/``) with the key in the ``apikey`` header, as Supabase's API-keys
-guide directs for both secret and legacy keys, and prints only:
+(``/rest/v1/``) with the headers the writers use (``auth_headers``): the key in
+``apikey``, and for a legacy JWT also as a bearer token. It prints only:
 
     loaded: yes|no
     format: sb_secret|legacy-jwt|unrecognized
@@ -86,6 +86,15 @@ def key_format(key: str) -> str:
     return "unrecognized"
 
 
+def auth_headers(key: str) -> dict[str, str]:
+    """The headers every AMS client authenticates with: ``apikey``, plus a bearer
+    token for a legacy JWT key (an ``sb_secret_`` key is never sent as a bearer)."""
+    headers = {"apikey": key}
+    if key_format(key) == "legacy-jwt":
+        headers["Authorization"] = "Bearer " + key
+    return headers
+
+
 def urllib_get(url: str, headers: Mapping[str, str]) -> int:
     request = urllib.request.Request(url, headers=dict(headers), method="GET")
     try:
@@ -113,7 +122,7 @@ def main(
         return 1
     try:
         status = (http_get or urllib_get)(
-            settings.url.rstrip("/") + "/rest/v1/", {"apikey": settings.key}
+            settings.url.rstrip("/") + "/rest/v1/", auth_headers(settings.key)
         )
     except Exception:
         # The exception text is not trusted to be free of the key; drop it.
