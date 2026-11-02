@@ -39,7 +39,7 @@ class ClaudeJudgeAdapter:
         def create():
             if transport is not None:return transport
             from ams.trial_transport import ClaudeProcess
-            return ClaudeProcess(cwd,system_prompt=system_prompt,structured_output=True)
+            return ClaudeProcess(cwd,system_prompt=system_prompt,structured_output=True,defer_start=True)
         def snapshot():
             return {'observedProviderTurns':len(messages)or None,'turnCountComplete':False,
                     'serializationCalls':uses,'terminalExecution':completed}

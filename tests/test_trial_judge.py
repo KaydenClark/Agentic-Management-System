@@ -87,7 +87,8 @@ def test_role_router_propagates_only_judge_mode_and_actual_turn_count(monkeypatc
     from ams import trial_transport
     from ams.trial_series import WORKER_SYSTEM,JUDGE_SYSTEM
     seen=[]
-    def factory(cwd,*,system_prompt=None,structured_output=False):
+    def factory(cwd,*,system_prompt=None,structured_output=False,defer_start=False):
+        assert defer_start is True
         seen.append((cwd,system_prompt,structured_output))
         return Transport(events(2)if structured_output else worker_events())
     monkeypatch.setattr(trial_transport,'ClaudeProcess',factory)

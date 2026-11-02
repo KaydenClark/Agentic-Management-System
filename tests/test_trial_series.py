@@ -256,7 +256,8 @@ def test_adapter_propagates_explicit_system_context_to_actual_process_factory(mo
     from ams import trial_transport
     from test_trial_runtime import Transport
     seen=[]
-    def factory(cwd,*,system_prompt=None):
+    def factory(cwd,*,system_prompt=None,defer_start=False):
+        assert defer_start is True
         seen.append((cwd,system_prompt));return Transport()
     monkeypatch.setattr(trial_transport,'ClaudeProcess',factory)
     runtime.ClaudeAdapter().execute('synthetic worker',cwd='synthetic fixture',system_prompt=series.WORKER_SYSTEM)

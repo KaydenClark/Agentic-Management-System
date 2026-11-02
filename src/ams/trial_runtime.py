@@ -85,7 +85,7 @@ class ClaudeAdapter:
         def create():
             if transport is not None:return transport
             from ams.trial_transport import ClaudeProcess
-            return ClaudeProcess(cwd, system_prompt=system_prompt)
+            return ClaudeProcess(cwd, system_prompt=system_prompt, defer_start=True)
         def snapshot():
             return {'observedProviderTurns':len(messages)or(1 if completed else None),
                     'observedAssistantMessages':assistant_events,'turnCountComplete':False,
