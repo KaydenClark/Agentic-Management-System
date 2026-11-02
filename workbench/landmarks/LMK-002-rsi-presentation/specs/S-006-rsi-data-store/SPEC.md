@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-000X claimed by codex-history-parser.
-**Next gate:** Close TK-000X with verification and documentation proof.
+**Latest event:** TK-000X closed with proof.
+**Next gate:** Complete TK-000W.
 
 ## Intent and authority
 
@@ -137,6 +137,7 @@ TASK.md Receipts hold full proof.
 | 2026-11-01 | review | Review verdict: pass at e5a8c33a24226fd1f3eb595fa227f385a04934bd [6df68e2822de] #5 | none | s006_review, independent Codex context, noncontributor | none |
 | 2026-11-01 | review-detail | Independent whole PASS receipt at e5a8c33 | [Scope, evidence and limits](../../../../feedback/REVIEW-S-006-e5a8c33.md) | s006_review direct handback | Actual owner QA and checked delivery remain separate |
 | 2026-11-01 | TK-000U | Task closed | Source9f3a6ca reconciles main17293a0; local and fresh590 passed4 skipped; focused85 passed; direct independent source review d50 PASS; all8 retained facts rederived exactly. Final CI/current-owner binding then postmerge live proof remain required. | src/ams/build_history.py module contract; S006 TaskU and Spec; TASKBOARD | Postmerge history import/readcheck and durable Spec proof pending in same run; Build-history criterion remains unchecked. Owner HumanQA/formal Spec acceptance pending.; close attribution: {"agent":"codex-history-consumer","claimant":"codex-history-consumer","onBehalfOf":null} |
+| 2026-11-02 | TK-000X | Task closed | Source3cd0637 CommonMark token parser;166focused; local/fresh699passed4skipped; exact8real facts once; source CI and direct independent scopedPASS. Two setext expected-value corrections documented; final owner binding/currentCI and postmerge proof remain. | build_history module contract; pinned pyproject/uv.lock; TaskX; approval Wiki; TASKBOARD | Actual postmerge history import/readcheck and durable Spec proof pending in same run. W remains stopped/unaccepted; owner HumanQA/formal S006 completion open.; close attribution: {"agent":"codex-history-parser","claimant":"codex-history-parser","onBehalfOf":null} |
 
 ## Review and Human QA
 
