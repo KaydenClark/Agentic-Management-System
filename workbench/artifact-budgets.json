@@ -39,6 +39,9 @@
       ],
       "maxCharacters": 3000
     },
+    "TASKBOARD.md": {
+      "maxCharacters": 3000
+    },
     "LANDMARK.md": {
       "maxCharacters": 8000
     },
