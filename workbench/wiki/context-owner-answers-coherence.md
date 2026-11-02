@@ -51,3 +51,16 @@ Supersedes: none
 
 COH-016 connectors: The owner does not want the Supabase and Vercel connectors detached, because the attachment is shared with the other orchestrators. Orchestrator C keeps them attached and never uses them; that is the working rule for S-013 No secrets.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-7d650a76-bdc6-49e5-9f23-d1681b5ab1eb
+Kind: intent
+State: confirmed
+Recorded: 2026-11-01T21:01:05.284Z
+Author: Kayden
+Source: Kayden, AMS resume chat 01a19887-118e-7dd2-88ad-676598f589ef, 2026-11-01; branch naming failure correction relayed by the owning orchestrator
+Topic: owner-answers-coherence
+Supersedes: none
+
+Kayden corrected this run: "Report failure, you mislabled that branch. Codex/ is not a feature." Use feature/s002-trial-preflight for this work. The agent had used the harness default codex/ prefix and called it a feature branch. This entry records the current owner correction; it does not invent proof of a previously recorded prefix rule. Rename/push must preserve the exact commits and dirty work. Retain the old remote ref as recovery until main contains it; then clean up with containment checks.
+<!-- /jot-entry -->

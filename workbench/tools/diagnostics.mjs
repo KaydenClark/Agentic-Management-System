@@ -76,6 +76,11 @@ const registry = Object.freeze({
   'stale-claim': entry('attention', 'specs', 'none', 'an in-progress claim is older than one working day; verify activity before reclaiming'),
   'complete-on-integration': entry('attention', 'specs', 'none', 'the spec next would select is already complete or superseded at the declared integration ref; the checkout is behind it'),
   'broken-link': entry('attention', 'specs', 'none', 'a spec links to a missing local target'),
+  // A Spec or Landmark describes a destination; its history (closes,
+  // verdicts, approvals, corrections) lives on its Wiki history page. A record
+  // still carrying the legacy in-body log or `Latest event` field keeps
+  // working (readers read those rows first) but should migrate.
+  'history-in-record': entry('attention', 'specs', 'none', 'a Spec or Landmark still carries an Append-Only Evidence And Execution Log section or Latest event field; move that history to its Wiki history page'),
   // S-00J TK-01T: a blocker entry carries a qualifier outside the known
   // grammar (`S-###:delivered` is the only one). The resolver already treats
   // it as unmet, so the finding only makes that wait visible; it blocks

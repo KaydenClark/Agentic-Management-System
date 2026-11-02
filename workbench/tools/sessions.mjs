@@ -16,6 +16,7 @@ import { validateWiki, parseGlossary } from './wiki.mjs';
 import { controls, containsPlaceholder } from './workbench-layout.mjs';
 import { laneRelative, IGNORED_COLLECTIONS } from './workbench-paths.mjs';
 import { landmarkSpecHomes } from './landmark-artifact.mjs';
+import { historyPagePath, historyRelative } from './spec-history.mjs';
 
 export function checkpoint() {
   return { status: 'blocked', error: finding('invalid-note', 'Checkpoint copy creation is retired; use Wiki jot for local continuity and sessions.mjs promote for selected durable-owner reconciliation. Existing checkpoint history remains unchanged.') };
@@ -111,7 +112,14 @@ function validatePromotionOwner(root, destination, content, original) {
     const after = parseSpecPacket(content, destination.absolute, root);
     if (before.id !== after.id) throw new Error('Promotion cannot change the existing spec identity');
     const oldRows = evidenceRows(original); const newRows = evidenceRows(content);
-    if (oldRows.some((row, index) => newRows[index] !== row)) throw new Error('Promotion cannot rewrite append-only spec evidence');
+    // A Spec holds only its destination; its history lives on its Wiki
+    // history page. Promotion may drop a legacy log whose every row that page
+    // already holds, never rewrite one, and never add history to the Spec.
+    const page = historyPagePath(root, after.id);
+    const pageRows = new Set(fs.existsSync(page) ? evidenceRows(fs.readFileSync(page, 'utf8')) : []);
+    const migrated = newRows.length === 0 && oldRows.every(row => pageRows.has(row));
+    if (!migrated && oldRows.some((row, index) => newRows[index] !== row)) throw new Error('Promotion cannot rewrite append-only spec evidence');
+    if (newRows.length > oldRows.length) throw new Error(`Promotion cannot add history to a Spec; ${after.id}'s closes, verdicts, approvals and corrections belong on its Wiki history page ${path.relative(root, page).split(path.sep).join('/')}`);
     const existing = new Set(validateSpecCandidate(root, destination.absolute, original).map(issue => JSON.stringify(issue)));
     const invalid = validateSpecCandidate(root, destination.absolute, content).filter(issue => issue.severity === 'error' && (issue.specId === after.id || !existing.has(JSON.stringify(issue))));
     if (invalid.length) throw new Error(invalid.map(issue => issue.message).join('; '));
@@ -121,7 +129,14 @@ function validatePromotionOwner(root, destination, content, original) {
     if (!listAdrs(root).some(record => record.filePath === destination.absolute)) throw new Error('Destination is not a recognized ADR record');
     findings = validateAdrs(root, overrides).filter(issue => issue.severity === 'error');
   }
-  else if (beneath(laneRelative(root, 'wiki'))) findings = validateWiki(root, overrides).filter(issue => issue.severity === 'error' && (issue.note === destination.relative || issue.message.includes(destination.relative)));
+  else if (beneath(laneRelative(root, 'wiki'))) {
+    // A Wiki history page is append-only like the log it holds.
+    if (beneath(historyRelative(root))) {
+      const oldRows = evidenceRows(original); const newRows = evidenceRows(content);
+      if (oldRows.some((row, index) => newRows[index] !== row)) throw new Error('Promotion cannot rewrite append-only history');
+    }
+    findings = validateWiki(root, overrides).filter(issue => issue.severity === 'error' && (issue.note === destination.relative || issue.message.includes(destination.relative)));
+  }
   else if (beneath(laneRelative(root, 'docs')) || beneath(laneRelative(root, 'feedback'))) return 'document';
   else throw new Error('Destination must be an existing control, GLOSSARY.md, spec, ADR, Wiki or docs/feedback Markdown owner');
   if (findings.length) throw new Error(findings.map(issue => issue.message).join('; '));

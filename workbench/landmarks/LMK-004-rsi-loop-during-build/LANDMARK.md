@@ -7,7 +7,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** The measured self-improvement loop, run on the website build and the work after it, with safeguards that keep its results honest.
 **Blockers:** none
-**Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning for S-002.
 
 ## Direction
@@ -29,6 +28,8 @@ Outside research does not settle whether shaping an agent's environment improves
 - [ ] Agents using the land skill no longer miss a landing event, shown by a rerun of the failing case after a change made through the skills repository's own process (S-011).
 - [ ] A Python lifecycle CLI exists and is compared with the current Node lifecycle tools on the same tasks (S-012).
 - [ ] Coherence checks report up-to-Spec state, skills pin and sync, and `dev`-ahead-of-`main` distance, and independent Spec review happens (S-013).
+
+History: [LMK-004 history](../../wiki/history/LMK-004.md).
 
 ## Decision Records
 
@@ -74,12 +75,6 @@ node workbench/tools/spec-workbench.mjs doctor
 ```
 
 Loop results are confirmed from the Supabase rows they produced, each naming its commit, skills pin and trial arm.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Landmark mapped from confirmed owner decisions and the earlier loop proposal; child Specs S-002, S-011, S-012 and S-013 written as planned | render and doctor on the mapping branch | this record | Task planning; standing campaign approval |
 
 ## Reached Result
 

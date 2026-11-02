@@ -73,7 +73,7 @@ export const SERIES: SeriesPlan[] = [
     title: "Dev results per task",
     shows: "Each dev task's pass results, one line per task, across versions.",
     nextEvent: {
-      text: "The noise-floor run: the current version run against itself, repeatedly, on a small fixed set of dev tasks, to record how often each task's result flips by chance. It waits on the RSI result tables in the data store and on the owner's standing campaign approval.",
+      text: "The noise-floor run: the current version run against itself, repeatedly, on a small fixed set of dev tasks, to record how often each task's result flips by chance. It is under way: its first trial stopped when the grader's answer could not be read, so no floor is recorded yet, and a correction to the grader comes before any further run.",
       source: { label: "the noise-floor Task of the RSI loop", href: `${S002}/tasks/TK-002/TASK.md` },
     },
   },

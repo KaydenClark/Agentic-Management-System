@@ -1,0 +1,68 @@
+{
+  "candidate": "a3d014e18f3f447d887a85fe6b6f16471781d509",
+  "tree": "b161312f6d0b41a7d711915b73acb9ff890ca645",
+  "trackedObjects": 446,
+  "inventorySha256": "79a24fe443cb6a032ce9b696ecb7490418874a2d3bba54802745698efa5a7b09",
+  "inventoryLocator": "git ls-tree -r a3d014e18f3f447d887a85fe6b6f16471781d509",
+  "rubric": "r1",
+  "rubricSourceSha256": "96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578",
+  "checks": 47,
+  "checkVersion": 1,
+  "classes": "original 14 Critical,33 Quality; no Regression baseline inferred",
+  "runCount": 3,
+  "comparison": "baseline only; no improvement effect or control arms claimed",
+  "occasion": "owner-requested initial whole-AMS assessment",
+  "scope": "whole AMS tracked artifacts and declared local/cloud workflow claims; external host evidence remains missing where unobserved",
+  "excludedChecks": {
+    "A07-04": "AMS is not Audit_Workbench assessing its own adoption"
+  },
+  "externalInstalledInventory": "personal discovery presence and managed receipts only; exact native activation not demonstrated",
+  "evaluatorExactModel": "unknown; not exposed by host",
+  "host": "Codex desktop on macOS-27.0.1-arm64-arm-64bit",
+  "qualification": "unqualified",
+  "attempt": 0,
+  "strikeConsumed": false,
+  "usage": "subscription meter; per-run token/cost attribution unavailable",
+  "assessmentId": "AMS-RSI-L1-BASELINE-20261101",
+  "assessedAt": "2026-11-01T17:02:49.503955+00:00",
+  "level": "Broken",
+  "alignment": {
+    "passed": 4,
+    "applicable": 138,
+    "percentageNumerator": 200,
+    "percentageDenominator": 69,
+    "displayApproximation": "2.90%"
+  },
+  "passingRuns": 0,
+  "acceptance": "not-accepted",
+  "evidenceState": "incomplete",
+  "releaseEligible": false,
+  "runResults": [
+    {
+      "runId": "ams-main-baseline-r1-run-1",
+      "yes": 1,
+      "no": 45,
+      "na": 1,
+      "level": "Broken",
+      "ledger": "run-1.json"
+    },
+    {
+      "runId": "ams-main-baseline-run-2",
+      "yes": 1,
+      "no": 45,
+      "na": 1,
+      "level": "Broken",
+      "ledger": "run-2.json"
+    },
+    {
+      "runId": "ams-main-baseline-run-3",
+      "yes": 2,
+      "no": 44,
+      "na": 1,
+      "level": "Broken",
+      "ledger": "run-3.json"
+    }
+  ],
+  "evaluationType": "three independent read-only evidence-review runs, not behavioral trials",
+  "judgmentLimits": "Model IDs unavailable; evaluators unqualified. Missing proof is No, not an observed defect. Provisional evidence coverage does not measure implementation failure rate."
+}

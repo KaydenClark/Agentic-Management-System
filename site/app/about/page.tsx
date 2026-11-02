@@ -44,8 +44,8 @@ export default function About() {
         <h2 id="holds">What the repository holds</h2>
         <p>
           The records and tools that run the work, the website, and places for the parts still being built. The
-          README is the map.
-          <Source path="README.md">README, Project Folders</Source>
+          architecture record is the map.
+          <Source path="ARCHITECTURE.md">Architecture, Codemap</Source>
         </p>
         <dl className={styles.terms}>
           {FOLDERS.map((f) => (

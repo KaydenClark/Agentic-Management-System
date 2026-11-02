@@ -28,7 +28,7 @@
 
 ## Cost and limits
 
-[Elapsed time, input/output tokens, measured cost, owner interventions and rework. Use unknown, not zero, when unmeasured. State what this attempt cannot establish.]
+[Elapsed time, input/output tokens, measured cost, owner interventions and rework. Use unknown, not zero, when unmeasured; retain each reason/source through the [trial-row contract](TRIAL-ROWS.md). State what this attempt cannot establish.]
 
 ## Corrections (append-only)
 

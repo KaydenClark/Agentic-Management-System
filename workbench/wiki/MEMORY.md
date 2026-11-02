@@ -69,15 +69,40 @@ an AMS glossary entry.
 - [Continuity and evidence boundaries](vocabulary-continuity-and-evidence-boundaries.md) - what transport, promotion and host checks do and do not establish
 - [AI coding reference](ai-coding-reference.md) - general AI coding words restated in Workbench words
 
+## History
+
+One page per Spec and Landmark. The Spec holds the destination; its page holds how it got there.
+
+- [LMK-001 history](history/LMK-001.md) - closes, verdicts, approvals and corrections for LMK-001 (Grill Board)
+- [LMK-002 history](history/LMK-002.md) - closes, verdicts, approvals and corrections for LMK-002 (RSI presentation)
+- [LMK-003 history](history/LMK-003.md) - closes, verdicts, approvals and corrections for LMK-003 (AMS website)
+- [LMK-004 history](history/LMK-004.md) - closes, verdicts, approvals and corrections for LMK-004 (RSI loop during the build)
+- [S-001 history](history/S-001.md) - closes, verdicts, approvals and corrections for S-001 (AMS)
+- [S-002 history](history/S-002.md) - closes, verdicts, approvals and corrections for S-002 (RSI loop)
+- [S-003 history](history/S-003.md) - closes, verdicts, approvals and corrections for S-003 (showcase site)
+- [S-004 history](history/S-004.md) - closes, verdicts, approvals and corrections for S-004 (Grill Board cards)
+- [S-005 history](history/S-005.md) - closes, verdicts, approvals and corrections for S-005 (page review cards)
+- [S-006 history](history/S-006.md) - closes, verdicts, approvals and corrections for S-006 (RSI data store)
+- [S-007 history](history/S-007.md) - closes, verdicts, approvals and corrections for S-007 (RSI charts)
+- [S-008 history](history/S-008.md) - closes, verdicts, approvals and corrections for S-008 (skills wiki)
+- [S-009 history](history/S-009.md) - closes, verdicts, approvals and corrections for S-009 (demo Grill Board)
+- [S-010 history](history/S-010.md) - closes, verdicts, approvals and corrections for S-010 (governance flow charts)
+- [S-011 history](history/S-011.md) - closes, verdicts, approvals and corrections for S-011 (land skill events)
+- [S-012 history](history/S-012.md) - closes, verdicts, approvals and corrections for S-012 (Python lifecycle CLI)
+- [S-013 history](history/S-013.md) - closes, verdicts, approvals and corrections for S-013 (coherence checks)
+
 ## Routing
 
 | Question | Read first |
 |---|---|
 | What is AMS and why is the first loop a website? | [AMS purpose](context-ams-purpose.md) — owner clarification, scope and rationale. |
+| What should the website explain, and why was S-003 rewritten? | [Website presentation](context-website-presentation.md) — owner corrections, presentation intent and source-linked implementation history. |
 | How was the Workbench adopted, and what moved where? | [Workbench adoption](context-workbench-adoption.md) — package identity, Port/Fold/Keep/Retire map, checks and open gaps. |
 | Which Specs are active, and who approved them? | [Active Spec approvals](context-active-spec-approvals.md) — the owner's confirmed Jot entries each active Spec cites for Confirmation and Execution approval. |
 | Who approves merges, where does the Supabase service key live, and may C use the shared connectors? | [Owner answers to coherence findings](context-owner-answers-coherence.md) — owner corrections of 2026-11-01: agents merge non-site work, the key stays local, C never calls the connectors. |
 | Which research informed the templates? | [Research basis](../research/template-research-basis.md) — inspected sources, design implications and limits. |
+| Where does AMS CI run? | [Shared CI](context-shared-ci.md) — owner requirement, workflow routing and VM operation. |
+| Where does a Spec's history go? | [Spec history](context-spec-history.md) — owner ruling of 2026-11-02: no history on Specs; each Spec and Landmark's history lives on its page under [History](#history). |
 
 Add a row only when a durable note exists to route to. Grow flat notes beside
 this router and inside the declared collections; only `archive/` may nest.

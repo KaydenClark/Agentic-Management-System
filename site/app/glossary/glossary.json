@@ -1,5 +1,5 @@
 {
-  "intro": "AMS manages Kayden's agents, workflows, intent capture, skills and AI tools in one RSI loop; these are its shared terms. Definitions follow Kayden's 2026-10-31 instruction and the [research basis](workbench/research/template-research-basis.md).",
+  "intro": "Shared AMS terms, defined per Kayden's 2026-10-31 instruction and the [research basis](workbench/research/template-research-basis.md).",
   "sections": [
     {
       "heading": "Language",
@@ -12,22 +12,42 @@
             {
               "term": "AMS",
               "id": "ams",
-              "definition": "Kayden's system for managing agents, workflows, intent capture, skills and AI tools in one RSI loop. It is built on and operates the Workbench while repairing it."
+              "definition": "Kayden's system for managing agents, workflows, intent capture, skills and AI tools in one RSI loop. It builds on, operates and repairs the Workbench."
             },
             {
               "term": "RSI loop",
               "id": "rsi-loop",
-              "definition": "Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record does not prove improvement."
+              "definition": "Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record proves no improvement."
+            },
+            {
+              "term": "Alignment assessment",
+              "id": "alignment-assessment",
+              "definition": "Application of approved Alignment Check r1 to a named candidate and scope over three assessment runs."
+            },
+            {
+              "term": "Alignment Score",
+              "id": "alignment-score",
+              "definition": "The percentage of passed applicable checks pooled across the three assessment runs; distinct from fitness level and acceptance."
+            },
+            {
+              "term": "Fitness level",
+              "id": "fitness-level",
+              "definition": "The r1 classification: Excellent at three passing runs, Stable at two, Functional at one and Broken at none; any Critical failure overrides the count to Broken."
+            },
+            {
+              "term": "Improvement attempt",
+              "id": "improvement-attempt",
+              "definition": "One assessed version of an improvement candidate; each candidate gets at most three, excluding baseline."
             },
             {
               "term": "Workbench",
               "id": "workbench",
-              "definition": "The working foundation AMS uses and repairs. AMS also encompasses the system and tool belt that operates above it."
+              "definition": "The working foundation AMS uses and repairs. AMS also includes the system and tool belt operating above it."
             },
             {
               "term": "Intent",
               "id": "intent",
-              "definition": "What the owner wants, with reasons, boundaries and corrections. Retain whether it is confirmed or unresolved."
+              "definition": "What the owner wants, with reasons, boundaries and corrections. Retain whether confirmed or unresolved."
             }
           ]
         },
@@ -49,12 +69,12 @@
             {
               "term": "Evidence audit",
               "id": "evidence-audit",
-              "definition": "A maintained assessment of claims against dated, candidate-specific evidence, preserving reassessment history."
+              "definition": "A maintained assessment of claims against dated, candidate-specific evidence, keeping reassessment history."
             },
             {
               "term": "Improvement record",
               "id": "improvement-record",
-              "definition": "The connection from an observed problem through a hypothesis and comparison to an actual disposition and later-use check."
+              "definition": "The link from an observed problem through hypothesis and comparison to an actual disposition and later-use check."
             },
             {
               "term": "Review receipt",
@@ -76,7 +96,7 @@
             {
               "term": "diagnostic",
               "id": "diagnostic",
-              "definition": "Names the diagnostic that makes the condition visible, and whether it is implemented or proposed."
+              "definition": "Names the diagnostic that makes the condition visible and whether it is implemented or proposed."
             },
             {
               "term": "test",
@@ -96,7 +116,7 @@
             {
               "term": "accepted-open",
               "id": "accepted-open",
-              "definition": "Names the actual acceptance of follow-up work and its owning Spec. The problem remains open."
+              "definition": "Names the actual acceptance of follow-up work and its owning Spec; the problem remains open."
             }
           ]
         }
