@@ -139,8 +139,15 @@ def campaign(tmp_path,monkeypatch,call):
     binary={'version':'synthetic','sha256':'b'*64}
     monkeypatch.setattr(series,'binary_identity',lambda:binary)
     monkeypatch.setattr(campaign_module,'verify_source_revision',lambda *a,**k:None)
-    protocol=series.freeze(worker,ref,source_revision='a'*40,binary_identity=binary)
-    controls=series.qualification_controls(ref,protocol['suite'])
+    from ams import trial_conditions
+    execution=tmp_path/'neutral-execution'
+    trial_conditions.execution_context(execution,worker,ref,create=True)
+    base=series.freeze(worker,ref,source_revision='a'*40,binary_identity=binary,execution=execution)
+    controls=series.qualification_controls(ref,base['suite'])
+    from trial_predecessor_fixture import predecessor
+    previous_paths=predecessor(tmp_path,controls,base,reply)
+    protocol=series.freeze(worker,ref,source_revision='a'*40,binary_identity=binary,execution=execution,
+                          predecessor=previous_paths)
     record={'protocol':protocol,'controls':controls,'controlsDigest':series.digest(controls)}
     return campaign_module.Campaign(record,worker,ref,tmp_path/'private',call=call,binary=binary)
 
@@ -249,7 +256,8 @@ def test_adapter_propagates_explicit_system_context_to_actual_process_factory(mo
     from ams import trial_transport
     from test_trial_runtime import Transport
     seen=[]
-    def factory(cwd,*,system_prompt=None):
+    def factory(cwd,*,system_prompt=None,defer_start=False):
+        assert defer_start is True
         seen.append((cwd,system_prompt));return Transport()
     monkeypatch.setattr(trial_transport,'ClaudeProcess',factory)
     runtime.ClaudeAdapter().execute('synthetic worker',cwd='synthetic fixture',system_prompt=series.WORKER_SYSTEM)

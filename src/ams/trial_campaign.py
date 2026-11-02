@@ -10,30 +10,40 @@ import subprocess
 from ams.assessment import require, same_artifact
 from ams import trial_series as series
 from ams import trial_runtime as runtime
+from ams import trial_judge,trial_conditions
 from ams.trial_inputs import load, worker_prompt, encoded
 from ams import rsi_rows
 
 
 def verify_source_revision(protocol, *, accepted_ref='origin/main'):
     root=Path(__file__).resolve().parents[2]
-    revision=protocol['sourceRevision']
-    git=['git','--no-replace-objects','--no-lazy-fetch','-c','protocol.allow=never']
-    require(subprocess.run(git+['merge-base','--is-ancestor',revision,accepted_ref],cwd=root,
-                           capture_output=True).returncode==0,'source reference is not main-contained')
-    for name,expected in protocol['sourceFiles'].items():
-        result=subprocess.run(git+['show',revision+':src/ams/'+name],cwd=root,capture_output=True)
-        require(result.returncode==0 and series.hashlib.sha256(result.stdout).hexdigest()==expected,
-                'source revision does not contain the frozen code')
-    suite=subprocess.run(git+['show',revision+':evals/interview-dev-cases.json'],cwd=root,capture_output=True)
-    require(suite.returncode==0 and series.digest(series.json.loads(suite.stdout))==protocol['suiteDigest'],
-            'suite is not at accepted source revision')
+    bindings=[protocol]+([protocol['predecessor']]if protocol.get('predecessor') else [])
+    for binding in bindings:
+        revision=binding['sourceRevision']
+        git=['git','--no-replace-objects','--no-lazy-fetch','-c','protocol.allow=never']
+        require(subprocess.run(git+['merge-base','--is-ancestor',revision,accepted_ref],cwd=root,
+                               capture_output=True).returncode==0,'source reference is not main-contained')
+        for name,expected in binding['sourceFiles'].items():
+            result=subprocess.run(git+['show',revision+':src/ams/'+name],cwd=root,capture_output=True)
+            require(result.returncode==0 and series.hashlib.sha256(result.stdout).hexdigest()==expected,
+                    'source revision does not contain the frozen code')
+        suite=subprocess.run(git+['show',revision+':evals/interview-dev-cases.json'],cwd=root,capture_output=True)
+        require(suite.returncode==0 and series.digest(series.json.loads(suite.stdout))==binding['suiteDigest'],
+                'suite is not at accepted source revision')
+
+
+
+class RuntimeHalt(KeyboardInterrupt):
+    reason='runtime-refused'
 
 
 class Campaign:
     def __init__(self,record,worker,reference,store,*,call=None,binary=None,verify_source=True):
         self.protocol=record['protocol'];self.controls=record['controls']
         self.worker=Path(worker);self.reference=Path(reference);self.store=Path(store)
-        self.call=call or runtime.ClaudeAdapter().execute
+        self.call=call or trial_judge.InterviewAdapter().execute
+        self.execution=Path(self.protocol['execution']['path']) if self.protocol.get('execution') else None
+        self.last_failure=None
         series.verify_frozen(self.protocol,self.worker,self.reference,
                              actual_binary=binary or series.binary_identity())
         require(record['controlsDigest']==series.digest(self.controls),'control identity changed')
@@ -43,8 +53,33 @@ class Campaign:
         self.identity=series.digest(record)
 
     def _validate(self):
+        require(self.execution is not None and self.protocol.get('predecessor') is not None,
+                'neutral execution and actual predecessor binding required')
+        require(not self.store.absolute().is_relative_to(self.execution.absolute())
+                and not self.execution.absolute().is_relative_to(self.store.absolute()), 'logs overlap execution cwd')
         series.verify_frozen(self.protocol,self.worker,self.reference,actual_binary=series.binary_identity())
         verify_source_revision(self.protocol)
+
+    def _execute(self,prompt,**kwargs):
+        require(Path(kwargs.get('cwd')).absolute()==self.execution.absolute(),'unfrozen execution cwd')
+        result=None
+        role='worker'if kwargs.get('system_prompt')==series.WORKER_SYSTEM else'judge'
+        try:
+            trial_conditions.execution_context(self.execution,self.worker,self.reference)
+            result=self.call(prompt,**kwargs)
+            trial_conditions.execution_context(self.execution,self.worker,self.reference)
+            return result
+        except BaseException as error:
+            failure=getattr(getattr(self.call,'__self__',None),'last_failure',None)
+            controlled=isinstance(error,Exception)
+            self.last_failure={'cause':str(error),'runtimeDiagnostic':failure}if controlled else failure
+            terminal=failure.get('terminalExecution')if isinstance(failure,dict)else None
+            execution=result if result is not None else terminal
+            if execution is not None:
+                self.last_failure={**(self.last_failure or{}),'availableExecution':{
+                    'role':role,'execution':execution,'returned':result is not None}}
+            if controlled:raise RuntimeHalt from error
+            raise
 
     def _retain(self,identity,value):
         return series.save_private(self.store,identity,{'campaignDigest':self.identity,'evidence':value})
@@ -56,7 +91,7 @@ class Campaign:
         oracle=(self.reference.parent/load(self.reference)['promptFile']).read_text()
         # Claim this phase before any call, so a crash cannot silently reset it.
         self._retain('qualification-start',{'controlsDigest':series.digest(self.controls)})
-        result=series.calibrate(self.controls,oracle,self.call,cwd=self.worker,
+        result=series.calibrate(self.controls,oracle,self._execute,cwd=self.execution,
                                retain=lambda row:self._retain('qualification-'+row['id'],row))
         result.update(protocolDigest=series.digest(self.protocol))
         self._retain('qualification-final',result)
@@ -75,14 +110,15 @@ class Campaign:
         require(not list(self.store.glob(slot+'-*.json')),'trial already attempted; no favorable reruns')
         if index:
             prior=series.read_private(self.store,'trial-'+str(index)+'-result')
-            require(prior['campaignDigest']==self.identity,'previous slot incomplete or unrelated')
+            require(prior['campaignDigest']==self.identity and prior['evidence']['execution_state']=='completed'
+                    and type(prior['evidence']['passed'])is bool,'previous slot incomplete, Unknown or unrelated')
         case_id,trial=self.protocol['order'][index]
         case=next(c for c in self.protocol['suite']['cases']if c['id']==case_id)
         prompt,identity=worker_prompt(self.worker,case_id)
         require(identity['suiteDigest']==self.protocol['suiteDigest'],'worker suite changed')
         self._retain(slot+'-start',{'caseId':case_id,'trial':trial,'inputIdentity':identity})
         oracle=(self.reference.parent/load(self.reference)['promptFile']).read_text()
-        return series.evaluate(case,prompt,oracle,self.call,cwd=self.worker,
+        return series.evaluate(case,prompt,oracle,self._execute,cwd=self.execution,
                                retain=lambda phase,row:self._retain(slot+'-'+phase,row))
 
 

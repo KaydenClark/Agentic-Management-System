@@ -20,34 +20,58 @@ EXECUTION_TIMEOUT = 55
 
 class ClaudeProcess:
     """JSONL control handshake before sending the one authorized caller prompt."""
-    def __init__(self, cwd, *, system_prompt=None):
+    def __init__(self, cwd, *, system_prompt=None, structured_output=False, defer_start=False):
+        require(type(structured_output) is bool and type(defer_start) is bool, 'explicit transport mode required')
+        self.structured_output = structured_output
         self.process = None
         self.selector = None
         self.stderr = b''
         self.closed = False
         self.stage = 'authentication'
         self.diagnostic_file = None
+        self.buffer = b''
+        self.pending = []
+        self.cwd = cwd
+        self.system_prompt = system_prompt
+        self.defer_start = defer_start
+        self.startup_attempted = False
+        self.started = False
+        if not defer_start:
+            self._start()
+
+    def _start(self):
+        require(not self.closed and not self.startup_attempted, 'transport startup already attempted or closed')
+        self.startup_attempted = True
         env = clean_environment()
         try:
             status = subprocess.run(['claude', 'auth', 'status', '--json'], env=env,
                                     capture_output=True, text=True, timeout=15, check=False)
             self.stderr = status.stderr.encode()[-16384:]
             auth = json.loads(status.stdout)
+            require(isinstance(auth, dict), 'subscription status object missing')
             require(status.returncode == 0 and auth.get('loggedIn') is True
                     and auth.get('authMethod') in ('claude.ai', 'oauth', 'subscription')
                     and not auth.get('apiKeySource'), 'subscription-only authentication unavailable')
             self.stage = 'startup'
-            self.process = subprocess.Popen(claude_command(system_prompt=system_prompt), cwd=cwd, env=env, stdin=subprocess.PIPE,
+            command = claude_command(system_prompt=self.system_prompt)
+            if self.structured_output:
+                from ams.trial_judge import judge_command
+                command = judge_command(system_prompt=self.system_prompt)
+            self.process = subprocess.Popen(command, cwd=self.cwd, env=env, stdin=subprocess.PIPE,
                                             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                             start_new_session=(os.name == 'posix'))
         except (OSError, ValueError, subprocess.TimeoutExpired) as error:
+            if isinstance(error, subprocess.TimeoutExpired) and error.stderr:
+                self.stderr = (error.stderr.encode() if isinstance(error.stderr, str) else error.stderr)[-16384:]
+            if self.defer_start:
+                # Preserve legacy controlled failure, while the owned lifetime retains its cause.
+                raise Refused('Claude runtime/authentication unavailable; inspect private trial diagnostics') from error
             self.failure_diagnostic(type(error).__name__, str(error))
             raise Refused('Claude runtime/authentication unavailable; inspect private trial diagnostics') from None
         self.selector = selectors.DefaultSelector()
         self.selector.register(self.process.stdout, selectors.EVENT_READ, 'stdout')
         self.selector.register(self.process.stderr, selectors.EVENT_READ, 'stderr')
-        self.buffer = b''
-        self.pending = []
+        self.started = True
 
     def _read_ready(self, key):
         chunk = os.read(key.fileobj.fileno(), 65536)
@@ -63,7 +87,12 @@ class ClaudeProcess:
         while b'\n' in self.buffer:
             line, self.buffer = self.buffer.split(b'\n', 1)
             try:
-                self.pending.append(json.loads(line))
+                if self.structured_output:
+                    from ams.trial_inputs import _unique
+                    value = json.loads(line, object_pairs_hook=_unique)
+                else:
+                    value = json.loads(line)
+                self.pending.append(value)
             except ValueError:
                 raise Refused('malformed Claude JSONL') from None
 
@@ -107,13 +136,20 @@ class ClaudeProcess:
         deadline = time.monotonic() + CONTROL_TIMEOUT
         self._send({'type': 'control_request', 'request_id': subtype, 'request': {'subtype': subtype}}, deadline)
         response = self._receive(deadline)
+        require(isinstance(response, dict), 'malformed Claude control envelope')
         require(response.get('type') == 'control_response', 'unexpected pre-prompt runtime message')
         data = response.get('response', {})
+        require(isinstance(data, dict), 'malformed Claude control response')
         require(data.get('request_id') == subtype and data.get('subtype') == 'success',
                 'Claude initialization/control refused')
-        return data.get('response', {})
+        body = data.get('response', {})
+        require(isinstance(body, dict), 'malformed Claude control body')
+        return body
 
     def initialize(self):
+        require(not self.closed, 'transport already closed')
+        if not self.started:
+            self._start()
         return self._control('initialize')
 
     def mcp_status(self):

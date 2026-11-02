@@ -174,8 +174,8 @@ def test_early_exit_broken_stdin_does_not_erase_failure_diagnostic(tmp_path,monk
     stream=trial_transport.ClaudeProcess(tmp_path);stream.process.wait(timeout=2)
     adapter=runtime.ClaudeAdapter()
     with pytest.raises(trials.Refused):adapter.execute('private',transport=stream)
-    assert isinstance(adapter.last_failure,str)
-    row=json.loads(Path(adapter.last_failure).read_text())
+    assert isinstance(adapter.last_failure['diagnostic'],str)
+    row=json.loads(Path(adapter.last_failure['diagnostic']).read_text())
     assert row['exitStatus']==7 and row['stage']=='initialize'
 
 

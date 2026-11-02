@@ -5,13 +5,13 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-02
 **Catalog description:** Skill/AMS audit loop.
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-002 narrow qualification accepted; first baseline slot held as Unknown on strict judge-format failure.
-**Next gate:** TK-000Y bounded structured-output correction; no further model calls or additional trial-store rows are released.
+**Latest event:** TK-001C claimed by s002-lifecycle.
+**Next gate:** Close TK-001C with verification and documentation proof.
 
 ## Intent and authority
 
@@ -24,6 +24,16 @@
 Exact-identity repair: S-006/TK-000S.
 
 TK-000V repairs blocked prompt writes; [bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. [TK-002](tasks/TK-002/TASK.md) owns noise state and exact identities under the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md): narrow qualification is accepted; baseline slot 0 stayed Unknown; later slots wait on TK-000Y's judge correction. Only old run28/result41 is [published](tasks/TK-002/TASK.md#old-incomplete-baseline-publication). Noise and benefit remain unproven.
+
+[TK-000Y](tasks/TK-000Y/TASK.md) completed only the bounded structured-output/neutral-context engineering correction at independently reviewed source `c3e1fd9`; private model-free recorde9c08d/protocol720869 binds unchanged semantic inputs and prior actual labels. Current/fresh/independent affected231/1skip and predecessor ed5 full local/fresh761/4skip are source-bound in its receipt; CI117 passed runtime-identical head489. PR101 checked delivery remains separate from root source selection and actual restricted-CLI compatibility/new qualification. Corrective model queries and additional store writes remain zero; old source921 evidence is unchanged.
+
+PR101 remained held after later automated review proved halted private diagnostic metadata could be lost. [TK-001A](tasks/TK-001A/TASK.md) completed the native fresh correction for that narrow retention gap, verified by affected239/1skip, exactb9 CI120 and independent delta PASS; Y’s closed receipt and scoped PASS remain historical. No actual corrective query or extra database write occurred.
+
+Later PR101 review proved actual adapter interruption and post-return drift still lost evidence; [TK-001B](tasks/TK-001B/TASK.md) owns the fresh second private-retention correction with actual-adapter integration tests and an explicit stop-on-repeated-failure rule. Earlier Y/001A source-specific receipts remain unchanged.
+
+TK-001B stopped at source179 after independent review proved valid-terminal evidence is lost when finally-close is interrupted (proof1aaf62e...). Passing786/4skip full local/fresh suites and CI123 do not satisfy the failed requirement. Acceptance remains unmet; [the stopped checkpoint](tasks/TK-001B/TASK.md) records both correction attempts and the unexecuted next proposal. No new source was selected or actual corrective query/storage action released.
+
+Kayden subsequently explicitly approved the fresh whole-lifecycle repair, captured in JOT-91c9d7c2. [TK-001C](tasks/TK-001C/TASK.md) owns that new bounded run; prior failed evidence remains retained, with no counter reset or actual call release.
 
 ## Desired Behavior
 
@@ -112,6 +122,8 @@ Kayden reported lost grilling as a failure; the linked context preserves the int
 | 2026-11-01 | TK-000O | Task closed | 42 focused; CI #38 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
 | 2026-11-01 | TK-000T | Task closed | 45 focused; fresh 562/4 skip; CI70; actual adapter smoke | evals, Runbook, Wiki | Oracle calibration, noise, controls, benefit; close attribution: {"agent":"s002-bootstrap","claimant":"s002-bootstrap","onBehalfOf":null} |
 | 2026-11-01 | TK-000V | Task closed | 50 focused; fresh 567/4 skip; actual inert adapter | evals/TRIALS.md | Oracle/noise/controls/benefit; close attribution: {"agent":"s002-transport","claimant":"s002-transport","onBehalfOf":null} |
+| 2026-11-02 | TK-000Y | Task closed | Engineering source c3e1fd9: primary/fresh/independent 231 passed/1 skipped; predecessor ed5 local/fresh full761 passed/4 skipped; current room/layout/render/diff checks; direct scoped independent source/binding PASS; CI117 passed exact489 runtime-identical head; model-free recorde9c08d/protocol720869 releasedfalse. | evals/INTERVIEW-NOISE.md; TK-000Y; S-002; TASKBOARD | Only bounded serialization/neutral-context engineering is complete. Actual restricted CLI compatibility and changed-source qualification are unverified/unreleased; TK-002 and floor remain incomplete. Old run28/result41 and original campaign evidence preserved; corrective model/store calls0. Current final-record CI and checked PR101 main delivery pending.; close attribution: {"agent":"s002-structured-judge","claimant":"s002-structured-judge","onBehalfOf":null} |
+| 2026-11-02 | TK-001A | Task closed | Sourceb9 primary/fresh/independent239 passed/1 skipped; eight causal private journal/stop/privacy cases; current room/layout/render/diff checks; exactb9 CI120 passed; code review no findings/security completed; scoped independent delta PASS; unreleased record18e47/protocol48c882. | TK-001A; S-002; TASKBOARD; INTERVIEW-NOISE context | Bounded private halt-retention correction complete only. Actual structured-output compatibility/new qualification remain unverified/unreleased; TK-002 and floor incomplete, original stoppedrun28/result41 unchanged. Final records CI/reviews and checked PR101 main delivery pending. Corrective model/store calls0.; close attribution: {"agent":"s002-halt-evidence","claimant":"s002-halt-evidence","onBehalfOf":null} |
 
 ## Review and Human QA
 

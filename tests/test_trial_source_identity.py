@@ -48,3 +48,16 @@ def test_source_verification_missing_promisor_blob_cannot_lazy_fetch(tmp_path,mo
     with pytest.raises(Refused):trial_campaign.verify_source_revision(protocol)
     assert not marker.exists()
     assert not (root/'.git/objects'/blob[:2]/blob[2:]).exists()
+
+
+def test_predecessor_source_also_ignores_replace_objects(tmp_path,monkeypatch):
+    import hashlib
+    from ams import trial_campaign
+    root,git,protocol=source_repo(tmp_path,monkeypatch)
+    bad=git('rev-parse','HEAD:src/ams/trial_runtime.py')
+    (root/'replacement').write_bytes(b'forged predecessor bytes')
+    replacement=git('hash-object','-w','replacement');git('replace',bad,replacement)
+    protocol['predecessor']={'sourceRevision':protocol['sourceRevision'],
+        'sourceFiles':{'trial_runtime.py':hashlib.sha256(b'forged predecessor bytes').hexdigest()},
+        'suiteDigest':protocol['suiteDigest']}
+    with pytest.raises(Refused,match='frozen code'):trial_campaign.verify_source_revision(protocol)

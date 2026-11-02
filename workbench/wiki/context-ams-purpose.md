@@ -271,3 +271,16 @@ Supersedes: none
 
 The owner explicitly requested running AMS through the RSI loop, making results viewable on the Vercel dev site, and “log the results in supabase.” The current owner request resumes S-006 approved local writer work and S-002. This is existing Supabase result-publication authority, separate from the later Anthropic payload approval; it corrects the premise of the first rejected old-baseline storage request. The bounded current publication is only one observed stopped old-source921 run and its Unknown slot0 result, safe metadata/hashes/counts only, through the existing local-key writer with exact readback. No raw private response, path, skill text or rationale is published; no schema, deployment, extra trial or row deletion is authorized. Preserve the rejected-before-process incident and the incomplete baseline.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-91c9d7c2-16c5-4f06-a3e0-90b1f231682d
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T13:52:52.121Z
+Author: Kayden
+Source: Kayden, chat01a19887-118e-7dd2-88ad-676598f589ef, turn01a19c86-bab2-7f13-9c55-5a6478ce14b0, userMessage01a19c86-bbf0-73c1-90e4-a6e136219469; direct reply to call_4b79599c18964d0d999224e57a903ebf, 2026-11-02
+Topic: ams-purpose
+Supersedes: none
+
+Kayden answered “Approve fresh lifecycle repair” to a fresh bounded S-002 repair protecting the entire worker/judge adapter lifecycle, including cleanup, so cleanup interruptions preserve observed terminal and usage evidence. Both failed retention attempts remain recorded; this does not reset counters or erase Y/001A/001B evidence. The new correction must cover one coherent lifetime exception/evidence boundary and preserve body plus cleanup causes, cancellation, known usage and Unknown grades. Existing scoped payload permission persists. No actual model or trial-store calls are released by this engineering approval; reviewed source/main containment/new frozen record and separate orchestrator phase release remain necessary. No semantic/tool/prompt/model/effort/auth/config or deployment expansion.
+<!-- /jot-entry -->
