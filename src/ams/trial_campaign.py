@@ -62,17 +62,23 @@ class Campaign:
 
     def _execute(self,prompt,**kwargs):
         require(Path(kwargs.get('cwd')).absolute()==self.execution.absolute(),'unfrozen execution cwd')
+        result=None
+        role='worker'if kwargs.get('system_prompt')==series.WORKER_SYSTEM else'judge'
         try:
             trial_conditions.execution_context(self.execution,self.worker,self.reference)
             result=self.call(prompt,**kwargs)
             trial_conditions.execution_context(self.execution,self.worker,self.reference)
             return result
-        except (series.Refused,OSError,TimeoutError) as error:
-            self.last_failure={'cause':str(error),'runtimeDiagnostic':
-                getattr(getattr(self.call,'__self__',None),'last_failure',None)}
-            raise RuntimeHalt from error
-        except BaseException:
-            self.last_failure=getattr(getattr(self.call,'__self__',None),'last_failure',None)
+        except BaseException as error:
+            failure=getattr(getattr(self.call,'__self__',None),'last_failure',None)
+            controlled=isinstance(error,(series.Refused,OSError,TimeoutError))
+            self.last_failure={'cause':str(error),'runtimeDiagnostic':failure}if controlled else failure
+            terminal=failure.get('terminalExecution')if isinstance(failure,dict)else None
+            execution=result if result is not None else terminal
+            if execution is not None:
+                self.last_failure={**(self.last_failure or{}),'availableExecution':{
+                    'role':role,'execution':execution,'returned':result is not None}}
+            if controlled:raise RuntimeHalt from error
             raise
 
     def _retain(self,identity,value):

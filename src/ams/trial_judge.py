@@ -119,13 +119,13 @@ class ClaudeJudgeAdapter:
                     raise Refused('unexpected judge event; no retry/fallback accepted')
             require(completed is not None,'judge terminal output missing')
             return completed
-        except Exception as error:
+        except (Exception,KeyboardInterrupt) as error:
             diagnostic=None
             if hasattr(stream,'failure_diagnostic'):
                 try:diagnostic=stream.failure_diagnostic(type(error).__name__,str(error))
                 except (OSError,Refused):diagnostic={'recorded':False}
             self.last_failure={'diagnostic':diagnostic,'observedProviderTurns':len(messages)or None,
-                               'turnCountComplete':False,'serializationCalls':uses}
+                               'turnCountComplete':False,'serializationCalls':uses,'terminalExecution':completed}
             raise
         finally:stream.close()
 

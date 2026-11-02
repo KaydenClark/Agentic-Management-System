@@ -190,6 +190,9 @@ def evaluate(case, prompt, oracle, call, *, cwd=None, retain=None):
         result['reason']=getattr(error,'reason','cancelled')
         result['ownerCancellation']=not hasattr(error,'reason')
         result['privateDiagnostic']=getattr(getattr(call,'__self__',None),'last_failure',None)
+        available=(result['privateDiagnostic']or{}).get('availableExecution')
+        if available and available['role']=='worker':
+            result.update(worker=available['execution'],workerCompleted=available['returned'])
         if retain:retain('cancelled',copy_result(result,start))
         raise
     except (Refused,OSError,TimeoutError):

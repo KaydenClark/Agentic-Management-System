@@ -85,6 +85,7 @@ class ClaudeAdapter:
             stream = ClaudeProcess(cwd, system_prompt=system_prompt)
         else:
             stream = transport
+        completed = None; messages = set(); assistant_events = 0
         try:
             initialized = stream.initialize()
             require(initialized.get('commands') == [], 'custom commands unexpectedly available')
@@ -105,6 +106,9 @@ class ClaudeAdapter:
                     require(init, 'assistant output before runtime inventory')
                     message = event.get('message', {})
                     require(message.get('model') == MODEL, 'assistant model changed')
+                    assistant_events += 1
+                    if isinstance(message.get('id'), str) and message['id']:
+                        messages.add(message['id'])
                     content = message.get('content')
                     require(isinstance(content, list), 'assistant content malformed')
                     for block in content:
@@ -131,12 +135,16 @@ class ClaudeAdapter:
                     raise Refused('unexpected runtime message; execution refused')
             require(completed is not None, 'provider result missing')
             return completed
-        except Exception as error:
+        except (Exception, KeyboardInterrupt) as error:
+            diagnostic = None
             if hasattr(stream, 'failure_diagnostic'):
                 try:
-                    self.last_failure = stream.failure_diagnostic(type(error).__name__, str(error))
+                    diagnostic = stream.failure_diagnostic(type(error).__name__, str(error))
                 except (OSError, Refused):
-                    self.last_failure = {'recorded': False, 'reason': 'private diagnostics unavailable'}
+                    diagnostic = {'recorded': False, 'reason': 'private diagnostics unavailable'}
+            self.last_failure = {'diagnostic': diagnostic, 'observedProviderTurns': len(messages) or None,
+                                 'observedAssistantMessages': assistant_events, 'turnCountComplete': False,
+                                 'terminalExecution': ({**completed, 'providerTurns': 1} if completed else None)}
             raise
         finally:
             stream.close()

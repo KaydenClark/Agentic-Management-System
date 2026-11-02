@@ -170,3 +170,5 @@ extra retries/turns. Only inert protocol evidence is claimed by engineering.
 Independent source review, checked main delivery and a new private predecessor-
 bound manifest precede any separately released compatibility/calibration phase.
 The old failed baseline is neither retried under the same identity nor deleted.
+
+Halted executions retain actual adapter partial facts and any validated terminal privately, including owner interruption. Campaign records an available execution with its role and whether the adapter returned it before context drift. A returned worker remains process-complete; an interrupted worker with a validated terminal can retain known usage while process completion stays false. Neither creates a task pass. Context-invalid judge execution stays quarantined in private diagnostics, never accepted as a grade or public rationale. The worker diagnostic pointer now sits inside its private metadata envelope; public rows retain their existing strict allowlist.
