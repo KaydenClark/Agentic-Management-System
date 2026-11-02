@@ -76,4 +76,4 @@ Primary local evidence retains frozen rows/inputs/failures and hashes, planned c
 
 This proves only the expressly approved main771/devfe snapshot using the checked corrected collector. It does not claim latest c67 coverage, a second import, whole-S006 acceptance, owner Human QA, W completion, trial/evaluator qualification or improvement. The Build-history acceptance coverage judgment remains with independent whole-S006 review; W stays stopped/unaccepted and actual owner QA remains open.
 
-Standards limit: the preexisting closed Task Z is 12,775 characters against its 8,000-character budget. Its immutable Receipt remains unchanged; this proof does not claim global standards compliance. The Spec is pruned within its own budget, retaining all 28 historical events and candidate-bound verdicts.
+Standards limit: the preexisting closed Task Z is 12,768 Unicode characters against its 8,000-character budget. Its immutable Receipt remains unchanged; this proof does not claim global standards compliance. The Spec is pruned within its own budget, retaining all 28 historical events and candidate-bound verdicts.
