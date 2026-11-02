@@ -46,11 +46,12 @@ export interface RsiResult extends Provenance {
   execution_state: ExecutionState;
   passed: boolean | null;
   score: number | string | null;
-  cost_usd: number | string;
-  input_tokens: number;
-  output_tokens: number;
-  turns: number;
-  wall_seconds: number | string;
+  cost_usd: number | string | null;
+  input_tokens: number | null;
+  output_tokens: number | null;
+  turns: number | null;
+  wall_seconds: number | string | null;
+  metric_unknowns?: Readonly<Record<string, { reason: string; source: string }>>;
 }
 
 export interface RsiData {

@@ -214,3 +214,10 @@
   font-weight: var(--weight-semibold);
   color: var(--ink);
 }
+.repair { margin-bottom: var(--space-48); }
+.repair code { overflow-wrap: anywhere; white-space: normal; }
+.evidenceBars { list-style: none; padding: 0; display: grid; gap: var(--space-12); }
+.evidenceBars li { overflow-wrap: anywhere; }
+.evidenceTrack { display: block; height: var(--space-8); margin-top: var(--space-4); background: var(--raised); border: var(--border-width) solid var(--line-strong); }
+.evidenceBar { display: block; height: 100%; background: currentColor; }
+.overBudget { background: var(--heat); }

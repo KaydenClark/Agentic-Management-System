@@ -250,12 +250,29 @@ test('empty state: zero rows keep every TK-001 empty-state check, with no number
   assert.ok(!html.includes('data-load-note'), 'a successful empty read must not claim a load failure');
 });
 
-test('unavailable: a failed read renders the empty state with a short "could not be loaded" note', () => {
+test('unavailable: a failed read never claims that no trials exist', () => {
   const html = render(cases.emptyCase, true);
-  for (const check of Object.values(CHECKS)) check(readPage(html));
+  assert.ok(!html.includes('data-empty-message'), 'a failed read cannot establish an empty store');
+  assert.equal((html.match(/data-unavailable-message/g) ?? []).length, 4);
   const note = walk(html).elements.find((e) => has(e, 'data-load-note'));
   assert.ok(note, 'no load note');
   assert.match(note.text, /could not be loaded/i);
+});
+
+test('unknown metrics remain unknown rather than zero or partial totals', () => {
+  const data = structuredClone(cases.linkCoverageCase);
+  for (const row of data.results) {
+    row.cost_usd = null;
+    row.input_tokens = 12;
+    row.output_tokens = null;
+    row.turns = null;
+  }
+  const html = render(data);
+  assert.match(html, /cost unknown/);
+  assert.match(html, /tokens unknown/);
+  assert.match(html, /turns unknown/);
+  assert.ok(!html.includes('cost $null'));
+  assert.ok(!html.includes('12 tokens'), 'a partial token count is not a total');
 });
 
 // The Supabase read: plain fetch to PostgREST with the publishable key, test
@@ -272,6 +289,7 @@ test('load: reads both tables with apikey and bearer headers and an explicit is_
   };
   const out = await loadRsiData({ env: ENV, fetchImpl });
   assert.equal(out.ok, true);
+  assert.ok(Number.isFinite(Date.parse(out.readAt)), 'successful reads identify their read time');
   const tables = calls.map((c) => new URL(c.url).pathname).sort();
   assert.deepEqual(tables, ['/rest/v1/rsi_results', '/rest/v1/rsi_runs']);
   for (const c of calls) {
@@ -297,6 +315,8 @@ test('load: missing env, a refused request, an error status or a bad body each g
     async () => { throw new Error('network down'); },
     async () => ({ ok: false, status: 503, json: async () => ({}) }),
     async () => ok({ not: 'an array' }),
+    async () => ok([null]),
+    async () => ok([{ is_test: false, id: 1 }]),
   ];
   for (const fetchImpl of failures) {
     const out = await loadRsiData({ env: ENV, fetchImpl });

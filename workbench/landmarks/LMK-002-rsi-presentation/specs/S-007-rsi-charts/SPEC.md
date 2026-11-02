@@ -5,12 +5,12 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-02
 **Catalog description:** Website pages that chart RSI results from Supabase, present and honestly empty from the first deploy, with every number linked to its rows.
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Complete TK-002.
+**Next gate:** Close TK-002 with verification and documentation proof.
 
 ## Intent and authority
 
@@ -27,7 +27,7 @@ The site exists partly to show whether the loop works. Only traceable, labeled n
 ## Current Verified State
 
 - **Not met:** every acceptance criterion. [TK-001](tasks/TK-001/TASK.md#receipt) (honest empty state slice) is done with its receipt; the criterion is not yet checked here.
-- **Blocked:** [TK-002](tasks/TK-002/TASK.md) and [TK-003](tasks/TK-003/TASK.md), as their records state.
+- **In progress:** [TK-002](tasks/TK-002/TASK.md) resumes the retained live reader with actual safe S-011 development evidence; required table/source inputs are delivered. Dev publication and deployment readback remain unverified. [TK-003](tasks/TK-003/TASK.md) still waits on TK-002. No skill improvement or Spec acceptance is inferred.
 
 History: [S-007 history](../../../../wiki/history/S-007.md).
 

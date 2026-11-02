@@ -16,13 +16,13 @@ const RUN_COLUMNS = [
 const RESULT_COLUMNS = [
   "id", "run_id", "arm", "provider", "model", "effort", "runtime_commit", "controls_commit", "skills_commit",
   "grader_version", "task_id", "split", "trial", "execution_state", "passed", "score", "cost_usd", "input_tokens",
-  "output_tokens", "turns", "wall_seconds", "source_kind", "source_ref", "source_url", "strength", "is_test", "detail",
+  "output_tokens", "turns", "wall_seconds", "metric_unknowns", "source_kind", "source_ref", "source_url", "strength", "is_test", "detail",
 ].join(",");
 
 const PAGE = 1000; // Supabase's default PostgREST row cap per request.
 const MAX_PAGES = 50;
 
-export type LoadResult = { ok: true; data: RsiData } | { ok: false; reason: string; data: RsiData };
+export type LoadResult = { ok: true; data: RsiData; readAt: string } | { ok: false; reason: string; data: RsiData; readAt: null };
 
 interface LoadOptions {
   env?: Readonly<Record<string, string | undefined>>;
@@ -31,6 +31,30 @@ interface LoadOptions {
 }
 
 class LoadError extends Error {}
+
+function validRow(table: string, value: unknown): boolean {
+  if (value === null || typeof value !== "object" || Array.isArray(value)) return false;
+  const row = value as Record<string, unknown>;
+  const positiveInteger = (v: unknown) => typeof v === "number" && Number.isSafeInteger(v) && v > 0;
+  if (!positiveInteger(row.id) || typeof row.is_test !== "boolean") return false;
+  const labels = ["arm", "provider", "model", "effort", "source_kind", "source_ref", "strength"];
+  if (labels.some((key) => typeof row[key] !== "string" || !(row[key] as string).trim())) return false;
+  for (const key of ["runtime_commit", "controls_commit", "skills_commit", "grader_version"]) {
+    if (typeof row[key] !== "string" || !/^[a-f0-9]{40}$/.test(row[key])) return false;
+  }
+  if (table === "rsi_runs") {
+    return ["running", "completed", "stopped", "failed"].includes(String(row.state)) &&
+      typeof row.started_at === "string" && Number.isFinite(Date.parse(row.started_at));
+  }
+  const metric = (v: unknown) => v === null ||
+    ((typeof v === "number" || (typeof v === "string" && v.trim() !== "")) && Number.isFinite(Number(v)) && Number(v) >= 0);
+  return positiveInteger(row.run_id) && positiveInteger(row.trial) &&
+    typeof row.task_id === "string" && row.task_id.trim() !== "" &&
+    ["dev", "held_out"].includes(String(row.split)) &&
+    ["completed", "runner_error", "auth_error", "timeout", "capped"].includes(String(row.execution_state)) &&
+    (row.passed === null || typeof row.passed === "boolean") &&
+    ["cost_usd", "input_tokens", "output_tokens", "turns", "wall_seconds"].every((key) => metric(row[key]));
+}
 
 async function readTable<T>(base: string, key: string, table: string, columns: string, fetchImpl: typeof fetch, timeoutMs: number): Promise<T[]> {
   const rows: T[] = [];
@@ -58,6 +82,7 @@ async function readTable<T>(base: string, key: string, table: string, columns: s
       throw new LoadError(`${table}: response was not JSON`);
     }
     if (!Array.isArray(body)) throw new LoadError(`${table}: response was not a row list`);
+    if (!body.every((row) => validRow(table, row))) throw new LoadError(`${table}: response contained malformed rows`);
     rows.push(...(body as T[]));
     if (body.length < PAGE) return rows;
   }
@@ -68,7 +93,7 @@ export async function loadRsiData(options: LoadOptions = {}): Promise<LoadResult
   const env = options.env ?? process.env;
   const base = env.NEXT_PUBLIC_SUPABASE_URL;
   const key = env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!base || !key) return { ok: false, reason: "Supabase URL or publishable key not set", data: emptyData };
+  if (!base || !key) return { ok: false, reason: "Supabase URL or publishable key not set", data: emptyData, readAt: null };
   const fetchImpl = options.fetchImpl ?? fetch;
   const timeoutMs = options.timeoutMs ?? 8000;
   try {
@@ -78,8 +103,8 @@ export async function loadRsiData(options: LoadOptions = {}): Promise<LoadResult
     ]);
     // Row-level security and the query already exclude test rows; drop any
     // that arrive anyway.
-    return { ok: true, data: { runs: runs.filter((r) => r?.is_test === false), results: results.filter((r) => r?.is_test === false) } };
+    return { ok: true, readAt: new Date().toISOString(), data: { runs: runs.filter((r) => r?.is_test === false), results: results.filter((r) => r?.is_test === false) } };
   } catch (err) {
-    return { ok: false, reason: err instanceof LoadError ? err.message : "unexpected read failure", data: emptyData };
+    return { ok: false, reason: err instanceof LoadError ? err.message : "unexpected read failure", data: emptyData, readAt: null };
   }
 }

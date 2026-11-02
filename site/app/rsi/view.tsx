@@ -58,11 +58,14 @@ function rowResult(r: RsiResult): string {
 
 function Row({ row, placeId, runUrl }: { row: RsiResult; placeId: string; runUrl: string | null }) {
   const href = row.source_url ?? runUrl;
-  const tokens = Number(row.input_tokens) + Number(row.output_tokens);
+  const tokens = row.input_tokens !== null && row.output_tokens !== null &&
+    Number.isSafeInteger(row.input_tokens) && Number.isSafeInteger(row.output_tokens) &&
+    Number.isSafeInteger(row.input_tokens + row.output_tokens)
+    ? row.input_tokens + row.output_tokens : "unknown";
   return (
     <li data-row="" data-row-id={String(row.id)} id={`${placeId}-row-${row.id}`} className={styles.row}>
-      Row {row.id}: task <code data-label="">{row.task_id}</code>, trial {row.trial}, {rowResult(row)}; cost ${String(row.cost_usd)},{" "}
-      {tokens} tokens, {row.turns} turns. Strength: <span data-strength="" className={styles.strength}>{STRENGTH[row.strength] ?? row.strength}</span>.
+      Row {row.id}: task <code data-label="">{row.task_id}</code>, trial {row.trial}, {rowResult(row)}; cost {row.cost_usd === null ? "unknown" : `$${row.cost_usd}`},{" "}
+      tokens {tokens}, turns {row.turns ?? "unknown"}. Strength: <span data-strength="" className={styles.strength}>{STRENGTH[row.strength] ?? row.strength}</span>.
       Source: {href ? <a href={href}>{row.source_kind} {row.source_ref}</a> : <code>{row.source_kind} {row.source_ref}</code>}.
     </li>
   );
@@ -199,7 +202,7 @@ function SeriesBlock({ series, index, view }: { series: Series; index: number; v
   );
 }
 
-function SeriesPlace({ series: view }: { series: SeriesView }) {
+function SeriesPlace({ series: view, unavailable }: { series: SeriesView; unavailable: boolean }) {
   const headingId = `rsi-${view.id}`;
   return (
     <figure className={styles.place} data-chart-place={view.id} aria-labelledby={headingId}>
@@ -209,8 +212,12 @@ function SeriesPlace({ series: view }: { series: SeriesView }) {
       </figcaption>
       {view.empty ? (
         <>
-          <div className={styles.plot} data-plot="" role="img" aria-label={`${view.title}: empty, no trials are recorded yet`} />
-          <p className={styles.empty} data-empty-message="">No trials are recorded yet.</p>
+          <div className={styles.plot} data-plot="" role="img" aria-label={`${view.title}: ${unavailable ? "results unavailable" : "empty, no trials are recorded yet"}`} />
+          {unavailable ? (
+            <p className={styles.empty} data-unavailable-message="">Results are unavailable; the recorded trial count is unknown.</p>
+          ) : (
+            <p className={styles.empty} data-empty-message="">No trials are recorded yet.</p>
+          )}
         </>
       ) : (
         <div className={styles.filled} data-plot="">
@@ -228,7 +235,7 @@ function SeriesPlace({ series: view }: { series: SeriesView }) {
   );
 }
 
-export function RsiView({ views, unavailable }: { views: readonly SeriesView[]; unavailable: boolean }) {
+export function RsiView({ views, unavailable, readAt = null }: { views: readonly SeriesView[]; unavailable: boolean; readAt?: string | null }) {
   const anyRows = views.some((v) => !v.empty);
   return (
     <div className={styles.page} data-rsi-page="">
@@ -242,17 +249,19 @@ export function RsiView({ views, unavailable }: { views: readonly SeriesView[]; 
           </p>
         ) : (
           <p className="lede">
-            This page will show what the RSI loop measures: how each task and each version of the system did, including
-            no change and regressions, with every number linked to the rows behind it. Nothing has been measured yet, so
-            every place below is empty on purpose. No sample or placeholder data is shown.
+            RSI is recursive self-improvement: compare a bounded change on real work and keep only supported improvements.
+            These charts show stored behavioral trial results, separately from development exercises and audits.
+            No sample or placeholder data is shown.
           </p>
         )}
         {unavailable ? (
           <p className={styles.note} data-load-note="">
-            Results could not be loaded from the data store just now, so every place shows its empty state. The page
-            tries again on its next refresh.
+            Results could not be loaded from the data store. No trial count is inferred from that failed read.
+            The page tries again on its next refresh; no earlier successful data is retained here, and the last
+            successful read is unknown for this response.
           </p>
         ) : null}
+        {readAt ? <p className={styles.muted}>Last successful read: <time dateTime={readAt}>{readAt}</time>.</p> : null}
         <p className={styles.muted}>
           Colors: this page uses no signal colors yet. A grey dashed frame marks a chart place with nothing in it; a
           square point marks a regression.
@@ -266,7 +275,7 @@ export function RsiView({ views, unavailable }: { views: readonly SeriesView[]; 
             {views
               .filter((v) => v.split === split)
               .map((view) => (
-                <SeriesPlace key={view.id} series={view} />
+                <SeriesPlace key={view.id} series={view} unavailable={unavailable} />
               ))}
           </div>
         </section>

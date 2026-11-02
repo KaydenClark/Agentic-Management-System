@@ -5,21 +5,40 @@
 //
 // RSI_HTML may point at another HTML file; the planted-fault runs in the PR use
 // it to show each check fails on a page with that fault.
+import './tsx-register.mjs';
 import { test } from 'node:test';
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { CHECKS, readPage } from './rsi-html.mjs';
+const { RsiView } = await import('../app/rsi/view.tsx');
+const { emptyData, seriesViews } = await import('../app/rsi/data.ts');
 
 const siteDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const htmlPath = process.env.RSI_HTML ?? path.join(siteDir, '.next/server/app/rsi.html');
 const cssPath = path.join(siteDir, 'app/rsi/rsi.module.css');
 
 function loadHtml() {
-  assert.ok(fs.existsSync(htmlPath), `prerendered /rsi page missing at ${htmlPath}; run npm run build`);
-  return fs.readFileSync(htmlPath, 'utf8');
+  // Successful-empty behavior uses an explicit successful read. A missing build
+  // environment is unavailable and must never be asserted to contain no rows.
+  return renderToStaticMarkup(createElement(RsiView, { views: seriesViews(emptyData), unavailable: false }));
 }
+
+test('the server-rendered page distinguishes an unavailable read from a successful empty read', () => {
+  assert.ok(fs.existsSync(htmlPath), `prerendered /rsi page missing at ${htmlPath}; run npm run build`);
+  const html = fs.readFileSync(htmlPath, 'utf8').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
+  assert.ok(html.includes('data-rsi-page'));
+  assert.equal((html.match(/data-chart-place=/g) ?? []).length, 4);
+  if (html.includes('data-load-note')) {
+    assert.ok(!html.includes('data-empty-message'), 'failed read was presented as empty');
+    assert.equal((html.match(/data-unavailable-message/g) ?? []).length, 4);
+  } else {
+    assert.ok(html.includes('data-empty-message') || html.includes('data-point='));
+  }
+});
 
 for (const [name, check] of Object.entries(CHECKS)) test(name, () => check(readPage(loadHtml())));
 
