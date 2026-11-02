@@ -75,3 +75,5 @@ Inserted record counts: commit 77, correction 10, merge 10, pr_opened 10, spec_e
 Primary local evidence retains frozen rows/inputs/failures and hashes, planned changes, actual before/after public readbacks, HTTP status/count trace, direct-current comparison, global pinned output and per-row undo audit. These artifacts contain no service key and remain available to independent review; complete API data is not duplicated here.
 
 This proves only the expressly approved main771/devfe snapshot using the checked corrected collector. It does not claim latest c67 coverage, a second import, whole-S006 acceptance, owner Human QA, W completion, trial/evaluator qualification or improvement. The Build-history acceptance coverage judgment remains with independent whole-S006 review; W stays stopped/unaccepted and actual owner QA remains open.
+
+Standards limit: the preexisting closed Task Z is 12,775 characters against its 8,000-character budget. Its immutable Receipt remains unchanged; this proof does not claim global standards compliance. The Spec is pruned within its own budget, retaining all 28 historical events and candidate-bound verdicts.
