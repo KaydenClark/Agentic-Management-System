@@ -137,6 +137,7 @@
   --text-small: 13px; /* eyebrows, pills, footer */
   --text-brand: 26px; /* header wordmark */
   --text-h2: 34px; /* section headings */
+  --text-h3: 20px; /* sub-section headings (first used for FAQ questions on /skills articles) */
   --text-h1: 48px; /* page title */
   --leading-body: 1.55;
   --leading-tight: 1;
@@ -192,6 +193,14 @@
   --hub-size: 300px; /* the What the AMS is picture */
   --ring-width: 3; /* the loop ring's stroke, in picture units */
   --motion-quick: 0.2s; /* a stage change; none under reduced motion */
+
+  /* /skills wiki. */
+  --text-h1-skill: clamp(30px, 7vw, var(--text-h1)); /* an article's title, the skill name: --text-h1 at most */
+  --text-h2-section: 28px; /* an article's section headings */
+  --text-code: 0.92em; /* inline code, relative to its text */
+  --step-size: 28px; /* a main-flow step number on the index */
+  --target-min: 24px; /* smallest link target (WCAG 2.2 target size) */
+  --rule-width: 4px; /* the request blockquote's leading rule */
 }
 
 /* Narrow screens: title and theme toggle share the first row of the top bar,

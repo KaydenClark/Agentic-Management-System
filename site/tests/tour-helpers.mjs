@@ -16,6 +16,7 @@ export const READING_ORDER = [
   '/start',
   '/why',
   '/how-it-works',
+  '/skills',
   '/quickstart',
   '/rsi',
   '/glossary',
@@ -110,6 +111,22 @@ export function orderProblems(html, index, order = READING_ORDER) {
   expect('prev', prev);
   expect('next', next);
   if (!prev && !next) problems.push('a page with neither forward nor back link is a dead end');
+  return problems;
+}
+
+// A built page outside the reading order must be a child of a page in it:
+// its route sits one level under that page's route (/skills/grilling under
+// /skills), the parent's content links it and it links back to the parent, so
+// no page is an orphan or a dead end. `parents` maps a route to its built
+// HTML. Empty when it passes.
+export function childProblems(route, html, parents, order = READING_ORDER) {
+  const parts = route.split('/').filter(Boolean);
+  const parent = `/${parts.slice(0, -1).join('/')}`;
+  if (parts.length < 2 || !order.includes(parent)) return [`${route} is outside the reading order and under no page in it (orphan)`];
+  const links = (h, target) => new RegExp(`href="${escape(target)}(?:#[^"]*)?"`).test(mainOf(h));
+  const problems = [];
+  if (!links(parents.get(parent) ?? '', route)) problems.push(`${parent} does not link ${route} (orphan)`);
+  if (!links(html, parent)) problems.push(`${route} does not link back to ${parent} (dead end)`);
   return problems;
 }
 

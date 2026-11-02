@@ -1,7 +1,9 @@
-// S-003 /start: the lifecycle diagram, the toy's no-JS fallback and the toy
-// itself all read one data file, app/start/flow.mjs, so they cannot disagree.
-// Over the built output: every stage in flow.mjs appears in the diagram and in
-// the no-JS fallback; the returned branch exists and uses the returned token;
+// S-003 /start: the toy's no-JS fallback and the toy itself read one data
+// file, app/start/flow.mjs, and the skills diagram reads app/start/skills.mjs,
+// so neither can disagree with its data. Over the built output: every stage in
+// flow.mjs appears in the no-JS fallback; every stage and skill in skills.mjs
+// appears in the skills diagram, main-flow skills marked and in order; the
+// returned branch exists and uses the returned token;
 // only the holder hues colour the page; the toy's source makes no request and
 // stores nothing. Keyboard play to the last stage, zero requests and empty
 // storage while playing are checked live in tests/browser.check.mjs.
@@ -16,6 +18,7 @@ import { builtPage, siteDir, sourceFiles, visibleText } from './helpers.mjs';
 import { mainOf } from './tour-helpers.mjs';
 
 const flow = await import(pathToFileURL(join(siteDir, 'app', 'start', 'flow.mjs')).href);
+const skills = await import(pathToFileURL(join(siteDir, 'app', 'start', 'skills.mjs')).href);
 
 // Inner HTML of the first element carrying `attr`, nesting of the same tag
 // included; null when there is none.
@@ -84,8 +87,64 @@ test('the stage check catches a missing, unnamed or wrongly coloured stage (self
   assert.equal(elementWith('<ol data-x=""><li><ol><li>i</li></ol></li></ol><ol><li>after</li></ol>', 'data-x'), '<li><ol><li>i</li></ol></li>');
 });
 
-test('/start: every stage in flow.mjs appears in the lifecycle diagram', () => {
-  assert.deepEqual(stageProblems(elementWith(main, 'data-flow-diagram'), flow.stages, hueOf, 'diagram'), []);
+// Problems with the skills diagram: each stage once, in order, with its name
+// and gloss; each skill once inside its stage, main-flow skills marked
+// data-main in their listed order and the others not.
+export function skillProblems(fragment, stages) {
+  if (fragment === null) return ['skills diagram: not found'];
+  const problems = [];
+  let last = -1;
+  for (const st of stages) {
+    const opens = [...fragment.matchAll(new RegExp(`<li\\b[^>]*data-skill-stage="${st.id}"[^>]*>`, 'g'))];
+    if (opens.length !== 1) { problems.push(`stage ${st.id} appears ${opens.length} times`); continue; }
+    if (opens[0].index < last) problems.push(`stage ${st.id} is out of order`);
+    last = opens[0].index;
+    const body = elementWith(fragment.slice(opens[0].index), `data-skill-stage="${st.id}"`) ?? '';
+    for (const word of [st.name, st.gloss]) if (!visibleText(body).includes(word)) problems.push(`stage ${st.id} does not show ${word}`);
+    let at = -1;
+    for (const [i, name] of [...st.main, ...st.used].entries()) {
+      const chips = [...body.matchAll(new RegExp(`<li\\b[^>]*data-skill="${name}"[^>]*>`, 'g'))];
+      if (chips.length !== 1) { problems.push(`skill ${name} appears ${chips.length} times in ${st.id}`); continue; }
+      const isMain = /\sdata-main(?:=|[\s>])/.test(chips[0][0]);
+      if (isMain !== i < st.main.length) problems.push(`skill ${name} ${isMain ? 'is' : 'is not'} marked main flow`);
+      if (i < st.main.length && chips[0].index < at) problems.push(`main-flow skill ${name} is out of order`);
+      if (i < st.main.length) at = chips[0].index;
+      const from = chips[0].index + chips[0][0].length;
+      if (!visibleText(body.slice(from, body.indexOf('</li>', from))).includes(name)) problems.push(`skill ${name} shows no name`);
+    }
+  }
+  return problems;
+}
+
+test('skills.mjs: every stage has a gloss and a main-flow skill, and no skill is listed twice', () => {
+  assert.ok(skills.stages.length >= 5, 'too few stages');
+  const ids = skills.stages.map((s) => s.id);
+  assert.equal(new Set(ids).size, ids.length, 'duplicate stage ids');
+  const all = skills.stages.flatMap((s) => [...s.main, ...s.used]);
+  assert.equal(new Set(all).size, all.length, 'a skill is listed twice');
+  for (const s of skills.stages) {
+    assert.ok(s.name && s.gloss, `${s.id}: no name or gloss`);
+    assert.ok(s.main.length >= 1, `${s.id}: no main-flow skill`);
+  }
+  for (const src of skills.sources) assert.ok(readFileSync(join(siteDir, '..', src.path)), src.path);
+});
+
+test('the skills check catches a missing, unmarked, wrongly marked or reordered skill (self-test)', () => {
+  const st = [{ id: 'a', name: 'Align', gloss: 'Agree', main: ['grilling', 'readback'], used: ['jot'] }];
+  const chip = (n, main) => `<li data-skill="${n}"${main ? ' data-main=""' : ''}>${n}</li>`;
+  const ok = `<ol><li data-skill-stage="a"><p>Align</p><p>Agree</p><ul>${chip('grilling', 1)}${chip('readback', 1)}${chip('jot')}</ul></li></ol>`;
+  assert.deepEqual(skillProblems(ok, st), []);
+  assert.ok(skillProblems(ok.replace(chip('jot'), ''), st).length, 'missing skill passes');
+  assert.ok(skillProblems(ok.replace(chip('jot'), chip('jot', 1)), st).length, 'wrongly marked skill passes');
+  assert.ok(skillProblems(ok.replace(chip('readback', 1), chip('readback')), st).length, 'unmarked main skill passes');
+  assert.ok(skillProblems(ok.replace(`${chip('grilling', 1)}${chip('readback', 1)}`, `${chip('readback', 1)}${chip('grilling', 1)}`), st).length, 'reordered main flow passes');
+  assert.ok(skillProblems(ok.replace('<p>Agree</p>', ''), st).length, 'missing gloss passes');
+  assert.ok(skillProblems(ok.replace('>jot<', '><'), st).length, 'unnamed skill passes');
+  assert.ok(skillProblems(null, st).length, 'absent diagram passes');
+});
+
+test('/start: every stage and skill in skills.mjs appears in the skills diagram', () => {
+  assert.deepEqual(skillProblems(elementWith(main, 'data-skills-diagram'), skills.stages), []);
 });
 
 test('/start: every stage in flow.mjs appears in the no-JS fallback, numbered and server-rendered', () => {
@@ -104,7 +163,7 @@ test('/start: the returned branch exists and uses the returned token', () => {
   assert.equal(flow.HOLDERS.returned.hue, 'h-returned');
   const tokens = readFileSync(join(siteDir, 'app', 'theme', 'tokens.css'), 'utf8');
   assert.match(tokens, /\.h-returned\s*\{\s*--hue:\s*var\(--returned\);/, 'h-returned does not set the returned token');
-  assert.match(elementWith(main, 'data-flow-diagram') ?? '', /data-stage="[^"]+"[^>]*class="[^"]*\bh-returned\b|class="[^"]*\bh-returned\b[^"]*"[^>]*data-stage/, 'diagram shows no returned stage in h-returned');
+  assert.match(elementWith(main, 'data-toy-fallback') ?? '', /data-stage="[^"]+"[^>]*class="[^"]*\bh-returned\b|class="[^"]*\bh-returned\b[^"]*"[^>]*data-stage/, 'fallback shows no returned stage in h-returned');
 });
 
 test('/start: only the holder hues colour the page, each through the tone tokens', () => {

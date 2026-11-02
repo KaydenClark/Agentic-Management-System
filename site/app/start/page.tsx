@@ -7,7 +7,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { HOLDERS, SOURCES as S, agentsAlso, mainPath, orchestrators, ownerAlso, stageById, stages, type Holder } from "./flow.mjs";
+import { SOURCES as S, agentsAlso, orchestrators, ownerAlso, stages } from "./flow.mjs";
+import { sources as skillSources, stages as skillStages } from "./skills.mjs";
 import { SourceLinks } from "./SourceLinks";
 import { Toy } from "./Toy";
 import styles from "./page.module.css";
@@ -25,19 +26,6 @@ const ADR000G = { label: "ADR-000G", path: "workbench/docs/adr/000G-a-rule-is-en
 const PARTS = ["Agents", "Workflows", "Intent capture", "Skills", "Tools"];
 const CARRIED = ["What you meant", "Why", "Corrections", "Proof"];
 
-function Legend({ holders }: { holders: Holder[] }) {
-  return (
-    <ul className={styles.legend} aria-label="What the colours mean">
-      {holders.map((h) => (
-        <li key={h} className={`tone ${HOLDERS[h].hue}`}>
-          <span className={styles.dot} aria-hidden="true" />
-          {HOLDERS[h].meaning}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 function Screen({ id, n, title, children }: { id: string; n: number; title: string; children: ReactNode }) {
   return (
     <section className={styles.screen} aria-labelledby={id}>
@@ -51,8 +39,6 @@ function Screen({ id, n, title, children }: { id: string; n: number; title: stri
 }
 
 export default function StartHere() {
-  const returned = stages.find((s) => s.branch);
-  const sendsBack = stages.filter((s) => s.back);
   const ownerStages = stages.filter((s) => s.holder === "owner");
   const agentStages = stages.filter((s) => s.holder === "agent");
 
@@ -147,42 +133,55 @@ export default function StartHere() {
 
       <Screen id="flow" n={3} title="How a piece of work moves">
         <p className={styles.say}>
-          Every change takes the same path. Colour shows who holds it; work that fails a review or Kayden&apos;s look
-          comes back and goes round again.
+          Every piece of work passes the same seven stages, each run by skills: written methods an agent loads before
+          it acts. Review findings come back as a new Journey, and kept improvements start the next loop.
         </p>
         <figure className={styles.figure}>
-          <div className={styles.flow} data-flow-diagram="">
-            <ol className={styles.flowPath}>
-              {mainPath.map((s, i) => (
-                <li key={s.id} data-stage={s.id} className={`tone ${HOLDERS[s.holder].hue} ${styles.node}`}>
-                  <span className={styles.nodeNo}>{i + 1}</span>
-                  <span className={styles.nodeName}>{s.name}</span>
-                  <span className={styles.nodeWho}>{HOLDERS[s.holder].label}</span>
-                </li>
-              ))}
-            </ol>
-            {returned ? (
-              <div className={styles.loop}>
-                <p className={styles.loopFrom}>{sendsBack.map((s) => s.name).join(" or ")} can send it back</p>
-                <ul className={styles.loopPath}>
-                  <li data-stage={returned.id} className={`tone ${HOLDERS[returned.holder].hue} ${styles.node}`}>
-                    <span className={styles.nodeNo}>Loop</span>
-                    <span className={styles.nodeName}>{returned.name}</span>
-                    <span className={styles.nodeWho}>{HOLDERS[returned.holder].label}</span>
-                  </li>
-                </ul>
-                <p className={styles.loopFrom}>then back to {stageById(returned.next?.to ?? "").name}</p>
-              </div>
-            ) : null}
-          </div>
+          <ol className={styles.skillStages} data-skills-diagram="">
+            {skillStages.map((st) => (
+              <li key={st.id} data-skill-stage={st.id} className={styles.skillStage}>
+                <div className={styles.skillStageHead}>
+                  <p className={styles.skillStageName}>{st.name}</p>
+                  <p className={styles.skillStageGloss}>{st.gloss}</p>
+                </div>
+                <div className={styles.skillStageBody}>
+                  <ul className={styles.skillMain} aria-label={`${st.name}: main flow`}>
+                    {st.main.map((k) => (
+                      <li key={k} data-skill={k} data-main="">
+                        {k}
+                      </li>
+                    ))}
+                  </ul>
+                  {st.used.length ? (
+                    <ul className={styles.skillUsed} aria-label={`${st.name}: also used`}>
+                      {st.used.map((k) => (
+                        <li key={k} data-skill={k}>
+                          {k}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+                  {st.note ? <p className={styles.skillNote}>↻ {st.note}</p> : null}
+                </div>
+              </li>
+            ))}
+          </ol>
           <figcaption>
-            In order: {mainPath.map((s) => `${s.name} (${HOLDERS[s.holder].label})`).join(", ")}.{" "}
-            {sendsBack.map((s) => s.name).join(" and ")} can send work to {returned?.name}, which leads back to{" "}
-            {stageById(returned?.next?.to ?? "").name}.
+            In order: {skillStages.map((st) => `${st.name} (${st.main.join(", then ")})`).join("; ")}. Solid chips are
+            the main flow, run in order; outlined chips are other skills used at that stage.
           </figcaption>
         </figure>
-        <Legend holders={["owner", "agent", "returned", "done"]} />
-        <SourceLinks sources={[S.runbook, S.ddr000F, S.ddr000M, S.ddr000Y]} />
+        <ul className={styles.skillKey} aria-label="What the chips mean">
+          <li>
+            <span className={styles.keyMain} aria-hidden="true" />
+            Main flow
+          </li>
+          <li>
+            <span className={styles.keyUsed} aria-hidden="true" />
+            Used at this stage
+          </li>
+        </ul>
+        <SourceLinks sources={skillSources} />
       </Screen>
 
       <Screen id="try" n={4} title="Try it: move one piece of work">
