@@ -22,9 +22,9 @@ Official references: [CLI structured output](https://code.claude.com/docs/en/hea
 
 ## Acceptance
 
-- [ ] Inert public caller/protocol tests enforce the exact schema, terminal identity, single serialization, IDs, turn cap, fail-closed errors and unchanged worker boundary.
-- [ ] Fixed semantic inputs stay unchanged; actual provider turns/usage and missing measurements are retained without invented completion or qualification.
-- [ ] Focused/full/fresh/room/CI and independent exact-source review pass; new private manifest identifies the accepted predecessor/new source, pending actual compatibility/calibration and retained old failures.
+- [x] Inert public caller/protocol tests enforce the exact schema, terminal identity, single serialization, IDs, turn cap, fail-closed errors and unchanged worker boundary.
+- [x] Fixed semantic inputs stay unchanged; actual provider turns/usage and missing measurements are retained without invented completion or qualification.
+- [x] Focused/full/fresh/room/CI and independent exact-source review pass; new private manifest identifies the accepted predecessor/new source, pending actual compatibility/calibration and retained old failures.
 
 ## Continuing gate
 
@@ -49,3 +49,7 @@ At initial source `7587fb2`, local/fresh full suites both passed 742/4 skipped. 
 Final scoped handshake correction at source `c3e1fd9ea3e38609c72ec9f5db141d5fd95f6f9d` follows the independent review's inert initialize-None finding: malformed envelopes/control bodies now become declared Refused before any prompt. Seven causal cases reproduced the old behavior then passed; an eighth campaign test retains controlled runtime-refused Unknown, closes its stream and writes no completed qualification. This was a protocol error-classification gap, not an accepted unsafe grade or observed live compatibility failure. Current/fresh affected suites both pass 231/1 skipped; prior exact `ed5f415` full local/fresh suites both pass 761/4 skipped. The final guard delta is confined to malformed handshake objects and these causal tests; unchanged full evidence is retained with its actual source identity.
 
 Model-free real-artifact preparation binds source `c3e1fd9`, record `e9c08dc9700709bc283eb866cc7d2c1ee19ace5339d8247028322b2949ce2fd2`, protocol `720869e7e1d289e0a96bb30ac6460d2444a976448d83863d049ecf13d48ae5f8`, the eight module hashes, predecessor0997/f693 and neutral context. Released remains false. An abbreviated revision was correctly refused at preparation; the full40-byte Git identity then passed, with no model call. Independent final-source review/current CI remain pending. PR99 records are merged at `a35ef0f`; PR101 is the separate engineering delivery. Main integration `7070066` preserves the S-001 assessment and handoff redactions; only the generated board overlapped, and native render preserved both owners. No actual corrective query or additional database write occurred.
+
+## Engineering disposition
+
+The bounded engineering Task meets its acceptance. Independent reviewer `s002_bootstrap_review` directly reported scoped source PASS/no blockers at `c3e1fd9ea3e38609c72ec9f5db141d5fd95f6f9d`, with independent exact-clean 231 passed/1 skipped and cumulative diff-check0. Protected report SHA256: `4f414e3da0d22d51315561919d1d1280eff28ff5196982f5653ac39d6fa46c66`. The reviewer confirmed final489 source/test equality and truthful records; this is source evidence, not assembled S-002 Review, Human QA or runtime compatibility. Exact489 CI117/workflow41422299682 passed. Scoped self-QA inspected caller routing, strict serialization/quote guards, neutral context, retained Unknown/stop behavior, documented limits and real-artifact model-free preparation. Actual new-source queries and additional store writes remain zero; Task002 and actual compatibility/requalification stay incomplete/unreleased.
