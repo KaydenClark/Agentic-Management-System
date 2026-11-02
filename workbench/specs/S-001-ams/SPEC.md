@@ -28,7 +28,6 @@ The owner needs one auditable account of what is done and what remains.
 ## Current Verified State
 
 - Workbench v3.2.2 is adopted: controls, lanes, Node lifecycle and generated Taskboard.
-- Six capability Specs were active before this correction. Specs consume no Landmark slots.
 - Site code, Supabase migrations and `dev` exist; see child Specs for scoped proof.
 
 ## Desired Behavior
@@ -51,7 +50,7 @@ The owner needs one auditable account of what is done and what remains.
 
 ## Related scope and priorities
 
-Landmarks parent capability Specs; S-001 assesses their outcomes across the build. Related unfinished work does not prevent S-001 from assessing it or repairing its own scope. Final acceptance remains unchanged.
+See Intent and authority, and Dependencies And Blockers.
 
 ## Non-Goals
 
@@ -117,7 +116,9 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- Current answer: **No** (2026-11-01). Every landmark is planned.
+- Current answer: **No** (2026-11-02, `325b422`, [assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)): 1/8 criteria, 8/23 landmark checks met.
+- Agent-workable: PR #98 with over-limit pruning; TK-003; blocked S-002, S-006, S-007, S-013 Tasks.
+- Owner gates: approve S-005, S-009 to S-012; S-003 TK-003; S-004/S-008 QA and approvals; `dev` -> `main`.
 
 ## Supersession
 
