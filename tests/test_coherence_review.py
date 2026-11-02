@@ -184,10 +184,19 @@ class StatusTest(unittest.TestCase):
 
     def test_review_reused_after_spec_content_changed_is_stale(self):
         head = self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}")
-        self.digest = lambda commit: "b" * 64
+        # The reviewed candidate and the checked commit digest differently: the content changed.
+        self.digest = lambda commit: ("b" if commit == self.candidate else "c") * 64
         [v] = self._status(head)
         self.assertEqual(v["status"], "stale", v)
         self.assertIn("content", " ".join(v["reasons"]))
+
+    def test_legacy_rule_verdict_binds_while_its_content_is_unchanged(self):
+        # Recorded when the Spec still carried its history (digest "a"); today's rule
+        # digests the same candidate content as "b" both then and now.
+        head = self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}")
+        self.digest = lambda commit: "b" * 64
+        [v] = self._status(head)
+        self.assertEqual(v["status"], "current", v)
 
     def test_reviewers_own_verdict_commit_does_not_make_it_a_builder(self):
         # Codex P2 on PR #97: review bookkeeping is not building.
@@ -333,6 +342,14 @@ class HistoryPageTest(unittest.TestCase):
         Path(self.repo, "src/thing.py").write_text("v = 2\n")
         [v] = self._status(_commit(self.repo, "Change delivered code after review"))
         self.assertEqual(v["status"], "stale", v)
+
+    def test_a_digest_mismatch_without_legacy_history_is_not_excused(self):
+        # This Spec never carried history, so no legacy rule explains the mismatch.
+        head = self._append_verdict(f"model fresh; agent: reviewer-b; context: {REVIEW_CTX}")
+        self.digest = lambda commit: "b" * 64
+        [v] = self._status(head)
+        self.assertEqual(v["status"], "stale", v)
+        self.assertIn("content", " ".join(v["reasons"]))
 
 
 if __name__ == "__main__":

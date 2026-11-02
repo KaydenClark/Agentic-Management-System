@@ -47,6 +47,7 @@ CELL_CONTEXT = re.compile(r"\bcontext:\s*([0-9a-f]{12})\b")
 NOT_A_NAME = {"", "none", "null", "unclaimed", "n-a"}
 REVIEW_ROW = re.compile(r"^\|\s*\d{4}-\d{2}-\d{2}\s*\|\s*review\s*\|\s*Review verdict: ")
 HISTORY_TABLE_HEAD = re.compile(r"^\|\s*(?:Date\s*\||-)")
+LEGACY_HISTORY = re.compile(r"^(?:## Append-Only Evidence And Execution Log|\*\*Latest event:\*\*)", re.M)
 REVIEW_HEADER = re.compile(r"^\*\*(?:Updated|Latest event|Next gate):\*\*")
 SPLIT_MARK = "<!-- workbench-record-section"
 
@@ -220,6 +221,27 @@ def _verdicts(spec_text: str) -> list[dict]:
     return rows
 
 
+def _binds_legacy(repo: str, spec_id: str, v: dict, current_digest: str,
+                  digest_at: Callable[[str], str]) -> bool:
+    """A verdict recorded under the digest rule that still kept history in the Spec.
+
+    The native digest now drops a legacy evidence section and `Latest event`, so
+    such a verdict's digest can never equal today's. As the native report's
+    legacy binding does, it still binds when its candidate's Spec carried that
+    history and the candidate's content, digested today, is the current content.
+    The native `verdict` refused any row whose digest was not its candidate's.
+    """
+    if not FULL_SHA.match(v["candidate"]):
+        return False
+    try:
+        files = _git(repo, "ls-tree", "-r", "--name-only", v["candidate"]).stdout.splitlines()
+        text = _show(repo, v["candidate"], _find_spec(files, spec_id))
+        legacy = bool(LEGACY_HISTORY.search(text))
+        return legacy and digest_at(v["candidate"]) == current_digest
+    except (subprocess.CalledProcessError, ValueError):
+        return False
+
+
 def _report_path(path: str) -> bool:
     """Generated projection and review reports: records that never alter the assembly."""
     return path == "TASKBOARD.md" or path.startswith("workbench/feedback/coherence/REVIEW-")
@@ -278,7 +300,7 @@ def status(spec_id: str, repo: str = ".", commit: str = "HEAD",
                 stale.append(f"commit changed since review: {len(changed)} path(s) differ ({shown})")
         if current_digest is None:
             current_digest = digest_at(sha)
-        if current_digest[:12] != v["digest"]:
+        if current_digest[:12] != v["digest"] and not _binds_legacy(repo, spec_id, v, current_digest, digest_at):
             stale.append(f"Spec content changed: reviewed digest {v['digest']}, now {current_digest[:12]}")
         unbound = [] if v["context"] else ["names no reviewing context"]
         state = ("refused" if refused else "unbound" if unbound else "stale" if stale else "current")

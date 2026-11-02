@@ -61,8 +61,9 @@ twice; every other page row is derived from the page, ``<page>#evidence-N``.
 
 Relocated Spec evidence is still derived from explicitly declared Wiki history:
 MEMORY.md must link the article; its frontmatter source_paths block list must
-name the registered Spec path; a visible [previous S-ID at HEX](URL) link must
-name this repository's immutable blob at that same HEX/path. Only locally
+name the pinned or current path of a registered Spec; a visible [previous S-ID
+at HEX](URL) link must name this repository's immutable blob at that same
+HEX/path, which may predate a later move of the Spec. Only locally
 available ancestors of the record snapshot are eligible. The archived Spec ID
 and evidence table must match; original blame supplies every event's source
 commit, line and time. Exact duplicate rows coalesce; conflicting keys refuse.
@@ -862,7 +863,8 @@ def _wiki_spec_events(git: Runner, specs: Sequence[dict], current: Sequence[dict
     """Only MEMORY-routed Wiki declarations can retain old Spec evidence.
 
     A declaration is [previous S-ID at HEX](this repository/blob/HEX/Spec path).
-    The article's frontmatter source_paths must declare that registered Spec.
+    The article's frontmatter source_paths must declare the pinned path or the
+    Spec's current one; the pinned path may predate a later move or retirement.
     Resolve/blame locally, disabling replacement objects, lazy-fetch protocols
     and text conversion. Neither an arbitrary ancestor nor an external URL
     authorizes history. Existing destinations win no conflict silently.
@@ -882,7 +884,10 @@ def _wiki_spec_events(git: Runner, specs: Sequence[dict], current: Sequence[dict
         path = posixpath.normpath(posixpath.join("workbench/wiki", url.path))
         if not url.scheme and not url.netloc and not url.query and path in files and path != router:
             pages.add(path)
-    registered = {s["path"]: s["id"] for s in specs}
+    # A pinned source keeps the path the Spec had at that commit; the Spec may have
+    # moved or retired since. Its blob must still carry the same Spec ID (below).
+    ids = {s["id"] for s in specs}
+    current_path = {s["id"]: s["path"] for s in specs}
     known = {_key(r): r for r in current}
     retained = []
     bound = parse_time(local(["show", "-s", "--format=%cI", "HEAD"]).strip())
@@ -902,9 +907,10 @@ def _wiki_spec_events(git: Runner, specs: Sequence[dict], current: Sequence[dict
             marker = base.path + "/blob/" + prefix + "/"
             path = url.path.removeprefix(marker)
             if (url.scheme != base.scheme or url.netloc != base.netloc or url.query or url.fragment
-                    or not url.path.startswith(marker) or registered.get(path) != spec_id
-                    or path not in declared or "%" in path or "\\" in path
-                    or path != posixpath.normpath(path) or path.startswith("/")):
+                    or not url.path.startswith(marker) or spec_id not in ids
+                    or not ({path, current_path.get(spec_id)} & declared) or "%" in path or "\\" in path
+                    or path != posixpath.normpath(path) or path.startswith("/")
+                    or ".." in path.split("/")):
                 raise RefusedError(f"unsupported historical Spec declaration in {page}")
             try:
                 sha = local(["rev-parse", "--verify", prefix + "^{commit}"]).strip()
@@ -950,8 +956,11 @@ def _history_page_events(git: Runner, specs: Sequence[dict], current: Sequence[d
         page = f"{HISTORY_DIR}/{spec_id}.md"
         if page not in files:
             continue
+        # Retained rows carry the path the Spec had when they were written, which a
+        # later move changes, so match them by Spec ID rather than by current path.
         retained = {(r["detail"].get("date"), r["detail"].get("task"), r["detail"].get("event"))
-                    for r in current if r["source_ref"].startswith(path + "#evidence-")}
+                    for r in current if r["detail"].get("spec") == spec_id
+                    and "#evidence-" in r["source_ref"] and not r["source_ref"].startswith(HISTORY_DIR + "/")}
         for row in _spec_events(spec_id, page, _blame(git, page)):
             if (row["detail"].get("date"), row["detail"].get("task"), row["detail"].get("event")) not in retained:
                 rows.append(row)
