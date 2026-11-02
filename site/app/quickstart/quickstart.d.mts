@@ -6,6 +6,8 @@ export type Step = {
   command: string;
   // What the command prints, or null when the page shows none.
   output: string | null;
+  // The exit status the command ends with; 0 when absent.
+  exitCode?: number;
 };
 
 export const CLONE_URL: string;
