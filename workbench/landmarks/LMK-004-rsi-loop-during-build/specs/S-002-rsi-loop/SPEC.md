@@ -10,8 +10,8 @@
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** TK-002 engineering delivered; qualification command rejected before process creation.
-**Next gate:** Explicit Anthropic payload/destination approval, then orchestrator phase release; preserve frozen source and zero-call hold.
+**Latest event:** TK-002 narrow qualification accepted; first baseline slot held as Unknown on strict judge-format failure.
+**Next gate:** TK-000Y bounded structured-output correction; no further model calls or additional trial-store rows are released.
 
 ## Intent and authority
 
@@ -23,7 +23,7 @@
 
 Exact-identity repair: S-006/TK-000S.
 
-[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise. Its reviewed engineering reference `921cb3e` (PR #92; CI87; 177 affected checks) freezes the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md). PR #92 merged at `d78b663`; the orchestrator selected main-contained source `921cb3e` after direct model-free import/protocol verification. The released qualification command was rejected by automatic approval review before process creation. Explicit Anthropic payload approval is pending with the owner; actual calls/journals/rows remain zero and calibration/noise remain unrun. [TK-002](tasks/TK-002/TASK.md) owns the exact hold and preserved identities.
+[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. TK-000V repairs blocked prompt writes; TK-002 owns noise. Its reviewed engineering reference `921cb3e` (PR #92; CI87; 177 affected checks) freezes the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md). PR #92 merged at `d78b663`; the orchestrator selected main-contained source `921cb3e` after direct model-free import/protocol verification. The released qualification command was rejected by automatic approval review before process creation. The owner explicitly approved scoped Anthropic/subscribed-Claude sends on 2026-11-02. The first five-control qualification phase then executed once and all expected outcomes matched; the root inspected private evidence digest `f6938f3...` and accepted only that narrow qualification. The first baseline worker process completed, but its judge returned fenced JSON and the strict parser retained Unknown (`3a2637ba...`); task success is unestablished. Further model slots are held. The root released only publication of the old incomplete observation, now run28/result41 with exact readback below. Noise and benefit remain unproven. [TK-002](tasks/TK-002/TASK.md) owns the exact hold and preserved identities.
 
 ## Desired Behavior
 
@@ -123,6 +123,12 @@ Kayden reported lost grilling as a failure; the linked context preserves the int
 | 2026-11-01 | TK-000O | Task closed | 42 focused; CI #38 pass | evals | S-006/trials; close attribution: {"agent":"codex-s002","claimant":"codex-s002","onBehalfOf":null} |
 | 2026-11-01 | TK-000T | Task closed | 45 focused; fresh 562/4 skip; CI70; actual adapter smoke | evals, Runbook, Wiki | Oracle calibration, noise, controls, benefit; close attribution: {"agent":"s002-bootstrap","claimant":"s002-bootstrap","onBehalfOf":null} |
 | 2026-11-01 | TK-000V | Task closed | 50 focused; fresh 567/4 skip; actual inert adapter | evals/TRIALS.md | Oracle/noise/controls/benefit; close attribution: {"agent":"s002-transport","claimant":"s002-transport","onBehalfOf":null} |
+
+## Old incomplete baseline publication
+
+A first storage request was also rejected before process creation for alleged missing Supabase destination authority; no key/HTTP/row action occurred. The exact original owner message `01a197f8-ec2b-72c0-9db7-4712043972d4` was then directly recovered: “log the results in supabase.” One reconsideration of the same safe payload cleared review; no workaround or destination change occurred.
+
+Released old observation only: stopped/incomplete run **28**, Unknown result **41** (`passed:null`, `workerCompleted:true`, grader `runner_error`, strength `single_trial`). Exact readback digest `68a1512b25d62903df21e1080f2a635658b2fc489e8bdc902d2cf58d25de57c7`; validated safe payload `77674f9676b6bb16bbe0d0a2c35eff391784398a53394cc46829b91daab3b45a`. Historical start/finish use explicitly labelled journal filesystem mtimes; database recorded_at is publication time. Public wall seconds `23.362` follows numeric(12,3); the exact raw measurement stays private. Actual spend remains null with evidence source. A separate trusted publisher loaded only the safe payload and explicit local key; no raw transcript/host path/skill/rationale or credential was exposed. No other rows, source changes or model calls occurred. One ungraded row cannot establish a noise floor or complete TK-002.
 
 ## Review and Human QA
 
