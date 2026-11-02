@@ -7,7 +7,9 @@ provenance:
   - Kayden, S-003 repair chat and owner corrections, 2026-11-01
   - Existing S-003 and S-007 execution reports at 97bfcaa
   - Owner decisions in chat, 2026-11-02 (paraphrased; entries below)
+  - Kayden, RSI proof and skill-improvement scope correction, 2026-11-02
 source_paths:
+  - BLUEPRINT.md
   - workbench/landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md
   - workbench/landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/SPEC.md
   - workbench/landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/SPEC.md
@@ -17,6 +19,12 @@ last_verified: 2026-11-02
 # Website presentation: intent, corrections and history
 
 The website explains and demonstrates AMS. Visitors come for understanding; it is not a live control panel. [S-003](../landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md) owns the shell and orientation. [S-007](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/SPEC.md) owns RSI evidence presentation. These Specs own their destinations; this article preserves context and grants no implementation or release authority.
+
+## RSI proof during website development
+
+Confirmed by Kayden in chat, 2026-11-02; the [sourced correction](#jot-052e2b9a-85fc-4813-bad1-6039aa017f9c) preserves the intent. This AMS project develops and proves shared skill improvements through the website build. Workflow and process issues found during that work feed the RSI loop: record the issue and baseline, repair the owning skills, compare before and after here, log the evidence and disposition, and display the RSI log on the website. Retain failures, regressions and unknowns; an issue report or merged repair alone proves no improvement.
+
+For each issue, ask how the skill correction prevents recurrence in any project. This project is the proving ground for improving the whole workflow and system. It improves the skills; installing them into other projects is outside its scope and is not an additional proof gate. [Blueprint](../../BLUEPRINT.md) owns this purpose, [S-002](../landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md) owns comparisons, S-006 owns stored results, and S-007 owns their presentation.
 
 ## Owner brief and corrections, 2026-11-01
 
@@ -58,6 +66,7 @@ The [previous S-007 at 97bfcaa](https://github.com/KaydenClark/Agentic-Managemen
 
 - 2026-11-01: created during owner-authorized S-003 specification repair. Preserved the opening brief, subsequent corrections and source-linked execution history; moved historical explanations out of the two affected Specs. No website implementation, Human QA or outcome acceptance performed.
 - 2026-11-02: recorded the owner's corrections on owner quotations, review banners and the Quickstart page; records only, no site change.
+- 2026-11-02: clarified that website development proves shared skill improvements here, records before/after in RSI and displays the log; installation into other projects is outside this project.
 
 <!-- jot-entry -->
 ### JOT-90878239-ede0-41d9-bc5a-aea988e679b2
@@ -96,4 +105,17 @@ Topic: website-presentation
 Supersedes: none
 
 Paraphrased owner decision: Quickstart is folded into Start here as one page at /start; there is no separate /quickstart page. That page tells readers to use the setup-workbench skill to set up a Workbench. The reading route through the tour stays; the page does not replay setup commands or become an installation guide. Effect: S-003 Orientation content and the Route criterion restate this; S-003 TK-003's quickstart page and fresh-clone replay need reconciling before implementation resumes.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-052e2b9a-85fc-4813-bad1-6039aa017f9c
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T17:09:39.584Z
+Author: Kayden
+Source: Kayden, AMS documentation correction and installation-scope clarification in chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden confirms that this AMS project is where shared skill improvements are developed and proved through actual website work. Find workflow and process issues while building, record each issue, repair the owning skills, compare before and after here, record the evidence and disposition in the RSI log, and display that log on the website. Recurring failures are inputs to improving the whole workflow and system for use in any project. The question of preventing recurrence in any project governs how the shared skills are repaired; proving the repair belongs to this project. This project improves the skills and does not install them into other projects. Cross-project installation or rollout is not this project's work or proof gate. This corrects the agent's proposed portfolio rollout and separate proof-project framing. The requested action is documentation correction; this entry claims no skill repair, measured result, database write, website implementation or deployment.
 <!-- /jot-entry -->
