@@ -23,6 +23,21 @@ The [frozen comparison](../research/IMPROVEMENT-shared-skills-delivery-2026-11-0
 
 ## Findings
 
+### Separate pruning-skill suite
+
+The same source pin also had three separate bounded pruning exercises; they are not additional arms or resets of the workflow comparison. The suite froze after drafting began but before results, so this is development evidence.
+
+| Exercise | Initial → returned Unicode characters | Observed limits |
+|---|---|---|
+| RUNBOOK | 2983 → 2897 | Near-900 / 900–1500 target unmet; 20 inline-code strings and 14 link targets retained; linked project sources absent in the isolated fixture |
+| Independent skill pruning | 1142 → 1065 | Independent pruner and author same-case source walkthroughs occurred; four described outcomes matched, without a claim of fictional product execution |
+| Shipment artifact | 793 → 708 | Approximate 240 goal unmet; 1000 cap met |
+| Separate note without a target | 343 → 218 | No target/cap invented |
+
+The separate pruning r1 attempt one reported **Broken**, 3 Yes of 51 applicable pooled (17 checks per run), acceptance false. Most No rows are missing full-check proof, not observed defects. Qualification covers objective literal/count/byte checks only, not full semantic equivalence. Ledger SHA-256: `f43a1c45621c9a17cf4a5011dda66b6c90fd05d49f6bbe1ff0b5098063f45844`.
+
+Target misses are observable outcomes, not proof that source caused them or permission to delete required detail. Conservative refusal and semantic completeness remain subject to evidence. Do not pool this inventory or score with the workflow audit, and do not turn smaller text alone into demonstrated benefit.
+
 **F-001 — Publication/completion proof incomplete.** The returned candidate end states do not establish the required clean, fully published completion. **Disposition: accepted-open**; owner: S-011/TK-002; evidence: the returned run-two/run-three facts above and ledger digest. Reconcile actual authority/refusal traces before choosing a repair; never bypass a native refusal.
 
 **F-002 — Audit gate not met.** Reported Broken, incomplete and unqualified evidence cannot authorize the requested Stable/Excellent merge. **Disposition: diagnostic**; owner: S-011/TK-002; evidence: immutable candidate and reported ledger identity above. Missing proof must remain visible in its original class.
