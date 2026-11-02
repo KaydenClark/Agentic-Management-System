@@ -43,7 +43,7 @@ The assistant's readback went from baseline/pass criteria directly to improving 
 
 ## Preparation owners
 
-The planned catalog destination belongs under the existing RSI landmark. S-011 retains its bounded handoff/branch/pruning repair and frozen evidence. S-013 owns the AMS-wide preparation-bypass detection and routing correction; S-008 owns later public skill explanations, S-006/S-007 stored and visible evidence. Link to their records for state. No current site acceptance, campaign hold or unrelated writer's work is reset.
+[S-000A](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) owns the catalog destination and source-repair side under the existing RSI landmark. Its [preparation readback](../research/PREPARE-skills-refocus-2026-11-02.md) explains bounded assignments and the conditional rollout. S-011 retains its handoff/branch/pruning repair and frozen evidence. S-013 owns preparation-bypass detection/routing; S-008 owns public skill explanations, S-006/S-007 stored/visible evidence. Follow these owners for state; no existing acceptance, campaign hold or unrelated work is reset.
 
 ## History
 

@@ -57,7 +57,7 @@ Preparation has no missing input. Execution needs owner authorization. Candidate
 
 ## Vertical Implementation Slices
 
-Map creates zero Tasks. Plan prepares bounded assignments after this Map is saved; TASK.md owns instructions, states, blockers and proof. All remain held at Prepare.
+The eight [prepared assignments](../../../../research/PREPARE-skills-refocus-2026-11-02.md) own their instructions, blockers and proof in TASK.md. All remain held at Prepare.
 
 ## Acceptance Criteria
 
