@@ -54,7 +54,7 @@ PATTERNS = (
     ("credential", SB_SECRET),
     ("credential", re.compile(r"-----BEGIN [A-Z ]*PRIVATE KEY-----")),
     ("credential", re.compile(
-        r"\b(?:sk-ant-[A-Za-z0-9_-]{20,}|(?:sk|pk)-[A-Za-z0-9_]{20,}|gh[oprsu]_[A-Za-z0-9]{20,}"
+        r"\b(?:sk-ant-[A-Za-z0-9_-]{20,}|sk-(?:proj|svcacct|admin)-[A-Za-z0-9_-]{20,}|(?:sk|pk)-[A-Za-z0-9_]{20,}|gh[oprsu]_[A-Za-z0-9]{20,}"
         r"|github_pat_[A-Za-z0-9_]{20,}|xox[abpr]-[A-Za-z0-9-]{10,}|AKIA[0-9A-Z]{16})\b")),
     ("credential", re.compile(r"\bBearer\s+[A-Za-z0-9._~+/=-]{16,}")),
     ("private record ID", re.compile(r"claude\.ai/code/session_[A-Za-z0-9]+|\bsession_0[A-Za-z0-9]{20,}")),
