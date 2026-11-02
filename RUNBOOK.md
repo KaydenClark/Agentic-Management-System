@@ -35,6 +35,7 @@ node workbench/tools/spec-workbench.mjs doctor
 node workbench/tools/spec-workbench.mjs next --json
 node workbench/tools/workbench-layout.mjs validate --project "$PWD"
 git diff --check
+uv run ams-hygiene [--site site]
 ```
 
 Render: no diff; doctor: no blockers. Repeat these and pytest
@@ -55,8 +56,8 @@ subscription meter; unknown stays unknown.
 ### Shared CI
 
 CI uses `workbench-ci` and
-`workbench-runner-ams` service, never a GitHub-hosted fallback. Queued jobs may
-mean the VM is unavailable. Fork jobs skip; inspect before internal execution.
+`workbench-runner-ams` service, never a GitHub-hosted fallback. Fork jobs skip;
+inspect before internal execution.
 [Shared CI](workbench/wiki/context-shared-ci.md) owns setup/operation details.
 Keep keys and `AMS_LIVE` out of CI.
 

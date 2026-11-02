@@ -153,10 +153,13 @@ def test_the_cli_exits_nonzero_and_names_findings(tmp_path, capsys):
     _git(tmp_path, "add", "RUNBOOK.md")
     assert hygiene.main(["--root", str(tmp_path)]) == 0
     site = _built_site(tmp_path / "site", "<main>" + J(["gh", "p_", "c" * 36]) + "</main>")
-    assert hygiene.main(["--root", str(tmp_path), "--site", str(site)]) == 1
+    (tmp_path / "RUNBOOK.md").write_text("a" * 3001)  # a repository finding the site run ignores
+    capsys.readouterr()
+    assert hygiene.main(["--site", str(site)]) == 1
     out = capsys.readouterr().out
     assert "site/.next/server/app/index.html:1: credential" in out
-    assert "c" * 36 not in out
+    assert "RUNBOOK.md" not in out and "c" * 36 not in out
+    assert hygiene.main(["--site", str(tmp_path / "unbuilt")]) == 2
 
 
 # The real repository on every candidate. Findings fail here; the check is

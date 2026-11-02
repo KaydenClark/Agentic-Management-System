@@ -1,7 +1,8 @@
 """Public hygiene and character limits over records, controls and the built site (S-001 TK-002).
 
-Usage: ``ams-hygiene [--root DIR] [--site SITE_DIR]``. Exit 0 when clean, 1 on
-any finding, 2 when ``--site`` has no build output.
+Usage: ``ams-hygiene [--root DIR]`` checks the repository; ``ams-hygiene --site
+SITE_DIR`` checks the built site instead. Exit 0 when clean, 1 on any finding,
+2 when ``--site`` has no build output.
 
 The repository check reads every file ``git ls-files`` lists. It refuses:
 
@@ -18,7 +19,7 @@ The repository check reads every file ``git ls-files`` lists. It refuses:
   root controls over 3,000 (S-001 Decisions; ``workbench/artifact-budgets.json``).
 
 Characters are Unicode code points after CRLF/CR become LF, as the Workbench
-budget tool counts them. ``--site`` also scans what the built site serves
+budget tool counts them. ``--site`` scans what the built site serves
 (``.next/server/app`` pages and ``.next/static`` JS/CSS). A finding names its
 file, line and class, never the matched value.
 """
@@ -158,12 +159,13 @@ def check_site(site: Path) -> list[str]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="ams-hygiene", description=__doc__.splitlines()[0])
     parser.add_argument("--root", type=Path, default=Path.cwd(), help="repository root (default: here)")
-    parser.add_argument("--site", type=Path, help="also check this built site directory")
+    parser.add_argument("--site", type=Path, help="check this built site directory instead")
     args = parser.parse_args(argv)
-    found = check_repository(args.root)
-    if args.site is not None:
+    if args.site is None:
+        found = check_repository(args.root)
+    else:
         try:
-            found += check_site(args.site)
+            found = check_site(args.site)
         except NoBuild as error:
             print(f"ams-hygiene: {error}", file=sys.stderr)
             return 2
