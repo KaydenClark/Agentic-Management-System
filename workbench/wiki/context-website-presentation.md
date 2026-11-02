@@ -97,3 +97,13 @@ Supersedes: none
 
 Paraphrased owner decision: Quickstart is folded into Start here as one page at /start; there is no separate /quickstart page. That page tells readers to use the setup-workbench skill to set up a Workbench. The reading route through the tour stays; the page does not replay setup commands or become an installation guide. Effect: S-003 Orientation content and the Route criterion restate this; S-003 TK-003's quickstart page and fresh-clone replay need reconciling before implementation resumes.
 <!-- /jot-entry -->
+
+## Start-page correction — 2026-11-02
+
+Kayden requested reconciliation of main's reusable intent-to-outcome definition
+into dev, preserving newer site work, and correction of the claim that RSI is
+empty. The correction retains dev's skills diagram and integrated Quickstart,
+uses owner roles, and describes the existing RSI repair checks, failures and gaps
+as development evidence that does not establish demonstrated improvement.
+This correction does not establish measured benefit, deployed-page verification
+or owner Human QA.
