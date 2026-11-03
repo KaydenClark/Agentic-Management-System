@@ -25,3 +25,7 @@ Hand back to S-003 with `close`.
 - [ ] A page with no approval record shows the draft mark.
 - [ ] A fixture approval bound to the page's hash removes it; changing one character of the page restores it (test).
 - [ ] Build and tests pass.
+
+## Reconciled disposition — 2026-11-02
+
+DDR-001B and JOT-76ddc50f withdraw public draft/review marks. Historical implementation8ba15e0 is contained in dev76b9c564692a1e979cffbebbe30063b73588efb6. Its original claimant and completed receipt remain at records/s003-tk003-tk004 commit95ef1bd; this is historical implementation of an older requirement, not acceptance of the current destination. Do not restore draft marks or merge the old records branch wholesale. Retain this blocked record: native retirement requires done and cannot represent withdrawal without false closure.

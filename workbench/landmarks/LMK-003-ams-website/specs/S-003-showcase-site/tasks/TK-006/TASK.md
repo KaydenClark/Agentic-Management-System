@@ -26,3 +26,7 @@ Hand back to S-003 with `close`.
 - [ ] A test fails when any history sentence on the page does not come from a row.
 - [ ] A live read on the `dev` deployment shows the rows Supabase holds.
 - [ ] Build and tests pass.
+
+## Reconciled disposition — 2026-11-02
+
+The owner explicitly withdrew the separate Under-the-hood/build-history page; S-007 owns build-evidence explanation. The current S-003 Spec and context-website-presentation.md supersede this assignment. Do not implement it, await S-006 for it or mark it completed. Retain the blocked record because native retirement accepts only done Tasks and has no withdrawal route.
