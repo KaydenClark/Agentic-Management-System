@@ -30,3 +30,5 @@ Pending consequential choice: the reusable component is Node-backed, whereas ADR
 - At mainbbc9ff7 the full suite passed809with5skipped; this is baseline evidence, not proof of a queue repair.
 - A separate S-004 baseline test invocation was interrupted after failures in the restricted environment. A direct socket-bind diagnostic reproduces PermissionError before product behavior can be exercised; localhost tests require permitted execution. No repair or final pass is claimed.
 - Wiki validation, layout validation and diff whitespace pass; doctor has no global blocker and retains existing informational/slice findings.
+
+Permitted baseline rerun: `uv run --offline pytest -q tests/test_grill_board.py tests/test_grill_board_answers.py tests/test_grill_board_ratings.py tests/test_grill_board_theme.py --maxfail=1` passed128/128 in86.17seconds on unchanged product code. This establishes existing card mechanics only. ADR validation and staged-file hygiene also pass. No automatic-queue repair has been implemented.
