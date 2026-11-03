@@ -505,3 +505,39 @@
   border-radius: var(--radius-control);
   background: var(--ground);
 }
+
+/* Keep the same parts and text equivalent when the round diagram has too
+   little room for readable labels. The caption still explains the loop. */
+@media (max-width: 480px) {
+  .hub {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    aspect-ratio: auto;
+  }
+
+  .ring {
+    display: none;
+  }
+
+  .core {
+    aspect-ratio: auto;
+    padding: var(--space-8) var(--space-12);
+    border-radius: var(--radius-control);
+  }
+
+  .parts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-8);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .parts li {
+    flex: 1 1 var(--node-basis);
+    border-radius: var(--radius-control);
+  }
+}
