@@ -91,7 +91,7 @@ claim Human QA, or prove improved agent reliability. A separate-context source r
 the pre-existing TK-002 limitation. That review covered the cited source and
 requirement only, not the full site, rendered behavior or Human QA.
 
-## F-002 — RSI comparison does not answer the owner's adoption question
+## F-002 — RSI page should show whole-AMS improvement over time
 
 Recorded: 2026-11-03 06:05 UTC. Reporter: **owner-assistant**.
 Disposition: **open owner feedback for S-007**, not a demonstrated numerical
@@ -145,3 +145,26 @@ track evidence limits, but not this exact owner concern about the visual's value
 as a reason to install. This entry records that additional feedback without
 creating a duplicate implementation Task. Review was source-only; no rendered
 deployment, visitor comprehension, full acceptance or Human QA was verified.
+
+### Owner clarification — supersedes the narrower adoption framing
+
+Recorded: 2026-11-03 06:09 UTC. Reporter: **owner-assistant**.
+Source: owner's subsequent message in the assistant conversation, verbatim:
+
+"Exactly, I want it to show the real thing. pass and fail. But I want it to give real info. Not just individual run results. The page is supposed to display the improvements of the whole AMS over time, not the results of runs"
+
+This clarification is the current meaning of F-002. The earlier installation
+question remains historical context, not the full destination. The owner wants
+the page to show the whole AMS's improvement over time, retaining both pass and
+fail and providing meaningful information rather than a display of individual
+run results. This is not a request to hide failures or turn failed runs into
+positive claims.
+
+The next action is to reconcile this exact intent through the existing S-007
+owner/builder workflow. This report does not define an aggregation method,
+metric, statistical claim, baseline, chart design or new test campaign.
+The earlier source observations remain valid within their bounded scope;
+they do not establish a whole-system trend. Missing evidence remains missing.
+No product code, Spec acceptance criteria, decisions or Tasks were changed by
+this clarification. This sourced owner wording is internal project feedback,
+not copy for the public website.
