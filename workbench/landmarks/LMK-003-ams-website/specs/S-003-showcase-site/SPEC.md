@@ -8,7 +8,7 @@
 **Updated:** 2026-11-03
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Next gate:** Merge checked TK-001R into dev; then assign TK-001T.
+**Next gate:** Close TK-001T with verification and documentation proof.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 

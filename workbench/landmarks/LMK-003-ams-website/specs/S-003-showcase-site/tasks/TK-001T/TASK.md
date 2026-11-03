@@ -3,10 +3,12 @@
 **Task ID:** TK-001T
 **Spec ID:** S-003
 **Slice:** Visitors see the Grill Board palette throughout the site
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation
 **Planned verification:** Compare rendered representative pages with the Grill Board palette in light/dark at desktop and 375px. Run token, contrast and relevant component checks plus site build.
+**Claimed by:** s003-glossary
+**Current claimant:** s003-glossary
 
 ## Authority and inputs
 
