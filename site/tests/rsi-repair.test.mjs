@@ -106,11 +106,15 @@ test('checker repair evidence shows the sourced false-met case and bounded dispo
   assert.match(out, /Current combined recovery checks and review status/);
   assert.match(out, /recovery PR 139/);
   assert.doesNotMatch(out, /candidate is awaiting assembly|assembled checks remain pending/);
+  assert.match(out, /separate observer, without inspecting the tests, replay script or expected answers/);
+  assert.match(out, /synthetic S-900 fixture records: 0 met, 1 not met, 5 unknown/);
+  assert.match(out, /not evidence of automatic detection or broader benefit/);
   assert.match(out, /S-001 returned 0 met, 6 not met, 2 unknown/);
   assert.match(out, /S-003 it returned 0 met, 8 not met, 0 unknown/);
   assert.match(out, /required owner and root intervention/);
   assert.match(out, /not evidence of a fully autonomous end-to-end learning cycle/);
   assert.ok(out.includes(repairEvidence.checker.report));
+  assert.match(repairEvidence.checker.report, /blob\/1c9516722a22157e1f78d2eccd9d445f5ae2018e\//);
   assert.ok(out.includes(repairEvidence.checker.source));
   assert.ok(out.includes(repairEvidence.checker.assemblySource));
   assert.ok(out.includes(repairEvidence.checker.recoveryPR));

@@ -5,7 +5,7 @@ const comparison = `${record}/research/IMPROVEMENT-shared-skills-delivery-2026-1
 const documentation = `${record}/feedback/REPORT-runbook-target-failure-2026-11-02.md`;
 const firstAttempt = "https://github.com/KaydenClark/Agentic-Management-System/blob/dcad9c47d572e7ed51d2a1a6db50b3c1cbce45d8/workbench/feedback/REPORT-shared-skills-attempt-1-2026-11-02.md";
 const pruningAttempt = `${firstAttempt}#separate-pruning-skill-suite`;
-const checkerReport = "https://github.com/KaydenClark/Agentic-Management-System/blob/6512ac54c96f0259ce1810fd9c8c5cd29f7c2d90/workbench/feedback/coherence/CHECKER-REPAIR-2026-11-02.md";
+const checkerReport = "https://github.com/KaydenClark/Agentic-Management-System/blob/1c9516722a22157e1f78d2eccd9d445f5ae2018e/workbench/feedback/coherence/CHECKER-REPAIR-2026-11-02.md";
 const checkerRecord = "https://github.com/KaydenClark/Agentic-Management-System/blob/045476eb68cd8419b9697202b6118aad362593bb/workbench/landmarks/LMK-004-rsi-loop-during-build/specs/S-013-coherence-checks/tasks/TK-001V/TASK.md";
 
 export const repairEvidence = {

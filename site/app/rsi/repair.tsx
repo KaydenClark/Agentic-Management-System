@@ -33,6 +33,12 @@ export function RepairEvidence() {
           recovery candidate passed hygiene after that separate control change.
         </p>
         <p>
+          A separate observer, without inspecting the tests, replay script or expected answers, ran the checker on synthetic
+          S-900 fixture records: 0 met, 1 not met, 5 unknown, with no false <code>met</code>. The missing and unmerged
+          references were routed to S-013. This is an independent synthetic observation, not evidence of automatic detection
+          or broader benefit; the <a href={evidence.checker.report}>maintained report</a> records its method and limits.
+        </p>
+        <p>
           Fresh Luna CLI use on S-001 returned 0 met, 6 not met, 2 unknown; on S-003 it returned 0 met, 8 not met,
           0 unknown. This is later real use of the checker, not evidence of missing historical behavior or a Spec verdict.
           Automatic skill discovery and other hosts remain unverified. The original false report remains historical evidence;
