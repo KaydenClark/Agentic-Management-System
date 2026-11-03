@@ -2,14 +2,24 @@
 
 ## Get oriented
 
-`git status --short --branch`; read [AGENTS](AGENTS.md) and assigned Spec/Task.
+Check repo, branch, remote, locks and dirty state (`git status --short --branch`).
+Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
+[Wiki](workbench/wiki/MEMORY.md), Taskboard, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
+Planning also reads `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031`; copying here needs owner approval.
 
 ## Workflows
 
-`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in Wiki.
+`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in their owning records.
 Run each role at its [model tier](workbench/docs/adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
 
+Use Landmark -> Spec -> Task; at most six active Landmarks. Specs need no slots;
+block Tasks only on required inputs ([ADR-003J](workbench/docs/adr/003J-limit-active-landmarks-not-specs.md)).
+
 ## Test And Build
+
+Diagnose failures; use red/green/refactor when practical. Never weaken checks;
+name unavailable checks. Three strikes: run, failed test, second failed test;
+stop and report both attempts.
 
 ```sh
 uv run pytest
@@ -34,6 +44,25 @@ Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
 [Trial contracts](evals/TRIALS.md); stopped series stay stopped.
 
+## Shared CI VM
+
+Use the [shared CI](workbench/wiki/context-shared-ci.md) VM and AMS runner;
+no GitHub-hosted fallback. Skip forks; inspect before internal execution.
+Keep keys and `AMS_LIVE` out of CI.
+
+## Delivery and recovery
+
+Commit coherent steps with what/why before exit; the [guard](.agents/hooks/require-committed.sh) checks dirt.
+Never commit to main, stash, reset or discard to clean.
+Merge current, checked non-site PRs into main with merge commits.
+Site: feature -> checked dev; only owner merges dev -> main.
+Follow [delivery reporting](workbench/docs/SKILLS.md#delivery).
+
+Recover via Spec/Task and Wiki; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+Handoffs stay local and ignored in `workbench/sessions/handoffs/`; publish Tasks.
+
 ## Clean up
 
-Use shared `land` under [project delivery](AGENTS.md#delivery-and-recovery).
+After Test And Build, use shared `land`: verify remote publication and containment;
+leave no owned dirty work. Keep unfinished work on its Spec Feature branch;
+report blockers and retained items.

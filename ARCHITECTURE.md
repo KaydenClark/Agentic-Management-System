@@ -37,7 +37,7 @@ AMS carries recorded intent into outcomes with AI on a Workbench. This project a
 | Procedures | [Runbook](RUNBOOK.md) -> named skill and tool |
 | Configuration | Manifest and `workbench/tools/` receipt |
 | Feedback | `workbench/feedback/` |
-| Evaluation | [RSI](RUNBOOK.md#rsi-during-website-work), `evals/` |
+| Evaluation | [RSI](workbench/docs/SKILLS.md#rsi-operations), `evals/` |
 | Orientation | [README](README.md) |
 
 ## Routes
