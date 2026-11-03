@@ -185,5 +185,5 @@ Source: Kayden, AMS chat 2026-11-02, model correction during the resumed S-011 o
 Topic: owner-answers-coherence
 Supersedes: JOT-fed30f75-6d6c-4cf6-9460-6c6bd22f69ed (model roles only)
 
-Use no GPT Sol, Terra or Luna models. The comparison models are Claude Opus, Sonnet and Haiku, the same provider as the running agent. Opus takes Sol's implementor role, Sonnet the deciding trial role and Haiku the small-model role; all three run the same held-out cases for a cross-model comparison.
+Use no GPT Sol, Terra or Luna models. The comparison models are Claude Opus, Sonnet and Haiku, the same provider as the running agent. The owner's full pairing is Fable = Astra, Opus = Sol, Sonnet = Terra, Haiku = Luna. Opus takes Sol's implementor role, Sonnet the deciding trial role and Haiku the small-model role; all three run the same held-out cases for a cross-model comparison. Astra had no prior testing role; the orchestrator assigns Fable the independent judge and review role.
 <!-- /jot-entry -->
