@@ -172,5 +172,18 @@ Source: Kayden, AMS chat 2026-11-02, orchestrate request naming skills PRs 59–
 Topic: owner-answers-coherence
 Supersedes: JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689 (evaluator model only)
 
-Kayden resumes S-011 as an RSI loop: improve the eight shared skills in PRs 59–66, fix their recorded failures (this project and GitHub) and prove the result on the AMS website. Each PR qualifies on its own; a PR may merge once fixed with an eligible Stable or Excellent passing review. Claude Sonnet replaces GPT-6.1 Terra as the deciding trial and review model. Small models (Claude Haiku, and GPT Luna where available) get a testing role chosen by the orchestrator. The prior owner-ended attempt and its failures stay preserved; this instruction is not a reset of attempt history.
+Kayden resumes S-011 as an RSI loop: improve the eight shared skills in PRs 59–66, fix their recorded failures (this project and GitHub) and prove the result on the AMS website. Each PR qualifies on its own; a PR may merge once fixed with an eligible Stable or Excellent passing review. Claude Sonnet replaces GPT-6.1 Terra as the deciding trial model. Small models (Claude Haiku, and GPT Luna where available) get a testing role chosen by the orchestrator. The prior owner-ended attempt and its failures stay preserved; this instruction is not a reset of attempt history.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-e72ca481-c2b9-4940-86a0-141f6c261913
+Kind: correction
+State: confirmed
+Recorded: 2026-11-03T04:33:31.000Z
+Author: Kayden
+Source: Kayden, AMS chat 2026-11-02, model correction during the resumed S-011 orchestration
+Topic: owner-answers-coherence
+Supersedes: JOT-fed30f75-6d6c-4cf6-9460-6c6bd22f69ed (model roles only)
+
+Use no GPT Sol, Terra or Luna models. The comparison models are Claude Opus, Sonnet and Haiku, the same provider as the running agent. Opus takes Sol's implementor role, Sonnet the deciding trial role and Haiku the small-model role; all three run the same held-out cases for a cross-model comparison.
 <!-- /jot-entry -->
