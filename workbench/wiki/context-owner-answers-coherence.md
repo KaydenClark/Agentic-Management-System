@@ -198,7 +198,7 @@ Source: Kayden, AMS chat 2026-11-02, answering how ceiling-scoring skills qualif
 Topic: owner-answers-coherence
 Supersedes: none
 
-"If they were sent back because of failures I found, they were no longer excellent, and those are the new tests you need to prove them against and make them excellent or stable at." The qualifying tests for each skill are its owner-found failures, reproduced under their actual conditions; a baseline passing a test that does not reproduce the failure proves nothing. Each candidate must reach Stable or Excellent on those reproduction tests. The first held-out contract (SHA-256 197858fe…), on which the baseline already scored Excellent for seven skills, stays recorded as non-qualifying evidence.
+Kayden ruled that skills sent back because of failures the owner found are no longer excellent, and that those failures are the tests each fix must be proven against and brought to Stable or Excellent on. The qualifying tests for each skill are its owner-found failures, reproduced under their actual conditions; a baseline passing a test that does not reproduce the failure proves nothing. Each candidate must reach Stable or Excellent on those reproduction tests. The first held-out contract (SHA-256 197858fe…), on which the baseline already scored Excellent for seven skills, stays recorded as non-qualifying evidence.
 <!-- /jot-entry -->
 
 <!-- jot-entry -->
