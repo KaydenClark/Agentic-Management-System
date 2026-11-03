@@ -200,3 +200,16 @@ Supersedes: none
 
 AMS is the fixed, optimized and refined LLM_Workbench with RSI: the Workbench is the AMS and the AMS uses it. It accumulates what the owner has built with AI, knows and can prove; the website shows it off. The move from the Workbench Studio (LLM_Workbench, Audit_Workbench, Workbench_Template) trimmed only what research, evidence and proofs did not support or let be tested; it was not a redesign. No proper recovery phase ran: definitions and workflows were not captured here, so fixes already made in LLM_Workbench (for example, Specs carrying no history, AGENTS.md as every-turn universal obligations) were lost. Direction: anything from the Workbench that works and can be used is taken and made sure to be in AMS; do not redesign; do not reuse merely for ease. First step: find what really needs fixing and correcting so AMS is the working LLM_Workbench with RSI.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-7f1423d9-1f8a-4b06-8334-de686807f172
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T03:42:25.385Z
+Author: Kayden
+Source: Kayden, AMS recovery owner correction in chat, 2026-11-02
+Topic: owner-answers-coherence
+Supersedes: none
+
+The owner authorized resuming after identifying another failure: the agent pursued the maximum instead of the established goal despite the earlier recorded issue. Preserve this as a recurrence and repair toward the smallest useful, faithful controls; passing a ceiling is not the goal or evidence of prevention.
+<!-- /jot-entry -->

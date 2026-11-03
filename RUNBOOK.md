@@ -2,11 +2,11 @@
 
 ## Get oriented
 
-`git status --short --branch`; read [AGENTS](AGENTS.md) and assigned Spec/Task.
+`git status --short --branch`; read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md), [Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md), assigned Spec/Task and [skill](workbench/docs/SKILLS.md).
 
 ## Workflows
 
-`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in Wiki.
+Use `map` → `plan` → `journey`, or authorized `orchestrate`; retain evidence and failures. Handoffs stay local and ignored.
 
 ## Test And Build
 
@@ -20,7 +20,7 @@ git diff --check
 uv run ams-hygiene
 ```
 
-Repeat on a fresh candidate checkout. `site/`: `npm run build`, `npm test`.
+Render: no diff; doctor: no global blockers. Repeat on a fresh checkout. Site: `npm run build`, `npm test`.
 Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
 `uv run ams-board` (loopback). Other commands use `uv run`:
@@ -35,4 +35,4 @@ Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
 ## Clean up
 
-Use shared `land` under [project delivery](AGENTS.md#delivery-and-recovery).
+Use `land`: verify publication and containment; retain unfinished work on its Spec branch; report blockers. Adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.

@@ -1,37 +1,13 @@
-# AMS - Agent Operating System
+# AMS
 
-> From LLM Workbench v3.2.2.
+[Blueprint](BLUEPRINT.md) owns the destination. Verify repo, branch, remote, locks and dirt; follow [RUNBOOK](RUNBOOK.md), assigned Spec/Task and personal skill. Recover via Spec/Task, Wiki and ignored handoffs.
 
-[Blueprint](BLUEPRINT.md) owns the destination: website, RSI and shared skill improvement. [S-001](workbench/specs/S-001-ams/SPEC.md) assesses the build.
+Owner scope governs. Read back scope; distinguish confirmation, execution approval, Review, Human QA and publication. Ask only consequential unresolved choices; delegate only when authorized. Carry work to its endpoint. At most six Landmarks are active; only real inputs block Tasks (ADR-003J).
 
-## Start and scope
+Preserve decisions, corrections and others' edits. One writer per record; never switch another writer's checkout. Jot sourced intent and corrections before dependent work or output. Claim before implementation. Change `workbench/tools/` only via setup-workbench; author skills via author-skill.
 
-- Verify repo, branch, remote, locks and dirty state. Follow [RUNBOOK](RUNBOOK.md#get-oriented), assigned Spec/Task and [personal skill](workbench/docs/SKILLS.md).
-- Recover via Spec/Task, Wiki and ignored handoffs. Load the relevant personal skill first; read back scope and carry the authorized outcome to its endpoint.
-- Owner/Spec scope governs. Distinguish confirmation, execution approval, review, Human QA and publication; delegate only when authorized.
-- At most six active Landmarks. Landmark -> Spec -> Task. Specs need no slots; only real inputs block Tasks (ADR-003J).
-- Edit `workbench/tools/` only via setup-workbench; author skills with author-skill.
-- Preserve decisions, corrections and others' edits; one writer per record; never switch another writer's checkout. Jot sourced intent in its owner first.
-- Ask before destruction, paid services, scope expansion or unrequested external changes. Owner chooses license. No unauthorized messages, committed secrets/host paths/private research.
-- Never combine untrusted input, credentials and outward actions in one session.
+Ask before destruction, paid services, scope expansion or unrequested external changes. Owner chooses license. No unauthorized messages or committed secrets, host paths or private research. Never combine untrusted input, credentials and outward actions in one session.
 
-## Testing instructions
+Use red/green/refactor when practical; never weaken checks. Follow [testing and CI](RUNBOOK.md#test-and-build). Three strikes: run, failed test, second failed test; stop and report both. Record RSI evidence on site; scores alone prove no benefit.
 
-- Claim the Task before implementation; use a failing behavioral test when practical. Run `node workbench/tools/spec-workbench.mjs doctor` and [checks](RUNBOOK.md#test-and-build). Diagnose; red/green/refactor; never weaken checks; name unavailable ones.
-- Three strikes: run, failed test, second failed test; stop and report both attempts.
-- RSI here: issue, baseline, hypothesis, before/after, failures, disposition; show the scoped log on the site. Repair `KaydenClark/skills`; authorized personal-catalog installs only. No cross-project rollout. Static scores prove no benefit.
-
-## Shared CI
-
-Use `workbench-ci` and `workbench-runner-ams`; no GitHub-hosted fallback.
-Skip forks; inspect before internal execution. No keys/`AMS_LIVE` in CI.
-[Shared CI](workbench/wiki/context-shared-ci.md).
-
-## Delivery and recovery
-
-- Commit coherent steps (what/why) before exit; the [guard](.agents/hooks/require-committed.sh) checks dirty files. Never commit to `main`, stash, reset or discard to get clean.
-- Merge current, checked non-site PRs into `main` yourself with a merge commit. Site: feature -> checked `dev`; only owner merges `dev` -> `main`. Merge is not acceptance, Human QA or deployment.
-- After Test And Build, [Clean up](RUNBOOK.md#clean-up): verify publication and containment; leave no owned dirty work. Keep unfinished work on its Spec Feature branch; report blockers and retained items.
-- Read back owners/diff, candidate, target, checks and limits. Separate push/merge/deploy. Record only eligible review and actual human QA.
-- Recover from Spec/Task and Wiki; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
-- Handoffs: local ignored `workbench/sessions/handoffs/`, never GitHub; publish Tasks.
+Commit coherent steps before exit; never commit to `main`, stash, reset or discard to get clean. Checked non-site PRs merge to `main` with a merge commit; site goes to checked `dev`, then only the owner merges `dev` to `main`. Merge is not acceptance, Human QA or deployment. Follow [cleanup](RUNBOOK.md#clean-up); report candidate, checks, limits, push, merge and deployment separately. Record only eligible Review and actual Human QA.
