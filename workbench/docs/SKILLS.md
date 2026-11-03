@@ -51,3 +51,7 @@ invocation remain setup gaps. A path check is not host activation.
 The project controls own branch targets, required review, Human QA and publication.
 An implementor's QA is not independent review. Setup, a successful check, a pushed
 branch or a PR never grants permission to merge main or deploy.
+
+## RSI operations
+
+Record issue, baseline, hypothesis, before/after, failures and disposition; show the scoped log on the website. Repair shared skills in `KaydenClark/skills` through author-skill. Install into the personal catalog only with authorization. Do not roll out to other projects. A score or record alone proves no behavioral benefit.

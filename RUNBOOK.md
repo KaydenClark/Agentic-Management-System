@@ -2,7 +2,7 @@
 
 ## Get oriented
 
-`git status --short --branch`; read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md), [Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md), assigned Spec/Task and [skill](workbench/docs/SKILLS.md).
+Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md), [Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md), assigned Spec/Task and [skill](workbench/docs/SKILLS.md).
 
 ## Workflows
 
@@ -20,7 +20,7 @@ git diff --check
 uv run ams-hygiene
 ```
 
-Render: no diff; doctor: no global blockers. Repeat on a fresh checkout. Site: `npm run build`, `npm test`.
+[Shared CI](workbench/wiki/context-shared-ci.md) owns runner, fork and secret rules. Render: no diff; doctor: no global blockers. Repeat on a fresh checkout. Site: `npm run build`, `npm test`.
 Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
 `uv run ams-board` (loopback). Other commands use `uv run`:
