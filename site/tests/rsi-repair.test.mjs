@@ -86,6 +86,12 @@ test('RSI page introduces itself before repair evidence and trial charts', async
     'page title must precede repair evidence, followed by trial charts');
 });
 
+test('RSI repair evidence heading covers tool repair and earlier skill delivery work', () => {
+  const out = html();
+  assert.match(out, /id="repair-title">Project tools and shared-skill repair evidence</);
+  assert.match(out, /bounded checker repair to AMS project tooling alongside earlier shared-skill delivery attempts/);
+});
+
 test('checker repair evidence shows the sourced false-met case and bounded disposition', () => {
   const out = html();
   assert.match(out, /false <code>met<\/code>/);
@@ -94,11 +100,20 @@ test('checker repair evidence shows the sourced false-met case and bounded dispo
   assert.match(out, /33 focused checks passed/);
   assert.match(out, /809 passed, 5 skipped, 1 failed/);
   assert.match(out, /inherited AGENTS\.md length check/);
+  assert.match(out, /not a checker assertion/);
+  assert.match(out, /included in recovery assembly/);
+  assert.match(out, /Task is closed/);
+  assert.match(out, /Current combined recovery checks and review status/);
+  assert.match(out, /recovery PR 139/);
+  assert.doesNotMatch(out, /candidate is awaiting assembly|assembled checks remain pending/);
   assert.match(out, /S-001 returned 0 met, 6 not met, 2 unknown/);
   assert.match(out, /S-003 it returned 0 met, 8 not met, 0 unknown/);
   assert.match(out, /required owner and root intervention/);
   assert.match(out, /not evidence of a fully autonomous end-to-end learning cycle/);
   assert.ok(out.includes(repairEvidence.checker.report));
+  assert.ok(out.includes(repairEvidence.checker.source));
+  assert.ok(out.includes(repairEvidence.checker.assemblySource));
+  assert.ok(out.includes(repairEvidence.checker.recoveryPR));
   assert.ok(out.includes(repairEvidence.checker.baselineSource));
   assert.ok(out.includes(repairEvidence.checker.fixtureSource));
   assert.ok(out.includes(repairEvidence.checker.candidateSource));
