@@ -8,6 +8,7 @@ import { seriesViews } from "./data";
 import { loadRsiData } from "./supabase";
 import { RsiView } from "./view";
 import { RepairEvidence } from "./repair";
+import { RoundTwoEvidence } from "./round-two";
 
 export const metadata: Metadata = {
   title: "RSI results | Agentic Management System",
@@ -22,6 +23,7 @@ export default async function RsiPage() {
   if (!loaded.ok) console.warn(`/rsi: results could not be loaded (${loaded.reason})`);
   return (
     <RsiView views={seriesViews(loaded.data)} unavailable={!loaded.ok} readAt={loaded.readAt}>
+      <RoundTwoEvidence />
       <RepairEvidence />
     </RsiView>
   );

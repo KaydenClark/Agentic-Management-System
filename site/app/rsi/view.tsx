@@ -259,7 +259,7 @@ export function RsiView({ views, unavailable, readAt = null, children }: { views
         ) : (
           <p className="lede">
             RSI is recursive self-improvement: compare a bounded change on real work and keep only supported improvements.
-            Recorded development comparisons appear first; behavioral trial results follow. No sample or placeholder data is shown.
+            Recorded shared-skill repair results and development comparisons appear first; behavioral trial results follow. No sample or placeholder data is shown.
           </p>
         )}
       </header>
