@@ -1,14 +1,11 @@
 """S-013 TK-002 (ADR-001F): up-to-Spec report for one Spec at one commit.
 
 Read-only; needs only `git`. For each acceptance criterion:
-  met      - line is checked AND its `Evidence:` clause names a commit SHA in the
-             checked commit's history, or a path present at that commit
-             (Markdown links resolve from the Spec's folder, code paths from root);
-  unknown  - line is checked but no evidence resolves (a claim without proof);
+  unknown  - line is checked; behavior has not been verified by this tool;
   not met  - line is unchecked.
-`Check:` and `Must fail:` text is planned verification, never evidence.
-Done Tasks whose Destination names the criterion are listed as context only;
-they do not make a criterion met (the line itself must link its evidence).
+Resolved `Evidence:` paths and ancestor commits are reported as references, not
+behavioral verification. `Check:` and `Must fail:` text is planned verification,
+never evidence. Related Tasks are context only and do not establish acceptance.
 
 Run: uv run python -m ams.coherence.up_to_spec S-004 [--commit REF] [--write PATH]
 """
@@ -117,7 +114,7 @@ def check_spec(spec_id: str, repo: str = ".", commit: str = "HEAD") -> dict:
             continue
         name, checked = m.group("name").strip(), m.group("mark") != " "
         evidence = _evidence(repo, sha, m.group("rest"), posixpath.dirname(spec_path)) if checked else []
-        status = "not met" if not checked else ("met" if evidence else "unknown")
+        status = "unknown" if checked else "not met"
         related = [{"id": t["id"], "status": t["status"], "proof": t["proof"]}
                    for t in tasks if name in t["destinations"]]
         criteria.append({"name": name, "checked": checked, "status": status,
@@ -147,8 +144,8 @@ def render_report(r: dict) -> str:
         "|---|---|---|---|",
         *rows,
         "",
-        "Met requires a checked line whose `Evidence:` clause names a SHA or path that resolves at the commit. "
-        "Checked without resolvable evidence is unknown; unchecked is not met. Task status never makes a line met.",
+        "Resolved references show only path presence or commit ancestry, not behavioral verification. "
+        "Checked criteria are unknown; unchecked criteria are not met. Related Tasks are context only.",
         "",
     ])
 

@@ -24,7 +24,7 @@ before finishing. This router links the articles and live owners; it never
 duplicates Task state.
 
 - [Wiki definition and maintenance rules](SCHEMA.md#purpose-and-ownership) - purpose, ownership, metadata and article maintenance.
-- [Runbook operation loop](../../RUNBOOK.md#preserve-knowledge-as-it-happens) - when to read and update existing articles.
+- [Jot method](../docs/SKILLS.md) - when to read and update existing articles.
 
 - [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — detection, feedback consumption, visible learning and later-use proof; planning only.
 - [Shared skills refocus](context-skills-refocus.md) — confirmed jobs, composition, prerequisites, attribution and the Prepare-only boundary; links the AMS preparation-bypass failure.

@@ -3,16 +3,18 @@
 **Task ID:** TK-001S
 **Spec ID:** S-003
 **Slice:** Visitors can comfortably read text across the website
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation
 **Planned verification:** Compare representative page screenshots before/after at the same viewport and zoom, including small labels and long content; check both themes and 375px. Run focused typography/reflow checks and site build.
+**Claimed by:** s003-frontend
+**Current claimant:** s003-frontend
 
 ## Authority and inputs
 
-[Approved five-item owner readback](../../../../../../wiki/context-website-presentation.md#jot-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458), AMS website feedback chat, 2026-11-02. Preparation only: this record grants no execution, claim, deployment or dev-to-main promotion authority. A ready record describes available inputs; the next agent needs its implementation assignment. No completion or Human QA is recorded.
+[Approved five-item owner readback](../../../../../../wiki/context-website-presentation.md#jot-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458), AMS website feedback chat, 2026-11-02. Execution is authorized by the [S-003 orchestration assignment](../../../../../../wiki/context-website-presentation.md#jot-4adf0b91-665d-4abb-8644-4835b40e905a). Complete a checked feature PR into dev; Human QA and owner-only dev-to-main promotion remain separate.
 
-Source recovery baseline: c8cd5ee (planning checkout). Recover the current parent Spec, relevant decisions and current `origin/dev` implementation before coding; this baseline is not evidence of the deployed website. The additional website-only example-link feedback is pending its individual readback; do not invent an exemption for GitHub sources or silently treat the old source-link requirement as a new owner decision.
+Source recovery baseline: c8cd5ee (planning checkout). Recover the current parent Spec, relevant decisions and current `origin/dev` implementation before coding; this baseline is not evidence of the deployed website. The confirmed website-only material/link rule is assigned to TK-002B (JOT-09260032). Preserve provenance and useful on-site material; coordinate shared-file changes serially.
 
 ## Assignment
 
@@ -31,3 +33,13 @@ For implementation, branch from current `origin/dev`, target a checked feature P
 ## Hand-back
 
 Return the candidate/PR, observable result, checks actually run, screenshots where relevant and remaining gaps to S-003. No implementation is performed by this planning change.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s003-website-completion | 9f81ba1bbab436b085ee528e1e6b54f6ffc3569e | ahead 0 behind 0 | 3 | Source9f81ba1: initial production build and211 site tests passed before the reflow repair. First failed verification: 200-percent text scaling at375px overflowed6 route/theme cases. Proposed wrapping and zero-minimum track repair built successfully but was not reverified. Second failed verification: rebuilding while the full browser suite still read .next invalidated asset requests and produced default styles; suite stopped. Three-strike STOP; no final browser pass or merge readiness. | site/README.md records typography scale; Task retains both failures and unverified repair | Owner-authorized retry needed: finish one production build, freeze it until all browser/reflow checks finish, then evaluate acceptance. Current source is pushed; no Task close, merge, deployment, independent Review or Human QA. Separate root baseline pytest passed811 with4 skipped; hygiene/layout passed before site publication. | 29c194332aa5d1ddaa68e795ea40a6db8fe3768856f7d98c00c0f4e9178accde |
+
+## Current continuation
+
+The later bounded corrective run TK-002A met the inherited behavior and records its actual checks. This original failed run and receipt remain unchanged; native incomplete-run retirement is unavailable. Follow TK-002A and the parent Spec for current delivery, rather than repeating the historical retry instruction.

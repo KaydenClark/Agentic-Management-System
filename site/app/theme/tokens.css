@@ -131,16 +131,17 @@
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
-  --text-body: 16px; /* canvas page body */
-  --text-ui: 15px; /* buttons */
-  --text-nav: 14px; /* top-bar links */
-  --text-small: 13px; /* eyebrows, pills, footer */
-  --text-brand: 26px; /* header wordmark */
-  --text-h2: 34px; /* section headings */
-  --text-h1: 48px; /* page title */
-  --leading-body: 1.55;
+  --text-body: 1.125rem; /* 18px at the default root size; prose */
+  --text-ui: 1.0625rem; /* 17px; buttons */
+  --text-nav: 1rem; /* 16px; navigation */
+  --text-small: 0.9375rem; /* 15px; labels, captions and sources */
+  --text-brand: 1.875rem; /* 30px; header wordmark and diagram titles */
+  --text-h2: 2.25rem; /* 36px; section headings */
+  --text-h3: 1.4375rem; /* 23px; sub-section headings */
+  --text-h1: clamp(2.25rem, 6vw, 3.25rem); /* 36–52px; titles reflow on narrow screens */
+  --leading-body: 1.65;
   --leading-tight: 1;
-  --leading-heading: 1.1;
+  --leading-heading: 1.15;
   --tracking-eyebrow: 0.08em;
 
   /* Spacing, named by size in px. */
@@ -168,38 +169,57 @@
   --control-min-height: 44px;
   --icon-size: 16px;
   --content-basis: 320px;
-  --measure: 68ch;
   --page-min-height: 100vh;
 
   /* Page container (owner feedback 11/01/2026): the header, <main> and the
      footer share one centred column, so the page content lines up with the
-     header's edge. --container-wide is for wide pages (the coming Grill Board
-     page); apply it with .container-wide. */
-  --container: 960px;
+     header's edge. The column is a reading width (a 736px content box), and
+     every block in <main> fills it, so text, cards and the header share both
+     edges. --container-wide is for wide pages (the coming Grill Board page);
+     apply it with .container-wide. */
+  --container: 784px;
   --container-wide: 1280px;
   --page-gutter: clamp(16px, 4vw, 24px);
 
-  /* Top bar: one row (title, links, toggle) where it fits. */
-  --topnav-order: 0;
-  --topnav-flex: 1 1 auto;
-  --brand-flex: 0 1 auto;
+  /* Top bar: title over its tagline and the theme toggle on the first row,
+     the reading-order links stretched across the row below. */
+  --text-tagline: 0.875rem; /* 14px; the header tagline under the wordmark */
+  --brand-gap: 2px; /* wordmark to tagline */
+  --layer-header: 10;
+  --layer-skip: 20;
+  --header-nav-height: max(var(--control-min-height), calc(var(--text-nav) * var(--leading-body) + var(--space-8) * 2 + var(--border-width) * 2));
+  /* Conservative no-script clearance includes room for a native scrollbar.
+     Header.tsx replaces it with the measured height after hydration. */
+  --header-fallback: calc(var(--header-nav-height) + var(--space-12) * 2 + var(--space-20) + var(--border-width));
 
   /* /start diagrams and toy. */
   --node-basis: 112px; /* a lifecycle node's minimum width */
   --stop-basis: 56px; /* a toy track stop's minimum width */
   --dot-size: 10px; /* a holder dot */
   --dot-size-live: 14px; /* the dot of the stage the work is on */
-  --hub-size: 300px; /* the What the AMS is picture */
+  --hub-size: 20rem; /* the What the AMS is picture */
   --ring-width: 3; /* the loop ring's stroke, in picture units */
   --motion-quick: 0.2s; /* a stage change; none under reduced motion */
+  --dot-scale-live: 1.4; /* --dot-size-live over --dot-size, as a transform so the label below never moves */
+
+  /* Press feedback on buttons: a slight shrink while held, eased out so it
+     answers at once. No transition under reduced motion. */
+  --motion-press: 160ms;
+  --press-scale: 0.97;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* /skills wiki. */
+  --text-h1-skill: clamp(2rem, 7vw, var(--text-h1)); /* an article's title, the skill name: --text-h1 at most */
+  --text-h2-section: 1.875rem; /* 30px; an article's section headings */
+  --text-code: 0.92em; /* inline code, relative to its text */
+  --step-size: 28px; /* a main-flow step number on the index */
+  --target-min: 24px; /* smallest link target (WCAG 2.2 target size) */
+  --rule-width: 4px; /* the request blockquote's leading rule */
 }
 
-/* Narrow screens: title and theme toggle share the first row of the top bar,
-   the reading-order links take their own row below and wrap. */
-@media (max-width: 880px) {
+/* Narrow screens put the scrollable navigation below the two controls. */
+@media (max-width: 959px) {
   :root {
-    --topnav-order: 2;
-    --topnav-flex: 1 1 100%;
-    --brand-flex: 1 1 0;
+    --header-fallback: calc(var(--control-min-height) + var(--space-6) + var(--header-nav-height) + var(--space-12) * 2 + var(--space-20) + var(--border-width));
   }
 }

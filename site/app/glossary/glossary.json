@@ -1,0 +1,126 @@
+{
+  "intro": "Shared AMS terms; [Blueprint](BLUEPRINT.md) owns the destination.",
+  "sections": [
+    {
+      "heading": "Language",
+      "groups": [
+        {
+          "heading": "AMS",
+          "id": "group-ams",
+          "note": "",
+          "terms": [
+            {
+              "term": "AMS",
+              "id": "ams",
+              "definition": "A reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. Its methods can be packaged for anyone to reuse; this project adds RSI to improve them through actual work."
+            },
+            {
+              "term": "RSI loop",
+              "id": "rsi-loop",
+              "definition": "Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record proves no improvement."
+            },
+            {
+              "term": "Alignment assessment",
+              "id": "alignment-assessment",
+              "definition": "Application of approved Alignment Check r1 to a named candidate and scope over three assessment runs."
+            },
+            {
+              "term": "Alignment Score",
+              "id": "alignment-score",
+              "definition": "The percentage of passed applicable checks pooled across the three assessment runs; distinct from fitness level and acceptance."
+            },
+            {
+              "term": "Fitness level",
+              "id": "fitness-level",
+              "definition": "The r1 classification: Excellent at three passing runs, Stable at two, Functional at one and Broken at none; any Critical failure overrides the count to Broken."
+            },
+            {
+              "term": "Improvement attempt",
+              "id": "improvement-attempt",
+              "definition": "One assessed version of an improvement candidate; each candidate gets at most three, excluding baseline."
+            },
+            {
+              "term": "Workbench",
+              "id": "workbench",
+              "definition": "An agentic management system that brings people, agents, project records, artifacts and tools together to carry intent into outcomes."
+            },
+            {
+              "term": "Intent",
+              "id": "intent",
+              "definition": "What the owner wants, with reasons, boundaries and corrections. Retain whether confirmed or unresolved."
+            }
+          ]
+        },
+        {
+          "heading": "Records",
+          "id": "group-records",
+          "note": "",
+          "terms": [
+            {
+              "term": "Implementation Task",
+              "id": "implementation-task",
+              "definition": "A bounded assigned slice under a Spec, owning execution state and proof."
+            },
+            {
+              "term": "Evaluation task",
+              "id": "evaluation-task",
+              "definition": "A repeatable test case; one attempt at it is a trial. Neither is an implementation assignment."
+            },
+            {
+              "term": "Evidence audit",
+              "id": "evidence-audit",
+              "definition": "A maintained assessment of claims against dated, candidate-specific evidence, keeping reassessment history."
+            },
+            {
+              "term": "Improvement record",
+              "id": "improvement-record",
+              "definition": "The link from an observed problem through hypothesis and comparison to an actual disposition and later-use check."
+            },
+            {
+              "term": "Review receipt",
+              "id": "review-receipt",
+              "definition": "An actual assessment of a named candidate and scope, recording reviewer involvement, findings and limits."
+            },
+            {
+              "term": "Human QA receipt",
+              "id": "human-qa-receipt",
+              "definition": "Sourced human judgment of the named experience or candidate. Agent checks cannot supply it."
+            }
+          ]
+        },
+        {
+          "heading": "Feedback dispositions",
+          "id": "group-feedback-dispositions",
+          "note": "A disposition describes how a finding was handled and grants no execution or release authority; without an established one, keep it pending and name the missing owner or evidence.",
+          "terms": [
+            {
+              "term": "diagnostic",
+              "id": "diagnostic",
+              "definition": "Names the diagnostic that makes the condition visible and whether it is implemented or proposed."
+            },
+            {
+              "term": "test",
+              "id": "test",
+              "definition": "Names the test that detects the condition, with its actual result or implementation gap."
+            },
+            {
+              "term": "repaired",
+              "id": "repaired",
+              "definition": "Names the implementing revision and its verification. Later-use benefit remains a separate claim."
+            },
+            {
+              "term": "declined",
+              "id": "declined",
+              "definition": "Names the actual decision source and reason for declining the proposed action."
+            },
+            {
+              "term": "accepted-open",
+              "id": "accepted-open",
+              "definition": "Names the actual acceptance of follow-up work and its owning Spec; the problem remains open."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

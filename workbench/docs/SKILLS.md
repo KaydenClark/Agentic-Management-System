@@ -3,6 +3,7 @@
 The shared personal catalog owns the methods; project skills are extensions.
 Read the installed personal skill and its reached references before the operation.
 The manifest and this project's controls bind paths, authority and delivery.
+Run each role at its [model tier](adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
 
 ## Changes to the shared catalog
 
@@ -37,7 +38,7 @@ From the project root, inspect with
 `node workbench/tools/spec-workbench.mjs doctor`, `next --json` and `show SPEC_ID`.
 Use the actual claim/receipt/close interface under current authority; never edit
 around a refusal. Regenerate TASKBOARD with `render`. It projects Spec/Task truth.
-Tool receipts guard managed bytes; explicit updates and backups belong to setup.
+Tool receipts guard managed bytes; edit `workbench/tools/` only via setup-workbench and author skills via author-skill. Explicit updates and backups belong to setup.
 
 ## Ownership
 
@@ -49,5 +50,9 @@ invocation remain setup gaps. A path check is not host activation.
 ## Delivery
 
 The project controls own branch targets, required review, Human QA and publication.
-An implementor's QA is not independent review. Setup, a successful check, a pushed
+Read back owners, diff, candidate, target, checks and limits; report push, merge and deployment separately. Record only eligible Review and actual Human QA. An implementor's QA is not independent review. Setup, a successful check, a pushed
 branch or a PR never grants permission to merge main or deploy.
+
+## RSI operations
+
+Record issue, baseline, hypothesis, before/after, failures and disposition; show the scoped log on the website. Repair shared skills in `KaydenClark/skills` through author-skill. Install into the personal catalog only with authorization. Do not roll out to other projects. A score or record alone proves no behavioral benefit.

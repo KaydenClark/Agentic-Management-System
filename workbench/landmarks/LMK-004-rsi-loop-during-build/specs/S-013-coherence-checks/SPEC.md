@@ -5,7 +5,7 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-03
 **Catalog description:** Checks that keep the AMS coherent: up to Spec, skills pinned and in sync, `dev` measured against `main`, and independent Spec review.
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
@@ -26,7 +26,7 @@ An earlier Workbench let its development trunk run thousands of commits ahead of
 
 ## Current Verified State
 
-No criterion is checked off.
+Independent review returned candidate `b7efbaba15baa354eafbc92b91a352ae54d94c71` for incomplete legacy accounting and control routes; [TK-001X](tasks/TK-001X/TASK.md) owns the correction. No criterion is checked off. The bounded dev recovery and its verification are recorded in [TK-001U](tasks/TK-001U/TASK.md); this does not complete detection or the learning cycle.
 
 - **Drift measured:** the drift check and report exist ([TK-001 receipt](tasks/TK-001/TASK.md#receipt)); the Grill Board item on breach is blocked ([TK-005](tasks/TK-005/TASK.md)).
 - **Up to Spec:** the check and an S-004 report exist ([TK-002 receipt](tasks/TK-002/TASK.md#receipt)).
@@ -118,4 +118,4 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+The original 2026-11-02 mapping stopped before implementation. Subsequent owner direction authorizes a bounded recovery and repair toward the loop; this does not establish completion of TK-001D. Earlier campaign stops and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).

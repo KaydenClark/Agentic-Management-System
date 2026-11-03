@@ -20,6 +20,8 @@ last_verified: 2026-11-02
 
 The website explains and demonstrates AMS. Visitors come for understanding; it is not a live control panel. [S-003](../landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md) owns the shell and orientation. [S-007](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/SPEC.md) owns RSI evidence presentation. These Specs own their destinations; this article preserves context and grants no implementation or release authority.
 
+For RSI, the [approved correction](#jot-cf0db5e8-89b7-4766-85d7-1f101bfc3aaa) requires visible real-evidence charts and useful supporting information on the website. Omit irrelevant material and GitHub exits; retain source identity, failures and evidence limits. Implementation is authorized for this correction; other website feedback and production promotion retain their own boundaries.
+
 ## RSI proof during website development
 
 Confirmed by Kayden in chat, 2026-11-02; the [sourced correction](#jot-052e2b9a-85fc-4813-bad1-6039aa017f9c) preserves the intent. This AMS project develops and proves shared skill improvements through the website build. Workflow and process issues found during that work feed the RSI loop: record the issue and baseline, repair the owning skills, compare before and after here, log the evidence and disposition, and display the RSI log on the website. Retain failures, regressions and unknowns; an issue report or merged repair alone proves no improvement.
@@ -109,6 +111,57 @@ Supersedes: none
 Paraphrased owner decision: Quickstart is folded into Start here as one page at /start; there is no separate /quickstart page. That page tells readers to use the setup-workbench skill to set up a Workbench. The reading route through the tour stays; the page does not replay setup commands or become an installation guide. Effect: S-003 Orientation content and the Route criterion restate this; S-003 TK-003's quickstart page and fresh-clone replay need reconciling before implementation resumes.
 <!-- /jot-entry -->
 
+## Start-page correction — 2026-11-02
+
+Kayden requested reconciliation of main's reusable intent-to-outcome definition
+into dev, preserving newer site work, and correction of the claim that RSI is
+empty. The correction retains dev's skills diagram and integrated Quickstart,
+uses owner roles, and describes the existing RSI repair checks, failures and gaps
+as development evidence that does not establish demonstrated improvement.
+This correction does not establish measured benefit, deployed-page verification
+or owner Human QA.
+
+## Live dev follow-up — 2026-11-02
+
+Owner-authorized browser inspection of dev ce39c6a confirmed the Start wording
+and working toy advance. Home, Why and the generated glossary still used the
+older personal-system framing. The correction carries main's Home/glossary
+meaning into dev, aligns Why, and updates How it works to acknowledge RSI repair
+evidence without claiming improvement. The real Spec/Task example is pinned to
+ce39c6a, which contains the described records and receipts; later record moves
+must not rewrite that historical account. This also repairs the mutable-example
+source mismatch recorded by the owner-assistant's source inspection.
+
+The RSI title now precedes its repair evidence and trial charts. These are site
+corrections, not Spec acceptance, owner Human QA or demonstrated benefit.
+Kayden subsequently authorized both license application and a current-source
+refresh of the skills wiki; the retry below records that work.
+
+## Authorized retry — 2026-11-02
+
+The immutable-source check now selects only the historical example and requires
+its distinct Spec and two Task links. Its negative controls accept a contextual
+moving link outside the example and reject one inside. The focused check passes.
+The MIT file is populated under the recorded decision and explicit owner request;
+About describes that file. Non-site license/report delivery uses PR #137 to main;
+site changes use PR #136 to dev.
+
+The 39 skills articles now name published catalog commit
+`fb7ad23c963e183b930b23bc5fdf4d309dff292a`, checked against remote main. The source
+comparison included referenced methods and setup assets, not just SKILL.md.
+Affected articles describe Spec history on the Wiki history page. The handoff
+article distinguishes the unchanged published method from AMS's local-only note
+rule; unfinished repair candidates remain unfinished. A Git archive made from
+that exact commit supplied the source-copy check: 39 articles, zero findings;
+the checker itself skipped Git HEAD comparison because the archive has no .git.
+This is source inspection and documentation checking, not skill activation or
+behavioral benefit evidence.
+
+One stale-output failure recurred during the retry: built-article tests were
+invoked after the source pin changed but before rebuilding. After a completed
+build, all 206 site tests passed. The incident report must retain that recurrence;
+recording preventive steps did not itself prevent it. No owner Human QA claimed.
+
 <!-- jot-entry -->
 ### JOT-052e2b9a-85fc-4813-bad1-6039aa017f9c
 Kind: intent
@@ -180,3 +233,125 @@ Five approved feedback Tasks were prepared under S-003 (TK-001P through TK-001T)
 ### Owner-authorized size repair and publication retry
 
 Kayden explicitly authorized pushing `docs/website-feedback-tasks`, opening its PR, repairing the size issue and merging after checks pass. The Spec was shortened to 7,997 characters without dropping its required subjects or changing the 8,000-character budget. Hygiene, layout, decision-record and whitespace checks pass. The earlier failures remain historical evidence; merge still requires passing checks on the candidate. The website-only link readback remains pending and has no Task; this publication approval does not confirm that readback or implement the website.
+
+
+## Checker evidence presentation — 2026-11-02
+
+S-007/TK-001W presents the bounded checker repair, observations and remaining limits on `/rsi`, linked to the immutable safe report. Site source `77ed4478ee8294f3f4cbd38e270c1514245ed170` was assembled at `1b07f1e72cc4419ad017af3fe0f76fc7f1e8fc9e`. The worker reported a passing build, 209 tests including 10 focused checks, and desktop inspection. Root inspected the actual build at 375px with a 360px document and no horizontal overflow; the console showed a favicon 404 and stylesheet preload warnings. An earlier page-hash link regression failed and was repaired. These observations do not prove owner Human QA, deployment, behavioral benefit or the complete learning cycle. See the [Task](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-001W/TASK.md) and [PR 141](https://github.com/KaydenClark/Agentic-Management-System/pull/141).
+
+<!-- jot-entry -->
+### JOT-9203891f-d937-480d-8d08-83bcf77eddd8
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T05:27:28.327Z
+Author: Kayden
+Source: Kayden, RSI Results feedback and scope answer in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+The RSI Results page must visibly chart relevant real results and present the useful explanation and supporting evidence on the website. Material that is not relevant enough to present there should be omitted; readers must not be sent to GitHub. This settles the RSI-page portion of the earlier website-only feedback without treating other pages as approved work. Kayden explicitly chose: Read back and prepare the task, rather than implement the page correction now. Prepare one bounded S-007 task covering chart visibility, on-site evidence and removal of GitHub exits from the RSI reader experience, including shared chrome where it supplies those exits. Preserve provenance, honest empty/unavailable states and the distinction between audits, development observations and demonstrated improvement. No website implementation, task claim, campaign, deployment or dev-to-main promotion is authorized by this preparation.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-d795477b-63fe-4264-8ca9-7ba15e5d4470
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T05:28:10.350Z
+Author: Kayden
+Source: Kayden, explicit readback-before-plan correction in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: JOT-9203891f-d937-480d-8d08-83bcf77eddd8
+
+Kayden explicitly requires the readback before planning. Stop at the proposed readback; no Task or Spec change until it is reviewed. The preceding entry records the RSI feedback and intended preparation scope, not approval of an agent-written readback, task breakdown or shared-footer design. No Task, implementation or deployment has been performed.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-cf0db5e8-89b7-4766-85d7-1f101bfc3aaa
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T05:33:14.467Z
+Author: Kayden
+Source: Kayden, approval of RSI readback and website implementation in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: JOT-d795477b-63fe-4264-8ca9-7ba15e5d4470
+
+Kayden confirmed the readback and explicitly authorized fixing the website now. Implement visible charts of real RSI evidence, keep relevant explanation and supporting information on the website, omit irrelevant material, and remove GitHub links from the RSI reader experience. The readback-only hold is released for this correction. Preserve honest empty/unavailable states, source identity and the distinction between development observations, audit scores and demonstrated improvement. This does not authorize new trial campaigns, skill installation or owner-only dev-to-main site promotion.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-75b4c558-de1c-4025-a6ab-8851d4c5448a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T05:50:45.123Z
+Author: Kayden
+Source: Kayden, explicit publication answer in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden explicitly answered Publish and merge into dev to the request to push the committed RSI correction to KaydenClark/Agentic-Management-System, open its PR and merge once checked. This releases the automatic-review publication blocker for that payload and feature branch. Production main stays unchanged; no dev-to-main promotion is authorized.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-4adf0b91-665d-4abb-8644-4835b40e905a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:17:13.071Z
+Author: Kayden
+Source: Kayden, S-003 orchestration and carry instruction in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden assigns S-003 to orchestration using appropriate frontend web development skills and carry through completion. This releases preparation-only execution holds for the five confirmed presentation Tasks TK-001P through TK-001T: coherent orientation, persistent navigation, visual glossary, readable typography and visible Grill Board palette. Execute serially with one writer for shared site files, inspect the assembled destination and deliver checked site PRs into dev. Preserve unresolved website-only-link feedback outside the separately approved RSI scope. Human QA, whole-Spec acceptance and owner-only dev-to-main promotion remain distinct. No new model campaigns, paid services or shared-skill installation are authorized.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-09260032-786b-47fb-8c71-1d7c4f387bb2
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:25:07.680Z
+Author: Kayden
+Source: Kayden, explicit confirmation of S-003 website-only material readback in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: JOT-78d8b232-f2c6-4697-ab8c-9e25f60760ba
+
+Kayden confirms and authorizes implementation across S-003: website examples and supporting material are presented on the website, with irrelevant material omitted, instead of sending visitors to GitHub. Visitors should understand and assess AMS without leaving the site. Preserve source and revision identity, including the deployed SHA visibly as text; apply this to source and footer links as well. This confirms the previously pending cross-S-003 link readback and supersedes its unresolved state. Implement within checked feature-to-dev delivery; Human QA and owner-only production promotion remain separate. This answer does not itself authorize a retry of the stopped typography verification.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-d161d980-cc09-430b-9207-cabfb5daf703
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:26:00.107Z
+Author: Kayden
+Source: Kayden, corrective-run authorization for draft PR146 in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden explicitly authorizes a corrective run after the S-003 typography three-strike stop and directs continuation. Finish one production build, freeze it until all browser/reflow checks complete, repair remaining scoped defects and continue S-003. Preserve both failures and prior incomplete run. Checked delivery targets dev; this grants no Human QA, production promotion, new trials or shared-skill installation.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-40afcae9-af5c-4573-8ddb-afcdfea99ac0
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:59:28.766Z
+Author: Kayden
+Source: Kayden, orientation corrective-run authorization in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden explicitly authorizes correction of the stopped orientation Task in draft PR147 and continuation of S-003. Correct the new alias checker to be independent of HTML attribute order while retaining negative controls, finish one build, verify the full site suite and affected rendered experience, then continue checked site delivery to dev. Preserve the two failed attempts209/214 and211/214 and their source. No Human QA, production promotion or shared-skill change is implied.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8f52b5d8-13f7-4428-8cee-035352c0cd1a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T07:44:21.595Z
+Author: Kayden
+Source: Kayden, explicit navigation focus-correction authorization in AMS chat, 2026-11-03
+Topic: website-presentation
+Supersedes: none
+
+Kayden authorizes only the bounded navigation focus correction after draft PR148 stopped. Establish why phone keyboard focus leaves links partly clipped, guarantee full focus visibility and verify the80case matrix and affected browser checks before checked dev delivery. Preserve both failed attempts and exact geometry. This grants no blanket permission for future corrective runs or weakening checks, and no Human QA or production promotion. The earlier S-003 assignment remains the source for other already-approved Tasks; any later three-strike stop still needs its own authorization.
+<!-- /jot-entry -->
