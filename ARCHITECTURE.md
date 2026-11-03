@@ -13,7 +13,7 @@ AMS carries intent into outcomes with AI and improves its methods through RSI. [
 | Scope | Owner request, AGENTS, assigned Spec/Task |
 | Destination | Blueprint; [purpose](workbench/wiki/context-ams-purpose.md) explains |
 | Requirements and proof | Spec; Task owns execution and receipt; Landmark owns direction |
-| Decisions | `workbench/docs/adr/`, `ddr/`; use `adr.mjs list` |
+| Decisions | `workbench/docs/adr/`, `workbench/docs/ddr/`; use `adr.mjs list` |
 | Language and knowledge | [Glossary](GLOSSARY.md); [Wiki](workbench/wiki/MEMORY.md) via jot |
 | Work view | [Taskboard](TASKBOARD.md), rendered from records |
 | Methods and operation | [SKILLS](workbench/docs/SKILLS.md), [Runbook](RUNBOOK.md) |

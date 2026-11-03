@@ -10,7 +10,7 @@ source_paths:
   - workbench/manifest.json
   - workbench/tools/.workbench-tools.json
   - workbench/research/template-inventory.md
-last_verified: 2026-11-01
+last_verified: 2026-11-02
 ---
 
 # Workbench adoption
