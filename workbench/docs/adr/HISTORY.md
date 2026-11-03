@@ -49,7 +49,7 @@
 | [001O](001O-links-and-grep-before-any-vector-index.md) | Links and grep before any vector index | accepted | 2026-11-01 | ARCHITECTURE.md |
 | [001P](001P-continuity-is-proven-by-a-fresh-recipient-trial.md) | Continuity is proven by a fresh-recipient trial | accepted | 2026-11-01 | AGENTS.md, evals |
 | [001Q](001Q-temporary-notes-are-reconciled-and-deleted.md) | Temporary notes are reconciled and deleted | accepted | 2026-11-01 | AGENTS.md |
-| [001R](001R-a-handoff-is-a-short-live-file.md) | A handoff is a short live file | accepted | 2026-11-01 | RUNBOOK.md |
+| [001R](archive/001R-a-handoff-is-a-short-live-file.md) | A handoff is a short live file | superseded | 2026-11-01 | RUNBOOK.md |
 | [001S](001S-everything-a-session-needs-is-committed.md) | Everything a session needs is committed | accepted | 2026-11-01 | AGENTS.md, .agents/skills |
 | [001T](001T-size-tasks-to-one-session-and-record-tokens.md) | Size Tasks to one session and record tokens | accepted | 2026-11-01 | workbench/specs, supabase |
 | [001U](001U-capture-a-decision-before-the-output-that-depends-on-it.md) | Capture a decision before the output that depends on it | accepted | 2026-11-01 | AGENTS.md |
@@ -84,7 +84,7 @@
 | [002X](002X-next-js-front-end-python-backends-node-only-as-tooling.md) | Next.js front end, Python backends, Node only as tooling | accepted | 2026-11-01 | ARCHITECTURE.md, site, pyproject.toml |
 | [002Y](archive/002Y-supabase-holds-the-rsi-data-and-a-python-writer-keeps-it-current.md) | Supabase holds the RSI data and a Python writer keeps it current | superseded | 2026-11-01 | supabase |
 | [002Z](002Z-three-orchestrators-split-the-work-by-risk.md) | Three orchestrators split the work by risk | accepted | 2026-11-01 | AGENTS.md, RUNBOOK.md |
-| [003A](003A-implementors-run-on-opus-or-sonnet.md) | Implementors run on Opus or Sonnet | accepted | 2026-11-01 | AGENTS.md |
+| [003A](archive/003A-implementors-run-on-opus-or-sonnet.md) | Implementors run on Opus or Sonnet | superseded | 2026-11-01 | AGENTS.md |
 | [003B](003B-the-dev-site-is-visible-only-to-the-owner-claude-and-codex.md) | The dev site is visible only to the owner, Claude and Codex | accepted | 2026-11-01 | site |
 | [003C](003C-the-supabase-project-and-its-read-only-baseline.md) | The Supabase project and its read-only baseline | accepted | 2026-11-01 | supabase |
 | [003D](003D-python-3-14-5-pinned-with-uv.md) | Python 3.14.5 pinned with uv | accepted | 2026-11-01 | .python-version, pyproject.toml |
@@ -94,3 +94,5 @@
 | [003H](003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md) | Supabase holds the RSI data and the service key stays local | accepted | 2026-11-01 | supabase |
 | [003I](003I-only-main-dev-and-site-branches-deploy-to-vercel.md) | Only main, dev and site branches deploy to Vercel | accepted | 2026-11-01 | site/vercel.json |
 | [003J](003J-limit-active-landmarks-not-specs.md) | Limit active Landmarks, not Specs | accepted | 2026-11-01 | AGENTS.md, workbench/specs/S-001-ams/SPEC.md |
+| [003K](003K-model-tiers-pair-claude-and-codex-models.md) | Model tiers pair Claude and Codex models | accepted | 2026-11-02 | workbench/docs/SKILLS.md |
+| [003L](003L-a-handoff-is-a-short-local-ignored-file.md) | A handoff is a short local ignored file | accepted | 2026-11-03 | AGENTS.md |

@@ -3,6 +3,7 @@
 The shared personal catalog owns the methods; project skills are extensions.
 Read the installed personal skill and its reached references before the operation.
 The manifest and this project's controls bind paths, authority and delivery.
+Run each role at its [model tier](adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
 
 ## Changes to the shared catalog
 

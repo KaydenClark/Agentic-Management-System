@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** TK-002: independently reprune PR58 checkpoint6f2277e, then author same-case retest before final candidate trials. Handoff only this run.
+**Next gate:** Round two merged setup-workbench, orchestrate, handoff and journey ([history](../../../../wiki/history/S-011.md#resumed-per-pr-rsi-round-two)); land, prune-artifact, writing-for-agents and author-skill await owner direction; personal install pending; RSI page update to dev.
 
 ## Intent and authority
 
@@ -26,10 +26,9 @@ Misnamed branches hide unfinished work; published handoffs expose session contex
 
 ## Current Verified State
 
-- Controls now distinguish personal installation and local handoffs. RUNBOOK1193 retains commands; [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) preserves pruning failures.
-- Private PR58 checkpoint `6f2277eaaffef2d6640860d6d257bf101107c10c`: unreviewed partial pruning draft, not merge/install eligible. Full author baseline6e4c06d is retained.
-- [Current evidence and continuation](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md#continuation-checkpoint-later-contexts-no-reset): workflow v2b attempt two Broken28/78; pruning attempt two not run after independent-pruner capacity failure. Native-checker PASS, useful benefit, installation and later use remain unestablished.
-- PR128 merged the truthful first-context RSI snapshot into dev12f8963; later outcomes are not yet graphed. Protected deployment HTML/live-store readback remains unavailable.
+- Controls distinguish personal installation and local handoffs; [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) preserves pruning failures.
+- PRs59–66 target `main`. The [owner-ended attempt](../../../../wiki/history/S-011.md#owner-ended-failed-qualification) at candidatefbf581fe FAILED: size cores met, Runbook2845/ship481 output goals missed, three rounds incomplete; [prior failures](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md) remain. No qualification or benefit is established.
+- PR128 put the first-context RSI snapshot on dev12f8963; later outcomes are not yet graphed.
 
 History: [S-011 history](../../../../wiki/history/S-011.md).
 
@@ -88,15 +87,15 @@ AGENTS/RUNBOOK own routing and installation authority; Wiki preserves correction
 
 ## Review and Human QA
 
-Separate-context skill review and Terra 6.1 assessment; site page Human QA remains the owner's judgment. Agent checks are not Human QA.
+Mid-tier three-run trials and separate-context Frontier review (ADR-003K); site page Human QA remains the owner's judgment. Agent checks are not Human QA.
 
 ## Completion Result
 
-Pending.
+The prior attempt FAILED qualification and stays preserved; the owner resumed per-PR repair and qualification. Task and destination acceptance remain incomplete.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-Qualification, benefit, installation/use and protected deployment readback remain unestablished. TK-002/TK-003 are ready and unclaimed; handoff supplies no lifecycle completion.
+Qualification, benefit, installation/use and protected deployment readback remain unestablished. TK-002 is in progress with source-author; TK-003 still waits on it. Draft PR publication supplies no lifecycle completion.
 
 [S-000A](../S-000A-skills-refocus/SPEC.md) separately maps the catalog-wide refocus. Preserve this Spec's repair, source drafts, attempts and merge/install gates; coordination of shared helpers grants no qualification or rollout authority.
 
