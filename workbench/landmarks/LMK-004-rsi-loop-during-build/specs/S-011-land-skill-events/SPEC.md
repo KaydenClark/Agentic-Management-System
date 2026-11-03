@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** Owner resumed the RSI loop ([JOT-fed30f75](../../../../wiki/context-owner-answers-coherence.md#jot-fed30f75-6d6c-4cf6-9460-6c6bd22f69ed)): per-PR repair and Sonnet three-run qualification; merge each eligible Stable/Excellent PR; show results on dev.
+**Next gate:** Owner resumed the RSI loop ([JOT-fed30f75](../../../../wiki/context-owner-answers-coherence.md#jot-fed30f75-6d6c-4cf6-9460-6c6bd22f69ed)): per-PR repair and Mid-tier three-run qualification; merge each eligible Stable/Excellent PR; show results on dev.
 
 ## Intent and authority
 
@@ -87,7 +87,7 @@ AGENTS/RUNBOOK own routing and installation authority; Wiki preserves correction
 
 ## Review and Human QA
 
-Separate-context skill review and Claude Sonnet assessment (replaced Terra 6.1 by owner); site page Human QA remains the owner's judgment. Agent checks are not Human QA.
+Mid-tier three-run trials and separate-context Frontier review (ADR-003K); site page Human QA remains the owner's judgment. Agent checks are not Human QA.
 
 ## Completion Result
 

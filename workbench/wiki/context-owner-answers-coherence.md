@@ -172,7 +172,7 @@ Source: Kayden, AMS chat 2026-11-02, orchestrate request naming skills PRs 59–
 Topic: owner-answers-coherence
 Supersedes: JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689 (evaluator model only)
 
-Kayden resumes S-011 as an RSI loop: improve the eight shared skills in PRs 59–66, fix their recorded failures (this project and GitHub) and prove the result on the AMS website. Each PR qualifies on its own; a PR may merge once fixed with an eligible Stable or Excellent passing review. Claude Sonnet replaces GPT-6.1 Terra as the deciding trial model. Small models (Claude Haiku, and GPT Luna where available) get a testing role chosen by the orchestrator. The prior owner-ended attempt and its failures stay preserved; this instruction is not a reset of attempt history.
+Kayden resumes S-011 as an RSI loop: improve the eight shared skills in PRs 59–66, fix their recorded failures (this project and GitHub) and prove the result on the AMS website. Each PR qualifies on its own; a PR may merge once fixed with an eligible Stable or Excellent passing review. Models follow the tier pairing in ADR-003K: the Mid tier runs the deciding trials and the Small tier gets a testing role chosen by the orchestrator. The prior owner-ended attempt and its failures stay preserved; this instruction is not a reset of attempt history.
 <!-- /jot-entry -->
 
 <!-- jot-entry -->
@@ -185,5 +185,5 @@ Source: Kayden, AMS chat 2026-11-02, model correction during the resumed S-011 o
 Topic: owner-answers-coherence
 Supersedes: JOT-fed30f75-6d6c-4cf6-9460-6c6bd22f69ed (model roles only)
 
-Use no GPT Sol, Terra or Luna models. The comparison models are Claude Opus, Sonnet and Haiku, the same provider as the running agent. The owner's full pairing is Fable = Astra, Opus = Sol, Sonnet = Terra, Haiku = Luna. Opus takes Sol's implementor role, Sonnet the deciding trial role and Haiku the small-model role; all three run the same held-out cases for a cross-model comparison. Astra had no prior testing role; the orchestrator assigns Fable the independent judge and review role.
+Name model roles by tier, with each agent running a tier on its own harness's model: Frontier Fable/Astra, High Opus/Sol, Mid Sonnet/Terra, Small Haiku/Luna ([ADR-003K](../docs/adr/003K-model-tiers-pair-claude-and-codex-models.md)). This Claude-run orchestration uses Claude models: High implements, Mid runs the deciding trials, High and Small run the same held-out cases for a cross-model comparison, and Frontier judges and reviews. Claude and Codex share the system without one provider's model names standing in for the other's.
 <!-- /jot-entry -->
