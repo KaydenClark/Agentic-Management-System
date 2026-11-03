@@ -1,0 +1,218 @@
+/* Live text diagrams keep their reading order when rails turn vertical. */
+.page,
+.section,
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+.page { container-type: inline-size; gap: var(--space-48); }
+.section {
+  border-top: var(--border-width) solid var(--line);
+  padding-top: var(--space-24);
+}
+.section h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: var(--text-h3);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-heading);
+}
+.index {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-24);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.index a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min-height);
+}
+.diagram,
+.miniDiagram {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+.diagram {
+  padding: var(--space-24);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--surface);
+}
+.diagram figcaption,
+.miniDiagram figcaption {
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+.diagram figcaption {
+  border-top: var(--border-width) solid var(--line);
+  padding-top: var(--space-18);
+}
+.flow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--node-basis), 1fr));
+  align-items: stretch;
+  gap: var(--space-24);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.flow li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-8);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-control);
+  text-align: center;
+  min-width: 0;
+}
+.flowArrow {
+  position: absolute;
+  left: 100%;
+  width: var(--space-24);
+  height: var(--space-24);
+  color: var(--ink);
+}
+.flow span,
+.branches span,
+.origin span {
+  display: block;
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+.flow a,
+.origin a,
+.branches a {
+  font-weight: var(--weight-semibold);
+  text-underline-offset: var(--focus-offset);
+}
+.origin {
+  position: relative;
+  align-self: center;
+  padding: var(--space-12) var(--space-18);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-control);
+  text-align: center;
+  font-weight: var(--weight-semibold);
+}
+.origin::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  height: var(--space-24);
+  border-left: var(--border-width) solid var(--line-strong);
+}
+.branches,
+.trials {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.branches li,
+.trials li {
+  position: relative;
+  border-top: var(--border-width) solid var(--line-strong);
+  padding: var(--space-24) var(--space-8) 0;
+  text-align: center;
+}
+.branchArrow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--space-24);
+  height: var(--space-24);
+  transform: translateX(-50%) rotate(90deg);
+}
+.dispositions {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  font-size: var(--text-small);
+}
+.definitions { margin: 0; }
+.definitions > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: var(--space-18);
+  padding-block: var(--space-18);
+  border-bottom: var(--border-width) solid var(--line);
+}
+.definitions dt { font-weight: var(--weight-semibold); }
+.definitions dd { margin: 0; }
+.definitions dt:target {
+  text-decoration: underline;
+  text-underline-offset: var(--focus-offset);
+}
+.comparison {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24);
+}
+.comparison > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-18);
+}
+.comparison > div + div {
+  border-left: var(--border-width) solid var(--line);
+  padding-left: var(--space-24);
+}
+.comparison .flow { grid-template-columns: minmax(0, 1fr); }
+.comparison .flowArrow {
+  left: 50%;
+  top: 100%;
+  transform: translateX(-50%) rotate(90deg);
+}
+.comparison .definitions > div {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8);
+}
+.context,
+.source {
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+.context a {
+  display: inline-block;
+  padding-block: var(--space-8);
+}
+@container (max-width: 40em) {
+  .flow,
+  .comparison,
+  .definitions > div { grid-template-columns: minmax(0, 1fr); }
+  .flowArrow {
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+  .definitions > div { gap: var(--space-8); }
+  .comparison > div + div {
+    border-left: none;
+    border-top: var(--border-width) solid var(--line);
+    padding-left: 0;
+    padding-top: var(--space-24);
+  }
+  .origin { align-self: stretch; }
+  .origin::after { left: 0; }
+  .branches { grid-template-columns: minmax(0, 1fr); }
+  .branches li {
+    border-top: none;
+    border-left: var(--border-width) solid var(--line-strong);
+    padding: var(--space-12) var(--space-24);
+    text-align: left;
+  }
+  .branches .branchArrow {
+    top: var(--space-12);
+    left: 0;
+    transform: none;
+  }
+}
