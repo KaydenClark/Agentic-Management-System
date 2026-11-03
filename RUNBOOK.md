@@ -46,7 +46,7 @@ Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
 ## Shared CI VM
 
-Use the [shared CI](workbench/wiki/context-shared-ci.md) VM and AMS runner;
+Use [shared CI](workbench/wiki/context-shared-ci.md) VM `workbench-ci` and AMS runner;
 no GitHub-hosted fallback. Skip forks; inspect before internal execution.
 Keep keys and `AMS_LIVE` out of CI.
 
