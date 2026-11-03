@@ -1,7 +1,7 @@
 ---
 name: code-review
 summary: Reviews a branch, PR or working changes on two axes, coding standards and the accepted request, reporting each separately and fixing nothing.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's code-review skill](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/code-review), MIT License, keeping Kayden Clark's separate Standards and Spec reports and adding pinned review targets, source recovery from Workbench records and honest handling of unavailable review. Smell baseline after Martin Fowler's Refactoring.
 credit_license: MIT

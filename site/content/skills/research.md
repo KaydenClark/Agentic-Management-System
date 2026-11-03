@@ -1,7 +1,7 @@
 ---
 name: research
 summary: Answer one decision-shaping question in a written paper with stable finding IDs, sources, checks and stated limits that decisions and Specs can cite.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from Kayden Clark's research collection, R-0001 and finding records, retaining primary-source investigation from [Matt Pocock's Research skill](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/research), MIT License.
 credit_license: MIT

@@ -1,7 +1,7 @@
 ---
 name: journey
 summary: Takes one assigned Task from first read to a pushed, checked candidate, with honest answers on whether it can merge and whether the Task is done.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Derived from Kayden Clark's Workbench Journey and adapted from [Matt Pocock's Implement skill](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/implement), MIT License, reshaped around Task QA and submission boundaries. It is not an unchanged import.
 credit_license: MIT

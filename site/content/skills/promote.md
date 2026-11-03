@@ -1,7 +1,7 @@
 ---
 name: promote
 summary: Moves selected, supported claims from working notes into the one durable record that should own them, checks the result, and publishes only as far as you asked.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: original
 credit_text: Original to Kayden Clark.
 ---

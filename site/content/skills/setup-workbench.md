@@ -1,7 +1,7 @@
 ---
 name: setup-workbench
 summary: Builds a project's Workbench, adopts an existing repo into one, updates an installed one, or checks it read-only, while keeping the work already there.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Workbench setup procedures and runtime by Kayden Clark, MIT License. The bundled runtime also carries files derived from [Matt Pocock's skills](https://github.com/mattpocock/skills), MIT License.
 credit_license: MIT
@@ -9,7 +9,7 @@ credit_license: MIT
 
 ## What it does
 
-Setup-workbench prepares a project so the rest of the catalog has somewhere to work. That somewhere is a **Workbench**: project files that tell agents the rules, hold the queue of work and explain how to verify it. A **Spec** records one capability with its acceptance criteria and evidence. A **Task** is a bounded slice of a Spec that one agent run can finish.
+Setup-workbench prepares a project so the rest of the catalog has somewhere to work. That somewhere is a **Workbench**: project files that tell agents the rules, hold the queue of work and explain how to verify it. A **Spec** defines a capability and the conditions for accepting it; dated evidence belongs in that Spec’s Wiki history page. A **Task** is a bounded slice of a Spec that one agent run can finish.
 
 A finished Workbench is more than a folder scaffold. It has eight filled root files (`README.md`, `AGENTS.md`, `CLAUDE.md`, `BLUEPRINT.md`, `ARCHITECTURE.md`, `GLOSSARY.md`, `RUNBOOK.md` and a generated `TASKBOARD.md`), routed knowledge, a feedback log, Spec and Task records, and working lifecycle tools.
 

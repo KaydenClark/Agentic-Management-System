@@ -121,5 +121,30 @@ source mismatch recorded by the owner-assistant's source inspection.
 
 The RSI title now precedes its repair evidence and trial charts. These are site
 corrections, not Spec acceptance, owner Human QA or demonstrated benefit.
-License application and refreshing the skills wiki's older catalog snapshot
-remain owner decisions; neither is changed here.
+Kayden subsequently authorized both license application and a current-source
+refresh of the skills wiki; the retry below records that work.
+
+## Authorized retry — 2026-11-02
+
+The immutable-source check now selects only the historical example and requires
+its distinct Spec and two Task links. Its negative controls accept a contextual
+moving link outside the example and reject one inside. The focused check passes.
+The MIT file is populated under the recorded decision and explicit owner request;
+About describes that file. Non-site license/report delivery uses PR #137 to main;
+site changes use PR #136 to dev.
+
+The 39 skills articles now name published catalog commit
+`fb7ad23c963e183b930b23bc5fdf4d309dff292a`, checked against remote main. The source
+comparison included referenced methods and setup assets, not just SKILL.md.
+Affected articles describe Spec history on the Wiki history page. The handoff
+article distinguishes the unchanged published method from AMS's local-only note
+rule; unfinished repair candidates remain unfinished. A Git archive made from
+that exact commit supplied the source-copy check: 39 articles, zero findings;
+the checker itself skipped Git HEAD comparison because the archive has no .git.
+This is source inspection and documentation checking, not skill activation or
+behavioral benefit evidence.
+
+One stale-output failure recurred during the retry: built-article tests were
+invoked after the source pin changed but before rebuilding. After a completed
+build, all 206 site tests passed. The incident report must retain that recurrence;
+recording preventive steps did not itself prevent it. No owner Human QA claimed.

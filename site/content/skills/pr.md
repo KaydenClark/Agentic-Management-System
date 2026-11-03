@@ -1,7 +1,7 @@
 ---
 name: pr
 summary: Writes a pull request body that reviewers can absorb fast, with a small visual, before-and-after evidence and an honest note on how risky the merge is.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's pr skill](https://github.com/mattpocock/skills), MIT License. Its Summary visuals come from the `show-me` skill by [Dex Horthy](https://github.com/dexhorthy) (HumanLayer) and are carried over nearly unchanged. The glossary reference now points at the project's own glossary, and the credits metadata was reformatted.
 credit_license: MIT

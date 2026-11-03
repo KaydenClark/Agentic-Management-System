@@ -1,7 +1,7 @@
 ---
 name: brainstorm
 summary: Test an idea through an interview where each recommendation comes with its strongest opposing case, an alternative and its main risk.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's grilling primitive](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/productivity/grilling), MIT License, with a counterargument lens added by Kayden Clark.
 credit_license: MIT

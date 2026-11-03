@@ -1,7 +1,7 @@
 ---
 name: triage
 summary: Sorts incoming issues and outside pull requests into labeled states, checks each claim against the code, and leaves an agent-ready brief or a reason to stop.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills), MIT License, with the glossary file and the way the tracker is queried changed.
 credit_license: MIT

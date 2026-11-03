@@ -1,7 +1,7 @@
 ---
 name: diagnosing-bugs
 summary: Finds why something is broken by building a small reliable reproduction and proving the root cause, then repairs only if you asked for a fix.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills), MIT License.
 credit_license: MIT

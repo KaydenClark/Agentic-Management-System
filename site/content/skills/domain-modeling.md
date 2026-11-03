@@ -1,7 +1,7 @@
 ---
 name: domain-modeling
 summary: Sharpens your project's vocabulary and concepts by challenging terms, testing edge cases and checking code, then records confirmed definitions in the glossary.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's domain-modeling skill](https://github.com/mattpocock/skills) (MIT License, upstream revision d81f3a183412e71a5b1e84ca21bc1a35eea03a60), with a local decision-record template added. The glossary format file follows upstream, with a short note added above it.
 credit_license: MIT

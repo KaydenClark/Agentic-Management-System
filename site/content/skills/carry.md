@@ -1,7 +1,7 @@
 ---
 name: carry
 summary: Tells your agent to own an objective end to end, answer its own questions from what you already said, and stop only for real blockers.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: original
 credit_text: Original to Kayden Clark.
 ---

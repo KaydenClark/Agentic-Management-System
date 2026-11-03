@@ -1,7 +1,7 @@
 ---
 name: writing-for-agents
 summary: A short method for writing and trimming documents that agents read, such as skills, AGENTS.md files, Specs and Tasks, so each stays small, clear and reviewable.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's writing-for-agents skill](https://github.com/mattpocock/skills/tree/d81f3a183412e71a5b1e84ca21bc1a35eea03a60/skills/productivity/writing-for-agents), MIT License. The compact method in the skill is Kayden Clark's revision, and the skill-mechanics companion adapts upstream guidance to this catalog's actual rules.
 credit_license: MIT

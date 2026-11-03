@@ -107,14 +107,32 @@ test('every GitHub link on a built page names a file that exists in this reposit
   }
 });
 
+function historicalExampleProblems(html) {
+  const section = html.match(/<section\b[^>]*aria-labelledby="example"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+  if (!section) return ['historical example section missing'];
+  const links = repoLinks(section);
+  const expected = ['SPEC.md', 'tasks/TK-001/TASK.md', 'tasks/TK-002/TASK.md'];
+  const problems = [];
+  for (const path of expected) {
+    const link = links.find((l) => l.path.endsWith(`S-003-showcase-site/${path}`));
+    if (!link) problems.push(`missing source: ${path}`);
+    else {
+      if (!/\/blob\/[a-f0-9]{40}\//.test(link.href)) problems.push(`mutable source: ${path}`);
+      if (!link.exists) problems.push(`missing evidence: ${path}`);
+    }
+  }
+  return problems;
+}
+
 test('historical example links stay pinned and resolve in their evidence revision', () => {
   const html = builtPage('how-it-works.html').html;
-  const links = repoLinks(html).filter((l) => /S-003-showcase-site\/(SPEC\.md|tasks\/TK-00[12]\/TASK\.md)$/.test(l.path));
-  assert.ok(links.length >= 3, 'Spec and both Task accounts must retain sources');
-  for (const link of links) {
-    assert.match(link.href, /\/blob\/[a-f0-9]{40}\//, 'historical source must be immutable');
-    assert.ok(link.exists, `missing evidence: ${link.href}`);
-  }
+  assert.deepEqual(historicalExampleProblems(html), []);
+  // A moving contextual source outside the example is valid. Inside the
+  // example the same mutation must still fail the immutable-source contract.
+  const contextual = '<a href="https://github.com/KaydenClark/Agentic-Management-System/blob/dev/workbench/landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md">context</a>';
+  assert.deepEqual(historicalExampleProblems(contextual + html), []);
+  const changed = html.replace(/(<section\b[^>]*aria-labelledby="example"[^>]*>[\s\S]*?)\/blob\/[a-f0-9]{40}\//, '$1/blob/dev/');
+  assert.ok(historicalExampleProblems(changed).some((p) => p.startsWith('mutable source:')));
   const bad = repoLinks('<a href="https://github.com/KaydenClark/Agentic-Management-System/blob/ce39c6a89f92dffaebecb468b367c49ab6577bd8/no-such-record.md">missing</a>');
   assert.equal(bad[0].exists, false);
 });

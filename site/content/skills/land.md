@@ -1,13 +1,15 @@
 ---
 name: land
 summary: Gets finished work safely onto its target branch, fixes what blocks the merge, proves the result, and cleans up with guards.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Combines Kayden Clark's combat-medic Land skill with the Workbench delivery path. Tree verification, worktree provenance, refused-removal handling and explicit-request-only discard are adapted from [obra/superpowers finishing-a-development-branch](https://github.com/obra/superpowers/tree/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/finishing-a-development-branch) by Jesse Vincent, MIT License. That source's fixed option menu and unconditional local merge are not kept.
 credit_license: MIT
 ---
 
 ## What it does
+
+For a Workbench Spec, dated events and corrections are kept on its Wiki history page. The Spec retains its destination and next gate.
 
 `land` carries finished work to the branch it belongs on and proves it arrived. It also repairs what stands in the way: unsaved changes, conflicts, a stale branch, a moved commit, or records that disagree with the code.
 

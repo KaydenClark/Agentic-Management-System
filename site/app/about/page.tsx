@@ -62,9 +62,8 @@ export default function About() {
       <section className={styles.section} aria-labelledby="license">
         <h2 id="license">License</h2>
         <p>
-          The decision is MIT, copyright Kayden Clark, so anyone who reuses the work must keep the credit. Applying
-          the license text is the owner&apos;s step, and the LICENSE file is still empty, so the files themselves
-          do not yet grant that license.
+          This repository uses the MIT License, copyright 2026 Kayden Clark. The license permits reuse and
+          modification under its terms, including keeping its copyright and permission notice.
           <Source path={`${DDR}000R-the-license-is-mit-copyright-kayden-clark.md`}>DDR-000R</Source>
           <Source path="LICENSE">LICENSE</Source>
         </p>

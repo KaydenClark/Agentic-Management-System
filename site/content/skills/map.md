@@ -1,7 +1,7 @@
 ---
 name: map
 summary: Writes the finished result you want as a checkable destination, such as a Spec, so a reviewer can judge the work without having been in the conversation.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's To Spec](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/to-spec) and Kayden Clark's Workbench Map, MIT License, using the project's own destination records and authority instead of automatic tracker activation.
 credit_license: MIT
@@ -21,7 +21,7 @@ The work runs in three moves.
 
 Two habits matter. Every requested requirement must land in acceptance or a named dependency; unfinished work may not quietly become an exclusion. And acceptance includes a plausible wrong result that must fail, so the check can tell success from near-success. Map prefers testing at the highest practical public seam (the outermost entry point a real caller uses), reuses approved testing decisions, and takes any materially new seam choice to the owner.
 
-A new Spec starts with the template's sample Task rows removed, an evidence section that is only ever appended to, and its completion result left pending. Map never records tests or implementation that did not happen. If the code lacks something a newer accepted requirement asks for, that is an implementation gap, not a reason to weaken the destination.
+A new Spec starts with the template's sample Task rows removed, its completion result left pending. Dated closes, decisions on reviews and corrections belong in its Wiki history page, not in the destination. Map never records tests or implementation that did not happen. If the code lacks something a newer accepted requirement asks for, that is an implementation gap, not a reason to weaken the destination.
 
 ## When to use it
 

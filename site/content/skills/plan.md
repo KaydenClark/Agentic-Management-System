@@ -1,13 +1,15 @@
 ---
 name: plan
 summary: Splits an agreed destination into Tasks that each fit one run and cross every layer, with honest dependencies and a start-now list, saved as TASK.md files.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's To Tickets skill](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/to-tickets), MIT License, reshaped for single-run TASK.md records, a generated TASKBOARD, authority and retention rules. It also absorbs the earlier tracer-bullet, to-tasks and to-tickets skills.
 credit_license: MIT
 ---
 
 ## What it does
+
+For a Workbench Spec, dated events and corrections are kept on its Wiki history page. The Spec retains its destination and next gate.
 
 `plan` takes a destination someone has already accepted (a Spec, an issue, a written plan, or a conversation that ended in agreement) and cuts it into **Tasks** an agent can pick up. A **Task** is one assignment sized for a single implementor run: recover the source, build, check, run QA, repair, and report back (the **hand-back**). A **Spec** is the long-lived record of where the work is going and what counts as done. The Spec keeps the goal; a Task is disposable scaffolding. Both live in a **Workbench**, the folder of Specs, Tasks and generated tracker files that the catalog's skills share.
 
