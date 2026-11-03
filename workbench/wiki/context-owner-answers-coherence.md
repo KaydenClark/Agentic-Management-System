@@ -187,3 +187,16 @@ Supersedes: none
 
 Correction: CONTINUE.md (private GPT_OS branch claude/ams-s003-map-20261031) directly opposes how the Workbench works. It cannot be in the AMS environment, should never have been created, and should have been cleaned up when setup-workbench adopted AMS. Continuation goes only through Workbench records (Spec, Task, Wiki, jot) and local ignored session handoffs; the AGENTS.md pointer to CONTINUE.md is removed.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-aba91085-29c1-4777-88a7-e8bc1da63060
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T02:53:57.770Z
+Author: Kayden
+Source: Kayden, owner direction in AMS chat (Claude Code), 2026-11-02
+Topic: owner-answers-coherence
+Supersedes: none
+
+AMS is the fixed, optimized and refined LLM_Workbench with RSI: the Workbench is the AMS and the AMS uses it. It accumulates what the owner has built with AI, knows and can prove; the website shows it off. The move from the Workbench Studio (LLM_Workbench, Audit_Workbench, Workbench_Template) trimmed only what research, evidence and proofs did not support or let be tested; it was not a redesign. No proper recovery phase ran: definitions and workflows were not captured here, so fixes already made in LLM_Workbench (for example, Specs carrying no history, AGENTS.md as every-turn universal obligations) were lost. Direction: anything from the Workbench that works and can be used is taken and made sure to be in AMS; do not redesign; do not reuse merely for ease. First step: find what really needs fixing and correcting so AMS is the working LLM_Workbench with RSI.
+<!-- /jot-entry -->
