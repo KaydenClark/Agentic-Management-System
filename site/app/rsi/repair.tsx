@@ -6,13 +6,51 @@ export function RepairEvidence() {
     <section className={`${styles.page} ${styles.repair}`} data-repair-evidence="" aria-labelledby="repair-title">
       <header className={styles.intro}>
         <p className="eyebrow">Development evidence</p>
-        <h2 id="repair-title">Repairing shared skill delivery</h2>
+        <h2 id="repair-title">Project tools and shared-skill repair evidence</h2>
         <p>
-          Website work exposed recurring branch and cleanup failures, and a handoff procedure that conflicted with
-          local session storage. The repair targets the shared methods, followed by the personal skill catalog used
-          for later website work. This is a snapshot of <a href={evidence.baseline.source}>published evidence</a>.
+          This page records a bounded checker repair to AMS project tooling alongside earlier shared-skill delivery
+          attempts. Each account links to its source records, including the <a href={evidence.baseline.source}>published evidence</a>.
         </p>
       </header>
+      <section className={styles.place} data-checker-repair="" aria-labelledby="checker-repair">
+        <h3 id="checker-repair">A checker that called a file reference proof</h3>
+        <p>
+          The original <a href={evidence.checker.baselineSource}>up-to-Spec checker at <code>{evidence.checker.baseline}</code></a>
+          {" "}reported a checked criterion as false <code>met</code> because its unrelated <code>Evidence:</code> file existed.
+          File presence and commit ancestry do not verify behavior. The repair in <a href={evidence.checker.candidateSource}>
+          candidate <code>{evidence.checker.candidate}</code></a>{" "}reports checked criteria as <code>unknown</code> while
+          retaining resolved references; unchecked criteria remain <code>not met</code>.
+        </p>
+        <p>The closed <a href={evidence.checker.source}>coherence repair Task</a> and its <a href={evidence.checker.report}>maintained safe evidence report</a> record the finding and disposition.</p>
+        <p>
+          On fixture <a href={evidence.checker.fixtureSource}><code>{evidence.checker.fixture}</code></a>, replay changed
+          three false <code>met</code> results to <code>unknown</code>, including an ancestor-only reference, and kept
+          their references. A second unrelated existing file reproduced the same pattern. Missing and unmerged references
+          stayed <code>unknown</code>; the unchecked criterion stayed <code>not met</code>. This recurrence is within the
+          same fixture, not later-use evidence. The <a href={evidence.checker.report}>maintained repair report</a> records
+          33 focused checks passed and a source-suite result of 809 passed, 5 skipped, 1 failed. The failure was an
+          inherited AGENTS.md length check (3215 against a 3000-character ceiling), not a checker assertion. A later
+          recovery candidate passed hygiene after that separate control change.
+        </p>
+        <p>
+          A separate observer, without inspecting the tests, replay script or expected answers, ran the checker on synthetic
+          S-900 fixture records: 0 met, 1 not met, 5 unknown, with no false <code>met</code>. The missing and unmerged
+          references were routed to S-013. This is an independent synthetic observation, not evidence of automatic detection
+          or broader benefit; the <a href={evidence.checker.report}>maintained report</a> records its method and limits.
+        </p>
+        <p>
+          Fresh Luna CLI use on S-001 returned 0 met, 6 not met, 2 unknown; on S-003 it returned 0 met, 8 not met,
+          0 unknown. This is later real use of the checker, not evidence of missing historical behavior or a Spec verdict.
+          Automatic skill discovery and other hosts remain unverified. The original false report remains historical evidence;
+          the checker source is included in recovery assembly <a href={evidence.checker.assemblySource}>
+          <code>{evidence.checker.assembly}</code></a>, and the Task is closed. Current combined recovery checks and
+          review status are tracked in <a href={evidence.checker.recoveryPR}>recovery PR 139</a>. These observations establish
+          no semantic verification, generalized benefit, whole-Spec acceptance, owner QA or completed learning cycle. The
+          broader control-pruning attempt repeated its goal-versus-
+          ceiling failure and required owner and root intervention, so this is not evidence of a fully autonomous end-to-end
+          learning cycle.
+        </p>
+      </section>
       <figure className={styles.place} aria-labelledby="baseline-predicates">
         <figcaption>
           <h3 id="baseline-predicates">Baseline development checks</h3>
