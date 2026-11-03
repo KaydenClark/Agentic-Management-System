@@ -218,3 +218,23 @@ and verifies the resulting candidate and delivery. Keep F-002's whole-AMS
 over-time purpose open for the existing S-007 review, while preserving honest
 bounded evidence and missing proof. No replacement design, metric, test
 campaign, acceptance or release permission is supplied by this observation.
+
+
+#### Delivery reconciliation — 2026-11-03 16:17 UTC
+
+A subsequent canonical GitHub readback supersedes the earlier open-PR state:
+[PR #154](https://github.com/KaydenClark/Agentic-Management-System/pull/154)
+merged at 16:14:57 UTC into dev
+`0d8a8fbd8478194dbf92706b292e40330d075094`, containing candidate
+`088acb924e443aca7b4e20f67607c100f3b58c79`. The three linked review findings
+were posted at 16:15:09 UTC, after the merge, and were still unresolved and
+not outdated at this readback. The merge therefore did not wait for that
+review outcome. No newer corrective source was present on dev.
+
+The round-two charts are now integrated source, not an unmerged candidate.
+The existing parser/provenance/CSS findings also remain in that integrated
+source; passing CI and the merge do not resolve them. Follow their existing
+review identities through a checked correction and verify the resulting
+delivery. The unsupported metadata in main needs its own target-aware
+reconciliation as well. No deployment readback, owner QA, production
+promotion or whole-system improvement is established by this merge.
