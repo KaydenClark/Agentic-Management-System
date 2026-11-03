@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Close TK-002F with verification and documentation proof.
+**Next gate:** TK-002F code is checked; real-request publication was rejected by automatic approval review and remains unperformed.
 
 ## Intent and authority
 
@@ -26,7 +26,7 @@ Priority and Value are how the owner decides what needs attention. Costly questi
 
 ## Current Verified State
 
-- Card mechanics have linked evidence (TK-001 to TK-000J). TK-002F owns the current-queue correction; an empty renderer proves no usable owner queue.
+- Python queue source `c9a8aa0` passes fresh829/6skip and8browser checks ([TK-002F](tasks/TK-002F/TASK.md)). The actual project has0authored questions and6visible preparation issues; real-request publication was rejected by automatic approval review. TK-002F remains open. Earlier card proof is retained in TK-001–TK-000J.
 - Historical pass `4d49bfc` is [unbound at the later candidate](../../../../feedback/coherence/REVIEW-STATUS-S-004-2026-11-02.md); current Review and acceptance remain open.
 - Not met: owner approval and Human QA.
 

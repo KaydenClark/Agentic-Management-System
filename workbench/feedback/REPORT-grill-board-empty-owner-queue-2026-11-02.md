@@ -40,3 +40,7 @@ The inspected LLM_Workbench source at9d5e1f25 has a reusable project component w
 ### Python correction and implementing Task
 
 Kayden reaffirmed Python on 2026-11-03. The backend choice was an unnecessary agent-created hold, not a missing owner decision. TK-002F now implements the reference workflow in the existing Python board. Its scoped tests and delivery records will own the repair evidence; this note does not supply Human QA or formal acceptance.
+
+### Checked implementation and unperformed live posting
+
+Python sourcec9a8aa0 passes a fresh829-test suite (6skips) and8browser checks.20queue cases cover projection, preserved answers, non-decision regrading, explicit holds, stale/dirty/conflicting writes and unavailable sources. The actual readback has0authored questions and6visible preparation issues. Automatic approval review rejected posting the proposed S-004 usability question as an additional workflow item beyond implementation authorization; the command did not run. PR156 carries the checked source into the S-004 feature branch as a draft. TK-002F and this failure stay open pending the real-project readback; no Human QA or repaired disposition is claimed.
