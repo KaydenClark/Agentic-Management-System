@@ -118,7 +118,7 @@ export const CHECKS = {
       const [next] = within(tracked, place, 'data-next-event');
       assert.ok(next, `place ${id} names no next expected event`);
       assert.match(next.text, /next expected event/i, `place ${id} next-event label`);
-      assert.ok(next.inner.some((t) => t.name === 'a' && /^https:\/\//.test(t.attrs.href ?? '')), `place ${id} next event must link its source record`);
+      assert.ok(next.inner.some((t) => t.name === 'a' && (t.attrs.href ?? '').startsWith('#')), `place ${id} next event must link its on-site explanation`);
     }
   },
 

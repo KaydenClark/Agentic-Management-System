@@ -41,7 +41,7 @@ History: [S-007 history](../../../../wiki/history/S-007.md).
 - Results are shown per task and per version; dev and held-out are visibly separate.
 - Each series shows its provenance: provider, model, effort and system version. A model change starts a new series.
 - Regressions, variants, removed versions and fired stop rules are shown.
-- Every number links to its rows. Each row's strength label is shown.
+- Every trial number links to its rows on-site. Each row's strength label is shown. Relevant explanations and evidence stay on the site; omit irrelevant material and GitHub exits. Show real development comparisons visibly without inventing trial data.
 - **Headlines** come only from held-out tasks, with the interval and the baseline. An interval including zero reads as no difference detected at this size.
 - Synthetic or test rows never render.
 
@@ -74,7 +74,7 @@ Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the 
 - [ ] **Build explanation.** A reader can follow sourced build activity into its related results or an explicit statement that no measured result exists. Activity alone is never labeled improvement; explanatory prose is allowed. No separate build-history page is required.
 
 - [ ] **Honest empty state.** With zero rows the page builds, shows each chart place and the "no trials yet" explanation. *Check:* render against an empty fixture. *Must fail:* a hidden section, a sample chart or any number.
-- [ ] **Every number links.** Each rendered number links to its rows. *Check:* a link-coverage test over rendered numbers. *Must fail:* a bare number.
+- [ ] **Every number links.** Each rendered trial number links to its rows on-site. *Check:* link coverage over trial numbers. *Must fail:* a bare number.
 - [ ] **Provenance and series.** Two models never share one trend line. *Must fail:* a model change drawn as a continuation.
 - [ ] **Not only up.** Regressions and variants are marked as such. *Must fail:* a timeline that hides a recorded regression.
 - [ ] **Held-out headlines.** A headline appears only from held-out rows, with its interval and baseline. *Must fail:* a dev-task number as a headline, or an interval including zero shown as improvement.

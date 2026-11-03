@@ -66,8 +66,7 @@ function rowResult(r: RsiResult): string {
   return `scored ${r.score === null ? "unknown" : numeric(r.score, score)}, no pass grade`;
 }
 
-function Row({ row, placeId, runUrl }: { row: RsiResult; placeId: string; runUrl: string | null }) {
-  const href = row.source_url ?? runUrl;
+function Row({ row, placeId }: { row: RsiResult; placeId: string }) {
   const tokens = row.input_tokens !== null && row.output_tokens !== null &&
     Number.isSafeInteger(row.input_tokens) && Number.isSafeInteger(row.output_tokens) &&
     Number.isSafeInteger(row.input_tokens + row.output_tokens)
@@ -76,7 +75,7 @@ function Row({ row, placeId, runUrl }: { row: RsiResult; placeId: string; runUrl
     <li data-row="" data-row-id={String(row.id)} id={`${placeId}-row-${row.id}`} className={styles.row}>
       Row {row.id}: task <code data-label="">{row.task_id}</code>, trial {row.trial}, {rowResult(row)}; cost {row.cost_usd === null ? "unknown" : numeric(row.cost_usd, usd)},{" "}
       tokens {tokens}, turns {row.turns === null ? "unknown" : count.format(row.turns)}. Strength: <span data-strength="" className={styles.strength}>{STRENGTH[row.strength] ?? row.strength}</span>.
-      Source: {href ? <a href={href}>{row.source_kind} {row.source_ref}</a> : <code>{row.source_kind} {row.source_ref}</code>}.
+      Source: <code>{row.source_kind} {row.source_ref}</code>. Grader: <code>{row.grader_version}</code>.
     </li>
   );
 }
@@ -95,7 +94,6 @@ function MarkItem({ mark }: { mark: Mark }) {
 }
 
 function PointItem({ point, rowsBase, placeId }: { point: Point; rowsBase: string; placeId: string }) {
-  const runUrl = (id: number) => point.runs.find((r) => r.id === id)?.source_url ?? null;
   return (
     <li data-point="" data-version={point.version.id} className={styles.point}>
       <p className={styles.version}>
@@ -137,7 +135,7 @@ function PointItem({ point, rowsBase, placeId }: { point: Point; rowsBase: strin
           <p className={styles.rowsTitle}>Rows behind “{countText(c)}”</p>
           <ul>
             {c.rows.map((r) => (
-              <Row key={r.id} row={r} placeId={placeId} runUrl={runUrl(r.run_id)} />
+              <Row key={r.id} row={r} placeId={placeId} />
             ))}
           </ul>
         </div>
@@ -260,10 +258,13 @@ export function RsiView({ views, unavailable, readAt = null, children }: { views
         ) : (
           <p className="lede">
             RSI is recursive self-improvement: compare a bounded change on real work and keep only supported improvements.
-            These charts show stored behavioral trial results, separately from development exercises and audits.
-            No sample or placeholder data is shown.
+            Recorded development comparisons appear first; behavioral trial results follow. No sample or placeholder data is shown.
           </p>
         )}
+      </header>
+      {children}
+      <section className={styles.place} aria-labelledby="reading-results">
+        <h2 id="reading-results">How to read the trial results</h2>
         {unavailable ? (
           <p className={styles.note} data-load-note="">
             Results could not be loaded from the data store. No trial count is inferred from that failed read.
@@ -273,11 +274,19 @@ export function RsiView({ views, unavailable, readAt = null, children }: { views
         ) : null}
         {readAt ? <p className={styles.muted}>Last successful read: <time dateTime={readAt}>{Number.isFinite(Date.parse(readAt)) ? `${readTime.format(new Date(readAt))} UTC` : readAt}</time>.</p> : null}
         <p className={styles.muted}>
-          Colors: this page uses no signal colors yet. A grey dashed frame marks a chart place with nothing in it; a
-          square point marks a regression.
+          Development charts compare recorded checks and document lengths. Trial charts below show pass share;
+          a square point marks a regression. An empty frame contains no trial data.
         </p>
-      </header>
-      {children}
+        <h3 id="held-out-method">Held-out evidence</h3>
+        <p>Held-out tasks are kept outside the work used to choose a change. A headline needs repeated trials,
+          control arms, the prior version and a recorded uncertainty interval. An interval including zero means
+          no difference detected at this size. Development checks and audit scores cannot supply that headline.</p>
+        <h3 id="dev-method">Development comparisons</h3>
+        <p>The noise-floor run repeats the current version on fixed tasks to measure ordinary variation.
+          Its first trial stopped because the grader answer could not be read; a correction comes before further runs.
+          A later comparison must retain the failed row, identify the change, and rerun the candidate beside the
+          current version and controls. A stopped attempt is evidence of a stop, not improvement.</p>
+      </section>
       {SPLITS.map(({ split, title, about }) => (
         <section key={split} className={styles.split} data-split={split} aria-labelledby={`rsi-split-${split}`}>
           <h2 id={`rsi-split-${split}`}>{title}</h2>

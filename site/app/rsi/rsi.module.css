@@ -218,6 +218,25 @@
 .repair code { overflow-wrap: anywhere; white-space: normal; }
 .evidenceBars { list-style: none; padding: 0; display: grid; gap: var(--space-12); }
 .evidenceBars li { overflow-wrap: anywhere; }
-.evidenceTrack { display: block; height: var(--space-8); margin-top: var(--space-4); background: var(--raised); border: var(--border-width) solid var(--line-strong); }
+.evidenceTrack { display: block; height: var(--space-18); margin-top: var(--space-4); background: var(--raised); border: var(--border-width) solid var(--line-strong); }
 .evidenceBar { display: block; height: 100%; background: currentColor; }
 .overBudget { background: var(--heat); }
+
+.comparison { border-top: var(--space-4) solid var(--returned); }
+.comparisonRuns { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-18); }
+.comparisonRuns h4 { margin: 0 0 var(--space-8); }
+.comparisonRow { display: grid; grid-template-columns: calc(var(--space-48) * 2) minmax(0, 1fr) calc(var(--space-48) + var(--space-24)); gap: var(--space-12); align-items: center; padding: var(--space-4) 0; color: var(--ink); text-decoration: none; }
+.comparisonRow:hover, .comparisonRow:focus-visible { text-decoration: underline; }
+.comparisonRow strong { text-align: right; font-variant-numeric: tabular-nums; }
+.comparisonTrack { height: var(--space-24); background: var(--raised); border: var(--border-width) solid var(--line-strong); }
+.comparisonBar { display: block; height: 100%; background: var(--ink); }
+.candidateBar { background: var(--returned); border-block: var(--space-4) double var(--ink); box-sizing: border-box; }
+.evidenceDetails { padding-top: var(--space-12); border-top: var(--border-width) solid var(--line); }
+.evidenceDetails summary { cursor: pointer; font-weight: var(--weight-semibold); }
+.evidenceDetails p { margin-top: var(--space-12); }
+.evidenceTable { border-collapse: collapse; width: 100%; margin-top: var(--space-12); }
+.evidenceTable caption { text-align: left; color: var(--muted); padding-bottom: var(--space-8); }
+.evidenceTable th, .evidenceTable td { text-align: left; padding: var(--space-8); border-bottom: var(--border-width) solid var(--line); }
+@media (max-width: 480px) {
+  .comparisonRow { grid-template-columns: calc(var(--space-48) + var(--space-24)) minmax(0, 1fr) calc(var(--space-48) + var(--space-14)); gap: var(--space-8); font-size: var(--text-small); }
+}
