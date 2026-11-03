@@ -3,12 +3,13 @@
 **Task ID:** TK-001Z
 **Spec ID:** S-007
 **Slice:** Visible real-evidence charts and supporting information on the RSI page
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Feedback loop connection; Every number links; Build explanation
 **Planned verification:** Renderer regressions for visible charts and on-site evidence links; production build and site tests; desktop and 375px browser inspection in both themes; applicable RUNBOOK checks.
 **Claimed by:** codex-rsi-feedback
 **Current claimant:** codex-rsi-feedback
+**Proof:** Source f893f6d; production build and 211 site tests pass; Python 811 passed and 4 skipped with socket permissions; Chromium 1280px and 375px both themes: visible charts, no outbound links or overflow, zero relevant console errors or scoped WCAG findings; data disclosure and theme interactions pass. Source and verification records published on codex/rsi-results-feedback.
 
 ## Authority and inputs
 
@@ -47,3 +48,9 @@ No live database read was verified: this local build lacks the publishable envir
 ## Publication gate
 
 Initially, the source was committed locally and automatic approval review rejected the feature push even after verifying the configured public repository, its owner and push access, and zero hygiene findings; it requires explicit owner approval for public publication separately from implementation. Kayden then explicitly answered Publish and merge into dev. The source and verification records were pushed on codex/rsi-results-feedback at c259d19; the PR will target dev and merge only after its exact-head shared CI passes. No production promotion or live database verification is claimed.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/rsi-results-feedback | f843b009a99113dccd1f292e21e159a99b3926e4 | ahead 0 behind 0 | 0 | Source f893f6d; production build and 211 site tests pass; Python 811 passed and 4 skipped with socket permissions; Chromium 1280px and 375px both themes: visible charts, no outbound links or overflow, zero relevant console errors or scoped WCAG findings; data disclosure and theme interactions pass. Source and verification records published on codex/rsi-results-feedback. | Updated S-007 on-site evidence contract, shared footer contract, approved owner context and TK-001Z verification/limits. | Exact-head shared CI and PR merge to dev follow; live database and protected deployment readback unavailable locally. No production promotion, Human QA or measured RSI benefit claimed.; close attribution: {"agent":"codex-rsi-feedback","claimant":"codex-rsi-feedback","onBehalfOf":null} | f2c772d49d02f2d08acc36f9e93b3f3704cb7eaa2355451b7a7ad1fef9fc46f4 |
