@@ -5,7 +5,7 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-03
 **Catalog description:** Checks that keep the AMS coherent: up to Spec, skills pinned and in sync, `dev` measured against `main`, and independent Spec review.
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
@@ -26,7 +26,7 @@ An earlier Workbench let its development trunk run thousands of commits ahead of
 
 ## Current Verified State
 
-No criterion is checked off.
+Independent review returned candidate `b7efbaba15baa354eafbc92b91a352ae54d94c71` for incomplete legacy accounting and control routes; [TK-001X](tasks/TK-001X/TASK.md) owns the correction. No criterion is checked off. The bounded dev recovery and its verification are recorded in [TK-001U](tasks/TK-001U/TASK.md); this does not complete detection or the learning cycle.
 
 - **Drift measured:** the drift check and report exist ([TK-001 receipt](tasks/TK-001/TASK.md#receipt)); the Grill Board item on breach is blocked ([TK-005](tasks/TK-005/TASK.md)).
 - **Up to Spec:** the check and an S-004 report exist ([TK-002 receipt](tasks/TK-002/TASK.md#receipt)).
@@ -44,6 +44,7 @@ History: [S-013 history](../../../../wiki/history/S-013.md).
 - **`dev` ahead of `main`.** Report commits and days `dev` is ahead of `main`, with a threshold that raises a Grill Board item.
 - **Independent Spec review.** A fresh-context reviewer passes or returns the exact assembled commit against the Spec's conditions; a changed commit needs a fresh review.
 - Reports are committed records; findings are visible, never silently fixed.
+- **Preparation routing.** Detect a large shared-skill or other AMS change proceeding without its Map/Plan or past a Prepare stop. Route the [recorded failure](../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) and recurrence to [S-000A](../S-000A-skills-refocus/SPEC.md) for source repair; check preparation before claiming a reliability improvement. This addition is preparation only.
 
 ## Decisions And Contracts
 
@@ -69,6 +70,9 @@ Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, 
 |---|---|---|---|---|
 
 ## Acceptance Criteria
+
+- [ ] **Feedback loop connection:** Detection closes the reporting gap: an orchestrator exercises acceptance beyond green checks, records an unreported mismatch with source/candidate identity, assigns its existing owner and next action, and preserves recurrence. A planted failure that reaches completion without a finding must fail.
+- [ ] **Prepare boundary:** TK-001D detects and routes a planted missing-Map/Plan or Prepare-stop bypass, including cross-repository skill work, before owner intervention. A document reminder alone fails.
 
 - [ ] **Drift measured.** The report gives commits and days `dev` is ahead of `main` at a named time, and a threshold breach creates a Grill Board item. *Must fail:* a breach with no item.
 - [ ] **Up to Spec.** The report lists each unmet criterion of the checked Spec with evidence. *Must fail:* a criterion reported met with no evidence.
@@ -111,3 +115,7 @@ Pending.
 
 - Supersedes: none
 - Superseded by: none
+
+## Feedback-loop planning boundary
+
+The original 2026-11-02 mapping stopped before implementation. Subsequent owner direction authorizes a bounded recovery and repair toward the loop; this does not establish completion of TK-001D. Earlier campaign stops and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).

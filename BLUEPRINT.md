@@ -1,28 +1,13 @@
 # Agentic Management System - Blueprint
 
-AMS-specific destination, filled from Kayden's 2026-10-31 instruction. This records intent; implementation and outcome claims require evidence.
+AMS is a reusable system of workflows, rules, skills and tools that helps people develop intent with AI and agents carry it into verified outcomes. Shared skills improve through evidence from real work, so learning can help other projects.
 
-## What it is
+This project builds the public website, runs recursive self-improvement (RSI), and improves shared skills. The website explains AMS and presents evidence.
 
-AMS is the system by which Kayden manages agents, workflows, intent capture, skills and the full tool belt he uses to work with AI. It organizes that work into one recursive self-improvement (RSI) loop, repairing the broken Workbench and creating the system on top of it that runs it.
+An orientation tour, skills wiki, governance explanations, flow charts and a demonstration Grill Board explain its methods. The real Grill Board lets the owner answer questions, review work and give feedback locally.
 
-The first loop builds a website that explains and shows AMS. Building the site supplies real work through which the system can expose friction, test improvements and explain the supported results.
+The website shows verified results, beginning with its build: work, workflow failures, skill changes and whether they helped. Each result links its baseline, comparison, evidence and limits. Failed, regressed and inconclusive attempts remain visible; a merge or static score does not prove improvement. Later results retain project, version, context and limits.
 
-## Who it serves
+RSI connects observed problems to bounded changes, comparisons and retention decisions. Intent, decisions and corrections inform later use. Shared skill improvement requires no separate delivery or installation in every project. Use `setup-workbench` for project setup, adoption or substantial Workbench correction.
 
-Kayden uses AMS to direct and understand work with AI. Agents need clear intent, scoped assignments, available methods and recoverable evidence. Website visitors need an understandable account of the system and demonstrations that distinguish intended behavior from verified capability.
-
-## Promised outcomes
-
-- Preserve intent, reasons and corrections from request through delivered outcome.
-- Connect agents, workflows, skills and tools with clear ownership and usable context.
-- Repair demonstrated Workbench failures while building useful capabilities above it.
-- Learn from actual work: capture friction, test bounded improvements, compare outcomes and carry supported learning into the next loop.
-- Explain AMS through a website whose claims link to suitable evidence and whose interactions demonstrate the claimed behavior.
-
-## Non-goals
-
-- Treating a template, dashboard, screenshot or passing structural check as proof of operational reliability.
-- Turning historical research proposals into adopted policy without a current decision.
-- Replacing independently owned personal skills merely because AMS uses them.
-- Publishing private source material or treating website creation as automatic deployment authority.
+Landmarks and Specs describe bounded destinations. Status, plans and proof live in their owners. Keep private material private and publish only safe evidence.

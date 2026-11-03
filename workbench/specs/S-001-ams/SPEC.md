@@ -1,4 +1,4 @@
-# S-001 - The AMS: yardstick for the whole system
+# S-001 - Assessment of the current AMS build
 
 **Spec ID:** S-001
 **Status:** active
@@ -10,15 +10,15 @@
 **Blockers:** none
 **Confirmation:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
-**Next gate:** Complete TK-002.
+**Next gate:** Confirm acceptance criteria and completion result.
 
 ## Intent and authority
 
-The owner wants one "Are we there yet?" Spec, with yes/no and remaining steps. S-001 sits under the Blueprint and assesses the four landmarks; it does not parent them. Their Specs own capabilities. The linked owner correction authorizes S-001 work while those capabilities remain unfinished.
+The Blueprint owns the final project destination. S-001 provides one "Are we there yet?" assessment of the current build, with yes/no and remaining steps against this Spec's criteria. It assesses the four landmarks without parenting them; their Specs own capabilities. The linked owner correction authorizes S-001 work while those capabilities remain unfinished.
 
 ## Outcome
 
-Claude Code and Codex deliver the owner's ideas through a Workbench, personal skills, a local Grill Board and a measured RSI loop. Its first outside product is the presentation website.
+An auditable assessment of the room, shared skills, local Grill Board, RSI loop and presentation website against this Spec's criteria. The website explains AMS and presents verified results; the room improves shared skills already used across projects.
 
 ## Why It Matters
 
@@ -26,9 +26,9 @@ The owner needs one auditable account of what is done and what remains.
 
 ## Current Verified State
 
-- Answer: **No** at `325b422` ([TK-001 assessment](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02)).
-- Met: Room.
-- Not met: Landmarks, Limits, Hygiene, Runtime baseline, Cold start, Owner gates.
+- Answer: **No** ([TK-001 assessment at 325b422](tasks/TK-001/TASK.md#assessment-at-325b422-2026-11-02), updated at `9655f3c`).
+- Met: Room; Limits (`uv run ams-hygiene` reports 0 findings at `9655f3c`, [TK-002](tasks/TK-002/TASK.md)); Cold start ([TK-003 trial](tasks/TK-003/TASK.md#trial-at-9655f3c-2026-11-02), with a shallow-clone claim caveat).
+- Not met: Landmarks, Runtime baseline, Owner gates; Hygiene (the tree and built site are clean at `9655f3c`, but git history still holds the host path and session IDs PR #103 removed).
 - Unknown: Skills pinned.
 - Workbench v3.2.2 is adopted: controls, lanes, Node lifecycle and generated Taskboard.
 - Site code, Supabase migrations and `dev` exist; see child Specs for scoped proof.
@@ -79,11 +79,11 @@ Task records under `tasks/` own these checks; capability work belongs to the lan
 
 - [ ] **Landmarks reached.** Each of LMK-001 to LMK-004 is `reached` with every success check ticked against `main`. *Check:* `show LMK-00N`. *Must fail:* a landmark marked reached while a child Spec's acceptance is unmet.
 - [ ] **Room.** `render` twice is byte-identical; `doctor` has no blocking finding; `CLAUDE.md` is exactly `@AGENTS.md`. *Must fail:* a hand-edited Taskboard.
-- [ ] **Limits.** Every Spec, Task and Landmark is at most 8,000 characters and none is split into parts. *Check:* TK-002. *Must fail:* a `.part-` file or a record over the limit.
+- [x] **Limits.** Every Spec, Task and Landmark is at most 8,000 characters and none is split into parts. *Check:* TK-002. *Must fail:* a `.part-` file or a record over the limit.
 - [ ] **Hygiene.** No host path, credential, private record ID or private trace is in the repository or built site. *Check:* TK-002 on every candidate. *Must fail:* a committed key.
 - [ ] **Skills pinned.** Every RSI run names the skills commit it used. *Must fail:* a run row with no skills pin.
 - [ ] **Runtime baseline.** S-012 reports Python CLI results against the Node baseline on the same tasks. *Must fail:* the Node tools removed before that comparison exists.
-- [ ] **Cold start.** TK-003 passes in a separate session. *Must fail:* a trial run in the building session.
+- [x] **Cold start.** TK-003 passes in a separate session. *Must fail:* a trial run in the building session.
 - [ ] **Owner gates.** The owner's Grill Board approval of every page and the owner's `dev` -> `main` merge are recorded, bound to commits. Never supplied by an agent.
 
 ## RSI and website connection
@@ -102,7 +102,7 @@ To answer "Are we there yet?": name the commit; run each check; report met, not 
 
 ## Documentation Impact
 
-- README and RUNBOOK point here as the yardstick.
+- The Blueprint owns product direction; README and AGENTS link this Spec for the current-build assessment.
 
 ## Review and Human QA
 
@@ -114,8 +114,8 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- Agent-workable: PR #98 with over-limit pruning; TK-003; blocked S-002, S-006, S-007, S-013 Tasks.
-- Owner gates: approve S-005, S-009 to S-012; S-003 TK-003; S-004/S-008 QA and approvals; `dev` -> `main`.
+- Agent-workable: S-002, S-006, S-007 and S-013 Tasks as their inputs land; make `next` warn when a shallow clone hides claim branches (setup-workbench).
+- Owner gates: approve S-005, S-009 to S-012; S-003 TK-003; S-004/S-008 QA and approvals; `dev` -> `main`; any history rewrite for strings PR #103 removed.
 
 ## Supersession
 

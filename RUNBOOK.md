@@ -1,68 +1,24 @@
-# AMS - Runbook
-
-> From LLM Workbench v3.2.2.
+# AMS Runbook
 
 ## Get oriented
 
-Run `git status --short --branch`; preserve others' work. Read [AGENTS](AGENTS.md),
-[Architecture routes](ARCHITECTURE.md#routes), [Glossary](GLOSSARY.md), relevant
-[Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md) and assigned Spec/Task.
-[S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick; load the
-[owning skill](workbench/docs/SKILLS.md).
+Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md), [Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md), assigned Spec/Task and [skill](workbench/docs/SKILLS.md).
 
-## Workflows
-
-Capture sourced intent/corrections with `jot` in the existing Wiki owner;
-requirements belong in the Spec. Use `map`, `plan`, then `journey` for one Task
-or `orchestrate` for authorized coordination. Retain proof/failures. Record
-[Review](workbench/specs/REVIEW-RECEIPT-TEMPLATE.md) and
-[Human QA](workbench/specs/HUMAN-QA-RECEIPT-TEMPLATE.md) only when performed.
-Update owners and render before departure; leave a
-[handoff](workbench/sessions/HANDOFF-TEMPLATE.md) when needed.
-
-For website RSI, connect [feedback](workbench/feedback/REPORT_FORMAT.md),
-[improvement records](workbench/research/IMPROVEMENT-TEMPLATE.md), [evals](evals/)
-and [page evidence](site/PAGE-TEMPLATE.md). Static scores prove no benefit.
 
 ## Test And Build
 
-`uv run pytest`; `AMS_LIVE=1` adds live Supabase tests. `uv run ams-board`
-serves the [Grill Board](grill-board/README.md) on loopback only. Room checks:
+Red/green/refactor when practical; never weaken checks. Run `uv run pytest`, `git diff --check`, `uv run ams-hygiene` and `node workbench/tools/workbench-layout.mjs validate --project .`. With `node workbench/tools/spec-workbench.mjs`, run `render`, `doctor`, `next --json`, `show SPEC_ID`. Render: no diff; doctor: no global blockers. Repeat on fresh checkout. Site: `npm run build`, `npm test`; root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`. [Shared CI](workbench/wiki/context-shared-ci.md).
 
-```bash
-node workbench/tools/spec-workbench.mjs render
-node workbench/tools/spec-workbench.mjs doctor
-node workbench/tools/spec-workbench.mjs next --json
-node workbench/tools/workbench-layout.mjs validate --project "$PWD"
-git diff --check
-```
+`uv run ams-board` (loopback); also `uv run`:
 
-Render: no diff; doctor: no blockers. Repeat these and pytest
-on a fresh clone at the recorded candidate.
+- `ams-keycheck`; `ams-writer record-merge|readcheck SHA`
+- `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
+- `ams-rsi livecheck`; `ams-sources livecheck`
+- `ams-assess score|record|list`; `ams-assessment-store import|readcheck|livecheck`
+- `ams-trials materialize|preflight|readback`; `ams-series`
 
-In B's checkout (keys never printed): `uv run ams-keycheck`;
-`ams-writer record-merge|readcheck SHA`; after each merge `ams-history import`,
-then `ams-history readcheck --ref SHA --dev-ref origin/dev`. Refresh rows
-with `ams-history import --refresh-changed` before readcheck. `ams-rsi livecheck`
-and `ams-sources livecheck` check RSI/source rules.
+[Trial contracts](evals/TRIALS.md); stopped series stay stopped.
 
-`ams-assess score|record|list` handles local r1 packets;
-`ams-assessment-store import|readcheck|livecheck` verifies private Supabase storage
-([contract](evals/ASSESSMENTS.md)). Storage proves no benefit. Trials use the
-subscription meter; unknown stays unknown.
-[Trial preparation](evals/TRIALS.md) never calls a model.
+## Clean up
 
-### Shared CI
-
-CI uses `workbench-ci` and
-`workbench-runner-ams` service, never a GitHub-hosted fallback. Queued jobs may
-mean the VM is unavailable. Fork jobs skip; inspect before internal execution.
-[Shared CI](workbench/wiki/context-shared-ci.md) owns setup/operation details.
-Keep keys and `AMS_LIVE` out of CI.
-
-## Delivery and recovery
-
-Non-site: feature -> checked PR -> merge commit into `main`; delete branch.
-Site: feature -> checked `dev`; only the owner merges `dev` -> `main`.
-Report push, merge and deploy separately. Reopen Spec/Task and Wiki for
-recovery; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+`land`: verify publication and containment; keep unfinished work on its Spec branch; report blockers. Rollback: `workbench/sessions/recovery/adoption-recovery.json`.

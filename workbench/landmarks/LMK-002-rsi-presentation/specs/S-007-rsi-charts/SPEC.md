@@ -5,12 +5,12 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-03
 **Catalog description:** Website pages that chart RSI results from Supabase, present and honestly empty from the first deploy, with every number linked to its rows.
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Close TK-002 with verification and documentation proof.
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
@@ -68,6 +68,8 @@ Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the 
 
 ## Acceptance Criteria
 
+- [ ] **Feedback loop connection:** Progress is visible: safe existing failures, assessments, stopped attempts and dispositions are read through S-006 and rendered on dev with source, scope, freshness and next action. A versioned workflow explanation links each changed step to its reason/evidence. Failed reads cannot appear as no activity, and activity/audit scores cannot become improvement claims.
+
 - [ ] **Shared data states.** Populated, empty, pending and failed reads satisfy [S-003's contract](../../../LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md#data-and-approvals). A failed read shown as zero results fails; retained data without its read time fails.
 - [ ] **Build explanation.** A reader can follow sourced build activity into its related results or an explicit statement that no measured result exists. Activity alone is never labeled improvement; explanatory prose is allowed. No separate build-history page is required.
 
@@ -99,6 +101,8 @@ node workbench/tools/spec-workbench.mjs show S-007
 
 ## Context and Evidence
 
+The bounded checker-evidence presentation and its checks are recorded in [TK-001W](tasks/TK-001W/TASK.md); live data and assembled acceptance remain open.
+
 History and prior evidence are maintained in the [website Wiki](../../../../wiki/context-website-presentation.md). Audit the candidate against this destination rather than inferring acceptance from earlier work.
 
 ## Review and Human QA
@@ -117,3 +121,7 @@ Pending.
 
 - Supersedes: the earlier site draft's results board criteria, including the "since last release" view (no development view on Vercel).
 - Superseded by: none
+
+## Feedback-loop planning boundary
+
+Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).

@@ -7,11 +7,11 @@ provenance:
   - Kayden, AMS template creation request, 2026-10-31
 source_paths:
   - BLUEPRINT.md
-last_verified: 2026-11-01
+last_verified: 2026-11-02
 ---
 # AMS purpose and first RSI loop
 
-AMS brings Kayden's agents, workflows, intent capture, skills and AI tools into one managed improvement loop. Product direction lives in [Blueprint](../../BLUEPRINT.md); this note preserves the reason and correction.
+AMS is a reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. This room builds its public presentation website, runs RSI and improves shared skills already used across projects. The website shows verified results, first from its own build and skill improvements, with evidence from other projects possible later. Project setup or Workbench adjustments use `setup-workbench` in the affected project; shared skill improvements need no separate per-project delivery. [Blueprint](../../BLUEPRINT.md) owns the final destination; S-001 assesses the current build. This note preserves the reasons and sourced corrections, including the [2026-11-02 clarification](#jot-37abcff9-7be7-49a9-9ddb-98e281445cc8).
 
 ## 2026-10-31: Owner clarification
 
@@ -270,4 +270,30 @@ Topic: ams-purpose
 Supersedes: none
 
 The owner explicitly requested running AMS through the RSI loop, making results viewable on the Vercel dev site, and “log the results in supabase.” The current owner request resumes S-006 approved local writer work and S-002. This is existing Supabase result-publication authority, separate from the later Anthropic payload approval; it corrects the premise of the first rejected old-baseline storage request. The bounded current publication is only one observed stopped old-source921 run and its Unknown slot0 result, safe metadata/hashes/counts only, through the existing local-key writer with exact readback. No raw private response, path, skill text or rationale is published; no schema, deployment, extra trial or row deletion is authorized. Preserve the rejected-before-process incident and the incomplete baseline.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-340112cd-7c5d-48ae-88e0-187d12df89d5
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T17:18:47.413Z
+Author: Owner
+Source: Owner, AMS project definition correction in chat, 2026-11-02
+Topic: ams-purpose
+Supersedes: none
+
+AMS is the reusable system in which anyone can capture, develop and record intent with AI and have agents deliver that intent into reality. It packages workflows, rules, skills and operating methods for use by other people. This project adds recursive self-improvement (RSI), using real work to test and improve the system; that does not make AMS a person-specific system. Correct the project definitions and explanatory copy without repeatedly naming its creator. The linked Workbench Agentic Management System Page is already correct and is a reference, not an edit target. This supersedes the person-centered current definition, preserving historical attribution, the existing RSI proof requirements and publication gates.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-37abcff9-7be7-49a9-9ddb-98e281445cc8
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T17:39:17.735Z
+Author: Kayden
+Source: Kayden, direct BLUEPRINT rewrite request in AMS chat, 2026-11-02
+Topic: ams-purpose
+Supersedes: none
+
+The Blueprint is the future-facing description of the final project destination; S-001 is a bounded assessment Spec, not the owner of that destination. AMS is the reusable system used across projects. This room builds its public presentation website, creates and runs the RSI loop, and updates shared skills already used by the projects. The website explains AMS and shows verified results from its own build and skill improvements; it can later include evidence from other projects. Shared skill improvement does not require a separate delivery or installation into every project. When a substantial change requires project adjustments, or a new or existing project needs adoption, someone runs setup-workbench in that project folder. Rewrite the Blueprint and reconcile misleading current descriptions; this request supplies no website implementation, measured benefit, cross-project action or deployment authority.
 <!-- /jot-entry -->

@@ -26,9 +26,9 @@ Spec acceptance, Human QA or website deployment.
 This article owns CI operation and prerequisites; the [Runbook](../../RUNBOOK.md#shared-ci-vm) routes here.
 The [Python workflow](../../.github/workflows/python-tests.yml) and
 [site workflow](../../.github/workflows/site-build.yml) own job routing.
-Both select `self-hosted`, `Linux`, `ARM64` and `servitor`; a dedicated AMS
-runner service supplies that capacity. Public fork PRs require inspection
-before their changes are brought onto an internal branch to execute on the VM.
+Use `workbench-ci` and the `workbench-runner-ams` service. Both workflows select
+`self-hosted`, `Linux`, `ARM64` and `servitor`. Skip fork jobs; inspect public
+fork changes before internal execution on the VM.
 
 The AMS account shares neither credentials nor workspaces with other projects.
 Its systemd service `workbench-runner-ams` starts with the VM and restarts after
