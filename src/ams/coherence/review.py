@@ -242,9 +242,14 @@ def _binds_legacy(repo: str, spec_id: str, v: dict, current_digest: str,
         return False
 
 
+# render paginates the Taskboard as TASKBOARD.page-NNN.md (artifact-pagination.mjs).
+TASKBOARD_PAGE = re.compile(r"TASKBOARD\.page-\d{3}\.md")
+
+
 def _report_path(path: str) -> bool:
     """Generated projection and review reports: records that never alter the assembly."""
-    return path == "TASKBOARD.md" or path.startswith("workbench/feedback/coherence/REVIEW-")
+    return (path == "TASKBOARD.md" or TASKBOARD_PAGE.fullmatch(path) is not None
+            or path.startswith("workbench/feedback/coherence/REVIEW-"))
 
 
 def _history_page(spec_id: str) -> str:

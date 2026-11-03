@@ -31,6 +31,10 @@ jobs:
           git config --global user.name "ci"
           git config --global user.email "ci@example.invalid"
       - run: uv run pytest -q
+      # S-001 TK-002: host paths, credentials, private record IDs, split
+      # records and character limits over tracked files (also in pytest).
+      - name: Public hygiene and character limits
+        run: uv run ams-hygiene
       # doctor also checks host setup (the owner's personal skill catalog),
       # which a CI runner never has; CI runs the repo-only record checks.
       - name: Records are valid and the Taskboard is current

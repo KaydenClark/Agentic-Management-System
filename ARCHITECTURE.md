@@ -7,13 +7,13 @@
 
 ## Bird's-Eye View
 
-AMS runs Kayden's agents, workflows, intent capture, skills and AI tools as one RSI loop on the Workbench it repairs. [Blueprint](BLUEPRINT.md) owns the destination; AGENTS owns authority.
+AMS carries recorded intent into outcomes with AI on a Workbench. This project adds RSI to improve its reusable methods. [Blueprint](BLUEPRINT.md) owns the destination; AGENTS owns authority.
 
 ## Codemap
 
 | Path | What lives there |
 |---|---|
-| `src/`, `tests/` | Package `ams`, pytest (uv); keycheck; writer/history/rsi source rules; assessment-store keeps raw r1 packets private; site key only reads presentation rows |
+| `src/`, `tests/` | Package `ams`, pytest (uv); keycheck; hygiene; writer/history/rsi source rules; assessment-store keeps raw r1 packets private; site key only reads presentation rows |
 | `supabase/` | Migrations: read-only baseline, `build_events`, `rsi_*` |
 | `site/` | Public website; planned Vercel hosting, Supabase data |
 | `grill-board/` | Owner's [cards](grill-board/README.md), theme, QA; local `ams-board` only |

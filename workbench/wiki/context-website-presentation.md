@@ -7,7 +7,9 @@ provenance:
   - Kayden, S-003 repair chat and owner corrections, 2026-11-01
   - Existing S-003 and S-007 execution reports at 97bfcaa
   - Owner decisions in chat, 2026-11-02 (paraphrased; entries below)
+  - Kayden, RSI proof and skill-improvement scope correction, 2026-11-02
 source_paths:
+  - BLUEPRINT.md
   - workbench/landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md
   - workbench/landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/SPEC.md
   - workbench/landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/SPEC.md
@@ -18,7 +20,15 @@ last_verified: 2026-11-02
 
 The website explains and demonstrates AMS. Visitors come for understanding; it is not a live control panel. [S-003](../landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md) owns the shell and orientation. [S-007](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/SPEC.md) owns RSI evidence presentation. These Specs own their destinations; this article preserves context and grants no implementation or release authority.
 
+## RSI proof during website development
+
+Confirmed by Kayden in chat, 2026-11-02; the [sourced correction](#jot-052e2b9a-85fc-4813-bad1-6039aa017f9c) preserves the intent. This AMS project develops and proves shared skill improvements through the website build. Workflow and process issues found during that work feed the RSI loop: record the issue and baseline, repair the owning skills, compare before and after here, log the evidence and disposition, and display the RSI log on the website. Retain failures, regressions and unknowns; an issue report or merged repair alone proves no improvement.
+
+For each issue, ask how the skill correction prevents recurrence in any project. This project is the proving ground for improving the whole workflow and system. Shared methods live in `KaydenClark/skills`; the [later owner instruction](#jot-8c178984-eede-44cc-8c58-33f137a551c6) authorizes installing qualifying repairs in this machine's personal catalog. Installing them into other projects remains outside scope and is not an additional proof gate. [Blueprint](../../BLUEPRINT.md) owns this purpose, [S-002](../landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md) owns comparisons, S-006 owns stored results, and S-007 owns their presentation.
+
 ## Owner brief and corrections, 2026-11-01
+
+Later catalog direction: [S-000A](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) prepares distinct jobs/methods, Primitive/Compound composition, actual Setup Workbench prerequisites and retained adaptation credit. S-008's next accepted source pin must explain these faithfully. This changes the documentation destination; no rewritten skill, trial, public article update or deployment is established by preparation.
 
 Kind: intent. State: confirmed. Source: Kayden's opening brief and subsequent answers in the S-003 repair chat.
 
@@ -58,6 +68,7 @@ The [previous S-007 at 97bfcaa](https://github.com/KaydenClark/Agentic-Managemen
 
 - 2026-11-01: created during owner-authorized S-003 specification repair. Preserved the opening brief, subsequent corrections and source-linked execution history; moved historical explanations out of the two affected Specs. No website implementation, Human QA or outcome acceptance performed.
 - 2026-11-02: recorded the owner's corrections on owner quotations, review banners and the Quickstart page; records only, no site change.
+- 2026-11-02: clarified that website development proves shared skill improvements here, records before/after in RSI and displays the log; installation into other projects is outside this project.
 
 <!-- jot-entry -->
 ### JOT-90878239-ede0-41d9-bc5a-aea988e679b2
@@ -148,3 +159,75 @@ One stale-output failure recurred during the retry: built-article tests were
 invoked after the source pin changed but before rebuilding. After a completed
 build, all 206 site tests passed. The incident report must retain that recurrence;
 recording preventive steps did not itself prevent it. No owner Human QA claimed.
+
+<!-- jot-entry -->
+### JOT-052e2b9a-85fc-4813-bad1-6039aa017f9c
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T17:09:39.584Z
+Author: Kayden
+Source: Kayden, AMS documentation correction and installation-scope clarification in chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden confirms that this AMS project is where shared skill improvements are developed and proved through actual website work. Find workflow and process issues while building, record each issue, repair the owning skills, compare before and after here, record the evidence and disposition in the RSI log, and display that log on the website. Recurring failures are inputs to improving the whole workflow and system for use in any project. The question of preventing recurrence in any project governs how the shared skills are repaired; proving the repair belongs to this project. This project improves the skills and does not install them into other projects. Cross-project installation or rollout is not this project's work or proof gate. This corrects the agent's proposed portfolio rollout and separate proof-project framing. The requested action is documentation correction; this entry claims no skill repair, measured result, database write, website implementation or deployment.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8c178984-eede-44cc-8c58-33f137a551c6
+Kind: intent
+State: confirmed
+Recorded: 2026-11-02T20:40:20.003Z
+Author: Kayden
+Source: Kayden, shared-skill repair instruction in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+The shared handoff, branch and cleanup repairs must be logged and displayed with their actual RSI test and audit results on dev. Terra 6.1 tests and audits govern the requested Stable or Excellent skill merge gate. The owner explicitly authorizes updating this machine personal skills folder after a qualifying repair. The earlier exclusion of installation into other projects remains: personal-catalog installation is a different action. Keep handoffs local and ignored; publish Tasks and safe evidence summaries, never the private source text or raw evaluation material. A measured audit score is separate from demonstrated behavioral benefit and whole-AMS fitness.
+<!-- /jot-entry -->
+
+## Verification failure and owner-authorized retry — 2026-11-02
+
+Kayden requested a failure report and another attempt after the website
+correction stopped on two failed verification runs. The
+[incident report](../feedback/REPORT-live-dev-verification-failure-2026-11-02.md)
+retains both attempts and the narrower-check and sequential-build corrections.
+Kayden also explicitly requested applying the recorded MIT license and
+updating the public skills wiki. This authorizes those corrections, not
+installing skills, promoting unfinished catalog candidates, owner Human QA
+or dev-to-main site promotion. Recording the failure proves no prevention
+benefit; the retry must supply its actual results.
+
+<!-- jot-entry -->
+### JOT-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T01:29:33.714Z
+Author: Kayden
+Source: Kayden, website feedback and explicit approval of five-item readback in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+The owner approved five website changes for task preparation: consolidate the overlapping Home, Start Here, Why and How It Works presentation, treating Start Here as About; use a conventional full-width persistent navigation header with the home icon at top left and light/dark toggle at far right; redesign the glossary as a fun visual explanation of definitions; enlarge site text and improve readability; visibly use the Grill Board palette across both themes. Exact page consolidation and glossary design remain implementation choices within those outcomes. This approval authorizes recording tasks for the next agent, not implementing the site, claiming Human QA, deployment or dev-to-main promotion. This supersedes the requirement for separately presented Start Here/About orientation, while preserving the required explanatory subjects.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-78d8b232-f2c6-4697-ab8c-9e25f60760ba
+Kind: intent
+State: unresolved
+Recorded: 2026-11-03T01:29:43.808Z
+Author: Kayden
+Source: Kayden, additional website feedback in AMS chat, 2026-11-02; individual readback pending
+Topic: website-presentation
+Supersedes: none
+
+Additional owner direction: website examples and showcase links should stay on the website rather than sending visitors to GitHub. If material belongs on the website, present it there; otherwise omit it as an example. The agent will read back this requirement before creating its task, as requested for each feedback item. Existing requirements for GitHub-linked sources and deployed SHA need reconciliation after that readback is approved; no exception for those links has been agreed. This pending readback is not task or implementation approval.
+<!-- /jot-entry -->
+
+## Feedback task preparation verification — 2026-11-02
+
+Five approved feedback Tasks were prepared under S-003 (TK-001P through TK-001T); website-only example links remain pending readback. Record/layout validation and diff whitespace checks passed. The hygiene check failed twice because the modified S-003 exceeded its 8,000-character budget: 9,934 characters on the first attempt, 8,782 after shortening. Work stopped under the project three-strike rule; do not merge this candidate until an authorized retry repairs the size failure and checks pass. No site implementation, deployment or Human QA is claimed.
+
+### Owner-authorized size repair and publication retry
+
+Kayden explicitly authorized pushing `docs/website-feedback-tasks`, opening its PR, repairing the size issue and merging after checks pass. The Spec was shortened to 7,997 characters without dropping its required subjects or changing the 8,000-character budget. Hygiene, layout, decision-record and whitespace checks pass. The earlier failures remain historical evidence; merge still requires passing checks on the candidate. The website-only link readback remains pending and has no Task; this publication approval does not confirm that readback or implement the website.

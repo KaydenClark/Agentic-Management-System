@@ -17,6 +17,8 @@ The loop carries its safeguards from the start: a noise-floor run, control arms,
 
 Coherence is part of the loop. Orchestrator C, which holds no secrets, checks that the project stays up to Spec, that skills are pinned and in sync, and how far `dev` runs ahead of `main`.
 
+The [catalog refocus](specs/S-000A-skills-refocus/SPEC.md) adds a Prepare-only destination: prove job-preserving improvements in Diagnosing Bugs and Plan, then apply the supported approach across shared skills. It also owns the repair side of the observed AMS preparation bypass; S-013 owns detection. Reliability is a valid outcome; existing failure-led comparisons and campaign stops remain.
+
 ## Why It Matters
 
 Outside research does not settle whether shaping an agent's environment improves results, so the AMS has to measure it against a no-AMS control and a plain-instruction control, and report the answer either way. An earlier loop built its apparatus and never ran it; this one runs on real work from day one.
@@ -28,6 +30,7 @@ Outside research does not settle whether shaping an agent's environment improves
 - [ ] Agents using the land skill no longer miss a landing event, shown by a rerun of the failing case after a change made through the skills repository's own process (S-011).
 - [ ] A Python lifecycle CLI exists and is compared with the current Node lifecycle tools on the same tasks (S-012).
 - [ ] Coherence checks report up-to-Spec state, skills pin and sync, and `dev`-ahead-of-`main` distance, and independent Spec review happens (S-013).
+- [ ] Shared skills teach distinct methods with verified reliability/capability outcomes, truthful composition/prerequisite labels and preserved workflows/credit; AMS no longer bypasses preparation for source changes (S-000A).
 
 History: [LMK-004 history](../../wiki/history/LMK-004.md).
 
@@ -58,6 +61,7 @@ The decision records under this landmark, one line each, linked to their record.
 ## Child Specs
 
 - [S-002 - RSI loop with safeguards](specs/S-002-rsi-loop/SPEC.md)
+- [S-000A - Behavior-specific shared skills and reliable AMS preparation](specs/S-000A-skills-refocus/SPEC.md)
 - [S-011 - Land skill catches every event](specs/S-011-land-skill-events/SPEC.md)
 - [S-012 - Python lifecycle CLI](specs/S-012-python-lifecycle-cli/SPEC.md)
 - [S-013 - Coherence checks](specs/S-013-coherence-checks/SPEC.md)

@@ -68,6 +68,8 @@ Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the 
 
 ## Acceptance Criteria
 
+- [ ] **Feedback loop connection:** Progress is visible: safe existing failures, assessments, stopped attempts and dispositions are read through S-006 and rendered on dev with source, scope, freshness and next action. A versioned workflow explanation links each changed step to its reason/evidence. Failed reads cannot appear as no activity, and activity/audit scores cannot become improvement claims.
+
 - [ ] **Shared data states.** Populated, empty, pending and failed reads satisfy [S-003's contract](../../../LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md#data-and-approvals). A failed read shown as zero results fails; retained data without its read time fails.
 - [ ] **Build explanation.** A reader can follow sourced build activity into its related results or an explicit statement that no measured result exists. Activity alone is never labeled improvement; explanatory prose is allowed. No separate build-history page is required.
 
@@ -117,3 +119,7 @@ Pending.
 
 - Supersedes: the earlier site draft's results board criteria, including the "since last release" view (no development view on Vercel).
 - Superseded by: none
+
+## Feedback-loop planning boundary
+
+Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).

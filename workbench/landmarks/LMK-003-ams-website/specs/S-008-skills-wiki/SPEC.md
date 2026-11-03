@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-In chat on 2026-11-01 the owner chose site-written articles on the owner's skills, modeled on https://www.aihero.dev/skills, with its `/grilling` page as the model of depth and tone. The source, `KaydenClark/skills`, is private, so the site never publishes skill files. The owner supplied the stage chart (`skills-by-workbench-stage.svg`, beside this Spec) and set the template and decisions below. Execution authority and endpoint: JOT-ba986c8a.
+The owner chose site-written articles modeled on https://www.aihero.dev/skills and its `/grilling` depth/tone (2026-11-01), supplied `skills-by-workbench-stage.svg` and set the template below. KaydenClark/skills is private: never publish its files. Authority/endpoint: JOT-ba986c8a.
 
 ## Outcome
 
@@ -26,8 +26,8 @@ The skills are how agents operate the AMS. Explaining them faithfully, without p
 
 ## Current Verified State
 
-- `dev` at `19c06cc` (PR #93), not `main`: `/skills` and 39 draft-marked articles at skills commit `8782412`. Every acceptance criterion is met there ([evidence](../../../../wiki/history/S-008.md#acceptance-criteria)). Not done: owner page approvals, Human QA, `dev` -> `main`.
-- Skills commit `878241202bf7ec97c0952287f1633f6f0ddf1a6e`: every chart skill is a top-level directory; the chart's `grill-me` and `grill-with-docs` are `align-concept` and `align-docs`; off the chart: `clean-my-ai-harness-codex`, `obsidian-vault`, `ponder`, `teach`; a `THIRD_PARTY_NOTICES.md`, no root `LICENSE`.
+- Historical delivery: `/skills` and 39 articles on dev19c06cc at skills8782412 ([evidence](../../../../wiki/history/S-008.md#acceptance-criteria)); no main delivery or owner QA is established here. Later refocus requirements remain unchecked.
+- Source878241202bf7ec97c0952287f1633f6f0ddf1a6e: chart skills are top-level; grill-me/grill-with-docs map to align-concept/align-docs. Off-chart: clean-my-ai-harness-codex, obsidian-vault, ponder, teach. Notices exist; root LICENSE does not.
 
 History: [S-008 history](../../../../wiki/history/S-008.md).
 
@@ -39,13 +39,13 @@ History: [S-008 history](../../../../wiki/history/S-008.md).
   1. **What it does**: the mechanism in plain words, key terms defined.
   2. **When to use it**: how it is invoked; where neighbours overlap, a "what you have / reach for" table pointing to the right skill.
   3. **Example request**: one realistic request that brings it in.
-  4. **What it requires**: skills, records, tools or Workbench it depends on.
+  4. **What it requires**: helper skills, records/tools and whether Setup Workbench is required. Explain actual conditional prerequisites and Primitive/Compound composition.
   5. **What it does not authorize**: what running it never grants (e.g. merging, publishing, Human QA).
   6. **Skill-specific sections**: only where needed (e.g. `grilling`'s round and frontier).
   7. **FAQs**: readers' actual questions, answered directly, including known failure modes and workarounds.
   8. **It's working when**: a list of observable signs of a correct run.
   9. **Where it fits in the workflow**: its chart stage, what calls it and what it hands to, linking those articles.
-- **Credit.** A closing line: original to the owner, or adapted from a named source with its license, as the skill file and `THIRD_PARTY_NOTICES.md` state at the pin.
+- **Credit.** State inspiration/adaptation, original author/source and license from the pin's skill/notices; changed ownership does not erase origin credit.
 - **Pin.** Each article derives from its skill file at the pinned commit and names it; a later pin updates affected articles.
 - Layout follows the reference site; exact elements are confirmed against it at Task planning.
 
@@ -92,10 +92,11 @@ Proves the coverage criterion.
 - [x] **Credit.** An adapted skill names its source and license. *Must fail:* an adapted skill labeled original.
 - [x] **No used marks.** No page marks a skill as used to build the site. *Must fail:* a "used" badge or list on any wiki page.
 - [x] **No private files.** The hygiene check finds no copied skill-file content beyond short quoted lines. *Must fail:* a skill file reproduced on the site.
+- [ ] **Refocus fidelity.** At an accepted S-000A pin, composition, Workbench prerequisites, job/method and adaptation credit match source; drafts and static checks are not outcome claims.
 
 ## RSI and website connection
 
-Skill changes measured by the loop (S-002, S-011) update the affected articles at the new pin.
+S-002/S-011 measured changes and [S-000A](../../../LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) accepted refocus pins update affected articles. This prepares the contract, not site implementation.
 
 ## Testing Seams
 

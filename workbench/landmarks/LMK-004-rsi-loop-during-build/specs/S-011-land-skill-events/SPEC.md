@@ -1,108 +1,94 @@
-# S-011 - Land skill catches every event
+# S-011 - Reliable shared skill handoffs and delivery
 
 **Spec ID:** S-011
-**Status:** planned
-**Priority:** 3
-**Owner:** Kayden; orchestrator B (local)
+**Status:** active
+**Priority:** 1
+**Owner:** Kayden; shared-skill repair orchestrator
 **Stance:** Builder
-**Updated:** 2026-11-01
-**Catalog description:** Improve the land skill so agents landing work no longer miss an event, measured as one RSI round from a failed result.
-**Blockers:** S-002
-**Next gate:** Task planning once the loop (S-002) can run a round.
+**Updated:** 2026-11-02
+**Catalog description:** Repair shared handoff, branch and cleanup behavior, prove it with Terra 6.1 and show the scoped RSI evidence.
+**Blockers:** none
+**Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
+**Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
+**Next gate:** TK-002: independently reprune PR58 checkpoint6f2277e, then author same-case retest before final candidate trials. Handoff only this run.
 
 ## Intent and authority
 
-The owner gave "improve the land skill so agents no longer miss an event" as an example Spec. The land skill lives in the owner's skills repository; changes to it go through that repository's own process.
+The owner's 2026-11-02 instruction expands the earlier land-only destination to the shared skills responsible for recurring branch, cleanup and handoff failures. Repair source in `KaydenClark/skills`, update this machine's personal skill catalog after a qualifying repair, and display actual RSI results on `dev`. Skills merge only after Terra 6.1 testing and Stable or Excellent audit results with the required evidence. This grants no cross-project rollout, dev-to-main promotion or fabricated qualification.
 
 ## Outcome
 
-An agent landing work through the land skill notices and handles each event in the landing path, such as a moved candidate, a failed check or unpushed work, instead of reporting success past it.
+Shared skills preserve one work branch, authorized delivery, truthful cleanup and local ignored handoffs. Later AMS work uses the repaired personal catalog; readers trace safe evidence without private source.
 
 ## Why It Matters
 
-A missed landing event turns into lost or unverified work that looks done. It is also a clean first RSI case: a concrete failure, one owner, and a rerun that shows whether the fix worked.
+Misnamed branches hide unfinished work; published handoffs expose session context. Repair their shared owner.
 
 ## Current Verified State
 
-- No criterion is met. No recorded failing case exists in this repository yet; the first Task records one.
+- Controls now distinguish personal installation and local handoffs. RUNBOOK1193 retains commands; [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) preserves pruning failures.
+- Private PR58 checkpoint `6f2277eaaffef2d6640860d6d257bf101107c10c`: unreviewed partial pruning draft, not merge/install eligible. Full author baseline6e4c06d is retained.
+- [Current evidence and continuation](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md#continuation-checkpoint-later-contexts-no-reset): workflow v2b attempt two Broken28/78; pruning attempt two not run after independent-pruner capacity failure. Native-checker PASS, useful benefit, installation and later use remain unestablished.
+- PR128 merged the truthful first-context RSI snapshot into dev12f8963; later outcomes are not yet graphed. Protected deployment HTML/live-store readback remains unavailable.
 
 History: [S-011 history](../../../../wiki/history/S-011.md).
 
 ## Desired Behavior
 
-- A failing case is recorded: the event, the run that missed it and the skills commit.
-- One change is proposed to the land skill, made through the skills repository's process.
-- The same case, and the regression set, are rerun at the new skills commit.
-- The result is a disposition: retain, revise or remove.
+- Resolve source/package/installed identities; installed text alone does not prove repository source or host activation.
+- Reconcile handoff routing and privacy before writing: ignored `workbench/sessions/handoffs/`, never a published root handoff. Published Tasks carry actionable work.
+- Reuse the Spec's branch across runs; inspect ownership, remote claims and unique work before changing refs. Do not create aliases and call them cleanup.
+- Verify exact-head target containment before eligible branch/worktree cleanup. Preserve active writers, unique commits and ignored recovery evidence; report app refusals and retained items.
+- Compare the pinned baseline and candidate with Terra 6.1 under frozen cases, controls and r1 inventory. Include consecutive use, adverse/refusal and regression cases; retain failures and candidate attempt count.
+- Install only the accepted shared repair in the machine's personal catalog, then distinguish byte verification, discovery, activation and observed later use.
+- Show safe evidence on the RSI page on `dev`: audits separate from behavioral outcomes, exact pins, scope, qualification, failures, unknowns and disposition. No whole-AMS or useful-benefit claim from static checks or an audit level alone.
 
 ## Decisions And Contracts
 
-- This Spec runs under S-002's safeguards.
-- A failure seen twice is first checked for an earlier fix that did not work.
+- S-002's r1 scoring, three-run evidence, qualification, attempt and benefit safeguards remain. Its stopped PR 101 experiment and specific call/row holds are unchanged; this separately authorized repair does not resume it.
+- Frozen baseline precedes repairs. Cases studied during repair remain development evidence. Missing evidence stays missing and cannot qualify a Stable/Excellent merge.
+- Author/review in the skills repository; private source/raw evidence stay private. Publish safe claims, counts and identities only.
+- Personal installation enables later AMS work; no project-specific copy or portfolio rollout.
+- The [approved prune-artifact addition](../../../../wiki/context-owner-answers-coherence.md#jot-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf) has a separate finite test suite; the original frozen comparison and its attempts remain unchanged.
 
 ## Non-Goals
 
-- Editing the skill inside this repository.
-- Other skills.
+Editing reusable skill copies in AMS; resetting S-002; replacing the trial runner; production promotion; claiming universal benefit or Human QA.
 
 ## Dependencies And Blockers
 
-- S-002 (round procedure); the skills repository's review of the change.
+The skills repository's process governs repair delivery. Candidate merge/install waits for qualifying Terra evidence. S-006 owns stored trial/assessment data; S-007 owns safe site presentation. Specific missing evidence blocks its claim, not unrelated preparation.
 
 ## Vertical Implementation Slices
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Record a failing landing case as an evaluation task with its skills commit | ready | none | pending |
-| TK-002 | Propose and land one land-skill change through the skills repository | ready | TK-001 | pending |
-| TK-003 | Rerun the case and regression set at the new pin and record the disposition | ready | TK-002 | pending |
-
-### TK-001 - Failing case
-
-**Stance:** Builder
-
-Proves the failing-case criterion.
-
-### TK-002 - Skill change
-
-**Stance:** Builder
-
-Proves the process criterion.
-
-### TK-003 - Rerun
-
-**Stance:** Builder
-
-Proves the rerun and disposition criteria.
 
 ## Acceptance Criteria
 
-- [ ] **Failing case recorded.** The case fails at the old skills commit. *Must fail:* a case that passes before any change.
-- [ ] **Changed through its owner.** The skill change is a merged change in the skills repository. *Must fail:* a copy of the skill edited in this repository.
-- [ ] **Rerun at new pin.** The case and regression set rerun at the new skills commit, with rows in Supabase. *Must fail:* a claim of improvement with no rerun rows.
-- [ ] **Disposition recorded.** Retain, revise or remove is recorded with its reason. *Must fail:* a retained change that broke a regression task.
-
-## RSI and website connection
-
-Its rows are among the first improvement data the charts show (S-007).
+- [ ] **Baseline and contract:** failures and exact pins precede repair; cases and criteria are frozen. A retrospective favorable-only test plan fails.
+- [ ] **Shared owner:** repaired skill source is reviewed and merged in `KaydenClark/skills`; an AMS-only copy fails.
+- [ ] **Reliable behavior:** original and regression cases cover consecutive branch reuse, authorized publication, preservation, eligible cleanup and local ignored handoffs. Unperformed behavior fails.
+- [ ] **Merge gate:** Terra 6.1 tests and three-run r1 audit establish eligible Stable or Excellent with complete required evidence and no unresolved Critical/Regression findings. A level label alone fails.
+- [ ] **Personal use:** accepted source is installed in the personal catalog and later AMS skill use is observed; a file copy alone fails activation/use.
+- [ ] **RSI readback:** actual results, failures, pins, conditions, qualification and disposition are readable through existing evidence routes; no reset or omitted failure.
+- [ ] **Visible on dev:** safe RSI charts/log link to their source and separate audits from trial benefit; no private source, synthetic results or unearned improvement headline.
 
 ## Testing Seams
 
-- The evaluation task fixture and its grader.
+Controlled original/adverse skill exercises, Catalog and RUNBOOK checks, site render/data tests; native scorer/private persistence only with qualifying packets.
 
 ## Verification Procedure
 
-```bash
-node workbench/tools/spec-workbench.mjs show S-011
-```
+`node workbench/tools/spec-workbench.mjs show S-011`; applicable RUNBOOK checks, exact skills candidate evidence and site build/tests at `dev` candidate.
 
 ## Documentation Impact
 
-- The skills wiki entry for land is updated at the new pin (S-008).
+AGENTS/RUNBOOK own routing and installation authority; Wiki preserves corrections; Tasks and improvement record own proof. Public source links are safe summaries, not private skill text.
 
 ## Review and Human QA
 
-The skill change is reviewed in the skills repository.
+Separate-context skill review and Terra 6.1 assessment; site page Human QA remains the owner's judgment. Agent checks are not Human QA.
 
 ## Completion Result
 
@@ -110,9 +96,11 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- none
+Qualification, benefit, installation/use and protected deployment readback remain unestablished. TK-002/TK-003 are ready and unclaimed; handoff supplies no lifecycle completion.
+
+[S-000A](../S-000A-skills-refocus/SPEC.md) separately maps the catalog-wide refocus. Preserve this Spec's repair, source drafts, attempts and merge/install gates; coordination of shared helpers grants no qualification or rollout authority.
 
 ## Supersession
 
-- Supersedes: none
+- Supersedes: the earlier S-011 land-only scope, by the owner's 2026-11-02 instruction.
 - Superseded by: none

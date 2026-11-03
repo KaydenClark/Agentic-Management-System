@@ -1,68 +1,38 @@
-# AMS - Runbook
-
-> From LLM Workbench v3.2.2.
+# AMS Runbook
 
 ## Get oriented
 
-Run `git status --short --branch`; preserve others' work. Read [AGENTS](AGENTS.md),
-[Architecture routes](ARCHITECTURE.md#routes), [Glossary](GLOSSARY.md), relevant
-[Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md) and assigned Spec/Task.
-[S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick; load the
-[owning skill](workbench/docs/SKILLS.md).
+`git status --short --branch`; read [AGENTS](AGENTS.md) and assigned Spec/Task.
 
 ## Workflows
 
-Capture sourced intent/corrections with `jot` in the existing Wiki owner;
-requirements belong in the Spec. Use `map`, `plan`, then `journey` for one Task
-or `orchestrate` for authorized coordination. Retain proof/failures. Record
-[Review](workbench/specs/REVIEW-RECEIPT-TEMPLATE.md) and
-[Human QA](workbench/specs/HUMAN-QA-RECEIPT-TEMPLATE.md) only when performed.
-Update owners and render before departure; leave a
-[handoff](workbench/sessions/HANDOFF-TEMPLATE.md) when needed.
-
-For website RSI, connect [feedback](workbench/feedback/REPORT_FORMAT.md),
-[improvement records](workbench/research/IMPROVEMENT-TEMPLATE.md), [evals](evals/)
-and [page evidence](site/PAGE-TEMPLATE.md). Static scores prove no benefit.
+`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in Wiki.
 
 ## Test And Build
 
-`uv run pytest`; `AMS_LIVE=1` adds live Supabase tests. `uv run ams-board`
-serves the [Grill Board](grill-board/README.md) on loopback only. Room checks:
-
-```bash
+```sh
+uv run pytest
 node workbench/tools/spec-workbench.mjs render
 node workbench/tools/spec-workbench.mjs doctor
 node workbench/tools/spec-workbench.mjs next --json
-node workbench/tools/workbench-layout.mjs validate --project "$PWD"
+node workbench/tools/workbench-layout.mjs validate --project .
 git diff --check
+uv run ams-hygiene
 ```
 
-Render: no diff; doctor: no blockers. Repeat these and pytest
-on a fresh clone at the recorded candidate.
+Repeat on a fresh candidate checkout. `site/`: `npm run build`, `npm test`.
+Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
-In B's checkout (keys never printed): `uv run ams-keycheck`;
-`ams-writer record-merge|readcheck SHA`; after each merge `ams-history import`,
-then `ams-history readcheck --ref SHA --dev-ref origin/dev`. Refresh rows
-with `ams-history import --refresh-changed` before readcheck. `ams-rsi livecheck`
-and `ams-sources livecheck` check RSI/source rules.
+`uv run ams-board` (loopback). Other commands use `uv run`:
 
-`ams-assess score|record|list` handles local r1 packets;
-`ams-assessment-store import|readcheck|livecheck` verifies private Supabase storage
-([contract](evals/ASSESSMENTS.md)). Storage proves no benefit. Trials use the
-subscription meter; unknown stays unknown.
-[Trial preparation](evals/TRIALS.md) never calls a model.
+- `ams-keycheck`; `ams-writer record-merge|readcheck SHA`
+- `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
+- `ams-rsi livecheck`; `ams-sources livecheck`
+- `ams-assess score|record|list`; `ams-assessment-store import|readcheck|livecheck`
+- `ams-trials materialize|preflight|readback`; `ams-series`
 
-### Shared CI
+[Trial contracts](evals/TRIALS.md); stopped series stay stopped.
 
-CI uses `workbench-ci` and
-`workbench-runner-ams` service, never a GitHub-hosted fallback. Queued jobs may
-mean the VM is unavailable. Fork jobs skip; inspect before internal execution.
-[Shared CI](workbench/wiki/context-shared-ci.md) owns setup/operation details.
-Keep keys and `AMS_LIVE` out of CI.
+## Clean up
 
-## Delivery and recovery
-
-Non-site: feature -> checked PR -> merge commit into `main`; delete branch.
-Site: feature -> checked `dev`; only the owner merges `dev` -> `main`.
-Report push, merge and deploy separately. Reopen Spec/Task and Wiki for
-recovery; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+Use shared `land` under [project delivery](AGENTS.md#delivery-and-recovery).
