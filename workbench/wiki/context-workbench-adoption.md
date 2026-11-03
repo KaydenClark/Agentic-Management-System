@@ -66,7 +66,7 @@ The owner confirmed that AMS should recover the Workbench as an agentic manageme
 | AGENTS duties | Partially adapted; the ten dropped and six changed lines above remain the historical accounting. Current control restores skill routing, scope readback, carry, claim and behavioral-test guidance; equivalence of all obligations is not proven. |
 | Continuation | The private CONTINUE pointer contradicted the newer owner correction; current routing uses Spec/Task, Wiki and ignored handoffs. |
 | Spec history | Spec-to-Wiki history implementation is retained; the Adoption Spec evidence row remains owed. |
-| Tools and skills | Manifest and tool receipt retain source identity; host activation is unknown. Personal skill routing is retained; actual invocation is not proven by presence. |
+| Tools and skills | Coordinator inspection found all 41 managed files match their receipt. The installed receipt source SHA `95d3c0c1cb98a0d1746fab9278a70bc719d9ea2af115bd38eac45db46c7d2f77` differs from the locally available package SHA `99080edd8e061ba6b1b142e27088338914b591cee27a7c5725383d405af7ceb2`: 11 tool hashes differ and spec-history was added by authorized update `0b58148359ae43ec9c15300414b4230c9dcc9b5a`. Preserve that update. Current sessions explicitly loaded orchestrate, carry, journey, plan and jot; automatic discovery and other host activation remain unverified. |
 | Recursive delivery | The destination is retained; composed delivery remains partial or unknown. |
 | Acceptance | Checks, independent Review and owner Human QA remain distinct; no owner acceptance follows from this reconciliation. |
 | Website | The evidence surface is retained; a complete learning cycle and behavioral benefit remain unproved. |
