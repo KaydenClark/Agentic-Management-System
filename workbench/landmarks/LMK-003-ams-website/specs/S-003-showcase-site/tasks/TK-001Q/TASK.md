@@ -3,10 +3,12 @@
 **Task ID:** TK-001Q
 **Spec ID:** S-003
 **Slice:** Visitors use a full-width navigation menu that stays visible
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation, Route
 **Planned verification:** Open a long page, scroll, use the home icon and theme toggle, and tab through the menu at desktop and 375px. Run focused header/navigation checks and site build.
+**Claimed by:** s003-frontend
+**Current claimant:** s003-frontend
 
 ## Authority and inputs
 
