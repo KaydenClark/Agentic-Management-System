@@ -196,6 +196,7 @@ async function keyboardProblems(page) {
   });
   const reached = new Set();
   const noIndicator = [];
+  const clipped = [];
   for (let step = 0; step < total * 2 + 5; step += 1) {
     await page.keyboard.press('Tab');
     const f = await page.evaluate(() => {
@@ -220,12 +221,17 @@ async function keyboardProblems(page) {
       if (shadowSeen(now.shadow) && now.shadow !== was.shadow) changes.push('box-shadow');
       if (now.border.some((b, k) => b !== was.border[k] && !b.startsWith('none') && parseFloat(b.split(' ')[1]) > 0 && alpha(b.split(' ').slice(2).join(' ')) > 0)) changes.push('border');
       if (now.background !== was.background && alpha(now.background) > 0) changes.push('background');
-      return { i, label: `${el.tagName.toLowerCase()}${el.className ? `.${String(el.className).split(' ')[0]}` : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 30)}"`, indicator: changes.length > 0 };
+      const nav = el.closest('.topnav');
+      const rect = el.getBoundingClientRect();
+      const viewport = nav?.getBoundingClientRect();
+      const fullyVisible = !viewport || (rect.left >= viewport.left - 1 && rect.right <= viewport.right + 1);
+      return { i, label: `${el.tagName.toLowerCase()}${el.className ? `.${String(el.className).split(' ')[0]}` : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 30)}"`, indicator: changes.length > 0, fullyVisible };
     });
     if (!f) break;
     if (f.i !== null && reached.has(f.i)) break;
     if (f.i !== null) reached.add(f.i);
     if (!f.indicator) noIndicator.push(f.label);
+    if (!f.fullyVisible) clipped.push(f.label);
   }
   const missed = await page.evaluate((got) => [...document.querySelectorAll('[data-qa-i]')]
     .filter((el) => !got.includes(el.getAttribute('data-qa-i')))
@@ -234,6 +240,7 @@ async function keyboardProblems(page) {
     ...(total === 0 ? ['no interactive element found'] : []),
     ...missed.map((m) => `not reachable by Tab: ${m}`),
     ...noIndicator.map((m) => `no visible focus indicator: ${m}`),
+    ...clipped.map((m) => `focused navigation link clipped: ${m}`),
   ];
 }
 
@@ -290,6 +297,7 @@ async function selfTest(browser, server, origin) {
     ['focus outlines removed', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline: none !important; box-shadow: none !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
     ['a transparent focus outline', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline-color: transparent !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
     ['a decorative box-shadow that does not change on focus', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline: none !important; } a, button { box-shadow: 0 0 0 2px #000 !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
+    ['focus reveal disabled', keyboardProblems, p=>p.evaluate(()=>{document.querySelector('.topnav').scrollBy=()=>{};}), x=>x.some(m=>m.startsWith('focused navigation link clipped'))],
     ['a control taken out of the tab order', keyboardProblems, (p) => p.evaluate(() => { const b = document.createElement('button'); b.textContent = 'Planted'; b.tabIndex = -1; document.querySelector('main').append(b); }), (x) => x.some((m) => m.startsWith('not reachable'))],
     ['main pushed off its centred column', layoutProblems, (p) => p.addStyleTag({ content: 'main { margin-left: 40px !important; }' }), (x) => x.some((m) => m.startsWith('main is not centred'))],
     ['a constrained header', layoutProblems, p=>p.addStyleTag({content: '.topbar-inner { width: 90% !important; margin-inline: auto !important; }'}), x=>x.some(m=>m.startsWith('header content does not span'))],
