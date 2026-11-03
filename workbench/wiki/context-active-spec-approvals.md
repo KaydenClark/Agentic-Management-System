@@ -207,3 +207,16 @@ Supersedes: none
 
 Find the next smallest bounded task you can complete, and /carry it to completion. Commit and PR to that specs feature branch. This authorizes selecting and completing one bounded task and opening its PR to the owning Spec feature branch. It supplies no owner Human QA or production promotion.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-804db5fe-d3da-4518-b08e-38c49fdd12c9
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T17:18:58.748Z
+Author: Kayden
+Source: Kayden, AMS chat, 2026-11-03
+Topic: active-spec-approvals
+Supersedes: none
+
+Things should be automatically being rendered into the grilling board, it should not need to be updated every time I want to use it. The LLM_Workbench had it figured out. Just make it like we did there. This corrects the agent suggestion of manually preparing cards and redirects the selected work to reproducing the established LLM_Workbench board behavior in AMS. Preserve existing data and safeguards; do not substitute another board design.
+<!-- /jot-entry -->

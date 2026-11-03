@@ -21,3 +21,9 @@ Assess mainbbc9ff7 and the observed dev tip, recording met, not met or unknown f
 - [ ] Every S-001 criterion and all four Landmark success checks have a candidate-bound result, source and explicit evidence limits.
 - [ ] The overall yes/no answer and smallest supported next actions are recorded; unknown never counts as met.
 - [ ] Relevant Runbook checks, self-review, publication state and limitations are reported truthfully; prior evidence and other writers are preserved.
+
+## Continuation correction (2026-11-03)
+
+The owner redirected this run to the missing automatic Grill Board queue and instructed reuse of the LLM_Workbench implementation. Assessment completion is not claimed. The claim and partial evidence remain recoverable on this branch. No capability is accepted by this Task. The next writer must inspect the pinned-check evidence and finish or retire this assessment through the supported lifecycle.
+
+Partial verification at mainbbc9ff7:809passed,5skipped; hygiene0findings; render matches committed output and is idempotent; layout valid; doctor has no global blocker. These checks do not complete the unfinished assessment.
