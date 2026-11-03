@@ -161,3 +161,29 @@ Supersedes: none
 
 The owner requests a handoff to continue improving the skills, ending this campaign at a recoverable checkpoint. All three proposed examples still need actual tests. The owner identifies example 2 as losing the explicit owner-only dev-to-main approval gate and example 3 as losing the 900–1500 RUNBOOK target and near-900 goal in favor of the 3000 ceiling. These negative labels do not accept example 1, prove general skill behavior or impose a universal 900-character minimum. Preserve failed assessments and setup failures, source drafts and pending pruning; do not merge or install an unqualified candidate. Publish safe continuation records while handoff and raw evidence remain local and ignored.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-c093c149-fea8-41e0-a377-d2e263d699aa
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T02:38:01.784Z
+Author: Kayden
+Source: Kayden, owner correction in AMS chat (Claude Code), 2026-11-02
+Topic: owner-answers-coherence
+Supersedes: none
+
+Correction: run-scoped instructions never enter durable records. Limits that a chat gives one run (for example 'do not implement anything', 'preparation only', 'handoff only this run') stay in that run. Writing them into project instructions, Specs, Tasks, Wiki or skills makes the records stale and misleads later models, which obey them as standing rules. Durable records state lasting truth; authority for a run comes from the owner in that run.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-b66f8d31-3731-4017-8502-dd54c9eba23e
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T02:38:01.968Z
+Author: Kayden
+Source: Kayden, owner correction in AMS chat (Claude Code), 2026-11-02
+Topic: owner-answers-coherence
+Supersedes: none
+
+Correction: CONTINUE.md (private GPT_OS branch claude/ams-s003-map-20261031) directly opposes how the Workbench works. It cannot be in the AMS environment, should never have been created, and should have been cleaned up when setup-workbench adopted AMS. Continuation goes only through Workbench records (Spec, Task, Wiki, jot) and local ignored session handoffs; the AGENTS.md pointer to CONTINUE.md is removed.
+<!-- /jot-entry -->
