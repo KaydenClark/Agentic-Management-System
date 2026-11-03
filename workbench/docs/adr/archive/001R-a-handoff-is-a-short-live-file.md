@@ -2,6 +2,7 @@
 date: 2026-11-01
 canonicalized_in:
   - RUNBOOK.md
+superseded_by: 003L-a-handoff-is-a-short-local-ignored-file.md
 ---
 
 # A handoff is a short live file
