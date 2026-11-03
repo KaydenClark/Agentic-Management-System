@@ -98,6 +98,8 @@ Current test attempt FAILED qualification; owner ended further test/repair cycle
 
 Qualification, benefit, installation/use and protected deployment readback remain unestablished. TK-002 is in progress with source-author; TK-003 still waits on it. Draft PR publication supplies no lifecycle completion.
 
+[S-000A](../S-000A-skills-refocus/SPEC.md) separately maps the catalog-wide refocus. Preserve this Spec's repair, source drafts, attempts and merge/install gates; coordination of shared helpers grants no qualification or rollout authority.
+
 ## Supersession
 
 - Supersedes: the earlier S-011 land-only scope, by the owner's 2026-11-02 instruction.
