@@ -5,10 +5,10 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-03
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Next gate:** Close TK-002C with verification and documentation proof.
+**Next gate:** Merge checked TK-002C into dev; then assign TK-001Q.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 

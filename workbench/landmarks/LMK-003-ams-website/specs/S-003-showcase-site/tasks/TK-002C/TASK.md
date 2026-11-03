@@ -3,12 +3,13 @@
 **Task ID:** TK-002C
 **Spec ID:** S-003
 **Slice:** Readers follow the consolidated orientation with verified alias navigation
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Content, Route, Feedback
 **Planned verification:** Order-independent alias checks with negative controls; completed production build and full site suite; focused rendered orientation, old entry routes and both themes at375px and desktop.
 **Claimed by:** s003-frontend
 **Current claimant:** s003-frontend
+**Proof:** Source63c6a4b6c7e36e0867512abe20598025179601d3: completed build;215/215site tests and264/264focused browser checks pass. Six attribute permutations pass; wrong destination/current-state/label/content and duplicate-current negative controls fail as intended. Reader journey116cases passes after a temporary observation race was corrected with waitForURL; first failed flow log retained. Console issues empty. Root inspected mobileHome/light and desktopAbout/dark screenshots and2-file checker diff. No protected-deployment or Human QA claim.
 
 ## Assignment
 
@@ -18,6 +19,12 @@ Finish and verify the consolidated orientation required by TK-001P: one About in
 
 ## Acceptance
 
-- [ ] Valid About alias links pass regardless of attribute order; wrong destination, missing current-page state and changed alias content fail.
-- [ ] The single About orientation, differentiated pages, required subjects and old route/fragment entries work at375px and desktop in both themes.
-- [ ] Build, full site suite and affected browser QA pass on the named candidate; earlier failures and verification limits remain visible.
+- [x] Valid About alias links pass regardless of attribute order; wrong destination, missing current-page state and changed alias content fail.
+- [x] The single About orientation, differentiated pages, required subjects and old route/fragment entries work at375px and desktop in both themes.
+- [x] Build, full site suite and affected browser QA pass on the named candidate; earlier failures and verification limits remain visible.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s003-orientation | 63c6a4b6c7e36e0867512abe20598025179601d3 | ahead 0 behind 0 | 0 | Source63c6a4b6c7e36e0867512abe20598025179601d3: completed build;215/215site tests and264/264focused browser checks pass. Six attribute permutations pass; wrong destination/current-state/label/content and duplicate-current negative controls fail as intended. Reader journey116cases passes after a temporary observation race was corrected with waitForURL; first failed flow log retained. Console issues empty. Root inspected mobileHome/light and desktopAbout/dark screenshots and2-file checker diff. No protected-deployment or Human QA claim. | Site orientation and test helpers; original001P failures retained; final screenshots/logs local | Local corrective acceptance met; exact-head CI and dev merge remain. Original001P incomplete run stays retained because native lifecycle has no incomplete-run retirement. Whole-Spec acceptance, deployed readback and owner Human QA remain separate.; close attribution: {"agent":"s003-orchestrator","claimant":"s003-frontend","onBehalfOf":"s003-frontend"} | b24fc7ffd7e9e18376ccb1f28639d74249b7a65e1b10dc7f7fe5fd44b7500634 |
