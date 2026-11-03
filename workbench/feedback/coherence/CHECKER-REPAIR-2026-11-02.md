@@ -19,3 +19,15 @@ Source: [draft PR 140](https://github.com/KaydenClark/Agentic-Management-System/
 ## Assembly update
 
 The implementor's full source suite reported **809 passed, 5 skipped and 1 failed**. The failure was the inherited base's AGENTS length (3,215 characters), not a checker assertion; recovery candidate `49a0ef2` passed hygiene after that separate control change. This does not replace a full run on the final combined candidate. The root inspected the three-file checker diff and accepted the bounded conservative behavior for assembly. Source `7735c553bbe2cde0e5c5d6a26a56e7468773961b` is contained in assembly merge `e882efe9d905f074a0b36bff8976e49da03cc028`. The assembled candidate still requires final checks and independent Review; no whole-Spec acceptance or owner Human QA is implied.
+
+## Reproduce fresh-record use
+
+In a disposable checkout containing the source commit, the read-only invocations are:
+
+```sh
+git switch --detach 7735c553bbe2cde0e5c5d6a26a56e7468773961b
+uv run python -m ams.coherence.up_to_spec S-001 --commit 7735c553bbe2cde0e5c5d6a26a56e7468773961b --json
+uv run python -m ams.coherence.up_to_spec S-003 --commit 7735c553bbe2cde0e5c5d6a26a56e7468773961b --json
+```
+
+The fresh observer explicitly loaded journey SHA-256 `9b740599e8f694c8d662471b187c42d9124a02ed655bc7d28885b8ec134bf42a` and carry SHA-256 `5c6aed11058d392bedc4f1071e7942162d1b6cf52592e61c08b23d6a7a39d986` from the personal catalog snapshot named above. This is the coordinator's summary of an actual explicit load and use, not proof of automatic discovery. It does not establish the meaning or completeness of other historical evidence. The initial published snapshot remains at `e8450d2`; this maintained update records the later source-suite and assembly observations. Final assembled checks and independent Review are still pending.
