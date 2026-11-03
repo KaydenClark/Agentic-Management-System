@@ -3,12 +3,13 @@
 **Task ID:** TK-001U
 **Spec ID:** S-013
 **Slice:** Assemble current main records and confirmed recovery corrections with the newer dev website
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Feedback loop connection
 **Planned verification:** Inspect merge and retained site ancestry; validate records, links, rendering, doctor and hygiene; report limits.
 **Claimed by:** codex-recovery
 **Current claimant:** codex-recovery
+**Proof:** Merge 3d302cf assembled dev 07a7ae4 and main 3a95814; controls candidate 1067809 passed scoped fidelity, wiki, layout, hygiene and whitespace checks; doctor no global blocker with findings retained. Full details and earlier failures in task and feedback report.
 
 ## Assignment
 
@@ -43,3 +44,9 @@ Merge `3d302cf` combined the original dev `07a7ae4` and main `3a95814` tips: new
 | Runtime commands, fresh checkout, rendering, doctor and rollback | RUNBOOK Test And Build and cleanup |
 
 Candidate `1067809` measures AGENTS 1,494 and RUNBOOK 1,396 Unicode codepoints within the 900–1,500 target; near-900 is not claimed. The protected strike and RSI sentences, owner-only dev-to-main gate and Wiki/skill routes remain. The orchestrator inspected fidelity against the original obligations and accepted this bounded candidate for final independent Review. Wiki and layout validation, hygiene and whitespace checks passed. Doctor reported no global blocker, retaining the S-011 slice, stale claim, legibility and permission findings. Final assembled checks, independent Review and owner Human QA remain open. No full Workbench equivalence, Spec acceptance or behavioral benefit is claimed.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/ams-recovery-dev | b7dce4ff3ba40da61a7400b68c6de993ec182066 | ahead 0 behind 0 | 0 | Merge 3d302cf assembled dev 07a7ae4 and main 3a95814; controls candidate 1067809 passed scoped fidelity, wiki, layout, hygiene and whitespace checks; doctor no global blocker with findings retained. Full details and earlier failures in task and feedback report. | S-013 TK-001U, context-workbench-adoption and REPORT-runbook-target-failure-2026-11-02 | Final assembled checks, independent Review and owner Human QA remain; full Workbench equivalence and learning-cycle acceptance are not claimed.; close attribution: {"agent":"codex-recovery","claimant":"codex-recovery","onBehalfOf":null} | 062d6495a2469cbae79f769c35e80fad87878da14cc1e2de7bc642344d8793a6 |
