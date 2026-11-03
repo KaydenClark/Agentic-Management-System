@@ -98,3 +98,8 @@ The owner resumed bounded source improvement on 2026-11-02 and required one skil
 ## Premature handback and v3.1 failure
 
 Kayden rejected the assistant's invented draft-only endpoint: source size repair and the required three fresh Terra/high trials were unfinished. [S-011 history](../wiki/history/S-011.md#premature-stop-and-failed-v31-round) records the correction and candidate-bound safe aggregates. Eight cores reached894–900 characters, but valid v3.1 round1 at local evidence57194dcd FAILED: candidate Runbook2810 versus900–1500/near900 and native original-bytes-unverified; baseline2996 also failed. Earlier input-invalid execution remains separate. Journey/Prune reference repairs continue through existing PR60/66; development native red→green and pruning959 are not deciding proof. Three fresh matched final rounds and fixed r1 eligibility remain required; no qualification/merge/install. Earlier failures and the insufficient handback Receipt remain preserved.
+
+
+## Owner-ended failed qualification
+
+The owner ended tests: nonpassing is FAILED. [Final safe readback](../wiki/history/S-011.md#owner-ended-failed-qualification) binds candidatefbf581fe: v3.2 round1 candidate Runbook2845/ship481, baseline2923/719, output goals failed. Three full rounds remain incomplete. Journey's bounded original-byte correction passed; one new private note still limits native remote recovery. Focused unchanged-source Runbook2802/ship503 also failed; incident166 had no goal. These are global qualification/development outcomes, not eight individual grades. Per-skill eligible-merge readback remains separate. TK-002 open/TK-003 blocked; no new tests/repairs without instruction. Earlier failures and receipts remain preserved.
