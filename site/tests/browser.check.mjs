@@ -5,7 +5,8 @@
 // 375, 1280 and 1440 px in both themes. For each it checks:
 //   - no horizontal scroll;
 //   - layout: the reading-order nav is in the header, no side navigation
-//     exists, and the header and <main> share one centred container edge;
+//     exists, Home and theme controls occupy opposite header edges, and
+//     the reading column remains centered independently of the header;
 //   - an automated WCAG 2.x A/AA pass with axe-core (contrast included),
 //     injected from node_modules, never a CDN;
 //   - keyboard: Tab reaches every visible interactive element and each one
@@ -99,55 +100,72 @@ async function horizontalScroll(page) {
   return scrollWidth > clientWidth ? [`scrollWidth ${scrollWidth} > ${clientWidth}`] : [];
 }
 
-// Owner feedback 11/01/2026 ("align better", "navigation in the top bar"):
-// the reading-order nav sits in the header and no side navigation exists; the
-// header's content box and <main>'s content box share both edges; and that
-// container is centred, with even gutters of at least 16 px.
+// S-003/TK-001Q: the header spans the viewport independently of the
+// centered reading column. Keep the old no-sidebar/centered-main guards.
 async function layoutProblems(page) {
   return page.evaluate(() => {
     const out = [];
-    const header = document.querySelector('header');
+    const header = document.querySelector('header.topbar');
     const main = document.querySelector('main');
     if (!header || !main) return ['no <header> or no <main>'];
     if (!header.querySelector('nav[aria-label="Reading order"]')) out.push('reading-order nav is not in the header');
     if (document.querySelector('aside, .sidebar')) out.push('a side navigation (aside or .sidebar) exists');
-    // The content box of the header's container (its first element child)
-    // and of <main>.
-    const box = (el) => {
+    const box = el => {
       const r = el.getBoundingClientRect();
-      const s = getComputedStyle(el);
-      return { left: r.left + parseFloat(s.paddingLeft) + parseFloat(s.borderLeftWidth), right: r.right - parseFloat(s.paddingRight) - parseFloat(s.borderRightWidth) };
+      const style = getComputedStyle(el);
+      return { left: r.left + parseFloat(style.paddingLeft) + parseFloat(style.borderLeftWidth), right: r.right - parseFloat(style.paddingRight) - parseFloat(style.borderRightWidth) };
     };
-    const inner = header.firstElementChild ?? header;
-    const h = box(inner);
+    const h = box(header.firstElementChild ?? header);
     const m = box(main);
-    const near = (a, b) => Math.abs(a - b) <= 1;
-    if (!near(h.left, m.left)) out.push(`header content left ${h.left.toFixed(1)} != main content left ${m.left.toFixed(1)}`);
-    if (!near(h.right, m.right)) out.push(`header content right ${h.right.toFixed(1)} != main content right ${m.right.toFixed(1)}`);
     const vw = document.documentElement.clientWidth;
-    const gutterL = m.left;
-    const gutterR = vw - m.right;
-    if (!near(gutterL, gutterR)) out.push(`main is not centred: gutters ${gutterL.toFixed(1)} / ${gutterR.toFixed(1)}`);
-    if (Math.min(gutterL, gutterR) < 16 - 0.5) out.push(`gutter under 16px: ${Math.min(gutterL, gutterR).toFixed(1)}`);
-    const brand = header.querySelector('a');
-    const first = main.firstElementChild;
-    if (brand && first && !near(brand.getBoundingClientRect().left, first.getBoundingClientRect().left)) {
-      out.push(`site title left ${brand.getBoundingClientRect().left.toFixed(1)} != page content left ${first.getBoundingClientRect().left.toFixed(1)}`);
-    }
+    const near = (a,b) => Math.abs(a-b) <= 1;
+    const gutter = parseFloat(getComputedStyle(header.firstElementChild).paddingLeft);
+    if (!near(h.left,gutter) || !near(h.right,vw-gutter)) out.push('header content does not span the available viewport');
+    if (!near(m.left,vw-m.right)) out.push(`main is not centred: gutters ${m.left.toFixed(1)} / ${(vw-m.right).toFixed(1)}`);
+    if (Math.min(m.left,vw-m.right)<15.5) out.push('main gutter under 16px');
+    const home=header.querySelector('a[aria-label="Home"]');
+    const toggle=header.querySelector('[data-theme-toggle]');
+    if (!home || home.getAttribute('href')!=='/' || !home.querySelector('svg') || !near(home.getBoundingClientRect().left,h.left)) out.push('Home icon is not at the left edge');
+    if (!toggle || !near(toggle.getBoundingClientRect().right,h.right)) out.push('theme control is not at the right edge');
     return out;
   });
+}
+
+async function stickyProblems(page) {
+  const before = await page.evaluate(() => window.scrollY);
+  await page.evaluate(() => window.scrollTo(0,1000));
+  const problems = await page.evaluate(() => {
+    const header=document.querySelector('header.topbar');
+    const box=header.getBoundingClientRect();
+    return getComputedStyle(header).position!=='sticky' || Math.abs(box.top)>1 ? ['header does not stay at the viewport top after scrolling'] : [];
+  });
+  await page.evaluate(y=>window.scrollTo(0,y),before);
+  return problems;
 }
 
 async function axeProblems(page) {
   if (!(await page.evaluate(() => typeof window.axe === 'object'))) await page.addScriptTag({ content: axeSource });
   const res = await page.evaluate((tags) => window.axe.run(document, { runOnly: { type: 'tag', values: tags }, resultTypes: ['violations', 'incomplete'] }), AXE_TAGS);
   const describe = (r) => `${r.id}: ${r.nodes.slice(0, 3).map((n) => `${n.target.join(' ')}${n.any?.[0]?.message ? ` [${n.any[0].message}]` : ''}`).join('; ')}${r.nodes.length > 3 ? `; +${r.nodes.length - 3} more` : ''}`;
-  // Contrast axe could not decide (e.g. text over an image) is treated as a
-  // failure: AA must be shown, not assumed.
-  return [
-    ...res.violations.map(describe),
-    ...res.incomplete.filter((r) => r.id === 'color-contrast').map((r) => `undecided ${describe(r)}`),
-  ];
+  // Scrollable navigation can clip a link even though the page does not
+  // overflow. Establish contrast while that actual node is visible; never
+  // discard undecided contrast or accept a check with no passing node.
+  const problems = res.violations.map(describe);
+  const scroll = await page.evaluate(() => ({x:window.scrollX,y:window.scrollY,nav:document.querySelector('.topnav')?.scrollLeft ?? 0}));
+  for (const result of res.incomplete.filter(rule=>rule.id==='color-contrast')) {
+    for (const node of result.nodes) {
+      const selector = node.target.length===1 ? node.target[0] : null;
+      const element = selector ? await page.$(selector) : null;
+      if (!element) { problems.push(`undecided ${describe({...result,nodes:[node]})}`); continue; }
+      await element.scrollIntoViewIfNeeded();
+      const visible = await page.evaluate(selector=>window.axe.run(selector, {runOnly:{type:'rule',values:['color-contrast']},resultTypes:['violations','incomplete','passes']}),selector);
+      if (visible.violations.length || visible.incomplete.length || !visible.passes.some(rule=>rule.id==='color-contrast'&&rule.nodes.length)) {
+        problems.push(`undecided after scrolling ${describe({...result,nodes:[node]})}`);
+      }
+    }
+  }
+  await page.evaluate(({x,y,nav})=>{window.scrollTo(x,y);document.querySelector('.topnav')?.scrollTo(nav,0);},scroll);
+  return problems;
 }
 
 async function keyboardProblems(page) {
@@ -178,6 +196,7 @@ async function keyboardProblems(page) {
   });
   const reached = new Set();
   const noIndicator = [];
+  const clipped = [];
   for (let step = 0; step < total * 2 + 5; step += 1) {
     await page.keyboard.press('Tab');
     const f = await page.evaluate(() => {
@@ -202,12 +221,17 @@ async function keyboardProblems(page) {
       if (shadowSeen(now.shadow) && now.shadow !== was.shadow) changes.push('box-shadow');
       if (now.border.some((b, k) => b !== was.border[k] && !b.startsWith('none') && parseFloat(b.split(' ')[1]) > 0 && alpha(b.split(' ').slice(2).join(' ')) > 0)) changes.push('border');
       if (now.background !== was.background && alpha(now.background) > 0) changes.push('background');
-      return { i, label: `${el.tagName.toLowerCase()}${el.className ? `.${String(el.className).split(' ')[0]}` : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 30)}"`, indicator: changes.length > 0 };
+      const nav = el.closest('.topnav');
+      const rect = el.getBoundingClientRect();
+      const viewport = nav?.getBoundingClientRect();
+      const fullyVisible = !viewport || (rect.left >= viewport.left - 1 && rect.right <= viewport.right + 1);
+      return { i, label: `${el.tagName.toLowerCase()}${el.className ? `.${String(el.className).split(' ')[0]}` : ''} "${(el.textContent || el.getAttribute('aria-label') || '').trim().slice(0, 30)}"`, indicator: changes.length > 0, fullyVisible };
     });
     if (!f) break;
     if (f.i !== null && reached.has(f.i)) break;
     if (f.i !== null) reached.add(f.i);
     if (!f.indicator) noIndicator.push(f.label);
+    if (!f.fullyVisible) clipped.push(f.label);
   }
   const missed = await page.evaluate((got) => [...document.querySelectorAll('[data-qa-i]')]
     .filter((el) => !got.includes(el.getAttribute('data-qa-i')))
@@ -216,6 +240,7 @@ async function keyboardProblems(page) {
     ...(total === 0 ? ['no interactive element found'] : []),
     ...missed.map((m) => `not reachable by Tab: ${m}`),
     ...noIndicator.map((m) => `no visible focus indicator: ${m}`),
+    ...clipped.map((m) => `focused navigation link clipped: ${m}`),
   ];
 }
 
@@ -272,8 +297,13 @@ async function selfTest(browser, server, origin) {
     ['focus outlines removed', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline: none !important; box-shadow: none !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
     ['a transparent focus outline', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline-color: transparent !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
     ['a decorative box-shadow that does not change on focus', keyboardProblems, (p) => p.addStyleTag({ content: '*:focus, *:focus-visible { outline: none !important; } a, button { box-shadow: 0 0 0 2px #000 !important; }' }), (x) => x.some((m) => m.startsWith('no visible focus'))],
+    ['focus reveal disabled', keyboardProblems, p=>p.evaluate(()=>{document.querySelector('.topnav').scrollBy=()=>{};}), x=>x.some(m=>m.startsWith('focused navigation link clipped'))],
     ['a control taken out of the tab order', keyboardProblems, (p) => p.evaluate(() => { const b = document.createElement('button'); b.textContent = 'Planted'; b.tabIndex = -1; document.querySelector('main').append(b); }), (x) => x.some((m) => m.startsWith('not reachable'))],
-    ['main pushed off the header edge', layoutProblems, (p) => p.addStyleTag({ content: 'main { margin-left: 40px !important; }' }), (x) => x.some((m) => m.startsWith('header content left'))],
+    ['main pushed off its centred column', layoutProblems, (p) => p.addStyleTag({ content: 'main { margin-left: 40px !important; }' }), (x) => x.some((m) => m.startsWith('main is not centred'))],
+    ['a constrained header', layoutProblems, p=>p.addStyleTag({content: '.topbar-inner { width: 90% !important; margin-inline: auto !important; }'}), x=>x.some(m=>m.startsWith('header content does not span'))],
+    ['a displaced Home icon', layoutProblems, p=>p.addStyleTag({content: '.brand { margin-left: 20px !important; }'}), x=>x.some(m=>m.startsWith('Home icon'))],
+    ['an inset theme control', layoutProblems, p=>p.addStyleTag({content: '.theme-toggle { margin-right: 20px !important; }'}), x=>x.some(m=>m.startsWith('theme control'))],
+    ['a nonpersistent header', stickyProblems, p=>p.addStyleTag({content: '.topbar { position: static !important; }'})],
     ['a side navigation', layoutProblems, (p) => p.evaluate(() => { const a = document.createElement('aside'); a.textContent = 'Planted'; document.body.prepend(a); }), (x) => x.some((m) => m.startsWith('a side navigation'))],
     ['an off-centre page', layoutProblems, (p) => p.addStyleTag({ content: 'header > *, main { padding-left: 56px !important; }' }), (x) => x.some((m) => m.startsWith('main is not centred'))],
     ['a transition ignoring reduced motion', motionProblems, (p) => p.addStyleTag({ content: '.card, h1 { transition: transform 1s ease; }' })],
@@ -421,7 +451,9 @@ try {
         let p = await horizontalScroll(page);
         check(`${tag}: no horizontal scroll`, !p.length, p.join('; '));
         p = await layoutProblems(page);
-        check(`${tag}: nav in the top bar; header and main share a centred container edge`, !p.length, p.join(' | '));
+        check(`${tag}: full-width header with Home left, theme right and centered reading column`, !p.length, p.join(' | '));
+        p = await stickyProblems(page);
+        check(`${tag}: header remains visible after scrolling`, !p.length, p.join(' | '));
         p = await axeProblems(page);
         check(`${tag}: axe WCAG A/AA (contrast included)`, !p.length, p.join(' | '));
         p = await keyboardProblems(page);

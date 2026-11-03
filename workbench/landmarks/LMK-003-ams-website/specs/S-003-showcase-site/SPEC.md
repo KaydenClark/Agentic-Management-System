@@ -8,7 +8,7 @@
 **Updated:** 2026-11-03
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Next gate:** Merge checked TK-002C into dev; then assign TK-001Q.
+**Next gate:** Merge checked TK-002D into dev; then assign TK-001R.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 
@@ -42,18 +42,18 @@ The [confirmed link readback](../../../../wiki/context-website-presentation.md#j
 
 ### Orientation content
 
-- **Start here** (`/start`, includes Quickstart): define AMS from the glossary, this project’s RSI addition and problem, and this website as its first outside product. Explain the route through introduction, real-work example, demonstration/skills and RSI evidence/limits, including what each teaches. Distinguish presentation from live controls. Name `setup-workbench` for Workbench setup; no command replay.
+- **About / Start here** (`/start`, Quickstart included): define glossary AMS, this project’s RSI addition/problem and this site as its first outside product. Explain the route through orientation, sourced work, demonstration/skills and RSI evidence/limits, and what each teaches. Distinguish presentation/live controls; name `setup-workbench`; no command replay.
 - **Why:** connect intent/corrections, delegated work and learning from failures to this build. Distinguish intended benefits from measured results; link RSI evidence.
-- **How it works:** explain intent -> Landmark -> Spec -> Task -> implementation, checks, review, human judgment and delivery through one real sourced example. Explain feedback returning to its owner and failed results starting bounded RSI comparisons. Link governance/flow charts; distinguish achieved from intended behavior.
-- **Limits:** the site runs no agents or record writes. Distinguish demos, activity, assessments and demonstrated improvement. Source capability limits and explain required human judgment.
-- **Glossary:** define tour terms consistently with the root glossary, including implementation Tasks versus evaluation tasks/trials. Link definitions from their uses and back to the explanation.
+- **How it works:** explain intent -> Landmark -> Spec -> Task -> implementation, checks, review, human judgment and delivery through a real sourced example. Return feedback to its owner and failures to bounded RSI comparisons. Link governance/flow charts; distinguish achieved/intended behavior.
+- **Limits:** no agents or record writes run here. Distinguish demos, activity, assessments and demonstrated improvement; source limits and required human judgment.
+- **Glossary:** use root glossary meanings, distinguishing implementation Tasks/evaluation tasks/trials. Link uses to definitions and back to explanations.
 - **About AMS:** explain the project, creator, purpose and relationship to this website; no employment history or CV requirement.
 
 ### Shell and related capabilities
 
 Navigation shows current page, tour order/start/finish and direct subject links, without dead ends. Core text works script-free. Light/dark follows system or manual override. Every page displays its deployed SHA on-site.
 
-Introduce and link RSI charts (S-007), site-written skill summaries (S-008), the demo Grill Board with non-engineering sample questions (S-009), and governance/flow charts (S-010). Keep private skill source private.
+Introduce/link RSI charts (S-007), site-written skill summaries (S-008), the demo Grill Board with non-engineering questions (S-009), and governance/flow charts (S-010). Keep private skill source private.
 
 No Under-the-hood/build-history page. S-007 explains S-006 evidence/results; S-008 explains skills. Prose need not map every sentence to a row. Activity proves no improvement.
 
@@ -66,7 +66,7 @@ Supabase read-only/publishable key; Python writes (S-006); service key local (AD
 - **Pending/failed:** distinguish loading, unavailable and zero results. Timestamp retained data; static explanations stay readable.
 - Test/synthetic rows never appear as real evidence. S-007 owns result labels/comparisons; S-006 owns storage/access.
 
-No page shows draft, approval or review status; page review stays on S-005's Grill Board cards (DDR-001B). No page quotes Kayden or uses his agent instructions as examples; paraphrase and link sources (DDR-001A).
+No public draft/approval/review status: page review stays on S-005 Grill Board cards (DDR-001B). No Kayden quotations or actual agent instructions as examples; paraphrase with on-site sources (DDR-001A).
 
 ## Decisions And Contracts
 

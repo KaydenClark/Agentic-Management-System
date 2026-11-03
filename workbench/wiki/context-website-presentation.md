@@ -342,3 +342,16 @@ Supersedes: none
 
 Kayden explicitly authorizes correction of the stopped orientation Task in draft PR147 and continuation of S-003. Correct the new alias checker to be independent of HTML attribute order while retaining negative controls, finish one build, verify the full site suite and affected rendered experience, then continue checked site delivery to dev. Preserve the two failed attempts209/214 and211/214 and their source. No Human QA, production promotion or shared-skill change is implied.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8f52b5d8-13f7-4428-8cee-035352c0cd1a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T07:44:21.595Z
+Author: Kayden
+Source: Kayden, explicit navigation focus-correction authorization in AMS chat, 2026-11-03
+Topic: website-presentation
+Supersedes: none
+
+Kayden authorizes only the bounded navigation focus correction after draft PR148 stopped. Establish why phone keyboard focus leaves links partly clipped, guarantee full focus visibility and verify the80case matrix and affected browser checks before checked dev delivery. Preserve both failed attempts and exact geometry. This grants no blanket permission for future corrective runs or weakening checks, and no Human QA or production promotion. The earlier S-003 assignment remains the source for other already-approved Tasks; any later three-strike stop still needs its own authorization.
+<!-- /jot-entry -->
