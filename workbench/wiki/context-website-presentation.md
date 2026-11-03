@@ -146,3 +146,37 @@ updating the public skills wiki. This authorizes those corrections, not
 installing skills, promoting unfinished catalog candidates, owner Human QA
 or dev-to-main site promotion. Recording the failure proves no prevention
 benefit; the retry must supply its actual results.
+
+<!-- jot-entry -->
+### JOT-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T01:29:33.714Z
+Author: Kayden
+Source: Kayden, website feedback and explicit approval of five-item readback in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+The owner approved five website changes for task preparation: consolidate the overlapping Home, Start Here, Why and How It Works presentation, treating Start Here as About; use a conventional full-width persistent navigation header with the home icon at top left and light/dark toggle at far right; redesign the glossary as a fun visual explanation of definitions; enlarge site text and improve readability; visibly use the Grill Board palette across both themes. Exact page consolidation and glossary design remain implementation choices within those outcomes. This approval authorizes recording tasks for the next agent, not implementing the site, claiming Human QA, deployment or dev-to-main promotion. This supersedes the requirement for separately presented Start Here/About orientation, while preserving the required explanatory subjects.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-78d8b232-f2c6-4697-ab8c-9e25f60760ba
+Kind: intent
+State: unresolved
+Recorded: 2026-11-03T01:29:43.808Z
+Author: Kayden
+Source: Kayden, additional website feedback in AMS chat, 2026-11-02; individual readback pending
+Topic: website-presentation
+Supersedes: none
+
+Additional owner direction: website examples and showcase links should stay on the website rather than sending visitors to GitHub. If material belongs on the website, present it there; otherwise omit it as an example. The agent will read back this requirement before creating its task, as requested for each feedback item. Existing requirements for GitHub-linked sources and deployed SHA need reconciliation after that readback is approved; no exception for those links has been agreed. This pending readback is not task or implementation approval.
+<!-- /jot-entry -->
+
+## Feedback task preparation verification — 2026-11-02
+
+Five approved feedback Tasks were prepared under S-003 (TK-001P through TK-001T); website-only example links remain pending readback. Record/layout validation and diff whitespace checks passed. The hygiene check failed twice because the modified S-003 exceeded its 8,000-character budget: 9,934 characters on the first attempt, 8,782 after shortening. Work stopped under the project three-strike rule; do not merge this candidate until an authorized retry repairs the size failure and checks pass. No site implementation, deployment or Human QA is claimed.
+
+### Owner-authorized size repair and publication retry
+
+Kayden explicitly authorized pushing `docs/website-feedback-tasks`, opening its PR, repairing the size issue and merging after checks pass. The Spec was shortened to 7,997 characters without dropping its required subjects or changing the 8,000-character budget. Hygiene, layout, decision-record and whitespace checks pass. The earlier failures remain historical evidence; merge still requires passing checks on the candidate. The website-only link readback remains pending and has no Task; this publication approval does not confirm that readback or implement the website.
