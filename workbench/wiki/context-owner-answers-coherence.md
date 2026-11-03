@@ -161,3 +161,16 @@ Supersedes: none
 
 The owner requests a handoff to continue improving the skills, ending this campaign at a recoverable checkpoint. All three proposed examples still need actual tests. The owner identifies example 2 as losing the explicit owner-only dev-to-main approval gate and example 3 as losing the 900–1500 RUNBOOK target and near-900 goal in favor of the 3000 ceiling. These negative labels do not accept example 1, prove general skill behavior or impose a universal 900-character minimum. Preserve failed assessments and setup failures, source drafts and pending pruning; do not merge or install an unqualified candidate. Publish safe continuation records while handoff and raw evidence remain local and ignored.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-fed30f75-6d6c-4cf6-9460-6c6bd22f69ed
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T04:31:27.000Z
+Author: Kayden
+Source: Kayden, AMS chat 2026-11-02, orchestrate request naming skills PRs 59–66, then two model corrections
+Topic: owner-answers-coherence
+Supersedes: JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689 (evaluator model only)
+
+Kayden resumes S-011 as an RSI loop: improve the eight shared skills in PRs 59–66, fix their recorded failures (this project and GitHub) and prove the result on the AMS website. Each PR qualifies on its own; a PR may merge once fixed with an eligible Stable or Excellent passing review. Claude Sonnet replaces GPT-6.1 Terra as the deciding trial and review model. Small models (Claude Haiku, and GPT Luna where available) get a testing role chosen by the orchestrator. The prior owner-ended attempt and its failures stay preserved; this instruction is not a reset of attempt history.
+<!-- /jot-entry -->
