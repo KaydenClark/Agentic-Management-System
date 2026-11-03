@@ -27,7 +27,7 @@ The r1 classification: Excellent at three passing runs, Stable at two, Functiona
 One assessed version of an improvement candidate; each candidate gets at most three, excluding baseline.
 
 **Workbench**:
-The environment where AMS operates, bringing together people, agents, project records, working artifacts and tools.
+An agentic management system that brings people, agents, project records, artifacts and tools together to carry intent into outcomes.
 
 **Intent**:
 What the owner wants, with reasons, boundaries and corrections. Retain whether confirmed or unresolved.

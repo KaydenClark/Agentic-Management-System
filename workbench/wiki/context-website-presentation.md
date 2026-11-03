@@ -231,3 +231,8 @@ Five approved feedback Tasks were prepared under S-003 (TK-001P through TK-001T)
 ### Owner-authorized size repair and publication retry
 
 Kayden explicitly authorized pushing `docs/website-feedback-tasks`, opening its PR, repairing the size issue and merging after checks pass. The Spec was shortened to 7,997 characters without dropping its required subjects or changing the 8,000-character budget. Hygiene, layout, decision-record and whitespace checks pass. The earlier failures remain historical evidence; merge still requires passing checks on the candidate. The website-only link readback remains pending and has no Task; this publication approval does not confirm that readback or implement the website.
+
+
+## Checker evidence presentation — 2026-11-02
+
+S-007/TK-001W presents the bounded checker repair, observations and remaining limits on `/rsi`, linked to the immutable safe report. Site source `77ed4478ee8294f3f4cbd38e270c1514245ed170` was assembled at `1b07f1e72cc4419ad017af3fe0f76fc7f1e8fc9e`. The worker reported a passing build, 209 tests including 10 focused checks, and desktop inspection. Root inspected the actual build at 375px with a 360px document and no horizontal overflow; the console showed a favicon 404 and stylesheet preload warnings. An earlier page-hash link regression failed and was repaired. These observations do not prove owner Human QA, deployment, behavioral benefit or the complete learning cycle. See the [Task](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-001W/TASK.md) and [PR 141](https://github.com/KaydenClark/Agentic-Management-System/pull/141).

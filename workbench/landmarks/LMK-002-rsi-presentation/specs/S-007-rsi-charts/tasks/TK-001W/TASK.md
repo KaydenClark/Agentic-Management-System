@@ -18,7 +18,11 @@ Use the existing `/rsi` repair evidence path to present the safe committed findi
 
 ## Acceptance
 
-- [ ] The page shows the false-met case, the repair, actual before/after and recurrence, exact source and candidate, disposition and limits.
-- [ ] Unrun or unavailable checks remain explicit; no audit score, behavioral benefit, owner QA or completed learning cycle is inferred.
-- [ ] A focused renderer regression, site build and browser inspection exercise the actual page and record results.
-- [ ] Hand-back identifies the exact candidate, commands, observations and remaining gaps.
+- [x] The page shows the false-met case, the repair, actual before/after and recurrence, exact source and candidate, disposition and limits.
+- [x] Unrun or unavailable checks remain explicit; no audit score, behavioral benefit, owner QA or completed learning cycle is inferred.
+- [x] A focused renderer regression, site build and browser inspection exercise the actual page and record results.
+- [x] Hand-back identifies the exact candidate, commands, observations and remaining gaps.
+
+## Check and QA
+
+Site source `77ed4478ee8294f3f4cbd38e270c1514245ed170` is contained in recovery assembly merge `1b07f1e72cc4419ad017af3fe0f76fc7f1e8fc9e`. The implementor reported site build and 209 tests passing, including 10 focused checks, and inspected desktop. The root inspected the actual build at 375px: document width 360px; checker panel x=16px, width 328px, right edge 344px; text and links were readable without clipping or horizontal overflow. Browser console showed a favicon 404 and stylesheet preload warnings. The report citation was corrected to the maintained immutable source; a prior page-hash link test failed and was repaired. [PR 141](https://github.com/KaydenClark/Agentic-Management-System/pull/141) records the source and check evidence. No owner Human QA, full assembled Review, deployment or learning-cycle acceptance is claimed.

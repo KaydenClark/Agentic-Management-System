@@ -101,6 +101,8 @@ node workbench/tools/spec-workbench.mjs show S-007
 
 ## Context and Evidence
 
+The bounded checker-evidence presentation and its checks are recorded in [TK-001W](tasks/TK-001W/TASK.md); live data and assembled acceptance remain open.
+
 History and prior evidence are maintained in the [website Wiki](../../../../wiki/context-website-presentation.md). Audit the candidate against this destination rather than inferring acceptance from earlier work.
 
 ## Review and Human QA
