@@ -187,3 +187,16 @@ Supersedes: JOT-fed30f75-6d6c-4cf6-9460-6c6bd22f69ed (model roles only)
 
 Name model roles by tier, with each agent running a tier on its own harness's model: Frontier Fable/Astra, High Opus/Sol, Mid Sonnet/Terra, Small Haiku/Luna ([ADR-003K](../docs/adr/003K-model-tiers-pair-claude-and-codex-models.md)). This Claude-run orchestration uses Claude models: High implements, Mid runs the deciding trials, High and Small run the same held-out cases for a cross-model comparison, and Frontier judges and reviews. Claude and Codex share the system without one provider's model names standing in for the other's.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-398538e8-c998-439c-9885-bb13b3388570
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T05:29:29.000Z
+Author: Kayden
+Source: Kayden, AMS chat 2026-11-02, answering how ceiling-scoring skills qualify for merge
+Topic: owner-answers-coherence
+Supersedes: none
+
+"If they were sent back because of failures I found, they were no longer excellent, and those are the new tests you need to prove them against and make them excellent or stable at." The qualifying tests for each skill are its owner-found failures, reproduced under their actual conditions; a baseline passing a test that does not reproduce the failure proves nothing. Each candidate must reach Stable or Excellent on those reproduction tests. The first held-out contract (SHA-256 197858fe…), on which the baseline already scored Excellent for seven skills, stays recorded as non-qualifying evidence.
+<!-- /jot-entry -->
