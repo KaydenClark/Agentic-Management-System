@@ -31,3 +31,13 @@ uv run python -m ams.coherence.up_to_spec S-003 --commit 7735c553bbe2cde0e5c5d6a
 ```
 
 The fresh observer explicitly loaded journey SHA-256 `9b740599e8f694c8d662471b187c42d9124a02ed655bc7d28885b8ec134bf42a` and carry SHA-256 `5c6aed11058d392bedc4f1071e7942162d1b6cf52592e61c08b23d6a7a39d986` from the personal catalog snapshot named above. This is the coordinator's summary of an actual explicit load and use, not proof of automatic discovery. It does not establish the meaning or completeness of other historical evidence. The initial published snapshot remains at `e8450d2`; this maintained update records the later source-suite and assembly observations. Final assembled checks and independent Review are still pending.
+
+## Independent synthetic observation
+
+A fresh observer used source `7735c553bbe2cde0e5c5d6a26a56e7468773961b` on fixture `ce9d9b71ef3709eddfc8fd615fe7280668e9f006` without inspecting the tests, replay script or expected answers. On a checkout of that source, with the fixture repository available as `FIXTURE_REPO`, the standard read-only command was:
+
+```sh
+uv run python -m ams.coherence.up_to_spec S-900 --repo "$FIXTURE_REPO" --commit ce9d9b71ef3709eddfc8fd615fe7280668e9f006 --json
+```
+
+The observer reported 0 met, 1 not met and 5 unknown. Alpha's README, Beta's ancestor and Zeta's other file resolved only as references; Gamma's unmerged commit `cb45a4ff708d7ed67350c4f56a751a94f32557bf` and Delta's missing file did not resolve; Epsilon remained unchecked despite its existing file. No false `met` appeared. The observer routed the missing and unmerged references to S-013 without modifying files. This is a separate synthetic recurrence check, not the self-asserting replay or actual S-001/S-003 use; it does not prove broader automatic orchestrator detection.
