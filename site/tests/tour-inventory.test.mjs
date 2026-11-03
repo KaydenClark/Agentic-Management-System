@@ -1,12 +1,13 @@
 // S-003 TK-002 and TK-003 acceptance: every tour page the Spec names exists in the built output with a
 // plain-language opener that uses no undefined term, then go deeper; a
 // placeholder page fails. The site quotes no one: no page carries an owner
-// quote, and a tour page holds no blockquote, <q> or quote marks. GitHub links
-// name files that exist. Run `npm run build` first.
+// quote, and a tour page holds no blockquote, <q> or quote marks. Citations
+// identify files at their actual revisions. Run `npm run build` first.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { builtPage, builtPages, visibleText } from './helpers.mjs';
-import { TOUR, builtName, mainOf, ownerQuoteProblems, pageProblems, quoteProblems, repoLinks } from './tour-helpers.mjs';
+import {readPage} from './rsi-html.mjs';
+import { TOUR, builtName, mainOf, ownerQuoteProblems, pageProblems, quoteProblems, sourceRecords } from './tour-helpers.mjs';
 
 const filler = (n) => Array.from({ length: n }, (_, i) => `word${i}`).join(' ');
 const page = ({ h1 = '<h1>T</h1>', opener, body = `<h2>A</h2><p>${filler(150)}</p><h2>B</h2><p>${filler(150)}</p>` }) =>
@@ -45,14 +46,33 @@ for (const { href, title } of TOUR) {
   });
 }
 
+function refusalProblems(html) {
+  const nodes = readPage(html, ['data-refusals'], ['li']);
+  const list = nodes.find(node => 'data-refusals' in node.attrs);
+  if (!list) return ['refusal list missing'];
+  const items = nodes.filter(node => node.name === 'li' && node.ancestors.at(-1)?.attrs === list.attrs);
+  const problems = [];
+  if (items.length < 5) problems.push(`only ${items.length} direct refusals listed`);
+  for (const item of items) {
+    if (!item.text.trim()) problems.push('refusal has no readable content');
+    if (!item.inner.some(node => 'data-source-path' in node.attrs)) problems.push('refusal has no source identity');
+  }
+  return problems;
+}
+
+test('refusal checks count direct items through nested source disclosures', () => {
+  const item = '<li>Refuse a condition.<details><summary>Sources</summary><ul><li><span data-source-path="AGENTS.md">Record</span></li></ul></details></li>';
+  const sample = count => `<ul data-refusals="">${item.repeat(count)}</ul>`;
+  assert.deepEqual(refusalProblems(sample(5)), []);
+  assert.ok(refusalProblems(sample(4)).some(problem => problem.includes('direct refusals')), 'nested source items must not replace a missing refusal');
+  assert.ok(refusalProblems(sample(5).replace('data-source-path="AGENTS.md"','data-source-removed=""')).some(problem => problem.includes('no source')), 'a missing item citation must fail');
+  assert.ok(refusalProblems(sample(5).replace('data-refusals','data-missing')).length);
+});
+
 test('/start says what the AMS refuses to do', () => {
   const main = mainOf(builtPage('start.html').html);
-  assert.match(main, /<h2\b[^>]*>[^<]*refuses[^<]*<\/h2>/i, 'no "refuses" section heading');
-  const refusals = main.match(/<ul\b[^>]*data-refusals[^>]*>([\s\S]*?)<\/ul>/i);
-  assert.ok(refusals, 'no refusal list (data-refusals)');
-  const items = [...refusals[1].matchAll(/<li\b[\s\S]*?<\/li>/gi)].map((m) => m[0]);
-  assert.ok(items.length >= 5, `only ${items.length} refusals listed`);
-  for (const item of items) assert.ok(repoLinks(item).length, `refusal without a source record: ${visibleText(item)}`);
+  assert.match(main, /<h2\b[^>]*>[^<]*refuses[^<]*<\/h2>/i, 'no refuses section heading');
+  assert.deepEqual(refusalProblems(main), []);
 });
 
 // The quickstart on /start (S-003 Quickstart): a reading route of at least
@@ -70,7 +90,7 @@ export function quickstartProblems(main) {
   const setup = section.match(/<div\b[^>]*data-setup-step[^>]*>([\s\S]*?)<\/div>/i)?.[1] ?? '';
   if (!/\buse the\b[\s\S]*setup-workbench/i.test(visibleText(setup))) problems.push('no step telling the reader to use setup-workbench');
   if (!/href="\/skills\/setup-workbench"/.test(setup)) problems.push('the setup step does not link the setup-workbench article');
-  if (!repoLinks(setup).some((l) => l.exists)) problems.push('the setup step cites no committed record');
+  if (!sourceRecords(setup).some((l) => l.exists)) problems.push('the setup step cites no committed record');
   return problems;
 }
 
@@ -88,10 +108,10 @@ test('/start ends with the quickstart: a reading route and the setup-workbench s
   assert.deepEqual(quickstartProblems(mainOf(builtPage('start.html').html)), []);
 });
 
-test('/how-it-works links one real Spec and one real Task to their files on GitHub', () => {
-  const links = repoLinks(builtPage('how-it-works.html').html);
-  assert.ok(links.some((l) => /\/SPEC\.md$/.test(l.path) && l.exists), 'no link to an existing SPEC.md');
-  assert.ok(links.some((l) => /\/TASK\.md$/.test(l.path) && l.exists), 'no link to an existing TASK.md');
+test('/how-it-works identifies one real Spec and one real Task on-site', () => {
+  const links = sourceRecords(builtPage('how-it-works.html').html);
+  assert.ok(links.some((l) => /\/SPEC\.md$/.test(l.path) && l.exists), 'no identity for an existing SPEC.md');
+  assert.ok(links.some((l) => /\/TASK\.md$/.test(l.path) && l.exists), 'no identity for an existing TASK.md');
 });
 
 test('no built page carries an owner quote (data-owner-quote), with a planted fault caught', () => {
@@ -101,38 +121,38 @@ test('no built page carries an owner quote (data-owner-quote), with a planted fa
   assert.equal(ownerQuoteProblems(planted).length, 1, 'a planted owner quote on a built page passes');
 });
 
-test('every GitHub link on a built page names a file that exists in this repository', () => {
+test('every on-site source identity resolves at its stated Git revision', () => {
   for (const { name, html } of builtPages()) {
-    for (const link of repoLinks(html)) assert.ok(link.exists, `${name}: ${link.href} names a missing file`);
+    for (const link of sourceRecords(html)) assert.ok(link.exists && link.identityAvailable, `${name}: ${link.path} at ${link.revision} is missing or has no accessible full identity`);
   }
 });
 
 function historicalExampleProblems(html) {
   const section = html.match(/<section\b[^>]*aria-labelledby="example"[^>]*>([\s\S]*?)<\/section>/)?.[1];
   if (!section) return ['historical example section missing'];
-  const links = repoLinks(section);
+  const links = sourceRecords(section);
   const expected = ['SPEC.md', 'tasks/TK-001/TASK.md', 'tasks/TK-002/TASK.md'];
   const problems = [];
   for (const path of expected) {
     const link = links.find((l) => l.path.endsWith(`S-003-showcase-site/${path}`));
     if (!link) problems.push(`missing source: ${path}`);
     else {
-      if (!/\/blob\/[a-f0-9]{40}\//.test(link.href)) problems.push(`mutable source: ${path}`);
+      if (link.revision !== 'ce39c6a89f92dffaebecb468b367c49ab6577bd8') problems.push(`mutable source: ${path}`);
       if (!link.exists) problems.push(`missing evidence: ${path}`);
     }
   }
   return problems;
 }
 
-test('historical example links stay pinned and resolve in their evidence revision', () => {
+test('historical example identities stay pinned and resolve in their evidence revision', () => {
   const html = builtPage('how-it-works.html').html;
   assert.deepEqual(historicalExampleProblems(html), []);
-  // A moving contextual source outside the example is valid. Inside the
-  // example the same mutation must still fail the immutable-source contract.
-  const contextual = '<a href="https://github.com/KaydenClark/Agentic-Management-System/blob/dev/workbench/landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md">context</a>';
+  const contextual = '<span data-source-path="context.md" data-source-revision="dev">context</span>';
   assert.deepEqual(historicalExampleProblems(contextual + html), []);
-  const changed = html.replace(/(<section\b[^>]*aria-labelledby="example"[^>]*>[\s\S]*?)\/blob\/[a-f0-9]{40}\//, '$1/blob/dev/');
-  assert.ok(historicalExampleProblems(changed).some((p) => p.startsWith('mutable source:')));
-  const bad = repoLinks('<a href="https://github.com/KaydenClark/Agentic-Management-System/blob/ce39c6a89f92dffaebecb468b367c49ab6577bd8/no-such-record.md">missing</a>');
+  const changed = html.replace(/(<section\b[^>]*aria-labelledby="example"[^>]*>[\s\S]*?data-source-revision=")[a-f0-9]{40}/, '$1dev');
+  assert.ok(historicalExampleProblems(changed).some(problem => problem.startsWith('mutable source:')));
+  const removed = html.replace(/data-source-path="[^"]*tasks\/TK-001\/TASK.md"/, 'data-removed-source=""');
+  assert.ok(historicalExampleProblems(removed).some(problem => problem.startsWith('missing source:')));
+  const bad = sourceRecords('<span data-source-path="no-such-record.md" data-source-revision="ce39c6a89f92dffaebecb468b367c49ab6577bd8" title="no-such-record.md at ce39c6a89f92dffaebecb468b367c49ab6577bd8">missing</span>');
   assert.equal(bad[0].exists, false);
 });

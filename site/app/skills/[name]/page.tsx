@@ -61,7 +61,7 @@ export default async function SkillArticle({ params }: Params) {
         ))}
         <div className={styles.credit} data-credit-block="">
           <p data-credit={a.credit}>
-            <InlineNodes nodes={a.creditText} />
+            <InlineNodes nodes={a.creditText} citation />
           </p>
           <p className={styles.pin}>
             Skills commit{" "}

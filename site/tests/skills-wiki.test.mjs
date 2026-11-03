@@ -143,7 +143,9 @@ test('the used-mark check catches faults (self-test)', () => {
 
 test('the link check catches faults (self-test)', () => {
   const ctx = { articles: new Set(['grilling']), pages: new Set(['start.html', 'skills.html', 'index.html']), indexIds: new Set(['align']) };
-  assert.deepEqual(wikiLinkProblems('<a href="/skills/grilling">g</a><a href="/skills#align">a</a><a href="/start">s</a><a href="https://example.com">e</a>', ctx), []);
+  assert.deepEqual(wikiLinkProblems('<a href="/skills/grilling">g</a><a href="/skills#align">a</a><a href="/start">s</a>', ctx), []);
+  assert.ok(wikiLinkProblems('<a href="https://example.com">e</a>', ctx).length, 'an external reader link passes');
+  assert.ok(wikiLinkProblems('<a href="//github.com/x/y">e</a>', ctx).length, 'a protocol-relative reader exit passes');
   assert.ok(wikiLinkProblems('<a href="/skills/readback">r</a>', ctx).length, 'a link to a missing article passes');
   assert.ok(wikiLinkProblems('<a href="/skills#nowhere">n</a>', ctx).length, 'a link to a missing index anchor passes');
   assert.ok(wikiLinkProblems('<a href="/glossary">g</a>', ctx).length, 'a link to a missing page passes');
