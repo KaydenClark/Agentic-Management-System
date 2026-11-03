@@ -1,6 +1,4 @@
-// Footer on every page: the commit this build was made from, linked to it on
-// GitHub. AMS_COMMIT_SHA is fixed at build time by next.config.ts.
-const REPO = "https://github.com/KaydenClark/Agentic-Management-System";
+// Keep build identity on-site. AMS_COMMIT_SHA is fixed by next.config.ts.
 
 export function Footer() {
   const sha = process.env.AMS_COMMIT_SHA || "unknown";
@@ -10,9 +8,9 @@ export function Footer() {
       <div className="container site-footer-inner">
         <span>Built from commit</span>
         {known ? (
-          <a className="mono" data-commit-sha={sha} href={`${REPO}/commit/${sha}`}>
+          <span className="mono" data-commit-sha={sha} title={sha}>
             {sha.slice(0, 7)}
-          </a>
+          </span>
         ) : (
           <span className="mono" data-commit-sha={sha}>
             {sha}

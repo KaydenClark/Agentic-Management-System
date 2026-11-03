@@ -20,6 +20,8 @@ last_verified: 2026-11-02
 
 The website explains and demonstrates AMS. Visitors come for understanding; it is not a live control panel. [S-003](../landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md) owns the shell and orientation. [S-007](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/SPEC.md) owns RSI evidence presentation. These Specs own their destinations; this article preserves context and grants no implementation or release authority.
 
+For RSI, the [approved correction](#jot-cf0db5e8-89b7-4766-85d7-1f101bfc3aaa) requires visible real-evidence charts and useful supporting information on the website. Omit irrelevant material and GitHub exits; retain source identity, failures and evidence limits. Implementation is authorized for this correction; other website feedback and production promotion retain their own boundaries.
+
 ## RSI proof during website development
 
 Confirmed by Kayden in chat, 2026-11-02; the [sourced correction](#jot-052e2b9a-85fc-4813-bad1-6039aa017f9c) preserves the intent. This AMS project develops and proves shared skill improvements through the website build. Workflow and process issues found during that work feed the RSI loop: record the issue and baseline, repair the owning skills, compare before and after here, log the evidence and disposition, and display the RSI log on the website. Retain failures, regressions and unknowns; an issue report or merged repair alone proves no improvement.

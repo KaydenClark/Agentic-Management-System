@@ -38,7 +38,7 @@ Pages explain ideas before IDs and define unfamiliar terms. Agents draft from ap
 
 The [approved feedback](../../../../wiki/context-website-presentation.md#jot-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458) consolidates overlapping orientation pages: Start Here serves as About; retain the subjects below. Tasks TK-001P–TK-001T cover orientation, persistent full-width navigation (Home left, theme right), visual glossary, larger text and visible Grill Board colors in both themes. Shared files require serial execution; preparation grants no implementation authority.
 
-The [website-only link readback](../../../../wiki/context-website-presentation.md#jot-78d8b232-f2c6-4697-ab8c-9e25f60760ba) is pending before its Task. It conflicts with the GitHub source/SHA requirements below; do not invent an exception.
+The [website-only link readback](../../../../wiki/context-website-presentation.md#jot-78d8b232-f2c6-4697-ab8c-9e25f60760ba) is pending before its Task. RSI links now follow its approved readback; other pages await confirmation.
 
 ### Orientation content
 
@@ -51,7 +51,7 @@ The [website-only link readback](../../../../wiki/context-website-presentation.m
 
 ### Shell and related capabilities
 
-Navigation shows current page, tour order/start/finish and direct subject links, without dead ends. Core text works without scripts. Light/dark follows system or manual override. Every page links its deployed SHA to GitHub.
+Navigation shows current page, tour order/start/finish and direct subject links, without dead ends. Core text works without scripts. Light/dark follows system or manual override. Every page displays its deployed SHA on-site.
 
 Introduce and link RSI charts (S-007), site-written skill summaries (S-008), the demo Grill Board with non-engineering sample questions (S-009), and governance/flow charts (S-010). Keep private skill source private.
 
