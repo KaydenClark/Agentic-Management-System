@@ -134,3 +134,15 @@ Supersedes: none
 
 The shared handoff, branch and cleanup repairs must be logged and displayed with their actual RSI test and audit results on dev. Terra 6.1 tests and audits govern the requested Stable or Excellent skill merge gate. The owner explicitly authorizes updating this machine personal skills folder after a qualifying repair. The earlier exclusion of installation into other projects remains: personal-catalog installation is a different action. Keep handoffs local and ignored; publish Tasks and safe evidence summaries, never the private source text or raw evaluation material. A measured audit score is separate from demonstrated behavioral benefit and whole-AMS fitness.
 <!-- /jot-entry -->
+
+## Verification failure and owner-authorized retry — 2026-11-02
+
+Kayden requested a failure report and another attempt after the website
+correction stopped on two failed verification runs. The
+[incident report](../feedback/REPORT-live-dev-verification-failure-2026-11-02.md)
+retains both attempts and the narrower-check and sequential-build corrections.
+Kayden also explicitly requested applying the recorded MIT license and
+updating the public skills wiki. This authorizes those corrections, not
+installing skills, promoting unfinished catalog candidates, owner Human QA
+or dev-to-main site promotion. Recording the failure proves no prevention
+benefit; the retry must supply its actual results.
