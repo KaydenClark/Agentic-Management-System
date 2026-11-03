@@ -20,6 +20,8 @@ SPEC_TEMPLATE = """# S-900 - Fixture
 
 ## Acceptance Criteria
 
+- [x] **Unrelated file.** Production behaves correctly. *Evidence:* `README.md`.
+- [x] **Ancestor only.** Another behavior works. *Evidence:* `{sha}`.
 - [x] **Evidenced.** Works. *Evidence:* `{sha}`, [test](tests/test_thing.py).
 - [x] **Unevidenced.** Claimed done with nothing linked.
 - [x] **Bogus evidence.** *Evidence:* `deadbeefdeadbeef` and `tests/missing.py`.
@@ -53,6 +55,7 @@ def _git(cwd, *args):
 def _fixture():
     d = tempfile.mkdtemp(prefix="uts-")
     _git(d, "init", "-q", "-b", "main")
+    Path(d, "README.md").write_text("unrelated\n")
     Path(d, "tests").mkdir()
     Path(d, "tests/test_thing.py").write_text("pass\n")
     _git(d, "add", ".")
@@ -80,6 +83,12 @@ class UpToSpecTest(unittest.TestCase):
         self.repo, self.commit = _fixture()
         self.report = check_spec("S-900", repo=self.repo, commit=self.commit)
         self.by_name = {c["name"]: c for c in self.report["criteria"]}
+
+    def test_resolved_references_do_not_verify_behavior(self):
+        for name in ("Unrelated file", "Ancestor only"):
+            criterion = self.by_name[name]
+            self.assertEqual(criterion["status"], "unknown")
+            self.assertTrue(criterion["evidence"])
 
     def test_evidenced_is_met_unevidenced_is_unknown(self):
         self.assertEqual(self.by_name["Evidenced"]["status"], "met")
