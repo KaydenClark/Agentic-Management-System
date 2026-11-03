@@ -35,8 +35,8 @@ export default function HowItWorks() {
         <h1>How it works</h1>
         <p className="lede" data-opener="">
           In the Agentic Management System, or <dfn id="ams">AMS</dfn>, work is written down before it is done. A
-          request becomes a <dfn id="spec">Spec</dfn>: a short written plan for one change, with the conditions that will show it worked. Each Spec is cut into{" "}
-          <dfn id="task">Tasks</dfn>, each small enough for one <dfn id="agent">agent</dfn>, an AI assistant that
+          request becomes a <dfn id="spec">Spec</dfn>: a bounded destination that says what behavior is wanted and the conditions that will show it worked. Each Spec is cut into{" "}
+          <dfn id="task">Tasks</dfn> that plan and carry out execution slices, each small enough for one <dfn id="agent">agent</dfn>, an AI assistant that
           carries out work, to finish in a single run. The agent hands back proof, and only Kayden, the owner, moves
           finished work into the main version of the site.
         </p>
@@ -176,8 +176,10 @@ export default function HowItWorks() {
             <Source path="GLOSSARY.md">Glossary, Human QA receipt</Source>
           </li>
           <li>
-            The AMS runtime software does not exist yet.
-            <Source path="ARCHITECTURE.md">Architecture, Bird&apos;s-eye view</Source>
+            The Workbench Node lifecycle and Python command-line tools are working components. The assembled RSI loop has not been demonstrated as a runtime system.
+            <Source path="ARCHITECTURE.md">Architecture</Source>
+            <Source path="workbench/tools/spec-workbench.mjs">Workbench Node lifecycle</Source>
+            <Source path="src/ams/trials.py">Python command-line tools</Source>
           </li>
           <li>
             The <Link href="/rsi">RSI results</Link> page shows shared-skill repair evidence and recorded trial

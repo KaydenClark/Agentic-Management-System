@@ -13,6 +13,36 @@ export function RepairEvidence() {
           for later website work. This is a snapshot of <a href={evidence.baseline.source}>published evidence</a>.
         </p>
       </header>
+      <section className={styles.place} data-checker-repair="" aria-labelledby="checker-repair">
+        <h3 id="checker-repair">A checker that called a file reference proof</h3>
+        <p>
+          The original <a href={evidence.checker.baselineSource}>up-to-Spec checker at <code>{evidence.checker.baseline}</code></a>
+          {" "}reported a checked criterion as false <code>met</code> because its unrelated <code>Evidence:</code> file existed.
+          File presence and commit ancestry do not verify behavior. The repair in <a href={evidence.checker.candidateSource}>
+          candidate <code>{evidence.checker.candidate}</code></a>{" "}reports checked criteria as <code>unknown</code> while
+          retaining resolved references; unchecked criteria remain <code>not met</code>.
+        </p>
+        <p>The <a href={evidence.checker.source}>coherence repair Task</a> and <a href={evidence.checker.report}>safe evidence report</a> keep the source finding and disposition.</p>
+        <p>
+          On fixture <a href={evidence.checker.fixtureSource}><code>{evidence.checker.fixture}</code></a>, replay changed
+          three false <code>met</code> results to <code>unknown</code>, including an ancestor-only reference, and kept
+          their references. A second unrelated existing file reproduced the same pattern. Missing and unmerged references
+          stayed <code>unknown</code>; the unchecked criterion stayed <code>not met</code>. This recurrence is within the
+          same fixture, not later-use evidence. The <a href={evidence.checker.report}>immutable repair report</a> records
+          33 focused checks passed and the source suite: 809 passed, 5 skipped, 1 failed. Its sole failure is the inherited
+          AGENTS.md length check (3215 over a 3000-character ceiling), unchanged by this source repair; assembled checks
+          remain pending.
+        </p>
+        <p>
+          Fresh Luna CLI use on S-001 returned 0 met, 6 not met, 2 unknown; on S-003 it returned 0 met, 8 not met,
+          0 unknown. This is later real use of the checker, not evidence of missing historical behavior or a Spec verdict.
+          Automatic skill discovery and other hosts remain unverified. The original false report remains historical evidence;
+          the candidate is awaiting assembly and review. No semantic verification, generalized benefit, whole-Spec acceptance,
+          owner QA or completed learning cycle is established. The broader control-pruning attempt repeated its goal-versus-
+          ceiling failure and required owner and root intervention, so this is not evidence of a fully autonomous end-to-end
+          learning cycle.
+        </p>
+      </section>
       <figure className={styles.place} aria-labelledby="baseline-predicates">
         <figcaption>
           <h3 id="baseline-predicates">Baseline development checks</h3>

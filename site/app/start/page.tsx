@@ -22,6 +22,8 @@ export const metadata: Metadata = {
 
 const S003 = { label: "S-003", path: "workbench/landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md" };
 const ARCH = { label: "Architecture", path: "ARCHITECTURE.md" };
+const WORKBENCH = { label: "Workbench Node lifecycle", path: "workbench/tools/spec-workbench.mjs" };
+const PYTHON = { label: "Python command-line tools", path: "src/ams/trials.py" };
 const DDR000O = { label: "DDR-000O", path: "workbench/docs/ddr/000O-the-public-site-only-presents-and-reads-supabase.md" };
 const ADR000G = { label: "ADR-000G", path: "workbench/docs/adr/000G-a-rule-is-enforced-only-when-code-refuses-and-a-test-shows-it.md" };
 const SKILLS_MD = { label: "Workbench skills", path: "workbench/docs/SKILLS.md" };
@@ -305,8 +307,8 @@ export default function StartHere() {
       <Screen id="today" n={7} title="Where it stands today">
         <ul className={styles.today}>
           <li>
-            The AMS runtime software does not exist yet; today the system is its records, tools and agents.
-            <SourceLinks sources={[ARCH]} />
+            The Workbench Node lifecycle and Python command-line tools are working components; the assembled RSI loop has not been demonstrated as a runtime system.
+            <SourceLinks sources={[ARCH, WORKBENCH, PYTHON]} />
           </li>
           <li>
             The <Link href="/rsi">RSI results</Link> page contains development evidence from shared-skill repair
@@ -329,7 +331,7 @@ export default function StartHere() {
           </li>
           <li>
             <strong>A real piece of work.</strong> <Link href="/how-it-works#example">How it works</Link> follows
-            one real Spec, the written plan for a change, and one of its Tasks from this site to their files, so you
+            one real Spec, a bounded destination with acceptance conditions, and one of its Tasks that plans execution from this site to their files, so you
             can see how a request is written down, split up and closed with proof.
           </li>
           <li>
