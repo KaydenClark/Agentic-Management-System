@@ -7,6 +7,7 @@
 ## Workflows
 
 `map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in Wiki.
+Run each role at its [model tier](workbench/docs/adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
 
 ## Test And Build
 
