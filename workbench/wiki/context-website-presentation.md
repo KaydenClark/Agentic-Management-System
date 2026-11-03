@@ -277,3 +277,16 @@ Supersedes: JOT-d795477b-63fe-4264-8ca9-7ba15e5d4470
 
 Kayden confirmed the readback and explicitly authorized fixing the website now. Implement visible charts of real RSI evidence, keep relevant explanation and supporting information on the website, omit irrelevant material, and remove GitHub links from the RSI reader experience. The readback-only hold is released for this correction. Preserve honest empty/unavailable states, source identity and the distinction between development observations, audit scores and demonstrated improvement. This does not authorize new trial campaigns, skill installation or owner-only dev-to-main site promotion.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-75b4c558-de1c-4025-a6ab-8851d4c5448a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T05:50:45.123Z
+Author: Kayden
+Source: Kayden, explicit publication answer in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden explicitly answered Publish and merge into dev to the request to push the committed RSI correction to KaydenClark/Agentic-Management-System, open its PR and merge once checked. This releases the automatic-review publication blocker for that payload and feature branch. Production main stays unchanged; no dev-to-main promotion is authorized.
+<!-- /jot-entry -->

@@ -28,7 +28,7 @@ The correction crosses safe evidence, route rendering, shared footer, styles, te
 - [x] The baseline/candidate comparison and its supporting data, provenance, failures and limits can be understood entirely on-site.
 - [x] No GitHub link appears in the rendered RSI page, including shared chrome; internal evidence links resolve to useful on-site content.
 - [x] Empty/unavailable trial states, separate evidence classes and existing failure history remain accurate; synthetic/test trial rows never render.
-- [ ] Focused regressions, production build, site suite and browser inspection pass; actual candidate, delivery and verification limits are recorded.
+- [x] Focused regressions, production build, site suite and browser inspection pass; actual candidate, delivery and verification limits are recorded.
 
 ## Hand-back
 
@@ -46,4 +46,4 @@ No live database read was verified: this local build lacks the publishable envir
 
 ## Publication gate
 
-The source is committed locally. Automatic approval review rejected the feature push even after verifying the configured public repository, its owner and push access, and zero hygiene findings; it requires explicit owner approval for public publication separately from implementation. An approval request is pending in chat. No PR, remote publication or merge is claimed; this Task stays in progress until delivery is resolved.
+Initially, the source was committed locally and automatic approval review rejected the feature push even after verifying the configured public repository, its owner and push access, and zero hygiene findings; it requires explicit owner approval for public publication separately from implementation. Kayden then explicitly answered Publish and merge into dev. The source and verification records were pushed on codex/rsi-results-feedback at c259d19; the PR will target dev and merge only after its exact-head shared CI passes. No production promotion or live database verification is claimed.
