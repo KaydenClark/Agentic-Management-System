@@ -20,12 +20,11 @@ export const READING_ORDER = [
   '/skills',
   '/rsi',
   '/glossary',
-  '/about',
 ];
 
 // Every tour page the Spec names (S-003 Desired Behavior, Tour pages).
 export const TOUR = [
-  { href: '/start', title: 'Start here' },
+  { href: '/start', title: 'About' },
   { href: '/why', title: 'Why' },
   { href: '/how-it-works', title: 'How it works' },
   { href: '/glossary', title: 'Glossary' },
@@ -119,6 +118,17 @@ export function orderProblems(html, index, order = READING_ORDER) {
 // no page is an orphan or a dead end. `parents` maps a route to its built
 // HTML. Empty when it passes.
 export function childProblems(route, html, parents, order = READING_ORDER) {
+  // /about is retained as a canonical alias, not a second reading-order page.
+  // Require equivalent content and the same About position to avoid allowing
+  // arbitrary top-level orphan pages through this exception.
+  if (route === '/about') {
+    const target = parents.get('/start');
+    const problems = [];
+    if (!target || visibleText(mainOf(html)) !== visibleText(mainOf(target))) problems.push('About alias differs from /start');
+    const headerNav = html.match(/<nav[^>]*aria-label="Reading order"[\s\S]*?<\/nav>/)?.[0] ?? '';
+    if (!/href="\/start"[^>]*aria-current="page"[^>]*>About<\/a>/.test(headerNav)) problems.push('About alias lacks its shared navigation position');
+    return problems;
+  }
   const parts = route.split('/').filter(Boolean);
   const parent = `/${parts.slice(0, -1).join('/')}`;
   if (parts.length < 2 || !order.includes(parent)) return [`${route} is outside the reading order and under no page in it (orphan)`];

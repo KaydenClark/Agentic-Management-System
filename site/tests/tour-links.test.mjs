@@ -73,3 +73,12 @@ test('internal links on tour pages resolve to a built page or an id on the page'
     }
   }
 });
+
+test('the older About route must preserve the canonical introduction rather than become an orphan', () => {
+  const start = builtPage('start.html').html;
+  const about = builtPage('about.html').html;
+  const parents = new Map([['/start', start]]);
+  assert.deepEqual(childProblems('/about', about, parents), []);
+  assert.ok(childProblems('/about', about.replace('aria-current="page"', ''), parents).length);
+  assert.ok(childProblems('/about', about.replace('<h1>About</h1>', '<h1>Different</h1>'), parents).length);
+});
