@@ -290,3 +290,16 @@ Supersedes: none
 
 Kayden explicitly answered Publish and merge into dev to the request to push the committed RSI correction to KaydenClark/Agentic-Management-System, open its PR and merge once checked. This releases the automatic-review publication blocker for that payload and feature branch. Production main stays unchanged; no dev-to-main promotion is authorized.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-4adf0b91-665d-4abb-8644-4835b40e905a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:17:13.071Z
+Author: Kayden
+Source: Kayden, S-003 orchestration and carry instruction in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden assigns S-003 to orchestration using appropriate frontend web development skills and carry through completion. This releases preparation-only execution holds for the five confirmed presentation Tasks TK-001P through TK-001T: coherent orientation, persistent navigation, visual glossary, readable typography and visible Grill Board palette. Execute serially with one writer for shared site files, inspect the assembled destination and deliver checked site PRs into dev. Preserve unresolved website-only-link feedback outside the separately approved RSI scope. Human QA, whole-Spec acceptance and owner-only dev-to-main promotion remain distinct. No new model campaigns, paid services or shared-skill installation are authorized.
+<!-- /jot-entry -->

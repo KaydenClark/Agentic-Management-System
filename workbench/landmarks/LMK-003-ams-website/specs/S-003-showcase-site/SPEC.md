@@ -5,16 +5,16 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-03
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Next gate:** Assign feedback Tasks; confirm website-only link readback.
+**Next gate:** Close TK-001S with verification and documentation proof.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 
 ## Intent and authority
 
-The [owner brief](../../../../wiki/context-website-presentation.md) governs shell/orientation; sibling Specs remain required. This revision prepares records only.
+The [owner brief](../../../../wiki/context-website-presentation.md) governs shell/orientation; sibling Specs remain required. Execution: [owner assignment](../../../../wiki/context-website-presentation.md#jot-4adf0b91-665d-4abb-8644-4835b40e905a).
 
 ## Outcome
 
@@ -36,7 +36,7 @@ Pages explain ideas before IDs and define unfamiliar terms. Agents draft from ap
 
 ### Approved presentation feedback
 
-The [approved feedback](../../../../wiki/context-website-presentation.md#jot-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458) consolidates overlapping orientation pages: Start Here serves as About; retain the subjects below. Tasks TK-001P–TK-001T cover orientation, persistent full-width navigation (Home left, theme right), visual glossary, larger text and visible Grill Board colors in both themes. Shared files require serial execution; preparation grants no implementation authority.
+The [approved feedback](../../../../wiki/context-website-presentation.md#jot-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458) consolidates overlapping orientation pages: Start Here serves as About; retain the subjects below. Tasks TK-001P–TK-001T cover orientation, persistent full-width navigation (Home left, theme right), visual glossary, larger text and visible Grill Board colors in both themes. Execute shared-file Tasks serially under the owner assignment.
 
 The [website-only link readback](../../../../wiki/context-website-presentation.md#jot-78d8b232-f2c6-4697-ab8c-9e25f60760ba) is pending before its Task. RSI links now follow its approved readback; other pages await confirmation.
 
