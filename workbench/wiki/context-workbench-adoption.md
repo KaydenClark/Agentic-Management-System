@@ -33,7 +33,7 @@ Kind: intent. State: confirmed. Source: Kayden, owner instruction approved 2026-
 
 | Item | Disposition |
 |---|---|
-| Eight root controls | Fold: reconciled in place to package formats; AGENTS, ARCHITECTURE and RUNBOOK pruned under 3,000 characters, all owner rules kept |
+| Eight root controls | Fold: reconciled in place to package formats; AGENTS, ARCHITECTURE and RUNBOOK pruned under 3,000 characters, owner rules were intended to be kept; the fidelity gaps below remained |
 | GLOSSARY feedback-disposition table | Port into Language terms (parser forbids other sections) |
 | Notepad JSON examples | Port to `workbench/sessions/notepads/templates/` (byte-identical to the package) |
 | Session ignore rule | Fold: root rule now re-includes lane subfolders; `workbench/sessions/.gitignore` keeps live contents local |
@@ -56,3 +56,19 @@ Kind: intent. State: confirmed. Source: Kayden, owner instruction approved 2026-
 - AGENTS fidelity: ten template lines dropped and six changed to fit the limit (personal-skill-first, `carry`, `claim`, pre-edit readback, Task-review policy, closeout). Restore them or record them in an ADR.
 - `TASK-TEMPLATE.md` keeps the earlier agreed `T-NNN` naming; installed tooling uses `TK-###`.
 - Legibility `run`, `journey`, `measure` are bracketed gaps until an application and eval runner exist.
+
+## Recovery accounting — 2026-11-02
+
+The owner confirmed that AMS should recover the Workbench as an agentic management system with RSI, and that the private CONTINUE route conflicts with that model ([corrections](context-owner-answers-coherence.md)). The pinned legacy [AGENTS](https://github.com/KaydenClark/LLM_Workbench/blob/9d5e1f25b0d5870589ae1c5752f27f42acb796ef/AGENTS.md), [system definition](https://github.com/KaydenClark/LLM_Workbench/blob/9d5e1f25b0d5870589ae1c5752f27f42acb796ef/workbench/docs/ddr/000T-the-workbench-is-an-agentic-management-system-not-a-harness.md), [recursive delivery](https://github.com/KaydenClark/LLM_Workbench/blob/9d5e1f25b0d5870589ae1c5752f27f42acb796ef/workbench/docs/ddr/000A-the-workbench-aligns-to-the-owner-s-concept-and-delivers-on-it-recursively.md), and [Wiki history](https://github.com/KaydenClark/LLM_Workbench/blob/9d5e1f25b0d5870589ae1c5752f27f42acb796ef/workbench/docs/ddr/001M-current-state-documents-carry-no-history-narrative-the-wiki-holds-the-project-s-history.md) were inspected at that immutable revision. The object is unavailable in the local Git database; a dirty legacy checkout is not evidence of that revision.
+
+| Area | Current evidence and limit |
+|---|---|
+| AGENTS duties | Partially adapted; the ten dropped and six changed lines above remain the historical accounting. Current control restores skill routing, scope readback, carry, claim and behavioral-test guidance; equivalence of all obligations is not proven. |
+| Continuation | The private CONTINUE pointer contradicted the newer owner correction; current routing uses Spec/Task, Wiki and ignored handoffs. |
+| Spec history | Spec-to-Wiki history implementation is retained; the Adoption Spec evidence row remains owed. |
+| Tools and skills | Manifest and tool receipt retain source identity; host activation is unknown. Personal skill routing is retained; actual invocation is not proven by presence. |
+| Recursive delivery | The destination is retained; composed delivery remains partial or unknown. |
+| Acceptance | Checks, independent Review and owner Human QA remain distinct; no owner acceptance follows from this reconciliation. |
+| Website | The evidence surface is retained; a complete learning cycle and behavioral benefit remain unproved. |
+
+This accounting is not a complete adoption audit or a claim that S-013 detection or S-007 presentation acceptance has passed. The bounded checker repair and later assembled evidence remain separate work.

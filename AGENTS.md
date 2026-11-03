@@ -7,7 +7,7 @@
 ## Start and scope
 
 - Verify repo/branch/remote, locks and dirty state. Follow [RUNBOOK](RUNBOOK.md#get-oriented), assigned Spec/Task and [personal skill](workbench/docs/SKILLS.md).
-- Planning: read `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031`; copying here needs owner go-ahead.
+- Recover continuation from the assigned Spec/Task and Wiki; use ignored local handoffs when needed. Load the relevant personal skill before work; read back scope and carry the authorized outcome through its endpoint.
 - Owner/Spec scope governs. Distinguish confirmation, execution approval, review, Human QA and publication. Ask consequential choices; delegate only when authorized.
 - At most six active Landmarks. Landmark -> Spec -> Task. Specs need no slots; only real inputs block Tasks (ADR-003J).
 - Edit `workbench/tools/` only via setup-workbench; author skills with author-skill.
@@ -17,7 +17,7 @@
 
 ## Testing instructions
 
-- Run `node workbench/tools/spec-workbench.mjs doctor` and [checks](RUNBOOK.md#test-and-build). Diagnose; red/green/refactor; never weaken checks; name unavailable ones.
+- Claim the assigned Task through the native lifecycle before implementation; use a failing behavioral test when practical. Run `node workbench/tools/spec-workbench.mjs doctor` and [checks](RUNBOOK.md#test-and-build). Diagnose; red/green/refactor; never weaken checks; name unavailable ones.
 - Three strikes: run, failed test, second failed test; stop and report both attempts.
 - RSI here: issue, baseline, hypothesis, before/after, failures, disposition; show the scoped log on the site. Repair `KaydenClark/skills`; authorized personal-catalog installs only. No cross-project rollout. Static scores prove no benefit.
 

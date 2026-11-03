@@ -14,7 +14,7 @@ last_verified: 2026-11-02
 
 ## Intent and boundary
 
-The owner wants feedback to produce demonstrated improvements in shared skills, orchestrators to catch and record failures without prompting, and the website to show actual progress and the workflow as it evolves. This request authorizes mapping, planning and normal documentation delivery only. Implementation remains held; existing campaign stops and earlier bounded authority are unchanged. No new Spec is needed: existing capability owners cover the destination.
+The owner wants feedback to produce demonstrated improvements in shared skills, orchestrators to catch and record failures without prompting, and the website to show actual progress and the workflow as it evolves. The original request authorized mapping and planning only. Subsequent owner direction authorizes bounded recovery and repair toward this loop; existing campaign stops and earlier bounded authority remain unchanged. No new Spec is needed: existing capability owners cover the destination.
 
 ## Stack and ownership
 
@@ -33,7 +33,7 @@ Each slice is one observable full path, not a schema/API/UI shard. Existing S-00
 
 ## Ready frontier and assembly
 
-Execution frontier: none for this newly planned work. Every new Task carries owner:feedback-loop-implementation, reflecting the explicit stop before implementation. Once execution is authorized, S-013 detection is the first new independent slice; existing prerequisite work retains its own authority and writers. Do not reopen S-002 PR 101 or reset attempts. An unavailable evaluator blocks its comparison, not unrelated reporting or website work.
+The original execution hold recorded the planning stop. Subsequent direction authorizes a bounded recovery and repair; it does not establish completion of the broader planned Tasks. S-013 detection remains the first new independent slice; existing prerequisite work retains its own authority and writers. Do not reopen S-002 PR 101 or reset attempts. An unavailable evaluator blocks its comparison, not unrelated reporting or website work.
 
 One writer per owner; A owns site changes targeting dev, B owns local feedback/storage/loop work, C owns independent coherence reporting without secrets or product writes. Shared skill repairs occur in KaydenClark/skills using author-skill and qualified evaluation, with only authorized personal catalog installation. Other projects are not modified.
 
@@ -49,4 +49,4 @@ Native dependency limitation: qualified cross-Spec Task edges are unsupported. T
 
 ## Later catalog-refocus correction
 
-The owner-recorded [preparation bypass](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) is a concrete recurrence case for S-013/TK-001D. [S-000A](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) separately owns the newly requested catalog-wide destination and repair side. The earlier statement that this feedback-loop mapping needed no new Spec applies to that earlier scope, not all future skill work. Both additions remain Prepare-only; existing holds, campaigns and evidence are unchanged.
+The owner-recorded [preparation bypass](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) is a concrete recurrence case for S-013/TK-001D. [S-000A](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) separately owns the newly requested catalog-wide destination and repair side. The earlier statement that this feedback-loop mapping needed no new Spec applies to that earlier scope, not all future skill work. The catalog-wide addition remains Prepare-only; existing campaign stops and evidence are unchanged.
