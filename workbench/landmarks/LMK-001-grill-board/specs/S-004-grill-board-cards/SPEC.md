@@ -5,12 +5,12 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-03
 **Catalog description:** Local Grill Board cards with Priority, Value, a rating and a "too taxing" flag, whose confirmed answers are written straight into their owning records.
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Owner approval and Human QA, then complete; this supplies no Spec activation slot.
+**Next gate:** Resolve the backend choice for TK-002F, then restore the current owner queue from the established LLM_Workbench behavior; owner QA remains separate.
 
 ## Intent and authority
 
@@ -26,15 +26,16 @@ Priority and Value are how the owner decides what needs attention. Costly questi
 
 ## Current Verified State
 
-- Met: every acceptance criterion, each at its linked evidence (TK-001 to TK-000J).
-- Review: passed at `4d49bfc` (Orchestrator C); proof in [S-004 history](../../../../wiki/history/S-004.md).
+- Earlier card mechanics have linked evidence (TK-001 to TK-000J); the automatic current-queue criterion below is not met. The checkout has no real cards, so an empty renderer is not proof of a usable owner-attention queue.
+- Historical review passed at `4d49bfc`; the [later review-status report](../../../../feedback/coherence/REVIEW-STATUS-S-004-2026-11-02.md) reports it unbound at its later candidate. Neither establishes current Review or owner acceptance.
 - Not met: owner approval and Human QA.
 
 History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Desired Behavior
 
-- A local Python server reads durable records and is never the record.
+- A local Python server reads durable records and is never the record. ADR-002X remains in force while the explicit backend choice below is pending.
+- The owner opens the current queue without requesting a refresh or preparing cards. Use the established LLM_Workbench queue, revision and answer workflow ([owner correction](../../../../wiki/context-owner-answers-coherence.md#jot-7c039b2f-ef97-4607-ad94-40cbbccc86ff)); existing answers and settled decisions survive updates.
 - Agents post only items needing an answer (owner gates, open choices, page approvals, decision texts), never routine content or drafts.
 - Each card shows Priority and Value with one-line reasons, a 1-5 rating and a one-click "too taxing" flag; a flagged card is rewritten before it is re-asked.
 - A confirmed answer goes straight into its owning record, with no re-confirmation.
@@ -59,6 +60,8 @@ History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Dependencies And Blockers
 
+- TK-002F needs the owner to choose between reusing the existing Node-backed LLM_Workbench board component and reproducing its behavior in Python. The newer reuse instruction does not explicitly resolve ADR-002X, which rejects Node backends. No replacement, data migration or backend change has been performed.
+
 - Python 3.14.5 pinned with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
 
 ## Vertical Implementation Slices
@@ -69,6 +72,8 @@ Each Task is one run landed on `main` by a checked PR.
 |---|---|---|---|---|
 
 ## Acceptance Criteria
+
+- [ ] **Current owner queue.** Opening the board shows actual pending owner questions with their context, recommendation, source and answer route; subsequent new, revised and resolved items appear without owner-requested preparation. Reopening creates no duplicates and does not re-ask a settled decision. A known actionable owner request with an empty “nothing needs you” view must fail. Unreadable inputs must appear as unavailable, never as an empty successful read.
 
 - [x] **Signals on every card.** Every card shows Priority and Value with a one-line reason each. *Check:* render a fixture card set. *Must fail:* a card with a grade and no reason. *Evidence:* [board] (TK-001, PR #16).
 - [x] **Answer lands in its owner.** Confirming an answer changes the owning record and needs no second confirmation. *Check:* test against a fixture record. *Must fail:* an answer that only changes board state. *Evidence:* [answers] (TK-000G, 3e557c0).
