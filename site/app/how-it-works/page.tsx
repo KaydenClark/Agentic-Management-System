@@ -3,6 +3,7 @@
 // GitHub. Every claim links the committed record it comes from.
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Signal } from "../components/Signal";
 import type { ReactNode } from "react";
 import styles from "./page.module.css";
 
@@ -169,18 +170,25 @@ export default function HowItWorks() {
 
       <section className={styles.section} aria-labelledby="grill-board">
         <h2 id="grill-board">The Grill Board brings questions to the owner</h2>
-        <p>
-          The Grill Board is the owner’s local place to answer choices that genuinely need human input. The
-          questions should make sense without knowing the project’s code. For example, planning a picnic might
-          need a date, the number of guests, a food budget and dietary needs. Those answers shape the work;
-          asking a person to decipher an internal file path does not resolve the underlying choice.
-        </p>
+        <Signal kind="worth" label="Why the answer matters">
+          <p>
+            The Grill Board is the owner’s local place to answer choices that genuinely need human input. The
+            questions should make sense without knowing the project’s code. For example, planning a picnic might
+            need a date, the number of guests, a food budget and dietary needs. Those answers shape the work;
+            asking a person to decipher an internal file path does not resolve the underlying choice.
+          </p>
+        </Signal>
         <p>
           In this project, answers and page-review judgments belong to the relevant work and identified content.
           A displayed card is not an answer or approval. The local board is separate from this presentation
-          website: this section explains its role, while the <Link href="/start#try">handoff toy</Link> illustrates
-          how work can return for correction. It does not submit questions or change the owner’s records.
+          website: this section explains its role.
         </p>
+        <Signal kind="returned" label="Returned for correction">
+          <p>
+            The <Link href="/start#try">handoff toy</Link> illustrates how work can return for correction.
+            It does not submit questions or change the owner’s records.
+          </p>
+        </Signal>
       </section>
 
       <section className={styles.section} aria-labelledby="guarantees">

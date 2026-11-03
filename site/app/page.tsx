@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Signal } from "./components/Signal";
 import styles from "./tour/tour.module.css";
 
 export default function Home() {
@@ -20,13 +21,15 @@ export default function Home() {
           <li><Link href="/start#refuses">Limits</Link>: what the website does, what it cannot prove and where human decisions remain.</li>
         </ul>
       </section>
-      <section className="card" aria-labelledby="this-site">
+      <section aria-labelledby="this-site">
+        <Signal kind="agent" label="Agents carry the work">
         <h2 id="this-site">A website built with the system it explains</h2>
         <p>
-          This is the AMS project’s first outside product. Building it gives the team real work from which to
+          This is the AMS project’s first outside product. Building it gives people and agents real work from which to
           learn. The site presents explanations, demonstrations and published evidence; it does not operate
           agents or change project records. Every page’s footer identifies its build revision as text.
         </p>
+        </Signal>
       </section>
     </>
   );
