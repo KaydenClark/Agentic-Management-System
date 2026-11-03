@@ -1,0 +1,17 @@
+# Up-to-Spec evidence boundary repair
+
+## Finding and candidate
+
+A checked acceptance criterion with an `Evidence:` reference to an unrelated existing file was reported `met`. File presence or commit ancestry does not verify the behavior. The baseline module at `408e851e5ec621bd00f32e9a382df8d9a06b505e` had SHA-256 `7aa6c2efd6829d93e45ce5d3d099bfa451bcd143215372c13336396012ebc400`. Candidate `7735c553bbe2cde0e5c5d6a26a56e7468773961b` has module SHA-256 `2621bf52c450cfac9f83b34e4dcec16fef7e7455af2bcfefdad1dedace172c37`. It reports checked criteria as `unknown`, while retaining resolved references; unchecked criteria remain `not met`.
+
+## Observations
+
+The implementor reported 33 focused coherence and review tests passed. Deterministic `uv run python tests/coherence_replay.py` compared the baseline and candidate at fixture commit `ce9d9b71ef3709eddfc8fd615fe7280668e9f006`: three false `met` results, including an ancestor-only reference and a second unrelated existing file, became `unknown` with their references preserved. Missing and unmerged references remained `unknown`; an unchecked criterion remained `not met`. The second unrelated file demonstrates recurrence of the original pattern within the fixture, not later-use benefit.
+
+The first attempted test had a fixture syntax error; the corrected test produced the expected red before repair. These are distinct observations. A fresh Luna context explicitly loaded the installed journey and carry skill bytes and ran the candidate on actual records without database, model or secret calls: S-001 returned 0 met, 6 not met and 2 unknown; S-003 returned 0 met, 8 not met and 0 unknown. These outputs describe the checker's conservative classifications, not proof that historical behavioral evidence is absent or that a Spec failed acceptance. Automatic skill discovery and other hosts remain unverified. The local personal catalog snapshot was `f2354fd037eddc3e02bf5766630bec8f039efaa7`, not a claim about published main.
+
+## Limits and disposition
+
+Full source suite and combined candidate checks were pending at this report. No independent assembled Review, owner Human QA, deployment, whole-Spec acceptance or benefit claim follows. The repair is a candidate awaiting assembly and review; the original false report remains historical evidence. Separately, the control-pruning work repeated an earlier ceiling-versus-goal failure and required root and owner intervention; see [failure report](../REPORT-runbook-target-failure-2026-11-02.md). This repair is not evidence of a fully autonomous end-to-end learning cycle.
+
+Source: [draft PR 140](https://github.com/KaydenClark/Agentic-Management-System/pull/140), including implementor verification and pending checks; [S-013 TK-001V](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-013-coherence-checks/tasks/TK-001V/TASK.md). Fresh-session observations were relayed by the coordinating orchestrator on 2026-11-02.
