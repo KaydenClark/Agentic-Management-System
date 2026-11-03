@@ -27,6 +27,10 @@ transfer to this candidate.
 Severity: medium. Disposition: **diagnostic**; owner: **S-003**, Route criterion.
 Diagnostic performed: source comparison described below; no persistent test added.
 
+**Known open gap, not a newly discovered defect:** the [TK-002 receipt](https://github.com/KaydenClark/Agentic-Management-System/blob/ce39c6a89f92dffaebecb468b367c49ab6577bd8/workbench/landmarks/LMK-003-ams-website/specs/S-003-showcase-site/tasks/TK-002/TASK.md#L37)
+already records this limitation. This report re-verifies that existing gap at
+the named candidate and retains its original owner; it creates no duplicate Task.
+
 [How It Works at the candidate](https://github.com/KaydenClark/Agentic-Management-System/blob/ce39c6a89f92dffaebecb468b367c49ab6577bd8/site/app/how-it-works/page.tsx#L14)
 defines `REPO_BLOB` with `/blob/dev/`. Its real-work example uses that prefix
 for S-003 and TK-001/TK-002 links. The paragraph following TK-002 explicitly
@@ -61,5 +65,6 @@ converted into new owner questions by this record.
 
 Keep F-001 with the existing S-003 website work; no new Task, approval gate or
 scope is created. This documentation-only record does not mark S-003 complete,
-claim Human QA, or prove improved agent reliability. Independent review of this
-narrow finding is recorded in the accompanying PR when available.
+claim Human QA, or prove improved agent reliability. A separate-context source reviewer confirmed this narrow mismatch and located
+the pre-existing TK-002 limitation. That review covered the cited source and
+requirement only, not the full site, rendered behavior or Human QA.
