@@ -238,3 +238,48 @@ review identities through a checked correction and verify the resulting
 delivery. The unsupported metadata in main needs its own target-aware
 reconciliation as well. No deployment readback, owner QA, production
 promotion or whole-system improvement is established by this merge.
+
+
+## Additional linked review observation — 2026-11-03 16:49 UTC
+
+Reporter: **owner-assistant**. Disposition: **diagnostic**.
+Existing finding identity:
+[PR #142 review, dynamic freshness included in the content hash](https://github.com/KaydenClark/Agentic-Management-System/pull/142#discussion_r4457543895).
+Owning surfaces: S-007 RSI page and S-005 page-review hash contract.
+This is a newly reported issue on unchanged site source, not a regression
+introduced by records-only PR #155. No duplicate Task is created.
+
+At dev `0fdd1e147a9d6143a16e0b3eba2d561a70bc8392`, source inspection
+corroborates the review:
+
+- [The loader](https://github.com/KaydenClark/Agentic-Management-System/blob/0fdd1e147a9d6143a16e0b3eba2d561a70bc8392/site/app/rsi/supabase.ts#L106)
+  generates a fresh read timestamp for each successful data read.
+- [The page](https://github.com/KaydenClark/Agentic-Management-System/blob/0fdd1e147a9d6143a16e0b3eba2d561a70bc8392/site/app/rsi/view.tsx#L278)
+  renders that changing text without the review-exclusion marker.
+- [The hashing implementation](https://github.com/KaydenClark/Agentic-Management-System/blob/0fdd1e147a9d6143a16e0b3eba2d561a70bc8392/site/scripts/page-hash.mjs)
+  includes main-region text unless explicitly excluded. The
+  [S-005 contract](https://github.com/KaydenClark/Agentic-Management-System/blob/0fdd1e147a9d6143a16e0b3eba2d561a70bc8392/workbench/landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/SPEC.md#decisions-and-contracts)
+  binds review to that content hash.
+
+Consequently, when live reads succeed, the hash can change solely because the
+displayed freshness time changes, despite unchanged result rows. This is a
+source-supported conditional mismatch, not an observed invalidation of an
+actual owner's approval in this watch. No app, build or test suite ran.
+Evaluated model: not-applicable; reviewer model: unknown.
+
+Next action: follow the existing review finding through the owning workflow,
+retain visible freshness, and verify that timestamp-only changes leave the
+review identity stable while actual content changes still change it. This
+record supplies no fix, design acceptance or release permission.
+
+### Delivery evidence reconciliation
+
+[PR #155](https://github.com/KaydenClark/Agentic-Management-System/pull/155)
+merged four documentation changes, with no site-code change. Its
+[new S-011 history entry](https://github.com/KaydenClark/Agentic-Management-System/blob/0fdd1e147a9d6143a16e0b3eba2d561a70bc8392/workbench/wiki/history/S-011.md#rsi-page-shows-round-two-on-dev-tk-003-evidence)
+reports the builder's deployed-page browser readback: round-two charts rendered
+and 41 links included no GitHub exits. GitHub also records a successful Vercel
+deployment for dev `0fdd1e1` at 16:27:29 UTC. This adds builder-reported
+rendering evidence; it is not this watch's independent browser verification or
+a closure of the three earlier review findings. Human QA, personal
+installation and production promotion remain open.
