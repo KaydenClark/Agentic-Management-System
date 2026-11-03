@@ -74,6 +74,11 @@
   text-align: center;
   min-width: 0;
 }
+.flow li[data-signal] {
+  background: var(--tone-soft);
+  border-color: var(--tone-line);
+  color: var(--tone-ink);
+}
 .flowArrow {
   position: absolute;
   left: 100%;

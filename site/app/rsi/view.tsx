@@ -1,3 +1,4 @@
+import { Signal } from "../components/Signal";
 // The /rsi page body (S-007). Pure: it renders the series views it is given
 // and reads nothing, so render tests can feed it labeled fixtures and the
 // page feeds it Supabase rows. Every number is a link to the rows behind it,
@@ -266,11 +267,13 @@ export function RsiView({ views, unavailable, readAt = null, children }: { views
       <section className={styles.place} aria-labelledby="reading-results">
         <h2 id="reading-results">How to read the trial results</h2>
         {unavailable ? (
-          <p className={styles.note} data-load-note="">
+          <Signal kind="heat" label="Results unavailable">
+          <p data-load-note="">
             Results could not be loaded from the data store. No trial count is inferred from that failed read.
             The page tries again on its next refresh; no earlier successful data is retained here, and the last
             successful read is unknown for this response.
           </p>
+          </Signal>
         ) : null}
         {readAt ? <p className={styles.muted}>Last successful read: <time dateTime={readAt}>{Number.isFinite(Date.parse(readAt)) ? `${readTime.format(new Date(readAt))} UTC` : readAt}</time>.</p> : null}
         <p className={styles.muted}>

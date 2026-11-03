@@ -4,6 +4,7 @@
 // this page never words a term differently from the project's one home for
 // its language.
 import type { Metadata } from "next";
+import type { SignalKind } from "../components/Signal";
 import { Fragment, type ReactNode } from "react";
 import { REPO_BLOB, Source } from "../tour/Source";
 import styles from "./glossary.module.css";
@@ -56,10 +57,10 @@ function Arrow({ className }: { className: string }) {
   return <svg className={className} viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true"><path d="M2 8h12m-5-5 5 5-5 5" /></svg>;
 }
 
-function Flow({ children }: { children: ReactNode[] }) {
+function Flow({ children, signals = [] }: { children: ReactNode[]; signals?: (SignalKind | undefined)[] }) {
   return (
     <ol className={styles.flow}>
-      {children.map((child, index) => <li key={index}>{child}{index < children.length - 1 ? <Arrow className={styles.flowArrow} /> : null}</li>)}
+      {children.map((child, index) => <li key={index} className={signals[index] ? `tone h-${signals[index]}` : undefined} data-signal={signals[index]}>{child}{index < children.length - 1 ? <Arrow className={styles.flowArrow} /> : null}</li>)}
     </ol>
   );
 }
@@ -88,7 +89,7 @@ export default function Glossary() {
       <section className={styles.section} aria-labelledby="group-ams">
         <h2 id="group-ams">From intent to outcomes</h2>
         <figure className={styles.diagram} aria-labelledby="intent-caption">
-          <Flow>{[
+          <Flow signals={[undefined, undefined, "agent"]}>{[
             <strong key="people">People</strong>,
             <Fragment key="intent"><a href="#intent">Intent</a><span>Reasons · boundaries · corrections</span></Fragment>,
             <Fragment key="agents"><a href="#agent">Work with agents</a><span>Workflows · rules · skills · tools</span></Fragment>,
