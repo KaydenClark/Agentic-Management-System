@@ -112,6 +112,18 @@ export function orderProblems(html, index, order = READING_ORDER) {
   return problems;
 }
 
+// Attribute order is not meaningful in HTML. Select the current anchor,
+// then check its destination and label independently.
+export function aboutNavigationProblems(html) {
+  const nav = html.match(/<nav[^>]*aria-label="Reading order"[\s\S]*?<\/nav>/i)?.[0] ?? '';
+  const links = [...nav.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/gi)].map(match => match[0]);
+  const current = links.filter(link => /\saria-current="page"(?:\s|>)/i.test(link));
+  if (current.length !== 1 || !/\shref="\/start"(?:\s|>)/i.test(current[0]) || visibleText(current[0]) !== 'About') {
+    return ['About alias lacks its shared navigation position'];
+  }
+  return [];
+}
+
 // A built page outside the reading order must be a child of a page in it:
 // its route sits one level under that page's route (/skills/grilling under
 // /skills), the parent's content links it and it links back to the parent, so
@@ -125,8 +137,7 @@ export function childProblems(route, html, parents, order = READING_ORDER) {
     const target = parents.get('/start');
     const problems = [];
     if (!target || visibleText(mainOf(html)) !== visibleText(mainOf(target))) problems.push('About alias differs from /start');
-    const headerNav = html.match(/<nav[^>]*aria-label="Reading order"[\s\S]*?<\/nav>/)?.[0] ?? '';
-    if (!/href="\/start"[^>]*aria-current="page"[^>]*>About<\/a>/.test(headerNav)) problems.push('About alias lacks its shared navigation position');
+    problems.push(...aboutNavigationProblems(html));
     return problems;
   }
   const parts = route.split('/').filter(Boolean);

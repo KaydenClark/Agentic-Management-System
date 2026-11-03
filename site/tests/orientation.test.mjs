@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { builtPage, visibleText } from './helpers.mjs';
-import { mainOf } from './tour-helpers.mjs';
+import { aboutNavigationProblems, childProblems, mainOf } from './tour-helpers.mjs';
 
 const page = name => builtPage(`${name}.html`).html;
 const headerNav = html => html.match(/<nav[^>]*aria-label="Reading order"[\s\S]*?<\/nav>/)?.[0] ?? '';
@@ -14,7 +14,7 @@ test('the orientation has one About entry and its older routes share the same in
   }
   assert.equal(visibleText(mainOf(page('start'))), visibleText(mainOf(page('about'))));
   for (const name of ['start', 'about']) {
-    assert.match(headerNav(page(name)), /href="\/start"[^>]*aria-current="page"[^>]*>About<\/a>/);
+    assert.deepEqual(aboutNavigationProblems(page(name)), []);
     for (const id of ['what-it-is','problem','flow','try','who','refuses','today','quickstart','holds','license','status','built']) {
       assert.match(page(name), new RegExp(`\\sid="${id}"`), `${name} loses old entry #${id}`);
     }
@@ -41,4 +41,30 @@ test('the orientation explains limits, human decisions and the everyday purpose 
   assert.match(visibleText(how), /does not.*approval|not.*approval/);
   assert.match(visibleText(how), /picnic|weekend|dinner/);
   assert.ok(how.includes('href="/start#refuses"'));
+});
+
+test('About alias accepts every valid attribute order and rejects wrong links or state', () => {
+  const orders = [
+    ['href="/start"', 'aria-current="page"', 'class="navlink"'],
+    ['href="/start"', 'class="navlink"', 'aria-current="page"'],
+    ['aria-current="page"', 'href="/start"', 'class="navlink"'],
+    ['aria-current="page"', 'class="navlink"', 'href="/start"'],
+    ['class="navlink"', 'href="/start"', 'aria-current="page"'],
+    ['class="navlink"', 'aria-current="page"', 'href="/start"'],
+  ];
+  const render = attrs => `<nav aria-label="Reading order"><a ${attrs.join(' ')}>About</a></nav><main>Same introduction.</main>`;
+  for (const attrs of orders) {
+    const html = render(attrs);
+    const parents = new Map([['/start', html]]);
+    assert.deepEqual(aboutNavigationProblems(html), [], attrs.join(' '));
+    assert.deepEqual(childProblems('/about', html, parents), []);
+    for (const changed of [
+      html.replace('href="/start"', 'href="/why"'),
+      html.replace('aria-current="page"', ''),
+      html.replace('aria-current="page"', 'aria-current="false"'),
+      html.replace('>About</a>', '>Different</a>'),
+    ]) assert.ok(aboutNavigationProblems(changed).length, changed);
+    assert.ok(childProblems('/about', html.replace('Same introduction.', 'Other introduction.'), parents).length);
+  }
+  assert.ok(aboutNavigationProblems('<nav aria-label="Reading order"><a aria-current="page" href="/start">About</a><a aria-current="page" href="/why">Why</a></nav>').length);
 });
