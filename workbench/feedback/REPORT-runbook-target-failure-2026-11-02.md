@@ -36,3 +36,8 @@ Publish the checked small RUNBOOK with S-011 records, then display this separate
 ## Recurrence during recovery — 2026-11-02
 
 The recovery agent failed hygiene at 3,215 and 3,085 characters for AGENTS, then proposed 2,997 and 2,964 after a root request for a concrete retry. Root intervened to ask for headroom and source guidance; the owner corrected the agent again: it was pursuing the maximum rather than the goal, repeating an already recorded issue. The owner authorized resumption and required this be marked as failure. This is a separate observed recurrence of F-001, not proof of prevention or a new scored skill trial. The partial controls and both failed checks remain in TK-001U; the rejected proposals were not applied. Repair uses the established target and preserves needed duties; actual result and verification follow in that Task.
+
+
+### Recovery control iterations
+
+Initial sandbox launches failed before hygiene ran (cache access, then virtual-environment creation). The owner-authorized execution failed hygiene at 3,215 and 3,085 characters; proposals of 2,997 and 2,964 pursued the ceiling and were rejected. After the owner identified the recurrence and resumed work, one draft measured AGENTS 1,767/RUNBOOK 1,525; a further pruning command was rejected by automatic review because it would weaken explicit strike and RSI duties and did not execute. A safe alternate measured 1,861/1,579; Wiki routing and other fidelity concerns remained. The corrected candidate `1067809` measures 1,494/1,396, within the project target but not evidence that the near-900 aspiration was achieved. The owner and root interventions and failed checks remain evidence, not proof of prevention.

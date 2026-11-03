@@ -26,7 +26,7 @@ An earlier Workbench let its development trunk run thousands of commits ahead of
 
 ## Current Verified State
 
-No criterion is checked off.
+No criterion is checked off. The bounded dev recovery and its verification are recorded in [TK-001U](tasks/TK-001U/TASK.md); this does not complete detection or the learning cycle.
 
 - **Drift measured:** the drift check and report exist ([TK-001 receipt](tasks/TK-001/TASK.md#receipt)); the Grill Board item on breach is blocked ([TK-005](tasks/TK-005/TASK.md)).
 - **Up to Spec:** the check and an S-004 report exist ([TK-002 receipt](tasks/TK-002/TASK.md#receipt)).

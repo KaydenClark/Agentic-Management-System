@@ -16,23 +16,13 @@ Owner instruction, 2026-11-02: recover the Workbench meaning and current records
 
 ## Acceptance
 
-- [ ] Current main records are assembled with newer dev site work and confirmed owner corrections, with conflicts explained.
-- [ ] Recovery accounting identifies retained obligations, gaps and source limits without claiming behavioral proof.
-- [ ] Focused checks and scoped QA are recorded; unverified work remains open.
+- [x] Current main records are assembled with newer dev site work and confirmed owner corrections, with conflicts explained.
+- [x] Recovery accounting identifies retained obligations, gaps and source limits without claiming behavioral proof.
+- [x] Focused checks and scoped QA are recorded; unverified work remains open.
 
-## Work in progress and verification
+## Check and QA
 
-The merge commit preserves dev's Start and How it Works pages, including its quickstart and RSI evidence, and combines both website context histories; the generated taskboard was rendered from merged records. Both original remote tips are ancestors. Owner correction commits were cherry-picked with their original messages. Controls and adoption accounting have been reconciled; broader detection and learning-cycle acceptance remain open.
-
-`doctor` reports no global blocker, with S-011/TK-003's dependency, a stale S-002 claim, undeclared legibility and permission-scope drift still visible. Wiki validation, layout validation and `git diff --check` pass. Hygiene did not run: the first attempt could not access the uv cache; the second, with a temporary cache, could not create the worktree virtual environment. Stop after these two failed attempts; final assembly must resolve the environment and run remaining checks. Full Python and site checks, fresh-clone verification, independent review and owner Human QA are not claimed.
-
-Authorized retry launched hygiene after the sandbox failures. It found AGENTS at 3,215 characters against the 3,000 limit; a shortening attempt yielded 3,085 and the second check failed. Stopped under the three-strike rule. The control is still over budget; an explicitly authorized retry must finish it before readiness.
-
-### Owner-authorized retry and fidelity review
-
-Owner identified the ceiling-focused proposals as a recurrence and authorized repair; see [failure report](../../../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) and [correction](../../../../../../wiki/context-owner-answers-coherence.md#jot-7f1423d9-1f8a-4b06-8334-de686807f172). Draft AGENTS is 1,767 characters and RUNBOOK 1,525, above their 900–1,500 targets. Hygiene passes the ceiling, not the goal. An automatic review rejected a subsequent proposed pruning action because it would weaken explicit strike and RSI duties; it did not execute. Further edits require a safe, independently reviewed route.
-
-Fidelity inspection: owner-only dev-to-main, review/QA distinctions, capture before dependent work, one writer, safety and three-strike rules remain explicit. Cold-start routes include architecture, glossary, Wiki, taskboard, Spec/Task and skill. Remaining gaps: AGENTS mentions Wiki without its path (Wiki validator reports `room-brain-unrouted`); shortened controls must be checked against shared CI, scoped RSI evidence and authorized-install boundaries before readiness. RUNBOOK retains the command surface, fresh checkout and render/doctor expectations. This is self-review, not independent Review or owner Human QA.
+Merge `3d302cf` combined the original dev `07a7ae4` and main `3a95814` tips: newer dev tour pages were retained, website context histories combined and the taskboard regenerated. Original owner-correction commits were cherry-picked. [Adoption accounting](../../../../../../wiki/context-workbench-adoption.md) records retained obligations and limits. The [failure report](../../../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) retains the sandbox launch failures, failed hygiene checks, rejected proposals, automatic review rejection and owner interventions; [owner correction](../../../../../../wiki/context-owner-answers-coherence.md#jot-7f1423d9-1f8a-4b06-8334-de686807f172) authorized the retry. None proves prevention.
 
 ### Fidelity map for alternate control repair
 
@@ -52,8 +42,4 @@ Fidelity inspection: owner-only dev-to-main, review/QA distinctions, capture bef
 | Review, Human QA, merge, deployment and delivery evidence distinctions | AGENTS; SKILLS delivery |
 | Runtime commands, fresh checkout, rendering, doctor and rollback | RUNBOOK Test And Build and cleanup |
 
-This map is the intended route for the alternate; actual edits and verification must be inspected separately. It does not establish full Workbench equivalence, independent Review or Human QA.
-
-The alternate retains the three-strike and site RSI sentences verbatim, routes the full RSI operation and personal-install/no-rollout boundary to SKILLS, and routes CI policy to its Wiki owner. Wiki validation and hygiene pass; doctor has no global blockers but retains the S-011 slice, stale claim, legibility and permission findings. `git diff --check` passes. AGENTS is 1,861 characters and RUNBOOK 1,579, above their 900–1,500 targets; these are not accepted as complete. The exact alternate and fidelity map require independent inspection and further meaning-preserving pruning.
-
-The revised candidate routes full RSI procedure to SKILLS and CI operation to its existing Wiki owner. The protected strike and site RSI sentences remain verbatim. Current controls measure AGENTS 1,494 and RUNBOOK 1,396 Unicode codepoints. The RUNBOOK retains all eleven AMS entrypoints and routes orientation to architecture, glossary, Wiki, Taskboard, assignment and skill; the duplicated workflow list remains in SKILLS. A focused fidelity check covered the target, protected sentences, Wiki/skill routes, Landmark and blocker rules, owner-only promotion, safety, managed tools, CI and entrypoints. Wiki and layout validation, hygiene and whitespace checks pass. Doctor has no global blocker; its existing slice and informational findings remain. These checks and this self-review do not constitute independent Review or owner Human QA. Final assembled checks and review remain open.
+Candidate `1067809` measures AGENTS 1,494 and RUNBOOK 1,396 Unicode codepoints within the 900–1,500 target; near-900 is not claimed. The protected strike and RSI sentences, owner-only dev-to-main gate and Wiki/skill routes remain. The orchestrator inspected fidelity against the original obligations and accepted this bounded candidate for final independent Review. Wiki and layout validation, hygiene and whitespace checks passed. Doctor reported no global blocker, retaining the S-011 slice, stale claim, legibility and permission findings. Final assembled checks, independent Review and owner Human QA remain open. No full Workbench equivalence, Spec acceptance or behavioral benefit is claimed.
