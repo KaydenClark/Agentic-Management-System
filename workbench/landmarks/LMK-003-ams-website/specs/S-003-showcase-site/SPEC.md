@@ -7,8 +7,8 @@
 **Stance:** Builder
 **Updated:** 2026-11-03
 **Catalog description:** Explain AMS and its evidence.
-**Blockers:** none
-**Next gate:** Close TK-002B with verification and documentation proof.
+**Blockers:** Owner authorization for the stopped TK-002B correction.
+**Next gate:** Authorize a bounded keyboard-check correction; preserve the failed run.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 
@@ -26,7 +26,7 @@ Visitors can test AMS claims against real work.
 
 ## Current Verified State
 
-No criterion is verified; none is audited at a named deployment.
+Five presentation Tasks checked on dev; Home/RSI readback matches 7441e9e. Source candidate 8e211a1 stopped; acceptance/Human QA unverified.
 
 History: [S-003 history](../../../../wiki/history/S-003.md).
 
@@ -113,4 +113,4 @@ Pending audit and Kayden's judgments.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-Video is undecided; no gate.
+S-009 card demo/S-010 chart links remain undelivered; Scope unchecked. Video undecided; no gate.

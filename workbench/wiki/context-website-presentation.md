@@ -355,3 +355,16 @@ Supersedes: none
 
 Kayden authorizes only the bounded navigation focus correction after draft PR148 stopped. Establish why phone keyboard focus leaves links partly clipped, guarantee full focus visibility and verify the80case matrix and affected browser checks before checked dev delivery. Preserve both failed attempts and exact geometry. This grants no blanket permission for future corrective runs or weakening checks, and no Human QA or production promotion. The earlier S-003 assignment remains the source for other already-approved Tasks; any later three-strike stop still needs its own authorization.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-038f7849-c392-49b1-9265-96fc7e854709
+Kind: verification
+State: current
+Recorded: 2026-11-03T09:31:56.548Z
+Author: s003-orchestrator
+Source: Root IAB observations of protected dev Home and RSI, 2026-11-03, footer7441e9e351fe75397448431b25e6e994e2cac29d
+Topic: website-presentation
+Supersedes: none
+
+Normal authenticated browsing through the existing in-app browser sign-in can read the protected dev preview. Home and RSI footer full SHA matches7441e9e351fe75397448431b25e6e994e2cac29d. RSI shows a successful read at09:12UTC, empty held-out charts, actual ungraded dev row41 and explicit no-demonstrated-improvement limits. No authentication, deployment-protection, account or data changes were made. This resolves the browser-page access limitation for that candidate; the connector fetch failure is not proof of missing team access. It does not audit the later on-site-source candidate or supply Human QA.
+<!-- /jot-entry -->
