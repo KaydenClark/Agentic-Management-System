@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** Owner resumed the RSI loop ([JOT-fed30f75](../../../../wiki/context-owner-answers-coherence.md#jot-fed30f75-6d6c-4cf6-9460-6c6bd22f69ed)): per-PR repair and Mid-tier three-run qualification; merge each eligible Stable/Excellent PR; show results on dev.
+**Next gate:** Round two merged setup-workbench, orchestrate, handoff and journey ([history](../../../../wiki/history/S-011.md#resumed-per-pr-rsi-round-two)); land, prune-artifact, writing-for-agents and author-skill await owner direction; personal install pending; RSI page update to dev.
 
 ## Intent and authority
 

@@ -200,3 +200,29 @@ Supersedes: none
 
 "If they were sent back because of failures I found, they were no longer excellent, and those are the new tests you need to prove them against and make them excellent or stable at." The qualifying tests for each skill are its owner-found failures, reproduced under their actual conditions; a baseline passing a test that does not reproduce the failure proves nothing. Each candidate must reach Stable or Excellent on those reproduction tests. The first held-out contract (SHA-256 197858fe…), on which the baseline already scored Excellent for seven skills, stays recorded as non-qualifying evidence.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-c1566797-be06-4950-9dee-0d228d452c70
+Kind: decision
+State: confirmed
+Recorded: 2026-11-03T16:00:39.000Z
+Author: Kayden
+Source: Kayden, AMS chat 2026-11-03, answering whether to merge journey (skills PR 60)
+Topic: owner-answers-coherence
+Supersedes: none
+
+Kayden chose to merge journey (PR 60) although its recorded failures did not reproduce on the Claude Mid tier. The evidence is recorded as no regression (Excellent 30/30 in both arms) with a passing independent review, not as a proven fix.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-0c8b00a9-901a-41c7-924e-1af73e48c7d6
+Kind: decision
+State: confirmed
+Recorded: 2026-11-03T16:00:39.000Z
+Author: Kayden
+Source: Kayden, AMS chat 2026-11-03, choosing how S-011's RSI page change is branched
+Topic: owner-answers-coherence
+Supersedes: none
+
+S-011's site change uses the same Spec branch, Feature/S-011-shared-skill-repair, with a pull request from it into dev, rather than a second S-011 branch. The orchestrator sequences it so records reach main before dev is merged into the branch, so the main pull request never carries unreleased dev work past the owner-only dev→main gate.
+<!-- /jot-entry -->
