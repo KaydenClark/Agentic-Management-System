@@ -3,12 +3,13 @@
 **Task ID:** TK-001X
 **Spec ID:** S-013
 **Slice:** Map the pinned legacy catalog to current owners, dispositions and evidence; restore concise control routes
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Feedback loop connection
 **Planned verification:** Compare inventory against pinned source catalogs; check owners, links, control targets, render, wiki, layout, doctor and hygiene.
 **Claimed by:** codex-recovery
 **Current claimant:** codex-recovery
+**Proof:** Pinned curated catalog and decision indices accounted in context-workbench-adoption; 51 captures, 52 operations, 33 core skills, 7 maintainers, 18 utilities, 82 ADR and 57 DDR IDs; exact ID comparison passed. ARCHITECTURE 1421 and BLUEPRINT 1495; site build, glossary tests 3/3 and suite 209/209; wiki, layout, hygiene and diff checks passed; doctor findings retained.
 
 ## Assignment
 
@@ -27,3 +28,9 @@ The earlier `b7efbaba` site CI found two glossary projection mismatches after th
 ## Check and scoped QA
 
 The [recovery inventory](../../../../../../wiki/context-workbench-adoption.md) enumerates the pinned catalog scope and all 51 captures, 52 operation rows, 33 core and seven maintainer skills, 18 utilities, 82 ADR and 57 DDR IDs. Exact ID set comparison found no missing, extra or duplicate IDs. Dispositions describe current record evidence or explicitly unknown parity with S-001 next actions; the catalog's later evidence snapshots are not asserted as pinned behavior. Root controls measure ARCHITECTURE 1,421 and BLUEPRINT 1,495 codepoints. Local link/anchor inspection, wiki, layout, hygiene and whitespace checks passed. Doctor had no global blocker; its S-011 slice, S-002 stale claim, legibility and permission findings remain. The glossary projection correction passed site build, three focused tests and all 209 site tests after `npm ci`; the build reported unavailable RSI data without Supabase configuration. The earlier two CI failures and unavailable initial build launch remain recorded above. The orchestrator inspected and accepted this bounded accounting for fresh review. This is scoped QA, not independent Review or owner Human QA; final assembled checks and fresh review remain. Full Workbench parity is not established.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/ams-recovery-dev | b3aab5904a312cdc9c38d148dbcad4c0e46fe47a | ahead 0 behind 0 | 0 | Pinned curated catalog and decision indices accounted in context-workbench-adoption; 51 captures, 52 operations, 33 core skills, 7 maintainers, 18 utilities, 82 ADR and 57 DDR IDs; exact ID comparison passed. ARCHITECTURE 1421 and BLUEPRINT 1495; site build, glossary tests 3/3 and suite 209/209; wiki, layout, hygiene and diff checks passed; doctor findings retained. | TK-001X, context-workbench-adoption, ARCHITECTURE, BLUEPRINT and Wiki MEMORY | Fresh independent review, final assembled checks and owner Human QA remain. Unknown source-to-AMS behavior and full Workbench parity require later S-001 assessment; prior b7 review and site CI failures remain historical.; close attribution: {"agent":"codex-recovery","claimant":"codex-recovery","onBehalfOf":null} | d152668ee540f53a17f93b3dbdca3c34707baea0a0ab863cbd640b41bf6ffcb0 |
