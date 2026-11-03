@@ -3,10 +3,12 @@
 **Task ID:** TK-002B
 **Spec ID:** S-003
 **Slice:** Readers understand S-003 examples and evidence without leaving the website
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Content, Route, Trust
 **Planned verification:** Built-output link checks plus rendered navigation through orientation/example/evidence at desktop and375px in both themes; build/site tests/hygiene.
+**Claimed by:** s003-glossary
+**Current claimant:** s003-glossary
 
 ## Assignment
 
