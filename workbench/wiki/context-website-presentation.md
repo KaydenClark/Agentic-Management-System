@@ -290,3 +290,42 @@ Supersedes: none
 
 Kayden explicitly answered Publish and merge into dev to the request to push the committed RSI correction to KaydenClark/Agentic-Management-System, open its PR and merge once checked. This releases the automatic-review publication blocker for that payload and feature branch. Production main stays unchanged; no dev-to-main promotion is authorized.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-4adf0b91-665d-4abb-8644-4835b40e905a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:17:13.071Z
+Author: Kayden
+Source: Kayden, S-003 orchestration and carry instruction in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden assigns S-003 to orchestration using appropriate frontend web development skills and carry through completion. This releases preparation-only execution holds for the five confirmed presentation Tasks TK-001P through TK-001T: coherent orientation, persistent navigation, visual glossary, readable typography and visible Grill Board palette. Execute serially with one writer for shared site files, inspect the assembled destination and deliver checked site PRs into dev. Preserve unresolved website-only-link feedback outside the separately approved RSI scope. Human QA, whole-Spec acceptance and owner-only dev-to-main promotion remain distinct. No new model campaigns, paid services or shared-skill installation are authorized.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-09260032-786b-47fb-8c71-1d7c4f387bb2
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:25:07.680Z
+Author: Kayden
+Source: Kayden, explicit confirmation of S-003 website-only material readback in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: JOT-78d8b232-f2c6-4697-ab8c-9e25f60760ba
+
+Kayden confirms and authorizes implementation across S-003: website examples and supporting material are presented on the website, with irrelevant material omitted, instead of sending visitors to GitHub. Visitors should understand and assess AMS without leaving the site. Preserve source and revision identity, including the deployed SHA visibly as text; apply this to source and footer links as well. This confirms the previously pending cross-S-003 link readback and supersedes its unresolved state. Implement within checked feature-to-dev delivery; Human QA and owner-only production promotion remain separate. This answer does not itself authorize a retry of the stopped typography verification.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-d161d980-cc09-430b-9207-cabfb5daf703
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:26:00.107Z
+Author: Kayden
+Source: Kayden, corrective-run authorization for draft PR146 in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden explicitly authorizes a corrective run after the S-003 typography three-strike stop and directs continuation. Finish one production build, freeze it until all browser/reflow checks complete, repair remaining scoped defects and continue S-003. Preserve both failures and prior incomplete run. Checked delivery targets dev; this grants no Human QA, production promotion, new trials or shared-skill installation.
+<!-- /jot-entry -->

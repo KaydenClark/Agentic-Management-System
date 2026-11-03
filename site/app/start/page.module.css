@@ -75,7 +75,7 @@
   aspect-ratio: 1;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     ". p1 ."
@@ -124,6 +124,8 @@
 
 .parts li {
   position: relative;
+  min-width: 0;
+  max-width: 100%;
   list-style: none;
   padding: var(--space-4) var(--space-8);
   background: var(--surface);
@@ -502,4 +504,40 @@
   border: var(--border-width) solid var(--line);
   border-radius: var(--radius-control);
   background: var(--ground);
+}
+
+/* Keep the same parts and text equivalent when the round diagram has too
+   little room for readable labels. The caption still explains the loop. */
+@media (max-width: 480px) {
+  .hub {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    aspect-ratio: auto;
+  }
+
+  .ring {
+    display: none;
+  }
+
+  .core {
+    aspect-ratio: auto;
+    padding: var(--space-8) var(--space-12);
+    border-radius: var(--radius-control);
+  }
+
+  .parts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-8);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .parts li {
+    flex: 1 1 var(--node-basis);
+    border-radius: var(--radius-control);
+  }
 }
