@@ -90,3 +90,4 @@
 | [003I](003I-only-main-dev-and-site-branches-deploy-to-vercel.md) | Only main, dev and site branches deploy to Vercel | accepted | 2026-11-01 | site/vercel.json |
 | [003J](003J-limit-active-landmarks-not-specs.md) | Limit active Landmarks, not Specs | accepted | 2026-11-01 | AGENTS.md, workbench/specs/S-001-ams/SPEC.md |
 | [003K](003K-model-tiers-pair-claude-and-codex-models.md) | Model tiers pair Claude and Codex models | accepted | 2026-11-02 | RUNBOOK.md |
+| [003L](003L-a-handoff-is-a-short-local-ignored-file.md) | A handoff is a short local ignored file | accepted | 2026-11-03 | AGENTS.md |

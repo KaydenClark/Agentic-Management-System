@@ -14,4 +14,4 @@ Considered and rejected: committing the handoff on the work branch while live (A
 
 Consequences: Replaces ADR-001R, retained in history. AGENTS.md already carries the rule; shared handoff skills follow this room control rather than overriding it.
 
-Provenance: Kayden's 2026-11-02 instruction captured as [JOT-3ac3966d](../../wiki/context-owner-answers-coherence.md#jot-3ac3966d-b26f-4212-894f-011e5e2410ad): "Handoffs belong in the local ignored workbench/sessions lane and are never pushed to GitHub." ADR-001R's owner decision review, 2026-11-01.
+Provenance: Kayden's 2026-11-02 instruction captured as [JOT-3ac3966d](../wiki/context-owner-answers-coherence.md#jot-3ac3966d-b26f-4212-894f-011e5e2410ad): "Handoffs belong in the local ignored workbench/sessions lane and are never pushed to GitHub." ADR-001R's owner decision review, 2026-11-01.
