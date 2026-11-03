@@ -69,3 +69,27 @@ skills-wiki refresh, verify the exact candidate, and publish through the
 project's separate main and dev routes. Review/acceptance and demonstrated
 later-use benefit remain unestablished. Update this report with actual retry
 results rather than promising that recurrence is impossible.
+
+## Retry evidence and recurrence
+
+Kayden explicitly authorized a retry in this chat. Site candidate
+`1d2b70d88ac699cbc922f8eb607283cdada23d75` changes the historical-example check
+in `site/tests/tour-inventory.test.mjs` to select its section and verify all
+three source identities. An outside moving link is accepted and an inside
+moving link is rejected. Focused execution: 1 passed. F-001 disposition is now
+**test** for that scoped assertion, with the saved candidate as evidence;
+no general reliability claim follows.
+
+F-002 recurred during this retry: the agent invoked built-article tests after
+changing the catalog source pin and before rebuilding. Two assertions read the
+old pin from generated HTML and failed. The first report did not prevent that
+ordering mistake. After awaiting `npm run build` in site/, `npm test` passed
+all 206 tests. This corrects the current verification result but leaves future
+recurrence prevention unproven. F-002 remains **diagnostic**, rather than
+repaired or an improvement claim. No shared harness code or installed skill
+was changed to compensate for the agent's mistake.
+
+The current published skills revision was checked against remote main;
+39 articles were checked against a Git archive made at that revision, with
+zero source-copy findings. These results and license application do not
+qualify unfinished skill repairs, prove native activation or supply Human QA.
