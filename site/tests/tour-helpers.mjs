@@ -20,12 +20,11 @@ export const READING_ORDER = [
   '/skills',
   '/rsi',
   '/glossary',
-  '/about',
 ];
 
 // Every tour page the Spec names (S-003 Desired Behavior, Tour pages).
 export const TOUR = [
-  { href: '/start', title: 'Start here' },
+  { href: '/start', title: 'About' },
   { href: '/why', title: 'Why' },
   { href: '/how-it-works', title: 'How it works' },
   { href: '/glossary', title: 'Glossary' },
@@ -113,12 +112,34 @@ export function orderProblems(html, index, order = READING_ORDER) {
   return problems;
 }
 
+// Attribute order is not meaningful in HTML. Select the current anchor,
+// then check its destination and label independently.
+export function aboutNavigationProblems(html) {
+  const nav = html.match(/<nav[^>]*aria-label="Reading order"[\s\S]*?<\/nav>/i)?.[0] ?? '';
+  const links = [...nav.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/gi)].map(match => match[0]);
+  const current = links.filter(link => /\saria-current="page"(?:\s|>)/i.test(link));
+  if (current.length !== 1 || !/\shref="\/start"(?:\s|>)/i.test(current[0]) || visibleText(current[0]) !== 'About') {
+    return ['About alias lacks its shared navigation position'];
+  }
+  return [];
+}
+
 // A built page outside the reading order must be a child of a page in it:
 // its route sits one level under that page's route (/skills/grilling under
 // /skills), the parent's content links it and it links back to the parent, so
 // no page is an orphan or a dead end. `parents` maps a route to its built
 // HTML. Empty when it passes.
 export function childProblems(route, html, parents, order = READING_ORDER) {
+  // /about is retained as a canonical alias, not a second reading-order page.
+  // Require equivalent content and the same About position to avoid allowing
+  // arbitrary top-level orphan pages through this exception.
+  if (route === '/about') {
+    const target = parents.get('/start');
+    const problems = [];
+    if (!target || visibleText(mainOf(html)) !== visibleText(mainOf(target))) problems.push('About alias differs from /start');
+    problems.push(...aboutNavigationProblems(html));
+    return problems;
+  }
   const parts = route.split('/').filter(Boolean);
   const parent = `/${parts.slice(0, -1).join('/')}`;
   if (parts.length < 2 || !order.includes(parent)) return [`${route} is outside the reading order and under no page in it (orphan)`];

@@ -37,9 +37,9 @@
     },
     {
       "path": "/start",
-      "title": "Start here",
+      "title": "About",
       "spec": "S-003",
-      "task": "TK-002",
+      "task": "TK-001P",
       "landed": {
         "branch": "dev",
         "commit": "992a5f86b7171fe837fb58dea3e91b3b7c59a9e4",
@@ -107,9 +107,9 @@
     },
     {
       "path": "/about",
-      "title": "About",
+      "title": "About (compatibility route)",
       "spec": "S-003",
-      "task": "TK-003",
+      "task": "TK-001P",
       "landed": {
         "branch": "dev",
         "commit": "63d9fbe0a6a5af415e7ee79d514a4f9d8e515628",
@@ -117,7 +117,7 @@
       },
       "sources": [
         "site/app/about/",
-        "site/app/tour/",
+        "site/app/start/",
         "site/app/nav.ts"
       ],
       "status": "draft"

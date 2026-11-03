@@ -3,10 +3,12 @@
 **Task ID:** TK-001P
 **Spec ID:** S-003
 **Slice:** Visitors understand a coherent orientation without overlapping pages
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Content, Route
 **Planned verification:** Open Home and follow the orientation links; check unique page purposes and all affected entry routes. Run site build and focused route/content/link checks.
+**Claimed by:** s003-frontend
+**Current claimant:** s003-frontend
 
 ## Authority and inputs
 
@@ -31,3 +33,13 @@ For implementation, branch from current `origin/dev`, target a checked feature P
 ## Hand-back
 
 Return the candidate/PR, observable result, checks actually run, screenshots where relevant and remaining gaps to S-003. No implementation is performed by this planning change.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s003-orientation | 0be5c58bbdbcdec8e7d5fb44255525831b30950a | ahead 0 behind 0 | 0 | Source0be5c58bbdbcdec8e7d5fb44255525831b30950a partial orientation candidate. First full verification214 tests:209pass/5fail (canonical metadata resource check, route whitelist and wording contracts). Second214 tests:211pass/3fail; new alias checker assumes href before aria-current, rejecting the actual valid rendered anchor. Intended initial TDD red is separate. Earlier focused browser264/264pass precedes metadata/wording repairs. Three-strike STOP; no final green suite, completion or merge. | Site orientation source/docs/test candidate; old routes and source identity retained. Failure logs remain local and unmodified. | Owner-authorized bounded correction needed: parse alias anchors independently of attribute order; completed build, full214site tests and focused affected browser verification. Preserve TK-001P incomplete run and both failures. Root must not fix assigned implementor artifacts. Remaining Q/R/T/B stay undispatched until integration. | 9a799a0881fa5f1bddaef665b47e89571a6302a8acf8b7202a600d836d85ac83 |
+
+## Current continuation
+
+The later bounded corrective run TK-002C met the inherited behavior and records its actual checks. This original failed run and receipt remain unchanged; native incomplete-run retirement is unavailable. Follow TK-002C and the parent Spec for current delivery, rather than repeating the historical retry instruction.
