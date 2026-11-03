@@ -4,26 +4,12 @@
 
 Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md), [Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md), assigned Spec/Task and [skill](workbench/docs/SKILLS.md).
 
-## Workflows
-
-Use `map` → `plan` → `journey`, or authorized `orchestrate`; retain evidence and failures. Handoffs stay local and ignored.
 
 ## Test And Build
 
-```sh
-uv run pytest
-node workbench/tools/spec-workbench.mjs render
-node workbench/tools/spec-workbench.mjs doctor
-node workbench/tools/spec-workbench.mjs next --json
-node workbench/tools/workbench-layout.mjs validate --project .
-git diff --check
-uv run ams-hygiene
-```
+Red/green/refactor when practical; never weaken checks. Run `uv run pytest`, `git diff --check`, `uv run ams-hygiene` and `node workbench/tools/workbench-layout.mjs validate --project .`. With `node workbench/tools/spec-workbench.mjs`, run `render`, `doctor`, `next --json`, `show SPEC_ID`. Render: no diff; doctor: no global blockers. Repeat on fresh checkout. Site: `npm run build`, `npm test`; root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`. [Shared CI](workbench/wiki/context-shared-ci.md).
 
-[Shared CI](workbench/wiki/context-shared-ci.md) owns runner, fork and secret rules. Render: no diff; doctor: no global blockers. Repeat on a fresh checkout. Site: `npm run build`, `npm test`.
-Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
-
-`uv run ams-board` (loopback). Other commands use `uv run`:
+`uv run ams-board` (loopback); also `uv run`:
 
 - `ams-keycheck`; `ams-writer record-merge|readcheck SHA`
 - `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
@@ -35,4 +21,4 @@ Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
 ## Clean up
 
-Use `land`: verify publication and containment; retain unfinished work on its Spec branch; report blockers. Adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+`land`: verify publication and containment; keep unfinished work on its Spec branch; report blockers. Rollback: `workbench/sessions/recovery/adoption-recovery.json`.
