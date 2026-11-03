@@ -1,18 +1,13 @@
-// Small "source" links to the committed records a claim comes from.
-import type { Source } from "./flow.mjs";
+// Native disclosure keeps full provenance available without interrupting reading.
+import type { Source as SourceRecord } from "./flow.mjs";
+import { Source } from "../tour/Source";
 import styles from "./toy.module.css";
 
-export const REPO_BLOB = "https://github.com/KaydenClark/Agentic-Management-System/blob/dev/";
-
-export function SourceLinks({ sources }: { sources: readonly Source[] }) {
+export function SourceLinks({ sources }: { sources: readonly SourceRecord[] }) {
   return (
-    <p className={styles.sources}>
-      <span>Source</span>
-      {sources.map((s) => (
-        <a key={s.path} href={`${REPO_BLOB}${s.path}`}>
-          {s.label}
-        </a>
-      ))}
-    </p>
+    <details className={styles.sources}>
+      <summary>Source identities</summary>
+      <ul>{sources.map(source => <li key={source.path}><Source path={source.path} expanded>{source.label}</Source></li>)}</ul>
+    </details>
   );
 }

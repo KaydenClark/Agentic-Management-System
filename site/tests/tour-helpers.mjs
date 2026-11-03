@@ -1,13 +1,12 @@
 // Shared checks for the S-003 tour tests (TK-002, TK-003). Each check is a pure
 // function over built HTML so the tests can run it on the real build and on
 // planted faults. Run `npm run build` first.
-import { existsSync, readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { siteDir, visibleText } from './helpers.mjs';
+import { readPage } from './rsi-html.mjs';
 
 export const repoRoot = join(siteDir, '..');
-export const REPO_BLOB = 'https://github.com/KaydenClark/Agentic-Management-System/blob/dev/';
 
 // The reading order the tour must follow, in order (owner of the list:
 // app/nav.ts; this is the expectation it is tested against).
@@ -150,22 +149,22 @@ export function childProblems(route, html, parents, order = READING_ORDER) {
   return problems;
 }
 
-// Moving dev links resolve in the checkout; immutable evidence links resolve
-// against their actual Git revision, even after records move or retire.
-export function repoLinks(html) {
-  return [...html.matchAll(/href="(https:\/\/github\.com\/KaydenClark\/Agentic-Management-System\/blob\/(dev|[a-f0-9]{40})\/([^"#?]+))[^"]*"/gi)]
-    .map((m) => {
-      const path = decodeURIComponent(m[3]);
-      let exists = false;
-      if (m[2] === 'dev') exists = existsSync(join(repoRoot, path));
-      else {
-        try {
-          execFileSync('git', ['cat-file', '-e', `${m[2]}:${path}`], { cwd: repoRoot, stdio: 'ignore' });
-          exists = true;
-        } catch { /* A missing revision or path remains a broken source link. */ }
-      }
-      return { href: m[1], path, exists };
-    });
+// Public source identities are citations, never reader exits. Resolve each
+// at its actual Git revision, including retired historical Task records.
+export function sourceRecords(html) {
+  return readPage(html, ['data-source-path']).map(node => {
+    const path = node.attrs['data-source-path'];
+    const revision = node.attrs['data-source-revision'] ?? '';
+    let exists = false;
+    if (/^[a-f0-9]{40}$/.test(revision)) {
+      try {
+        execFileSync('git', ['cat-file', '-e', `${revision}:${path}`], {cwd: repoRoot, stdio:'ignore'});
+        exists = true;
+      } catch { /* A missing revision or path remains missing evidence. */ }
+    }
+    const identity = node.attrs.title ?? '';
+    return {path, revision, exists, identityAvailable: identity.includes(path) && identity.includes(revision), text: node.text};
+  });
 }
 
 const decode = (s) => s.replace(/&amp;/g, '&').replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');

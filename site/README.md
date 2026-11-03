@@ -85,3 +85,19 @@ Site-written articles on Kayden's skills, one per skill on the chart, grouped by
 - **Source check (not in `npm test`; the skills repository is private and absent in CI).** `npm run check:skills-source -- --skills DIR [--content DIR]`, DIR a checkout of the skills repository: checks each article has a skill folder (`<name>/SKILL.md`) there and, when DIR is a git checkout, that its HEAD is the pin; then flags any run of 10 or more consecutive normalized words an article (summary or section) shares with any file in its skill's folder, printing article, section, word offset and skill file but never the words. A flagged run may be an allowed short quoted term or the skill's description phrase; a reviewer decides. It runs its self-test first (`tests/fixtures/skills-source/`, also run by `tests/skills-source.test.mjs` in `npm test`) and exits 1 on any finding.
 
 The current article source pin is published catalog main `fb7ad23c963e183b930b23bc5fdf4d309dff292a`. The refresh checked changes from the prior pin, including referenced methods and setup assets; destination/history separation is reflected in affected articles. The handoff article explicitly distinguishes the still-published catalog method from AMS's local-only session-note boundary. Unmerged repair candidates are not described as completed methods.
+
+### Reader navigation and attribution
+
+Reader links stay on-site, including source disclosures and skill credits.
+Project citations retain their public path and revision in accessible metadata;
+About's native source disclosures expose the full identity. Historical examples
+keep their explicit evidence revision. Only generated current-build revision
+text is excluded from page hashes; source paths and historical revisions remain
+part of the content.
+
+Skill bodies and summaries accept on-site destinations. Public source and
+license URIs in credit metadata render as wrapped citation text, preserving the
+author, adaptation notice and any recorded upstream revision. The private
+catalog pin remains unchanged; its source is never copied into the site.
+`npm test` checks every built anchor, including cross-page fragments, plus
+source identities and attribution retention.
