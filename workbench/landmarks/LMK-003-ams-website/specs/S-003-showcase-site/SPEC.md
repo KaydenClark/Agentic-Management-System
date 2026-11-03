@@ -8,7 +8,7 @@
 **Updated:** 2026-11-02
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Next gate:** Reconcile assignments.
+**Next gate:** Assign feedback Tasks; confirm website-only link readback.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 
@@ -32,13 +32,19 @@ History: [S-003 history](../../../../wiki/history/S-003.md).
 
 ## Desired Behavior
 
-Pages open plainly, define/link unfamiliar terms, then offer detail/sources. Explain ideas before IDs. Agents draft from approved records and owner feedback, without requiring owner-written copy.
+Pages explain ideas before IDs and define unfamiliar terms. Agents draft from approved records and owner feedback.
+
+### Approved presentation feedback
+
+The [2026-11-02 owner readback](../../../../wiki/context-website-presentation.md#jot-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458) supersedes separate overlapping orientation pages: Start Here serves as About; preserve the explanatory subjects below while consolidating their presentation. Five prepared Tasks, TK-001P through TK-001T, cover coherent orientation, persistent full-width navigation (Home icon left, theme toggle right), visual glossary, larger readable text and visible Grill Board colors in both themes. Execute serially because they share files; preparation grants no implementation authority.
+
+The [website-only link readback](../../../../wiki/context-website-presentation.md#jot-78d8b232-f2c6-4697-ab8c-9e25f60760ba) is pending before its Task. It conflicts with the GitHub source/SHA requirements below; do not invent an exception.
 
 ### Orientation content
 
-- **Start here** (`/start`, includes Quickstart): define AMS per the glossary: reusable methods carrying intent into outcomes with AI. Explain this project’s RSI addition; use roles. Explain the problem, identify this website as its first outside product, and orient visitors to the tour, demonstrations and evidence. Distinguish presentation from live controls. Give the reading route (introduction, real-work example, demonstration or skill summary, RSI evidence/limits), what each stop teaches, and that the `setup-workbench` skill sets up a Workbench. No command replay.
+- **Start here** (`/start`, includes Quickstart): define AMS from the glossary, this project’s RSI addition and problem, and this website as its first outside product. Explain the route through introduction, real-work example, demonstration/skills and RSI evidence/limits, including what each teaches. Distinguish presentation from live controls. Name `setup-workbench` for Workbench setup; no command replay.
 - **Why:** explain preserving intent/corrections, organizing delegated work and learning from failures. Connect these purposes to this build. Separate intended benefits from measured results; link RSI evidence.
-- **How it works:** explain intent -> Landmark -> Spec -> Task, then implementation, checks, review, human judgment and delivery. Walk through one real, sourced Spec/Task. Explain feedback returning to its durable owner and failed results starting bounded RSI comparisons. Link governance/flow charts; do not imply every step has succeeded.
+- **How it works:** explain intent -> Landmark -> Spec -> Task -> implementation, checks, review, human judgment and delivery through one real sourced example. Explain feedback returning to its owner and failed results starting bounded RSI comparisons. Link governance/flow charts; distinguish achieved from intended behavior.
 - **Limits:** explain that the site runs no agents or record writes. Distinguish demonstrations, build activity, assessments and demonstrated improvement. Source incomplete/unsupported capabilities and explain where human judgment remains necessary.
 - **Glossary:** define tour terms consistently with the root glossary, including implementation Tasks versus evaluation tasks/trials. Link definitions from their uses and back to the explanation.
 - **About AMS:** explain the project, who made it, why it exists and its relationship to this website. Project context, not employment history; no CV/resume request.
@@ -74,7 +80,7 @@ CMS, accounts, comments, analytics, newsletter, custom domain, live dashboard, i
 
 ## Dependencies And Blockers
 
-S-005 owns reviews; S-006 data; S-007/008/009/010 linked capabilities. Missing results do not block the tour. Inspect sources/configuration before asking for input. Only consequential unresolved decisions or inaccessible required resources block affected criteria; name them precisely.
+S-005 owns reviews; S-006 data; S-007/008/009/010 linked capabilities. Missing results do not block the tour. Inspect sources before asking; name real missing inputs or consequential decisions.
 
 ## Acceptance Criteria
 
@@ -84,6 +90,7 @@ Audit a named deployment. CI cannot establish editorial meaning.
 - [ ] **Route:** follow Start here's route without setup, reach example/evidence and return; it names `setup-workbench`. Public revision-pinned Spec/Task sources survive record moves.
 - [ ] **Scope:** sibling subjects have meaningful introductions/working links. No CV dependency, separate build-history page or live controls.
 - [ ] **Data:** inspect populated, empty, pending and failed reads. Empty/unavailable differ; retained data has its read time; no fabricated/test evidence. S-007 also meets its own criteria.
+- [ ] **Feedback:** coherent orientation with Start Here presented as About; persistent full-width navigation with Home icon left and theme toggle right; visual glossary; larger readable text; visible Grill Board colors in both themes.
 - [ ] **Presentation:** at 375px and desktop, both themes, text/controls are readable without horizontal page overflow. Keyboard operation has visible focus; contrast meets WCAG AA; reduced motion is respected. Shared tokens match their source.
 - [ ] **Trust:** SHA matches deployment; core text works without scripts; sources resolve; public output has no secrets, host paths or private evidence. Only permitted resource loads.
 - [ ] **Owner presentation:** no page shows review status, owner quotations or owner instructions as examples.
