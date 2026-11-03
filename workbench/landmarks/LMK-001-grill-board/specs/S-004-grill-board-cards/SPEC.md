@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Resolve the backend choice for TK-002F, then restore the current owner queue from the established LLM_Workbench behavior; owner QA remains separate.
+**Next gate:** Close TK-002F with verification and documentation proof.
 
 ## Intent and authority
 
@@ -34,7 +34,7 @@ History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Desired Behavior
 
-- A local Python server reads durable records and is never the record. ADR-002X remains in force while the explicit backend choice below is pending.
+- A local Python server reads durable records and is never the record. ADR-002X governs; the owner reaffirmed Python on 2026-11-03.
 - The owner opens the current queue without requesting a refresh or preparing cards. Use the established LLM_Workbench queue, revision and answer workflow ([owner correction](../../../../wiki/context-owner-answers-coherence.md#jot-7c039b2f-ef97-4607-ad94-40cbbccc86ff)); existing answers and settled decisions survive updates.
 - Agents post only items needing an answer (owner gates, open choices, page approvals, decision texts), never routine content or drafts.
 - Each card shows Priority and Value with one-line reasons, a 1-5 rating and a one-click "too taxing" flag; a flagged card is rewritten before it is re-asked.
@@ -60,7 +60,7 @@ History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Dependencies And Blockers
 
-- TK-002F needs the owner to choose between reusing the existing Node-backed LLM_Workbench board component and reproducing its behavior in Python. The newer reuse instruction does not explicitly resolve ADR-002X, which rejects Node backends. No replacement, data migration or backend change has been performed.
+- The owner reaffirmed Python for TK-002F on 2026-11-03; the agent-created backend-selection hold is resolved. Keep the existing Python backend and board data.
 
 - Python 3.14.5 pinned with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
 

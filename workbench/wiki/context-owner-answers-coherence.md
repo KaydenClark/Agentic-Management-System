@@ -161,3 +161,16 @@ Supersedes: none
 
 The Grill Board must render current work automatically without the owner asking for it to be updated before use. The LLM_Workbench had it figured out. Just make it like we did there. Reuse the established board workflow and preserve data. This supersedes the agent assumption that manually preparing cards for each owner visit is an acceptable prerequisite. A Node-versus-Python backend choice remains explicitly pending because ADR-002X requires Python and the reusable reference component uses Node.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8d5edcf6-7feb-4d5d-8f1b-3ddb9fbd27c8
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T17:54:39.902Z
+Author: Kayden
+Source: Kayden direct AMS chat 2026-11-03
+Topic: owner-answers-coherence
+Supersedes: JOT-7c039b2f-ef97-4607-ad94-40cbbccc86ff
+
+Use Python, as already required by ADR-002X. Reproduce the established LLM_Workbench queue, question revision and answer workflow in the existing Python Grill Board. The owner requires current items to render without requesting an update before use. The agent unnecessarily reopened the settled backend decision; no architecture choice remains. Preserve existing records, answers, safeguards and the requested PR endpoint into the S-004 feature branch.
+<!-- /jot-entry -->

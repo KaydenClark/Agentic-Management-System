@@ -3,10 +3,12 @@
 **Task ID:** TK-002F
 **Spec ID:** S-004
 **Slice:** Restore the established LLM_Workbench owner-queue workflow in AMS
-**Status:** blocked
-**Blockers:** owner:grill-board-backend-selection
+**Status:** in-progress
+**Blockers:** none
 **Destination:** spec-acceptance: Current owner queue
 **Planned verification:** A disposable project with an actionable pending owner request and no prebuilt card must show the request; new/revised/resolved items update without owner preparation; preserve answers, revisions, refusal and privacy checks; execute applicable Runbook checks.
+**Claimed by:** codex-s004-queue
+**Current claimant:** codex-s004-queue
 
 ## Assignment
 
@@ -14,7 +16,7 @@ Kayden, AMS chat, 2026-11-03: things should automatically render into the Grill 
 
 Reference source: KaydenClark/LLM_Workbench at9d5e1f25b0d5870589ae1c5752f27f42acb796ef, tools/grill-board.mjs, tools/grill-board-project.mjs, tools/grill-board-deploy.mjs and workbench/grill-board/README.md. Reuse its stable question identity/revision, current queue reads, preserved owner answers and explicit answer-application workflow. Its agents add/revise items through the native tool; the reader does not infer all owner questions from Specs. Do not claim otherwise or re-ask settled holds as new decisions.
 
-Pending consequential choice: the reusable component is Node-backed, whereas ADR-002X requires Python for all AMS backends. The owner has been asked whether to reuse that component or reproduce its workflow in Python. Do not implement the dependent architecture choice until answered. Preserve the existing board, answer history, other writers and the unborn dirty owner-queue worktree. No production deployment, paid service, synthetic owner answer, Spec acceptance or Human QA is authorized by this Task.
+Resolved correction, 2026-11-03: Kayden directs Python, as already required by ADR-002X. The agent-created backend hold was unnecessary. Implement the established behavior in Python; no architecture choice remains. Preserve the existing board, answer history, other writers and the unborn dirty owner-queue worktree. No production deployment, paid service, synthetic owner answer, Spec acceptance or Human QA is authorized by this Task.
 
 ## Acceptance
 
