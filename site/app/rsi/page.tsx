@@ -20,5 +20,9 @@ export const revalidate = 300;
 export default async function RsiPage() {
   const loaded = await loadRsiData();
   if (!loaded.ok) console.warn(`/rsi: results could not be loaded (${loaded.reason})`);
-  return <><RepairEvidence /><RsiView views={seriesViews(loaded.data)} unavailable={!loaded.ok} readAt={loaded.readAt} /></>;
+  return (
+    <RsiView views={seriesViews(loaded.data)} unavailable={!loaded.ok} readAt={loaded.readAt}>
+      <RepairEvidence />
+    </RsiView>
+  );
 }

@@ -2,6 +2,7 @@
 // function over built HTML so the tests can run it on the real build and on
 // planted faults. Run `npm run build` first.
 import { existsSync, readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { siteDir, visibleText } from './helpers.mjs';
 
@@ -128,11 +129,22 @@ export function childProblems(route, html, parents, order = READING_ORDER) {
   return problems;
 }
 
-// Every link into this repository on GitHub (blob/dev) and whether its file
-// exists in this checkout.
+// Moving dev links resolve in the checkout; immutable evidence links resolve
+// against their actual Git revision, even after records move or retire.
 export function repoLinks(html) {
-  return [...html.matchAll(/href="(https:\/\/github\.com\/KaydenClark\/Agentic-Management-System\/blob\/dev\/([^"#?]+))[^"]*"/gi)]
-    .map((m) => ({ href: m[1], path: decodeURIComponent(m[2]), exists: existsSync(join(repoRoot, decodeURIComponent(m[2]))) }));
+  return [...html.matchAll(/href="(https:\/\/github\.com\/KaydenClark\/Agentic-Management-System\/blob\/(dev|[a-f0-9]{40})\/([^"#?]+))[^"]*"/gi)]
+    .map((m) => {
+      const path = decodeURIComponent(m[3]);
+      let exists = false;
+      if (m[2] === 'dev') exists = existsSync(join(repoRoot, path));
+      else {
+        try {
+          execFileSync('git', ['cat-file', '-e', `${m[2]}:${path}`], { cwd: repoRoot, stdio: 'ignore' });
+          exists = true;
+        } catch { /* A missing revision or path remains a broken source link. */ }
+      }
+      return { href: m[1], path, exists };
+    });
 }
 
 const decode = (s) => s.replace(/&amp;/g, '&').replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');

@@ -106,3 +106,15 @@ test('every GitHub link on a built page names a file that exists in this reposit
     for (const link of repoLinks(html)) assert.ok(link.exists, `${name}: ${link.href} names a missing file`);
   }
 });
+
+test('historical example links stay pinned and resolve in their evidence revision', () => {
+  const html = builtPage('how-it-works.html').html;
+  const links = repoLinks(html).filter((l) => /S-003-showcase-site\/(SPEC\.md|tasks\/TK-00[12]\/TASK\.md)$/.test(l.path));
+  assert.ok(links.length >= 3, 'Spec and both Task accounts must retain sources');
+  for (const link of links) {
+    assert.match(link.href, /\/blob\/[a-f0-9]{40}\//, 'historical source must be immutable');
+    assert.ok(link.exists, `missing evidence: ${link.href}`);
+  }
+  const bad = repoLinks('<a href="https://github.com/KaydenClark/Agentic-Management-System/blob/ce39c6a89f92dffaebecb468b367c49ab6577bd8/no-such-record.md">missing</a>');
+  assert.equal(bad[0].exists, false);
+});

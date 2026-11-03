@@ -107,3 +107,19 @@ uses owner roles, and describes the existing RSI repair checks, failures and gap
 as development evidence that does not establish demonstrated improvement.
 This correction does not establish measured benefit, deployed-page verification
 or owner Human QA.
+
+## Live dev follow-up — 2026-11-02
+
+Owner-authorized browser inspection of dev ce39c6a confirmed the Start wording
+and working toy advance. Home, Why and the generated glossary still used the
+older personal-system framing. The correction carries main's Home/glossary
+meaning into dev, aligns Why, and updates How it works to acknowledge RSI repair
+evidence without claiming improvement. The real Spec/Task example is pinned to
+ce39c6a, which contains the described records and receipts; later record moves
+must not rewrite that historical account. This also repairs the mutable-example
+source mismatch recorded by the owner-assistant's source inspection.
+
+The RSI title now precedes its repair evidence and trial charts. These are site
+corrections, not Spec acceptance, owner Human QA or demonstrated benefit.
+License application and refreshing the skills wiki's older catalog snapshot
+remain owner decisions; neither is changed here.

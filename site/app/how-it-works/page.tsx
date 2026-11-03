@@ -13,6 +13,8 @@ export const metadata: Metadata = {
 
 const REPO_BLOB = "https://github.com/KaydenClark/Agentic-Management-System/blob/dev/";
 const ADR = "workbench/docs/adr/";
+// This revision contains the Spec and receipts described in the historical example.
+const EXAMPLE_BLOB = "https://github.com/KaydenClark/Agentic-Management-System/blob/ce39c6a89f92dffaebecb468b367c49ab6577bd8/";
 const S003 = "workbench/landmarks/LMK-003-ams-website/specs/S-003-showcase-site/";
 
 // A link to the committed record a claim comes from.
@@ -131,7 +133,7 @@ export default function HowItWorks() {
         <h2 id="example">One real Spec and one real Task</h2>
         <p>
           <strong>
-            Spec <a href={`${REPO_BLOB}${S003}SPEC.md`}>S-003</a>
+            Spec <a href={`${EXAMPLE_BLOB}${S003}SPEC.md`}>S-003</a>
           </strong>{" "}
           is the Spec for this site&apos;s shell and orientation tour. It is active, at priority 1, owned by Kayden with
           orchestrator A. Its acceptance conditions run from every page opening in plain language to the commit shown
@@ -140,7 +142,7 @@ export default function HowItWorks() {
         </p>
         <p>
           <strong>
-            Task <a href={`${REPO_BLOB}${S003}tasks/TK-001/TASK.md`}>TK-001</a>
+            Task <a href={`${EXAMPLE_BLOB}${S003}tasks/TK-001/TASK.md`}>TK-001</a>
           </strong>{" "}
           built the shell every page uses: the navigation, light and dark themes, the commit shown in the footer and a
           home page rendered on the server. Its status is done. Its receipt records the tests written first and
@@ -152,9 +154,9 @@ export default function HowItWorks() {
         </p>
         <p>
           This page is itself the work of{" "}
-          <a href={`${REPO_BLOB}${S003}tasks/TK-002/TASK.md`}>Task TK-002</a>. Task files are scaffolding and are deleted
-          when their Spec closes, so these links will change then; the site&apos;s tests fail on any link to a file
-          that no longer exists.
+          <a href={`${EXAMPLE_BLOB}${S003}tasks/TK-002/TASK.md`}>Task TK-002</a>. Task files are scaffolding and are deleted
+          when their Spec closes. These example links point to the recorded revision, so later moves or deletion
+          do not change the evidence behind this account.
         </p>
       </section>
 
@@ -178,8 +180,8 @@ export default function HowItWorks() {
             <Source path="ARCHITECTURE.md">Architecture, Bird&apos;s-eye view</Source>
           </li>
           <li>
-            No improvement has been measured yet; the <Link href="/rsi">RSI results</Link> page shows where results
-            will appear.
+            The <Link href="/rsi">RSI results</Link> page shows shared-skill repair evidence and recorded trial
+            results. Checks, failures and incomplete trials do not establish demonstrated improvement.
           </li>
         </ul>
       </section>

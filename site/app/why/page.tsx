@@ -23,22 +23,23 @@ export default function Why() {
         <p className="eyebrow">Tour</p>
         <h1>Why</h1>
         <p className="lede" data-opener="">
-          Kayden works with many <dfn id="agent">agents</dfn>, AI assistants that carry out work on their own, and
-          with the instructions, habits and tools that go with them. The Agentic Management System, or{" "}
-          <dfn id="ams">AMS</dfn>, exists to keep all of that in one place, to keep what he meant attached to the
-          work, and to learn from each round of work which changes actually help. This page says why it was built
-          and why it treats its own value as unproven until the numbers say otherwise.
+          The Agentic Management System, or <dfn id="ams">AMS</dfn>, gives people and AI assistants reusable
+          methods for carrying <dfn id="intent">intent</dfn>—what people want, why and within what boundaries—into
+          outcomes. <dfn id="agent">Agents</dfn> carry out the work; written notes keep the purpose and corrections
+          attached to it. This project adds <dfn id="rsi">RSI</dfn>, recursive self-improvement, to test those methods
+          through real work. Its value remains unproven until supported comparisons
+          show whether a change helps.
         </p>
       </header>
 
       <section className={styles.section} aria-labelledby="words">
         <h2 id="words">What Kayden built it for</h2>
         <p>
-          Kayden describes the AMS as everything he uses to work with AI, brought together into a single loop that
-          improves itself, and he gave that loop its first job: building a website that explains the system. He gives
-          the reason too: the work repairs the broken parts of the Workbench, the working foundation underneath, and
-          builds the system on top of it that runs it. In this repository the Workbench is the controls, lifecycle
-          tools and templates agents work with.
+          AMS is intended for anyone to reuse. People capture and develop what they want with AI, and agents
+          carry that intent into checked outcomes. In this project, building a website that explains AMS supplies
+          real work for testing and repairing the methods. The Workbench is the environment bringing together
+          people, agents, project records, working artifacts and tools.
+          <Source path="GLOSSARY.md">Glossary, AMS and Workbench</Source>
           <Source path={PURPOSE}>AMS purpose and first RSI loop</Source>
           <Source path="README.md">README</Source>
         </p>

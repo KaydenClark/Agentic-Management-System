@@ -1,5 +1,5 @@
 {
-  "intro": "Shared AMS terms, defined per Kayden's 2026-10-31 instruction and the [research basis](workbench/research/template-research-basis.md).",
+  "intro": "Shared AMS terms; [Blueprint](BLUEPRINT.md) owns the destination.",
   "sections": [
     {
       "heading": "Language",
@@ -12,7 +12,7 @@
             {
               "term": "AMS",
               "id": "ams",
-              "definition": "Kayden's system for managing agents, workflows, intent capture, skills and AI tools in one RSI loop. It builds on, operates and repairs the Workbench."
+              "definition": "A reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. Its methods can be packaged for anyone to reuse; this project adds RSI to improve them through actual work."
             },
             {
               "term": "RSI loop",
@@ -42,7 +42,7 @@
             {
               "term": "Workbench",
               "id": "workbench",
-              "definition": "The working foundation AMS uses and repairs. AMS also includes the system and tool belt operating above it."
+              "definition": "The environment where AMS operates, bringing together people, agents, project records, working artifacts and tools."
             },
             {
               "term": "Intent",
