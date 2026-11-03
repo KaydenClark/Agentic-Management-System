@@ -36,7 +36,7 @@ export default function HowItWorks() {
         <p className="lede" data-opener="">
           In the Agentic Management System, or <dfn id="ams">AMS</dfn>, a request becomes written work before
           it is carried out. A <dfn id="spec">Spec</dfn> is a bounded destination with conditions for judging it;
-          <dfn id="task"> Tasks</dfn> plan and carry out execution through bounded assignments. AI assistants, called
+          <dfn id="task"> <Link href="/glossary#implementation-task">Tasks</Link></dfn> plan and carry out execution through bounded assignments. AI assistants, called
           <dfn id="agent"> agents</dfn>, implement and check those assignments, then return the result with evidence.
           This page follows that path and distinguishes automated checks from human decisions.
         </p>
