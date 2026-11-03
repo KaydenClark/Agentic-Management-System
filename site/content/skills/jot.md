@@ -1,7 +1,7 @@
 ---
 name: jot
 summary: Saves what the owner decided, corrected or found in the right project record, with its source and status, so the next session can resume cold.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: original
 credit_text: Original to Kayden Clark.
 ---

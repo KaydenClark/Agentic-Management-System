@@ -1,7 +1,7 @@
 ---
 name: codebase-design
 summary: Gives your agent shared vocabulary and a method for designing deep modules: small interfaces, well-placed seams, and tests that use the seam real callers use.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's Codebase Design](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/codebase-design), MIT License. It draws on Michael Feathers' idea of a seam and John Ousterhout's Design It Twice, and it replaces the retired design-an-interface skill.
 credit_license: MIT

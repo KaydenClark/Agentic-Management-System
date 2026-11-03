@@ -1,7 +1,7 @@
 ---
 name: evaluate-workbench
 summary: Gathers evidence on whether a Workbench's structure, installed skills and task results really work, without repairing anything or assigning a score.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: original
 credit_text: Original to Kayden Clark.
 ---
@@ -17,7 +17,7 @@ It works in four moves.
 1. **Bind the evaluation.** Fix the request, the target repository, the exact **candidate** (the revision under judgment), the scope and the stopping point. Read the target's controls and the assigned **Spec** and **Task**, check for uncommitted work and locks, and leave existing work alone. Then name the kind of evaluation: a focused diagnostic, a comparison against a baseline, or one scored with the **Alignment Check**, the rubric [audit-workbench](/skills/audit-workbench) owns.
 2. **Check structure and capabilities.** Inventory what is installed at that revision and run the room's own static checks, noting command, revision, exit code and limits. For each claimed host, watch the skill get discovered, note which path and revision loaded, and see the action that followed. A listing, symlink or package receipt does not count, and a host you skipped stays on the report as untested.
 3. **Test outcomes and benefit.** When someone says a change helps, lock the prompts, acceptance rules, conditions, grader, model, host and budget before running anything, then use bounded exercises with fresh agents. A worker's self-check is not independent grading, and an undemonstrated benefit is reported as unproven.
-4. **Return the result.** Report scope, exact identities, what each check covered and where the raw evidence lives, with separate limits for static, activation and behavioral conclusions. Add failures, cost, uncertainty and stable finding identities with next owners, then read the saved report back to confirm its links.
+4. **Return the result.** Report scope, exact identities, what each check covered and where the raw evidence lives, with separate limits for static, activation and behavioral conclusions. Add failures, cost, uncertainty and stable finding identities with next owners. Route dated Spec evidence to its Wiki history page, then read the saved report back to confirm its links.
 
 ## When to use it
 

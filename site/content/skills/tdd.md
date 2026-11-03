@@ -1,7 +1,7 @@
 ---
 name: tdd
 summary: Builds one behavior at a time: a test that fails for the expected reason, the least code to pass it, then cleanup while the test stays green.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills), MIT License.
 credit_license: MIT

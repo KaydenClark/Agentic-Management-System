@@ -1,12 +1,14 @@
 ---
 name: sitrep
 summary: Gives you a short, read-only status report from the project board: what needs your review, what only you can unblock, what is moving and what is ready next.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: original
 credit_text: Original to Kayden Clark.
 ---
 
 ## What it does
+
+For a Workbench Spec, dated events and corrections are kept on its Wiki history page. The Spec retains its destination and next gate.
 
 `sitrep` answers the owner's question about the project: where do we stand, and what is waiting on me? It reads the task board and the records behind it, then writes a compact report in the conversation, changing nothing and claiming no work.
 

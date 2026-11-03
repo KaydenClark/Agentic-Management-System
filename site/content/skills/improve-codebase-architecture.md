@@ -1,7 +1,7 @@
 ---
 name: improve-codebase-architecture
 summary: Surveys your codebase for places where a deeper module would help, shows ranked candidates in a visual HTML report, then explores the one you pick.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's improve-codebase-architecture method and HTML report](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/improve-codebase-architecture), MIT License. This version adds source evidence, migration risk, a smallest falsifying check, an offline report with no CDN dependencies, and an explicit rule that choosing a candidate authorizes no implementation.
 credit_license: MIT

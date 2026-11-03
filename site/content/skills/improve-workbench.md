@@ -1,13 +1,15 @@
 ---
 name: improve-workbench
 summary: Fix one failing agent job by changing the Workbench around it, proving the change with checks and a fresh rerun, then keeping, revising or removing it.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: The loop's shape is adapted from Ryan Lopopolo's [Harness Engineering](https://github.com/lopopolo/harness-engineering) improve-harness playbook (playbooks/improve-harness.md at 226c8d35), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), rewritten for Workbench rooms with ownership routing, feedback records and dispositions added.
 credit_license: CC BY 4.0
 ---
 
 ## What it does
+
+A Spec defines the destination; its Wiki history page preserves dated observations and comparisons. Task receipts and linked runs supply the underlying proof.
 
 A **Workbench** is the bundle of controls, skills, tools, records and checks a coding agent works inside. This skill repairs that bundle, which it calls the **harness**, not the model or your product code. You pick one job an agent got wrong, hold the model and job fixed, change the harness, and measure whether it helped.
 

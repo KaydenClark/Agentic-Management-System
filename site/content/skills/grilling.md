@@ -1,7 +1,7 @@
 ---
 name: grilling
 summary: Interviews you about a plan in batches, with a recommendation on every question, until you explicitly confirm you and the agent mean the same thing.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's grilling skill](https://github.com/mattpocock/skills/blob/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/productivity/grilling/SKILL.md), MIT License, with Why/Impact fields, correction checks and caller-owned persistence added.
 credit_license: MIT

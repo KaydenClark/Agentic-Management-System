@@ -1,7 +1,7 @@
 ---
 name: retro
 summary: Reviews a finished coding session and proposes ranked changes to the agent's checks, standards, docs and steering files so the next run goes better.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's retro skill](https://github.com/mattpocock/skills), MIT License. The entrypoint changes only how it points at the writing-for-agents skill.
 credit_license: MIT

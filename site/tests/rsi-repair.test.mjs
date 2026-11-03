@@ -71,3 +71,16 @@ test('safe feed contains no raw session, host paths, prompt or private skill sou
   assert.match(out, /Development evidence/);
   assert.match(out, /not native activation/);
 });
+
+test('RSI page introduces itself before repair evidence and trial charts', async () => {
+  const { RsiView } = await import('../app/rsi/view.tsx');
+  const { seriesViews } = await import('../app/rsi/data.ts');
+  const out = renderToStaticMarkup(createElement(RsiView, {
+    views: seriesViews({ runs: [], results: [] }), unavailable: false,
+  }, createElement(RepairEvidence)));
+  const title = out.indexOf('<h1>RSI results</h1>');
+  const repair = out.indexOf('id="repair-title"');
+  const trials = out.indexOf('id="rsi-split-held-out"');
+  assert.ok(title >= 0 && repair > title && trials > repair,
+    'page title must precede repair evidence, followed by trial charts');
+});

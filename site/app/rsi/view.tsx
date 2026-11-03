@@ -2,6 +2,7 @@
 // and reads nothing, so render tests can feed it labeled fixtures and the
 // page feeds it Supabase rows. Every number is a link to the rows behind it,
 // and each row shows its strength label.
+import type { ReactNode } from "react";
 import type { Arm, Count, ExecutionState, Mark, Point, RsiResult, Series, SeriesView, Strength } from "./data";
 import { SPLITS } from "./series";
 import styles from "./rsi.module.css";
@@ -244,7 +245,7 @@ function SeriesPlace({ series: view, unavailable }: { series: SeriesView; unavai
   );
 }
 
-export function RsiView({ views, unavailable, readAt = null }: { views: readonly SeriesView[]; unavailable: boolean; readAt?: string | null }) {
+export function RsiView({ views, unavailable, readAt = null, children }: { views: readonly SeriesView[]; unavailable: boolean; readAt?: string | null; children?: ReactNode }) {
   const anyRows = views.some((v) => !v.empty);
   return (
     <div className={styles.page} data-rsi-page="">
@@ -276,6 +277,7 @@ export function RsiView({ views, unavailable, readAt = null }: { views: readonly
           square point marks a regression.
         </p>
       </header>
+      {children}
       {SPLITS.map(({ split, title, about }) => (
         <section key={split} className={styles.split} data-split={split} aria-labelledby={`rsi-split-${split}`}>
           <h2 id={`rsi-split-${split}`}>{title}</h2>

@@ -1,7 +1,7 @@
 ---
 name: author-skill
 summary: Turns an agreed workflow into a working skill, or repairs and merges existing ones, with a tested full draft, a separate pruner and a retest.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from Kayden Clark's writing-great-skills guidance, which derives from Matt Pocock's MIT-licensed [skills](https://github.com/mattpocock/skills), and from the evaluation guidance in [Anthropic's skill-creator](https://github.com/anthropics/skills/tree/ca45fc496a3436251f191354091d557da31c15b5/skills/skill-creator) (Apache-2.0), with Kayden Clark's own authoring process, plain-language guidance and owner decisions.
 credit_license: MIT and Apache-2.0

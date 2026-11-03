@@ -14,7 +14,7 @@ import { inlineText, parseInline, parseMarkdown, slug } from './markdown.mjs';
 
 // The skills repository commit every article is derived from (owner,
 // 2026-11-01). A later pin updates the affected articles.
-export const SKILLS_PIN = '878241202bf7ec97c0952287f1633f6f0ddf1a6e';
+export const SKILLS_PIN = 'fb7ad23c963e183b930b23bc5fdf4d309dff292a';
 export const SKILLS_PIN_SHORT = SKILLS_PIN.slice(0, 7);
 export const ORIGINAL_CREDIT = 'Original to Kayden Clark.';
 

@@ -1,7 +1,7 @@
 ---
 name: ask-workbench
 summary: Picks the smallest skill flow that fits your current request, after reading the real procedures, and stops at a recommendation unless you authorized running it.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's Ask Matt](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/ask-matt) and Kayden Clark's Workbench router, MIT License.
 credit_license: MIT

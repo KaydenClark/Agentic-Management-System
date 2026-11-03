@@ -1,7 +1,7 @@
 ---
 name: align-docs
 summary: Talk a concept through with an agent while it updates your docs and domain model, then stop at a confirmed record of intent before anything gets built.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's skills](https://github.com/mattpocock/skills) (this skill was formerly called grill-with-docs), MIT License, rebuilt on the align-concept interview with documentation editing, domain modeling and confirmed-intent preservation added.
 credit_license: MIT

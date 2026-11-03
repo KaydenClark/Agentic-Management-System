@@ -1,7 +1,7 @@
 ---
 name: wayfinder
 summary: Charts a big, uncertain effort as a map of linked decisions, then settles them one per session until the route to your destination is clear enough to plan.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's Wayfinder skill](https://github.com/mattpocock/skills/blob/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/wayfinder/SKILL.md), MIT License, with project-owned glossary, decision records and trackers, and authorized delegation and delivery added.
 credit_license: MIT

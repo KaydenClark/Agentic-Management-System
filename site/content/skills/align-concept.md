@@ -1,7 +1,7 @@
 ---
 name: align-concept
 summary: Interviews you about a concept, saves the answers as notes, and records your exact confirmed readback as intent, then stops before any execution.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's Grill Me](https://github.com/mattpocock/skills/blob/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/productivity/grill-me/SKILL.md), MIT License, to compose grilling, readback and Jot for confirmed-intent capture.
 credit_license: MIT

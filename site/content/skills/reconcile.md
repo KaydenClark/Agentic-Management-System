@@ -1,7 +1,7 @@
 ---
 name: reconcile
 summary: Brings your project's Spec, Task records and board back in line with what the code and evidence show, so the next agent can continue from the records alone.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: original
 credit_text: Original to Kayden Clark.
 ---
@@ -12,7 +12,7 @@ Records go stale fast. A run finishes, a review fails, a branch lands or the own
 
 It works on a **Workbench**, the folder of structured project records that [setup-workbench](/skills/setup-workbench) creates. Three kinds of record matter here:
 
-- A **Spec** is the **destination** record: what "done" means, the acceptance checklist, decisions and an append-only evidence log. It also holds the **next gate**, the next substantive check or action before work can advance.
+- A **Spec** is the **destination** record: what "done" means, the acceptance checklist and decisions. Its Wiki history page holds the dated evidence and corrections. It also holds the **next gate**, the next substantive check or action before work can advance.
 - A **Task** records one implementor run: status, proof, receipts and decisions.
 - The **board** is a generated summary of Specs and Tasks. A tool regenerates it; nobody edits it by hand.
 
@@ -22,7 +22,7 @@ A pass has four parts.
 
 **Classify every claim** as **supported**, **stale**, **contradicted** or **unknown**. A stale or contradicted claim is then an **implementation gap** (accepted intent is newer than the code, so work remains and the intent is never bent to fit), **documentation drift** (the code was verified and the description lags, so the description is fixed) or an **ambiguity** that stays open.
 
-**Fix each claim where it lives, once.** Acceptance and the next gate go in the Spec, one run's receipt and proof in its Task, term meanings in the glossary, procedure in the runbook. A durable choice a Task made goes into its durable owner (a Spec decision, a decision record or the glossary) and only then is the Task's decision row marked reconciled. Nothing is deleted: corrections are appended and link to the row they fix. A stale instruction such as "merge this" is replaced with what actually comes next, or what blocks it.
+**Fix each claim where it lives, once.** Acceptance and the next gate go in the Spec, one run's receipt and proof in its Task, term meanings in the glossary, procedure in the runbook, and dated events in the Spec’s Wiki history page. A durable choice a Task made goes into its durable owner (a Spec decision, a decision record or the glossary) and only then is the Task's decision row marked reconciled. Nothing is deleted: corrections are appended and link to the row they fix. A stale instruction such as "merge this" is replaced with what actually comes next, or what blocks it.
 
 **Regenerate and read back.** The board is regenerated, records are published only as far as the assignment allows, and the skill rereads the owners as a stranger would. A cold reader must be able to say which revision was achieved and where it sits, what was checked and what was not, which acceptance lines remain open, and the single next action with its owner. If they cannot, the skill repairs the records rather than writing a longer report.
 
@@ -77,7 +77,7 @@ A green run shows a check passed, not that the Task's acceptance was met. The sk
 
 ### Why won't it tick the Spec's acceptance boxes after a hand-back?
 
-A box gets ticked only when evidence exists for that exact line. Per-run progress goes in the evidence log, and the boxes are checked during whole-Spec QA.
+A box gets ticked only when evidence exists for that exact line. Per-run progress belongs in the Spec’s Wiki history page; acceptance boxes are checked during whole-Spec QA.
 
 ### What if a helper skill it mentions is not installed?
 
