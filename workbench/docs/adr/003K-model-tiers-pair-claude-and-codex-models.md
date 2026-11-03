@@ -25,4 +25,4 @@ Considered and rejected: naming one provider's models in records with the other'
 
 Consequences: Replaces ADR-003A, retained in history; its Opus/Sonnet implementor rule becomes High/Mid. Existing records that name exact models stay as evidence. Running agents use their own provider's model for each tier.
 
-Provenance: Kayden's AMS chat, 2026-11-02, giving the pairing "Fable = Astra, Opus = Sol, Sonnet = Terra, Haiku = Luna" and asking for a system "so that you and codex can use it without stepping on each others toes and confusing one another." Kayden, same chat: "Frontier models are not allowed to implement. Judgement and advice only. Unless I authorize it". ADR-003A's owner answers, 2026-11-01.
+Provenance: Kayden's AMS chat, 2026-11-02 and 2026-11-03: the owner gave the Claude/Codex model pairing in the table, asked for a system both harnesses can share without stepping on each other or causing confusion, and ruled that Frontier models give judgment and advice only unless the owner authorizes implementation. ADR-003A's owner answers, 2026-11-01.
