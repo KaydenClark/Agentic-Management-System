@@ -185,7 +185,12 @@
      the reading-order links stretched across the row below. */
   --text-tagline: 0.875rem; /* 14px; the header tagline under the wordmark */
   --brand-gap: 2px; /* wordmark to tagline */
-  --navitem-flex: 1 1 auto; /* every link on one row */
+  --layer-header: 10;
+  --layer-skip: 20;
+  --header-nav-height: max(var(--control-min-height), calc(var(--text-nav) * var(--leading-body) + var(--space-8) * 2 + var(--border-width) * 2));
+  /* Conservative no-script clearance includes room for a native scrollbar.
+     Header.tsx replaces it with the measured height after hydration. */
+  --header-fallback: calc(var(--header-nav-height) + var(--space-12) * 2 + var(--space-20) + var(--border-width));
 
   /* /start diagrams and toy. */
   --node-basis: 112px; /* a lifecycle node's minimum width */
@@ -212,10 +217,9 @@
   --rule-width: 4px; /* the request blockquote's leading rule */
 }
 
-/* Narrow screens: the reading-order links wrap three a row, each stretched
-   so every row spans the full width. */
-@media (max-width: 767px) {
+/* Narrow screens put the scrollable navigation below the two controls. */
+@media (max-width: 959px) {
   :root {
-    --navitem-flex: 1 1 30%;
+    --header-fallback: calc(var(--control-min-height) + var(--space-6) + var(--header-nav-height) + var(--space-12) * 2 + var(--space-20) + var(--border-width));
   }
 }

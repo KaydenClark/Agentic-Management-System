@@ -15,7 +15,7 @@ export function ReadingNav() {
       <ol>
         {nav.map((entry, i) => (
           <li key={entry.href}>
-            <Link className="navlink" href={entry.href} aria-current={i === index ? "page" : undefined}>
+            <Link className="navlink" prefetch={false} href={entry.href} aria-current={i === index ? "page" : undefined}>
               {entry.label}
             </Link>
           </li>
