@@ -236,3 +236,42 @@ Kayden explicitly authorized pushing `docs/website-feedback-tasks`, opening its 
 ## Checker evidence presentation — 2026-11-02
 
 S-007/TK-001W presents the bounded checker repair, observations and remaining limits on `/rsi`, linked to the immutable safe report. Site source `77ed4478ee8294f3f4cbd38e270c1514245ed170` was assembled at `1b07f1e72cc4419ad017af3fe0f76fc7f1e8fc9e`. The worker reported a passing build, 209 tests including 10 focused checks, and desktop inspection. Root inspected the actual build at 375px with a 360px document and no horizontal overflow; the console showed a favicon 404 and stylesheet preload warnings. An earlier page-hash link regression failed and was repaired. These observations do not prove owner Human QA, deployment, behavioral benefit or the complete learning cycle. See the [Task](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-001W/TASK.md) and [PR 141](https://github.com/KaydenClark/Agentic-Management-System/pull/141).
+
+<!-- jot-entry -->
+### JOT-9203891f-d937-480d-8d08-83bcf77eddd8
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T05:27:28.327Z
+Author: Kayden
+Source: Kayden, RSI Results feedback and scope answer in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+The RSI Results page must visibly chart relevant real results and present the useful explanation and supporting evidence on the website. Material that is not relevant enough to present there should be omitted; readers must not be sent to GitHub. This settles the RSI-page portion of the earlier website-only feedback without treating other pages as approved work. Kayden explicitly chose: Read back and prepare the task, rather than implement the page correction now. Prepare one bounded S-007 task covering chart visibility, on-site evidence and removal of GitHub exits from the RSI reader experience, including shared chrome where it supplies those exits. Preserve provenance, honest empty/unavailable states and the distinction between audits, development observations and demonstrated improvement. No website implementation, task claim, campaign, deployment or dev-to-main promotion is authorized by this preparation.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-d795477b-63fe-4264-8ca9-7ba15e5d4470
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T05:28:10.350Z
+Author: Kayden
+Source: Kayden, explicit readback-before-plan correction in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: JOT-9203891f-d937-480d-8d08-83bcf77eddd8
+
+Kayden explicitly requires the readback before planning. Stop at the proposed readback; no Task or Spec change until it is reviewed. The preceding entry records the RSI feedback and intended preparation scope, not approval of an agent-written readback, task breakdown or shared-footer design. No Task, implementation or deployment has been performed.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-cf0db5e8-89b7-4766-85d7-1f101bfc3aaa
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T05:33:14.467Z
+Author: Kayden
+Source: Kayden, approval of RSI readback and website implementation in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: JOT-d795477b-63fe-4264-8ca9-7ba15e5d4470
+
+Kayden confirmed the readback and explicitly authorized fixing the website now. Implement visible charts of real RSI evidence, keep relevant explanation and supporting information on the website, omit irrelevant material, and remove GitHub links from the RSI reader experience. The readback-only hold is released for this correction. Preserve honest empty/unavailable states, source identity and the distinction between development observations, audit scores and demonstrated improvement. This does not authorize new trial campaigns, skill installation or owner-only dev-to-main site promotion.
+<!-- /jot-entry -->
