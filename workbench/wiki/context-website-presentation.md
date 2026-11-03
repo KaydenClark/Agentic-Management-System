@@ -329,3 +329,16 @@ Supersedes: none
 
 Kayden explicitly authorizes a corrective run after the S-003 typography three-strike stop and directs continuation. Finish one production build, freeze it until all browser/reflow checks complete, repair remaining scoped defects and continue S-003. Preserve both failures and prior incomplete run. Checked delivery targets dev; this grants no Human QA, production promotion, new trials or shared-skill installation.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-40afcae9-af5c-4573-8ddb-afcdfea99ac0
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:59:28.766Z
+Author: Kayden
+Source: Kayden, orientation corrective-run authorization in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden explicitly authorizes correction of the stopped orientation Task in draft PR147 and continuation of S-003. Correct the new alias checker to be independent of HTML attribute order while retaining negative controls, finish one build, verify the full site suite and affected rendered experience, then continue checked site delivery to dev. Preserve the two failed attempts209/214 and211/214 and their source. No Human QA, production promotion or shared-skill change is implied.
+<!-- /jot-entry -->
