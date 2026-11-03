@@ -3,10 +3,12 @@
 **Task ID:** TK-001P
 **Spec ID:** S-003
 **Slice:** Visitors understand a coherent orientation without overlapping pages
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Content, Route
 **Planned verification:** Open Home and follow the orientation links; check unique page purposes and all affected entry routes. Run site build and focused route/content/link checks.
+**Claimed by:** s003-frontend
+**Current claimant:** s003-frontend
 
 ## Authority and inputs
 
