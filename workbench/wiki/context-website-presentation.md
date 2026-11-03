@@ -20,7 +20,9 @@ last_verified: 2026-11-02
 
 The website explains and demonstrates AMS. Visitors come for understanding; it is not a live control panel. [S-003](../landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md) owns the shell and orientation. [S-007](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/SPEC.md) owns RSI evidence presentation. These Specs own their destinations; this article preserves context and grants no implementation or release authority.
 
-For RSI, the [approved correction](#jot-cf0db5e8-89b7-4766-85d7-1f101bfc3aaa) requires visible real-evidence charts and useful supporting information on the website. Omit irrelevant material and GitHub exits; retain source identity, failures and evidence limits. Implementation is authorized for this correction; other website feedback and production promotion retain their own boundaries.
+RSI Results serves prospective users: explain how AMS can improve their project, supported by facts and evidence of how AMS has improved over time. Single runs do not establish improvement. The page is not an agent reporting channel for Kayden. Isolated repair checks, audit scores and work logs cannot substitute for an account of change over time and its relevance to project outcomes. Where the evidence does not yet support a benefit, say so without inventing one. The sourced owner correction below preserves this purpose.
+
+The [approved presentation correction](#jot-cf0db5e8-89b7-4766-85d7-1f101bfc3aaa) requires visible real-evidence charts and useful supporting information on the website, serving that purpose. Omit irrelevant material and GitHub exits; retain source identity, failures and evidence limits. Other website feedback and production promotion retain their own boundaries.
 
 ## RSI proof during website development
 
@@ -289,4 +291,17 @@ Topic: website-presentation
 Supersedes: none
 
 Kayden explicitly answered Publish and merge into dev to the request to push the committed RSI correction to KaydenClark/Agentic-Management-System, open its PR and merge once checked. This releases the automatic-review publication blocker for that payload and feature branch. Production main stays unchanged; no dev-to-main promotion is authorized.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-7621aa25-99a9-4a6c-ba9d-8fa55e6a8d82
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:08:02.088Z
+Author: Kayden
+Source: Kayden, RSI Results purpose correction in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+The RSI Results page serves prospective AMS users: show someone how AMS will improve their project and the facts and evidence behind that claim. It shows how AMS has improved over time; it does not present single runs as evidence of improvement and is not a place for agents to give Kayden results. This corrects the agent interpretation that foregrounded isolated repair checks and run reports as the page content. The earlier chart-visibility and on-site-evidence requirements remain, but they must serve this longitudinal, project-benefit explanation. Preserve failures and uncertainty without inventing demonstrated benefit. This entry captures the owner correction; it claims no page implementation, new campaign, Human QA or deployment.
 <!-- /jot-entry -->
