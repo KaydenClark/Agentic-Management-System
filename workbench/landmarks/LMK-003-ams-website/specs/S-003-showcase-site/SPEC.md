@@ -18,11 +18,11 @@ The [owner brief](../../../../wiki/context-website-presentation.md) governs shel
 
 ## Outcome
 
-Explain what AMS manages, why, how intent becomes work/feedback and what evidence demonstrates, plainly for non-engineers with sources for technical readers. Present AMS without operating it.
+Explain AMS purpose, intent-to-work/feedback and evidence, plainly for non-engineers with technical sources. Present AMS without operating it.
 
 ## Why It Matters
 
-Visitors can examine whether real work supports AMS claims.
+Visitors can test AMS claims against real work.
 
 ## Current Verified State
 
@@ -32,7 +32,7 @@ History: [S-003 history](../../../../wiki/history/S-003.md).
 
 ## Desired Behavior
 
-Pages explain ideas before IDs and define unfamiliar terms. Agents draft from approved records and owner feedback.
+Explain ideas before IDs and define terms. Draft from approved records and owner feedback.
 
 ### Approved presentation feedback
 
@@ -84,7 +84,7 @@ S-005 owns reviews; S-006 data; S-007/008/009/010 linked capabilities. Missing r
 
 ## Acceptance Criteria
 
-Audit a named deployment; CI cannot prove editorial meaning.
+Audit a named deployment; CI proves no comprehension.
 
 - [ ] **Content:** satisfy each brief with explanations of purpose, workflow, evidence limits and project identity; titles alone fail.
 - [ ] **Route:** follow Start here's route without setup, reach example/evidence and return; it names `setup-workbench`. Public revision-pinned Spec/Task sources survive record moves.
