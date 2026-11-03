@@ -90,3 +90,58 @@ this record. No new Task, approval gate or scope is created. This documentation-
 claim Human QA, or prove improved agent reliability. A separate-context source reviewer confirmed this narrow mismatch and located
 the pre-existing TK-002 limitation. That review covered the cited source and
 requirement only, not the full site, rendered behavior or Human QA.
+
+## F-002 — RSI comparison does not answer the owner's adoption question
+
+Recorded: 2026-11-03 06:05 UTC. Reporter: **owner-assistant**.
+Disposition: **open owner feedback for S-007**, not a demonstrated numerical
+defect, accepted design change, new Task, or implementation authorization.
+
+The owner asked in the assistant conversation: "So what is the point of this
+visual if its not telling me if the AMS is making things better or worse?
+Why would I look at this and want to install the AMS skills"
+
+This preserves the owner's concern about the visual's purpose and usefulness.
+It does not establish that AMS as a whole makes outcomes worse. This wording is
+feedback provenance, not public-site copy; the no-owner-quotations site rule
+remains unchanged.
+
+### Verified evidence and meaning
+
+Source inspected at dev `76b9c564692a1e979cffbebbe30063b73588efb6`:
+
+- [Chart and explanation](https://github.com/KaydenClark/Agentic-Management-System/blob/76b9c564692a1e979cffbebbe30063b73588efb6/site/app/rsi/repair.tsx#L4-L49)
+  explicitly present the first workflow attempt as recorded development evidence.
+- [Source data](https://github.com/KaydenClark/Agentic-Management-System/blob/76b9c564692a1e979cffbebbe30063b73588efb6/site/app/rsi/repair-data.ts#L30-L43)
+  give baseline 9/11, 10/11, 10/11 and candidate 9/11, 8/11, 7/11:
+  totals 29/33 and 24/33, respectively. Those totals summarize repeated
+  deterministic checks, not independent outcome probabilities or an Alignment Score.
+- Both arms use skill versions: baseline `fb7ad23c963e183b930b23bc5fdf4d309dff292a`
+  and candidate `6f84573de47cbc7675876777e22e903ecd4783d1`.
+  This is not an AMS-versus-no-AMS comparison. The candidate passed fewer checks
+  in two runs, but this alone establishes neither source causation nor the
+  value of installing AMS.
+- The page already states that counts establish neither cause nor useful benefit,
+  identifies source-injected skills rather than proven native activation,
+  and keeps this first attempt distinct from later work. Those safeguards
+  should not be misreported as missing.
+- [S-007](https://github.com/KaydenClark/Agentic-Management-System/blob/76b9c564692a1e979cffbebbe30063b73588efb6/workbench/landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/SPEC.md)
+  requires visible failures/regressions and traceable evidence, and forbids
+  improvement claims without held-out rows, controls, a prior version and an
+  interval. [Current presentation intent](https://github.com/KaydenClark/Agentic-Management-System/blob/76b9c564692a1e979cffbebbe30063b73588efb6/workbench/wiki/context-website-presentation.md)
+  authorizes showing relevant real evidence on-site, not hiding failed attempts.
+
+### Next action and boundary
+
+Reconcile this owner feedback in the existing S-007 presentation review:
+identify what useful question this visual answers for a visitor and make clear
+what adoption or benefit conclusion remains unsupported. Preserve the failed
+attempt and its limits. The exact presentation response remains for the existing
+owner/builder process; this record does not prescribe a replacement chart,
+approve a new baseline or test campaign, or change acceptance criteria.
+
+The reviewed S-007, presentation Wiki and existing owner-assistant report already
+track evidence limits, but not this exact owner concern about the visual's value
+as a reason to install. This entry records that additional feedback without
+creating a duplicate implementation Task. Review was source-only; no rendered
+deployment, visitor comprehension, full acceptance or Human QA was verified.
