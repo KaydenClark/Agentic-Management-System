@@ -3,10 +3,12 @@
 **Task ID:** TK-001R
 **Spec ID:** S-003
 **Slice:** Visitors learn glossary definitions through visual explanations
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Content, Presentation
 **Planned verification:** Follow a term link from a content page and explain its definition and relationship using the rendered visual. Inspect accessible text, both themes and narrow width; run focused glossary/link checks and site build.
+**Claimed by:** s003-glossary
+**Current claimant:** s003-glossary
 
 ## Authority and inputs
 
