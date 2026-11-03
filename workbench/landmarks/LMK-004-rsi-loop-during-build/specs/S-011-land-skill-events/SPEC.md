@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
 **Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** TK-002: qualify immutable per-skill candidates before merge or personal installation; retain draft-only delivery limits.
+**Next gate:** TK-002: repair Journey/Prune failures, then three fresh Terra/high matched final rounds and fixed r1 gates before eligible merge/install.
 
 ## Intent and authority
 
@@ -27,8 +27,8 @@ Misnamed branches hide unfinished work; published handoffs expose session contex
 ## Current Verified State
 
 - Controls now distinguish personal installation and local handoffs. RUNBOOK1193 retains commands; [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) preserves pruning failures.
-- Separate skill draft PRs target `main`; [history](../../../../wiki/history/S-011.md#per-skill-draft-continuation) owns exact candidates and checks. PR58 checkpoint6f2277e and full author baseline6e4c06d remain retained.
-- [Failed histories](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md#continuation-checkpoint-later-contexts-no-reset) remain, including workflow v2b Broken28/78. Independent Prune return and author retest are development evidence; fresh candidate-bound trials/r1, useful benefit, installation and later use remain unestablished.
+- Eight source cores now894–900 characters; separate PRs59–66 target `main`. [Current failed round and correction](../../../../wiki/history/S-011.md#premature-stop-and-failed-v31-round) bind the local evidence candidate. Prior source/PR58 checkpoints remain retained.
+- Valid v3.1 round1 failed: candidate Runbook2810 misses900–1500/near900; native preservation reported original-bytes-unverified. Baseline2996 also failed. [Earlier failures](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md) remain; no qualification, benefit, merge/install or later use is established.
 - PR128 merged the truthful first-context RSI snapshot into dev12f8963; later outcomes are not yet graphed. Protected deployment HTML/live-store readback remains unavailable.
 
 History: [S-011 history](../../../../wiki/history/S-011.md).
