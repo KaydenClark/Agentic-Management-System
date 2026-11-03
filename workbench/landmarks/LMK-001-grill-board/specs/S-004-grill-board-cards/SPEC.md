@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-The owner named "make the Grill Board cards" as an LMK-001 Spec and confirmed the card rules on 2026-11-01. Orchestrator B builds locally, holds the only Supabase keys and never deploys.
+Owner-confirmed card rules (2026-11-01), under LMK-001. B builds locally, holds the Supabase keys and never deploys.
 
 ## Outcome
 
@@ -26,23 +26,23 @@ Priority and Value are how the owner decides what needs attention. Costly questi
 
 ## Current Verified State
 
-- Earlier card mechanics have linked evidence (TK-001 to TK-000J); the automatic current-queue criterion below is not met. The checkout has no real cards, so an empty renderer is not proof of a usable owner-attention queue.
-- Historical review passed at `4d49bfc`; the [later review-status report](../../../../feedback/coherence/REVIEW-STATUS-S-004-2026-11-02.md) reports it unbound at its later candidate. Neither establishes current Review or owner acceptance.
+- Card mechanics have linked evidence (TK-001 to TK-000J). TK-002F owns the current-queue correction; an empty renderer proves no usable owner queue.
+- Historical pass `4d49bfc` is [unbound at the later candidate](../../../../feedback/coherence/REVIEW-STATUS-S-004-2026-11-02.md); current Review and acceptance remain open.
 - Not met: owner approval and Human QA.
 
 History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Desired Behavior
 
-- A local Python server reads durable records and is never the record. ADR-002X governs; the owner reaffirmed Python on 2026-11-03.
-- The owner opens the current queue without requesting a refresh or preparing cards. Use the established LLM_Workbench queue, revision and answer workflow ([owner correction](../../../../wiki/context-owner-answers-coherence.md#jot-7c039b2f-ef97-4607-ad94-40cbbccc86ff)); existing answers and settled decisions survive updates.
+- Python reads durable records; the server is never the record (ADR-002X, reaffirmed 2026-11-03).
+- Automatically show current questions and retain answers and settled decisions, using the established LLM_Workbench workflow ([owner correction](../../../../wiki/context-owner-answers-coherence.md#jot-7c039b2f-ef97-4607-ad94-40cbbccc86ff)).
 - Agents post only items needing an answer (owner gates, open choices, page approvals, decision texts), never routine content or drafts.
 - Each card shows Priority and Value with one-line reasons, a 1-5 rating and a one-click "too taxing" flag; a flagged card is rewritten before it is re-asked.
 - A confirmed answer goes straight into its owning record, with no re-confirmation.
 - Flags, ratings and comments are committed records the loop reads.
 - A write refuses a target changed since it was read; nothing is deleted or renumbered.
 - Each color is a signal with one stated meaning.
-- It matches the owner's "Grilling Board Redesign" artifact, dark and light, loading nothing from other hosts.
+- Match the owner's "Grilling Board Redesign" artifact in both themes; load no other host.
 
 ## Decisions And Contracts
 
@@ -60,7 +60,7 @@ History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Dependencies And Blockers
 
-- The owner reaffirmed Python for TK-002F on 2026-11-03; the agent-created backend-selection hold is resolved. Keep the existing Python backend and board data.
+- Python is settled; preserve board data.
 
 - Python 3.14.5 pinned with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
 
@@ -73,7 +73,7 @@ Each Task is one run landed on `main` by a checked PR.
 
 ## Acceptance Criteria
 
-- [ ] **Current owner queue.** Opening the board shows actual pending owner questions with their context, recommendation, source and answer route; subsequent new, revised and resolved items appear without owner-requested preparation. Reopening creates no duplicates and does not re-ask a settled decision. A known actionable owner request with an empty “nothing needs you” view must fail. Unreadable inputs must appear as unavailable, never as an empty successful read.
+- [ ] **Current owner queue.** Pending questions show context, recommendation, source and an answer route. New/revised/resolved items update without owner-requested preparation, duplication or re-asking settled decisions. Known pending input plus an empty “nothing needs you” view fails. Unreadable inputs show unavailable, never an empty success.
 
 - [x] **Signals on every card.** Every card shows Priority and Value with a one-line reason each. *Check:* render a fixture card set. *Must fail:* a card with a grade and no reason. *Evidence:* [board] (TK-001, PR #16).
 - [x] **Answer lands in its owner.** Confirming an answer changes the owning record and needs no second confirmation. *Check:* test against a fixture record. *Must fail:* an answer that only changes board state. *Evidence:* [answers] (TK-000G, 3e557c0).

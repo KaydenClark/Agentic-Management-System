@@ -36,3 +36,7 @@ Urgently reconcile the actual blocked requests and their current owners, sources
 Kayden requires current items to render automatically, without asking for the board to be updated before use, and directs reuse of LLM_Workbench. The current AMS reader has no card producer: it reads committed card files only; an empty card directory therefore says nothing about outstanding owner requests. The agent's claim that all other work needed owner input was too broad: current claims, failed-run stops and deliberate Prepare holds are different conditions. Do not turn settled owner holds into repeated approval questions.
 
 The inspected LLM_Workbench source at9d5e1f25 has a reusable project component with stable questions, revisions, live queue reads and preserved answer/application state. Agents add/revise its items through the existing tool; automatic inference of all pending questions was not found. Reuse is blocked only on the consequential Node-versus-Python choice retained in S-004 TK-002F. No board replacement or repaired outcome is claimed.
+
+### Python correction and implementing Task
+
+Kayden reaffirmed Python on 2026-11-03. The backend choice was an unnecessary agent-created hold, not a missing owner decision. TK-002F now implements the reference workflow in the existing Python board. Its scoped tests and delivery records will own the repair evidence; this note does not supply Human QA or formal acceptance.

@@ -16,6 +16,7 @@ the Origin (or, without one, the Referer) must be its own origin.
 """
 
 import argparse
+import json
 import threading
 from html import escape
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -26,7 +27,7 @@ from .answers import VERDICTS, AnswerRefused, AnswerWrittenIndexStale, is_record
 from .answers import answer as write_answer
 from .answers import flag as write_flag
 from .answers import rate as write_rate
-from .cards import PRIORITIES, VALUES, CardSourceError, committed_cards, load_cards
+from .cards import PRIORITIES, VALUES, CardSourceError, committed_cards, committed_snapshot, load_cards
 
 HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
@@ -99,8 +100,8 @@ def render_rail(groups, topic):
 </div>
 <section class="rail-note" aria-label="Where cards come from">
 <div class="eyebrow">Cards</div>
-<div>Read from committed files in <span class="mono">grill-board/cards/</span>.</div>
-<div class="small">Commit a card to post it; drafts never show.</div>
+<div>Pending questions come from their committed project records.</div>
+<div class="small">The queue stays current. Saved answers and earlier revisions remain available.</div>
 </section>
 </aside>"""
 
@@ -120,12 +121,13 @@ def render_row(card, topic, selected):
 </a></li>"""
 
 
-def render_queue(topic, all_cards, selected):
+def render_queue(topic, all_cards, selected, unavailable=False):
     cards = [card for card in all_cards if card.waiting]
     count = len(cards)
     rows = "\n".join(render_row(card, topic, selected) for card in cards)
     if not rows:
-        rows = '<li class="empty">Nothing here needs you.</li>'
+        message = "The queue needs attention; see the source issues above." if unavailable else "Nothing here needs you."
+        rows = f'<li class="empty">{message}</li>'
     return f"""<section class="queue" aria-label="Question queue">
 <div class="queue-head">
 <h1>{escape(topic) if all_cards else "Grill Board"}</h1>
@@ -144,7 +146,7 @@ def render_queue(topic, all_cards, selected):
 </section>"""
 
 
-def render_verdicts(cards_dir, topic, card):
+def render_verdicts(cards_dir, topic, card, drafts=None):
     card_sha, record_sha = render_hashes(cards_dir, card)
     target, anchor = card.fields.get("Owner record", ""), card.fields.get("Write after", "")
     if not (target and anchor):
@@ -172,11 +174,11 @@ def render_verdicts(cards_dir, topic, card):
 {chr(10).join(buttons)}
 </div>
 <label class="sr-only" for="note">Note</label>
-<textarea id="note" name="note" rows="3" maxlength="4000" placeholder="What should change, in your words"></textarea>
+<textarea id="note" name="note" rows="3" maxlength="4000" placeholder="What should change, in your words">{escape((drafts or {}).get('note', ''))}</textarea>
 </form>"""
 
 
-def render_rating(topic, card):
+def render_rating(topic, card, drafts=None):
     """One click each: a star POSTs its rating to /rate, "Too taxing" POSTs to
     /flag. The optional comment travels with either click."""
     hidden = "".join(
@@ -199,11 +201,11 @@ def render_rating(topic, card):
 <span class="stars" role="group" aria-label="Rate this question, one to five">{stars}</span>{saved}
 {taxing}
 <label class="sr-only" for="comment">Comment on the question</label>
-<input id="comment" class="comment" type="text" name="comment" maxlength="1000" placeholder="Optional comment on the question">
+<input id="comment" class="comment" type="text" name="comment" maxlength="1000" placeholder="Optional comment on the question" value="{escape((drafts or {}).get('comment', ''), quote=True)}">
 </form>"""
 
 
-def render_open(cards_dir, topic, cards, card):
+def render_open(cards_dir, topic, cards, card, drafts=None):
     if card in cards:
         index = cards.index(card)
         before, after = cards[index - 1], cards[(index + 1) % len(cards)]
@@ -216,7 +218,14 @@ def render_open(cards_dir, topic, cards, card):
     if card.fields.get("Recommendation"):
         extras += f"""<div class="box tone h-agent"><div class="box-head"><span class="dot rest"></span>Agent recommendation</div>
 <p>{escape(card.fields["Recommendation"])}</p></div>\n"""
-    if card.flag is not None:
+    if card.fields.get("Source record"):
+        extras += (f'<p class="verdict-note">Source: <span class="mono">{escape(card.fields["Source record"])}</span>'
+                   f' · request <span class="mono">{escape(card.fields["Request key"])}</span>'
+                   f' · revision <span class="mono">{escape(card.fields["Source revision"][:12])}</span>.</p>')
+    if not card.source_current:
+        state = '<span class="pill tone h-none">Earlier request</span>'
+        verdict = '<p class="verdict-note">This request changed or was withdrawn. Its earlier answer is preserved; use the current question.</p>'
+    elif card.flag is not None:
         state = '<span class="pill tone h-returned"><span class="dot"></span>Too taxing: held for rewrite</span>'
         verdict = '<p class="verdict-note">Flagged too taxing. An agent rewrites the question and posts it as a new card before it is asked again.</p>'
     elif card.answer is not None:
@@ -224,7 +233,7 @@ def render_open(cards_dir, topic, cards, card):
         verdict = f'<p class="verdict-note">Answered {escape(card.answer.get("Answered", ""))}. You can still rate it or flag it too taxing.</p>'
     else:
         state = '<span class="pill tone h-owner"><span class="dot"></span>To answer</span>'
-        verdict = render_verdicts(cards_dir, topic, card)
+        verdict = render_verdicts(cards_dir, topic, card, drafts)
     if card in cards:
         index = cards.index(card)
         place = f"{index + 1} of {len(cards)} in this topic"
@@ -246,7 +255,7 @@ def render_open(cards_dir, topic, cards, card):
 {extras}<section class="verdict-area" aria-label="Your verdict">
 <div class="eyebrow">Your verdict</div>
 {verdict}
-{render_rating(topic, card)}
+{render_rating(topic, card, drafts)}
 <div class="pager">
 <span>{place}</span>
 <span class="buttons"><a class="ghost" href="{link(topic, before)}">Previous</a><a class="inkbtn" href="{link(topic, after)}">Next question</a></span>
@@ -283,7 +292,8 @@ def render_notice(notice):
     return f'<section class="alert notice" role="status" aria-label="Answer written"><div>{escape(text)}</div></section>'
 
 
-def render_page(cards_dir, query="", notice=None):
+def render_page(cards_dir, query="", notice=None, drafts=None):
+    revision, _ = committed_snapshot(cards_dir)
     cards, refusals = load_cards(cards_dir)
     params = parse_qs(query)
     groups = group_by_topic(cards)
@@ -296,24 +306,26 @@ def render_page(cards_dir, query="", notice=None):
     wanted_card = params.get("card", [None])[0]
     # A link may open an answered or flagged card, so it can still be rated or flagged.
     selected = next((card for card in in_topic if card.file == wanted_card), shown[0] if shown else None)
-    open_card = render_open(cards_dir, topic, shown, selected) if selected else ""
+    open_card = render_open(cards_dir, topic, shown, selected, drafts) if selected else ""
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Grill Board</title>
 <link rel="stylesheet" href="/static/board.css">
 <script src="/static/theme.js"></script>
+<script src="/static/queue.js" defer></script>
 </head>
-<body>
+<body data-board-revision="{escape(revision, quote=True)}">
 <header class="top"><div class="top-in">
 <div class="brand"><span class="brand-name">AMS</span><span class="brand-sub">Grill Board</span></div>
 <button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch light or dark theme">{HALF_MOON}<span data-theme-label>Dark</span></button>
 </div></header>
 {render_notice(notice)}
 {render_refusals(refusals)}
+<p class="verdict-note" data-queue-update role="status" hidden></p>
 <div class="cols">
 {render_rail(groups, topic)}
-{render_queue(topic, dict(groups).get(topic, []), selected)}
+{render_queue(topic, dict(groups).get(topic, []), selected, unavailable=bool(refusals))}
 {open_card}
 </div>
 </body></html>
@@ -338,6 +350,13 @@ def make_server(cards_dir, port=DEFAULT_PORT):
             url = urlsplit(self.path)
             if url.path.startswith("/static/") and (found := static_file(url.path)):
                 self.reply(200, CONTENT_TYPES.get(found.suffix, "application/octet-stream"), found.read_bytes())
+                return
+            if url.path == "/api/revision":
+                try:
+                    revision, _ = committed_snapshot(cards_dir)
+                    self.reply(200, "application/json", json.dumps({"revision": revision}).encode())
+                except CardSourceError:
+                    self.reply(503, "application/json", b'{"error":"The queue source is unavailable."}')
                 return
             if url.path not in ("/", "/index.html"):
                 self.send_error(404)
@@ -405,7 +424,7 @@ def make_server(cards_dir, port=DEFAULT_PORT):
                 notice = ("written", f"Written: {error}")
             query = urlencode({"topic": topic, "card": form.get("card", "")})
             try:
-                page = render_page(cards_dir, query, notice)
+                page = render_page(cards_dir, query, notice, drafts=form if status == 409 else None)
             except CardSourceError as error:
                 page = f"Grill Board cannot read committed cards: {error}\n"
             self.reply(status, "text/html", page.encode("utf-8"))
@@ -415,6 +434,7 @@ def make_server(cards_dir, port=DEFAULT_PORT):
             charset = "; charset=utf-8" if kind.startswith("text/") else ""
             self.send_header("Content-Type", kind + charset)
             self.send_header("Content-Length", str(len(payload)))
+            self.send_header("Cache-Control", "no-store")
             self.end_headers()
             self.wfile.write(payload)
 
@@ -425,6 +445,11 @@ def make_server(cards_dir, port=DEFAULT_PORT):
 
 
 def main(argv=None):
+    import sys
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] in ("add", "revise", "status", "pending"):
+        from .queue import main as queue_main
+        return queue_main(argv)
     parser = argparse.ArgumentParser(prog="ams-board", description="Serve the local Grill Board.")
     parser.add_argument("--cards", type=Path, default=DEFAULT_CARDS, help="card directory (default: grill-board/cards)")
     parser.add_argument("--port", type=int, default=DEFAULT_PORT, help=f"port on {HOST} (default: {DEFAULT_PORT})")

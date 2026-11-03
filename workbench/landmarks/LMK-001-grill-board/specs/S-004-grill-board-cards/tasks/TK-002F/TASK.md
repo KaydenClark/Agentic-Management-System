@@ -34,3 +34,9 @@ Resolved correction, 2026-11-03: Kayden directs Python, as already required by A
 - Wiki validation, layout validation and diff whitespace pass; doctor has no global blocker and retains existing informational/slice findings.
 
 Permitted baseline rerun: `uv run --offline pytest -q tests/test_grill_board.py tests/test_grill_board_answers.py tests/test_grill_board_ratings.py tests/test_grill_board_theme.py --maxfail=1` passed128/128 in86.17seconds on unchanged product code. This establishes existing card mechanics only. ADR validation and staged-file hygiene also pass. No automatic-queue repair has been implemented.
+
+## Implementation evidence
+
+Expected red: an explicit pending request in a Spec rendered the old empty-board message; after projection, both initial HTTP cases passed. The next expected red showed projected requests could not yet use the committed-card writer. Extending that writer initially exposed Git's missing --add option for a first response file; the transaction refused and rolled back. The correction passed the full focused suite:146tests, including128existing board tests and18queue regressions.
+
+The first full suite passed827with6skipped. Browser checks passed8/8, covering both themes at375/1280, reachable controls, automatic reload, exact unsaved-note preservation and source unavailability; inspected phone/dark and desktop/light screenshots. Self-review then tightened non-decision revisions and unprepared owner-next-gate detection; the resulting20queue cases pass. A fresh-checkout full run will bind final verification. No owner answer was submitted to the real board.

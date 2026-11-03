@@ -23,7 +23,9 @@ uv run ams-hygiene
 Repeat on a fresh candidate checkout. `site/`: `npm run build`, `npm test`.
 Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
-`uv run ams-board` (loopback). Other commands use `uv run`:
+`uv run ams-board` (loopback). Agents publish owner questions with
+`ams-board add|revise` before reporting owner blockage; read answers with `pending`.
+[Queue contract](grill-board/README.md#current-owner-queue). Other commands use `uv run`:
 
 - `ams-keycheck`; `ams-writer record-merge|readcheck SHA`
 - `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
