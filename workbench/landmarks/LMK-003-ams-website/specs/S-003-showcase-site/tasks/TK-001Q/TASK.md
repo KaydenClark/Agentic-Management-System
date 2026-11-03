@@ -34,3 +34,9 @@ For implementation, branch from current `origin/dev`, target a checked feature P
 ## Hand-back
 
 Return the candidate/PR, observable result, checks actually run, screenshots where relevant and remaining gaps to S-003. No implementation is performed by this planning change.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s003-navigation | d929eeec1dd517132494797753a56abdd5f914a9 | ahead 0 behind 0 | 0 | Sourced929eeec1dd517132494797753a56abdd5f914a9: production build and217site tests pass. First focused browser330/347pass,17fail (clipped contrast undecidable and header prefetch interfering with toy network check). After repair browser347/347pass. Second completed navigation matrix76/80pass:4phone cases clip focused links at100/200-percent in both themes. Original no-JS RAF harness was canceled without a completed matrix; log retained. Three-strike STOP, no full keyboard QA or completion. | site README, shared header/styles and browser detectors; exact geometry and both failed attempts retained locally | Draft PR148 pushed, no merge. Owner-authorized corrective run must establish focus-scroll cause and fully reveal focused nav links, then rerun the80case matrix and affected browser checks on one completed frozen build. R/T/B remain undispatched; Human QA and production remain owner gates. | 8cba4c66ee76d3a3f21b2b2e28377a95f4fc58dc3434f1234568be289d0f975e |
