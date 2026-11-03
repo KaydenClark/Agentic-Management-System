@@ -6,7 +6,7 @@ AMS carries intent into outcomes with AI and improves its methods through RSI. [
 
 `src/`, `tests/`: package and checks; `supabase/`: storage; `site/`: public presentation using a read-only presentation key; `grill-board/`: local review; `evals/`: RSI. [Manifest](workbench/manifest.json): Workbench lanes. `.agents/`: hook and skill extensions.
 
-## Ownership and routes
+## Routes
 
 | Need | Owner or route |
 |---|---|
