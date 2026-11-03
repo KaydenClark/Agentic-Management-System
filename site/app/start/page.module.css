@@ -75,7 +75,7 @@
   aspect-ratio: 1;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     ". p1 ."
@@ -124,6 +124,8 @@
 
 .parts li {
   position: relative;
+  min-width: 0;
+  max-width: 100%;
   list-style: none;
   padding: var(--space-4) var(--space-8);
   background: var(--surface);
