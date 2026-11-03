@@ -168,3 +168,53 @@ they do not establish a whole-system trend. Missing evidence remains missing.
 No product code, Spec acceptance criteria, decisions or Tasks were changed by
 this clarification. This sourced owner wording is internal project feedback,
 not copy for the public website.
+
+
+### Candidate progress and existing review findings — 2026-11-03 16:16 UTC
+
+Reporter: **owner-assistant**. Evidence: source inspection and GitHub state
+readback; evaluated model: not-applicable; reviewer model: unknown.
+F-002 remains open. This observation is not a new implementation defect or
+a claim that an unfinished PR should already satisfy whole-Spec acceptance.
+
+[PR #154](https://github.com/KaydenClark/Agentic-Management-System/pull/154)
+at `088acb924e443aca7b4e20f67607c100f3b58c79` adds round-two per-skill
+comparisons before the preserved first attempt. The
+[new page section](https://github.com/KaydenClark/Agentic-Management-System/blob/088acb924e443aca7b4e20f67607c100f3b58c79/site/app/rsi/round-two.tsx)
+and [data](https://github.com/KaydenClark/Agentic-Management-System/blob/088acb924e443aca7b4e20f67607c100f3b58c79/site/app/rsi/round-two-data.ts)
+distinguish three qualified repairs, journey's owner-directed no-regression
+merge, land's failed qualification, pruning development observations and an
+unmeasured skill on hold. The whole page retains separate behavioral-trial
+sections and explicit missing-evidence states. It does not establish a
+whole-AMS trend: the new section explicitly excludes broader benefit, native
+discovery and later use, with personal installation still pending.
+
+The [merged round-two record](https://github.com/KaydenClark/Agentic-Management-System/blob/bbc9ff7f52988cb60a5800fca232297475437f3b/workbench/wiki/history/S-011.md#resumed-per-pr-rsi-round-two)
+and direct skills PR state readback confirm four merges. This replaces the
+earlier zero-merge endpoint for current context, without rewriting that failed
+attempt. Three bounded qualification outcomes and one no-regression merge must
+not be pooled into an overall improvement claim. The reused RUNBOOK case
+remains development evidence, not a fresh held-out qualification.
+
+Both exact-head CI jobs passed. The builder reports a completed build,
+232 site tests and a 375px inspection; this watch did not rerun those checks.
+At observation, PR #154 was open against dev, dev remained
+`7441e9e351fe75397448431b25e6e994e2cac29d`, and deployed-page readback,
+Human QA and production promotion were not established.
+
+Three actionable issues already have owners in PR #154's unresolved review:
+[unsupported native entry kinds](https://github.com/KaydenClark/Agentic-Management-System/pull/154#discussion_r4457357204),
+[a missing entry boundary](https://github.com/KaydenClark/Agentic-Management-System/pull/154#discussion_r4457357219),
+and [candidate-bar contrast overridden by CSS](https://github.com/KaydenClark/Agentic-Management-System/pull/154#discussion_r4457357231).
+Source inspection corroborates the invalid metadata, missing delimiters and
+equal-specificity CSS ordering; runtime effects were not independently
+executed here. The unsupported metadata also exists in the named main
+snapshot, so reconciliation should account for both main and the dev
+candidate. These references preserve the existing review identities rather
+than create duplicate findings or Tasks.
+
+Next action: the existing builder/reviewer workflow resolves those findings
+and verifies the resulting candidate and delivery. Keep F-002's whole-AMS
+over-time purpose open for the existing S-007 review, while preserving honest
+bounded evidence and missing proof. No replacement design, metric, test
+campaign, acceptance or release permission is supplied by this observation.
