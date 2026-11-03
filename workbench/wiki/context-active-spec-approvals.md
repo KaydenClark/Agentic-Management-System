@@ -194,3 +194,16 @@ Supersedes: none
 
 S-006: The owner answered "Approve this history import" to the explicit question authorizing the local writer to import real AMS build-history rows from main771bd1e264ff15ab89217c8f91f79fc38c57f96b and devfe9870fe93f715c859fc5059b0b4c52f38f4a640 into existing Supabase project hqvtnpvwwppbeurponnn, refreshing changed sourced rows and retaining the eight archived facts, using the existing local service key. This resolves the fresh import-approval hold for these exact data pins and destination only. Use the corrected checked collector, preserve original three S008 facts and historical identity declarations, require direct current canonical metadata and pinned readcheck, and do not delete rows or expose/copy keys. Approval is not proof of a successful import, whole-S006 acceptance, owner Human QA, or authority to resume stopped W.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-72694beb-00cb-4df3-ab5f-8a0a92ead211
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T17:15:13.308Z
+Author: Kayden
+Source: Kayden, AMS chat, 2026-11-03
+Topic: active-spec-approvals
+Supersedes: none
+
+Find the next smallest bounded task you can complete, and /carry it to completion. Commit and PR to that specs feature branch. This authorizes selecting and completing one bounded task and opening its PR to the owning Spec feature branch. It supplies no owner Human QA or production promotion.
+<!-- /jot-entry -->

@@ -5,12 +5,12 @@
 **Priority:** 1
 **Owner:** Kayden
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-03
 **Catalog description:** One "Are we there yet?" check across landmarks, room, skills, runtime and owner gates.
 **Blockers:** none
 **Confirmation:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-abe54041-757d-443a-82f4-6bc011b3908f](../../wiki/context-active-spec-approvals.md)
-**Next gate:** Confirm acceptance criteria and completion result.
+**Next gate:** Close TK-002E with verification and documentation proof.
 
 ## Intent and authority
 
