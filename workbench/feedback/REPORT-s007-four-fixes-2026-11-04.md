@@ -1,6 +1,6 @@
 # Four RSI presentation repairs: observed failures and expected outcomes
 
-Attribution: owner-assistant. Owner-approved scope, 2026-11-04. Owner: [S-007 TK-002L](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002L/TASK.md). Baseline: dev `ae231ee`. This is supporting evidence for the existing failure log, not a replacement log or a measured skill-improvement claim. PR164's active writer is consolidating that log; its edits are preserved.
+Attribution: owner-assistant. Owner-approved scope, 2026-11-04. Owner: [S-007 TK-002L](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002L/TASK.md). Baseline: dev `ae231ee`. This is supporting evidence for the existing failure log, not a replacement log or a measured skill-improvement claim. PR164 merged to main as69fc587 during this repair. Its exact accepted log is retained here with appended FAIL-034 through FAIL-050; no earlier rows are overwritten.
 
 ## Attribution limits
 
@@ -36,4 +36,8 @@ Automatic approval review denied the public push of product commit `4e3aa13`: im
 
 `node --test tests/rsi-repairs.test.mjs tests/rsi-rows.test.mjs`: 20 passed after repair, versus four new expected red tests before it. Production build and `npm test`: 266 passed. Browser contrast check passes light/manual-dark/system-dark including a deliberately broken solid-fill negative control; run-only fixtures visible without overflow at 375/1280 in both themes. Actual results, availability and run failures remain review-hash-bound. Test runs are excluded; result-backed failures stay on their existing point.
 
-No real model trials, private credentials or database writes were used. Fixtures are labeled and never imported by the production page. Fresh-candidate checks, shared CI, deployment and delivery state are recorded in TK-002L; they are not implied by these local results. Human QA and production promotion remain owner-only. Repairing presentation is not evidence that AMS itself improved.
+No real model trials, private credentials or database writes were used. Fixtures are labeled and never imported by the production page. Fresh checkout5cc0cdf passed build,266 site tests and811 Python tests with4 skipped; source bytes match4e3aa13. Shared CI, deployment and delivery state are recorded in TK-002L; they are not implied by these local results. Human QA and production promotion remain owner-only. Repairing presentation is not evidence that AMS itself improved.
+
+## Preservation and invocation corrections
+
+I-006: The baseline status itself recorded a dirty generated Taskboard; not every original was committed before snapshot. Exact original bytes are retained in the local Git object and independently copied with matching digest. This does not reconstruct the required earlier chronology; preservation remains local and incomplete until delivery. I-007: abbreviated baseline ID was refused; I-008: a subsequently supplied incorrect full ID failed binding. The actual Git-resolved full SHA was then used. Correct outcome: resolve identifiers from Git and commit owned originals before taking the baseline, never guess or reconstruct history. I-009 through I-012 capture the initial DNS and tool-interface refusals in the canonical log; these are invocation/environment diagnostics, not evidence of a skill-source defect.

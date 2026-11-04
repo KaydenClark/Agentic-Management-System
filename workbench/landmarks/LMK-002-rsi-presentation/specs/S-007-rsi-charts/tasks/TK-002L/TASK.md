@@ -4,7 +4,7 @@
 **Spec ID:** S-007
 **Slice:** Repair four owner-approved RSI presentation defects end to end
 **Status:** in-progress
-**Blockers:** none
+**Blockers:** owner:s007-four-fixes-publication
 **Destination:** spec-acceptance: Provenance and series; Not only up; Shared data states
 **Planned verification:** Candidate fill contrast in both themes; rendered hash invariance under freshness changes and sensitivity to evidence; grader isolation; run-only failure visibility without fabricated results; site build and suite.
 **Claimed by:** codex-rsi-four-fixes
@@ -30,4 +30,18 @@ Workspace baseline sha256:eb5a7cca4ddbafa39d4daab2c03211289a0e85911273e2d00cfa6b
 
 Focused red: four new render tests failed for timestamp hashing, both grader cases and absent run-only evidence; Chrome reproduced identical candidate/baseline fills. Green: build and 266 site tests pass, including 20 reader/repair tests. Browser actual CSS passes contrasting candidate interior and double border in light/manual-dark/system-dark with a planted solid-fill negative control. Run-only source fixtures visible at 375/1280 in both themes without overflow or invented points. No live database/model calls or owner QA. Python suite and fresh-candidate verification pending.
 
-[Failure evidence and attribution limits](../../../../../../feedback/REPORT-s007-four-fixes-2026-11-04.md): historical skill/model tier unknown; current harness Codex, exact model/tier unknown. Canonical log has an active PR164 writer; this report preserves evidence without overwriting that log.
+[Failure evidence and attribution limits](../../../../../../feedback/REPORT-s007-four-fixes-2026-11-04.md): historical skill/model tier unknown; current harness Codex, exact model/tier unknown. PR164 merged during this run; its accepted canonical log is preserved with appended FAIL-034 through FAIL-050. Earlier IDs remain intact.
+
+## Final local verification and delivery boundary
+
+Fresh checkout at5cc0cdf: build and266/266 site tests passed; full Python811 passed/4 skipped (200.79s). Product bytes equal4e3aa13. Root and built-site hygiene0; Wiki, decisions, layout, render and whitespace checks pass. Doctor retains pre-existing unrelated attention/slice findings. Browser checks and screenshots are fixture-only, not a deployed readback. React server-component review: stable row keys, no new client state/effects, no extra fetches.
+
+Public push was denied by automatic approval review: explicit publication approval is required. Remote feature tip remains7af73e7 (claim only); product/verification commits are local. No PR, shared CI, dev merge, deployment, owner QA or production promotion is claimed. Native close is not attempted while required delivery is blocked.
+
+Initial preservation gap: baseline recorded dirty generated Taskboard, so the original-commit-before-snapshot sequence was incomplete. Exact original bytes have a verified independent local copy. No chronology is reconstructed. Native accounting remains incomplete because the feature ref is unpushed; ignored local test caches/evidence also remain local. Preserve this checkout, its commits and local recovery until publication is authorized.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-007-rsi-chart-pages | 5cc0cdf5b020991b0cc889b9b9ca8331db82cbc7 | ahead 3 behind 0 | 3 | Fresh5cc0cdf: build;266 site tests;811 Python passed/4 skipped. Product tree matches4e3aa13. Chrome contrast and375/1280 run-only fixtures pass. Root/build hygiene0; Wiki/layout/decisions/render/diff checks pass. | site README; owner intent; TK-002L; accepted main failure log plus FAIL-034 through FAIL-050 and supporting report. | Public push denied; explicit push/PR/checked-dev-merge approval pending. No PR/CI/deploy/QA. Native preservation incomplete: unpushed ref, local test caches, missed pre-snapshot original Taskboard commit; exact original bytes preserved locally. | e1294657a58e1abb4b1940c85100d50879531db3933affaae56b69f380774383 |
