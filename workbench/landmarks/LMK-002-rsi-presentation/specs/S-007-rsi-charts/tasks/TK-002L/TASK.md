@@ -18,10 +18,16 @@ One writer `codex-rsi-four-fixes` owns this corrective Task and its source/tests
 
 ## Acceptance
 
-- [ ] Candidate bars retain contrasting interior and double border in both themes.
-- [ ] Freshness-only changes keep the review hash; actual evidence changes alter it.
-- [ ] Different graders produce separate series with visible provenance, never pooled counts or cross-grader regression.
-- [ ] Stopped/failed runs without rows remain visible with source and stop/failure evidence; no invented task, split, count or score; test runs hidden.
+- [x] Candidate bars retain contrasting interior and double border in both themes.
+- [x] Freshness-only changes keep the review hash; actual evidence changes alter it.
+- [x] Different graders produce separate series with visible provenance, never pooled counts or cross-grader regression.
+- [x] Stopped/failed runs without rows remain visible with source and stop/failure evidence; no invented task, split, count or score; test runs hidden.
 - [ ] Build, focused regression tests and required checks pass; actual failures and limits recorded.
 
 Workspace baseline sha256:eb5a7cca4ddbafa39d4daab2c03211289a0e85911273e2d00cfa6bca80b5562a
+
+## Check and QA checkpoint
+
+Focused red: four new render tests failed for timestamp hashing, both grader cases and absent run-only evidence; Chrome reproduced identical candidate/baseline fills. Green: build and 266 site tests pass, including 20 reader/repair tests. Browser actual CSS passes contrasting candidate interior and double border in light/manual-dark/system-dark with a planted solid-fill negative control. Run-only source fixtures visible at 375/1280 in both themes without overflow or invented points. No live database/model calls or owner QA. Python suite and fresh-candidate verification pending.
+
+[Failure evidence and attribution limits](../../../../../../feedback/REPORT-s007-four-fixes-2026-11-04.md): historical skill/model tier unknown; current harness Codex, exact model/tier unknown. Canonical log has an active PR164 writer; this report preserves evidence without overwriting that log.

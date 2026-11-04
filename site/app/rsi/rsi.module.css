@@ -233,7 +233,7 @@
 .comparisonRow strong { text-align: right; font-variant-numeric: tabular-nums; }
 .comparisonTrack { height: var(--space-24); background: var(--raised); border: var(--border-width) solid var(--line-strong); }
 .comparisonBar { display: block; height: 100%; background: var(--ink); }
-.candidateBar { background: var(--raised); border-block: var(--space-4) double var(--ink); box-sizing: border-box; }
+.comparisonBar.candidateBar, .armBar.candidateBar { background: var(--raised); border-block: var(--space-4) double var(--ink); box-sizing: border-box; }
 .evidenceDetails { padding-top: var(--space-12); border-top: var(--border-width) solid var(--line); }
 .evidenceDetails summary { cursor: pointer; font-weight: var(--weight-semibold); }
 .evidenceDetails p { margin-top: var(--space-12); }

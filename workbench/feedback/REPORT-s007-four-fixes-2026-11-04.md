@@ -1,0 +1,32 @@
+# Four RSI presentation repairs: observed failures and expected outcomes
+
+Attribution: owner-assistant. Owner-approved scope, 2026-11-04. Owner: [S-007 TK-002L](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002L/TASK.md). Baseline: dev `ae231ee`. This is supporting evidence for the existing failure log, not a replacement log or a measured skill-improvement claim. PR164's active writer is consolidating that log; its edits are preserved.
+
+## Attribution limits
+
+The four source defects below are reproduced product failures. Their originating skill invocation, provider, exact model and tier are **unknown** from the inspected evidence. Review-bot identity is not implementor identity. No specific design or workflow skill is blamed without an invocation trace. Current repair harness: Codex; exact model and tier are unknown in the available task metadata. No personal names are used.
+
+## Reproduced defects
+
+| ID | Failed activity | Observed failure | Correct outcome | Evidence | Disposition |
+|---|---|---|---|---|---|
+| F-001 | Display baseline/candidate encodings | Candidate arm's later background overrides the contrasting interior; both bars become solid ink | Contrasting interior and double ink border in both themes | [PR154 finding](https://github.com/KaydenClark/Agentic-Management-System/pull/154#discussion_r4457357231); `rsi-bars.check.mjs` reproduced identical fills | test; S-007 TK-002L |
+| F-002 | Keep page review tied to evidence | Changing read time alone changes the content hash | Timestamp remains visible; identical evidence keeps the hash; evidence or availability changes alter it | [PR142 finding](https://github.com/KaydenClark/Agentic-Management-System/pull/142#discussion_r4457543895); first `rsi-repairs.test.mjs` run fails freshness equality | test; S-007 TK-002L |
+| F-003 | Compare results across versions | Different graders pool into one point or produce a false continuous trend/regression | Grader version is visible series identity; counts and regressions stay within one grader | [PR142 finding](https://github.com/KaydenClark/Agentic-Management-System/pull/142#discussion_r4450929584); both same/changed-system grader fixtures fail with one series instead of two | test; S-007 TK-002L |
+| F-004 | Preserve failed/stopped attempts | A run without results has no point and disappears | Separate run-level source/provenance/stop evidence, with unknown task/split/grade and no fabricated score | [PR142 finding](https://github.com/KaydenClark/Agentic-Management-System/pull/142#discussion_r4450929591); no run-only reader at baseline; terminal run fixture reproduced omission | test; S-007 TK-002L |
+
+## Actual invocation failures in this repair
+
+Skill context: installed Journey Check procedure and TDD; no skill-source defect is established. Provider/harness: OpenAI/Codex; exact model and tier: unknown. The expected red tests above intentionally reproduced existing product defects and are not failed repair attempts.
+
+| ID | Failed activity | Observed failure | Correct outcome and handling | Disposition |
+|---|---|---|---|---|
+| I-001 | Launch browser contrast check | Playwright's expected Chromium executable was absent; no check executed | Use an installed supported browser or identify the missing prerequisite. Installed Chrome then reproduced F-001 and verified the repair | diagnostic; environment prerequisite, no skill repair claimed |
+| I-002 | Run repository hygiene through uv | Restricted DNS blocked Python dependency download (`iniconfig`); hygiene did not run in that invocation | Install locked dependencies through approved network access, then execute the unchanged check. Approved sync succeeded and hygiene reported zero findings | diagnostic; environment restriction, no skill repair claimed |
+| I-003 | Apply documentation patch | A README line fragment did not match the full existing line; the atomic patch applied nothing | Read back current bytes, make the exact bounded replacement and verify the diff. Corrected replacement preserved surrounding text | diagnostic; editing invocation, no skill repair claimed |
+
+## Verification and limits
+
+`node --test tests/rsi-repairs.test.mjs tests/rsi-rows.test.mjs`: 20 passed after repair, versus four new expected red tests before it. Production build and `npm test`: 266 passed. Browser contrast check passes light/manual-dark/system-dark including a deliberately broken solid-fill negative control; run-only fixtures visible without overflow at 375/1280 in both themes. Actual results, availability and run failures remain review-hash-bound. Test runs are excluded; result-backed failures stay on their existing point.
+
+No real model trials, private credentials or database writes were used. Fixtures are labeled and never imported by the production page. Fresh-candidate checks, shared CI, deployment and delivery state are recorded in TK-002L; they are not implied by these local results. Human QA and production promotion remain owner-only. Repairing presentation is not evidence that AMS itself improved.
