@@ -1,10 +1,8 @@
 # AMS failure log
 
-This is the single canonical Markdown log for **every AMS failure**: model/skill
-execution, coordination, tooling, tests, environment, delivery and owner-reported
-failures. Record failures here even when a Task, trial ledger or detailed report
-also records evidence. Supporting artifacts link here; they are not alternative
-failure intake locations. Expected TDD red controls are test evidence, not failed
+Log **every AMS failure here**: models/skills, coordination, tooling, tests,
+environment, delivery and owner reports. Tasks, trial ledgers and detailed
+reports remain supporting evidence, never alternative intake locations. Expected TDD red controls are test evidence, not failed
 candidate attempts; unexpected verification failures and failed retries belong here.
 
 Source: Kayden's AMS chat, 2026-11-03: every failure belongs in the same Markdown
@@ -14,7 +12,7 @@ so the evidence can guide skill repairs. This supersedes the harness-only scope.
 ## Recording rules
 
 - Append a stable `FAIL-NNN` row when a failure is observed, before handback or
-  dependent repair. No separate service or new incident report is required.
+  dependent repair. No service or new report is required.
 - Record the **failed actor**, not the reporting/reviewing agent: tier
   (`Frontier`, `High`, `Mid`, `Small`), provider (e.g. OpenAI/Anthropic), exact model
   and harness when known. Separate requested from actual configuration. Use
@@ -40,14 +38,13 @@ Copy this row, filling every field (escape literal pipes inside cells):
 
 ## Recorded failures
 
-The first18 rows normalize the previous log in its original order, summarizing
+The first 18 rows normalize the previous log in its original order, summarizing
 its activity, observed result, impact and historical status. Original wording and
 proposed remedies remain in this file at `8b09ae4` and the linked reports.
 Historical statuses below are observations at capture, not fresh repair judgments.
 Model metadata absent from the original evidence remains unknown. Multi-finding
 historical summaries retain their source granularity; newly recorded attempts
-must be separate. This migration does not claim an exhaustive audit of every
-historical trial, coherence finding or private trace.
+must be separate. Historical trial/trace coverage is not exhaustive.
 
 | ID | Date | Tier | Provider | Model / harness | Activity / skill | Failure / impact | Correct outcome | Evidence / owner / disposition |
 |---|---|---|---|---|---|---|---|---|
@@ -80,3 +77,4 @@ historical trial, coherence finding or private trace.
 | FAIL-027 | 2026-11-03 | unknown | OpenAI | GPT-6 / Codex desktop; tier not exposed | Failure-log verification | uv could not open its default cache under sandbox permissions. | Run hygiene with a writable cache; no permission bypass. | This chat; `UV_CACHE_DIR=/tmp/ams-uv-cache` hygiene passed; environment failure, diagnostic |
 | FAIL-028 | 2026-11-03 | unknown | OpenAI | GPT-6 / Codex desktop; tier not exposed | Failure-log delivery fetch | Broad fetch could not update case-conflicting remote refs. | Fetch required delivery refs without altering other branches. | This chat; targeted main/dev/current-branch fetch passed; diagnostic |
 | FAIL-029 | 2026-11-03 | unknown | OpenAI | GPT-6 / Codex desktop; tier not exposed | Log normalization script | Invoked unavailable python executable; script did not run. | Use the available python3 interpreter. | This chat; rerun with python3 succeeded; local invocation corrected, no reliability claim |
+| FAIL-030 | 2026-11-03 | unknown | OpenAI | GPT-6 / Codex; tier not exposed | Fresh-candidate hygiene | Archive lacked Git metadata; hygiene requires git ls-files. | Verify in a fresh Git checkout. | This chat; archive check failed; retry uses local clone; diagnostic |
