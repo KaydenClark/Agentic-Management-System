@@ -3,7 +3,7 @@
   "source": {
     "repository": "https://github.com/KaydenClark/skills.git",
     "release": "v3.2.2",
-    "sha256": "20706cf9481ec59191615a21b6a8443c44b07842b0013c7ccaa2ae26efa715d1",
+    "sha256": "f38e2b3e15caa7e883e1bcca424c17a2da34bd66cb164f4865d6972894c40658",
     "upstream": {
       "repository": "https://github.com/KaydenClark/LLM_Workbench.git",
       "commit": "9d5e1f25b0d5870589ae1c5752f27f42acb796ef",
@@ -50,7 +50,7 @@
     "skill-inspection.mjs": "36f0371f5dafaa4b10824440d25727792a884de71d2a1b848b06f4ef592eab73",
     "wiki.mjs": "506c574ac43bed13bb3fa62b324572905d2445953edd3d29a970a67a336b31a2",
     "workspace-closeout.mjs": "a61609e2a3d8f63810de95ab43ae353ba9942f9f69ec47d23d4da66ffc14efb9",
-    "workbench-layout.mjs": "26579ad1f218425f8b605cabd3036911a732851417e52fb4ed7fb426845b212d",
+    "workbench-layout.mjs": "cdc67d516963860b8283222dc13759d1a1048f783c3faa05ca206711ed2e7246",
     "workbench-paths.mjs": "1b983217041860795382b30e8ab6d1cbc6f4954884cb227c89e6b8d22e6948d2",
     "spec-history.mjs": "9a93faf9675ea1f263970cee7e48d59f305f5ba23e3b549a2cfff4e3576567dd",
     "dqc-lifecycle.mjs": "46e7dbcec6cb683754e71c8d2d3c3c39dfeebd2f1444d22cbc61ec552b0d2e02"
@@ -106,6 +106,16 @@
         "artifact-budgets.mjs": "8202e2ad096a0e893bc60aeb5e5b9b93e5ef44d0e16eb812d234f5d2b30d0e7d",
         "workbench-layout.mjs": "5c86d7136c3d653ea67cecb1367e6e327ee23bb890bf5d404cdbb5fcba675633",
         "workbench-paths.mjs": "8781801a15fbd7b0044253aef020c5de3ba547b6f75539948dbafc3fc9855bfa"
+      }
+    },
+    {
+      "path": "~/.workbench-tools-backup-tzbAtT",
+      "files": [
+        "workbench-layout.mjs"
+      ],
+      "absent": [],
+      "hashes": {
+        "workbench-layout.mjs": "26579ad1f218425f8b605cabd3036911a732851417e52fb4ed7fb426845b212d"
       }
     }
   ],

@@ -915,7 +915,7 @@ export function legibilityFindings(project) {
   return findings;
 }
 
-export function validateManifest(project) {
+export function validateManifest(project, { allowMissingTracker = false } = {}) {
   const { manifest, failure } = readManifestFile(project);
   if (failure) return failure;
   if (manifest.schemaVersion === 1) {
@@ -959,7 +959,7 @@ export function validateManifest(project) {
     const overlap = owned.find((relative) => relative === tracker.root || tracker.root.startsWith(`${relative}/`) || relative.startsWith(`${tracker.root}/`));
     if (overlap) return fail('invalid-collection', `Manifest landmarkTracker root ${tracker.root} overlaps ${overlap}; the Tracker is its own root, not a lane or collection.`, { landmarkTracker: manifest.landmarkTracker });
     for (const relative of [tracker.root, ...Object.values(tracker.collections)]) {
-      if (!ordinaryDirectory(project, relative)) return fail('missing-collection', `Manifest landmarkTracker directory ${relative} must be an ordinary directory; it may be empty.`);
+      if (!ordinaryDirectory(project, relative) && !(allowMissingTracker && !lstatOrNull(path.join(project, relative)))) return fail('missing-collection', `Manifest landmarkTracker directory ${relative} must be an ordinary directory; it may be empty.`);
     }
   }
   const ignore = path.join(project, lanes.sessions, '.gitignore');
@@ -1392,27 +1392,33 @@ function replaceFromStage(source, target) {
 
 export function enableTracker(options) {
   const project = path.resolve(options['--project']);
-  const valid = validateManifest(project);
+  const valid = validateManifest(project, { allowMissingTracker: true });
   if (valid.status !== 'valid') return valid;
   const manifest = valid.manifest;
   const declared = manifest.landmarkTracker ?? { root: 'workbench/landmark-tracker', collections: { 'destination-questions': 'workbench/landmark-tracker/destination-questions', landmarks: 'workbench/landmark-tracker/landmarks' } };
   const declaration = trackerDeclaration({ landmarkTracker: { ...declared, markdown: 'TRACKER.md' } });
   const paths = [declaration.root, ...Object.values(declaration.collections)];
+  const markers = Object.values(declaration.collections).map(relative => `${relative}/.gitkeep`);
   try {
+    const ignored = spawnSync('git', ['check-ignore', '--quiet', '--', ...markers], { cwd: project });
+    if (ignored.status === 0) return fail('tracker-ignored', 'Tracker collection markers are ignored by Git; reconcile the ignore rule before enabling.');
     for (const relative of paths) assertSafeReadPath(project, path.join(project, relative));
-    for (const relative of ['workbench/manifest.json', 'TRACKER.md', declaration.projection]) assertSafeWritePath(project, path.join(project, relative));
+    for (const relative of ['workbench/manifest.json', 'TRACKER.md', declaration.projection, ...markers]) assertSafeWritePath(project, path.join(project, relative));
     for (const relative of paths) { const entry = lstatOrNull(path.join(project, relative)); if (entry && !entry.isDirectory()) return fail('tracker-collision', `${relative} must be an ordinary directory`); }
     if (!manifest.landmarkTracker && paths.some(relative => lstatOrNull(path.join(project, relative)))) return fail('tracker-collision', 'Undeclared tracker path already exists; preserve and reconcile it before enabling');
     if (!manifest.landmarkTracker?.markdown && lstatOrNull(path.join(project, 'TRACKER.md'))) return fail('tracker-collision', 'TRACKER.md already exists; preserve it before enabling');
   } catch (error) { return fail('unsafe-tracker', error.message); }
   const prior = fs.readFileSync(path.join(project, 'workbench/manifest.json'));
   const created = [];
+  const createdFiles = [];
+  const rollback = () => { fs.writeFileSync(path.join(project, 'workbench/manifest.json'), prior); for (const relative of createdFiles) fs.unlinkSync(path.join(project, relative)); for (const relative of [...created].reverse()) if (!fs.readdirSync(path.join(project, relative)).length) fs.rmdirSync(path.join(project, relative)); };
   try {
     for (const relative of paths) if (!lstatOrNull(path.join(project, relative))) { fs.mkdirSync(path.join(project, relative), { recursive: true }); created.push(relative); }
+    for (const relative of markers) if (!lstatOrNull(path.join(project, relative))) { writeSafeFile(project, path.join(project, relative), ''); createdFiles.push(relative); }
     manifest.landmarkTracker = { ...declared, markdown: 'TRACKER.md' };
     writeSafeFile(project, path.join(project, 'workbench/manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
-    return import('./landmark-tracker.mjs').then(({ rebuildTracker }) => { rebuildTracker(project); return report('declared', { tracker: declaration }); }).catch(error => { fs.writeFileSync(path.join(project, 'workbench/manifest.json'), prior); return fail('invalid-tracker', error.message); });
-  } catch (error) { fs.writeFileSync(path.join(project, 'workbench/manifest.json'), prior); for (const relative of created.reverse()) if (!fs.readdirSync(path.join(project, relative)).length) fs.rmdirSync(path.join(project, relative)); return fail('tracker-failed', error.message); }
+    return import('./landmark-tracker.mjs').then(({ rebuildTracker }) => { rebuildTracker(project); return report('declared', { tracker: declaration }); }).catch(error => { rollback(); return fail('invalid-tracker', error.message); });
+  } catch (error) { rollback(); return fail('tracker-failed', error.message); }
 }
 
 export function initialize(options) {
