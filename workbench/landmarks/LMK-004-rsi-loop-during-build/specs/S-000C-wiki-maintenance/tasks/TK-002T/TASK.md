@@ -28,3 +28,7 @@ Deliver all Spec acceptance: current Grill Board/AMS purpose/RSI explanations; f
 - [ ] Hand back committed/pushed candidate, routes, sources/proof and gaps for independent Review. No Human QA, other Spec acceptance, website/deploy, shared-skill install or stopped-campaign restart.
 
 Sizing: one Markdown behavior path across existing sources, explanations, routes, procedure and verification, with repair/QA in the run; no external service or product implementation. Preserve unrelated work.
+
+## Preservation baseline
+
+Owned claim originals committed at 9105f4c after native claim16adb21. Complete workspace snapshot before product edits: Workspace baseline sha256:4cc4eac7943f916cf944e3b5264bbf645c7d49c6c195368348e29daefaaffb9f. Private recovery holds raw inventory and exact copies of29 Wiki source/history/readback files; retained manifest sha256:f67b489ab4276e5504ad1ab5adaed7555ce9181dd6e0cfb924ccf6f632c88ca9. Original bytes remain in published ancestry; closeout must check them.
