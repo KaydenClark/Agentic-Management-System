@@ -21,10 +21,10 @@ Deliver all Spec acceptance: current Grill Board/AMS purpose/RSI explanations; f
 
 ## Acceptance and hand-back
 
-- [ ] Three explanations/four syntheses satisfy S-000C with sources, unresolved claims, limits and live owners distinct.
-- [ ] Execute safe immutable-source intake and durable query filing; update affected explanations/crosslinks/summaries beyond jots.
+- [x] Three explanations/four syntheses satisfy S-000C with sources, unresolved claims, limits and live owners distinct.
+- [x] Execute safe immutable-source intake and durable query filing; update affected explanations/crosslinks/summaries beyond jots.
 - [ ] Clean cold-start Grill Board retrieval and isolated introduced correction show explanation, affected links and preserved history agree. Label synthetic material; never introduce fake owner confirmation into real records.
-- [ ] Structural/bounded semantic checks detect planted inconsistency; retained-byte comparison passes. Record actual checks/failures and limitations in existing owners.
+- [x] Structural/bounded semantic checks detect planted inconsistency; retained-byte comparison passes. Record actual checks/failures and limitations in existing owners.
 - [ ] Hand back committed/pushed candidate, routes, sources/proof and gaps for independent Review. No Human QA, other Spec acceptance, website/deploy, shared-skill install or stopped-campaign restart.
 
 Sizing: one Markdown behavior path across existing sources, explanations, routes, procedure and verification, with repair/QA in the run; no external service or product implementation. Preserve unrelated work.
@@ -32,3 +32,13 @@ Sizing: one Markdown behavior path across existing sources, explanations, routes
 ## Preservation baseline
 
 Owned claim originals committed at 9105f4c after native claim16adb21. Complete workspace snapshot before product edits: Workspace baseline sha256:4cc4eac7943f916cf944e3b5264bbf645c7d49c6c195368348e29daefaaffb9f. Private recovery holds raw inventory and exact copies of29 Wiki source/history/readback files; retained manifest sha256:f67b489ab4276e5504ad1ab5adaed7555ce9181dd6e0cfb924ccf6f632c88ca9. Original bytes remain in published ancestry; closeout must check them.
+
+## Implementor result
+
+Content fb7e22b9522e6347547d03d5e78e134cdcaeef66 is pushed to the assigned Spec branch. [Exercise/intake report](../../../../../../wiki/context-wiki-maintenance.md#implementor-verification-2026-11-04) retains actual synthetic before/after hashes, detected contradiction and native correction-context readback. Baseline uv pytest839 passed/6 skipped; candidate Wiki/render/doctor/layout/next/hygiene and full-range whitespace checks pass with existing doctor findings. No site change. Root fresh retrieval/Review/CI remain pending, so cold-start acceptance and native closure await that evidence. Full workspace recovery check requires the exact candidate's discovery route in integration; no pre-integration completion is claimed.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-000C-wiki-maintenance | fb7e22b9522e6347547d03d5e78e134cdcaeef66 | ahead 0 behind 0 | 2 | fb7e22b focused Wiki/render/doctor/layout/next/hygiene/range-diff PASS; baseline pytest839 pass6 skip; synthetic correction and78-JOT/19-history preservation PASS | Three topics, four Landmark syntheses, MEMORY, maintenance guide/SKILLS, Board README, source/QA report and failure log | Fresh-context retrieval, independent Review, fresh full suite/shared CI and integration recovery pending root; no Human QA or general benefit claim | 5089dcd432b6a60798a8915899d7c50f66861ea307fb7cf4f3d39d456d5e3560 |
