@@ -30,12 +30,22 @@ Work on `Feature/S-007-rsi-chart-pages`. Delivery to `dev` is the orchestrator's
 
 ## Acceptance
 
-- [ ] Each charted skill shows one point per recorded loop from the kept version's Alignment Score and fitness level, with the start point, rejected attempts and High/Small runs distinguishable and never deciding a point.
-- [ ] The fitness-level-per-loop strip shows every charted skill by loop, with stated level colors; Excellent is green.
-- [ ] A labeled multi-loop fixture renders a contract change and a model change as separate lines and keeps a regression visible; the page itself shows no invented loop.
-- [ ] Existing `/rsi` behavior and evidence stay intact; empty trial places stay honest and compact.
-- [ ] Focused regressions, production build, site suite and browser inspection at 1280px and 375px in both themes pass; actual candidate and limits are recorded.
+- [x] Each charted skill shows one point per recorded loop from the kept version's Alignment Score and fitness level, with the start point, rejected attempts and High/Small runs distinguishable and never deciding a point.
+- [x] The fitness-level-per-loop strip shows every charted skill by loop, with stated level colors; Excellent is green.
+- [x] A labeled multi-loop fixture renders a contract change and a model change as separate lines and keeps a regression visible; the page itself shows no invented loop.
+- [x] Existing `/rsi` behavior and evidence stay intact; empty trial places stay honest and compact.
+- [x] Focused regressions, production build, site suite and browser inspection at 1280px and 375px in both themes pass; actual candidate and limits are recorded.
 
 ## Hand-back
 
 Return the exact candidate commit on the Spec branch, actual checks, screenshots inspected and limitations. A completed slice does not establish S-007 acceptance, owner Human QA or measured RSI benefit.
+
+## Check and QA
+
+Candidate `9531b0f9cc433cbf8b3662a54f52dd44a78b0a99` on `Feature/S-007-rsi-chart-pages`, parent `77bfb38` (contains dev `0fdd1e1`). New: `site/app/rsi/skill-loops.ts` (the loop-point seam over the round-two safe summary, with not-kept attempt scores sourced from S-011 history), `site/app/rsi/skill-trends.tsx`, a labeled multi-loop test fixture and `site/tests/rsi-skill-trends.test.mjs`. The section leads `/rsi`; empty trial places keep their message, explanation and next event in a compact frame.
+
+Fitness-level colors sit in a second marked block of `site/app/theme/tokens.css` after the generated Grill Board block, which stays unchanged. `site/tests/tokens-json.test.mjs` failed on them as written, so its contract was extended: the new block may hold only stated `--level-*` hex or recorded-token values, alike in the light, manual-dark and system-dark rules; planted faults prove each rule fails. Everything outside both blocks keeps the old rule. Excellent is green (`#157A47` light, `#3FC27F` dark), Stable blue, Functional amber, Broken uses `--heat`; each fill also carries its name or short form, and agent green does not appear on `/rsi`.
+
+Implementor checks: production build; site suite 261 of 261; built-site hygiene 0 findings; `git diff --check` clean; doctor no S-007 finding. Browser check with Playwright from a scratch install: all 49 `/rsi` checks pass (axe AA with contrast, no horizontal scroll, focus, reduced motion, network) at 375, 1280 and 1440 px in both themes; one `/start` toy request check failed intermittently across runs and was not compared with the baseline. Screenshots of the trends, cards, strip and empty places were inspected in both themes. Orchestrator re-ran the build, the site suite (261 of 261), hygiene and diff checks on the candidate and confirmed it merges cleanly with dev `0fdd1e1`.
+
+Limits: tests were written alongside the code, with planted faults as the must-fail proof. One loop is recorded, so the running average and line breaks are exercised only by the fixture, not by the real page. No local Supabase environment, so the page shows trial data as unavailable locally. No owner Human QA, deployment readback, measured RSI benefit or Spec acceptance is claimed.
