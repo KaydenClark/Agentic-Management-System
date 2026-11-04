@@ -45,3 +45,7 @@ I-006: The baseline status itself recorded a dirty generated Taskboard; not ever
 ## Publication authorization correction
 
 Owner,2026-11-04, explicitly authorized merging into dev and main for the things that belong in each. This releases publication for this candidate, with website changes to dev and records to main; no unrelated site promotion or Human QA. The prior denial remains historical. Another writer assigned FAIL-034 before this push; our entries use FAIL-035 through FAIL-051 and leave that writer unchanged.
+
+## Receipt preservation failure during delivery
+
+FAIL-053: failure-ID reconciliation accidentally changed text inside receipt row1, causing native close to refuse its checksum before changing Task state. Exact original row bytes were restored from6bd979c without recalculating the checksum; new ID meaning is recorded outside the receipt. Correct outcome: preserve immutable historical receipt text during record reconciliation. Skill context Journey/native close; current Codex exact model and tier unknown. This records the implementor mistake, not a proven skill-source defect.
