@@ -316,6 +316,45 @@ def test_revision_endpoint_and_unsaved_note_survive_a_source_conflict(board):
     assert "Keep my unsaved words &amp; punctuation." in body
 
 
+@pytest.mark.parametrize("materialized", [False, True])
+@pytest.mark.parametrize("ended", ["withdrawn", "complete"])
+def test_refused_note_survives_when_its_request_leaves_the_queue(board, materialized, ended):
+    from ams.grill_board.answers import rate, render_hashes
+
+    root, cards, record, _ = board
+    card = load_cards(cards)[0][0]
+    if materialized:
+        rate(cards, card, "3", "", render_hashes(cards, card)[0])
+        card = load_cards(cards)[0][0]
+    request = {**REQUEST, "state": "withdrawn"} if ended == "withdrawn" else REQUEST
+    record.write_text(source(request, status="complete" if ended == "complete" else "active"))
+    commit(root)
+    before = git(root, "rev-parse", "HEAD")
+
+    status, body = post(board, card, note="Keep my exact words <please> & punctuation.")
+
+    assert status == 409
+    assert "Keep my exact words &lt;please&gt; &amp; punctuation." in body
+    assert 'aria-label="Unsaved submission"' in body
+    assert git(root, "rev-parse", "HEAD") == before
+
+
+def test_refused_note_is_not_attached_to_a_different_question(board):
+    root, cards, record, _ = board
+    card = load_cards(cards)[0][0]
+    other = root / "workbench/specs/S-002-other/SPEC.md"
+    other.parent.mkdir(parents=True)
+    other.write_text(source({**REQUEST, "key": "other-question", "question": "A different question?"}))
+    record.write_text(source({**REQUEST, "state": "withdrawn"}))
+    commit(root)
+
+    status, body = post(board, card, note="Words for the original question.")
+
+    assert status == 409
+    assert "Words for the original question." in body
+    assert 'placeholder="What should change, in your words"></textarea>' in body
+
+
 def test_regrading_an_answered_question_does_not_ask_the_decision_again(board):
     root, cards, record, server = board
     original = load_cards(cards)[0][0]

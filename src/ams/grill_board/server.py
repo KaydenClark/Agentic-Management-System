@@ -292,6 +292,20 @@ def render_notice(notice):
     return f'<section class="alert notice" role="status" aria-label="Answer written"><div>{escape(text)}</div></section>'
 
 
+def render_drafts(drafts):
+    """Keep refused input copyable even when its question is no longer shown."""
+    fields = "".join(
+        f'<label>{label}<textarea readonly rows="3">{escape(drafts[name])}</textarea></label>'
+        for name, label in (("note", "Your note"), ("comment", "Your comment"))
+        if drafts.get(name)
+    )
+    if not fields:
+        return ""
+    return (f'<section class="alert" aria-label="Unsaved submission">'
+            f'<div><p>Your submission was not saved. Copy your words before leaving this page.</p>'
+            f'{fields}</div></section>')
+
+
 def render_page(cards_dir, query="", notice=None, drafts=None):
     revision, _ = committed_snapshot(cards_dir)
     cards, refusals = load_cards(cards_dir)
@@ -306,7 +320,11 @@ def render_page(cards_dir, query="", notice=None, drafts=None):
     wanted_card = params.get("card", [None])[0]
     # A link may open an answered or flagged card, so it can still be rated or flagged.
     selected = next((card for card in in_topic if card.file == wanted_card), shown[0] if shown else None)
-    open_card = render_open(cards_dir, topic, shown, selected, drafts) if selected else ""
+    card_drafts = drafts if selected and selected.file == (drafts or {}).get("card") else None
+    open_card = render_open(cards_dir, topic, shown, selected, card_drafts) if selected else ""
+    # Refusal can remove the original question from the current queue. Never
+    # attach its words to another card or rely on a now-hidden answer form.
+    recovery = render_drafts(drafts) if drafts and (drafts.get("comment") or not card_drafts or not selected.waiting) else ""
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -321,6 +339,7 @@ def render_page(cards_dir, query="", notice=None, drafts=None):
 <button type="button" class="theme-toggle" data-theme-toggle hidden aria-label="Switch light or dark theme">{HALF_MOON}<span data-theme-label>Dark</span></button>
 </div></header>
 {render_notice(notice)}
+{recovery}
 {render_refusals(refusals)}
 <p class="verdict-note" data-queue-update role="status" hidden></p>
 <div class="cols">
@@ -426,7 +445,9 @@ def make_server(cards_dir, port=DEFAULT_PORT):
             try:
                 page = render_page(cards_dir, query, notice, drafts=form if status == 409 else None)
             except CardSourceError as error:
-                page = f"Grill Board cannot read committed cards: {error}\n"
+                page = f"Grill Board cannot read committed cards: {escape(str(error))}\n"
+                if status == 409:
+                    page += render_drafts(form)
             self.reply(status, "text/html", page.encode("utf-8"))
 
         def reply(self, status, kind, payload):
