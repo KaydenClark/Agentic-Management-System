@@ -283,3 +283,44 @@ deployment for dev `0fdd1e1` at 16:27:29 UTC. This adds builder-reported
 rendering evidence; it is not this watch's independent browser verification or
 a closure of the three earlier review findings. Human QA, personal
 installation and production promotion remain open.
+
+
+## F-002 current direction and candidate progress — 2026-11-04 04:40 UTC
+
+Reporter: **owner-assistant**. Evidence: fixed-revision source inspection and
+GitHub state readback. Evaluated model: not-applicable; reviewer model: unknown.
+No project command, test suite or rendered-page check was executed.
+
+The [new sourced presentation decision](https://github.com/KaydenClark/Agentic-Management-System/blob/7b7bd50100d87cbeeb5ed780d01dae218775b315/workbench/wiki/context-website-presentation.md#jot-5529977d-ad73-433f-9a3c-85dede8946ba)
+records approval of per-skill Alignment Score points over RSI loops, a running
+average, fitness-level strips, separate comparison runs, and breaks when the
+test contract or model changes. This is the current approved presentation
+direction. Do not treat its per-skill form as a defect or use the earlier
+F-002 feedback to impose an alternative aggregate metric or chart.
+
+[PR #162](https://github.com/KaydenClark/Agentic-Management-System/pull/162)
+implements those views from real recorded round-two evidence. Only one loop
+per charted skill is available; multiple loops and line breaks are exercised
+by labeled fixtures, not claimed as real history. This is meaningful
+presentation progress, without establishing whole-AMS improvement over time.
+
+The existing [P2 review finding](https://github.com/KaydenClark/Agentic-Management-System/pull/162#discussion_r4463639061)
+identified an introduction that equated a climbing assessment score with
+demonstrated improvement. **Disposition: repaired at candidate source**;
+owner: S-007/TK-002J; implementing commit:
+[7b7bd50100d87cbeeb5ed780d01dae218775b315](https://github.com/KaydenClark/Agentic-Management-System/commit/7b7bd50100d87cbeeb5ed780d01dae218775b315).
+The inspected diff replaces that inference with a higher recorded score,
+retains the held-out/control/prior-version/interval requirement, and adds a
+regression assertion. The review thread is resolved. This records the existing
+finding's correction, not a duplicate issue or independently executed test.
+
+At this readback the PR remains open against dev. The earlier head's site CI
+passed, but both checks on the corrected head are queued and renewed review
+is running; earlier results are not a pass for the new head. Dev remains
+`0fdd1e147a9d6143a16e0b3eba2d561a70bc8392`. No delivery, deployment readback,
+owner Human QA, S-007 acceptance or measured benefit is established.
+
+Next action: the existing S-007 workflow verifies the corrected candidate and
+its authorized dev delivery, then reports the actual evidence and limits.
+Keep the newer approved presentation and the distinction between assessment
+scores and demonstrated outcomes together in subsequent F-002 review.
