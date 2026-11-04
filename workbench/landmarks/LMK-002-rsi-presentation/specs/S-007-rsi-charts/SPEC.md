@@ -44,11 +44,13 @@ History: [S-007 history](../../../../wiki/history/S-007.md).
 - Every trial number links to its rows on-site. Each row's strength label is shown. Relevant explanations and evidence stay on the site; omit irrelevant material and GitHub exits. Show real development comparisons visibly without inventing trial data.
 - **Headlines** come only from held-out tasks, with the interval and the baseline. An interval including zero reads as no difference detected at this size.
 - Synthetic or test rows never render.
+- **Skill trends.** For each skill the RSI loop works on, the page shows whether RSI is improving it over loops. Each loop contributes one point per skill: the Alignment Score of the version that loop kept, with its fitness level. A per-skill line chart shows the points, a running average and a fitness-level strip; a skills-by-loops strip shows the fitness level per loop. A new test contract or model starts a new line. High and Small tier runs appear as secondary marks and never decide a point. Real recorded loops lead the page; where results exist, no empty-looking place stands in for them ([JOT-5529977d](../../../../wiki/context-website-presentation.md#jot-5529977d-ad73-433f-9a3c-85dede8946ba)).
 
 ## Decisions And Contracts
 
 - The page reads Supabase with the publishable key only.
 - No claim of improved outcomes without held-out rows, controls, the prior version and an interval.
+- Fitness levels on the RSI page have their own stated colors, with Excellent green ([JOT-5529977d](../../../../wiki/context-website-presentation.md#jot-5529977d-ad73-433f-9a3c-85dede8946ba)). Per DDR-000M the page states each color's meaning and no color carries two meanings there.
 
 ## Non-Goals
 
@@ -77,6 +79,7 @@ Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the 
 - [ ] **Every number links.** Each rendered trial number links to its rows on-site. *Check:* link coverage over trial numbers. *Must fail:* a bare number.
 - [ ] **Provenance and series.** Two models never share one trend line. *Must fail:* a model change drawn as a continuation.
 - [ ] **Not only up.** Regressions and variants are marked as such. *Must fail:* a timeline that hides a recorded regression.
+- [ ] **Skill trends.** Each charted skill shows one point per recorded loop from the kept version's Alignment Score and fitness level, in a per-skill chart and the fitness-level-per-loop strip. *Check:* render tests on the recorded loop data and a labeled multi-loop fixture. *Must fail:* a test contract or model change joined into one line, a point taken from a rejected attempt or a High or Small run, or any invented loop on the page.
 - [ ] **Held-out headlines.** A headline appears only from held-out rows, with its interval and baseline. *Must fail:* a dev-task number as a headline, or an interval including zero shown as improvement.
 - [ ] **No test rows.** A marked test row in the fixture never renders.
 
