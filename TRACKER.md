@@ -4,7 +4,7 @@ Generated from DQC records. Execution state and proof remain in Landmarks, Specs
 
 ## DQC-000A — Grilling Board purpose and DQC lifecycle
 
-Revision 7; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000A.json)
+Revision 8; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000A.json)
 
 <pre>**Summary**
 
@@ -45,6 +45,7 @@ Round: ams-concept-20261103. Dependencies: none.
 
 Expected result: The exact confirmed DQC lifecycle is traceable through supported tracker setup and the local Python Board, with source/history and distinct owner gates\. — workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC\.md.
 - propose at r7: 
+- confirm at r8: Recording the actual prior owner confirmation and its exact displayed readback, not simulating a new owner action\. Source reply: Confirmed\. And I thought we just fixed that so that you could push things to the github\.
 
 ## DQC-000B — What belongs on the Grilling Board
 
