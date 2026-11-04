@@ -3,10 +3,16 @@
 **Task ID:** TK-002M
 **Landmark ID:** LMK-004
 **Slice:** Finish the RSI loop design and prepare its executable Task graph
-**Status:** blocked
-**Blockers:** owner:rsi-design-launch
+**Status:** in-progress
+**Blockers:** none
 **Destination:** spec-acceptance: End-to-end acceptance
 **Planned verification:** Compare exact confirmed readback to its source; check destination coverage, dependency graph and a fresh-chat launch; run native validators. No model trial.
+**Claimed by:** codex-rsi-stage-a
+**Current claimant:** codex-rsi-stage-a
+
+## Launch authority
+
+[Owner Stage A launch](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-af4af602-47bf-4669-b131-65694f17ca37), 2026-11-04: “Launch Stage A: finish design, confirm the readback, and deliver executable preparation.” Only this preparation Task is released; all child implementation holds remain.
 
 ## Assignment
 

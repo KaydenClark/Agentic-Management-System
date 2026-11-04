@@ -116,3 +116,16 @@ Supersedes: none
 
 Kayden explicitly answered "Approve push, PR, and checked merge" to publication of the 19 documentation-only RSI Map/Plan files to public KaydenClark/Agentic-Management-System, opening a PR and merging into main after shared CI passes. This approval addresses the automatic approval-review publication refusals; it authorizes no implementation, model trials, installation or deployment. Existing design confirmation, stopped campaigns, attempts and separate authorities remain unchanged.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-af4af602-47bf-4669-b131-65694f17ca37
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:57:47.544Z
+Author: Kayden (captured by Codex)
+Source: chat:stage-a-launch-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+On 2026-11-04 Kayden instructed: “Launch Stage A: finish design, confirm the readback, and deliver executable preparation.” This releases owner:rsi-design-launch for LMK-004/TK-002M only. Activate that design assignment; preserve all child implementation holds. The assembled readback still requires actual confirmation. No software implementation, actual model trials, database writes, automation, personal installation, deployment, stopped-campaign resumption or wider catalog work is authorized. Both S-000A pilots and all prior attempt, qualification and separate release gates remain unchanged.
+<!-- /jot-entry -->

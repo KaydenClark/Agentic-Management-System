@@ -1,13 +1,13 @@
 # LMK-004 - RSI Loop
 
 **Landmark ID:** LMK-004
-**Status:** planned
+**Status:** active
 **Priority:** 2
 **Owner:** Kayden
-**Updated:** 2026-11-01
+**Updated:** 2026-11-04
 **Catalog description:** The measured self-improvement loop, run on the website build and the work after it, with safeguards that keep its results honest.
 **Blockers:** none
-**Next gate:** Launch TK-002M to finish design and preparation; stopped campaigns and implementation holds remain scoped.
+**Next gate:** Close TK-002M with verification and documentation proof.
 
 ## Direction
 
@@ -83,7 +83,7 @@ The decision records under this landmark, one line each, linked to their record.
 
 ## Direct Tasks
 
-- [TK-002M - Finish the RSI loop design and prepare its executable Task graph](tasks/TK-002M/TASK.md) (held until the design launch)
+- [TK-002M - Finish the RSI loop design and prepare its executable Task graph](tasks/TK-002M/TASK.md) (Stage A design launched; implementation held)
 
 ## Verification Procedure
 
