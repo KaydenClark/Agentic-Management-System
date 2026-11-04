@@ -4,12 +4,13 @@
 **Spec ID:** S-004
 **Concept source:** [DQC-000A](../../../../../../landmark-tracker/destination-questions/DQC-000A.json) — confirmed Grilling Board lifecycle.
 **Slice:** The owner answers current DQCs and continues a Board round
-**Status:** in-progress
+**Status:** done
 **Blockers:** TK-002H
 **Destination:** spec-acceptance: DQC lifecycle acceptance
 **Planned verification:** Native CLI/setup and disposable Git/HTTP/browser cases described below; applicable Runbook checks and exact-candidate delivery verification.
 **Claimed by:** codex-s004-board
 **Current claimant:** codex-s004-board
+**Proof:** d760635 CI:839pass/6skip,10browser; independent axes PASS; director acceptance86f0fb0.
 
 ## Assignment
 
@@ -47,3 +48,9 @@ High-tier Codex implementor gpt-6.1-sol delivered product d9178b0, then guide/ma
 - Original root prelude snapshot remains explicitly incomplete due retained historical REBASE_HEAD. Product edits began only after a genuine complete snapshot in the isolated implementation clone, bound separately in 8845720. Private baseline/dispositions are retained; full inventory accounting awaits integration and generated-cache cleanup rather than a fabricated preintegration pass.
 
 Merge answer: eligible pending final assembled gates. Completion answer: scoped acceptance met. Native closure follows; owner Human QA and Spec acceptance remain unperformed.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-004-dqc-grilling-board | 9f2aeccd591abad570ba1fa60b34a9d5dae8ead4 | ahead 0 behind 0 | 0 | d760635 CI:839pass/6skip,10browser; independent axes PASS; director acceptance86f0fb0. | Board README, tests, QA and director handback. | Whole-Spec delivery, postmerge inventory and owner Human QA remain; no deployment/install.; close attribution: {"agent":"codex-s004-board","claimant":"codex-s004-board","onBehalfOf":null} | 4c28f1c05ce4d6fbf7a4bd724476c4859b01b59d0ddca588302a293a686a4980 |
