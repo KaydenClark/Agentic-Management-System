@@ -374,3 +374,16 @@ AMS PR161 merged as 3fea0317a9bf7a138de5d06ea6e86b592c151572. Freshly fetched or
 
 DQC-000A now records that delivered result while its answer, confirmation and full lifecycle remain unchanged. Native landing history records main containment; source questions and original confirmations are not rewritten as acceptance. The local Board is implemented; actual owner Human QA and Spec acceptance remain unperformed. The installed personal catalog, protected prior worktrees and recovery metadata remain preserved. Subsequent record-only publication and postintegration inventory are reported separately from this code delivery.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-c9dcebb6-4d50-4d6d-95d7-30d723d66d53
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T05:41:46.638Z
+Author: Codex
+Source: Kayden direct correction in AMS chat, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+Kayden clarified that the Too taxing button is the orchestration tax signal: it tells the agent that the card added to their orchestration tax rather than lowered it. These are the same feedback, not separate controls. The existing hold-for-rewrite behavior remains. Kayden also directed that the supplied Grilling Board Redesign HTML is the design reference and that its search, filters, batch actions and other dashboard controls must function, not merely appear functional. This correction records owner intent; it is not evidence of implementation or acceptance.
+<!-- /jot-entry -->
