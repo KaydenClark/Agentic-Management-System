@@ -26,8 +26,8 @@
 // assessment is an arithmetic dependency, and a cycle of those is refused.
 //
 // Concurrency: `--expect-revision` refuses a write based on a stale read. It
-// is a comparison, not a lock, and does not isolate two concurrent writers;
-// see workbench/landmark-tracker/README.md.
+// is a comparison; native CLI mutations also share a serialization lock;
+// see https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md.
 import fs from 'node:fs';
 import { LIFECYCLE_SCHEMA, lifecycleProblems, addLifecycleViews, readRounds, writeMarkdown, renderTrackerMarkdown, withTrackerLock, applyAction, committedView } from './dqc-lifecycle.mjs';
 import path from 'node:path';
@@ -94,7 +94,7 @@ function context(rootDir) {
   let declared;
   try { declared = declaredTracker(root); }
   catch (error) { refuse(error.code === 'invalid-tracker' ? 'invalid-manifest' : error.code ?? 'invalid-manifest', error.message); }
-  if (!declared) refuse('tracker-undeclared', 'This room declares no Landmark Tracker root; add a landmarkTracker block to workbench/manifest.json (see workbench/landmark-tracker/README.md).');
+  if (!declared) refuse('tracker-undeclared', 'This room declares no tracker; use setup-workbench layout enable-tracker under Create/Adopt or explicit Update (see https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md).');
   const trackerRoot = path.resolve(root, declared.root);
   const dirs = Object.fromEntries(TRACKER_COLLECTIONS.map(name => [name, path.resolve(root, declared.collections[name])]));
   for (const directory of [trackerRoot, ...Object.values(dirs)]) {
@@ -1342,7 +1342,7 @@ const OPTIONS = Object.freeze({
   action: { positional: 'optional', flags: [], booleans: ['stdin'] }
 });
 
-export const USAGE = 'Usage: landmark-tracker.mjs capture|add-landmark|revise ID|link ID|relate ID|rebuild|show [ID] [options] [--json] [--path DIR] (see workbench/landmark-tracker/README.md)';
+export const USAGE = 'Usage: landmark-tracker.mjs capture|add-landmark|revise ID|link ID|relate ID|rebuild|show [ID]|action [ID] --stdin [options] [--json] [--path DIR] (see https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md)';
 
 export function parseArgs(argv) {
   const [command, ...rest] = argv;

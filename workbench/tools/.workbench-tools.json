@@ -3,7 +3,7 @@
   "source": {
     "repository": "https://github.com/KaydenClark/skills.git",
     "release": "v3.2.2",
-    "sha256": "f38e2b3e15caa7e883e1bcca424c17a2da34bd66cb164f4865d6972894c40658",
+    "sha256": "8c3b46b064ac4d5f209a4d7ea80247bc2abe3367d2dd04261e4710b26934b65c",
     "upstream": {
       "repository": "https://github.com/KaydenClark/LLM_Workbench.git",
       "commit": "9d5e1f25b0d5870589ae1c5752f27f42acb796ef",
@@ -21,7 +21,7 @@
     "glossary-format.mjs": "1bf28fb20a4e74a27abf219c46370316c3df6a6f7bc557d08e082170717420ff",
     "host-floor.mjs": "db5bfeb569af46f0df464d5e614bd5fd25e9297f1aaf7a4a3dc7eecda6c7a193",
     "landmark-artifact.mjs": "f6932075dda208970091dad95698511e3bb10c63f32782f1f0f898549a4e1863",
-    "landmark-tracker.mjs": "0b5a714307a91489d2a3448dd7c006a8263417d027630d2c8cb2cc8455e6f70a",
+    "landmark-tracker.mjs": "d0d822370b34c2aebbba30d98fa9ddb41559ac90611826c1d77d4f240c6799dc",
     "landmark-wiki.mjs": "dd5eee302f9cb8afb1db7949461554bc7471a575425cc920aa0b04a6b1322d52",
     "lane-sweep.mjs": "b4143a27b5b99de9e1d705144493766869818c744d00a57312413376b691eacf",
     "lexicon-retirement-data.mjs": "e13534d8effaae519619c8c8ee15d4f0d94727246b96ec83a5cd23a07246fdf8",
@@ -53,7 +53,7 @@
     "workbench-layout.mjs": "cdc67d516963860b8283222dc13759d1a1048f783c3faa05ca206711ed2e7246",
     "workbench-paths.mjs": "1b983217041860795382b30e8ab6d1cbc6f4954884cb227c89e6b8d22e6948d2",
     "spec-history.mjs": "9a93faf9675ea1f263970cee7e48d59f305f5ba23e3b549a2cfff4e3576567dd",
-    "dqc-lifecycle.mjs": "46e7dbcec6cb683754e71c8d2d3c3c39dfeebd2f1444d22cbc61ec552b0d2e02"
+    "dqc-lifecycle.mjs": "c3835bd6ab1d0e0c72da531bcd2ab49f9eba5071f2cc60fbe59180ec6f2f82e4"
   },
   "backups": [
     {
@@ -116,6 +116,18 @@
       "absent": [],
       "hashes": {
         "workbench-layout.mjs": "26579ad1f218425f8b605cabd3036911a732851417e52fb4ed7fb426845b212d"
+      }
+    },
+    {
+      "path": "~/.workbench-tools-backup-NgcXPR",
+      "files": [
+        "landmark-tracker.mjs",
+        "dqc-lifecycle.mjs"
+      ],
+      "absent": [],
+      "hashes": {
+        "landmark-tracker.mjs": "0b5a714307a91489d2a3448dd7c006a8263417d027630d2c8cb2cc8455e6f70a",
+        "dqc-lifecycle.mjs": "46e7dbcec6cb683754e71c8d2d3c3c39dfeebd2f1444d22cbc61ec552b0d2e02"
       }
     }
   ],

@@ -71,8 +71,11 @@ export function addLifecycleViews(projection, root) {
   const rounds = readRounds(root); projection.rounds = rounds.rounds; projection.currentRound = rounds.currentRound;
   return projection;
 }
-function htmlText(value) { return String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;'); }
-function markdownText(value) { return htmlText(value).replace(/([\\`*_[\]{}()#+.!|])/g, '\\$1'); }
+function htmlText(value) {
+  const escaped = String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('\t', '&#9;').replaceAll('\r', '&#13;');
+  return escaped.replace(/ +(?=\n|$)/g, spaces => '&#32;'.repeat(spaces.length));
+}
+function markdownText(value) { return htmlText(String(value).replace(/([\\`*_[\]{}()#+.!|])/g, '\\$1')).replaceAll('\n', '&#10;'); }
 function questionFingerprint(value) { return value.normalize('NFKC').toLowerCase().replace(/[\p{P}\p{S}\p{Cf}\s]/gu, ''); }
 export function renderTrackerMarkdown(projection, declared) {
   const lines = ['# Intent tracker', '', 'Generated from DQC records. Execution state and proof remain in Landmarks, Specs and Tasks.', ''];
@@ -85,10 +88,12 @@ export function renderTrackerMarkdown(projection, declared) {
     if (card.expectedResult) lines.push('', `Expected result: ${markdownText(card.expectedResult.change)}${card.expectedResult.home ? ` — ${markdownText(card.expectedResult.home)}` : ''}.`);
     if (card.result) lines.push('', `Recorded outcome (r${card.result.revision}): ${markdownText(card.result.summary)}.`);
     if (card.uncertainty?.length) lines.push('', `Unresolved: ${card.uncertainty.map(markdownText).join('; ')}.`);
-    for (const event of life.events ?? []) lines.push(`- ${markdownText(event.type)} at r${event.revision}: ${markdownText(event.note ?? '')}`);
+    for (const event of life.events ?? []) lines.push(`- ${markdownText(event.type)} at r${event.revision}${event.note ? `: ${markdownText(event.note)}` : ''}`);
     lines.push('');
   }
   for (const round of projection.rounds ?? []) lines.push(`## Round ${markdownText(round.id)}`, '', `Owner finished: ${round.finished ? 'yes' : 'no'}; reconciliation: ${round.receipt ? 'recorded' : 'pending'}. Changed DQCs: ${round.changed.map(item => item.id).join(', ') || 'none'}.`, '');
+  // Only generated separators are removed; owner whitespace is encoded above.
+  while (lines.at(-1) === '') lines.pop();
   return `${lines.join('\n')}\n`;
 }
 export function writeMarkdown(root, projection) {

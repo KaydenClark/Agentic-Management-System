@@ -12,8 +12,8 @@
     "Verified"
   ],
   "workbench": {
-    "items": 8,
-    "denominator": 8,
+    "items": 9,
+    "denominator": 9,
     "status": "incomplete",
     "counted": [
       "dqc:DQC-000A",
@@ -23,6 +23,7 @@
       "spec:S-004",
       "task:S-004/TK-002H",
       "task:S-004/TK-002I",
+      "task:S-004/TK-002K",
       "landmark:LMK-001"
     ],
     "numerators": {
@@ -53,6 +54,7 @@
       "spec:S-004",
       "task:S-004/TK-002H",
       "task:S-004/TK-002I",
+      "task:S-004/TK-002K",
       "landmark:LMK-001"
     ],
     "unknown": [],
@@ -116,11 +118,12 @@
         }
       },
       "task": {
-        "items": 2,
+        "items": 3,
         "status": "incomplete",
         "counted": [
           "task:S-004/TK-002H",
-          "task:S-004/TK-002I"
+          "task:S-004/TK-002I",
+          "task:S-004/TK-002K"
         ],
         "numerators": {
           "Idea": 0,
@@ -248,6 +251,18 @@
         "key": "task:S-004/TK-002I",
         "type": "task",
         "id": "S-004/TK-002I",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": null,
+        "itemRevision": null
+      },
+      {
+        "key": "task:S-004/TK-002K",
+        "type": "task",
+        "id": "S-004/TK-002K",
         "state": "unassessed",
         "contributions": null,
         "basis": null,
@@ -398,6 +413,24 @@
       ]
     },
     {
+      "key": "task:S-004/TK-002K",
+      "type": "task",
+      "id": "S-004/TK-002K",
+      "resolution": "room",
+      "state": "unassessed",
+      "holders": [
+        {
+          "dqc": "DQC-000A",
+          "itemRevision": null,
+          "reason": "Later corrective Task repairs generated Markdown whitespace while preserving exact confirmed intent and owner history.",
+          "assessment": null
+        }
+      ],
+      "relatedBy": [
+        "DQC-000A"
+      ]
+    },
+    {
       "key": "landmark:LMK-001",
       "type": "landmark",
       "id": "LMK-001",
@@ -441,14 +474,15 @@
         "state": "unassessed"
       },
       "distribution": {
-        "items": 5,
-        "denominator": 5,
+        "items": 6,
+        "denominator": 6,
         "status": "incomplete",
         "counted": [
           "dqc:DQC-000A",
           "spec:S-004",
           "task:S-004/TK-002H",
           "task:S-004/TK-002I",
+          "task:S-004/TK-002K",
           "landmark:LMK-001"
         ],
         "numerators": {
@@ -476,6 +510,7 @@
           "spec:S-004",
           "task:S-004/TK-002H",
           "task:S-004/TK-002I",
+          "task:S-004/TK-002K",
           "landmark:LMK-001"
         ],
         "unknown": [],
@@ -536,11 +571,12 @@
             }
           },
           "task": {
-            "items": 2,
+            "items": 3,
             "status": "incomplete",
             "counted": [
               "task:S-004/TK-002H",
-              "task:S-004/TK-002I"
+              "task:S-004/TK-002I",
+              "task:S-004/TK-002K"
             ],
             "numerators": {
               "Idea": 0,
@@ -641,6 +677,18 @@
             "itemRevision": null
           },
           {
+            "key": "task:S-004/TK-002K",
+            "type": "task",
+            "id": "S-004/TK-002K",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
+          },
+          {
             "key": "landmark:LMK-001",
             "type": "landmark",
             "id": "LMK-001",
@@ -699,6 +747,17 @@
           "resolution": "room",
           "state": "unassessed",
           "assessment": null
+        },
+        {
+          "type": "task",
+          "id": "S-004/TK-002K",
+          "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/tasks/TK-002K/TASK.md",
+          "key": "task:S-004/TK-002K",
+          "revision": null,
+          "reason": "Later corrective Task repairs generated Markdown whitespace while preserving exact confirmed intent and owner history.",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
         }
       ],
       "relatedBy": [
@@ -740,6 +799,13 @@
             "id": "S-004/TK-002I",
             "resolution": "room",
             "state": "unassessed"
+          },
+          {
+            "key": "task:S-004/TK-002K",
+            "type": "task",
+            "id": "S-004/TK-002K",
+            "resolution": "room",
+            "state": "unassessed"
           }
         ]
       },
@@ -764,7 +830,7 @@
         "at": "2026-11-04T03:56:18.631Z"
       },
       "corrections": [],
-      "revision": 8,
+      "revision": 9,
       "history": [
         {
           "revision": 1,
@@ -977,6 +1043,22 @@
                     "round": "ams-concept-20261103"
                   }
                 ]
+              }
+            }
+          ]
+        },
+        {
+          "revision": 9,
+          "at": "2026-11-04T04:54:26.452Z",
+          "reason": "Later corrective Task repairs generated Markdown whitespace while preserving exact confirmed intent and owner history.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "task",
+                "id": "S-004/TK-002K",
+                "revision": null
               }
             }
           ]
@@ -1266,6 +1348,13 @@
                 "key": "task:S-004/TK-002I",
                 "type": "task",
                 "id": "S-004/TK-002I",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "task:S-004/TK-002K",
+                "type": "task",
+                "id": "S-004/TK-002K",
                 "resolution": "room",
                 "state": "unassessed"
               }
@@ -1642,6 +1731,13 @@
                 "id": "S-004/TK-002I",
                 "resolution": "room",
                 "state": "unassessed"
+              },
+              {
+                "key": "task:S-004/TK-002K",
+                "type": "task",
+                "id": "S-004/TK-002K",
+                "resolution": "room",
+                "state": "unassessed"
               }
             ]
           },
@@ -2014,6 +2110,13 @@
                 "key": "task:S-004/TK-002I",
                 "type": "task",
                 "id": "S-004/TK-002I",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "task:S-004/TK-002K",
+                "type": "task",
+                "id": "S-004/TK-002K",
                 "resolution": "room",
                 "state": "unassessed"
               }

@@ -1,7 +1,7 @@
 {
   "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000A",
-  "revision": 8,
+  "revision": 9,
   "title": "Grilling Board purpose and DQC lifecycle",
   "question": "How should the Grilling Board preserve confirmed intent through execution?",
   "answer": "**Summary**\n\nAMS has two connected lanes. TASKBOARD.md tracks execution through Landmarks, Specs and Tasks. TRACKER.md tracks intent and concepts through stable Destination Question Cards (DQCs), including how those concepts develop and move through execution. Execution records reference their originating DQCs by stable ID; DQCs can reference the corresponding Landmarks, Specs and Tasks.\n\nDQCs are created when the interview starts: its main branches become initial DQCs. Each Grilling Board card is a view of its DQC, presenting a question laid out as a complete readback with a suggested answer that the owner can confirm or correct. Existing DQCs evolve as understanding changes; distinct new decisions receive new DQCs.\n\n**The why**\n\nQuestions, reasons, confirmed concepts and resulting work must remain connected. The owner should be able to inspect and answer a complete proposal on the Board, while agents can recover what was actually confirmed and follow it through delivery without reconstructing scattered chats or maintaining competing copies.\n\n**The intended result**\n\nThe exact confirmed readback is preserved on its DQC with its confirmation source and scope. Earlier wording, owner corrections, reasons and confirmed versions remain recoverable. Pending revisions retain their own status and do not inherit earlier confirmation.\n\nChat and Board actions reach the same DQC records. When the owner finishes a round, the agent reviews every changed DQC, including answers and question-quality feedback; updates the Wiki and owning documents with confirmed and approved understanding; and either proceeds to authorized preparation or presents the next interview frontier. Unanswered questions and dependencies carry forward.\n\nDQCs remain traceable through preparation, implementation, verification and delivery, including deferral, supersession and reopening affected understanding after correction. Execution state and proof remain in their execution owners. Concept confirmation, execution authorization, Review, Human QA and publication remain distinct.\n\nThe tracker is available in AMS and included in reusable setup-workbench support. The Board remains local and Python-based, with complete question readbacks replacing the current card-context restriction that prevents them.\n\n**What I will do**\n\nAfter confirmation, preserve this exact readback as the authoritative intent, establish the supported AMS tracker and initial DQCs, and carry the requested tracker and DQC-backed Board lifecycle through the project’s Map, Plan and implementation workflow. Add reusable tracker support in the setup-workbench source in the shared skills catalog, preserving unrelated work and existing source decisions except where this confirmed concept supersedes them.\n\nVerify stable references in both directions, exact readback/history preservation, consistent chat and Board updates, round continuation, conflict refusal and persistence, and tracker availability through setup-workbench. Publish checked AMS non-site work under the standing publication authority. Shared-skill candidates retain their required qualification and delivery gates; changing the installed personal catalog requires separate explicit installation authority. Stop at verified delivery and report any incomplete checks or owner-only acceptance gates; do not claim Human QA or deploy the public website.",
@@ -51,6 +51,13 @@
       "id": "S-004/TK-002I",
       "revision": null,
       "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    },
+    {
+      "type": "task",
+      "id": "S-004/TK-002K",
+      "revision": null,
+      "reason": "Later corrective Task repairs generated Markdown whitespace while preserving exact confirmed intent and owner history.",
       "assessment": null
     }
   ],
@@ -279,6 +286,22 @@
                 "round": "ams-concept-20261103"
               }
             ]
+          }
+        }
+      ]
+    },
+    {
+      "revision": 9,
+      "at": "2026-11-04T04:54:26.452Z",
+      "reason": "Later corrective Task repairs generated Markdown whitespace while preserving exact confirmed intent and owner history.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "task",
+            "id": "S-004/TK-002K",
+            "revision": null
           }
         }
       ]
