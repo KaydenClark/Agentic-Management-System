@@ -85,3 +85,36 @@ Next alignment step: present the recovered model for owner correction/confirmati
 - [Reusable project Board](https://github.com/KaydenClark/LLM_Workbench/blob/9d5e1f25b0d5870589ae1c5752f27f42acb796ef/workbench/docs/project-grill-board.md).
 - [AMS Board](../../grill-board/README.md), [Grill Board Landmark](../landmarks/LMK-001-grill-board/LANDMARK.md), and [S-004](../landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md).
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-aa694f42-e43c-4eb7-9aea-e3e63d57ba36
+Kind: intent
+State: current
+Recorded: 2026-11-04T02:12:38.416Z
+Author: Kayden
+Source: Kayden, AMS align-concept lifecycle correction, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+## Owner correction: DQCs own the interview from its beginning
+
+Source: Kayden, AMS align-concept chat, 2026-11-03 America/Denver. The following is the exact owner correction, not an agent paraphrase or confirmation of a new assembled readback:
+
+> This describes a good part of it, but doesn't get the whole story.  The DQCs are supposed to be where all of the intent and questions are initially recorded, so like at the start of this align concept you would of created the 4 DQCs for the 4 main branches on the interview tree. and after we align on each concept, and you give me the readback to confirm, its the readback that is stored onto the DQC since that is the concept that I confirmed and aligned. and then as we adjusted the interview tree you edit the DQC, chaning the why and the answer, or creating new DQCs when a new decision needs to be made form a different question. Each card on the grilling board is a DQ Card. When I saw I am done with a grilling board round, then you should review all of the DQCs cards that got changed by me pushing buttons on the website, and then update the project's wiki and docs with any confirmed and approved concepts, start the prepare phase with a map and plan, or just update the DQCs with the next round for me after I tell you I am done so I can go right back to answering them.
+
+This expands the incomplete lifecycle description in JOT-e26f9c60-59ef-4f8f-8fe4-80bab6b41029. Preserve the earlier source investigation and evidence limits; its summary is not the complete owner model.
+
+## Current interpretation for the next readback
+
+DQCs are the initial home for intent and questions, not merely records produced after an interview or linked to independent Board cards. For this interview the four main tree branches should have four initial DQCs. Each Grilling Board card is a view of its DQC. As the tree evolves, update the existing DQC's question, why and developing answer, retaining history; create another DQC when a distinct question introduces a new decision.
+
+After alignment on a concept, present its readback for owner confirmation. The exact confirmed readback is stored on that DQC as the concept actually confirmed, with source, scope, confirmation and prior revisions preserved. Tentative answers, corrections and proposed readbacks must retain their own state; do not treat them as confirmation of a newly assembled concept.
+
+The owner's statement that a Board round is finished triggers the agent's review of all DQCs changed through the website. Reconcile the confirmed and approved concepts into the project's Wiki and appropriate documents, proceed to Prepare through Map and Plan where covered by existing approval, or update DQCs for the next interview round so the owner can return to answering. Round completion is not merely an archival count of button clicks. Implementation still needs its applicable authorization. This interpretation awaits confirmation as an assembled readback.
+
+## Verified AMS recording limitation
+
+The supported command `node workbench/tools/landmark-tracker.mjs show --json` currently refuses with code `tracker-undeclared`: the room declares no Landmark Tracker root. No DQCs were created in this session. The Wiki capture is a recoverable holding record, not a substitute DQC system or proof that the intended lifecycle is available. Restoring the supported DQC capability is a Workbench setup operation; this correction capture does not silently change the manifest, create a hand-built tracker, repair the Board, or claim publication.
+
+Publication approval asked earlier remains unanswered; this correction is not approval to push the branch or merge it.
+<!-- /jot-entry -->
