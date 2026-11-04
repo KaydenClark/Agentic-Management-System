@@ -245,3 +245,50 @@ After confirmation, preserve this exact readback as the authoritative intent, es
 
 Verify stable references in both directions, exact readback/history preservation, consistent chat and Board updates, round continuation, conflict refusal and persistence, and tracker availability through setup-workbench. Publish checked AMS non-site work under the standing publication authority. Shared-skill candidates retain their required qualification and delivery gates; changing the installed personal catalog requires separate explicit installation authority. Stop at verified delivery and report any incomplete checks or owner-only acceptance gates; do not claim Human QA or deploy the public website.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-af34e4a9-efdf-4688-91d9-0c2d2b0685ba
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T03:13:03.576Z
+Author: Kayden
+Source: Kayden direct AMS readback and public-publication confirmation, 2026-11-03
+Topic: grilling-board
+Supersedes: JOT-f2c3dca4-ca5a-4d36-9aeb-6d8018d79471
+
+## Current authoritative intent — revision 1
+
+Source and speaker: Kayden, AMS align-concept chat, 2026-11-03 America/Denver. After the complete four-section readback and the request for direct public-publication permission, Kayden replied: "Confirmed. And I thought we just fixed that so that you could push things to the github."
+
+Confirmation: the complete displayed readback below is confirmed, including its bounded execution scope. The same reply directly authorizes publication of this alignment record to the public AMS repository. The standing routine-publication instruction remains in JOT-d24d46bd-7ca5-44e0-854e-0411e4fbff30; automatic approval review had refused to treat that saved statement as trusted authorization, which is why direct confirmation was requested again.
+
+Current-intent pointer: this entry supersedes the pending assembled readback in JOT-f2c3dca4-ca5a-4d36-9aeb-6d8018d79471 and replaces the earlier pending readback in JOT-a1064eef-0239-494e-9fa1-387a68d3529d. Preserve their history and the owner's original answers and corrections. Scope and exclusions are the exact readback below. This confirmation establishes intent and authorizes its stated work; it proves no implementation, Human QA, acceptance or deployment. The DQC recording capability remains unavailable, so this Wiki entry holds the exact intent until supported DQCs can be established and linked.
+
+## Exact confirmed readback
+
+**Summary**
+
+AMS has two connected lanes. TASKBOARD.md tracks execution through Landmarks, Specs and Tasks. TRACKER.md tracks intent and concepts through stable Destination Question Cards (DQCs), including how those concepts develop and move through execution. Execution records reference their originating DQCs by stable ID; DQCs can reference the corresponding Landmarks, Specs and Tasks.
+
+DQCs are created when the interview starts: its main branches become initial DQCs. Each Grilling Board card is a view of its DQC, presenting a question laid out as a complete readback with a suggested answer that the owner can confirm or correct. Existing DQCs evolve as understanding changes; distinct new decisions receive new DQCs.
+
+**The why**
+
+Questions, reasons, confirmed concepts and resulting work must remain connected. The owner should be able to inspect and answer a complete proposal on the Board, while agents can recover what was actually confirmed and follow it through delivery without reconstructing scattered chats or maintaining competing copies.
+
+**The intended result**
+
+The exact confirmed readback is preserved on its DQC with its confirmation source and scope. Earlier wording, owner corrections, reasons and confirmed versions remain recoverable. Pending revisions retain their own status and do not inherit earlier confirmation.
+
+Chat and Board actions reach the same DQC records. When the owner finishes a round, the agent reviews every changed DQC, including answers and question-quality feedback; updates the Wiki and owning documents with confirmed and approved understanding; and either proceeds to authorized preparation or presents the next interview frontier. Unanswered questions and dependencies carry forward.
+
+DQCs remain traceable through preparation, implementation, verification and delivery, including deferral, supersession and reopening affected understanding after correction. Execution state and proof remain in their execution owners. Concept confirmation, execution authorization, Review, Human QA and publication remain distinct.
+
+The tracker is available in AMS and included in reusable setup-workbench support. The Board remains local and Python-based, with complete question readbacks replacing the current card-context restriction that prevents them.
+
+**What I will do**
+
+After confirmation, preserve this exact readback as the authoritative intent, establish the supported AMS tracker and initial DQCs, and carry the requested tracker and DQC-backed Board lifecycle through the project’s Map, Plan and implementation workflow. Add reusable tracker support in the setup-workbench source in the shared skills catalog, preserving unrelated work and existing source decisions except where this confirmed concept supersedes them.
+
+Verify stable references in both directions, exact readback/history preservation, consistent chat and Board updates, round continuation, conflict refusal and persistence, and tracker availability through setup-workbench. Publish checked AMS non-site work under the standing publication authority. Shared-skill candidates retain their required qualification and delivery gates; changing the installed personal catalog requires separate explicit installation authority. Stop at verified delivery and report any incomplete checks or owner-only acceptance gates; do not claim Human QA or deploy the public website.
+<!-- /jot-entry -->
