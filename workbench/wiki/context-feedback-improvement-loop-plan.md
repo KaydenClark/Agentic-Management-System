@@ -142,3 +142,16 @@ Supersedes: none
 
 Kayden explicitly replied “Confirm the readback as written.” to the exact assembled four-section readback presented in the AMS chat on 2026-11-04. The exact body is preserved in guidebooks/rsi-loop-readback-2026-11-04.md, SHA-256 427c3f0d3c109b3ce05011433920b2f74b7044b068c41a6e8d58b08a93d9e853 (UTF-8, from Summary heading through final newline). This confirms meaning and Stage A documentation/executable preparation only. It does not authorize Stage B software implementation, model trials, database writes, automation, personal installation or deployment; prior attempt limits, stopped campaigns and both catalog pilots retain their scope and holds. The linked exact body supersedes earlier unconfirmed assembled wording only; sourced prior answers remain settled.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8529e8c1-690d-42b2-a501-dcc1dcce4a06
+Kind: verification
+State: current
+Recorded: 2026-11-04T08:23:25.859Z
+Author: Codex Stage A record writer
+Source: chat:stage-a-publication-refusal-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Root reports final Stage A candidate 5cd3b976d7909d2ce4973cfb3d6ceebb90bd3054 passed both fresh independent Standards and Spec delta reviews with zero findings, and shared CI run 41798333987 passed 839 tests/6 skipped plus 10 browser checks. Draft PR169 targets main. Automatic approval review rejected its merge twice before execution: first, trusted user authorization for the asserted owner-only default-branch merge was absent despite green CI; second, after root supplied exact scoped non-site payload and pinned-policy evidence through the same connector action, trusted user content still lacked explicit promotion authority and repository policy claims could not supply it. No merge occurred, no alternate route was attempted. Main remains cfc0bc4c7f2cd167cea2972016edee076b479b73. These are publication approval refusals FAIL-079/080, not model trials or RSI candidate strikes. Record the concrete final PR/head and obtain explicit user merge approval; changed metadata still requires final delta review/CI. Readback and preparation are complete, checked default-branch delivery is blocked; Stage B, model campaigns, DB writes, automation, installation and deployment remain held.
+<!-- /jot-entry -->
