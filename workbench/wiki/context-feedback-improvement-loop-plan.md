@@ -62,3 +62,16 @@ Detailed reports and trial ledgers remain evidence, linked by failure ID.
 Missing actor metadata stays unknown. New failed retries receive separate rows.
 This authorizes this logging consolidation, not the earlier held cross-Spec
 automation, shared-skill repairs, new trials or installation.
+
+<!-- jot-entry -->
+### JOT-9179f5d2-dd33-42ed-b679-5bf49c79c078
+Kind: intent
+State: unresolved
+Recorded: 2026-11-04T06:42:19.816Z
+Author: Claude Opus 5.5 (align-concept)
+Source: Kayden's AMS chat, 2026-11-03, /align-concept on the RSI loop
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Owner-proposed RSI loop direction, pending interview and readback confirmation. Failures from real agent work should become demonstrated improvements to individual skills and the Workbench across capture, diagnosis, testing, repair, regression checks, adoption and later-use observation. WORKBENCH_FEEDBACK.md stays the canonical failure intake; each skill gets a traceable view of its failures and improvement evidence; relevant LLM_Workbench failures may expand coverage. Proposed architecture: Supabase Free for durable records and website data, a Python worker executing and coordinating the loop outside Supabase; local execution is recommended, hosting not approved. Why: repeated owner intervention and no shared agent understanding of the loop; inspected execution path is manually advanced and too narrow for real Workbench behaviors; Supabase stores results without the full lifecycle. More documentation, higher audit scores or familiar-case passes alone do not establish improvement. Intended loop: reproducible cases with observable success criteria; cause attributed to skill, tool, environment, instructions or coordination; candidate vs current and, where applicable, no-skill baseline; failed attempts preserved; regression and qualification enforced; adoption distinct from source publication; later skill version verified and recurrence detected; authorized work continues without the owner starting each step. Visuals show lifecycle progress, candidate comparisons, regressions, uncertainty, owner interventions and recurrence per eligible use; historical coverage and unfamiliar-work performance stay separate. Existing installation, publication, budget and stopped-campaign boundaries remain. Open interview frontier: owning record (revise S-002 vs new Spec), eligible improvement targets, canonical store per record kind, inference harness/provider and budget, autonomy gates, success-criterion form. No execution authority granted.
+<!-- /jot-entry -->
