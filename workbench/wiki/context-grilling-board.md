@@ -118,3 +118,60 @@ The supported command `node workbench/tools/landmark-tracker.mjs show --json` cu
 
 Publication approval asked earlier remains unanswered; this correction is not approval to push the branch or merge it.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-a1064eef-0239-494e-9fa1-387a68d3529d
+Kind: proposal
+State: unresolved
+Recorded: 2026-11-04T02:18:31.649Z
+Author: Codex
+Source: Kayden AMS align-concept chat, save request and pending readback, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+## Owner feedback and continuation, 2026-11-03
+
+Kayden said: "This is sounding a lot better, we are almost there. Save this and why are we getting this error? You are the only session running righ tnow"
+
+Save the latest four-section readback as pending, alongside the exact lifecycle correction in JOT-aa694f42-e43c-4eb7-9aea-e3e63d57ba36. This is positive alignment feedback and an explicit save request, not final confirmation of the assembled readback or permission to publish the branch. Next: continue from the DQC-first lifecycle and clarify any remaining meaning; do not restart settled questions.
+
+## Pending readback preserved exactly
+
+**Summary**
+
+At the start of alignment, the main interview branches become DQCs—four initial DQCs for this session’s four branches. Each card on the Grilling Board **is a DQ Card**, displaying that record’s current question, why, developing answer and confirmation state.
+
+As the interview tree changes, existing DQCs evolve with it. A distinct question requiring another decision creates a new DQC. Earlier wording, answers, corrections and reasons remain recoverable.
+
+**The why**
+
+The interview, board and recorded intent must remain connected throughout alignment. Otherwise, agents reconstruct understanding from scattered conversations, and the board becomes stale or disconnected from what was actually confirmed.
+
+**The intended result**
+
+After alignment on each concept, the agent presents a readback. **The exact readback you confirm is stored on its DQC as the confirmed concept.**
+
+When you say a board round is finished, the agent reviews every DQC changed through your website actions and takes the appropriate continuation:
+
+- Update the Wiki and owning documents with confirmed and approved concepts.
+- Begin Prepare with Map and Plan where authorized.
+- Update the DQCs with the next questions and proposals so you can immediately resume answering.
+
+That round review carries understanding forward; it does not merely count completed answers.
+
+**What I will do**
+
+I’ve preserved your exact correction in the [existing capture](context-grilling-board.md), committed locally as `59bcbff`. This assembled readback remains pending your confirmation.
+
+AMS currently refuses the supported DQC operation with `tracker-undeclared`. Consequently, the four initial DQCs do **not** exist yet; the Wiki capture preserves the correction while that capability is unavailable. Nothing has been published.
+
+Preservation note: the original chat's machine-local Markdown link target was normalized to this Wiki page's relative path; visible readback text is unchanged.
+
+## Error investigation
+
+No index.lock or HEAD.lock exists in the inspected AMS checkout. The Git save hook runs because the branch has commits absent from remote-tracking refs, not because another session holds a lock. Its stop operation calls unpushed for the entire HEAD after HEAD changes from the session baseline, so its count also includes earlier unpushed commits on this branch. The other-worktree warning inventories dirty worktrees; it does not establish active sessions.
+
+The actual push was rejected before Git ran by automatic approval review for insufficient explicit authorization to disclose the branch's documentation/project context to the public repository. The save hook's instruction to push does not override that review. No retry or workaround is authorized by this diagnosis.
+
+The separate DQC error, tracker-undeclared, is a manifest/configuration gap, also unrelated to concurrent sessions. Existing data, pending confirmation and blocked publication remain preserved. No hook, security setting, manifest or Board code was changed by this capture.
+<!-- /jot-entry -->
