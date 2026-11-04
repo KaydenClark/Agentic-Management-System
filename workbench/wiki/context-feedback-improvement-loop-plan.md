@@ -12,6 +12,8 @@ last_verified: 2026-11-02
 
 # Feedback-to-improvement loop: current understanding and prepared route
 
+<a id="current-mapped-destination"></a>
+
 ## Current understanding
 
 The RSI Loop turns failures from real agent work into demonstrated improvements to shared skills and the Workbench, then checks later use for recurrence and regression. [LMK-004 — RSI Loop](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md) owns this whole destination; [its synthesis](design-concepts/landmark-rsi-loop.md) explains the capability relationships. S-002 owns evaluation/qualification, S-000B worker execution/recovery, S-006 durable data, S-007 presentation, S-013 detection, S-011 source delivery and S-000A catalog refocus. Follow the [continuation guide](guidebooks/rsi-loop-continuation.md) for actual owners and release conditions, not a copied queue here.
