@@ -3,11 +3,11 @@
 **Task ID:** TK-002G
 **Spec ID:** S-013
 **Slice:** Repair AGENTS document ownership
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** wiki-claim: Workbench control ownership
 **Planned verification:** policy and link inspection; Runbook checks; checked PR into main
-**Proof:** Local full suite 810 passed, 4 skipped; fresh-checkout documentation checks passed. Earlier public pushes were rejected. The owner has now explicitly authorized public publication; current PR checks and landing remain pending.
+**Proof:** PR 158 merged into main at 5f0a554f2ccfd590a3fe5f38c03fa598d16bd879; exact candidate dbddb805841e56ece9aad2f536941c530c04ecb3 passed shared-runner python tests, hygiene, record validation and 375px Board checks; fetched main contains the candidate.
 **Claimed by:** codex-agents-ownership
 **Current claimant:** codex-agents-ownership
 
@@ -26,3 +26,4 @@ Next action: push this documentation and its required records, open a PR into ma
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | codex/agents-document-ownership | ea007f82b05653fbb0130c8e0336d0265832c9cb | ahead 1 behind 0 | 1 | Local full suite: 810 passed, 4 skipped with loopback permitted. Initial sandbox run: 704 passed, 4 skipped, 97 failed and 9 errors when socket.bind was denied. Fresh checkout: hygiene tests 36 passed, 1 skipped; hygiene 0 findings; Wiki and layout valid; render no diff. Edited links resolve; whitespace clean; AGENTS 1369 and RUNBOOK 2969 characters. Doctor retains pre-existing findings, none globally blocking. | AGENTS.md, RUNBOOK.md, SKILLS.md; Architecture RSI route; Wiki ownership and continuation; S-013 TK-002G and generated Taskboard | Implemented locally. Automatic approval review rejected public branch push twice: explicit user approval to disclose this documentation and its associated records to the public AMS repository is required. No push, PR, CI, merge or deployment occurred. Retain feature branch and verification clone pending approval. | 429979792bd9c437f2e14b37a731cf9ac59fe0339206a43061cf1f5da96aabef |
+| 2 | codex/agents-document-ownership | dbddb805841e56ece9aad2f536941c530c04ecb3 | ahead 0 behind 1 | 0 | PR 158 merged into main at 5f0a554f2ccfd590a3fe5f38c03fa598d16bd879; exact candidate dbddb805841e56ece9aad2f536941c530c04ecb3 passed shared-runner python tests, hygiene, record validation and 375px Board checks; fetched main contains the candidate. | AGENTS.md, RUNBOOK.md, SKILLS.md, Architecture routes and Wiki capture/publication authority | S-013 remains active; TK-003 waits on S-006. Grilling concept readback remains pending; no Human QA, DQC implementation or website promotion is claimed.; close attribution: {"agent":"codex-publication","claimant":"codex-agents-ownership","onBehalfOf":"codex-agents-ownership"} | 7d24afddb6db5531049a1835e1c3fe81b72d6f307725a2cfb97785da47f3cc25 |
