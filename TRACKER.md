@@ -77,12 +77,31 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000C — Question and answer flow
 
-Revision 3; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000C.json)
+Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000C.json)
 
-How do question readbacks and owner answers stay connected?
+<pre>**Summary**
+
+Each Board card projects a stable DQC and its full proposed readback. Confirmations bind exactly displayed content; correction and quality feedback preserve owner words.
+
+**The why**
+
+Chat and Board actions must reach the same owning records.
+
+**The intended result**
+
+This branch covers the settled flow in DQC-000A, preserving pending revision and confirmation boundaries. It is agent context.
+
+**What I will do**
+
+Use the supported native lifecycle and retain source/history; request no reconfirmation of this derived summary.</pre>
+
+Source: Derived source-linked branch context from DQC-000A; workbench/wiki/context-grilling-board\.md@aa2467c181989e5ff58d14687e39bea57083d7d3\#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba; Kayden direct confirmation, 2026-11-03. Scope: Agent coverage context for the already confirmed DQC-000A; no new owner decision or authorization\..
+
+Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 - [dqc:DQC-000A](workbench/landmark-tracker/destination-questions/DQC-000A.json) (tracker): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
 - [spec:S-004](workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) (room): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
+- propose at r4: 
 
 ## DQC-000D — Keeping intent current
 
