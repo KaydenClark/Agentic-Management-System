@@ -6,7 +6,9 @@
  * recorded in grill-board/theme/tokens.json (DDR-000Y). The theme block below
  * is generated from that file (npm run tokens:gen) and checked byte for byte
  * by tests/tokens-json.test.mjs; type and spacing tokens after it are
- * hand-written.
+ * hand-written. Site-only colors the Grill Board does not use (the /rsi
+ * fitness levels) sit in a second marked block right after it, which
+ * tests/tokens-json.test.mjs also checks.
  *
  * Colors are signals with one stated meaning each (DDR-000M). The greys are
  * the page, not signals. Light is the default; the system's dark preference
@@ -122,6 +124,51 @@
 }
 /* END theme tokens */
 
+/* BEGIN site tokens: hand-written, not recorded in grill-board/theme/tokens.json */
+/* Fitness levels on /rsi (S-007 TK-002J). Each color means one fitness level
+   and nothing else on that page (DDR-000M); Broken is the trouble hue itself.
+   Every fill carries its level's name or initial in its -on color, which
+   meets WCAG AA contrast on it, so the colors are never the only cue. */
+
+:root,
+[data-theme="light"],
+.t-light {
+  --level-excellent: #157A47; /* Fitness level Excellent: all three deciding runs passed */
+  --level-excellent-on: #FFFFFF; /* Text on an Excellent fill */
+  --level-stable: #24739A; /* Fitness level Stable: two deciding runs passed */
+  --level-stable-on: #FFFFFF; /* Text on a Stable fill */
+  --level-functional: #E2A72E; /* Fitness level Functional: one deciding run passed */
+  --level-functional-on: #0A0A0A; /* Text on a Functional fill */
+  --level-broken: var(--heat); /* Fitness level Broken: trouble, no deciding run passed or a critical check failed */
+  --level-broken-on: #0A0A0A; /* Text on a Broken fill */
+}
+
+[data-theme="dark"],
+.t-dark {
+  --level-excellent: #3FC27F; /* Fitness level Excellent: all three deciding runs passed */
+  --level-excellent-on: #0A0A0A; /* Text on an Excellent fill */
+  --level-stable: #5BB3D9; /* Fitness level Stable: two deciding runs passed */
+  --level-stable-on: #0A0A0A; /* Text on a Stable fill */
+  --level-functional: #E8B84A; /* Fitness level Functional: one deciding run passed */
+  --level-functional-on: #0A0A0A; /* Text on a Functional fill */
+  --level-broken: var(--heat); /* Fitness level Broken: trouble, no deciding run passed or a critical check failed */
+  --level-broken-on: #0A0A0A; /* Text on a Broken fill */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --level-excellent: #3FC27F; /* Fitness level Excellent: all three deciding runs passed */
+    --level-excellent-on: #0A0A0A; /* Text on an Excellent fill */
+    --level-stable: #5BB3D9; /* Fitness level Stable: two deciding runs passed */
+    --level-stable-on: #0A0A0A; /* Text on a Stable fill */
+    --level-functional: #E8B84A; /* Fitness level Functional: one deciding run passed */
+    --level-functional-on: #0A0A0A; /* Text on a Functional fill */
+    --level-broken: var(--heat); /* Fitness level Broken: trouble, no deciding run passed or a critical check failed */
+    --level-broken-on: #0A0A0A; /* Text on a Broken fill */
+  }
+}
+/* END site tokens */
+
 :root {
   /* Type: self-hosted from @fontsource (no third-party requests). */
   --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -215,6 +262,10 @@
   --step-size: 28px; /* a main-flow step number on the index */
   --target-min: 24px; /* smallest link target (WCAG 2.2 target size) */
   --rule-width: 4px; /* the request blockquote's leading rule */
+
+  /* /rsi skill trends. */
+  --text-chart: 0.8125rem; /* 13px in chart units; SVG axis and strip labels */
+  --chart-basis: 300px; /* a skill-trend card's minimum width */
 }
 
 /* Narrow screens put the scrollable navigation below the two controls. */
