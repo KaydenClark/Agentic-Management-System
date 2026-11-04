@@ -40,6 +40,15 @@ The exact original synthetic native entry remains contained byte for byte, SHA-2
 
 Baseline `uv run pytest`:839 passed/6 skipped. Focused Wiki validation, native render/doctor, layout, hygiene and diff checks pass; doctor retains the pre-existing S-011 dependency, undeclared legibility and permission drift findings. No site files changed. Root owns fresh assembled checks and shared CI; neither static green nor this single correction exercise establishes general RSI improvement, Human QA or other Spec acceptance.
 
+
+## Assembled review and publication boundary
+
+Root's fresh checkout at source candidate fb7e22b passed839 Python tests/6 skipped; corrected-head f111d12 Wiki/hygiene/projections/range whitespace passed. Independent Standards and Spec contexts passed f111d12 after the incoming RSI anchor repair, retaining FAIL-093. Root directly inspected the synthetic finding/before/after/readback artifacts and independently verified declared hashes, unchanged source and retained original entry. This proves the bounded exercise, not general benefit or Human QA.
+
+[Shared CI41933508110](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/41933508110) passed on f111d12. [PR171](https://github.com/KaydenClark/Agentic-Management-System/pull/171) merged as `2e093fff12818bcf31f2c89a3f10dd732ac37e76`. A fresh main fetch proves candidate containment and a tree identical to the checked source. This establishes source delivery; final record publication is checked separately.
+
+Automatic approval review initially rejected the merge before execution, classifying default-branch delivery as owner-only and saying the exact merge lacked authorization (FAIL-096). After checking the unchanged head, green CI, non-site file scope and current supplied delivery authority, root retried the same connector with that evidence; it accepted the pinned merge. No alternative route, approval setting or reviewer policy was changed. The source publication hold is resolved for PR171; this success guarantees no future-session approval behavior. Owner Human QA, Spec acceptance, website promotion, installation and stopped campaigns retain their separate boundaries.
+
 ## Maintenance history
 
 - 2026-11-04: S-000C intake/query reconciled current explanations, Landmark routes and concrete maintenance procedure; synthetic contradiction detected and corrected with source/history preserved. Lifecycle judgments remain in native S-000C history, not copied here.
