@@ -40,6 +40,13 @@ The exact original synthetic native entry remains contained byte for byte, SHA-2
 
 Baseline `uv run pytest`:839 passed/6 skipped. Focused Wiki validation, native render/doctor, layout, hygiene and diff checks pass; doctor retains the pre-existing S-011 dependency, undeclared legibility and permission drift findings. No site files changed. Root owns fresh assembled checks and shared CI; neither static green nor this single correction exercise establishes general RSI improvement, Human QA or other Spec acceptance.
 
+
+## Assembled review and publication boundary
+
+Root's fresh checkout at source candidate fb7e22b passed839 Python tests/6 skipped; corrected-head f111d12 Wiki/hygiene/projections/range whitespace passed. Independent Standards and Spec contexts passed f111d12 after the incoming RSI anchor repair, retaining FAIL-093. Root directly inspected the synthetic finding/before/after/readback artifacts and independently verified declared hashes, unchanged source and retained original entry. This proves the bounded exercise, not general benefit or Human QA.
+
+[Shared CI41933508110](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/41933508110) passed on f111d12. [PR171](https://github.com/KaydenClark/Agentic-Management-System/pull/171) is the non-site Wiki repair. On2026-11-04 automatic approval review rejected its merge before execution, classifying default-branch delivery as owner-only and saying the exact merge lacked explicit authorization. FAIL-096 preserves that refusal. The routine non-site route and owner-only website promotion remain distinct; no alternative merge route was attempted. Current main delivery is blocked; publication of these review/continuation records is not a merge or owner acceptance.
+
 ## Maintenance history
 
 - 2026-11-04: S-000C intake/query reconciled current explanations, Landmark routes and concrete maintenance procedure; synthetic contradiction detected and corrected with source/history preserved. Lifecycle judgments remain in native S-000C history, not copied here.
