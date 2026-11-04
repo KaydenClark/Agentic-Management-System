@@ -132,3 +132,16 @@ Supersedes: none
 
 The owner permits more than one Spec for separation of concerns and identifies the RSI Loop as a LANDMARK. This supersedes the mapping interpretation that S-002 owns the whole lifecycle. Reuse LMK-004 as RSI Loop; S-002 owns evaluation/qualification, new planned S-000B worker execution/recovery, S-006 persistence, S-007 presentation, S-013 detection and S-011 source delivery. Cross-landmark links preserve existing placements and evidence. Mapping only, zero new Tasks; attempt and acceptance requirements remain unchanged.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-ceab17ab-3842-4b20-992a-4f0ad562eb65
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:16:39.699Z
+Author: Kayden (captured by Codex)
+Source: Kayden's AMS chat, 2026-11-04, RSI Landmark correction and explicit merge approval
+Topic: feedback-improvement-loop-plan
+Supersedes: JOT-d07bee36-7b4a-4029-8124-1a4120e97ccd
+
+The owner identifies the RSI Loop as a Landmark and permits capability-specific Specs. LMK-004 owns the whole destination; S-002 evaluation/qualification; S-000B execution/recovery; S-006 persistence; S-007 presentation; S-013 detection; S-011 shared-source delivery. This corrects only the earlier S-002 whole-lifecycle ownership interpretation. All other confirmed terms in the superseded entry remain: unchanged three-attempt limit with baseline excluded, metered Mid/Small Codex/Claude and High when needed, no API-dollar cap, existing Fitness/Alignment and Stable/Excellent/no-regression/useful-benefit gates, Markdown intake, canonical Supabase records with safe Git exports, local/private raw transcripts, and separate installation authority. Mapping creates one planned worker Spec and zero Tasks. The owner now explicitly approves merging this mapping into main; implementation and stopped trials remain unauthorized by this map.
+<!-- /jot-entry -->
