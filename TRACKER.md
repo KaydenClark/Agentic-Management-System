@@ -105,10 +105,29 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000D — Keeping intent current
 
-Revision 3; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000D.json)
+Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000D.json)
 
-How does a completed round carry understanding forward?
+<pre>**Summary**
+
+After a round, agents review every changed DQC, answer and quality event; reconcile actual confirmed and authorized knowledge, then record authorized preparation or the next frontier.
+
+**The why**
+
+Unanswered questions, dependencies and prior confirmed versions must remain recoverable.
+
+**The intended result**
+
+This branch covers currentness and continuation already settled in DQC-000A; execution proof stays in its owners. It requests no new owner answer.
+
+**What I will do**
+
+Preserve context/history and expose genuine new decisions separately, without inventing Human QA or acceptance.</pre>
+
+Source: Derived source-linked branch context from DQC-000A; workbench/wiki/context-grilling-board\.md@aa2467c181989e5ff58d14687e39bea57083d7d3\#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba; Kayden direct confirmation, 2026-11-03. Scope: Agent coverage context for the already confirmed DQC-000A; no new owner decision or authorization\..
+
+Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 - [dqc:DQC-000A](workbench/landmark-tracker/destination-questions/DQC-000A.json) (tracker): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
 - [spec:S-004](workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) (room): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
+- propose at r4: 
 
