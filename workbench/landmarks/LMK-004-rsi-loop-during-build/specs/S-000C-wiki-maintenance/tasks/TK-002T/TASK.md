@@ -23,9 +23,9 @@ Deliver all Spec acceptance: current Grill Board/AMS purpose/RSI explanations; f
 
 - [x] Three explanations/four syntheses satisfy S-000C with sources, unresolved claims, limits and live owners distinct.
 - [x] Execute safe immutable-source intake and durable query filing; update affected explanations/crosslinks/summaries beyond jots.
-- [ ] Clean cold-start Grill Board retrieval and isolated introduced correction show explanation, affected links and preserved history agree. Label synthetic material; never introduce fake owner confirmation into real records.
+- [x] Clean cold-start Grill Board retrieval and isolated introduced correction show explanation, affected links and preserved history agree. Label synthetic material; never introduce fake owner confirmation into real records.
 - [x] Structural/bounded semantic checks detect planted inconsistency; retained-byte comparison passes. Record actual checks/failures and limitations in existing owners.
-- [ ] Hand back committed/pushed candidate, routes, sources/proof and gaps for independent Review. No Human QA, other Spec acceptance, website/deploy, shared-skill install or stopped-campaign restart.
+- [x] Hand back committed/pushed candidate, routes, sources/proof and gaps for independent Review. No Human QA, other Spec acceptance, website/deploy, shared-skill install or stopped-campaign restart.
 
 Sizing: one Markdown behavior path across existing sources, explanations, routes, procedure and verification, with repair/QA in the run; no external service or product implementation. Preserve unrelated work.
 
@@ -35,7 +35,7 @@ Owned claim originals committed at 9105f4c after native claim16adb21. Complete w
 
 ## Implementor result
 
-Content fb7e22b9522e6347547d03d5e78e134cdcaeef66 is pushed to the assigned Spec branch. [Exercise/intake report](../../../../../../wiki/context-wiki-maintenance.md#implementor-verification-2026-11-04) retains actual synthetic before/after hashes, detected contradiction and native correction-context readback. Baseline uv pytest839 passed/6 skipped; candidate Wiki/render/doctor/layout/next/hygiene and full-range whitespace checks pass with existing doctor findings. No site change. Root fresh retrieval/Review/CI remain pending, so cold-start acceptance and native closure await that evidence. Full workspace recovery check requires the exact candidate's discovery route in integration; no pre-integration completion is claimed.
+Content fb7e22b9522e6347547d03d5e78e134cdcaeef66 is pushed to the assigned Spec branch. [Exercise/intake report](../../../../../../wiki/context-wiki-maintenance.md#implementor-verification-2026-11-04) retains actual synthetic before/after hashes, detected contradiction and native correction-context readback. Baseline uv pytest839 passed/6 skipped; candidate Wiki/render/doctor/layout/next/hygiene and full-range whitespace checks pass with existing doctor findings. No site change. Root reports noncontributor cold retrieval PASS at exact fb7e22b: MEMORY plus leading Board prose only, recovering required meaning and limits before any history/Spec/Task. Independent assembled Review/CI remain pending; this Task acceptance does not supply them. Full workspace recovery check requires the exact candidate's discovery route in integration; no pre-integration completion is claimed.
 
 ## Receipt
 

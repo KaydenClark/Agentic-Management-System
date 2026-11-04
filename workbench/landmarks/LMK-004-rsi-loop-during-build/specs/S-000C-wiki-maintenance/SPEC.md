@@ -26,7 +26,7 @@ The [approved diagnosis](../../../../wiki/context-wiki-maintenance.md) identifie
 
 ## Current Verified State
 
-Content candidate fb7e22b supplies three current explanations, four routed Landmark syntheses and the [maintenance procedure](../../../../wiki/guidebooks/wiki-maintenance.md). Public immutable-source intake and a durable Board answer reconcile existing owners; a synthetic contradiction was detected before correction, then explanation/route/history reconciled. [Evidence and limits](../../../../wiki/context-wiki-maintenance.md#implementor-verification-2026-11-04) retain source and fixture hashes. Original78 JOT entries and19 complete history/readback files match baseline before lifecycle close. Focused structural/hygiene checks pass. Same-context implementor QA is not fresh retrieval or independent Review; root owns those, fresh suite, shared CI and delivery. Features remains empty; this does not supply a completion/retirement exception.
+Content candidate fb7e22b supplies three current explanations, four routed Landmark syntheses and the [maintenance procedure](../../../../wiki/guidebooks/wiki-maintenance.md). Public immutable-source intake and a durable Board answer reconcile existing owners; a synthetic contradiction was detected before correction, then explanation/route/history reconciled. [Evidence and limits](../../../../wiki/context-wiki-maintenance.md#implementor-verification-2026-11-04) retain source and fixture hashes. Original78 JOT entries and19 complete history/readback files match baseline before lifecycle close. Focused structural/hygiene checks pass. Root reports noncontributor cold retrieval PASS at fb7e22b, reading only MEMORY/leading Board prose. Independent Review, fresh suite, shared CI and delivery remain root-owned. Features remains empty; this does not supply a completion/retirement exception.
 History: [S-000C history](../../../../wiki/history/S-000C.md).
 
 ## Desired Behavior
@@ -64,7 +64,7 @@ None for this bounded repair. Missing/private evidence limits its affected claim
 - [x] Four Landmarks have schema-shaped routed syntheses sourced from current cards/owners. Invented accepted answers or copied Task state fails.
 - [x] Execute safe source intake and durable query filing through the routed procedure, updating existing explanations and affected links/summaries. Jot-only append, duplicate ownership or chat-only answer fails.
 - [x] Native structural checks plus bounded semantic inspection cover affected routes and detect an introduced inconsistency. Sources use immutable refs/permitted snapshots; private exposure or unsourced certainty fails.
-- [ ] Cold-start Grill Board retrieval recovers purpose, DQC relationship, question/answer/update flow and limits with sources. An isolated introduced correction reaches current explanation, affected links and retained history consistently; superseded claims resurfacing as current fail. Label synthetic exercise evidence.
+- [x] Cold-start Grill Board retrieval recovers purpose, DQC relationship, question/answer/update flow and limits with sources. An isolated introduced correction reaches current explanation, affected links and retained history consistently; superseded claims resurfacing as current fail. Label synthetic exercise evidence.
 - [ ] Retained JOT/confirmation/history bytes match recorded baseline; live owners/private boundaries/stops remain intact. Record actual checks and independent Review and complete authorized delivery; no fabricated Human QA or other Spec acceptance.
 
 ## RSI and website connection
@@ -89,7 +89,7 @@ Independent candidate-bound Review pending. Human QA/owner acceptance unperforme
 
 ## Completion Result
 
-Implemented on the Spec branch; fresh-context retrieval, assembled Review/CI and integration delivery pending. No other Spec acceptance or Human QA claimed.
+Implemented on the Spec branch; assembled Review/CI and integration delivery pending. No other Spec acceptance or Human QA claimed.
 
 ## Remaining Limitations Or Follow-Up Specs
 
