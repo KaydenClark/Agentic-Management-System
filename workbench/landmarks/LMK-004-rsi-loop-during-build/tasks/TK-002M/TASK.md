@@ -55,4 +55,4 @@ RUNBOOK’s private planning source was recovered without copying private conten
 
 ## Publication boundary
 
-[Delivery record](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-9280ecbd-819b-4559-bf34-6f342a7402a9): PR169 delivered candidate `7dbcc98829627ea2152c616cc99035bcc26b31f2` into main at `3e3078810753035f289f20e5f9bc268a61e0fbd3` after the owner's direct instruction to permit automatic commits, PRs and checked merges. Exact-head shared CI41799304048 and both independent metadata reviews passed. Fresh main clone verified the merge and candidate parent. FAIL-079/080 and the original checksummed Receipt remain historical evidence; the publication hold is resolved. Stage B remains held.
+[Delivery and checks](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-9280ecbd-819b-4559-bf34-6f342a7402a9): PR169 merged `7dbcc988` into main at `3e307881`. Owner instruction resolved FAIL-079/080. Original Receipt retained; Stage B held.
