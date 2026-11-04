@@ -104,7 +104,7 @@ Existing Tasks retain their scope; Map creates none.
 
 ## Documentation Impact
 
-LMK-004 owns the loop; Wiki explains intent. S-000B owns the worker, S-006 storage, S-007 visuals, S-013 detection and S-011 delivery. S-012 remains the lifecycle CLI. Plan reconciles Tasks later; only actual missing inputs block consumers.
+LMK-004 owns the loop; the Wiki routes its capability Specs. S-012 remains the lifecycle CLI. Plan reconciles Tasks later; only missing inputs block consumers.
 
 ## Testing Seams
 
