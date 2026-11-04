@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes this destination revision only. Existing execution approvals remain scoped; this Map creates no Tasks, runs, installation or deployment authority.
+The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes Map only; execution holds remain. No new Tasks or trials.
 
 The owner named "a site page showing the improvement charts" as an example Spec, asked that chart places exist from the start so the owner can see where data will appear, and ruled out fabricated data.
 
@@ -76,21 +76,16 @@ Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the 
 
 ## Acceptance Criteria
 
-- [ ] **Feedback loop connection:** Progress is visible: safe existing failures, assessments, stopped attempts and dispositions are read through S-006 and rendered on dev with source, scope, freshness and next action. A versioned workflow explanation links each changed step to its reason/evidence. Failed reads cannot appear as no activity, and activity/audit scores cannot become improvement claims.
-
-- [ ] **Shared data states.** Populated, empty, pending and failed reads satisfy [S-003's contract](../../../LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md#data-and-approvals). A failed read shown as zero results fails; retained data without its read time fails.
-- [ ] **Build explanation.** A reader can follow sourced build activity into its related results or an explicit statement that no measured result exists. Activity alone is never labeled improvement; explanatory prose is allowed. No separate build-history page is required.
-
-- [ ] **Honest empty state.** With zero rows the page builds, shows each chart place and the "no trials yet" explanation. *Check:* render against an empty fixture. *Must fail:* a hidden section, a sample chart or any number.
-- [ ] **Every number links.** Each rendered number links to its rows. *Check:* a link-coverage test over rendered numbers. *Must fail:* a bare number.
-- [ ] **Provenance and series.** Two models never share one trend line. *Must fail:* a model change drawn as a continuation.
-- [ ] **Not only up.** Regressions and variants are marked as such. *Must fail:* a timeline that hides a recorded regression.
-- [ ] **Held-out headlines.** A headline appears only from held-out rows, with its interval and baseline. *Must fail:* a dev-task number as a headline, or an interval including zero shown as improvement.
-- [ ] **No test rows.** A marked test row in the fixture never renders.
-
-- [ ] **Learning views:** a reader follows one failure into its actual attempts, rejected/retained candidate and later-use evidence through S-006. A manually invented chart value or hidden failed attempt fails.
-- [ ] **Comparable trends:** changed models/contracts/case sets are separated, with denominators and sample sizes. Missing usage is unknown; an imported failure count presented as a recurrence rate fails.
-- [ ] **Effort and outcomes:** views distinguish loop operation, behavioral improvement and persistence in later use. A Stable/Excellent label alone cannot produce an improvement headline.
+- [ ] **Feedback connection:** safe failures, stopped attempts, assessments and dispositions render from S-006 with source, scope, freshness and next action. Workflow explanations link changed steps to evidence. Activity/audits alone cannot imply benefit.
+- [ ] **Read states:** populated, empty, pending and unavailable follow S-003; failed reads cannot mean zero results, retained data needs its timestamp.
+- [ ] **Build explanation:** sourced activity links to results or explicitly absent evidence; no separate build-history page is required.
+- [ ] **Empty state:** chart places remain visible and explain the next event; sample numbers presented as results fail.
+- [ ] **Traceability:** every metric links to its rows; independent hand-maintained numeric chart data fails.
+- [ ] **Comparable series:** model/contract/case-set changes are separated, with sample sizes and denominators. Imported counts cannot masquerade as recurrence rates.
+- [ ] **Regressions:** failed and rejected candidates remain visible; hidden failures or upward-only selection fail.
+- [ ] **Headlines:** require held-out evidence, controls, prior version and interval; an interval including zero means no difference detected.
+- [ ] **Privacy:** synthetic/test rows and private evidence never render.
+- [ ] **Learning views:** per-skill/Workbench case matrix, candidate lineage and later-use evidence distinguish loop operation, qualification, behavioral benefit and recurrence; unknown usage stays unknown.
 
 ## RSI and website connection
 
@@ -134,4 +129,5 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+This Map does not activate website implementation or held Tasks. Existing approval scopes and stopped experiments remain. See the [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination).
+

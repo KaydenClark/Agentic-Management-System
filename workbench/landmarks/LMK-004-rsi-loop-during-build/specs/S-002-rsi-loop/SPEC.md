@@ -1,4 +1,4 @@
-# S-002 - RSI loop with safeguards
+# S-002 - RSI evaluation and qualification
 
 **Spec ID:** S-002
 **Status:** active
@@ -6,7 +6,7 @@
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
 **Updated:** 2026-11-03
-**Catalog description:** Skill/AMS audit loop.
+**Catalog description:** Case contracts, comparisons, Fitness/Alignment qualification and regression evidence for LMK-004.
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
@@ -14,37 +14,27 @@
 
 ## Intent and authority
 
-The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes this destination revision only. Existing execution approvals remain scoped; this Map creates no Tasks, runs, installation or deployment authority.
+The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes Map only; execution holds remain. No new Tasks or trials.
 
 [Owner decisions](../../../../wiki/context-ams-purpose.md) govern resumed Journey: fixed r1/acceptance, attempts, meter and bounded versus whole scope.
 
 ## Current Verified State
 
-Met: **Scoring** ([TK-000M receipt](tasks/TK-000M/TASK.md#receipt)). Open: Cycle, Evals, Stops, Readback.
-
-[Baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md): Broken 4/138, incomplete/unqualified; no trial, strike or skill result.
-
-Exact-identity repair: S-006/TK-000S.
-
-[Bootstrap](../../../../../evals/TRIALS.md) proves no trial, qualification or benefit. [TK-002](tasks/TK-002/TASK.md) owns noise state and exact identities under the [narrow protocol](../../../../../evals/INTERVIEW-NOISE.md): narrow qualification is accepted; baseline slot 0 is Unknown; later slots wait on TK-000Y's judge correction. Only old run28/result41 is [published](tasks/TK-002/TASK.md#old-incomplete-baseline-publication). Noise and benefit remain unproven.
-
-History: [S-002 history](../../../../wiki/history/S-002.md).
+Scoring is met ([TK-000M](tasks/TK-000M/TASK.md#receipt)); cycle, evaluations, stops and readback remain open. The [baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md) is Broken 4/138, incomplete/unqualified, not a trial or strike. S-006/TK-000S owns exact identity. [TK-002](tasks/TK-002/TASK.md) owns the accepted narrow qualification and Unknown baseline slot; later slots wait on TK-000Y. Only stopped run28/result41 is published. Bootstrap is not benefit evidence. See [history](../../../../wiki/history/S-002.md).
 
 ## Desired Behavior
 
 Failure -> earliest gap/owner -> one repository change -> baseline/retest -> disposition/later use.
 
-### Complete improvement lifecycle
+### Evaluation within the RSI Landmark
 
-One canonical failure occurrence reaches diagnosis, reproducible cases, a pinned baseline, a bounded candidate change, existing Fitness/Alignment qualification, regression comparison, disposition, authorized adoption and observed later use. Target individual shared skills or a declared coupled skills/Workbench bundle; bundle improvement does not establish benefit for each component. Reusable skills remain in their source repository, not AMS copies. Product defects route to their owning Specs while their failure intake remains linked here.
+LMK-004 owns the loop; S-000B executes, S-006 persists, S-013 detects recurrence and S-011 delivers shared-source changes. This Spec owns case contracts, comparisons, qualification and benefit decisions.
 
-The local Python worker executes through Codex or Claude harnesses outside Supabase with real tools appropriate to the case. It distinguishes operational recovery, candidate improvement and adoption monitoring. A tool-free transcript test cannot certify filesystem, Git, delivery or native-discovery behavior. Cases record actual loaded skill identity and end-state evidence; planned installation or source merge is not observed use.
+Evaluate individual skills or declared bundles; bundle gains do not certify each component. Diagnose skill, instruction, tool, environment, context, ownership, coordination, proof or model limitations; unknown remains unknown. Route product defects to their Specs.
 
-S-006 persists eligible work, attempts and results. Duplicate triggers, interruption and uncertain external effects resume/reconcile the same identities without duplicate claims, hidden retries or reset counters. A recorded explicit stop remains stopped. Within an authorized campaign the worker advances eligible steps without per-step owner prompting; unavailable meter or host records a recoverable block, never fallback to paid API billing. No new dollar cap or attempt allowance is inferred.
+Cases link original correct outcomes, baseline, loaded versions, tools and end states to r1 checks. Objective checks and qualified semantic judgments supply evidence, not new scores. Transcript-only tests cannot certify Git/filesystem behavior. Cheap screening never replaces full qualification.
 
-Diagnosis distinguishes skill/instruction, tool, context, environment, ownership, coordination, proof and possible model limitations; unknown causes remain unknown. Capture successful eligible uses as well as failures so recurrence has a denominator. Historical LLM_Workbench incidents retain provenance and source granularity; private traces are not published. Studied cases are development evidence; fresh deciding evidence remains protected.
-
-A case's observable correct outcome supplies evidence to the existing r1 checks, not a replacement scoring system. Use objective end-state checks where applicable and qualified independent semantic judgment where needed. Screen candidates before full qualification without weakening acceptance. Preserve previously passing behavior and applicable cross-skill interactions. Declared useful benefit includes actual work outcomes and owner intervention, not audit score or document size alone.
+Preserve historical provenance, development/held-out boundaries, prior-pass and cross-skill regressions. Count eligible successes, failures, owner interventions and later recurrence. Document size or audit gains alone are not useful benefit.
 
 ### Audit scores
 
@@ -94,30 +84,27 @@ Weights; running loops during mapping; presentation (S-007).
 
 ## Dependencies And Blockers
 
-S-006 retains assessment/attempt/run identities, metadata, ledgers, levels, acceptance/evidence/qualification and finding/retest/behavior links; S-007 safe presentation is pending. Strength-label real seeds; private sources yield summaries/commits only. Require storage and qualified comparisons.
+S-000B executes; S-006 stores evidence; S-007 presents safe results. Only missing inputs block consumers.
 
 ## Vertical Implementation Slices
 
-TK-000M/N/O: scoring; TK-000T/V: bootstrap; TK-001..004: trials. B local; checked PRs to main.
+Existing Tasks retain their scope; Map creates none.
 
 ## Acceptance Criteria
 
-- [ ] **Feedback loop connection:** Closed loop: one feedback occurrence reaches diagnosis, bounded repair, qualified comparison, disposition, accepted personal use and a later website task; safe progress is visible throughout. An introduced recurrence is detected without owner prompting. Interrupted coordination resumes the same records without duplicate claims, reset attempts or expansion of a scoped stop.
-
-- [ ] **Cycle:** failure -> change -> three-run score -> retest/disposition/later use; reject missing pin/retest.
-- [x] **Scoring:** Pool `8/10 + 1/2 + 1/2 = 10/14`; empty: no score. Test all levels, Quality No, Critical/Regression/missing proof. Reject Broken acceptance and bounded-as-whole.
-- [ ] **Evals:** enforce comparison contracts; reject do-nothing passes, self-grading, anecdotal/static benefit, skipped permissions/below-floor lift.
-- [ ] **Stops:** omitted findings stay open; regressions visible; baseline excluded. Reject fourth attempt/reset.
-- [ ] **Readback:** S-006/S-007 retain assessment/trial distinctions and failures/evidence. Reject false storage or test/private-data publication.
-
-- [ ] **Native behavior:** a fresh real-tool run proves the targeted end state and loaded skill version. A convincing transcript without the required artifact or operation fails.
-- [ ] **Autonomous continuation:** one authorized campaign progresses without repeated initiation; interruption and duplicate delivery preserve identities and attempts. Uncertain side effects are reconciled before retry. A fourth attempt, silent fallback billing or restarting a stopped series fails.
-- [ ] **Retention and regression:** candidate qualification uses existing Fitness/Alignment checks, Stable/Excellent, useful benefit and applicable regression evidence. An original-case pass with a new regression fails; a bundle result attributed to every skill fails.
-- [ ] **Later use:** source merge, authorized installation, actual loading and subsequent outcomes are separately evidenced. Recurrence is detected without owner prompting; a stale installed copy cannot count as the repaired version.
+- [ ] **Cycle:** one failure reaches diagnosis, bounded repair, qualified comparison, disposition, authorized adoption and later-use evidence. Missing pins/retests fail.
+- [x] **Scoring:** pooled 8/10 + 1/2 + 1/2 = 10/14; empty has no score. Critical/Regression/missing-proof and level rules are tested.
+- [ ] **Evals:** frozen contracts reject self-grading, do-nothing passes, static-only benefit, skipped permissions and below-noise gains.
+- [ ] **Stops:** baseline excluded; fourth attempt, renamed/reset counter or omitted finding fails.
+- [ ] **Readback:** S-006/S-007 preserve assessment/trial distinctions, failures and private-data boundaries; false storage claims fail.
+- [ ] **Native evidence:** fresh real-tool execution proves required end state and loaded skill identity; a transcript alone fails Git/filesystem claims.
+- [ ] **Worker evidence:** S-000B receipts preserve attempts; interruption cannot qualify an unrun check or restart stopped work.
+- [ ] **Retention:** existing Fitness/Alignment checks establish Stable/Excellent, useful benefit and no regression. Original-case pass with regression fails; bundle gains cannot certify each skill.
+- [ ] **Later use:** distinguish merge, authorized install, loading and outcomes. Recurrence is detected without owner prompting; stale loaded copies cannot count as repaired versions.
 
 ## Documentation Impact
 
-The Wiki explains sourced intent; S-006 owns storage/export, S-007 visuals, S-013 detection and S-011 source delivery. S-012 remains the separately scoped Python lifecycle CLI and is not silently expanded into the RSI worker. Plan reconciles existing Tasks only after mapping; no whole-Spec or site-completion dependency substitutes for an actual required artifact.
+LMK-004 owns the loop; Wiki explains intent. S-000B owns the worker, S-006 storage, S-007 visuals, S-013 detection and S-011 delivery. S-012 remains the lifecycle CLI. Plan reconciles Tasks later; only actual missing inputs block consumers.
 
 ## Testing Seams
 
@@ -133,4 +120,5 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+The mapped destination grants no implementation or new trial authority. Earlier approvals, explicit holds, attempts and stopped experiments retain scope. The [Wiki](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) owns the sourced correction and continuation.
+

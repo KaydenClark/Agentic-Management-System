@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes this destination revision only. Existing execution approvals remain scoped; this Map creates no Tasks, runs, installation or deployment authority.
+The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes Map only; execution holds remain. No new Tasks or trials.
 
 The owner's 2026-11-02 instruction expands the earlier land-only destination to the shared skills responsible for recurring branch, cleanup and handoff failures. Repair source in `KaydenClark/skills`, update this machine's personal skill catalog after a qualifying repair, and display actual RSI results on `dev`. Skills merge only after Terra 6.1 testing and Stable or Excellent audit results with the required evidence. This grants no cross-project rollout, dev-to-main promotion or fabricated qualification.
 
@@ -24,15 +24,11 @@ Shared skills preserve one work branch, authorized delivery, truthful cleanup an
 
 ## Why It Matters
 
-Misnamed branches hide unfinished work; published handoffs expose session context. Repair their shared owner.
+Repair shared causes of lost delivery and exposed handoffs.
 
 ## Current Verified State
 
-- Controls distinguish personal installation and local handoffs; [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) preserves pruning failures.
-- PRs59–66 target `main`. The [owner-ended attempt](../../../../wiki/history/S-011.md#owner-ended-failed-qualification) at candidatefbf581fe FAILED: size cores met, Runbook2845/ship481 output goals missed, three rounds incomplete; [prior failures](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md) remain. No qualification or benefit is established.
-- PR128 put the first-context RSI snapshot on dev12f8963; later outcomes are not yet graphed.
-
-History: [S-011 history](../../../../wiki/history/S-011.md).
+Controls distinguish personal installation and ignored handoffs. The owner-ended candidate fbf581fe failed qualification; the later per-PR round and merged/held candidates remain in [S-011 history](../../../../wiki/history/S-011.md). See the Next gate for current scoped continuation. Earlier failures and attempts remain evidence, not reset by this map. Whole destination acceptance is incomplete.
 
 ## Desired Behavior
 
@@ -54,7 +50,7 @@ History: [S-011 history](../../../../wiki/history/S-011.md).
 
 ### General loop delivery boundary
 
-For newly authorized campaigns, S-002's Mid/Small default and subscription-meter rules govern. The existing Terra-pinned series and stopped/held candidates retain their frozen conditions and attempt counts. A skill meeting existing Fitness/Alignment qualification at Stable/Excellent, useful-benefit and no-regression requirements may merge through the checked source workflow without an extra per-candidate owner merge gate. A level label or this Map alone cannot qualify a candidate. Personal installation retains its separately scoped authority; this mapping does not execute it or restart held work.
+New campaigns follow S-002's Mid/Small subscription-meter defaults; older Terra-pinned series, held candidates and attempt counts stay frozen. Qualified Stable/Excellent skills with useful benefit and no regression may merge through the checked source workflow without another owner merge gate. A level label or Map cannot qualify a candidate. Installation retains separately scoped authority; held work is not restarted.
 
 ## Non-Goals
 
@@ -81,15 +77,15 @@ The skills repository's process governs repair delivery. Candidate merge/install
 
 ## Testing Seams
 
-Controlled original/adverse skill exercises, Catalog and RUNBOOK checks, site render/data tests; native scorer/private persistence only with qualifying packets.
+Original/adverse exercises, catalog/RUNBOOK and site checks; scorer/persistence require qualifying packets.
 
 ## Verification Procedure
 
-`node workbench/tools/spec-workbench.mjs show S-011`; applicable RUNBOOK checks, exact skills candidate evidence and site build/tests at `dev` candidate.
+RUNBOOK checks, exact skill-candidate evidence and site build/tests on the dev candidate.
 
 ## Documentation Impact
 
-AGENTS/RUNBOOK own routing and installation authority; Wiki preserves corrections; Tasks and improvement record own proof. Public source links are safe summaries, not private skill text.
+AGENTS/RUNBOOK own authority; Wiki preserves corrections; Tasks own proof. Public evidence excludes private skill text.
 
 ## Review and Human QA
 
@@ -101,9 +97,7 @@ The prior attempt FAILED qualification and stays preserved; the owner resumed pe
 
 ## Remaining Limitations Or Follow-Up Specs
 
-Qualification, benefit, installation/use and protected deployment readback remain unestablished. TK-002 is in progress with source-author; TK-003 still waits on it. Draft PR publication supplies no lifecycle completion.
-
-[S-000A](../S-000A-skills-refocus/SPEC.md) separately maps the catalog-wide refocus. Preserve this Spec's repair, source drafts, attempts and merge/install gates; coordination of shared helpers grants no qualification or rollout authority.
+Remaining qualification, benefit, installation/use and presentation claims require their own receipts. Draft PRs do not complete the lifecycle. [S-000A](../S-000A-skills-refocus/SPEC.md) owns the catalog-wide refocus; this map neither restarts held repairs nor broadens installation authority.
 
 ## Supersession
 

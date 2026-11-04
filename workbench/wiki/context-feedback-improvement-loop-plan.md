@@ -14,13 +14,13 @@ last_verified: 2026-11-02
 
 ## Current mapped destination
 
-The 2026-11-03 owner answers and Map request below govern this revision. S-002 owns the complete RSI lifecycle; S-006 owns durable Supabase data, S-007 its public presentation, S-013 detection and S-011 shared-skill qualification/delivery. The Wiki preserves understanding so another session can recover it; Specs own the checkable destination. No new Spec or execution Task is created.
+The 2026-11-03 owner answers and Map request below govern this revision. LMK-004 owns the complete RSI Loop; S-002 owns evaluation/qualification, S-000B worker execution/recovery, and S-006 durable Supabase data, S-007 its public presentation, S-013 detection and S-011 shared-skill qualification/delivery. The Wiki preserves understanding so another session can recover it; Specs own the checkable destination. One planned worker Spec, S-000B, separates execution/recovery from evaluation. No execution Task is created.
 
 Supabase Free stores canonical worker-written cases, runs, candidates, comparisons and dispositions; Markdown remains canonical failure intake. The Python worker executes outside Supabase, initially locally; raw transcripts stay local/private. Safe Git exports are recovery copies, never a competing writable authority. Database scheduling/queues are implementation options, not a required service purchase. The host must be available to execute; database availability alone does not run agents.
 
 Mid/Small Codex or Claude workers use available subscription meters, High when needed. There is no API-dollar budget. The existing three-attempt limit, baseline exclusion, r1 Fitness/Alignment qualification, no-regression and useful-benefit requirements remain. A qualifying skill may merge; installation and stopped-campaign restart retain separate authority. Existing frozen campaign conditions remain pinned.
 
-Mapping is authorized and implementation is held. The next phase is Plan against the revised Specs; mapping neither prepares new Tasks nor activates existing held work. Worker invocation, meter-unavailable handling, High-tier selection and export mechanics must satisfy the contracts without inventing a budget or resetting attempts. The assembled earlier readback is not represented as confirmed wholesale.
+Mapping is authorized and implementation is held. The next phase is Plan against the revised Landmark and Specs; mapping neither prepares new Tasks nor activates existing held work. Worker invocation, meter-unavailable handling, High-tier selection and export mechanics must satisfy the contracts without inventing a budget or resetting attempts. The assembled earlier readback is not represented as confirmed wholesale.
 
 The earlier plan below is retained as provenance. Its ordering is not a new dependency requiring website completion before independent local evaluation; only an actually missing input blocks its consumer.
 
@@ -118,4 +118,17 @@ Topic: feedback-improvement-loop-plan
 Supersedes: none
 
 Owner confirmation and Map authorization, 2026-11-03. Kayden explicitly retains the existing attempt limit and confirms that useful-benefit requirements remain alongside Fitness and Alignment qualification. He requests this agent to map the destination now, not hand it off to Claude. A1/B1/C1/D1/D2/E1 answers in JOT-f2ce313b remain settled: Wiki explains intent and Specs own requirements; shared skills and Workbench controls/tools/instructions are RSI targets; Markdown owns failure intake; Supabase owns worker-written commit-pinned cases/runs/candidates/comparisons/dispositions; raw transcripts remain local/private, with safe derived fields and a Git-committed export. Codex/Claude run on available subscription meters, Mid/Small by default and High when needed; no API-dollar cap. Initial attempt -> retry -> retry -> stop, baseline excluded; repair/rename does not reset attempts. Qualified Stable/Excellent skills without regression may merge under existing checks and useful-benefit requirements; this does not grant installation, restart stopped campaigns or replace their frozen model conditions. Existing attempts are not an unresolved choice. S-002 remains lifecycle owner, S-006 data, S-007 presentation, S-013 detection, S-011 shared-skill delivery. This request authorizes Map and its normal documentation delivery only: no new Tasks, claims, model trials, backend changes, installation or deployment. The earlier assembled readback remains proposed; these sourced answers and the explicit mapping request supply the scope of this map.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-0968ba30-e2b1-4784-8df4-b887f76949f0
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:05:12.012Z
+Author: Kayden (captured by Codex)
+Source: Kayden's AMS chat, 2026-11-04, separation-of-concerns and RSI Landmark corrections
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+The owner permits more than one Spec for separation of concerns and identifies the RSI Loop as a LANDMARK. This supersedes the mapping interpretation that S-002 owns the whole lifecycle. Reuse LMK-004 as RSI Loop; S-002 owns evaluation/qualification, new planned S-000B worker execution/recovery, S-006 persistence, S-007 presentation, S-013 detection and S-011 source delivery. Cross-landmark links preserve existing placements and evidence. Mapping only, zero new Tasks; attempt and acceptance requirements remain unchanged.
 <!-- /jot-entry -->

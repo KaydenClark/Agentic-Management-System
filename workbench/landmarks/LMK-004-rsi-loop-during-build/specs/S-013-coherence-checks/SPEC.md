@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes this destination revision only. Existing execution approvals remain scoped; this Map creates no Tasks, runs, installation or deployment authority.
+The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes Map only; execution holds remain. No new Tasks or trials.
 
 The owner asked that the system stay coherent and nothing fall behind, with one orchestrator checking that the project stays up to Spec, and that the distance between `dev` and `main` be measured so a long-unmerged trunk does not happen again. Orchestrator C runs in a cloud session, works only through GitHub, holds no secrets and writes no product code.
 
@@ -28,16 +28,7 @@ An earlier Workbench let its development trunk run thousands of commits ahead of
 
 ## Current Verified State
 
-No criterion is checked off.
-
-- **Drift measured:** the drift check and report exist ([TK-001 receipt](tasks/TK-001/TASK.md#receipt)); the Grill Board item on breach is blocked ([TK-005](tasks/TK-005/TASK.md)).
-- **Up to Spec:** the check and an S-004 report exist ([TK-002 receipt](tasks/TK-002/TASK.md#receipt)).
-- **Skills in sync:** blocked on S-006 rows ([TK-003](tasks/TK-003/TASK.md)).
-- **Independent review:** the procedure and checker exist ([TK-004 receipt](tasks/TK-004/TASK.md#receipt)); the checker is not in the native verdict gate.
-- **No secrets:** no evidence recorded.
-- `doctor` reports structural findings. `dev` exists on the remote. RUNBOOK does not name the coherence commands.
-
-History: [S-013 history](../../../../wiki/history/S-013.md).
+No criterion is checked off. Drift and up-to-Spec checks exist ([TK-001](tasks/TK-001/TASK.md), [TK-002](tasks/TK-002/TASK.md)); Board breach reporting waits on TK-005 and skills sync on S-006 rows. Independent review tooling exists ([TK-004](tasks/TK-004/TASK.md)) but is not in the native verdict gate. Secret-free execution has no recorded proof. RUNBOOK lacks coherence commands. See [history](../../../../wiki/history/S-013.md).
 
 ## Desired Behavior
 
