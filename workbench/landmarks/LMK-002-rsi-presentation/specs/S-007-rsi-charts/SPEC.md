@@ -5,7 +5,7 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-03
+**Updated:** 2026-11-04
 **Catalog description:** Website pages that chart RSI results from Supabase, present and honestly empty from the first deploy, with every number linked to its rows.
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
@@ -44,6 +44,7 @@ History: [S-007 history](../../../../wiki/history/S-007.md).
 - Every trial number links to its rows on-site. Each row's strength label is shown. Relevant explanations and evidence stay on the site; omit irrelevant material and GitHub exits. Show real development comparisons visibly without inventing trial data.
 - **Headlines** come only from held-out tasks, with the interval and the baseline. An interval including zero reads as no difference detected at this size.
 - Synthetic or test rows never render.
+- **Skill trends** ([TK-002J](tasks/TK-002J/TASK.md)): one point per skill per RSI loop (the kept version's Alignment Score and fitness level), per skill and in a level-per-loop strip; Excellent is green. A contract or model change starts a new line.
 
 ## Decisions And Contracts
 
@@ -77,6 +78,7 @@ Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the 
 - [ ] **Every number links.** Each rendered trial number links to its rows on-site. *Check:* link coverage over trial numbers. *Must fail:* a bare number.
 - [ ] **Provenance and series.** Two models never share one trend line. *Must fail:* a model change drawn as a continuation.
 - [ ] **Not only up.** Regressions and variants are marked as such. *Must fail:* a timeline that hides a recorded regression.
+- [ ] **Skill trends.** *Must fail:* a contract or model change in one line, a point from a rejected attempt or High/Small run, or an invented loop.
 - [ ] **Held-out headlines.** A headline appears only from held-out rows, with its interval and baseline. *Must fail:* a dev-task number as a headline, or an interval including zero shown as improvement.
 - [ ] **No test rows.** A marked test row in the fixture never renders.
 
@@ -124,4 +126,4 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+Owner instruction, 2026-11-02, held in the [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md): TK-001F keeps its execution hold; earlier approvals and evidence keep their scope.

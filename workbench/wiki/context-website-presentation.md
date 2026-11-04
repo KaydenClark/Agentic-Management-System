@@ -355,3 +355,16 @@ Supersedes: none
 
 Kayden authorizes only the bounded navigation focus correction after draft PR148 stopped. Establish why phone keyboard focus leaves links partly clipped, guarantee full focus visibility and verify the80case matrix and affected browser checks before checked dev delivery. Preserve both failed attempts and exact geometry. This grants no blanket permission for future corrective runs or weakening checks, and no Human QA or production promotion. The earlier S-003 assignment remains the source for other already-approved Tasks; any later three-strike stop still needs its own authorization.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-5529977d-ad73-433f-9a3c-85dede8946ba
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T03:57:17.313Z
+Author: Kayden
+Source: Kayden, RSI Results prototype review and implementation approval in AMS chat, 2026-11-03
+Topic: website-presentation
+Supersedes: none
+
+For every skill the RSI loop works on, the RSI page shows whether RSI is actually improving it over time. Each RSI loop contributes one plotted point per skill: the Alignment Score of the version that loop kept, pooled over the deciding tier's runs, with its fitness level. Kayden chose two views from the prototypes: a per-skill line chart (one point per loop, a running average line, a fitness-level strip, and a visible break where a new test contract or model starts a new line) and a skills-by-loops Fitness level per loop strip. The High and Small tier runs stay visible per skill as secondary marks that never decide the point. Better colors are wanted: Excellent is green. Results are real recorded data; there are no more empty-looking results where real results exist. Kayden approved implementation through orchestrate.
+<!-- /jot-entry -->
