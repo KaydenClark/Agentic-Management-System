@@ -2,9 +2,9 @@
 
 ## Get oriented
 
-Check repo, branch, remote, locks and dirty state (`git status --short --branch`).
+Check branch, remotes, locks and dirt (`git status --short --branch`).
 Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
-[Wiki](workbench/wiki/MEMORY.md), Taskboard, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
+[Wiki](workbench/wiki/MEMORY.md), both trackers, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
 Planning also reads `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031`; copying here needs owner approval.
 
 ## Workflows
@@ -34,7 +34,7 @@ uv run ams-hygiene
 Repeat on a fresh candidate checkout. `site/`: `npm run build`, `npm test`.
 Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
-`uv run ams-board` (loopback). Other commands use `uv run`:
+`uv run ams-board` (loopback). Concepts: `node workbench/tools/landmark-tracker.mjs show --committed --json`; [Board procedure](grill-board/README.md). Other commands use `uv run`:
 
 - `ams-keycheck`; `ams-writer record-merge|readcheck SHA`
 - `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
@@ -52,7 +52,7 @@ Keep keys and `AMS_LIVE` out of CI.
 
 ## Delivery and recovery
 
-Commit coherent steps with what/why before exit; the [guard](.agents/hooks/require-committed.sh) checks dirt.
+Commit coherent steps with what/why; the [guard](.agents/hooks/require-committed.sh) checks dirt.
 Never commit to main, stash, reset or discard to clean.
 Merge current, checked non-site PRs into main with merge commits.
 Site: feature -> checked dev; only owner merges dev -> main.
@@ -63,6 +63,4 @@ Handoffs stay local and ignored in `workbench/sessions/handoffs/`; publish Tasks
 
 ## Clean up
 
-After Test And Build, use shared `land`: verify remote publication and containment;
-leave no owned dirty work. Keep unfinished work on its Spec Feature branch;
-report blockers and retained items.
+Use `land` after checks: verify publication/containment and no owned dirt. Retain unfinished Spec work; report blockers.

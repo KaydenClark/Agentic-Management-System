@@ -1,13 +1,11 @@
 # AMS - Architecture
 
-> Generated from LLM Workbench v3.2.2.
-
-**Last reviewed:** 2026-11-01
+**Last reviewed:** 2026-11-03
 **Status:** partial
 
 ## Bird's-Eye View
 
-AMS carries recorded intent into outcomes with AI on a Workbench. This project adds RSI to improve its reusable methods. [Blueprint](BLUEPRINT.md) owns the destination; AGENTS owns authority.
+AMS carries intent into outcomes with AI and uses RSI to improve its methods. [Blueprint](BLUEPRINT.md) owns the destination; AGENTS owns authority.
 
 ## Codemap
 
@@ -19,7 +17,7 @@ AMS carries recorded intent into outcomes with AI on a Workbench. This project a
 | `grill-board/` | Owner's [cards](grill-board/README.md), theme, QA; local `ams-board` only |
 | `evals/` | RSI eval tasks, results, comparisons |
 | `.agents/` | Commit hook and skill extensions (`.claude/skills` links here) |
-| Root files | The eight controls ([Ownership](#ownership)) |
+| Root files | Eight controls plus concept projection TRACKER.md |
 | `workbench/` | [Manifest](workbench/manifest.json) lanes: specs, landmarks, ADR/DDR, wiki, feedback, sessions, tools, research |
 
 ## Ownership
@@ -33,7 +31,8 @@ AMS carries recorded intent into outcomes with AI on a Workbench. This project a
 | Decisions | `workbench/docs/adr/`, `workbench/docs/ddr/` (`adr.mjs`) |
 | Language | [Glossary](GLOSSARY.md); Wiki explains |
 | Knowledge | [Wiki MEMORY](workbench/wiki/MEMORY.md) via `jot` |
-| Work view | [Taskboard](TASKBOARD.md), rendered from records |
+| Execution view | [Taskboard](TASKBOARD.md), from Landmarks, Specs and Tasks |
+| Concept view | [TRACKER.md](TRACKER.md), from stable DQCs; Board reads the same owners |
 | Procedures | [Runbook](RUNBOOK.md) -> named skill and tool |
 | Configuration | Manifest and `workbench/tools/` receipt |
 | Feedback | `workbench/feedback/` |
@@ -49,12 +48,11 @@ AMS carries recorded intent into outcomes with AI on a Workbench. This project a
 | Assigned work | `spec-workbench.mjs show S-###` |
 | Decision rationale | `adr.mjs list` -> record -> its owners |
 | Methods, layout | [SKILLS](workbench/docs/SKILLS.md), [structure](workbench/docs/WORKBENCH_STRUCTURE.md) |
-| Artifact choice | [Template inventory](workbench/research/template-inventory.md) |
 | Operations, recovery | [Runbook](RUNBOOK.md) |
 
 ## Invariants And Boundaries
 
-- Each claim has one owner; consumers link it. Taskboard and Wiki never set state or acceptance.
+- DQCs and execution owners link stable IDs in both directions; projections never set execution state or acceptance.
 - A manifest declares, a receipt records, a template shapes and code behaves; none proves another.
 - Review and Human QA are recorded only when performed on identified content.
 - Website claims separate planned, observed and repeated behavior; publish only safe evidence.

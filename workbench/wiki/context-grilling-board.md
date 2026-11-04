@@ -11,6 +11,8 @@ last_verified: 2026-11-04
 
 # Grilling Board and DQC-backed intent
 
+Current concept owner: [DQC-000A](../landmark-tracker/destination-questions/DQC-000A.json), retaining the exact confirmed readback. [TRACKER.md](../../TRACKER.md) projects concepts; [TASKBOARD.md](../../TASKBOARD.md) projects execution. [S-004](../landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) owns current implementation evidence and remaining gates; the [Board guide](../../grill-board/README.md) owns use. Dated entries below retain sources, corrections and verification limits.
+
 Captured context. Claim labels preserve intent and uncertainty; capture alone supplies neither Canon nor implementation proof. The date above checks this page's capture format, not every claim.
 
 <!-- jot-entry -->
@@ -291,4 +293,67 @@ The tracker is available in AMS and included in reusable setup-workbench support
 After confirmation, preserve this exact readback as the authoritative intent, establish the supported AMS tracker and initial DQCs, and carry the requested tracker and DQC-backed Board lifecycle through the project’s Map, Plan and implementation workflow. Add reusable tracker support in the setup-workbench source in the shared skills catalog, preserving unrelated work and existing source decisions except where this confirmed concept supersedes them.
 
 Verify stable references in both directions, exact readback/history preservation, consistent chat and Board updates, round continuation, conflict refusal and persistence, and tracker availability through setup-workbench. Publish checked AMS non-site work under the standing publication authority. Shared-skill candidates retain their required qualification and delivery gates; changing the installed personal catalog requires separate explicit installation authority. Stop at verified delivery and report any incomplete checks or owner-only acceptance gates; do not claim Human QA or deploy the public website.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-285d9127-f10b-4928-b302-23131f2f42fe
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T03:20:26.301Z
+Author: Kayden
+Source: Kayden direct AMS implementation instruction, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+## Implementation authorization and source ownership
+
+Kayden, AMS chat, 2026-11-03 America/Denver: "Go ahead and implement the grilling board as we confirmed, including TRACKER.md, the DQC lifecycle, and setup-workbench support. Preserve the existing work and carry it through verification and delivery." The owner explicitly invoked orchestrate, carry and explore-kb.
+
+This continues the confirmed intent JOT-af34e4a9-efdf-4688-91d9-0c2d2b0685ba under S-004 (Grill Board cards and answers), including reusable setup-workbench source work in KaydenClark/skills and the supported AMS managed-tool update. Confirmation of meaning is already recorded; this instruction provides execution authorization for this scope. S-004's new bounded Tasks will own implementation and proof; this capture supplies no success, Review, Human QA, release or personal-catalog installation claim.
+
+Read-only source recovery: main 1a11f25 retains the committed-card Board. PR156 merged e575ea44 into Feature/s004-owner-queue-gap, not main; preserve that candidate and its unrelated dirty Wiki edit. Its refresh and transaction behaviors are reusable, but owner-request fences are not DQCs. The existing native tracker lacks a declared AMS root and a root TRACKER.md projection; revision comparisons are not locks and changed wording can retain old confirmation. Repair these through the setup-workbench source package, preserving installed personal skills. Board and terminal must use the same supported owning operations, with safe conflict refusal and exact readback history.
+
+Current implementation branch: Feature/S-004-dqc-grilling-board. Prior S-004 candidates and stopped/private evaluation work remain preserved, without reopening unrelated campaigns. Next: extend S-004 destination and prepare bounded Tasks for native tracker/setup availability and the Python DQC Board, then dispatch implementors. Independent assembled Review and actual owner Human QA remain distinct.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-9245c539-d484-47e8-b0ab-edfa359f3f0b
+Kind: verification
+State: current
+Recorded: 2026-11-04T04:10:01.234Z
+Author: Codex
+Source: AMS tracker verification and scoped TK-002H handback, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+## Native tracker availability and current intent route
+
+Verified on 2026-11-03 America/Denver at AMS f833633, with native closure f16d7d4. DQC-000A (Grilling Board purpose and confirmed lifecycle) is now the concept owner: [stable record](../landmark-tracker/destination-questions/DQC-000A.json). Its proposal, immutable confirmation snapshot and primary answer match the exact four-section readback in JOT-af34e4a9 byte for byte. That Jot remains the original confirmation source, rather than a competing evolving concept copy.
+
+DQC-000B (what belongs), DQC-000C (question/answer flow) and DQC-000D (keeping current) preserve initial branches as source-linked, pending, non-actionable context. No newly paraphrased branch answer was marked confirmed or presented as a fresh owner question.
+
+TRACKER.md projects those owners; TASKBOARD.md projects execution. Stable related IDs connect the actual LMK-001, S-004 and its qualified Tasks, whose records link back to DQC-000A. Current execution/proof stays in [S-004](../landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md).
+
+Reusable source was delivered in skills PR68 and PR69 at reviewed heads fde0090 and 2f9d45a; package f38e2b3e15caa7e883e1bcca424c17a2da34bd66cb164f4865d6972894c40658 is installed through the supported AMS tool-update route with authentic receipt and ignored recovery. The installed personal catalog remains unchanged. [Native procedure](https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md) owns capture, exact confirmation, corrections, quality feedback, round review and sourced continuation. Source existence and native checks do not establish the Python Board UI or Human QA.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-dff5acbf-ebb7-480b-aa52-799019ca0fdb
+Kind: verification
+State: current
+Recorded: 2026-11-04T05:07:50.468Z
+Author: Codex
+Source: AMS inspected Board handbacks and exact-candidate CI, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+## Verified Board and shared lifecycle
+
+Implementation candidate 9d1a8ab contains the Python DQC Board and natively closed H/I/K Tasks. The actual concept remains DQC-000A: full proposed/confirmed readback, exact history/source/scope and stable links to LMK-001/S-004/qualified Tasks. Context branches B/C/D remain unconfirmed and non-actionable. The Board groups concepts, keeps dependency/agent-rewrite holds out of the ready frontier, preserves legacy records, and exposes actual history and round review.
+
+Terminal and web actions call the same native transaction contract. Complete readbacks have safe semantic headings while underlying exact text stays unchanged. Unknown save receipts retain the original event/submission for exact retry; tests compare saved/replayed notes with actual browser POST bytes. Round continuation was exercised through web input, owner finish, an actual disposable Wiki commit, native sourced reconciliation and a next proposal appearing through refresh. Agent processing still requires its existing scope; a finished round is not autonomous implementation authority.
+
+Native setup source PR68/69/70 is merged. Supported AMS package 8c3b46b064ac4d5f209a4d7ea80247bc2abe3367d2dd04261e4710b26934b65c has authentic receipt, preserved provenance and ignored recovery. Both independent axes verified source/consumption fixes and exact owner-data preservation. Current native help and the [Board guide](../../grill-board/README.md) reach the real procedure. The installed personal catalog remains unchanged; published setup support is not claimed installed there.
+
+[Exact CI at d760635](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/41776062954) passed 839 tests/6 skips and10 browser checks, including 375/1280 dark/light, plus range whitespace, hygiene, layout and ADR/render. Later closure changes are records only; final assembled Review and main containment are still required before claiming delivery. Actual owner Human QA and Spec acceptance remain unperformed. Existing recovery/other worktrees are retained; Task owners distinguish the incomplete original-root prelude from genuine complete pre-edit isolated-workspace baselines.
 <!-- /jot-entry -->

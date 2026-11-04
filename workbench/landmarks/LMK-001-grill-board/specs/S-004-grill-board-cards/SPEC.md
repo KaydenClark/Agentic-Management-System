@@ -1,56 +1,37 @@
 # S-004 - Grill Board cards and answers
 
 **Spec ID:** S-004
+**Concept source:** [DQC-000A](../../../../landmark-tracker/destination-questions/DQC-000A.json) — confirmed Grilling Board lifecycle.
 **Status:** active
 **Priority:** 1
-**Owner:** Kayden; orchestrator B (local)
+**Owner:** Kayden; codex-s004-director
 **Stance:** Builder
-**Updated:** 2026-11-01
-**Catalog description:** Local Grill Board cards with Priority, Value, a rating and a "too taxing" flag, whose confirmed answers are written straight into their owning records.
+**Updated:** 2026-11-04
+**Catalog description:** Local DQC readback cards and TRACKER.md, with shared actions and stable execution links.
 **Blockers:** none
-**Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Owner approval and Human QA, then complete; this supplies no Spec activation slot.
+**Confirmation:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
+**Execution approval:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
+**Next gate:** Confirm acceptance criteria and completion result.
 
 ## Intent and authority
 
-The owner named "make the Grill Board cards" as an LMK-001 Spec and confirmed the card rules on 2026-11-01. Orchestrator B builds locally, holds the only Supabase keys and never deploys.
+The [confirmed readback](../../../../wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba) and cited execution instruction authorize both lanes, full-readback cards, TRACKER.md, reusable setup support and checked delivery. Preserve earlier proof and decisions except where explicitly superseded. No paid services, website deployment or installed personal-catalog replacement.
 
 ## Outcome
 
-One local page shows every item waiting on the owner, sorted by the owner's signals. Answering an item updates its owning record.
+One local Python Board presents current DQCs as complete readback questions. Board and terminal actions update the same stable concept records, while TRACKER.md follows intent through execution records that remain owned by Landmarks, Specs and Tasks.
 
 ## Why It Matters
 
-Priority and Value are how the owner decides what needs attention. Costly questions waste the scarcest input, so the owner can flag them for rewrite.
+Owner attention is scarce. Exact intent, separate Priority/Value and quality feedback keep questions usable and connected to outcomes.
 
 ## Current Verified State
 
-- Met: every acceptance criterion, each at its linked evidence (TK-001 to TK-000J).
-- Review: passed at `4d49bfc` (Orchestrator C); proof in [S-004 history](../../../../wiki/history/S-004.md).
-- Not met: owner approval and Human QA.
+[H](tasks/TK-002H/TASK.md) proves tracker/setup and exact initial DQCs; [I](tasks/TK-002I/TASK.md) proves the Python Board; [K](tasks/TK-002K/TASK.md) proves the source-generator correction. CI d760635 passes839/6skip and10browser checks. [History](../../../../wiki/history/S-004.md) owns actual reviews/receipts; owner Human QA remains unperformed. Prior candidates/recovery stay preserved.
 
-History: [S-004 history](../../../../wiki/history/S-004.md).
+## Desired Behavior And Contracts
 
-## Desired Behavior
-
-- A local Python server reads durable records and is never the record.
-- Agents post only items needing an answer (owner gates, open choices, page approvals, decision texts), never routine content or drafts.
-- Each card shows Priority and Value with one-line reasons, a 1-5 rating and a one-click "too taxing" flag; a flagged card is rewritten before it is re-asked.
-- A confirmed answer goes straight into its owning record, with no re-confirmation.
-- Flags, ratings and comments are committed records the loop reads.
-- A write refuses a target changed since it was read; nothing is deleted or renumbered.
-- Each color is a signal with one stated meaning.
-- It matches the owner's "Grilling Board Redesign" artifact, dark and light, loading nothing from other hosts.
-
-## Decisions And Contracts
-
-- Board decisions are tracked apart from delivery (Specs, Tasks).
-- The board is local only; Vercel never serves it.
-- Card Context is a note of at most 1,000 characters with no heading or `---` line; else it is refused as page content (TK-000I).
-- Card data is plain files in Git; an answer lands in its owning record.
-- An owning record is a `.md` file under `workbench/` `specs/`, `landmarks/`, `docs/adr/`, `docs/ddr/` or `wiki/`, or `grill-board/page-approvals.md`; any other path is refused (TK-000G).
-- The theme follows the artifact; tokens live in `grill-board/theme/tokens.json` ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
+The acceptance and confirmed readback own behavior. DQCs own concepts; execution records own work. Full DQC readbacks supersede the old context limit; no page editor. Preserve legacy data and [DDR-000Y theme](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md). Reusable source belongs in KaydenClark/skills; supported updates own managed bytes/receipts. No installed-skill changes or authority inferred from round completion.
 
 ## Non-Goals
 
@@ -63,21 +44,27 @@ History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Vertical Implementation Slices
 
-Each Task is one run landed on `main` by a checked PR.
+TK-002K repairs the review-found generated whitespace through the source package before assembly delivery.
+
+TK-002H delivers native tracker/setup and AMS update; TK-002I consumes its API for the Python Board. Serialize writers on Feature/S-004-dqc-grilling-board. Catalog source uses an isolated checkout and independent PR. Both include checks/QA; assembled Review follows.
+
+Checked Task delivery targets `main`.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
 
 ## Acceptance Criteria
 
-- [x] **Signals on every card.** Every card shows Priority and Value with a one-line reason each. *Check:* render a fixture card set. *Must fail:* a card with a grade and no reason. *Evidence:* [board] (TK-001, PR #16).
-- [x] **Answer lands in its owner.** Confirming an answer changes the owning record and needs no second confirmation. *Check:* test against a fixture record. *Must fail:* an answer that only changes board state. *Evidence:* [answers] (TK-000G, 3e557c0).
-- [x] **Conflict refusal.** A write against a record changed since it was read is refused and nothing is written. *Must fail:* a silent overwrite. *Evidence:* [answers] (TK-002).
-- [x] **Rating and flag.** A 1-5 rating and a "too taxing" flag are each one click and saved as committed records. A flagged card cannot be re-asked unchanged. *Must fail:* a flagged card re-posted with the same text. *Evidence:* [ratings] (TK-003; TK-000H, 0356d08).
-- [x] **Not a drafting surface.** The board offers no editor for pages or routine content. *Must fail:* a page draft posted as a card. *Evidence:* [ratings] (TK-000I, a06d530).
-- [x] **Colors mean one thing.** Each color has one documented meaning used consistently. *Must fail:* one color used for two meanings. *Evidence:* [theme] (TK-004, PR #24).
-- [x] **Local only.** The board starts with one documented local command and no Vercel deployment serves it. *Evidence:* [board].
-- [x] **Looks like the artifact.** Layout, formatting and colors match the artifact, dark and light. *Check:* served tokens equal `grill-board/theme/tokens.json`; side-by-side screenshots in `grill-board/qa/`; no third-party request; 375px holds. *Must fail:* a drifted token or a third-party resource. *Evidence:* [theme], [qa shots], [375px] (TK-000J, 00b0aa0).
+Historical committed-card evidence remains valid for that candidate, not the new DQC lifecycle:
+
+- [x] **Signals on every card.** Separate Priority/Value grades and reasons; missing reasons refuse. Evidence: [board], TK-001.
+- [x] **Answer lands in its owner.** Confirm writes the exact answer with no second confirmation. Evidence: [answers], TK-000G.
+- [x] **Conflict refusal.** Stale writes refuse without changing files. Evidence: [answers], TK-002.
+- [x] **Rating and flag.** Committed 1-5 ratings and Too taxing; unchanged flagged questions cannot return. Evidence: [ratings], TK-003/TK-000H.
+- [x] **Not a drafting surface.** No routine page editor; legacy page-shaped cards refuse. Complete DQC readbacks are now explicitly allowed. Evidence: [ratings], TK-000I; new behavior remains below.
+- [x] **Colors mean one thing.** Token values and meaning are consistent. Evidence: [theme], TK-004.
+- [x] **Local only.** One local Python command, no hosted Board. Evidence: [board].
+- [x] **Looks like the artifact.** Dark/light, local assets and 375px controls. Evidence: [theme], [qa shots], [375px], TK-000J.
 
 [board]: ../../../../../tests/test_grill_board.py
 [answers]: ../../../../../tests/test_grill_board_answers.py
@@ -86,37 +73,29 @@ Each Task is one run landed on `main` by a checked PR.
 [qa shots]: ../../../../../grill-board/qa/
 [375px]: ../../../../../tests/test_grill_board_phone.py
 
-## RSI and website connection
+### DQC lifecycle acceptance
 
-A low-rated or flagged question is a failed result the loop may study (S-002). The demo (S-009) shows the board with sample cards.
+- [x] **Initial capture and setup.** Create/Adopt/explicit Update yields usable DQCs and deterministic root TRACKER.md. Initial interview branches have stable IDs; existing schema/declarations remain readable. A bundled-but-unusable tool fails. Evidence: [TK-002H](tasks/TK-002H/TASK.md).
+- [x] **Complete readback.** Cards show question, why, full proposal, source, revision, separate Priority/Value reasons and state. Confirm binds displayed bytes; corrections/quality feedback preserve owner words without invented confirmation. Evidence: [I](tasks/TK-002I/TASK.md).
+- [x] **One safe lifecycle.** CLI/web preserve exact confirmed versions, source/scope, corrections, ratings and flags across retry/restart. Stale/concurrent/failed writes cannot overwrite or partially save; pending wording never inherits confirmation. Evidence: [I](tasks/TK-002I/TASK.md).
+- [x] **Round continuation.** Review every changed DQC and quality event; retain unanswered/dependent questions. Reconciliation links actual Wiki/docs revisions, authorized preparation or next frontier. A count without continuation fails. Evidence: [I](tasks/TK-002I/TASK.md).
+- [x] **Connected lanes.** DQCs and execution owners reference stable IDs in both directions, including qualified Tasks. Show deferral, supersession, outcome evidence and affected reopening without duplicating execution authority. Evidence: [TK-002H](tasks/TK-002H/TASK.md).
+- [x] **Usable current Board.** Refresh new/revised/resolved DQCs without manual preparation; preserve typing, returned notes and history. Origin/escaping/local-only protections and 375px dark/light controls hold. Legacy records and protected worktrees remain intact. Evidence: [I](tasks/TK-002I/TASK.md).
+- [x] **Verified delivery.** Source setup/update compatibility, preservation and recovery pass; AMS consumes authentic package receipts. Applicable source gates identify exact candidates. Personal catalog is unchanged; agent checks supply no Human QA. Evidence: [I](tasks/TK-002I/TASK.md). [K](tasks/TK-002K/TASK.md).
 
-## Testing Seams
+## Verification And Documentation
 
-- The server's HTTP interface on fixture records in a temporary Git repository.
+Use disposable Git projects at native CLI, Python HTTP and browser seams. Run RUNBOOK checks, supported setup Create/Adopt/Update/recovery and package/receipt verification. Exercise complete readbacks, round feedback, stable references, retry/stale/concurrent failure, refresh/restart, preserved data and 375px dark/light UI. Bind evidence to exact revisions; include a fresh candidate checkout.
 
-## Verification Procedure
-
-```bash
-node workbench/tools/spec-workbench.mjs show S-004
-uv run pytest
-uv run --with playwright pytest tests/test_grill_board_phone.py
-```
-
-## Documentation Impact
-
-- RUNBOOK: the start command. `grill-board/README.md`: format, theme, QA.
+Maintain RUNBOOK, ARCHITECTURE, Wiki and grill-board/README with actual tracker ownership/commands and update identity. Package references/templates cover fresh/existing projects. Quality feedback remains RSI input; S-005 owns page-review features, S-009 the public demo.
 
 ## Review and Human QA
 
-Human QA is the owner using the board on real items.
+Independent assembled Review covers the new immutable candidate after implementor QA. Human QA is the owner using the board on real items; it is not supplied by agent browser checks.
 
 ## Completion Result
 
-Pending.
-
-## Remaining Limitations Or Follow-Up Specs
-
-- S-005 adds page review cards on this board.
+Implementation and source publication are verified in H/I/K; History owns delivery receipts. Owner Human QA and Spec acceptance remain unperformed.
 
 ## Supersession
 
