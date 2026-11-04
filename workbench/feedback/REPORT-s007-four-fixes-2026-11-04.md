@@ -25,6 +25,13 @@ Skill context: installed Journey Check procedure and TDD; no skill-source defect
 | I-002 | Run repository hygiene through uv | Restricted DNS blocked Python dependency download (`iniconfig`); hygiene did not run in that invocation | Install locked dependencies through approved network access, then execute the unchanged check. Approved sync succeeded and hygiene reported zero findings | diagnostic; environment restriction, no skill repair claimed |
 | I-003 | Apply documentation patch | A README line fragment did not match the full existing line; the atomic patch applied nothing | Read back current bytes, make the exact bounded replacement and verify the diff. Corrected replacement preserved surrounding text | diagnostic; editing invocation, no skill repair claimed |
 
+| I-004 | Invoke hygiene with default uv cache | Default cache was outside writable roots; no hygiene check executed | Reuse the task-local UV_CACHE_DIR already established; unchanged check then passes | diagnostic; local invocation |
+| I-005 | Full Python repository verification | 810 passed, 4 skipped, 1 failed: native claim expanded S-007 Next gate enough to exceed the 8000-character record limit (8026) | Keep the Task-owned next-gate field concise without dropping requirements; then rerun repository hygiene and full suite on a fresh checkout. This is a current Journey Check failure, not a historical attribution | test; S-007 TK-002L |
+
+## Publication blocker
+
+Automatic approval review denied the public push of product commit `4e3aa13`: implementation was authorized, but the reviewer requires explicit public-publication approval. The earlier native claim was pushed as `7af73e7`; subsequent product changes were not pushed. No connector or indirect workaround was attempted. Retain local commits, finish local checks, and request approval for push, PR and checked dev merge. No owner QA or production promotion.
+
 ## Verification and limits
 
 `node --test tests/rsi-repairs.test.mjs tests/rsi-rows.test.mjs`: 20 passed after repair, versus four new expected red tests before it. Production build and `npm test`: 266 passed. Browser contrast check passes light/manual-dark/system-dark including a deliberately broken solid-fill negative control; run-only fixtures visible without overflow at 375/1280 in both themes. Actual results, availability and run failures remain review-hash-bound. Test runs are excluded; result-backed failures stay on their existing point.
