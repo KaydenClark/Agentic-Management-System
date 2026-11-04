@@ -194,3 +194,54 @@ Kayden explicitly adopted the following standing instruction in the AMS chat, 20
 
 This grants the stated publication and checked non-site merge scope. It does not confirm the pending Grilling Board concept readback, approve Human QA, activate implementation of the DQC lifecycle, or authorize website dev-to-main promotion. Earlier publication-hold entries remain historical; their missing explicit public-disclosure authorization is resolved by this owner statement. The requested current delivery includes this documentation branch and the eligible PRs actually raised in this chat, preserving each existing target and any failed checks or product-acceptance limits.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-f2c3dca4-ca5a-4d36-9aeb-6d8018d79471
+Kind: proposal
+State: unresolved
+Recorded: 2026-11-04T03:09:12.803Z
+Author: Codex
+Source: Kayden AMS align-concept answers and tracker request, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+## Owner answers and expanded scope
+
+Source: Kayden, AMS align-concept chat, 2026-11-03 America/Denver. The owner answered the three remaining frontier questions:
+
+1. "Yes, the card on the grilling board should basically be a question laid out like a readback, so I can confirm the suggested answer, or correct it."
+2. "Yes" to reviewing confirmations, corrections, comments, ratings and Too taxing flags at round completion, carrying unanswered questions and dependencies into the next round without treating feedback as confirmation.
+3. "Yes, there are two lanes in the AMS, execution and concept. the TASKBOARD.md tracks the execution through landmarks, specs, and tasks. The TRACKER.md tracks my intent and cocncepts as they develop and move through the taskbaord. So LANDMARKS, SPECs, and TASKs should be referencing the DQC by its stable ID. and DQCs can do the same for the others."
+
+The owner additionally requested: "We need to create the tracker, and add it to setup workbench."
+
+These answers settle the frontier choices and request the implementation scope. They do not constitute explicit confirmation of the newly assembled readback below. The earlier pending readback remains historical and unconfirmed. This revision incorporates the two lanes and requested reusable setup support. No tracker, Board or setup-package change has been executed by this capture.
+
+## Revised readback — pending confirmation
+
+**Summary**
+
+AMS has two connected lanes. TASKBOARD.md tracks execution through Landmarks, Specs and Tasks. TRACKER.md tracks intent and concepts through stable Destination Question Cards (DQCs), including how those concepts develop and move through execution. Execution records reference their originating DQCs by stable ID; DQCs can reference the corresponding Landmarks, Specs and Tasks.
+
+DQCs are created when the interview starts: its main branches become initial DQCs. Each Grilling Board card is a view of its DQC, presenting a question laid out as a complete readback with a suggested answer that the owner can confirm or correct. Existing DQCs evolve as understanding changes; distinct new decisions receive new DQCs.
+
+**The why**
+
+Questions, reasons, confirmed concepts and resulting work must remain connected. The owner should be able to inspect and answer a complete proposal on the Board, while agents can recover what was actually confirmed and follow it through delivery without reconstructing scattered chats or maintaining competing copies.
+
+**The intended result**
+
+The exact confirmed readback is preserved on its DQC with its confirmation source and scope. Earlier wording, owner corrections, reasons and confirmed versions remain recoverable. Pending revisions retain their own status and do not inherit earlier confirmation.
+
+Chat and Board actions reach the same DQC records. When the owner finishes a round, the agent reviews every changed DQC, including answers and question-quality feedback; updates the Wiki and owning documents with confirmed and approved understanding; and either proceeds to authorized preparation or presents the next interview frontier. Unanswered questions and dependencies carry forward.
+
+DQCs remain traceable through preparation, implementation, verification and delivery, including deferral, supersession and reopening affected understanding after correction. Execution state and proof remain in their execution owners. Concept confirmation, execution authorization, Review, Human QA and publication remain distinct.
+
+The tracker is available in AMS and included in reusable setup-workbench support. The Board remains local and Python-based, with complete question readbacks replacing the current card-context restriction that prevents them.
+
+**What I will do**
+
+After confirmation, preserve this exact readback as the authoritative intent, establish the supported AMS tracker and initial DQCs, and carry the requested tracker and DQC-backed Board lifecycle through the project’s Map, Plan and implementation workflow. Add reusable tracker support in the setup-workbench source in the shared skills catalog, preserving unrelated work and existing source decisions except where this confirmed concept supersedes them.
+
+Verify stable references in both directions, exact readback/history preservation, consistent chat and Board updates, round continuation, conflict refusal and persistence, and tracker availability through setup-workbench. Publish checked AMS non-site work under the standing publication authority. Shared-skill candidates retain their required qualification and delivery gates; changing the installed personal catalog requires separate explicit installation authority. Stop at verified delivery and report any incomplete checks or owner-only acceptance gates; do not claim Human QA or deploy the public website.
+<!-- /jot-entry -->
