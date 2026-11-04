@@ -374,3 +374,29 @@ AMS PR161 merged as 3fea0317a9bf7a138de5d06ea6e86b592c151572. Freshly fetched or
 
 DQC-000A now records that delivered result while its answer, confirmation and full lifecycle remain unchanged. Native landing history records main containment; source questions and original confirmations are not rewritten as acceptance. The local Board is implemented; actual owner Human QA and Spec acceptance remain unperformed. The installed personal catalog, protected prior worktrees and recovery metadata remain preserved. Subsequent record-only publication and postintegration inventory are reported separately from this code delivery.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-c9dcebb6-4d50-4d6d-95d7-30d723d66d53
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T05:41:46.638Z
+Author: Codex
+Source: Kayden direct correction in AMS chat, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+Kayden clarified that the Too taxing button is the orchestration tax signal: it tells the agent that the card added to their orchestration tax rather than lowered it. These are the same feedback, not separate controls. The existing hold-for-rewrite behavior remains. Kayden also directed that the supplied Grilling Board Redesign HTML is the design reference and that its search, filters, batch actions and other dashboard controls must function, not merely appear functional. This correction records owner intent; it is not evidence of implementation or acceptance.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-e851c4cf-c545-440a-b8a6-e1d478900077
+Kind: observation
+State: current
+Recorded: 2026-11-04T05:46:25.972Z
+Author: Codex
+Source: LLM_Workbench integration 9d5e1f25b0d5870589ae1c5752f27f42acb796ef, Board README, answer controls, batch procedure, DDR-001L and DDR-001O
+Topic: grilling-board
+Supersedes: none
+
+LLM_Workbench source recovery, 2026-11-03: The Grill Board is the question-answering section of one local Workbench Dashboard, intended to reduce owner orchestration by putting context and actual proposed text beside decisions. The five sections are Destination Tracker (Landmarks and DQCs), Taskboard (Specs and Tasks), Grilling Board, Drafts to approve, and Wiki; other sections project their existing owners rather than create a new source of truth. The Board groups questions by topic and supports an owner-selected queue: independent Priority and Value filters, plus decision kind, workflow stage and destination scale where the source data supports them. Grades remain separate and have accessible reasons. Search and batch selection operate on real items; a batch is not an automatic recommended batch. Cards carry current understanding, full proposal, why, consequences, sources and revision/history; read existing answers before asking again. Confirm binds the displayed revision and exact approved content; Rework wording, Change the why and Change preserve the owner note and do not confirm replacement wording. An unanswered question remains pending. Source revisions and owner answers remain recoverable; agents route answers to real owners, reassess affected Priority and Value, and keep confirmation distinct from execution and publication. Source reader and drafts distinguish current text from proposals. The producer implements APIs and a local dashboard service; source inspection alone does not prove every destination feature is delivered. AMS must adapt these behaviors to its existing native DQC and execution owners rather than install a competing answer store; existing conflict and retry protections remain. The supplied Grilling Board Redesign HTML is the visual reference; AMS implementation and owner QA remain open.
+<!-- /jot-entry -->
