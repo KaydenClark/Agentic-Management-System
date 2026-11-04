@@ -31,6 +31,12 @@ This routing clarification is not proof that the systemic failure is fixed.
 | Improve a demonstrated harness gap | improve-workbench |
 | Author a reusable skill | author-skill |
 
+## Concept lifecycle
+
+TRACKER.md and Grilling Board cards project stable DQCs; TASKBOARD.md projects execution. Capture interview branches before asking, preserve the exact confirmed readback, and link execution owners by stable ID in both directions. Native CLI and Python Board share owning operations; never edit a second question store. After the owner finishes a round, review every changed DQC and feedback item, perform authorized Wiki/docs reconciliation or preparation, and record the next frontier with actual source revisions. Round completion grants no additional execution authority.
+
+Use the [delivered native procedure](https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md) and [project Board guide](../../grill-board/README.md). A personal-catalog source merge does not update the active installation. Preserve the [confirmed meaning](../wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba), sourced corrections and actual publication state.
+
 ## Runtime
 
 From the project root, inspect with

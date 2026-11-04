@@ -313,3 +313,24 @@ Read-only source recovery: main 1a11f25 retains the committed-card Board. PR156 
 
 Current implementation branch: Feature/S-004-dqc-grilling-board. Prior S-004 candidates and stopped/private evaluation work remain preserved, without reopening unrelated campaigns. Next: extend S-004 destination and prepare bounded Tasks for native tracker/setup availability and the Python DQC Board, then dispatch implementors. Independent assembled Review and actual owner Human QA remain distinct.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-9245c539-d484-47e8-b0ab-edfa359f3f0b
+Kind: verification
+State: current
+Recorded: 2026-11-04T04:10:01.234Z
+Author: Codex
+Source: AMS tracker verification and scoped TK-002H handback, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+## Native tracker availability and current intent route
+
+Verified on 2026-11-03 America/Denver at AMS f833633, with native closure f16d7d4. DQC-000A (Grilling Board purpose and confirmed lifecycle) is now the concept owner: [stable record](../landmark-tracker/destination-questions/DQC-000A.json). Its proposal, immutable confirmation snapshot and primary answer match the exact four-section readback in JOT-af34e4a9 byte for byte. That Jot remains the original confirmation source, rather than a competing evolving concept copy.
+
+DQC-000B (what belongs), DQC-000C (question/answer flow) and DQC-000D (keeping current) preserve initial branches as source-linked, pending, non-actionable context. No newly paraphrased branch answer was marked confirmed or presented as a fresh owner question.
+
+TRACKER.md projects those owners; TASKBOARD.md projects execution. Stable related IDs connect the actual LMK-001, S-004 and its qualified Tasks, whose records link back to DQC-000A. Current execution/proof stays in [S-004](../landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md).
+
+Reusable source was delivered in skills PR68 and PR69 at reviewed heads fde0090 and 2f9d45a; package f38e2b3e15caa7e883e1bcca424c17a2da34bd66cb164f4865d6972894c40658 is installed through the supported AMS tool-update route with authentic receipt and ignored recovery. The installed personal catalog remains unchanged. [Native procedure](https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md) owns capture, exact confirmation, corrections, quality feedback, round review and sourced continuation. Source existence and native checks do not establish the Python Board UI or Human QA.
+<!-- /jot-entry -->
