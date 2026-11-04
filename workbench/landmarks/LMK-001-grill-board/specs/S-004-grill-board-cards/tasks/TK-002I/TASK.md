@@ -2,6 +2,7 @@
 
 **Task ID:** TK-002I
 **Spec ID:** S-004
+**Concept source:** [DQC-000A](../../../../../../landmark-tracker/destination-questions/DQC-000A.json) — confirmed Grilling Board lifecycle.
 **Slice:** The owner answers current DQCs and continues a Board round
 **Status:** ready
 **Blockers:** TK-002H

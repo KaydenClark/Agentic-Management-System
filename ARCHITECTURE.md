@@ -32,7 +32,7 @@ AMS carries intent into outcomes with AI and uses RSI to improve its methods. [B
 | Language | [Glossary](GLOSSARY.md); Wiki explains |
 | Knowledge | [Wiki MEMORY](workbench/wiki/MEMORY.md) via `jot` |
 | Execution view | [Taskboard](TASKBOARD.md), from Landmarks, Specs and Tasks |
-| Concept view | TRACKER.md, from stable DQCs; Board reads the same owners |
+| Concept view | [TRACKER.md](TRACKER.md), from stable DQCs; Board reads the same owners |
 | Procedures | [Runbook](RUNBOOK.md) -> named skill and tool |
 | Configuration | Manifest and `workbench/tools/` receipt |
 | Feedback | `workbench/feedback/` |

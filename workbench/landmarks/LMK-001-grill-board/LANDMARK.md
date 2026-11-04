@@ -1,6 +1,7 @@
 # LMK-001 - Grill Board
 
 **Landmark ID:** LMK-001
+**Concept source:** [DQC-000A](../../landmark-tracker/destination-questions/DQC-000A.json) — confirmed Grilling Board lifecycle.
 **Status:** planned
 **Priority:** 1
 **Owner:** Kayden

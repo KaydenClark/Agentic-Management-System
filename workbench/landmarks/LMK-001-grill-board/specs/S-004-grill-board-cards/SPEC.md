@@ -1,6 +1,7 @@
 # S-004 - Grill Board cards and answers
 
 **Spec ID:** S-004
+**Concept source:** [DQC-000A](../../../../landmark-tracker/destination-questions/DQC-000A.json) — confirmed Grilling Board lifecycle.
 **Status:** active
 **Priority:** 1
 **Owner:** Kayden; codex-s004-director
