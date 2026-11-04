@@ -29,3 +29,9 @@ Return exact SHA, tests, screenshots/implementor QA against parent acceptance, l
 - [ ] New/revised/resolved DQCs and round changes appear without manual preparation, preserving unsaved typing, unanswered/dependent frontier and clear reconciliation/next action.
 - [ ] Existing committed card data, answers and flags survive; no duplicate competing question store, unsafe path/origin, stale overwrite or partial save.
 - [ ] Focused and full product checks plus dark/light 375px browser QA pass on the exact candidate; source/usage docs match actual behavior and no Human QA is fabricated.
+
+## Workspace preservation
+
+Workspace baseline sha256:bfc58b1c0c4fd948b8522e7c742347d34ee20e34099c6344c9328dafdf8f40f2
+
+The implementation begins in a fresh isolated clone at published `1553bc6`, after native claim `0da727f`. The complete starting snapshot is retained privately. The original-checkout prelude snapshot was incomplete because historical REBASE_HEAD remains; it and its exact bytes are retained without removal. This new workspace baseline does not retroactively replace that limitation. No product edits preceded this binding.
