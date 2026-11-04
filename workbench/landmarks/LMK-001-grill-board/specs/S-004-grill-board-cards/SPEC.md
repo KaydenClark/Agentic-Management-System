@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** TK-002F code is checked; real-request publication was rejected by automatic approval review and remains unperformed.
+**Next gate:** Verify TK-002F real-project request presentation; owner approval and Human QA remain open. Standing public-publication authorization is now granted.
 
 ## Intent and authority
 
