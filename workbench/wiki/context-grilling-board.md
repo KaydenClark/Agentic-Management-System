@@ -292,3 +292,24 @@ After confirmation, preserve this exact readback as the authoritative intent, es
 
 Verify stable references in both directions, exact readback/history preservation, consistent chat and Board updates, round continuation, conflict refusal and persistence, and tracker availability through setup-workbench. Publish checked AMS non-site work under the standing publication authority. Shared-skill candidates retain their required qualification and delivery gates; changing the installed personal catalog requires separate explicit installation authority. Stop at verified delivery and report any incomplete checks or owner-only acceptance gates; do not claim Human QA or deploy the public website.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-285d9127-f10b-4928-b302-23131f2f42fe
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T03:20:26.301Z
+Author: Kayden
+Source: Kayden direct AMS implementation instruction, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+## Implementation authorization and source ownership
+
+Kayden, AMS chat, 2026-11-03 America/Denver: "Go ahead and implement the grilling board as we confirmed, including TRACKER.md, the DQC lifecycle, and setup-workbench support. Preserve the existing work and carry it through verification and delivery." The owner explicitly invoked orchestrate, carry and explore-kb.
+
+This continues the confirmed intent JOT-af34e4a9-efdf-4688-91d9-0c2d2b0685ba under S-004 (Grill Board cards and answers), including reusable setup-workbench source work in KaydenClark/skills and the supported AMS managed-tool update. Confirmation of meaning is already recorded; this instruction provides execution authorization for this scope. S-004's new bounded Tasks will own implementation and proof; this capture supplies no success, Review, Human QA, release or personal-catalog installation claim.
+
+Read-only source recovery: main 1a11f25 retains the committed-card Board. PR156 merged e575ea44 into Feature/s004-owner-queue-gap, not main; preserve that candidate and its unrelated dirty Wiki edit. Its refresh and transaction behaviors are reusable, but owner-request fences are not DQCs. The existing native tracker lacks a declared AMS root and a root TRACKER.md projection; revision comparisons are not locks and changed wording can retain old confirmation. Repair these through the setup-workbench source package, preserving installed personal skills. Board and terminal must use the same supported owning operations, with safe conflict refusal and exact readback history.
+
+Current implementation branch: Feature/S-004-dqc-grilling-board. Prior S-004 candidates and stopped/private evaluation work remain preserved, without reopening unrelated campaigns. Next: extend S-004 destination and prepare bounded Tasks for native tracker/setup availability and the Python DQC Board, then dispatch implementors. Independent assembled Review and actual owner Human QA remain distinct.
+<!-- /jot-entry -->

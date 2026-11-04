@@ -3,22 +3,22 @@
 **Spec ID:** S-004
 **Status:** active
 **Priority:** 1
-**Owner:** Kayden; orchestrator B (local)
+**Owner:** Kayden; codex-s004-director
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-03
 **Catalog description:** Local Grill Board cards with Priority, Value, a rating and a "too taxing" flag, whose confirmed answers are written straight into their owning records.
 **Blockers:** none
-**Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Owner approval and Human QA, then complete; this supplies no Spec activation slot.
+**Confirmation:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
+**Execution approval:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
+**Next gate:** Prepare bounded DQC lifecycle and Board Tasks, then implement under the confirmed owner instruction; Human QA remains separate.
 
 ## Intent and authority
 
-The owner named "make the Grill Board cards" as an LMK-001 Spec and confirmed the card rules on 2026-11-01. Orchestrator B builds locally, holds the only Supabase keys and never deploys.
+The owner originally confirmed card rules on 2026-11-01. The [exact confirmed DQC lifecycle readback](../../../../wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba) and [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md) now authorize the connected concept/execution lanes, full-readback cards, TRACKER.md, reusable setup-workbench support, verification and checked non-site delivery. Preserve original decisions and historical proof except where this confirmed correction supersedes them. No paid services, public website deployment or replacement of the installed personal catalog is authorized.
 
 ## Outcome
 
-One local page shows every item waiting on the owner, sorted by the owner's signals. Answering an item updates its owning record.
+One local Python Board presents current DQCs as complete readback questions. Board and terminal actions update the same stable concept records, while TRACKER.md follows intent through execution records that remain owned by Landmarks, Specs and Tasks.
 
 ## Why It Matters
 
@@ -26,7 +26,9 @@ Priority and Value are how the owner decides what needs attention. Costly questi
 
 ## Current Verified State
 
-- Met: every acceptance criterion, each at its linked evidence (TK-001 to TK-000J).
+- Historical committed-card criteria were verified at their linked evidence (TK-001 to TK-000J); this does not prove the expanded DQC lifecycle.
+- The automatic-queue candidate in PR156 is preserved on its feature target, not main. Its separate dirty worktree is outside this writer’s scope.
+- Current native tracker is bundled but undeclared in AMS; no root TRACKER.md exists. New DQC acceptance below is unverified.
 - Review: passed at `4d49bfc` (Orchestrator C); proof in [S-004 history](../../../../wiki/history/S-004.md).
 - Not met: owner approval and Human QA.
 
@@ -47,8 +49,12 @@ History: [S-004 history](../../../../wiki/history/S-004.md).
 
 - Board decisions are tracked apart from delivery (Specs, Tasks).
 - The board is local only; Vercel never serves it.
-- Card Context is a note of at most 1,000 characters with no heading or `---` line; else it is refused as page content (TK-000I).
-- Card data is plain files in Git; an answer lands in its owning record.
+- Complete DQC question readbacks are allowed and must be inspectable before confirmation. This supersedes the 1,000-character/no-heading restriction for DQC cards; the Board still offers no routine page drafting editor. Preserve legacy card data and history.
+- DQCs are the initial owners of questions, evolving concepts and exact confirmed readbacks. Board cards and TRACKER.md project those records. TASKBOARD.md projects execution. Stable DQC IDs connect both lanes; execution records retain execution truth.
+- Persist changes through one native validated operation contract for terminal and Python Board, with serialized writes, revision/commit conflict refusal, idempotent retries and rollback on commit failure.
+- Preserve history, source, scope and owner words; pending revisions cannot inherit previous confirmation. Confirmation, authorization, reconciliation, implementation and Human QA remain distinct.
+- Round review includes all changed answers and feedback, carries unanswered/dependent questions, and records confirmed Wiki/document reconciliation, authorized preparation or the next frontier. Completion alone dispatches no unauthorized work.
+- Reusable native tools and setup changes belong in KaydenClark/skills through author-skill; AMS consumes the supported package/update route with recovery inventory and authentic tool receipts. Never mutate installed personal skills or forge managed hashes.
 - An owning record is a `.md` file under `workbench/` `specs/`, `landmarks/`, `docs/adr/`, `docs/ddr/` or `wiki/`, or `grill-board/page-approvals.md`; any other path is refused (TK-000G).
 - The theme follows the artifact; tokens live in `grill-board/theme/tokens.json` ([DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md)).
 
@@ -86,6 +92,16 @@ Each Task is one run landed on `main` by a checked PR.
 [qa shots]: ../../../../../grill-board/qa/
 [375px]: ../../../../../tests/test_grill_board_phone.py
 
+### DQC lifecycle acceptance
+
+- [ ] **Initial concept capture and tracker.** Supported setup creates/enables a tracker and root TRACKER.md; capture main branches before interviewing, retain stable IDs and deterministic current/history views. Must fail: bundled tool exists but fresh setup has no usable tracker.
+- [ ] **Complete readback card.** Each DQC card shows its full question, why, proposed answer/readback, source, revision, separate Priority/Value reasons and state. Confirm binds exactly that displayed readback; correction/feedback records owner words without invented confirmation.
+- [ ] **One safe lifecycle.** CLI and web actions use the same owning operations and preserve exact prior confirmed versions, source/scope, corrections, ratings and flags across retry/restart. Stale, competing or failed writes cannot silently overwrite or partially save records/projections; pending text cannot inherit old confirmation.
+- [ ] **Round continuation.** Ending a round exposes every changed DQC and quality event; reconciliation receipts link actual Wiki/docs revisions or authorized preparation/next frontier. Unanswered questions and dependencies remain visible. A bookkeeping count alone fails.
+- [ ] **Two connected lanes.** DQCs relate by stable ID to Landmarks, Specs and qualified Tasks; those execution records reference DQC IDs. Concept traceability includes deferral, supersession, delivery evidence and affected reopening without copying execution status into a competing authority.
+- [ ] **Current usable Board.** New/revised/resolved DQCs refresh without manual preparation; preserve unsaved owner typing and readable returned notes/history. Local-only origin/escaping protections and reachable controls at 375px hold in dark/light. Existing card/history data and protected worktrees remain intact.
+- [ ] **Reusable setup and delivery.** Source candidate proves Create, Adopt and explicit Update availability, compatibility, refusal/preservation and recovery; AMS update uses supported package tooling and valid receipts. Catalog/source checks, applicable qualification and independent assembled Review are recorded on exact revisions. Installed personal catalog remains unchanged; Human QA stays unperformed unless actually sourced.
+
 ## RSI and website connection
 
 A low-rated or flagged question is a failed result the loop may study (S-002). The demo (S-009) shows the board with sample cards.
@@ -104,11 +120,11 @@ uv run --with playwright pytest tests/test_grill_board_phone.py
 
 ## Documentation Impact
 
-- RUNBOOK: the start command. `grill-board/README.md`: format, theme, QA.
+- RUNBOOK, ARCHITECTURE, Wiki and grill-board/README.md: tracker ownership, supported capture/actions/round continuation, Python Board operation and exact source/update identity. Reusable setup package references/templates explain fresh and existing project support without assuming the Board is hosted.
 
 ## Review and Human QA
 
-Human QA is the owner using the board on real items.
+Independent assembled Review covers the new immutable candidate after implementor QA. Human QA is the owner using the board on real items; it is not supplied by agent browser checks.
 
 ## Completion Result
 
