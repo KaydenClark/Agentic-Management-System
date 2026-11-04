@@ -53,7 +53,7 @@ Real execution needs supported harness authentication, appropriate local tools, 
 
 ## Vertical Implementation Slices
 
-TK-002P prepares one held end-to-end worker recovery slice; the design stage may refine its released inputs.
+TK-002P consumes the [worker contract](../../../../wiki/guidebooks/rsi-worker-contract.md) and frozen Stage A fixture; implementation stays held.
 
 ## Acceptance Criteria
 

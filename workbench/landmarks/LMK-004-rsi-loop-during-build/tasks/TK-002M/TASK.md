@@ -29,3 +29,11 @@ Investigate and document r1 per-case mapping, qualified grader and the frozen ca
 - [ ] The exact assembled readback is confirmed and sourced; only genuine unresolved choices were asked and recorded.
 - [ ] Capability contracts and the task graph cover the end-to-end destination, named artifact release conditions, ownership, existing stops and independent release authority; no acceptance or receipt is fabricated.
 - [ ] A fresh chat can start the later implementation using the maintained continuation guide launch prompt and Task records; all implementation remains held.
+
+## Prepared artifacts
+
+- [Exact confirmed readback](../../../../wiki/guidebooks/rsi-loop-readback-2026-11-04.md), sourced by [JOT-6a1d5383](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-6a1d5383-d939-47b2-bd45-51e702c12550). Body SHA-256 `427c3f0d3c109b3ce05011433920b2f74b7044b068c41a6e8d58b08a93d9e853`.
+- [Frozen case/r1 contract](../../../../wiki/guidebooks/rsi-case-contract.md), including `evals/rsi-stage-a/grilling-native-resume-v1.json`, and [worker/recovery contract](../../../../wiki/guidebooks/rsi-worker-contract.md). Fixture is synthetic development preparation, not an execution or fresh-case result.
+- [Bounded artifact-release graph](../../../../wiki/guidebooks/rsi-task-release.md), held source fallback TK-002R and [fresh-chat continuation](../../../../wiki/guidebooks/rsi-loop-continuation.md).
+
+Readback confirmation is actual; native tooling/qualification/campaign/installation availability is not inferred. The remaining real-call inputs are exact model/meter/sandbox/load evidence, qualified grader/label identities, concrete benefit margin/uncertainty method and fresh deciding cases. Stage B and all implementation holds remain. Checks and independent review must bind the final immutable documentation candidate before closure.

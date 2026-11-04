@@ -27,7 +27,7 @@ duplicates Task state.
 - [Jot method](../docs/SKILLS.md) - when to read and update existing articles.
 
 - [Canonical failure log](../feedback/WORKBENCH_FEEDBACK.md) — all failures, failed model tier/provider, activity, correct outcome and repair evidence.
-- [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — confirmed interview answers, Supabase/Python ownership, unchanged attempt limits and mapped lifecycle; implementation remains held.
+- [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — confirmed readback and Stage A case/worker/release contracts; implementation remains held.
 - [Shared skills refocus](context-skills-refocus.md) — confirmed jobs, composition, prerequisites, attribution and the Prepare-only boundary; links the AMS preparation-bypass failure.
 
 ## Source Precedence
