@@ -3,10 +3,12 @@
 **Task ID:** TK-002L
 **Spec ID:** S-007
 **Slice:** Repair four owner-approved RSI presentation defects end to end
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Provenance and series; Not only up; Shared data states
 **Planned verification:** Candidate fill contrast in both themes; rendered hash invariance under freshness changes and sensitivity to evidence; grader isolation; run-only failure visibility without fabricated results; site build and suite.
+**Claimed by:** codex-rsi-four-fixes
+**Current claimant:** codex-rsi-four-fixes
 
 ## Assignment
 
