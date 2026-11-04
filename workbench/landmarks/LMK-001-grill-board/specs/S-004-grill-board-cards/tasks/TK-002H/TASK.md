@@ -3,10 +3,12 @@
 **Task ID:** TK-002H
 **Spec ID:** S-004
 **Slice:** A project captures and confirms a DQC through a safely installed tracker
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: DQC lifecycle acceptance
 **Planned verification:** Native CLI/setup and disposable Git/HTTP/browser cases described below; applicable Runbook checks and exact-candidate delivery verification.
+**Claimed by:** codex-s004-tracker
+**Current claimant:** codex-s004-tracker
 
 ## Assignment
 
