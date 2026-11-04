@@ -11,7 +11,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
 **Execution approval:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
-**Next gate:** Close TK-002H with verification and documentation proof.
+**Next gate:** Complete TK-002I.
 
 ## Intent and authority
 

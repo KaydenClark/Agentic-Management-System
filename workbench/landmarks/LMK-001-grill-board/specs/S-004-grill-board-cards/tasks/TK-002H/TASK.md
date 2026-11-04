@@ -4,12 +4,13 @@
 **Spec ID:** S-004
 **Concept source:** [DQC-000A](../../../../../../landmark-tracker/destination-questions/DQC-000A.json) — confirmed Grilling Board lifecycle.
 **Slice:** A project captures and confirms a DQC through a safely installed tracker
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: DQC lifecycle acceptance
 **Planned verification:** Native CLI/setup and disposable Git/HTTP/browser cases described below; applicable Runbook checks and exact-candidate delivery verification.
 **Claimed by:** codex-s004-tracker
 **Current claimant:** codex-s004-tracker
+**Proof:** f833633: Mac810pass/4skip; CI41770272779 809pass/5skip; source PR68/69 reviewed+merged; packagef38e2b3e; native clone/retry/recovery and hygiene/layout/projection pass. Evidence above.
 
 ## Assignment
 
@@ -41,3 +42,9 @@ Director accepted the native/setup result at `f833633ff421d7e0d7220bc0d4c812174b
 - All 757 original tracked paths remain; no product/site/legacy Board bytes changed. Installed personal catalog's 3137 file/link identities are unchanged. Earlier candidates, ignored recovery and the pre-existing REBASE_HEAD marker remain. Original before-work closeout snapshot was not captured; later inventory cannot establish that earlier boundary.
 
 Merge answer: native/runtime content is eligible; source is merged, AMS assembly delivery waits TK-002I and independent assembled Review. Completion answer: this Task's scoped acceptance is met. Human QA, website deployment and personal-catalog installation are not claimed.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-004-dqc-grilling-board | 944f0eb8cf5bce202b224e62733b6321de29229d | ahead 0 behind 0 | 0 | f833633: Mac810pass/4skip; CI41770272779 809pass/5skip; source PR68/69 reviewed+merged; packagef38e2b3e; native clone/retry/recovery and hygiene/layout/projection pass. Evidence above. | Tracker/runtime/receipt/DQCs; source and director records. | TK-002I/assembly/HumanQA pending; snapshot/REBASE_HEAD limits retained; no install/deploy.; close attribution: {"agent":"codex-s004-tracker","claimant":"codex-s004-tracker","onBehalfOf":null} | bfa5b7dabcf289e2656940330e50100ce6f01ad7ca96633678e0b0a0899e5e1d |
