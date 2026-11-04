@@ -26,9 +26,9 @@ Investigate and document r1 per-case mapping, qualified grader and the frozen ca
 
 ## Acceptance
 
-- [ ] The exact assembled readback is confirmed and sourced; only genuine unresolved choices were asked and recorded.
-- [ ] Capability contracts and the task graph cover the end-to-end destination, named artifact release conditions, ownership, existing stops and independent release authority; no acceptance or receipt is fabricated.
-- [ ] A fresh chat can start the later implementation using the maintained continuation guide launch prompt and Task records; all implementation remains held.
+- [x] The exact assembled readback is confirmed and sourced; only genuine unresolved choices were asked and recorded.
+- [x] Capability contracts and the task graph cover the end-to-end destination, named artifact release conditions, ownership, existing stops and independent release authority; no acceptance or receipt is fabricated.
+- [x] A fresh chat can start the later implementation using the maintained continuation guide launch prompt and Task records; all implementation remains held.
 
 ## Prepared artifacts
 
@@ -37,3 +37,11 @@ Investigate and document r1 per-case mapping, qualified grader and the frozen ca
 - [Bounded artifact-release graph](../../../../wiki/guidebooks/rsi-task-release.md), held source fallback TK-002R and [fresh-chat continuation](../../../../wiki/guidebooks/rsi-loop-continuation.md).
 
 Readback confirmation is actual; native tooling/qualification/campaign/installation availability is not inferred. The remaining real-call inputs are exact model/meter/sandbox/load evidence, qualified grader/label identities, concrete benefit margin/uncertainty method and fresh deciding cases. Stage B and all implementation holds remain. Checks and independent review must bind the final immutable documentation candidate before closure.
+
+## Stage A verification and review
+
+Substantive candidate `ae7a6ea5be16318a8af4b0843a688dc39d522d8e`: separate fresh Frontier contexts `stage_a_standards_review` and `stage_a_spec_review` returned PASS (2026-11-04, root-coordinated). Standards found zero hard/heuristic findings; Spec verified exact readback/fixture identities, full bounded r1 obligations, held acyclic R/Q/S route and recoverable next launch. These are Stage A documentation reviews, not whole-Landmark verdicts, Human QA, model qualification or evidence of working implementation. The final metadata delta and required shared CI remain delivery gates.
+
+Focused checks used a 45-file trusted tool/source snapshot verified byte-for-byte from main `cfc0bc4c7f2cd167cea2972016edee076b479b73`, with clean interpreter startup and explicit candidate data roots: render passed; doctor exited0 after render (only pre-existing S-011/TK-003 dependency, undeclared runtime and permission drift); layout valid; hygiene0; direct-Task gate not refused; full base diff whitespace passed. Exact readback/fixture digests, JSON parsing and 31 included/16 excluded r1 coverage were independently recomputed. Local-only next inspection offered unrelated TK-000Y and retained its no-calls hold; no unrelated claim was taken. Full/fresh Python and browser tests are not claimed locally; required shared CI must bind the final publication head.
+
+Initial clean Git status and main-contained base were observed. No complete assignment-start ignored-byte snapshot was captured; no reconstructed snapshot or full ignored-material preservation proof is claimed. The existing preparation checkout/branch and all recovery material are retained for later work, with no cleanup deletion. Stage A changed only safe documentation/preparation data and generated projections; software, native managed tools, workflows, personal catalog and databases were not changed.
