@@ -57,3 +57,23 @@ def test_open_queue_updates_automatically_and_keeps_unsaved_owner_words(board, b
         assert page.get_by_role("heading", name=revised["question"], exact=True).is_visible()
     finally:
         page.close()
+
+
+@pytest.mark.parametrize("width", [375, 1280])
+def test_refused_submission_keeps_removed_questions_note_copyable(board, browser, width):
+    root, _, record, server = board
+    page = browser.new_page(viewport={"width": width, "height": 900})
+    words = "Keep my exact words <please> & punctuation."
+    try:
+        page.goto(f"http://127.0.0.1:{server.server_address[1]}")
+        page.fill("#note", words)
+        record.write_text(source({**REQUEST, "state": "withdrawn"}))
+        commit(root)
+        page.get_by_role("button", name="Rework wording", exact=True).click()
+        recovered = page.locator('[aria-label="Unsaved submission"] textarea[readonly]')
+        assert recovered.input_value() == words
+        recovered.focus()
+        assert recovered.evaluate("field => document.activeElement === field")
+        assert page.evaluate("document.documentElement.scrollWidth") <= width
+    finally:
+        page.close()
