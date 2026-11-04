@@ -43,7 +43,7 @@ No criterion is checked off. Drift and up-to-Spec checks exist ([TK-001](tasks/T
 
 Detect and route observed mismatches before owner prompting, preserving a separate occurrence for each recurrence. Link detection to the existing failure intake and S-006 safe identities; classify suspected cause without asserting skill causation from involvement alone. Count eligible successful uses alongside failures for later recurrence measurement.
 
-Distinguish accepted source version, installed bytes, actual host loading and observed use. A deliberately pinned baseline is not an accidental stale installation; report the condition rather than silently upgrading a comparison. S-002 owns recovery/adoption decisions, while C's existing secret-free boundary remains unchanged.
+Distinguish accepted source version, installed bytes, actual host loading and observed use. A deliberately pinned baseline is not an accidental stale installation; report the condition rather than silently upgrading a comparison. S-000B owns recovery; S-002 qualification/retention. Installation needs separate authority; C stays secret-free.
 
 ## Decisions And Contracts
 
