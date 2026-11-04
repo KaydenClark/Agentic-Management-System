@@ -49,3 +49,9 @@ Fitness-level colors sit in a second marked block of `site/app/theme/tokens.css`
 Implementor checks: production build; site suite 261 of 261; built-site hygiene 0 findings; `git diff --check` clean; doctor no S-007 finding. Browser check with Playwright from a scratch install: all 49 `/rsi` checks pass (axe AA with contrast, no horizontal scroll, focus, reduced motion, network) at 375, 1280 and 1440 px in both themes; one `/start` toy request check failed intermittently across runs and was not compared with the baseline. Screenshots of the trends, cards, strip and empty places were inspected in both themes. Orchestrator re-ran the build, the site suite (261 of 261), hygiene and diff checks on the candidate and confirmed it merges cleanly with dev `0fdd1e1`.
 
 Limits: tests were written alongside the code, with planted faults as the must-fail proof. One loop is recorded, so the running average and line breaks are exercised only by the fixture, not by the real page. No local Supabase environment, so the page shows trial data as unavailable locally. No owner Human QA, deployment readback, measured RSI benefit or Spec acceptance is claimed.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | detached at 72952d8 | 72952d8fde8d222c9e44853aaaf9c897371a84e5 | none | 0 | Production build; site suite 261/261; built-site hygiene 0; diff check clean; /rsi browser checks 49/49 at 375/1280/1440 both themes; /start toy request check intermittent, not baselined | site/README.md; S-007 TK-002J Check and QA | Delivery to dev, deployment readback and owner Human QA | 837c6164b95a1a4f2027b5ab0055f81c4b89f63a3b18aa542a9e5217130afa34 |
