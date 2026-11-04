@@ -5,7 +5,7 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-03
 **Catalog description:** Website pages that chart RSI results from Supabase, present and honestly empty from the first deploy, with every number linked to its rows.
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
@@ -13,6 +13,8 @@
 **Next gate:** Complete TK-002.
 
 ## Intent and authority
+
+The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes this destination revision only. Existing execution approvals remain scoped; this Map creates no Tasks, runs, installation or deployment authority.
 
 The owner named "a site page showing the improvement charts" as an example Spec, asked that chart places exist from the start so the owner can see where data will appear, and ruled out fabricated data.
 
@@ -44,6 +46,12 @@ History: [S-007 history](../../../../wiki/history/S-007.md).
 - Every number links to its rows. Each row's strength label is shown.
 - **Headlines** come only from held-out tasks, with the interval and the baseline. An interval including zero reads as no difference detected at this size.
 - Synthetic or test rows never render.
+
+### Learning evidence views
+
+Provide per-skill and whole-Workbench views from S-006, joined to canonical failure IDs rather than copied independent logs. Show lifecycle stage/age and blockers, candidate lineage and dispositions, paired baseline/candidate results with regressions, and later-use recurrence per eligible use. Owner interventions, runtime and available usage metrics show effort alongside outcomes. A skill-by-case matrix distinguishes pass, failure, unrun and unavailable evidence.
+
+Every displayed metric identifies its case set/version, actual model/host/skills, sample size, evidence strength and freshness. Keep fixed benchmark trends separate from expanded historical coverage; imports or improved detection cannot appear as worsening reliability. Distinguish development/held-out results, operational errors, Fitness/Alignment levels and demonstrated benefit. No independently maintained numeric website dataset replaces the canonical Supabase rows; explanatory prose and clearly labeled test fixtures remain allowed.
 
 ## Decisions And Contracts
 
@@ -79,6 +87,10 @@ Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the 
 - [ ] **Not only up.** Regressions and variants are marked as such. *Must fail:* a timeline that hides a recorded regression.
 - [ ] **Held-out headlines.** A headline appears only from held-out rows, with its interval and baseline. *Must fail:* a dev-task number as a headline, or an interval including zero shown as improvement.
 - [ ] **No test rows.** A marked test row in the fixture never renders.
+
+- [ ] **Learning views:** a reader follows one failure into its actual attempts, rejected/retained candidate and later-use evidence through S-006. A manually invented chart value or hidden failed attempt fails.
+- [ ] **Comparable trends:** changed models/contracts/case sets are separated, with denominators and sample sizes. Missing usage is unknown; an imported failure count presented as a recurrence rate fails.
+- [ ] **Effort and outcomes:** views distinguish loop operation, behavioral improvement and persistence in later use. A Stable/Excellent label alone cannot produce an improvement headline.
 
 ## RSI and website connection
 

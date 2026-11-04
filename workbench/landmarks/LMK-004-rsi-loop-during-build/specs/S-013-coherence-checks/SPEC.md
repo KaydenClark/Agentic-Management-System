@@ -14,6 +14,8 @@
 
 ## Intent and authority
 
+The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes this destination revision only. Existing execution approvals remain scoped; this Map creates no Tasks, runs, installation or deployment authority.
+
 The owner asked that the system stay coherent and nothing fall behind, with one orchestrator checking that the project stays up to Spec, and that the distance between `dev` and `main` be measured so a long-unmerged trunk does not happen again. Orchestrator C runs in a cloud session, works only through GitHub, holds no secrets and writes no product code.
 
 ## Outcome
@@ -45,6 +47,12 @@ History: [S-013 history](../../../../wiki/history/S-013.md).
 - **Independent Spec review.** A fresh-context reviewer passes or returns the exact assembled commit against the Spec's conditions; a changed commit needs a fresh review.
 - Reports are committed records; findings are visible, never silently fixed.
 - **Preparation routing.** Detect a large shared-skill or other AMS change proceeding without its Map/Plan or past a Prepare stop. Route the [recorded failure](../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) and recurrence to [S-000A](../S-000A-skills-refocus/SPEC.md) for source repair; check preparation before claiming a reliability improvement. This addition is preparation only.
+
+### Failure detection and use evidence
+
+Detect and route observed mismatches before owner prompting, preserving a separate occurrence for each recurrence. Link detection to the existing failure intake and S-006 safe identities; classify suspected cause without asserting skill causation from involvement alone. Count eligible successful uses alongside failures for later recurrence measurement.
+
+Distinguish accepted source version, installed bytes, actual host loading and observed use. A deliberately pinned baseline is not an accidental stale installation; report the condition rather than silently upgrading a comparison. S-002 owns recovery/adoption decisions, while C's existing secret-free boundary remains unchanged.
 
 ## Decisions And Contracts
 
@@ -79,6 +87,8 @@ Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, 
 - [ ] **Skills in sync.** Rows without a skills commit, or behind the current skills `main`, are listed. *Must fail:* an unpinned row passing.
 - [ ] **Independent review.** A review names its exact commit and comes from a context that did not build the Spec. *Must fail:* a review by the builder's own session, or one reused after the commit changed.
 - [ ] **No secrets.** C's session configuration holds no Supabase or Vercel secret, and C never calls the Supabase or Vercel connectors shared with the other orchestrators (owner, 2026-11-01, [JOT-dfb739bc](../../../../wiki/context-owner-answers-coherence.md)). *Must fail:* a secret in C's environment, or a C call to either connector.
+
+- [ ] **Recurrence and loading:** detect a planted recurrence and a stale loaded skill without owner intervention; link the occurrence and actual version. A source merge treated as proof of host use fails; an intentional baseline silently upgraded fails.
 
 ## RSI and website connection
 

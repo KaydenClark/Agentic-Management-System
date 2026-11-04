@@ -5,7 +5,7 @@
 **Priority:** 1
 **Owner:** Kayden; shared-skill repair orchestrator
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-03
 **Catalog description:** Repair shared handoff, branch and cleanup behavior, prove it with Terra 6.1 and show the scoped RSI evidence.
 **Blockers:** none
 **Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
@@ -13,6 +13,8 @@
 **Next gate:** Round two merged setup-workbench, orchestrate, handoff and journey ([history](../../../../wiki/history/S-011.md#resumed-per-pr-rsi-round-two)); land, prune-artifact, writing-for-agents and author-skill await owner direction; personal install pending; RSI page update to dev.
 
 ## Intent and authority
+
+The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes this destination revision only. Existing execution approvals remain scoped; this Map creates no Tasks, runs, installation or deployment authority.
 
 The owner's 2026-11-02 instruction expands the earlier land-only destination to the shared skills responsible for recurring branch, cleanup and handoff failures. Repair source in `KaydenClark/skills`, update this machine's personal skill catalog after a qualifying repair, and display actual RSI results on `dev`. Skills merge only after Terra 6.1 testing and Stable or Excellent audit results with the required evidence. This grants no cross-project rollout, dev-to-main promotion or fabricated qualification.
 
@@ -49,6 +51,10 @@ History: [S-011 history](../../../../wiki/history/S-011.md).
 - Author/review in the skills repository; private source/raw evidence stay private. Publish safe claims, counts and identities only.
 - Personal installation enables later AMS work; no project-specific copy or portfolio rollout.
 - The [approved prune-artifact addition](../../../../wiki/context-owner-answers-coherence.md#jot-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf) has a separate finite test suite; the original frozen comparison and its attempts remain unchanged.
+
+### General loop delivery boundary
+
+For newly authorized campaigns, S-002's Mid/Small default and subscription-meter rules govern. The existing Terra-pinned series and stopped/held candidates retain their frozen conditions and attempt counts. A skill meeting existing Fitness/Alignment qualification at Stable/Excellent, useful-benefit and no-regression requirements may merge through the checked source workflow without an extra per-candidate owner merge gate. A level label or this Map alone cannot qualify a candidate. Personal installation retains its separately scoped authority; this mapping does not execute it or restart held work.
 
 ## Non-Goals
 

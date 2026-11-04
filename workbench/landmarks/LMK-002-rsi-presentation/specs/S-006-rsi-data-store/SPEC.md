@@ -5,7 +5,7 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local, holds the Supabase keys)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-03
 **Catalog description:** Supabase schema and local Python writer for RSI results, build history, cost and tokens; the site reads under RLS.
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
@@ -13,6 +13,8 @@
 **Next gate:** Coverage/W disposition, whole Review, actual owner QA.
 
 ## Intent and authority
+
+The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes this destination revision only. Existing execution approvals remain scoped; this Map creates no Tasks, runs, installation or deployment authority.
 
 The owner decided that Python pushes RSI results to Supabase as they arrive and the site reads from it; everything the site shows, build history included, lives there. Token counts go with the RSI data. The service key stays in the gitignored local environment; the site receives only its publishable key.
 
@@ -44,6 +46,18 @@ History: [S-006 history](../../../../wiki/history/S-006.md).
 - **Build history.** Rows for this build's Spec, Task, PR and commit events from real records, returns and corrections included, showing how the AMS built itself.
 
 - Private assessment envelopes retain S-002 frozen packets, attempt/run IDs, findings/retests and recomputable results, separately from behavioral trial rows.
+
+### Lifecycle records and recovery
+
+Failures remain canonical in WORKBENCH_FEEDBACK.md. Worker ingestion references stable failure ID, source revision and correction lineage; duplicate ingestion is idempotent. Supabase is canonical for cases, runs, candidates, comparisons and dispositions, written through the authorized Python worker with commit-pinned provenance. Existing Git fixtures/contracts remain versioned artifacts referenced by those records, not independent live statuses.
+
+Extend existing run/result/assessment identities to connect failure occurrence, case version, experiment contract, candidate/parent, execution job, outcome, decision, source merge and installation/use receipts. Preserve the existing assessment versus behavioral-evidence distinction. No table layout or queue technology is mandated by this destination.
+
+Durable job state identifies authorization, owner/claim, attempt, next eligible action, stop/block reason and recoverable execution stage. Atomic claims and conflict refusal prevent two workers owning the same job. Interruptions, duplicate notifications and database outages preserve uncertain outcomes for reconciliation; no automatic replay of an already completed external effect.
+
+Raw transcripts remain local/private; only safe derived fields and evidence identities enter Supabase. Public-safe data is separate from private operational state. Safe Git-committed exports carry source revision, schema, record identities and a completeness checkpoint; export is a recovery snapshot, not another writer. Restore preserves corrections, attempts and provenance and refuses stale conflicting state. Export excludes secrets, host paths, raw traces and private assessment contents.
+
+Free-plan capacity and availability are constraints: the worker exposes storage/read failures and preserves pending evidence locally without reporting publication success. No paid hosting, upgrade, inference purchase or raw-evidence cloud upload is implied. Subscription availability and usage are distinct from optional estimated API-equivalent metrics.
 
 ## Decisions And Contracts
 
@@ -82,6 +96,11 @@ One run per Task in B's lane, by checked PR. Native Task records own slices; dup
 [p]: tasks/TK-000B/TASK.md#proof
 
 - [x] **Private assessment persistence.** Private remote append/readback retains the canonical assessment history with idempotence and conflict refusal; clients cannot read raw packets or write. *Must fail:* tampered totals, reset attempts, exposed private evidence or a silent overwrite.
+
+- [ ] **Lifecycle lineage:** a safe readback follows a failure through case, candidate, comparison, disposition and actual later use. An orphan result or unpinned candidate fails.
+- [ ] **Recovery:** concurrent claims, repeated intake, interrupted publication and duplicate delivery preserve one logical job and original attempts. An uncertain successful write replayed as a new result fails.
+- [ ] **Safe export:** an exported checkpoint reconstructs eligible safe records without changing identities or exposing private data; incomplete exports and conflicting restores fail visibly.
+- [ ] **Authority boundary:** presentation clients cannot write or read private operational evidence. Worker-only mutation does not give candidate agents database credentials or permission to change graders.
 
 ## RSI and website connection
 
