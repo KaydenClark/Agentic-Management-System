@@ -11,30 +11,20 @@ so the evidence can guide skill repairs. This supersedes the harness-only scope.
 
 ## Recording rules
 
-- Append a stable `FAIL-NNN` row when a failure is observed, before handback or
-  dependent repair. No service or new report is required.
-- Record the **failed actor**, not the reporting/reviewing agent: tier
-  (`Frontier`, `High`, `Mid`, `Small`), provider (e.g. OpenAI/Anthropic), exact model
-  and harness when known. Separate requested from actual configuration. Use
-  `unknown` with the missing-evidence reason; `not-applicable` only when no model
-  was involved. A Codex host alone does not prove the model or provider.
-- Name the activity and skill/copy/revision when known, actual failure and impact,
-  and an observable correct outcome derived from the request or contract. Link
-  source, candidate/attempt, owner and disposition. Do not infer skill causation
-  from an agent mistake, environmental refusal or missing evidence.
-- Log each failed retry/recurrence as a new row linked to its earlier ID; keep
-  original outcomes. Append corrections or repair evidence referencing the ID;
-  never erase a failure or turn a later pass into a passed earlier attempt.
-- Diagnosis, repair and baseline/candidate/later-use evidence link back to these
-  IDs. A proposal, merge or static score alone cannot close a failure or prove
-  improvement. Follow the existing RSI qualification and installation authority.
-- Publish safe summaries only; keep secrets, raw private traces and host paths out.
+Append a stable `FAIL-NNN` row before handback or dependent repair. Include date,
+failed actor tier (Frontier/High/Mid/Small), provider, actual model/harness,
+activity and skill/copy/revision, observed failure/impact, observable correct
+outcome, evidence/candidate/attempt, owner and disposition. Use the table below
+as the template. Distinguish requested from actual model; the reporter is not
+the failed actor. `unknown` means absent from available evidence;
+`not-applicable` means no model was involved. Never infer provider from the host.
 
-Copy this row, filling every field (escape literal pipes inside cells):
-
-| ID | Date | Tier | Provider | Model / harness | Activity / skill | Failure / impact | Correct outcome | Evidence / owner / disposition |
-|---|---|---|---|---|---|---|---|---|
-| FAIL-NNN | YYYY-MM-DD | unknown — reason | unknown — reason | unknown — reason | Task and skill revision, if known | Observed result | Observable expected result | Source; candidate/attempt; owning Spec/Task or unknown; pending/diagnostic/test/repaired/declined/accepted-open |
+Each failed retry/recurrence gets its own linked row. Append corrections and
+repair/retest evidence by ID; preserve earlier failures. Historical aggregate
+rows retain their original source granularity. Reports and trial ledgers remain
+supporting evidence. Skill causation needs diagnosis; a merge, static score or
+later pass cannot establish improvement or erase a failed attempt. Keep private
+traces, secrets and host paths out; existing qualification/installation gates apply.
 
 ## Recorded failures
 
@@ -78,3 +68,6 @@ must be separate. Historical trial/trace coverage is not exhaustive.
 | FAIL-028 | 2026-11-03 | unknown | OpenAI | GPT-6 / Codex desktop; tier not exposed | Failure-log delivery fetch | Broad fetch could not update case-conflicting remote refs. | Fetch required delivery refs without altering other branches. | This chat; targeted main/dev/current-branch fetch passed; diagnostic |
 | FAIL-029 | 2026-11-03 | unknown | OpenAI | GPT-6 / Codex desktop; tier not exposed | Log normalization script | Invoked unavailable python executable; script did not run. | Use the available python3 interpreter. | This chat; rerun with python3 succeeded; local invocation corrected, no reliability claim |
 | FAIL-030 | 2026-11-03 | unknown | OpenAI | GPT-6 / Codex; tier not exposed | Fresh-candidate hygiene | Archive lacked Git metadata; hygiene requires git ls-files. | Verify in a fresh Git checkout. | This chat; archive check failed; retry uses local clone; diagnostic |
+| FAIL-031 | 2026-11-03 | unknown | OpenAI | GPT-6 / Codex; tier not exposed | Full Python verification | Sandboxed run:97 failed,704 passed,5 skipped,39 errors; Board socket binds refused. | Run server tests with authorized loopback permission. | This chat; permission-enabled retry running; environmental diagnostic |
+| FAIL-032 | 2026-11-03 | unknown | unknown | unknown — inherited HTML author | PR164 candidate whitespace | Shared CI failed at inherited design HTML line126: trailing whitespace. | Candidate diff passes whitespace check before publication. | Run41783136858; remove whitespace only; diagnostic |
+| FAIL-033 | 2026-11-03 | unknown | OpenAI | GPT-6 / Codex; tier not exposed | Native next inspection | Fetch refused writing .git/FETCH_HEAD; selection used cached refs. | Inspect current remote claims with authorized Git access. | This chat; targeted fetch succeeded (FAIL-028); cached next output grants no claim; diagnostic |
