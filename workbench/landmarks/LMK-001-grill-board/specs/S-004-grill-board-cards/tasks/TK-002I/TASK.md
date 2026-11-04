@@ -4,10 +4,12 @@
 **Spec ID:** S-004
 **Concept source:** [DQC-000A](../../../../../../landmark-tracker/destination-questions/DQC-000A.json) — confirmed Grilling Board lifecycle.
 **Slice:** The owner answers current DQCs and continues a Board round
-**Status:** ready
+**Status:** in-progress
 **Blockers:** TK-002H
 **Destination:** spec-acceptance: DQC lifecycle acceptance
 **Planned verification:** Native CLI/setup and disposable Git/HTTP/browser cases described below; applicable Runbook checks and exact-candidate delivery verification.
+**Claimed by:** codex-s004-board
+**Current claimant:** codex-s004-board
 
 ## Assignment
 
