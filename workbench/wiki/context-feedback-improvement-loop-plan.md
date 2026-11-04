@@ -103,3 +103,16 @@ Supersedes: none
 
 The owner wants the RSI Loop to finish pointing in the mapped direction and requests orchestration of Map and Plan for the unrecorded remainder. Prepare a recoverable next chat to finish loop design and executable preparation, followed by a separate later chat to implement the prepared loop. This instruction authorizes current documentation and preparation, not implementation, model trials, database writes, automation, installation, or deployment. The earlier assembled readback is not confirmed wholesale by this request; the design stage must confirm the exact assembled readback and resolve genuinely open choices before affected implementation. Existing confirmed answers, attempts, stopped campaigns and separate release authorities remain in force.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-df911047-15f2-444b-84c8-35e347675c36
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:39:57.714Z
+Author: Kayden (captured by Codex)
+Source: Kayden direct approval in AMS chat, 2026-11-04, publication question reply
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden explicitly answered "Approve push, PR, and checked merge" to publication of the 19 documentation-only RSI Map/Plan files to public KaydenClark/Agentic-Management-System, opening a PR and merging into main after shared CI passes. This approval addresses the automatic approval-review publication refusals; it authorizes no implementation, model trials, installation or deployment. Existing design confirmation, stopped campaigns, attempts and separate authorities remain unchanged.
+<!-- /jot-entry -->
