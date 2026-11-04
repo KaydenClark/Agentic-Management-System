@@ -3,12 +3,13 @@
 **Task ID:** TK-002M
 **Landmark ID:** LMK-004
 **Slice:** Finish the RSI loop design and prepare its executable Task graph
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: End-to-end acceptance
 **Planned verification:** Compare exact confirmed readback to its source; check destination coverage, dependency graph and a fresh-chat launch; run native validators. No model trial.
 **Claimed by:** codex-rsi-stage-a
 **Current claimant:** codex-rsi-stage-a
+**Proof:** Confirmed exact readback; independent Standards and Spec PASS on ae7a6ea; trusted cfc0bc4 render/doctor/layout/task-gate pass, hygiene0; exact fixture/body identities and full diff whitespace verified. Full shared CI and final metadata review pending publication.
 
 ## Launch authority
 
@@ -36,7 +37,7 @@ Investigate and document r1 per-case mapping, qualified grader and the frozen ca
 - [Frozen case/r1 contract](../../../../wiki/guidebooks/rsi-case-contract.md), including `evals/rsi-stage-a/grilling-native-resume-v1.json`, and [worker/recovery contract](../../../../wiki/guidebooks/rsi-worker-contract.md). Fixture is synthetic development preparation, not an execution or fresh-case result.
 - [Bounded artifact-release graph](../../../../wiki/guidebooks/rsi-task-release.md), held source fallback TK-002R and [fresh-chat continuation](../../../../wiki/guidebooks/rsi-loop-continuation.md).
 
-Readback confirmation is actual; native tooling/qualification/campaign/installation availability is not inferred. The remaining real-call inputs are exact model/meter/sandbox/load evidence, qualified grader/label identities, concrete benefit margin/uncertainty method and fresh deciding cases. Stage B and all implementation holds remain. Checks and independent review must bind the final immutable documentation candidate before closure.
+Readback confirmation is actual; native tooling/qualification/campaign/installation availability is not inferred. The remaining real-call inputs are exact model/meter/sandbox/load evidence, qualified grader/label identities, concrete benefit margin/uncertainty method and fresh deciding cases. Stage B and all implementation holds remain. Final metadata review and shared CI must bind the publication head.
 
 ## Stage A verification and review
 
@@ -44,4 +45,10 @@ Substantive candidate `ae7a6ea5be16318a8af4b0843a688dc39d522d8e`: separate fresh
 
 Focused checks used a 45-file trusted tool/source snapshot verified byte-for-byte from main `cfc0bc4c7f2cd167cea2972016edee076b479b73`, with clean interpreter startup and explicit candidate data roots: render passed; doctor exited0 after render (only pre-existing S-011/TK-003 dependency, undeclared runtime and permission drift); layout valid; hygiene0; direct-Task gate not refused; full base diff whitespace passed. Exact readback/fixture digests, JSON parsing and 31 included/16 excluded r1 coverage were independently recomputed. Local-only next inspection offered unrelated TK-000Y and retained its no-calls hold; no unrelated claim was taken. Full/fresh Python and browser tests are not claimed locally; required shared CI must bind the final publication head.
 
-Initial clean Git status and main-contained base were observed. No complete assignment-start ignored-byte snapshot was captured; no reconstructed snapshot or full ignored-material preservation proof is claimed. The existing preparation checkout/branch and all recovery material are retained for later work, with no cleanup deletion. Stage A changed only safe documentation/preparation data and generated projections; software, native managed tools, workflows, personal catalog and databases were not changed.
+RUNBOOK’s private planning source was recovered without copying private content. Initial clean Git status and main-contained base were observed. No complete assignment-start ignored-byte snapshot was captured; no reconstructed snapshot or full ignored-material preservation proof is claimed. The existing preparation checkout/branch and all recovery material are retained for later work, with no cleanup deletion. Stage A changed only safe documentation/preparation data and generated projections; software, native managed tools, workflows, personal catalog and databases were not changed.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/LMK-004-rsi-loop-plan | dd63a0d8f34a63285de97952cea5da0eff8e5955 | ahead 0 behind 0 | 0 | Confirmed exact readback; independent Standards and Spec PASS on ae7a6ea; trusted cfc0bc4 render/doctor/layout/task-gate pass, hygiene0; exact fixture/body identities and full diff whitespace verified. Full shared CI and final metadata review pending publication. | Confirmed readback; case and worker contracts; bounded graph; held TK002R/TK002S; continuation and owner links. | Stage A checked publication/final metadata review pending. Stage B, model campaigns, DB writes, automation, installation and deployment remain held; whole Landmark acceptance open.; close attribution: {"agent":"codex-rsi-stage-a","claimant":"codex-rsi-stage-a","onBehalfOf":null} | f2ed922fc6a267ad5ca252f207a6f5a2b5604f9662f9eba58c32a7a54605b4bb |

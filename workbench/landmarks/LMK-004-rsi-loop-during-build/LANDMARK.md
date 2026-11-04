@@ -7,7 +7,7 @@
 **Updated:** 2026-11-04
 **Catalog description:** The measured self-improvement loop, run on the website build and the work after it, with safeguards that keep its results honest.
 **Blockers:** none
-**Next gate:** Close TK-002M with verification and documentation proof.
+**Next gate:** Deliver checked Stage A records; Stage B implementation remains held.
 
 ## Direction
 
@@ -83,7 +83,7 @@ The decision records under this landmark, one line each, linked to their record.
 
 ## Direct Tasks
 
-- [TK-002M - Finish the RSI loop design and prepare its executable Task graph](tasks/TK-002M/TASK.md) (Stage A design launched; implementation held)
+- [TK-002M - Finish the RSI loop design and prepare its executable Task graph](tasks/TK-002M/TASK.md) (Stage A preparation closed; checked delivery pending)
 
 ## Verification Procedure
 
