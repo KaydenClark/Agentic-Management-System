@@ -49,12 +49,31 @@ Expected result: The exact confirmed DQC lifecycle is traceable through supporte
 
 ## DQC-000B — What belongs on the Grilling Board
 
-Revision 3; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000B.json)
+Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000B.json)
 
-What belongs on the Grilling Board?
+<pre>**Summary**
+
+The Board presents owner questions through DQCs; ordinary drafts and routine content are outside its owner frontier.
+
+**The why**
+
+Owner attention belongs on actual choices and requested judgments.
+
+**The intended result**
+
+This branch covers the settled scope in DQC-000A. It is source-linked agent context and requests no new confirmation.
+
+**What I will do**
+
+Preserve the confirmed concept and link actual execution owners; introduce a distinct DQC only for a genuinely new decision.</pre>
+
+Source: Derived source-linked branch context from DQC-000A; workbench/wiki/context-grilling-board\.md@aa2467c181989e5ff58d14687e39bea57083d7d3\#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba; Kayden direct confirmation, 2026-11-03. Scope: Agent coverage context for the already confirmed DQC-000A; no new owner decision or authorization\..
+
+Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 - [dqc:DQC-000A](workbench/landmark-tracker/destination-questions/DQC-000A.json) (tracker): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
 - [spec:S-004](workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) (room): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
+- propose at r4: 
 
 ## DQC-000C — Question and answer flow
 
