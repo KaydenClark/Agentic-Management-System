@@ -22,7 +22,7 @@ One writer `codex-rsi-four-fixes` owns this corrective Task and its source/tests
 - [x] Freshness-only changes keep the review hash; actual evidence changes alter it.
 - [x] Different graders produce separate series with visible provenance, never pooled counts or cross-grader regression.
 - [x] Stopped/failed runs without rows remain visible with source and stop/failure evidence; no invented task, split, count or score; test runs hidden.
-- [ ] Build, focused regression tests and required checks pass; actual failures and limits recorded.
+- [x] Build, focused regression tests and required checks pass; actual failures and limits recorded.
 
 Workspace baseline sha256:eb5a7cca4ddbafa39d4daab2c03211289a0e85911273e2d00cfa6bca80b5562a
 
@@ -49,3 +49,7 @@ Initial preservation gap: baseline recorded dirty generated Taskboard, so the or
 ## Publication approval resumed
 
 Owner,2026-11-04: approved merging into dev and main for the things belonging in each, after the explicit public-publication request. Scope: checked website PR into dev; records-only PR into main. This releases the earlier public-push blocker without granting Human QA or broad website promotion. Remote dev remainsae231ee and feature7af73e7; no overlapping site work found. Another published writer used FAIL-034, so these entries move to unused FAIL-035 through FAIL-051. Existing FAIL-034 is preserved on its owner branch.
+
+## Checked publication candidate
+
+Published2e842724de126391cb3c4ed0e59524dedcc9caaf is current with devae231ee. Both exact-head shared CI jobs passed: site41790083913 (build, tests, public hygiene) and Python41790084156 (suite, hygiene, records and375px Board). PR165 targets dev; PR166 carries only failure records to main. Local source product bytes still equal fully checked4e3aa13. No unresolved new review threads observed; independent Review and Human QA are not claimed. Close records change no site source; exact final-head CI is required before merge.
