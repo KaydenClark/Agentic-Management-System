@@ -27,13 +27,11 @@ Priority and Value are how the owner decides what needs attention. Costly questi
 
 ## Current Verified State
 
-Historical card evidence below predates DQCs; [S-004 history](../../../../wiki/history/S-004.md) preserves Review and receipts. PR156 remains on its feature target, not main. Its dirty worktree is outside this writer’s scope. Native tracker is undeclared in AMS; expanded acceptance is unverified. Owner Human QA remains open.
+[TK-002H evidence](tasks/TK-002H/TASK.md) verifies native tracker/setup, exact sourced initial DQCs and reciprocal IDs at f833633. Python DQC Board, assembled Review and owner Human QA remain open. Earlier card proof remains in [S-004 history](../../../../wiki/history/S-004.md); protected PR156 candidate/worktree remain separate.
 
 ## Desired Behavior And Contracts
 
-The DQC acceptance below defines the shared Board/terminal lifecycle. Durable Git records own state; no independent question store or duplicate execution authority. Full DQC readbacks supersede the 1,000-character/no-heading restriction, while routine page editing remains excluded. Preserve legacy cards, history and protected worktrees. Retain the artifact theme and [DDR-000Y tokens](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md).
-
-Reusable source belongs in KaydenClark/skills. Supported package updates own AMS managed files/receipts; no hand-copy, forged hashes or installed-skill changes. Round completion and concept confirmation grant no additional execution authority or Human QA.
+The acceptance below and confirmed readback own behavior. Durable DQCs own concepts; execution records own work. Full DQC readbacks supersede the 1,000-character/no-heading restriction; no routine page editor. Preserve legacy data and the [DDR-000Y theme](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md). Reusable source belongs in KaydenClark/skills; supported package updates own managed bytes/receipts. No forged hashes, installed-skill changes or authority inferred from round completion.
 
 ## Non-Goals
 
@@ -75,11 +73,11 @@ Historical committed-card evidence remains valid for that candidate, not the new
 
 ### DQC lifecycle acceptance
 
-- [ ] **Initial capture and setup.** Create/Adopt/explicit Update yields usable DQCs and deterministic root TRACKER.md. Initial interview branches have stable IDs; existing schema/declarations remain readable. A bundled-but-unusable tool fails.
+- [x] **Initial capture and setup.** Create/Adopt/explicit Update yields usable DQCs and deterministic root TRACKER.md. Initial interview branches have stable IDs; existing schema/declarations remain readable. A bundled-but-unusable tool fails. Evidence: [TK-002H](tasks/TK-002H/TASK.md).
 - [ ] **Complete readback.** Cards show question, why, full proposal, source, revision, separate Priority/Value reasons and state. Confirm binds displayed bytes; corrections/quality feedback preserve owner words without invented confirmation.
 - [ ] **One safe lifecycle.** CLI/web preserve exact confirmed versions, source/scope, corrections, ratings and flags across retry/restart. Stale/concurrent/failed writes cannot overwrite or partially save; pending wording never inherits confirmation.
 - [ ] **Round continuation.** Review every changed DQC and quality event; retain unanswered/dependent questions. Reconciliation links actual Wiki/docs revisions, authorized preparation or next frontier. A count without continuation fails.
-- [ ] **Connected lanes.** DQCs and execution owners reference stable IDs in both directions, including qualified Tasks. Show deferral, supersession, outcome evidence and affected reopening without duplicating execution authority.
+- [x] **Connected lanes.** DQCs and execution owners reference stable IDs in both directions, including qualified Tasks. Show deferral, supersession, outcome evidence and affected reopening without duplicating execution authority. Evidence: [TK-002H](tasks/TK-002H/TASK.md).
 - [ ] **Usable current Board.** Refresh new/revised/resolved DQCs without manual preparation; preserve typing, returned notes and history. Origin/escaping/local-only protections and 375px dark/light controls hold. Legacy records and protected worktrees remain intact.
 - [ ] **Verified delivery.** Source setup/update compatibility, preservation and recovery pass; AMS consumes authentic package receipts. Applicable source gates and independent assembled Review identify exact candidates. Personal catalog is unchanged; agent checks supply no Human QA.
 

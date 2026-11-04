@@ -25,7 +25,19 @@ Return exact source/AMS SHAs, branch/PR, API contract, before/after checks, sour
 
 ## Acceptance
 
-- [ ] A fresh and existing Workbench can capture/read/confirm a complete DQC and produce deterministic root TRACKER.md through supported setup operations.
-- [ ] Terminal actions preserve exact readbacks, correction/feedback/source/scope history, pending confirmation boundaries, stable related IDs and round continuation; simultaneous/stale/repeated/failed writes are safe.
-- [ ] Catalog source passes applicable checks and actual review; baseline/pruning/retest evidence is retained. Checked source delivery and supported AMS update preserve original catalog/private/project work and receipt integrity.
-- [ ] Four initial branch DQCs and the exact confirmed concept are recoverable with honest confirmation states and reciprocal execution references; no synthetic owner confirmation or Human QA.
+- [x] A fresh and existing Workbench can capture/read/confirm a complete DQC and produce deterministic root TRACKER.md through supported setup operations.
+- [x] Terminal actions preserve exact readbacks, correction/feedback/source/scope history, pending confirmation boundaries, stable related IDs and round continuation; simultaneous/stale/repeated/failed writes are safe.
+- [x] Catalog source passes applicable checks and actual review; baseline/pruning/retest evidence is retained. Checked source delivery and supported AMS update preserve original catalog/private/project work and receipt integrity.
+- [x] Four initial branch DQCs and the exact confirmed concept are recoverable with honest confirmation states and reciprocal execution references; no synthetic owner confirmation or Human QA.
+
+## Verified handback
+
+Director accepted the native/setup result at `f833633ff421d7e0d7220bc0d4c812174bf428fd`; Board Task TK-002I and assembled Review remain.
+
+- [Source PR68](https://github.com/KaydenClark/skills/pull/68) and [persistence follow-up PR69](https://github.com/KaydenClark/skills/pull/69) merged. Independent source Review passed exact heads fde0090 and 2f9d45a; source 57/57 plus final strengthened clone case 1/1. Final source main 41e537f Catalog and cleanup checks passed. Independent pruning and same-case retest are recorded in the source candidate.
+- Supported AMS update receipt identifies package `f38e2b3e15caa7e883e1bcca424c17a2da34bd66cb164f4865d6972894c40658`. Existing formation provenance is retained; ignored backups support tested rollback/reapply and valid tool verification.
+- Local full suite: 810 passed/4 skipped. [Exact fresh CI](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/41770272779): 809 passed/5 skipped; hygiene zero; layout/ADR/render and existing 375px checks passed. Platform skips differ; neither run supplies new Board QA.
+- Actual fresh clone works before repair: both collection markers, native committed action/replay and deterministic projections pass. Root independently compared exact confirmed readback with proposal, immutable snapshot and primary answer. DQC-000A is confirmed; B/C/D are non-actionable pending context with no invented confirmations. Execution owners link stable IDs back.
+- All 757 original tracked paths remain; no product/site/legacy Board bytes changed. Installed personal catalog's 3137 file/link identities are unchanged. Earlier candidates, ignored recovery and the pre-existing REBASE_HEAD marker remain. Original before-work closeout snapshot was not captured; later inventory cannot establish that earlier boundary.
+
+Merge answer: native/runtime content is eligible; source is merged, AMS assembly delivery waits TK-002I and independent assembled Review. Completion answer: this Task's scoped acceptance is met. Human QA, website deployment and personal-catalog installation are not claimed.
