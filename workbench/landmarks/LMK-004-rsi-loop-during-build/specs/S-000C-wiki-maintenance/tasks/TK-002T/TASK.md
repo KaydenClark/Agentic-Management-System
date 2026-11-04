@@ -3,11 +3,11 @@
 **Task ID:** TK-002T
 **Spec ID:** S-000C
 **Slice:** Maintained explanations across ingest, query and correction
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: All S-000C Acceptance Criteria
 **Planned verification:** Baseline/retained-byte hashes; native checks; ingest/query; cold retrieval; isolated correction; semantic review.
-**Proof:** pending
+**Proof:** Wiki/doctor/layout/next/hygiene/range-diff PASS; baseline pytest839 pass6 skip; source intake/query and synthetic correction PASS;78 original JOTs/19 source-history files retained; root cold retrieval PASS at fb7e22b
 **Claimed by:** none, codex-wiki-implement
 **Current claimant:** codex-wiki-implement
 
@@ -42,3 +42,4 @@ Content fb7e22b9522e6347547d03d5e78e134cdcaeef66 is pushed to the assigned Spec 
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-000C-wiki-maintenance | fb7e22b9522e6347547d03d5e78e134cdcaeef66 | ahead 0 behind 0 | 2 | fb7e22b focused Wiki/render/doctor/layout/next/hygiene/range-diff PASS; baseline pytest839 pass6 skip; synthetic correction and78-JOT/19-history preservation PASS | Three topics, four Landmark syntheses, MEMORY, maintenance guide/SKILLS, Board README, source/QA report and failure log | Fresh-context retrieval, independent Review, fresh full suite/shared CI and integration recovery pending root; no Human QA or general benefit claim | 5089dcd432b6a60798a8915899d7c50f66861ea307fb7cf4f3d39d456d5e3560 |
+| 2 | Feature/S-000C-wiki-maintenance | d99939a2b61b26ff37b7d2b127d5dfbaf05bdd46 | ahead 0 behind 0 | 0 | Wiki/doctor/layout/next/hygiene/range-diff PASS; baseline pytest839 pass6 skip; source intake/query and synthetic correction PASS;78 original JOTs/19 source-history files retained; root cold retrieval PASS at fb7e22b | Three topics; four Landmark syntheses; MEMORY; maintenance guide/SKILLS; Board README; intake/QA report; feedback | Task slice met; assembled independent Review/fresh suite/shared CI/main delivery remain root-owned; preintegration workspace recovery incomplete; no Human QA, redesign delivery or general benefit claim; close attribution: {"agent":"codex-wiki-implement","claimant":"codex-wiki-implement","onBehalfOf":null} | d6b0a68e50146a9ae1ed709c64464cc2a9c033840dd869b81a7013194b3a405f |
