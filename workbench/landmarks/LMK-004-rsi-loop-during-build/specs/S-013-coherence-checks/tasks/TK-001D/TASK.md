@@ -16,6 +16,8 @@ Exercise one website Task with a planted acceptance miss and green unit checks. 
 
 Include the owner's [preparation-bypass failure](../../../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md): exercise a shared-skill request whose source is outside AMS and another large AMS change. Detect missing Map/Plan, an overbroad assignment or execution past a Prepare stop before owner intervention. Record and route the exact missing obligation to S-000A's repair owner; this coherence Task reports and verifies detection, not product/source repairs. Preserve the original finding and all prior evidence. This added case is planned only and does not release owner:feedback-loop-implementation.
 
+Also detect one planted recurrence and stale actual loaded skill identity without owner intervention, distinguishing intentional target-skill-withheld baselines from stale use. Link each finding to its earlier occurrence and eligible-use context; an unavailable host identity remains unknown.
+
 Size: one representative occurrence through the full path; widen only through another bounded run under this Spec. Existing contracts and history remain authoritative. Return exact candidate, checks, observed outcome, remaining findings and next action to this Spec. Non-site delivery targets main; site delivery targets dev. No implementation, campaign execution, scheduler change, installation or deployment is authorized by this planning record.
 
 ## Acceptance

@@ -4,8 +4,8 @@
 **Spec ID:** S-002
 **Slice:** One feedback finding completes repair, adoption and recurrence observation
 **Status:** blocked
-**Blockers:** owner:feedback-loop-implementation
-**Destination:** spec-acceptance: Feedback loop connection
+**Blockers:** owner:feedback-loop-implementation, TK-002Q
+**Destination:** spec-acceptance: Cycle
 **Planned verification:** One observable original-case demonstration, planted failure, replay/resume and affected regression checks; applicable RUNBOOK checks.
 
 ## Assignment
@@ -25,4 +25,4 @@ Size: one representative occurrence through the full path; widen only through an
 
 ## Prerequisite release
 
-Before removing the execution hold, verify delivered S-013/TK-001D, S-005/TK-001E, S-007/TK-001F and S-011/TK-003 evidence. The native blocker grammar does not support qualified cross-Spec Task IDs. Keep this hold until these exact artifacts exist; do not substitute completion of entire Specs or claim automatically enforceable cross-Spec edges.
+Before removing the execution hold, verify delivered S-013/TK-001D, S-005/TK-001E, S-007/TK-001F, S-011/TK-003 and S-006/TK-002N and TK-002O, S-000B/TK-002P and S-002/TK-002Q evidence. TK-002Q is the native same-Spec dependency; cross-Spec inputs are verified artifacts under the owner hold. The native blocker grammar does not support qualified cross-Spec Task IDs. Keep this hold until these exact artifacts exist; do not substitute completion of entire Specs or claim automatically enforceable cross-Spec edges.

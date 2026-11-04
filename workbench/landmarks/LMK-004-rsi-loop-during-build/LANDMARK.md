@@ -7,7 +7,7 @@
 **Updated:** 2026-11-01
 **Catalog description:** The measured self-improvement loop, run on the website build and the work after it, with safeguards that keep its results honest.
 **Blockers:** none
-**Next gate:** Plan the mapped capabilities; stopped campaigns and implementation holds remain scoped.
+**Next gate:** Launch TK-002M to finish design and preparation; stopped campaigns and implementation holds remain scoped.
 
 ## Direction
 
@@ -83,7 +83,7 @@ The decision records under this landmark, one line each, linked to their record.
 
 ## Direct Tasks
 
-- none
+- [TK-002M - Finish the RSI loop design and prepare its executable Task graph](tasks/TK-002M/TASK.md) (held until the design launch)
 
 ## Verification Procedure
 

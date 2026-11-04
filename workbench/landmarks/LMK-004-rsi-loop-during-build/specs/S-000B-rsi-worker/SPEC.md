@@ -9,12 +9,12 @@
 **Catalog description:** Local Python execution and recovery for authorized RSI campaigns, with durable Supabase state.
 **Blockers:** none for mapping
 **Confirmation:** Sourced owner answers and separation-of-concerns direction in the linked Wiki; assembled implementation readback pending.
-**Execution approval:** none; Map only.
-**Next gate:** Plan within the mapped destination; implementation requires scoped authorization.
+**Execution approval:** none for implementation; Map/Plan preparation only.
+**Next gate:** TK-002M completes design and preparation; implementation requires a later scoped launch.
 
 ## Intent and authority
 
-[Owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) places the RSI Loop at LMK-004 and permits capability separation. Supabase Free stores durable state; Python executes outside it. The owner uses subscription meters, not API-dollar budgets. This new Spec maps the worker, creates no execution Tasks and restarts no stopped campaigns.
+[Owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) places the RSI Loop at LMK-004 and permits capability separation. Supabase Free stores durable state; Python executes outside it. The owner uses subscription meters, not API-dollar budgets. This Spec maps the worker; TK-002P is prepared and held. No stopped campaign is restarted.
 
 ## Outcome
 
@@ -53,7 +53,7 @@ Real execution needs supported harness authentication, appropriate local tools, 
 
 ## Vertical Implementation Slices
 
-None prepared. Map creates zero Tasks; tasks/ contains only .gitkeep.
+TK-002P prepares one held end-to-end worker recovery slice; the design stage may refine its released inputs.
 
 ## Acceptance Criteria
 
