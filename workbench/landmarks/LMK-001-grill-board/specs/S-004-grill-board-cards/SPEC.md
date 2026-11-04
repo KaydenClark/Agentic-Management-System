@@ -7,7 +7,7 @@
 **Owner:** Kayden; codex-s004-director
 **Stance:** Builder
 **Updated:** 2026-11-04
-**Catalog description:** Local Grill Board cards with Priority, Value, a rating and a "too taxing" flag, whose confirmed answers are written straight into their owning records.
+**Catalog description:** Local DQC readback cards and TRACKER.md, with shared actions and stable execution links.
 **Blockers:** none
 **Confirmation:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
 **Execution approval:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
@@ -23,15 +23,15 @@ One local Python Board presents current DQCs as complete readback questions. Boa
 
 ## Why It Matters
 
-Priority and Value are how the owner decides what needs attention. Costly questions waste the scarcest input, so the owner can flag them for rewrite.
+Owner attention is scarce. Exact intent, separate Priority/Value and quality feedback keep questions usable and connected to outcomes.
 
 ## Current Verified State
 
-[TK-002H evidence](tasks/TK-002H/TASK.md) verifies native tracker/setup, exact sourced initial DQCs and reciprocal IDs at f833633. Python DQC Board, assembled Review and owner Human QA remain open. Earlier card proof remains in [S-004 history](../../../../wiki/history/S-004.md); protected PR156 candidate/worktree remain separate.
+[H](tasks/TK-002H/TASK.md) proves tracker/setup and exact initial DQCs; [I](tasks/TK-002I/TASK.md) proves the Python Board; [K](tasks/TK-002K/TASK.md) proves the source-generator correction. CI d760635 passes839/6skip and10browser checks. [History](../../../../wiki/history/S-004.md) owns actual reviews/receipts; owner Human QA remains unperformed. Prior candidates/recovery stay preserved.
 
 ## Desired Behavior And Contracts
 
-The acceptance below and confirmed readback own behavior. Durable DQCs own concepts; execution records own work. Full DQC readbacks supersede the 1,000-character/no-heading restriction; no routine page editor. Preserve legacy data and the [DDR-000Y theme](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md). Reusable source belongs in KaydenClark/skills; supported package updates own managed bytes/receipts. No forged hashes, installed-skill changes or authority inferred from round completion.
+The acceptance and confirmed readback own behavior. DQCs own concepts; execution records own work. Full DQC readbacks supersede the old context limit; no page editor. Preserve legacy data and [DDR-000Y theme](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md). Reusable source belongs in KaydenClark/skills; supported updates own managed bytes/receipts. No installed-skill changes or authority inferred from round completion.
 
 ## Non-Goals
 
@@ -76,12 +76,12 @@ Historical committed-card evidence remains valid for that candidate, not the new
 ### DQC lifecycle acceptance
 
 - [x] **Initial capture and setup.** Create/Adopt/explicit Update yields usable DQCs and deterministic root TRACKER.md. Initial interview branches have stable IDs; existing schema/declarations remain readable. A bundled-but-unusable tool fails. Evidence: [TK-002H](tasks/TK-002H/TASK.md).
-- [ ] **Complete readback.** Cards show question, why, full proposal, source, revision, separate Priority/Value reasons and state. Confirm binds displayed bytes; corrections/quality feedback preserve owner words without invented confirmation.
-- [ ] **One safe lifecycle.** CLI/web preserve exact confirmed versions, source/scope, corrections, ratings and flags across retry/restart. Stale/concurrent/failed writes cannot overwrite or partially save; pending wording never inherits confirmation.
-- [ ] **Round continuation.** Review every changed DQC and quality event; retain unanswered/dependent questions. Reconciliation links actual Wiki/docs revisions, authorized preparation or next frontier. A count without continuation fails.
+- [x] **Complete readback.** Cards show question, why, full proposal, source, revision, separate Priority/Value reasons and state. Confirm binds displayed bytes; corrections/quality feedback preserve owner words without invented confirmation. Evidence: [I](tasks/TK-002I/TASK.md).
+- [x] **One safe lifecycle.** CLI/web preserve exact confirmed versions, source/scope, corrections, ratings and flags across retry/restart. Stale/concurrent/failed writes cannot overwrite or partially save; pending wording never inherits confirmation. Evidence: [I](tasks/TK-002I/TASK.md).
+- [x] **Round continuation.** Review every changed DQC and quality event; retain unanswered/dependent questions. Reconciliation links actual Wiki/docs revisions, authorized preparation or next frontier. A count without continuation fails. Evidence: [I](tasks/TK-002I/TASK.md).
 - [x] **Connected lanes.** DQCs and execution owners reference stable IDs in both directions, including qualified Tasks. Show deferral, supersession, outcome evidence and affected reopening without duplicating execution authority. Evidence: [TK-002H](tasks/TK-002H/TASK.md).
-- [ ] **Usable current Board.** Refresh new/revised/resolved DQCs without manual preparation; preserve typing, returned notes and history. Origin/escaping/local-only protections and 375px dark/light controls hold. Legacy records and protected worktrees remain intact.
-- [ ] **Verified delivery.** Source setup/update compatibility, preservation and recovery pass; AMS consumes authentic package receipts. Applicable source gates and independent assembled Review identify exact candidates. Personal catalog is unchanged; agent checks supply no Human QA.
+- [x] **Usable current Board.** Refresh new/revised/resolved DQCs without manual preparation; preserve typing, returned notes and history. Origin/escaping/local-only protections and 375px dark/light controls hold. Legacy records and protected worktrees remain intact. Evidence: [I](tasks/TK-002I/TASK.md).
+- [x] **Verified delivery.** Source setup/update compatibility, preservation and recovery pass; AMS consumes authentic package receipts. Applicable source gates identify exact candidates. Personal catalog is unchanged; agent checks supply no Human QA. Evidence: [I](tasks/TK-002I/TASK.md). [K](tasks/TK-002K/TASK.md).
 
 ## Verification And Documentation
 

@@ -25,13 +25,25 @@ Return exact SHA, tests, screenshots/implementor QA against parent acceptance, l
 
 ## Acceptance
 
-- [ ] Current DQCs render as complete readback-shaped cards; confirm/correct/feedback use the native lifecycle with exact owner words and visible history.
-- [ ] New/revised/resolved DQCs and round changes appear without manual preparation, preserving unsaved typing, unanswered/dependent frontier and clear reconciliation/next action.
-- [ ] Existing committed card data, answers and flags survive; no duplicate competing question store, unsafe path/origin, stale overwrite or partial save.
-- [ ] Focused and full product checks plus dark/light 375px browser QA pass on the exact candidate; source/usage docs match actual behavior and no Human QA is fabricated.
+- [x] Current DQCs render as complete readback-shaped cards; confirm/correct/feedback use the native lifecycle with exact owner words and visible history.
+- [x] New/revised/resolved DQCs and round changes appear without manual preparation, preserving unsaved typing, unanswered/dependent frontier and clear reconciliation/next action.
+- [x] Existing committed card data, answers and flags survive; no duplicate competing question store, unsafe path/origin, stale overwrite or partial save.
+- [x] Focused and full product checks plus dark/light 375px browser QA pass on the exact candidate; source/usage docs match actual behavior and no Human QA is fabricated.
 
 ## Workspace preservation
 
 Workspace baseline sha256:bfc58b1c0c4fd948b8522e7c742347d34ee20e34099c6344c9328dafdf8f40f2
 
 The implementation begins in a fresh isolated clone at published `1553bc6`, after native claim `0da727f`. The complete starting snapshot is retained privately. The original-checkout prelude snapshot was incomplete because historical REBASE_HEAD remains; it and its exact bytes are retained without removal. This new workspace baseline does not retroactively replace that limitation. No product edits preceded this binding.
+
+## Verified handback
+
+High-tier Codex implementor gpt-6.1-sol delivered product d9178b0, then guide/manifest/CI corrections 2e50b2b. The director inspected dark375/light1280 screenshots and the safe semantic-heading correction. Exact owner source remains stored unchanged; rendered sections escape prose. Native transactions remain the sole DQC writer.
+
+- [HTTP/native regressions](../../../../../../../tests/test_grill_board_dqcs.py) cover full readback, exact confirmation and retry, web/CLI history parity, corrections/quality, source/dirty/stale failures, concurrent writers, failed commit and unrelated staging, dependency holds, context/history, legacy preservation, origin checks, cross-topic links and malformed manifests. Unknown receipts retain the original submission; actual browser POST bytes (including CRLF) match saved/replayed words.
+- [Rendered checks](../../../../../../../tests/test_grill_board_dqc_browser.py) and [desktop screenshot](../../../../../../../grill-board/qa/dqc-light-1280.png) cover 375/1280 dark/light, reachable controls, escaped complete semantic sections, refresh/draft retention and unknown-outcome retry. All 10 browser checks passed, including three existing legacy checks. The round walkthrough performs web input, finish, actual disposable Wiki commit, sourced native reconciliation and a next proposal visible through refresh.
+- [Exact assembled CI d760635](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/41776062954) passed: 839 tests, 6 skips; browser 10 passed; full PR-range whitespace, hygiene zero, layout/ADR/render passed. Prior local full run834/6 and affected checks are supporting evidence, not a substitute for this fresh candidate.
+- Both independent axes revalidated guide/manifest corrections; source K fixes the generated whitespace check through the package. Real-project read-only load preserves A confirmed and B/C/D non-actionable context, zero source issues. No synthetic owner actions, personal-catalog update or website deployment.
+- Original root prelude snapshot remains explicitly incomplete due retained historical REBASE_HEAD. Product edits began only after a genuine complete snapshot in the isolated implementation clone, bound separately in 8845720. Private baseline/dispositions are retained; full inventory accounting awaits integration and generated-cache cleanup rather than a fabricated preintegration pass.
+
+Merge answer: code is eligible under checked non-site delivery, pending final assembled record/review gates. Completion answer: scoped implementation acceptance is met; native closure follows director acceptance. Actual owner Human QA and Spec acceptance remain unperformed.
