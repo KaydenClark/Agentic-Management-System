@@ -14,72 +14,17 @@ last_verified: 2026-11-02
 
 ## Current mapped destination
 
-The 2026-11-03 owner answers and Map request below govern this revision. LMK-004 owns the complete RSI Loop; S-002 owns evaluation/qualification, S-000B worker execution/recovery, and S-006 durable Supabase data, S-007 its public presentation, S-013 detection and S-011 shared-skill qualification/delivery. The Wiki preserves understanding so another session can recover it; Specs own the checkable destination. One planned worker Spec, S-000B, separates execution/recovery from evaluation. No execution Task is created.
+LMK-004 owns the full RSI Loop; S-002 owns evaluation and qualification, S-000B worker execution and recovery, S-006 durable data, S-007 presentation, S-013 detection, S-011 shared-skill delivery and S-000A the catalog refocus. Specs own acceptance; the [continuation guide](guidebooks/rsi-loop-continuation.md) links the prepared Tasks and launches.
 
-Supabase Free stores canonical worker-written cases, runs, candidates, comparisons and dispositions; Markdown remains canonical failure intake. The Python worker executes outside Supabase, initially locally; raw transcripts stay local/private. Safe Git exports are recovery copies, never a competing writable authority. Database scheduling/queues are implementation options, not a required service purchase. The host must be available to execute; database availability alone does not run agents.
+Canonical failure intake is [WORKBENCH_FEEDBACK.md](../feedback/WORKBENCH_FEEDBACK.md); worker-written cases, runs, candidates, comparisons and dispositions are canonical in Supabase. Raw transcripts stay local and private; safe Git exports are recovery copies. A Python worker runs outside Supabase, initially locally. Supabase availability is not worker availability.
 
-Mid/Small Codex or Claude workers use available subscription meters, High when needed. There is no API-dollar budget. The existing three-attempt limit, baseline exclusion, r1 Fitness/Alignment qualification, no-regression and useful-benefit requirements remain. A qualifying skill may merge; installation and stopped-campaign restart retain separate authority. Existing frozen campaign conditions remain pinned.
+Use available Codex or Claude subscription meters, Mid/Small by default and High only when needed. Preserve initial attempt, retry, retry, stop; baseline excluded. Existing campaign pins and stops remain. Stable/Excellent, useful benefit and no regression are required; merge, installation, observed loading, owner Human QA and website promotion remain distinct. The assembled earlier readback is not confirmed wholesale.
 
-Mapping is authorized and implementation is held. The next phase is Plan against the revised Landmark and Specs; mapping neither prepares new Tasks nor activates existing held work. Worker invocation, meter-unavailable handling, High-tier selection and export mechanics must satisfy the contracts without inventing a budget or resetting attempts. The assembled earlier readback is not represented as confirmed wholesale.
+The owner now authorizes Map/Plan preparation, with implementation held until a separate launch. Stage A finishes genuinely open contracts and confirms the exact assembled readback. The older Map-only boundary and specific owner answers are preserved in the entries below; the newer request changes preparation authority only. No model trials, database writes, automation, installation or deployment are authorized now.
 
-The earlier plan below is retained as provenance. Its ordering is not a new dependency requiring website completion before independent local evaluation; only an actually missing input blocks its consumer.
+Research mechanisms are hypotheses, not demonstrated local benefit: [transition-state search](https://www.nature.com/articles/s41524-026-02301-9), [GEPA](https://arxiv.org/html/2507.19457v1), [ACE](https://arxiv.org/abs/2510.04618), [SkillRevise](https://arxiv.org/html/2606.01139v1), and [SWE-Skills-Bench](https://arxiv.org/abs/2603.15401v2). They do not replace r1 or prove improvement. Historical details and the earlier sequence remain in Git; the live Task records own current prerequisites.
 
-## Research basis and limits
-
-The mapping applies research mechanisms as hypotheses, not as local benefit claims. [Transition-state search](https://www.nature.com/articles/s41524-026-02301-9) supports failure-targeted variants with external validation; its fixed-dataset coverage does not prove general skill reliability. [GEPA](https://arxiv.org/html/2507.19457v1) motivates execution feedback, candidate lineage and cheap screening before broader comparisons. [ACE](https://arxiv.org/abs/2510.04618) motivates incremental preservation of useful knowledge rather than repeated wholesale rewrites. [SkillRevise](https://arxiv.org/html/2606.01139v1) motivates bounded trace-grounded revision and utility-gated retention. [SWE-Skills-Bench](https://arxiv.org/abs/2603.15401v2) motivates no-skill controls and the possibility of harmful skill guidance. None replaces AMS r1 or establishes local effectiveness; primary sources were inspected during the preceding diagnosis, not reproduced here.
-
-The mapping therefore separates historical failure coverage, existing Fitness/Alignment qualification, fresh behavioral benefit and later-use recurrence. It does not prescribe an evolutionary search library, a new scoring rubric or new infrastructure before a demonstrated need.
-
-## Intent and boundary
-
-The owner wants feedback to produce demonstrated improvements in shared skills, orchestrators to catch and record failures without prompting, and the website to show actual progress and the workflow as it evolves. This request authorizes mapping, planning and normal documentation delivery only. Implementation remains held; existing campaign stops and earlier bounded authority are unchanged. No new Spec is needed: existing capability owners cover the destination.
-
-## Stack and ownership
-
-Work and owner feedback → orchestration/QA detection → existing finding and Task records → diagnosis of product, instruction, shared skill or tool cause → bounded repair and comparison → disposition → personal installation and observed later use → safe S-006 writer/Supabase records → S-007 website and evolving workflow explanation. S-005 owns page feedback and taste; S-013 owns detection/coherence; S-002 owns the assembled learning cycle; S-011 supplies the already planned shared repair. S-006 remains the storage owner; its existing schema is inspected before any extension.
-
-Detection and truthful reporting do not wait for semantic evaluator qualification. Qualification gates retention and benefit claims, not reporting a mismatch. Do not silently convert every owner preference into a universal skill rule. Preserve original feedback, agent interpretation, causal evidence and disposition separately.
-
-## Sequence and genuine dependencies
-
-1. **[S-013/TK-001D](../landmarks/LMK-004-rsi-loop-during-build/specs/S-013-coherence-checks/tasks/TK-001D/TASK.md) — An orchestrator detects and routes an unreported failure.** No new artifact prerequisite; first technical frontier.
-2. **[S-005/TK-001E](../landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/tasks/TK-001E/TASK.md) — A recorded correction reaches the next draft and review.** Uses existing TK-003 voice record before proving consumption.
-3. **[S-007/TK-001F](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-001F/TASK.md) — A reader follows a real failure through progress and workflow changes.** Uses existing TK-002 live row presentation before widening to learning history.
-4. **[S-002/TK-001G](../landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/tasks/TK-001G/TASK.md) — One feedback finding completes repair, adoption and recurrence observation.** Requires the three preceding paths and S-011 later-use evidence to prove the assembled cycle.
-
-Each slice is one observable full path, not a schema/API/UI shard. Existing S-005/TK-001 and TK-003, S-007/TK-002, and S-011 Tasks retain their work; do not duplicate them. At execution, release prerequisites only from verified delivered artifacts, never a green label. Narrow overbroad inherited whole-Spec blockers only through the supported lifecycle after proving their required inputs exist.
-
-## Ready frontier and assembly
-
-Execution frontier: none for this newly planned work. Every new Task carries owner:feedback-loop-implementation, reflecting the explicit stop before implementation. Once execution is authorized, S-013 detection is the first new independent slice; existing prerequisite work retains its own authority and writers. Do not reopen S-002 PR 101 or reset attempts. An unavailable evaluator blocks its comparison, not unrelated reporting or website work.
-
-One writer per owner; A owns site changes targeting dev, B owns local feedback/storage/loop work, C owns independent coherence reporting without secrets or product writes. Shared skill repairs occur in KaydenClark/skills using author-skill and qualified evaluation, with only authorized personal catalog installation. Other projects are not modified.
-
-## Acceptance demonstration
-
-Give one feedback item once. Observe capture, diagnosis, assignment, bounded repair, baseline/candidate evidence, retain/revise/reject disposition, actual personal skill loading in later website work, and a safe public explanation. Plant a recurrence that is detected before owner intervention. Interrupt and resume coordination without duplicate claims or lost findings. Show failed/stopped/unknown evidence and stale/read-error states honestly. Track owner interventions and recurrence alongside outcomes; audit delta alone is not benefit.
-
-## Capability setup and remaining limits
-
-Reuse existing records, board, runner, writer, Supabase and website. No new service is selected. Verify the execution host and continuation facility during the assembled Task; use a bounded existing heartbeat only under subsequent execution authority. Automatic proposing remains behind the existing trusted-grader/cost/manual-round gate. Human QA and dev-to-main promotion remain owner actions. Current records and code demonstrate incomplete connections, not completed behavior. Planned verification is not proof.
-
-Native dependency limitation: qualified cross-Spec Task edges are unsupported. The assembly Task retains its execution hold until its named artifact prerequisites are verified; no whole-Spec completion gate is substituted.
-
-## Later catalog-refocus correction
-
-The owner-recorded [preparation bypass](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) is a concrete recurrence case for S-013/TK-001D. [S-000A](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) separately owns the newly requested catalog-wide destination and repair side. The earlier statement that this feedback-loop mapping needed no new Spec applies to that earlier scope, not all future skill work. Both additions remain Prepare-only; existing holds, campaigns and evidence are unchanged.
-
-## 2026-11-03: one failure intake file
-
-Source: Kayden's AMS chat, 2026-11-03. The owner directed that every failure
-be recorded in the same Markdown file with the failed model tier, provider,
-activity and correct outcome, so failures can guide skill repair.
-[WORKBENCH_FEEDBACK.md](../feedback/WORKBENCH_FEEDBACK.md) is that canonical
-log for all failure categories, superseding its harness-only intake scope.
-Detailed reports and trial ledgers remain evidence, linked by failure ID.
-Missing actor metadata stays unknown. New failed retries receive separate rows.
-This authorizes this logging consolidation, not the earlier held cross-Spec
-automation, shared-skill repairs, new trials or installation.
+The [preparation-bypass failure](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) is a recurrence case for S-013/TK-001D. Owner instruction of 2026-11-03 consolidated all failure categories into one Markdown intake; detailed reports and ledgers remain linked evidence. Missing actor metadata stays unknown. This consolidation did not authorize held automation, shared-skill repair, trials or installation.
 
 <!-- jot-entry -->
 ### JOT-9179f5d2-dd33-42ed-b679-5bf49c79c078
@@ -144,4 +89,30 @@ Topic: feedback-improvement-loop-plan
 Supersedes: JOT-d07bee36-7b4a-4029-8124-1a4120e97ccd
 
 The owner identifies the RSI Loop as a Landmark and permits capability-specific Specs. LMK-004 owns the whole destination; S-002 evaluation/qualification; S-000B execution/recovery; S-006 persistence; S-007 presentation; S-013 detection; S-011 shared-source delivery. This corrects only the earlier S-002 whole-lifecycle ownership interpretation. All other confirmed terms in the superseded entry remain: unchanged three-attempt limit with baseline excluded, metered Mid/Small Codex/Claude and High when needed, no API-dollar cap, existing Fitness/Alignment and Stable/Excellent/no-regression/useful-benefit gates, Markdown intake, canonical Supabase records with safe Git exports, local/private raw transcripts, and separate installation authority. Mapping creates one planned worker Spec and zero Tasks. The owner now explicitly approves merging this mapping into main; implementation and stopped trials remain unauthorized by this map.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-55876e5d-6957-4a4e-917b-8ba7245adee2
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:28:56.703Z
+Author: Kayden (captured by Codex)
+Source: Kayden's AMS chat, 2026-11-04, RSI loop Map and Plan preparation request
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+The owner wants the RSI Loop to finish pointing in the mapped direction and requests orchestration of Map and Plan for the unrecorded remainder. Prepare a recoverable next chat to finish loop design and executable preparation, followed by a separate later chat to implement the prepared loop. This instruction authorizes current documentation and preparation, not implementation, model trials, database writes, automation, installation, or deployment. The earlier assembled readback is not confirmed wholesale by this request; the design stage must confirm the exact assembled readback and resolve genuinely open choices before affected implementation. Existing confirmed answers, attempts, stopped campaigns and separate release authorities remain in force.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-df911047-15f2-444b-84c8-35e347675c36
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:39:57.714Z
+Author: Kayden (captured by Codex)
+Source: Kayden direct approval in AMS chat, 2026-11-04, publication question reply
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden explicitly answered "Approve push, PR, and checked merge" to publication of the 19 documentation-only RSI Map/Plan files to public KaydenClark/Agentic-Management-System, opening a PR and merging into main after shared CI passes. This approval addresses the automatic approval-review publication refusals; it authorizes no implementation, model trials, installation or deployment. Existing design confirmation, stopped campaigns, attempts and separate authorities remain unchanged.
 <!-- /jot-entry -->

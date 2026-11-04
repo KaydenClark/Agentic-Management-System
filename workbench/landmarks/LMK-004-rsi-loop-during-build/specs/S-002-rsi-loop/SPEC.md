@@ -14,13 +14,13 @@
 
 ## Intent and authority
 
-The [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) authorizes Map only; execution holds remain. No new Tasks or trials.
+[Owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes preparation; implementation and trials remain held.
 
 [Owner decisions](../../../../wiki/context-ams-purpose.md) govern resumed Journey: fixed r1/acceptance, attempts, meter and bounded versus whole scope.
 
 ## Current Verified State
 
-Scoring is met ([TK-000M](tasks/TK-000M/TASK.md#receipt)); cycle, evaluations, stops and readback remain open. The [baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md) is Broken 4/138, incomplete/unqualified, not a trial or strike. S-006/TK-000S owns exact identity. [TK-002](tasks/TK-002/TASK.md) owns the accepted narrow qualification and Unknown baseline slot; later slots wait on TK-000Y. Only stopped run28/result41 is published. Bootstrap is not benefit evidence. See [history](../../../../wiki/history/S-002.md).
+Scoring is met ([TK-000M](tasks/TK-000M/TASK.md#receipt)); cycle, evaluations, stops and readback remain open. The [baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md) is Broken 4/138, unqualified and not a strike; S-006/TK-000S owns identity. TK-002 owns narrow qualification and Unknown baseline; later slots wait on TK-000Y. Only stopped run28/result41 is published; bootstrap is not benefit. See [history](../../../../wiki/history/S-002.md).
 
 ## Desired Behavior
 
@@ -32,33 +32,19 @@ LMK-004 owns the loop; S-000B executes, S-006 persists, S-013 detects recurrence
 
 Evaluate individual skills or declared bundles; bundle gains do not certify each component. Diagnose skill, instruction, tool, environment, context, ownership, coordination, proof or model limitations; unknown remains unknown. Route product defects to their Specs.
 
-Cases link original correct outcomes, baseline, loaded versions, tools and end states to r1 checks. Objective checks and qualified semantic judgments supply evidence, not new scores. Transcript-only tests cannot certify Git/filesystem behavior. Cheap screening never replaces full qualification.
+Cases link original outcomes, baseline, actual loaded versions, tools and end states to r1. Separate optimizer training/selection from fresh confirmation; studied cases become development cases. Target-skill-withheld controls retain mandatory authority and safety instructions. Record natural routing and explicit invocation per host, actual loading and verified end state. Measure owner review effort and recurrence per eligible use; unknown denominators stay unknown. Objective and qualified semantic checks supply evidence, not new scores. Transcripts cannot certify Git/filesystem behavior; cheap screening cannot replace qualification.
 
 Preserve historical provenance, development/held-out boundaries, prior-pass and cross-skill regressions. Count eligible successes, failures, owner interventions and later recurrence. Document size or audit gains alone are not useful benefit.
 
 ### Audit scores
 
-Canonical: `audit-workbench` r1 checks/scenarios/qualification, version 1,
-hash `96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578`.
-Freeze rubric, scope/inventory/exclusions, IDs/classes, baseline/candidate/skill
-pins, loaded artifacts, host/tools and evaluator model/prompt/qualification;
-no changes/extra points.
+Canonical: `audit-workbench` r1 version 1, hash `96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578`. Freeze rubric, scope, IDs, pins, loaded artifacts, host/tools and evaluator/model/prompt/qualification; no extra points.
 
-r1 owns rows, pooled `100 × Yes / applicable`, run pass, levels (3/2/1/0 passing
-of three runs = Excellent/Stable/Functional/Broken; Critical No overrides) and
-eligibility; [assessments](../../../../../evals/ASSESSMENTS.md) implement them.
-Missing/Unknown/refused/interrupted stays No in class and denominator; label
-static/unqualified proof; no rounding; empty means no percentage. Acceptance
-implies no QA/distribution/benefit; bounded results cannot certify ten-area AMS.
+r1 owns pooled `100 × Yes / applicable`, eligibility and levels (3/2/1/0 passing runs = Excellent/Stable/Functional/Broken; Critical No overrides); [assessments](../../../../../evals/ASSESSMENTS.md) implement them. Missing/Unknown/refused/interrupted stays No in class and denominator; label static/unqualified proof; no rounding or empty percentage. Acceptance is not QA, distribution or benefit; bounded results cannot certify ten-area AMS.
 
 ### Skill evals and retests
 
-`evals/` pins case/failure, prompt/fixtures/reset, permissions, end state,
-grader/model/host/loaded skill. Cover invocation/near misses, valid/adverse input,
-prerequisites/discovery/resume/authority. Map r1 IDs; no extra points.
-Qualify good/bad/do-nothing cases and judges per r1; protect inputs/logs; manual
-trials until qualified. Findings close only by r1 three-run repaired-revision
-retest; merge/omission/score cannot close; retain recurrence/new failures.
+`evals/` pins case, fixtures, permissions, end state, grader/model/host/skill. Cover invocation, near misses, adverse input, prerequisites, discovery, resume and authority. Map r1 IDs; qualify judges and good/bad/do-nothing cases; protect inputs/logs and use manual trials until qualified. Findings close only by r1 three-run repaired-revision retest, not merge, omission or score; retain recurrence and new failures.
 
 ## Decisions And Contracts
 
@@ -88,7 +74,7 @@ S-000B executes; S-006 stores evidence; S-007 presents safe results. Only missin
 
 ## Vertical Implementation Slices
 
-Existing Tasks retain their scope; Map creates none.
+TK-002Q prepares a held controlled-comparison path.
 
 ## Acceptance Criteria
 
@@ -120,4 +106,4 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-The mapped destination grants no implementation or new trial authority. Earlier approvals, explicit holds, attempts and stopped experiments retain scope. The [Wiki](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) owns the sourced correction and continuation.
+Implementation and trials remain held; earlier approvals, attempts and stopped experiments retain scope. The [Wiki](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) owns sourced continuation.
