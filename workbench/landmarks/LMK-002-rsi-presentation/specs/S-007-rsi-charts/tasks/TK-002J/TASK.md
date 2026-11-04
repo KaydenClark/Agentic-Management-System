@@ -3,10 +3,12 @@
 **Task ID:** TK-002J
 **Spec ID:** S-007
 **Slice:** Per-skill RSI trend charts and the fitness-level-per-loop strip from recorded loops
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Skill trends; Provenance and series; Not only up
 **Planned verification:** Render tests on the recorded loop data and a labeled multi-loop fixture (contract break, model break, rejected attempt, regression); production build and site suite; desktop and 375px browser inspection in both themes; applicable RUNBOOK checks.
+**Claimed by:** claude-s007-skill-trends
+**Current claimant:** claude-s007-skill-trends
 
 ## Authority and inputs
 
