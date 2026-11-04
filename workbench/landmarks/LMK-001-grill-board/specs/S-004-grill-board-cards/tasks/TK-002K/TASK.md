@@ -4,10 +4,12 @@
 **Spec ID:** S-004
 **Concept source:** [DQC-000A](../../../../../../landmark-tracker/destination-questions/DQC-000A.json)
 **Slice:** Correct generated Markdown and deliver it through supported setup update
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Verified delivery
 **Planned verification:** Regression with empty notes and exact owner whitespace; generated projection determinism and full-range git diff check; package checks, source Review/CI and supported AMS update/receipt verification.
+**Claimed by:** codex-s004-projection
+**Current claimant:** codex-s004-projection
 
 ## Assignment
 
