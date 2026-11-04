@@ -62,8 +62,8 @@ The skills repository's process governs repair delivery. Candidate merge/install
 
 ## Vertical Implementation Slices
 
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
+[TK-002R](tasks/TK-002R/TASK.md): held exact-case fallback; old claims/stops remain.
+
 
 ## Acceptance Criteria
 

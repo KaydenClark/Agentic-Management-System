@@ -20,7 +20,7 @@ Canonical failure intake is [WORKBENCH_FEEDBACK.md](../feedback/WORKBENCH_FEEDBA
 
 Use available Codex or Claude subscription meters, Mid/Small by default and High only when needed. Preserve initial attempt, retry, retry, stop; baseline excluded. Existing campaign pins and stops remain. Stable/Excellent, useful benefit and no regression are required; merge, installation, observed loading, owner Human QA and website promotion remain distinct. The assembled earlier readback is not confirmed wholesale.
 
-The owner now authorizes Map/Plan preparation, with implementation held until a separate launch. Stage A finishes genuinely open contracts and confirms the exact assembled readback. The older Map-only boundary and specific owner answers are preserved in the entries below; the newer request changes preparation authority only. No model trials, database writes, automation, installation or deployment are authorized now.
+The owner launched Stage A on 2026-11-04 and explicitly confirmed the [exact assembled readback](guidebooks/rsi-loop-readback-2026-11-04.md). TK-002M delivers its [case](guidebooks/rsi-case-contract.md), [worker](guidebooks/rsi-worker-contract.md) and [bounded release graph](guidebooks/rsi-task-release.md); implementation remains held until a separate launch. The older Map-only boundary and specific owner answers are preserved in the entries below; the newer request changes preparation authority only. No model trials, database writes, automation, installation or deployment are authorized now.
 
 Research mechanisms are hypotheses, not demonstrated local benefit: [transition-state search](https://www.nature.com/articles/s41524-026-02301-9), [GEPA](https://arxiv.org/html/2507.19457v1), [ACE](https://arxiv.org/abs/2510.04618), [SkillRevise](https://arxiv.org/html/2606.01139v1), and [SWE-Skills-Bench](https://arxiv.org/abs/2603.15401v2). They do not replace r1 or prove improvement. Historical details and the earlier sequence remain in Git; the live Task records own current prerequisites.
 
@@ -115,4 +115,43 @@ Topic: feedback-improvement-loop-plan
 Supersedes: none
 
 Kayden explicitly answered "Approve push, PR, and checked merge" to publication of the 19 documentation-only RSI Map/Plan files to public KaydenClark/Agentic-Management-System, opening a PR and merging into main after shared CI passes. This approval addresses the automatic approval-review publication refusals; it authorizes no implementation, model trials, installation or deployment. Existing design confirmation, stopped campaigns, attempts and separate authorities remain unchanged.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-af4af602-47bf-4669-b131-65694f17ca37
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:57:47.544Z
+Author: Kayden (captured by Codex)
+Source: chat:stage-a-launch-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+On 2026-11-04 Kayden instructed: “Launch Stage A: finish design, confirm the readback, and deliver executable preparation.” This releases owner:rsi-design-launch for LMK-004/TK-002M only. Activate that design assignment; preserve all child implementation holds. The assembled readback still requires actual confirmation. No software implementation, actual model trials, database writes, automation, personal installation, deployment, stopped-campaign resumption or wider catalog work is authorized. Both S-000A pilots and all prior attempt, qualification and separate release gates remain unchanged.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-6a1d5383-d939-47b2-bd45-51e702c12550
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T08:05:56.881Z
+Author: Kayden (captured by Codex)
+Source: chat:stage-a-readback-confirmation-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden explicitly replied “Confirm the readback as written.” to the exact assembled four-section readback presented in the AMS chat on 2026-11-04. The exact body is preserved in guidebooks/rsi-loop-readback-2026-11-04.md, SHA-256 427c3f0d3c109b3ce05011433920b2f74b7044b068c41a6e8d58b08a93d9e853 (UTF-8, from Summary heading through final newline). This confirms meaning and Stage A documentation/executable preparation only. It does not authorize Stage B software implementation, model trials, database writes, automation, personal installation or deployment; prior attempt limits, stopped campaigns and both catalog pilots retain their scope and holds. The linked exact body supersedes earlier unconfirmed assembled wording only; sourced prior answers remain settled.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8529e8c1-690d-42b2-a501-dcc1dcce4a06
+Kind: verification
+State: current
+Recorded: 2026-11-04T08:23:25.859Z
+Author: Codex Stage A record writer
+Source: chat:stage-a-publication-refusal-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Root reports final Stage A candidate 5cd3b976d7909d2ce4973cfb3d6ceebb90bd3054 passed both fresh independent Standards and Spec delta reviews with zero findings, and shared CI run 41798333987 passed 839 tests/6 skipped plus 10 browser checks. Draft PR169 targets main. Automatic approval review rejected its merge twice before execution: first, trusted user authorization for the asserted owner-only default-branch merge was absent despite green CI; second, after root supplied exact scoped non-site payload and pinned-policy evidence through the same connector action, trusted user content still lacked explicit promotion authority and repository policy claims could not supply it. No merge occurred, no alternate route was attempted. Main remains cfc0bc4c7f2cd167cea2972016edee076b479b73. These are publication approval refusals FAIL-079/080, not model trials or RSI candidate strikes. Record the concrete final PR/head and obtain explicit user merge approval; changed metadata still requires final delta review/CI. Readback and preparation are complete, checked default-branch delivery is blocked; Stage B, model campaigns, DB writes, automation, installation and deployment remain held.
 <!-- /jot-entry -->

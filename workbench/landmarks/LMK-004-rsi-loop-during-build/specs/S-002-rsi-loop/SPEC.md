@@ -74,7 +74,7 @@ S-000B executes; S-006 stores evidence; S-007 presents safe results. Only missin
 
 ## Vertical Implementation Slices
 
-TK-002Q prepares a held controlled-comparison path.
+[TK-002Q case contract](../../../../wiki/guidebooks/rsi-case-contract.md).
 
 ## Acceptance Criteria
 
@@ -90,7 +90,7 @@ TK-002Q prepares a held controlled-comparison path.
 
 ## Documentation Impact
 
-LMK-004 owns the loop; the Wiki routes its capability Specs. S-012 remains the lifecycle CLI. Plan reconciles Tasks later; only missing inputs block consumers.
+LMK-004 owns the loop; Wiki routes capabilities. S-012 owns the lifecycle CLI; only missing inputs block consumers.
 
 ## Testing Seams
 

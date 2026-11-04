@@ -61,7 +61,7 @@ Build history is incomplete: the approved pinned import at 771bd1e passed, but l
 
 ## Vertical Implementation Slices
 
-Native Task records own existing slices. No new Tasks in this Map.
+[TK-002N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md); implementation held.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|

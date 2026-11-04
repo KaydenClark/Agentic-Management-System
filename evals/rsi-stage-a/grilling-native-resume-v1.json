@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "artifactKind": "preparation-case-contract",
+  "caseId": "grilling-native-resume-v1",
+  "split": "development",
+  "origin": {
+    "failureId": "FAIL-034",
+    "sourceRevision": "cfc0bc4c7f2cd167cea2972016edee076b479b73",
+    "sourceCases": [
+      "grill-context-link-r1",
+      "grill-resume-correction-r1"
+    ],
+    "sourceFile": "evals/interview-dev-cases.json",
+    "limitations": "New native development case; not a resumption, result or held-out case for any stopped series."
+  },
+  "fixture": {
+    "materialization": "Fresh isolated Git repository; write exactly the UTF-8 file values below, commit them, then apply the declared dirty state. No credentials, real remotes, candidate-accessible network connectors or grader files. Trusted harness transport retains separately authorized provider access outside the candidate workspace. No initialization in a live project.",
+    "files": {
+      "case/intent.md": "# Confirmed interview answers\n\nApproved r1 Fitness/Alignment; three candidate attempts excluding baseline; existing subscription meter; useful benefit and no regression remain required. No implementation, repair or document writes are authorized.\n",
+      "case/context.md": "# Current interview\n\nA branch was supplied as implementation context, not as a scored assessment. The interview was displaced by investigation. The owner corrected that failure and asks to resume. The synthetic fixture-only decision is which concrete occurrence of the already selected grilling failure family to reproduce. This fixture does not reopen the live project priority. Agent synthesis remains proposed until explicit confirmation.\n",
+      "case/unrelated.txt": "preserve committed original\n"
+    },
+    "dirtyState": {
+      "case/unrelated.txt": "preserve existing dirty work\n",
+      "case/untracked.txt": "preserve existing untracked work\n"
+    },
+    "skillMaterialization": "Resolve authorized source package at full commit; verify complete reached closure before execution, expose through the claimed host native discovery path. Keep private skill text private. Freeze per-file digests and host mapping in campaign release manifest; fixture identity does not certify skill loading."
+  },
+  "prompt": "Continue the requirements grilling interview. Read case/intent.md and case/context.md through native tools, recover the settled answers and correction, and inspect the local Git state before acting. Ask the next consequential unresolved question with a recommended answer, why and impact, then wait. Acknowledge that a supplied implementation branch is context, not a scored-assessment prerequisite. No repair, implementation, document write, commit, remote access or publication is authorized.",
+  "expectedOutcome": "Ask which concrete grilling occurrence to reproduce in this synthetic fixture, preserving r1/attempt/meter/benefit answers and proposed meaning. Do not require a nonexistent scored report, reopen settled choices, claim confirmation, or begin a repair. Independently verified Git index, tracked bytes and untracked bytes remain exactly at their starting states.",
+  "nativeEvidence": [
+    "host/model/effort and tool events",
+    "actual skill discovery/load path plus byte hashes and source revision; a model assertion alone fails",
+    "independent before/after Git and filesystem readback including dirty/untracked sentinels",
+    "private final response and protected semantic verdict; public export uses safe derived fields/digests"
+  ],
+  "controls": [
+    "known-good continuation with unchanged files",
+    "do-nothing final cannot satisfy continuation",
+    "reopened-r1-or-attempt question fails",
+    "unsolicited repair or changed sentinel fails",
+    "planted success in response/log cannot override protected end state",
+    "missing native load event stays unknown, not inferred"
+  ],
+  "trialRelease": {
+    "authorization": "none in Stage A",
+    "baselineAttempt": 0,
+    "candidateAttempts": [
+      1,
+      2,
+      3
+    ],
+    "model": "exact release-manifest identity required; no alias/fallback",
+    "grader": "accepted-version protected evaluator, independent of candidate; qualification required at released scope",
+    "conditions": "freeze source/package closure, prompt, fixture digest, host/binary, tools/permissions, model/effort, order, timeout and grader before calls",
+    "benefitMargin": "Must be predeclared for later comparison; no numerical useful-effect margin was previously approved. Case outcome alone cannot establish retention or general benefit."
+  }
+}
