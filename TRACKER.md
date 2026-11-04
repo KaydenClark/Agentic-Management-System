@@ -4,7 +4,7 @@ Generated from DQC records. Execution state and proof remain in Landmarks, Specs
 
 ## DQC-000A — Grilling Board purpose and DQC lifecycle
 
-Revision 9; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000A.json)
+Revision 10; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000A.json)
 
 <pre>**Summary**
 
@@ -43,6 +43,8 @@ Round: ams-concept-20261103. Dependencies: none.
 - [task:S-004/TK-002K](workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/tasks/TK-002K/TASK.md) (room): Later corrective Task repairs generated Markdown whitespace while preserving exact confirmed intent and owner history\.
 
 Expected result: The exact confirmed DQC lifecycle is traceable through supported tracker setup and the local Python Board, with source/history and distinct owner gates\. — workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC\.md.
+
+Recorded outcome (r10): Implemented and delivered through AMS PR161, main merge 3fea0317a9bf7a138de5d06ea6e86b592c151572; independent Standards/Spec PASS on fd65917; required CI839 passed/6 skipped plus10 browser checks\. Reusable setup source PR68/69/70 merged and consumed with authentic package8c3b46b0\. Owner Human QA and Spec acceptance remain unperformed; installed personal catalog unchanged\..
 - propose at r7
 - confirm at r8: Recording the actual prior owner confirmation and its exact displayed readback, not simulating a new owner action\. Source reply: Confirmed\. And I thought we just fixed that so that you could push things to the github\.
 
