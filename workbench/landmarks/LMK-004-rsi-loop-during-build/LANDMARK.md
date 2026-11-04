@@ -81,6 +81,8 @@ The decision records under this landmark, one line each, linked to their record.
 - [S-012 - Python lifecycle CLI](specs/S-012-python-lifecycle-cli/SPEC.md)
 - [S-013 - Coherence checks](specs/S-013-coherence-checks/SPEC.md)
 
+- [S-000C - Maintained Wiki understanding](specs/S-000C-wiki-maintenance/SPEC.md)
+
 ## Direct Tasks
 
 - [TK-002M - Finish the RSI loop design and prepare its executable Task graph](tasks/TK-002M/TASK.md) (Stage A preparation closed and delivered by PR169)

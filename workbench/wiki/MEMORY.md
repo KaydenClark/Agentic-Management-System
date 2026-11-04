@@ -30,6 +30,8 @@ duplicates Task state.
 - [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — confirmed readback and Stage A case/worker/release contracts; implementation remains held.
 - [Shared skills refocus](context-skills-refocus.md) — confirmed jobs, composition, prerequisites, attribution and the Prepare-only boundary; links the AMS preparation-bypass failure.
 
+- [Maintained Wiki repair](context-wiki-maintenance.md) — approved maintenance diagnosis, bounded repair scope and execution authority.
+
 ## Source Precedence
 
 Use AGENTS for authority, Blueprint or the assigned Spec for intended behavior,
@@ -94,6 +96,8 @@ One page per Spec and Landmark. The Spec holds the destination; its page holds h
 - [S-011 history](history/S-011.md) - closes, verdicts, approvals and corrections for S-011 (land skill events)
 - [S-012 history](history/S-012.md) - closes, verdicts, approvals and corrections for S-012 (Python lifecycle CLI)
 - [S-013 history](history/S-013.md) - closes, verdicts, approvals and corrections for S-013 (coherence checks)
+
+- [S-000C history](history/S-000C.md) - preparation and evidence for maintained Wiki understanding.
 
 ## Routing
 
