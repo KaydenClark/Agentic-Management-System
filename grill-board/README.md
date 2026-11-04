@@ -11,8 +11,7 @@ S-004: the [native tracker](../workbench/landmark-tracker/README.md) owns DQCs;
 The Board calls `landmark-tracker.mjs show --committed --json`, reading the same
 native records used in terminal interviews. It renders their full readback,
 why, source, scope, revision, separate Priority/Value reasons, dependencies,
-confirmed versions, exact owner feedback and revision history. Source text is
-escaped and displayed without trusting HTML. DQCs bypass the legacy short-note
+confirmed versions, exact owner feedback and revision history. Readback headings receive safe formatting; source and prose stay escaped. DQCs bypass the legacy short-note
 restriction; the Board provides no routine page drafting editor.
 
 Topics use the native concept titles. A `/?card=DQC-ID` link follows the stable

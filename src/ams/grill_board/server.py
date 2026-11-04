@@ -17,6 +17,7 @@ the Origin (or, without one, the Referer) must be its own origin.
 
 import argparse
 import json
+import re
 import uuid
 import threading
 from html import escape
@@ -345,6 +346,31 @@ def render_context(cards, topic):
     return f'<section class="context-list" aria-label="Context and history"><h2>Context and history</h2><p>Confirmed concepts, branch context and questions held for agent work.</p><ul>{links}</ul></section>'
 
 
+READBACK_HEADING = re.compile(
+    r'^\s*(?:\*\*|#{1,6}\s*)?(Summary|The why|The intended result|My next step|What I will do)\s*:?(?:\*\*)?\s*$',
+    re.IGNORECASE,
+)
+
+
+def render_readback(value):
+    """Recognize only readback section headings; all other source is escaped prose."""
+    sections, lines = [], []
+    for line in value.splitlines(keepends=True):
+        match = READBACK_HEADING.fullmatch(line.rstrip('\r\n'))
+        if match:
+            if lines:
+                sections.append('<div class="readback">' + escape(''.join(lines).strip('\r\n')) + '</div>')
+                lines = []
+            sections.append('<h3>' + escape(match[1]) + '</h3>')
+        else:
+            lines.append(line)
+    if lines:
+        sections.append('<div class="readback">' + escape(''.join(lines).strip('\r\n')) + '</div>')
+    displayed = '<div class="readback-proposal" aria-label="Exact displayed readback">' + ''.join(sections) + '</div>'
+    source = '<details class="readback-source"><summary>Exact source wording</summary>' + exact_text(value, 'Exact source readback') + '</details>'
+    return displayed + source
+
+
 def render_dqc_proposal(card):
     proposal = card.dqc['lifecycle'].get('proposal')
     if not proposal:
@@ -364,7 +390,7 @@ def render_dqc_proposal(card):
     return f"""<section class="box tone h-worth"><div class="box-head">Why this choice matters</div>
 {exact_text(proposal['why'])}</section>
 <section class="box tone h-agent"><div class="box-head">{heading}</div>
-{exact_text(proposal['readback'], 'Exact displayed readback')}</section>
+{render_readback(proposal['readback'])}</section>
 <section class="block"><div class="eyebrow">Source and scope</div>{exact_text(proposal['source'])}
 <div class="eyebrow">Scope</div>{exact_text(proposal['scope'])}<p class="small">Round {escape(proposal['round'])}</p></section>
 {dependency_section}{held}"""

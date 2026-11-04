@@ -19,7 +19,10 @@ def test_complete_readback_and_controls_reachable(dqc_room,dqc_board,browser,the
     try:
         page.goto(origin(dqc_board)+'/?card=DQC-000A')
         page.wait_for_load_state('networkidle')
-        assert page.get_by_label('Exact displayed readback').text_content() == READBACK
+        assert page.get_by_label('Exact source readback',exact=True).text_content() == READBACK
+        for heading in ['Summary','The why','The intended result','My next step']:
+            assert page.get_by_role('heading',name=heading,exact=True).is_visible()
+        assert '**Summary**' not in page.get_by_label('Exact displayed readback',exact=True).text_content()
         assert page.evaluate('document.documentElement.scrollWidth') <= width
         page.get_by_label('DQC history',exact=True).evaluate('(element) => element.open = true')
         controls = page.evaluate(CONTROLS)

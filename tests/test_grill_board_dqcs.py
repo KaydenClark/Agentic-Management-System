@@ -98,6 +98,8 @@ def test_complete_native_readback_is_current_and_not_limited_as_legacy_context(d
     assert PROPOSAL['why'] in page and PROPOSAL['scope'] in page
     assert 'Before invitations.' in page and 'Preserve access.' in page
     assert 'Revision 2' in page and 'Suggested readback' in page
+    assert '<h3>Summary</h3>' in page and '<h3>The why</h3>' in page
+    assert '<h3>The intended result</h3>' in page and '<h3>My next step</h3>' in page
     assert head(dqc_room) == before
     assert git(dqc_room, 'status', '--porcelain') == ''
 
@@ -381,3 +383,15 @@ def test_too_taxing_goes_to_same_native_record_and_new_instance_keeps_history(dq
         assert 'name="verdict" value="confirm"' not in page
     finally:
         restarted.shutdown();restarted.server_close()
+
+
+def test_safe_readback_headings_keep_source_and_escape_untrusted_prose(dqc_room,dqc_board):
+    readback='**Summary**\n\n<script>do not run</script>\n\n**The why**\n\nAccess.\n\n**The intended result**\n\nReadable proposal.\n\n**What I will do**\n\nWait for approval.'
+    action(dqc_room,'propose',proposal={**PROPOSAL,'readback':readback})
+    page=get(dqc_board)
+    assert '<h3>What I will do</h3>' in page
+    assert '<script>do not run</script>' not in page
+    assert '&lt;script&gt;do not run&lt;/script&gt;' in page
+    assert html.escape(readback) in page
+    assert post(dqc_board,{**form(dqc_board),'verdict':'confirm'})[0]==200
+    assert view(dqc_room)['tracker']['questions'][0]['answer']==readback
