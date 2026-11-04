@@ -1,7 +1,5 @@
 # AMS Glossary
 
-> Generated from LLM Workbench v3.2.2.
-
 Shared AMS terms; [Blueprint](BLUEPRINT.md) owns the destination.
 
 ## Language
@@ -9,16 +7,16 @@ Shared AMS terms; [Blueprint](BLUEPRINT.md) owns the destination.
 ### AMS
 
 **AMS**:
-A reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. Its methods can be packaged for anyone to reuse; this project adds RSI to improve them through actual work.
+Reusable workflows, rules, skills and tools for developing intent with AI and carrying it into verified outcomes. This project adds RSI through actual work.
 
 **RSI loop**:
-Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record proves no improvement.
+Recursive self-improvement: observe friction, propose a bounded change, compare outcomes, decide disposition and check later use. Recording a loop proves no benefit.
 
 **Alignment assessment**:
 Application of approved Alignment Check r1 to a named candidate and scope over three assessment runs.
 
 **Alignment Score**:
-The percentage of passed applicable checks pooled across the three assessment runs; distinct from fitness level and acceptance.
+Passed applicable checks pooled across three runs, as a percentage; distinct from fitness and acceptance.
 
 **Fitness level**:
 The r1 classification: Excellent at three passing runs, Stable at two, Functional at one and Broken at none; any Critical failure overrides the count to Broken.
@@ -27,12 +25,21 @@ The r1 classification: Excellent at three passing runs, Stable at two, Functiona
 One assessed version of an improvement candidate; each candidate gets at most three, excluding baseline.
 
 **Workbench**:
-The environment where AMS operates, bringing together people, agents, project records, working artifacts and tools.
+The AMS environment: people, agents, project records, working artifacts and tools.
 
 **Intent**:
 What the owner wants, with reasons, boundaries and corrections. Retain whether confirmed or unresolved.
 
 ### Records
+
+**Destination Question Card (DQC)**:
+A stable record owning an evolving question or concept, its readbacks, confirmations and history. A Grilling Board card presents that DQC.
+
+**Concept lane**:
+Intent and concepts developing through DQCs, projected in TRACKER.md and linked by stable ID to execution records.
+
+**Execution lane**:
+Work through Landmarks, Specs and Tasks, projected in TASKBOARD.md and linked to its originating DQCs.
 
 **Implementation Task**:
 A bounded assigned slice under a Spec, owning execution state and proof.
@@ -41,32 +48,32 @@ A bounded assigned slice under a Spec, owning execution state and proof.
 A repeatable test case; one attempt at it is a trial. Neither is an implementation assignment.
 
 **Evidence audit**:
-A maintained assessment of claims against dated, candidate-specific evidence, keeping reassessment history.
+Claims assessed against dated candidate evidence, with reassessment history.
 
 **Improvement record**:
-The link from an observed problem through hypothesis and comparison to an actual disposition and later-use check.
+An observed problem linked to hypothesis, comparison, actual disposition and later-use check.
 
 **Review receipt**:
-An actual assessment of a named candidate and scope, recording reviewer involvement, findings and limits.
+An actual candidate/scope assessment naming reviewer involvement, findings and limits.
 
 **Human QA receipt**:
 Sourced human judgment of the named experience or candidate. Agent checks cannot supply it.
 
 ### Feedback dispositions
 
-A disposition describes how a finding was handled and grants no execution or release authority; without an established one, keep it pending and name the missing owner or evidence.
+A finding’s handling, granting no execution or release authority; pending until an owner/evidence establishes disposition.
 
 **diagnostic**:
-Names the diagnostic that makes the condition visible and whether it is implemented or proposed.
+Names the diagnostic and whether implemented or proposed.
 
 **test**:
-Names the test that detects the condition, with its actual result or implementation gap.
+Names the detecting test, actual result or implementation gap.
 
 **repaired**:
-Names the implementing revision and its verification. Later-use benefit remains a separate claim.
+Names the implementing revision and verification; later-use benefit is separate.
 
 **declined**:
-Names the actual decision source and reason for declining the proposed action.
+Names the decision source and reason for declining.
 
 **accepted-open**:
-Names the actual acceptance of follow-up work and its owning Spec; the problem remains open.
+Names accepted follow-up and its Spec; the problem remains open.
