@@ -5,12 +5,12 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-03
 **Catalog description:** Checks that keep the AMS coherent: up to Spec, skills pinned and in sync, `dev` measured against `main`, and independent Spec review.
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Complete TK-003.
+**Next gate:** Land TK-002G through checked PR; TK-003 still waits on S-006.
 
 ## Intent and authority
 

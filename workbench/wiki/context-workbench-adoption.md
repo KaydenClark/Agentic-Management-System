@@ -56,3 +56,16 @@ Kind: intent. State: confirmed. Source: Kayden, owner instruction approved 2026-
 - AGENTS fidelity: ten template lines dropped and six changed to fit the limit (personal-skill-first, `carry`, `claim`, pre-edit readback, Task-review policy, closeout). Restore them or record them in an ADR.
 - `TASK-TEMPLATE.md` keeps the earlier agreed `T-NNN` naming; installed tooling uses `TK-###`.
 - Legibility `run`, `journey`, `measure` are bracketed gaps until an application and eval runner exist.
+
+<!-- jot-entry -->
+### JOT-9abd9e46-08ae-4283-a950-a96e6095759f
+Kind: intent
+State: current
+Recorded: 2026-11-03T19:41:00.470Z
+Author: Kayden
+Source: Kayden, AMS chat, 2026-11-03
+Topic: workbench-adoption
+Supersedes: none
+
+Owner correction: AGENTS.md still contains material that belongs elsewhere, specifically the three-strike rule. Authorized repair: keep core authority, safety and collaboration rules in AGENTS; route testing, CI, scheduling, RSI and delivery procedures to their existing owning documents. Relocation preserves the existing policies; this request does not retire the three-strike stop or authorize deployment.
+<!-- /jot-entry -->
