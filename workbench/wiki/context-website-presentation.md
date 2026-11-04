@@ -368,3 +368,16 @@ Supersedes: none
 
 For every skill the RSI loop works on, the RSI page shows whether RSI is actually improving it over time. Each RSI loop contributes one plotted point per skill: the Alignment Score of the version that loop kept, pooled over the deciding tier's runs, with its fitness level. Kayden chose two views from the prototypes: a per-skill line chart (one point per loop, a running average line, a fitness-level strip, and a visible break where a new test contract or model starts a new line) and a skills-by-loops Fitness level per loop strip. The High and Small tier runs stay visible per skill as secondary marks that never decide the point. Better colors are wanted: Excellent is green. Results are real recorded data; there are no more empty-looking results where real results exist. Kayden approved implementation through orchestrate.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-41b13707-6dc7-476a-9ed9-1edb7dae9d43
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T06:06:34.461Z
+Author: owner-assistant
+Source: Owner approval in website repair chat, 2026-11-04
+Topic: website-presentation
+Supersedes: none
+
+The owner approved four bounded repairs: preserve contrasting candidate chart fills, keep freshness-only changes out of page review hashes, separate grader versions in trial series, and show stopped or failed runs with no result rows. Record actual skill failures with skill, reliably known model tier (otherwise unknown), failed activity, correct outcome and evidence. Preserve real pass and fail evidence, do not invent results or authorize new trials, redesign, owner QA or dev-to-main promotion. This grants execution for these repairs; earlier task ownership and project delivery gates remain.
+<!-- /jot-entry -->
