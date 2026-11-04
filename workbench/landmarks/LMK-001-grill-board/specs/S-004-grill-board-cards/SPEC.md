@@ -48,7 +48,7 @@ TK-002K repairs the review-found generated whitespace through the source package
 
 TK-002H delivers native tracker/setup and AMS update; TK-002I consumes its API for the Python Board. Serialize writers on Feature/S-004-dqc-grilling-board. Catalog source uses an isolated checkout and independent PR. Both include checks/QA; assembled Review follows.
 
-Each Task is one bounded run; whole-Spec checked delivery targets `main`.
+Checked Task delivery targets `main`.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
@@ -96,10 +96,6 @@ Independent assembled Review covers the new immutable candidate after implemento
 ## Completion Result
 
 Pending.
-
-## Remaining Limitations Or Follow-Up Specs
-
-- S-005 adds page review cards on this board.
 
 ## Supersession
 
