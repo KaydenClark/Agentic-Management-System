@@ -23,3 +23,5 @@ One writer `codex-rsi-four-fixes` owns this corrective Task and its source/tests
 - [ ] Different graders produce separate series with visible provenance, never pooled counts or cross-grader regression.
 - [ ] Stopped/failed runs without rows remain visible with source and stop/failure evidence; no invented task, split, count or score; test runs hidden.
 - [ ] Build, focused regression tests and required checks pass; actual failures and limits recorded.
+
+Workspace baseline sha256:eb5a7cca4ddbafa39d4daab2c03211289a0e85911273e2d00cfa6bca80b5562a
