@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-a66709e3-68e6-4ed1-b56d-b0fc388f4f64](../../../../wiki/context-wiki-maintenance.md)
 **Execution approval:** [JOT-a66709e3-68e6-4ed1-b56d-b0fc388f4f64](../../../../wiki/context-wiki-maintenance.md)
-**Next gate:** Claim TK-002T under approved repair authority; no implementation yet.
+**Next gate:** Close TK-002T with verification and documentation proof.
 
 ## Intent and authority
 

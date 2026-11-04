@@ -3,13 +3,13 @@
 **Task ID:** TK-002T
 **Spec ID:** S-000C
 **Slice:** Maintained explanations across ingest, query and correction
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: All S-000C Acceptance Criteria
 **Planned verification:** Baseline/retained-byte hashes; native checks; ingest/query; cold retrieval; isolated correction; semantic review.
 **Proof:** pending
-**Claimed by:** none
-**Current claimant:** none
+**Claimed by:** none, codex-wiki-implement
+**Current claimant:** codex-wiki-implement
 
 ## Authorized slice
 
