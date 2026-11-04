@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
 **Execution approval:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
-**Next gate:** Prepare bounded DQC lifecycle and Board Tasks, then implement under the confirmed owner instruction; Human QA remains separate.
+**Next gate:** TK-002H native tracker/setup, then TK-002I Python Board; independent assembled Review and owner Human QA remain separate.
 
 ## Intent and authority
 
@@ -69,7 +69,9 @@ History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Vertical Implementation Slices
 
-Each Task is one run landed on `main` by a checked PR.
+TK-002H delivers the reusable native tracker/setup path and supported AMS update. TK-002I consumes that exact API and delivers the Python Board path. Serialize these writers on Feature/S-004-dqc-grilling-board; preserve prior candidate branches. Source catalog delivery uses its isolated checkout and independent PR. Both Tasks include repair, checks and implementor QA, followed by assembled Review.
+
+Each Task is one bounded run; whole-Spec checked delivery targets `main`.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
