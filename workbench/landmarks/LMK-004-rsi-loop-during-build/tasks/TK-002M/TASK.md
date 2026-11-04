@@ -55,4 +55,4 @@ RUNBOOK’s private planning source was recovered without copying private conten
 
 ## Publication boundary
 
-[Actual check/refusal record](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-8529e8c1-690d-42b2-a501-dcc1dcce4a06): PR169 merge was refused twice before execution (FAIL-079/080). Explicit user merge approval is required. No delivery or Stage B launch occurred. Original Receipt remains unchanged.
+[Delivery and checks](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-9280ecbd-819b-4559-bf34-6f342a7402a9): PR169 merged `7dbcc988` into main at `3e307881`. Owner instruction resolved FAIL-079/080. Original Receipt retained; Stage B held.
