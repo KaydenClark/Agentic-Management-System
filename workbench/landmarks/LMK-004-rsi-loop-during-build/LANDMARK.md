@@ -7,7 +7,7 @@
 **Updated:** 2026-11-04
 **Catalog description:** The measured self-improvement loop, run on the website build and the work after it, with safeguards that keep its results honest.
 **Blockers:** none
-**Next gate:** PR169 merge blocked on explicit user approval after automatic refusals; Stage B remains held.
+**Next gate:** Stage A delivered by PR169 at 3e307881; separate Stage B launch remains required.
 
 ## Direction
 
@@ -83,7 +83,7 @@ The decision records under this landmark, one line each, linked to their record.
 
 ## Direct Tasks
 
-- [TK-002M - Finish the RSI loop design and prepare its executable Task graph](tasks/TK-002M/TASK.md) (Stage A preparation closed; default-branch merge blocked)
+- [TK-002M - Finish the RSI loop design and prepare its executable Task graph](tasks/TK-002M/TASK.md) (Stage A preparation closed and delivered by PR169)
 
 ## Verification Procedure
 

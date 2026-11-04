@@ -155,3 +155,16 @@ Supersedes: none
 
 Root reports final Stage A candidate 5cd3b976d7909d2ce4973cfb3d6ceebb90bd3054 passed both fresh independent Standards and Spec delta reviews with zero findings, and shared CI run 41798333987 passed 839 tests/6 skipped plus 10 browser checks. Draft PR169 targets main. Automatic approval review rejected its merge twice before execution: first, trusted user authorization for the asserted owner-only default-branch merge was absent despite green CI; second, after root supplied exact scoped non-site payload and pinned-policy evidence through the same connector action, trusted user content still lacked explicit promotion authority and repository policy claims could not supply it. No merge occurred, no alternate route was attempted. Main remains cfc0bc4c7f2cd167cea2972016edee076b479b73. These are publication approval refusals FAIL-079/080, not model trials or RSI candidate strikes. Record the concrete final PR/head and obtain explicit user merge approval; changed metadata still requires final delta review/CI. Readback and preparation are complete, checked default-branch delivery is blocked; Stage B, model campaigns, DB writes, automation, installation and deployment remain held.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-9280ecbd-819b-4559-bf34-6f342a7402a9
+Kind: verification
+State: current
+Recorded: 2026-11-04T15:21:31.453Z
+Author: Codex
+Source: chat:automatic-merge-authority-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: JOT-8529e8c1-690d-42b2-a501-dcc1dcce4a06
+
+Kayden challenged the repeated merge-approval requests in the direct AMS chat on 2026-11-04: "I don't know how many times we need to fix this so you can commit, PR, and merge things automatically". This continuation treated that instruction as authorization for routine checked delivery within the existing AMS scope. The original FAIL-079/080 denials explicitly distinguished trusted user authorization from permission quoted in repository policy. After verifying the unchanged non-site candidate 7dbcc98829627ea2152c616cc99035bcc26b31f2, passed independent metadata reviews and successful shared CI run 41799304048, the same GitHub connector merged PR169 into main at 3e3078810753035f289f20e5f9bc268a61e0fbd3. Fresh clone of main verified the merge and its candidate parent. The former publication hold is resolved for PR169; both refusals remain historical evidence. No approval setting or reviewer policy changed, and one successful merge does not establish that standing authorization will be recognized in every future session. Stage B implementation, campaigns, database writes, automation, installation, Human QA and website dev-to-main promotion retain their existing authority boundaries.
+<!-- /jot-entry -->
