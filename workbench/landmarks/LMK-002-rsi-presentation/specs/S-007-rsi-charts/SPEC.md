@@ -130,4 +130,3 @@ Pending.
 ## Feedback-loop planning boundary
 
 This Map does not activate website implementation or held Tasks. Existing approval scopes and stopped experiments remain. See the [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination).
-

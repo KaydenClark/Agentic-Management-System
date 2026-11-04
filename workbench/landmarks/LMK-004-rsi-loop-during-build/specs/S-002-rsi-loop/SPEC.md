@@ -121,4 +121,3 @@ Pending.
 ## Feedback-loop planning boundary
 
 The mapped destination grants no implementation or new trial authority. Earlier approvals, explicit holds, attempts and stopped experiments retain scope. The [Wiki](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) owns the sourced correction and continuation.
-
