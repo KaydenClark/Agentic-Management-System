@@ -98,6 +98,7 @@ One page per Spec and Landmark. The Spec holds the destination; its page holds h
 
 | Question | Read first |
 |---|---|
+| What is the Grilling Board, and how do DQCs carry its questions and updates? | [Grilling Board and DQC-backed intent](context-grilling-board.md) — recovered LLM_Workbench definition, confirmed DQC relationship, implementation limits and AMS comparison. |
 | What is AMS and why is the first loop a website? | [AMS purpose](context-ams-purpose.md) — owner clarification, scope and rationale. |
 | What should the website explain, and where are skill improvements proved? | [Website presentation](context-website-presentation.md) — this build proves shared skill improvements and displays the RSI log; owner corrections and site history. |
 | How was the Workbench adopted, and what moved where? | [Workbench adoption](context-workbench-adoption.md) — package identity, Port/Fold/Keep/Retire map, checks and open gaps. |
