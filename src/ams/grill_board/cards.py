@@ -50,6 +50,10 @@ class Card:
     flag: dict | None = None  # the `## Flag` section, when the owner flagged it too taxing
     sha: str = ""  # SHA-256 of the exact committed bytes this Card was parsed from
     commit: str = ""  # the commit those bytes were read at
+    projection: bytes | None = None  # live request; no materialized card yet
+    source_sha: str = ""
+    source_current: bool = True
+    answer_note: str = ""
 
     @property
     def rating(self):
@@ -58,7 +62,7 @@ class Card:
     @property
     def waiting(self):
         """Still waiting on the owner: neither answered nor held for rewrite."""
-        return self.answer is None and self.flag is None
+        return self.source_current and self.answer is None and self.flag is None
 
     @property
     def sort_key(self):
@@ -100,6 +104,12 @@ def parse_card(name, text):
         for at, end in zip(starts, starts[1:] + [len(rest)])
     ]
     answers = [f for h, f in sections if h == "## Answer"]
+    answer_note = ""
+    for at, end in zip(starts, starts[1:] + [len(rest)]):
+        if rest[at] == "## Answer":
+            answer_note = "\n".join(line[2:] if line.startswith("> ") else ""
+                                    for line in rest[at + 1:end] if line.startswith(">"))
+            break
     ratings = [f for h, f in sections if h == "## Rating" and f.get("Rating", "").split(" ")[0] in RATINGS]
     flags = [f for h, f in sections if h == "## Flag" and f.get("Too taxing") == "yes"]
     if starts:
@@ -120,6 +130,7 @@ def parse_card(name, text):
         answer=answers[0] if answers else None,
         ratings=ratings,
         flag=flags[0] if flags else None,
+        answer_note=answer_note,
     )
 
 
@@ -248,11 +259,26 @@ def load_cards(cards_dir):
     line is unchanged, or it is a card once flagged whose flag is gone."""
     cards, refusals = [], []
     commit, snapshot = committed_snapshot(cards_dir)
+    from .queue import projected_cards
+    root = Path(_git(Path(cards_dir), "rev-parse", "--show-toplevel").strip()).resolve()
+    projected, failures = projected_cards(root, commit)
+    refusals.extend(failures)
     for name, data in snapshot:
         result = parse_card(name, data.decode("utf-8"))
         if isinstance(result, Card):
             result.sha, result.commit = hashlib.sha256(data).hexdigest(), commit
+            if result.fields.get("Request key"):
+                current = projected.pop(name, None)
+                result.source_current = current is not None
+                result.source_sha = current.source_sha if current else ""
+                if current:
+                    # Presentation grades can change without replacing an
+                    # answer or its immutable response-card bytes.
+                    result.priority, result.priority_reason = current.priority, current.priority_reason
+                    result.value, result.value_reason = current.value, current.value_reason
+                    result.fields = current.fields
         (cards if isinstance(result, Card) else refusals).append(result)
+    cards.extend(projected.values())
     flagged = []
     if commit:
         root = Path(_git(Path(cards_dir), "rev-parse", "--show-toplevel").strip()).resolve()

@@ -2,6 +2,70 @@
 
 The owner's local attention queue: one page of committed cards that wait on the owner (DDR-000L, DDR-000P). Start it from the repository root with `uv run ams-board`; it serves on 127.0.0.1 only. Spec: S-004.
 
+## Current owner queue
+
+The Python board reads explicit owner requests from committed Spec, Task and
+Landmark records on each visit. An open page checks for changes every five
+seconds and updates automatically, preserving any unsaved note. No generator or
+owner-requested refresh is needed. Existing card files remain supported.
+
+Agents publish a self-contained question in its owning record before reporting
+that work needs an owner answer. Use the native queue commands from the repo root:
+
+```sh
+uv run ams-board add --record workbench/specs/S-001-example/SPEC.md --file request.json --by AGENT
+uv run ams-board revise --record workbench/specs/S-001-example/SPEC.md --file request.json --by AGENT --reason "What changed and why"
+uv run ams-board pending --json
+uv run ams-board status --json
+```
+
+The input is a single JSON object, for example:
+
+```json
+{
+  "schema": "grill-board/request@1",
+  "key": "event-location",
+  "question": "Should we hold the event in the library?",
+  "recommendation": "Hold the event in the library within the existing budget.",
+  "priority": "P2",
+  "priority_reason": "The venue must be settled before invitations go out.",
+  "value": "V1",
+  "value_reason": "The venue meets the requirements at low cost.",
+  "topic": "The event",
+  "context": "Availability and accessibility are confirmed."
+}
+```
+
+`add` appends a `grill-board` JSON fence under `## Owner requests` in that
+record and commits only the record. `revise` keeps its key, requires a reason and
+preserves prior answers. Repeating an identical revision writes nothing. Inputs
+are one-line text; context obeys the existing short-note contract. Optional
+`why`, full `candidate` SHA and `blocker` name provide relevant context. A request
+withdrawn with `state: "withdrawn"` leaves the queue with its history preserved;
+use `revise` with the actual reason. Completed/retired records are not pending.
+Requests in quoted examples or archived records are not live questions.
+
+The board projects the question directly: no card file is prepared on a read.
+Its stable identity is the record path plus request key; its wording has a
+content-bound revision. An owner action materializes its response card in the
+same locked, compare-and-swap transaction used by existing cards. Confirm writes
+the exact recommendation and note into the source record; returns keep their
+exact note on the response card for agents to read with `pending`. Earlier
+answers remain history after a decision revision; they never confirm changed wording.
+Changing only Priority, Value or topic preserves the settled decision and displays
+the current grades without rewriting its answer.
+
+A declared owner hold without a published question is shown as an agent
+preparation issue, not invented as an approval request. Deliberate Prepare stops
+stay stopped. Invalid/unreadable sources show an error rather than a reassuring
+empty queue. Agents consume actual answers through the existing owning lifecycle;
+a board answer never fabricates independent Review, Human QA, formal Spec
+approval or publication. Do not submit answers on the owner's behalf.
+
+This adapts the established queue/revision/answer workflow in
+[LLM_Workbench at 9d5e1f25](https://github.com/KaydenClark/LLM_Workbench/blob/9d5e1f25b0d5870589ae1c5752f27f42acb796ef/workbench/grill-board/README.md)
+to AMS's Python backend and existing committed-card writer.
+
 ## Cards
 
 One Markdown file per question in `cards/`, read from the committed snapshot (HEAD) only. Format: [card-example.md](card-example.md). Required header fields are `Priority`, `Priority reason`, `Value` and `Value reason` (DDR-000K); a card missing one is refused and listed in the heat-colored alert, never shown.

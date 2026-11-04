@@ -5,16 +5,16 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-03
 **Catalog description:** Local Grill Board cards with Priority, Value, a rating and a "too taxing" flag, whose confirmed answers are written straight into their owning records.
 **Blockers:** none
 **Confirmation:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-6198374a-22d7-45f2-9f3b-3e960abe583e](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Owner approval and Human QA, then complete; this supplies no Spec activation slot.
+**Next gate:** Verify TK-002F real-project request presentation; owner approval and Human QA remain open. Standing public-publication authorization is now granted.
 
 ## Intent and authority
 
-The owner named "make the Grill Board cards" as an LMK-001 Spec and confirmed the card rules on 2026-11-01. Orchestrator B builds locally, holds the only Supabase keys and never deploys.
+Owner-confirmed card rules (2026-11-01), under LMK-001. B builds locally, holds the Supabase keys and never deploys.
 
 ## Outcome
 
@@ -26,22 +26,23 @@ Priority and Value are how the owner decides what needs attention. Costly questi
 
 ## Current Verified State
 
-- Met: every acceptance criterion, each at its linked evidence (TK-001 to TK-000J).
-- Review: passed at `4d49bfc` (Orchestrator C); proof in [S-004 history](../../../../wiki/history/S-004.md).
+- Python queue source `c9a8aa0` passes fresh829/6skip and8browser checks ([TK-002F](tasks/TK-002F/TASK.md)). The actual project has0authored questions and6visible preparation issues; real-request publication was rejected by automatic approval review. TK-002F remains open. Earlier card proof is retained in TK-001–TK-000J.
+- Historical pass `4d49bfc` is [unbound at the later candidate](../../../../feedback/coherence/REVIEW-STATUS-S-004-2026-11-02.md); current Review and acceptance remain open.
 - Not met: owner approval and Human QA.
 
 History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Desired Behavior
 
-- A local Python server reads durable records and is never the record.
+- Python reads durable records; the server is never the record (ADR-002X, reaffirmed 2026-11-03).
+- Automatically show current questions and retain answers and settled decisions, using the established LLM_Workbench workflow ([owner correction](../../../../wiki/context-owner-answers-coherence.md#jot-7c039b2f-ef97-4607-ad94-40cbbccc86ff)).
 - Agents post only items needing an answer (owner gates, open choices, page approvals, decision texts), never routine content or drafts.
 - Each card shows Priority and Value with one-line reasons, a 1-5 rating and a one-click "too taxing" flag; a flagged card is rewritten before it is re-asked.
 - A confirmed answer goes straight into its owning record, with no re-confirmation.
 - Flags, ratings and comments are committed records the loop reads.
 - A write refuses a target changed since it was read; nothing is deleted or renumbered.
 - Each color is a signal with one stated meaning.
-- It matches the owner's "Grilling Board Redesign" artifact, dark and light, loading nothing from other hosts.
+- Match the owner's "Grilling Board Redesign" artifact in both themes; load no other host.
 
 ## Decisions And Contracts
 
@@ -59,6 +60,8 @@ History: [S-004 history](../../../../wiki/history/S-004.md).
 
 ## Dependencies And Blockers
 
+- Python is settled; preserve board data.
+
 - Python 3.14.5 pinned with uv ([ADR-003D](../../../../docs/adr/003D-python-3-14-5-pinned-with-uv.md)).
 
 ## Vertical Implementation Slices
@@ -69,6 +72,8 @@ Each Task is one run landed on `main` by a checked PR.
 |---|---|---|---|---|
 
 ## Acceptance Criteria
+
+- [ ] **Current owner queue.** Pending questions show context, recommendation, source and an answer route. New/revised/resolved items update without owner-requested preparation, duplication or re-asking settled decisions. Known pending input plus an empty “nothing needs you” view fails. Unreadable inputs show unavailable, never an empty success.
 
 - [x] **Signals on every card.** Every card shows Priority and Value with a one-line reason each. *Check:* render a fixture card set. *Must fail:* a card with a grade and no reason. *Evidence:* [board] (TK-001, PR #16).
 - [x] **Answer lands in its owner.** Confirming an answer changes the owning record and needs no second confirmation. *Check:* test against a fixture record. *Must fail:* an answer that only changes board state. *Evidence:* [answers] (TK-000G, 3e557c0).

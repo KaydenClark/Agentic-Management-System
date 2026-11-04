@@ -148,3 +148,29 @@ Supersedes: none
 
 Kayden approves the proposed ownership breakdown and explicitly authorizes adding prune-artifact. This follows the earlier unresolved proposal: one shared pruning owner, author-skill retaining method development and behavior validation, and writing-for-agents retaining composition. The new skill is part of the shared skills source repair, with independent pruning/testing and the same eligible Stable or Excellent merge gate. Approval to implement is not evidence of an implemented, installed or accepted skill. Its new finite suite stays distinct from the original frozen workflow comparison.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-7c039b2f-ef97-4607-ad94-40cbbccc86ff
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T17:22:59.972Z
+Author: Kayden
+Source: Kayden, AMS chat, 2026-11-03
+Topic: owner-answers-coherence
+Supersedes: none
+
+The Grill Board must render current work automatically without the owner asking for it to be updated before use. The LLM_Workbench had it figured out. Just make it like we did there. Reuse the established board workflow and preserve data. This supersedes the agent assumption that manually preparing cards for each owner visit is an acceptable prerequisite. A Node-versus-Python backend choice remains explicitly pending because ADR-002X requires Python and the reusable reference component uses Node.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8d5edcf6-7feb-4d5d-8f1b-3ddb9fbd27c8
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T17:54:39.902Z
+Author: Kayden
+Source: Kayden direct AMS chat 2026-11-03
+Topic: owner-answers-coherence
+Supersedes: JOT-7c039b2f-ef97-4607-ad94-40cbbccc86ff
+
+Use Python, as already required by ADR-002X. Reproduce the established LLM_Workbench queue, question revision and answer workflow in the existing Python Grill Board. The owner requires current items to render without requesting an update before use. The agent unnecessarily reopened the settled backend decision; no architecture choice remains. Preserve existing records, answers, safeguards and the requested PR endpoint into the S-004 feature branch.
+<!-- /jot-entry -->

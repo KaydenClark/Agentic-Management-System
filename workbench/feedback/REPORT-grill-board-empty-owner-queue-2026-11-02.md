@@ -30,3 +30,17 @@ The S-004 Spec records an independent pass at `4d49bfc`; a later [review-status 
 The immediate mechanism is that no committed card was available in the served checkout. The evidence does not yet establish why each purported question was not posted, whether a separate current source contains it, or whether automation, handoff, branch routing, or multiple failures caused the omission. A functioning empty-card renderer is not an end-to-end owner-attention queue.
 
 Urgently reconcile the actual blocked requests and their current owners, sources, branch and readiness; post each real unresolved item through the authorized card and record flow with a usable answer path. Distinguish spec approval and Human QA from a generic card confirmation, and preserve the owner's existing decisions. Verify the owner can see and resolve each posted item in the intended board, that the response reaches the right record, and that the blocked work can continue. Add a suitable check so an empty board cannot falsely reassure the owner while known owner requests are outstanding. Do not mark this failure repaired until those outcomes are demonstrated; reconcile the appropriate owning Spec/Task and feedback disposition.
+
+## Owner correction and recovered reference (2026-11-03)
+
+Kayden requires current items to render automatically, without asking for the board to be updated before use, and directs reuse of LLM_Workbench. The current AMS reader has no card producer: it reads committed card files only; an empty card directory therefore says nothing about outstanding owner requests. The agent's claim that all other work needed owner input was too broad: current claims, failed-run stops and deliberate Prepare holds are different conditions. Do not turn settled owner holds into repeated approval questions.
+
+The inspected LLM_Workbench source at9d5e1f25 has a reusable project component with stable questions, revisions, live queue reads and preserved answer/application state. Agents add/revise its items through the existing tool; automatic inference of all pending questions was not found. Reuse is blocked only on the consequential Node-versus-Python choice retained in S-004 TK-002F. No board replacement or repaired outcome is claimed.
+
+### Python correction and implementing Task
+
+Kayden reaffirmed Python on 2026-11-03. The backend choice was an unnecessary agent-created hold, not a missing owner decision. TK-002F now implements the reference workflow in the existing Python board. Its scoped tests and delivery records will own the repair evidence; this note does not supply Human QA or formal acceptance.
+
+### Checked implementation and unperformed live posting
+
+Python sourcec9a8aa0 passes a fresh829-test suite (6skips) and8browser checks.20queue cases cover projection, preserved answers, non-decision regrading, explicit holds, stale/dirty/conflicting writes and unavailable sources. The actual readback has0authored questions and6visible preparation issues. Automatic approval review rejected posting the proposed S-004 usability question as an additional workflow item beyond implementation authorization; the command did not run. PR156 carries the checked source into the S-004 feature branch as a draft. TK-002F and this failure stay open pending the real-project readback; no Human QA or repaired disposition is claimed.

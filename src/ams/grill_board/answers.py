@@ -175,7 +175,7 @@ def _commit_on(root, base, writes, subject, body):
         _git(root, "read-tree", base, env=env)
         for relative, _, mode, _, new in writes:
             blob = _git(root, "hash-object", "-w", "--stdin", data=new).strip()
-            _git(root, "update-index", "--cacheinfo", f"{mode},{blob},{relative}", env=env)
+            _git(root, "update-index", "--add", "--cacheinfo", f"{mode},{blob},{relative}", env=env)
         tree = _git(root, "write-tree", env=env).strip()
     finally:
         os.unlink(index)
@@ -221,6 +221,18 @@ def _replace(path, data):
         if os.path.lexists(tmp):
             os.unlink(tmp)
         raise
+
+
+def _create(path, data):
+    """Publish a new response card exclusively; a competing file is preserved."""
+    handle, tmp = tempfile.mkstemp(dir=path.parent, prefix=".request-", suffix=".answer-tmp")
+    try:
+        with os.fdopen(handle, "wb") as out:
+            out.write(data)
+        os.chmod(tmp, 0o644)
+        os.link(tmp, path)  # fails if any file or symlink appeared at the destination
+    finally:
+        os.unlink(tmp)
 
 
 @contextlib.contextmanager
@@ -288,7 +300,14 @@ def _checked_card(cards_dir, card, card_sha):
         raise AnswerRefused(f"the card {card_rel} is a symlink")
     if card.sha and card.sha != card_sha:  # the parsed card must be the bytes being checked
         raise AnswerRefused(f"the card {card_rel} changed since the page showed it; reload and read it again")
-    card_mode, card_blob = _unchanged(root, base, card_rel, card_file, card_sha, "card")
+    if card.projection is not None:
+        if os.path.lexists(card_file) or _git(root, "status", "--porcelain", "--", card_rel).strip():
+            raise AnswerRefused("the projected card destination has uncommitted contents; nothing is overwritten")
+        target = card.fields["Source record"]
+        _unchanged(root, base, target, owned_path(root, target), card.source_sha, "request source")
+        card_mode, card_blob = "100644", card.projection
+    else:
+        card_mode, card_blob = _unchanged(root, base, card_rel, card_file, card_sha, "card")
     _still_askable(cards_dir, base, card)
     return root, base, card_rel, card_file, card_mode, card_blob
 
@@ -300,7 +319,7 @@ def _still_askable(cards_dir, base, card):
     cards, refusals = load_cards(cards_dir)
     if any(c.commit != base for c in cards):
         raise AnswerRefused("HEAD moved while the write was being checked; reload and try again")
-    if not any(c.file == card.file for c in cards):
+    if not any(c.file == card.file and c.source_current for c in cards):
         problems = next((r.problems for r in refusals if r.file == card.file), ["it is no longer a committed card"])
         raise AnswerRefused(f"{card.file} cannot be written: {'; '.join(problems)}")
 
@@ -324,17 +343,32 @@ def _write_and_commit(root, base, writes, subject, body):
     and put back the committed bytes if anything fails. Call under the lock."""
     if len({path.resolve() for _, path, *_ in writes}) != len(writes):
         raise AnswerRefused("two writes would land in one file, so neither is written")
+    # A projected card does not exist until this owner action. On refusal its
+    # absence must be restored too; never leave a generated card behind.
+    originals = {relative: committed_blob(root, relative, base) for relative, *_ in writes}
+    touched = []
     try:
-        for _, path, _, _, new in writes:
-            _replace(path, new)
+        for relative, path, _, _, new in writes:
+            if originals[relative] is None:
+                _create(path, new)
+                touched.append(path)
+            else:
+                touched.append(path)
+                _replace(path, new)
         commit = _commit_on(root, base, writes, subject, body)
     except (AnswerRefused, OSError) as error:
-        for _, path, _, old, _ in writes:  # put back exactly the committed bytes this call replaced
-            _replace(path, old)
+        for relative, path, _, old, _ in writes:
+            if path not in touched:
+                continue
+            if originals[relative] is None:
+                if os.path.lexists(path):
+                    path.unlink()
+            else:
+                _replace(path, old)
         raise AnswerRefused(f"nothing was kept: {error}") from None
     # The branch now holds the write; stage the same bytes so the tree reads clean.
     try:
-        _git(root, "update-index", "--", *[relative for relative, *_ in writes])
+        _git(root, "update-index", "--add", "--", *[relative for relative, *_ in writes])
     except AnswerRefused as error:
         raise AnswerWrittenIndexStale(f"committed {commit[:7]}, but refreshing the index failed ({error}); run git status") from None
     return commit
