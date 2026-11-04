@@ -47,4 +47,4 @@ jobs:
         run: |
           # System packages are provisioned on the VM; the runner has no sudo.
           uv run --with playwright python -m playwright install chromium
-          uv run --with playwright pytest -q tests/test_grill_board_phone.py
+          uv run --with playwright pytest -q tests/test_grill_board_phone.py tests/test_grill_board_dqc_browser.py

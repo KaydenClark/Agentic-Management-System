@@ -1,8 +1,113 @@
 # Grill Board
 
-The owner's local attention queue: one page of committed cards that wait on the owner (DDR-000L, DDR-000P). Start it from the repository root with `uv run ams-board`; it serves on 127.0.0.1 only. Spec: S-004.
+The owner's local Python Board presents committed DQCs as complete readback
+questions, with their exact history and connected execution identities. Start
+from the repository root with `uv run ams-board`; it serves on 127.0.0.1 only.
+S-004: the [native tracker](../workbench/landmark-tracker/README.md) owns DQCs;
+[TRACKER.md](../TRACKER.md) projects them. Legacy cards remain supported below.
 
-## Cards
+## Current DQCs
+
+The Board calls `landmark-tracker.mjs show --committed --json`, reading the same
+native records used in terminal interviews. It renders their full readback,
+why, source, scope, revision, separate Priority/Value reasons, dependencies,
+confirmed versions, exact owner feedback and revision history. Source text is
+escaped and displayed without trusting HTML. DQCs bypass the legacy short-note
+restriction; the Board provides no routine page drafting editor.
+
+Topics use the native concept titles. A `/?card=DQC-ID` link follows the stable
+identity across topic changes. Pending/reopened actionable proposals enter the
+owner frontier once every declared prerequisite DQC is currently confirmed.
+Unknown or non-DQC dependencies stay unresolved. Held-for-rewrite, deferred,
+superseded and confirmed concepts remain under Context and history. A proposal
+with `actionable: false` is source-linked branch context, not a new owner request
+or a newly confirmed synthesis. Existing settled questions are not re-asked.
+
+The page checks HEAD every five seconds and refreshes automatically, preserving
+unsaved typing. Native views are cached by exact HEAD; dirty DQC text never
+appears. Source errors remain visible.
+
+## Owner actions and recovery
+
+Confirm records the exact displayed native readback/digest and scope, with the
+actual local Board click as source. Rework wording, Change the why and Change
+record the owner's exact note for agent rewriting. They confirm no replacement
+wording. Confirmed versions remain recoverable after corrections. Ratings 1–5
+and Too taxing use those same native owning operations; a flagged question is
+held until the agent changes its readback. A confirmed concept can still be
+corrected or rated. These actions grant no implementation authority or Human QA.
+
+Python submits native actions, never editing DQC JSON. Native transactions
+serialize writers, check HEAD/revision/digest and preserve unrelated work.
+Legacy cards retain their separate compare-and-swap writer.
+
+A stale or refused submission preserves copyable owner words. Words from an old
+proposal are not silently attached to its replacement. If a save receipt is lost
+or malformed, the Board reports **Save outcome unknown** and preserves an explicit
+**Check or retry this exact action** form. This retains the original payload and
+event ID even when it contains no note. Native replay returns the original
+commit instead of duplicating an action, including after later concept changes.
+Do not create a new action to hide an uncertain outcome. A reported successful
+commit remains successful if rendering the subsequent view fails.
+
+Legacy files, answers, ratings and flags are preserved. To make an existing card
+history-only after an explicitly authorized DQC mapping, add `**DQC:** DQC-ID`
+through the normal record editing procedure. The DQC becomes the sole actionable
+question; the old file remains navigable and its bytes/history are not migrated
+or rewritten by reading the Board. Unmapped legacy cards continue to work.
+
+## Agent capture and round continuation
+
+Capture each main interview branch before asking it, recover prior settled intent
+and retain its actual source. Use native tools from the project root:
+
+```sh
+node workbench/tools/landmark-tracker.mjs capture --title "Concept title" --question "Owner choice" --source SAFE_SOURCE --reason "Why this branch exists" --json
+node workbench/tools/landmark-tracker.mjs show --committed --json
+node workbench/tools/landmark-tracker.mjs action DQC-ID --stdin --json < action.json
+```
+
+Commit capture records/projections before actions. `propose` supplies a stable
+`eventId`, actual `expectHead`/`expectRevision`, and full `proposal` with
+`readback`, `why`, `source`, `scope`, `round`, separate Priority/Value objects
+`{value: 1..4, reason}`, and `dependencies: ["DQC-ID"]`. Later actions bind its
+`digest`. Use only actual sourced owner confirmations. Read the installed
+[native reference](../workbench/landmark-tracker/README.md) and current CLI;
+reusable procedure: `setup-workbench/references/dqc.md`.
+
+**Finish this round** records that the owner is done and lists every unreviewed
+DQC change, including corrections, ratings and flags. It preserves unanswered
+questions/dependencies and opens the next round. The UI explicitly says agent
+review is pending. Tell the agent the round is finished; no background AI service
+or implementation dispatch runs from this button.
+
+The agent then reads `show --committed --json` and reviews every entry under
+`tracker.rounds[].changed`, including its exact events/history. Reconcile only
+confirmed and approved understanding into the actual Wiki/docs, retaining
+unsettled choices and quality feedback. Commit those real document changes. Then
+submit a native global action (no DQC ID):
+
+```json
+{
+  "type": "reconcile-round",
+  "eventId": "a-unique-stable-reconciliation-id",
+  "expectHead": "ACTUAL_FULL_PROJECT_COMMIT",
+  "round": "THE_FINISHED_ROUND",
+  "receipt": {
+    "sources": ["workbench/wiki/actual.md@ACTUAL_FULL_PROJECT_COMMIT"],
+    "outcome": "What was actually reconciled and what remains unsettled",
+    "nextFrontier": "Authorized preparation or the next ready interview questions"
+  }
+}
+```
+
+Receipt sources must identify real committed Workbench Markdown. Native
+source checks do not establish semantic correctness; the agent owns that judgment. Prepare changed proposals in the
+reported `currentRound`; the Board refreshes the resulting frontier and receipt.
+Round bookkeeping alone supplies no reconciliation, preparation approval,
+implementation, independent Review or Human QA.
+
+## Legacy cards
 
 One Markdown file per question in `cards/`, read from the committed snapshot (HEAD) only. Format: [card-example.md](card-example.md). Required header fields are `Priority`, `Priority reason`, `Value` and `Value reason` (DDR-000K); a card missing one is refused and listed in the heat-colored alert, never shown.
 
@@ -71,4 +176,18 @@ Both pages render the generic fixture cards in `tests/fixtures/grill_board/showc
 
 **375px check** (TK-000J): `uv run --with playwright pytest tests/test_grill_board_phone.py` fails if the page is wider than 375px, if reaching a control scrolls sideways, or if any visible control (verdicts, note, stars, Too taxing, comment, links, theme toggle) is off-screen or covered, in dark and light; a star tapped at 375px must commit its rating. The default `uv run pytest` skips it, because Playwright and a browser are not project dependencies.
 
-Differences from the artifact, by choice: the artifact's other Dashboard sections, search, filters, batch, rounds, lanes other than "To answer", a flags view and history are left out until real records back them; queue rows also show each grade's reason, because DDR-000K keeps reasons on every card; the brand reads "AMS · Grill Board".
+Differences from the artifact, by choice: the other Dashboard sections, search, filters and batch are omitted; native DQC rounds/context/history use their actual records; queue rows also show each grade's reason, because DDR-000K keeps reasons on every card; the brand reads "AMS · Grill Board".
+
+
+## DQC verification
+
+`tests/test_grill_board_dqcs.py` exercises the real installed native operations
+through disposable Git/HTTP records: exact confirmation, corrections, feedback,
+dependencies, migration/history, concurrent writers, commit failure, uncertain
+receipt retries, source refusal and a real Wiki reconciliation/next frontier.
+`uv run --with playwright pytest tests/test_grill_board_dqc_browser.py tests/test_grill_board_phone.py`
+checks dark/light at 375px/desktop, reachable controls, exact readback text,
+automatic refresh/unsaved words and the concrete web-to-agent round walkthrough.
+Optional `AMS_BOARD_CAPTURE_DIR` saves disposable screenshots to a chosen local
+output directory. The existing CI Playwright step includes both test files.
+Agent browser checks do not establish owner Human QA.
