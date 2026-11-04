@@ -1,6 +1,6 @@
 # Four RSI presentation repairs: observed failures and expected outcomes
 
-Attribution: owner-assistant. Owner-approved scope, 2026-11-04. Owner: [S-007 TK-002L](https://github.com/KaydenClark/Agentic-Management-System/blob/dev/workbench/landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002L/TASK.md). Baseline: dev `ae231ee`. This is supporting evidence for the existing failure log, not a replacement log or a measured skill-improvement claim. PR164 merged to main as69fc587 during this repair. Its exact accepted log is retained here with appended FAIL-035 through FAIL-051; no earlier rows are overwritten.
+Attribution: owner-assistant. Owner-approved scope, 2026-11-04. Owner: [S-007 correction PR165](https://github.com/KaydenClark/Agentic-Management-System/pull/165). Baseline: dev `ae231ee`. This is supporting evidence for the existing failure log, not a replacement log or a measured skill-improvement claim. PR164 merged to main as69fc587 during this repair. Its exact accepted log is retained here with appended FAIL-035 through FAIL-051; no earlier rows are overwritten.
 
 ## Attribution limits
 
@@ -49,3 +49,7 @@ Owner,2026-11-04, explicitly authorized merging into dev and main for the things
 ## Receipt preservation failure during delivery
 
 FAIL-053: failure-ID reconciliation accidentally changed text inside receipt row1, causing native close to refuse its checksum before changing Task state. Exact original row bytes were restored from6bd979c without recalculating the checksum; new ID meaning is recorded outside the receipt. Correct outcome: preserve immutable historical receipt text during record reconciliation. Skill context Journey/native close; current Codex exact model and tier unknown. This records the implementor mistake, not a proven skill-source defect.
+
+## Post-close STOP: record budget
+
+FAIL-054: after exact original receipt recovery, native close succeeded and appended receipt2, expanding TK-002L to8194 characters. Post-close hygiene failed the8000-character limit. This follows the earlier full-Python Spec-limit failure (FAIL-043). Under RUNBOOK Test And Build, the second verification failure stops further website correction/retry. No Task pruning, source changes or further site tests followed. Website merge remains blocked despite earlier source CI passing; native done status is engineering history, not accepted delivery. Preserve the complete candidate and both receipts. Required next authorization: bounded coherent Task-record pruning preserving receipts and requirements, then rerun the same gates. Failure-record-only main delivery can continue independently.
