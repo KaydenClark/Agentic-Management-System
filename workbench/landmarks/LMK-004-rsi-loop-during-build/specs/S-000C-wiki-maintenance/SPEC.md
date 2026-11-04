@@ -1,7 +1,7 @@
 # S-000C - Maintained Wiki understanding
 
 **Spec ID:** S-000C
-**Status:** planned
+**Status:** active
 **Priority:** 2
 **Owner:** Kayden; codex-wiki orchestrator
 **Stance:** Builder
@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-a66709e3-68e6-4ed1-b56d-b0fc388f4f64](../../../../wiki/context-wiki-maintenance.md)
 **Execution approval:** [JOT-a66709e3-68e6-4ed1-b56d-b0fc388f4f64](../../../../wiki/context-wiki-maintenance.md)
-**Next gate:** Plan the approved repair; no claim yet.
+**Next gate:** Claim TK-002T under approved repair authority; no implementation yet.
 
 ## Intent and authority
 
@@ -32,13 +32,13 @@ History: [S-000C history](../../../../wiki/history/S-000C.md).
 
 ## Desired Behavior
 
-Consolidate those three current explanations with what/why, source lineage, reasons, established versus unresolved meaning, limits and related concepts. Maintain one owner per subject; reuse sufficient capability explanation instead of creating a page per Spec.
+Consolidate the three explanations with meaning, rationale, sources, established/unresolved claims, limits and related concepts; reuse sufficient capability ownership.
 
-Provide all four current Landmarks' synthesis articles and summarized MEMORY routes under the [existing article contract](../../../../wiki/design-concepts/README.md). Explain accepted answers, unresolved points and live owners; cite DQCs by ID/title. Unconfirmed answers remain labeled; newer accepted decisions and contradictions remain explicit.
+Provide four Landmark syntheses and summarized MEMORY routes per the [article contract](../../../../wiki/design-concepts/README.md), citing DQCs by ID/title and distinguishing confirmed answers, unresolved questions and superseding decisions.
 
-A concrete routed procedure makes authorized source ingest and durable query filing reconcile affected explanations, Landmark synthesis, crosslinks and router summaries. Jots retain source/status/correction lineage; current explanation must also change where needed. Existing History sections/pages provide chronology. File useful answers into an existing owner, creating a page only when no owner fits.
+A routed procedure makes ingest and durable query filing reconcile affected explanations, Landmark synthesis, crosslinks and summaries alongside jots. Use existing History and create a page only when no owner fits.
 
-Source intake names provenance/date, immutable Git/revision reference or permitted snapshot, exposure and uncertainty. Preserve raw evidence and privacy. Recover current owners on this base, including newer RSI authority/stopped evidence.
+Source intake records provenance/date, immutable reference or permitted snapshot, exposure and uncertainty. Preserve raw evidence/privacy and current RSI authority/stops.
 
 ## Decisions And Contracts
 
@@ -57,7 +57,7 @@ None for this bounded repair. Missing/private evidence limits its affected claim
 
 ## Vertical Implementation Slices
 
-Map creates zero Tasks. Plan prepares one coherent run spanning preservation, explanation, routed operations and observable verification.
+[TK-002T](tasks/TK-002T/TASK.md) spans preservation, explanation, routed operations and verification in one High-tier run; no blockers.
 
 ## Acceptance Criteria
 
@@ -78,7 +78,7 @@ MEMORY traversal, native jot retrieval/correction, semantic source review, isola
 
 ## Verification Procedure
 
-Recover RUNBOOK baseline before edits; retain exact JOT/history bytes/hashes. Run wiki validate, native render/doctor/next, layout validate, hygiene and full base diff whitespace. Exercise ingest/query/cold retrieval/correction with actual inputs/results in existing owners. Root owns fresh assembled checks, full tests/shared CI and independent Review. Planned checks prove nothing.
+Recover RUNBOOK baseline and exact retained bytes/hashes before edits. Run native Wiki/lifecycle/layout/hygiene/diff checks and scoped behavioral exercises with actual results. Root owns fresh assembled verification, full tests/shared CI and independent Review.
 
 ## Documentation Impact
 

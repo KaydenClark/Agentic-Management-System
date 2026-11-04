@@ -1,0 +1,30 @@
+# TK-002T - Wiki understanding stays current through retrieval and correction
+
+**Task ID:** TK-002T
+**Spec ID:** S-000C
+**Slice:** Maintained explanations across ingest, query and correction
+**Status:** ready
+**Blockers:** none
+**Destination:** spec-acceptance: All S-000C Acceptance Criteria
+**Planned verification:** Baseline/retained-byte hashes; native checks; ingest/query; cold retrieval; isolated correction; semantic review.
+**Proof:** pending
+**Claimed by:** none
+**Current claimant:** none
+
+## Authorized slice
+
+S-000C and its [owner approval](../../../../../../wiki/context-wiki-maintenance.md) authorize one High-tier implementor run using Journey/Jot. Base main416e71d759387c29e00b9eea5e2667a38cc5c09c. One writer owns this Task/Spec, touched Wiki/procedure docs and projections during implementation; return ownership to the orchestrator for independent Review/delivery. Use this Spec branch, no per-role branch.
+
+Before edits recover controls/sources, run RUNBOOK baseline checks and retain exact JOT/confirmation/history bytes and hashes in local recovery material. Preserve live owners, private boundaries, exact confirmations, earlier log rows/receipt checksums and stopped campaigns; never copy private CONTINUE material. Root's baseline retrieval probe read JOT history before filtering (FAIL-084); it supplies no clean baseline or benefit claim.
+
+Deliver all Spec acceptance: current Grill Board/AMS purpose/RSI explanations; four schema-shaped Landmark syntheses and MEMORY routes; concrete routed ingest/query/lint/source-intake procedure; semantic consistency and retrieval/correction proof. Reuse sufficient article owners and existing History; no new service/gate. Explain delivered DQC Board versus later required working redesign controls (JOT-c9dcebb6); do not implement redesign or repeat omission “by choice” as current settled intent. Recover newer RSI evidence/holds from this base.
+
+## Acceptance and hand-back
+
+- [ ] Three explanations/four syntheses satisfy S-000C with sources, unresolved claims, limits and live owners distinct.
+- [ ] Execute safe immutable-source intake and durable query filing; update affected explanations/crosslinks/summaries beyond jots.
+- [ ] Clean cold-start Grill Board retrieval and isolated introduced correction show explanation, affected links and preserved history agree. Label synthetic material; never introduce fake owner confirmation into real records.
+- [ ] Structural/bounded semantic checks detect planted inconsistency; retained-byte comparison passes. Record actual checks/failures and limitations in existing owners.
+- [ ] Hand back committed/pushed candidate, routes, sources/proof and gaps for independent Review. No Human QA, other Spec acceptance, website/deploy, shared-skill install or stopped-campaign restart.
+
+Sizing: one Markdown behavior path across existing sources, explanations, routes, procedure and verification, with repair/QA in the run; no external service or product implementation. Preserve unrelated work.
