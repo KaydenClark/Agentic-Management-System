@@ -4,12 +4,13 @@
 **Spec ID:** S-004
 **Concept source:** [DQC-000A](../../../../../../landmark-tracker/destination-questions/DQC-000A.json)
 **Slice:** Correct generated Markdown and deliver it through supported setup update
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Verified delivery
 **Planned verification:** Regression with empty notes and exact owner whitespace; generated projection determinism and full-range git diff check; package checks, source Review/CI and supported AMS update/receipt verification.
 **Claimed by:** codex-s004-projection
 **Current claimant:** codex-s004-projection
+**Proof:** d760635 full-range clean; source PR70 merged92f39d6,59/59; AMS CI41776062954 success (839pass/6skip,10browser); package8c3b46b; independent Standards/Spec PASS.
 
 Workspace baseline sha256:e42a3e97088c284f79cbb5354160944497a71f55ca1645c14b03a61a33e923d4
 
@@ -38,3 +39,9 @@ Actual full-range main...HEAD whitespace and deterministic rebuild pass. Both ax
 The genuine complete pre-edit snapshot e42a3e97 was taken after original published coordination ec87dd6 and separately bound in 6312905 before source edits. Private raw evidence is retained in ignored recovery. Earlier root REBASE_HEAD and personal catalog remain untouched. Source correction preserves exact owner whitespace by encoding projection display; only generated empty-note separators/final blank are removed. Native help now reaches the pinned delivered procedure.
 
 [Exact AMS CI](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/41776062954) passes839/6skip plus10browser checks, full-range whitespace/hygiene/layout/ADR/render. Merge answer: correction is eligible; source is already merged. Completion answer: scoped correction acceptance is met; final assembly delivery and owner Human QA remain separate.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-004-dqc-grilling-board | 86f0fb089e126b0d84496405b56bbe670ee80fda | ahead 0 behind 0 | 0 | d760635 full-range clean; source PR70 merged92f39d6,59/59; AMS CI41776062954 success (839pass/6skip,10browser); package8c3b46b; independent Standards/Spec PASS. | Supported runtime/receipt/TRACKER and director evidence. | Task I closure, whole-Spec delivery and owner Human QA remain; no personal install/deploy.; close attribution: {"agent":"codex-s004-projection","claimant":"codex-s004-projection","onBehalfOf":null} | 7f38bc127039a37ac39858b5302bc01ecd7482032fdc9dff3bd530f27f859015 |
