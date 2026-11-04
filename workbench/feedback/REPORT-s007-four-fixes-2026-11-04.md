@@ -1,6 +1,6 @@
 # Four RSI presentation repairs: observed failures and expected outcomes
 
-Attribution: owner-assistant. Owner-approved scope, 2026-11-04. Owner: [S-007 TK-002L](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002L/TASK.md). Baseline: dev `ae231ee`. This is supporting evidence for the existing failure log, not a replacement log or a measured skill-improvement claim. PR164 merged to main as69fc587 during this repair. Its exact accepted log is retained here with appended FAIL-034 through FAIL-050; no earlier rows are overwritten.
+Attribution: owner-assistant. Owner-approved scope, 2026-11-04. Owner: [S-007 TK-002L](https://github.com/KaydenClark/Agentic-Management-System/blob/dev/workbench/landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002L/TASK.md). Baseline: dev `ae231ee`. This is supporting evidence for the existing failure log, not a replacement log or a measured skill-improvement claim. PR164 merged to main as69fc587 during this repair. Its exact accepted log is retained here with appended FAIL-035 through FAIL-051; no earlier rows are overwritten.
 
 ## Attribution limits
 
@@ -41,3 +41,7 @@ No real model trials, private credentials or database writes were used. Fixtures
 ## Preservation and invocation corrections
 
 I-006: The baseline status itself recorded a dirty generated Taskboard; not every original was committed before snapshot. Exact original bytes are retained in the local Git object and independently copied with matching digest. This does not reconstruct the required earlier chronology; preservation remains local and incomplete until delivery. I-007: abbreviated baseline ID was refused; I-008: a subsequently supplied incorrect full ID failed binding. The actual Git-resolved full SHA was then used. Correct outcome: resolve identifiers from Git and commit owned originals before taking the baseline, never guess or reconstruct history. I-009 through I-012 capture the initial DNS and tool-interface refusals in the canonical log; these are invocation/environment diagnostics, not evidence of a skill-source defect.
+
+## Publication authorization correction
+
+Owner,2026-11-04, explicitly authorized merging into dev and main for the things that belong in each. This releases publication for this candidate, with website changes to dev and records to main; no unrelated site promotion or Human QA. The prior denial remains historical. Another writer assigned FAIL-034 before this push; our entries use FAIL-035 through FAIL-051 and leave that writer unchanged.

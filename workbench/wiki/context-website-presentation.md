@@ -381,3 +381,16 @@ Supersedes: none
 
 The owner approved four bounded repairs: preserve contrasting candidate chart fills, keep freshness-only changes out of page review hashes, separate grader versions in trial series, and show stopped or failed runs with no result rows. Record actual skill failures with skill, reliably known model tier (otherwise unknown), failed activity, correct outcome and evidence. Preserve real pass and fail evidence, do not invent results or authorize new trials, redesign, owner QA or dev-to-main promotion. This grants execution for these repairs; earlier task ownership and project delivery gates remain.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-39aff91b-1bef-4a28-b67c-f846f1f36b2d
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:06:19.479Z
+Author: owner-assistant
+Source: Owner publication and destination approval in website repair chat, 2026-11-04
+Topic: website-presentation
+Supersedes: none
+
+After the public push was denied, the owner authorized merging into dev and main for the things that belong in each. This releases publication and checked destination merges for the four website fixes and associated failure records. Website implementation goes to dev; non-site failure records go to main through their own checked PR. It does not authorize unrelated dev-to-main promotion or supply Human QA. Preserve previous denials and evidence limits.
+<!-- /jot-entry -->
