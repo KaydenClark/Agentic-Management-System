@@ -1,9 +1,9 @@
 # Grill Board
 
-The owner's local Python Board presents committed DQCs as complete readback
-questions, with their exact history and connected execution identities. Start
+The local Python Board presents DQC readback questions, their exact history
+and connected execution identities. Start
 from the repository root with `uv run ams-board`; it serves on 127.0.0.1 only.
-S-004: the [native tracker](../workbench/landmark-tracker/README.md) owns DQCs;
+S-004: the [native tracker](../workbench/docs/SKILLS.md#concept-lifecycle) owns DQCs;
 [TRACKER.md](../TRACKER.md) projects them. Legacy cards remain supported below.
 
 ## Current DQCs
@@ -71,7 +71,7 @@ Commit capture records/projections before actions. `propose` supplies a stable
 `readback`, `why`, `source`, `scope`, `round`, separate Priority/Value objects
 `{value: 1..4, reason}`, and `dependencies: ["DQC-ID"]`. Later actions bind its
 `digest`. Use only actual sourced owner confirmations. Read the installed
-[native reference](../workbench/landmark-tracker/README.md) and current CLI;
+[native reference](../workbench/docs/SKILLS.md#concept-lifecycle) and current CLI;
 reusable procedure: `setup-workbench/references/dqc.md`.
 
 **Finish this round** records that the owner is done and lists every unreviewed

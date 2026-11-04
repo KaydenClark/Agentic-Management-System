@@ -30,6 +30,12 @@ jobs:
         run: |
           git config --global user.name "ci"
           git config --global user.email "ci@example.invalid"
+      - name: Candidate whitespace
+        env:
+          AMS_PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: |
+          [[ "$AMS_PR_BASE_SHA" =~ ^[0-9a-f]{40}$ ]] || exit 1
+          git diff --check "$AMS_PR_BASE_SHA...HEAD"
       - run: uv run pytest -q
       # S-001 TK-002: host paths, credentials, private record IDs, split
       # records and character limits over tracked files (also in pytest).

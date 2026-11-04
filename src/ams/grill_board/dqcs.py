@@ -162,6 +162,8 @@ def load_board(cards_dir, legacy_loader=load_cards):
     if manifest_blob.strip():
         try:
             manifest = json.loads(_git(root, 'show', f'{head}:workbench/manifest.json'))
+            if not isinstance(manifest, dict):
+                raise ValueError('The committed Workbench manifest must be a JSON object.')
             if manifest.get('landmarkTracker'):
                 tracker = copy.deepcopy(_committed(str(root), head))
                 by_id = {data['id']:data for data in tracker['questions']}

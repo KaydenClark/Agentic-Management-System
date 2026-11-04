@@ -395,3 +395,13 @@ def test_safe_readback_headings_keep_source_and_escape_untrusted_prose(dqc_room,
     assert html.escape(readback) in page
     assert post(dqc_board,{**form(dqc_board),'verdict':'confirm'})[0]==200
     assert view(dqc_room)['tracker']['questions'][0]['answer']==readback
+
+
+@pytest.mark.parametrize('manifest',[[],None,False,'invalid-object'])
+def test_nonobject_committed_manifest_is_a_visible_source_refusal(dqc_room,dqc_board,manifest):
+    path=dqc_room/'workbench/manifest.json'
+    path.write_text(json.dumps(manifest))
+    git(dqc_room,'add','workbench/manifest.json');git(dqc_room,'commit','-qm','Malformed disposable manifest shape')
+    page=get(dqc_board,'/')
+    assert 'DQC tracker' in page and 'manifest must be a JSON object' in page
+    assert 'queue is unavailable' in page and 'Nothing here needs you.' not in page
