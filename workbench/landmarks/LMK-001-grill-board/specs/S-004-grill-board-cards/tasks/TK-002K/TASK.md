@@ -11,6 +11,8 @@
 **Claimed by:** codex-s004-projection
 **Current claimant:** codex-s004-projection
 
+Workspace baseline sha256:e42a3e97088c284f79cbb5354160944497a71f55ca1645c14b03a61a33e923d4
+
 ## Assignment
 
 The owner authorized S-004 implementation, preservation, verification and delivery; see the parent Spec's confirmed intent and execution citation. Independent Standards/Spec review of d9178b0 found required `git diff --check BASE...HEAD` fails in generated TRACKER.md: empty notes produce trailing ': ' and the document has an extra blank final line. Source H is already closed; this is a later bounded corrective run, not erased evidence or a new concept.
