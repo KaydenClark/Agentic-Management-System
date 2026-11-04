@@ -816,6 +816,22 @@ function verifyNotepadIgnores(project, manifest) {
   return { verification: 'git' };
 }
 
+// A migration renames whole legacy directories into tracked lanes. An ignored
+// file inside one (a private local handoff, say) would leave its ignore rule
+// behind and become committable at the destination, so the move refuses before
+// any write and names the paths; their bytes stay where they are. Content is
+// never read or reported.
+export function ignoredLegacyFiles(project, relatives) {
+  const present = relatives.filter(relative => lstatOrNull(path.join(project, relative)));
+  if (!present.length || !insideWorkTree(project)) return null;
+  const listed = spawnSync('git', ['ls-files', '-z', '--others', '--ignored', '--exclude-standard', '--', ...present.map(relative => `:(literal)${relative}`)], { cwd: project, encoding: 'utf8' });
+  if (listed.status !== 0) return fail('legacy-ignored-files', `Git could not list ignored files under ${present.join(', ')}; nothing was moved.`, { sources: present });
+  const ignored = listed.stdout.split('\0').filter(Boolean);
+  if (!ignored.length) return null;
+  const one = ignored.length === 1;
+  return fail('legacy-ignored-files', `${listPaths(ignored)} ${one ? 'is' : 'are'} ignored inside a legacy directory this migration would move into a tracked lane, where ${one ? 'it' : 'they'} could be committed. Nothing was written and ${one ? 'its' : 'their'} bytes stay in place. Classify each with the owner; private, live or unknown material never enters a tracked lane. Keep it out of the moving directory only through an authorized private route with byte verification, then retry.`, { ignored, sources: present });
+}
+
 // The parts of `verifyNotepadIgnores` an uninstalled project already decides,
 // so adoption can refuse before writing: a committed rule that would hide a
 // tracked session file (or the sessions ignore file itself, which a clone
@@ -1372,6 +1388,31 @@ function replaceFromStage(source, target) {
     throw error;
   }
   return true;
+}
+
+export function enableTracker(options) {
+  const project = path.resolve(options['--project']);
+  const valid = validateManifest(project);
+  if (valid.status !== 'valid') return valid;
+  const manifest = valid.manifest;
+  const declared = manifest.landmarkTracker ?? { root: 'workbench/landmark-tracker', collections: { 'destination-questions': 'workbench/landmark-tracker/destination-questions', landmarks: 'workbench/landmark-tracker/landmarks' } };
+  const declaration = trackerDeclaration({ landmarkTracker: { ...declared, markdown: 'TRACKER.md' } });
+  const paths = [declaration.root, ...Object.values(declaration.collections)];
+  try {
+    for (const relative of paths) assertSafeReadPath(project, path.join(project, relative));
+    for (const relative of ['workbench/manifest.json', 'TRACKER.md', declaration.projection]) assertSafeWritePath(project, path.join(project, relative));
+    for (const relative of paths) { const entry = lstatOrNull(path.join(project, relative)); if (entry && !entry.isDirectory()) return fail('tracker-collision', `${relative} must be an ordinary directory`); }
+    if (!manifest.landmarkTracker && paths.some(relative => lstatOrNull(path.join(project, relative)))) return fail('tracker-collision', 'Undeclared tracker path already exists; preserve and reconcile it before enabling');
+    if (!manifest.landmarkTracker?.markdown && lstatOrNull(path.join(project, 'TRACKER.md'))) return fail('tracker-collision', 'TRACKER.md already exists; preserve it before enabling');
+  } catch (error) { return fail('unsafe-tracker', error.message); }
+  const prior = fs.readFileSync(path.join(project, 'workbench/manifest.json'));
+  const created = [];
+  try {
+    for (const relative of paths) if (!lstatOrNull(path.join(project, relative))) { fs.mkdirSync(path.join(project, relative), { recursive: true }); created.push(relative); }
+    manifest.landmarkTracker = { ...declared, markdown: 'TRACKER.md' };
+    writeSafeFile(project, path.join(project, 'workbench/manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`);
+    return import('./landmark-tracker.mjs').then(({ rebuildTracker }) => { rebuildTracker(project); return report('declared', { tracker: declaration }); }).catch(error => { fs.writeFileSync(path.join(project, 'workbench/manifest.json'), prior); return fail('invalid-tracker', error.message); });
+  } catch (error) { fs.writeFileSync(path.join(project, 'workbench/manifest.json'), prior); for (const relative of created.reverse()) if (!fs.readdirSync(path.join(project, relative)).length) fs.rmdirSync(path.join(project, relative)); return fail('tracker-failed', error.message); }
 }
 
 export function initialize(options) {
@@ -2825,6 +2866,8 @@ function migrateUnlocked(options) {
   if (JSON.stringify(manifest.lanes) !== JSON.stringify(legacyLanes)) return fail('invalid-lane', 'Schema 1 lanes are not the v3.0 layout; reconcile them before migrating.');
   const unsafe = preflightLayout(project, Object.values(legacyLanes));
   if (unsafe) return unsafe;
+  const ignoredMove = ignoredLegacyFiles(project, [legacyLanes.handoffs]);
+  if (ignoredMove) return ignoredMove;
   const shape = validateManifestShape({ workbenchVersion: options['--version'] ?? manifest.workbenchVersion, provenance: manifest.provenance, wiki: { profile: options['--wiki-profile'] ?? 'project' } });
   if (shape) return shape;
   const declaration = gitDeclaration(project, options);
@@ -2967,6 +3010,7 @@ export const RUNTIME_TOOLS = Object.freeze([
   'host-floor.mjs',
   'landmark-artifact.mjs',
   'landmark-tracker.mjs',
+  'dqc-lifecycle.mjs',
   'landmark-wiki.mjs',
   'lane-sweep.mjs',
   'lexicon-retirement-data.mjs',
@@ -3451,6 +3495,7 @@ if (isMainModule(import.meta.url)) {
     const [command, ...args] = process.argv.slice(2);
     let result;
     if (command === 'init') result = initialize(parseOptions(args, ['--project', '--provenance', '--version']));
+    else if (command === 'enable-tracker') result = Promise.resolve(enableTracker(parseOptions(args, ['--project']))).then(conclude, invalid);
     else if (command === 'migrate') result = migrate(parseOptions(args, ['--project']));
     else if (command === 'skills-lane-rollback') result = rollbackSkillsLane(parseOptions(args, ['--project']));
     else if (command === 'organize-plan' || command === 'organize-apply' || command === 'organize-rollback') {
