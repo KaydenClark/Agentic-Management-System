@@ -51,3 +51,10 @@ invocation remain setup gaps. A path check is not host activation.
 The project controls own branch targets, required review, Human QA and publication.
 An implementor's QA is not independent review. Setup, a successful check, a pushed
 branch or a PR never grants permission to merge main or deploy.
+
+## Project design trials
+
+The owner authorized project-local UI UX Pro Max, Taste and Impeccable for trials;
+Hallmark is excluded. See [installed packages](../../.agents/skills/README.md) for
+pinned sources, invocation, runtime requirements and project constraints.
+Installation is not a completed trial or evidence of improvement.
