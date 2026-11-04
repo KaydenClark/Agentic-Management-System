@@ -3,12 +3,13 @@
 **Task ID:** TK-002J
 **Spec ID:** S-007
 **Slice:** Per-skill RSI trend charts and the fitness-level-per-loop strip from recorded loops
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Skill trends; Provenance and series; Not only up
 **Planned verification:** Render tests on the recorded loop data and a labeled multi-loop fixture (contract break, model break, rejected attempt, regression); production build and site suite; desktop and 375px browser inspection in both themes; applicable RUNBOOK checks.
 **Claimed by:** claude-s007-skill-trends
 **Current claimant:** claude-s007-skill-trends
+**Proof:** Candidate 9531b0f on Feature/S-007-rsi-chart-pages: per-skill Alignment Score per loop charts and fitness-level-per-loop strip; build, 261/261 site tests, hygiene 0, /rsi browser checks pass; delivery to dev follows
 
 ## Authority and inputs
 
@@ -55,3 +56,4 @@ Limits: tests were written alongside the code, with planted faults as the must-f
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | detached at 72952d8 | 72952d8fde8d222c9e44853aaaf9c897371a84e5 | none | 0 | Production build; site suite 261/261; built-site hygiene 0; diff check clean; /rsi browser checks 49/49 at 375/1280/1440 both themes; /start toy request check intermittent, not baselined | site/README.md; S-007 TK-002J Check and QA | Delivery to dev, deployment readback and owner Human QA | 837c6164b95a1a4f2027b5ab0055f81c4b89f63a3b18aa542a9e5217130afa34 |
+| 2 | detached at 641b553 | 641b553d8585156d6399122d87e70acb30905ff9 | none | 0 | Candidate 9531b0f on Feature/S-007-rsi-chart-pages: per-skill Alignment Score per loop charts and fitness-level-per-loop strip; build, 261/261 site tests, hygiene 0, /rsi browser checks pass; delivery to dev follows | site/README.md; S-007 TK-002J Check and QA | Delivery to dev, deployment readback and owner Human QA; close attribution: {"agent":"claude-s007-skill-trends","claimant":"claude-s007-skill-trends","onBehalfOf":null} | 6a028114406668bc6154ca7f86cc64e1084a2e501a973fb5fe82cc473fcf0b31 |
