@@ -50,3 +50,15 @@ Native dependency limitation: qualified cross-Spec Task edges are unsupported. T
 ## Later catalog-refocus correction
 
 The owner-recorded [preparation bypass](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) is a concrete recurrence case for S-013/TK-001D. [S-000A](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) separately owns the newly requested catalog-wide destination and repair side. The earlier statement that this feedback-loop mapping needed no new Spec applies to that earlier scope, not all future skill work. Both additions remain Prepare-only; existing holds, campaigns and evidence are unchanged.
+
+## 2026-11-03: one failure intake file
+
+Source: Kayden's AMS chat, 2026-11-03. The owner directed that every failure
+be recorded in the same Markdown file with the failed model tier, provider,
+activity and correct outcome, so failures can guide skill repair.
+[WORKBENCH_FEEDBACK.md](../feedback/WORKBENCH_FEEDBACK.md) is that canonical
+log for all failure categories, superseding its harness-only intake scope.
+Detailed reports and trial ledgers remain evidence, linked by failure ID.
+Missing actor metadata stays unknown. New failed retries receive separate rows.
+This authorizes this logging consolidation, not the earlier held cross-Spec
+automation, shared-skill repairs, new trials or installation.

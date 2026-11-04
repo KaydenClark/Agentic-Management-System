@@ -62,6 +62,10 @@ The [owner's standing publication authorization](../wiki/context-grilling-board.
 
 ## RSI operations
 
+Log every failure and failed retry in [one Markdown log](../feedback/WORKBENCH_FEEDBACK.md):
+failed model tier, provider, actual model/harness, activity/skill, observed failure,
+correct outcome and evidence. Capture it before handback; link diagnosis, repair
+and retests by `FAIL-NNN`. Use unknown for missing metadata, not a guessed actor.
 Record issue, baseline, hypothesis, before/after, failures and disposition; show the scoped log on the website. Repair shared skills in `KaydenClark/skills` through author-skill. Install into the personal catalog only with authorization. Do not roll out to other projects. Static scores alone prove no behavioral benefit.
 
 ## Project design trials
