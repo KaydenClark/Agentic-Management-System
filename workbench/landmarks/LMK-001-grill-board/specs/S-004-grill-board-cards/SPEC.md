@@ -30,15 +30,9 @@ Historical card evidence below predates DQCs; [S-004 history](../../../../wiki/h
 
 ## Desired Behavior And Contracts
 
-- Local Python server; durable Git records own state. Every card is a DQC view, not an independent question store.
-- DQCs start with interview branches and preserve full developing/confirmed readbacks, why, source, scope and history. Distinct decisions get distinct stable IDs.
-- TRACKER.md projects concepts; TASKBOARD.md projects execution. DQCs and Landmarks/Specs/Tasks reference stable IDs in both directions; execution truth remains in its owners.
-- Terminal and Board share validated owning operations, serialized writes, commit/revision conflict checks, idempotency and rollback. Pending wording never inherits old confirmation.
-- Confirm preserves the displayed readback exactly. Correction, ratings and flags preserve owner words without inventing confirmation, authorization or Human QA.
-- Round review includes changed answers/quality feedback, actual Wiki/docs reconciliation or authorized preparation/next frontier, and unresolved dependencies. Round completion alone starts no unauthorized work.
-- Full DQC readbacks supersede the 1,000-character/no-heading restriction; no routine page editor. Preserve legacy cards/history and protected worktrees.
-- Separate Priority/Value reasons, 1-5 ratings, Too taxing rewrites, local assets and artifact theme remain. Tokens: [DDR-000Y](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md).
-- Reusable source belongs in KaydenClark/skills; supported package update owns AMS managed files/receipts. No hand-copy/forged hashes or installed-skill changes.
+The DQC acceptance below defines the shared Board/terminal lifecycle. Durable Git records own state; no independent question store or duplicate execution authority. Full DQC readbacks supersede the 1,000-character/no-heading restriction, while routine page editing remains excluded. Preserve legacy cards, history and protected worktrees. Retain the artifact theme and [DDR-000Y tokens](../../../../docs/ddr/000Y-the-grill-board-theme-follows-the-grilling-board-redesign-artifact.md).
+
+Reusable source belongs in KaydenClark/skills. Supported package updates own AMS managed files/receipts; no hand-copy, forged hashes or installed-skill changes. Round completion and concept confirmation grant no additional execution authority or Human QA.
 
 ## Non-Goals
 
