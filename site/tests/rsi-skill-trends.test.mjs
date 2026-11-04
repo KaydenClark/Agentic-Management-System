@@ -230,6 +230,18 @@ test('the page explains a loop, the point, the level and High/Small, and states 
   assert.match(t, /not a statistical test/);
 });
 
+// S-007: no improved-outcome claim without held-out rows, controls, the prior
+// version and an interval. A rising Alignment Score is a recorded score only.
+test('a climbing score is never called improvement; the claim is reserved for held-out evidence', () => {
+  for (const records of [recordedLoops(), multiLoopFixture]) {
+    const t = text(render(records));
+    assert.doesNotMatch(t, /\b(is|are) improving (that|the|this|each) skill\b|means the loop is improving/i, 'a score trend is presented as improvement');
+    assert.match(t, /does not show that RSI improved the skill/);
+    assert.match(t, /held-out trials with control arms, the prior version and an interval/);
+  }
+  assert.match(render(recordedLoops()), /href="#held-out-method"/);
+});
+
 test('not-charted skills are stated briefly and carry no score', () => {
   const out = render(recordedLoops());
   const note = text(out.match(/data-not-charted=""[\s\S]*?<\/p>/)?.[0] ?? '');

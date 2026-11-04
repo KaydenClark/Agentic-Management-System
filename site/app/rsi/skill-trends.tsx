@@ -387,8 +387,10 @@ export function SkillTrends({ records }: { records: readonly LoopRecord[] }) {
         <p className="eyebrow">Skill trends · {maxLoop === 1 ? "one RSI loop recorded" : `${maxLoop} RSI loops recorded`}</p>
         <h2 id="skill-trends-title">Is RSI improving each skill?</h2>
         <p>
-          Each RSI loop adds one point per skill: the Alignment Score of the version that loop kept. Higher is better, and
-          a line that climbs over loops means the loop is improving that skill.{" "}
+          Each RSI loop adds one point per skill: the Alignment Score of the version that loop kept. Higher is better. A
+          line that climbs over loops shows a higher recorded score on that skill&apos;s checks; on its own it does not
+          show that RSI improved the skill. That claim needs <a href="#held-out-method">held-out trials</a> with control
+          arms, the prior version and an interval.{" "}
           {maxLoop === 1
             ? "One loop is recorded so far, so each skill shows two points: its start and its loop-1 result. Every new loop adds a point."
             : null}
