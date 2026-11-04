@@ -175,3 +175,22 @@ The actual push was rejected before Git ran by automatic approval review for ins
 
 The separate DQC error, tracker-undeclared, is a manifest/configuration gap, also unrelated to concurrent sessions. Existing data, pending confirmation and blocked publication remain preserved. No hook, security setting, manifest or Board code was changed by this capture.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-d24d46bd-7ca5-44e0-854e-0411e4fbff30
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T02:44:40.440Z
+Author: Kayden
+Source: Kayden direct AMS chat, standing public-publication authorization and merge instruction, 2026-11-03
+Topic: grilling-board
+Supersedes: none
+
+## Standing public-publication authorization
+
+Kayden explicitly adopted the following standing instruction in the AMS chat, 2026-11-03 America/Denver, then directed: "And then merge the PRs that have been getting flagged in this chat".
+
+> For AMS, I authorize routine publication of project source, documentation, DQCs and Wiki records—including captured project questions, corrections, and pending or confirmed readbacks—to the public KaydenClark/Agentic-Management-System repository. Preserve each record’s confirmation state. Push feature branches and merge checked non-site PRs into main without asking again. Private answer stores, ignored files, credentials, private research and raw transcripts remain excluded. Website dev-to-main promotion remains mine.
+
+This grants the stated publication and checked non-site merge scope. It does not confirm the pending Grilling Board concept readback, approve Human QA, activate implementation of the DQC lifecycle, or authorize website dev-to-main promotion. Earlier publication-hold entries remain historical; their missing explicit public-disclosure authorization is resolved by this owner statement. The requested current delivery includes this documentation branch and the eligible PRs actually raised in this chat, preserving each existing target and any failed checks or product-acceptance limits.
+<!-- /jot-entry -->

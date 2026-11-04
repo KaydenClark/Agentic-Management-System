@@ -3,11 +3,11 @@
 **Task ID:** TK-002G
 **Spec ID:** S-013
 **Slice:** Repair AGENTS document ownership
-**Status:** blocked
-**Blockers:** owner:public-push-approval
+**Status:** in-progress
+**Blockers:** none
 **Destination:** wiki-claim: Workbench control ownership
 **Planned verification:** policy and link inspection; Runbook checks; checked PR into main
-**Proof:** Local full suite 810 passed, 4 skipped; fresh-checkout documentation checks passed. See Receipt. Public push rejected by automatic approval review; no PR or merge.
+**Proof:** Local full suite 810 passed, 4 skipped; fresh-checkout documentation checks passed. Earlier public pushes were rejected. The owner has now explicitly authorized public publication; current PR checks and landing remain pending.
 **Claimed by:** codex-agents-ownership
 **Current claimant:** codex-agents-ownership
 
@@ -19,7 +19,7 @@ Kayden's AMS chat, 2026-11-03: fix AGENTS.md because it contains material that b
 
 AGENTS now holds core rules and routes. RUNBOOK owns testing (including the three-strike stop), scheduling, CI and delivery; SKILLS owns method routing, delivery reporting and RSI. Local links and character limits pass. The Receipt retains the initial sandbox failures and successful rerun.
 
-Next action: obtain explicit owner approval to push this documentation and its required records to the public AMS repository, then open a PR into main, wait for required CI and merge under the existing non-site policy. Local verification clone is retained pending delivery; original checkout and unrelated ignored material remain untouched. This is no Spec acceptance, Human QA or deployment.
+Next action: push this documentation and its required records, open a PR into main, wait for required CI and merge under the existing non-site policy. [Standing authorization](../../../../../../wiki/context-grilling-board.md#jot-d24d46bd-7ca5-44e0-854e-0411e4fbff30) resolves the earlier public-disclosure hold. Local verification clone is retained pending delivery; original checkout and unrelated ignored material remain untouched. This is no Spec acceptance, Human QA or deployment.
 
 ## Receipt
 

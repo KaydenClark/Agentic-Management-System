@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Resolve TK-002G public-push approval; TK-003 still waits on S-006.
+**Next gate:** Land TK-002G through checked PR; TK-003 still waits on S-006.
 
 ## Intent and authority
 
