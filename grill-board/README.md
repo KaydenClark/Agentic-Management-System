@@ -175,7 +175,7 @@ Both pages render the generic fixture cards in `tests/fixtures/grill_board/showc
 
 **375px check** (TK-000J): `uv run --with playwright pytest tests/test_grill_board_phone.py` fails if the page is wider than 375px, if reaching a control scrolls sideways, or if any visible control (verdicts, note, stars, Too taxing, comment, links, theme toggle) is off-screen or covered, in dark and light; a star tapped at 375px must commit its rating. The default `uv run pytest` skips it, because Playwright and a browser are not project dependencies.
 
-Differences from the artifact, by choice: the other Dashboard sections, search, filters and batch are omitted; native DQC rounds/context/history use their actual records; queue rows also show each grade's reason, because DDR-000K keeps reasons on every card; the brand reads "AMS · Grill Board".
+Current differences from the artifact: other Dashboard sections, search, filters and batch remain omitted. The later [owner redesign correction](../workbench/wiki/context-grilling-board.md#jot-c9dcebb6-4d50-4d6d-95d7-30d723d66d53) requires those supplied controls to function; these omissions are an implementation gap, superseding the earlier “by choice” characterization. Native DQC rounds/context/history use their actual records; queue rows retain each grade's reason under DDR-000K, and the brand reads "AMS · Grill Board". Delivered DQC lifecycle checks establish neither the later redesign nor owner Human QA.
 
 
 ## DQC verification

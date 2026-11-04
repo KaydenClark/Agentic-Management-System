@@ -10,21 +10,37 @@ source_paths:
 last_verified: 2026-11-02
 ---
 
-# Feedback-to-improvement loop: mapped destination and prepared route
+# Feedback-to-improvement loop: current understanding and prepared route
 
-## Current mapped destination
+## Current understanding
 
-LMK-004 owns the full RSI Loop; S-002 owns evaluation and qualification, S-000B worker execution and recovery, S-006 durable data, S-007 presentation, S-013 detection, S-011 shared-skill delivery and S-000A the catalog refocus. Specs own acceptance; the [continuation guide](guidebooks/rsi-loop-continuation.md) links the prepared Tasks and launches.
+The RSI Loop turns failures from real agent work into demonstrated improvements to shared skills and the Workbench, then checks later use for recurrence and regression. [LMK-004 — RSI Loop](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md) owns this whole destination; [its synthesis](design-concepts/landmark-rsi-loop.md) explains the capability relationships. S-002 owns evaluation/qualification, S-000B worker execution/recovery, S-006 durable data, S-007 presentation, S-013 detection, S-011 source delivery and S-000A catalog refocus. Follow the [continuation guide](guidebooks/rsi-loop-continuation.md) for actual owners and release conditions, not a copied queue here.
 
-Canonical failure intake is [WORKBENCH_FEEDBACK.md](../feedback/WORKBENCH_FEEDBACK.md); worker-written cases, runs, candidates, comparisons and dispositions are canonical in Supabase. Raw transcripts stay local and private; safe Git exports are recovery copies. A Python worker runs outside Supabase, initially locally. Supabase availability is not worker availability.
+Failures enter [WORKBENCH_FEEDBACK.md](../feedback/WORKBENCH_FEEDBACK.md). Diagnosis identifies whether the cause belongs to a skill, tool, environment, control or coordination. Cases and comparisons declare an observable outcome and intended useful benefit before evaluating the candidate against the current version and applicable controls. Existing r1 Fitness/Alignment qualification, Stable/Excellent, useful benefit and no regression all matter; a higher static score alone does not prove improved work. Failed attempts and inconclusive results remain evidence. Adoption and later observed use are distinct from source publication.
 
-Use available Codex or Claude subscription meters, Mid/Small by default and High only when needed. Preserve initial attempt, retry, retry, stop; baseline excluded. Existing campaign pins and stops remain. Stable/Excellent, useful benefit and no regression are required; merge, installation, observed loading, owner Human QA and website promotion remain distinct. The assembled earlier readback is not confirmed wholesale.
+Worker-written, commit-pinned cases/runs/candidates/comparisons/dispositions belong in Supabase; raw transcripts remain local/private and safe Git exports are recovery copies. The Python worker runs outside Supabase, initially locally. An available database proves no running worker. Available Codex/Claude subscription meters govern model work, Mid/Small by default and High when needed. Preserve initial attempt → retry → retry → stop, baseline excluded; repairs or renames reset no counter or stopped campaign.
 
-The owner launched Stage A on 2026-11-04 and explicitly confirmed the [exact assembled readback](guidebooks/rsi-loop-readback-2026-11-04.md). TK-002M delivers its [case](guidebooks/rsi-case-contract.md), [worker](guidebooks/rsi-worker-contract.md) and [bounded release graph](guidebooks/rsi-task-release.md); implementation remains held until a separate launch. The older Map-only boundary and specific owner answers are preserved in the entries below; the newer request changes preparation authority only. No model trials, database writes, automation, installation or deployment are authorized now.
+## Confirmed preparation and execution boundary
 
-Research mechanisms are hypotheses, not demonstrated local benefit: [transition-state search](https://www.nature.com/articles/s41524-026-02301-9), [GEPA](https://arxiv.org/html/2507.19457v1), [ACE](https://arxiv.org/abs/2510.04618), [SkillRevise](https://arxiv.org/html/2606.01139v1), and [SWE-Skills-Bench](https://arxiv.org/abs/2603.15401v2). They do not replace r1 or prove improvement. Historical details and the earlier sequence remain in Git; the live Task records own current prerequisites.
+The owner launched Stage A and explicitly confirmed the [exact four-section readback](guidebooks/rsi-loop-readback-2026-11-04.md), sourced by [the confirmation entry](#jot-6a1d5383-d939-47b2-bd45-51e702c12550). Its body SHA-256 remains `427c3f0d3c109b3ce05011433920b2f74b7044b068c41a6e8d58b08a93d9e853`. Stage A delivered the [case contract](guidebooks/rsi-case-contract.md), [worker contract](guidebooks/rsi-worker-contract.md) and [bounded release graph](guidebooks/rsi-task-release.md). [The later delivery observation](#jot-9280ecbd-819b-4559-bf34-6f342a7402a9) records PR169's merge at `3e3078810753035f289f20e5f9bc268a61e0fbd3`: the earlier publication refusal is resolved, with both refusals preserved as history.
 
-The [preparation-bypass failure](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) is a recurrence case for S-013/TK-001D. Owner instruction of 2026-11-03 consolidated all failure categories into one Markdown intake; detailed reports and ledgers remain linked evidence. Missing actor metadata stays unknown. This consolidation did not authorize held automation, shared-skill repair, trials or installation.
+Earlier statements that the assembled readback was unconfirmed or publication blocked refer to earlier stages; they are not the current frontier. Confirmation covers meaning and Stage A executable preparation. A separate Stage B launch is still required. This Wiki repair starts no model trials, database writes, automation, skill installation, deployment or stopped campaigns, and does not select a catalog pilot. The [live release owners](guidebooks/rsi-loop-continuation.md) govern any future action. Merge, installation, observed loading, Human QA and website promotion retain separate authority.
+
+## Relationships and unresolved proof
+
+The [AMS purpose](context-ams-purpose.md) explains why the website build is the first application. The [Grill Board](context-grilling-board.md) supplies sourced owner corrections and quality feedback; [RSI presentation](design-concepts/landmark-rsi-presentation.md) displays evidence at its supported strength. [Wiki maintenance](guidebooks/wiki-maintenance.md) makes the resulting knowledge retrievable, but a successful local correction exercise is not broad RSI benefit.
+
+The [preparation-bypass failure](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) remains a recurrence case, not an implemented systemic repair by this page. End-to-end autonomous improvement, later-use benefit and unfamiliar-work generalization still need their actual evidence. The existing schema and contracts explain how to collect it; their existence supplies none of those outcomes.
+
+## Evidence and sources
+
+- [LMK-004 source at the intake revision](https://github.com/KaydenClark/Agentic-Management-System/blob/da4f0ca809c6759e9c17ce798c52753dab123a65/workbench/landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md) and the linked live owner distinguish destination and current authority.
+- [Pinned confirmed readback](https://github.com/KaydenClark/Agentic-Management-System/blob/da4f0ca809c6759e9c17ce798c52753dab123a65/workbench/wiki/guidebooks/rsi-loop-readback-2026-11-04.md) retains exact meaning; [Landmark history](history/LMK-004.md) owns lifecycle chronology.
+- Research links in earlier source revisions are design hypotheses, not demonstrated local benefit. This repair relies on inspected AMS owners and preserves their sources rather than reasserting unverified research conclusions.
+
+## History
+
+- 2026-11-04: S-000C repair reconciled the confirmed Stage A readback, delivered preparation and resolved PR169 publication hold with unchanged Stage B/campaign stops. Original entries remain byte-preserved below; a historical unresolved entry cannot reopen subsequently confirmed meaning.
 
 <!-- jot-entry -->
 ### JOT-9179f5d2-dd33-42ed-b679-5bf49c79c078

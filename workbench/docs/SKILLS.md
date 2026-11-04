@@ -37,6 +37,10 @@ TRACKER.md and Grilling Board cards project stable DQCs; TASKBOARD.md projects e
 
 Use the [delivered native procedure](https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md) and [project Board guide](../../grill-board/README.md). A personal-catalog source merge does not update the active installation. Preserve the [confirmed meaning](../wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba), sourced corrections and actual publication state.
 
+## Wiki maintenance
+
+Read the [maintenance procedure](../wiki/guidebooks/wiki-maintenance.md) after relevant Wiki recovery and before finishing changed knowledge. It makes the existing schema concrete: source intake, current explanation plus affected Landmark/routes, durable query filing and semantic lint. Jot capture alone is not completed ingest.
+
 ## Runtime
 
 From the project root, inspect with
