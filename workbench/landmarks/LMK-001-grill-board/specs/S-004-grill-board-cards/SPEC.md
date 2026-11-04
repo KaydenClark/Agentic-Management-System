@@ -44,6 +44,8 @@ The acceptance below and confirmed readback own behavior. Durable DQCs own conce
 
 ## Vertical Implementation Slices
 
+TK-002K repairs the review-found generated whitespace through the source package before assembly delivery.
+
 TK-002H delivers native tracker/setup and AMS update; TK-002I consumes its API for the Python Board. Serialize writers on Feature/S-004-dqc-grilling-board. Catalog source uses an isolated checkout and independent PR. Both include checks/QA; assembled Review follows.
 
 Each Task is one bounded run; whole-Spec checked delivery targets `main`.
