@@ -1,0 +1,93 @@
+{
+  "schema": "landmark-tracker/destination-question@2",
+  "id": "DQC-000C",
+  "revision": 3,
+  "title": "Question and answer flow",
+  "question": "How do question readbacks and owner answers stay connected?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+      "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [
+    {
+      "type": "dqc",
+      "id": "DQC-000A",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    },
+    {
+      "type": "spec",
+      "id": "S-004",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    }
+  ],
+  "claims": [],
+  "origin": {
+    "title": "Question and answer flow",
+    "question": "How do question readbacks and owner answers stay connected?",
+    "sources": [
+      {
+        "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+        "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-04T03:56:18.846Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-04T03:56:18.846Z",
+      "reason": "Recover the four original interview branches from sourced intent, dated 2026-11-03; captured now after supported setup.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    },
+    {
+      "revision": 2,
+      "at": "2026-11-04T03:56:20.151Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "dqc",
+            "id": "DQC-000A",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-04T03:56:20.309Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "spec",
+            "id": "S-004",
+            "revision": null
+          }
+        }
+      ]
+    }
+  ]
+}

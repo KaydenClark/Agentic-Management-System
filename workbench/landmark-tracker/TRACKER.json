@@ -12,26 +12,1754 @@
     "Verified"
   ],
   "workbench": {
-    "items": 0,
-    "denominator": 0,
-    "status": "empty",
-    "counted": [],
-    "numerators": null,
-    "distribution": null,
-    "unassessed": [],
+    "items": 8,
+    "denominator": 8,
+    "status": "incomplete",
+    "counted": [
+      "dqc:DQC-000A",
+      "dqc:DQC-000B",
+      "dqc:DQC-000C",
+      "dqc:DQC-000D",
+      "spec:S-004",
+      "task:S-004/TK-002H",
+      "task:S-004/TK-002I",
+      "landmark:LMK-001"
+    ],
+    "numerators": {
+      "Idea": 0,
+      "Aligning": 0,
+      "Confirmed": 0,
+      "Mapped": 0,
+      "Planned": 0,
+      "Journey": 0,
+      "Review": 0,
+      "Verified": 0
+    },
+    "distribution": {
+      "Idea": 0,
+      "Aligning": 0,
+      "Confirmed": 0,
+      "Mapped": 0,
+      "Planned": 0,
+      "Journey": 0,
+      "Review": 0,
+      "Verified": 0
+    },
+    "unassessed": [
+      "dqc:DQC-000A",
+      "dqc:DQC-000B",
+      "dqc:DQC-000C",
+      "dqc:DQC-000D",
+      "spec:S-004",
+      "task:S-004/TK-002H",
+      "task:S-004/TK-002I",
+      "landmark:LMK-001"
+    ],
     "unknown": [],
     "invalid": [],
-    "bySourceType": {},
-    "contributions": []
+    "bySourceType": {
+      "dqc": {
+        "items": 4,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000A",
+          "dqc:DQC-000B",
+          "dqc:DQC-000C",
+          "dqc:DQC-000D"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        }
+      },
+      "spec": {
+        "items": 1,
+        "status": "incomplete",
+        "counted": [
+          "spec:S-004"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        }
+      },
+      "task": {
+        "items": 2,
+        "status": "incomplete",
+        "counted": [
+          "task:S-004/TK-002H",
+          "task:S-004/TK-002I"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        }
+      },
+      "landmark": {
+        "items": 1,
+        "status": "incomplete",
+        "counted": [
+          "landmark:LMK-001"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        }
+      }
+    },
+    "contributions": [
+      {
+        "key": "dqc:DQC-000A",
+        "type": "dqc",
+        "id": "DQC-000A",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000A",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000B",
+        "type": "dqc",
+        "id": "DQC-000B",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000B",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000C",
+        "type": "dqc",
+        "id": "DQC-000C",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000C",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000D",
+        "type": "dqc",
+        "id": "DQC-000D",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000D",
+        "itemRevision": null
+      },
+      {
+        "key": "spec:S-004",
+        "type": "spec",
+        "id": "S-004",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": null,
+        "itemRevision": null
+      },
+      {
+        "key": "task:S-004/TK-002H",
+        "type": "task",
+        "id": "S-004/TK-002H",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": null,
+        "itemRevision": null
+      },
+      {
+        "key": "task:S-004/TK-002I",
+        "type": "task",
+        "id": "S-004/TK-002I",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": null,
+        "itemRevision": null
+      },
+      {
+        "key": "landmark:LMK-001",
+        "type": "landmark",
+        "id": "LMK-001",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": null,
+        "itemRevision": null
+      }
+    ],
+    "unassessedPercent": 100
   },
   "landmarks": [],
   "noLandmark": {
     "display": "No landmark",
-    "questions": []
+    "questions": [
+      "DQC-000A",
+      "DQC-000B",
+      "DQC-000C",
+      "DQC-000D"
+    ]
   },
-  "items": [],
+  "items": [
+    {
+      "key": "dqc:DQC-000A",
+      "type": "dqc",
+      "id": "DQC-000A",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": [
+        "DQC-000B",
+        "DQC-000C",
+        "DQC-000D"
+      ]
+    },
+    {
+      "key": "dqc:DQC-000B",
+      "type": "dqc",
+      "id": "DQC-000B",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000C",
+      "type": "dqc",
+      "id": "DQC-000C",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000D",
+      "type": "dqc",
+      "id": "DQC-000D",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "spec:S-004",
+      "type": "spec",
+      "id": "S-004",
+      "resolution": "room",
+      "state": "unassessed",
+      "holders": [
+        {
+          "dqc": "DQC-000A",
+          "itemRevision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "assessment": null
+        },
+        {
+          "dqc": "DQC-000B",
+          "itemRevision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "assessment": null
+        },
+        {
+          "dqc": "DQC-000C",
+          "itemRevision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "assessment": null
+        },
+        {
+          "dqc": "DQC-000D",
+          "itemRevision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "assessment": null
+        }
+      ],
+      "relatedBy": [
+        "DQC-000A",
+        "DQC-000B",
+        "DQC-000C",
+        "DQC-000D"
+      ]
+    },
+    {
+      "key": "task:S-004/TK-002H",
+      "type": "task",
+      "id": "S-004/TK-002H",
+      "resolution": "room",
+      "state": "unassessed",
+      "holders": [
+        {
+          "dqc": "DQC-000A",
+          "itemRevision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "assessment": null
+        }
+      ],
+      "relatedBy": [
+        "DQC-000A"
+      ]
+    },
+    {
+      "key": "task:S-004/TK-002I",
+      "type": "task",
+      "id": "S-004/TK-002I",
+      "resolution": "room",
+      "state": "unassessed",
+      "holders": [
+        {
+          "dqc": "DQC-000A",
+          "itemRevision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "assessment": null
+        }
+      ],
+      "relatedBy": [
+        "DQC-000A"
+      ]
+    },
+    {
+      "key": "landmark:LMK-001",
+      "type": "landmark",
+      "id": "LMK-001",
+      "resolution": "room",
+      "state": "unassessed",
+      "holders": [
+        {
+          "dqc": "DQC-000A",
+          "itemRevision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "assessment": null
+        }
+      ],
+      "relatedBy": [
+        "DQC-000A"
+      ]
+    }
+  ],
   "reconciliation": [],
-  "questions": [],
+  "questions": [
+    {
+      "id": "DQC-000A",
+      "title": "Grilling Board purpose and DQC lifecycle",
+      "question": "How should the Grilling Board preserve confirmed intent through execution?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": {
+        "change": "The exact confirmed DQC lifecycle is traceable through supported tracker setup and the local Python Board, with source/history and distinct owner gates.",
+        "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md",
+        "revision": 6
+      },
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 5,
+        "denominator": 5,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000A",
+          "spec:S-004",
+          "task:S-004/TK-002H",
+          "task:S-004/TK-002I",
+          "landmark:LMK-001"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000A",
+          "spec:S-004",
+          "task:S-004/TK-002H",
+          "task:S-004/TK-002I",
+          "landmark:LMK-001"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000A"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          },
+          "spec": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "spec:S-004"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          },
+          "task": {
+            "items": 2,
+            "status": "incomplete",
+            "counted": [
+              "task:S-004/TK-002H",
+              "task:S-004/TK-002I"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          },
+          "landmark": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "landmark:LMK-001"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000A",
+            "type": "dqc",
+            "id": "DQC-000A",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000A",
+            "itemRevision": null
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
+          },
+          {
+            "key": "task:S-004/TK-002H",
+            "type": "task",
+            "id": "S-004/TK-002H",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
+          },
+          {
+            "key": "task:S-004/TK-002I",
+            "type": "task",
+            "id": "S-004/TK-002I",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
+          },
+          {
+            "key": "landmark:LMK-001",
+            "type": "landmark",
+            "id": "LMK-001",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [
+        {
+          "type": "landmark",
+          "id": "LMK-001",
+          "home": "workbench/landmarks/LMK-001-grill-board/LANDMARK.md",
+          "key": "landmark:LMK-001",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
+        },
+        {
+          "type": "spec",
+          "id": "S-004",
+          "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md",
+          "key": "spec:S-004",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
+        },
+        {
+          "type": "task",
+          "id": "S-004/TK-002H",
+          "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/tasks/TK-002H/TASK.md",
+          "key": "task:S-004/TK-002H",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
+        },
+        {
+          "type": "task",
+          "id": "S-004/TK-002I",
+          "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/tasks/TK-002I/TASK.md",
+          "key": "task:S-004/TK-002I",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
+        }
+      ],
+      "relatedBy": [
+        "DQC-000B",
+        "DQC-000C",
+        "DQC-000D"
+      ],
+      "lineage": {
+        "key": "dqc:DQC-000A",
+        "type": "dqc",
+        "id": "DQC-000A",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": [
+          {
+            "key": "landmark:LMK-001",
+            "type": "landmark",
+            "id": "LMK-001",
+            "resolution": "room",
+            "state": "unassessed"
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "resolution": "room",
+            "state": "unassessed"
+          },
+          {
+            "key": "task:S-004/TK-002H",
+            "type": "task",
+            "id": "S-004/TK-002H",
+            "resolution": "room",
+            "state": "unassessed"
+          },
+          {
+            "key": "task:S-004/TK-002I",
+            "type": "task",
+            "id": "S-004/TK-002I",
+            "resolution": "room",
+            "state": "unassessed"
+          }
+        ]
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+          "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+        }
+      ],
+      "origin": {
+        "title": "Grilling Board purpose and DQC lifecycle",
+        "question": "How should the Grilling Board preserve confirmed intent through execution?",
+        "sources": [
+          {
+            "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+            "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-04T03:56:18.631Z"
+      },
+      "corrections": [],
+      "revision": 6,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-04T03:56:18.631Z",
+          "reason": "Recover the four original interview branches from sourced intent, dated 2026-11-03; captured now after supported setup.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "at": "2026-11-04T03:56:19.128Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "landmark",
+                "id": "LMK-001",
+                "revision": null
+              }
+            }
+          ]
+        },
+        {
+          "revision": 3,
+          "at": "2026-11-04T03:56:19.308Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "spec",
+                "id": "S-004",
+                "revision": null
+              }
+            }
+          ]
+        },
+        {
+          "revision": 4,
+          "at": "2026-11-04T03:56:19.461Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "task",
+                "id": "S-004/TK-002H",
+                "revision": null
+              }
+            }
+          ]
+        },
+        {
+          "revision": 5,
+          "at": "2026-11-04T03:56:19.656Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "task",
+                "id": "S-004/TK-002I",
+                "revision": null
+              }
+            }
+          ]
+        },
+        {
+          "revision": 6,
+          "at": "2026-11-04T03:56:20.850Z",
+          "reason": "Link confirmed intended result to the execution owner; this records no completion.",
+          "changes": [
+            {
+              "field": "expectedResult",
+              "from": null,
+              "to": {
+                "change": "The exact confirmed DQC lifecycle is traceable through supported tracker setup and the local Python Board, with source/history and distinct owner gates.",
+                "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md",
+                "revision": 6
+              }
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000B",
+      "title": "What belongs on the Grilling Board",
+      "question": "What belongs on the Grilling Board?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 3,
+        "denominator": 3,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000A",
+          "dqc:DQC-000B",
+          "spec:S-004"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000A",
+          "dqc:DQC-000B",
+          "spec:S-004"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 2,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000A",
+              "dqc:DQC-000B"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          },
+          "spec": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "spec:S-004"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000A",
+            "type": "dqc",
+            "id": "DQC-000A",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000A",
+            "itemRevision": null
+          },
+          {
+            "key": "dqc:DQC-000B",
+            "type": "dqc",
+            "id": "DQC-000B",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000B",
+            "itemRevision": null
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [
+        {
+          "type": "dqc",
+          "id": "DQC-000A",
+          "home": "workbench/landmark-tracker/destination-questions/DQC-000A.json",
+          "key": "dqc:DQC-000A",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "tracker",
+          "state": "unassessed",
+          "assessment": null
+        },
+        {
+          "type": "spec",
+          "id": "S-004",
+          "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md",
+          "key": "spec:S-004",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
+        }
+      ],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000B",
+        "type": "dqc",
+        "id": "DQC-000B",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": [
+          {
+            "key": "dqc:DQC-000A",
+            "type": "dqc",
+            "id": "DQC-000A",
+            "resolution": "tracker",
+            "state": "unassessed",
+            "related": [
+              {
+                "key": "landmark:LMK-001",
+                "type": "landmark",
+                "id": "LMK-001",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "spec:S-004",
+                "type": "spec",
+                "id": "S-004",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "task:S-004/TK-002H",
+                "type": "task",
+                "id": "S-004/TK-002H",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "task:S-004/TK-002I",
+                "type": "task",
+                "id": "S-004/TK-002I",
+                "resolution": "room",
+                "state": "unassessed"
+              }
+            ]
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "seen": true
+          }
+        ]
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+          "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+        }
+      ],
+      "origin": {
+        "title": "What belongs on the Grilling Board",
+        "question": "What belongs on the Grilling Board?",
+        "sources": [
+          {
+            "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+            "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-04T03:56:18.742Z"
+      },
+      "corrections": [],
+      "revision": 3,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-04T03:56:18.742Z",
+          "reason": "Recover the four original interview branches from sourced intent, dated 2026-11-03; captured now after supported setup.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "at": "2026-11-04T03:56:19.835Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "dqc",
+                "id": "DQC-000A",
+                "revision": null
+              }
+            }
+          ]
+        },
+        {
+          "revision": 3,
+          "at": "2026-11-04T03:56:19.989Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "spec",
+                "id": "S-004",
+                "revision": null
+              }
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000C",
+      "title": "Question and answer flow",
+      "question": "How do question readbacks and owner answers stay connected?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 3,
+        "denominator": 3,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000A",
+          "dqc:DQC-000C",
+          "spec:S-004"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000A",
+          "dqc:DQC-000C",
+          "spec:S-004"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 2,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000A",
+              "dqc:DQC-000C"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          },
+          "spec": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "spec:S-004"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000A",
+            "type": "dqc",
+            "id": "DQC-000A",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000A",
+            "itemRevision": null
+          },
+          {
+            "key": "dqc:DQC-000C",
+            "type": "dqc",
+            "id": "DQC-000C",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000C",
+            "itemRevision": null
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [
+        {
+          "type": "dqc",
+          "id": "DQC-000A",
+          "home": "workbench/landmark-tracker/destination-questions/DQC-000A.json",
+          "key": "dqc:DQC-000A",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "tracker",
+          "state": "unassessed",
+          "assessment": null
+        },
+        {
+          "type": "spec",
+          "id": "S-004",
+          "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md",
+          "key": "spec:S-004",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
+        }
+      ],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000C",
+        "type": "dqc",
+        "id": "DQC-000C",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": [
+          {
+            "key": "dqc:DQC-000A",
+            "type": "dqc",
+            "id": "DQC-000A",
+            "resolution": "tracker",
+            "state": "unassessed",
+            "related": [
+              {
+                "key": "landmark:LMK-001",
+                "type": "landmark",
+                "id": "LMK-001",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "spec:S-004",
+                "type": "spec",
+                "id": "S-004",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "task:S-004/TK-002H",
+                "type": "task",
+                "id": "S-004/TK-002H",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "task:S-004/TK-002I",
+                "type": "task",
+                "id": "S-004/TK-002I",
+                "resolution": "room",
+                "state": "unassessed"
+              }
+            ]
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "seen": true
+          }
+        ]
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+          "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+        }
+      ],
+      "origin": {
+        "title": "Question and answer flow",
+        "question": "How do question readbacks and owner answers stay connected?",
+        "sources": [
+          {
+            "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+            "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-04T03:56:18.846Z"
+      },
+      "corrections": [],
+      "revision": 3,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-04T03:56:18.846Z",
+          "reason": "Recover the four original interview branches from sourced intent, dated 2026-11-03; captured now after supported setup.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "at": "2026-11-04T03:56:20.151Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "dqc",
+                "id": "DQC-000A",
+                "revision": null
+              }
+            }
+          ]
+        },
+        {
+          "revision": 3,
+          "at": "2026-11-04T03:56:20.309Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "spec",
+                "id": "S-004",
+                "revision": null
+              }
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000D",
+      "title": "Keeping intent current",
+      "question": "How does a completed round carry understanding forward?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 3,
+        "denominator": 3,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000A",
+          "dqc:DQC-000D",
+          "spec:S-004"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000A",
+          "dqc:DQC-000D",
+          "spec:S-004"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 2,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000A",
+              "dqc:DQC-000D"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          },
+          "spec": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "spec:S-004"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000A",
+            "type": "dqc",
+            "id": "DQC-000A",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000A",
+            "itemRevision": null
+          },
+          {
+            "key": "dqc:DQC-000D",
+            "type": "dqc",
+            "id": "DQC-000D",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000D",
+            "itemRevision": null
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [
+        {
+          "type": "dqc",
+          "id": "DQC-000A",
+          "home": "workbench/landmark-tracker/destination-questions/DQC-000A.json",
+          "key": "dqc:DQC-000A",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "tracker",
+          "state": "unassessed",
+          "assessment": null
+        },
+        {
+          "type": "spec",
+          "id": "S-004",
+          "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md",
+          "key": "spec:S-004",
+          "revision": null,
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
+        }
+      ],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000D",
+        "type": "dqc",
+        "id": "DQC-000D",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": [
+          {
+            "key": "dqc:DQC-000A",
+            "type": "dqc",
+            "id": "DQC-000A",
+            "resolution": "tracker",
+            "state": "unassessed",
+            "related": [
+              {
+                "key": "landmark:LMK-001",
+                "type": "landmark",
+                "id": "LMK-001",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "spec:S-004",
+                "type": "spec",
+                "id": "S-004",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "task:S-004/TK-002H",
+                "type": "task",
+                "id": "S-004/TK-002H",
+                "resolution": "room",
+                "state": "unassessed"
+              },
+              {
+                "key": "task:S-004/TK-002I",
+                "type": "task",
+                "id": "S-004/TK-002I",
+                "resolution": "room",
+                "state": "unassessed"
+              }
+            ]
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "seen": true
+          }
+        ]
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+          "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+        }
+      ],
+      "origin": {
+        "title": "Keeping intent current",
+        "question": "How does a completed round carry understanding forward?",
+        "sources": [
+          {
+            "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+            "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-04T03:56:18.943Z"
+      },
+      "corrections": [],
+      "revision": 3,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-04T03:56:18.943Z",
+          "reason": "Recover the four original interview branches from sourced intent, dated 2026-11-03; captured now after supported setup.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        },
+        {
+          "revision": 2,
+          "at": "2026-11-04T03:56:20.484Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "dqc",
+                "id": "DQC-000A",
+                "revision": null
+              }
+            }
+          ]
+        },
+        {
+          "revision": 3,
+          "at": "2026-11-04T03:56:20.664Z",
+          "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "spec",
+                "id": "S-004",
+                "revision": null
+              }
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    }
+  ],
   "rounds": [],
   "currentRound": null
 }

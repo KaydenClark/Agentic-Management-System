@@ -1,0 +1,159 @@
+{
+  "schema": "landmark-tracker/destination-question@2",
+  "id": "DQC-000A",
+  "revision": 6,
+  "title": "Grilling Board purpose and DQC lifecycle",
+  "question": "How should the Grilling Board preserve confirmed intent through execution?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": {
+    "change": "The exact confirmed DQC lifecycle is traceable through supported tracker setup and the local Python Board, with source/history and distinct owner gates.",
+    "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md",
+    "revision": 6
+  },
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+      "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [
+    {
+      "type": "landmark",
+      "id": "LMK-001",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    },
+    {
+      "type": "spec",
+      "id": "S-004",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    },
+    {
+      "type": "task",
+      "id": "S-004/TK-002H",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    },
+    {
+      "type": "task",
+      "id": "S-004/TK-002I",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    }
+  ],
+  "claims": [],
+  "origin": {
+    "title": "Grilling Board purpose and DQC lifecycle",
+    "question": "How should the Grilling Board preserve confirmed intent through execution?",
+    "sources": [
+      {
+        "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+        "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-04T03:56:18.631Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-04T03:56:18.631Z",
+      "reason": "Recover the four original interview branches from sourced intent, dated 2026-11-03; captured now after supported setup.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    },
+    {
+      "revision": 2,
+      "at": "2026-11-04T03:56:19.128Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "landmark",
+            "id": "LMK-001",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-04T03:56:19.308Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "spec",
+            "id": "S-004",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 4,
+      "at": "2026-11-04T03:56:19.461Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "task",
+            "id": "S-004/TK-002H",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 5,
+      "at": "2026-11-04T03:56:19.656Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "task",
+            "id": "S-004/TK-002I",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 6,
+      "at": "2026-11-04T03:56:20.850Z",
+      "reason": "Link confirmed intended result to the execution owner; this records no completion.",
+      "changes": [
+        {
+          "field": "expectedResult",
+          "from": null,
+          "to": {
+            "change": "The exact confirmed DQC lifecycle is traceable through supported tracker setup and the local Python Board, with source/history and distinct owner gates.",
+            "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md",
+            "revision": 6
+          }
+        }
+      ]
+    }
+  ]
+}
