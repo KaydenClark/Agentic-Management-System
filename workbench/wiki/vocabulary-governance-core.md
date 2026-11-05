@@ -222,3 +222,16 @@ Supersedes: none
 
 Local documentation now defines the six planes in 6-to-1 order, explains downward and upward use, treats planes as claim roles, preserves Enduring Context and makes Projection a dated/revisioned snapshot. All 22 original glossary terms remain; six new entries restore Governance Plane and the five previously missing plane definitions. The compact glossary retains intent development and DQC evolution within its 3000-character limit. Wiki, glossary, layout, decision-record, Taskboard and hygiene checks passed. A fresh checkout of source candidate 3039e22 passed 839 tests with 6 skipped after authorized localhost access; the sandboxed failure and rerun are retained in FAIL-104. Later edits only tighten glossary wording, order explanatory examples and record verification/publication limits. Doctor still reports unrelated existing claims, S-011 dependency, undeclared runtime surfaces and Claude permission drift; none establishes a stack-documentation defect. Publication was refused twice by automatic approval review (FAIL-102/103); the branch remains local with no PR or main merge. The requested documentation is implemented locally; checked public delivery awaits recognized owner approval, and no owner acceptance, browser QA or measured RSI benefit is claimed.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-14f25176-8c50-47f8-8089-2319e079f3a3
+Kind: intent
+State: confirmed
+Recorded: 2026-11-05T04:13:00.328Z
+Author: codex-wiki-governance
+Source: Kayden direct approval in this Wiki governance-stack chat, 2026-11-04
+Topic: vocabulary-governance-core
+Supersedes: none
+
+Kayden replied "I approve" directly to the request to publish codex/wiki-governance-stack to the public KaydenClark/Agentic-Management-System repository, open its PR into main, and merge after CI passes. This explicitly authorizes that bounded documentation delivery. The earlier failed publication attempts remain historical. The approval does not establish owner acceptance, Human QA, deployment or any broader release permission. Continue the checked non-site landing; retain all six definitions and the ordered stack unchanged.
+<!-- /jot-entry -->
