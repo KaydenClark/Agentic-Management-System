@@ -72,7 +72,7 @@ an AMS glossary entry.
 - [Workbench meanings of AI coding terms](vocabulary-workbench-meanings-of-ai-coding-terms.md) - AI coding words with a distinct Workbench meaning
 - [Continuity terms](vocabulary-continuity-terms.md) - notepads, scoped handoffs and artifact identifiers
 - [Stance terms](vocabulary-stance-terms.md) - the job each stance does inside an assigned role
-- [Governance core](vocabulary-governance-core.md) - claim roles, authority, lanes, collections and decision records
+- [Governance core](vocabulary-governance-core.md) - six claim planes in stack order, downward and upward use, authority and decision records
 - [Continuity and evidence boundaries](vocabulary-continuity-and-evidence-boundaries.md) - what transport, promotion and host checks do and do not establish
 - [AI coding reference](ai-coding-reference.md) - general AI coding words restated in Workbench words
 
