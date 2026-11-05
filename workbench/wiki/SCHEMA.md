@@ -87,8 +87,8 @@ Investigate discrepancies, preserve uncertainty and repair the appropriate
 owner within the operation's authority. Actuality alone cannot redefine
 Canon, and Canon alone cannot prove Actuality.
 
-The Wiki is not itself a Governance Plane. Its knowledge, captured evidence,
-governing schema claims and summaries retain their respective claim roles.
+The Wiki is not itself a Governance Plane. Its summaries, knowledge,
+captured evidence and governing schema claims retain their respective claim roles.
 Capture, confirmation and Projection do not promote a claim into Canon,
 prove implementation or authorize execution. A delivered-intent report does
 not establish owner acceptance or Human QA. Only the current user request,

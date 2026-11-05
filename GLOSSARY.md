@@ -5,13 +5,13 @@
 ## Language
 
 **AMS**:
-Workflows, rules, skills and tools carrying intent into verified outcomes with AI; RSI through actual work.
+Reusable AI workflows, rules, skills and tools developing intent and carrying it into verified outcomes; RSI through actual work.
 
 **RSI loop**:
 Recursive self-improvement: observe friction, propose bounded change, compare outcomes, decide disposition, check later use. Recording proves no benefit.
 
 **Alignment assessment**:
-Approved Alignment Check r1 on a named candidate/scope over three runs.
+Approved Alignment Check r1 on a named candidate/scope in three runs.
 
 **Alignment Score**:
 Applicable checks passed, pooled across three runs as a percentage; separate from fitness/acceptance.
@@ -28,7 +28,7 @@ AMS people, agents, records, artifacts and tools.
 ### Governance core
 
 **Governance Plane**:
-A claim's role for a target/operation; artifacts can hold claims on one or several planes. Order: 6 → 1 below or 1 → 6.
+A claim's role for a target/operation; artifacts can hold claims on one or several planes.
 
 **Projection**:
 6: Snapshot summary of each plane's claims as of its last visit.
@@ -51,7 +51,7 @@ A claim's role for a target/operation; artifacts can hold claims on one or sever
 ### Records
 
 **Destination Question Card (DQC)**:
-Stable question/concept record with readbacks, confirmations and history, presented by a Grilling Board card.
+Stable evolving question/concept record owning readbacks, confirmations and history; a Board card presents it.
 
 **Concept lane**:
 Intent/concepts in DQCs, projected in TRACKER.md, linked to execution by stable ID.

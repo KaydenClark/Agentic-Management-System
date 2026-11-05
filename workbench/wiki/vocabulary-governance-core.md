@@ -28,8 +28,8 @@ their terms are not all entries in the current AMS glossary.
 
 Planes classify claims relative to a target and operation, not whole artifacts.
 One artifact may contain claims on several planes or only one. For example,
-a Spec can contain desired outcomes, governing acceptance criteria, supporting
-test results and learned rationale; those claims retain different roles.
+a Spec can contain desired outcomes, learned rationale, supporting test results
+and governing acceptance criteria; those claims retain different roles.
 
 Definition: [GLOSSARY.md, Governance core](../../GLOSSARY.md#governance-core).
 
@@ -208,4 +208,17 @@ Topic: vocabulary-governance-core
 Supersedes: none
 
 Kayden authorized updating the Wiki schema, glossary and related references. Claims within an artifact occupy planes; an artifact can contain claims from several planes or only one. Always present the numbered stack in ascending or descending order: 6 Projection, 5 Intent, 4 Enduring Context, 3 Grounding, 2 Canon, 1 Actuality. Enduring Context remains the name; the temporary wording Enduring Knowledge was corrected by Kayden. Canon is the authoritative source of truth. Grounding is the evidence and proofs used to establish and support that source of truth. Enduring Context is our knowledge about what exists, what Canon and evidence say exists or should change, and Intent and what to do with it. Projection is a snapshot summary of each plane’s claims as of the last time we were there. Downward use starts from a projection, develops Intent, updates knowledge, creates or reviews evidence, changes Canon based on knowledge and proof, and changes Actuality based on Canon, proof and understood Intent. Upward use starts from changed Actuality, reconciles Canon if needed, records proofs, updates knowledge, records Intent as delivered or not, and projects results. Stack traversal does not supply additional execution authority or owner acceptance. This supersedes the schema and vocabulary article passages assigning a plane to a whole artifact; historical evidence remains intact.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-0ad0d283-d165-4b0e-8cc9-9175c7c094f5
+Kind: verification
+State: current
+Recorded: 2026-11-05T03:52:25.161Z
+Author: codex-wiki-governance
+Source: Codex local documentation readback and fresh-checkout checks, 2026-11-04; source candidate 3039e2220c99c0479ac43998edc4169beb952afa
+Topic: vocabulary-governance-core
+Supersedes: none
+
+Local documentation now defines the six planes in 6-to-1 order, explains downward and upward use, treats planes as claim roles, preserves Enduring Context and makes Projection a dated/revisioned snapshot. All 22 original glossary terms remain; six new entries restore Governance Plane and the five previously missing plane definitions. The compact glossary retains intent development and DQC evolution within its 3000-character limit. Wiki, glossary, layout, decision-record, Taskboard and hygiene checks passed. A fresh checkout of source candidate 3039e22 passed 839 tests with 6 skipped after authorized localhost access; the sandboxed failure and rerun are retained in FAIL-104. Later edits only tighten glossary wording, order explanatory examples and record verification/publication limits. Doctor still reports unrelated existing claims, S-011 dependency, undeclared runtime surfaces and Claude permission drift; none establishes a stack-documentation defect. Publication was refused twice by automatic approval review (FAIL-102/103); the branch remains local with no PR or main merge. The requested documentation is implemented locally; checked public delivery awaits recognized owner approval, and no owner acceptance, browser QA or measured RSI benefit is claimed.
 <!-- /jot-entry -->
