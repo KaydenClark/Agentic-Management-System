@@ -3,12 +3,13 @@
 **Task ID:** TK-003B
 **Spec ID:** S-003
 **Slice:** Script-free and enhanced native keyboard navigation through the real shared shell
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation, Trust and Route; real native keyboard access with and without scripts
 **Planned verification:** Current-base reproduction and adverse controls; real 375/desktop theme/script matrix, original64 enlarged-text cases, fresh build/strict utilities/site/shared-browser checks and reviewed checked-dev containment.
 **Claimed by:** codex-s003-nojs-nav
 **Current claimant:** codex-s003-nojs-nav
+**Proof:** PR202 exact2eb47dbc2d7a70be3bf9b885595d8fe158f818af delivered in devcb14e01353216e173b6ab3c998b73193f10ff1ba. CI42264815071/42264815183 all14 steps success each; gate0; bounded3aeReviewPASS; retained27/64/3096 proof inspected.
 
 ## Assignment
 
@@ -36,3 +37,4 @@ Workspace baseline sha256:98981019e2c257656b90c432d1a99db16048079a9c8f7ebc808b12
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-003-website-shell-and-ams-orientation | 1be8aed9c7147e3e6fba459d7ffdfa92449e3785 | ahead 2 behind 0 | 1 | Fresh baseline build/strict utilities pass; unchanged real no-JS/rsi375 detector reproduces FAIL220. Causal CSS harness then stalled at style insertion: interrupted, no variant result; STOP/report retained. | Exact F extension and preparation/claim/query/harness diagnostics preserved; genuine baseline binding predates all product work. | In-progress: scoped harness correction and causal source repair, adverse controls before original64, new script/theme/width cases, shared-browser/repo checks, review and checkeddev. No product fix or HumanQA claim. | d4f32a3e747d1a97bfc356494034bae46b384ed633bca189825bded79d4ed6df |
 | 2 | Feature/S-003-website-shell-and-ams-orientation | cc6ce3393b1aa93d5191a9ab29b34b53e0317403 | ahead 3 behind 0 | 3 | Exact3ae fresh build/frozenutilities/site332; controls27 BEFORE original64/64; sharedbrowser3096/3096; Python867/5skip. Independent boundedReview3ae PASS0findings. Currentdev0fa record-only reconciliation keeps site tree exact. | FAIL220 repair/retests, separate reviewer/native-preflight diagnostics; full prior scope and receipt1 retained. | In-progress: final exact-headCI and root checkeddev containment; then nativeclose. F resumed294/protected readback/owner cards/HumanQA/main remain separate. No workspace/process release or auth/capacity claim. | 313f880bdcd4372c42788c0c6ebfd3e9c06d21e337c4b52dd1821f4100c15c44 |
+| 3 | Feature/S-003-website-shell-and-ams-orientation | b219d4a600eee94c97e979e9cde679b664e2157b | ahead 0 behind 0 | 0 | PR202 exact2eb47dbc2d7a70be3bf9b885595d8fe158f818af delivered in devcb14e01353216e173b6ab3c998b73193f10ff1ba. CI42264815071/42264815183 all14 steps success each; gate0; bounded3aeReviewPASS; retained27/64/3096 proof inspected. | Native closure; prior receipts/failures/baseline unchanged. Local3ae, CI2eb and deliveredcb14 scopes retained. | WholeS003/site acceptance, F resumed294, protected current readback, S005 cards, actualHumanQA and owner main remain. No workspace/process release or auth/capacity claim.; close attribution: {"agent":"codex-s003-nojs-nav","claimant":"codex-s003-nojs-nav","onBehalfOf":null} | 73dcdd80c6f2d4709d7afae371b243886b8009b3280150291b2ed5f26dfa8158 |
