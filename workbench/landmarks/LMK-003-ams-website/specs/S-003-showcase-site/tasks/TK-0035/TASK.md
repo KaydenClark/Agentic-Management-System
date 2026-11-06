@@ -2,13 +2,14 @@
 
 **Task ID:** TK-0035
 **Spec ID:** S-003
-**Slice:** Hash CLI covers every manifest-bound public artifact in both supported build layouts
-**Status:** in-progress
+**Slice:** Hash CLI covers every supported frozen public artifact
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Review coverage and Trust; complete built page/hash enumeration
 **Planned verification:** Strict route/hash parity, adverse controls, exact pure identity, frozen build/tests, actual adapter and checkeddev.
 **Claimed by:** codex-s003-hash-reader
 **Current claimant:** codex-s003-hash-reader
+**Proof:** PR195 delivered to dev3659a01e698511a4a36142ac76b203e62536250a; CI42235103197/42235103213 passed, bounded Review/gate0 verified.
 
 
 
@@ -27,9 +28,9 @@ Retain checkeddev933e386020c729f7af94822c6066e62f6403ce06's S010/S007 source/rec
 
 ## Verification and remaining delivery
 
-Keep intentional9-case red and actual206/207/209/212/213 failures with native STOPs. Required source checks are established in receipt3 and bounded independent Review: strict parity/adverse controls, exact pure core/vectors/provenance negatives and inventory side effects. Fresh builds/tests/utility reads precede Next start; runtime duplicates refuse without deletion/deduplication.
+Required source qualification is recorded in receipt3 and bounded independent Review. Retain original9-case red,206/207/209/212/213 failures and native STOPs. Frozen utility reads precede Next start; runtime duplicates refuse, never cleanup/deduplication. Actual adapter proof retains package/source pins, safe filter and distinct failed artifacts; no server/settings/auth forwarding or protected deployment claim.
 
-Real credential-free adapter proof retains installed package/source pins, safe Python filter and distinct failed archives/dirs/logs. No server/settings/auth forwarding/deployment; local proof is not protected readback. README owns the frozen API contract, S005 its collector/cards. All optional probes now END:213's port lookup/assertions/build were UNRUN, no cleanup inferred. Publish only mandatory record checks/current-head CI and actual checkeddev containment; then supported closure and correct known205 withdrawn-brief Nextgate. Preserve source/Check/QA limits and both delivery answers; no workspace-release/remote-completeness claim.
+Optional probes END:213 port lookup/assertions/build were UNRUN, no cleanup inferred. Exact-head CI and checkeddev containment are now verified in PR195; close metadata only, correcting known205 withdrawn-brief Nextgate. S005 owns cards; remaining site acceptance, actual HumanQA/main promotion and workspace/remote-completeness remain separate.
 
 Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d42da83436fd
 
@@ -37,7 +38,7 @@ Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d4
 
 - [x] Shared seam gives exact classic/adapter public hashes and stable API/CLI;39 articles,/skills/visitor404 included, only global-error excluded.
 - [x] Adverse cases refuse; pure identity/vectors/path-pin controls, provenance/atomic writer and existing site behavior remain intact.
-- [ ] Current-head CI and actual checkeddev containment complete the documented source/control/adapter/check/review evidence; HumanQA/production separate.
+- [x] Current-head CI and actual checkeddev containment complete the documented source/control/adapter/check/review evidence; HumanQA/production separate.
 
 ## Receipt
 
@@ -47,3 +48,4 @@ Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d4
 | 2 | Feature/S-003-website-shell-and-ams-orientation | 976c7ce76f1d7325269fc68b04099322aa5307fb | ahead 1 behind 0 | 0 | Source8558691 clean-env classic build/site327/inventory/hash pass. Actual adapter harness stopped before extraction/build: system Python3.9.6 rejects safe filter keyword. No adapter result; FAIL209 retained, no retry before report. | Failed archive/empty proof dirs/log preserved; root verified projectPython3.14.5 safe-filter support and released same-Task harness correction. | In-progress: new distinct safe-filter proof using supported interpreter, actual installed package pins, matched real classic/adapter sets, final checks/review/dev containment. Product/core/baseline unchanged; no server/credentials/deploy. | 4526cd47fb392949656f4e7902eea682e964b5761a80a9bea8bfd42ef46d724b |
 | 3 | Feature/S-003-website-shell-and-ams-orientation | 24b011fa3d34a8d88256746a1b36f428c43abc13 | ahead 1 behind 0 | 0 | af810 freshbuild/site331/utilityCLI0; actual pinned classic+adapter8phases0,50samehashes/39articles+404,coreexact;24focused,tour40 AFTER frozenreads. Python867/5skip at086; no Python code changed. | README frozen API; independent boundedReview086 PASS0findings; both STOP receipts/families/intakes retained. | In-progress: final-headCI and root checkeddev containment, then close/inspect withdrawn-TK003 Nextgate. Optional extra probe UNRUN/omitted(212), notpass. No protecteddeployment/HumanQA/workspace-release claim. | 01fefbab911a92fd04a46c37a67f53bc499d412f6cafdb272ed071ce9d923d12 |
 | 4 | Feature/S-003-website-shell-and-ams-orientation | a66228127c41f01251081315c067680ba39f6057 | ahead 1 behind 0 | 0 | No new source test. Optional213 audit stopped before port lookup/assertions/build because tour log omits child Local URL. Required receipt3 source results retain scope; no cleanup/current-head build inferred. | Canonical213 and UNRUN status; no product/helper/guard changes; prior receipts retained. | In-progress: mandatory headCI/root checkeddev containment, then close with actual Nextgate. All optional verification/cleanup experiments ended; workspace/process release unverified; HumanQA open. | 37cd143fb7858234ceedad0e5da7a50ce52843114b0e266e2396673b936472e4 |
+| 5 | Feature/S-003-website-shell-and-ams-orientation | 06e56a9b8856c103312ca2919dd4044b76624f31 | ahead 0 behind 0 | 0 | PR195 delivered to dev3659a01e698511a4a36142ac76b203e62536250a; CI42235103197/42235103213 passed, bounded Review/gate0 verified. | Native closure; prior receipts retained. | S005 cards/site acceptance/HumanQA and owner main promotion remain; no process/workspace release.; close attribution: {"agent":"codex-s003-hash-reader","claimant":"codex-s003-hash-reader","onBehalfOf":null} | 9f61554c279ade7c551d30a5f38c93b8963c260a563e7daca94c6fea7c81b4bb |
