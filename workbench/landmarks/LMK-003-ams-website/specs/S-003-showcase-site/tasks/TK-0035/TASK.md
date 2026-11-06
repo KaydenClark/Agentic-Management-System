@@ -40,3 +40,5 @@ Update site/README.md for the actual utility contract. Coordinate any changed co
 ## Plan release, 2026-11-06
 
 Coordinator inspected exact cae67a1646f0994574c9090840200433aaa23c87 and passed this bounded plan under existing confirmed items1/2/12. This releases native claim and implementation; no new owner confirmation. Preserve the withdrawn TK003 brief and all older Task receipts. Native claim, fresh starting snapshot and separate literal digest binding precede product edits.
+
+Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d42da83436fd
