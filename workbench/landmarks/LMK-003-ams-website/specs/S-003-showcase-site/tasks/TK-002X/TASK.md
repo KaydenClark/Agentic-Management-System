@@ -52,3 +52,9 @@ Every conflict was inspected against both source trees and dated changes; neithe
 The canonical glossary permits initial terms without a named group and adds nine terms. Its existing site parser/rendering did not support that owner shape. Expected red reproduced the parser refusal; the focused correction preserves old anchors and exact definitions while rendering every canonical addition. All other original site paths remain.
 
 Canonical failure intake for this execution wave is recorded in FAIL-126 through FAIL-129; no private Wiki-writer rows were copied. IDs were allocated above its observed maximum to avoid collision.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-003-website-shell-and-ams-orientation | 8165ea38a34149ccdf40ecb1798f8fd5fbf963d0 | ahead 118 behind 0 | 0 | Source4ce31ee: fresh build and263site tests pass; Python840pass/5skip/1fail (GLOSSARY3075>3000,S0138556>8000). Site hygiene0; layout/Wiki pass. Preservation audit failed twice: Jot boundary, then faulty outside-prose extraction. Stop/report before repair; earlier failures retained. | Conflict dispositions, canonical FAIL126-134, delimiter-only Jot correction; private original logs/diff retained. | Incomplete baseline; no dev merge. Parent authorizes scoped extractor/budget correction after this checkpoint, then focused preservation/budget checks, fresh build/site tests and root suite. No whole-Spec/HumanQA claim. | e11e8b724a40e37511da493ddbabb752e6ccca21df343fd5dbabf639920c50a8 |
