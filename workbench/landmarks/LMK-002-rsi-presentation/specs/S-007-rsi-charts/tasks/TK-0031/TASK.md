@@ -16,6 +16,8 @@ The owner authorized resuming PR165's bounded post-close budget stop and checkin
 
 Merge provenance: PR165 head 1cbb969 merged dev 259b7a9. The canonical log writer verified the entire prior log was an exact prefix of dev's log; the merged log matches dev byte-for-byte, preserving all published rows.
 
+Workspace baseline sha256:7a1c61ba565d56e09c7be07037d60c7c39306f09d1b941d2b2256c14c93d31ee
+
 ## Acceptance
 
 - [ ] TK-002L and S-007 fit their budgets without losing requirements, failures or changing native receipt rows.
