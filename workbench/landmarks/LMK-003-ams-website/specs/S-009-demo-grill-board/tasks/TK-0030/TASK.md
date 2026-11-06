@@ -11,6 +11,8 @@
 **Current claimant:** codex-s009-demo
 Workspace baseline sha256:4106561b4e83a48bea8672f3a5cf2bc2060c8dc44e40957a807543b68ddd3d15
 
+The snapshot was captured at claim commit 3523bff before product work and its digest bound in e793ba6. The native-compatible literal above was corrected later in c023ef0; it was not present in that earlier binding commit.
+
 ## Assignment
 
 Recover the existing S-009 prototype and preserve its source history. Deliver labeled everyday sample cards with Priority and Value reasons, rating and Too taxing, using S-004 signal colors. Interactions stay in memory and send or store no answers. Explain the current real Board lifecycle accurately. The S-003 writer owns shared navigation, tour, glossary and page inventory integration; return the route and source metadata for integration. Do not use real owner queue data.
