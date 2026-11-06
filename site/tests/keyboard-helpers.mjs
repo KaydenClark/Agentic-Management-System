@@ -90,4 +90,3 @@ export async function keyboardProblems(page) {
     ...clipped.map((m) => `focused navigation link clipped: ${m}`),
   ];
 }
-
