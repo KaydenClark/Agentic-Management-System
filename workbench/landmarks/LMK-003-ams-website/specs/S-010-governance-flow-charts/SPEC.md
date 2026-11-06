@@ -26,7 +26,7 @@ The governance stack is what makes the AMS auditable rather than a set of prompt
 
 ## Current Verified State
 
-- TK-001 delivered the Task lifecycle chart on the Spec branch; TK-002 through TK-004 and assembled acceptance remain open.
+- TK-001 and TK-002 are contained in checked `dev` at `b6880f5e7b6160a12d3553309a1568ce5fd9d83d`. TK-003 is in progress; TK-004 and assembled acceptance remain open.
 - At assembled candidate `987c3314b26764772b7331d500e30c1c3b8a3ebc` (including checked `dev` `6cdb647d2d415a8400d1d26cad2614b492c03926`), site build and 282 site tests passed; the RSI browser integration check passed. The Task chart and audited runtime sources are byte-identical to `d774b5113d0e19bc3e35a7467ce03a321a9eb948`, where shared CI passed Python and site jobs and earlier browser and Python checks apply to that unchanged scope. This does not establish independent Review, Human QA or delivery.
 
 History: [S-010 history](../../../../wiki/history/S-010.md).
