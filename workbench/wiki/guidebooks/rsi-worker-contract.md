@@ -30,6 +30,14 @@ Run `uv run pytest -q tests/test_native_worker.py tests/test_native_worker_live.
 
 Native host checks additionally need independently pinned binary, permissions and runtime/source closure. The observed bounded profile keeps root/tmp/network denied and grants read access only to the case plus its pinned runtime; conflicting workspace-root denial and the cache-writing Apple interpreter shim failed and remain recorded. Use the host's supported profile/cancellation interfaces. Private operator replay scripts/captures remain with the Task evidence. Raw packets, paths, credentials and skill text never enter this guide or public projections. A read-only account/capacity snapshot and skill discovery establish neither actual model execution nor loaded skill use. The frozen real invocation retains its grader/labels/conditions/capacity gates.
 
+## Accepted software continuation
+
+The coordinator accepted bounded TK-002P thread/turn software continuation under the existing owner launch. Private plan SHA-256 `cf481230b48195dd5d1b3de5a2ab4ec56d64fd7742d6ba7beabc88d1dcd02cc1` binds the inspected proposal; it is not a call release. Preserve the original claim/baseline, guarded receipts, reviewed standalone/FIFO primitives and accepted O385 API.
+
+Add a supported, bounded thread/turn executor with explicit pinned skill mapping, correlated events, held approval/user-input requests and incomplete captures. External release/readiness, source/fixture and effective connector/tool containment checks must pass before entering `run_slot` or consuming an intent; recheck critical gates immediately before `turn/start`. A purported normal completion requires a final response. Failed/interrupted/awaiting-input captures stay incomplete with assessment unknown; persistence does not establish semantic success. Unknown tool-tree cleanup cannot establish closed-success or a safe retry.
+
+The software slice uses inert peers/processes and distinct synthetic isolated-store identities only. Actual host canaries need later coordinator release; no model, skill or grader call, frozen-case slot, install, source-skill change, held evaluator import, production write or main merge is included. Keep exact installed804 runtime sources and ed0 bytes, required hooks, private raw packets and safe store fields. Missing runtime-model/load/descendant evidence remains unknown. Native configuration and acknowledgments do not fill it. Draft193 and P remain open until their actual acceptance conditions hold.
+
 ## Verified source seams and gaps
 
 At main `cfc0bc4c7f2cd167cea2972016edee076b479b73`, `trial_campaign.Campaign.run_one` journals before one released slot, refuses an attempted slot and requires its predecessor. It is not a durable multiworker scheduler. `trial_runtime.ClaudeAdapter` explicitly requires empty tools/MCP and rejects native tool use. Private source packs prove no native discovery/installation. Do not change its stopped protocol.

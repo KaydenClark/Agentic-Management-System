@@ -10,7 +10,7 @@
 **Blockers:** none for mapping
 **Confirmation:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
 **Execution approval:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
-**Next gate:** Keep the checked pre-model component in draft; qualify exact labels/grader/frozen conditions before real skill calls. No main merge or P acceptance.
+**Next gate:** Implement accepted thread/turn software continuation (guidebook plan digest); external readiness precedes intent. Actual calls, P acceptance and main merge remain held.
 
 ## Intent and authority
 
