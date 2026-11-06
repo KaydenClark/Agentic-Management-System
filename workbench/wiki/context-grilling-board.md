@@ -439,3 +439,16 @@ Supersedes: none
 
 Alignment answer: "The whole dashboad. Give me the workbench dashboard from LLM_Workbench with the two trackers, and the grilling board." This settles whole-dashboard scope rather than a Grilling Board-only first delivery. Destination Tracker presents Landmarks/DQCs and Taskboard presents Specs/Tasks under existing owners. The owner asks which remaining choices could contradict the intended design. This is an individual interview answer, not confirmation of an assembled revised readback. Remaining frontier: source behavior versus known source defects, always-available local service, and whether owner answers should trigger agent processing. Preserve prior visual reference, functional controls, DQC/history protections and authority limits. No implementation starts during this alignment.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-20a1c097-eea3-453e-be38-242b15a69cd4
+Kind: intent
+State: unresolved
+Recorded: 2026-11-06T19:42:10.098Z
+Author: Kayden
+Source: Kayden direct AMS alignment correction, 2026-11-06
+Topic: grilling-board
+Supersedes: JOT-7f16abf6-5b54-4214-8854-8f66418dd673
+
+Whole LLM_Workbench dashboard scope remains settled, including Destination Tracker, Taskboard, Grilling Board, Drafts to approve and Wiki. Owner correction, exact words: "No, and I already answered this. I come back to the agent and tell them I am finished with my round, they then update the workbench with the answers from my round, correct anything that needs to be corrected, and then adjusts the DQCs and grilling board so that I can do the next round. Questions should track how many rounds they have gone through." This closes the automatic-agent-continuation question: owner returns to the agent to initiate round processing; do not ask this settled question again. Per-question round counts are required. Owner rejected the tracker-management question as unclear and bundled; no tracker editing choice is settled by that question. Next frontier: ask one plain question about changing a Task status from the dashboard. Individual answers remain distinct from confirmation of the assembled readback. No dashboard implementation begins during alignment. The owner separately explicitly approved publishing the existing 20 commits; publication is distinct from unfinished Wiki candidate acceptance or restart authority.
+<!-- /jot-entry -->
