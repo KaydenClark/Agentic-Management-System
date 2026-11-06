@@ -8,17 +8,17 @@
 **Updated:** 2026-11-06
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Next gate:** Remaining site acceptance, S005 cards and actual Human QA.
+**Next gate:** Inspect deferred TK-003B no-script navigation plan; S005 cards, site acceptance and Human QA remain.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 
 ## Intent and authority
 
-The [owner brief](../../../../wiki/context-website-presentation.md) governs shell/orientation; sibling Specs remain required. Execution: [owner assignment](../../../../wiki/context-website-presentation.md#jot-4adf0b91-665d-4abb-8644-4835b40e905a).
+The [owner brief](../../../../wiki/context-website-presentation.md) governs; sibling Specs remain required. Execution: [owner assignment](../../../../wiki/context-website-presentation.md#jot-4adf0b91-665d-4abb-8644-4835b40e905a).
 
 ## Outcome
 
-Explain AMS purpose, workflow/feedback and evidence plainly for non-engineers, with technical sources. Present AMS without operating it.
+Explain AMS purpose, workflow/feedback and evidence for non-engineers, with technical sources; present AMS without operating it.
 
 ## Why It Matters
 
@@ -32,7 +32,7 @@ History: [S-003 history](../../../../wiki/history/S-003.md).
 
 ## Desired Behavior
 
-Explain ideas before IDs and define terms. Draft from approved records and owner feedback.
+Explain ideas/terms before IDs; draft from approved records and owner feedback.
 
 ### Approved presentation feedback
 
@@ -51,7 +51,7 @@ The [confirmed link readback](../../../../wiki/context-website-presentation.md#j
 
 ### Shell and related capabilities
 
-Navigation shows current page, tour order/start/finish and direct subject links, without dead ends. Core text works script-free. Light/dark follows system or manual override. Every page displays its deployed SHA on-site.
+Navigation shows current page, tour order/start/finish and direct subject links, without dead ends. Core text and native keyboard navigation work with scripts disabled or enabled. Light/dark follows system or manual override. Every page displays its deployed SHA on-site.
 
 Introduce/link RSI charts (S-007), site-written skill summaries (S-008), the demo Grill Board with non-engineering questions (S-009), and governance/flow charts (S-010). Keep private skill source private.
 
@@ -99,11 +99,11 @@ Audit a named deployment; CI proves no comprehension.
 
 ## Verification Procedure
 
-At a named deployment/commit, inspect content/links, data states, keyboard, themes and widths; record evidence/gaps per criterion. Automation proves no comprehension or human approval.
+At a named deployment/commit, audit content/links, data states, keyboard, themes and widths against each criterion; automation proves no comprehension or human approval.
 
 ## Documentation Impact
 
-S-007 consumes data states/build explanation; S-008 explains skills. Assignments follow this Spec.
+S-007: data states/build explanation; S-008: skills. Assignments follow this Spec.
 
 ## Review and Human QA
 
