@@ -28,3 +28,7 @@ Size: one narrow usable recall/change-detection path, including tests, QA and re
 - [ ] Public CLI tests prove private/restricted/ignored content is excluded before body reads, malformed handling metadata fails closed, symlink/path escapes refuse, and referenced secrets/arbitrary external bodies are not ingested.
 - [ ] Initial real AMS development cases execute through evaluate with pinned navigation/Jot baseline and candidate outputs, context/source measures and explicit judgment/owner-effort limits. Wrong/stale answers are retained as failures, not silently regraded.
 - [ ] Implementor Check/QA and focused tests/native Wiki validation pass; exact prior sources/confirmations are preserved. R1/R2 remaining corpus or behavior limits are explicit, never claimed complete from a skeleton alone.
+
+## Starting preservation
+
+Claim originals committed as `9ccae2f`. Workspace baseline sha256:296c63314038c19e04f8b3f7e372a2295a934102a1ef3e6da008071a9938db24. Native inventory is explicitly incomplete: pre-existing `REBASE_HEAD` residue, no active rebase directories; root independently verified. It remains untouched. Public retrieval corpus frozen at `280725648ed4a2a7d0e97236fd51def5c02aaa65` before implementation; private recovery retains source and inventory bytes. Local publication hold prevents remote recovery proof. Owned-path preservation will be checked separately; no complete workspace-closeout claim.
