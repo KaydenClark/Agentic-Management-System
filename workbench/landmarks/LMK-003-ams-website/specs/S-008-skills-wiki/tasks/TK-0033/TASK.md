@@ -16,6 +16,8 @@ Authority: [JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8](../../../../../../wiki/con
 
 Inspect PR #111 head 85c993f91c03ed68cfd9c19945fb889853ec7118 against current dev and recover justified navigation, article contents links and linked start-page skill chips. Fit the current sticky header, focus behavior and tokens; preserve current shell and other owners' changes. Carry the bounded candidate through checks, QA and handback to dev. Do not change article content, page inventory, shared top-level navigation, private skills source or owner approval records. Prior Task receipts and whole-Spec Human QA remain distinct.
 
+Workspace baseline sha256:df3974973671558bf9a64c9e27eb27afff1558b3e6fcbced627d5331c1658c50
+
 ## Acceptance
 
 - [ ] Index and all 39 articles expose reachable navigation and mark the current page; each article's contents links match its actual headings.
