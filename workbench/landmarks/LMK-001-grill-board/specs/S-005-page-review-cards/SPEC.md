@@ -1,14 +1,16 @@
 # S-005 - Page review cards
 
 **Spec ID:** S-005
-**Status:** planned
+**Status:** active
 **Priority:** 2
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-05
+**Confirmation:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** A Grill Board review card for every website page, where the owner approves or criticizes the site and the criticism becomes the voice and taste record.
-**Blockers:** S-004
-**Next gate:** Confirm scoped authority and required S-004 inputs, then activate. S-004 closure supplies no slot.
+**Blockers:** none
+**Next gate:** Implement and check content-bound page coverage, then consume recorded criticism in a subsequent draft/review. S-004 Human QA remains separate.
 
 ## Intent and authority
 
@@ -43,7 +45,7 @@ History: [S-005 history](../../../../wiki/history/S-005.md).
 - Approval is bound to a content hash, never to a page name or date alone.
 - The voice record is built from the owner's recorded feedback; it is not owner-written prose.
 - The public site shows no owner quotations and no review status ([DDR-001A](../../../../docs/ddr/001A-the-public-site-shows-no-owner-quotations.md), DDR-001B); criticism and approvals never surface there.
-- **Approval storage: a Supabase row mirrored from a committed file.** Confirm writes the approval into `grill-board/page-approvals.md` (the committed record, DDR-000X); the Python writer copies it to a `page_approvals` row with the local service key, and the site reads the row with the publishable key. The site only presents and reads Supabase ([DDR-000O](../../../../docs/ddr/000O-the-public-site-only-presents-and-reads-supabase.md)) and does not read repository files at build time ([ADR-003H](../../../../docs/adr/003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md)). A page is approved only while a row names its path and current content hash, so an edit makes the approval stale with nothing deleted. The site displays no approval; whether the row is still needed is open for TK-002.
+- **Approval storage: committed owner record only.** Confirm writes the path and current content hash into `grill-board/page-approvals.md` through the local Board's locked compare-and-swap. No Supabase approval mirror or publishable-key approval access is required; the site neither consumes nor displays approval status. This applies the confirmed recommendation under the owner's 2026-11-05 correction, preserving the withdrawn proposal in [history](../../../../wiki/history/S-005.md). Private criticism and raw private evidence must not be committed or exposed through public pages. Safe synthetic fixtures remain labeled synthetic.
 - **Content hash** is SHA-256 over the canonical content of the served page's `<main id="main">`, excluding the footer and regions marked `data-review-exclude`. TK-001 commits the contract and test vectors.
 - Page review cards target `main`; nothing here changes `site/`.
 
@@ -54,7 +56,7 @@ History: [S-005 history](../../../../wiki/history/S-005.md).
 
 ## Dependencies And Blockers
 
-- S-004 (cards and answers); S-003 (page list).
+- Required S-004 legacy card/answer API is present on main `adde5f4`; its independent Human QA and later redesign remain open. S-003 owns the current built route inventory and protected dev deployment; cards must cover the built inventory, including skill articles, rather than trust an incomplete historical list.
 
 ## Vertical Implementation Slices
 
@@ -111,4 +113,4 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+The 2026-11-02 preparation-only boundary remains historical. The owner explicitly launched S-005 implementation on 2026-11-05 and confirmed the presented scope; the linked confirmed intent owns that scoped release. Earlier failed evidence, stopped campaigns, independent Human QA and owner-only website promotion remain unchanged. TK-001E still consumes its delivered same-Spec prerequisites. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
