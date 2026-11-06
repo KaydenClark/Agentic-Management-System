@@ -10,11 +10,11 @@
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Complete TK-003.
+**Next gate:** Review F slice; retain full-lineage and producer gaps.
 
 ## Intent and authority
 
-The [owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes Map/Plan preparation; implementation and trial holds remain.
+Stage A's [preparation boundary](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) remains scoped. The [goal10 launch](../../../../wiki/history/S-007.md#goal-10-continuation) releases F's old launch hold; root accepted its software slice, with producer execution separate.
 
 Owner requires chart places from the first deploy and no fabricated data.
 
@@ -24,12 +24,12 @@ Show skill/build changes per task/version, including no change and regressions, 
 
 ## Why It Matters
 
-Traceable, labeled evidence lets readers assess whether the loop works.
+Traceable evidence lets readers assess the loop.
 
 ## Current Verified State
 
 - Whole-Spec acceptance remains unverified. [TK-001](tasks/TK-001/TASK.md#receipt) closed the bounded empty-state slice.
-- [TK-002](tasks/TK-002/TASK.md) closed the checked live reader; [proof and limits](tasks/TK-002/CURRENT-CHECK.md) retain failures and originals. Native accounting remains unverified; no workspace release, full closeout or Spec acceptance. TK-003 is next; lineage inputs remain unverified.
+- [TK-002](tasks/TK-002/TASK.md) closed the checked live reader; [proof and limits](tasks/TK-002/CURRENT-CHECK.md) retain failures and originals. Native accounting remains unverified; no workspace release, full closeout or Spec acceptance. F software is released; private lineage and TK-003 interval inputs remain missing.
 
 History: [S-007 history](../../../../wiki/history/S-007.md).
 
@@ -91,7 +91,7 @@ Tasks target checked `dev`; only the owner promotes to `main`. Stack: Next.js, p
 
 ## RSI and website connection
 
-This is the RSI presentation. Rows come from S-002 through S-006.
+S-002 supplies trial rows through S-006.
 
 ## Testing Seams
 
@@ -101,7 +101,7 @@ This is the RSI presentation. Rows come from S-002 through S-006.
 
 ```bash
 node workbench/tools/spec-workbench.mjs show S-007
-# site test command named at Task planning
+# Task owns checks.
 ```
 
 ## Documentation Impact
