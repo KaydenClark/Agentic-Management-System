@@ -76,6 +76,13 @@ def owned_process(arguments, *, cwd, environment, output=None, grace=2.0):
                     # Darwin reports EPERM for a zombie-only group. The leader
                     # may exit after the first poll, so reap and retry ONCE only
                     # when that known leader has exited. Other EPERM propagates.
+                    # After successful TERM, signal-zero may observe an exiting
+                    # group before WNOHANG can reap its leader. Wait only for
+                    # that owned child, within the existing grace deadline;
+                    # do not resend a group signal while its exit is unknown.
+                    if which == 0:
+                        while reap() is None and time.monotonic() < deadline:
+                            time.sleep(min(0.025, max(0, deadline - time.monotonic())))
                     if reap() is None:
                         raise
                     try:

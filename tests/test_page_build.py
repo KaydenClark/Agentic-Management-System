@@ -344,12 +344,74 @@ def test_genuine_group_permission_error_is_not_hidden(tmp_path, monkeypatch):
     assert len(calls) == 1, 'live-leader permission denial was retried or swallowed'
 
 
+@pytest.mark.parametrize('outcome', ['absent', 'live-descendant', 'persistent-denial', 'denial-after-exit'])
+def test_group_observation_race_waits_boundedly_without_qualifying_denial(tmp_path, monkeypatch, outcome):
+    import errno, signal
+    import ams.page_build as module
+    class Process:
+        pid = 123456789  # synthetic; no operating-system signal is sent
+        returncode = None
+        waited = False
+        killed = False
+        def poll(self): return self.returncode
+        def kill(self):
+            self.killed = True
+            self.returncode = -9
+        def wait(self, timeout=None):
+            self.waited = True
+            return self.returncode
+    process = Process()
+    clock, calls = [0.0], []
+    observed = False
+    descendant = outcome == 'live-descendant'
+    def sleep(seconds):
+        clock[0] += seconds
+        if outcome != 'persistent-denial':
+            process.returncode = -15
+    def signal_group(pid, which):
+        nonlocal observed, descendant
+        assert pid == process.pid
+        calls.append(which)
+        if which == signal.SIGTERM:
+            return
+        if which == signal.SIGKILL:
+            descendant = False
+            return
+        assert which == 0
+        if not observed or outcome in ('persistent-denial', 'denial-after-exit'):
+            observed = True
+            raise PermissionError(errno.EPERM, 'synthetic group observation denial')
+        if descendant:
+            return
+        raise ProcessLookupError(errno.ESRCH, 'synthetic reaped group')
+    monkeypatch.setattr(module.subprocess, 'Popen', lambda *args, **kwargs: process)
+    monkeypatch.setattr(module.os, 'killpg', signal_group)
+    monkeypatch.setattr(module.time, 'monotonic', lambda: clock[0])
+    monkeypatch.setattr(module.time, 'sleep', sleep)
+    if outcome in ('persistent-denial', 'denial-after-exit'):
+        with pytest.raises(PermissionError, match='observation denial'):
+            with module.owned_process(['synthetic'], cwd=tmp_path, environment={}, grace=.1):
+                pass
+        assert process.killed == (outcome == 'persistent-denial'), 'denial must still clean up the known live direct child'
+    else:
+        with module.owned_process(['synthetic'], cwd=tmp_path, environment={}, grace=.1):
+            pass
+        assert not process.killed
+        assert (signal.SIGKILL in calls) == (outcome == 'live-descendant')
+    assert process.waited and clock[0] <= .125
+    assert calls.count(signal.SIGTERM) == 1
+
+
 def test_poll_interruption_is_reraised_after_owned_cleanup(tmp_path, monkeypatch):
     import os, signal, sys, time
     import ams.page_build as module
     actual_popen = subprocess.Popen
     marker = tmp_path / 'poll-interrupt-ready.json'
-    program = "import json,os,subprocess,sys,time; p=subprocess.Popen([sys.executable,'-c','import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(60)']);open(sys.argv[1],'w').write(json.dumps([os.getpid(),p.pid]));time.sleep(60)"
+    child = "import signal,sys,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);open(sys.argv[1],'w').write('ready');time.sleep(60)"
+    program = ("import json,os,subprocess,sys,time\nready=sys.argv[1]+'.child'\n"
+               f"p=subprocess.Popen([sys.executable,'-c',{child!r},ready])\n"
+               "while not os.path.exists(ready): time.sleep(.001)\n"
+               "open(sys.argv[1],'w').write(json.dumps([os.getpid(),p.pid]))\ntime.sleep(60)")
     owned = []
     real = None
     class InterruptedPoll:
