@@ -69,3 +69,127 @@ Supersedes: none
 
 Owner correction: AGENTS.md still contains material that belongs elsewhere, specifically the three-strike rule. Authorized repair: keep core authority, safety and collaboration rules in AGENTS; route testing, CI, scheduling, RSI and delivery procedures to their existing owning documents. Relocation preserves the existing policies; this request does not retire the three-strike stop or authorize deployment.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-bc41fc6e-de68-4769-b8e6-0419470558c5
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T22:27:21.085Z
+Author: Kayden
+Source: Kayden direct confirmation and scoped execution/publication/installation authorization, 2026-11-06
+Topic: workbench-adoption
+Supersedes: none
+
+**Summary**
+
+The proposed scope is a coordinated repair across **`KaydenClark/skills`**, its bundled runtime, the active skills installation and **AMS**.
+
+The governing model is:
+
+- **Landmarks and Specs own outcomes and requirements. Tasks own bounded execution and proof.**
+- **Branches carry related, deliverable changes and close after verified delivery.** They do not remain open merely because their Spec or Landmark remains open.
+- Ready project records and non-site changes merge into **main**.
+- Website changes merge into **dev**. Their temporary branches can then close. Website promotion from dev into main remains owner-controlled.
+- Landmark-only and project-wide work use their appropriate existing owners; they do not require artificial Specs.
+- Unfinished work is committed and pushed for recovery, without treating recovery as merge readiness.
+
+This readback proposes implementation and delivery **only after your confirmation**.
+
+**The why**
+
+The current workflow contains conflicting instructions, incomplete support for multiple delivery destinations and Spec-only assumptions in some procedures.
+
+The repair must make the model consistent from assignment through cleanup. Changing prose without executable support would leave unsupported operations; changing runtime without correcting the instructions would leave agents following incompatible workflows.
+
+**The intended result**
+
+### 1. Shared skill changes
+
+Changes are authored in a separate checkout of **`KaydenClark/skills`**, preserving the active installation.
+
+| Package | Files and changes |
+|---|---|
+| **`orchestrate`** | Update `SKILL.md` and `references/workbench.md`. Replace mandatory continuing Spec branches with bounded delivery branches. Every assignment identifies its owner, branch, destination, writer boundary, verification and endpoint. Support existing Landmark-owned Tasks. Use temporary assembly branches only where changes cannot safely integrate independently. Preserve whole-destination review and acceptance. |
+| **`journey`** | Update `SKILL.md` and `references/workbench.md`. Resolve the assignment’s branch and destination instead of automatically reusing a Spec branch. Preserve claims, receipts, checks and Task closure. Close delivered branches independently of parent completion; retain unfinished work and protect other writers. |
+| **`land`** | Update `SKILL.md` and `references/workbench.md`. Cover Spec changes, Landmark changes and standalone maintenance through the complete sequence: establish owner and authority, preserve recovery, verify, merge, prove containment, reconcile evidence and clean up. Use the actual authorized destination, including dev. |
+| **`setup-workbench`** | Update reached package instructions and generated `AGENTS.md`, `RUNBOOK.md`, `docs/SKILLS.md`, `GLOSSARY.md` and chats-and-roles articles. Remove the assumption that a Dispatcher’s Spec requires one continuing branch. Generate coherent delivery and closeout instructions. |
+
+Land’s existing guarded-cleanup protections remain. The repair does not weaken checks, reviews, ownership rules or publication boundaries.
+
+### 2. Runtime changes
+
+The source changes happen under:
+
+`setup-workbench/assets/runtime/workbench/tools/`
+
+The bounded runtime work is:
+
+- **`spec-workbench.mjs`:** Support recording a landing against an explicitly declared delivery destination while retaining exact-SHA, containment and content checks. Preserve the distinction between intermediate delivery and final Spec completion on the default branch.
+- **`workspace-closeout.mjs`:** Support Spec Tasks, existing Landmark Tasks and bounded project work associated with a real owning record. Bind closeout evidence to the actual delivery destination rather than assuming one global integration branch.
+- **Route declaration and validation:** Provide one validated project declaration for permitted delivery routes, extending manifest handling only as needed. Tool arguments must not silently nominate arbitrary destinations.
+- **Claim coordination:** Reuse its existing Task-branch capability. Correct it only where focused verification demonstrates a conflict with the declared branch or target.
+- Update affected command documentation, tests, package inventory and integrity receipts through the existing packaging mechanism.
+
+This does **not** introduce a new tracker, standalone Task system, branch registry, cleanup service or dependency.
+
+### 3. Enforcement and removal of contradictions
+
+Responsibilities are explicit:
+
+- **Project controls** establish scope, destinations and authority.
+- **Skills** execute their part of that declared workflow.
+- **Runtime** checks structural facts such as ownership, branch state, commits, destinations and containment.
+- **Human judgments and authorization** remain sourced decisions; tools cannot manufacture them.
+
+Inspect all reached instructions, templates and runtime consumers—not only the four entry-point files. Correct contradictory current claims, including parent ownership and branch-lifetime assumptions. Preserve historical decisions with explicit supersession.
+
+If that inspection exposes a necessary change outside this bounded workflow repair, report it before expanding scope. Do not rewrite unrelated skills.
+
+### 4. AMS adoption
+
+Apply the verified catalog/runtime repair through the supported update procedure, preserving project customizations.
+
+Reconcile:
+
+- **`AGENTS.md`** — authority and routing.
+- **`RUNBOOK.md`** — delivery, recovery and cleanup.
+- **`workbench/docs/SKILLS.md`** — method responsibilities and project exceptions.
+- **`workbench/manifest.json`** — main as default/general integration, with the supported website-dev route.
+- **Existing delivery decision** — sourced amendment superseding incompatible rules.
+- **Wiki adoption topic, chats-and-roles article and `MEMORY.md`** — exact confirmed intent, explanation and navigation.
+- **Installed tools and receipts** — adopted from the checked package rather than independently patched copies.
+
+Reconcile my premature policy edits and supersede PR #208 without merging its obsolete model. Preserve its historical commits and unrelated unfinished work.
+
+### 5. Verification
+
+Verify both instruction consistency and observable behavior.
+
+Required cases:
+
+1. A completed Task merges and its branch closes while its Spec remains open.
+2. A Landmark-owned Task delivers without an artificial Spec.
+3. Standalone CI and documentation changes reach main and close out.
+4. Website work reaches dev and its branch closes without authorizing production promotion.
+5. Ready records publish independently of unfinished implementation.
+6. Dependent changes can use a temporary assembly branch and clean it up after delivery.
+7. Wrong destinations, moved tips, uncontained work, competing writers and unpreserved local material prevent unsafe closeout.
+
+Use focused regression tests for changed runtime behavior, existing setup/package tests, catalog validation and whitespace checks. Exercise representative skill instructions against these scenarios; a text search alone does not establish behavioral consistency.
+
+After AMS adoption, run its applicable runtime, record, Wiki, hygiene and CI checks. Record failures and limits accurately. Do not claim owner Human QA or broad skill qualification from these checks.
+
+**What I will do**
+
+After confirmation of this scope:
+
+1. Author and verify the coordinated catalog repair on a short-lived branch.
+2. Publish a PR to **`skills/main`**, satisfy required checks and review, merge, and verify the resulting published revision.
+3. Update the active catalog through its registered maintenance route. Preserve its location, discovery links and separately sourced imports.
+4. Adopt the checked runtime and reconcile AMS through a bounded PR to **AMS main**, excluding unfinished implementation and website promotion.
+5. Verify published results, reconcile completion evidence and safely clean up only this repair’s delivered branches and worktrees.
+
+The endpoint is a **published, installed and verified workflow repair**, with any remaining blockers explicitly reported.
+
+Existing unfinished-branch consolidation, unrelated Spec acceptance and production website promotion are excluded. **No changes will begin until you confirm this full scope.**
+<!-- /jot-entry -->
