@@ -8,3 +8,5 @@
 **Destination:** spec-acceptance: S-010 Acceptance Criteria
 **Claimed by:** codex-governance-charts
 **Current claimant:** codex-governance-charts
+
+Workspace baseline sha256:346b7e069c0bbb9b9bfbcdd58973c1f6914d5a0223d64fa6743335b7efaffd54
