@@ -3,12 +3,13 @@
 **Task ID:** TK-001
 **Spec ID:** S-005
 **Slice:** Complete content-bound cards from one pinned build.
-**Status:** in-progress
+**Status:** done
 **Claimed by:** codex-s005-pages
 **Current claimant:** codex-s005-pages
 **Blockers:** none
 **Destination:** spec-acceptance: Every page covered
 **Planned verification:** Fixtures, owned runtime/interruption, protected readback.
+**Proof:** 930:967/6skip; CI965/8+10browser; Reviews89x2; protected47:50cards/HTTP/no-op.
 
 ## Assignment
 
@@ -41,3 +42,4 @@ Workspace baseline sha256:81dd8dfc83cf2aaa52dcbc6b763823137fe82ede9d053bb84a2222
 | 6 | Feature/S-005-page-review-cards | 8c761dbce8114f49c401b08e35a7d9706bb8ae5b | ahead 3 behind 0 | 0 | 8c761db:59 focused passed incl Docker/SIGINT. Earlier1721a8c full877 passed/6 skipped. HTTP409 preserves note. CI pending. | Board guide/Wiki; claimant and five receipts preserved. | S-003:41 route owners/protected RSI artifact/freshness. Coverage/review/later Tasks/owner QA open; no merge/close. | cf58de0094d169f75fb70fb8db2d3153e7723a99009ea8e8d23ad2cd57b5bc04 |
 | 7 | Feature/S-005-page-review-cards | 84ded45c08bc7026d41e497de4979ae9505bb130 | ahead 0 behind 0 | 4 | 84ded45 fresh960/6skip; CI958/8skip+10browser; two independent82test reviews; 211dd1b50route/card/HTTP proof. | Guide, Spec, Wiki, preserved chains. | PR178 dev delivery and exact protected capture; then final cards, later Tasks and owner QA. No close or merge. | b2ec621f303035027ba867924a3413fd4ce5fa335ccbbc09f3222f1db47f5b2d |
 | 8 | Feature/S-005-page-review-cards | 3e41a6441ace178817d21c4df3a4aa7ff4c2f79f | ahead 0 behind 0 | 4 | 40ac ordinary50routes/cleanup. No-op-adapter diagnostic:0 legacy/51 scoped HTML; same inventory refusal. Vercel ERROR. | S003 layout report; Spec/history; prior rows intact. | Existing S003 owner repairs adapter layout and READY dev; then exact protected capture/cards. No close or QA. | f4c6869e44cbd1ab01b6e0b91cbdea9f43ca0bd5e3da288bd651fef3dfa2d6a5 |
+| 9 | Feature/S-005-page-review-cards | 982d1b8b130db7d7070fc2d9a913d4bfa7df01f0 | ahead 0 behind 0 | 0 | 930:967/6skip; CI965/8+10browser; Reviews89x2; protected47:50cards/HTTP/no-op. | Spec/guide/history. | Later Tasks/final-dev QA; ledger/cache limits retained.; close attribution: {"agent":"codex-servitor-pr174","claimant":"codex-s005-pages","onBehalfOf":"codex-s005-pages"} | b8b310213a21d6cba9ecf71be367a78ac9f0d91d09f535aa6c2ea0f1e9a66b98 |
