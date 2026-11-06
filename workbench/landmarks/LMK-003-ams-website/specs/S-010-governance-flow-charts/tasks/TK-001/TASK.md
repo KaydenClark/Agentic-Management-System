@@ -20,3 +20,5 @@ Deliver the first readable Task lifecycle diagram at a visitor-facing route usin
 - [ ] A visitor can read the Task lifecycle and its actual transitions at 375 px and desktop in both themes without JavaScript.
 - [ ] A drift check fails for an added unknown state, omitted state, added unknown edge and omitted edge against the runtime source.
 - [ ] The built site and applicable tests pass; actual browser checks and remaining limits are recorded.
+
+Workspace baseline sha256:3fa637d179e1dcd78a6e453e26c4bb36b515f63cc1e42a9ba82e8c50f4ecf504
