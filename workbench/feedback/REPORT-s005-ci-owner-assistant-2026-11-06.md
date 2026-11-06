@@ -76,3 +76,80 @@ No PR was opened or updated: the repository runs its full suite on every PR,
 which this observation-only watch is not authorized to start. The checkpoint is
 not merged or delivered to main and makes no Review, Human QA, acceptance,
 repair or RSI-benefit claim.
+
+## F-002 - Private FIFO receipt blocks before the regular-file refusal
+
+Reporter: **owner-assistant**. Recorded: 2026-11-06, latest Website Watch.
+Severity: **P2**. Disposition: **test / unresolved**.
+Owner: existing **S-005/TK-003, codex-s005-feedback**, coordinated through the
+existing PR174 writer. Occurrence key:
+`OA-S005-20261106-FIFO-dc2cc96`. This source-bound key awaits the active
+canonical writer's numeric intake; no competing global FAIL number is allocated.
+
+### Source and expected behavior
+
+[PR174](https://github.com/KaydenClark/Agentic-Management-System/pull/174) is
+draft and unmerged. Its inspected head is
+`dc2cc96151cd2788750e8a1e556245b8b8cb755f`, not the older head named in
+its description. The unchanged product module has SHA-256
+`b7c7557163c276dc916ed5a48dc0964449e7bf4bf497e25610fd9ad3cb8bed85`.
+
+[`_Store.read` lines 159-168](https://github.com/KaydenClark/Agentic-Management-System/blob/dc2cc96151cd2788750e8a1e556245b8b8cb755f/src/ams/page_feedback.py#L159-L168)
+opens an event receipt using blocking `O_RDONLY | O_NOFOLLOW`, then checks
+`S_ISREG` with `fstat`. An owned FIFO with no writer blocks in the open,
+so execution cannot reach the nonregular-file refusal.
+
+[TK-003's private-storage and interruption contract](https://github.com/KaydenClark/Agentic-Management-System/blob/dc2cc96151cd2788750e8a1e556245b8b8cb755f/workbench/landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/tasks/TK-003/TASK.md)
+requires unsafe or damaged private capture to refuse recoverably, retaining
+copyable original words and exact-action recovery. Replay takes the Board
+repository lock before reading this receipt; normal page actions also use the
+existing Board lock. A blocking receipt can therefore stall a submission and
+retain that lock, delaying other Board writes. No public data leak was observed.
+
+### Bounded reproduction
+
+The exact `_Store` class was AST-extracted from that source without changing
+its methods, and exercised in a disposable local directory using owned
+synthetic files. Required exception names were supplied as harness bindings.
+No project checkout, Git record, real note, HTTP server or public/private Board
+state was used.
+
+- Control: an owned mode-0600 regular file containing invalid JSON-object
+  metadata returned the expected recoverable refusal promptly.
+- Adverse: replace only that receipt with an owned mode-0600 FIFO, with no
+  writer. The same `_Store.read(event_id)` remained blocked beyond a one-second
+  parent timeout. Only the probe's known child process was terminated.
+- Observed output before timeout: `entered-exact-store-read`; there was no
+  refusal or other output. This confirms an unbounded low-level open, not a
+  measured HTTP outage or real-user incident.
+- The existing unsafe-storage matrix covers symlinks, public modes and tracked
+  private storage; no FIFO case appears in the inspected tests. Green
+  [exact-head CI42248684793](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/42248684793)
+  does not exercise this added adverse case.
+
+The first regular-file control lacked the harness's `AnswerRefused` binding
+and raised NameError while handling invalid metadata. It was not a pass.
+That probe miss and its single corrected rerun are retained as
+`OA-S005-20261106-FIFO-HARNESS-1`; the corrected control exited zero after
+`refused-recoverably`. The FIFO timed out on both invocations.
+
+### Deduplication, routing and next action
+
+The inspected PR174 canonical intake through FAIL-256 records symlink IO,
+manifest ownership, interruption and harness failures, but not this FIFO
+open. S-000B's separately documented FIFO correction concerns a different
+reader and owner; it does not repair this S-005 module.
+
+Keep the correction with the active S-005 writer: make receipt type validation
+bounded even for FIFOs/nonregular files, retain symlink/ownership/mode/size
+checks, and add an unchanged-state bounded regression proving prompt
+recoverable refusal and lock release. This report does not implement or
+authorize a competing repair, mark TK-003 complete, retry a denied merge, or
+establish Human QA.
+
+The existing owner-assistant report route and its canonical-log file carry
+this intake; the active coordinator must ingest the source-bound key into its
+current central log and route it to the existing TK-003 claimant. No duplicate
+Task, PR, message/comment to another person, build, full suite, merge,
+deployment or permission change was performed. This branch remains an
+unmerged records-only checkpoint; no CI-triggering PR was opened.
