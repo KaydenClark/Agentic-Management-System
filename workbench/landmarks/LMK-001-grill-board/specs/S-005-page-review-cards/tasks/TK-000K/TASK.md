@@ -3,7 +3,7 @@
 **Task ID:** TK-000K
 **Spec ID:** S-005
 **Slice:** A coverage check fails when a listed page has no card for its current hash or a card's hash is stale
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Every page covered
 **Planned verification:** pytest with a fixture page missing a card and a stale index entry
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Nothing in `site/` changes.
+**Claimed by:** codex-s005-coverage
+**Current claimant:** codex-s005-coverage
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), `grill-board/README.md` and the TK-001 generator, index and hash contract.
 
