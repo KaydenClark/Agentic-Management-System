@@ -31,3 +31,9 @@ Cross input/CLI, Git change inventory, safe report publication and fresh-process
 Workspace baseline sha256:880606720be44cddca30f995a14ed6e8ef2af00a086456ae2171ed83fc735c89
 
 Complete native schema-1 inventory captured outside the observed checkout after committed claim/original projection 3f01f9b401172e3e888215e75b86f688ee9eb9fa. No ignored paths were present; findings and busy arrays were empty. Raw inventory stays private. This binding precedes product edits; claim and projection originals remain committed.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-013-coherence-checks | a41c062acda0ab1d840b448b0850423b5054da48 | ahead 0 behind 0 | 2 | Pre-repair 3 failed/1 passed; focused 33 passed; current full 872 passed/6 skipped; exact fresh candidate suite still running; product a41c062acda0ab1d840b448b0850423b5054da48 | coherence-observations guidebook; canonical FAIL-183/184 and diagnostic189-191; corrective S013 report | Fresh full suite pending; independent Standards/Spec review and exact-head shared CI pending; no merge or Human QA; local cooperative-filesystem boundary only | 7b2cdcb7ef1056a1a10a29bc286e23b141dee95c29e90bd3ec7b8c8bd8ebb66d |
