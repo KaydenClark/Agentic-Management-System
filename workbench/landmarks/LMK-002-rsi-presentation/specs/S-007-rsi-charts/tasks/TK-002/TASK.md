@@ -43,3 +43,9 @@ Retained reader fixtures passed14 tests before repair. Red/green checks then exp
 Phone browser inspection found the new full commit link overflowed (scroll width423 at viewport375); wrapping was repaired and awaits the final built readback. Local browser also observed the existing favicon404 and CSS-preload warnings. No live Supabase read or protected dev readback, whole-Spec acceptance or Human QA is claimed yet. The source-injected skill evidence is incomplete/unqualified and authorizes no skills merge or installation.
 
 Final local readback at source1f87d39: production build passed; all203 site tests passed; built-site hygiene zero. Phone recheck after wrapping: viewport375, document scroll width375, actual screenshot retained locally; earlier overflow remains above as history. Repo hygiene found two pre-existing dev gaps already repaired on main (missing TASKBOARD max budget and a literal host path in a planted test string). Applying those exact main fixes and native render returned zero findings; no managed runtime or check was weakened. Current-head shared CI and protected dev readback remain the delivery gate.
+
+## Resumption inventory — 2026-11-06
+
+Workspace baseline sha256:210dc486dbab702cce0215b23b78c86d28b43fb504336d4195a9338eafa36fc3
+
+Native complete resumption snapshot at committed dev 517184e46a4b3ba0ebda36a54a6744e1b7c3b606, recorded owner ams-records-site; actual observer/closing delegate codex-s007-reader-readback (gpt-6.1-sol, harness Codex, tier unknown). Existing claimant and history remain unchanged. This newly observed snapshot binds this resumed run only; it cannot reconstruct the abandoned original run. Original committed records remain reachable; raw inventory is retained privately outside the observed checkout. Parent verified the old claimant has no active worker and delegated bounded continuation. No competing open Spec PR or newer remote head was observed before switching this isolated checkout.
