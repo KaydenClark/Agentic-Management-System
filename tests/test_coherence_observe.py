@@ -311,3 +311,107 @@ def test_recovery_refuses_a_recurrence_with_its_parent_removed(case):
     original.unlink()
     with pytest.raises(Refused):
         recover(directory)
+
+
+@pytest.mark.parametrize("move", ["outside-to-allowed", "product-to-record", "within-allowed"])
+def test_move_checks_both_endpoints(case, move):
+    repo, _, contract = case
+    contract = copy.deepcopy(contract)
+    if move == "outside-to-allowed":
+        old, new, expected = "outside.txt", "site/moved.txt", ["assignment-scope"]
+    elif move == "product-to-record":
+        old, new, expected = "site/product.txt", "workbench/wiki/moved.md", ["prepare-stop-bypass"]
+        contract["workflow"].update(limit="prepare", allowed_paths=["site", "workbench"])
+    else:
+        old, new, expected = "site/old.txt", "site/new.txt", []
+    put(repo, old, "Distinct unchanged bytes that Git recognizes as a complete rename.\n")
+    case = recut(case, contract)
+    (repo / new).parent.mkdir(parents=True, exist_ok=True)
+    git(repo, "mv", old, new)
+    commit(repo)
+    assert codes(check(case)) == expected
+
+
+# Spawn fresh interpreters, not threads or inherited flock descriptors. The
+# first writer pauses after fsync but before link; the contender must finish
+# with a controlled refusal while that first writer still owns its operation.
+PUBLISH_WORKER = r'''
+import json, os, sys
+from ams.coherence import observe as o
+report = json.loads(sys.stdin.readline())
+if sys.argv[2] == 'pause':
+    link = o.os.link
+    def paused(*args, **kwargs):
+        print('ready', flush=True)
+        sys.stdin.readline()
+        return link(*args, **kwargs)
+    o.os.link = paused
+try:
+    print(o.publish(report, sys.argv[1]), flush=True)
+except o.Refused:
+    print('refused', flush=True)
+    sys.exit(2)
+'''
+
+
+def start_publisher(report, directory, pause=False):
+    import sys
+    process = subprocess.Popen([sys.executable, "-c", PUBLISH_WORKER, str(directory), "pause" if pause else "run"],
+                               stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    process.stdin.write(json.dumps(report) + "\n")
+    process.stdin.flush()
+    return process
+
+
+def fresh_recover(directory):
+    import sys
+    result = subprocess.run([sys.executable, "-m", "ams.coherence.observe", "recover", "--reports", str(directory)],
+                            capture_output=True, text=True, timeout=10)
+    assert result.returncode == 0, result.stderr
+    return json.loads(result.stdout)
+
+
+def test_competing_processes_preserve_native_use_and_other_owner(case):
+    case, _ = native_case(case)
+    directory = case[0] / "reports"
+    other = check(case, "other-owner")
+    other["owner"] = {"spec_id": "S-004", "task_id": "TK-004"}
+    other["task_path"] = "workbench/specs/S-004-other/tasks/TK-004/TASK.md"
+    other["skill_use"]["use_id"] = "other-native-use"
+    assert publish(other, directory) == "created"
+    original = {p.name: p.read_bytes() for p in directory.glob("OBS-*.md")}
+    first = check(case, "first-contender")
+    second = check(case, "second-contender")
+    winner = start_publisher(first, directory, pause=True)
+    try:
+        assert winner.stdout.readline().strip() == "ready"
+        loser = start_publisher(second, directory)
+        output, error = loser.communicate(timeout=10)
+        assert (loser.returncode, output.strip()) == (2, "refused"), error
+    finally:
+        output, error = winner.communicate("continue\n", timeout=10)
+    assert (winner.returncode, output.strip()) == (0, "created"), error
+    assert {r["occurrence_id"] for r in fresh_recover(directory)} == {"other-owner", "first-contender"}
+    assert publish(first, directory) == "unchanged"
+    assert all((directory / name).read_bytes() == raw for name, raw in original.items())
+
+
+def test_interrupted_publisher_releases_lock_and_retains_temporary(case):
+    directory = case[0] / "reports"
+    retained = check(case, "retained-owner")
+    publish(retained, directory)
+    originals = {p.name: p.read_bytes() for p in directory.glob("OBS-*.md")}
+    process = start_publisher(check(case, "interrupted"), directory, pause=True)
+    try:
+        assert process.stdout.readline().strip() == "ready"
+        temporary = {p.name: p.read_bytes() for p in directory.glob(".observation-*")}
+        assert len(temporary) == 1
+        assert fresh_recover(directory) == [retained]
+    finally:
+        process.kill()
+        process.communicate(timeout=10)
+    successor = start_publisher(check(case, "successor"), directory)
+    output, error = successor.communicate(timeout=10)
+    assert (successor.returncode, output.strip()) == (0, "created"), error
+    assert {r["occurrence_id"] for r in fresh_recover(directory)} == {"retained-owner", "successor"}
+    assert all((directory / name).read_bytes() == raw for name, raw in {**temporary, **originals}.items())
