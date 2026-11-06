@@ -4,7 +4,7 @@
 **Spec ID:** S-011
 **Slice:** One diagnosed source change reaches checked qualification and adoption evidence
 **Status:** blocked
-**Blockers:** owner:rsi-scoped-reuse-evidence
+**Blockers:** none
 **Destination:** spec-acceptance: Shared owner; Merge gate; Personal use
 **Planned verification:** One exact original/adverse/regression case across source process, accepted-version qualification and authorized adoption readback; no trial in preparation.
 
