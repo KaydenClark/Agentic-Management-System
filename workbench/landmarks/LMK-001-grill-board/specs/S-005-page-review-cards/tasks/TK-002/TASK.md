@@ -3,7 +3,7 @@
 **Task ID:** TK-002
 **Spec ID:** S-005
 **Slice:** Confirming a page card records an owner-facing approval bound to its current hash in Git
-**Status:** in-progress
+**Status:** done
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Approval bound to content
 **Planned verification:** pytest with fixture cards, current hashes, stale approvals and append-only committed approval readback
@@ -13,6 +13,7 @@
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Nothing in `site/` changes.
 **Claimed by:** codex-s005-approvals
 **Current claimant:** codex-s005-approvals
+**Proof:** 5ef989/6skip;CI272987/8+10browser;18approval/17collector;100/100;Reviews0.
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`, its approval-storage decision), `grill-board/README.md`, DDR-000O, DDR-000X, ADR-002U, ADR-003C, ADR-003H, the TK-001 generator and hash contract, `src/ams/writer.py` and `tests/test_writer.py`, and `supabase/migrations/`. Run Supabase commands only in orchestrator B's main checkout, where the service key lives; never print it.
 
@@ -52,3 +53,4 @@ Workspace baseline sha256:64986c46643318243bc3bb1e5aba64064430cdfbe4b85768d01b02
 | 3 | Feature/S-005-page-review-cards | 6ad46e1922aa3990b8d92a45b612acfcd6f3c64c | ahead 10 behind 0 | 0 | Fresh b8e2236:984 passed/6 skipped/1 failed. test_poll_interruption_is_reraised_after_owned_cleanup raises EPERM from owned group send(0). Collector bytes equal800a; earlier full981/6 remains historical. Approval source reviews and107 focused pass; projection omission corrected11578ce. | Retained failed full log and independent findings; no original receipt overwritten. | Diagnose collector lifecycle before readiness; no permission waiver or merge retry. Task3 locally claimed/baselined but implementation paused. All continuation commits remain private. | 37a79b5b166630c511634508d2f61cf3072b472958fb87affc46e1c20c750a19 |
 | 4 | Feature/S-005-page-review-cards | a5b4c57fcd313efad21894bce9583454b5b73e80 | ahead 11 behind 0 | 3 | Collector unchanged b8 diagnosis:90/100 pass,10 EPERM after successful TERM before leader reap. Deterministic race red retained. Corrected working runtime:100/100 original-fixture cases pass with sentinel safety; all17 collector tests pass including Docker/SIGINT and persistent-permission controls. | S005 group-observation report; original full failure and prior rows retained. | Fresh immutable full checks and renewed independent review remain. Private continuation only; no main merge retry, Task close or owner QA. Task3 implementation remains paused. | 27d6de3d2506dc978b8c24383858e4dfc4b8210bbfbc335e53a0f053b4420f71 |
 | 5 | Feature/S-005-page-review-cards | 5ef89a66e619815a834119b45bccf0285679487f | ahead 12 behind 0 | 3 | 5ef fresh989/6skip;17 collector;100/100 original fixture. Runtime Review0; late central FAIL210-234 added, record review pending. | Failure log/report; original rows retained. | Exact CI/publication/native close and TK003 remain. No main retry or owner QA. | 1182474b6b4dde757ca6691979bae3af4e7d75e7ed74177bf6a885089952718e |
+| 6 | Feature/S-005-page-review-cards | 27291722b10f9db9cfef73237812bc9383960cf5 | ahead 0 behind 0 | 0 | 5ef989/6skip;CI272987/8+10browser;18approval/17collector;100/100;Reviews0. | Approval guide/FAIL210 report. | TK003/coverage/consumption/final-dev QA/main permission; workspace retained.; close attribution: {"agent":"codex-servitor-pr174","claimant":"codex-s005-approvals","onBehalfOf":"codex-s005-approvals"} | cbf2d8d92733e662f578b15062b83dec5b226f47179f95f764c354a9400a9225 |

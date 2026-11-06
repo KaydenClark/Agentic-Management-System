@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** Content-bound page reviews and versioned feedback consumed by later drafts.
 **Blockers:** none
-**Next gate:** Publish/check the corrected collector and approval slice; finish private feedback and final-dev capture.
+**Next gate:** Complete TK-003.
 
 
 ## Intent and authority
