@@ -31,3 +31,24 @@ No active checkout is switched or modified. The unpushed Wiki-memory branch and 
 ## Starting inventory
 
 Workspace baseline sha256:42d67e833329f5edfc4481777be79a12be8c44bfd133024e523c26883c590800. The original native claim and generated projection were committed before this snapshot; raw inventory is retained privately outside the checkout. This binding precedes conflict resolution.
+
+## Conflict dispositions
+
+Every conflict was inspected against both source trees and dated changes; neither side was selected wholesale for the assembly.
+
+| Owner/path | Resolution and reason |
+|---|---|
+| AGENTS, RUNBOOK, SKILLS | Retain main's later approved policy relocation, claim/receipt, RSI intake, shared CI and delivery routes; owner-only site promotion remains. |
+| ARCHITECTURE | Retain main's later ownership table, DQC/execution links and routes; dev's presentation/read-only boundary remains. |
+| GLOSSARY | Keep main's six claim planes and DQC lanes; retain dev's sourced Workbench meaning. Regenerate the site projection from this owner. |
+| TASKBOARD.page-001/002 | Regenerate both from reconciled Spec/Task records, not conflict text. |
+| S-007 Spec | Combine main's lineage/learning/uncertainty requirements with dev's live-reader state, on-site links, skill trends and evidence pointers; shorten duplicate prose within the existing limit. |
+| S-013 Spec | Retain dev's bounded failed-review/correction evidence and main's continuing acceptance limits; no criterion is silently completed. |
+| Wiki MEMORY | Keep main's delivered maintenance route alongside both sets of existing routes. |
+| feedback-improvement topic | Preserve all immutable Jots, bounded-recovery history, current capability ownership and campaign/attempt limits. |
+| adoption topic | Keep dev's named capability/decision accounting and main's later immutable owner correction; retain gaps and unknown parity, removing duplicate prose only. |
+| S-013 history | Preserve every incoming row from both parents byte-for-byte. |
+
+The canonical glossary permits initial terms without a named group and adds nine terms. Its existing site parser/rendering did not support that owner shape. Expected red reproduced the parser refusal; the focused correction preserves old anchors and exact definitions while rendering every canonical addition. All other original site paths remain.
+
+Canonical failure intake for this execution wave is recorded in FAIL-126 through FAIL-129; no private Wiki-writer rows were copied. IDs were allocated above its observed maximum to avoid collision.
