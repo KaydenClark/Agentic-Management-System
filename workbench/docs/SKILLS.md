@@ -73,7 +73,6 @@ branch or a PR never grants permission to merge main or deploy.
 
 The [owner's standing publication authorization](../wiki/context-grilling-board.md#jot-d24d46bd-7ca5-44e0-854e-0411e4fbff30) covers routine public project records; preserve its exclusions, confirmation states and website promotion gate.
 
-
 Before requesting delivery approval, recover the originating owner instruction and
 standing publication scope. Carry through an already-authorized delivery endpoint
 includes its necessary commit, push, PR and eligible checked merge; do not ask the
