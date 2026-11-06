@@ -225,6 +225,9 @@ Topic: owner-answers-coherence
 Supersedes: none
 
 S-011's site change uses the same Spec branch, Feature/S-011-shared-skill-repair, with a pull request from it into dev, rather than a second S-011 branch. The orchestrator sequences it so records reach main before dev is merged into the branch, so the main pull request never carries unreleased dev work past the owner-only dev→main gate.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
 ### JOT-c093c149-fea8-41e0-a377-d2e263d699aa
 Kind: intent
 State: confirmed
