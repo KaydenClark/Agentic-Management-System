@@ -104,3 +104,81 @@ def test_hash_matches_existing_site_contract_vectors():
         assert pages.content_hash(vector["html"]) == vector["hash"]
     with pytest.raises(pages.PageRefused, match="main"):
         pages.content_hash("<p>No main</p>")
+
+
+def test_removed_page_stales_history_and_readded_content_gets_fresh_occurrence(room):
+    listed = inventory(room)
+    candidate = git(room, 'rev-parse', 'HEAD')
+    built = {row['path']: html(row['title']) for row in listed['pages']}
+    pages.generate(room, listed, built, candidate=candidate)
+    cards = load_cards(room / 'grill-board/cards')[0]
+    removed = next(card for card in cards if card.fields['Page'] == '/skills/grilling')
+    before = (room / 'grill-board/cards' / removed.file).read_bytes()
+    reduced = {'pages': [listed['pages'][0]]}
+    pages.generate(room, reduced, {'/': built['/']}, candidate=candidate)
+    history = next(card for card in load_cards(room / 'grill-board/cards')[0] if card.file == removed.file)
+    assert history.stale and not history.waiting
+    assert history.stale['Removed in'] == candidate
+    assert (room / 'grill-board/cards' / removed.file).read_bytes().startswith(before)
+    pages.generate(room, listed, built, candidate=candidate)
+    current = [card for card in load_cards(room / 'grill-board/cards')[0] if card.fields['Page'] == '/skills/grilling' and card.waiting]
+    assert len(current) == 1 and current[0].file != removed.file
+
+
+def test_verified_containment_is_never_labeled_as_original_landing(room):
+    listed = inventory(room, ('/',))
+    listed['pages'][0]['provenance_kind'] = 'verified-containment'
+    candidate = git(room, 'rev-parse', 'HEAD')
+    pages.generate(room, listed, {'/': html()}, candidate=candidate)
+    card = load_cards(room / 'grill-board/cards')[0][0]
+    assert card.fields['Provenance kind'] == 'verified-containment'
+    assert 'Verified containment' in card.fields
+    assert 'Landed' not in card.fields
+    index = json.loads((room / 'grill-board/pages/index.json').read_text())
+    assert index['pages']['/']['provenance_kind'] == 'verified-containment'
+
+
+def test_automatic_cli_collects_frozen_candidate_before_any_board_write(room, monkeypatch, capsys):
+    import ams.page_build as build
+    candidate = git(room, 'rev-parse', 'HEAD')
+    listed = inventory(room, ('/',))
+    image = 'sha256:' + '1' * 64
+    observed = []
+    class Runtime:
+        cleanup_verified = True
+        def __init__(self, selected, *, timeout):
+            assert selected == image and timeout == 300
+    def collect(source, ref, expected, **options):
+        assert git(room, 'rev-parse', 'HEAD') == candidate
+        assert options['public_config'] is None
+        observed.append((source, ref, expected))
+        return {'candidate': candidate, 'inventory': listed, 'html': {'/': html()}, 'kinds': {'/': 'page'}, 'excluded': {}}
+    monkeypatch.setattr(build, 'DockerBuild', Runtime)
+    monkeypatch.setattr(build, 'collect_current', collect)
+    pages.main(['generate','--project',str(room),'--ref','dev','--candidate',candidate,'--image',image])
+    assert observed == [(room, 'dev', candidate)]
+    result = json.loads(capsys.readouterr().out)
+    assert result['input_mode'] == 'pinned-container-build' and result['cleanup_verified']
+    assert len(load_cards(room / 'grill-board/cards')[0]) == 1
+
+
+def test_automatic_cli_refusal_and_unverified_cleanup_never_write_cards(room, monkeypatch):
+    import ams.page_build as build
+    candidate = git(room, 'rev-parse', 'HEAD')
+    image = 'sha256:' + '1' * 64
+    class Runtime:
+        cleanup_verified = False
+        def __init__(self, *args, **kwargs): pass
+    monkeypatch.setattr(build, 'DockerBuild', Runtime)
+    def missing(*args, **kwargs):
+        raise pages.PageRefused('/skills/new has no page-list owner')
+    monkeypatch.setattr(build, 'collect_current', missing)
+    command = ['generate','--project',str(room),'--candidate',candidate,'--image',image]
+    with pytest.raises(SystemExit) as refused:
+        pages.main(command)
+    assert refused.value.code == 1 and git(room, 'rev-parse', 'HEAD') == candidate
+    monkeypatch.setattr(build, 'collect_current', lambda *args, **kwargs: {'candidate': candidate, 'inventory': inventory(room, ('/',)), 'html': {'/': html()}, 'kinds': {'/': 'page'}, 'excluded': {}})
+    with pytest.raises(SystemExit) as cleanup:
+        pages.main(command)
+    assert cleanup.value.code == 1 and git(room, 'rev-parse', 'HEAD') == candidate
+    assert not list((room / 'grill-board/cards').glob('*.md'))

@@ -227,7 +227,10 @@ def render_open(cards_dir, topic, cards, card):
     if getattr(card, 'stale', None) is not None:
         target = card.stale.get('Superseded by', '')
         state = '<span class="pill tone h-none">Stale content · history only</span>'
-        verdict = f'<p>Read the current <a href="/?{urlencode({"topic": topic, "card": target})}">replacement review card</a>. This content approval is no longer current.</p>'
+        if card.stale.get('Removed in'):
+            verdict = '<p>This page was removed from the current candidate. Its review remains history.</p>'
+        else:
+            verdict = f'<p>Read the current <a href="/?{urlencode({"topic": topic, "card": target})}">replacement review card</a>. This content approval is no longer current.</p>'
     elif card.flag and card.flag.get('Migrated'):
         target = card.flag['Migrated']
         state = '<span class="pill tone h-none">Legacy history · DQC owns the question</span>'

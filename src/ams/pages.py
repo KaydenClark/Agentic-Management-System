@@ -115,6 +115,8 @@ def _metadata(listed, built):
         landed = row.get("landed", {})
         if not re.fullmatch(r"[0-9a-f]{40,64}", landed.get("commit", "")):
             raise PageRefused(f"{path}: no immutable landed commit")
+        if row.get("provenance_kind", "historical-landing") not in {"historical-landing", "verified-containment"}:
+            raise PageRefused(f"{path}: unsupported provenance kind; current ownership and actual containment are required")
         result[path] = row
     missing = sorted(set(result) - set(built))
     uncovered = sorted(set(built) - set(result))
@@ -141,17 +143,21 @@ def _stamp(now):
 
 def _new_card(row, digest, candidate):
     landed = row["landed"]
+    kind = row.get("provenance_kind", "historical-landing")
+    provenance_label = "Verified containment" if kind == "verified-containment" else "Landed"
+    sources = ", ".join(row.get("sources", []))
     return (f'# Review {row["path"]}: {row["title"]} at {digest}\n\n'
             '**Topic:** Website pages\n**Priority:** P2\n'
             '**Priority reason:** Review this exact candidate before website acceptance.\n'
             '**Value:** V1\n**Value reason:** A content-bound decision prevents repeated review.\n'
             f'**Page:** {row["path"]}\n**Title:** {row["title"]}\n**Content hash:** {digest}\n'
-            f'**Candidate:** {candidate}\n**Landed:** {landed.get("branch", "dev")} {landed["commit"]} PR {landed.get("pr", "unknown")}\n'
+            f'**Candidate:** {candidate}\n**Provenance kind:** {kind}\n'
+            f'**{provenance_label}:** {landed.get("branch", "dev")} {landed["commit"]} PR {landed.get("pr", "unknown")}\n'
             f'**Spec:** {row["spec"]}\n**Task:** {row["task"]}\n'
             f'**Recommendation:** Approve page {row["path"]} ({row["title"]}) at content hash {digest}.\n'
             f'**Owner record:** {APPROVALS}\n**Write after:** ## Approvals\n\n'
             f'Inspect this path on the protected dev candidate {candidate}. '
-            'This local card supplies no public review status.\n')
+            f'This local card supplies no public review status. Sources: {sources or "owning page inventory"}.\n')
 
 
 def generate(root, listed, built, *, candidate, now=None):
@@ -190,7 +196,10 @@ def generate(root, listed, built, *, candidate, now=None):
                     # answered history. A fresh occurrence gets a new filename.
                     suffix += 1
                     name = f"{stem}-{suffix}.md"
-                writes[f"{CARDS}/{name}"] = _new_card(row, digest, candidate).encode()
+                new_card = _new_card(row, digest, candidate)
+                if not isinstance(parse_card(name, new_card), Card):
+                    raise PageRefused(f"{path}: generated card is not valid Board content")
+                writes[f"{CARDS}/{name}"] = new_card.encode()
                 if old:
                     old_rel = f'{CARDS}/{old["card"]}'
                     old_blob = committed_blob(root, old_rel, base)
@@ -198,7 +207,17 @@ def generate(root, listed, built, *, candidate, now=None):
                         raise PageRefused(f"{path}: previous card is missing")
                     writes[old_rel] = old_blob + (b"" if old_blob.endswith(b"\n") else b"\n") + (
                         f'\n## Stale\n\n**Superseded by:** {name}\n**Stale since:** {_stamp(now)}\n').encode()
-            entries[path] = {"title": row["title"], "landed": row["landed"]["commit"], "hash": digest, "card": name}
+            entries[path] = {"title": row["title"], "landed": row["landed"]["commit"],
+                             "provenance_kind": row.get("provenance_kind", "historical-landing"), "hash": digest, "card": name}
+        for path in previous.get("pages", {}).keys() - rows.keys():
+            old = previous["pages"][path]
+            relative = f'{CARDS}/{old["card"]}'
+            old_blob = committed_blob(root, relative, base)
+            parsed = parse_card(old["card"], old_blob.decode()) if old_blob else None
+            if not isinstance(parsed, Card) or parsed.stale or parsed.fields.get("Page") != path or parsed.fields.get("Content hash") != old["hash"]:
+                raise PageRefused(f"{path}: removed route does not name its current committed card")
+            writes[relative] = old_blob + (b"" if old_blob.endswith(b"\n") else b"\n") + (
+                f'\n## Stale\n\n**Removed in:** {candidate}\n**Stale since:** {_stamp(now)}\n').encode()
         writes[INDEX] = (json.dumps({"candidate": candidate, "pages": entries}, indent=2, sort_keys=True) + "\n").encode()
         if committed_blob(root, APPROVALS, base) is None:
             writes[APPROVALS] = b"# Website page approvals\n\nOwner-facing content-bound decisions; no public-site status.\n\n## Approvals\n"
@@ -228,13 +247,35 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["generate"])
     parser.add_argument("--project", type=Path, default=Path.cwd())
-    parser.add_argument("--inventory", type=Path, required=True)
-    parser.add_argument("--built-html", type=Path, required=True,
+    parser.add_argument("--inventory", type=Path)
+    parser.add_argument("--built-html", type=Path,
                         help="JSON object mapping every public route to served HTML from the pinned candidate")
     parser.add_argument("--candidate", required=True)
+    parser.add_argument("--source-repo", type=Path, help="trusted source checkout; defaults to --project")
+    parser.add_argument("--ref", help="already fetched source ref; defaults to origin/dev")
+    parser.add_argument("--image", help="approved local immutable Node Docker image sha256 identity")
+    parser.add_argument("--public-config", type=Path, help="explicit public read-only site configuration JSON; no inherited values")
+    parser.add_argument("--timeout", type=float, default=300)
     args = parser.parse_args(argv)
+    if args.built_html and (not args.inventory or args.image or args.source_repo or args.ref or args.public_config):
+        parser.error("injected HTML requires --inventory and cannot be combined with automatic build options")
+    if not args.built_html and (args.inventory or not args.image):
+        parser.error("automatic collection reads the pinned inventory and requires --image")
     try:
-        result = generate(args.project, json.loads(args.inventory.read_text()), json.loads(args.built_html.read_text()), candidate=args.candidate)
+        if args.built_html:
+            result = generate(args.project, json.loads(args.inventory.read_text()), json.loads(args.built_html.read_text()), candidate=args.candidate)
+            result["input_mode"] = "injected-artifact"
+        else:
+            from .page_build import DockerBuild, collect_current
+            runtime = DockerBuild(args.image, timeout=args.timeout)
+            config = json.loads(args.public_config.read_text()) if args.public_config else None
+            collected = collect_current(args.source_repo or args.project, args.ref or "origin/dev", args.candidate,
+                                        build_start=runtime, public_config=config)
+            if not runtime.cleanup_verified:
+                raise PageRefused("owned runtime cleanup is not verified; no Board write")
+            result = generate(args.project, collected["inventory"], collected["html"], candidate=collected["candidate"])
+            result.update(input_mode="pinned-container-build", build_image=args.image,
+                          route_kinds=collected["kinds"], excluded=collected["excluded"], cleanup_verified=True)
     except (PageRefused, AnswerRefused, OSError, json.JSONDecodeError) as error:
         parser.exit(1, f"ams-pages: {error}\n")
     print(json.dumps(result, sort_keys=True))
