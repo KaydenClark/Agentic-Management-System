@@ -1,5 +1,5 @@
 // A link to the committed record a claim comes from, for the tour pages that
-// are prose (Why, Quickstart, Glossary, About). Links point at blob/dev, the
+// are prose (Why, Glossary, About). Links point at blob/dev, the
 // branch the site is built from.
 import type { ReactNode } from "react";
 import styles from "./tour.module.css";

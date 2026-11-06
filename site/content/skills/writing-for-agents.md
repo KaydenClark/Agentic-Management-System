@@ -1,7 +1,7 @@
 ---
 name: writing-for-agents
 summary: A short method for writing and trimming documents that agents read, such as skills, AGENTS.md files, Specs and Tasks, so each stays small, clear and reviewable.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's writing-for-agents skill](https://github.com/mattpocock/skills/tree/d81f3a183412e71a5b1e84ca21bc1a35eea03a60/skills/productivity/writing-for-agents), MIT License. The compact method in the skill is Kayden Clark's revision, and the skill-mechanics companion adapts upstream guidance to this catalog's actual rules.
 credit_license: MIT
@@ -42,7 +42,7 @@ The agent would look up the limit for that file type, drop what the repository a
 
 - The document to write or revise, plus who reads it and who owns its content.
 - A size limit. The skill says to find the one that applies and not invent it. The folder includes a budgets file counting characters (Unicode code points), not words. `AGENTS.md`, `BLUEPRINT.md`, `ARCHITECTURE.md` and `RUNBOOK.md` target 900 to 1,500 with a maximum of 3,000. `LANDMARK.md`, `SPEC.md`, `TASK.md` and `TASKS.md` max out at 8,000. Anything else falls back to 15,000.
-- The plain-language guide in the author-skill folder, reached by a relative link, so the two skills sit side by side.
+- The plain-language guide in the author-skill folder, reached by a relative link, so the two skills need to be installed side by side.
 - For skills only: the skill-mechanics and invocation notes in the writing-for-agents folder.
 
 It names no other prerequisite and never says it needs a Workbench (the project records and tools most catalog skills work against).
@@ -93,4 +93,4 @@ Do not invent a number. The file offers a 15,000-character default ceiling, but 
 
 ## Where it fits in the workflow
 
-It belongs to the Improve stage (Learn and fix), as a supporting skill beside the main flow of [retro](/skills/retro) then [improve-workbench](/skills/improve-workbench). Its neighbours there include [audit-workbench](/skills/audit-workbench), [evaluate-workbench](/skills/evaluate-workbench) and [diagnose-and-propose](/skills/diagnose-and-propose). Its closest tie is author-skill, which delegates its pruning pass to a separate agent that uses this skill. The output is the revised document, which goes back to the owner of that artifact for review.
+It belongs to the Improve stage (Learn and fix), as a supporting skill beside the main flow of [retro](/skills/retro) then [improve-workbench](/skills/improve-workbench). Its neighbors there include [audit-workbench](/skills/audit-workbench), [evaluate-workbench](/skills/evaluate-workbench) and [diagnose-and-propose](/skills/diagnose-and-propose). Its closest tie is author-skill, which delegates its pruning pass to a separate agent that uses this skill. The output is the revised document, which goes back to the owner of that artifact for review.

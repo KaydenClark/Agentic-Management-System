@@ -30,7 +30,7 @@ const SECTIONS = {
   'Where it fits in the workflow': '<p>Align stage.</p>',
 };
 const credit = (kind = 'adapted', body = 'Adapted from a source, MIT License.') =>
-  `<div data-credit-block=""><p data-credit="${kind}">${body}</p><p>Skills commit <code title="${SKILLS_PIN}" data-pin="${SKILLS_PIN}">8782412</code>${kind === 'adapted' ? ' · Source license: MIT' : ''}</p></div>`;
+  `<div data-credit-block=""><p data-credit="${kind}">${body}</p><p>Skills commit <code title="${SKILLS_PIN}" data-pin="${SKILLS_PIN}">${SKILLS_PIN.slice(0, 7)}</code>${kind === 'adapted' ? ' · Source license: MIT' : ''}</p></div>`;
 const article = ({ name = 'grilling', sections = Object.entries(SECTIONS), tail = credit(), stage = '<a href="/skills#align" data-stage-link="align">Align stage</a>' } = {}) =>
   `<html><body><main><article data-skill="${name}"><header><p>${stage}</p><h1>${name}</h1></header>` +
   sections.map(([t, html]) => `<section><h2 id="x">${t}</h2>${html}</section>`).join('') +

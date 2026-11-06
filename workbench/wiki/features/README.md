@@ -43,7 +43,8 @@ update that same article before the operation finishes.
 
 Source-backed knowledge transformed into prose a cold reader can use. Keep
 observed behavior, evolving understanding and unresolved gaps distinct. Explain
-progress and history with dated sources and links to live owners. Not a pasted Spec, a Task list, evidence rows, a Taskboard
+progress and history with dated sources and links to live owners; a Spec's
+closes, verdicts and corrections stay on its `history/<ID>.md` page. Not a pasted Spec, a Task list, evidence rows, a Taskboard
 projection or a completed Task standing in for the capability. Copied delivery
 state is refused by the validator (`copied-task-state`); link to the retired
 Spec instead.

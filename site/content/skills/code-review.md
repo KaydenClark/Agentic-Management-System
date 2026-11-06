@@ -1,7 +1,7 @@
 ---
 name: code-review
 summary: Reviews a branch, PR or working changes on two axes, coding standards and the accepted request, reporting each separately and fixing nothing.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's code-review skill](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/code-review), MIT License, keeping Kayden Clark's separate Standards and Spec reports and adding pinned review targets, source recovery from Workbench records and honest handling of unavailable review. Smell baseline after Martin Fowler's Refactoring.
 credit_license: MIT
@@ -26,15 +26,15 @@ The skill works in a fixed order:
 
 ### What each reviewer looks for
 
-The **Standards** reviewer lists every breach of a documented repo rule, citing the file and the rule. It also checks the diff against a built-in smell baseline, naming any smell it finds and quoting the hunk. It keeps hard violations apart from heuristic judgements.
+The **Standards** reviewer lists every breach of a documented repo rule, citing the file and the rule. It also checks the diff against a built-in smell baseline, naming any smell it finds and quoting the hunk. It keeps hard violations apart from heuristic judgments.
 
-The **Spec** reviewer hunts for requirements that are missing or only partly done, behaviour nobody asked for (scope creep), and requirements that look implemented wrongly. Each finding quotes the request line behind it, because a Spec finding you can't trace to the request is just an opinion.
+The **Spec** reviewer hunts for requirements that are missing or only partly done, behavior nobody asked for (scope creep), and requirements that look implemented wrongly. Each finding quotes the request line behind it, because a Spec finding you can't trace to the request is just an opinion.
 
 ### The smell baseline
 
 Standards always carries a fixed checklist of twelve code smells from Martin Fowler's *Refactoring*, used even when the repo has no standards file: Mysterious Name, Duplicated Code, Feature Envy, Data Clumps, Primitive Obsession, Repeated Switches, Shotgun Surgery, Divergent Change, Speculative Generality, Message Chains, Middle Man and Refused Bequest. Each pairs a definition with a usual remedy. Duplicated Code suggests extracting the shared shape, and Middle Man suggests cutting the pass-through and calling the real target.
 
-Two rules keep this from becoming noise. Smells are judgement calls, worded as possibilities ("possible Feature Envy"), never hard violations. And documented repo standards win: a smell is dropped when the repo endorses the pattern, and anything your tooling already enforces is skipped.
+Two rules keep this from becoming noise. Smells are judgment calls, worded as possibilities ("possible Feature Envy"), never hard violations. And documented repo standards win: a smell is dropped when the repo endorses the pattern, and anything your tooling already enforces is skipped.
 
 For **workspace reviews** of uncommitted changes, the skill snapshots the selected tracked and untracked files with a manifest and hashes, says what it included and left out, and never stages, commits or resets your files to get a clean target.
 
@@ -52,13 +52,13 @@ Reach for it when you have a branch, a PR, workspace changes or a range since a 
 
 ## Example request
 
-> Review the changes on this branch against main. Check them against our coding standards and against Task TK-0042, and give me the two reports separately.
+> Review the changes on this branch against main. Check them against our coding standards and against the Task for the retry fix, and give me the two reports separately.
 
 The skill records both SHAs in the report, then returns a Standards report and a Spec report with a closing tally of findings and the worst issue on each side.
 
 ## What it requires
 
-- **A Workbench**, created by the [setup-workbench](/skills/setup-workbench) skill. The skill first checks for the Workbench manifest and its tool script. If either is missing, it stops and tells you to run setup. It won't create records by hand or substitute another tracker.
+- **A Workbench**, created by the [setup-workbench](/skills/setup-workbench) skill. The skill first checks for the Workbench manifest and its tool script. If either is missing, it stops and tells you to run setup-workbench. It won't create records by hand or substitute another tracker.
 - **Readable git history:** valid base and candidate refs and a non-empty diff.
 - **Spec and Task records**, or an explicit accepted request, for the Spec axis, recovered through the Workbench's own tools.
 - **Subagent delegation** for truly independent review. The FAQs cover what happens without it.

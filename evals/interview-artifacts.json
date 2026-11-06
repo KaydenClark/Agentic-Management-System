@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "repository": "KaydenClark/skills",
+  "scope": "explicit private source context, no native installation or document-provider claim",
+  "baseline": {
+    "sourceCommit": "8d6631eacf6b3d51e0b4692fe3f7c75351196195",
+    "entry": "grill-with-docs/SKILL.md",
+    "entrySha256": "7d26a7fe55064d3a3a77fd88e220a5e20b8b2a94628b34f8f81b5473d4956e77",
+    "dependencies": ["grilling/SKILL.md", "domain-modeling/SKILL.md", "domain-modeling/GLOSSARY-FORMAT.md"]
+  },
+  "candidate": {
+    "sourceCommit": "43cd2fe60aca8c7e5db5be7cb9f43fae1db87b71",
+    "mergedCommit": "878241202bf7ec97c0952287f1633f6f0ddf1a6e",
+    "entry": "align-docs/SKILL.md",
+    "entrySha256": "48fafcbc2096dff003ad256e068e78e3a2edc405d9ffbb9c64dfce14357ac9ae",
+    "dependencies": ["align-concept/SKILL.md", "grilling/SKILL.md", "readback/SKILL.md", "jot/SKILL.md", "jot/references/workbench.md", "domain-modeling/SKILL.md", "domain-modeling/GLOSSARY-FORMAT.md"]
+  },
+  "provider": {"kind": "first-party subscription", "model": "claude-opus-5-5", "effort": "medium", "tools": [], "mcpServers": []},
+  "limitations": ["Private pack manifests retain per-file hashes and source provenance", "No docs/SKILL.md exists at either repository pin", "No one-third effect threshold was approved", "Owner-labelled examples do not qualify a whole assessor"]
+}

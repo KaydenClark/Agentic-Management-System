@@ -2,6 +2,7 @@
 // function over built HTML so the tests can run it on the real build and on
 // planted faults. Run `npm run build` first.
 import { existsSync, readFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { siteDir, visibleText } from './helpers.mjs';
 
@@ -16,19 +17,17 @@ export const READING_ORDER = [
   '/start',
   '/why',
   '/how-it-works',
+  '/grill-board-demo',
   '/skills',
-  '/quickstart',
   '/rsi',
   '/glossary',
-  '/about',
 ];
 
 // Every tour page the Spec names (S-003 Desired Behavior, Tour pages).
 export const TOUR = [
-  { href: '/start', title: 'Start here' },
+  { href: '/start', title: 'About' },
   { href: '/why', title: 'Why' },
   { href: '/how-it-works', title: 'How it works' },
-  { href: '/quickstart', title: 'Quickstart' },
   { href: '/glossary', title: 'Glossary' },
   { href: '/about', title: 'About' },
 ];
@@ -114,12 +113,34 @@ export function orderProblems(html, index, order = READING_ORDER) {
   return problems;
 }
 
+// Attribute order is not meaningful in HTML. Select the current anchor,
+// then check its destination and label independently.
+export function aboutNavigationProblems(html) {
+  const nav = html.match(/<nav[^>]*aria-label="Reading order"[\s\S]*?<\/nav>/i)?.[0] ?? '';
+  const links = [...nav.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/gi)].map(match => match[0]);
+  const current = links.filter(link => /\saria-current="page"(?:\s|>)/i.test(link));
+  if (current.length !== 1 || !/\shref="\/start"(?:\s|>)/i.test(current[0]) || visibleText(current[0]) !== 'About') {
+    return ['About alias lacks its shared navigation position'];
+  }
+  return [];
+}
+
 // A built page outside the reading order must be a child of a page in it:
 // its route sits one level under that page's route (/skills/grilling under
 // /skills), the parent's content links it and it links back to the parent, so
 // no page is an orphan or a dead end. `parents` maps a route to its built
 // HTML. Empty when it passes.
 export function childProblems(route, html, parents, order = READING_ORDER) {
+  // /about is retained as a canonical alias, not a second reading-order page.
+  // Require equivalent content and the same About position to avoid allowing
+  // arbitrary top-level orphan pages through this exception.
+  if (route === '/about') {
+    const target = parents.get('/start');
+    const problems = [];
+    if (!target || visibleText(mainOf(html)) !== visibleText(mainOf(target))) problems.push('About alias differs from /start');
+    problems.push(...aboutNavigationProblems(html));
+    return problems;
+  }
   const parts = route.split('/').filter(Boolean);
   const parent = `/${parts.slice(0, -1).join('/')}`;
   if (parts.length < 2 || !order.includes(parent)) return [`${route} is outside the reading order and under no page in it (orphan)`];
@@ -130,37 +151,41 @@ export function childProblems(route, html, parents, order = READING_ORDER) {
   return problems;
 }
 
-// Every link into this repository on GitHub (blob/dev) and whether its file
-// exists in this checkout.
+// Moving dev links resolve in the checkout; immutable evidence links resolve
+// against their actual Git revision, even after records move or retire.
 export function repoLinks(html) {
-  return [...html.matchAll(/href="(https:\/\/github\.com\/KaydenClark\/Agentic-Management-System\/blob\/dev\/([^"#?]+))[^"]*"/gi)]
-    .map((m) => ({ href: m[1], path: decodeURIComponent(m[2]), exists: existsSync(join(repoRoot, decodeURIComponent(m[2]))) }));
+  return [...html.matchAll(/href="(https:\/\/github\.com\/KaydenClark\/Agentic-Management-System\/blob\/(dev|[a-f0-9]{40})\/([^"#?]+))[^"]*"/gi)]
+    .map((m) => {
+      const path = decodeURIComponent(m[3]);
+      let exists = false;
+      if (m[2] === 'dev') exists = existsSync(join(repoRoot, path));
+      else {
+        try {
+          execFileSync('git', ['cat-file', '-e', `${m[2]}:${path}`], { cwd: repoRoot, stdio: 'ignore' });
+          exists = true;
+        } catch { /* A missing revision or path remains a broken source link. */ }
+      }
+      return { href: m[1], path, exists };
+    });
 }
 
 const decode = (s) => s.replace(/&amp;/g, '&').replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>');
 
-// Owner quotes: each <blockquote data-owner-quote> must carry a source link to
-// a committed record and a dated attribution, and its text must appear
-// verbatim in that record. Quote marks elsewhere in the page body would
-// present words as quoted without a source.
+// The site quotes no one: a tour page holds no owner-quote figure, no
+// <blockquote>, no <q> and no words in quote marks. A point from the owner is
+// paraphrased in plain prose and links the committed record it comes from.
 export function quoteProblems(html) {
   const problems = [];
   const main = mainOf(html);
-  const quotes = [...main.matchAll(/<figure\b[^>]*data-owner-quote[^>]*>([\s\S]*?)<\/figure>/gi)];
-  for (const [, inner] of quotes) {
-    const said = decode(visibleText(inner.match(/<blockquote\b[^>]*>([\s\S]*?)<\/blockquote>/i)?.[1] ?? ''));
-    const caption = inner.match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/i)?.[1] ?? '';
-    const link = repoLinks(caption)[0];
-    if (!said) { problems.push('owner quote with no <blockquote> text'); continue; }
-    if (!link) { problems.push(`quote "${said}" has no source link to a committed record`); continue; }
-    if (!link.exists) { problems.push(`quote source ${link.path} does not exist`); continue; }
-    if (!/\b20\d\d-\d\d-\d\d\b/.test(visibleText(caption))) problems.push(`quote "${said}" has no dated attribution`);
-    const source = readFileSync(join(repoRoot, link.path), 'utf8').replace(/\s+/g, ' ');
-    if (!source.includes(said)) problems.push(`quote "${said}" is not verbatim in ${link.path}`);
-  }
-  const rest = decode(visibleText(main.replace(/<figure\b[^>]*data-owner-quote[^>]*>[\s\S]*?<\/figure>/gi, ' ')));
-  const quoted = rest.match(/[“"][^”"]{12,}[”"]/);
-  if (quoted) problems.push(`quoted words outside an owner-quote figure: ${quoted[0]}`);
-  if (/<q\b/i.test(main.replace(/<figure\b[^>]*data-owner-quote[^>]*>[\s\S]*?<\/figure>/gi, ''))) problems.push('<q> outside an owner-quote figure');
+  if (/\sdata-owner-quote\b/i.test(main)) problems.push('an owner-quote figure (data-owner-quote); the site quotes no one');
+  if (/<blockquote\b/i.test(main)) problems.push('a <blockquote>; paraphrase instead of quoting');
+  if (/<q\b/i.test(main)) problems.push('a <q>; paraphrase instead of quoting');
+  const quoted = decode(visibleText(main)).match(/[“"][^”"]{12,}[”"]/);
+  if (quoted) problems.push(`quoted words: ${quoted[0]}`);
   return problems;
+}
+
+// Any built page (tour or not) carrying the owner-quote feature.
+export function ownerQuoteProblems(pages) {
+  return pages.filter(({ html }) => /\sdata-owner-quote\b/i.test(html)).map(({ name }) => `${name}: has data-owner-quote; the site quotes no one`);
 }

@@ -1,7 +1,7 @@
 ---
 name: orchestrate
 summary: Coordinates implementor agents on a Workbench Spec, checks what they hand back against the destination, and stops at the endpoint you authorized.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: original
 credit_text: Original to Kayden Clark.
 ---
@@ -40,14 +40,14 @@ Reach for it when you hold a Director or Dispatcher assignment: several Tasks, w
 
 ## Example request
 
-> You are the Dispatcher for S-012. Run the ready Tasks through implementors, check what each hands back, make sure the checked PRs land in main one at a time, and stop when the Spec is assembled and ready for independent review.
+> You're the Dispatcher for the billing Spec. Run its ready Tasks through implementors, check each result before accepting it, merge the checked PRs into main one by one, and stop once the Spec is assembled for an independent review.
 
 ## What it requires
 
-- **A Workbench.** The first thing it confirms is that the project has a manifest at `workbench/manifest.json` and the command-line tool at `workbench/tools/spec-workbench.mjs`. Should one of them be missing, it halts and points you to `/setup-workbench` rather than building records manually or adopting a different tracker.
+- **A Workbench.** The first thing it confirms is that the project has a manifest at `workbench/manifest.json` and the command-line tool at `workbench/tools/spec-workbench.mjs`. If either is missing, it stops and points you to [`setup-workbench`](/skills/setup-workbench) rather than building records by hand or adopting a different tracker.
 - **An assignment** with a clear endpoint, scope and exclusions.
-- **The room's own procedures.** It reads the project's AGENTS.md, RUNBOOK and task lifecycle before dispatching. It never treats a merely proposed skill as installed, and never installs or replaces project controls.
-- **Delegation ability.** It respects your model and cost preferences and does not invent controls.
+- **The project's own procedures.** It reads the project's AGENTS.md, RUNBOOK and task lifecycle before dispatching. It never treats a merely proposed skill as installed, and never installs or replaces project controls.
+- **A real way to delegate.** It works with the delegation tools that actually exist, respects your model and cost preferences, and does not invent controls.
 
 ## What it does not authorize
 
@@ -89,6 +89,6 @@ The conflict goes to the implementor who owns that branch. The orchestrator then
 
 ## Where it fits in the workflow
 
-`orchestrate` sits in the Journey stage of the chart (Build each Task), alongside [`carry`](/skills/carry) and [`journey`](/skills/journey). That stage is not a single Task's own Journey, the implement, check, QA and submit path that [`journey`](/skills/journey) runs for each dispatched Task. It comes after [`map`](/skills/map) and [`plan`](/skills/plan) have produced a Spec with Tasks, and it keeps lasting context in [`jot`](/skills/jot) instead of copying work state into notes.
+`orchestrate` sits in the Journey stage of the chart (Build each Task), alongside [`carry`](/skills/carry) and [`journey`](/skills/journey). The stage is broader than a single Task's Journey, the implement, check, QA and submit path that [`journey`](/skills/journey) runs for each dispatched Task. It comes after [`map`](/skills/map) and [`plan`](/skills/plan) have produced a Spec with Tasks, and it keeps lasting context in [`jot`](/skills/jot) instead of copying work state into notes.
 
 The assembled Spec then goes to independent review with [`code-review`](/skills/code-review), and work still needing to reach its target branch can go to [`land`](/skills/land). If you are unsure orchestration is warranted at all, start with [`ask-workbench`](/skills/ask-workbench).

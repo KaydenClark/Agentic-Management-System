@@ -1,7 +1,7 @@
 ---
 name: ask-workbench
 summary: Picks the smallest skill flow that fits your current request, after reading the real procedures, and stops at a recommendation unless you authorized running it.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's Ask Matt](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/ask-matt) and Kayden Clark's Workbench router, MIT License.
 credit_license: MIT
@@ -22,7 +22,7 @@ It works in four moves:
 
 ## When to use it
 
-Reach for it when you know the outcome you want but not which workflow gets you there, or when you are unsure a workflow is needed at all. A supporting file inside the skill lists common candidates. They narrow the choice; the router still reads the real procedure before acting.
+Reach for it when you know the outcome you want but not which workflow gets you there, or when you are unsure a workflow is needed at all. The skill keeps a list of common candidates, summarized below. The list narrows the choice, but the router still reads the real procedure before acting.
 
 | What you have | Reach for |
 |---|---|
@@ -46,7 +46,7 @@ Reach for it when you know the outcome you want but not which workflow gets you 
 | Durable, sourced understanding to keep | [jot](/skills/jot) |
 | A new or revised skill | [author-skill](/skills/author-skill) |
 
-Requests about the Workbench itself (orientation, setup, update, improvement, evaluation or audit) go to the room's routing index and the matching Workbench skills. If all you want is a status picture, ask for a sitrep and [sitrep](/skills/sitrep) reads the TASKBOARD for you.
+Requests about the Workbench itself (orientation, setup, update, improvement, evaluation or audit) go to the Workbench's own routing index and the matching Workbench skills. If all you want is a status picture, ask for a sitrep and [sitrep](/skills/sitrep) reads the TASKBOARD for you.
 
 ## Example request
 
@@ -56,7 +56,7 @@ The router would read the project's records, check whether a Spec or Task for ex
 
 ## What it requires
 
-- **A Workbench.** It confirms that `workbench/manifest.json` and `workbench/tools/spec-workbench.mjs` both exist at the project root. When either is absent it halts and sends you to `/setup-workbench`. It does not build Workbench records by hand or swap in another tracker.
+- **A Workbench.** It confirms that `workbench/manifest.json` and `workbench/tools/spec-workbench.mjs` both exist at the project root. When either is absent it halts and sends you to [setup-workbench](/skills/setup-workbench). It does not build Workbench records by hand or swap in another tracker.
 - **Readable skill files.** Each candidate's `SKILL.md` and references, reached through the host catalog and the project route.
 - **Project records.** Controls, the glossary, relevant decisions, the assigned Spec and Task, and the TASKBOARD.
 
@@ -82,11 +82,11 @@ Names can mislead; a skill's real inputs, outputs and limits live in its files.
 
 ### What if it recommends a long sequence for a small job?
 
-The skill is built to skip any stage whose result already exists, and it imposes no fixed delivery sequence on reviews, questions or small edits. If you still get an over-long route, you can state the result you want and where it should stop. That is advice for you, not a documented router feature.
+The skill is built to skip any stage whose result already exists, and it imposes no fixed delivery sequence on reviews, questions or small edits. If a route still looks too long, tell it the result you want and where it should stop.
 
 ## It's working when
 
-- It opens by confirming the Workbench files exist, or stops and points you to `/setup-workbench`.
+- It opens by confirming the Workbench files exist, or stops and points you to [setup-workbench](/skills/setup-workbench).
 - Its answer names the procedure, where it came from, and why it fits.
 - It gives the next action, the artifact it will produce and where that lives, and where it stops.
 - It picks the shortest route and skips stages whose results already exist.

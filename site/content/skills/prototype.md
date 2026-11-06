@@ -1,7 +1,7 @@
 ---
 name: prototype
 summary: Answer one concrete design or behavior question with a small reversible artifact, record the verdict, and clean the artifact up.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's skills collection](https://github.com/mattpocock/skills), MIT License.
 credit_license: MIT
@@ -35,15 +35,15 @@ Reach for it when you have a behavior or design question that a test-like experi
 
 > We can't agree on how the retry button should behave when a request fails twice. Prototype the retry states as a small runnable loop I can step through, plus two or three variants of the button, so we can pick one. Throw it away when we've decided.
 
-The agent restates the question and the verdict you will judge by, builds the loop and the variants in an isolated, labelled spot, and shows you how to run them. After you choose, it records the chosen behavior and the evidence where the question came from, then deletes the experiment.
+The agent restates the question and the verdict you will judge by, builds the loop and the variants in an isolated, labeled spot, and shows you how to run them. After you choose, it records the chosen behavior and the evidence where the question came from, then deletes the experiment.
 
 ## What it requires
 
 Very little. The skill names no Workbench, no companion skills and no special tools. It needs:
 
-- a question you can state, with a verdict you can observe;
-- somewhere to build the artifact that is separate from real code and fits local conventions;
-- a record to write the outcome into, or the chat if there is none.
+- A question you can state, with a verdict you can observe.
+- Somewhere to build the artifact that is separate from real code and fits local conventions.
+- A record to write the outcome into, or the chat if there is none.
 
 ## What it does not authorize
 
@@ -51,7 +51,7 @@ The skill covers building a temporary artifact and recording the result. Nothing
 
 - **Removal is the default.** Keeping the artifact needs an explicit reason: the record has to want it as proof.
 - **A working prototype is not the feature.** The skill describes the artifact as isolated and temporary. Moving any of it into real code is separate work.
-- **Running it is not a preference.** When the choice depends on the owner's taste, [wayfinder](/skills/wayfinder) leaves that decision pending until the owner reacts. A prototype that runs cleanly cannot supply it.
+- **A clean run is not a preference.** When the choice depends on the owner's taste, [wayfinder](/skills/wayfinder) leaves that decision pending until the owner reacts. A prototype that runs cleanly cannot supply it.
 
 ## FAQs
 
@@ -77,6 +77,6 @@ Into the ticket, pull request or decision write-up where the question came from,
 
 ## Where it fits in the workflow
 
-`prototype` sits in the Align stage ("Shared concept") as one of the supporting skills. Align's main flow is [grilling](/skills/grilling) and then [readback](/skills/readback), which get you and the agent to the same understanding. `prototype` covers the cases where that understanding depends on seeing a behavior or interaction rather than discussing it.
+`prototype` sits in the Align stage (Shared concept) as one of the supporting skills. Align's main flow is [grilling](/skills/grilling) and then [readback](/skills/readback), which get you and the agent to the same understanding. `prototype` covers the cases where that understanding depends on seeing a behavior or interaction rather than discussing it.
 
 Two skills reach for it directly. [wayfinder](/skills/wayfinder) uses it for uncertain behavior or design that needs a test, records the prototype's path and result, and moves on. [plan](/skills/plan) turns to it when evidence is too thin to plan responsibly, asking for a prototype with a named question and result instead of building on unknowns. In both cases the result goes back into the record that asked.

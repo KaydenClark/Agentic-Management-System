@@ -26,9 +26,10 @@
 // assessment is an arithmetic dependency, and a cycle of those is refused.
 //
 // Concurrency: `--expect-revision` refuses a write based on a stale read. It
-// is a comparison, not a lock, and does not isolate two concurrent writers;
-// see workbench/landmark-tracker/README.md.
+// is a comparison; native CLI mutations also share a serialization lock;
+// see https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md.
 import fs from 'node:fs';
+import { LIFECYCLE_SCHEMA, lifecycleProblems, addLifecycleViews, readRounds, writeMarkdown, renderTrackerMarkdown, withTrackerLock, applyAction, committedView } from './dqc-lifecycle.mjs';
 import path from 'node:path';
 import { assertSafeReadPath, assertSafeWritePath, collectionRelative, declaredTracker, findRoot, isMainModule, laneRelative, writeSafeFile, TRACKER_COLLECTIONS } from './workbench-paths.mjs';
 import { allocateArtifactId, compareVisibleIds, visibleIdKey, visibleIdParts } from './visible-ids.mjs';
@@ -57,7 +58,7 @@ const QUESTION_KEYS = [...QUESTION_KEYS_V1, 'claims', 'related'];
 // The source types that contribute to a distribution, in display order. Each
 // declared constituent is one unit whatever its type; there is no supporting-
 // reference exclusion and no effort weight.
-export const SOURCE_TYPES = Object.freeze(['dqc', 'grilling-question', 'spec', 'adr', 'task']);
+export const SOURCE_TYPES = Object.freeze(['dqc', 'grilling-question', 'spec', 'adr', 'task', 'landmark']);
 // Claim bookkeeping is not itself changed understanding.
 const CLAIM_FIELDS = new Set(['claim', 'claim-evidence', 'claim-affected', 'schema']);
 const LANDMARK_KEYS = ['history', 'id', 'importance', 'origin', 'revision', 'schema', 'summary', 'title'];
@@ -93,7 +94,7 @@ function context(rootDir) {
   let declared;
   try { declared = declaredTracker(root); }
   catch (error) { refuse(error.code === 'invalid-tracker' ? 'invalid-manifest' : error.code ?? 'invalid-manifest', error.message); }
-  if (!declared) refuse('tracker-undeclared', 'This room declares no Landmark Tracker root; add a landmarkTracker block to workbench/manifest.json (see workbench/landmark-tracker/README.md).');
+  if (!declared) refuse('tracker-undeclared', 'This room declares no tracker; use setup-workbench layout enable-tracker under Create/Adopt or explicit Update (see https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md).');
   const trackerRoot = path.resolve(root, declared.root);
   const dirs = Object.fromEntries(TRACKER_COLLECTIONS.map(name => [name, path.resolve(root, declared.collections[name])]));
   for (const directory of [trackerRoot, ...Object.values(dirs)]) {
@@ -229,7 +230,7 @@ export function itemIdentityProblems(type, id) {
     if (parts.numeric && !parts.spec) return [`legacy numeric Task label ${id} is scoped to its Spec; write it Spec-qualified, for example S-00H/${id}`];
     return [];
   }
-  const prefix = { dqc: DQC_PREFIX, spec: 'S', adr: 'ADR' }[type];
+  const prefix = { dqc: DQC_PREFIX, spec: 'S', adr: 'ADR', landmark: 'LMK' }[type];
   return visibleIdParts(id)?.prefix === prefix ? [] : [`${type} ${JSON.stringify(id)} must be a ${prefix}- identity`];
 }
 
@@ -292,15 +293,16 @@ function claimProblems(record) {
 
 export function validateQuestion(record) {
   const legacy = isPlainObject(record) && record.schema === DQC_SCHEMA_V1;
-  const keys = legacy ? QUESTION_KEYS_V1 : QUESTION_KEYS;
+  const keys = legacy ? QUESTION_KEYS_V1 : record.schema === LIFECYCLE_SCHEMA ? [...QUESTION_KEYS, 'lifecycle'] : QUESTION_KEYS;
   if (!exactKeys(record, keys)) return [`a DQC record has exactly the fields ${keys.join(', ')}`];
   const problems = [];
-  if (record.schema !== DQC_SCHEMA && !legacy) problems.push(`schema must be ${DQC_SCHEMA}`);
+  if (record.schema === LIFECYCLE_SCHEMA) problems.push(...lifecycleProblems(record.lifecycle));
+  if (record.schema !== DQC_SCHEMA && record.schema !== LIFECYCLE_SCHEMA && !legacy) problems.push(`schema must be ${DQC_SCHEMA}`);
   if (visibleIdParts(record.id)?.prefix !== DQC_PREFIX) problems.push(`id must be a ${DQC_PREFIX}- identity`);
   if (!isRevision(record.revision)) problems.push('revision must be a positive integer');
   problems.push(...titleProblems(record.title, 'title'));
   if (!isText(record.question)) problems.push('question must be non-empty text');
-  if (!(record.answer === null || isText(record.answer))) problems.push('answer must be null (unanswered) or text');
+  if (!(record.answer === null || (record.schema === LIFECYCLE_SCHEMA ? typeof record.answer === 'string' && record.answer.trim().length > 0 : isText(record.answer)))) problems.push('answer must be null (unanswered) or text');
   if (!(record.confirmation === null || (exactKeys(record.confirmation, ['basis', 'revision']) && isText(record.confirmation.basis) && isRevision(record.confirmation.revision)))) problems.push('confirmation must be null or {basis, revision}');
   if (!(record.expectedResult === null || (exactKeys(record.expectedResult, ['change', 'home', 'revision']) && isText(record.expectedResult.change) && (record.expectedResult.home === null || isText(record.expectedResult.home)) && isRevision(record.expectedResult.revision)))) problems.push('expectedResult must be null or {change, home, revision}; a home without an intended change is not an Expected result');
   if (!(record.result === null || (exactKeys(record.result, ['revision', 'summary']) && isText(record.result.summary) && isRevision(record.result.revision)))) problems.push('result must be null or {summary, revision}');
@@ -444,13 +446,24 @@ function directoryEntries(directory) {
 
 function roomIndex(ctx) {
   if (ctx.roomIndex) return ctx.roomIndex;
-  const index = { specs: new Map(), tasks: new Map(), adrs: new Set() };
+  const index = { specs: new Map(), tasks: new Map(), adrs: new Set(), landmarks: new Map() };
   let specsRoot = null;
   let adrRoot = null;
   try { specsRoot = path.resolve(ctx.root, laneRelative(ctx.root, 'specs')); } catch { specsRoot = null; }
   try { adrRoot = path.resolve(ctx.root, collectionRelative(ctx.root, 'adr')); } catch { adrRoot = null; }
   if (specsRoot) {
-    for (const folder of [specsRoot, path.join(specsRoot, 'retired')]) {
+    const folders = [specsRoot, path.join(specsRoot, 'retired')];
+    let landmarksRoot;
+    try { landmarksRoot = path.resolve(ctx.root, collectionRelative(ctx.root, 'landmarks')); } catch {}
+    if (landmarksRoot) for (const landmark of directoryEntries(landmarksRoot)) {
+      if (!landmark.isDirectory()) continue;
+      const match = /^(LMK-[0-9A-Za-z]+)(?:-|$)/.exec(landmark.name);
+      if (!match) continue;
+      const dir = path.join(landmarksRoot, landmark.name);
+      if (fs.existsSync(path.join(dir, 'LANDMARK.md'))) index.landmarks.set(visibleIdKey(match[1]), dir);
+      folders.push(path.join(dir, 'specs'));
+    }
+    for (const folder of folders) {
       for (const entry of directoryEntries(folder)) {
         const match = entry.isDirectory() ? /^(S-[0-9A-Za-z]+)(?:-|$)/.exec(entry.name) : null;
         if (!match || !visibleIdParts(match[1])) continue;
@@ -488,12 +501,24 @@ export function resolveItem(ctx, inventory, type, id) {
   if (type === 'dqc') return questionIdsByKey(inventory).has(visibleIdKey(id)) ? 'tracker' : 'unknown';
   if (type === 'grilling-question' || !ctx) return 'declared';
   const index = roomIndex(ctx);
+  if (type === 'landmark') return index.landmarks.has(visibleIdKey(id)) ? 'room' : 'unknown';
   if (type === 'spec') return index.specs.has(visibleIdKey(id)) ? 'room' : 'unknown';
   if (type === 'adr') return index.adrs.has(visibleIdKey(id)) ? 'room' : 'unknown';
   const parts = taskParts(id);
   const taskKey = visibleIdKey(parts.task);
   if (parts.spec) return index.tasks.get(visibleIdKey(parts.spec))?.has(taskKey) ? 'room' : 'unknown';
   return [...index.tasks.values()].some(tasks => tasks.has(taskKey)) ? 'room' : 'unknown';
+}
+
+function itemHome(ctx, type, id) {
+  if (!ctx) return null;
+  const index = roomIndex(ctx);
+  let target;
+  if (type === 'landmark') { const dir = index.landmarks.get(visibleIdKey(id)); if (dir) target = path.join(dir,'LANDMARK.md'); }
+  if (type === 'spec') { const dir = index.specs.get(visibleIdKey(id)); if (dir) target = path.join(dir,'SPEC.md'); }
+  if (type === 'task') { const parts = taskParts(id); const dir = parts.spec ? index.specs.get(visibleIdKey(parts.spec)) : [...index.specs.entries()].find(([key]) => index.tasks.get(key)?.has(visibleIdKey(parts.task)))?.[1]; if (dir) { const task = path.join(dir,'tasks',parts.task,'TASK.md'); target = fs.existsSync(task) ? task : path.join(dir,'SPEC.md'); } }
+  if (type === 'dqc') target = path.join(ctx.dirs[QUESTIONS],`${id}.json`);
+  return target ? posixRelative(ctx.root,target) : null;
 }
 
 // --------------------------------------------------------------- projection
@@ -760,7 +785,7 @@ function ownAssessment(record) {
   return { state: Object.hasOwn(record.assessment, 'derived') ? 'derived' : 'assessed', ...record.assessment };
 }
 
-function questionCard(record, landmarks, index, inventory) {
+function questionCard(record, landmarks, index, inventory, ctx) {
   const titles = record.landmarks.map(id => landmarks.get(id).record.title);
   const claims = claimsOf(record).map(claim => claimView(record, claim));
   const self = index.get(itemKey('dqc', record.id));
@@ -780,7 +805,7 @@ function questionCard(record, landmarks, index, inventory) {
     distribution: aggregate(index, scopeKeys(record)),
     related: relatedOf(record).map((entry) => {
       const item = index.get(itemKey(entry.type, entry.id));
-      return { type: entry.type, id: entry.id, key: item.key, revision: entry.revision, reason: entry.reason, resolution: item.resolution, state: item.state, assessment: entry.assessment };
+      return { type: entry.type, id: entry.id, home: itemHome(ctx, entry.type, entry.id), key: item.key, revision: entry.revision, reason: entry.reason, resolution: item.resolution, state: item.state, assessment: entry.assessment };
     }),
     relatedBy: self.relatedBy,
     lineage: lineage(index, inventory, self.canonical),
@@ -798,8 +823,8 @@ export function buildProjection(inventory, ctx = null) {
   const questions = [...inventory[QUESTIONS].values()].map(entry => entry.record).sort((a, b) => compareVisibleIds(a.id, b.id));
   const landmarks = [...inventory[LANDMARKS].values()].map(entry => entry.record).sort((a, b) => compareVisibleIds(a.id, b.id));
   const index = itemIndex(inventory, ctx);
-  const cards = questions.map(record => questionCard(record, inventory[LANDMARKS], index, inventory));
-  return {
+  const cards = questions.map(record => ({ ...questionCard(record, inventory[LANDMARKS], index, inventory, ctx), lifecycle: record.lifecycle ?? { state: 'pending', proposal: null, digest: null, confirmations: [], events: [] } }));
+  const projection = {
     schema: PROJECTION_SCHEMA,
     notice: NOTICE,
     steps: [...STEPS],
@@ -835,6 +860,8 @@ export function buildProjection(inventory, ctx = null) {
     })),
     questions: cards
   };
+  if (ctx) { const rounds = readRounds(ctx.root); projection.rounds = rounds.rounds; projection.currentRound = rounds.currentRound ?? cards.find(card => card.lifecycle.proposal)?.lifecycle.proposal.round ?? null; }
+  return projection;
 }
 
 function serialize(value) {
@@ -876,8 +903,10 @@ function commit(ctx, inventory, changes) {
   const projection = serialize(buildProjection(next, ctx));
   for (const write of writes) preflight(ctx, write.destination);
   preflight(ctx, ctx.projection);
+  if (ctx.declared.markdown) preflight(ctx, path.join(ctx.root, ctx.declared.markdown));
   for (const write of writes) safeWrite(ctx, write.destination, write.content, { exclusive: write.exclusive });
   safeWrite(ctx, ctx.projection, projection);
+  writeMarkdown(ctx.root, JSON.parse(projection));
   return writes.map(write => posixRelative(ctx.root, write.destination));
 }
 
@@ -1023,6 +1052,8 @@ function reviseQuestion(record, options, revision) {
       next[field] = options[field];
     }
   }
+  if (options.confirm !== undefined && record.lifecycle) refuse('action-required', 'Confirm lifecycle readbacks through action --stdin with displayed digest/source/scope');
+  if (changes.some(change => ['title', 'question', 'answer'].includes(change.field)) && options.confirm === undefined) next.confirmation = null;
   if (options.confirm !== undefined) {
     next.confirmation = { basis: options.confirm, revision };
     changes.push({ field: 'confirmation', from: record.confirmation?.basis ?? null, to: options.confirm });
@@ -1128,6 +1159,7 @@ export function reviseRecord(rootDir, id, options = {}) {
   requireRevision(options, found.record);
   const revision = found.record.revision + 1;
   const { next, changes } = found.kind === QUESTIONS ? reviseQuestion(found.record, options, revision) : reviseLandmark(found.record, options);
+  if (found.record.lifecycle && changes.some(change => ['title', 'question', 'answer'].includes(change.field))) { next.confirmation = null; next.lifecycle.state = 'pending'; next.lifecycle.proposal = null; next.lifecycle.digest = null; }
   if (changes.length === 0) refuse('invalid-record', `This revision changes nothing in ${found.record.id}.`);
   next.revision = revision;
   next.history.push({ revision, at: nowStamp(), reason: options.reason, changes });
@@ -1213,16 +1245,20 @@ export function relateItem(rootDir, id, options = {}) {
 export function rebuildTracker(rootDir, options = {}) {
   const ctx = context(rootDir);
   const inventory = loadInventory(ctx);
-  const content = serialize(buildProjection(inventory, ctx));
+  const view = buildProjection(inventory, ctx);
+  const content = serialize(view);
   const relative = ctx.declared.projection;
   if (options.check) {
     const entry = lstatOrNull(ctx.projection);
     const current = entry?.isFile() && !entry.isSymbolicLink() ? fs.readFileSync(ctx.projection, 'utf8') : null;
+    if (ctx.declared.markdown && (!fs.existsSync(path.join(ctx.root, ctx.declared.markdown)) || fs.readFileSync(path.join(ctx.root, ctx.declared.markdown), 'utf8') !== renderTrackerMarkdown(view, ctx.declared))) refuse('projection-drift', 'TRACKER.md does not match its records');
     if (current !== content) refuse('projection-drift', `${relative} does not match a rebuild from the records; run rebuild (never hand-edit the projection).`, { projection: relative });
     return { status: 'current', projection: relative };
   }
   preflight(ctx, ctx.projection);
+  if (ctx.declared.markdown) preflight(ctx, path.join(ctx.root, ctx.declared.markdown));
   safeWrite(ctx, ctx.projection, content);
+  writeMarkdown(ctx.root, view);
   return { status: 'rebuilt', projection: relative, questions: inventory[QUESTIONS].size, landmarks: inventory[LANDMARKS].size };
 }
 
@@ -1302,10 +1338,11 @@ const OPTIONS = Object.freeze({
   link: { positional: true, flags: ['landmark', 'expect-revision', 'reason'], required: ['landmark', 'expect-revision'] },
   relate: { positional: true, flags: ['item', 'expect-revision', 'reason', 'assess', 'basis', 'evidence'], required: ['item', 'expect-revision'] },
   rebuild: { positional: false, flags: [], booleans: ['check'] },
-  show: { positional: 'optional', flags: [] }
+  show: { positional: 'optional', flags: [], booleans: ['committed'] },
+  action: { positional: 'optional', flags: [], booleans: ['stdin'] }
 });
 
-export const USAGE = 'Usage: landmark-tracker.mjs capture|add-landmark|revise ID|link ID|relate ID|rebuild|show [ID] [options] [--json] [--path DIR] (see workbench/landmark-tracker/README.md)';
+export const USAGE = 'Usage: landmark-tracker.mjs capture|add-landmark|revise ID|link ID|relate ID|rebuild|show [ID]|action [ID] --stdin [options] [--json] [--path DIR] (see https://github.com/KaydenClark/skills/blob/2f9d45a6004a4a54df33d35d1df914f2074cdf46/setup-workbench/references/dqc.md)';
 
 export function parseArgs(argv) {
   const [command, ...rest] = argv;
@@ -1344,7 +1381,8 @@ export function runCommand(rootDir, command, id, options) {
   if (command === 'link') return linkLandmark(rootDir, id, options);
   if (command === 'relate') return relateItem(rootDir, id, options);
   if (command === 'rebuild') return rebuildTracker(rootDir, options);
-  if (command === 'show') return showTracker(rootDir, id);
+  if (command === 'show') return options.committed ? committedView(rootDir, id, showTracker) : showTracker(rootDir, id);
+  if (command === 'action') { if (!options.stdin) refuse('invalid-invocation', 'action requires --stdin JSON input'); return applyAction(rootDir, id, JSON.parse(fs.readFileSync(0, 'utf8')), { validate: validateQuestion, rebuild: rebuildTracker, show: showTracker }); }
   throw new TrackerRefusal('invalid-invocation', USAGE);
 }
 
@@ -1357,11 +1395,11 @@ if (isMainModule(import.meta.url)) {
     command = parsed.command;
     const root = findRoot(parsed.options.path ?? process.cwd());
     const { path: _path, json: _json, ...options } = parsed.options;
-    const result = runCommand(root, command, parsed.id, options);
+    const result = command === 'show' || command === 'action' ? runCommand(root, command, parsed.id, options) : withTrackerLock(root, () => runCommand(root, command, parsed.id, options));
     process.stdout.write(json ? `${JSON.stringify(result)}\n` : `${formatResult(command, result)}\n`);
   } catch (error) {
     const known = error instanceof TrackerRefusal;
-    const failure = { status: 'blocked', error: { code: known ? error.code : 'tracker-failure', message: error.message, ...(known ? error.details : {}) } };
+    const failure = { status: 'blocked', error: { code: error.code ?? 'tracker-failure', message: error.message, ...(known ? error.details : {}) } };
     if (json) process.stdout.write(`${JSON.stringify(failure)}\n`);
     else process.stderr.write(`blocked (${failure.error.code}): ${failure.error.message}\n`);
     process.exitCode = 1;

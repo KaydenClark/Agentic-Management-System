@@ -5,9 +5,11 @@ sensitivity: normal
 knowledge_role: canonical
 provenance:
   - LLM Workbench template wiki
+  - Kayden's Wiki governance-stack definitions and ordering, 2026-11-04
 source_paths:
   - workbench/wiki
-last_verified: 2026-11-01
+  - GLOSSARY.md
+last_verified: 2026-11-04
 ---
 
 # Wiki Schema and CRUD Contract
@@ -28,26 +30,69 @@ This evolving synthesis is agent-written Markdown: summaries, entity pages,
 concept pages, comparisons and an overview, plus small source-linked jots with
 clearly labeled intent, findings, proposals and unresolved questions. A cold
 start retrieves relevant context rather than loading the corpus. Progress
-explanations link to live owners instead of copying Task rows or Spec evidence.
+explanations link to live owners; a Spec's or Landmark's history (closes,
+verdicts, approvals, corrections) is owned by its `history/<ID>.md` page.
 Legacy notepads remain readable sources and structured domain stores.
 
-In Governance Plane terms a wiki page is Enduring Context, this schema is
-Canon, and the wiki's raw sources are the claims that played the Actuality
-role relative to the target in the operation just performed. Destination
-Question Cards and landmark records keep the structured account with its
-lineage and identifiers; the wiki is what they are summarized into, updated
-whenever a card changes.
-
-The wiki is not a Governance Plane and owns none. A note may document
-Grounding or Enduring Context. A governing artifact may have a role as a whole
-while its supporting claims remain distinct; a folder or role label grants no
-instruction authority. Wiki content cannot
-authorize a change to Actuality; only the current user request, `AGENTS.md`,
-and the explicitly assigned spec instruct.
+Destination Question Cards and landmark records keep the structured account
+with its lineage and identifiers; the Wiki synthesizes their claims and is
+updated whenever a card changes. Live work state and proof retain their owners.
 
 A recall/search index is derived from named sources and remains rebuildable;
 it neither owns Wiki knowledge nor supplies authority. No recall database or
 additional index service is required by this boundary.
+
+## Governance Stack
+
+The [glossary](../../GLOSSARY.md#governance-core) owns these definitions;
+the [governance article](vocabulary-governance-core.md#governance-stack)
+preserves the owner's correction, rationale and examples.
+
+Governance planes classify claims within an artifact relative to a target
+and operation. An artifact may contain claims on several planes, or only
+claims on one plane; never assign a plane from its filename or folder.
+Always present the stack in the following descending order, or its exact
+ascending reverse, retaining the numbers in either direction:
+
+| Plane | Meaning |
+|---|---|
+| 6. Projection | A snapshot summary of each plane's claims as of the last time we were there. It reports that observed state, not guaranteed current truth. |
+| 5. Intent | What the owner wants, with reasons, boundaries, corrections and confirmation status. |
+| 4. Enduring Context | Our knowledge: what we know about what exists; what Canon and Grounding say exists or should change; and what we know about Intent and what to do with it. |
+| 3. Grounding | The evidence and proofs used to establish and support the authoritative source of truth. |
+| 2. Canon | The authoritative source of truth for the target: what governs. |
+| 1. Actuality | What exists and is being worked on. |
+
+### Working Down And Back Up
+
+Downward use follows **6 → 5 → 4 → 3 → 2 → 1**. The owner views a Projection
+and develops Intent. Capture that Intent and update Enduring Context before
+dependent work. Use that knowledge to create or review Grounding for changes
+to Canon and Actuality. Within existing authority, change Canon based on what
+is known and proven, then change Actuality based on Canon, Grounding and
+understood Intent. Recheck relevant sources first; a Projection can be stale.
+
+Upward use follows **1 → 2 → 3 → 4 → 5 → 6**. After changing Actuality,
+reconcile Canon if the work reveals a needed correction, record the evidence
+and proofs from the work as Grounding, and update Enduring Context with what
+now exists, what Canon says and what the new evidence suggests. Record whether
+the Intent was delivered, partly delivered or not delivered, retaining the
+original desired outcome and confirmation history. Then project the results,
+including the source revision or observation time and unresolved gaps.
+
+These are directions for using the stack, not six mandatory files, sections
+or approval gates. Revisit a plane as evidence changes. Numbering expresses
+the owner's traversal order; it does not resolve conflicting claims by rank.
+Investigate discrepancies, preserve uncertainty and repair the appropriate
+owner within the operation's authority. Actuality alone cannot redefine
+Canon, and Canon alone cannot prove Actuality.
+
+The Wiki is not itself a Governance Plane. Its summaries, knowledge,
+captured evidence and governing schema claims retain their respective claim roles.
+Capture, confirmation and Projection do not promote a claim into Canon,
+prove implementation or authorize execution. A delivered-intent report does
+not establish owner acceptance or Human QA. Only the current user request,
+`AGENTS.md` and the explicitly assigned spec instruct within their scope.
 
 ## Profile And Collections
 
@@ -61,7 +106,9 @@ additional index service is required by this boundary.
 
 Declared collections are `design-concepts/` (required to exist, may be empty),
 `features/` (the maintained Feature catalog; capture at completion and update
-the owning capability article as knowledge changes; additive, may be empty), `guidebooks/` (ordered procedures), and
+the owning capability article as knowledge changes; additive, may be empty),
+`history/` (one append-only `history/<ID>.md` page per Spec or Landmark, type
+`history`, written by the native lifecycle tools; additive, may be empty), `guidebooks/` (ordered procedures), and
 `archive/` (historical, generated, superseded, and migration evidence). Every
 collection is flat; only `archive/` may nest. `MEMORY.md` is the only router.
 
@@ -195,6 +242,8 @@ last_verified: YYYY-MM-DD
 - Start at `MEMORY.md` and follow the smallest relevant link. Traverse first;
   search only when a route is missing, stale, or under explicit maintenance.
 - Current work requires the live controls or verified runtime, never a note.
+- Treat a Projection as a snapshot. Follow its sources and check relevant
+  revisions before relying on it for current work.
 - Read `archive/` only for a targeted historical or provenance need.
 - Restricted notes are opt-in and must be relevant to the user's request.
 
@@ -209,12 +258,18 @@ last_verified: YYYY-MM-DD
   page references an identifier without the artifact's name or title and a
   little context about what it is for.
 - Update the owning note rather than appending a second version elsewhere.
+- Apply the [Governance Stack](#governance-stack) in either direction, keeping
+  claim roles, confirmation and delivery status distinct. Reconcile new Intent
+  before dependent work and refresh knowledge and affected Projections after it.
+- Give Projections source revisions or observation times and preserve gaps;
+  a page's `last_verified` date does not certify every summarized claim.
 - Refresh `last_verified` only for facts actually checked in the current task.
 - Label inferred claims with `Inference:` and dated claims with their date.
 - Preserve unresolved contradictions explicitly until a higher-authority
   source is verified.
-- Never copy live task rows, spec evidence, or generated Taskboard state into
-  a note; link to the owner instead.
+- Never copy live task rows or generated Taskboard state into a note; link to
+  the owner instead. Spec and Landmark history belongs in `history/<ID>.md`,
+  which the native tools append to.
 
 ## Lint
 
@@ -225,6 +280,12 @@ pages against the changed controls. Broaden semantic review only where the
 change reaches further pages; ordinary wording does not require rereading
 all articles. Keep necessary corrections in the current Task; a new outcome
 needs scope authority. A green validator is not semantic proof.
+
+For affected claims, check that Projection snapshots, Intent, Enduring
+Context, Grounding, Canon and Actuality remain distinguishable and any stack
+listing follows 6 → 1 or 1 → 6. Check evidence coverage, authoritative owners,
+snapshot freshness and delivered-intent claims against the actual work.
+Do not silently turn a summary, desired outcome or inference into proof or Canon.
 
 ## Concurrency
 

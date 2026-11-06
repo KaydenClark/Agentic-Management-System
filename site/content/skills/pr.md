@@ -1,7 +1,7 @@
 ---
 name: pr
 summary: Writes a pull request body that reviewers can absorb fast, with a small visual, before-and-after evidence and an honest note on how risky the merge is.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's pr skill](https://github.com/mattpocock/skills), MIT License. Its Summary visuals come from the `show-me` skill by [Dex Horthy](https://github.com/dexhorthy) (HumanLayer) and are carried over nearly unchanged. The glossary reference now points at the project's own glossary, and the credits metadata was reformatted.
 credit_license: MIT
@@ -39,7 +39,7 @@ Put each visual beside the short text it supports. Cut everything that does not 
 
 ## When to use it
 
-Reach for it when you are about to write or rewrite a PR description. Two neighbouring skills point to it: `journey` uses it when a merge-request body with before-and-after evidence and risks is requested, and `land` uses it at its publish step when a PR is requested.
+Reach for it when you are about to write or rewrite a PR description. Two neighboring skills point to it: `journey` uses it when a PR body with before-and-after evidence and risks is requested, and `land` uses it at its publish step when a PR is requested.
 
 A **Task** is one assigned unit of work in a Workbench, the project's record system for Specs and Tasks.
 
@@ -80,7 +80,7 @@ The skill lists a screenshot for visual changes, then test results or console ou
 
 ### The change touches many files. Do I include every visual?
 
-No. The skill expects you to choose, and says using all of them is unlikely. For a broad refactor a shallow file tree usually carries the point; for a small logic change a short diff does. An overloaded Summary defeats the purpose of making the PR quick to review.
+No. The skill expects you to choose, and says using all of them is unlikely to help. For a broad refactor a shallow file tree usually carries the point; for a small logic change a short diff does. An overloaded Summary defeats the purpose of making the PR quick to review.
 
 ### How do I decide between one-way and two-way?
 
@@ -97,4 +97,4 @@ Ask whether the change can be walked back after merging. Destructive actions and
 
 ## Where it fits in the workflow
 
-`pr` is a supporting skill in the **Journey** stage (build each Task), outside the main flow of `carry`, `orchestrate` and `journey`. [journey](/skills/journey) calls it when a merge-request body is wanted at submit time, and [land](/skills/land), in the **Complete** stage, calls it when publishing a PR. It hands the finished body back to whichever skill is publishing, and the project's rules decide what happens next. Independent review of the result belongs to [code-review](/skills/code-review).
+`pr` is a supporting skill in the **Journey** stage (Build each Task), outside the main flow of `carry`, `orchestrate` and `journey`. [journey](/skills/journey) calls it when a PR body is wanted at submit time, and [land](/skills/land), in the **Complete** stage, calls it when publishing a PR. It hands the finished body back to whichever skill is publishing, and the project's rules decide what happens next. Independent review of the result belongs to [code-review](/skills/code-review).

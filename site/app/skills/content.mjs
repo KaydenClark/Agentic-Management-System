@@ -14,7 +14,7 @@ import { inlineText, parseInline, parseMarkdown, slug } from './markdown.mjs';
 
 // The skills repository commit every article is derived from (owner,
 // 2026-11-01). A later pin updates the affected articles.
-export const SKILLS_PIN = '878241202bf7ec97c0952287f1633f6f0ddf1a6e';
+export const SKILLS_PIN = 'fb7ad23c963e183b930b23bc5fdf4d309dff292a';
 export const SKILLS_PIN_SHORT = SKILLS_PIN.slice(0, 7);
 export const ORIGINAL_CREDIT = 'Original to Kayden Clark.';
 
@@ -29,7 +29,7 @@ export const FAQ_RANGE = [3, 6];
 // Site routes an article may link besides /skills/<name>: the reading order
 // of app/nav.ts (a test keeps the two equal; nav.ts is TypeScript, which
 // this plain module cannot import).
-export const SITE_ROUTES = ['/', '/start', '/why', '/how-it-works', '/skills', '/quickstart', '/rsi', '/glossary', '/about'];
+export const SITE_ROUTES = ['/', '/start', '/why', '/how-it-works', '/grill-board-demo', '/skills', '/rsi', '/glossary'];
 // The skills repository is private: a link to it is a 404 for readers.
 export const PRIVATE_SKILLS_REPO = /github\.com\/KaydenClark\/skills(?![\w.-])/i;
 

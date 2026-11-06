@@ -1,7 +1,7 @@
 ---
 name: land
 summary: Gets finished work safely onto its target branch, fixes what blocks the merge, proves the result, and cleans up with guards.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Combines Kayden Clark's combat-medic Land skill with the Workbench delivery path. Tree verification, worktree provenance, refused-removal handling and explicit-request-only discard are adapted from [obra/superpowers finishing-a-development-branch](https://github.com/obra/superpowers/tree/2ce8aa15d05bd57213e6f746f953aafb7ded7a8b/skills/finishing-a-development-branch) by Jesse Vincent, MIT License. That source's fixed option menu and unconditional local merge are not kept.
 credit_license: MIT
@@ -9,11 +9,13 @@ credit_license: MIT
 
 ## What it does
 
+For a Workbench Spec, dated events and corrections are kept on its Wiki history page. The Spec retains its destination and next gate.
+
 `land` carries finished work to the branch it belongs on and proves it arrived. It also repairs what stands in the way: unsaved changes, conflicts, a stale branch, a moved commit, or records that disagree with the code.
 
 A **Workbench** is the project scaffolding the catalog's skills run on: a manifest, records for each **Spec** (a described destination) and **Task** (one unit of work toward it), and a CLI. Permissions come from the owner's real grants, never from files on the candidate.
 
-Its core ideas:
+Four ideas shape how `land` works:
 
 - **Candidate and target.** The *candidate* is the branch plus its full commit SHA, since names move. The *target* is where it lands, normally `main`, matched to the pull request's real base.
 - **Endpoint.** Each run names where it stops: **Check** (a read-only answer to "will this merge?"), **Publish** (committed, pushed, PR opened or updated), **Land** (the target contains the candidate and records are reconciled), **Release** (only where the project reserves it for the owner), or **Clean up**. A run that edited anything must at least commit and push, and may not leave work local or stashed.
@@ -46,7 +48,7 @@ Every run ends with a receipt: outcome, what was wrong, changes, verification, a
 
 Reach for `land` when the work is built and the question is delivery: "land this", "will this merge?", a merge error, unpushed work, or a branch that moved under you.
 
-Under the default policy, where feature branches merge straight into `main`, being asked to do the work already covers merging its own PR once it is current and required checks pass.
+Under the default policy, where feature branches merge straight into `main`, a request to do the work already covers merging its PR once the branch is current and required checks pass.
 
 | What you have | Reach for |
 |---|---|
@@ -60,7 +62,7 @@ Under the default policy, where feature branches merge straight into `main`, bei
 
 > My feature branch has two uncommitted files, and main has moved since I branched. Land this on main, and tell me honestly if anything blocks it.
 
-`land` would commit and push your two files first, simulate the merge against the fetched `main`, and list every conflicted path before editing. Conflicts go to the conflict skill, then checks rerun on the updated head. A failing test caused by your own logic goes back to the implementor.
+`land` would commit and push your two files first, simulate the merge against the fetched `main`, and list every conflicted path before editing. Conflicts go to [resolving-merge-conflicts](/skills/resolving-merge-conflicts), then checks rerun on the updated head. A failing test caused by your own logic goes back to the implementor.
 
 ## What it requires
 
@@ -77,7 +79,7 @@ Under the default policy, where feature branches merge straight into `main`, bei
 - **No self-review.** It never reviews work it built or repaired, and a repair after review voids that review.
 - **No bypasses.** No admin merges, skipped protection or review holds, or merging failing work just to keep it safe.
 - **No history surgery.** No force-pushes, shared-history rebases, stash, reset or clean to tidy a tree, and no branch renames.
-- **No unrequested deletion.** Unmerged work goes only on explicit owner request, risks listed first.
+- **No unrequested deletion.** Unmerged work is deleted only on the owner's explicit request, with the risks listed first.
 
 ## FAQs
 
@@ -87,11 +89,11 @@ Green proves only the tree that was tested. If the candidate moved, the target a
 
 ### Why won't it clean up my worktree?
 
-Cleanup runs only after the target is proven to contain the merged commit, and even then it is cautious. A clean status does not prove removal is safe, since removal silently destroys ignored files and some index flags hide changed ones. Those, an active writer, an unknown owner, or a host-created checkout make it keep the worktree and say why. Preserve or explicitly discard the contents, then retry.
+Cleanup runs only after the target is proven to contain the merged commit, and even then it is cautious. A clean status does not prove removal is safe, since removal silently destroys ignored files and some index flags hide changed ones. Any of those, or an active writer, an unknown owner or a host-created checkout, makes it keep the worktree and say why. Preserve or explicitly discard the contents, then retry.
 
 ### What if the same verification fails twice?
 
-With no clearly safe next step, that is a hard stop. The skill records the blocker and the decision it needs instead of looping or weakening the check. Failed required review, new logins, irreversible remote deletion, credentials in the diff and unknown ownership also stop it.
+If there is no clearly safe next step, that is a hard stop. The skill records the blocker and the decision it needs instead of looping or weakening the check. Failed required review, new logins, irreversible remote deletion, credentials in the diff and unknown ownership also stop it.
 
 ### What if I can't run the checks safely here?
 

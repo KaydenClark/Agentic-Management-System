@@ -1,7 +1,7 @@
 ---
 name: oracle
 summary: Have an agent judge your idea, claim or question as a skeptical domain expert, with evidence for its verdict and a plain statement of where you are wrong.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: original
 credit_text: Original to Kayden Clark.
 ---
@@ -34,7 +34,7 @@ Each issue follows with its evidence and the agent's confidence, with factual er
 Reach for Oracle when you want to be told where you are wrong, not helped to build the thing: a design claim you are about to commit to, a diagnosis you doubt, or a question that may point at the wrong target. An owner or an agent can call it. It gives a bounded judgment, though it may ask a clarifying question first.
 
 | What you have | Reach for |
-| --- | --- |
+|---|---|
 | A known problem needing a cause, or a specific fix you want proven right or wrong | [diagnose-and-propose](/skills/diagnose-and-propose) |
 | Doubt about the question or idea itself | Oracle |
 | A plan you want questioned until you and the agent share one understanding | [grilling](/skills/grilling) |
@@ -55,9 +55,9 @@ Very little. The verdict is only as good as the primary evidence, observed behav
 
 ## What it does not authorize
 
-The skill states two limits. Running it gives no right to implement anything or to edit project records, so the agent answers where you asked and stops at the verdict. Separately approved work can continue within its own scope, but the Oracle run adds nothing to it. And it leaves your open choices open.
+The skill states two limits. First, running it gives no right to implement anything or to edit project records, so the agent answers where you asked and stops at the verdict. Separately approved work can continue within its own scope, but the Oracle run adds nothing to it. Second, it leaves your open choices open.
 
-A consequence for you, not a statement from the skill: a supported verdict judges evidence. Do not read it as approval to merge, publish or deploy, or as a substitute for a review your project requires.
+One consequence follows for you, though the skill does not spell it out: a supported verdict judges evidence. Do not read it as approval to merge, publish or deploy, or as a substitute for a review your project requires.
 
 ## FAQs
 

@@ -9,7 +9,7 @@
 // The four signals /start uses, each with its one meaning (DDR-000M) and the
 // tokens.css hue class that carries it (DDR-000Y). Nothing else is coloured.
 export const HOLDERS = {
-  owner: { label: "Kayden", ball: "Kayden has the ball", meaning: "Blue: it waits on the owner, Kayden.", hue: "h-owner" },
+  owner: { label: "Owner", ball: "The owner has the ball", meaning: "Blue: it waits on the owner.", hue: "h-owner" },
   agent: { label: "Agents", ball: "Agents have the ball", meaning: "Green: agents carry it.", hue: "h-agent" },
   returned: { label: "Returned", ball: "Returned for rework", meaning: "Purple: it came back for rework.", hue: "h-returned" },
   done: { label: "Done", ball: "Done: nothing waits on anyone", meaning: "Grey: done, nothing for you here.", hue: "h-none" },
@@ -50,7 +50,7 @@ export const stages = [
     id: "ask",
     name: "Ask",
     holder: "owner",
-    line: "Kayden asks for a change and says why.",
+    line: "The owner asks for a change and says why.",
     sources: [src.runbook, src.blueprint],
     next: { label: "Next: an agent reads it back", to: "readback" },
   },
@@ -60,13 +60,13 @@ export const stages = [
     holder: "agent",
     line: "An agent writes the request down and reads it back: the idea, the direction, the cost, the reason and what will be made.",
     sources: [src.ddr000G, src.runbook],
-    next: { label: "Next: Kayden confirms", to: "confirm" },
+    next: { label: "Next: the owner confirms", to: "confirm" },
   },
   {
     id: "confirm",
     name: "Confirm",
     holder: "owner",
-    line: "Kayden confirms what it means and approves the scope. Nothing is planned or built before this.",
+    line: "The owner confirms what it means and approves the scope. Nothing is planned or built before this.",
     sources: [src.ddr000G, src.ddr000H],
     next: { label: "Next: write the Spec", to: "spec" },
   },
@@ -123,10 +123,10 @@ export const stages = [
     id: "approve",
     name: "Approve",
     holder: "owner",
-    line: "Kayden looks at the result and approves it, or sends it back saying what is wrong. For this site, only he moves work live.",
+    line: "The owner looks at the result and approves it, or sends it back saying what is wrong. For this site, only the owner moves work live.",
     sources: [src.ddr000F, src.ddr000H],
-    next: { label: "Kayden approves", to: "done" },
-    back: { label: "Kayden sends it back", to: "returned" },
+    next: { label: "The owner approves", to: "done" },
+    back: { label: "The owner sends it back", to: "returned" },
   },
   {
     id: "returned",
@@ -152,19 +152,19 @@ export const firstStage = stages[0];
 export const lastStage = stages[stages.length - 1];
 export const stageById = (id) => stages.find((s) => s.id === id) ?? firstStage;
 
-// What the owner does beyond the lifecycle stages he holds.
+// What the owner does beyond the lifecycle stages they hold.
 export const ownerAlso = [
-  { line: "Approves an improvement campaign once: its budget, round cap and stop rule. He does not approve every merge.", sources: [src.adr003F] },
+  { line: "Approves an improvement campaign once: its budget, round cap and stop rule. The owner does not approve every merge.", sources: [src.adr003F] },
 ];
 
 // What agents do beyond the lifecycle stages they hold.
 export const agentsAlso = [
-  { line: "Merge work that is not deployed into main themselves, once checks pass.", sources: [src.ddr000H, src.adr003F] },
+  { line: "Merge non-site work into main themselves, once checks pass.", sources: [src.ddr000H, src.adr003F] },
 ];
 
 // The three orchestrators, all Claude, split by risk (ADR-002Z).
 export const orchestrators = [
   { id: "A", name: "Website", does: "Builds this site; reaches the web host only by pushing to dev.", never: "Browses the web." },
-  { id: "B", name: "Grill Board and RSI loop", does: "Runs the local Grill Board, the Python backend and the database keys on Kayden's own machine.", never: "Deploys anything." },
+  { id: "B", name: "Grill Board and RSI loop", does: "Runs the local Grill Board, the Python backend and the database keys on the owner’s local machine.", never: "Deploys anything." },
   { id: "C", name: "Coherence", does: "Checks the project stays true to its Specs, reviews Specs and does web research.", never: "Holds secrets or writes product code." },
 ];

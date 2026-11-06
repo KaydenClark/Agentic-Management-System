@@ -1,7 +1,7 @@
 ---
 name: domain-modeling
 summary: Sharpens your project's vocabulary and concepts by challenging terms, testing edge cases and checking code, then records confirmed definitions in the glossary.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's domain-modeling skill](https://github.com/mattpocock/skills) (MIT License, upstream revision d81f3a183412e71a5b1e84ca21bc1a35eea03a60), with a local decision-record template added. The glossary format file follows upstream, with a short note added above it.
 credit_license: MIT
@@ -23,13 +23,13 @@ The agent works through five moves:
 
 When you do explicitly confirm a term's definition, the agent updates `GLOSSARY.md` right then, without waiting for the session to end or asking again. It reads the current file first so other entries and concurrent edits survive, follows the bundled format, then reads the saved entry back. If the write fails, it keeps your claim and tells you the entry is unsaved.
 
-The format is opinionated: a sentence or two per term, an `_Avoid_` list of rejected synonyms, and only project-specific terms. Several contexts get a `GLOSSARY-MAP.md`; if no glossary exists, one is created when the first term is resolved.
+The format is opinionated: a sentence or two per term, an `_Avoid_` list of rejected synonyms, and only project-specific terms. A project with several contexts gets a `GLOSSARY-MAP.md`; if no glossary exists, one is created when the first term is resolved.
 
 ## When to use it
 
 Use it when you are reworking terminology or a concept: two words for one thing, one word for two things, a boundary that keeps moving, or a name you are about to commit to. It is optional: you or a calling skill invoke it, often beside [grilling](/skills/grilling), which finishes fine without it.
 
-Inside a grilling or [align-docs](/skills/align-docs) interview, it folds its challenges into that interview's question tree, defers dependent questions, and keeps interviewing instead of implementing. Otherwise it asks one question at a time. align-docs reads this skill before editing domain terms or decision records.
+Inside a grilling or [align-docs](/skills/align-docs) interview, it folds its challenges into that interview's question tree, defers dependent questions, and keeps interviewing instead of implementing. Otherwise it asks one question at a time. `align-docs` reads this skill before editing domain terms or decision records.
 
 | What you have | Reach for |
 |---|---|
@@ -64,7 +64,7 @@ If a change turns out to be material, the agent keeps your confirmed intent, rec
 
 ## Decision records, offered sparingly
 
-A decision record (called CDR, ADR or DDR; the same thing) holds the rationale behind a choice. The agent offers one only if the choice is hard to reverse, would surprise a future reader, and came from a real trade-off with genuine alternatives. If any test fails, it skips the record and says which one.
+A decision record (also called a CDR, ADR or DDR) holds the rationale behind a choice. The agent offers one only if the choice is hard to reverse, would surprise a future reader, and came from a real tradeoff with genuine alternatives. If any test fails, it skips the record and says which one.
 
 Offering is not writing. After you accept, the agent links an existing record if the index already has one; otherwise it writes a numbered record in the Workbench's decision collection, adds it to the index and reads both back. A record stays `proposed` until its cited source supports acceptance. To change a decision, it writes a new record and marks the old one superseded.
 
@@ -84,11 +84,11 @@ No. It names the kind of mismatch it found. When the order is unclear, it report
 
 ### Why did it decline to write a decision record?
 
-One of the three tests failed, and it should say which. The agent skips the record rather than writing one that does not qualify.
+One of the three tests failed, and the agent names which one. The agent skips the record rather than writing one that does not qualify.
 
 ### My project already keeps terms in another file. Will it make a new one?
 
-It should not. An existing glossary is updated in place. If the agent proposes a parallel file anyway, point it at the existing one.
+No. An existing glossary is updated in place. If the agent proposes a parallel file anyway, point it at the existing one.
 
 ## It's working when
 

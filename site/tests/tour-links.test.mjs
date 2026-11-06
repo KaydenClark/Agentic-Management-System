@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { builtPage, builtPages, siteDir } from './helpers.mjs';
-import { routeOf } from '../scripts/draft-marks.mjs';
+import { routeOf } from '../scripts/page-hash.mjs';
 import { READING_ORDER, builtName, childProblems, mainOf, orderProblems } from './tour-helpers.mjs';
 
 const nav = (links) => `<nav aria-label="Page order">${links}</nav>`;
@@ -72,4 +72,13 @@ test('internal links on tour pages resolve to a built page or an id on the page'
       assert.ok(built.has(builtName(path === '' ? href : path)), `${href}: link ${target} has no built page`);
     }
   }
+});
+
+test('the older About route must preserve the canonical introduction rather than become an orphan', () => {
+  const start = builtPage('start.html').html;
+  const about = builtPage('about.html').html;
+  const parents = new Map([['/start', start]]);
+  assert.deepEqual(childProblems('/about', about, parents), []);
+  assert.ok(childProblems('/about', about.replace('aria-current="page"', ''), parents).length);
+  assert.ok(childProblems('/about', about.replace('<h1>About</h1>', '<h1>Different</h1>'), parents).length);
 });

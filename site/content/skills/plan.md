@@ -1,13 +1,15 @@
 ---
 name: plan
 summary: Splits an agreed destination into Tasks that each fit one run and cross every layer, with honest dependencies and a start-now list, saved as TASK.md files.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's To Tickets skill](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/to-tickets), MIT License, reshaped for single-run TASK.md records, a generated TASKBOARD, authority and retention rules. It also absorbs the earlier tracer-bullet, to-tasks and to-tickets skills.
 credit_license: MIT
 ---
 
 ## What it does
+
+For a Workbench Spec, dated events and corrections are kept on its Wiki history page. The Spec retains its destination and next gate.
 
 `plan` takes a destination someone has already accepted (a Spec, an issue, a written plan, or a conversation that ended in agreement) and cuts it into **Tasks** an agent can pick up. A **Task** is one assignment sized for a single implementor run: recover the source, build, check, run QA, repair, and report back (the **hand-back**). A **Spec** is the long-lived record of where the work is going and what counts as done. The Spec keeps the goal; a Task is disposable scaffolding. Both live in a **Workbench**, the folder of Specs, Tasks and generated tracker files that the catalog's skills share.
 
@@ -30,7 +32,7 @@ Key terms:
 
 Name each Task for what someone can observe, such as saving a record and reading it back, not for a layer. Each should be demoable alone, with a quick check run through the entry point a real caller uses (the **public seam**), the way [tdd](/skills/tdd) tests behavior. The opening Task is a thin working path; later Tasks extend it one behavior at a time.
 
-Prefactoring (a prep change that alters no behavior) and wide mechanical refactors are exempt. They pass on unchanged behavior and green CI, and a wide refactor runs in steps: add the new form, migrate callers in batches, remove the old one.
+Prefactoring (a prep change that alters no behavior) and wide mechanical refactors are exempt from the demoable-slice rule. They pass on unchanged behavior and green CI, and a wide refactor runs in steps: add the new form, migrate callers in batches, remove the old one.
 
 ## When to use it
 
@@ -48,7 +50,7 @@ Reach for `plan` when the destination is settled and you need work an agent can 
 
 ## Example request
 
-> The checkout Spec is accepted. Break S-004 into Tasks. Start with one demoable path from cart to saved order, keep the blockers honest, and show me the breakdown before you write any records.
+> The checkout Spec is accepted. Break it into Tasks. Start with one demoable path from cart to saved order, keep the blockers honest, and show me the breakdown before you write any records.
 
 The skill maps the layers checkout crosses, proposes a numbered breakdown with titles, blockers, delivered behavior and sizing rationale, and holds there for your go-ahead, as you asked.
 
@@ -90,7 +92,7 @@ No. It returns pointers, the ready frontier, open choices and the next action, t
 
 ### Can I retire or delete a Task I no longer want?
 
-Not freely. The skill preserves a record's history and repairs anything that depends on it, using only supported lifecycle operations. The inspected runtime has no generic way to discard an incomplete run or rewrite dependencies, so the record stays and the limit is reported.
+Not freely. The skill preserves a record's history and repairs anything that depends on it, using only supported lifecycle operations. The current Workbench runtime has no generic way to discard an incomplete run or rewrite dependencies, so the record stays and the limit is reported.
 
 ## It's working when
 
@@ -104,6 +106,6 @@ Not freely. The skill preserves a record's history and repairs anything that dep
 
 ## Where it fits in the workflow
 
-`plan` sits in the **Prepare** stage (Map and Plan), the second half of it. [map](/skills/map) comes first and describes the destination that `plan` cuts into Tasks. Earlier, the Align stage ([grilling](/skills/grilling), [readback](/skills/readback)) settles a destination that is not yet agreed.
+`plan` is the second half of the **Prepare** stage (Map and Plan). [map](/skills/map) comes first and describes the destination that `plan` cuts into Tasks. Earlier, the Align stage ([grilling](/skills/grilling), [readback](/skills/readback)) settles a destination that is not yet agreed.
 
 From `plan`, work moves to the Journey stage, where [carry](/skills/carry), [orchestrate](/skills/orchestrate) and [journey](/skills/journey) run the ready Tasks. Results flow back into the Spec, and follow-up work becomes a new bounded Task under the same Spec.

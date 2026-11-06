@@ -1,0 +1,52 @@
+---
+type: guidebook
+status: active
+sensitivity: normal
+knowledge_role: curated
+provenance:
+  - TK-002M Stage A source inspection, 2026-11-04
+source_paths:
+  - src/ams/trial_runtime.py
+  - src/ams/trial_campaign.py
+  - src/ams/assessment_store.py
+  - evals/ASSESSMENTS.md
+last_verified: 2026-11-04
+---
+
+# RSI worker, recovery and checkpoint contracts
+
+[S-000B](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-000B-rsi-worker/SPEC.md) owns execution; [S-006](../../landmarks/LMK-002-rsi-presentation/specs/S-006-rsi-data-store/SPEC.md) owns durable truth. Worker/RPC/schema availability remains unproven. Stage A used no database, credential or model call.
+
+## Verified source seams and gaps
+
+At main `cfc0bc4c7f2cd167cea2972016edee076b479b73`, `trial_campaign.Campaign.run_one` journals before one released slot, refuses an attempted slot and requires its predecessor. It is not a durable multiworker scheduler. `trial_runtime.ClaudeAdapter` explicitly requires empty tools/MCP and rejects native tool use. Private source packs prove no native discovery/installation. Do not change its stopped protocol.
+
+`assessment_store.py` and its exact-artifact migration preserve immutable canonical TEXT plus identity projection and predecessor digest, expected-head append, matching-prefix resume and divergent-prefix refusal. Existing scorer/store tests cover typed JSON identity, skipped/reset/fourth attempt rejection and duplicate artifacts. They do not implement the new lineage/job/export interfaces. `rsi_rows` has AMS/no-AMS/plain-instruction arms and run/result provenance; extend existing identities rather than create a competing tracker. Readback proves no qualification or benefit.
+
+## Host invocation and evidence
+
+Non-secret local help on 2026-11-04: Codex CLI `0.159.3` supports `exec --json --model MODEL -c model_reasoning_effort=EFFORT --sandbox workspace-write --cd FIXTURE --output-last-message FINAL PROMPT`; stdin `-` avoids shell-interpolated prompts. The effort key needs release-preflight validation. Claude Code `2.1.310` supports `--print --output-format stream-json --verbose --model MODEL --effort EFFORT --tools Read,Bash --allowedTools RULES --permission-mode dontAsk --permission-prompts none --strict-mcp-config --mcp-config EMPTY_JSON PROMPT`. Use the owned fixture cwd. These are unexecuted command shapes; verify tool rules and sandbox before release. Tool permission refusal stops the case, never triggers bypass flags.
+
+Do not use permission/sandbox bypass, Claude `--bare` API-auth route, fallback models, provider switching or dollar caps. Existing subscription authentication remains within the trusted harness; do not forward provider API overrides or database credentials to the case process. Native user/project discovery must remain enabled when claimed, with all loaded instructions pinned. CLI version alone proves neither authentication, subscription availability, native skill/tool execution nor loaded identity. Failed local PATH-alias creation during help is a host limitation, not a model trial.
+
+Before an authorized real-tool call, the worker owner proves sandbox/connector boundaries using synthetic canaries, validates an exact model/effort against actual runtime events, verifies binary and source hashes, and records an affirmative recent subscription-capacity observation with source/time/scope. No meter endpoint was verified in Stage A. Unknown/exhausted meter blocks new calls; resumption requires updated evidence, not another model or paid capacity. Unknown subscription cost/tokens stay null with reason/source, distinct from optional API-equivalent estimates. Mid/Small is default; High requires recorded need before freezing. Aliases prove no actual model identity.
+
+Loading requires native discovery/load evidence, source/package/installed byte identities and independent observed use/end state. Separate declared/observed paths; public exports redact host paths and private originals stay local. Missing path/version observation remains Unknown; model self-report or a declared command argument cannot fill it. Each host adapter needs its own native proof; absence of one does not block an authorized other.
+
+## Durable identity and release manifest
+
+S-006/TK-002N supplies one linked graph: original failure occurrence + source revision/correction, immutable case version/digest, candidate revision/parent, frozen comparison, run/result, disposition, adoption receipt and eligible later use. Markdown owns intake; Supabase retains safe derived fields/pointers. A failure family and recurrence occurrence are different identities. Missing origin/qualification stays missing.
+
+Before TK-002P or TK-002Q real execution, freeze campaign ID + explicit approval scope, existing Task/Spec IDs, baseline/current/candidate and skill closure identities, case/fixture + inventory/exclusions, grader/labels/qualification identities, host/binary/tools/permissions/model/effort, arms/order/repetitions/limits, usage availability and expected artifact release hashes. Bind each call to a unique execution slot. A new label/repair/campaign name does not reset the underlying failure/candidate attempt chain. Baseline is 0; candidate versions are 1–3. Worker and grader calls are separately journaled; a grader failure is neither a measured worker No nor permission to replay its worker.
+
+## Claim, effect and recovery semantics
+
+TK-002O implements atomic compare-and-swap claim with job ID, expected state version, claimant, bounded lease and fencing token. Allowed transitions distinguish ready, running, effect-uncertain, awaiting-evidence, completed, failed, blocked and stopped; they are operational states, not r1 verdicts. Expired lease transfers no permission to repeat an effect. Each side effect uses a stable effect key and intent receipt before execution, then observed remote/object identity and readback receipt after it. Duplicate intake/matching repeat return the same job/artifact; changed same-key payload refuses.
+
+On crash after success but before receipt, a fresh worker queries the authoritative effect by its key and verifies payload/hash: matching success records recovered receipt; demonstrably absent permits only the still-authorized pending action; unavailable or conflicting outcome becomes effect-uncertain/blocked. Never infer absence from a timeout. Stale fences cannot append/publish. Reserve a model slot before spawning; unknown completion consumes no new slot and cannot be rerun blindly. Retain every actual candidate attempt and partial evidence. Failed candidate three stops; baseline/transport reconciliation never erases history. Stop/approval/meter state is checked again before each new call/effect.
+
+## Safe export and restore
+
+TK-002O exports allowlisted safe lineage/job/receipt projections with schema/reader revision, export ID, namespace, exact record IDs, per-record canonical byte digest, predecessor/head, completeness boundary/counts and manifest digest. Raw assessment packets/transcripts, prompts/labels/private locators/host paths/secrets never enter Git. A redacted checkpoint restores only its declared safe projection and operational identities; unavailable private evidence remains missing and cannot be recreated or qualify a result. Complete means complete for that declared projection, not a full private evidence backup.
+
+Restore validates hashes, graph closure/counts, schema/reader, sources, namespace and expected head before writing. Empty compatible destination may reconstruct identical safe identities; matching destination is a no-op; strict matching-prefix append requires expected-head fencing and full validation. Partial, unsupported, stale-divergent, changed same-ID bytes, absent parents and private fields refuse atomically, with no overwrite, renumber or attempt reset. Outage leaves local evidence pending, unpublished. Reconcile against Supabase before replay; Git export is recovery only, never a parallel writable authority.

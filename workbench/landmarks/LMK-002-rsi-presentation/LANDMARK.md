@@ -7,7 +7,6 @@
 **Updated:** 2026-11-01
 **Catalog description:** Website pages that chart skill and build improvement from real RSI data only, read from Supabase and labeled at the strength the data supports.
 **Blockers:** none
-**Latest event:** Landmark mapped from the owner's confirmed decisions of 2026-11-01.
 **Next gate:** Task planning for S-006.
 
 ## Direction
@@ -27,6 +26,8 @@ The AMS premise, that a managed environment beats none, is a claim to test, not 
 - [ ] Every seeded row comes from a real, named source and carries a strength label (S-006).
 - [ ] The RSI chart pages exist on the `dev` deployment with an honest empty state before any data arrives (S-007).
 - [ ] Every number on those pages links to the rows that produced it, and a headline appears only from held-out tasks with an interval (S-007).
+
+History: [LMK-002 history](../../wiki/history/LMK-002.md).
 
 ## Decision Records
 
@@ -56,12 +57,6 @@ node workbench/tools/spec-workbench.mjs doctor
 ```
 
 Each reached check is confirmed against what has landed on `main` and, for pages, against the protected `dev` deployment.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Landmark mapped from confirmed owner decisions; child Specs S-006 and S-007 written as planned; a read-only Supabase baseline migration already exists | render and doctor on the mapping branch | this record | Task planning |
 
 ## Reached Result
 

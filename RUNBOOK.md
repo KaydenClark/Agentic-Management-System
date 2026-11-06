@@ -1,46 +1,65 @@
-# AMS - Runbook
-
-> Generated from LLM Workbench v3.2.2. See the `setup-workbench` skill -> Update.
+# AMS Runbook
 
 ## Get oriented
 
-1. Run `git status --short --branch`; keep others' work.
-2. Read [AGENTS](AGENTS.md), [ARCHITECTURE](ARCHITECTURE.md#routes), [GLOSSARY](GLOSSARY.md) and the relevant [Wiki](workbench/wiki/MEMORY.md).
-3. Read [TASKBOARD](TASKBOARD.md) and follow its Spec/Task owners; [S-001](workbench/specs/S-001-ams/SPEC.md) answers "Are we there yet?". Load the owning skill.
+Check branch, remotes, locks and dirt (`git status --short --branch`).
+Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
+[Wiki](workbench/wiki/MEMORY.md), both trackers, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
 
 ## Workflows
 
-1. Capture request, reasons and corrections with `jot`; requirements go in the Spec.
-2. A capability gets a Spec (`map`) and Tasks (`plan`) with observable acceptance; small edits need none. Run a Task with `journey`, coordinate with `orchestrate` ([SKILLS](workbench/docs/SKILLS.md)).
-3. Check; keep proof, failures and limits. Record [review](workbench/specs/REVIEW-RECEIPT-TEMPLATE.md) and [Human QA](workbench/specs/HUMAN-QA-RECEIPT-TEMPLATE.md) only when they happen.
-4. Deliver; update owners, run `render`, leave a [handoff](workbench/sessions/HANDOFF-TEMPLATE.md) if work remains.
+`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in their owning records.
+Run each role at its [model tier](workbench/docs/adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
 
-### RSI during website work
-
-Capture friction in a [feedback report](workbench/feedback/REPORT_FORMAT.md); test a bounded hypothesis with an [improvement record](workbench/research/IMPROVEMENT-TEMPLATE.md), eval task, result and comparison templates in [evals](evals/). Explain verified behavior with the [page template](site/PAGE-TEMPLATE.md).
-
-## Preserve knowledge as it happens
-
-Use existing topic owners; grow flat Wiki notes via [MEMORY](workbench/wiki/MEMORY.md) and its [schema](workbench/wiki/SCHEMA.md), with source, speaker, date and status.
+Use Landmark -> Spec -> Task; at most six active Landmarks. Specs need no slots;
+block Tasks only on required inputs ([ADR-003J](workbench/docs/adr/003J-limit-active-landmarks-not-specs.md)).
 
 ## Test And Build
 
-From the root: `uv run pytest` (`AMS_LIVE=1` adds live tests); `uv run ams-board` serves the [Grill Board](grill-board/README.md) on 127.0.0.1 only. Supabase (`uv run` in orchestrator B's main checkout; key never printed): `ams-keycheck` checks it; `ams-writer record-merge|readcheck SHA` (a merge), `ams-history import|readcheck` (history, idempotent); `ams-rsi`/`ams-sources livecheck` test RSI and source rules. The site key only reads. Room checks:
+Diagnose failures; use red/green/refactor when practical. Never weaken checks;
+name unavailable checks. Three strikes: run, failed test, second failed test;
+stop and report both attempts.
 
-```bash
+```sh
+uv run pytest
 node workbench/tools/spec-workbench.mjs render
 node workbench/tools/spec-workbench.mjs doctor
 node workbench/tools/spec-workbench.mjs next --json
-node workbench/tools/workbench-layout.mjs validate --project "$PWD"
+node workbench/tools/workbench-layout.mjs validate --project .
 git diff --check
+uv run ams-hygiene
 ```
 
-`render` must leave no diff, `doctor` no blocking finding. On a fresh clone at the recorded commit, rerun them and `uv run pytest`.
+Repeat on a fresh candidate checkout. `site/`: `npm run build`, `npm test`.
+Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 
-## Version control and publication
+`uv run ams-board` (loopback). Concepts: `node workbench/tools/landmark-tracker.mjs show --committed --json`; [Board procedure](grill-board/README.md). Other commands use `uv run`:
 
-Non-site work: branch, commit each step, push, PR into `main`, merge-commit once current and checked; delete the branch. Site work goes feature -> `dev` -> `main`; agents merge into `dev` once CI `site builds` passes; only the owner merges `dev` -> `main`. Report local, pushed, merged and deployed states separately.
+- `ams-keycheck`; `ams-writer record-merge|readcheck SHA`
+- `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
+- `ams-rsi livecheck`; `ams-sources livecheck`
+- `ams-assess score|record|list`; `ams-assessment-store import|readcheck|livecheck`
+- `ams-trials materialize|preflight|readback`; `ams-series`
 
-## Recovery
+[Trial contracts](evals/TRIALS.md); stopped series stay stopped.
 
-Reopen the owning Spec/Task and Wiki; verify live state. Adoption rollback: `workbench/sessions/recovery/adoption-recovery.json` (local).
+## Shared CI VM
+
+Use [shared CI](workbench/wiki/context-shared-ci.md) VM `workbench-ci` and AMS runner;
+no GitHub-hosted fallback. Skip forks; inspect before internal execution.
+Keep keys and `AMS_LIVE` out of CI.
+
+## Delivery and recovery
+
+Commit coherent steps with what/why; the [guard](.agents/hooks/require-committed.sh) checks dirt.
+Never commit to main, stash, reset or discard to clean.
+Merge current, checked non-site PRs into main with merge commits.
+Site: feature -> checked dev; only owner merges dev -> main.
+Follow [delivery reporting](workbench/docs/SKILLS.md#delivery).
+
+Recover via Spec/Task and Wiki; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+Handoffs stay local and ignored in `workbench/sessions/handoffs/`; publish Tasks.
+
+## Clean up
+
+Use `land` after checks: verify publication/containment and no owned dirt. Retain unfinished Spec work; report blockers.

@@ -1,7 +1,7 @@
 ---
 name: explore-kb
 summary: Answer a focused outside-world question from primary sources, with each claim cited beside its version, date and limits, so you can make the next call.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's Research skill](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/research), MIT License, together with Kayden Clark's focused research method and an earlier source-gathering candidate, with version and freshness checks, contradiction handling, access fallbacks and a claim and citation audit added.
 credit_license: MIT
@@ -42,7 +42,7 @@ A good run gives each answer a direct link, a pointer to the spot and the SDK ve
 
 - A question focused enough to have a source-backed answer. "Tell me everything about X" is a poor fit.
 - Access to primary sources through the session's tools. Having a search tool does not prove a source was opened.
-- No Workbench prerequisite is stated. A **Workbench** is the project's set of records and rules for agent work, and Explore KB works from the conversation and any findings you supply. If you name an issue or document, or ask for a saved artifact, it follows that place's existing format and reads the saved result back.
+- No Workbench. A **Workbench** is the project's set of records and rules for agent work; Explore KB does not need one and works from the conversation and any findings you supply. If you name an issue or document, or ask for a saved artifact, it follows that place's existing format and reads the saved result back.
 - Delegation is optional, used only for independent topics and only when your authority and tools allow it. Otherwise it investigates directly and never claims a background worker ran.
 
 ## What it does not authorize

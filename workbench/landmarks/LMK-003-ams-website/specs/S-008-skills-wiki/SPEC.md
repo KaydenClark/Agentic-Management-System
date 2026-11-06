@@ -1,23 +1,24 @@
 # S-008 - Skills wiki
 
 **Spec ID:** S-008
-**Status:** planned
+**Status:** active
 **Priority:** 3
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-01
-**Catalog description:** Site-written summaries of the owner's skills, one entry per skill, modeled on the format of aihero.dev/skills.
-**Blockers:** S-003
-**Latest event:** Mapped from the owner's confirmed decisions of 2026-11-01.
-**Next gate:** Task planning after the site shell (S-003) exists.
+**Updated:** 2026-11-02
+**Catalog description:** Site-written articles on the owner's skills, one page per skill grouped by Workbench stage, modeled on aihero.dev/skills.
+**Blockers:** none
+**Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
+**Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
+**Next gate:** Owner page approvals and Human QA of the 40 pages on protected `dev`; only the owner merges `dev` -> `main`; then `complete`.
 
 ## Intent and authority
 
-The owner chose site-written summaries of the owner's skills, modeled on https://www.aihero.dev/skills. The skills repository is private, so the site publishes summaries, not skill files.
+The owner chose site-written articles modeled on https://www.aihero.dev/skills and its `/grilling` depth/tone (2026-11-01), supplied `skills-by-workbench-stage.svg` and set the template below. KaydenClark/skills is private: never publish its files. Authority/endpoint: JOT-ba986c8a.
 
 ## Outcome
 
-A reader can browse the skills that operate the AMS, see what each does, when to use it and what it does not authorize, and see which ones were actually used to build the site.
+A reader browses the skills that operate the AMS by Workbench stage, opens any one, and learns what it does, when to reach for it, what it needs and refuses, how to tell it is working and where it fits.
 
 ## Why It Matters
 
@@ -25,43 +26,56 @@ The skills are how agents operate the AMS. Explaining them faithfully, without p
 
 ## Current Verified State
 
-- No wiki pages exist. The skills live in the owner's skills repository, outside this one.
+- Historical delivery: `/skills` and 39 articles on dev19c06cc at skills8782412 ([evidence](../../../../wiki/history/S-008.md#acceptance-criteria)); no main delivery or owner QA is established here. Later refocus requirements remain unchecked.
+- Source878241202bf7ec97c0952287f1633f6f0ddf1a6e: chart skills are top-level; grill-me/grill-with-docs map to align-concept/align-docs. Off-chart: clean-my-ai-harness-codex, obsidian-vault, ponder, teach. Notices exist; root LICENSE does not.
+
+History: [S-008 history](../../../../wiki/history/S-008.md).
 
 ## Desired Behavior
 
-- An index of the owner's skills, grouped by workflow stage, and one entry per skill.
-- Each entry gives: what it does, when to use it, what it does not authorize, an example request, and its provenance or license.
-- Each entry is derived from that skill's file at a pinned skills commit, and names the commit.
-- "Used to build this site" appears only where a record links the skill to a Task or review.
-- Layout follows the reference site's format; the exact elements are confirmed against that page at Task planning.
+- **Set.** One article per chart skill under its repository name at the pin: 39 at `8782412` (Route 5, Align 12, Prepare 2, Journey 7, Judge 1, Complete 4, Improve 8); none for off-chart skills.
+- **Index (`/skills`).** Grouped by the chart's stages in order (Route, Align, Prepare, Journey, Judge, Complete, Improve), each with its gloss; main-flow skills first in order, then the rest. Each entry: name, one-line summary, link.
+- **Article (`/skills/<name>`).** Sections in order:
+  1. **What it does**: the mechanism in plain words, key terms defined.
+  2. **When to use it**: how it is invoked; where neighbours overlap, a "what you have / reach for" table pointing to the right skill.
+  3. **Example request**: one realistic request that brings it in.
+  4. **What it requires**: helper skills, records/tools and whether Setup Workbench is required. Explain actual conditional prerequisites and Primitive/Compound composition.
+  5. **What it does not authorize**: what running it never grants (e.g. merging, publishing, Human QA).
+  6. **Skill-specific sections**: only where needed (e.g. `grilling`'s round and frontier).
+  7. **FAQs**: readers' actual questions, answered directly, including known failure modes and workarounds.
+  8. **It's working when**: a list of observable signs of a correct run.
+  9. **Where it fits in the workflow**: its chart stage, what calls it and what it hands to, linking those articles.
+- **Credit.** State inspiration/adaptation, original author/source and license from the pin's skill/notices; changed ownership does not erase origin credit.
+- **Pin.** Each article derives from its skill file at the pinned commit and names it; a later pin updates affected articles.
+- Layout follows the reference site; exact elements are confirmed against it at Task planning.
 
 ## Decisions And Contracts
 
-- Summaries are written for the site; skill files are not copied.
-- An adapted skill is credited to its source, never labeled original.
+- Articles are written for the site; skill files are not copied.
+- Adapted skills are credited to their source, never labeled original.
+- The nine-section article is the owner's (2026-11-01).
+- Stages come from the chart, names from the repository at the pin; where they differ the repository name wins and this Spec leaves the chart alone.
+- No "used to build this site" marks; that record belongs to the Supabase backend and GitHub (owner, 2026-11-01).
 
 ## Non-Goals
 
-- Publishing the skills repository or any skill file.
-- Editing skills; skill changes go through the skills repository's own process.
+- Publishing the skills repository or any skill file; editing skills (their repository's process); off-chart articles; used marks.
 
 ## Dependencies And Blockers
 
-- S-003 (site shell); a pinned skills commit readable by the authoring session.
+- Satisfied: S-003 shell, theme and site tests on `dev`; stage data (`site/app/start/skills.mjs`, drawn by `/start` screen 3) on `dev`, not yet `main`.
+- Read access to `KaydenClark/skills` at the pin for authoring.
 
 ## Vertical Implementation Slices
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Skills index page and one complete entry from a pinned skill, deployed to `dev` | ready | none | pending |
-| TK-002 | Entries for every skill in the owner's set, grouped by stage | ready | TK-001 | pending |
-| TK-003 | "Used to build this site" marks driven by Task and review records | ready | TK-002 | pending |
 
-### TK-001 - First entry
+### TK-001 - Index and first article
 
 **Stance:** Builder
 
-Proves the entry-shape and pin criteria on one skill.
+Proves the index, the article shape, credit and pin criteria on one skill.
 
 ### TK-002 - Full set
 
@@ -69,44 +83,37 @@ Proves the entry-shape and pin criteria on one skill.
 
 Proves the coverage criterion.
 
-### TK-003 - Used marks
-
-**Stance:** Builder
-
-Proves the "used" criterion.
-
 ## Acceptance Criteria
 
-- [ ] **Entry shape.** Every entry has all five parts and names its skills commit. *Check:* a content test over entries. *Must fail:* an entry with no "does not authorize" line.
-- [ ] **Faithful.** Each described behavior appears in the pinned skill file. *Check:* a reviewer compares entries with the pinned files. *Must fail:* a behavior the skill does not have.
-- [ ] **Coverage.** Every skill in the owner's set has an entry and every stage names at least one skill. *Must fail:* an orphan stage.
-- [ ] **Used means recorded.** A "used" mark links the Task or review record. *Must fail:* a mark with no record.
-- [ ] **No private files.** The hygiene check finds no copied skill file content beyond short quoted lines. *Must fail:* a skill file reproduced on the site.
+- [x] **Article shape.** Every article has sections 1-5 and 7-9 in order (6 optional, between 5 and 7), a credit line, and its skills commit. *Check:* content test over built articles. *Must fail:* no FAQs, no "It's working when", no "What it does not authorize", or sections out of order.
+- [x] **Faithful.** Each described behavior, requirement and refusal appears in the pinned skill file. *Check:* a reviewer compares articles with the pinned files. *Must fail:* a behavior the skill lacks.
+- [x] **Coverage.** Every chart skill has an article under its repository name at the pin; every stage names a skill. *Must fail:* a missing chart skill, an article named `grill-me`, an off-chart article, or an orphan stage.
+- [x] **Index.** `/skills` lists every article under its chart stage, main-flow first in order, each linking `/skills/<name>`. *Must fail:* a skill under the wrong stage or an unlinked article.
+- [x] **Credit.** An adapted skill names its source and license. *Must fail:* an adapted skill labeled original.
+- [x] **No used marks.** No page marks a skill as used to build the site. *Must fail:* a "used" badge or list on any wiki page.
+- [x] **No private files.** The hygiene check finds no copied skill-file content beyond short quoted lines. *Must fail:* a skill file reproduced on the site.
+- [ ] **Refocus fidelity.** At an accepted S-000A pin, composition, Workbench prerequisites, job/method and adaptation credit match source; drafts and static checks are not outcome claims.
 
 ## RSI and website connection
 
-Skill changes measured by the loop (S-002, S-011) update the affected entries at the new pin.
+S-002/S-011 measured changes and [S-000A](../../../LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) accepted refocus pins update affected articles. This prepares the contract, not site implementation.
 
 ## Testing Seams
 
-- Content tests over the built entries; a pin comparison against the skills commit.
+- Content tests over the built index and articles; pin comparison with the skills commit; site hygiene and browser checks.
 
 ## Verification Procedure
 
 ```bash
 node workbench/tools/spec-workbench.mjs show S-008
-# site test command named at Task planning
+cd site && npm ci && npm run build && npm test
+npm run check:browser                                   # needs Playwright with Chromium
+npm run check:skills-source -- --skills DIR             # DIR: private skills checkout at 8782412
 ```
 
 ## Documentation Impact
 
 - The glossary links the wiki for skill names.
-
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion |
 
 ## Review and Human QA
 
@@ -118,7 +125,10 @@ Pending.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- none
+- The chart image shows `grill-me` and `grill-with-docs` until the owner updates it.
+- Documentation Impact is not done: the site Glossary is S-003 TK-003 (PR #84, open); `GLOSSARY.md` edits go through domain-modeling.
+- `site/page-list.json` lacks `/skills` and the articles; orchestrator A is its only writer.
+- `check:skills-source` needs the private skills checkout, so it runs locally, not in CI.
 
 ## Supersession
 

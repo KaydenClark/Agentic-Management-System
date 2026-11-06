@@ -1,7 +1,7 @@
 ---
 name: jot
 summary: Saves what the owner decided, corrected or found in the right project record, with its source and status, so the next session can resume cold.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: original
 credit_text: Original to Kayden Clark.
 ---
@@ -49,24 +49,24 @@ Say "jot this" when the owner answers a question, corrects an agent, or reveals 
 
 ## Example request
 
-> The owner just told me the dashboard should only show shared pages, never private ones, and that this replaces what we assumed last week. Jot that so the next session doesn't redo the question.
+> I've decided the weekly report should list only closed tickets, never open ones, and that replaces what we assumed last week. Jot that so the next session doesn't ask again.
 
-Because the meaning changed, Jot does not just append a note. It finds the smallest existing owner for the dashboard topic (or a new Wiki topic if none covers it) and records a pending correction, then asks the owner to confirm a revised readback. Until they do, the earlier confirmed intent stands and dependent work is blocked. After confirmation, Jot saves the confirmed text exactly, moves the current-intent pointer, links old to new, reads it back, and reports where it saved and whether anything is unpublished.
+Because the meaning changed, Jot does not just append a note. It finds the smallest existing owner for the weekly-report topic (or a new Wiki topic if none covers it) and records a pending correction, then asks you to confirm a revised readback. Until you do, the earlier confirmed intent stands and dependent work is blocked. After confirmation, Jot saves the confirmed text exactly, moves the current-intent pointer, links old to new, reads it back, and reports where it saved and whether anything is unpublished.
 
 ## What it requires
 
 - **A Workbench.** Jot looks for the Workbench manifest and the `spec-workbench` tool at the project root and stops if either is absent, telling you to run `setup-workbench` first.
-- **The capture tool.** The Workbench ships one, currently `workbench/tools/jot.mjs`, and Jot resolves its current interface before use. At this pin it offers `read`, `add`, `correct` and `search` for active Markdown Wiki topics. A write needs the page's current revision hash (from `read`), a visibility, kind, state, source and author, and design-concept pages also need an `--operation` naming the authorized operation. It cannot edit passages inside a Spec or decision record, so Jot uses those documents' own procedures there.
+- **The capture tool.** The Workbench ships one, currently `workbench/tools/jot.mjs`, and Jot resolves its current interface before use. At the skills commit this article describes, it offers `read`, `add`, `correct` and `search` for active Markdown Wiki topics. A write needs the page's current revision hash (from `read`), a visibility, kind, state, source and author, and design-concept pages also need an `--operation` naming the authorized operation. It cannot edit passages inside a Spec or decision record, so Jot uses those documents' own procedures there.
 - **Context to read first.** Project instructions, ownership routes, the glossary and the topic's sources and corrections. `read` returns entries and the revision but not the page's surrounding prose, so Jot reads that prose and its governing links too.
 - **A confirmed readback, for intent.** For concept intent, the owner's explicitly confirmed [readback](/skills/readback) is the record to save.
 
 ## What it does not authorize
 
-Saving a claim grants nothing beyond the save. Capture authorizes no:
+Saving a claim grants nothing beyond the save. In particular, capture does not authorize:
 
-- edit to a governing document, map or plan, implementation, verdict, publishing or merging;
-- execution of the intent it records. Confirming meaning, permitting an operation and accepting delivery are three separate things, even when they arrive together. A confirmation is reusable only for its own revision and scope, and execution needs an explicit owner grant of scope, either in that confirmation or in a separate instruction;
-- proof. Confirmed understanding can be saved before any code exists, and it shows neither working behavior nor accepted delivery.
+- **Further edits or actions.** No edit to a governing document, map or plan, and no implementation, verdict, publishing or merging.
+- **Execution of the recorded intent.** Confirming meaning, permitting an operation and accepting delivery are three separate things, even when they arrive together. A confirmation is reusable only for its own revision and scope, and execution needs an explicit owner grant of scope, either in that confirmation or in a separate instruction.
+- **Proof.** Confirmed understanding can be saved before any code exists, and it shows neither working behavior nor accepted delivery.
 
 An agent-written readback, a recommendation, silence or a bare command does not make intent confirmed. The `confirmed` flag only stores a supplied judgment, so the source must show a real owner confirmation.
 
@@ -96,7 +96,7 @@ Jot rechecks live state against the accepted claims. Newer Canon can reveal an i
 
 ### Will it re-ask questions I already answered?
 
-Not if they are sourced and confirmed. They stay settled unless a named premise, a contradiction or an owner correction reopens them. Note that individual answers can settle a choice or a fact, but only the owner's confirmed readback makes assembled intent confirmed. On resume Jot also reads omitted entries and the correction chain.
+Not if they are sourced and confirmed. They stay settled unless a named premise, a contradiction or an owner correction reopens them. Individual answers can settle a choice or a fact, but only the owner's confirmed readback makes assembled intent confirmed. On resume Jot also reads omitted entries and the correction chain.
 
 ## It's working when
 

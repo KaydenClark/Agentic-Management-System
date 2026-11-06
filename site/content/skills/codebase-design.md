@@ -1,7 +1,7 @@
 ---
 name: codebase-design
 summary: Gives your agent shared vocabulary and a method for designing deep modules: small interfaces, well-placed seams, and tests that use the seam real callers use.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's Codebase Design](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/engineering/codebase-design), MIT License. It draws on Michael Feathers' idea of a seam and John Ousterhout's Design It Twice, and it replaces the retired design-an-interface skill.
 credit_license: MIT
@@ -46,12 +46,12 @@ Tests should check observable outcomes and survive internal refactors. A stand-i
 
 ## When to use it
 
-Ask for it by name when an interface needs designing or improving, when you want to find modules worth deepening or decide where a seam goes, or when you want code that is easier to test and for an agent to navigate. Skills such as [Journey](/skills/journey) and [improve-codebase-architecture](/skills/improve-codebase-architecture) also load it for the vocabulary. It needs no setup of its own.
+Ask for it by name when an interface needs designing or improving, when you want to find modules worth deepening or decide where a seam goes, or when you want code that is easier to test and easier for an agent to navigate. Skills such as [journey](/skills/journey) and [improve-codebase-architecture](/skills/improve-codebase-architecture) also load it for the vocabulary. It needs no setup of its own.
 
 | What you have | Reach for |
 | --- | --- |
 | A codebase and no idea where the shallow modules are | [improve-codebase-architecture](/skills/improve-codebase-architecture), a request-only survey that produces a report and uses this skill's vocabulary |
-| One chosen module whose interface is unsettled | codebase-design |
+| One chosen module whose interface is unsettled | `codebase-design` |
 | An accepted design ready to build | [tdd](/skills/tdd) |
 | A bug with an unknown cause | [diagnosing-bugs](/skills/diagnosing-bugs) |
 | Disputed or overloaded business terms | [domain-modeling](/skills/domain-modeling) |
@@ -60,7 +60,7 @@ Ask for it by name when an interface needs designing or improving, when you want
 
 > The order-processing code is split across five tiny files and every test mocks half of them. Use codebase design to tell me whether these modules are shallow, and show me two or three different interface options before we touch anything.
 
-The agent should read callers and tests first, then present alternatives and stop at a recommendation.
+The agent reads callers and tests first, then presents alternatives and stops at a recommendation.
 
 ## What it requires
 
@@ -87,7 +87,7 @@ Not necessarily. A mock or local stand-in only exercises behavior at the test se
 
 ### The agent could not see the callers or tests. What then?
 
-It should state its assumptions and leave affected choices provisional rather than guess. Supply the missing call paths or tests and ask again.
+It states its assumptions and leaves affected choices provisional rather than guessing. Supply the missing call paths or tests and ask again.
 
 ### Will it delete my old tests once the new module exists?
 
@@ -104,4 +104,4 @@ Not on its own. A test goes only when new interface checks preserve its coverage
 
 ## Where it fits in the workflow
 
-Codebase design is a supporting skill in the Journey stage (build each Task), not a step in the main flow. [Journey](/skills/journey) points to it when an interface is unsettled during implementation, within the design authority you have granted. [improve-codebase-architecture](/skills/improve-codebase-architecture), from the Improve stage, relies on it for vocabulary, dependency classification and any interface alternatives you request. Once a design is accepted, it hands off to [tdd](/skills/tdd) or the project's task workflow, carrying unresolved interface choices.
+Codebase design is a supporting skill in the Journey stage (Build each Task), not a step in the main flow. [journey](/skills/journey) points to it when an interface is unsettled during implementation, within the design authority you have granted. [improve-codebase-architecture](/skills/improve-codebase-architecture), from the Improve stage, relies on it for vocabulary, dependency classification and any interface alternatives you request. Once a design is accepted, it hands off to [tdd](/skills/tdd) or the project's task workflow, carrying unresolved interface choices.

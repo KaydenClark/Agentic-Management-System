@@ -17,3 +17,5 @@ Provenance: Orchestrators A and B with the coordinating session, 2026-11-01, aft
 Changed 2026-11-01: allow list widened to orchestrator A's existing site branches, by Spec number only so non-site `feat/` branches stay off.
 
 Changed 2026-11-01: previews replaced by CI to protect the free quota. Only `main` and `dev` deploy; the GitHub Actions check `site builds` (`.github/workflows/site-build.yml`: npm ci, lint if present, build, then test in `site/`) is the required check for site PRs into `dev` and `main`, in place of the Vercel preview. It skips cleanly where `site/package.json` is absent.
+
+Changed 2026-11-01: the team moved to Vercel Pro, so the daily cap no longer applies; the main-and-dev-only rule stays as hygiene (DDR-000Z).

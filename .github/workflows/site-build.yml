@@ -5,7 +5,7 @@ name: site builds
 on:
   pull_request:
     branches: [dev, main]
-    paths: ["site/**", ".github/workflows/site-build.yml"]
+    paths: ["site/**", "grill-board/theme/**", ".github/workflows/site-build.yml"]
 
 permissions:
   contents: read
@@ -41,3 +41,10 @@ jobs:
         if: steps.app.outputs.present == 'true'
       - run: npm test
         if: steps.app.outputs.present == 'true'
+      # S-001 TK-002: the repository's hygiene rules over the served build.
+      - uses: astral-sh/setup-uv@v6
+        if: steps.app.outputs.present == 'true'
+      - name: Public hygiene over the built site
+        if: steps.app.outputs.present == 'true'
+        working-directory: .
+        run: uv run ams-hygiene --site site

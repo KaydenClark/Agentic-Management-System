@@ -1,7 +1,7 @@
 ---
 name: brainstorm
 summary: Test an idea through an interview where each recommendation comes with its strongest opposing case, an alternative and its main risk.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: Adapted from [Matt Pocock's grilling primitive](https://github.com/mattpocock/skills/tree/a496f5513d4a4cf889bc48e189e579f4b0bdf6aa/skills/productivity/grilling), MIT License, with a counterargument lens added by Kayden Clark.
 credit_license: MIT
@@ -23,11 +23,11 @@ The agent starts from what the conversation already holds: your question, the in
 
 ## When to use it
 
-Reach for it when you are weighing options or testing an idea before you commit, and you want each suggestion to come with its best objection instead of a confident pitch. It is invoked by asking for it by name or by describing that need; it is a conversation.
+Reach for it when you are weighing options or testing an idea before you commit, and you want each suggestion to come with its best objection instead of a confident pitch. Ask for it by name or describe that need. It runs entirely as a conversation.
 
 | What you have | Reach for |
 |---|---|
-| An idea or plan you want questioned, with trade-offs shown for each recommendation | `brainstorm` |
+| An idea or plan you want questioned, with tradeoffs shown for each recommendation | `brainstorm` |
 | A plan to stress-test until you and the agent share one confirmed understanding | [grilling](/skills/grilling) |
 | An idea you want judged by a domain expert who gives its own verdict and tells you where it is wrong | [oracle](/skills/oracle) |
 | A saved interview whose confirmed intent should be preserved for later | [align-concept](/skills/align-concept) |
@@ -45,7 +45,7 @@ The agent will first look at what it can check, such as how often the calls repe
 ## What it requires
 
 - The [grilling](/skills/grilling) skill. Brainstorm relies on it for the interview protocol. If it is unavailable, the agent reports the missing prerequisite and does not claim the protocol was followed.
-- A question or intended result from the conversation to start from. The skill does not state any other required records, tools or setup.
+- A question or intended result from the conversation to start from. No other records, tools or setup are needed.
 - Ideally, reachable facts about your question. If some sources cannot be reached, the agent names the gap and keeps going only on decisions that do not depend on them.
 
 ## What it does not authorize
@@ -66,7 +66,7 @@ That is the point of the skill. A recommendation that arrives with its strongest
 
 ### What if there is no good argument against a recommendation?
 
-The agent should say that the evidence is missing and name what it lacks. It is told not to invent an opposing case. Treat a named gap as a prompt to supply the evidence or accept the uncertainty.
+The agent should say that the evidence is missing and name what it lacks. It does not invent an opposing case. Treat a named gap as a prompt to supply the evidence or accept the uncertainty.
 
 ### What happens if some sources are unavailable?
 
@@ -93,4 +93,4 @@ Agreement alone starts nothing. Turning the outcome into documentation, a handof
 
 ## Where it fits in the workflow
 
-Brainstorm sits in the Align stage (shared concept), where the main flow is [grilling](/skills/grilling) followed by [readback](/skills/readback). It is an optional side tool there, used when you want opposing cases surfaced during the interview. It leans on grilling for its protocol. Its summary of settled direction is something you can carry into the next stage, but it does not start that stage on its own: mapping, planning or building follows only if you ask for it and the authorization exists. If the work needs a durable saved record of confirmed intent, [align-concept](/skills/align-concept) is the neighbour built for that.
+Brainstorm sits in the Align stage (Shared concept), where the main flow is [grilling](/skills/grilling) followed by [readback](/skills/readback). It is an optional supporting skill there, used when you want opposing cases surfaced during the interview. It leans on grilling for its protocol. Its summary of settled direction is something you can carry into the next stage, but it does not start that stage on its own: mapping, planning or building follows only if you ask for it and the authorization exists. If the work needs a durable saved record of confirmed intent, [align-concept](/skills/align-concept) is the neighbor built for that.

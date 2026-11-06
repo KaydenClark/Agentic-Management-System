@@ -41,7 +41,8 @@
     "recovery": "workbench/sessions/recovery",
     "features": "workbench/wiki/features",
     "ddr": "workbench/docs/ddr",
-    "landmarks": "workbench/landmarks"
+    "landmarks": "workbench/landmarks",
+    "history": "workbench/wiki/history"
   },
   "wiki": {
     "profile": "project"
@@ -79,5 +80,13 @@
     "errors": "node workbench/tools/spec-workbench.mjs doctor --json; git status --porcelain",
     "journey": "[JOURNEY_COMMAND]",
     "measure": "[MEASURE_COMMAND]"
+  },
+  "landmarkTracker": {
+    "root": "workbench/landmark-tracker",
+    "collections": {
+      "destination-questions": "workbench/landmark-tracker/destination-questions",
+      "landmarks": "workbench/landmark-tracker/landmarks"
+    },
+    "markdown": "TRACKER.md"
   }
 }

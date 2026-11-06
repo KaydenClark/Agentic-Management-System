@@ -1,13 +1,15 @@
 ---
 name: improve-workbench
 summary: Fix one failing agent job by changing the Workbench around it, proving the change with checks and a fresh rerun, then keeping, revising or removing it.
-pin: 878241202bf7ec97c0952287f1633f6f0ddf1a6e
+pin: fb7ad23c963e183b930b23bc5fdf4d309dff292a
 credit: adapted
 credit_text: The loop's shape is adapted from Ryan Lopopolo's [Harness Engineering](https://github.com/lopopolo/harness-engineering) improve-harness playbook (playbooks/improve-harness.md at 226c8d35), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), rewritten for Workbench rooms with ownership routing, feedback records and dispositions added.
 credit_license: CC BY 4.0
 ---
 
 ## What it does
+
+A Spec defines the destination; its Wiki history page preserves dated observations and comparisons. Task receipts and linked runs supply the underlying proof.
 
 A **Workbench** is the bundle of controls, skills, tools, records and checks a coding agent works inside. This skill repairs that bundle, which it calls the **harness**, not the model or your product code. You pick one job an agent got wrong, hold the model and job fixed, change the harness, and measure whether it helped.
 
@@ -20,7 +22,7 @@ A **Workbench** is the bundle of controls, skills, tools, records and checks a c
 
 Steps 1 to 3 are read-only. A **job contract** written first governs them: target and revision, the job, the accepted outcome, the worker's model and tools, authority, outside state such as CI, and the suspected gap. Baseline and rerun share it; changing a field starts a new comparison.
 
-Easy to miss: the **run without it**. If existing material might already explain the fix, withhold the change and rerun. If the job still closes, claim no improvement.
+One check is easy to miss: the **run without it**. If existing material might already explain the fix, withhold the change and rerun. If the job still closes, claim no improvement.
 
 The pass ends with one result report in the feedback lane, one **disposition** per finding in its Spec (`diagnostic`, `test`, `repaired`, `declined` or `accepted-open`), and a new row in the Workbench Feedback log that names the original row instead of editing it.
 
@@ -40,18 +42,16 @@ A failed review verdict is first captured with [jot](/skills/jot) under a `revie
 
 ## Example request
 
-> Our last three Journeys on this repo each stalled because the agent picked the wrong test command. Run improve-workbench on that: baseline one of the runs, find where the agent first lacked what it needed, and give me the smallest change with a prediction. Don't change anything yet.
+> Our last three agent runs on this repo each stalled because the agent picked the wrong test command. Run improve-workbench on that: baseline one of the runs, find where the agent first lacked what it needed, and give me the smallest change with a prediction. Don't change anything yet.
 
 Because you asked for no changes, the skill stays read-only and returns the job contract, the earliest gap and a prediction to review.
 
 ## What it requires
 
 - **A Workbench.** If `workbench/manifest.json` or `workbench/tools/spec-workbench.mjs` is missing, it stops and sends you to [setup-workbench](/skills/setup-workbench) rather than hand-building records.
-- **The project's records.** It reads AGENTS.md, the RUNBOOK, the GLOSSARY, the Wiki and the manifest.
-- **Scoped authority to change a control,** usually through an assigned Spec and Task. Running a fresh worker or a paid trial requires its own go-ahead.
+- **The project's records.** It reads `AGENTS.md`, the runbook, the glossary, the Wiki and the manifest.
+- **Scoped authority to change a control.** This usually comes through an assigned Spec and Task. Running a fresh worker or a paid trial requires its own go-ahead.
 - **The delivery skills** listed in the last section.
-
-It also decides who owns the gap. A **room** is a project using an installed Workbench; the **producer**, LLM_Workbench, releases the Workbench and owns its core skills, tools and templates. In a room that carries a separately managed, legacy release, a producer-owned gap ends the loop after step 3: record the evidence, add a feedback row, and hand back. Inside the producer, the full loop runs. Ownership differs for a room built from the self-contained setup-workbench package under the personal-catalog normal setup (the `skillPolicy.normalSetup` value). In that case the personal skills repository holds the reusable methods, while the setup package holds the runtime and templates it bundles. The manifest or receipt points to the actual source and feedback owners, so no producer checkout is needed, and a repair authorized in that personal catalog does not halt at step 3.
 
 ## What it does not authorize
 
@@ -60,6 +60,14 @@ It also decides who owns the gap. A **room** is a project using an installed Wor
 - It does not pre-approve fresh-worker runs or paid trials, or touch scheduled feedback adapters.
 - A result record repairs nothing and grants no approval or release; a disposition does not schedule or authorize a repair.
 - A landed fix does not close an [audit-workbench](/skills/audit-workbench) finding. The repaired revision goes back there for retest.
+
+## Who owns the gap
+
+The skill also decides who owns the gap before anything changes. A **room** is a project using an installed Workbench. The **producer**, LLM_Workbench, releases the Workbench and owns its core skills, tools and templates.
+
+- **In the producer.** The full loop runs.
+- **In a room on a separately managed legacy release.** A producer-owned gap ends the loop after step 3: record the evidence, add a feedback row and hand back.
+- **In a room built from the self-contained setup-workbench package.** This is the personal-catalog normal setup (the `skillPolicy.normalSetup` value). The personal skills catalog holds the reusable methods, and the setup package holds the runtime and templates it bundles. The manifest or receipt points to the actual source and feedback owners, so no producer checkout is needed, and a repair authorized in that catalog does not halt at step 3.
 
 ## FAQs
 

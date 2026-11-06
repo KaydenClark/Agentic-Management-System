@@ -1,60 +1,97 @@
 # AMS Glossary
 
-> Generated from LLM Workbench v3.2.2.
-
-AMS manages Kayden's agents, workflows, intent capture, skills and AI tools in one RSI loop; these are its shared terms. Definitions follow Kayden's 2026-10-31 instruction and the [research basis](workbench/research/template-research-basis.md).
+[Blueprint](BLUEPRINT.md) governs.
 
 ## Language
 
-### AMS
-
 **AMS**:
-Kayden's system for managing agents, workflows, intent capture, skills and AI tools in one RSI loop. It is built on and operates the Workbench while repairing it.
+Reusable AI workflows, rules, skills and tools developing intent and carrying it into verified outcomes; RSI through actual work.
 
 **RSI loop**:
-Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record does not prove improvement.
+Recursive self-improvement: observe friction, propose bounded change, compare outcomes, decide disposition, check later use. Recording proves no benefit.
+
+**Alignment assessment**:
+Approved Alignment Check r1 on a named candidate/scope in three runs.
+
+**Alignment Score**:
+Applicable checks passed, pooled over three runs (%); separate from fitness/acceptance.
+
+**Fitness level**:
+r1: Excellent=3 passing runs; Stable=2; Functional=1; Broken=0 or any Critical failure.
+
+**Improvement attempt**:
+Assessed improvement version; three attempts per candidate maximum, excluding baseline.
 
 **Workbench**:
-The working foundation AMS uses and repairs. AMS also encompasses the system and tool belt that operates above it.
+An agentic management system that brings people, agents, project records, artifacts and tools together to carry intent into outcomes.
+
+### Governance core
+
+**Governance Plane**:
+A claim's role for a target/operation; artifacts can hold claims on one or several planes.
+
+**Projection**:
+6: Snapshot summary of each plane's claims as of its last visit.
 
 **Intent**:
-What the owner wants, with reasons, boundaries and corrections. Retain whether it is confirmed or unresolved.
+5: What the owner wants, with reasons, boundaries, corrections and confirmation status.
+
+**Enduring Context**:
+4: Our knowledge of what exists, what Canon and Grounding say exists or should change, and Intent and what to do with it.
+
+**Grounding**:
+3: Evidence and proofs used to establish and support the authoritative source of truth.
+
+**Canon**:
+2: The authoritative source of truth for the target: what governs.
+
+**Actuality**:
+1: What exists and is being worked on.
 
 ### Records
 
+**Destination Question Card (DQC)**:
+Stable evolving question/concept record owning readbacks, confirmations and history; a Board card presents it.
+
+**Concept lane**:
+Intent/concepts in DQCs, projected in TRACKER.md, linked to execution by stable ID.
+
+**Execution lane**:
+Landmark, Spec and Task work, projected in TASKBOARD.md, linked to originating DQCs.
+
 **Implementation Task**:
-A bounded assigned slice under a Spec, owning execution state and proof.
+Assigned Spec slice owning execution state and proof.
 
 **Evaluation task**:
-A repeatable test case; one attempt at it is a trial. Neither is an implementation assignment.
+Repeatable test case; trials are attempts, distinct from implementation Tasks.
 
 **Evidence audit**:
-A maintained assessment of claims against dated, candidate-specific evidence, preserving reassessment history.
+Claims checked against dated candidate evidence; retain reassessments.
 
 **Improvement record**:
-The connection from an observed problem through a hypothesis and comparison to an actual disposition and later-use check.
+Problem linked to hypothesis, comparison, disposition and later-use check.
 
 **Review receipt**:
-An actual assessment of a named candidate and scope, recording reviewer involvement, findings and limits.
+Candidate/scope review: reviewer, findings and limits.
 
 **Human QA receipt**:
-Sourced human judgment of the named experience or candidate. Agent checks cannot supply it.
+Sourced human judgment of a named candidate/experience; never agent-supplied.
 
 ### Feedback dispositions
 
-A disposition describes how a finding was handled and grants no execution or release authority; without an established one, keep it pending and name the missing owner or evidence.
+Finding outcomes; pending until sourced, granting no authority.
 
 **diagnostic**:
-Names the diagnostic that makes the condition visible, and whether it is implemented or proposed.
+Named diagnostic: implemented or proposed.
 
 **test**:
-Names the test that detects the condition, with its actual result or implementation gap.
+Detecting test, actual result or implementation gap.
 
 **repaired**:
-Names the implementing revision and its verification. Later-use benefit remains a separate claim.
+Repair revision and verification; later-use benefit is separate.
 
 **declined**:
-Names the actual decision source and reason for declining the proposed action.
+Declining decision source and reason.
 
 **accepted-open**:
-Names the actual acceptance of follow-up work and its owning Spec. The problem remains open.
+Accepted follow-up and Spec; problem remains open.
