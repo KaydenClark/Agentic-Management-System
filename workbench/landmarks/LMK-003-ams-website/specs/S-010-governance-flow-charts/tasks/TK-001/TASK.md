@@ -22,3 +22,9 @@ Deliver the first readable Task lifecycle diagram at a visitor-facing route usin
 - [ ] The built site and applicable tests pass; actual browser checks and remaining limits are recorded.
 
 Workspace baseline sha256:3fa637d179e1dcd78a6e453e26c4bb36b515f63cc1e42a9ba82e8c50f4ecf504
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-010-governance-flow-charts | 6af751c5547532648be8db31d694e8b77f2d2bbf | none | 0 | At 6af751c: npm run build and npm test passed 278; browser 375 and 1440 light/dark with and without JavaScript passed eight cases; tour 375 passed 40 checks before final chart styling. Drift negatives passed; transitions manually audited with source fingerprints. Root pytest running. | S-010 Task lifecycle page, tour navigation and glossary links. | First site suite found orphan route; fixed via navigation. First browser run lacked matching Chromium; rerun passed using installed Playwright. Workspace closeout not complete: discovery, retained refs and ignored entries remain. Full project checks, independent Review and Human QA remain. | 9923deeea9d13da592d292670d47c05207036d16d7e25f527885e9c37d90c8c0 |
