@@ -68,20 +68,7 @@ History: [S-008 history](../../../../wiki/history/S-008.md).
 
 ## Vertical Implementation Slices
 
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
-
-### TK-001 - Index and first article
-
-**Stance:** Builder
-
-Proves the index, the article shape, credit and pin criteria on one skill.
-
-### TK-002 - Full set
-
-**Stance:** Builder
-
-Proves the coverage criterion.
+TK-001 (Builder) proves index, article shape, credit and pin on one skill. TK-002 (Builder) proves coverage.
 
 ## Acceptance Criteria
 
