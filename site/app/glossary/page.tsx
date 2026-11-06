@@ -6,7 +6,7 @@
 import type { Metadata } from "next";
 import type { SignalKind } from "../components/Signal";
 import { Fragment, type ReactNode } from "react";
-import { REPO_BLOB, Source } from "../tour/Source";
+import { Source } from "../tour/Source";
 import styles from "./glossary.module.css";
 import glossary from "./glossary.json";
 
@@ -16,14 +16,14 @@ export const metadata: Metadata = {
 };
 
 // Markdown inline text from GLOSSARY.md: [links](path), **bold** and `code`.
-// A relative link is a path from the repository root, shown on GitHub.
+// Inline references retain their text; the canonical glossary is cited below.
 function Inline({ md }: { md: string }) {
   const parts: ReactNode[] = [];
   const re = /\[([^\]]+)\]\(([^)]+)\)|\*\*([^*]+)\*\*|`([^`]+)`/g;
   let last = 0;
   for (let m = re.exec(md); m; m = re.exec(md)) {
     if (m.index > last) parts.push(md.slice(last, m.index));
-    if (m[1]) parts.push(<a key={m.index} href={/^https?:/.test(m[2]) ? m[2] : `${REPO_BLOB}${m[2]}`}>{m[1]}</a>);
+    if (m[1]) parts.push(<span key={m.index} title={m[2]}>{m[1]}</span>);
     else if (m[3]) parts.push(<strong key={m.index}>{m[3]}</strong>);
     else parts.push(<code key={m.index}>{m[4]}</code>);
     last = re.lastIndex;
@@ -200,7 +200,7 @@ export default function Glossary() {
         );
       })}
       <p className={styles.source}><Inline md={glossary.intro} /> Definitions are copied from the project glossary.
-        <Source path="GLOSSARY.md">GLOSSARY.md</Source></p>
+        <Source path="GLOSSARY.md">GLOSSARY.md</Source><Source path="BLUEPRINT.md">Blueprint</Source></p>
     </div>
   );
 }

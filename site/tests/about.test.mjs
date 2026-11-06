@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { builtPage, visibleText } from './helpers.mjs';
-import { mainOf, repoLinks, repoRoot } from './tour-helpers.mjs';
+import { mainOf, sourceRecords, repoRoot } from './tour-helpers.mjs';
 
 const EMPTY = /LICENSE file is still empty/;
 
@@ -28,10 +28,10 @@ test('the license check catches a stale line (self-test)', () => {
 test('/about states the license as the repository has it, sourced to DDR-000R', () => {
   const main = mainOf(builtPage('about.html').html);
   assert.deepEqual(licenseProblems(visibleText(main), readFileSync(join(repoRoot, 'LICENSE'), 'utf8')), []);
-  assert.ok(repoLinks(main).some((l) => /ddr\/000R-/.test(l.path) && l.exists), 'no link to DDR-000R');
+  assert.ok(sourceRecords(main).some((l) => /ddr\/000R-/.test(l.path) && l.exists), 'no source identity for DDR-000R');
 });
 
-test('/about links the Spec this site is built under', () => {
-  const links = repoLinks(mainOf(builtPage('about.html').html));
-  assert.ok(links.some((l) => /S-003-showcase-site\/SPEC\.md$/.test(l.path) && l.exists), 'no link to S-003');
+test('/about identifies the Spec this site is built under', () => {
+  const links = sourceRecords(mainOf(builtPage('about.html').html));
+  assert.ok(links.some((l) => /S-003-showcase-site\/SPEC\.md$/.test(l.path) && l.exists), 'no source identity for S-003');
 });

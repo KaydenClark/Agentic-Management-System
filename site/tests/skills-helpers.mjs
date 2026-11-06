@@ -8,6 +8,7 @@ import {
   TRAILING_SECTIONS, chartSkills, contentDir,
 } from '../app/skills/content.mjs';
 import { siteDir, visibleText } from './helpers.mjs';
+import { isReaderHref } from '../app/reader-links.mjs';
 import { mainOf } from './tour-helpers.mjs';
 
 // The Spec's count of chart skills per stage at the pin (S-008 Desired
@@ -252,7 +253,8 @@ export function wikiLinkProblems(html, { articles, pages, indexIds }) {
   for (const [, href] of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
     const target = href.replace(/&amp;/g, '&');
     if (PRIVATE_SKILLS_REPO.test(target)) { problems.push(`links the private skills repository: ${target}`); continue; }
-    if (!target.startsWith('/')) continue;
+    if (!isReaderHref(target)) { problems.push(`reader exit: ${target}`); continue; }
+    if (target.startsWith('#')) continue;
     const [path, frag] = target.split('#');
     const skill = path.match(/^\/skills\/([^/]+)$/);
     if (skill) { if (!articles.has(skill[1])) problems.push(`links ${target}, which has no article`); continue; }

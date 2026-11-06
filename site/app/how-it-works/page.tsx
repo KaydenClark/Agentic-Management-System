@@ -1,10 +1,10 @@
 // /how-it-works: How it works, the second tour page (S-003 TK-002). The
-// records, the lifecycle, and one real Spec and Task linked to their files on
-// GitHub. Every claim links the committed record it comes from.
+// records, the lifecycle, and one real Spec and Task explained on-site.
+// Citations retain the public record path and its actual revision.
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Signal } from "../components/Signal";
-import type { ReactNode } from "react";
+import { Source } from "../tour/Source";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
@@ -12,21 +12,10 @@ export const metadata: Metadata = {
   description: "The records the AMS keeps, the life of a piece of work, and one real Spec and Task from this site.",
 };
 
-const REPO_BLOB = "https://github.com/KaydenClark/Agentic-Management-System/blob/dev/";
 const ADR = "workbench/docs/adr/";
 // This revision contains the Spec and receipts described in the historical example.
-const EXAMPLE_BLOB = "https://github.com/KaydenClark/Agentic-Management-System/blob/ce39c6a89f92dffaebecb468b367c49ab6577bd8/";
+const EXAMPLE_REVISION = "ce39c6a89f92dffaebecb468b367c49ab6577bd8";
 const S003 = "workbench/landmarks/LMK-003-ams-website/specs/S-003-showcase-site/";
-
-// A link to the committed record a claim comes from.
-function Source({ path, children }: { path: string; children: ReactNode }) {
-  return (
-    <span className={styles.source}>
-      {" "}
-      Source: <a href={`${REPO_BLOB}${path}`}>{children}</a>.
-    </span>
-  );
-}
 
 export default function HowItWorks() {
   return (
@@ -120,16 +109,17 @@ export default function HowItWorks() {
         <h2 id="example">One real Spec and one real Task</h2>
         <p>
           <strong>
-            Spec <a href={`${EXAMPLE_BLOB}${S003}SPEC.md`}>S-003</a>
+            Spec S-003
           </strong>{" "}
           describes this site&apos;s shell and orientation tour at the recorded revision ce39c6a. At that point it is active, at priority 1, owned by Kayden with
           orchestrator A. Its acceptance conditions run from every page opening in plain language to the commit shown
           in each footer matching the deployment, and its work is split into seven Tasks, TK-001 to TK-007. None of
           its conditions is checked off yet.
+          <Source path={`${S003}SPEC.md`} revision={EXAMPLE_REVISION}>S-003 at the example revision</Source>
         </p>
         <p>
           <strong>
-            Task <a href={`${EXAMPLE_BLOB}${S003}tasks/TK-001/TASK.md`}>TK-001</a>
+            Task TK-001
           </strong>{" "}
           built the shell every page uses: the navigation, light and dark themes, the commit shown in the footer and a
           home page rendered on the server. Its status is done. Its receipt records the tests written first and
@@ -138,11 +128,13 @@ export default function HowItWorks() {
           security review with no findings. It also records what it could not check: the footer of the live{" "}
           <code>dev</code> deployment was not fetched, because the Vercel connector, the tool agents use to reach the web
           host, refused the request, so that check stays open.
+          <Source path={`${S003}tasks/TK-001/TASK.md`} revision={EXAMPLE_REVISION}>TK-001 receipt</Source>
         </p>
         <p>
           The original explanation on this page was delivered by{" "}
-          <a href={`${EXAMPLE_BLOB}${S003}tasks/TK-002/TASK.md`}>Task TK-002</a>. These are historical receipts, not the current state of every website Task. The example links keep their
+          Task TK-002. These are historical receipts, not the current state of every website Task. The example citations keep their
           original revision, so later record moves or changes do not rewrite the evidence behind this account.
+          <Source path={`${S003}tasks/TK-002/TASK.md`} revision={EXAMPLE_REVISION}>TK-002 receipt</Source>
         </p>
       </section>
 
