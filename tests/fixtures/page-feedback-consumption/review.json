@@ -15,7 +15,7 @@
   },
   "reviewers": [
     {
-      "actor": "/root/consumption_spec_review",
+      "actor": "consumption_spec_review",
       "axis": "Spec/content",
       "harness": "Codex",
       "model": "unknown",
@@ -23,12 +23,13 @@
       "judgment": "The universal reliability promise is removed. The single local observation is retained beside its limits. Evidence-strength defect and project guidance are distinguished from unproved reusable benefit."
     },
     {
-      "actor": "/root/consumption_standards_review",
+      "actor": "consumption_standards_review",
       "axis": "Standards",
       "harness": "Codex",
       "model": "unknown",
       "findings": 0,
       "judgment": "Sources, chronology, safe artifacts and append-only interpretation preserve privacy and pending gates; no documented breach or heuristic finding."
     }
-  ]
+  ],
+  "public_identity_format": "Role aliases; canonical thread identifiers remain in private recovery."
 }

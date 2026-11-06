@@ -29,14 +29,19 @@ Size: one representative occurrence through the full path; widen only through an
 
 Workspace baseline sha256:852ec2c768c31516f48dec950789f5f81dc6de152871c7cf710edd0d50b47b4c
 
-## Current run
+## Initial capture and draft
 
 The genuine964-file baseline852ec2/78 copied ignored originals precedes this work. One labeled synthetic rating/criticism was captured through the delivered private-feedback interface. Exact originals remain private; feedback version1 and its safe source identity bind the subsequent agent draft. Safe case/draft artifacts are in tests/fixtures/page-feedback-consumption. An appended application supplement preserves the original pending entry. Actual independent review, adverse replay, checks and delivery remain; no actual owner feedback, site change or campaign is claimed.
 
 [Consumption evidence](../../../../../../feedback/REPORT-s005-feedback-consumption-servitor-2026-11-06.md): actual synthetic draft99.53s, both content review axes0; initial replay9/1.90s and original-case retry0.734s. Exact version/source and private-original separation retained. Revised assertions/regressions, code delta review, fresh full, exact CI and native close remain.
+
+## Verification progress
+
+Both actual draft and replay/code reviews pass with0 findings. Revised106 regression checks pass. Fresha473 failed only the host-path hygiene gate (1087passed/4skipped/1failed); FAIL292/293 retains it and its reproduction. Safe reviewer aliases preserve original private judgments and fifth local export commit; replay9/2.76s and hygiene0 now pass. Corrected fresh full and exact CI remain before close. The private0fa deployment capture is historical after newer dev work; final current-dev coverage stays open with TK-000K.
 
 ## Receipt
 
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-005-page-review-cards | b2fdbe9c7781d3ac2f229175d8f88a9e2a434313 | ahead 19 behind 0 | 12 | One synthetic actual draft99.53s;both independent draftReviews0. Replay9/1.90s;actual original-case regeneration/two exact retries0.734s. Revised replay/private/FIFO/approval/coverage106/85.52s. | Safe case/draft/actualreview/occurrence artifacts,Board procedure,Wiki,Task/report;raw original stays private. Genuine852ec2 baseline/78 original copies retained. | Code/replay deltaReview,freshfull,currentCI and nativeclose. No actual owner feedback/site edit/campaign. Current-dev coverage/finalassembledQA/main permission/release remain. | 990de0860135d5e81c86617081c9f45b1f0826166908d837d71391fe93cfb132 |
+| 2 | Feature/S-005-page-review-cards | a473464ffa85508a9048989aacb03a9144d8cf58 | ahead 20 behind 0 | 7 | a473:1087passed/4skipped/1hygiene failure292;reproduction293. Safe-alias replay9/2.76s,hygiene0. Both code/draftReview axes0;prior106 regressions and bounded actual-retry proof retained. | Public safe reviewer role export/fifth local commit;original judgments unchanged/private. FAIL287-293 retains review/full/hygiene limits. | Corrected freshfull,currentCI,export deltaReview and nativeclose. Current-dev coverage/finalassembly/ownerQA/mainpermission/release remain. | 90f7555817da81076a6e5699e62d40222270396023d1eadefc22dc7ccc051355 |
