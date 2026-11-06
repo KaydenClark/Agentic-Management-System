@@ -5,7 +5,7 @@
 // its honest empty state (TK-001). The skill trends (TK-002J) lead, drawn
 // from the recorded loops only.
 import type { Metadata } from "next";
-import { seriesViews } from "./data";
+import { seriesViews, runsWithoutResults } from "./data";
 import { loadRsiData } from "./supabase";
 import { RsiView } from "./view";
 import { RepairEvidence } from "./repair";
@@ -25,7 +25,7 @@ export default async function RsiPage() {
   const loaded = await loadRsiData();
   if (!loaded.ok) console.warn(`/rsi: results could not be loaded (${loaded.reason})`);
   return (
-    <RsiView views={seriesViews(loaded.data)} unavailable={!loaded.ok} readAt={loaded.readAt}>
+    <RsiView views={seriesViews(loaded.data)} runEvidence={runsWithoutResults(loaded.data)} unavailable={!loaded.ok} readAt={loaded.readAt}>
       <SkillTrends records={recordedLoops()} />
       <RoundTwoEvidence />
       <RepairEvidence />
