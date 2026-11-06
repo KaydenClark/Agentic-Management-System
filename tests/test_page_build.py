@@ -134,3 +134,39 @@ def test_owned_process_cleanup_on_actual_interrupt_preserves_unrelated_process(t
             try: os.killpg(owned[0], signal.SIGKILL)
             except ProcessLookupError: pass
         unrelated.terminate(); unrelated.wait()
+
+
+def test_container_runner_requires_an_immutable_image_before_execution():
+    from ams.page_build import DockerBuild
+    with pytest.raises(PageRefused, match="immutable"):
+        DockerBuild("node:latest")
+
+
+def test_public_configuration_rejects_privileged_or_unexpected_values():
+    import base64
+    from ams.page_build import public_configuration
+    def token(role):
+        encoded = base64.urlsafe_b64encode(json.dumps({"role": role}).encode()).decode().rstrip("=")
+        return "synthetic." + encoded + ".signature"
+    public = {"NEXT_PUBLIC_SUPABASE_URL": "https://fixture.supabase.co", "NEXT_PUBLIC_SUPABASE_ANON_KEY": token("anon")}
+    assert public_configuration(public) == public
+    with pytest.raises(PageRefused, match="anonymous"):
+        public_configuration({**public, "NEXT_PUBLIC_SUPABASE_ANON_KEY": token("service_role")})
+    with pytest.raises(PageRefused, match="only explicit public"):
+        public_configuration({"GITHUB_TOKEN": "synthetic-private-canary"})
+
+
+def test_build_artifact_directory_link_refuses_before_reading_outside(source, tmp_path):
+    candidate = git(source, "rev-parse", "HEAD")
+    outside = tmp_path / "unrelated-artifacts"
+    outside.mkdir()
+    (outside / "index.html").write_text("Synthetic private canary")
+    @contextmanager
+    def linked(export, frozen, config):
+        app = export / "site/.next/server"
+        app.mkdir(parents=True)
+        (app / "app").symlink_to(outside, target_is_directory=True)
+        yield lambda *_: pytest.fail("unsafe artifacts reached served collection")
+    with pytest.raises(PageRefused, match="symlink"):
+        collect_current(source, "dev", candidate, build_start=linked)
+    assert (outside / "index.html").read_text() == "Synthetic private canary"
