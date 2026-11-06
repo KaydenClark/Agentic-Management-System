@@ -64,15 +64,23 @@ const faults = [
   ['malformed', f => f.put('.next/server/route-cache/APP_PAGE/not-a-hash/skills/alpha.html', '<title>Bad</title>'), /cache.*artifact|layout/],
   ['file symlink', (_f, files) => { rmSync(files['skills/alpha.html']); symlinkSync(files['skills.html'], files['skills/alpha.html']); }, /symlink/],
   ['directory symlink', f => { const base = join(f.site, '.next/server'); renameSync(join(base, 'route-cache/APP_PAGE'), join(base, 'saved-pages')); symlinkSync(join(base, 'saved-pages'), join(base, 'route-cache/APP_PAGE')); }, /symlink/],
-  ['site-root symlink', f => symlinkSync(f.site, join(f.site, 'alias')), /symlink/],
 ];
 for (const [name, change, expected] of faults) test(`manifest-backed reader and CLI refuse ${name}`, () => {
   const f = fixture();
   try {
     change(f, cache(f));
-    const directory = name === 'site-root symlink' ? join(f.site, 'alias') : f.site;
-    assert.throws(() => readBuiltPages(directory), expected);
-    const result = cli(directory); assert.notEqual(result.status, 0); assert.match(result.stderr, expected);
+    assert.throws(() => readBuiltPages(f.site), expected);
+    const result = cli(f.site); assert.notEqual(result.status, 0); assert.match(result.stderr, expected);
+  } finally { f.cleanup(); }
+});
+
+test('the explicit-directory API refuses a site-root symlink', () => {
+  const f = fixture();
+  try {
+    const alias = join(f.site, 'alias');
+    symlinkSync(f.site, alias);
+    assert.throws(() => readBuiltPages(alias), /symlink/);
+    // The CLI has no directory input: an aliased script is not this API call.
   } finally { f.cleanup(); }
 });
 
