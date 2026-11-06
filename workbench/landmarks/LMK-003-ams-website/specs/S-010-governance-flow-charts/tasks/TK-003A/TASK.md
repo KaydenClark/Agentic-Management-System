@@ -3,12 +3,13 @@
 **Task ID:** TK-003A
 **Spec ID:** S-010
 **Slice:** Accept two audited RSI source revisions; reject unknown or meaning-changing drift
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: S-010 Acceptance Criteria
 **Planned verification:** Audit source transition; reject unknown digest and changed workflow; retain existing adverse controls. Fresh build, focused and site tests, project checks and exact-head CI.
 **Claimed by:** codex-governance-charts
 **Current claimant:** codex-governance-charts
+**Proof:** Source 555c09a006c95137e513a0c99c4e20e1a309f905: audited the original RSI authority and append-only S-011 fcd0d3661477b2717cfde49bdc1ceda25a081d0c source against chart meaning. Both exact source bytes pass; unknown source and changed attempt meaning fail. Fresh build and frozen inventory passed; 50 page hashes unchanged; 14 focused and 332 site tests passed. Exact-head Python and site CI each passed all 14 steps. Local Python printed 867 passed and 5 skipped; its shell wrapper subsequently failed on a read-only variable.
 
 ## Release
 
@@ -35,3 +36,9 @@ Read-only comparison found the old 22,049 bytes intact as a prefix of the publis
 - [ ] Return source evidence, checks, Receipt, gaps and both merge/Task answers. Independent Review, actual Human QA and owner-only dev-to-main promotion remain distinct.
 
 Workspace baseline sha256:eca78f529117f2156c5f06eb784e65d0fac680417686bc31c6ee479e4b8bdb56
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-010-governance-flow-charts | 555c09a006c95137e513a0c99c4e20e1a309f905 | ahead 0 behind 0 | 0 | Source 555c09a006c95137e513a0c99c4e20e1a309f905: audited the original RSI authority and append-only S-011 fcd0d3661477b2717cfde49bdc1ceda25a081d0c source against chart meaning. Both exact source bytes pass; unknown source and changed attempt meaning fail. Fresh build and frozen inventory passed; 50 page hashes unchanged; 14 focused and 332 site tests passed. Exact-head Python and site CI each passed all 14 steps. Local Python printed 867 passed and 5 skipped; its shell wrapper subsequently failed on a read-only variable. | Task record and native Spec evidence; no chart or UI change. The prior assembled Review is historical; the changed packet requires a new independent delta Review. | Independent delta Review, final page cards and owner Human QA remain open; only the owner promotes dev to main. Snapshot excludes ignored generated caches and does not certify semantic completeness.; close attribution: {"agent":"codex-governance-charts","claimant":"codex-governance-charts","onBehalfOf":null} | baca64f57f8810dfd2cb846c7341f222538e9f590937ad4651d427818ec59431 |
