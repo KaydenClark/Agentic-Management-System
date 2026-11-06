@@ -12,13 +12,9 @@
 
 ## Assignment
 
-Target checked `main` via [PR174](https://github.com/KaydenClark/Agentic-Management-System/pull/174). Site/other writers stay read-only. Preserve claimant, receipts/failures and unrelated work; original assignment is at7eedef9. Parent Spec and Board README own detailed contracts.
+Target checked `main` via [PR174](https://github.com/KaydenClark/Agentic-Management-System/pull/174); site/other writers stay read-only. Full contracts: parent Spec, Board README and original7eedef9 assignment.
 
-One frozen trusted SHA → Git-only export → isolated build/start → postbuild owner projection → complete built/served route comparison → cards/index/approval anchor. Require explicit current owners/sources for every public page,39+ skill articles and visitor404; exclude only internal global-error. Distinguish historical landing, containment and pending/null provenance; never invent ownership/integration or use old landing content.
-
-Exclude private host context; verify owned interruption cleanup. Fixtures prove their scope only. RSI results/availability stay bound; exclude freshness only and require trusted protected HTML.
-
-Use Board flock/CAS and atomic dirty/unsafe/conflict refusal. Preserve answered bytes; append stale history for edits/removals, new returning occurrences and changed metadata. Identical reruns are no-ops; footer-only changes do not stale. Spec privacy/promotion rules hold; later Tasks remain separate. Close only on acceptance/checks/delivery.
+Deliver a frozen Git-only, isolated current build through complete explicit route owners, served hashes and Board lock/CAS. Cover all pages/articles/visitor404; exclude internal global-error only. Preserve provenance, source validation, atomic refusals, private isolation, owned cleanup, append-only stale/returning history, no-op reruns and footer stability. Bind RSI results/availability; exclude freshness only. Verify protected artifacts rather than substitute local HTML. Later Tasks/owner QA/promotion remain separate.
 
 ## Acceptance
 
@@ -33,7 +29,7 @@ Use Board flock/CAS and atomic dirty/unsafe/conflict refusal. Preserve answered 
 
 Workspace baseline sha256:81dd8dfc83cf2aaa52dcbc6b763823137fe82ede9d053bb84a22225d4f2feb2d
 
-Claim originals preceded complete private inventory/separate binding. Local retention is not remote recovery. Preserve every receipt/failure; no attempt reset/new owner gate. Actual protected coverage, later Tasks and Human QA remain open.
+Claim originals/private inventory remain preserved; local retention is not remote recovery. Both receipt forks remain intact: published native chain below and [frozen sibling chain](../../../../../../wiki/history/S-005-TK-001-fb12d6e.md). No renumbering or rehashing; no acceptance/reset is inferred.
 
 ## Receipt
 

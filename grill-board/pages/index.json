@@ -1,0 +1,341 @@
+{
+  "candidate": "262d28e19b50ec0774f7c58c949cff8e403e8ec3",
+  "pages": {
+    "/": {
+      "card": "page-home-7fdc257fccaf.md",
+      "hash": "sha256:7fdc257fccaf0eea1bfea65b5a6bf5026de0ed3068abd057da2a95717b22396e",
+      "landed": "c529821de4f8f9b8db916dfc9988e365ab06c134",
+      "provenance_kind": "historical-landing",
+      "title": "Home"
+    },
+    "/_not-found": {
+      "card": "page-_not-found-c68565e9125e.md",
+      "hash": "sha256:c68565e9125e7b638646aeb7cd9969eed6f1a540a7add20e2bcf819242dc76c8",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "Agentic Management System"
+    },
+    "/about": {
+      "card": "page-about-3c98c314eeee.md",
+      "hash": "sha256:3c98c314eeee5fe82d8133935953d542045a944efaaea77997aaec87bf2f76f5",
+      "landed": "63d9fbe0a6a5af415e7ee79d514a4f9d8e515628",
+      "provenance_kind": "historical-landing",
+      "title": "About (compatibility route)"
+    },
+    "/glossary": {
+      "card": "page-glossary-658902d27aa5.md",
+      "hash": "sha256:658902d27aa50760e28d7bd6e003a9e569ed9e2bfa836b54d571e9b2c393a8a6",
+      "landed": "ea66a1bac7856933ae2fdbaab1ec6c44a5ef0d1b",
+      "provenance_kind": "historical-landing",
+      "title": "Glossary"
+    },
+    "/how-it-works": {
+      "card": "page-how-it-works-0dd10a5d92cf.md",
+      "hash": "sha256:0dd10a5d92cfe8d006b88954b22b3c0fdd727e9faed52f114794900833b04a9a",
+      "landed": "0418ac716d4ad48440f512ea90420d45bf2b4eec",
+      "provenance_kind": "historical-landing",
+      "title": "How it works"
+    },
+    "/rsi": {
+      "card": "page-rsi-f904998cd593.md",
+      "hash": "sha256:f904998cd593a09c1f64985df76178d98252588b08cd7f9ac5521b2bb1fb9b0c",
+      "landed": "fceec125c75590d49b828e636e081edd4983fec4",
+      "provenance_kind": "historical-landing",
+      "title": "RSI results"
+    },
+    "/skills": {
+      "card": "page-skills-3f83e6f38ed7.md",
+      "hash": "sha256:3f83e6f38ed72c04d1b264c665e4175b885c8bdf286d5ef24d4bd0e5fcef5c6d",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "Skills | Agentic Management System"
+    },
+    "/skills/align-concept": {
+      "card": "page-skills-align-concept-78548b8fed16.md",
+      "hash": "sha256:78548b8fed16cec73973c89b2881f9878173bf0a525e112cb00e5286b9167bda",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "align-concept | Skills | Agentic Management System"
+    },
+    "/skills/align-docs": {
+      "card": "page-skills-align-docs-308803886c95.md",
+      "hash": "sha256:308803886c95da4cf4bd199529348f9ef191fae089c6aa380540d2cbf13fd388",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "align-docs | Skills | Agentic Management System"
+    },
+    "/skills/ask-workbench": {
+      "card": "page-skills-ask-workbench-a7cf1924e6f0.md",
+      "hash": "sha256:a7cf1924e6f078934643d7fd42f707e8b952ac732b8178ca088e7451ab178750",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "ask-workbench | Skills | Agentic Management System"
+    },
+    "/skills/audit-workbench": {
+      "card": "page-skills-audit-workbench-515990d9d707.md",
+      "hash": "sha256:515990d9d7070e10d6870a0f5a99420989e92f221cf3c35b350c376dc40bbd83",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "audit-workbench | Skills | Agentic Management System"
+    },
+    "/skills/author-skill": {
+      "card": "page-skills-author-skill-b864ed04baee.md",
+      "hash": "sha256:b864ed04baee75bee91719c67f31e810ed519c5db1f491cafd91086e11db9b72",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "author-skill | Skills | Agentic Management System"
+    },
+    "/skills/brainstorm": {
+      "card": "page-skills-brainstorm-ba23e87de670.md",
+      "hash": "sha256:ba23e87de670b66afabff662358cefc599fa4ca518972e76b8567c2586129cdf",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "brainstorm | Skills | Agentic Management System"
+    },
+    "/skills/carry": {
+      "card": "page-skills-carry-e7d357f2972b.md",
+      "hash": "sha256:e7d357f2972bbb0b8243ae06f693a3d2d6926f8102aa24435ea2216dbe0e5ad1",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "carry | Skills | Agentic Management System"
+    },
+    "/skills/code-review": {
+      "card": "page-skills-code-review-2359a701a06c.md",
+      "hash": "sha256:2359a701a06c19d3f35047cdebac5bd1eaeca2c1c349786b0cd968543231cefa",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "code-review | Skills | Agentic Management System"
+    },
+    "/skills/codebase-design": {
+      "card": "page-skills-codebase-design-799b7cd1af3c.md",
+      "hash": "sha256:799b7cd1af3cb4df16f40fc7b42af682d043406667b5d15a9e057c7783707e94",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "codebase-design | Skills | Agentic Management System"
+    },
+    "/skills/diagnose-and-propose": {
+      "card": "page-skills-diagnose-and-propose-9d41c2c3df0d.md",
+      "hash": "sha256:9d41c2c3df0d9c27e72103b6c73edf4dc8abf3a44a7bf405218773383a811e1c",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "diagnose-and-propose | Skills | Agentic Management System"
+    },
+    "/skills/diagnosing-bugs": {
+      "card": "page-skills-diagnosing-bugs-53123d891322.md",
+      "hash": "sha256:53123d89132205f0c19ef60ec2ba8479e58e2c9618f014403501a59297537408",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "diagnosing-bugs | Skills | Agentic Management System"
+    },
+    "/skills/domain-modeling": {
+      "card": "page-skills-domain-modeling-6005d2bbd378.md",
+      "hash": "sha256:6005d2bbd378e4553dd0a8ba07f24d0269289478a60ca62822cd8ae0b4bd4d83",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "domain-modeling | Skills | Agentic Management System"
+    },
+    "/skills/evaluate-workbench": {
+      "card": "page-skills-evaluate-workbench-d9c1c7be984b.md",
+      "hash": "sha256:d9c1c7be984b895b568e3f2b8ea92d22e26861241415c844d5d89a39dcf99a36",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "evaluate-workbench | Skills | Agentic Management System"
+    },
+    "/skills/explore-kb": {
+      "card": "page-skills-explore-kb-2cdd1ab2c596.md",
+      "hash": "sha256:2cdd1ab2c596542c4844b936cd80b8dc6d8b50f3b02350ab7e51c9f89e988c6b",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "explore-kb | Skills | Agentic Management System"
+    },
+    "/skills/grilling": {
+      "card": "page-skills-grilling-3b93a2fed36b.md",
+      "hash": "sha256:3b93a2fed36b239672652d562da2ac9340c87203615faa4d4420c8c5de20fc87",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "grilling | Skills | Agentic Management System"
+    },
+    "/skills/handoff": {
+      "card": "page-skills-handoff-246a547a76d2.md",
+      "hash": "sha256:246a547a76d2eb87b473bd3b8b88b4a2feee544652ba23854adb61c8bd48e4be",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "handoff | Skills | Agentic Management System"
+    },
+    "/skills/improve-codebase-architecture": {
+      "card": "page-skills-improve-codebase-architecture-6a864e46bae5.md",
+      "hash": "sha256:6a864e46bae5a34df2869fc9cb2098a0080d641592610dadbfcb2992dab91755",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "improve-codebase-architecture | Skills | Agentic Management System"
+    },
+    "/skills/improve-workbench": {
+      "card": "page-skills-improve-workbench-0870d2cdd2b7.md",
+      "hash": "sha256:0870d2cdd2b7a9140d4cff5068b8513df9d38f4a845242d7bfb0c1febe79b8f7",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "improve-workbench | Skills | Agentic Management System"
+    },
+    "/skills/jot": {
+      "card": "page-skills-jot-d3a82ed4ba30.md",
+      "hash": "sha256:d3a82ed4ba30d284147c5574f2e3c851635306f376e9670f4dbc22fa71d6e315",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "jot | Skills | Agentic Management System"
+    },
+    "/skills/journey": {
+      "card": "page-skills-journey-708979bfdc0f.md",
+      "hash": "sha256:708979bfdc0f0caeef22ece00498735a785695a98e58a0328d070de1da55c362",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "journey | Skills | Agentic Management System"
+    },
+    "/skills/land": {
+      "card": "page-skills-land-8784ab6fafdf.md",
+      "hash": "sha256:8784ab6fafdf5afbfab3743e734fee4b1ebbfc4c18307e4d573c9afbfb9bdcbc",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "land | Skills | Agentic Management System"
+    },
+    "/skills/map": {
+      "card": "page-skills-map-aac365e6a6cd.md",
+      "hash": "sha256:aac365e6a6cd1e9f79de3213d5460a37218069d00ae7cbe51a4e06000d721422",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "map | Skills | Agentic Management System"
+    },
+    "/skills/oracle": {
+      "card": "page-skills-oracle-85e2bfbb0498.md",
+      "hash": "sha256:85e2bfbb04985bf3c9a97fc8e205d8c6dd6b24827df272f6d6732604b3058ef2",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "oracle | Skills | Agentic Management System"
+    },
+    "/skills/orchestrate": {
+      "card": "page-skills-orchestrate-7a40b5eddab1.md",
+      "hash": "sha256:7a40b5eddab1bf3c7297e1961f0106a504b83c2e199cb91b29172930490c4275",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "orchestrate | Skills | Agentic Management System"
+    },
+    "/skills/plan": {
+      "card": "page-skills-plan-e2949d39aca0.md",
+      "hash": "sha256:e2949d39aca023c9c330bc1cd314bd82fef1258457591783e8b569fa145b2a2b",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "plan | Skills | Agentic Management System"
+    },
+    "/skills/pr": {
+      "card": "page-skills-pr-9d61ff335e3f.md",
+      "hash": "sha256:9d61ff335e3f89cc7d6323ee0a50655a143b1c1696c8e932d54b9d1e842e757e",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "pr | Skills | Agentic Management System"
+    },
+    "/skills/promote": {
+      "card": "page-skills-promote-185c518154fd.md",
+      "hash": "sha256:185c518154fd38a51c421b8a3fec776ee304701ca11140effc6b7990ef36c8e6",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "promote | Skills | Agentic Management System"
+    },
+    "/skills/prototype": {
+      "card": "page-skills-prototype-43ca1116ef05.md",
+      "hash": "sha256:43ca1116ef05853401ce37f31159aa6b85a7593af17f4ecb7984b5ff2d906d13",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "prototype | Skills | Agentic Management System"
+    },
+    "/skills/readback": {
+      "card": "page-skills-readback-42837c6157be.md",
+      "hash": "sha256:42837c6157be8624648eb421fe521f0712a13c345aaa3c65a307972cef360105",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "readback | Skills | Agentic Management System"
+    },
+    "/skills/reconcile": {
+      "card": "page-skills-reconcile-bc0d3c7cb48b.md",
+      "hash": "sha256:bc0d3c7cb48b56a7eb39ca69a16e0d9beb4d9ebc5c5bb9219a11fc2433ee6e06",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "reconcile | Skills | Agentic Management System"
+    },
+    "/skills/research": {
+      "card": "page-skills-research-5181ea92236f.md",
+      "hash": "sha256:5181ea92236ff5d0f39448592c53dffa6f8dbf48cf7aa68c73db557067d00c92",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "research | Skills | Agentic Management System"
+    },
+    "/skills/resolving-merge-conflicts": {
+      "card": "page-skills-resolving-merge-conflicts-2c98c08af27f.md",
+      "hash": "sha256:2c98c08af27f71a70d626bd86a560c1249bb899a5003b7e9bb4dc56c5c66f633",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "resolving-merge-conflicts | Skills | Agentic Management System"
+    },
+    "/skills/retro": {
+      "card": "page-skills-retro-2b8a1f21ed09.md",
+      "hash": "sha256:2b8a1f21ed097129e7207699295cda5c49b61240a61fea59344104fb634272d0",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "retro | Skills | Agentic Management System"
+    },
+    "/skills/setup-workbench": {
+      "card": "page-skills-setup-workbench-9a4b72e15f9a.md",
+      "hash": "sha256:9a4b72e15f9af9599b56beec3264886f9ff57418629940f88298daa4a6bc8b23",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "setup-workbench | Skills | Agentic Management System"
+    },
+    "/skills/sitrep": {
+      "card": "page-skills-sitrep-7c5748bd24ac.md",
+      "hash": "sha256:7c5748bd24ac6bb145e7234984bcc06139893c2d9bc6c30dded2c98780e28566",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "sitrep | Skills | Agentic Management System"
+    },
+    "/skills/tdd": {
+      "card": "page-skills-tdd-4048503499ab.md",
+      "hash": "sha256:4048503499ab996cf66a0f3751ec1747eec7c68e97543129e217ead75528e606",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "tdd | Skills | Agentic Management System"
+    },
+    "/skills/triage": {
+      "card": "page-skills-triage-5d457fbe15f4.md",
+      "hash": "sha256:5d457fbe15f4a647e499677db7768eafa159c7bea180fdb2082d2270493231f2",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "triage | Skills | Agentic Management System"
+    },
+    "/skills/wayfinder": {
+      "card": "page-skills-wayfinder-371d47345123.md",
+      "hash": "sha256:371d47345123436719a1690329028ab67e478ac095e41d03047d42a2b4b5c7d0",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "wayfinder | Skills | Agentic Management System"
+    },
+    "/skills/writing-for-agents": {
+      "card": "page-skills-writing-for-agents-a4d93d441dcd.md",
+      "hash": "sha256:a4d93d441dcdd2dcb2b87d384a5e7ea36cf2b5594647ecd5ecf940d0c3fe30cc",
+      "landed": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+      "provenance_kind": "verified-containment",
+      "title": "writing-for-agents | Skills | Agentic Management System"
+    },
+    "/start": {
+      "card": "page-start-3c98c314eeee.md",
+      "hash": "sha256:3c98c314eeee5fe82d8133935953d542045a944efaaea77997aaec87bf2f76f5",
+      "landed": "992a5f86b7171fe837fb58dea3e91b3b7c59a9e4",
+      "provenance_kind": "historical-landing",
+      "title": "About"
+    },
+    "/why": {
+      "card": "page-why-750d5a161652.md",
+      "hash": "sha256:750d5a1616529793aa40fca0ba1a588473f4042ea98f1521edaac35539e4d296",
+      "landed": "ea66a1bac7856933ae2fdbaab1ec6c44a5ef0d1b",
+      "provenance_kind": "historical-landing",
+      "title": "Why"
+    }
+  }
+}

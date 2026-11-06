@@ -333,3 +333,12 @@ def test_provenance_never_invents_a_branch(room, kind):
         pages.generate(room, listed, {'/': html()}, candidate=before)
     assert git(room, 'rev-parse', 'HEAD') == before
     assert not git(room, 'status', '--porcelain')
+
+
+def test_built_card_does_not_claim_unverified_protected_deployment(room):
+    candidate = git(room, 'rev-parse', 'HEAD')
+    pages.generate(room, inventory(room, ('/',)), {'/': html()}, candidate=candidate)
+    card = load_cards(room / 'grill-board/cards')[0][0]
+    assert f'built candidate {candidate}' in card.context
+    assert 'Protected-deployment verification is pending' in card.context
+    assert 'protected dev candidate' not in card.context
