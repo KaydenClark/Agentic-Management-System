@@ -67,7 +67,7 @@ def test_collection_freezes_one_tree_and_classifies_every_built_surface(source):
         assert frozen == candidate and config == {}
         with fixture_build(export, frozen, config) as read:
             yield read
-    result = collect_current(source, "dev", candidate, build_start=build)
+    result = collect_current(source, "dev", candidate, build_start=build, inventory_relative="site/page-list.json")
     assert result["candidate"] == candidate
     assert set(result["html"]) == {"/", "/skills/new", "/_not-found"}
     assert result["html"]["/"] == '<main id="main">Pinned current content</main>'
@@ -93,10 +93,10 @@ def test_missing_page_owner_and_moving_pin_refuse_without_source_changes(source)
         with fixture_build(export, frozen, config) as read:
             yield read
     with pytest.raises(PageRefused, match="candidate.*changed"):
-        collect_current(source, "dev", candidate, build_start=build)
+        collect_current(source, "dev", candidate, build_start=build, inventory_relative="site/page-list.json")
     assert called == []
     with pytest.raises(PageRefused, match="/skills/new.*page-list owner"):
-        collect_current(source, "dev", before, build_start=build)
+        collect_current(source, "dev", before, build_start=build, inventory_relative="site/page-list.json")
     assert called == [before]
     assert git(source, "rev-parse", "HEAD") == before
 
@@ -168,7 +168,7 @@ def test_build_artifact_directory_link_refuses_before_reading_outside(source, tm
         (app / "app").symlink_to(outside, target_is_directory=True)
         yield lambda *_: pytest.fail("unsafe artifacts reached served collection")
     with pytest.raises(PageRefused, match="symlink"):
-        collect_current(source, "dev", candidate, build_start=linked)
+        collect_current(source, "dev", candidate, build_start=linked, inventory_relative="site/page-list.json")
     assert (outside / "index.html").read_text() == "Synthetic private canary"
 
 
@@ -217,7 +217,7 @@ def test_real_container_build_served_collection_and_cleanup(source, tmp_path, mo
     for key in ["OPENAI_API_KEY", "SUPABASE_SERVICE_ROLE_KEY", "GITHUB_TOKEN", "NODE_OPTIONS"]:
         monkeypatch.setenv(key, "synthetic-private-canary")
     runtime = DockerBuild(image, timeout=60)
-    result = collect_current(source, "dev", candidate, build_start=runtime)
+    result = collect_current(source, "dev", candidate, build_start=runtime, inventory_relative="site/page-list.json")
     assert len(result["html"]) == 3 and result["kinds"]["/_not-found"] == "visitor-404"
     assert runtime.cleanup_verified and runtime.container_id
     absent = subprocess.run(["docker", "inspect", "--format", "{{.Id}}", runtime.container_id], capture_output=True, text=True)
@@ -244,7 +244,7 @@ def build(export,candidate,config):
   Path(sys.argv[4]).write_text(json.dumps({'id':runtime.container_id}))
   time.sleep(60)
   yield read
-collect_current(Path(sys.argv[1]),'dev',sys.argv[2],build_start=build)
+collect_current(Path(sys.argv[1]),'dev',sys.argv[2],build_start=build, inventory_relative="site/page-list.json")
 '''
     env = {**os.environ, "PYTHONPATH": str(Path(__file__).resolve().parents[1] / "src")}
     log = (tmp_path / "interrupted-container.log").open("wb")
@@ -462,6 +462,6 @@ def test_collection_consumes_owner_projection_produced_by_the_frozen_build(sourc
             generated = (export / 'site/declared-owners.json').read_text()
             (export / 'site/page-list.json').write_text(generated)
             yield read
-    result = collect_current(source,'dev',candidate,build_start=postbuild)
+    result = collect_current(source,'dev',candidate,build_start=postbuild, inventory_relative="site/page-list.json")
     assert {row['path'] for row in result['inventory']['pages']} == {'/','/skills/new','/_not-found'}
     assert json.loads(page_list.read_text()) == stale, 'collector changed the source checkout projection'

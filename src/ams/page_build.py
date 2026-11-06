@@ -349,8 +349,8 @@ def built_routes(exported):
     return routes, excluded
 
 
-def collect_current(source, ref, expected_candidate, *, build_start, public_config=None,
-                    expected_origin=AMS_ORIGIN, inventory_relative=None):
+def collect_current(source, ref, expected_candidate, *, build_start, inventory_relative, public_config=None,
+                    expected_origin=AMS_ORIGIN):
     """Build/start one frozen tree through the supplied owned execution seam.
 
     ``build_start(exported_root, candidate, public_config)`` is a context manager
@@ -358,8 +358,7 @@ def collect_current(source, ref, expected_candidate, *, build_start, public_conf
     runner; injection supplies inert deterministic fixtures, never live proof.
     """
     source = Path(source).resolve()
-    if inventory_relative is not None and (not safe_relative(inventory_relative)
-            or not inventory_relative.endswith('.json')):
+    if not safe_relative(inventory_relative) or not inventory_relative.endswith('.json'):
         raise PageRefused('the declared page inventory path is unsafe')
     config = public_configuration(public_config)
     candidate = _pin(source, ref, expected_candidate, expected_origin)
@@ -368,7 +367,7 @@ def collect_current(source, ref, expected_candidate, *, build_start, public_conf
             # The pinned build may regenerate this projection from its committed
             # owner declarations. Read that output, never a stale prebuild list.
             try:
-                inventory = _safe_file(exported, inventory_relative or "site/page-list.json")
+                inventory = _safe_file(exported, inventory_relative)
                 listed = json.loads(inventory.read_text())
             except (OSError, json.JSONDecodeError) as error:
                 raise PageRefused("pinned build has no readable page-owner inventory") from error

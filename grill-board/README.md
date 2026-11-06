@@ -302,3 +302,7 @@ Every response must carry exactly the pinned footer `data-commit-sha` and a Next
 Automatic CLI collection accepts `--protected-artifact DIR --protected-project PROJECT --protected-deployment DEPLOYMENT --protected-origin IMMUTABLE_ORIGIN --protected-capture-sha256 OBSERVER_DIGEST` alongside the pinned build arguments above. The ordinary build and verified cleanup finish before protected files are consumed. Injected `--built-html` input cannot claim this mode.
 
 Successful collection returns a validated capture bound to the exact raw HTML, inventory and candidate. Generation accepts that in-process result, not a serialized evidence dictionary; replay revalidates the artifact. Safe protection identity/digest goes into the committed index. New verified cards are labeled `protected-capture`; an existing occurrence gets an appended verification receipt, preserving its answer and original context. Ordinary builds remain explicitly pending. A fresh capture with identical content/ownership updates snapshot evidence without re-asking unchanged cards, including older card templates. Hash or owner changes still append staleness. This verifies the observed snapshot; it supplies no owner decision or later-data freshness guarantee.
+
+Automatic collection requires the committed `pageReview.inventory` declaration.
+The internal build seam accepts that resolved path explicitly; it has no layout
+fallback. A current unanswered card held for rewrite blocks coverage.

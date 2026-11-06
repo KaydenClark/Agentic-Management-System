@@ -350,9 +350,11 @@ def _capture_arguments(args, parser):
 def _collect_for_review(args, *, review_commit=None):
     """The same frozen, cleanup-verified build/capture seam for writes and checks."""
     from .page_build import AMS_ORIGIN, DockerBuild, collect_current
+    paths = feedback_paths(args.project, review_commit or 'HEAD')
+    if paths.inventory is None:
+        raise PageRefused('the committed manifest must declare pageReview.inventory for automatic collection')
     runtime = DockerBuild(args.image, timeout=args.timeout)
     config = json.loads(args.public_config.read_text()) if args.public_config else None
-    paths = feedback_paths(args.project, review_commit or 'HEAD')
     collected = collect_current(args.source_repo or args.project, args.ref or 'origin/dev', args.candidate,
                                 build_start=runtime, public_config=config, inventory_relative=paths.inventory)
     if not runtime.cleanup_verified:

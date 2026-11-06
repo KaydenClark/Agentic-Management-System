@@ -298,6 +298,9 @@ def test_concurrent_review_commit_refuses_this_check_without_overwriting_it(room
 def test_automatic_generation_refuses_changed_layout_after_collection(room,monkeypatch,capsys):
     from ams import page_build
     listed=inventory(room,('/',))
+    manifest=json.loads((room/'workbench/manifest.json').read_text())
+    manifest['pageReview']['inventory']='site/page-list.json'
+    commit_json(room,'workbench/manifest.json',manifest)
     candidate=git(room,'rev-parse','HEAD')
     observed=[]
     class Runtime:
@@ -316,3 +319,46 @@ def test_automatic_generation_refuses_changed_layout_after_collection(room,monke
     assert error.value.code==1 and 'manifest changed' in capsys.readouterr().err
     assert git(room,'rev-parse','HEAD')==observed[0]
     assert not list((room/pages.CARDS).iterdir())
+
+
+def test_held_unanswered_page_is_not_covered_and_answered_history_remains_valid(room):
+    from ams.page_coverage import CoverageRefused, check_coverage
+    from ams.grill_board.answers import flag, render_hashes
+    from ams.page_feedback import read_voice
+    import uuid
+    (room / '.gitignore').write_text('.local/\n')
+    git(room, 'add', '.gitignore'); git(room, 'commit', '-qm', 'Synthetic ignored private store')
+    listed, _, candidate = prepared(room)
+    card = next(c for c in load_cards(room / pages.CARDS)[0] if c.fields['Page'] == '/')
+    card_sha, _ = render_hashes(room / pages.CARDS, card)
+    flag(room / pages.CARDS, card, '', card_sha, event_id=uuid.uuid4().hex,
+         voice_sha=read_voice(room).sha)
+    held = next(c for c in load_cards(room / pages.CARDS)[0] if c.file == card.file)
+    assert held.flag is not None and not held.waiting and held.answer is None
+    before = git(room, 'rev-parse', 'HEAD'), git(room, 'status', '--porcelain')
+    with pytest.raises(CoverageRefused, match='/.*held for rewrite'):
+        check_coverage(room, listed, candidate=candidate)
+    assert (git(room, 'rev-parse', 'HEAD'), git(room, 'status', '--porcelain')) == before
+    # An answer is coverage even if a later quality flag holds that question.
+    target = room / pages.CARDS / card.file
+    original = git(room, 'show', before[0] + ':' + pages.CARDS + '/' + card.file)
+    target.write_text(original + '\n## Answer\n\n**Verdict:** change\n')
+    git(room, 'add', str(target)); git(room, 'commit', '-qm', 'Synthetic answered held history')
+    assert check_coverage(room, listed, candidate=candidate)['cards'] == 2
+
+
+@pytest.mark.parametrize('command', ['generate', 'check'])
+def test_automatic_collection_requires_the_committed_inventory_declaration(room, monkeypatch, capsys, command):
+    from ams import page_build
+    _, _, candidate = source_fixture(room)
+    manifest = json.loads((room / 'workbench/manifest.json').read_text())
+    del manifest['pageReview']['inventory']
+    commit_json(room, 'workbench/manifest.json', manifest)
+    def unexpected(*args, **kwargs):
+        pytest.fail('undeclared inventory reached the build seam')
+    monkeypatch.setattr(page_build, 'DockerBuild', unexpected)
+    args = [command, '--project', str(room), '--candidate', candidate, '--image', 'sha256:'+'1'*64]
+    if command == 'check': args.append('--recompute')
+    with pytest.raises(SystemExit) as error:
+        pages.main(args)
+    assert error.value.code == 1 and 'declare pageReview.inventory' in capsys.readouterr().err

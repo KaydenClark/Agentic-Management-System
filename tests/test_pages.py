@@ -27,7 +27,8 @@ def room(tmp_path):
     (root / "README.md").write_text("Synthetic fixture.\n")
     (root / 'workbench').mkdir()
     (root / 'workbench/manifest.json').write_text(json.dumps({'pageReview': {
-        'voice': 'grill-board/voice-and-taste.md', 'privateFeedback': '.local/page-feedback'}}) + '\n')
+        'voice': 'grill-board/voice-and-taste.md', 'privateFeedback': '.local/page-feedback',
+        'inventory': 'site/page-list.json'}}) + '\n')
     git(root, "add", ".")
     git(root, "commit", "-qm", "fixture")
     return root
@@ -167,7 +168,7 @@ def test_automatic_cli_collects_frozen_candidate_before_any_board_write(room, mo
     assert len(load_cards(room / 'grill-board/cards')[0]) == 1
 
 
-def test_automatic_cli_refusal_and_unverified_cleanup_never_write_cards(room, monkeypatch):
+def test_automatic_cli_refusal_and_unverified_cleanup_never_write_cards(room, monkeypatch, capsys):
     import ams.page_build as build
     candidate = git(room, 'rev-parse', 'HEAD')
     image = 'sha256:' + '1' * 64
@@ -182,10 +183,12 @@ def test_automatic_cli_refusal_and_unverified_cleanup_never_write_cards(room, mo
     with pytest.raises(SystemExit) as refused:
         pages.main(command)
     assert refused.value.code == 1 and git(room, 'rev-parse', 'HEAD') == candidate
+    assert '/skills/new has no page-list owner' in capsys.readouterr().err
     monkeypatch.setattr(build, 'collect_current', lambda *args, **kwargs: {'candidate': candidate, 'inventory': inventory(room, ('/',)), 'html': {'/': html()}, 'kinds': {'/': 'page'}, 'excluded': {}})
     with pytest.raises(SystemExit) as cleanup:
         pages.main(command)
     assert cleanup.value.code == 1 and git(room, 'rev-parse', 'HEAD') == candidate
+    assert 'cleanup is not verified' in capsys.readouterr().err
     assert not list((room / 'grill-board/cards').glob('*.md'))
 
 

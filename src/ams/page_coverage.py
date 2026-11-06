@@ -65,6 +65,8 @@ def check_coverage(root, listed, *, candidate, built=None, review_commit=None):
                     or card.fields.get('Content hash') != entry['hash']
                     or not _same_owners(card, row, entry['hash'], candidate, voice_path)):
                 failures.append(f'{path}: no current committed card matches its index hash')
+            elif card.answer is None and not card.waiting:
+                failures.append(f'{path}: current unanswered card is held for rewrite')
             else:
                 matched += 1
                 if card.waiting:
