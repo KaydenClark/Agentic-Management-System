@@ -1,0 +1,175 @@
+{
+  "schema": "landmark-tracker/destination-question@3",
+  "id": "DQC-000B",
+  "revision": 4,
+  "title": "What belongs on the Grilling Board",
+  "question": "What belongs on the Grilling Board?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+      "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [
+    {
+      "type": "dqc",
+      "id": "DQC-000A",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    },
+    {
+      "type": "spec",
+      "id": "S-004",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    }
+  ],
+  "claims": [],
+  "origin": {
+    "title": "What belongs on the Grilling Board",
+    "question": "What belongs on the Grilling Board?",
+    "sources": [
+      {
+        "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+        "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-04T03:56:18.742Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-04T03:56:18.742Z",
+      "reason": "Recover the four original interview branches from sourced intent, dated 2026-11-03; captured now after supported setup.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    },
+    {
+      "revision": 2,
+      "at": "2026-11-04T03:56:19.835Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "dqc",
+            "id": "DQC-000A",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-04T03:56:19.989Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "spec",
+            "id": "S-004",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 4,
+      "at": "2026-11-04T03:56:22.295Z",
+      "reason": "DQC propose",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "pending",
+            "proposal": {
+              "readback": "**Summary**\n\nThe Board presents owner questions through DQCs; ordinary drafts and routine content are outside its owner frontier.\n\n**The why**\n\nOwner attention belongs on actual choices and requested judgments.\n\n**The intended result**\n\nThis branch covers the settled scope in DQC-000A. It is source-linked agent context and requests no new confirmation.\n\n**What I will do**\n\nPreserve the confirmed concept and link actual execution owners; introduce a distinct DQC only for a genuinely new decision.",
+              "why": "Coverage context from the exact confirmed concept, not a new owner question.",
+              "source": "Derived source-linked branch context from DQC-000A; workbench/wiki/context-grilling-board.md@aa2467c181989e5ff58d14687e39bea57083d7d3#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba; Kayden direct confirmation, 2026-11-03",
+              "scope": "Agent coverage context for the already confirmed DQC-000A; no new owner decision or authorization.",
+              "round": "ams-concept-20261103",
+              "priority": {
+                "value": 1,
+                "reason": "Current confirmed lifecycle implementation and recovery."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Connect owner intent with its actual execution and retained evidence."
+              },
+              "dependencies": [
+                "DQC-000A"
+              ],
+              "actionable": false
+            },
+            "digest": "f697e7fcd6346ba2b5c0ad4e7a7b41aea91b448cf9d5e45c9c8c8e96a65d199b",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "ams-seed-20261103-DQC-000B-propose",
+                "type": "propose",
+                "at": "2026-11-04T03:56:22.295Z",
+                "requestDigest": "e1753fb90c5e26b0ecca957a5f101f85f44c457e5a7dfce62a1af451a5ab59ef",
+                "source": null,
+                "note": null,
+                "revision": 4,
+                "round": "ams-concept-20261103"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "lifecycle": {
+    "state": "pending",
+    "proposal": {
+      "readback": "**Summary**\n\nThe Board presents owner questions through DQCs; ordinary drafts and routine content are outside its owner frontier.\n\n**The why**\n\nOwner attention belongs on actual choices and requested judgments.\n\n**The intended result**\n\nThis branch covers the settled scope in DQC-000A. It is source-linked agent context and requests no new confirmation.\n\n**What I will do**\n\nPreserve the confirmed concept and link actual execution owners; introduce a distinct DQC only for a genuinely new decision.",
+      "why": "Coverage context from the exact confirmed concept, not a new owner question.",
+      "source": "Derived source-linked branch context from DQC-000A; workbench/wiki/context-grilling-board.md@aa2467c181989e5ff58d14687e39bea57083d7d3#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba; Kayden direct confirmation, 2026-11-03",
+      "scope": "Agent coverage context for the already confirmed DQC-000A; no new owner decision or authorization.",
+      "round": "ams-concept-20261103",
+      "priority": {
+        "value": 1,
+        "reason": "Current confirmed lifecycle implementation and recovery."
+      },
+      "value": {
+        "value": 1,
+        "reason": "Connect owner intent with its actual execution and retained evidence."
+      },
+      "dependencies": [
+        "DQC-000A"
+      ],
+      "actionable": false
+    },
+    "digest": "f697e7fcd6346ba2b5c0ad4e7a7b41aea91b448cf9d5e45c9c8c8e96a65d199b",
+    "confirmations": [],
+    "events": [
+      {
+        "eventId": "ams-seed-20261103-DQC-000B-propose",
+        "type": "propose",
+        "at": "2026-11-04T03:56:22.295Z",
+        "requestDigest": "e1753fb90c5e26b0ecca957a5f101f85f44c457e5a7dfce62a1af451a5ab59ef",
+        "source": null,
+        "note": null,
+        "revision": 4,
+        "round": "ams-concept-20261103"
+      }
+    ]
+  }
+}

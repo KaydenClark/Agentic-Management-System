@@ -34,5 +34,5 @@ export function characterCount(source) {
 export function budgetFailure(policy, file, source) {
   const count = characterCount(source);
   const max = budgetFor(policy, file).maxCharacters;
-  return count > max ? `${file}: ${count} characters; maximum ${max}. Split or condense this artifact without losing required meaning.` : null;
+  return count > max ? `${file}: ${count} characters; maximum ${max}. Return it to its author to prune and revise until it fits without losing required meaning; never split it into parts or truncate it.` : null;
 }

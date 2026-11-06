@@ -1,19 +1,20 @@
 # LMK-001 - Grill Board
 
 **Landmark ID:** LMK-001
+**Concept source:** [DQC-000A](../../landmark-tracker/destination-questions/DQC-000A.json) — confirmed Grilling Board lifecycle.
 **Status:** planned
 **Priority:** 1
 **Owner:** Kayden
-**Updated:** 2026-11-01
+**Updated:** 2026-11-03
 **Catalog description:** The owner's local attention queue, where agents post items that need an answer and confirmed answers land straight in their owning records.
 **Blockers:** none
-**Next gate:** Task planning for S-004.
+**Next gate:** S-004 DQC tracker/setup and Python Board implementation; owner Human QA remains open.
 
 ## Direction
 
-The Grill Board is where the owner's attention goes. Agents post only what needs the owner: an owner gate, an open choice, a page approval or the text of a decision. The owner answers, rates and comments there, and the agent writes each confirmed answer straight into the record that owns it. Nothing is re-asked and no bookkeeping step sits in between.
+The Grill Board presents DQCs needing the owner: questions and concepts laid out as full readbacks with suggested answers to confirm or correct. DQCs own the interview from its first branches, evolve with its tree, and preserve exact confirmed readbacks, corrections, reasons and history. The [confirmed lifecycle](../../wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba) supplies current meaning.
 
-It runs locally on the owner's machine with a Python server. It is never hosted on Vercel and is never a drafting surface: pages and routine content are written elsewhere, and only items that need an answer go on the board.
+It runs locally with a Python server, never Vercel. Complete DQC readbacks are visible on cards; routine page drafting remains elsewhere. TRACKER.md projects concepts; TASKBOARD.md projects execution through Landmarks, Specs and Tasks, with stable references in both directions. Ending a round triggers review of changed answers and feedback, then actual reconciliation, authorized preparation or another interview frontier.
 
 Once the board exists it replaces chat as the place where the owner approves and criticizes the whole website, page by page. The recorded criticism and ratings become the owner's voice and taste record, which agents follow and the RSI loop reads.
 
