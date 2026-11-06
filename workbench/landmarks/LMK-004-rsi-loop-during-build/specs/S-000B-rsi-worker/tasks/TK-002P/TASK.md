@@ -20,6 +20,12 @@ Planning source: owner RSI Map/Plan request of 2026-11-04 and mapped base 8319e8
 
 The Spec's current owner Jot records the later twelve-outcome launch. The coordinator verified and released exact S-006 recovery artifact `3856614eeb8ec2e158db003025a7a75ee29bfc2f`, including full CI and both independent rechecks. Implement/check the pre-model adapter, supported-permission canaries, owned process cleanup and recovery integration. Real calls remain held until the frozen native-case grader, applicable approved labels, source/host/model/conditions and current subscription capacity are verified. This is no Q-execution prerequisite, stopped-campaign release, production migration or publication workaround. No earlier receipt, frozen fixture or exhausted attempt changes.
 
+## Starting inventory
+
+Workspace baseline sha256:58df227157dd196fdc4647935379e2f348d1fa013d057e9a163f2963af50219c
+
+Native claim `68f1499f4a1b6c7274f95f863e7194cd8d2700eb` and rendered originals `3d5ed69e8479d8f436186f548c8beb01f8591f1c` precede this separate binding and all P product edits. The complete snapshot covers825 files:823 tracked originals verified against the published original commit and2 ignored generated-cache originals independently copied and hash/mode-verified in private recovery. Four refs and no stashes were observed; no inventory findings. Raw paths/snapshot/private copies stay local; whole-workspace remote recovery is not claimed.
+
 ## Acceptance
 
 - [ ] One real-tool case reaches a verified end state and a fresh worker recovers the same identity without duplicate effects.
