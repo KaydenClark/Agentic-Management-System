@@ -46,7 +46,7 @@ A local map uses this schema:
 
 Retained Markdown files participate in current-link repair. Include every
 current inbound reference that must follow the move. Outgoing links from moved
-Markdown files are rebased too. The existing append-only evidence section stays
+Markdown files are rebased too. A legacy append-only evidence section, where one remains, stays
 byte-identical and its links read at the plan's `snapshot.head` revision.
 Immutable web citations remain unchanged. Other prose that describes historical
 paths needs explicit review before selection; the runtime cannot infer its intent.

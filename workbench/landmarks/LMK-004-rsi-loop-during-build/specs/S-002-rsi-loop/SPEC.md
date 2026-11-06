@@ -1,128 +1,109 @@
-# S-002 - RSI loop with safeguards
+# S-002 - RSI evaluation and qualification
 
 **Spec ID:** S-002
 **Status:** active
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
-**Updated:** 2026-11-01
-**Catalog description:** The measured self-improvement loop: the site build as the first trial, then rounds that start from failed results, under safeguards that keep the numbers honest.
+**Updated:** 2026-11-03
+**Catalog description:** Case contracts, comparisons, Fitness/Alignment qualification and regression evidence for LMK-004.
 **Blockers:** none
 **Confirmation:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-1871d72c-c1cf-4602-887c-3c996f26e086](../../../../wiki/context-active-spec-approvals.md)
-**Latest event:** Activated 2026-11-01 under the owner's six-active-Spec approval; four Tasks planned, seeding first.
-**Next gate:** S-006 rows for TK-001; the owner's standing campaign approval before TK-002.
+**Next gate:** TK-000Y bounded structured-output correction; no further model calls or additional trial-store rows are released.
 
 ## Intent and authority
 
-The owner's aim is to build the whole thing and then loop. The first trial is the whole build; then the loop repeats until the owner's token meter is spent or a stop rule fires. The owner confirmed building the safeguards in from the start.
+[Owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes preparation; implementation and trials remain held.
 
-## Outcome
-
-Each change to a runtime, control or skill is tested on fixed tasks against the current version and against controls, and ends in rows plus a disposition. The site shows the result either way.
-
-## Why It Matters
-
-Outside research does not settle whether shaping an agent's environment improves results. Without controls, noise and grader independence, a loop can report improvement that is not there.
+[Owner decisions](../../../../wiki/context-ams-purpose.md) govern resumed Journey: fixed r1/acceptance, attempts, meter and bounded versus whole scope.
 
 ## Current Verified State
 
-- No loop, tasks, graders or rows exist in this repository. The data store is S-006.
+Scoring is met ([TK-000M](tasks/TK-000M/TASK.md#receipt)); cycle, evaluations, stops and readback remain open. The [baseline](../../../../feedback/REPORT-rsi-baseline-2026-11-01.md) is Broken 4/138, unqualified and not a strike; S-006/TK-000S owns identity. TK-002 owns narrow qualification and Unknown baseline; later slots wait on TK-000Y. Only stopped run28/result41 is published; bootstrap is not benefit. See [history](../../../../wiki/history/S-002.md).
 
 ## Desired Behavior
 
-One round: select the failing tasks; analyze the failed runs and name the earliest gap and its single owner; propose one change with its expected movement; implement it (skills through the skills repository's own process); rerun the same tasks against the current version; dispose as retain, revise (variant) or remove; write rows and the disposition to Supabase.
+Failure -> earliest gap/owner -> one repository change -> baseline/retest -> disposition/later use.
 
-Safeguards, each required:
+### Evaluation within the RSI Landmark
 
-1. **Start from failure.** A round starts only from a failed result. Retro findings are for the owner and do not start rounds yet.
-2. **Noise floor.** A version is run against itself before any change is trusted.
-3. **Control arms.** No-AMS and plain-instruction arms run alongside the AMS arm.
-4. **Paired statistics** per task, with intervals.
-5. **Full rows.** Cost, tokens and completed state on every row.
-6. **Independent graders** taken from the accepted version, never the candidate's.
-7. **Sandboxed trials**, never with permission checks skipped.
-8. **Held-out before public.** More than two held-out tasks before any public number.
-9. **Retire studied held-out tasks** once their failures have been studied.
-10. **One standing campaign approval** from the owner instead of a spend approval each round.
-11. **Skills pinned per run.** Each run records the skills commit it used.
-12. **Three strikes.** A run, a failed test, a second failed test, then stop and report.
-13. **Repeat failures.** A failure seen twice is first checked for an earlier fix that did not work.
+LMK-004 owns the loop; S-000B executes, S-006 persists, S-013 detects recurrence and S-011 delivers shared-source changes. This Spec owns case contracts, comparisons, qualification and benefit decisions.
+
+Evaluate individual skills or declared bundles; bundle gains do not certify each component. Diagnose skill, instruction, tool, environment, context, ownership, coordination, proof or model limitations; unknown remains unknown. Route product defects to their Specs.
+
+Cases link original outcomes, baseline, actual loaded versions, tools and end states to r1. Separate optimizer training/selection from fresh confirmation; studied cases become development cases. Target-skill-withheld controls retain mandatory authority and safety instructions. Record natural routing and explicit invocation per host, actual loading and verified end state. Measure owner review effort and recurrence per eligible use; unknown denominators stay unknown. Objective and qualified semantic checks supply evidence, not new scores. Transcripts cannot certify Git/filesystem behavior; cheap screening cannot replace qualification.
+
+Preserve historical provenance, development/held-out boundaries, prior-pass and cross-skill regressions. Count eligible successes, failures, owner interventions and later recurrence. Document size or audit gains alone are not useful benefit.
+
+### Audit scores
+
+Canonical: `audit-workbench` r1 version 1, hash `96636d4a5e70cacbb0b94fd079340f02ed0f09b121b6498c1c70eebeb13b0578`. Freeze rubric, scope, IDs, pins, loaded artifacts, host/tools and evaluator/model/prompt/qualification; no extra points.
+
+r1 owns pooled `100 × Yes / applicable`, eligibility and levels (3/2/1/0 passing runs = Excellent/Stable/Functional/Broken; Critical No overrides); [assessments](../../../../../evals/ASSESSMENTS.md) implement them. Missing/Unknown/refused/interrupted stays No in class and denominator; label static/unqualified proof; no rounding or empty percentage. Acceptance is not QA, distribution or benefit; bounded results cannot certify ten-area AMS.
+
+### Skill evals and retests
+
+`evals/` pins case, fixtures, permissions, end state, grader/model/host/skill. Cover invocation, near misses, adverse input, prerequisites, discovery, resume and authority. Map r1 IDs; qualify judges and good/bad/do-nothing cases; protect inputs/logs and use manual trials until qualified. Findings close only by r1 three-run repaired-revision retest, not merge, omission or score; retain recurrence and new failures.
 
 ## Decisions And Contracts
 
-- One improvement procedure; one change per version.
-- Same provider, model and effort within a comparison.
-- No automated proposer until a trusted grader, a measured cost per trial and an owner-judged manual round exist.
+- Retain only qualified Stable/Excellent with demonstrated useful benefit
+  predeclared before comparison. First case: grilling failure; coordinate existing redesign.
+- Failure-led rounds; review ineffective prior fixes on recurrence. One change/version.
+- New campaigns use Mid/Small tiers by default, High when needed, on Codex or Claude subscription meters. Record the selection and reason; freeze provider/model/effort within a comparison. Existing campaign pins remain unchanged. Accepted-version runner/graders/scoring, never
+  candidate-owned. Grader changes start a new series judged by its predecessor.
+- Same-version noise floor first, then r1 paired trials: fixed-task
+  AMS/no-AMS/plain-instruction arms, paired per-task intervals. Audit delta proves no benefit.
+- Public lift needs >2 fresh held-out tasks, controls, baseline/interval.
+  Studied cases retire to dev; scores are not lift.
+- Sandbox without skipped permissions. Automatic proposing waits for a trusted
+  grader, recorded subscription-meter availability and owner-judged manual round.
+- Baseline 0: no strike. Candidate initial -> retry -> retry -> stop/report unless
+  accepted. Repair/rename never resets; retain failures/harm.
+- Trial rows: task/arm, version/skills pin, provider/model/effort, completion,
+  cost/tokens availability, source. Subscription meter; unknown is not zero.
 
 ## Non-Goals
 
-- Changing model weights.
-- Presenting results (S-007).
+Weights; running loops during mapping; presentation (S-007).
 
 ## Dependencies And Blockers
 
-- S-006 for rows; sandboxed run hosts.
-- Open owner choice `rsi-campaign-approval`: the one standing campaign approval (budget and stop condition) before any paid trial run. The build readback approval of 2026-11-01 authorizes building the loop, not its spend.
-- Seed sources are real only: this build's own history (S-006 build-history rows) and the before/after notes the owner's skills repository records. That repository is private, so a row carries a summary and a commit pointer, never its text.
+S-000B executes; S-006 stores evidence; S-007 presents safe results. Only missing inputs block consumers.
 
 ## Vertical Implementation Slices
 
-Each Task is one fresh-session run in orchestrator B's local lane, landed feature -> `main` through a checked PR. Stack: task set and graders under `evals/`, a Python runner in a sandbox, the S-006 writer, Supabase rows, and queries over them.
-
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
+[TK-002Q case contract](../../../../wiki/guidebooks/rsi-case-contract.md).
 
 ## Acceptance Criteria
 
-- [ ] **Real, labeled seeds.** Every seed row names a real source (a build-history row, or a skills-repository commit) and the strength it supports; the build alone is one uncontrolled trial. *Must fail:* a seed row with no source, or a before/after note shown as measured improvement.
-- [ ] **Full rows.** Every row has cost, tokens, completed state, arm, version and skills commit. *Must fail:* a row missing its skills pin.
-- [ ] **Noise floor first.** A comparison is reported only after a same-version run sets the noise floor. *Must fail:* a lift smaller than the floor shown as improvement.
-- [ ] **Controls run.** Each round has no-AMS and plain-instruction rows on the same tasks. *Must fail:* a round with only the AMS arm.
-- [ ] **Graders independent.** The grader commit differs from the candidate and equals the accepted version's. *Must fail:* a candidate graded by its own changed grader.
-- [ ] **Sandboxed.** Trials run without skipped permission checks. *Must fail:* a trial log showing them skipped.
-- [ ] **Public numbers gated.** No public number until more than two held-out tasks have rows. *Must fail:* a headline from two tasks.
-- [ ] **Starts from failure.** Every round names the failed row it started from. *Must fail:* a round started from a retro idea.
-- [ ] **Stops.** After two failed fixes for one event the loop stops and reports. *Must fail:* a fourth attempt.
-
-## RSI and website connection
-
-This is the loop. S-006 stores its rows and S-007 presents them.
-
-## Testing Seams
-
-- The round runner on a fixture task with a known pass and fail; queries over the written rows.
-
-## Verification Procedure
-
-```bash
-node workbench/tools/spec-workbench.mjs show S-002
-# runner and test commands named at Task planning
-```
+- [ ] **Cycle:** one failure reaches diagnosis, bounded repair, qualified comparison, disposition, authorized adoption and later-use evidence. Missing pins/retests fail.
+- [x] **Scoring:** pooled 8/10 + 1/2 + 1/2 = 10/14; empty has no score. Critical/Regression/missing-proof and level rules are tested.
+- [ ] **Evals:** frozen contracts reject self-grading, do-nothing passes, static-only benefit, skipped permissions and below-noise gains.
+- [ ] **Stops:** baseline excluded; fourth attempt, renamed/reset counter or omitted finding fails.
+- [ ] **Readback:** S-006/S-007 preserve assessment/trial distinctions, failures and private-data boundaries; false storage claims fail.
+- [ ] **Native evidence:** fresh real-tool execution proves required end state and loaded skill identity; a transcript alone fails Git/filesystem claims.
+- [ ] **Worker evidence:** S-000B receipts preserve attempts; interruption cannot qualify an unrun check or restart stopped work.
+- [ ] **Retention:** existing Fitness/Alignment checks establish Stable/Excellent, useful benefit and no regression. Original-case pass with regression fails; bundle gains cannot certify each skill.
+- [ ] **Later use:** distinguish merge, authorized install, loading and outcomes. Recurrence is detected without owner prompting; stale loaded copies cannot count as repaired versions.
 
 ## Documentation Impact
 
-- RUNBOOK names the run, inspect and measure commands the graders call.
+LMK-004 owns the loop; Wiki routes capabilities. S-012 owns the lifecycle CLI; only missing inputs block consumers.
 
-## Append-Only Evidence And Execution Log
+## Testing Seams
 
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-| 2026-11-01 | none | Mapped as planned | render, doctor | this Spec | Every criterion; campaign approval |
+CLI/runner/writer/readback: missing proof, recurrence, original-pass/regression-fail. Checks: RUNBOOK; [proof](tasks/TK-000M/TASK.md).
 
 ## Review and Human QA
 
-Each retained change gets independent review; the owner judges whether a manual round is worth automating.
+Independent review per retained change; owner judges automation.
 
 ## Completion Result
 
 Pending.
 
-## Remaining Limitations Or Follow-Up Specs
+## Feedback-loop planning boundary
 
-- The retro improvement loop needs its own improvement before it is used in force.
-
-## Supersession
-
-- Supersedes: none
-- Superseded by: none
+Implementation and trials remain held; earlier approvals, attempts and stopped experiments retain scope. The [Wiki](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) owns sourced continuation.

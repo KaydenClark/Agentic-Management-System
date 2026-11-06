@@ -1,0 +1,45 @@
+# TK-001S - Visitors can comfortably read text across the website
+
+**Task ID:** TK-001S
+**Spec ID:** S-003
+**Slice:** Visitors can comfortably read text across the website
+**Status:** in-progress
+**Blockers:** none
+**Destination:** spec-acceptance: Presentation
+**Planned verification:** Compare representative page screenshots before/after at the same viewport and zoom, including small labels and long content; check both themes and 375px. Run focused typography/reflow checks and site build.
+**Claimed by:** s003-frontend
+**Current claimant:** s003-frontend
+
+## Authority and inputs
+
+[Approved five-item owner readback](../../../../../../wiki/context-website-presentation.md#jot-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458), AMS website feedback chat, 2026-11-02. Execution is authorized by the [S-003 orchestration assignment](../../../../../../wiki/context-website-presentation.md#jot-4adf0b91-665d-4abb-8644-4835b40e905a). Complete a checked feature PR into dev; Human QA and owner-only dev-to-main promotion remain separate.
+
+Source recovery baseline: c8cd5ee (planning checkout). Recover the current parent Spec, relevant decisions and current `origin/dev` implementation before coding; this baseline is not evidence of the deployed website. The confirmed website-only material/link rule is assigned to TK-002B (JOT-09260032). Preserve provenance and useful on-site material; coordinate shared-file changes serially.
+
+## Assignment
+
+Increase the effective type sizes across body text, navigation, labels and supporting content. Adjust line height, spacing and hierarchy coherently rather than enlarging only headings. Inspect all current routes and shared styles; retain the existing font family unless a demonstrated readability need warrants changing it. Do not invent a numerical size accepted by the owner; show before/after at normal zoom.
+
+One assigned implementor owns the complete behavior, affected content/styles, focused checks, QA, repairs and hand-back to S-003. Execute these feedback Tasks serially because they share shell/content/styles; there is no artifact dependency between them. Each is independently demoable and sized as one behavior through content, route/shell rendering, accessibility and verification. Integrate each checked result before taking the next shared-file assignment. Preserve unrelated work and historical receipts.
+
+For implementation, branch from current `origin/dev`, target a checked feature PR to `dev`, and respect site delivery controls. Only the owner promotes `dev` to `main`. Report the named candidate and actual local/deployed verification limits. Record site experience judgments only when actually supplied by the owner; automated checks cannot establish comfort, comprehension or approval.
+
+## Acceptance
+
+- [ ] Body text, navigation, labels and supporting information are visibly larger and comfortably readable at normal zoom.
+- [ ] Text hierarchy and spacing remain coherent across current routes in both themes.
+- [ ] At 375px and desktop, enlarged text neither clips controls nor creates horizontal page overflow, and zoom/reflow remains usable.
+
+## Hand-back
+
+Return the candidate/PR, observable result, checks actually run, screenshots where relevant and remaining gaps to S-003. No implementation is performed by this planning change.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s003-website-completion | 9f81ba1bbab436b085ee528e1e6b54f6ffc3569e | ahead 0 behind 0 | 3 | Source9f81ba1: initial production build and211 site tests passed before the reflow repair. First failed verification: 200-percent text scaling at375px overflowed6 route/theme cases. Proposed wrapping and zero-minimum track repair built successfully but was not reverified. Second failed verification: rebuilding while the full browser suite still read .next invalidated asset requests and produced default styles; suite stopped. Three-strike STOP; no final browser pass or merge readiness. | site/README.md records typography scale; Task retains both failures and unverified repair | Owner-authorized retry needed: finish one production build, freeze it until all browser/reflow checks finish, then evaluate acceptance. Current source is pushed; no Task close, merge, deployment, independent Review or Human QA. Separate root baseline pytest passed811 with4 skipped; hygiene/layout passed before site publication. | 29c194332aa5d1ddaa68e795ea40a6db8fe3768856f7d98c00c0f4e9178accde |
+
+## Current continuation
+
+The later bounded corrective run TK-002A met the inherited behavior and records its actual checks. This original failed run and receipt remain unchanged; native incomplete-run retirement is unavailable. Follow TK-002A and the parent Spec for current delivery, rather than repeating the historical retry instruction.

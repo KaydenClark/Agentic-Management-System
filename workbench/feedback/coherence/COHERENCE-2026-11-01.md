@@ -45,3 +45,44 @@ Each finding has one disposition, as defined in the [Glossary](../../../GLOSSARY
 - **B:** the COH-004 mapping first; then COH-001, COH-003 and COH-007 to COH-011.
 - **Owner:** COH-005, COH-006, COH-016, then COH-002.
 - **C** reruns this sweep as work lands, and reviews each Spec once it is assembled.
+
+## Owner answers, 2026-11-01
+
+Recorded in [owner answers](../../wiki/context-owner-answers-coherence.md). Each disposition below replaces the one in the table above.
+
+| ID | Answer | Disposition |
+|---|---|---|
+| COH-005 | The owner does not approve every merge. Agents merge non-site work into `main`; the owner approves only the site's `dev` -> `main`. DDR-000H and AGENTS were already right; ADR-002O and ADR-002F were wrong. | repaired: ADR-003F and ADR-003G supersede ADR-002O and ADR-002F |
+| COH-006 | The owner delegated the call. The service role key stays only in the gitignored local env file (ADR-003C); Vercel holds only the URL and publishable key, because the site only reads. | repaired: ADR-003H supersedes ADR-002Y |
+| COH-016 | The connectors stay attached, because they are shared with the other orchestrators. C never uses them. | declined (detaching); S-013 No secrets now requires that C never calls them |
+
+## Later findings, 2026-11-01
+
+| ID | Sev | Finding | Disposition | Return to |
+|---|---|---|---|---|
+| COH-019 | high | The Vercel free plan's limit of 100 deployments per day was hit at 13:48 UTC. Vercel reported `api-deployments-free-per-day` on PR #30 at `a1b3d8d`. Every push to a PR branch creates a Vercel deployment, including non-site PRs where `site/vercel.json`'s `ignoreCommand` cancels the build. With three orchestrators pushing, the daily limit runs out, and site previews on `dev` are blocked for about 24 hours. Non-site PRs show a red Vercel status that is not about their content. | diagnostic | A or B, with the owner's go-ahead: stop deployments for branches that need none, for example with `git.deploymentEnabled` in `site/vercel.json` limited to `dev` and `main`, so ignored builds stop counting. |
+
+| ID | Update | Disposition |
+|---|---|---|
+| COH-019 | PR #46 (`3affa38`) set `git.deploymentEnabled` in `site/vercel.json` to `main` and `dev` only, recorded as ADR-003I. Other branches no longer create Vercel deployments. | repaired (`3affa38`) |
+
+## Wrap-up sweep, 2026-11-01 15:43 UTC (`main` `b0fd71f`, `dev` `e0317ae`)
+
+| ID | Sev | Finding | Disposition | Return to |
+|---|---|---|---|---|
+| COH-020 | low | C's `up_to_spec` checker does not resolve Markdown reference-style links (`[board]: path`). It reported 4 evidenced S-004 lines as unknown. | accepted-open (S-013 Up to Spec) | C: resolve reference links, with a fixture test |
+| COH-021 | high | `dev` is 84 commits ahead of `main` and 62 behind, which breaches the 20-commit threshold. See [DRIFT-2026-11-01-wrap](DRIFT-2026-11-01-wrap.md). | diagnostic (`ams.coherence.drift`) | Owner: merge `dev` -> `main`, the site gate. C raises no Grill Board item until S-013 TK-005 lands. |
+| COH-022 | med | Recording a review verdict pushes Specs over 8,000 characters: S-004 is at 8,218 and S-006 at 8,183. Both were near the limit before review. | diagnostic | B: prune both. The process needs room for verdict rows. |
+| COH-023 | low | S-013 TK-004 still shows `blocked` by TK-002, which is done. | diagnostic | The next C session updates the blocker when it claims TK-004. |
+
+Status of the earlier findings at this commit:
+- COH-001 (README at 4,245 characters) is still open.
+- COH-003 (RUNBOOK at 2,986 characters) is still open, so there is still no room for the coherence commands.
+- COH-004, COH-007 to COH-011 and COH-013 still have their original dispositions. C has not verified any change.
+- COH-005, 006, 016 and 019 are repaired or declined, as recorded above.
+
+## Owner correction, 2026-11-01 (`main` `1372441`)
+
+| ID | Sev | Finding | Disposition | Return to |
+|---|---|---|---|---|
+| COH-024 | high | The coordinator's "08:00 MST demo" framing was wrong, and the owner has withdrawn it: there are no demo priorities, cutoffs or freezes, and the Specs set the review order. The framing displaced confirmed scope: the orientation tour (S-003), the skills wiki (S-008, still planned in the backlog) and RSI information on the site (S-007). One record still carries it. `workbench/handoffs/orchestrator-A-website.md` lines 15 and 43 set a "Demo freeze" for 11/02 07:00 to 09:00 MST, line 40 is a "Demo plan" section, and line 19 calls PR #47 a "demo batch". C's records hold no demo framing. "Demo Grill Board" (S-009, DDR-000V) is confirmed scope, not this framing. | diagnostic (`git grep` for timed-demo terms at `1372441`) | A: remove the demo framing from its handoff. Coordinator: restore the confirmed scope's priority by Spec order. |

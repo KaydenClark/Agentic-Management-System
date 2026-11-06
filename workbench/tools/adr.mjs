@@ -817,7 +817,8 @@ function collectExternalMarkdownFiles(root) {
   return files;
 }
 
-// A `SPEC.md`'s Append-Only Evidence And Execution Log is frozen history:
+// An Append-Only Evidence And Execution Log - a Spec's or Landmark's Wiki
+// history page, or a legacy log still inside a `SPEC.md` - is frozen history:
 // `tools/check-append-only.py` pins each row's first-published text, and this
 // migration must never rewrite a link inside one, even a stale one pointing
 // at a record's pre-migration path. Split the file into the part before that

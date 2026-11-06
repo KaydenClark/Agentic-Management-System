@@ -1,8 +1,7 @@
 """S-013 TK-002: fixture tests for the up-to-Spec report (ADR-001F).
 
-A criterion is met only when its acceptance line carries evidence that resolves at
-the checked commit (a commit SHA or a repository path). Checked without such
-evidence is unknown; unchecked is not met.
+Resolved references do not verify behavior. Checked criteria are unknown;
+unchecked criteria are not met.
 """
 
 import os
@@ -20,6 +19,8 @@ SPEC_TEMPLATE = """# S-900 - Fixture
 
 ## Acceptance Criteria
 
+- [x] **Unrelated file.** Production behaves correctly. *Evidence:* `README.md`.
+- [x] **Ancestor only.** Another behavior works. *Evidence:* `{sha}`.
 - [x] **Evidenced.** Works. *Evidence:* `{sha}`, [test](tests/test_thing.py).
 - [x] **Unevidenced.** Claimed done with nothing linked.
 - [x] **Bogus evidence.** *Evidence:* `deadbeefdeadbeef` and `tests/missing.py`.
@@ -53,6 +54,7 @@ def _git(cwd, *args):
 def _fixture():
     d = tempfile.mkdtemp(prefix="uts-")
     _git(d, "init", "-q", "-b", "main")
+    Path(d, "README.md").write_text("unrelated\n")
     Path(d, "tests").mkdir()
     Path(d, "tests/test_thing.py").write_text("pass\n")
     _git(d, "add", ".")
@@ -81,8 +83,14 @@ class UpToSpecTest(unittest.TestCase):
         self.report = check_spec("S-900", repo=self.repo, commit=self.commit)
         self.by_name = {c["name"]: c for c in self.report["criteria"]}
 
-    def test_evidenced_is_met_unevidenced_is_unknown(self):
-        self.assertEqual(self.by_name["Evidenced"]["status"], "met")
+    def test_resolved_references_do_not_verify_behavior(self):
+        for name in ("Unrelated file", "Ancestor only"):
+            criterion = self.by_name[name]
+            self.assertEqual(criterion["status"], "unknown")
+            self.assertTrue(criterion["evidence"])
+
+    def test_evidenced_and_unevidenced_are_unknown(self):
+        self.assertEqual(self.by_name["Evidenced"]["status"], "unknown")
         self.assertEqual(self.by_name["Unevidenced"]["status"], "unknown")
 
     def test_unresolvable_evidence_is_not_met(self):
@@ -91,7 +99,7 @@ class UpToSpecTest(unittest.TestCase):
 
     def test_markdown_links_resolve_relative_to_the_spec(self):
         c = self.by_name["Sibling link"]
-        self.assertEqual(c["status"], "met")
+        self.assertEqual(c["status"], "unknown")
         self.assertIn("workbench/landmarks/LMK-900-x/specs/S-900-fixture/evidence.md", c["evidence"])
         self.assertIn("tests/test_thing.py", c["evidence"])
 
@@ -107,11 +115,8 @@ class UpToSpecTest(unittest.TestCase):
         self.assertEqual(self.by_name["Open"]["status"], "not met")
         self.assertEqual(self.by_name["Open"]["evidence"], [])
 
-    def test_no_criterion_met_without_evidence(self):
-        # Must-fail invariant from S-013 "Up to Spec": met implies resolved evidence.
-        for c in self.report["criteria"]:
-            if c["status"] == "met":
-                self.assertTrue(c["evidence"], c["name"])
+    def test_no_criterion_is_certified_met(self):
+        self.assertTrue(all(c["status"] != "met" for c in self.report["criteria"]))
 
     def test_related_tasks_listed_by_destination(self):
         self.assertEqual([t["id"] for t in self.by_name["Open"]["tasks"]], ["TK-001"])
@@ -121,9 +126,10 @@ class UpToSpecTest(unittest.TestCase):
         md = render_report(self.report)
         self.assertIn(self.commit, md)
         self.assertIn("S-900", md)
+        self.assertIn("not behavioral verification", md)
         for name in ("Unevidenced", "Bogus evidence", "Open"):
             self.assertIn(name, md)
-        self.assertEqual(self.report["summary"], {"met": 2, "not met": 1, "unknown": 4})
+        self.assertEqual(self.report["summary"], {"met": 0, "not met": 1, "unknown": 8})
 
 
 if __name__ == "__main__":

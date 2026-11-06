@@ -1,51 +1,543 @@
-/* /start styles. Page furniture only, so greys; no signal hue applies here.
+/* /start styles. Greys are the page. The only hues are the four holder
+   signals, each through the .tone mixes of its .h-* class (DDR-000M,
+   DDR-000Y): blue owner, green agents, purple returned, grey done.
+   The skills diagram (screen 3) uses no hue.
    Every value comes from app/theme/tokens.css. */
 
 .page {
   display: flex;
   flex-direction: column;
-  gap: var(--space-48);
+  gap: var(--space-24);
 }
 
-.intro,
-.section {
+.intro {
   display: flex;
   flex-direction: column;
   gap: var(--space-12);
 }
 
-.list {
+.jump a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min-height);
+  font-weight: var(--weight-semibold);
+}
+
+.screen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+  padding: var(--space-24);
+  background: var(--surface);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-panel);
+  min-width: 0;
+}
+
+.screenNo {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.say {
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
+}
+
+.figure {
   margin: 0;
-  padding-left: var(--space-20);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.figure figcaption {
+  color: var(--muted);
+  font-size: var(--text-small);
+}
+
+.dot {
+  display: inline-block;
+  flex: none;
+  width: var(--dot-size);
+  height: var(--dot-size);
+  border-radius: var(--radius-pill);
+  background: var(--tone-dot);
+}
+
+/* 1. The hub: the AMS in the middle of the parts it joins, inside its loop. */
+
+.hub {
+  position: relative;
+  width: 100%;
+  max-width: var(--hub-size);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-areas:
+    ". p1 ."
+    "p2 core p3"
+    "p4 . p5";
+  align-items: center;
+  justify-items: center;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ringPath {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: var(--ring-width);
+  stroke-dasharray: 6 5;
+}
+
+.ringHead {
+  fill: var(--line-strong);
+}
+
+.core {
+  grid-area: core;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-pill);
+  background: var(--ink);
+  color: var(--ground);
+  font-family: var(--font-heading);
+  font-weight: var(--weight-bold);
+  font-size: var(--text-brand);
+}
+
+.parts {
+  display: contents;
+}
+
+.parts li {
+  position: relative;
+  min-width: 0;
+  max-width: 100%;
+  list-style: none;
+  padding: var(--space-4) var(--space-8);
+  background: var(--surface);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-small);
+  font-weight: var(--weight-semibold);
+  text-align: center;
+}
+
+.parts li:nth-child(1) { grid-area: p1; }
+.parts li:nth-child(2) { grid-area: p2; }
+.parts li:nth-child(3) { grid-area: p3; }
+.parts li:nth-child(4) { grid-area: p4; }
+.parts li:nth-child(5) { grid-area: p5; }
+
+/* 2. Two lanes: what falls away without a system, what the AMS carries. */
+
+.lanes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.lane {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-14);
+  border: var(--border-width) dashed var(--line-strong);
+  border-radius: var(--radius-card);
+}
+
+.lane[data-lane="with"] {
+  border-style: solid;
+  border-color: var(--ink);
+}
+
+.laneName {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.laneRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.end {
+  padding: var(--space-6) var(--space-10);
+  background: var(--raised);
+  border-radius: var(--radius-nav);
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-small);
+}
+
+.lost,
+.kept {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+}
+
+.lost li,
+.kept li {
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-small);
+}
+
+.lost li {
+  border: var(--border-width) dashed var(--line-strong);
+  color: var(--muted);
+}
+
+.kept li {
+  border: var(--border-width) solid var(--ink);
+  font-weight: var(--weight-semibold);
+}
+
+.lost li::after,
+.kept li::after {
+  content: "→";
+  margin-left: var(--space-6);
+  color: var(--muted);
+}
+
+/* 3. The skills by stage: one card per stage, main-flow chips solid in
+   order, the other skills outlined. Neutral greys only: on this page a hue
+   means who holds the work, and a skill holds nothing. */
+
+.skillStages {
+  margin: 0;
+  padding: 0;
+  list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-10);
 }
 
-.source {
-  color: var(--muted);
-  font-size: var(--text-small);
+.skillStage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8) var(--space-18);
+  padding: var(--space-12) var(--space-14);
+  background: var(--surface);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-card);
 }
 
-.quote {
-  margin: 0;
-  padding: var(--space-14) var(--space-18);
-  background: var(--surface);
-  border-left: var(--focus-width) solid var(--line-strong);
-  border-radius: var(--radius-nav);
+@media (min-width: 720px) {
+  .skillStage {
+    grid-template-columns: calc(var(--node-basis) * 1.4) minmax(0, 1fr);
+  }
+}
+
+.skillStageName {
+  font-weight: var(--weight-bold);
+}
+
+.skillStageGloss {
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.skillStageBody {
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
+  min-width: 0;
 }
 
-.quote blockquote {
+.skillMain,
+.skillUsed,
+.skillKey {
   margin: 0;
-  font-family: var(--font-heading);
-  font-size: var(--text-brand);
-  line-height: var(--leading-heading);
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-6) var(--space-8);
 }
 
-.quote figcaption {
-  color: var(--muted);
+.skillMain li,
+.skillUsed li {
+  padding: var(--space-4) var(--space-10);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-badge);
+  font-family: var(--font-mono);
   font-size: var(--text-small);
+  overflow-wrap: anywhere;
+}
+
+.skillMain li {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--ground);
+  font-weight: var(--weight-semibold);
+}
+
+.skillMain {
+  column-gap: var(--space-20);
+}
+
+.skillMain li {
+  position: relative;
+}
+
+.skillMain li + li::before {
+  content: "→";
+  position: absolute;
+  left: calc(var(--space-20) * -1);
+  width: var(--space-20);
+  text-align: center;
+  color: var(--muted);
+  font-weight: var(--weight-regular);
+}
+
+.skillUsed li {
+  background: var(--raised);
+  color: var(--ink);
+}
+
+.skillNote {
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.skillKey {
+  font-size: var(--text-small);
+  color: var(--muted);
+  gap: var(--space-8) var(--space-18);
+}
+
+.skillKey li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.keyMain,
+.keyUsed {
+  width: var(--space-14);
+  height: var(--space-14);
+  border: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-pill);
+}
+
+.keyMain {
+  background: var(--ink);
+  border-color: var(--ink);
+}
+
+.keyUsed {
+  background: var(--raised);
+}
+
+/* 5. Who does what: the owner beside the agents, then the three orchestrators. */
+
+.split {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+}
+
+.side {
+  flex: 1 1 calc(var(--node-basis) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-14);
+  background: var(--tone-soft);
+  border: var(--border-width) solid var(--tone-line);
+  border-radius: var(--radius-card);
+}
+
+.side ul {
+  margin: 0;
+  padding-left: var(--space-18);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  font-size: var(--text-small);
+}
+
+.side ul.chips {
+  padding: 0;
+  list-style: none;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.chips li {
+  padding: var(--space-4) var(--space-8);
+  background: var(--surface);
+  border: var(--border-width) solid var(--tone-line);
+  border-radius: var(--radius-pill);
+  font-weight: var(--weight-semibold);
+}
+
+.sideName,
+.treeTop {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-weight: var(--weight-bold);
+}
+
+.tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.treeTop {
+  position: relative;
+  margin: 0 0 var(--space-24);
+  padding: var(--space-8) var(--space-14);
+  background: var(--tone-soft);
+  border: var(--border-width) solid var(--tone-line);
+  border-radius: var(--radius-pill);
+}
+
+.treeTop::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  height: var(--space-24);
+  border-left: var(--border-width) solid var(--line-strong);
+}
+
+.treeRow {
+  width: 100%;
+  margin: 0;
+  padding: var(--space-14) 0 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(var(--node-basis) * 1.5), 1fr));
+  gap: var(--space-12);
+  border-top: var(--border-width) solid var(--line-strong);
+}
+
+.orch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-12);
+  background: var(--tone-soft);
+  border: var(--border-width) solid var(--tone-line);
+  border-radius: var(--radius-card);
+  font-size: var(--text-small);
+}
+
+.orchName {
+  font-weight: var(--weight-bold);
+  font-size: var(--text-body);
+}
+
+.never {
+  color: var(--muted);
+}
+
+/* 6 and 7. Short cards and one-liners. */
+
+.refusals,
+.today {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--space-10);
+}
+
+.refusals {
+  grid-template-columns: repeat(auto-fill, minmax(calc(var(--node-basis) * 2), 1fr));
+}
+
+.refusals li,
+.today li {
+  display: block;
+  padding: var(--space-10) var(--space-12);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--ground);
+}
+
+/* Screen 8, the quickstart: a numbered reading route, then the setup step. */
+.jump {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-14);
+}
+
+.route {
+  margin: 0;
+  padding-left: var(--space-24);
+  display: grid;
+  gap: var(--space-10);
+}
+
+.setup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-14);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--ground);
+}
+
+/* Keep the same parts and text equivalent when the round diagram has too
+   little room for readable labels. The caption still explains the loop. */
+@media (max-width: 480px) {
+  .hub {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+    aspect-ratio: auto;
+  }
+
+  .ring {
+    display: none;
+  }
+
+  .core {
+    aspect-ratio: auto;
+    padding: var(--space-8) var(--space-12);
+    border-radius: var(--radius-control);
+  }
+
+  .parts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-8);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .parts li {
+    flex: 1 1 var(--node-basis);
+    border-radius: var(--radius-control);
+  }
 }

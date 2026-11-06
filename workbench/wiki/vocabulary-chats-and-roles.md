@@ -60,6 +60,6 @@ Definition: [GLOSSARY.md, Chats and roles](../../GLOSSARY.md#chats-and-roles).
 
 ## Coordination hand-back
 
-It is a defect in a record, route, skill, or tool, recorded per occurrence with its cause and smallest correction in the assigned spec's evidence log by the `carry` skill. Answering a genuine owner decision is not one, and neither is a new framework built in response to one. `AGENTS.md` Safety And Change Control owns when an owner is asked; these four reasons restate that gate and never widen it.
+It is a defect in a record, route, skill, or tool, recorded per occurrence with its cause and smallest correction in the assigned Spec's Wiki history page by the `carry` skill. Answering a genuine owner decision is not one, and neither is a new framework built in response to one. `AGENTS.md` Safety And Change Control owns when an owner is asked; these four reasons restate that gate and never widen it.
 
 Definition: [GLOSSARY.md, Chats and roles](../../GLOSSARY.md#chats-and-roles).

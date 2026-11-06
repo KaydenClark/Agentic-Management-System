@@ -3,7 +3,7 @@
   "source": {
     "repository": "https://github.com/KaydenClark/skills.git",
     "release": "v3.2.2",
-    "sha256": "99080edd8e061ba6b1b142e27088338914b591cee27a7c5725383d405af7ceb2",
+    "sha256": "8c3b46b064ac4d5f209a4d7ea80247bc2abe3367d2dd04261e4710b26934b65c",
     "upstream": {
       "repository": "https://github.com/KaydenClark/LLM_Workbench.git",
       "commit": "9d5e1f25b0d5870589ae1c5752f27f42acb796ef",
@@ -12,16 +12,16 @@
   },
   "installedAt": "2026-11-01",
   "files": {
-    "adr.mjs": "5388e03aed20bd501265cc091339ab2f2e235f6ad6358ba28eb3b481004507ef",
+    "adr.mjs": "cb697dcc2a1f02af56ac15db213ada71c3a5d6299982ac5a51109d7694f26c48",
     "bundled-source.mjs": "6a5689a9f60b7bcf82bd8bf60fc6eeeab46b9e7f7f5ea793fe52f33be37623cc",
-    "personal-skills.mjs": "066a4b96d542307af9cd65c993ce1efcf555cca77833527531b2ffd3131c278c",
+    "personal-skills.mjs": "953a159e52d5b528a38902698432c3370a55f59d4052ef84ac09537f9a512314",
     "claim-coordination.mjs": "83068a6f5ec06cb52aef8778699f380ba1a21477e6be22dfc79afa0863604aa0",
-    "diagnostics.mjs": "3f9516b0b4216f4657c4de231293314a157ded18037ef97fd4d2f159a0620e84",
+    "diagnostics.mjs": "ed796f153e9ced14c58afab8928775a1c6796169c85394d2ca47b3327aee59b1",
     "github-coordination.mjs": "3bec184271cd3e4a983c279e81ae81e35ae1c7c046d3b4780cd891d9f561920e",
     "glossary-format.mjs": "1bf28fb20a4e74a27abf219c46370316c3df6a6f7bc557d08e082170717420ff",
     "host-floor.mjs": "db5bfeb569af46f0df464d5e614bd5fd25e9297f1aaf7a4a3dc7eecda6c7a193",
-    "landmark-artifact.mjs": "2ab5c6711f975587e417cdc8c25bf8ea62a214abc47fa10649266ed1a02b76f9",
-    "landmark-tracker.mjs": "3c0a56f72c166cdb6869bd48390d1067769ce0a600115f0878aab461cd3a758d",
+    "landmark-artifact.mjs": "f6932075dda208970091dad95698511e3bb10c63f32782f1f0f898549a4e1863",
+    "landmark-tracker.mjs": "d0d822370b34c2aebbba30d98fa9ddb41559ac90611826c1d77d4f240c6799dc",
     "landmark-wiki.mjs": "dd5eee302f9cb8afb1db7949461554bc7471a575425cc920aa0b04a6b1322d52",
     "lane-sweep.mjs": "b4143a27b5b99de9e1d705144493766869818c744d00a57312413376b691eacf",
     "lexicon-retirement-data.mjs": "e13534d8effaae519619c8c8ee15d4f0d94727246b96ec83a5cd23a07246fdf8",
@@ -33,25 +33,103 @@
     "privacy.mjs": "8731047bc626b7b7a539b04c674aac2ac19452e7103cebd53ccf336c32a3ad8b",
     "project-evidence.mjs": "5fdfdce8f57b749b3be995a1f31ff9bf69ce4b6c6cf8690df9719661813eeca3",
     "self-drift.mjs": "2b84f455849372f47fcec3fb95754816536bcf79d4e6c484a23182e0c3b85c18",
-    "sessions.mjs": "efc5310b48459523277bf50374f20319d0b75d6bc7846af7413826caf4ff0bf3",
+    "sessions.mjs": "739223b13b50800f6ec9872573642f1772c1bc7b69ab192682ea59aeeceb563b",
     "session-transport.mjs": "17172dcb489a2fa571551a605f3130fd20d6bc2a17d8cba8811ef39a8c2c5416",
-    "spec-packet.mjs": "63247356543394b88b730b54e1a42f932561fe9a4cea9581a23b3f0b0e09a0c4",
+    "spec-packet.mjs": "7e49a8d3bed7fed8098f9881736e3c6e2127e2ba15ac2d11351b1654f1bc571c",
     "record-parts.mjs": "334bd6bec19433271f37ee1ea18b5e800d2310a08d4411160fbbe31f6ba97078",
     "artifact-pagination.mjs": "999f79e129686e126e5d271f49372bd2871c384c22aa5b5c40464fec8f49cb8b",
-    "artifact-budgets.mjs": "8202e2ad096a0e893bc60aeb5e5b9b93e5ef44d0e16eb812d234f5d2b30d0e7d",
-    "spec-report.mjs": "d399f7102ada1db434bebe8107784e73369ec742da822a890455c0464b677afb",
-    "spec-workbench.mjs": "44d81a101cab731c37d80d4999e6a6435ee7355e3463980679f8159cadd882b4",
+    "artifact-budgets.mjs": "2c8eec1e81003e2cef9efd1424a7963563109dc0f83ea626c7dc1c32b3193047",
+    "spec-report.mjs": "e0e7ae8ff8d89319f67952559d5713c0082288d305681738181b2952f4f17a30",
+    "spec-workbench.mjs": "7610b38a04af2f9996455a814b3d5454dbd75464ad79c5f573028029eecb78a5",
     "task-packet.mjs": "68cb064d767a75e710393784aff0b65a5ab313a4a92ecd172d47c0f34bb4079c",
     "task-receipt.mjs": "7b12d2c6c7fd5fcc025fdbc33f4dbadebf1baaac674d908ef658d16105589e33",
-    "task-record.mjs": "7ed73edd7660f22a32121c1a130883eafe3f81b1bbac181fed7d8e5ba09edc65",
+    "task-record.mjs": "cf33e729619e1ca7eef15fff684e8df754e40104e4dad014074aba431efe9d8a",
     "taskboard.mjs": "e2cebd88f301182109347a191c6647295609a0283a84f69e27ef5096e4cd7e75",
     "template-placeholders.mjs": "d6e45ebcbeb028ded78b597d852d24017c65e52ae7ed193bfc3497ee4f51eb48",
     "visible-ids.mjs": "587b737001ec95a5bbee2f4f9b3920bacdb5b7e540f01da87ea8fe0b0ee4796f",
     "skill-inspection.mjs": "36f0371f5dafaa4b10824440d25727792a884de71d2a1b848b06f4ef592eab73",
-    "wiki.mjs": "653a7c13a36a70ec809cdf804a46662ec1a7ec4e335b6db408456f0c0cc9a1f1",
+    "wiki.mjs": "506c574ac43bed13bb3fa62b324572905d2445953edd3d29a970a67a336b31a2",
     "workspace-closeout.mjs": "a61609e2a3d8f63810de95ab43ae353ba9942f9f69ec47d23d4da66ffc14efb9",
-    "workbench-layout.mjs": "7a4fbbd3bcad27d46498b88133197a2f5478dc2dfc5c8df1fb54552143ef0b41",
-    "workbench-paths.mjs": "9a598d196e62d855c5956f87814071bb7bf3e3b6c260f19501f49177154d5cc6"
+    "workbench-layout.mjs": "cdc67d516963860b8283222dc13759d1a1048f783c3faa05ca206711ed2e7246",
+    "workbench-paths.mjs": "1b983217041860795382b30e8ab6d1cbc6f4954884cb227c89e6b8d22e6948d2",
+    "spec-history.mjs": "9a93faf9675ea1f263970cee7e48d59f305f5ba23e3b549a2cfff4e3576567dd",
+    "dqc-lifecycle.mjs": "c3835bd6ab1d0e0c72da531bcd2ab49f9eba5071f2cc60fbe59180ec6f2f82e4"
   },
-  "backups": []
+  "backups": [
+    {
+      "path": "~/.workbench-tools-backup-HDoesW",
+      "files": [
+        "adr.mjs",
+        "diagnostics.mjs",
+        "landmark-artifact.mjs",
+        "sessions.mjs",
+        "spec-packet.mjs",
+        "spec-report.mjs",
+        "spec-workbench.mjs",
+        "task-record.mjs",
+        "wiki.mjs",
+        "workbench-layout.mjs",
+        "workbench-paths.mjs"
+      ],
+      "absent": [
+        "spec-history.mjs"
+      ],
+      "hashes": {
+        "adr.mjs": "5388e03aed20bd501265cc091339ab2f2e235f6ad6358ba28eb3b481004507ef",
+        "diagnostics.mjs": "3f9516b0b4216f4657c4de231293314a157ded18037ef97fd4d2f159a0620e84",
+        "landmark-artifact.mjs": "2ab5c6711f975587e417cdc8c25bf8ea62a214abc47fa10649266ed1a02b76f9",
+        "sessions.mjs": "efc5310b48459523277bf50374f20319d0b75d6bc7846af7413826caf4ff0bf3",
+        "spec-packet.mjs": "63247356543394b88b730b54e1a42f932561fe9a4cea9581a23b3f0b0e09a0c4",
+        "spec-report.mjs": "d399f7102ada1db434bebe8107784e73369ec742da822a890455c0464b677afb",
+        "spec-workbench.mjs": "44d81a101cab731c37d80d4999e6a6435ee7355e3463980679f8159cadd882b4",
+        "task-record.mjs": "7ed73edd7660f22a32121c1a130883eafe3f81b1bbac181fed7d8e5ba09edc65",
+        "wiki.mjs": "653a7c13a36a70ec809cdf804a46662ec1a7ec4e335b6db408456f0c0cc9a1f1",
+        "workbench-layout.mjs": "7a4fbbd3bcad27d46498b88133197a2f5478dc2dfc5c8df1fb54552143ef0b41",
+        "workbench-paths.mjs": "9a598d196e62d855c5956f87814071bb7bf3e3b6c260f19501f49177154d5cc6"
+      }
+    },
+    {
+      "path": "~/.workbench-tools-backup-CCbeFZ",
+      "files": [
+        "personal-skills.mjs",
+        "landmark-tracker.mjs",
+        "artifact-budgets.mjs",
+        "workbench-layout.mjs",
+        "workbench-paths.mjs"
+      ],
+      "absent": [
+        "dqc-lifecycle.mjs"
+      ],
+      "hashes": {
+        "personal-skills.mjs": "066a4b96d542307af9cd65c993ce1efcf555cca77833527531b2ffd3131c278c",
+        "landmark-tracker.mjs": "3c0a56f72c166cdb6869bd48390d1067769ce0a600115f0878aab461cd3a758d",
+        "artifact-budgets.mjs": "8202e2ad096a0e893bc60aeb5e5b9b93e5ef44d0e16eb812d234f5d2b30d0e7d",
+        "workbench-layout.mjs": "5c86d7136c3d653ea67cecb1367e6e327ee23bb890bf5d404cdbb5fcba675633",
+        "workbench-paths.mjs": "8781801a15fbd7b0044253aef020c5de3ba547b6f75539948dbafc3fc9855bfa"
+      }
+    },
+    {
+      "path": "~/.workbench-tools-backup-tzbAtT",
+      "files": [
+        "workbench-layout.mjs"
+      ],
+      "absent": [],
+      "hashes": {
+        "workbench-layout.mjs": "26579ad1f218425f8b605cabd3036911a732851417e52fb4ed7fb426845b212d"
+      }
+    },
+    {
+      "path": "~/.workbench-tools-backup-NgcXPR",
+      "files": [
+        "landmark-tracker.mjs",
+        "dqc-lifecycle.mjs"
+      ],
+      "absent": [],
+      "hashes": {
+        "landmark-tracker.mjs": "0b5a714307a91489d2a3448dd7c006a8263417d027630d2c8cb2cc8455e6f70a",
+        "dqc-lifecycle.mjs": "46e7dbcec6cb683754e71c8d2d3c3c39dfeebd2f1444d22cbc61ec552b0d2e02"
+      }
+    }
+  ],
+  "updatedAt": "2026-11-04"
 }

@@ -5,20 +5,34 @@ tree, so drafts and uncommitted edits stay off the board (DDR-000L).
 
 A card is a title line, then `**Field:** value` header lines, then optional
 context. Priority and Value each need a grade and a one-line reason
-(DDR-000K). Unknown header fields are kept, so later fields (rating, flag,
-color) extend the format without breaking older cards. An answered card
-ends with a `## Answer` section the board appended (see answers.py).
+(DDR-000K). Unknown header fields are kept, so later fields extend the
+format without breaking older cards. The board appends `## Answer`,
+`## Rating` and `## Flag` sections at the end (see answers.py); they are the
+committed records the RSI loop reads (DDR-000J).
+
+A card flagged too taxing is held for rewrite. A card that asks a flagged
+question again unchanged (same question line, ignoring case, spacing,
+punctuation and invisible characters; see question_key) is refused, whether
+it is a new file, a copy, or the same card with its flag undone: the flagged
+questions come from every card and every flag the board ever committed in
+this branch's history.
 """
+
+import functools
 
 import hashlib
 import re
 import subprocess
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 
 PRIORITIES = {"P1": "Interrupt", "P2": "Committed", "P3": "Secondary", "P4": "Backlog"}
 VALUES = {"V1": "Quick Win", "V2": "Strategic Value", "V3": "Fill-In", "V4": "Defer / Eliminate"}
 FIELD = re.compile(r"^\*\*([^*]+):\*\*[ \t]*(.*)$")
+SECTIONS = ("## Answer", "## Rating", "## Flag")
+RATINGS = ("1", "2", "3", "4", "5")
+FLAG_LINE = "**Too taxing:** yes"
 
 
 @dataclass
@@ -32,8 +46,19 @@ class Card:
     fields: dict = field(default_factory=dict)
     context: str = ""
     answer: dict | None = None
+    ratings: list = field(default_factory=list)  # every `## Rating`, oldest first; the last one stands
+    flag: dict | None = None  # the `## Flag` section, when the owner flagged it too taxing
     sha: str = ""  # SHA-256 of the exact committed bytes this Card was parsed from
     commit: str = ""  # the commit those bytes were read at
+
+    @property
+    def rating(self):
+        return self.ratings[-1]["Rating"].split()[0] if self.ratings else ""
+
+    @property
+    def waiting(self):
+        """Still waiting on the owner: neither answered nor held for rewrite."""
+        return self.answer is None and self.flag is None
 
     @property
     def sort_key(self):
@@ -68,10 +93,21 @@ def parse_card(name, text):
             problems.append(f"{label} reason is missing or blank")
     if problems:
         return Refusal(name, problems)
-    rest, answer = lines[index:], None
-    if "## Answer" in rest:
-        at = rest.index("## Answer")
-        rest, answer = rest[:at], dict(m.groups() for line in rest[at + 1:] if (m := FIELD.match(line)))
+    rest = lines[index:]
+    starts = [at for at, line in enumerate(rest) if line in SECTIONS]
+    sections = [
+        (rest[at], dict(m.groups() for line in rest[at + 1:end] if (m := FIELD.match(line))))
+        for at, end in zip(starts, starts[1:] + [len(rest)])
+    ]
+    answers = [f for h, f in sections if h == "## Answer"]
+    ratings = [f for h, f in sections if h == "## Rating" and f.get("Rating", "").split(" ")[0] in RATINGS]
+    flags = [f for h, f in sections if h == "## Flag" and f.get("Too taxing") == "yes"]
+    if starts:
+        rest = rest[:starts[0]]
+    context = "\n".join(rest).strip()
+    if draft := page_content(context):
+        return Refusal(name, [f"its context {draft}; the board is not a drafting surface, so post the page "
+                              "elsewhere and ask only the question about it (S-004 TK-000I)"])
     return Card(
         file=name,
         question=question,
@@ -80,9 +116,43 @@ def parse_card(name, text):
         value=fields["Value"],
         value_reason=fields["Value reason"],
         fields=fields,
-        context="\n".join(rest).strip(),
-        answer=answer,
+        context=context,
+        answer=answers[0] if answers else None,
+        ratings=ratings,
+        flag=flags[0] if flags else None,
     )
+
+
+CONTEXT_LIMIT = 1000
+HEADING = re.compile(r"^ {0,3}(#{1,6}(\s|$)|=+\s*$)")
+FENCE = re.compile(r"^ {0,3}-{3,}\s*$")
+
+
+def page_content(context):
+    """Why a card's context is page content, or "" (S-004 TK-000I). Context is
+    a short note: at most CONTEXT_LIMIT characters, with no Markdown heading
+    and no `---` line (front matter, a rule or a heading underline)."""
+    lines = context.splitlines()
+    if any(HEADING.match(line) for line in lines):
+        return "has a Markdown heading"
+    if any(FENCE.match(line) for line in lines):
+        return "has a '---' line (front matter, a rule or a heading underline)"
+    if len(context) > CONTEXT_LIMIT:
+        return f"is {len(context)} characters, over the {CONTEXT_LIMIT} characters a note may take"
+    return ""
+
+
+def question_key(question):
+    """The form of a question that a rewrite must change (S-004 TK-000H):
+    Unicode NFKC, format characters (category Cf, such as zero-width spaces
+    and joiners) removed, punctuation read as spacing, case folded and
+    spacing collapsed. Only a change of words or symbols is a rewrite."""
+    text = unicodedata.normalize("NFKC", question)
+    text = "".join(
+        "" if (kind := unicodedata.category(char)) == "Cf" else " " if kind[0] == "P" else char
+        for char in text
+    )
+    return " ".join(text.casefold().split())
 
 
 class CardSourceError(Exception):
@@ -129,8 +199,53 @@ def committed_snapshot(cards_dir):
     return commit, cards
 
 
+@functools.lru_cache(maxsize=32)
+def _flagged_in_history(root, commit, prefix):
+    """((question key, card name), ...) for every card version that carried a
+    flag line in a commit reachable from `commit`, directly under prefix.
+    Commits never change, so the result is cached per commit."""
+    if not commit:
+        return ()
+    pattern = "^" + re.escape(FLAG_LINE)
+    # --full-history: a merged branch that flagged and then reverted is TREESAME
+    # overall, and default simplification would prune it and lose the flag.
+    listed = _git(Path(root), "log", "-z", "--full-history", "--no-renames", "--format=%x01%H", "--name-only",
+                  "-G", pattern, commit, "--", prefix or ".")
+    flagged = []
+    for block in listed.split("\x01")[1:]:  # each block: SHA NUL, then NUL-ended paths
+        sha, *paths = [part.lstrip("\n") for part in block.split("\0")]
+        for path in filter(None, paths):
+            name = path[len(prefix):]
+            if not path.startswith(prefix) or "/" in name or not name.endswith(".md"):
+                continue
+            try:
+                data = _git(Path(root), "cat-file", "blob", f"{sha}:{path}", binary=True)
+            except CardSourceError:
+                continue  # this commit removed the file; the commit that added the flag lists it too
+            question = flagged_question(data.decode("utf-8", "replace"))
+            if question:
+                flagged.append((question_key(question), name))
+    return tuple(flagged)
+
+
+def flagged_question(text):
+    """The question line of a card version that carries a `## Flag` section with
+    the flag line, or "". Read apart from parse_card's acceptance rules, so a
+    flag stays binding when a later rule (such as TK-000I's) would refuse its card."""
+    lines = text.splitlines()
+    if not lines or not lines[0].startswith("# "):
+        return ""
+    starts = [at for at, line in enumerate(lines) if line in SECTIONS]
+    for at, end in zip(starts, starts[1:] + [len(lines)]):
+        if lines[at] == "## Flag" and FLAG_LINE in (line.strip() for line in lines[at + 1:end]):
+            return lines[0][2:].strip()
+    return ""
+
+
 def load_cards(cards_dir):
-    """Read every committed `*.md` card in cards_dir: sorted Cards and Refusals."""
+    """Read every committed `*.md` card in cards_dir: sorted Cards and Refusals.
+    A card that would ask a flagged question again is a Refusal: its question
+    line is unchanged, or it is a card once flagged whose flag is gone."""
     cards, refusals = [], []
     commit, snapshot = committed_snapshot(cards_dir)
     for name, data in snapshot:
@@ -138,4 +253,29 @@ def load_cards(cards_dir):
         if isinstance(result, Card):
             result.sha, result.commit = hashlib.sha256(data).hexdigest(), commit
         (cards if isinstance(result, Card) else refusals).append(result)
-    return sorted(cards, key=lambda card: card.sort_key), refusals
+    flagged = []
+    if commit:
+        root = Path(_git(Path(cards_dir), "rev-parse", "--show-toplevel").strip()).resolve()
+        prefix = Path(cards_dir).resolve().relative_to(root).as_posix()
+        flagged = list(_flagged_in_history(str(root), commit, "" if prefix == "." else prefix + "/"))
+    flagged += [(question_key(card.question), card.file) for card in cards if card.flag is not None]
+    by_question, by_name = {}, set()
+    for key, name in flagged:
+        by_question.setdefault(key, name)
+        by_name.add(name)
+    held = []
+    for card in cards:
+        if not card.waiting:
+            continue
+        if question_key(card.question) in by_question:
+            problem = (f"asks again the question flagged too taxing in {by_question[question_key(card.question)]} "
+                       "without a rewrite; rewrite the question line before posting it again (DDR-000J)")
+        elif card.file in by_name:
+            problem = ("was flagged too taxing and its flag is gone; keep the flag on the card and "
+                       "post the rewritten question as a new card (DDR-000J)")
+        else:
+            continue
+        held.append(card)
+        refusals.append(Refusal(card.file, [problem]))
+    cards = [card for card in cards if not any(card is h for h in held)]
+    return sorted(cards, key=lambda card: card.sort_key), sorted(refusals, key=lambda r: r.file)

@@ -1,6 +1,8 @@
 # S-[###] - [CAPABILITY_TITLE]
 
 > AMS template adapted from LLM_Workbench `templates/SPEC.md` at `227d7c2a3ca0`. This is a starting format, not evidence of installed software, approved AMS policy, or completed work.
+>
+> A Spec is the verifiable, auditable destination. It says where we are going, how we will know we arrived and where we stand now. It carries no history: closes, verdicts, approvals, corrections and progress narrative go to `workbench/wiki/history/S-[###].md`, never into this file.
 
 **Spec ID:** S-[###]
 **Status:** planned
@@ -9,13 +11,12 @@
 **Stance:** Builder
 **Updated:** [YYYY-MM-DD]
 **Catalog description:** [One-sentence capability description.]
-**Blockers:** [Known blockers or none.]
-**Latest event:** [Latest actual event.]
+**Blockers:** [Current blockers or none.]
 **Next gate:** [Next authorized action or owner decision.]
 
 ## Intent and authority
 
-[Owner request, reason, confirmed scope, source/date and authorized endpoint. Link corrections and existing decisions. Distinguish Workbench repair, AMS capability and website explanation; identify the actual target.]
+[Who authorized what, with a link to the source. The confirmed scope and authorized endpoint. Name the actual target: Workbench repair, AMS capability or website explanation.]
 
 ## Outcome
 
@@ -27,7 +28,9 @@
 
 ## Current Verified State
 
-[Source-backed behavior and gaps.]
+[For each acceptance criterion: met, not met or blocked now, with a link to its proof. No narrative of how it got there.]
+
+History: [S-[###] history](../../wiki/history/S-[###].md).
 
 ## Desired Behavior
 
@@ -49,11 +52,10 @@
 
 Tasks are temporary tracer bullets reaching or repairing this scoped destination.
 Task records belong under `workbench/specs/S-NNN/tasks/T-NNN/TASK.md`.
-The source template's legacy conversion table is omitted because AMS has no migration runtime.
 
 ## Acceptance Criteria
 
-- [ ] [Observable acceptance gate]
+- [ ] [Observable acceptance gate, the check that proves it and a fault the check must catch]
 
 ## RSI and website connection
 
@@ -74,22 +76,17 @@ The source template's legacy conversion table is omitted because AMS has no migr
 
 - [Docs to update, or why no update is needed]
 
-## Append-Only Evidence And Execution Log
-
-| Date | Task | Event | Verification | Docs | Remaining gap |
-|---|---|---|---|---|---|
-
 ## Review and Human QA
 
-[Link candidate-bound receipts required for this scope. Record self-checks separately from independent review and actual human judgment; preserve pending findings.]
+[Which candidate-bound receipts this scope requires and whether each is present now, linked. Self-checks, independent review and actual human judgment stay distinct.]
 
 ## Completion Result
 
-Pending. Record the delivered revision/destination and acceptance evidence when real; local completion, publication and deployment remain separate.
+Pending. When arrived: what was delivered, linked to the acceptance proof. Local completion, publication and deployment remain separate.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-- [Known limit or linked follow-up]
+- [Current known limit or linked follow-up]
 
 ## Supersession
 

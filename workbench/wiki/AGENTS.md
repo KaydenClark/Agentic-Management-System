@@ -32,6 +32,10 @@ This Wiki follows root `AGENTS.md`; this file bounds Wiki maintenance.
 
 - The wiki owns durable documentary knowledge and navigation, not a
   Governance Plane and not authorization.
+- Follow [the schema's Governance Stack](SCHEMA.md#governance-stack): planes
+  classify claims within artifacts; list the stack only in 6 → 1 or 1 → 6
+  order. Reconcile Intent before dependent work and knowledge and snapshot
+  Projections after it; preserve sources, uncertainty and acceptance boundaries.
 - Verified runtime and the root controls outrank wiki notes; maintained active
   notes outrank `archive/` and platform auto-memory.
 - Raw sources stay read-only during wiki maintenance unless the user also

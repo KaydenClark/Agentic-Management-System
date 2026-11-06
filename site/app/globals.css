@@ -1,11 +1,19 @@
-/* Shell styles. Every value comes from app/theme/tokens.css. Layout follows
-   the owner's Grilling Board canvas: a surface header, a surface sidebar
-   with the reading order, content on the ground colour, cards on surface. */
+/* Shell styles. Every value comes from app/theme/tokens.css. A surface top
+   bar with the title, the reading order and the theme toggle; content on the
+   ground colour in the same centred container; cards on surface. */
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: calc(var(--sticky-header-height, var(--header-fallback)) + var(--space-12));
+}
+
+:where([id], a, button, summary) {
+  scroll-margin-block: var(--space-12);
 }
 
 body {
@@ -15,6 +23,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: var(--leading-body);
+  overflow-wrap: anywhere;
 }
 
 a {
@@ -27,7 +36,8 @@ a {
 }
 
 .skip-link {
-  position: absolute;
+  position: fixed;
+  z-index: var(--layer-skip);
   left: var(--space-8);
   top: var(--space-8);
   padding: var(--space-8) var(--space-12);
@@ -47,21 +57,59 @@ a {
   min-height: var(--page-min-height);
 }
 
+/* One centred column for the header, main and footer, so the page content
+   lines up with the header's edge on every page. Wide pages (the coming Grill
+   Board page) add .container-wide. */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+.container-wide {
+  max-width: var(--container-wide);
+}
+
 .topbar {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-10) var(--space-20);
-  padding: var(--space-10) var(--space-24);
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-header);
   background: var(--surface);
   border-bottom: var(--border-width) solid var(--line);
 }
 
+.topbar-inner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-6) var(--space-12);
+  width: 100%;
+  padding: var(--space-12) var(--page-gutter);
+}
+
 .brand {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-10);
+  align-items: center;
+  justify-content: center;
+  min-width: var(--control-min-height);
+  min-height: var(--control-min-height);
+  border-radius: var(--radius-control);
+  color: var(--ink);
   text-decoration: none;
+}
+
+.brand:hover {
+  background: var(--raised);
+}
+
+.brand svg {
+  width: var(--space-24);
+  height: var(--space-24);
+}
+
+.eyebrow {
+  font-size: var(--text-tagline);
 }
 
 .brand-name {
@@ -80,24 +128,36 @@ a {
 }
 
 .theme-toggle {
-  margin-left: auto;
+  justify-self: end;
   display: flex;
   align-items: center;
-  gap: var(--space-8);
+  justify-content: center;
+  min-width: var(--control-min-height);
   min-height: var(--control-min-height);
-  padding: var(--space-8) var(--space-12);
+  padding: 0;
   background: transparent;
   border: var(--border-width) solid var(--line-strong);
   border-radius: var(--radius-control);
   color: var(--muted);
-  font-family: var(--font-body);
-  font-size: var(--text-small);
   cursor: pointer;
+  transition: transform var(--motion-press) var(--ease-out);
 }
 
-.theme-toggle:hover {
-  border-color: var(--ink);
-  color: var(--ink);
+.theme-toggle:active {
+  transform: scale(var(--press-scale));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle {
+    transition: none;
+  }
 }
 
 .theme-toggle svg {
@@ -105,47 +165,69 @@ a {
   height: var(--icon-size);
 }
 
-.frame {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
+/* A scrollable navigation row keeps every link available at enlarged text
+   sizes. Its own scrollbar never moves the page horizontally. */
+.topnav {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) var(--raised);
 }
 
-.sidebar {
-  flex: 1 1 var(--sidebar-basis);
-  max-width: 100%;
-  padding: var(--space-20) var(--space-14);
-  background: var(--surface);
-  border-right: var(--border-width) solid var(--line);
-}
-
-.reading-nav {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-8);
-}
-
-.reading-nav ol {
+.topnav ol {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: var(--space-4);
+  width: max-content;
+  min-width: 100%;
+}
+
+.topnav li {
+  display: flex;
+  flex: none;
+}
+
+@media (max-width: 959px) {
+  .topbar-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .brand {
+    justify-self: start;
+  }
+
+  .topnav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .theme-toggle {
+    grid-column: 2;
+    grid-row: 1;
+  }
 }
 
 .navlink {
+  flex: 1;
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: var(--control-min-height);
-  padding: var(--space-8) var(--space-12);
+  padding: var(--space-8);
+  white-space: nowrap;
   border: var(--border-width) solid transparent;
   border-radius: var(--radius-nav);
   color: var(--muted);
   font-size: var(--text-nav);
   font-weight: var(--weight-medium);
   text-decoration: none;
+}
+
+.navlink:focus-visible {
+  outline-offset: calc(var(--focus-offset) * -1);
 }
 
 .navlink:hover {
@@ -161,16 +243,11 @@ a {
 }
 
 .content {
-  flex: 999 1 var(--content-basis);
-  min-width: 0;
-  padding: var(--space-48) var(--space-24);
+  flex: 1;
+  padding-block: var(--space-48);
   display: flex;
   flex-direction: column;
   gap: var(--space-24);
-}
-
-.content > * {
-  max-width: var(--measure);
 }
 
 h1,
@@ -209,14 +286,17 @@ p {
 }
 
 .site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-6);
-  padding: var(--space-14) var(--space-24);
   background: var(--surface);
   border-top: var(--border-width) solid var(--line);
   color: var(--muted);
   font-size: var(--text-small);
+}
+
+.site-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  padding-block: var(--space-14);
 }
 
 .site-footer .mono {

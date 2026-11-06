@@ -1,30 +1,15 @@
-# AMS - Agent Operating System
+# AMS
 
-> Generated from LLM Workbench v3.2.2.
+## Start and scope
 
-AMS uses and repairs the Workbench while building the system in [Blueprint](BLUEPRINT.md); [S-001](workbench/specs/S-001-ams/SPEC.md) is the yardstick. Templates are shapes, not records.
+Follow the owner’s scope and corrections. Distinguish investigation, planning and implementation, and carry authorized work to its endpoint. Ask only consequential unresolved choices; delegate only with authority.
 
-## Dev environment tips
+Before work, follow [RUNBOOK](RUNBOOK.md#get-oriented), the assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md). RUNBOOK owns operating, testing, delivery and recovery procedures; SKILLS owns method routing and RSI operations.
 
-- Run `git status --short --branch`; read [RUNBOOK](RUNBOOK.md#get-oriented), [GLOSSARY](GLOSSARY.md), the [Wiki](workbench/wiki/MEMORY.md) and the assigned Spec/Task. Load the personal skill ([methods](workbench/docs/SKILLS.md)) before using it.
-- Pre-repo planning lives in private GPT_OS branch `claude/ams-s003-map-20261031` under `AMS/`; read its `AMS/CONTINUE.md` before planning. Copy nothing here without owner go-ahead: this repository is public.
-- The owner request governs scope; these rules and an assigned Spec bound it. Distinguish intent confirmation, execution approval, review, Human QA and publication. Ask only for consequential unresolved choices. Delegate only when authorized.
-- At most six Specs are active; the rest wait in S-001's backlog.
-- Edit `workbench/tools/` only via setup-workbench; author skills with author-skill.
-- Verify repository, branch, remote and locks before editing. Preserve decisions, corrections and others' edits; one writer per record; never switch a checkout another writer uses.
-- Ask before destructive actions, paid services, wider scope or unrequested external changes. License choice stays with the owner. Send no messages without authorization. Never commit secrets, host paths or private research.
-- One session never holds all three of untrusted input, credentials and outward actions.
-- Jot sourced intent and corrections into their owner first.
+Recover project context through the [Wiki](workbench/wiki/MEMORY.md) and assigned records.
 
-## Testing instructions
+Preserve decisions, corrections and others’ edits. Keep one writer per record; never switch another writer’s checkout. Capture sourced intent and corrections in their owner before dependent work. Use the supported claim and receipt tools.
 
-- Run `node workbench/tools/spec-workbench.mjs doctor` and the [checks](RUNBOOK.md#test-and-build). Find causes before fixing; red/green/refactor. Never weaken checks; name unavailable ones.
-- Three strikes: the run, a failed test, a second failed test; then stop and report both attempts.
-- RSI keeps problem, baseline, hypothesis, controlled comparison, failures and disposition; a demo or static score proves no improvement. Site claims link evidence at its scope.
+Ask before destruction, paid services, wider scope or unrequested external changes. The owner chooses the license. Send no unauthorized messages. Never commit secrets, host paths or private research, or combine untrusted input, credentials and outward actions in one session.
 
-## PR instructions
-
-- Work on a short-lived branch named for the change; never commit to `main`. Started on `main`? Run `git switch -c BRANCH`.
-- Commit each coherent step before ending a turn, saying what and why; the [require-committed](.agents/hooks/require-committed.sh) Stop hook enforces this. Never stash, reset or discard to get a clean tree.
-- Push and confirm the remote has the commit. Non-site work: PR into `main`; once current and checked, merge it yourself with a merge commit. Site work: feature -> `dev` -> `main`; agents merge into `dev` only, never `dev` -> `main`. A merge is not Spec acceptance, Human QA or deployment.
-- Read back changed owners and the diff; report candidate, checks, limits and delivery. Record review only from an eligible reviewer and Human QA only from a human.
+Keep confirmation, execution approval, Review, Human QA and publication distinct. Record only checks and judgments actually performed. Merge is not acceptance, Human QA or deployment. Follow [delivery authority](RUNBOOK.md#delivery-and-recovery); only the owner merges dev into main.

@@ -13,12 +13,22 @@ Every row is derived, read-only, from a real record and names it:
   evidence-log row that starts ``Correction``, or a Wiki entry whose ``Kind``
   names a correction.
 - ``correction_fix``: the commit a reply names as the fix for a finding.
-- ``spec``, ``task``: each Spec and Task record the lifecycle tool lists
-  (``spec-workbench.mjs list --all --json`` and ``show S-### --json``), dated by
-  the commit that added its file.
+- ``spec``: each currently registered Spec, dated by its file's creation.
+- ``task``: the first record of each Spec/Task identity, from its verified local
+  ancestor/rename lineage. Original legacy table or native blob supplies every
+  birth field; migration, removal and later Slice/Status edits do not rewrite it.
+  Native execution and receipts remain with their current lifecycle owners.
 - ``spec_event``: each other Spec evidence-log row; ``task_receipt``: each Task
   Receipt row; ``task_claimed``: each ``Claim S-### TK-###`` commit. A table row
   is dated by the commit that recorded it (``git blame``).
+
+Task births use graph ancestry, not timestamps. Conflicting earliest sources
+refuse. A native-verdict scaffold collision can reconcile only through the
+unique pre-join native claim, an existing visible corrective-provenance statement
+naming the other source, and a merge preserving the claimed document unchanged.
+Competing claim/execution or unsupported resolution still refuses; both commits
+remain history. Replacement, lazy fetch, protocols and text conversion cannot
+supply historical record content.
 
 Each row carries strength ``recorded_fact`` and a ``source_url``; a row without
 a source is refused before anything is sent. Inserts use the table's unique key
@@ -27,24 +37,62 @@ re-import adds no rows. Rows are sorted and inserted in the order the events
 occurred. Records must be committed: uncommitted changes under ``workbench/``
 are refused, because a row must link a source others can open.
 
-Commands: ``ams-history import [--dry-run] [--ref REF ...]`` writes with the
-service key; ``ams-history readcheck [--ref REF ...]`` reads every row back with
-the publishable key and compares it with the records. No key is ever printed.
+Commands: ``ams-history import [--dry-run] [--ref REF ...] [--refresh-changed]``
+writes with the service key and reports stored rows whose subject, summary, time
+or link no longer match the records; Task rows also compare the six canonical
+birth-detail keys, including absence. ``--refresh-changed`` updates them, logging
+old values in ``detail.refreshed``. Task refresh preserves annotations and audit,
+logs only bounded canonical previous detail, and requires the complete original
+detail plus core fields to still match. Direct returned Task fields must match;
+a historical-state readcheck alone does not prove current metadata was updated.
+``ams-history readcheck [--ref SHA] [--dev-ref REF]`` reads the records in a
+temporary worktree at SHA (default HEAD), keeps GitHub events up to SHA's commit
+time, and compares every row the publishable key reads: it fails on a missing
+row, an extra row (one no record derives, so a hand-typed row fails it), a
+content mismatch, an unsourced row or rows out of order, naming up to 20 keys of
+each. Rows after SHA that it does not derive count as newer than the ref.
+Dev-only commits are expected only when ``--dev-ref`` names the dev branch.
+No key is ever printed.
+
+A Spec carries no history (owner ruling, 2026-11-02): the native tools append
+its rows to ``workbench/wiki/history/<ID>.md``. A page row whose Date, Task and
+Event match a row retained from the Spec is that same fact and is not derived
+twice; every other page row is derived from the page, ``<page>#evidence-N``.
+
+Relocated Spec evidence is still derived from explicitly declared Wiki history:
+MEMORY.md must link the article; its frontmatter source_paths block list must
+name the pinned or current path of a registered Spec; a visible [previous S-ID
+at HEX](URL) link must name this repository's immutable blob at that same
+HEX/path, which may predate a later move of the Spec. Only locally
+available ancestors of the record snapshot are eligible. The archived Spec ID
+and evidence table must match; original blame supplies every event's source
+commit, line and time. Exact duplicate rows coalesce; conflicting keys refuse.
+CommonMark link tokens, not Markdown-shaped text, govern visibility; archive
+labels must be plain text. The pinned parser is used without rendering,
+plugins or URL fetching. Git must support --no-lazy-fetch (otherwise this
+read fails closed), and archived blame disables text conversion and replace
+objects. Orphan articles, code examples and comments authorize no events;
+unprovable retained DB rows continue to fail readcheck.
 """
 
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import os
 import posixpath
 import re
 import subprocess
 import sys
+import tempfile
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable, Iterable, Mapping, Sequence
+from urllib.parse import quote, urlsplit
+
+from markdown_it import MarkdownIt
 
 from ams import keycheck, source_rules, writer
 
@@ -61,8 +109,14 @@ BATCH = 200
 PR_FIELDS = ("number,title,state,url,createdAt,closedAt,mergedAt,mergeCommit,"
              "headRefName,baseRefName,reviews")
 EVIDENCE_HEADING = "## Append-Only Evidence And Execution Log"
+HISTORY_DIR = "workbench/wiki/history"
 RECEIPT_HEADING = "## Receipt"
 READ_COLUMNS = "id,kind,source_kind,source_ref,occurred_at,source_url,strength,subject,summary"
+# The fields readcheck compares with the re-derived records (review N1); detail is
+# bookkeeping (refs, PR numbers, receipt cells) and is not compared.
+CONTENT_FIELDS = ("subject", "summary", "occurred_at", "source_url")
+TASK_BIRTH_FIELDS = ("spec", "task", "status", "record", "created_commit", "recorded_commit")
+SHOWN = 20  # keys printed per list before the rest are counted
 
 Runner = Callable[[Sequence[str]], str]
 
@@ -87,6 +141,9 @@ class Sources:
     gh: Runner
     lifecycle: Runner
     refs: tuple[str, ...] = DEFAULT_REFS
+    # A pinned readcheck keeps GitHub events (PRs, merges, review threads) that
+    # occurred at or before this instant: the pinned ref's commit time.
+    cutoff: datetime | None = None
 
 
 # --- small helpers -----------------------------------------------------------
@@ -138,7 +195,7 @@ def validate(row: Mapping) -> None:
     for name in ("subject", "summary"):
         if not isinstance(row.get(name), str) or not row[name].strip():
             raise ValueError(f"row without {name}: {row.get('kind')}")
-    source_rules.check_source(row)  # the rule every site table shares (TK-005)
+    source_rules.check_source(row, table="build_events")  # the rule every site table shares (TK-005)
     if row.get("source_kind") not in SOURCE_KINDS:
         raise ValueError(f"row without a source kind: {row.get('kind')}")
     if not isinstance(row.get("source_ref"), str) or not row["source_ref"].strip():
@@ -184,16 +241,18 @@ def _first_commit(git: Runner, path: str) -> tuple[str, str] | None:
     return sha, committed
 
 
-def _blame(git: Runner, path: str) -> list[tuple[str, str, int, str, str]]:
-    """(commit, utc time, line, text, path) for each line of path at HEAD.
+def _blame(git: Runner, path: str, ref: str = "HEAD", *, required: bool = False) -> list[tuple[str, str, int, str, str]]:
+    """(commit, utc time, line, text, path) for each line of path at ref.
 
     The line number and path are the ones the line had in that commit, so a
     link to the commit's blob shows the line even after lines above it moved
     or the file was renamed.
     """
     try:
-        out = git(["blame", "--line-porcelain", "HEAD", "--", path])
+        out = git(["blame", "--no-textconv", "--line-porcelain", ref, "--", path])
     except subprocess.CalledProcessError:
+        if required:
+            raise RefusedError("historical Spec blob is unavailable") from None
         return []
     lines, sha, when, number, origin = [], None, None, 0, path
     for raw in out.splitlines():
@@ -311,7 +370,7 @@ def review_rows(prs: Sequence[dict], comments: Sequence[dict], resolved: Mapping
         number = int(comment["pull_request_url"].rstrip("/").rsplit("/", 1)[1])
         ref, title = f"#{number} comment {comment['id']}", _finding_title(comment["body"])
         priority = _PRIORITY.search(comment["body"])
-        fix_sha, fix_reply, named_earlier = None, None, []
+        fix_sha, fix_reply, fix_derived_at, named_earlier = None, None, None, []
         human = [r for r in replies.get(comment["id"], [])
                  if not _is_codex((r.get("user") or {}).get("login", ""))]
         for reply in sorted(human, key=lambda r: r["created_at"], reverse=True):
@@ -321,8 +380,11 @@ def review_rows(prs: Sequence[dict], comments: Sequence[dict], resolved: Mapping
             if fix_reply is None:  # the newest naming reply decides, even if unresolvable
                 fix_sha = _resolve_commit(named.group(1), pr_commits, git)
                 fix_reply = reply["html_url"]
+                fix_derived_at = utc(reply["created_at"])
             else:
                 named_earlier.insert(0, named.group(1))
+                if fix_sha and _resolve_commit(named.group(1), pr_commits, git) == fix_sha:
+                    fix_derived_at = utc(reply["created_at"])
         for reply in human:
             first = reply["body"].strip().splitlines()[0].strip() if reply["body"].strip() else ""
             if _CORRECTION_EVENT.match(first):
@@ -338,7 +400,8 @@ def review_rows(prs: Sequence[dict], comments: Sequence[dict], resolved: Mapping
                           "fix_named_earlier": named_earlier}))
         if fix_sha:
             entry = fixes.setdefault(fix_sha[0], {"time": fix_sha[1], "findings": [], "titles": [],
-                                                   "prs": set(), "replies": []})
+                                                   "prs": set(), "replies": [], "derived_at": fix_derived_at})
+            entry["derived_at"] = min(entry["derived_at"], fix_derived_at, key=parse_time)
             entry["findings"].append(ref)
             entry["titles"].append(title)
             entry["prs"].add(number)
@@ -349,7 +412,7 @@ def review_rows(prs: Sequence[dict], comments: Sequence[dict], resolved: Mapping
                          "Fix for review finding: " + "; ".join(entry["titles"]),
                          utc(entry["time"]), "commit", sha, _commit_url(sha),
                          {"findings": entry["findings"], "prs": prs_named,
-                          "reply_urls": entry["replies"]}))
+                          "reply_urls": entry["replies"], "derived_at": entry["derived_at"]}))
     return rows
 
 
@@ -365,9 +428,383 @@ def _resolve_commit(prefix: str, pr_commits: Mapping[str, dict], git: Runner):
     return sha, committed
 
 
-def record_rows(git: Runner, lifecycle: Runner) -> list[dict]:
+def _spec_events(spec_id: str, path: str, blame) -> list[dict]:
     rows = []
-    for listed in json.loads(lifecycle(["list", "--all", "--json"]))["specs"]:
+    for index, (cells, line) in enumerate(_table(blame, EVIDENCE_HEADING), start=1):
+        event = cells.get("event", "").strip()
+        task = cells.get("task", "").strip()
+        kind = ("correction" if _CORRECTION_EVENT.match(event)
+                else "return" if _RETURN_EVENT.match(event) else "spec_event")
+        subject = f"{spec_id} {task}" if task and task.lower() != "none" else spec_id
+        rows.append(_row(kind, subject, event or "(no event)", line[1], "path",
+                         f"{path}#evidence-{index}", _blob_url(line[0], line[4], line[2]),
+                         dict(cells, spec=spec_id, recorded_commit=line[0])))
+    return rows
+
+
+def _birth_fields(text: str, *, native: bool = False) -> tuple[dict, str]:
+    """Read canonical native fields from genuine CommonMark metadata tokens."""
+    tokens = MarkdownIt("commonmark").parse(text)
+    fields, title = {}, ""
+    for index, token in enumerate(tokens):
+        if not native and token.type == "heading_open" and token.level == 0 and token.tag != "h1":
+            break
+        if token.type != "inline" or token.level != 1:
+            continue
+        previous = tokens[index - 1]
+        if previous.type == "heading_open" and previous.tag == "h1" and not title:
+            title = token.content
+        if previous.type != "paragraph_open":
+            continue
+        lines = [[]]
+        for child in token.children or []:
+            if child.type in {"softbreak", "hardbreak"}:
+                lines.append([])
+            elif child.type != "text" or child.content:
+                lines[-1].append(child)
+        for line in lines:
+            if len(line) < 3 or [child.type for child in line[:3]] != ["strong_open", "text", "strong_close"]:
+                continue
+            name = _field_name(line[1].content.removesuffix(":"))
+            if not line[1].content.endswith(":") or name not in {"spec_id", "task_id", "slice", "status", "claimed_by", "current_claimant", "proof"}:
+                continue
+            # Tokens prove the label is real; raw spelling preserves Slice markup.
+            # A code span's embedded newlines cannot impersonate metadata labels.
+            raw = [match[2].strip() for raw_line in token.content.splitlines()
+                   if (match := re.fullmatch(r"\*\*([^*\n]+):\*\*[ \t]*(.*)", raw_line))
+                   and _field_name(match[1]) == name]
+            if len(raw) != 1 or (name not in {"slice", "proof"} and any(child.type != "text" for child in line[3:])):
+                raise RefusedError(f"unsupported historical metadata {name}")
+            value = raw[0]
+            if name in fields:
+                raise RefusedError(f"conflicting historical metadata {name}")
+            fields[name] = value
+    return fields, title
+
+
+def _has_native_receipt(text: str) -> bool:
+    tokens = MarkdownIt("commonmark").parse(text)
+    return any(token.type == "heading_open" and token.level == 0 and token.tag == "h2"
+               and tokens[index + 1].content == "Receipt" for index, token in enumerate(tokens))
+
+
+def _native_resolution(text: str):
+    """Recognize the existing explicit native corrective-provenance statement.
+
+    Its genuine paragraph names the joined verdict source; code/comment examples
+    cannot declare an alias. No new selector field or Task/commit allowlist exists.
+    Return the source and document with only that provenance section removed.
+    """
+    tokens, sections = MarkdownIt("commonmark").parse(text), []
+    for index, token in enumerate(tokens):
+        if (token.type == "heading_open" and token.level == 0 and token.tag == "h2"
+                and tokens[index + 1].content == "Native corrective provenance"):
+            end = next((i for i in range(index + 1, len(tokens))
+                        if tokens[i].type == "heading_open" and tokens[i].level == 0
+                        and tokens[i].tag in {"h1", "h2"}), len(tokens))
+            sections.append((index, end))
+    if len(sections) != 1:
+        return None
+    start, end = sections[0]
+    declarations = []
+    pattern = (r"The native failed verdict(?: at reviewed \x00)? generated this same Task ID"
+               r"(?: at evidence row ?[1-9][0-9]*)?\. "
+               r"Its generic assignment and the already claimed bounded assignment describe the same "
+               r"(?:[\w-]+ )*correction; preserve the current claimant, detailed acceptance "
+               r"and original failed-review row\. Native verdict source commit \x00 is merged into this branch\.")
+    for index in range(start, end):
+        token = tokens[index]
+        if token.type != "inline" or token.level != 1 or tokens[index - 1].type != "paragraph_open":
+            continue
+        children = token.children or []
+        plain = "".join(c.content if c.type == "text" else " " if c.type in {"softbreak", "hardbreak"}
+                        else "\0" for c in children)
+        if not re.fullmatch(pattern, plain):
+            continue
+        for position, child in enumerate(children):
+            if (child.type == "code_inline" and re.fullmatch(r"[0-9a-f]{40}", child.content)
+                    and position > 0 and children[position - 1].type == "text"
+                    and children[position - 1].content.endswith("Native verdict source commit ")):
+                declarations.append(child.content)
+    if len(declarations) != 1:
+        return None
+    lines = text.splitlines(keepends=True)
+    stop = tokens[end].map[0] if end < len(tokens) else len(lines)
+    preserved = "".join(lines[:tokens[start].map[0]] + lines[stop:]).rstrip()
+    return declarations[0], preserved
+
+
+class _TaskBirthIndex:
+    """Births from the registered Spec's local ancestor and rename lineage.
+
+    A later execution file or table rewrite cannot change a creation fact. Git
+    ancestry orders definitions; wall time cannot choose between parallel births.
+    Content reads are bounded by the registered path, verified renames and their
+    Task subtrees. Rename discovery reads diff metadata, never arbitrary blobs.
+    """
+
+    def __init__(self, git: Runner, spec_id: str, spec_path: str):
+        # record_rows supplies the protected local Git reader. Birth lookups
+        # require their objects; optional current receipt paths may be absent.
+        def safe(args):
+            try:
+                return git(args)
+            except subprocess.CalledProcessError:
+                raise RefusedError("historical source unavailable in local Git") from None
+        self.git, self.spec_id, self.spec_path = safe, spec_id, spec_path
+        self.parents = {}
+        for line in safe(["rev-list", "--parents", "HEAD"]).splitlines():
+            sha, *parents = line.split()
+            self.parents[sha] = parents
+        if any(p not in self.parents for parents in self.parents.values() for p in parents):
+            raise RefusedError("Task birth ancestry is incomplete")
+        if safe(["rev-parse", "--is-shallow-repository"]).strip() != "false":
+            raise RefusedError("Task birth ancestry requires a complete local clone")
+        self.head = safe(["rev-parse", "HEAD"]).strip()
+        self.blobs, self.trees, self.fields, self.times, self.ancestors = {}, {}, {}, {}, {}
+        self.native_paths, self.native_snapshots, self.path_bounds = {}, {}, {}
+
+    def tree(self, ref: str, path: str, *, recursive: bool = False):
+        key = ref, path, recursive
+        if key not in self.trees:
+            args = ["ls-tree", "-z", *(["-r"] if recursive else []), ref, "--", path]
+            entries = []
+            for entry in self.git(args).split("\0"):
+                if entry:
+                    metadata, name = entry.split("\t", 1)
+                    mode, kind, oid = metadata.split()
+                    if kind == "blob" and mode in {"100644", "100755"}:
+                        entries.append((name, oid))
+                    elif ((not recursive and name == path) or
+                          (recursive and re.fullmatch(re.escape(path) + r"/(?:retired/)?TK-[A-Za-z0-9]+/TASK\.md", name))):
+                        raise RefusedError(f"historical record is not a regular blob: {path}")
+            self.trees[key] = entries
+        return self.trees[key]
+
+    def text(self, oid: str):
+        if oid not in self.blobs:
+            self.blobs[oid] = self.git(["cat-file", "blob", oid])
+        return self.blobs[oid]
+
+    def spec_blob(self, ref: str, path: str):
+        entries = self.tree(ref, path)
+        return entries[0][1] if entries else None
+
+    def metadata(self, oid: str, *, native: bool = False):
+        key = oid, native
+        if key not in self.fields:
+            self.fields[key] = _birth_fields(self.text(oid), native=native)
+        return self.fields[key]
+
+    def owns(self, ref: str, path: str):
+        oid = self.spec_blob(ref, path)
+        return oid is not None and self.metadata(oid)[0].get("spec_id") == self.spec_id
+
+    def ancestor(self, older: str, newer: str):
+        if newer not in self.ancestors:
+            found, pending = set(), [newer]
+            while pending:
+                sha = pending.pop()
+                if sha not in found:
+                    found.add(sha)
+                    pending.extend(self.parents[sha])
+            self.ancestors[newer] = found
+        return older in self.ancestors[newer]
+
+    def history(self, ref: str, path: str):
+        return self.git(["log", "--full-history", "--format=%H", ref, "--", path]).splitlines()
+
+    def renames(self, parent: str, child: str):
+        names = iter(self.git(["diff-tree", "--no-commit-id", "--no-ext-diff", "--no-textconv",
+                               "-r", "-M", "--name-status", "-z", parent, child]).split("\0"))
+        for status in names:
+            if not status:
+                continue
+            old = next(names)
+            if status.startswith(("R", "C")):
+                new = next(names)
+                if status.startswith("R"):
+                    yield old, new
+
+    def table_births(self, ref: str, path: str, oid: str):
+        tokens = MarkdownIt("commonmark").enable("table").parse(self.text(oid))
+        eligible = False
+        blame = None
+        for index, token in enumerate(tokens):
+            if token.type == "heading_open" and token.level == 0:
+                eligible = token.tag == "h2" and tokens[index + 1].content == "Vertical Implementation Slices"
+            if token.type != "table_open" or token.level != 0 or not eligible:
+                continue
+            if blame is None:
+                blame = _blame(self.git, path, ref, required=True)
+            start, end = token.map
+            # Reuse the original raw-cell/blame codec only for parser-proved tables.
+            sentinel = [(None, None, 0, "## slices", path)]
+            for cells, line in _table(sentinel + blame[start:end], "## slices"):
+                task_id = cells.get("task", cells.get("task_id", ""))
+                if not re.fullmatch(r"TK-[A-Za-z0-9]+", task_id):
+                    continue
+                sha, when, number, _, origin = line
+                if (sha not in self.parents or not self.ancestor(sha, ref)
+                        or not any(self.ancestor(sha, bound) for bound in self.path_bounds.get(origin, ()))
+                        or not self.owns(sha, origin)):
+                    raise RefusedError(f"unprovable Task birth source: {self.spec_id}/{task_id}")
+                yield task_id, _row("task", f"{self.spec_id} {task_id}", cells.get("slice") or task_id,
+                                   when, "path", f"{self.spec_id}/{task_id}", _blob_url(sha, origin, number),
+                                   {"spec": self.spec_id, "task": task_id, "status": cells.get("status"),
+                                    "recorded_commit": sha, "record": origin}), sha
+
+    def native_births(self, ref: str, path: str):
+        directory = posixpath.join(posixpath.dirname(path), "tasks")
+        pattern = re.compile(re.escape(directory) + r"/(?:retired/)?(TK-[A-Za-z0-9]+)/TASK\.md")
+        for name, oid in self.tree(ref, directory, recursive=True):
+            match = pattern.fullmatch(name)
+            if not match:
+                continue
+            task_id = match[1]
+            self.native_paths.setdefault(task_id, {})[name] = path
+            self.native_snapshots[task_id, ref, name] = oid
+            fields, title = self.metadata(oid, native=True)
+            if fields.get("task_id") != task_id or fields.get("spec_id", self.spec_id) != self.spec_id:
+                raise RefusedError(f"conflicting historical Task identity: {name}")
+            if "status" not in fields:
+                raise RefusedError(f"historical Task has no status: {name}")
+            summary = fields.get("slice")
+            if not summary:
+                heading = re.fullmatch(re.escape(task_id) + r"\s+[-–—]\s+(.+)", title)
+                if not heading:
+                    raise RefusedError(f"historical Task has no slice or title: {name}")
+                summary = heading[1]
+            if ref not in self.times:
+                self.times[ref] = utc(self.git(["show", "-s", "--format=%cI", ref, "--"]).strip())
+            yield task_id, _row("task", f"{self.spec_id} {task_id}", summary, self.times[ref], "path",
+                               f"{self.spec_id}/{task_id}", _blob_url(ref, name),
+                               {"spec": self.spec_id, "task": task_id, "status": fields["status"],
+                                "created_commit": ref, "record": name}), ref
+
+    def native_at(self, ref: str, task_id: str):
+        records = []
+        for name, spec_path in self.native_paths.get(task_id, {}).items():
+            if not any(self.ancestor(ref, bound) for bound in self.path_bounds[spec_path]):
+                continue
+            if self.owns(ref, spec_path) and (oid := self.spec_blob(ref, name)) is not None:
+                records.append((name, oid, self.metadata(oid, native=True)[0]))
+        return records[0] if len(records) == 1 else None
+
+    def reconcile(self, task_id: str, earliest):
+        # This narrowly reconciles the existing native-verdict scaffold workflow.
+        # A graph join alone is insufficient: require a unique real claim, a
+        # visible explicit source resolution and the unchanged claimed document.
+        if len(earliest) != 2 or any("created_commit" not in row["detail"] for _, row in earliest):
+            return None
+        sources = {sha for sha, _ in earliest}
+        if len(sources) != 2:
+            return None
+        claims = []
+        for line in self.git(["log", "--format=%H%x1f%s", self.head]).splitlines():
+            sha, subject = line.split("\x1f", 1)
+            if (match := _CLAIM.fullmatch(subject)) and match.groups() == (self.spec_id, task_id):
+                claims.append(sha)
+        solutions = {}
+        for birth, row in earliest:
+            other = (sources - {birth}).pop()
+            for merge, parents in self.parents.items():
+                if len(parents) != 2:
+                    continue
+                owned = [p for p in parents if self.ancestor(birth, p) and not self.ancestor(other, p)]
+                scaffold = [p for p in parents if self.ancestor(other, p) and not self.ancestor(birth, p)]
+                if len(owned) != 1 or len(scaffold) != 1:
+                    continue
+                owner, loser = owned[0], scaffold[0]
+                own_claims = [c for c in claims if self.ancestor(c, owner)]
+                if not own_claims or any(self.ancestor(c, loser) for c in claims):
+                    continue
+                claimant = set()
+                for claim in own_claims:
+                    record = self.native_at(claim, task_id)
+                    fields = record[2] if record else {}
+                    agent = fields.get("claimed_by")
+                    if (fields.get("status") != "in-progress" or not agent
+                            or fields.get("current_claimant") != agent):
+                        break
+                    claimant.add(agent)
+                else:
+                    if len(claimant) != 1:
+                        continue
+                    before, joined = self.native_at(owner, task_id), self.native_at(merge, task_id)
+                    if (not before or not joined or before[2].get("claimed_by") not in claimant
+                            or before[2].get("current_claimant") not in claimant):
+                        continue
+                    resolution = _native_resolution(self.text(joined[1]))
+                    if not resolution or resolution != (other, self.text(before[1]).rstrip()):
+                        continue
+                    # Every pre-join scaffold snapshot must remain unclaimed and
+                    # unexecuted, even if a later edit removed an earlier receipt.
+                    executed = False
+                    for (identity, sha, _), oid in self.native_snapshots.items():
+                        if identity == task_id and self.ancestor(sha, loser):
+                            fields = self.metadata(oid, native=True)[0]
+                            if (fields.get("status") != "ready" or fields.get("claimed_by")
+                                    or fields.get("current_claimant") or fields.get("proof")
+                                    or _has_native_receipt(self.text(oid))):
+                                executed = True
+                                break
+                    if not executed:
+                        solutions[json.dumps(row, sort_keys=True)] = row
+        return next(iter(solutions.values())) if len(solutions) == 1 else None
+
+    def rows(self):
+        states, pending, snapshots, definitions = set(), [(self.head, self.spec_path)], set(), {}
+        while pending:
+            ref, path = pending.pop()
+            if (ref, path) in states:
+                continue
+            states.add((ref, path))
+            self.path_bounds.setdefault(path, set()).add(ref)
+            spec_commits = self.history(ref, path)
+            task_dir = posixpath.join(posixpath.dirname(path), "tasks")
+            snapshots.update((sha, path) for sha in set(spec_commits + self.history(ref, task_dir))
+                             if self.owns(sha, path))
+            for sha in spec_commits:
+                if not self.owns(sha, path):
+                    continue
+                for parent in self.parents[sha]:
+                    if self.spec_blob(parent, path) is not None:
+                        continue
+                    for old, new in self.renames(parent, sha):
+                        if new == path:
+                            if not old.endswith("/SPEC.md") or not self.owns(parent, old):
+                                raise RefusedError(f"unverified registered Spec rename: {path}")
+                            pending.append((parent, old))
+        # Verify all rename bounds before a blame origin can authorize a row.
+        for sha, path in sorted(snapshots):
+            for task_id, row, source in [*self.table_births(sha, path, self.spec_blob(sha, path)),
+                                         *self.native_births(sha, path)]:
+                definitions.setdefault(task_id, {})[json.dumps(row, sort_keys=True)] = (source, row)
+        rows = []
+        for task_id, entries in sorted(definitions.items()):
+            candidates = list(entries.values())
+            earliest = [(sha, row) for sha, row in candidates
+                        if not any(other != sha and self.ancestor(other, sha) for other, _ in candidates)]
+            chosen = earliest[0][1] if len(earliest) == 1 else self.reconcile(task_id, earliest)
+            if chosen is None:
+                raise RefusedError(f"ambiguous conflicting Task births: {self.spec_id}/{task_id}")
+            rows.append(chosen)
+        return rows
+
+
+def record_rows(git: Runner, lifecycle: Runner) -> list[dict]:
+    original_git = git
+    def local(args):
+        try:
+            return original_git(["--no-replace-objects", "--no-lazy-fetch", "-c", "protocol.allow=never",
+                                 "-c", "blame.ignoreRevsFile=", *args])
+        except UnicodeError:
+            raise RefusedError("historical source unavailable in local Git") from None
+    git = local
+    rows = []
+    listed_specs = json.loads(lifecycle(["list", "--all", "--json"]))["specs"]
+    for listed in listed_specs:
         spec_id, path = listed["id"], listed["path"]
         shown = json.loads(lifecycle(["show", spec_id, "--json"]))
         created = _first_commit(git, path)
@@ -377,44 +814,164 @@ def record_rows(git: Runner, lifecycle: Runner) -> list[dict]:
                          path, _blob_url(created[0], path),
                          {"status": listed.get("status"), "landmark": listed.get("landmarkId"),
                           "created_commit": created[0]}))
-        blame = _blame(git, path)
-        for index, (cells, line) in enumerate(_table(blame, EVIDENCE_HEADING), start=1):
-            event = cells.get("event", "").strip()
-            task = cells.get("task", "").strip()
-            kind = ("correction" if _CORRECTION_EVENT.match(event)
-                    else "return" if _RETURN_EVENT.match(event) else "spec_event")
-            subject = f"{spec_id} {task}" if task and task.lower() != "none" else spec_id
-            rows.append(_row(kind, subject, event or "(no event)", line[1], "path",
-                             f"{path}#evidence-{index}", _blob_url(line[0], line[4], line[2]),
-                             dict(cells, spec=spec_id, recorded_commit=line[0])))
+        rows.extend(_spec_events(spec_id, path, _blame(git, path)))
+        rows.extend(_TaskBirthIndex(git, spec_id, path).rows())
         for task in [*shown.get("tasks", []), *shown.get("retiredTasks", [])]:
-            rows.extend(_task_rows(git, spec_id, path, task))
+            rows.extend(_task_receipts(git, spec_id, path, task))
+    rows.extend(_wiki_spec_events(git, listed_specs, rows))
+    rows.extend(_history_page_events(git, listed_specs, rows))
     return rows
 
 
-def _task_rows(git: Runner, spec_id: str, spec_path: str, task: Mapping) -> list[dict]:
+_PREVIOUS_SPEC = re.compile(r"previous (S-[A-Za-z0-9]+) at ([0-9a-f]{7,40})")
+
+
+def _markdown_links(text: str):
+    """Read genuine CommonMark links without rendering or interpreting examples.
+
+    Only top-level inline children count: images' alt-text children, raw HTML,
+    comments and code tokens cannot supply links. An archive declaration label
+    must be plain text; formatting/code cannot be removed to forge its identity.
+    Router links need only a genuine link target, so their label is immaterial.
+    """
+    for block in MarkdownIt("commonmark").parse(text):
+        if block.type != "inline":
+            continue
+        children = block.children or []
+        for index, token in enumerate(children):
+            if token.type != "link_open":
+                continue
+            label = []
+            for child in children[index + 1:]:
+                if child.type == "link_close":
+                    break
+                label.append(child)
+            target = token.attrGet("href")
+            if target is not None:
+                plain = all(child.type == "text" for child in label)
+                yield "".join(child.content for child in label) if plain else "", target
+
+
+def _link_url(target: str):
+    try:
+        return urlsplit(target)
+    except ValueError:
+        raise RefusedError("malformed Wiki source link") from None
+
+
+def _wiki_spec_events(git: Runner, specs: Sequence[dict], current: Sequence[dict]) -> list[dict]:
+    """Only MEMORY-routed Wiki declarations can retain old Spec evidence.
+
+    A declaration is [previous S-ID at HEX](this repository/blob/HEX/Spec path).
+    The article's frontmatter source_paths must declare the pinned path or the
+    Spec's current one; the pinned path may predate a later move or retirement.
+    Resolve/blame locally, disabling replacement objects, lazy-fetch protocols
+    and text conversion. Neither an arbitrary ancestor nor an external URL
+    authorizes history. Existing destinations win no conflict silently.
+    """
+    def local(args):
+        return git(["--no-replace-objects", "--no-lazy-fetch", "-c", "protocol.allow=never",
+                    "-c", "blame.ignoreRevsFile=", *args])
+
+    files = set(local(["ls-tree", "-r", "--name-only", "HEAD", "--", "workbench/wiki"]).splitlines())
+    router = "workbench/wiki/MEMORY.md"
+    if router not in files:
+        return []
+    router_text = local(["show", f"HEAD:{router}"])
+    pages = set()
+    for _, target in _markdown_links(router_text):
+        url = _link_url(target)
+        path = posixpath.normpath(posixpath.join("workbench/wiki", url.path))
+        if not url.scheme and not url.netloc and not url.query and path in files and path != router:
+            pages.add(path)
+    # A pinned source keeps the path the Spec had at that commit; the Spec may have
+    # moved or retired since. Its blob must still carry the same Spec ID (below).
+    ids = {s["id"] for s in specs}
+    current_path = {s["id"]: s["path"] for s in specs}
+    known = {_key(r): r for r in current}
+    retained = []
+    bound = parse_time(local(["show", "-s", "--format=%cI", "HEAD"]).strip())
+    for page in sorted(pages):
+        text = local(["show", f"HEAD:{page}"])
+        frontmatter = re.match(r"\A---\n(.*?)\n---(?:\n|$)", text, re.S)
+        sources = re.search(r"(?m)^source_paths:\n((?: +-[^\n]*\n?)*)", frontmatter[1]) if frontmatter else None
+        declared = {line.strip()[2:].strip() for line in sources[1].splitlines()} if sources else set()
+        body = text[frontmatter.end():] if frontmatter else text
+        for label, target in _markdown_links(body):
+            declaration = _PREVIOUS_SPEC.fullmatch(label)
+            if declaration is None:
+                continue
+            spec_id, prefix = declaration.groups()
+            url = _link_url(target)
+            base = urlsplit(REPO_URL)
+            marker = base.path + "/blob/" + prefix + "/"
+            path = url.path.removeprefix(marker)
+            if (url.scheme != base.scheme or url.netloc != base.netloc or url.query or url.fragment
+                    or not url.path.startswith(marker) or spec_id not in ids
+                    or not ({path, current_path.get(spec_id)} & declared) or "%" in path or "\\" in path
+                    or path != posixpath.normpath(path) or path.startswith("/")
+                    or ".." in path.split("/")):
+                raise RefusedError(f"unsupported historical Spec declaration in {page}")
+            try:
+                sha = local(["rev-parse", "--verify", prefix + "^{commit}"]).strip()
+                if not re.fullmatch(r"[0-9a-f]{40}", sha) or not sha.startswith(prefix):
+                    raise RefusedError("historical Spec ref does not identify its declared object")
+                local(["merge-base", "--is-ancestor", sha, "HEAD"])
+                when = parse_time(local(["show", "-s", "--format=%cI", sha]).strip())
+                blame = _blame(local, path, sha, required=True)
+            except subprocess.CalledProcessError:
+                raise RefusedError(f"unavailable or non-ancestor historical Spec source in {page}") from None
+            blob = "\n".join(line[3] for line in blame)
+            if not re.search(r"(?m)^\*\*Spec ID:\*\* " + re.escape(spec_id) + r"\s*$", blob):
+                raise RefusedError(f"historical Spec identity differs in {page}")
+            events = _spec_events(spec_id, path, blame)
+            if not events:
+                raise RefusedError(f"historical Spec source has no evidence table in {page}")
+            if when > bound or any(parse_time(r["occurred_at"]) > bound for r in events):
+                raise RefusedError(f"future historical Spec source in {page}")
+            for row in events:
+                key = _key(row)
+                if key in known:
+                    if row != known[key]:
+                        raise RefusedError(f"conflicting historical Spec event {row['source_ref']}")
+                else:
+                    known[key] = row
+                    retained.append(row)
+    return retained
+
+
+def _history_page_events(git: Runner, specs: Sequence[dict], current: Sequence[dict]) -> list[dict]:
+    """Rows the native tools append to a Spec's Wiki history page, ``history/<ID>.md``.
+
+    A page opens with the rows moved out of its Spec; its ``previous S-ID at HEX``
+    declaration already derives those with their original identity, dates and
+    links. A page row is that same fact when its append-only identity (Date,
+    Task, Event) matches a retained row of the Spec, so it is not derived twice.
+    Every other page row is derived from the page itself.
+    """
+    files = set(git(["ls-tree", "-r", "--name-only", "HEAD", "--", HISTORY_DIR]).splitlines())
+    rows = []
+    for listed in specs:
+        spec_id, path = listed["id"], listed["path"]
+        page = f"{HISTORY_DIR}/{spec_id}.md"
+        if page not in files:
+            continue
+        # Retained rows carry the path the Spec had when they were written, which a
+        # later move changes, so match them by Spec ID rather than by current path.
+        retained = {(r["detail"].get("date"), r["detail"].get("task"), r["detail"].get("event"))
+                    for r in current if r["detail"].get("spec") == spec_id
+                    and "#evidence-" in r["source_ref"] and not r["source_ref"].startswith(HISTORY_DIR + "/")}
+        for row in _spec_events(spec_id, page, _blame(git, page)):
+            if (row["detail"].get("date"), row["detail"].get("task"), row["detail"].get("event")) not in retained:
+                rows.append(row)
+    return rows
+
+
+def _task_receipts(git: Runner, spec_id: str, spec_path: str, task: Mapping) -> list[dict]:
     task_id = task["id"]
     path = posixpath.join(posixpath.dirname(spec_path), "tasks", task_id, "TASK.md")
-    created = _first_commit(git, path)
     subject = f"{spec_id} {task_id}"
-    # One key per Task whichever record holds it (and wherever the Spec moves), so a
-    # table-only Task that later gets its TASK.md is the same event, not a second row.
-    identity = f"{spec_id}/{task_id}"
-    if created is None:
-        # A planned Task recorded only as a row of its Spec's slice table.
-        line = next((line for line in _blame(git, spec_path)
-                     if re.match(rf"^\|\s*{re.escape(task_id)}\s*\|", line[3])), None)
-        if line is None:
-            print(f"note: {subject} has no committed record; no task row", file=sys.stderr)
-            return []
-        return [_row("task", subject, task.get("slice") or task_id, line[1], "path",
-                     identity, _blob_url(line[0], line[4], line[2]),
-                     {"spec": spec_id, "task": task_id, "status": task.get("status"),
-                      "recorded_commit": line[0], "record": spec_path})]
-    rows = [_row("task", subject, task.get("slice") or task_id, utc(created[1]), "path", identity,
-                 _blob_url(created[0], path),
-                 {"spec": spec_id, "task": task_id, "status": task.get("status"),
-                  "created_commit": created[0], "record": path})]
+    rows = []
     for index, (cells, line) in enumerate(_table(_blame(git, path), RECEIPT_HEADING), start=1):
         rows.append(_row("task_receipt", subject,
                          f"Receipt run {cells.get('run', index)} on {cells.get('branch', 'unknown')}",
@@ -494,8 +1051,15 @@ def collect(sources: Sources) -> list[dict]:
     comments = [json.loads(line) for line in sources.gh(
         ["api", "--paginate", f"repos/{REPO_SLUG}/pulls/comments?per_page=100", "--jq", ".[]"]
     ).splitlines() if line.strip()]
-    rows = [*commit_rows(commits, prs_of), *pr_rows(prs, sources.git),
-            *review_rows(prs, comments, _resolved_threads(sources.gh), sources.git),
+    if sources.cutoff is not None:
+        # Cut comments off first: a later reply can name an earlier fix commit, and
+        # that fix row is dated by the commit, not the reply (Codex P2 on PR #65).
+        comments = [c for c in comments if parse_time(c["created_at"]) <= sources.cutoff]
+    github = [*pr_rows(prs, sources.git),
+              *review_rows(prs, comments, _resolved_threads(sources.gh), sources.git)]
+    if sources.cutoff is not None:
+        github = [r for r in github if parse_time(r["occurred_at"]) <= sources.cutoff]
+    rows = [*commit_rows(commits, prs_of), *github,
             *record_rows(sources.git, sources.lifecycle), *wiki_rows(sources.git)]
     seen = set()
     for row in rows:
@@ -517,11 +1081,12 @@ def sort_rows(rows: Iterable[dict]) -> list[dict]:
                                        KIND_ORDER.get(r["kind"], 99), r["source_ref"]))
 
 
-_THREADS_QUERY = """query($owner: String!, $name: String!) {
+_THREADS_QUERY = """query($owner: String!, $name: String!, $after: String) {
   repository(owner: $owner, name: $name) {
-    pullRequests(first: 100, orderBy: {field: CREATED_AT, direction: ASC}) {
-      pageInfo { hasNextPage }
+    pullRequests(first: 100, after: $after, orderBy: {field: CREATED_AT, direction: ASC}) {
+      pageInfo { hasNextPage endCursor }
       nodes { number reviewThreads(first: 100) {
+        pageInfo { hasNextPage }
         nodes { isResolved comments(first: 1) { nodes { databaseId } } } } }
     }
   }
@@ -529,18 +1094,25 @@ _THREADS_QUERY = """query($owner: String!, $name: String!) {
 
 
 def _resolved_threads(gh: Runner) -> dict[int, bool]:
+    """Each review thread's first comment id -> resolved, over every page of PRs."""
     owner, name = REPO_SLUG.split("/")
-    data = json.loads(gh(["api", "graphql", "-f", f"query={_THREADS_QUERY}",
-                          "-F", f"owner={owner}", "-F", f"name={name}"]))
-    pulls = data["data"]["repository"]["pullRequests"]
-    if pulls["pageInfo"]["hasNextPage"]:
-        raise RefusedError("more than 100 pull requests; review-thread paging is not implemented")
-    resolved = {}
-    for pr in pulls["nodes"]:
-        for thread in pr["reviewThreads"]["nodes"]:
-            for comment in thread["comments"]["nodes"]:
-                resolved[comment["databaseId"]] = thread["isResolved"]
-    return resolved
+    resolved, after = {}, None
+    while True:
+        args = ["api", "graphql", "-f", f"query={_THREADS_QUERY}",
+                "-F", f"owner={owner}", "-F", f"name={name}"]
+        if after:
+            args += ["-f", f"after={after}"]
+        pulls = json.loads(gh(args))["data"]["repository"]["pullRequests"]
+        for pr in pulls["nodes"]:
+            threads = pr["reviewThreads"]
+            if (threads.get("pageInfo") or {}).get("hasNextPage"):
+                raise RefusedError(f"PR #{pr['number']} has more than 100 review threads")
+            for thread in threads["nodes"]:
+                for comment in thread["comments"]["nodes"]:
+                    resolved[comment["databaseId"]] = thread["isResolved"]
+        if not pulls["pageInfo"]["hasNextPage"]:
+            return resolved
+        after = pulls["pageInfo"]["endCursor"]
 
 
 # --- Supabase ----------------------------------------------------------------
@@ -565,7 +1137,77 @@ def _send(http, method: str, url: str, headers: Mapping[str, str], payload=None)
         return status, None
 
 
-def import_rows(rows: Sequence[dict], settings: keycheck.Settings, http: writer.Http) -> int:
+def _task_birth_detail(row: Mapping):
+    detail = row.get("detail")
+    if not isinstance(detail, Mapping):
+        return None
+    return {key: detail[key] for key in TASK_BIRTH_FIELDS if key in detail}
+
+
+def _differences(have: Mapping, want: Mapping) -> list[str]:
+    """The compared fields whose stored value differs from the re-derived record."""
+    changed = []
+    for field in CONTENT_FIELDS:
+        if field == "occurred_at":
+            try:
+                same = parse_time(have.get(field) or "") == parse_time(want[field])
+            except ValueError:
+                same = False
+        else:
+            same = have.get(field) == want[field]
+        if not same:
+            changed.append(field)
+    if want.get("kind") == "task" and _task_birth_detail(have) != _task_birth_detail(want):
+        changed.append("detail")
+    return changed
+
+
+def _states(row: Mapping) -> list[dict]:
+    """The row's compared fields now, then as they stood before each logged refresh
+    (newest undone first). A pinned record matches if it equals any of them. This
+    does not depend on refresh times, which are database write times, not source
+    changes (Codex P2s on PR #65)."""
+    stood = {f: row.get(f) for f in CONTENT_FIELDS}
+    if row.get("kind") == "task":
+        stood["detail"] = _task_birth_detail(row)
+    states = [dict(stood)]
+    detail = row.get("detail") or {}
+    history = [] if row.get("kind") == "task" and not isinstance(detail, Mapping) else detail.get("refreshed") or []
+    if isinstance(history, dict):
+        history = [history]
+    # Task refreshes can share a timestamp; append order breaks those ties.
+    ordered = reversed(history) if row.get("kind") == "task" else history
+    for entry in sorted(ordered, key=lambda h: parse_time(h["at"]), reverse=True):
+        stood.update(entry.get("previous") or {})
+        states.append(dict(stood))
+    return states
+
+
+def _named(label: str, items: Sequence[str]) -> None:
+    for item in items[:SHOWN]:
+        print(f"{label}: {item}")
+    if len(items) > SHOWN:
+        print(f"{label}: ... and {len(items) - SHOWN} more")
+
+
+def _read_all(http, url: str, key: str, columns: str, page: int = 1000):
+    headers = writer._headers(key)
+    rows, offset = [], 0
+    while True:
+        query = (f"{writer._rest(url)}?select={columns}&is_test=eq.false"
+                 f"&order=occurred_at.asc,id.asc&limit={page}&offset={offset}")
+        status, body = _send(http, "GET", query, headers)
+        if status != 200 or not isinstance(body, list):
+            print(f"select failed: http status {status if status is not None else 'none'}")
+            return None
+        rows.extend(body)
+        if len(body) < page:
+            return rows
+        offset += page
+
+
+def import_rows(rows: Sequence[dict], settings: keycheck.Settings, http: writer.Http,
+                refresh_changed: bool = False) -> int:
     if settings.key is None:
         print("loaded: no")
         return 1
@@ -594,29 +1236,108 @@ def import_rows(rows: Sequence[dict], settings: keycheck.Settings, http: writer.
     for kind, count in _counts(ordered).items():
         print(f"{kind}: records {count}, inserted {made.get(kind, 0)}")
     print(f"inserted: {len(inserted)}\nalready recorded: {len(ordered) - len(inserted)}")
+    return _refresh(ordered, settings, http, refresh_changed)
+
+
+def _refresh(rows: Sequence[dict], settings: keycheck.Settings, http, apply: bool) -> int:
+    """Find stored rows whose compared fields differ from the records; update them only
+    when asked, logging each one and keeping the old values in detail.refreshed."""
+    stored = _read_all(http, settings.url, settings.key, "id,detail," + READ_COLUMNS)
+    if stored is None:
+        return 1
+    want = {_key(r): r for r in rows}
+    changed = [(r, want[_key(r)], _differences(r, want[_key(r)]))
+               for r in stored if _key(r) in want]
+    # Backfill source-availability metadata on rows imported before this field existed.
+    for row, record, fields in changed:
+        if record.get("kind") == "task":
+            detail = row.get("detail")
+            history = detail.get("refreshed") if isinstance(detail, Mapping) else None
+            if (not isinstance(detail, Mapping) or
+                    (history is not None and not isinstance(history, (dict, list)))):
+                print(f"refused: {' '.join(_key(row))} has unsupported stored Task detail")
+                return 1
+        derived = record.get("detail", {}).get("derived_at")
+        if derived and derived != (row.get("detail") or {}).get("derived_at"):
+            fields.append("detail")
+    changed = [c for c in changed if c[2]]
+    if not apply:
+        print(f"changed: {len(changed)} (not updated; run with --refresh-changed)")
+        _named("changed", [f"{' '.join(_key(r))}: {', '.join(f)}" for r, _, f in changed])
+        return 0
+    headers = writer._headers(settings.key)
+    at = utc(datetime.now(timezone.utc))
+    for row, record, fields in changed:
+        patch = {f: record[f] for f in fields}
+        # Append to the stored refresh history; never drop an earlier refresh's values.
+        history = (row.get("detail") or {}).get("refreshed") or []
+        if isinstance(history, dict):
+            history = [history]
+        previous = {f: row.get(f) for f in fields}
+        if record.get("kind") == "task":
+            # Only source-owned birth fields change; preserve annotations and
+            # keep undo snapshots bounded rather than recursively copying audit.
+            detail = {k: v for k, v in row["detail"].items() if k not in TASK_BIRTH_FIELDS}
+            detail.update(_task_birth_detail(record))
+            if "detail" in fields:
+                previous["detail"] = _task_birth_detail(row)
+        else:
+            detail = dict(record["detail"])
+        patch["detail"] = dict(detail, refreshed=[*history, {"at": at, "previous": previous}])
+        # Conditional on the values read, so a write in between is refused, not lost.
+        match = "".join(f"&{f}=eq.{quote(str(row.get(f)), safe='')}" for f in CONTENT_FIELDS)
+        if record.get("kind") == "task":
+            original = json.dumps(row["detail"], sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+            match += "&detail=eq." + quote(original, safe="")
+        status, body = _send(http, "PATCH", f"{writer._rest(settings.url)}?id=eq.{row['id']}{match}",
+                             headers, patch)
+        if status not in (200, 204):
+            print(f"refresh failed: http status {status if status is not None else 'none'} "
+                  f"at {' '.join(_key(row))}")
+            return 1
+        if not body:
+            print(f"refused: {' '.join(_key(row))} changed since it was read; rerun the import")
+            return 1
+        if record.get("kind") == "task" and (not isinstance(body, list) or len(body) != 1
+                or not isinstance(body[0], Mapping) or _differences(body[0], record)):
+            print(f"refused: {' '.join(_key(row))} current Task readback differs after refresh")
+            return 1
+        print(f"refreshed: {' '.join(_key(row))}: {', '.join(fields)}")
+    print(f"refreshed: {len(changed)}")
     return 0
 
 
-def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page: int = 1000) -> int:
+def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page: int = 1000,
+              cutoff: datetime | None = None) -> int:
+    """Compare every row the site key reads with the records re-derived at one ref.
+
+    Fails on a record without a row (missing), a row before the ref that no record
+    derives (extra), a compared field that differs (content mismatch), an unsourced
+    row or rows out of time order. A row after ``cutoff`` that the ref does not
+    derive is counted as newer than the ref, not as extra.
+    """
     if keycheck.key_format(key) != "unrecognized" or not key.startswith("sb_publishable_"):
         print("refused: the publishable slot holds a key that is not a publishable key")
         return 1
-    headers = writer._headers(key)
-    visible, offset = [], 0
-    while True:
-        query = (f"{writer._rest(url)}?select={READ_COLUMNS}&order=occurred_at.asc,id.asc"
-                 f"&limit={page}&offset={offset}")
-        status, body = _send(http, "GET", query, headers)
-        if status != 200 or not isinstance(body, list):
-            print(f"select failed: http status {status if status is not None else 'none'}")
-            return 1
-        visible.extend(body)
-        if len(body) < page:
-            break
-        offset += page
-    have = {_key(r) for r in visible}
-    want = {_key(r) for r in rows}
-    missing, extra = want - have, have - want
+    visible = _read_all(http, url, key, READ_COLUMNS + ",detail", page)
+    if visible is None:
+        return 1
+    have = {_key(r): r for r in visible}
+    want = {_key(r): r for r in rows}
+    missing = sorted(want.keys() - have.keys())
+    unexpected = sorted(have.keys() - want.keys())
+    newer = {k for k in unexpected
+             if cutoff is not None and (
+                 parse_time(have[k]["occurred_at"]) > cutoff or
+                 (have[k]["kind"] == "correction_fix" and
+                  (have[k].get("detail") or {}).get("derived_at") and
+                  parse_time(have[k]["detail"]["derived_at"]) > cutoff))}
+    extra = [k for k in unexpected if k not in newer]
+    mismatches = []
+    for k in sorted(want.keys() & have.keys()):
+        found = [_differences(state, want[k]) for state in _states(have[k])]
+        if all(found):
+            mismatches.append((k, found[0]))  # named against the stored values
     unsourced = [r for r in visible if not (r.get("source_ref") or "").strip()
                  or not (r.get("source_url") or "").startswith("https://")
                  or r.get("strength") != STRENGTH]
@@ -625,22 +1346,40 @@ def readcheck(rows: Sequence[dict], url: str, key: str, http: writer.Http, page:
     seen = _counts(r for r in visible if _key(r) in want)
     for kind, count in _counts(rows).items():
         print(f"{kind}: records {count}, rows {seen.get(kind, 0)}")
-    print(f"missing: {len(missing)}\nextra: {len(extra)}\nunsourced: {len(unsourced)}")
+    print(f"missing: {len(missing)}\nextra: {len(extra)}\nnewer than ref: {len(newer)}")
+    print(f"content mismatches: {len(mismatches)}\nunsourced: {len(unsourced)}")
     print(f"in time order: {'yes' if times == sorted(times) else 'no'}")
+    _named("missing", [" ".join(k) for k in missing])
+    _named("extra", [" ".join(k) for k in extra])  # hand-typed, fabricated or stale rows
+    _named("mismatch", [f"{' '.join(k)}: {', '.join(f)}" for k, f in mismatches])
     for row in visible:
         if row["kind"] in ("return", "correction", "correction_fix"):
             print(f"{row['kind']}: {row['occurred_at']} {row['source_ref']} {row.get('summary', '')}")
-    return 0 if not missing and not unsourced and times == sorted(times) else 1
+    ok = not (missing or extra or mismatches or unsourced) and times == sorted(times)
+    return 0 if ok else 1
 
 
 # --- command line ------------------------------------------------------------
 
 
-def _runner(prefix: Sequence[str]) -> Runner:
+def _runner(prefix: Sequence[str], cwd: Path = REPO_ROOT) -> Runner:
     def run(args: Sequence[str]) -> str:
-        return subprocess.run([*prefix, *args], cwd=REPO_ROOT, check=True, capture_output=True,
+        return subprocess.run([*prefix, *args], cwd=cwd, check=True, capture_output=True,
                               text=True).stdout
     return run
+
+
+@contextlib.contextmanager
+def _checkout_at(sha: str):
+    """A detached temporary worktree at sha, so records are read as they stood there."""
+    folder = tempfile.mkdtemp(prefix="ams-history-")
+    subprocess.run(["git", "-C", str(REPO_ROOT), "worktree", "add", "-q", "--detach", folder, sha],
+                   check=True, capture_output=True)
+    try:
+        yield Path(folder)
+    finally:
+        subprocess.run(["git", "-C", str(REPO_ROOT), "worktree", "remove", "--force", folder],
+                       capture_output=True)
 
 
 def main(
@@ -655,38 +1394,63 @@ def main(
 ) -> int:
     parser = argparse.ArgumentParser(prog="ams-history", description=__doc__.split("\n")[0])
     sub = parser.add_subparsers(dest="command", required=True)
-    for name, text in (("import", "derive build-history rows and insert the new ones"),
-                       ("readcheck", "read every row with the publishable key; compare to records")):
-        command = sub.add_parser(name, help=text)
-        command.add_argument("--ref", action="append", default=[],
-                             help="Git ref whose commits are history (default: origin/main, origin/dev)")
-        if name == "import":
-            command.add_argument("--dry-run", action="store_true", help="print counts; send nothing")
+    imp = sub.add_parser("import", help="derive build-history rows and insert the new ones")
+    imp.add_argument("--ref", action="append", default=[],
+                     help="Git ref whose commits are history (default: origin/main, origin/dev)")
+    imp.add_argument("--dry-run", action="store_true", help="print counts; send nothing")
+    imp.add_argument("--refresh-changed", action="store_true",
+                     help="update stored rows whose subject, summary, time or link differ "
+                          "from the records, logging each and keeping the old values")
+    check = sub.add_parser("readcheck",
+                           help="read every row with the publishable key; compare to the records at one ref")
+    check.add_argument("--ref", default="HEAD", help="commit the records are read at (default HEAD)")
+    check.add_argument("--dev-ref", help="also expect the commits of this ref (the dev branch)")
     args = parser.parse_args(argv)
-    sources = Sources(git=git or _runner(["git", "-C", str(REPO_ROOT)]),
-                      gh=gh or _runner(["gh"]),
-                      lifecycle=lifecycle or _runner(["node", "workbench/tools/spec-workbench.mjs"]),
-                      refs=tuple(args.ref) or DEFAULT_REFS)
+    git_here = git or _runner(["git", "-C", str(REPO_ROOT)])
+    gh = gh or _runner(["gh"])
+    environ = os.environ if environ is None else environ
+    dotenv_path = keycheck.DOTENV_PATH if dotenv_path is None else dotenv_path
+    http = http or writer.urllib_http
     try:
-        rows = collect(sources)
+        if args.command == "readcheck":
+            return _pinned_readcheck(args, git, git_here, gh, lifecycle, environ, dotenv_path, http)
+        rows = collect(Sources(git=git_here, gh=gh,
+                               lifecycle=lifecycle or _runner(["node", "workbench/tools/spec-workbench.mjs"]),
+                               refs=tuple(args.ref) or DEFAULT_REFS))
     except RefusedError as error:
         print(f"refused: {error}")
         return 1
     except subprocess.CalledProcessError as error:
         print(f"refused: {Path(str(error.cmd[0])).name} failed (exit {error.returncode})")
         return 1
-    environ = os.environ if environ is None else environ
-    dotenv_path = keycheck.DOTENV_PATH if dotenv_path is None else dotenv_path
-    http = http or writer.urllib_http
-    if args.command == "readcheck":
-        settings = keycheck.load_settings(environ, dotenv_path)
-        return readcheck(rows, settings.url, writer.publishable_key(environ, dotenv_path), http)
     if args.dry_run:
         for kind, count in _counts(rows).items():
             print(f"{kind}: {count}")
         print(f"total: {len(rows)}")
         return 0
-    return import_rows(rows, keycheck.load_settings(environ, dotenv_path), http)
+    return import_rows(rows, keycheck.load_settings(environ, dotenv_path), http,
+                       refresh_changed=args.refresh_changed)
+
+
+def _pinned_readcheck(args, git, git_here, gh, lifecycle, environ, dotenv_path, http) -> int:
+    sha = git_here(["rev-parse", "--verify", f"{args.ref}^{{commit}}"]).strip()
+    dev = git_here(["rev-parse", "--verify", f"{args.dev_ref}^{{commit}}"]).strip() if args.dev_ref else None
+    cutoff = parse_time(git_here(["show", "-s", "--format=%cI", sha, "--"]).strip())
+    print(f"ref: {sha}\nref time: {utc(cutoff)}")
+    print(f"dev ref: {dev}" if dev else "dev ref: none (dev-only rows read as extra)")
+    refs = (sha, dev) if dev else (sha,)
+
+    def check(git_at: Runner, lifecycle_at: Runner) -> int:
+        rows = collect(Sources(git=git_at, gh=gh, lifecycle=lifecycle_at, refs=refs, cutoff=cutoff))
+        settings = keycheck.load_settings(environ, dotenv_path)
+        return readcheck(rows, settings.url, writer.publishable_key(environ, dotenv_path), http,
+                         cutoff=cutoff)
+
+    if git is not None:  # injected runners (tests) already read the records at the ref
+        return check(git, lifecycle)
+    with _checkout_at(sha) as folder:
+        return check(_runner(["git", "-C", str(folder)], folder),
+                     _runner(["node", "workbench/tools/spec-workbench.mjs"], folder))
 
 
 if __name__ == "__main__":

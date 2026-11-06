@@ -29,6 +29,11 @@ Neutrals are the page. Five hues are signals, each with one meaning (DDR-000M). 
 | `--soft-pct` | `22%` | `22%` | Tint strength of a hue at rest |
 | `--line-pct` | `62%` | `68%` | Hue strength of a tone outline |
 | `--dot-pct` | `80%` | `72%` | Hue strength of a tone dot |
+| `--on` | `#0A0A0A` | `#0A0A0A` | Text on a strong hue fill |
+| `--tone-soft` | mix | mix | The soft, at-rest fill of the card's hue |
+| `--tone-ink` | mix | mix | Text in the card's hue |
+| `--tone-line` | mix | mix | The outline in the card's hue |
+| `--tone-dot` | mix | mix | The live dot in the card's hue |
 
 Mixes, from one hue: `.tone` sets `--on: #0A0A0A`, `--tone-soft: color-mix(in oklab, var(--hue) var(--soft-pct), var(--surface))`, `--tone-ink: color-mix(in oklab, var(--hue) 40%, var(--pole))`, `--tone-line: color-mix(in oklab, var(--hue) var(--line-pct), var(--pole))` and `--tone-dot: color-mix(in oklab, var(--hue) var(--dot-pct), var(--pole))`. `.h-heat`, `.h-worth`, `.h-owner`, `.h-agent` and `.h-returned` set `--hue` to their token; `.h-none` sets it to `--line-strong`. Strong (the hue itself) means now; soft means the same meaning at rest; a filled dot is live and a hollow dot rests.
 
@@ -39,5 +44,7 @@ Dark `--soft-pct` is 22%, as in the artifact's color system page (v2.2), not the
 Considered and rejected: a new palette or the site's earlier Workbench tokens, which the owner set aside for the artifact; loading fonts from Google Fonts as the artifact does, because the board is local and loads nothing from other hosts.
 
 Consequences: The board's stylesheet and the site's tested copy follow `grill-board/theme/tokens.json`; a token changes there first. Board-specific detail is in `grill-board/README.md`.
+
+Changed 2026-11-01: the five `.tone` mix tokens gained their one meaning each, in this table and in `tokens.json` (S-004 TK-003).
 
 Provenance: Owner, relayed by the coordinating session on 2026-11-01: the board should "basically look exactly like the artifact. The colors, the formatting, the layout. Just make the artifact, but for real." Owner, relayed by orchestrator A on 2026-11-01: "I am not going to micro manage your color choices. Make the grilling board using the artifact as the design guide post."
