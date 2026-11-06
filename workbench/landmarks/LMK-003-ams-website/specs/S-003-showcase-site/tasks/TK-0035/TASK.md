@@ -12,31 +12,32 @@
 
 
 
+
 ## Assignment
 
-Confirmed items1/2/12; approved full plan cae67a1646f0994574c9090840200433aaa23c87 retains all requirements. Claimant codex-s003-hash-reader published originals184daac333cc4906635e0e39a33ef54158eee3dd BEFORE the new complete968-file snapshot, separately bound99c349defe6a91e28fc15b7279c4afc1c4cc3d5d. Never reuse Z/34 baselines, execute withdrawn TK003 or reset attempts; preserve all old evidence.
+Confirmed items1/2/12; full approved requirements remain at cae67a1646f0994574c9090840200433aaa23c87. Claimant codex-s003-hash-reader published originals184daac333cc4906635e0e39a33ef54158eee3dd before its genuine complete968-file snapshot, bound99c349defe6a91e28fc15b7279c4afc1c4cc3d5d below. No Z/34 baseline reuse, withdrawn TK003 execution or attempt reset; preserve older evidence.
 
-S005 report800a67b870ee99d0241e716a15907ce7841e7f2b proves inventory1/readBuiltPages0 on an adapter fixture. Its served-body hashing/pure50-body contract was already correct; no competing card/store repair. One S003 slice spans strict manifest/HTML enumeration -> unchanged hash -> existing API/human+JSON CLI -> docs/verification -> checkeddev.
+S005 report800a67b870ee99d0241e716a15907ce7841e7f2b proves adapter inventory1/reader0; S005 served-body hashes were already correct. This single end-to-end manifest/reader/hash/CLI/docs/checkeddev slice changes no card/store ownership.
 
-Use one acyclic shared strict classic/APP_PAGE seam, never inventory/hash circular imports, parallel weak parsers, broad scans or fallbacks. Preserve readBuiltPages(siteRoot), legitimate manifest fixtures and {name,route,html} shape; CLI accepts json mode, not a directory argument. Enforce exact source-owner hashes/cache shape/manifest coverage, all39 articles,/skills and visitor404, excluding only global-error. Derive later-page coverage from manifests. Missing/extra/duplicate/ambiguous/wrong-owner/malformed and file/directory symlinks refuse, never silentzero/partial output. Root-alias negative is API-only; build-tree CLI negatives remain.
+One strict acyclic classic/APP_PAGE seam; no circular/parallel weak parser, broad scan or fallback. Preserve readBuiltPages(siteRoot), manifest-backed fixtures and {name,route,html}; CLI json mode has no directory argument. Require exact manifest/source-owner hashes/cache shape, complete current/later-page coverage, all39 articles,/skills/visitor404, only global-error excluded. Missing/extra/duplicate/ambiguous/wrong-owner/malformed and file/directory symlinks refuse, never silentzero/partial output. Root-alias negative is API-only; build-tree CLI negatives remain. Keep original7 metadata, ownership/provenance and atomic collision safety.
 
-Keep canonicalContent/contentHash core and vectors EXACT: only existing generated provenance/freshness exclusions; changed main text/href/src/alt, paths/historical pins and RSI results/availability stay hash-bound. Preserve original7 metadata, current ownership/provenance and atomic collision safety. No dependencies, UI/browser helpers, public status/private criticism, cards/store/model calls, grader/campaign/skill/install or paid-service changes.
+Canonical main identity/core/vectors stay EXACT: only existing generated provenance/freshness exclusions; changed text/href/src/alt, paths/pins and RSI results/availability remain hash-bound. No dependencies, UI/browser helpers, public status/private criticism, cards/store/model/grader/skill/campaign/install or paid-service changes.
 
-Reconcile checked dev through933e386020c729f7af94822c6066e62f6403ce06 (S010 charts and S007 records); retain all their source/receipts/family diagnostics, newer navigation/demo and protected Wiki/Board writers. Mainc787 and unmerged S005/S006 promotions remain held. Root reserves dev merges; owner-only production and HumanQA stay separate.
+Retain checkeddev933e386020c729f7af94822c6066e62f6403ce06's S010/S007 source/receipts/families and newer navigation/demo. Protect Wiki/Board writers; mainc787/S005/S006 promotions remain held. Root reserves dev merge; owner-only main, actual HumanQA and whole-S003 acceptance remain separate.
 
-## Verification
+## Verification and remaining delivery
 
-Retain intentional9-case RED, actual206/207 failures/nativeSTOP1 and209 safe-extraction harness failure/STOP2. Corrected focused24/24 passes. Require matching classic/cache API+CLI sets, all adverse controls, exact pure core/vectors/provenance negatives and unchanged inventory side effects. Fresh immutable build BEFORE site tests and utility checks, BEFORE Next start: runtime cache duplicates must refuse, not be deleted/deduplicated.
+Keep intentional9-case red and actual206/207/209/212/213 failures with native STOPs. Required source checks are established in receipt3 and bounded independent Review: strict parity/adverse controls, exact pure core/vectors/provenance negatives and inventory side effects. Fresh builds/tests/utility reads precede Next start; runtime duplicates refuse without deletion/deduplication.
 
-Use actual credential-free Vercel adapter reproduction with verified installed package/source pins and supported safe Python filter, distinct output retaining failed archives/dirs/logs. No server, settings, auth forwarding or deployment. Fixtures/local adapter proof do not establish protected deployment readiness. Site README owns the API/frozen timing; S005 writer owns its collector/cards. Return executed Check/QA, independent review, current-head CI/actual checkeddev containment, exact artifacts/limits and both delivery answers; no whole-S003/workspace-release/remote-completeness/HumanQA claim.
+Real credential-free adapter proof retains installed package/source pins, safe Python filter and distinct failed archives/dirs/logs. No server/settings/auth forwarding/deployment; local proof is not protected readback. README owns the frozen API contract, S005 its collector/cards. All optional probes now END:213's port lookup/assertions/build were UNRUN, no cleanup inferred. Publish only mandatory record checks/current-head CI and actual checkeddev containment; then supported closure and correct known205 withdrawn-brief Nextgate. Preserve source/Check/QA limits and both delivery answers; no workspace-release/remote-completeness claim.
 
 Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d42da83436fd
 
 ## Acceptance
 
-- [x] One strict acyclic seam yields exact classic/adapter public path/hash sets and stable API/CLI shape; all39 articles,/skills/visitor404 retained, only global-error excluded.
-- [x] All malformed/missing/extra/duplicate/ambiguous/wrong-owner/symlink cases refuse; pure identity/vectors/path-pin controls, ownership/provenance/atomic writer and existing site behavior stay intact.
-- [ ] Real adapter/control proof, fresh build/checks/QA, independent review/current CI and actual checkeddev containment are evidenced with honest limits.
+- [x] Shared seam gives exact classic/adapter public hashes and stable API/CLI;39 articles,/skills/visitor404 included, only global-error excluded.
+- [x] Adverse cases refuse; pure identity/vectors/path-pin controls, provenance/atomic writer and existing site behavior remain intact.
+- [ ] Current-head CI and actual checkeddev containment complete the documented source/control/adapter/check/review evidence; HumanQA/production separate.
 
 ## Receipt
 
