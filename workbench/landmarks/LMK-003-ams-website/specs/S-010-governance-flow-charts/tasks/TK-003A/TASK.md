@@ -33,3 +33,5 @@ Read-only comparison found the old 22,049 bytes intact as a prefix of the publis
 - [ ] UI, chart data, rendered content, page hashes and the other five single-source guards remain unchanged.
 - [ ] Fresh build precedes focused and site tests; project checks and exact-head CI pass. Reuse browser evidence only for byte-identical UI; name its scope.
 - [ ] Return source evidence, checks, Receipt, gaps and both merge/Task answers. Independent Review, actual Human QA and owner-only dev-to-main promotion remain distinct.
+
+Workspace baseline sha256:eca78f529117f2156c5f06eb784e65d0fac680417686bc31c6ee479e4b8bdb56
