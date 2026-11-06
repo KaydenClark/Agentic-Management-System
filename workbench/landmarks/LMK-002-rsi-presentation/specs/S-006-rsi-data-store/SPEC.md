@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Close TK-002O with verification and documentation proof.
+**Next gate:** N/O delivery checks and review; TK-000W remains stopped.
 
 ## Intent and authority
 
@@ -28,7 +28,7 @@ Sourced rows make charts auditable; private writes protect credentials.
 
 ## Current Verified State
 
-N isolated lineage: [proof](tasks/TK-002N/TASK.md#proof). Production migration remains unperformed.
+N isolated lineage: [proof](tasks/TK-002N/TASK.md#proof). N/O product3856614: [recovery proof](tasks/TK-002O/TASK.md#proof); final delivery CI pending. Production migration remains unperformed.
 
 Schema/provenance, writer/readback, conflict refusal, sources and key handling are met ([TK-000B](tasks/TK-000B/TASK.md#proof), [live limits](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01)). Private assessments/unknown metrics: TK-000Q/R/S and TK-000P.
 

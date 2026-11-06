@@ -3,12 +3,13 @@
 **Task ID:** TK-002O
 **Spec ID:** S-006
 **Slice:** A worker recovers one job and exports a safe checkpoint
-**Status:** in-progress
+**Status:** done
 **Blockers:** TK-002N
 **Destination:** spec-acceptance: Recovery
 **Planned verification:** Public seams, adverse checks and scoped QA; evals/RECOVERY.md.
 **Claimed by:** codex-s006-recovery
 **Current claimant:** codex-s006-recovery
+**Proof:** 3856614eeb8ec2e158db003025a7a75ee29bfc2f:390pass2skip; StandardsPASS/Specno-findings; recovery+restore QA.
 
 ## Assignment
 
@@ -40,3 +41,4 @@ Claim/originals10797e22e38f19c9a3b54c57aa5244f941d6c634 precede snapshot. Unrela
 | 4 | Feature/S-006-rsi-data-store | 2e63ba969147e58907c0d9258a565bb311487967 | ahead 0 behind 0 | 0 | Exact2e63ba9 fresh checkout:288pass2existing-skip, including77O. Raw NULL/missing/type enums and nullable controls reject with expected SQLSTATE and unchanged state; explicit keyed retry passes/native retry refuses. Matching preexisting canonical-parent pinned restore/readback/noop and hidden client reads pass with guards enabled. EarlierreviewFAIL retained; unavailable full-run output remains unverified. Hygiene0; doctor no blocking finding. | RECOVERY API documents SQL authority, canonical-reference fixtures and limits; correction source/tests frozen. | O open pending fresh independent Standards/Spec rechecks and exacthead fullCI. Isolated schema/fixtures only, no production migration or measured model outcome. No P release, qualification/adoption, campaign reset, PR-body retry or whole-workspace recovery claim. | 569ba25d5c8f3f85ffc28dbd329c85afbb2a724c1c356dd5ad31b76120d6195a |
 | 5 | Feature/S-006-rsi-data-store | e8839751e800e2cee66521a6446f23379b3fcc4c | ahead 0 behind 0 | 1 | Standards recheck FAIL at2e63: originalNULLs fixed; raw numeric proof/payload digests persisted and blocked export. N guard also accepted numeric record_id/source_commit/parent refs that its reader refused. Reviewer31unit+64SQLpass does not override these probes. New verified N/O roundtrip defects; old N closure and all prior proofs remain prior-source evidence. | Existing O correction only: systematically align persisted scalar types/canonical representation with readers; valid all-digit strings must remain valid. Prior guarded receipt rows unchanged. | O open. One coherent N/O SQL correction, rawRPC red/green strict SQLSTATE/unchanged-fullstate controls and fullchain/export/restore positives required before independent rechecks. No new Task/campaign/counter, P release, model call, production write or publicbody retry. | 6b5e5af40f7b739f841fb16a473ec23e691d5025d8a5db28ce4bcfba70c56a12 |
 | 6 | Feature/S-006-rsi-data-store | d85d1e5a345c2d0c39b318ec7c1d12c2c0a2fa4b | ahead 1 behind 0 | 1 | STOP: two unexpected valid-create failures HTTP404/42883. Read-only PG probe confirms text[]-text[] undefined in new request string-field loop. Previous217focused pass predates that loop; not proof of this WIP. Failed log retained. | Scalar correction source/tests checkpointed; earlier review failures/receipts unchanged. | O incomplete: replace unsupported array filtering, then rerun all exact-source proofs and independent rechecks. No P release, production write, model call or publicbody retry. | c4a64cc251f63b5007515a862167e6c72a9fe617875c7b105239d2cc09ae442e |
+| 7 | Feature/S-006-rsi-data-store | b7e7f7171754d6872ac287dd7891272bd03d76b8 | ahead 0 behind 0 | 0 | 3856614eeb8ec2e158db003025a7a75ee29bfc2f:390pass2skip; StandardsPASS/Specno-findings; recovery+restore QA. | evals/RECOVERY.md | CIpending; isolated only; wholeS006/P/production/benefit/workspace release unclaimed.; close attribution: {"agent":"codex-s006-recovery","claimant":"codex-s006-recovery","onBehalfOf":null} | f7b4a0b41e48e33ed818d8fe681e35aa4e8f398197f54a4138e610317b9785a1 |
