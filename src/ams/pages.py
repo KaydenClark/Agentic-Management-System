@@ -17,7 +17,7 @@ from .grill_board.answers import (
 )
 from .grill_board.cards import Card, load_cards, parse_card
 from .page_approvals import APPROVALS, CARDS, INDEX, approval_recommendation, page_status
-from .page_feedback import INITIAL_VOICE, VOICE, card_voice_version, read_voice
+from .page_feedback import INITIAL_VOICE, card_voice_version, read_voice
 
 LINE_BREAKS = "\n\r\v\f\x1c\x1d\x1e\x85\u2028\u2029"
 VOID = set("area base br col embed hr img input link meta param source track wbr".split())
@@ -162,7 +162,7 @@ def _stamp(now):
     return (now or datetime.now(timezone.utc)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _new_card(row, digest, candidate, *, protected=False, voice_version=0):
+def _new_card(row, digest, candidate, *, voice_path, protected=False, voice_version=0):
     landed = row.get("landed")
     kind = row.get("provenance_kind", "historical-landing")
     provenance_label = "Verified containment" if kind == "verified-containment" else "Landed"
@@ -178,7 +178,7 @@ def _new_card(row, digest, candidate, *, protected=False, voice_version=0):
             '**Value:** V1\n**Value reason:** A content-bound decision prevents repeated review.\n'
             f'**Page:** {row["path"]}\n**Title:** {row["title"]}\n**Content hash:** {digest}\n'
             f'**Candidate:** {candidate}\n**Provenance kind:** {kind}\n'
-            f'**Voice record:** {VOICE} version {voice_version}\n'
+            f'**Voice record:** {voice_path} version {voice_version}\n'
             f'**Verification:** {"protected-capture" if protected else "built-candidate"}\n'
             f'**Sources:** {json.dumps(row["sources"], ensure_ascii=True)}\n'
             f'{provenance}'
@@ -190,8 +190,8 @@ def _new_card(row, digest, candidate, *, protected=False, voice_version=0):
             f'Sources: {sources}.\n')
 
 
-def _same_owners(parsed, row, digest, candidate):
-    expected = parse_card('expected.md', _new_card(row, digest, candidate))
+def _same_owners(parsed, row, digest, candidate, voice_path):
+    expected = parse_card('expected.md', _new_card(row, digest, candidate, voice_path=voice_path))
     if not isinstance(expected, Card):
         return False
     keys = ('Page', 'Title', 'Content hash', 'Spec', 'Task', 'Provenance kind',
@@ -240,6 +240,7 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
         previous_blob = committed_blob(root, INDEX, base)
         previous = json.loads(previous_blob) if previous_blob else {"pages": {}}
         writes, entries = {}, {}
+        voice_path = voice.path
         for path, row in rows.items():
             digest, old = hashes[path], previous.get("pages", {}).get(path)
             reuse = False
@@ -252,20 +253,20 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
                 # Reuse an unchanged content occurrence only while its owners,
                 # sources and provenance still match. Keep that occurrence's
                 # original candidate; the index binds the latest build pin.
-                reuse = _same_owners(parsed, row, digest, candidate)
+                reuse = _same_owners(parsed, row, digest, candidate, voice.path)
                 if (reuse and protection is not None
                         and not (parsed.verification and parsed.verification.get('State') == 'protected-capture')):
                     writes[f'{CARDS}/{name}'] = existing + (b'' if existing.endswith(b'\n') else b'\n') + _verification_suffix(protection)
                 if reuse and parsed.waiting:
                     try:
-                        version = card_voice_version(parsed)
+                        version = card_voice_version(parsed, voice.path)
                     except AnswerRefused as error:
                         raise PageRefused(str(error)) from error
                     if version is None:
                         relative = f'{CARDS}/{name}'
                         updated = writes.get(relative, existing)
                         writes[relative] = updated + (b'' if updated.endswith(b'\n') else b'\n') + (
-                            f'\n## Voice record\n\n**Record:** {VOICE}\n**Version:** {voice.version}\n').encode()
+                            f'\n## Voice record\n\n**Record:** {voice_path}\n**Version:** {voice.version}\n').encode()
                     elif version > voice.version:
                         raise PageRefused('the page card cites an unavailable voice version')
             if not reuse:
@@ -277,7 +278,7 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
                     # answered history. A fresh occurrence gets a new filename.
                     suffix += 1
                     name = f"{stem}-{suffix}.md"
-                new_card = _new_card(row, digest, candidate, protected=protection is not None, voice_version=voice.version)
+                new_card = _new_card(row, digest, candidate, voice_path=voice.path, protected=protection is not None, voice_version=voice.version)
                 parsed = parse_card(name, new_card)
                 required = {"Page": path, "Content hash": digest, "Candidate": candidate,
                             "Title": row["title"], "Spec": row["spec"], "Task": row["task"],
@@ -311,7 +312,7 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
         if committed_blob(root, APPROVALS, base) is None:
             writes[APPROVALS] = b"# Website page approvals\n\nOwner-facing content-bound decisions; no public-site status.\n\n## Approvals\n"
         if voice.blob is None:
-            writes[VOICE] = INITIAL_VOICE
+            writes[voice.path] = INITIAL_VOICE
         transaction = []
         for relative, new in writes.items():
             path = _safe_file(root, relative)

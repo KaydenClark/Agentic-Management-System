@@ -25,6 +25,9 @@ def room(tmp_path):
     git(root, "config", "user.name", "fixture")
     git(root, "config", "user.email", "fixture@example.invalid")
     (root / "README.md").write_text("Synthetic fixture.\n")
+    (root / 'workbench').mkdir()
+    (root / 'workbench/manifest.json').write_text(json.dumps({'pageReview': {
+        'voice': 'grill-board/voice-and-taste.md', 'privateFeedback': '.local/page-feedback'}}) + '\n')
     git(root, "add", ".")
     git(root, "commit", "-qm", "fixture")
     return root

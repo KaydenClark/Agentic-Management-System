@@ -17,8 +17,8 @@ from .grill_board.answers import AnswerRefused, _git, _text, committed_entry, sh
 from .grill_board.cards import parse_card
 from .grill_board.cards import CardSourceError
 from .page_approvals import APPROVALS, CARDS, CARD_NAME, HASH, INDEX, ROUTE, validate_page_confirmation
+from .project_paths import MANIFEST, feedback_paths, safe_voice_path
 
-VOICE = 'grill-board/voice-and-taste.md'
 INITIAL_VOICE = (b'# Page feedback voice and taste\n\n**Version:** 0\n\n'
                  b'Original words stay private; entries contain only safe references and dispositions.\n\n'
                  b'## Entries\n')
@@ -30,18 +30,20 @@ class VoiceRecord:
     blob: bytes | None
     sha: str
     mode: str
+    path: str
 
 
 def read_voice(root, rev='HEAD'):
-    entry = committed_entry(root, VOICE, rev)
+    relative = feedback_paths(root, rev).voice
+    entry = committed_entry(root, relative, rev)
     if entry is None:
-        if _git(root, 'ls-tree', '-z', rev, '--', VOICE):
+        if _git(root, 'ls-tree', '-z', rev, '--', relative):
             raise AnswerRefused('the voice record is not a committed regular file')
-        if _git(root, 'log', '-1', '--format=%H', rev, '--', VOICE).strip():
+        if _git(root, 'log', '-1', '--format=%H', rev, '--', relative).strip():
             raise AnswerRefused('the voice record was removed; restore its committed history')
-        return VoiceRecord(0, None, '', '100644')
+        return VoiceRecord(0, None, '', '100644', relative)
     mode, blob = entry
-    lines = _text(blob, VOICE).splitlines()
+    lines = _text(blob, relative).splitlines()
     if lines.count('## Entries') != 1:
         raise AnswerRefused('the voice record needs one Entries section')
     header = lines[:lines.index('## Entries')]
@@ -49,13 +51,13 @@ def read_voice(root, rev='HEAD'):
     match = re.fullmatch(r'\*\*Version:\*\* ([0-9]{1,18})', counters[0]) if len(counters) == 1 else None
     if match is None:
         raise AnswerRefused('the voice record needs one valid version counter')
-    return VoiceRecord(int(match[1]), blob, sha256(blob), mode)
+    return VoiceRecord(int(match[1]), blob, sha256(blob), mode, relative)
 
 
-def card_voice_version(card):
+def card_voice_version(card, voice_path):
     reference = card.fields.get('Voice record')
     if reference is not None:
-        match = re.fullmatch(re.escape(VOICE) + r' version ([0-9]{1,18})', reference)
+        match = re.fullmatch(re.escape(voice_path) + r' version ([0-9]{1,18})', reference)
         if not match:
             raise AnswerRefused('the page card voice reference is invalid')
         return int(match[1])
@@ -63,7 +65,7 @@ def card_voice_version(card):
     if section is None:
         return None
     version = section.get('Version', '')
-    if section.get('Record') != VOICE or not re.fullmatch(r'[0-9]{1,18}', version):
+    if section.get('Record') != voice_path or not re.fullmatch(r'[0-9]{1,18}', version):
         raise AnswerRefused('the page card voice reference is invalid')
     return int(version)
 
@@ -111,18 +113,21 @@ def is_page_card(cards_dir, card):
 @contextmanager
 def _private_store(root, *, create=False):
     """Bind IO to owned, nonlinked directory handles; no original enters Git."""
+    relative = feedback_paths(root).private
     opened = []
     missing = False
     try:
-        if _git(root, 'ls-files', '-z', '--', '.local/page-feedback/'):
+        if _git(root, 'ls-files', '-z', '--', relative + '/'):
             raise AnswerRefused('Private feedback storage must stay outside tracked Git files.')
         try:
-            _git(root, 'check-ignore', '--quiet', '--', '.local/page-feedback/')
+            _git(root, 'check-ignore', '--quiet', '--', relative + '/')
         except AnswerRefused:
             raise AnswerRefused('Private feedback storage must be Git-ignored.') from None
         parent = os.open(root, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
         opened.append(parent)
-        for name, private in (('.local', False), ('page-feedback', True)):
+        parts = relative.split('/')
+        for number, name in enumerate(parts):
+            private = number == len(parts) - 1
             try:
                 fd = os.open(name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=parent)
             except FileNotFoundError:
@@ -138,8 +143,8 @@ def _private_store(root, *, create=False):
             if info.st_uid != os.getuid() or permissions & 0o022 or (private and permissions != 0o700):
                 raise AnswerRefused('Private feedback storage permissions need an agent repair; keep your note.')
             parent = fd
-    except OSError:
-        raise AnswerRefused('Private feedback storage is unavailable; keep a copy of your note.') from None
+    except (AnswerRefused, OSError):
+        raise FeedbackOutcomeUnknown('Private feedback storage needs agent repair. Keep your note and retry this exact action after recovery.') from None
     else:
         yield None if missing else _Store(parent)
     finally:
@@ -176,6 +181,7 @@ class _Store:
                     or not isinstance(context.get('hash'), str) or not HASH.fullmatch(context['hash'])
                     or not isinstance(context.get('when'), str)
                     or not re.fullmatch(r'[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z', context['when'])
+                    or not safe_voice_path(context.get('voice'))
                     or context.get('kind') not in {*board.VERDICTS, 'rate', 'flag'}
                     or context.get('version') is not None and (type(context['version']) is not int or context['version'] < 1)):
                 raise ValueError
@@ -231,7 +237,10 @@ def _checked_plan(packet):
     if plan is None:
         return None
     card = packet['request']['card']
-    allowed = {CARDS + '/' + card, VOICE, APPROVALS}
+    voice_path = packet['context'].get('voice')
+    if not safe_voice_path(voice_path):
+        raise FeedbackOutcomeUnknown('The private voice identity needs agent recovery.')
+    allowed = {CARDS + '/' + card, voice_path, APPROVALS}
     if (not isinstance(plan, dict) or not isinstance(plan.get('base'), str)
             or not re.fullmatch(r'[0-9a-f]{40,64}', plan['base'])
             or not isinstance(plan.get('writes'), list) or not 1 <= len(plan['writes']) <= 3):
@@ -320,7 +329,7 @@ def _reconcile_worktree(root, packet, *, committed):
         _git(root, 'update-index', '--add', '--', *refresh)
 
 
-def _voice_write(root, base, voice, request, context):
+def _voice_write(root, voice, request, context):
     data = voice.blob if voice.blob is not None else INITIAL_VOICE
     header, entries = data.split(b'## Entries', 1)
     version = context['version']
@@ -334,7 +343,7 @@ def _voice_write(root, base, voice, request, context):
     if request.kind == 'rate':
         entry += f'**Rating:** {request.value} of 5\n'
     new = header + b'## Entries' + entries + (b'' if data.endswith(b'\n') else b'\n') + entry.encode()
-    return VOICE, _public_path(root, VOICE), voice.mode, voice.blob, new
+    return voice.path, _public_path(root, voice.path), voice.mode, voice.blob, new
 
 
 def _public_writes(cards_dir, card, request, when):
@@ -346,13 +355,15 @@ def _public_writes(cards_dir, card, request, when):
     voice = read_voice(root, base)
     if voice.sha != request.voice_sha:
         raise AnswerRefused('The voice record changed since this page was shown; reload and keep your note.')
-    voice_path = _public_path(root, VOICE)
+    paths = feedback_paths(root, base)
+    board._unchanged(root, base, MANIFEST, _public_path(root, MANIFEST), paths.manifest_sha, 'page-feedback manifest')
+    voice_path = _public_path(root, voice.path)
     if voice.blob is None:
-        if voice_path.exists() or _git(root, 'status', '--porcelain', '--', VOICE).strip():
+        if voice_path.exists() or _git(root, 'status', '--porcelain', '--', voice.path).strip():
             raise AnswerRefused('The voice record has uncommitted work; keep your note.')
     else:
-        board._unchanged(root, base, VOICE, voice_path, voice.sha, 'voice record')
-    if actual.waiting and card_voice_version(actual) is None:
+        board._unchanged(root, base, voice.path, voice_path, voice.sha, 'voice record')
+    if actual.waiting and card_voice_version(actual, voice.path) is None:
         raise AnswerRefused('This page review needs an agent refresh before feedback can be saved; keep your note.')
     confirm = request.kind == 'answer' and request.value == 'confirm'
     if request.kind == 'answer':
@@ -362,7 +373,7 @@ def _public_writes(cards_dir, card, request, when):
             raise AnswerRefused('A return needs a note saying what should change.')
     if request.kind == 'flag' and actual.flag is not None:
         raise AnswerRefused('This page card is already flagged too taxing.')
-    context = {'page': actual.fields['Page'], 'hash': actual.fields['Content hash'],
+    context = {'voice': voice.path, 'page': actual.fields['Page'], 'hash': actual.fields['Content hash'],
                'when': when, 'kind': request.value if request.kind == 'answer' else request.kind,
                'version': None if confirm else voice.version + 1}
     writes = []
@@ -379,7 +390,7 @@ def _public_writes(cards_dir, card, request, when):
     section += f'**Feedback event:** {request.event_id}\n**Original:** retained privately\n'
     if not confirm:
         section += f'**Voice version:** {context["version"]}\n**Interpretation:** pending\n'
-        writes.append(_voice_write(root, base, voice, request, context))
+        writes.append(_voice_write(root, voice, request, context))
     writes.append((relative, path, mode, blob, board._appended(blob, relative, section, '')))
     return root, base, context, writes
 
@@ -402,7 +413,20 @@ def _completed(root, store, packet, commit):
     return commit
 
 
+@contextmanager
+def _recoverable_io():
+    try:
+        yield
+    except OSError:
+        raise FeedbackOutcomeUnknown('Private capture or public save could not be verified. Keep your note and retry this exact action.') from None
+
+
 def save_page_action(cards_dir, card, request, now=None):
+    with _recoverable_io():
+        return _save_page_action(cards_dir, card, request, now)
+
+
+def _save_page_action(cards_dir, card, request, now=None):
     """Call under the existing Board lock; preserve exact text before any public write."""
     if not request.event_id and getattr(card, 'stale', None) is not None:
         raise AnswerRefused(f'{card.file} is stale; read its current replacement')
@@ -421,10 +445,7 @@ def save_page_action(cards_dir, card, request, now=None):
         raise FeedbackOutcomeUnknown('A public event exists without its verified private receipt; keep the original action for agent recovery.')
     when = packet['context']['when'] if packet is not None else board._stamp(now)
     root, base, context, writes = _public_writes(cards_dir, card, request, when)
-    try:
-        return _save_prepared(root, base, context, writes, request, packet)
-    except OSError:
-        raise FeedbackOutcomeUnknown('Private capture or public save could not be verified. Keep your note and retry this exact action.') from None
+    return _save_prepared(root, base, context, writes, request, packet)
 
 
 def _save_prepared(root, base, context, writes, request, packet):
@@ -484,7 +505,7 @@ def replay_page_submission(cards_dir, form, action):
     request = request_from_form(form, action)
     request.validate()
     root = board.repo_root(cards_dir)
-    with board.repository_lock(root), _private_store(root) as store:
+    with _recoverable_io(), board.repository_lock(root), _private_store(root) as store:
         packet = store.read(request.event_id) if store is not None else None
         if packet is None:
             return None

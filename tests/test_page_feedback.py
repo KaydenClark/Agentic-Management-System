@@ -2,6 +2,7 @@
 import json
 import re
 import stat
+from pathlib import Path
 import subprocess
 import threading
 import urllib.parse
@@ -87,7 +88,7 @@ def test_legacy_open_card_gets_one_appended_reference_and_answered_bytes_stay(ro
     for number, row in enumerate(listed['pages']):
         digest = pages.content_hash(built[row['path']])
         name = f'legacy-synthetic-{number}.md'
-        text = pages._new_card(row, digest, candidate)
+        text = pages._new_card(row, digest, candidate, voice_path=VOICE)
         text = '\n'.join(line for line in text.splitlines() if not line.startswith('**Voice record:**')) + '\n'
         (room / pages.CARDS / name).write_text(text)
         entries[row['path']] = {'title': row['title'], 'landed': row['landed']['commit'],
@@ -305,7 +306,7 @@ def test_receipt_replay_survives_later_card_deletion_and_never_undoes_other_work
 
 @pytest.mark.parametrize('unsafe', ['symlink-store', 'public-mode', 'symlink-local', 'tracked-private'])
 def test_unsafe_private_storage_refuses_before_public_write(room, tmp_path, unsafe):
-    from ams.grill_board.answers import AnswerRefused
+    from ams.page_feedback import FeedbackOutcomeUnknown
     card = prepare_feedback(room)
     request = feedback_request(room, card)
     local = room / '.local'
@@ -325,7 +326,7 @@ def test_unsafe_private_storage_refuses_before_public_write(room, tmp_path, unsa
             git(room, 'add', '-f', '.local/page-feedback/unsafe.txt')
             git(room, 'commit', '-qm', 'Synthetic unsafe tracked store')
     before = git(room, 'rev-parse', 'HEAD')
-    with pytest.raises(AnswerRefused):
+    with pytest.raises(FeedbackOutcomeUnknown):
         submit_feedback(room, card, request)
     assert git(room, 'rev-parse', 'HEAD') == before
     assert not list(outside.iterdir())
@@ -421,3 +422,119 @@ def test_error_after_successful_branch_cas_recovers_known_commit_immediately(roo
     assert int(git(room, 'rev-list', '--count', 'HEAD')) == before + 1
     assert read_voice(room).version == 1 and not git(room, 'status', '--porcelain')
     assert_original_private(room, request)
+
+
+def test_private_event_symlink_reports_recoverable_outcome(room, tmp_path):
+    from ams import page_feedback as feedback
+    card = prepare_feedback(room)
+    request = feedback_request(room, card)
+    store = room / '.local/page-feedback'
+    store.mkdir(parents=True, mode=0o700)
+    target = tmp_path / 'synthetic-outside.json'
+    target.write_text('{}')
+    (store / (request.event_id + '.json')).symlink_to(target)
+    with pytest.raises(feedback.FeedbackOutcomeUnknown):
+        submit_feedback(room, card, request)
+    assert target.read_text() == '{}'
+
+
+def test_pending_public_read_io_error_reports_recoverable_outcome(room, monkeypatch):
+    from ams import page_feedback as feedback
+    card = prepare_feedback(room)
+    request = feedback_request(room, card)
+    write = feedback._Store.write
+    with monkeypatch.context() as patch:
+        def interrupt(store, packet, **kwargs):
+            write(store, packet, **kwargs)
+            if packet['state'] == 'planned':
+                raise KeyboardInterrupt('synthetic interruption')
+        patch.setattr(feedback._Store, 'write', interrupt)
+        with pytest.raises(KeyboardInterrupt):
+            submit_feedback(room, card, request)
+    read = Path.read_bytes
+    with monkeypatch.context() as patch:
+        def unavailable(path):
+            if path == room / VOICE:
+                raise OSError('synthetic read failure')
+            return read(path)
+        patch.setattr(Path, 'read_bytes', unavailable)
+        with pytest.raises(feedback.FeedbackOutcomeUnknown):
+            submit_feedback(room, current_card(room), request)
+
+
+def test_manifest_path_rename_reaches_generation_capture_and_replay(room):
+    from ams.page_feedback import read_voice
+    manifest = room / 'workbench/manifest.json'
+    declared = {'voice': 'grill-board/renamed-voice.md', 'privateFeedback': '.local/renamed-feedback'}
+    manifest.write_text(json.dumps({'pageReview': declared}) + '\n')
+    git(room, 'add', str(manifest))
+    git(room, 'commit', '-qm', 'Synthetic renamed feedback paths')
+    card = prepare_feedback(room)
+    assert card.fields['Voice record'] == declared['voice'] + ' version 0'
+    request = feedback_request(room, card)
+    commit = submit_feedback(room, card, request)
+    assert read_voice(room).version == 1
+    packet = room / declared['privateFeedback'] / (request.event_id + '.json')
+    assert json.loads(packet.read_text())['request']['note'] == request.note
+    assert submit_feedback(room, current_card(room), request) == commit
+    assert not (room / VOICE).exists() and not (room / '.local/page-feedback').exists()
+    objects = subprocess.check_output(['git', 'cat-file', '--batch-all-objects', '--batch'], cwd=room)
+    assert request.note.encode() not in objects
+
+
+def test_receipt_io_failure_returns_copyable_exact_action_without_public_write(room, tmp_path):
+    from dataclasses import asdict
+    from html import unescape
+    card = prepare_feedback(room)
+    request = feedback_request(room, card, note='\n Synthetic-' + uuid.uuid4().hex + '\r\n café \t')
+    commit = submit_feedback(room, card, request)
+    packet = room / '.local/page-feedback' / (request.event_id + '.json')
+    packet.rename(packet.with_name('retained-synthetic-original.json'))
+    outside = tmp_path / 'synthetic-target.json'
+    outside.write_text('{}')
+    packet.symlink_to(outside)
+    server = make_server(room / pages.CARDS, port=0)
+    threading.Thread(target=server.serve_forever, daemon=True).start()
+    try:
+        fields = asdict(request)
+        fields['verdict'] = fields.pop('value')
+        status, body = post(server, fields)
+        assert status == 503 and 'Save outcome unknown:' in body
+        retry = body.split('<form class="retry"', 1)[1].split('</form>', 1)[0]
+        retained = {name: unescape(value) for name, value in re.findall(
+            r'<input type="hidden" name="([^"]+)" value="([^"]*)"', retry)}
+        assert retained['note'] == request.note and retained['event_id'] == request.event_id
+        assert git(room, 'rev-parse', 'HEAD') == commit and outside.read_text() == '{}'
+    finally:
+        server.shutdown()
+        server.server_close()
+
+
+@pytest.mark.parametrize('field,value', [('voice','../outside.md'), ('voice','grill-board/page-approvals.md'),
+    ('voice','grill-board/PAGE-APPROVALS.md'), ('privateFeedback','../outside'),
+    ('privateFeedback','.GiT/page-feedback')])
+def test_unsafe_declared_paths_refuse_before_generation(room, field, value):
+    manifest = room / 'workbench/manifest.json'
+    data = json.loads(manifest.read_text())
+    data['pageReview'][field] = value
+    manifest.write_text(json.dumps(data) + '\n')
+    git(room, 'add', str(manifest))
+    git(room, 'commit', '-qm', 'Synthetic unsafe application path')
+    before = git(room, 'rev-parse', 'HEAD')
+    with pytest.raises(pages.PageRefused, match='manifest'):
+        pages.generate(room, inventory(room, ('/',)), {'/': html()}, candidate=before)
+    assert git(room, 'rev-parse', 'HEAD') == before
+    assert not list((room / pages.CARDS).iterdir())
+
+
+def test_dirty_manifest_refuses_before_private_capture(room):
+    from ams.grill_board.answers import AnswerRefused
+    card = prepare_feedback(room)
+    request = feedback_request(room, card)
+    manifest = room / 'workbench/manifest.json'
+    manifest.write_bytes(manifest.read_bytes() + b' ')
+    before = git(room, 'rev-parse', 'HEAD'), manifest.read_bytes()
+    with pytest.raises(AnswerRefused, match='manifest'):
+        submit_feedback(room, card, request)
+    assert (git(room, 'rev-parse', 'HEAD'), manifest.read_bytes()) == before
+    assert not (room / '.local/page-feedback' / (request.event_id + '.json')).exists()

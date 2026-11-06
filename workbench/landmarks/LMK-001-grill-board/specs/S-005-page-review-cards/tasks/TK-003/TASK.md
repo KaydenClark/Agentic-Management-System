@@ -39,7 +39,7 @@ Hand back to S-005 with `close`.
 - [ ] Must fail: an open page card that names no voice record version fails the test.
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
 
-TK-002 is natively closed at published6d06b13 with exact-head CI success. This Task now implements private capture, safe version/card commits and durable event replay in the existing baselined continuation. Synthetic boundary/interruption checks pass36 cases; the actual browser retry passes after correcting its form-encoding expectation. Full/fresh checks and independent Review remain before delivery or close; no actual owner notes were submitted.
+TK-002 is natively closed at published6d06b13; exact CI987/8 skips plus10 browser passes. TK-003 sourcef13 passes full1037/4 skips, but independent Review finds receipt IO recovery and manifest path ownership gaps (FAIL246/248). Corrective source now passes128 focused page/approval/browser cases, including seven interruption cuts, exact-action IO recovery, configured path propagation and unsafe-path refusal. FAIL237-250 preserves misses and corrections. Fresh full checks and corrective independent Review remain before publication/close. No actual owner notes, final capture, consumption or HumanQA.
 
 Workspace baseline sha256:77b8702e5c168d8ea307b5c62fcffeb0f5ab555e304d05be9de27cbba50ffcb9
 

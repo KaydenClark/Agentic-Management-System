@@ -232,6 +232,11 @@ changes retain the matching approval. This state is never a public-site query.
 
 ### Private page feedback
 
+The committed manifest declares `pageReview.voice` and
+`pageReview.privateFeedback`; one Python reader resolves both. The configured
+voice location supplies card references and the private location supplies
+capture/replay. Unsafe or uncommitted configuration refuses.
+
 Page returns, ratings and Too taxing capture the exact original privately
 before public writes. The ignored local store requires owned, nonlinked
 directories and private file permissions. Raw words never enter a Git object,
