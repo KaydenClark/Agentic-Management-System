@@ -40,3 +40,9 @@ Hand back to S-005 with `close`.
 - [ ] The board lists a stale card outside the queue and refuses an answer to it, writing nothing.
 - [ ] Live: against `origin/dev`, `generate` writes a card for `/` and `/rsi`, and `uv run ams-board` shows both under "Website pages".
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
+
+## Starting preservation
+
+Workspace baseline sha256:81dd8dfc83cf2aaa52dcbc6b763823137fe82ede9d053bb84a22225d4f2feb2d
+
+The original claim-state bytes are committed before this inventory. Raw local inventory stays outside the checkout; local retention is not claimed as remote recovery.
