@@ -3,10 +3,12 @@
 **Task ID:** TK-003A
 **Spec ID:** S-010
 **Slice:** Accept two audited RSI source revisions; reject unknown or meaning-changing drift
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: S-010 Acceptance Criteria
 **Planned verification:** Audit source transition; reject unknown digest and changed workflow; retain existing adverse controls. Fresh build, focused and site tests, project checks and exact-head CI.
+**Claimed by:** codex-governance-charts
+**Current claimant:** codex-governance-charts
 
 ## Release
 
