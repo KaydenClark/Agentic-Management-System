@@ -40,3 +40,9 @@ Focused red/green checks precede changes. Fresh build and strict inventory/hash 
 This software release includes no new schema, private-lineage import, model campaign, skill install, database write or deployment. After reader qualification, propose EXACT two real Git-derived merge payloads and trusted LOCAL protected-main record-merge/readback actions for separate root review. No generic correction-payload expansion; no service keys/connectors for frontend/C/cloud. A second supported event must appear without site-source edits;409 alone proves no content identity, and uncertain publication needs reconciliation.
 
 Full original Acceptance above remains unchanged/unchecked. Public activity and reader repairs advance independently of PR175, but private failure/assessment/disposition/later-use joins, safe publication, case identities and recurrence remain genuinely missing producer artifacts. No fabricated fields, trial/grade/benefit or bootstrap41 headline. TK-003 still needs actual control-arm/paired intervals. Keep F open with a truthful native continued receipt when these gaps remain. Return an immutable candidate, actual checks/QA, exact completed subset/gaps and both merge answers in a dev PR for root inspection.
+
+## Starting inventory
+
+Workspace baseline sha256:0c40e6470f51241a2a2fb1a82ec9845106102f92f50a0a8331b6c7439f11489e
+
+Native claim2f8aeac01335c28f5f87e09f358bcc5a47017053; committed originals e5102da9eae2d61b71c4972e30a08403ff6a8425 precede the genuine complete snapshot. All original file copies and committed blobs were independently verified; raw evidence stays private. This binding precedes product work.
