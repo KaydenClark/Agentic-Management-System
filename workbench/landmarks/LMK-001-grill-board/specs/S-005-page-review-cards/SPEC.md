@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns evidence and failures. Current-main84ded45 passes fresh960 tests/6 skips; CI958/8 plus10 browser checks; separate Standards/Spec each82 pass with no material corrective finding. Frozen PR178211dd1b independently builds50 public routes,39 skill articles and visitor404; disposable generation/readback covers50 current cards and a no-op rerun with cleanup verified. This built-only proof is not protected dev coverage. Current dev e10216e lacks that final inventory; require checked PR178 delivery and a complete authenticated capture of its exact deployed revision. Raw page-note refusal stays until private capture; later Tasks and owner QA remain open.
+No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns evidence and failures. Current-main84ded45 passes fresh960 tests/6 skips; CI958/8 plus10 browser checks; separate Standards/Spec each82 pass with no material corrective finding. Frozen PR178211dd1b independently builds50 public routes,39 skill articles and visitor404; disposable generation/readback covers50 current cards and a no-op rerun with cleanup verified. This built-only proof is not protected dev coverage. The observed e10216e snapshot lacks that final inventory; re-pin moving dev after checked PR178 delivery and require its complete authenticated capture. Raw page-note refusal stays until private capture; later Tasks and owner QA remain open.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 
