@@ -181,7 +181,7 @@ export default function HowItWorks() {
         <p>
           In this project, answers and page-review judgments belong to the relevant work and identified content.
           A displayed card is not an answer or approval. The local board is separate from this presentation
-          website: this section explains its role.
+          website: this section explains its role. Try the <Link href="/grill-board-demo">sample Grill Board</Link> to explore everyday questions locally.
         </p>
         <Signal kind="returned" label="Returned for correction">
           <p>
