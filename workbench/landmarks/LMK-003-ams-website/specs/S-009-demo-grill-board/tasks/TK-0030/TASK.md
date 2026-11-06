@@ -3,12 +3,13 @@
 **Task ID:** TK-0030
 **Spec ID:** S-009
 **Slice:** Recover the existing demo as a usable visitor experience with accurate current Board context
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: S-009 Acceptance Criteria
 **Planned verification:** Built-site tests and browser interaction, storage and network checks at 375px and desktop in both themes; inspect script-disabled content and current S-004 behavior.
 **Claimed by:** codex-s009-demo
 **Current claimant:** codex-s009-demo
+**Proof:** d5b015f site build, 275 site tests, 2461 browser checks and 2 complementary privacy checks; Python 841 passed 5 skipped with loopback. Built-demo reload cleared rating, flag and note. PR177 merge 63870b54 and PR178 inventory 40acb3a contained in dev.
 Workspace baseline sha256:4106561b4e83a48bea8672f3a5cf2bc2060c8dc44e40957a807543b68ddd3d15
 
 The snapshot was captured at claim commit 3523bff before product work and its digest bound in e793ba6. The native-compatible literal above was corrected later in c023ef0; it was not present in that earlier binding commit.
@@ -38,3 +39,4 @@ The original workspace snapshot and late literal correction above remain preserv
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-009-demo-grill-board-page | 40acb3a491a55599e5b1f00fd92a27315739a4a9 | ahead 76 behind 0 | 1 | d5b015f site build; 275 site tests; 2461 browser checks and 2 complementary interaction/privacy checks; Python 841 passed 5 skipped with loopback; targeted built-demo reload reset passed. Current dev retains demo source bytes; PR177 and PR178 containment verified. | Task acceptance and delivery provenance; native snapshot and late binding preserved. | Spec acceptance, legacy Task reconciliation, independent Review, Human QA, protected deployment verification and owner-only main promotion remain. Dev deployment ERROR; platform repair separate. Workspace preservation check incomplete; workspace retained. | a97b46321ddb21e97e3ec225d141b315c4acdf90abf2ffa2475a3f55cecc7d02 |
+| 2 | Feature/S-009-demo-grill-board-page | 4c7b94dc3a8a482e1de413e042d6816e82602ceb | ahead 0 behind 0 | 0 | d5b015f site build, 275 site tests, 2461 browser checks and 2 complementary privacy checks; Python 841 passed 5 skipped with loopback. Built-demo reload cleared rating, flag and note. PR177 merge 63870b54 and PR178 inventory 40acb3a contained in dev. | TK-0030 acceptance, native receipt and inventory provenance; original workspace snapshot and late binding retained. | S-009 Spec and legacy Tasks remain open; independent Review, Human QA, protected deployment verification and owner-only main promotion remain. Dev deployment ERROR; platform repair separate. Workspace preservation check incomplete; workspace retained.; close attribution: {"agent":"codex-s009-demo","claimant":"codex-s009-demo","onBehalfOf":null} | 58a6970896492f4f5a8d74e0635ff42d90b13cd9ce6d166d2f23d6fa7b9a83ab |
