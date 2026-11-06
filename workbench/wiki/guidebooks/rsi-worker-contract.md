@@ -50,6 +50,14 @@ FAIL-217 records source/schema mismatch at `cf85db03df69897d367cb59aacdcb1268534
 
 The schema-backed positive `final_answer` and negative unsupported `final` controls were RED before the minimal parser/peer correction, then GREEN together with the unknown-phase negative. Current coherent source/review evidence will be appended after the in-scope history and deadline changes freeze. Native loading, runtime identity, cleanup and semantic qualification remain separate unknowns.
 
+## Component history input-binding failure
+
+FAIL-219 records independent Review FAIL at `63200b1adc728685a9751c33e455cf5293db8184`: the history helper accepted one frozen userMessage plus an unapproved second userMessage through a presence/OR test. It returned observed while keeping the store unchanged, execution disallowed and assessment unknown. This remains a source binding defect. Required STOP/report retained both failed component candidates, cf85 and632; the two full632 suites (each967 passed/214 skipped) do not clear either independent failure.
+
+The coordinator released one bounded same-Task recovery. `9cca984bccbab6a8ceef4219942199c23d78e376` changes exactly3 source lines to collect the complete ordered normalized input sequence and require its exact frozen singleton. Only documented empty text_elements normalization remains. Primitive/O/Task bytes and deadline/MessagePhase fixes stay unchanged.
+
+The original independent reproducer remains byte-identical (SHA-256 `f51accd41df56cb9be8fab909da928cc1dbe74af17cee90e585667b80b2a6f1c`): observed/two inputs before, untrusted/no retry/store unchanged after. Exact-single, extra-before/after/after-final/across-page, duplicate, different, reordered, split and missing controls gave5 expected REDs/5 existing passes before the correction and all GREEN after. The targeted history set passes19; independent delta review and one corrected-candidate full/fresh check remain pending. No real call or qualification is implied.
+
 ## Verified source seams and gaps
 
 At main `cfc0bc4c7f2cd167cea2972016edee076b479b73`, `trial_campaign.Campaign.run_one` journals before one released slot, refuses an attempted slot and requires its predecessor. It is not a durable multiworker scheduler. `trial_runtime.ClaudeAdapter` explicitly requires empty tools/MCP and rejects native tool use. Private source packs prove no native discovery/installation. Do not change its stopped protocol.
