@@ -199,3 +199,12 @@ def test_pending_candidate_keeps_landing_unknown_and_binds_actual_candidate(room
     bad['pages'][0].update(provenance_kind='pending-candidate', spec='')
     with pytest.raises(pages.PageRefused, match='invalid spec'):
         pages.generate(room, bad, {'/second-page': html()}, candidate=candidate)
+
+
+def test_built_card_does_not_claim_unverified_protected_deployment(room):
+    candidate = git(room, 'rev-parse', 'HEAD')
+    pages.generate(room, inventory(room, ('/',)), {'/': html()}, candidate=candidate)
+    card = load_cards(room / 'grill-board/cards')[0][0]
+    assert f'built candidate {candidate}' in card.context
+    assert 'Protected-deployment verification is pending' in card.context
+    assert 'protected dev candidate' not in card.context

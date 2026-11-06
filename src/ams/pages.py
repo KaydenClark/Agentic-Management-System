@@ -162,8 +162,9 @@ def _new_card(row, digest, candidate):
             f'**Spec:** {row["spec"]}\n**Task:** {row["task"]}\n'
             f'**Recommendation:** Approve page {row["path"]} ({row["title"]}) at content hash {digest}.\n'
             f'**Owner record:** {APPROVALS}\n**Write after:** ## Approvals\n\n'
-            f'Inspect this path on the protected dev candidate {candidate}. '
-            f'This local card supplies no public review status. Sources: {sources or "owning page inventory"}.\n')
+            f'Inspect this page at built candidate {candidate}. '
+            'Protected-deployment verification is pending; this local card supplies no public review status. '
+            f'Sources: {sources or "owning page inventory"}.\n')
 
 
 def generate(root, listed, built, *, candidate, now=None):
