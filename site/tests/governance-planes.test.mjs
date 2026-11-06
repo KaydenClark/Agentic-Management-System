@@ -28,6 +28,9 @@ test('altered, missing and reordered roles or missing examples are rejected',()=
   assert.throws(()=>check([...planes].reverse()));
   assert.throws(()=>check(planes.map((p,i)=>i===0?{...p,definition:'Current truth'}:p)));
   assert.throws(()=>check(planes.map((p,i)=>i===1?{...p,example:''}:p)));
+  const changedSource=glossary.replace("Snapshot summary of each plane's claims as of its last visit.", 'Guaranteed current truth.');
+  assert.notEqual(changedSource, glossary);
+  assert.throws(()=>check(planes, changedSource));
 });
 
 const { builtPage, visibleText } = await import('./helpers.mjs');
