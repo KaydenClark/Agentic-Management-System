@@ -39,3 +39,5 @@ Return exact source/artifact identities, control and64-case results, honest gaps
 ## Artifact release, 2026-11-06
 
 Coordinator verified the named S008 helper packet: PR180 exact62ef5f13a65bc807438186ffabd81ed0c4a92578, native TK0033 closed, independent root UI/helper review PASS, final-head CI42215385443/42215385400 successful and checked devb699f10f4e08a0ea72f2915e0c14c0744385cbcd containment. Delivered site tree9364ae7fa6215d7352ae88078a8437d867bf92f2 matches the qualified303-site/328-focused/2745-browser candidate. Cold13, settled0 and planted10 controls support the accepted three-line prewindow settle, without URL filtering. This satisfies the artifact condition and releases this Task under JOT54; no new owner approval is requested. S003 now owns only document-start/helper controls; S010 retains governance/glossary. Establish the native claim and fresh recovery baseline next.
+
+Workspace baseline sha256:ef8b5abbcc86dddf628cb5ed52644535682d4a9e907d01bbc89750b19522eaf3
