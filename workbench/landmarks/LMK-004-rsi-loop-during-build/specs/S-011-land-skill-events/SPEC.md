@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
 **Execution approval:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
-**Next gate:** Close TK-002S with verification and documentation proof.
+**Next gate:** Resume open TK-002S observation after S-003 repair/F delivery and protected end-state readback; full safe joins remain missing. One synthetic detection/preservation result is recorded, not S completion or general benefit. Old claims/stops remain.
 
 ## Intent and authority
 

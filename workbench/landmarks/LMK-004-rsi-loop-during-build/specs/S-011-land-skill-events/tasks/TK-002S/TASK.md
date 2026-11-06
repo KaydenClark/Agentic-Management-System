@@ -12,7 +12,7 @@
 
 ## Assignment
 
-The [item 7 instruction](../../../../../../wiki/context-feedback-improvement-loop-plan.md#jot-9354c241-ca54-44ee-a1e9-859f7a206810) supplies scope without new confirmation/requalification. R's accepted source/adoption/load receipt is delivered by PR198 into checked dev4b66b5e. This remains an unclaimed, blocked PLAN until root inspects/releases it. Old claims/receipts, campaigns and counters stay unchanged. Preparation creates no control/clone, code, model call, installation, store write or website execution.
+The [item 7 instruction](../../../../../../wiki/context-feedback-improvement-loop-plan.md#jot-9354c241-ca54-44ee-a1e9-859f7a206810) supplies scope without new confirmation/requalification. R is delivered by PR198; root inspected/released S's exact PR199 plan, delivered dev0fa4003. Native claim below starts one ordinary-use observation/control. S stays OPEN: protected F end state and safe full joins remain missing. Old claims/receipts/counters stay unchanged; no new source/model/install/store effect is released.
 
 ### One in-progress ordinary-use observation, 2026-11-06
 
@@ -43,6 +43,8 @@ Workspace baseline sha256:9b1acbe38eabca76ba8168d2d70e48dc60f057eb9618f4429d2c31
 Native claim fc601011 and committed original coordination bytes0a099d4d precede the genuine complete schema-v1 snapshot:977 files, no findings/busy Git operations. Raw inventory stays private; no ignored recovery files selected. This separate binding precedes observation/control execution and establishes identity, not acceptance or workspace release.
 
 - [ ] The independent real website Task observes the exact adopted source loaded and used, with protected actual end-state readback and available usage/owner-intervention evidence.
-- [ ] A planted recurrence is detected and linked before owner prompting, with actual eligible-use denominator or explicit unknown; previous successes/regressions remain visible.
+- [x] A planted recurrence is detected and linked before owner prompting, with actual eligible-use denominator or explicit unknown; previous successes/regressions remain visible.
 - [ ] Safe source/use/disposition evidence traverses writer/store/public reader and protected checked dev readback; privacy, failure/outage and audit-versus-benefit distinctions hold.
 - [ ] Exact Task/source/adoption/load/dev identities and executed checks/QA are handed to TK-001G; no old Task closure, stopped-campaign restart, installation or production promotion is inferred.
+
+Open checkpoint: [one synthetic detection/preservation result](../../../../../../wiki/history/S-011.md#tk-002s-initial-observation-checkpoint), one in-progress episode, prior denominator/total effort unknown. Protected F end state and full safe joins are unperformed; no S close or general benefit claim.
