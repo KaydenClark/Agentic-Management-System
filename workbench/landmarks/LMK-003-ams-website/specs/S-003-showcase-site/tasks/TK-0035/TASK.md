@@ -2,7 +2,7 @@
 
 **Task ID:** TK-0035
 **Spec ID:** S-003
-**Slice:** Hash CLI covers every manifest-bound public artifact in both supported build layouts
+**Slice:** Hash CLI covers every supported frozen public artifact
 **Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Review coverage and Trust; complete built page/hash enumeration
@@ -27,9 +27,9 @@ Retain checkeddev933e386020c729f7af94822c6066e62f6403ce06's S010/S007 source/rec
 
 ## Verification and remaining delivery
 
-Keep intentional9-case red and actual206/207/209/212/213 failures with native STOPs. Required source checks are established in receipt3 and bounded independent Review: strict parity/adverse controls, exact pure core/vectors/provenance negatives and inventory side effects. Fresh builds/tests/utility reads precede Next start; runtime duplicates refuse without deletion/deduplication.
+Required source qualification is recorded in receipt3 and bounded independent Review. Retain original9-case red,206/207/209/212/213 failures and native STOPs. Frozen utility reads precede Next start; runtime duplicates refuse, never cleanup/deduplication. Actual adapter proof retains package/source pins, safe filter and distinct failed artifacts; no server/settings/auth forwarding or protected deployment claim.
 
-Real credential-free adapter proof retains installed package/source pins, safe Python filter and distinct failed archives/dirs/logs. No server/settings/auth forwarding/deployment; local proof is not protected readback. README owns the frozen API contract, S005 its collector/cards. All optional probes now END:213's port lookup/assertions/build were UNRUN, no cleanup inferred. Publish only mandatory record checks/current-head CI and actual checkeddev containment; then supported closure and correct known205 withdrawn-brief Nextgate. Preserve source/Check/QA limits and both delivery answers; no workspace-release/remote-completeness claim.
+Optional probes END:213 port lookup/assertions/build were UNRUN, no cleanup inferred. Exact-head CI and checkeddev containment are now verified in PR195; close metadata only, correcting known205 withdrawn-brief Nextgate. S005 owns cards; remaining site acceptance, actual HumanQA/main promotion and workspace/remote-completeness remain separate.
 
 Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d42da83436fd
 
@@ -37,7 +37,7 @@ Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d4
 
 - [x] Shared seam gives exact classic/adapter public hashes and stable API/CLI;39 articles,/skills/visitor404 included, only global-error excluded.
 - [x] Adverse cases refuse; pure identity/vectors/path-pin controls, provenance/atomic writer and existing site behavior remain intact.
-- [ ] Current-head CI and actual checkeddev containment complete the documented source/control/adapter/check/review evidence; HumanQA/production separate.
+- [x] Current-head CI and actual checkeddev containment complete the documented source/control/adapter/check/review evidence; HumanQA/production separate.
 
 ## Receipt
 
