@@ -3,12 +3,13 @@
 **Task ID:** TK-002X
 **Spec ID:** S-003
 **Slice:** Current project meaning and website behavior share a checked baseline
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Content, Route, Trust, Owner presentation
 **Planned verification:** Pinned refs, conflict/byte preservation, rendered projections, repository checks, fresh build/site/browser QA.
 **Claimed by:** codex-s003-baseline
 **Current claimant:** codex-s003-baseline
+**Proof:** PR176 delivered checked f976eec7f063aec13ae1d59bc6095af69b5f7425 to fetched dev259b7a905639cc6ab621220b160fc813c5bc43f1. Both shared CI jobs passed; scoped independent reviews0 findings. Final footer/build263site checks passed; unchanged source671 retained841Python/5skip and2406browser proof. Both source parents preserved. Baseline only; no HumanQA/deployment claim.
 
 ## Assignment
 
@@ -26,7 +27,7 @@ Target checked dev; orchestrator inspects before merge, owner alone promotes dev
 - [x] Ownership/chronology dispositions preserve controls, knowledge, requirements, failed evidence and receipt identities.
 - [x] Existing website behavior passes fresh-build, site and browser checks; changed glossary projection follows Canon.
 - [x] Generated projections and repository checks pass after the scoped corrections; original failures remain recorded.
-- [ ] Pushed candidate is presented for checked dev integration; no owner acceptance or production promotion is inferred.
+- [x] Checked candidate f976eec is contained in dev259b7a9 through PR176; no owner acceptance or production promotion is inferred.
 
 ## Starting inventory
 
@@ -60,3 +61,4 @@ Owned occurrences at Feature/S-003-website-shell-and-ams-orientation:57cfd91 for
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-003-website-shell-and-ams-orientation | 8165ea38a34149ccdf40ecb1798f8fd5fbf963d0 | ahead 118 behind 0 | 0 | Source4ce31ee: fresh build and263site tests pass; Python840pass/5skip/1fail (GLOSSARY3075>3000,S0138556>8000). Site hygiene0; layout/Wiki pass. Preservation audit failed twice: Jot boundary, then faulty outside-prose extraction. Stop/report before repair; earlier failures retained. | Conflict dispositions, canonical FAIL126-134, delimiter-only Jot correction; private original logs/diff retained. | Incomplete baseline; no dev merge. Parent authorizes scoped extractor/budget correction after this checkpoint, then focused preservation/budget checks, fresh build/site tests and root suite. No whole-Spec/HumanQA claim. | e11e8b724a40e37511da493ddbabb752e6ccca21df343fd5dbabf639920c50a8 |
+| 2 | Feature/S-003-website-shell-and-ams-orientation | b6a1cd3684d2967aaba13240da0013483dafacda | ahead 0 behind 0 | 0 | PR176 delivered checked f976eec7f063aec13ae1d59bc6095af69b5f7425 to fetched dev259b7a905639cc6ab621220b160fc813c5bc43f1. Both shared CI jobs passed; scoped independent reviews0 findings. Final footer/build263site checks passed; unchanged source671 retained841Python/5skip and2406browser proof. Both source parents preserved. Baseline only; no HumanQA/deployment claim. | Task acceptance/closure, preserved failed receipt and aliases, S003 history and regenerated projections. | Whole S003/siblings, deployed readback, Human QA and owner-only dev-to-main promotion remain. Workspace retained.; close attribution: {"agent":"codex-s003-baseline","claimant":"codex-s003-baseline","onBehalfOf":null} | 81de2540849e19b518ac78e3165855923dda4bae6c90f5d7d2a55623eb4bff8d |

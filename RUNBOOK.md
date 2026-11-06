@@ -2,7 +2,7 @@
 
 ## Get oriented
 
-Check branch, remotes, locks and dirt (`git status --short --branch`).
+Inspect Git state (`git status --short --branch`), remotes and locks.
 Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
 [Wiki](workbench/wiki/MEMORY.md), both trackers, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
 
@@ -30,10 +30,10 @@ git diff --check
 uv run ams-hygiene
 ```
 
-Repeat on a fresh candidate checkout. `site/`: `npm run build`, `npm test`.
-Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
+Repeat on a fresh checkout. `site/`: `npm run build`, `npm test`.
+Root: `uv run ams-hygiene --site site`. Live: `AMS_LIVE=1`. [Coherence](workbench/wiki/guidebooks/coherence-observations.md).
 
-`uv run ams-board` (loopback). Concepts: `node workbench/tools/landmark-tracker.mjs show --committed --json`; [Board procedure](grill-board/README.md). Other commands use `uv run`:
+`uv run ams-board` (loopback). `node workbench/tools/landmark-tracker.mjs show --committed --json`; [Board procedure](grill-board/README.md). Commands use `uv run`:
 
 - `ams-keycheck`; `ams-writer record-merge|readcheck SHA`
 - `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
@@ -46,8 +46,8 @@ Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 ## Shared CI VM
 
 Use [shared CI](workbench/wiki/context-shared-ci.md) VM `workbench-ci` and AMS runner;
-no GitHub-hosted fallback. Skip forks; inspect before internal execution.
-Keep keys and `AMS_LIVE` out of CI.
+no GitHub-hosted fallback. Skip forks; inspect internal code first.
+Keep keys/`AMS_LIVE` out of CI.
 
 ## Delivery and recovery
 
@@ -57,9 +57,9 @@ Merge current, checked non-site PRs into main with merge commits.
 Site: feature -> checked dev; only owner merges dev -> main.
 Follow [delivery reporting](workbench/docs/SKILLS.md#delivery).
 
-Recover via Spec/Task and Wiki; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+Recover: Spec/Task, Wiki; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
 Handoffs stay local and ignored in `workbench/sessions/handoffs/`; publish Tasks.
 
 ## Clean up
 
-Use `land` after checks: verify publication/containment and no owned dirt. Retain unfinished Spec work; report blockers.
+`land` after checks: verify publication/containment and no owned dirt. Retain unfinished Spec work; report blockers.
