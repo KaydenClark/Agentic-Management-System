@@ -3,10 +3,12 @@
 **Task ID:** TK-001F
 **Spec ID:** S-007
 **Slice:** A reader follows a real failure through progress and workflow changes
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Feedback loop connection
 **Planned verification:** One observable original-case demonstration, planted failure, replay/resume and affected regression checks; applicable RUNBOOK checks.
+**Claimed by:** codex-s007-public-evidence
+**Current claimant:** codex-s007-public-evidence
 
 ## Assignment
 
