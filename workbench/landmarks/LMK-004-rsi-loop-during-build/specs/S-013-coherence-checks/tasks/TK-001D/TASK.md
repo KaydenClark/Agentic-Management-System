@@ -3,10 +3,12 @@
 **Task ID:** TK-001D
 **Spec ID:** S-013
 **Slice:** An orchestrator detects and routes an unreported failure
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Feedback loop connection
 **Planned verification:** One observable original-case demonstration, planted failure, replay/resume and affected regression checks; applicable RUNBOOK checks.
+**Claimed by:** codex-s013-detection
+**Current claimant:** codex-s013-detection
 
 ## Assignment
 
