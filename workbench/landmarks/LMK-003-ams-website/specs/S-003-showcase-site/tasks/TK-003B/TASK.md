@@ -41,3 +41,9 @@ Workspace baseline sha256:98981019e2c257656b90c432d1a99db16048079a9c8f7ebc808b12
 - [ ] Real current-base no-JS375 clipping is reproduced with existing detector and diagnosed; smallest source repair reveals every real nav link by native document-start Tab at375/1280, both themes and script states, preserving focus and core text.
 - [ ] Real adverse controls and prefocused-middle positive pass before original64 enlarged-text matrix; original64 and new no-JS cases pass without weakened checks, fake focus/scroll, filtering or erased faults.
 - [ ] Fresh build/strict utilities/site/shared-browser/link/privacy and required repository/CI checks preserve current features/source identities; reviewed exact candidate is contained in checked dev with evidence and remaining gaps reconciled. Whole-S003, F browser acceptance, Human QA and promotion are not inferred.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-003-website-shell-and-ams-orientation | 1be8aed9c7147e3e6fba459d7ffdfa92449e3785 | ahead 2 behind 0 | 1 | Fresh baseline build/strict utilities pass; unchanged real no-JS/rsi375 detector reproduces FAIL220. Causal CSS harness then stalled at style insertion: interrupted, no variant result; STOP/report retained. | Exact F extension and preparation/claim/query/harness diagnostics preserved; genuine baseline binding predates all product work. | In-progress: scoped harness correction and causal source repair, adverse controls before original64, new script/theme/width cases, shared-browser/repo checks, review and checkeddev. No product fix or HumanQA claim. | d4f32a3e747d1a97bfc356494034bae46b384ed633bca189825bded79d4ed6df |
