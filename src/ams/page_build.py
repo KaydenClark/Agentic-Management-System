@@ -30,6 +30,16 @@ SHA = re.compile(r"[0-9a-f]{40,64}")
 
 
 @contextmanager
+def _cleanup_signals():
+    """Deliver termination signals only after the current owned cleanup ends."""
+    previous = signal.pthread_sigmask(signal.SIG_BLOCK, {signal.SIGINT, signal.SIGTERM})
+    try:
+        yield
+    finally:
+        signal.pthread_sigmask(signal.SIG_SETMASK, previous)
+
+
+@contextmanager
 def owned_process(arguments, *, cwd, environment, output=None, grace=2.0):
     """Own a new POSIX process group through normal exit and interruption.
 
@@ -44,19 +54,50 @@ def owned_process(arguments, *, cwd, environment, output=None, grace=2.0):
     try:
         yield process
     finally:
-        def send(which):
+        with _cleanup_signals():
+            interrupted = None
+            def reap():
+                nonlocal interrupted
+                try:
+                    return process.poll()
+                except KeyboardInterrupt as error:
+                    # Preserve an interruption from the poll itself, but do not
+                    # let it bypass group cleanup. Actual signals are masked.
+                    interrupted = interrupted or error
+                    return process.poll()
+            def send(which):
+                reap()
+                try:
+                    os.killpg(process.pid, which)
+                    return True
+                except ProcessLookupError:
+                    return False
+                except PermissionError:
+                    # Darwin reports EPERM for a zombie-only group. The leader
+                    # may exit after the first poll, so reap and retry ONCE only
+                    # when that known leader has exited. Other EPERM propagates.
+                    if reap() is None:
+                        raise
+                    try:
+                        os.killpg(process.pid, which)
+                        return True
+                    except ProcessLookupError:
+                        return False
             try:
-                os.killpg(process.pid, which)
-                return True
-            except ProcessLookupError:
-                return False
-        send(signal.SIGTERM)
-        deadline = time.monotonic() + grace
-        while time.monotonic() < deadline and send(0):
-            time.sleep(0.025)
-        if send(0):
-            send(signal.SIGKILL)
-        process.wait()
+                send(signal.SIGTERM)
+                deadline = time.monotonic() + grace
+                while time.monotonic() < deadline and send(0):
+                    time.sleep(0.025)
+                if send(0):
+                    send(signal.SIGKILL)
+            finally:
+                # Even an unqualified group-permission error must not skip
+                # terminating/reaping our known direct child. It remains an error.
+                if reap() is None:
+                    process.kill()
+                process.wait()
+            if interrupted is not None:
+                raise interrupted
 
 
 def public_configuration(values=None):
@@ -237,7 +278,8 @@ while (true) {
                             return self._command(["exec", self.container_id, "node", "--input-type=module", "-e", self.FETCH, request, str(expected_status)], timeout=10).stdout
                         yield read
             finally:
-                self._cleanup()
+                with _cleanup_signals():
+                    self._cleanup()
 
 
 def _pin(source, ref, expected_candidate, expected_origin):

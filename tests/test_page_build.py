@@ -267,3 +267,120 @@ collect_current(Path(sys.argv[1]),'dev',sys.argv[2],build_start=build)
         log.close()
         if identity:
             subprocess.run(["docker","rm","--force",identity],capture_output=True)
+
+
+def test_cleanup_reaps_an_exited_leader_before_group_observation(tmp_path):
+    import os, sys, time
+    from ams.page_build import owned_process
+    process = None
+    try:
+        with owned_process([sys.executable, '-c', 'pass'], cwd=tmp_path, environment={}) as process:
+            until = time.monotonic() + 3
+            while time.monotonic() < until:
+                status = subprocess.run(['/bin/ps', '-p', str(process.pid), '-o', 'stat='], capture_output=True, text=True).stdout.strip()
+                if status.startswith('Z'):
+                    break
+                time.sleep(0.01)
+            assert status.startswith('Z'), 'fixture leader did not reach the unreaped state'
+        assert process.returncode == 0
+        with pytest.raises(ProcessLookupError):
+            os.killpg(process.pid, 0)
+    finally:
+        if process is not None:
+            process.wait(timeout=3)
+
+
+def test_exit_between_poll_and_group_signal_retries_only_after_reap(tmp_path, monkeypatch):
+    import errno, signal
+    import ams.page_build as module
+    class Process:
+        pid = 123456789  # synthetic; every signal is intercepted below
+        returncode = None
+        polls = 0
+        def poll(self):
+            self.polls += 1
+            if self.polls >= 2:
+                self.returncode = 0
+            return self.returncode
+        def wait(self, timeout=None):
+            self.returncode = 0
+            return 0
+        def kill(self):
+            self.returncode = -9
+    process = Process()
+    calls = []
+    def signal_group(pid, which):
+        assert pid == process.pid
+        calls.append((which, process.returncode))
+        if len(calls) == 1:
+            raise PermissionError(errno.EPERM, 'synthetic exit-before-probe race')
+        raise ProcessLookupError(errno.ESRCH, 'synthetic reaped group')
+    monkeypatch.setattr(module.subprocess, 'Popen', lambda *args, **kwargs: process)
+    monkeypatch.setattr(module.os, 'killpg', signal_group)
+    with module.owned_process(['synthetic'], cwd=tmp_path, environment={}):
+        pass
+    assert calls[:2] == [(signal.SIGTERM, None), (signal.SIGTERM, 0)]
+
+
+def test_genuine_group_permission_error_is_not_hidden(tmp_path, monkeypatch):
+    import errno
+    import ams.page_build as module
+    class Process:
+        pid = 123456789
+        returncode = None
+        def poll(self): return self.returncode
+        def wait(self, timeout=None): return self.returncode
+        def kill(self): self.returncode = -9
+    process = Process()
+    calls = []
+    def denied(pid, which):
+        calls.append((pid, which))
+        raise PermissionError(errno.EPERM, 'synthetic genuine permission denial')
+    monkeypatch.setattr(module.subprocess, 'Popen', lambda *args, **kwargs: process)
+    monkeypatch.setattr(module.os, 'killpg', denied)
+    with pytest.raises(PermissionError, match='genuine permission'):
+        with module.owned_process(['synthetic'], cwd=tmp_path, environment={}):
+            pass
+    assert len(calls) == 1, 'live-leader permission denial was retried or swallowed'
+
+
+def test_poll_interruption_is_reraised_after_owned_cleanup(tmp_path, monkeypatch):
+    import os, signal, sys, time
+    import ams.page_build as module
+    actual_popen = subprocess.Popen
+    marker = tmp_path / 'poll-interrupt-ready.json'
+    program = "import json,os,subprocess,sys,time; p=subprocess.Popen([sys.executable,'-c','import signal,time;signal.signal(signal.SIGTERM,signal.SIG_IGN);time.sleep(60)']);open(sys.argv[1],'w').write(json.dumps([os.getpid(),p.pid]));time.sleep(60)"
+    owned = []
+    real = None
+    class InterruptedPoll:
+        interrupted = False
+        def __init__(self, process): self.process = process
+        def __getattr__(self, key): return getattr(self.process, key)
+        def poll(self):
+            if not self.interrupted:
+                self.interrupted = True
+                raise KeyboardInterrupt('synthetic cleanup poll interruption')
+            return self.process.poll()
+    def start(*args, **kwargs):
+        nonlocal real
+        real = actual_popen(*args, **kwargs)
+        return InterruptedPoll(real)
+    try:
+        with monkeypatch.context() as patch:
+            patch.setattr(module.subprocess, 'Popen', start)
+            with pytest.raises(KeyboardInterrupt, match='cleanup poll interruption'):
+                with module.owned_process([sys.executable,'-c',program,str(marker)], cwd=tmp_path, environment={}, grace=0.3):
+                    until = time.monotonic() + 3
+                    while not marker.exists() and time.monotonic() < until:
+                        time.sleep(0.01)
+                    owned = json.loads(marker.read_text())
+        assert real.returncode is not None
+        for pid in owned:
+            status = subprocess.run(['/bin/ps','-p',str(pid),'-o','stat='],capture_output=True,text=True).stdout.strip()
+            assert not status or status.startswith('Z'), 'poll interruption skipped descendant cleanup'
+    finally:
+        if real is not None and real.poll() is None:
+            os.killpg(real.pid, signal.SIGKILL);real.wait()
+        if owned:
+            try: os.killpg(owned[0], signal.SIGKILL)
+            except ProcessLookupError: pass
