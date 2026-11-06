@@ -12,9 +12,25 @@ const sources = {
   'workbench/docs/adr/003H-supabase-holds-the-rsi-data-and-the-service-key-stays-local.md':'d3842d1b96f1f926fee82dc0a2412f785e4ae42b87b3658757ac2055251b52f9',
   'workbench/wiki/context-owner-answers-coherence.md':'30f12e2cc7ef609593f3606d991737cc95401cf060ae62e3f1345777b730e638',
   'workbench/landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md':'ba7d5baa57e4715bed46a28e183c7f04d04ecaaabbe734705a344fd592ae3153',
-  'workbench/wiki/context-feedback-improvement-loop-plan.md':'6d1f8a40507f458a311dfcdb50895f5a98454a6340d443ed26695d0931487b34',
 };
 const read = path => readFileSync(new URL(path,root),'utf8');
+const rsiSource = 'workbench/wiki/context-feedback-improvement-loop-plan.md';
+// These exact revisions were independently audited against the diagram. New revisions require re-audit.
+const rsiDigests = new Set([
+  '6d1f8a40507f458a311dfcdb50895f5a98454a6340d443ed26695d0931487b34',
+  '62b11ce4fd248e8048f45e595e05c2ee9fc4ae4a07fdd060cc2b138df0b1b6f7',
+]);
+export function checkRsiMeaning(text) {
+  assert.match(text, /initial attempt → retry → retry → stop, baseline excluded/i);
+  assert.match(text, /repairs or renames reset no counter or stopped campaign/i);
+  assert.match(text, /Adoption and later observed use are distinct from source publication/i);
+  assert.match(text, /Merge, installation, observed loading, Human QA and website promotion retain separate authority/i);
+}
+export function checkRsiSource(text) {
+  const digest = createHash('sha256').update(text).digest('hex');
+  assert.ok(rsiDigests.has(digest), `${rsiSource} changed; re-audit chart meaning`);
+  checkRsiMeaning(text);
+}
 const expected = {
   branches:{states:['Website feature','Checked dev','Main','Non-site feature'], edges:['Website feature:Checked dev','Checked dev:Main','Non-site feature:Main']},
   responsibilities:{states:['A: Website','B: Local work','C: Coherence','Site and presentation','Local Python writer','Independent checks'], edges:['A: Website:Site and presentation','B: Local work:Local Python writer','C: Coherence:Independent checks']},
@@ -37,8 +53,16 @@ test('audited process charts stay bound to their source contracts',()=>{
   assert.match(read('RUNBOOK.md'), /Site: feature -> checked dev; only owner merges dev -> main/);
   assert.match(read('workbench/wiki/context-owner-answers-coherence.md'), /Orchestrator C keeps them attached and never uses them/);
   assert.match(read('workbench/landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md'), /Baseline 0: no strike/);
-  assert.match(read('workbench/wiki/context-feedback-improvement-loop-plan.md'), /initial attempt → retry → retry → stop, baseline excluded/i);
+  checkRsiSource(read(rsiSource));
   for(const key of Object.keys(expected)) check(charts[key],expected[key]);
+});
+test('RSI source guard rejects unknown bytes and changed workflow meaning',()=>{
+  const source=read(rsiSource);
+  assert.throws(()=>checkRsiSource(source+'\nunknown change'));
+  const changed=source.replace('initial attempt → retry → retry → stop, baseline excluded', 'initial attempt → retry indefinitely');
+  assert.notEqual(changed,source);
+  assert.throws(()=>checkRsiMeaning(changed));
+  assert.throws(()=>checkRsiSource(changed));
 });
 test('process charts reject added and omitted states and arrows',()=>{
   for(const key of Object.keys(expected)) planted(charts[key],expected[key]);
