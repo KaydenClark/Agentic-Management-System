@@ -1,0 +1,34 @@
+{
+  "branches": {
+    "states": ["Website feature", "Checked dev", "Main", "Non-site feature"],
+    "transitions": [
+      {"from":"Website feature", "to":"Checked dev", "action":"Checked site work goes to the staging branch"},
+      {"from":"Checked dev", "to":"Main", "action":"Only the owner promotes the website to production"},
+      {"from":"Non-site feature", "to":"Main", "action":"Checked non-site work follows its permitted delivery route"}
+    ]
+  },
+  "responsibilities": {
+    "states": ["A: Website", "B: Local work", "C: Coherence", "Site and presentation", "Local Python writer", "Independent checks"],
+    "transitions": [
+      {"from":"A: Website", "to":"Site and presentation", "action":"Explains the system and presents evidence"},
+      {"from":"B: Local work", "to":"Local Python writer", "action":"Works with the local Board, backend and protected writer"},
+      {"from":"C: Coherence", "to":"Independent checks", "action":"Checks consistency and performs independent review"}
+    ]
+  },
+  "rsi": {
+    "states": ["Observed friction", "Diagnosis", "Bounded change", "Qualified comparison", "Disposition", "No adoption", "Authorized adoption", "Later use", "Baseline 0", "Attempt 1", "Attempt 2", "Attempt 3", "Stop"],
+    "transitions": [
+      {"from":"Observed friction", "to":"Diagnosis", "action":"Identify the earliest responsible gap"},
+      {"from":"Diagnosis", "to":"Bounded change", "action":"Propose one versioned repair"},
+      {"from":"Bounded change", "to":"Qualified comparison", "action":"Compare against the baseline using fixed, qualified checks"},
+      {"from":"Qualified comparison", "to":"Disposition", "action":"Decide what the evidence supports, including failures and regressions"},
+      {"from":"Disposition", "to":"No adoption", "action":"Retain a rejected or inconclusive result without claiming useful improvement"},
+      {"from":"Disposition", "to":"Authorized adoption", "action":"Adopt only when the result qualifies and the separate action is authorized"},
+      {"from":"Authorized adoption", "to":"Later use", "action":"Check actual loading, outcomes and recurrence"},
+      {"from":"Baseline 0", "to":"Attempt 1", "action":"The baseline is measured separately and is not a strike"},
+      {"from":"Attempt 1", "to":"Attempt 2", "action":"If not accepted, one retry may follow"},
+      {"from":"Attempt 2", "to":"Attempt 3", "action":"If still not accepted, one final retry may follow"},
+      {"from":"Attempt 3", "to":"Stop", "action":"If still not accepted, stop and report rather than reset the counter"}
+    ]
+  }
+}
