@@ -1,0 +1,30 @@
+{
+  "synthetic": true,
+  "case": "one unsupported reliability claim",
+  "page": "/",
+  "original_hash": "sha256:65a32736b05b504e7608108c16f88854be638175afdc1239a920d3ee00a206ee",
+  "event_id": "1a706c6060714e0ea216c4c882f773fc",
+  "voice_record": "grill-board/voice-and-taste.md",
+  "voice_version": 1,
+  "voice_blob_sha256": "dd98166250d3d617787b2fd324183fba963920751b68ff9b05196f2fb2dc5521",
+  "feedback_commit": "c818ef14e859f79c19535b659e49119809976e98",
+  "candidate": "017235a48deadcf89fc081f48790154bef1345cb",
+  "draft_actor": "codex-s005-consumption",
+  "draft_model": "unknown",
+  "draft_harness": "Codex",
+  "draft_started_at": "2026-11-06T17:53:31.801621+00:00",
+  "interpretation": "Defect: the strength of the universal claim exceeds one observed check. Project guidance: pair the scoped observation with its limits. No reusable skill benefit is established.",
+  "required_phrases": [
+    "one recorded correction",
+    "no measured generalization",
+    "no owner approval"
+  ],
+  "forbidden_phrase": "reliably improves every agent",
+  "draft_hash": "sha256:674a1b19715f944b55be7576c07319db979fd7a29ac2bd782999dc1d6bb8ffdf",
+  "draft_file_sha256": "1ce748190df446de20e4a05e60d0fcb2baa974f8de2747c9c9c02ea962443253",
+  "draft_finished_at": "2026-11-06T17:55:11.329234+00:00",
+  "draft_method": {
+    "skill": "journey",
+    "sha256": "23556e031801d884911040a9198d92fdf20927dc673095568b08f6839f3cf6d6"
+  }
+}

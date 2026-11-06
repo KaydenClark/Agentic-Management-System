@@ -28,3 +28,7 @@ Size: one representative occurrence through the full path; widen only through an
 - [ ] Applicable checks and scoped QA pass; unmet outcomes remain open with a responsible owner.
 
 Workspace baseline sha256:852ec2c768c31516f48dec950789f5f81dc6de152871c7cf710edd0d50b47b4c
+
+## Current run
+
+The genuine964-file baseline852ec2/78 copied ignored originals precedes this work. One labeled synthetic rating/criticism was captured through the delivered private-feedback interface. Exact originals remain private; feedback version1 and its safe source identity bind the subsequent agent draft. Safe case/draft artifacts are in tests/fixtures/page-feedback-consumption. An appended application supplement preserves the original pending entry. Actual independent review, adverse replay, checks and delivery remain; no actual owner feedback, site change or campaign is claimed.
