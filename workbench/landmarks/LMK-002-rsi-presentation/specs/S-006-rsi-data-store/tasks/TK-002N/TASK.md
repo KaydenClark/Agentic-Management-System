@@ -3,10 +3,12 @@
 **Task ID:** TK-002N
 **Spec ID:** S-006
 **Slice:** A worker saves and reads one linked improvement record
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Lifecycle lineage
 **Planned verification:** Representative public-seam demonstration, adverse cases, focused checks and scoped QA.
+**Claimed by:** codex-s006-lineage
+**Current claimant:** codex-s006-lineage
 
 ## Assignment
 
