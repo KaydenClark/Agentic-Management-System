@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** Content-bound page reviews and versioned feedback consumed by later drafts.
 **Blockers:** none
-**Next gate:** Complete TK-000K.
+**Next gate:** Close TK-003 with verification and documentation proof.
 
 
 ## Intent and authority
@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. TK-001, TK-002 and TK-003 are closed. Private-feedback product642 passes fresh1047/4 skips and128 focused checks; exact dc2 CI1034/9 skips plus11 browser/all14 steps succeeds. Both corrective and record reviews find0 remaining issues. Native TK-003 close names the original claimant and actual checked source. FAIL210-256 retains failed attempts and late intake. Committed50 cards still pin protected47; private86 preparation is historical proof. Final capture must use assembled READY dev. S003 ledger/adapter reader are repaired; RSI comparability/real-loop work remains with its owner. TK-000K has a genuine956-file start with75 copied private originals; implementation remains in progress. Consumption, final coverage, owner QA and main delivery remain open. Original nodeids is not located; no workspace release.
+No Spec acceptance is claimed. TK-001/TK-002 are closed. Newly verified FIFO receipt blocks before regular-file validation in unchanged dc2/65 product bytes. FAIL258-260 maps the source-bound owner-assistant finding, harness miss and recurrence. Targeted independent Spec FAIL at65 continued TK-003 through native Review and the original claimant. Local65 close is historical, held and not publication readiness. Prior642 fresh1047/4 skips,128 focused checks and dc2 CI1034/9 skips plus11 browser remain valid within their uncovered scope. Corrective bounded refusal/lock-release proof, Review and current CI are required. TK-000K retains its956-file start/75 copied ignored originals and incomplete prototype. Committed cards still pin47; private86 preparation is historical. Final capture must use assembled READY dev. Coverage/consumption, owner QA, main permission and workspace release remain open.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 

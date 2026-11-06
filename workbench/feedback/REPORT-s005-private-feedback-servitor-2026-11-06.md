@@ -37,3 +37,21 @@ does not prove later use. Protected47 cards and private86 preparation are
 historical; final capture/readback must use one exact assembled READY dev.
 Whole-Spec acceptance, actual owner QA, main delivery and workspace release
 remain unclaimed. All retained checkouts, snapshots and original copies stay in place.
+
+## Later FIFO finding supersedes close readiness
+
+The local65 native close above is retained historical evidence. It is not
+published completion and cannot qualify delivery after the new source-bound
+FIFO finding (FAIL258/260, original owner-assistant key
+`OA-S005-20261106-FIFO-dc2cc96`). Current65 private-module SHA256 exactly
+matches the reported dc2 bytes. An independent targeted Spec FAIL at65
+continued the existing TK-003 through native Review, preserving its original
+claimant, all three receipts and the close history. No duplicate Task was created.
+
+Unsafe-type refusal must be bounded before a FIFO can block the read and retain
+the repository lock. Require a bounded regression proving recoverable refusal,
+no public write, original-note retention and lock release, then corrective
+Review/current CI. Prior green checks do not cover this case. FAIL259 retains
+the reporter's first missing-binding control and corrected regular-file rerun.
+No real-user outage/data leak, new owner notes, Task completion or main merge
+is claimed. The immutable external source report remains owned by its writer.
