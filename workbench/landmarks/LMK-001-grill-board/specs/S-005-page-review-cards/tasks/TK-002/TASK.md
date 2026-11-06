@@ -40,3 +40,5 @@ Hand back to S-005 with `close`.
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
 
 Preparation: published prerequisite TK-001 is done at800a67b. Exact PR174 main delivery is approval-blocked. This continuation remains local; it does not change that held PR head or claim delivery.
+
+Workspace baseline sha256:64986c46643318243bc3bb1e5aba64064430cdfbe4b85768d01b02cd82a18e6f
