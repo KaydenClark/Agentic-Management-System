@@ -26,7 +26,7 @@ Target checked dev; orchestrator inspects before merge, owner alone promotes dev
 - [x] Ownership/chronology dispositions preserve controls, knowledge, requirements, failed evidence and receipt identities.
 - [x] Existing website behavior passes fresh-build, site and browser checks; changed glossary projection follows Canon.
 - [x] Generated projections and repository checks pass after the scoped corrections; original failures remain recorded.
-- [ ] Pushed candidate is presented for checked dev integration; no owner acceptance or production promotion is inferred.
+- [x] Checked candidate f976eec is contained in dev259b7a9 through PR176; no owner acceptance or production promotion is inferred.
 
 ## Starting inventory
 
