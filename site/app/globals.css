@@ -190,6 +190,15 @@ a {
   flex: none;
 }
 
+/* Native focus may leave partly visible horizontal links clipped. Without
+   the client reveal enhancement, wrap so every link remains fully visible. */
+@media (scripting: none) {
+  .topnav ol {
+    width: auto;
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 959px) {
   .topbar-inner {
     grid-template-columns: minmax(0, 1fr) auto;
