@@ -5,12 +5,13 @@ sensitivity: normal
 knowledge_role: curated
 provenance:
   - S-000C maintained Wiki repair, 2026-11-04
+  - S-007 TK-002 authorized reader resumption and protected dev517 observation, 2026-11-06
 source_paths:
   - workbench/landmarks/LMK-002-rsi-presentation
   - workbench/landmark-tracker/destination-questions
 parent: none
-authorized_by: S-000C Wiki repair under JOT-a66709e3
-last_verified: 2026-11-04
+authorized_by: S-000C Wiki repair under JOT-a66709e3; S-007 TK-002 authorized reader resumption, 2026-11-06
+last_verified: 2026-11-06
 ---
 
 # Presentation of the RSI
@@ -40,3 +41,5 @@ Inference: storage, lineage and chart behavior must be checked together before t
 ## History
 
 - 2026-11-04: Created by S-000C authorized Wiki repair from existing Landmark/card sources; distinguishes current confirmed meaning, unresolved claims and implementation evidence. Updated alongside related topic explanations and MEMORY routes.
+
+- 2026-11-06: S-007 TK-002 authorized reader resumption ingested the [dated authenticated dev517 observation](../context-website-presentation.md#protected-reader-evidence--2026-11-06), sourced by JOT-7a282d6d-3ca7-47bd-bc90-4c662fa6ab52 and the owning Task. The observed reader does not certify later deployments, whole-Spec acceptance, owner QA or benefit. Standards review identified missing operation attribution; this entry and metadata correct that omission while preserving the original S-000C provenance.
