@@ -24,3 +24,9 @@ Workspace baseline sha256:df3974973671558bf9a64c9e27eb27afff1558b3e6fcbced627d53
 - [ ] Start-page skill chips reach their corresponding articles; anchors and keyboard focus remain visible below the sticky header.
 - [ ] Navigation works at 375, 1280 and 1440 pixels, in both themes, with enlarged text and with scripts disabled; negative controls detect missing or incorrect links.
 - [ ] Current-base tests and browser QA pass without weakening checks; exact candidate and remaining limits are reported for independent review and dev containment.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-008-skills-wiki | cbbda7ee8a86ff505d5c7c2c218afc51895e7501 | ahead 0 behind 0 | 0 | Current-base site build and 287 tests pass; focused navigation browser 328 checks pass. Full browser stopped: six /governance axe color-contrast results undecided; no suppression. Root pytest across a moving checkout: 840 pass, 5 skip, 1 record-budget failure; focused hygiene passes after condensation. | S-008 Spec and Task; scoped website authority Jot. | Full browser rerun after S-010 correction, exact-head CI, independent review, native close and dev containment remain. Prior CSS zoom and misconfigured script-mode observations retained in handoff; PR151 enlarged-text matrix and Human QA remain separate. | de407ad7f057c43210d91e4cadfc86aeb5164eacdb8b2381ac3c248a2eb3dd04 |
