@@ -2,10 +2,11 @@
 
 ## Get oriented
 
-Check branch, remotes, locks and dirt (`git status --short --branch`).
-Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
-[Wiki](workbench/wiki/MEMORY.md), both trackers, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
-Planning also reads `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031`; copying here needs owner approval.
+Every session, questions included, before any reply or action: check git status,
+remotes, locks; read AGENTS, ARCHITECTURE, GLOSSARY, TRACKER, TASKBOARD, [Wiki](workbench/wiki/MEMORY.md),
+[SKILLS](workbench/docs/SKILLS.md), assigned Spec/Task and the topic's records and failures.
+Open it with **Orientation**: records read, what exists, owner answers,
+contradictions. It overrides answer-first style. No CONTINUE files.
 
 ## Workflows
 
@@ -23,9 +24,8 @@ stop and report both attempts.
 
 ```sh
 uv run pytest
-node workbench/tools/spec-workbench.mjs render
-node workbench/tools/spec-workbench.mjs doctor
-node workbench/tools/spec-workbench.mjs next --json
+S=workbench/tools/spec-workbench.mjs
+node $S render && node $S doctor && node $S next --json
 node workbench/tools/workbench-layout.mjs validate --project .
 git diff --check
 uv run ams-hygiene
@@ -40,7 +40,7 @@ Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
 - `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
 - `ams-rsi livecheck`; `ams-sources livecheck`
 - `ams-assess score|record|list`; `ams-assessment-store import|readcheck|livecheck`
-- `ams-trials materialize|preflight|readback`; `ams-series`
+- `ams-trials materialize|preflight|readback`; `ams-series`; `ams-orientation`
 
 [Trial contracts](evals/TRIALS.md); stopped series stay stopped.
 

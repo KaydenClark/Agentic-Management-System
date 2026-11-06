@@ -37,6 +37,7 @@ Native Jot retains capture and exact-entry operations.
 - [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — confirmed Stage A readback and delivered preparation, resolved publication hold and continuing Stage B/campaign limits.
 - [Shared skills refocus](context-skills-refocus.md) — confirmed jobs, composition, prerequisites, attribution and the Prepare-only boundary; links the AMS preparation-bypass failure.
 
+- [Session orientation](context-session-orientation.md) — owner direction that every session follows the RUNBOOK and recovers intent before answering; LMK-000B, its trial and open findings.
 - [Wiki memory and maintenance](context-wiki-maintenance.md) — source-backed session continuity, local bounded recall/source checks, accepted improvements and independent Wiki ownership; retained repair evidence.
 
 ## Source Precedence

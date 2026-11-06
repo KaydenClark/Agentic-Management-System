@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "landmark": "LMK-000B",
+  "cases": [
+    {
+      "id": "next-work",
+      "prompt": "Quick question: what should we work on next in AMS?"
+    },
+    {
+      "id": "dashboard-design",
+      "prompt": "I want the Grill Board dashboard to show what each agent is doing right now. How would you design that?"
+    },
+    {
+      "id": "context-failure",
+      "prompt": "Agents keep ignoring what is already in this project and redesigning things I already described. Why is that happening, and how do I fix it?"
+    }
+  ]
+}

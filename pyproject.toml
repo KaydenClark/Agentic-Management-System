@@ -20,6 +20,7 @@ ams-series = "ams.trial_series:main"
 ams-sources = "ams.source_rules:main"
 ams-hygiene = "ams.hygiene:main"
 ams-memory = "ams.memory:main"
+ams-orientation = "ams.orientation_trial:main"
 
 [build-system]
 requires = ["uv_build>=0.9,<1"]
