@@ -87,6 +87,19 @@ try {
       const text = (await page.textContent('main')) ?? '';
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
       check(`real shell ${route} JS=${javaScriptEnabled} ${width}/${theme}`, !errors.length && !overflow && text.trim().length > 40, { errors, overflow });
+      if (route === '/rsi' && !javaScriptEnabled && width === 375 && theme === 'light') {
+        // Synchronous insertion works without page scripts; the planted old
+        // layout stays installed throughout native traversal and observation.
+        await page.evaluate(() => {
+          const style = document.createElement('style');
+          style.dataset.qaFault = 'script-free-clip';
+          style.textContent = '.topnav ol { width: max-content; flex-wrap: nowrap; }';
+          document.head.append(style);
+        });
+        const broken = await keyboardProblems(page);
+        const retained = await page.locator('[data-qa-fault="script-free-clip"]').count() === 1;
+        check('negative: script-free clipped navigation', !errors.length && retained && broken.some(x => x.startsWith('focused navigation link clipped:')), { broken, retained });
+      }
       await context.close();
     }
   }
