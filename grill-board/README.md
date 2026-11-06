@@ -306,3 +306,21 @@ Successful collection returns a validated capture bound to the exact raw HTML, i
 Automatic collection requires the committed `pageReview.inventory` declaration.
 The internal build seam accepts that resolved path explicitly; it has no layout
 fallback. A current unanswered card held for rewrite blocks coverage.
+
+## Carry criticism into a subsequent draft
+
+After private capture, the drafting agent reads the local original and its safe
+voice entry. Keep original words private. Cite the applicable voice path/version,
+source commit/blob, feedback event and page/hash in the draft's review notes.
+Record safe interpretation separately: preference or defect, project guidance
+or an unproven reusable hypothesis. Append an application/disposition supplement
+to the existing voice history; preserve the original pending entry. Apply the
+correction in the existing source owner lane, or state a reasoned unresolved
+disposition and responsible owner.
+
+An independent reviewer reads that version and the exact resulting draft, checks
+the actual application and names both version and draft hash. Changed content
+needs fresh review. A rating or version citation alone supplies no consumption
+proof. [The synthetic occurrence](../tests/fixtures/page-feedback-consumption/README.md)
+is a short replay with planted failures; it preserves actual agent/reviewer
+judgments and does not substitute for new owner feedback, real site work or QA.
