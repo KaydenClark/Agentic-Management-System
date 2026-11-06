@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
 **Execution approval:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
-**Next gate:** Close TK-002R with verification and documentation proof.
+**Next gate:** TK-002R closed only the accepted unchanged source/adoption/load handoff. TK-002S awaits scoped later-use execution and real S-007/TK-001F evidence; old TK-002/TK-003 claims and prerequisites remain.
 
 ## Intent and authority
 
@@ -24,7 +24,7 @@ Shared skills preserve one work branch, authorized delivery, truthful cleanup an
 
 ## Current Verified State
 
-Root accepted the [exact one-branch source/adoption/load handoff](../../../../wiki/history/S-011.md#tk-002r-accepted-sourceadoption-handoff). Its historical qualification and new ordinary loading prove no general benefit/discovery or complete later-use outcome. Independent protected end state, recurrence, regressions, owner effort and safe store/page joins remain. Failed fbf581fe, refusal and all attempts stay preserved; whole acceptance is incomplete.
+TK-002R's native receipt closes the [accepted one-branch source/adoption/load handoff](../../../../wiki/history/S-011.md#tk-002r-accepted-sourceadoption-handoff). Historical qualification/new ordinary loading prove no general benefit/discovery or complete later-use outcome. Independent protected end state, recurrence, regressions, owner effort and safe store/page joins remain. Failed fbf581fe, refusal and all attempts stay preserved; whole acceptance is incomplete.
 
 ## Desired Behavior
 
