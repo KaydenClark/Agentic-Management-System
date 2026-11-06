@@ -191,10 +191,24 @@ Optional `AMS_BOARD_CAPTURE_DIR` saves disposable screenshots to a chosen local
 output directory. The existing CI Playwright step includes both test files.
 Agent browser checks do not establish owner Human QA.
 
-## Page review generator: incomplete candidate
+## Content-bound website review cards
 
-S-005/TK-001 owns an incomplete candidate for `ams-pages generate`. It accepts one immutable current candidate, a complete page inventory, and a map from each built public route to its served HTML. It refuses any route-set mismatch, including an unlisted skills article. Historical per-page landed commits supply provenance only. Cards/index are written through the Board repository lock and compare-and-swap; changes append stale sections, preserving earlier answers. Returning to an earlier content hash requires a fresh card occurrence rather than rewriting history.
+S-005/TK-001 remains open: the generator and isolated collector have focused proof; actual complete protected-deployment coverage still needs its frontend metadata/RSI artifact prerequisites. The local Board/CLI owns review state; public pages receive none.
 
-The content hash matches the existing site contract: `sha256:` plus UTF-8 SHA-256 of canonical `<main id="main">` content. Exclude script/style/comment and `data-review-mark`/`data-review-exclude` subtrees; retain text plus `href`, `src`, `alt` values in source order, decode supported character references, join with spaces, collapse ASCII whitespace and trim. The footer is outside the hash. Retained independent vectors live under `tests/fixtures/grill_board/pages/`; the current focused run passes the retained hash vectors.
+`ams-pages generate` freezes one already-fetched trusted source SHA, exports only tracked Git bytes, runs one isolated build and server, consumes the postbuild page-list projection from explicit committed owner declarations, compares all actual built/served routes, then creates cards/index/approval anchor through the existing Board lock/CAS. Missing or ambiguous owners refuse; no Spec/Task or landing is invented. Include every skill article and the visitor404 (`/_not-found`, fetched through a nonexistent URL expecting404). Only `_global-error.html` is an internal framework fallback.
 
-This candidate has no Supabase approval row or public review-status path. It has not completed real current-build collection, live coverage or full repository regression checks. The Task preserves two earlier verification failures and the orchestrator-inspected correction; 119 focused generator/Board tests now pass, without claiming live coverage or approval readiness. Actual private criticism must not be put into public committed raw evidence.
+```sh
+uv run ams-pages generate --project . --source-repo SOURCE_CHECKOUT \
+  --ref origin/dev --candidate FULL_CANDIDATE_SHA \
+  --image sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9
+```
+
+The image must already exist on the supported local Docker engine. Only the owned Git export is mounted; candidate processes receive isolated container HOME, no host credentials/configuration, and only explicitly validated public anonymous site configuration when requested with `--public-config JSON`. Public package acquisition precedes network-disconnected build/serving. Runtime refusal has no host-build fallback. Exact owned process groups/containers are cleaned and read back, including interruption; genuine permission/cleanup failures refuse before Board writes.
+
+Provenance remains explicit: existing historical landings retain their meaning; `verified-containment` identifies actual presence, not creation; `pending-candidate` uses null landing and the collector's frozen candidate with integration pending. Sources/current owners remain required. Changed/removed content appends stale history; existing answered bytes survive. Returning content gets a new card occurrence. Identical reruns do nothing.
+
+The hash is `sha256:` plus UTF-8 SHA-256 over canonical `<main id="main">`: drop script/style/comments and review-mark/exclude subtrees; retain decoded text and href/src/alt in source order, join with spaces, collapse ASCII whitespace and trim. Footer identity is outside it. Retained independent vectors are under `tests/fixtures/grill_board/pages/`.
+
+For RSI, only freshness/last-successful-read text may be excluded: changed results and availability must change the review hash. A network-isolated unavailable-state build cannot represent different protected-deployment HTML. Actual RSI review needs the existing PR165 freshness correction and a trusted immutable deployed-artifact seam; credentials never enter the candidate build. Explicit `--inventory FILE --built-html FILE --candidate SHA` remains an injected-artifact seam, not live proof by itself.
+
+Approvals stay in the committed owner record; no Supabase approval mirror/public query is added. Actual private criticism must not enter public committed raw evidence. Original failed checks/receipts, scoped corrections and unperformed live outcomes remain in the Task; green fixture tests supply no owner Human QA.
