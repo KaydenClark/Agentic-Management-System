@@ -12,9 +12,7 @@
 
 ## Assignment
 
-Target checked `main` via [PR174](https://github.com/KaydenClark/Agentic-Management-System/pull/174); site/other writers stay read-only. Full contracts: parent Spec, Board README and original7eedef9 assignment.
-
-Deliver a frozen Git-only, isolated current build through complete explicit route owners, served hashes and Board lock/CAS. Cover all pages/articles/visitor404; exclude internal global-error only. Preserve provenance, source validation, atomic refusals, private isolation, owned cleanup, append-only stale/returning history, no-op reruns and footer stability. Bind RSI results/availability; exclude freshness only. Verify protected artifacts rather than substitute local HTML. Later Tasks/owner QA/promotion remain separate.
+Target checked `main` through [PR174](https://github.com/KaydenClark/Agentic-Management-System/pull/174). Site/other-owner lanes stay read-only. Parent Spec, Board guide and original7eedef9 retain full contracts; meet every criterion below through the frozen-build, ownership, cleanup and locked append-only seams.
 
 ## Acceptance
 
@@ -29,7 +27,7 @@ Deliver a frozen Git-only, isolated current build through complete explicit rout
 
 Workspace baseline sha256:81dd8dfc83cf2aaa52dcbc6b763823137fe82ede9d053bb84a22225d4f2feb2d
 
-Claim originals/private inventory remain preserved; local retention is not remote recovery. Both receipt forks remain intact: published native chain below and [frozen sibling chain](../../../../../../wiki/history/S-005-TK-001-fb12d6e.md). No renumbering or rehashing; no acceptance/reset is inferred.
+Originals remain preserved; private retention is not remote recovery. Keep the native chain below and [frozen sibling seven-row chain](../../../../../../wiki/history/S-005-TK-001-fb12d6e.md) intact. No renumbering, rehashing, acceptance or reset.
 
 ## Receipt
 
@@ -42,3 +40,4 @@ Claim originals/private inventory remain preserved; local retention is not remot
 | 5 | Feature/S-005-page-review-cards | defad63ab961e533217577d8ea1cbafe602639c8 | ahead 0 behind 0 | 4 | Product:135 focused pass at5f74950;22 collector/page pass atdefad63. Full858pass/8skip retained; sole Spec-budget failure corrected, focused hygiene36pass/1skip. No unchanged broad rerun. | Spec/Task condensed without changing criteria/authority or prior receipt bytes; collector/CLI/provenance/RSI hash boundaries documented. | Actual Next/protected48-route cards pending complete S003 metadata,165 freshness and trusted deployed RSI artifact. Independent review/delivery and later S005 Tasks remain; no close/Human QA. | 2fa109b5b17be6cb4757a70fe43b54c565ad3e9df554ac341b39577147f2c0ec |
 | 6 | Feature/S-005-page-review-cards | 8c761dbce8114f49c401b08e35a7d9706bb8ae5b | ahead 3 behind 0 | 0 | 8c761db:59 focused passed incl Docker/SIGINT. Earlier1721a8c full877 passed/6 skipped. HTTP409 preserves note. CI pending. | Board guide/Wiki; claimant and five receipts preserved. | S-003:41 route owners/protected RSI artifact/freshness. Coverage/review/later Tasks/owner QA open; no merge/close. | cf58de0094d169f75fb70fb8db2d3153e7723a99009ea8e8d23ad2cd57b5bc04 |
 | 7 | Feature/S-005-page-review-cards | 84ded45c08bc7026d41e497de4979ae9505bb130 | ahead 0 behind 0 | 4 | 84ded45 fresh960/6skip; CI958/8skip+10browser; two independent82test reviews; 211dd1b50route/card/HTTP proof. | Guide, Spec, Wiki, preserved chains. | PR178 dev delivery and exact protected capture; then final cards, later Tasks and owner QA. No close or merge. | b2ec621f303035027ba867924a3413fd4ce5fa335ccbbc09f3222f1db47f5b2d |
+| 8 | Feature/S-005-page-review-cards | 3e41a6441ace178817d21c4df3a4aa7ff4c2f79f | ahead 0 behind 0 | 4 | 40ac ordinary50routes/cleanup. No-op-adapter diagnostic:0 legacy/51 scoped HTML; same inventory refusal. Vercel ERROR. | S003 layout report; Spec/history; prior rows intact. | Existing S003 owner repairs adapter layout and READY dev; then exact protected capture/cards. No close or QA. | f4c6869e44cbd1ab01b6e0b91cbdea9f43ca0bd5e3da288bd651fef3dfa2d6a5 |

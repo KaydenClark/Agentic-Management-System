@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** Content-bound page reviews and versioned feedback consumed by later drafts.
 **Blockers:** none
-**Next gate:** PR178 checked dev delivery, then same-revision protected capture/cards and TK-001 completion; later Tasks remain separate.
+**Next gate:** S-003 adapter-layout repair and matching READY deployment; then protected capture/cards and TK-001 completion.
 
 
 ## Intent and authority
@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns evidence and failures. Current-main84ded45 passes fresh960 tests/6 skips; CI958/8 plus10 browser checks; separate Standards/Spec each82 pass with no material corrective finding. Frozen PR178211dd1b independently builds50 public routes,39 skill articles and visitor404; disposable generation/readback covers50 current cards and a no-op rerun with cleanup verified. This built-only proof is not protected dev coverage. The observed e10216e snapshot lacks that final inventory; re-pin moving dev after checked PR178 delivery and require its complete authenticated capture. Raw page-note refusal stays until private capture; later Tasks and owner QA remain open.
+No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns evidence and failures. Current-main84ded45 passes fresh960 tests/6 skips; final3e41 CI958/8 plus10 browser checks; separate Standards/Spec each82 pass with no material corrective finding. PR178 landed in dev40acb3a: its isolated build collects50 public routes, but matching Vercel deployment fails inventory postbuild. An isolated no-op-adapter build reproduces0 legacy versus51 scoped HTML artifacts; [S-003 layout report](../../../../feedback/REPORT-s003-vercel-artifact-layout-servitor-2026-11-06.md) routes the correction to its existing owner. The earlier50-card/HTTP/no-op proof remains built-only. Protected coverage, private feedback, later Tasks and owner QA remain open.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 
