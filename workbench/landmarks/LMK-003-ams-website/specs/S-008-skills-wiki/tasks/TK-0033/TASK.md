@@ -20,10 +20,10 @@ Workspace baseline sha256:df3974973671558bf9a64c9e27eb27afff1558b3e6fcbced627d53
 
 ## Acceptance
 
-- [ ] Index and all 39 articles expose reachable navigation and mark the current page; each article's contents links match its actual headings.
-- [ ] Start-page skill chips reach their corresponding articles; anchors and keyboard focus remain visible below the sticky header.
-- [ ] Navigation works at 375, 1280 and 1440 pixels, in both themes, with enlarged text and with scripts disabled; negative controls detect missing or incorrect links.
-- [ ] Current-base tests and browser QA pass without weakening checks; exact candidate and remaining limits are reported for independent review and dev containment.
+- [x] Index and all 39 articles expose reachable navigation and mark the current page; each article's contents links match its actual headings.
+- [x] Start-page skill chips reach their corresponding articles; anchors and keyboard focus remain visible below the sticky header.
+- [x] Navigation works at 375, 1280 and 1440 pixels, in both themes, with enlarged text and with scripts disabled; negative controls detect missing or incorrect links.
+- [x] Current-base tests and browser QA pass without weakening checks; exact candidate and remaining limits are reported for independent review and dev containment.
 
 ## Receipt
 
@@ -31,3 +31,4 @@ Workspace baseline sha256:df3974973671558bf9a64c9e27eb27afff1558b3e6fcbced627d53
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-008-skills-wiki | cbbda7ee8a86ff505d5c7c2c218afc51895e7501 | ahead 0 behind 0 | 0 | Current-base site build and 287 tests pass; focused navigation browser 328 checks pass. Full browser stopped: six /governance axe color-contrast results undecided; no suppression. Root pytest across a moving checkout: 840 pass, 5 skip, 1 record-budget failure; focused hygiene passes after condensation. | S-008 Spec and Task; scoped website authority Jot. | Full browser rerun after S-010 correction, exact-head CI, independent review, native close and dev containment remain. Prior CSS zoom and misconfigured script-mode observations retained in handoff; PR151 enlarged-text matrix and Human QA remain separate. | de407ad7f057c43210d91e4cadfc86aeb5164eacdb8b2381ac3c248a2eb3dd04 |
 | 2 | Feature/S-008-skills-wiki | 3cc34f626dcacdb1f0fcbbdcb77fcaeafb8e912b | ahead 0 behind 0 | 0 | At 3cc34f626dcacdb1f0fcbbdcb77fcaeafb8e912b: clean install, build and 303 site tests pass; focused navigation 328 checks pass. Full browser 2739/2745: six start-toy no-request checks observed route and skill _rsc requests in the interaction window; cause unproven. Previously failing governance contrast passes six cases. | S-008 Task; original stop receipt retained. | Coordinated diagnosis and correction of no-request failures, current-base full browser, exact-head CI, independent review, native close and dev containment remain. Human QA and PR151 historical matrix remain separate. | badbf1016b7fd3c337ad64f4446a6018073ea4121fd1dd989ae18750d7d1d9c7 |
+| 3 | Feature/S-008-skills-wiki | 49e6aa4df23e5c0654f9b551945344ac6c47a7a7 | ahead 3 behind 0 | 0 | At ac276e13d21628ea118e4dfed5e8e58739dc8d74: fresh build and 303 site tests pass; navigation matrix 328/328; full browser 2745/2745 including original request and focus controls; exact-head python and site CI pass. At 49e6aa4df23e5c0654f9b551945344ac6c47a7a7 the site tree is identical; dev merge changes evidence records only. | S-008 Task and preserved earlier receipts. | Independent assembled review and dev containment remain with orchestrator. Native workspace check incomplete: retained refs, ignored evidence and missing discovery route; private verified originals retained. PR151 historical matrix and Human QA remain separate. | 3964d957f0051155749302f60686c37711bb62fe03818557d7e9341bc04b4286 |
