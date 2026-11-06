@@ -25,3 +25,9 @@ Cross input/CLI, Git change inventory, safe report publication and fresh-process
 - [ ] A terminated publisher cannot leave a held lock or a partially published report; retained evidence is not deleted or overwritten.
 - [ ] Original findings reproduce before repair, focused/fresh/full checks and scoped QA pass, and documentation states the lock boundary, platform/support limits and remaining trust limits.
 - [ ] Return exact source and final candidates, tests/QA, both merge answers, retained failed evidence and any actual blocker. Independent review, exact-head shared CI and non-site main delivery remain distinct from whole-Spec acceptance, real native host use and Human QA.
+
+## Starting preservation
+
+Workspace baseline sha256:880606720be44cddca30f995a14ed6e8ef2af00a086456ae2171ed83fc735c89
+
+Complete native schema-1 inventory captured outside the observed checkout after committed claim/original projection 3f01f9b401172e3e888215e75b86f688ee9eb9fa. No ignored paths were present; findings and busy arrays were empty. Raw inventory stays private. This binding precedes product edits; claim and projection originals remain committed.
