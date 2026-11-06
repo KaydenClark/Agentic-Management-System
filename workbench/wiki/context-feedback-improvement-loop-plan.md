@@ -190,3 +190,37 @@ Supersedes: JOT-8529e8c1-690d-42b2-a501-dcc1dcce4a06
 
 Kayden challenged the repeated merge-approval requests in the direct AMS chat on 2026-11-04: "I don't know how many times we need to fix this so you can commit, PR, and merge things automatically". This continuation treated that instruction as authorization for routine checked delivery within the existing AMS scope. The original FAIL-079/080 denials explicitly distinguished trusted user authorization from permission quoted in repository policy. After verifying the unchanged non-site candidate 7dbcc98829627ea2152c616cc99035bcc26b31f2, passed independent metadata reviews and successful shared CI run 41799304048, the same GitHub connector merged PR169 into main at 3e3078810753035f289f20e5f9bc268a61e0fbd3. Fresh clone of main verified the merge and its candidate parent. The former publication hold is resolved for PR169; both refusals remain historical evidence. No approval setting or reviewer policy changed, and one successful merge does not establish that standing authorization will be recognized in every future session. Stage B implementation, campaigns, database writes, automation, installation, Human QA and website dev-to-main promotion retain their existing authority boundaries.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-9354c241-ca54-44ee-a1e9-859f7a206810
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T14:18:29.721Z
+Author: Kayden (captured by codex-s011-record-prep)
+Source: chat:ams-item7-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden's current AMS chat directs the twelve-item website/RSI program with /orchestrate and /carry and challenges repeated confirmation requests: "We're my two confirmations not enough? I'm confused now". Item 7 is retained verbatim: "Complete one shared-skill repair through actual later use—S-011. Reuse existing qualifying evidence only where its exact scope matches. Otherwise use the held TK-002R/TK-002S route after its release. Repair the source in KaydenClark/skills, independently review it, qualify the exact candidate, then install only the accepted version under scoped authority. Pass condition: subsequent website work demonstrably loads and uses that version, with recurrence, regressions, and owner effort observed. Merge, installation, and use each need their own evidence."
+
+The owning orchestrator confirms these existing confirmations authorize that scope; the bounded records/preparation assignment captures it without another general confirmation. This is not a replacement four-section readback and invents none of its missing bytes. Current preparation endpoint: reconcile existing exact-scope source/qualification/merge/install evidence and prepare existing R/S for orchestrator inspection before any claim or dependent execution. Exact new model/campaign/grader/semantic-label inputs, protected publication policy, independent later-use proof and owner-controlled dev-to-main promotion retain their distinct gates. Existing source-author claim, failures/refusals, r1/land/PR101 stops and counters remain. This capture performs no source change, trial, installation, store write or website change.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-0aa12be4-1a4d-4b94-8872-7174a0e97a86
+Kind: observation
+State: current
+Recorded: 2026-11-06T14:19:14.559Z
+Author: codex-s011-record-prep
+Source: audit:s011-scoped-reuse-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Bounded S-011 audit, 2026-11-06, by codex-s011-record-prep. Existing accepted orchestrate source aebb3098f0f119e15b1ca773b7bf2a96aba54d6c merged as 1e41c87d2550b61add7d2b2a47a4128420666498. Its subtree 9b6e9531b1ff775ff6232b804a9d8a810312ca1a exactly matches the observed clean installed catalog at 804ba1ed3a8532b55fa0a7542945f806fb165883. S-011 history records Claude tool-free contract v1: baseline 26/27; corrected candidate 27/27 across three Mid runs; High/Small 9/9; independent Frontier PASS WITH NOTES. This demonstrates the one-Spec-branch predicate correction and no observed regression among its other graded checks. It is not a qualified useful-effect margin, native-discovery/Codex qualification, longitudinal benefit or whole-S-011 pass.
+
+Read-only installed Git reflog/source inspection establishes a real transition f2354fd037eddc3e02bf5766630bec8f039efaa7 -> 6a020669d4d824b580e793a539ba7e51759fa07f at 2026-11-03T17:45:13-07:00. Orchestrate changed from subtree 724481e0cf637d315112b59a1d205a291e065372 to accepted 9b6e953; that merge changed 58 files. Its executor is unknown; Git author is not proof of the executor. Prior conditional installation authority is JOT-8c178984-eede-44cc-8c58-33f137a551c6. Keep the old refused-install history and do not describe the whole migration as qualified. Earlier authenticated remote comparison in this audit resolved skills main 92f39d6da24da30452fb40a87beb6fc217be6107, nine commits beyond installed804, with no orchestrate-file changes; neither newest-source quality nor installed-currentness is inferred.
+
+The owning website orchestrator reports observable loading of installed orchestrate and its reached reference plus published one-Spec-branch website delivery. Treat these as candidate ordinary-use observations at that clause's scope, independently bind exact website/end-state identities before accepting later-use proof, and keep the separate scope-reconfirmation failure visible. No recovered source requires requalification for every ordinary Codex use; historical qualification explicitly excluded native discovery. Still missing: independent protected end-state/readback, representative recurrence before owner prompting, regressions/eligible denominator or explicit unknown, actual elapsed/owner effort, and safe S-006 writer/store -> S-007 reader/protected-dev lineage. Existing R/S may reconcile/reuse the accepted artifact; no rewrite, reinstall or new qualification campaign is prescribed.
+
+Fresh inventory found canonical S-0117fbfdc1b996bba2f05afd579acaef6699e235cf7 already merged by PR155; existing records checkout clean and without Git locks, no evidenced active concurrent Spec records writer. Old TK-002 source-author claim and TK-003 prerequisite remain. codex-s011-record-prep is the sole writer for this bounded records assignment only, not a claimant of those Tasks. Branch was fast-forwarded privately to dev933e386020c729f7af94822c6066e62f6403ce06 with mainc787b2958fa7a23f55c6406f3ce367a91e9162dc pinned; publication must not carry unreleased dev work into main.
+<!-- /jot-entry -->
