@@ -193,7 +193,7 @@ Agent browser checks do not establish owner Human QA.
 
 ## Content-bound website review cards
 
-S-005/TK-001 remains open: the generator and isolated collector have focused proof; actual complete protected-deployment coverage still needs its frontend metadata/RSI artifact prerequisites. The local Board/CLI owns review state; public pages receive none.
+S-005/TK-001 remains open. Immutable262d28e produced48 cards through the actual isolated Next build/serve path, including39 skill articles and visitor404; a second generation made no changes. This older local slice is not current expanded coverage or protected-deployment/data-state proof. The local Board/CLI owns review state; public pages receive none.
 
 `ams-pages generate` freezes one already-fetched trusted source SHA, exports only tracked Git bytes, runs one isolated build and server, consumes the postbuild page-list projection from explicit committed owner declarations, compares all actual built/served routes, then creates cards/index/approval anchor through the existing Board lock/CAS. Missing or ambiguous owners refuse; no Spec/Task or landing is invented. Include every skill article and the visitor404 (`/_not-found`, fetched through a nonexistent URL expecting404). Only `_global-error.html` is an internal framework fallback.
 

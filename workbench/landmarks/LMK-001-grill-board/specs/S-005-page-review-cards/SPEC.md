@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns generator/collector source, checks, failures and remaining live-coverage proof. The full Python run retained858 passes/8 skips and this Spec's budget failure; coherent condensation and focused hygiene correct the record-only defect. Actual protected coverage remains open. Existing S-004 locked/CAS card operations are delivered; its Human QA/redesign remain separate. S-003 owns complete current route metadata and protected dev readback. The historical seven-entry inventory omitted skills coverage; never review historical landed content as current.
+No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns generator/collector source, checks, failures and remaining live-coverage proof. The full Python run retained858 passes/8 skips and this Spec's budget failure; coherent condensation and focused hygiene correct the record-only defect. Actual262d28e isolated Next build/serve produced48 cards (39 articles,404),50 owned files and an identical no-op at4e10432. Protected/current expanded coverage remains open. Existing S-004 locked/CAS card operations are delivered; its Human QA/redesign remain separate. S-003 owns complete current route metadata and protected dev readback. The historical seven-entry inventory omitted skills coverage; never review historical landed content as current.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 
