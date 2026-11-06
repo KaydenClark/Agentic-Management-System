@@ -5,7 +5,7 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
 **Stance:** Builder
-**Updated:** 2026-11-03
+**Updated:** 2026-11-06
 **Catalog description:** Coherence checks: Spec fidelity, pinned/current skills, dev/main drift and independent review.
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
@@ -28,14 +28,9 @@ An earlier Workbench accumulated thousands of unmerged commits and stale records
 
 ## Current Verified State
 
-Independent Review returned `b7efbaba15baa354eafbc92b91a352ae54d94c71` for incomplete legacy accounting/control routes; [TK-001X](tasks/TK-001X/TASK.md) records its bounded correction. No criterion is verified. [TK-001U](tasks/TK-001U/TASK.md) retains dev-recovery proof, not complete detection or learning.
+No criterion is verified. Legacy Review returned `b7efbaba15baa354eafbc92b91a352ae54d94c71` for incomplete accounting/control routes; [TK-001X](tasks/TK-001X/TASK.md) owns correction. [TK-001U](tasks/TK-001U/TASK.md) retains dev-recovery evidence, not complete detection/learning. [TK-001D](tasks/TK-001D/TASK.md#receipt) now records bounded synthetic detection/replay; real native loading/use and whole-Spec acceptance remain open.
 
-- Drift check/report: [TK-001 receipt](tasks/TK-001/TASK.md#receipt); Board breach item blocked on [TK-005](tasks/TK-005/TASK.md).
-- Up-to-Spec check and S-004 report: [TK-002 receipt](tasks/TK-002/TASK.md#receipt).
-- **Skills in sync:** blocked on S-006 rows ([TK-003](tasks/TK-003/TASK.md)).
-- Review procedure/checker: [TK-004 receipt](tasks/TK-004/TASK.md#receipt); absent from the native verdict gate.
-- **No secrets:** no evidence recorded.
-- `doctor` reports structural findings. `dev` exists on the remote. RUNBOOK does not name the coherence commands.
+Drift/report: [TK-001](tasks/TK-001/TASK.md#receipt); breach card waits on [TK-005](tasks/TK-005/TASK.md). Up-to-Spec/S-004: [TK-002](tasks/TK-002/TASK.md#receipt). Skills sync [TK-003](tasks/TK-003/TASK.md) waits on S-006. Review tooling [TK-004](tasks/TK-004/TASK.md#receipt) remains outside the native verdict gate. Secret-free execution is unproved. Doctor remains structural; dev exists. RUNBOOK now routes to the detection procedure.
 
 History: [S-013 history](../../../../wiki/history/S-013.md).
 
@@ -128,4 +123,7 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-The original 2026-11-02 mapping stopped before implementation. Subsequent owner direction authorizes a bounded recovery and repair toward the loop; this does not establish completion of TK-001D. Earlier campaign stops and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+The 2026-11-02 preparation request granted no implementation authority. TK-001D's later scoped release is recorded in [its Task](tasks/TK-001D/TASK.md); other holds, stopped experiments and failed evidence retain their scope. See [plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+
+
+Detection replay and limits: [procedure](../../../../wiki/guidebooks/coherence-observations.md).
