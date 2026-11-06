@@ -24,7 +24,7 @@ Workspace baseline sha256:7a1c61ba565d56e09c7be07037d60c7c39306f09d1b941d2b2256c
 - [x] Candidate bars retain distinct fill and double borders in both themes.
 - [x] Freshness alone leaves the review hash stable; actual results and availability change it.
 - [x] Grader versions remain separate and visible; stopped or failed runs without result rows remain visible without fabricated results.
-- [ ] Build, required checks and representative browser QA pass on the current-base candidate; evidence and limits are recorded.
+- [x] Build, required checks and representative browser QA pass on the current-base candidate; evidence and limits are recorded.
 
 ## Receipt
 
@@ -35,3 +35,5 @@ Workspace baseline sha256:7a1c61ba565d56e09c7be07037d60c7c39306f09d1b941d2b2256c
 ## Assembled verification
 
 Source aa5f811 merges dev63870b5; the S-003 writer preserved all Jot blocks from both parents. Fresh build and 279 site tests pass; Chrome contrast and planted solid-fill negative pass in light, dark and system-dark; run-only fixtures pass at 375/1280 in both themes. Root and built-site hygiene 0; 37 hygiene tests, Wiki/ADR/layout/render and candidate whitespace pass. Earlier source15ce44c: full Python 841 passed, 5 skipped; subsequent dev merge changes site, records and Wiki, not Python runtime/tests. Exact-head shared CI and independent review remain. No live-store readback, Human QA or measured benefit claimed.
+
+Root independently reviewed source and receipt preservation, verified exact d17d03d site and Python shared CI, and passed the trusted immutable-main gate. PR165 merged to dev as 6cdb647d2d415a8400d1d26cad2614b492c03926; fresh dev e10216e contains d17d03d. This completes only TK-0031, not S-007, live lineage or Human QA. Workspace closeout accounting remains incomplete; retain the clone and evidence.
