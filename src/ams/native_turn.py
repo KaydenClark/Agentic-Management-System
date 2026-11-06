@@ -884,7 +884,7 @@ def reconcile_native_history(rpc, store, job, call, pin, *, expected_pin_digest,
                 target = turn
         require(target is not None, 'pinned native turn is not present; absence is not established')
         rows = paged('thread/items/list', {'threadId': pin['thread_id'], 'turnId': pin['turn_id']})
-        items, final, source_input = {}, None, False
+        items, final, source_inputs = {}, None, []
         expected_input = [{'type': 'skill', 'name': c['skill']['name'], 'path': c['skill']['path']},
                           {'type': 'text', 'text': c['prompt']}]
         for row in rows:
@@ -908,7 +908,7 @@ def reconcile_native_history(rpc, store, job, call, pin, *, expected_pin_digest,
                                 'persisted input formatting differs from the frozen call')
                         value = {key: data for key, data in value.items() if key != 'text_elements'}
                     content.append(value)
-                source_input = source_input or content == expected_input
+                source_inputs.append(content)
             elif kind == 'agentMessage':
                 require(type(item.get('text')) is str and item.get('phase') in (None, 'commentary', 'final_answer'),
                         'persisted message phase/text differs from pinned schema')
@@ -920,7 +920,7 @@ def reconcile_native_history(rpc, store, job, call, pin, *, expected_pin_digest,
                         and item.get('cwd') == c['cwd'] and item.get('status') in ('inProgress', 'completed', 'failed', 'declined')
                         and (item.get('exitCode') is None or type(item['exitCode']) is int)
                         and (item.get('processId') is None or type(item['processId']) is str), 'persisted command item is malformed')
-        require(source_input, 'persisted input is not the independently pinned call')
+        require(source_inputs == [expected_input], 'persisted complete input sequence differs from the independently pinned call')
         require(target['status'] != 'completed' or final is not None, 'normal persisted completion lacks a final response')
         if target.get('itemsView', 'full') == 'full':
             declared = {item.get('id'): item for item in target['items'] if type(item) is dict}

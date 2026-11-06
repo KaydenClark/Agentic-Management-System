@@ -550,3 +550,50 @@ def test_history_aggregate_limits_preserve_unknown_and_consumed_intent(make_case
     assert result['observation']['outcome'] == 'unavailable'
     assert store.snapshot('test-inert-turn') == before
     assert len(peer.calls) <= 3
+
+
+@pytest.mark.parametrize('variant', ['exact-single', 'extra-before', 'extra-after', 'extra-after-final',
+                                     'across-page', 'duplicate', 'different', 'reordered', 'split', 'missing'])
+def test_history_requires_the_complete_exact_ordered_frozen_input_sequence(make_case, variant):
+    _, call = make_case()
+    store = MemoryStore(call)
+    reserved = store.begin_effect(store.claim(store.job, 'interrupted', lease_seconds=300), 0)
+    store.release(reserved['job'])
+    pin = history_pin(call, store.job, reserved['effect'])
+    c = call.data
+    expected = [{'type': 'skill', 'name': c['skill']['name'], 'path': c['skill']['path']},
+                {'type': 'text', 'text': c['prompt'], 'text_elements': []}]
+    original = {'id': 'original-input', 'type': 'userMessage', 'content': expected}
+    extra = {'id': 'extra-input', 'type': 'userMessage', 'content': [{'type': 'text', 'text': 'Unapproved extra input.'}]}
+    final = {'id': 'final', 'type': 'agentMessage', 'phase': 'final_answer', 'text': 'Retained private answer.'}
+    if variant == 'extra-before':items = [extra, original, final]
+    elif variant in ('extra-after', 'across-page'):items = [original, extra, final]
+    elif variant == 'extra-after-final':items = [original, final, extra]
+    elif variant == 'duplicate':items = [original, {**original, 'id': 'duplicate-input'}, final]
+    elif variant == 'different':items = [extra, final]
+    elif variant == 'reordered':items = [{**original, 'content': list(reversed(expected))}, final]
+    elif variant == 'split':items = [{**original, 'content': expected[:1]}, {**extra, 'content': expected[1:]}, final]
+    elif variant == 'missing':items = [final]
+    else:items = [original, final]
+
+    class SequencePeer(HistoryPeer):
+        def call(self, method, params, *, timeout):
+            if method == 'thread/read':return super().call(method, params, timeout=timeout)
+            self.calls.append((method, params))
+            if method == 'thread/turns/list':
+                return {'data': [{'id': 'retained-turn', 'status': 'completed', 'itemsView': 'full', 'items': items}], 'nextCursor': None}
+            assert method == 'thread/items/list'
+            first = params.get('cursor') is None
+            selected = items[:1] if variant == 'across-page' and first else items[1:] if variant == 'across-page' else items
+            return {'data': [{'turnId': 'retained-turn', 'item': item} for item in selected],
+                    'nextCursor': 'second-item-page' if variant == 'across-page' and first else None}
+
+    peer = SequencePeer(call)
+    before = store.snapshot('test-inert-turn')
+    result = native_turn.reconcile_native_history(peer, store, store.job, call, pin,
+        expected_pin_digest=recovery.digest(pin), expected_job_digest=store.job['job_digest'])
+    assert result['status'] == ('observed' if variant == 'exact-single' else 'untrusted')
+    assert result['execution_allowed'] is False and result['assessment_result'] == 'unknown'
+    assert result['observation']['outcome'] == 'unavailable'
+    assert store.snapshot('test-inert-turn') == before
+    assert all(method in ('thread/read', 'thread/turns/list', 'thread/items/list') for method, _ in peer.calls)
