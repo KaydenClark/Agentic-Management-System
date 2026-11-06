@@ -14,7 +14,6 @@ const SHA = /^(?:[a-f0-9]{40}|[a-f0-9]{64})$/;
 const json = (file) => JSON.parse(readFileSync(file, 'utf8'));
 const fail = (message) => { throw new Error(`Page inventory: ${message}`); };
 
-
 function safeRelative(name) {
   if (typeof name !== 'string' || !name || name.startsWith('/') || name.includes('\\') || /[\r\n]/.test(name) || name.split('/').some(part => part === '..' || part === '.git' || part.startsWith('.env') || part.startsWith('.jot-private-'))) {
     fail('source ownership paths must be public repository-relative paths');
@@ -46,7 +45,6 @@ function ownerRecords(project) {
   }
   return { specs, tasks };
 }
-
 
 
 export function readBuild(site = DEFAULT_SITE) {

@@ -57,6 +57,7 @@ function buildPath(root, name) {
   return file;
 }
 
+// Both layouts map the same logical artifact name to one public route.
 export function routeOf(name) {
   const path = name.replace(/\\/g, '/').replace(/\.html$/, '');
   if (path === 'index') return '/';
