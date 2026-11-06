@@ -24,7 +24,7 @@ Shared skills preserve one work branch, authorized delivery, truthful cleanup an
 
 ## Current Verified State
 
-Accepted orchestrate source/merge/subtree and executed installation transition are in [history](../../../../wiki/history/S-011.md#2026-11-06-scoped-orchestrate-reuse-and-preparation). Claude one-branch qualification proves no general benefit/discovery/use. Independent recurrence, regressions, owner effort and safe store/page readback remain. Failed fbf581fe, refusal and attempts stay preserved; whole acceptance is incomplete.
+Root accepted the [exact one-branch source/adoption/load handoff](../../../../wiki/history/S-011.md#tk-002r-accepted-sourceadoption-handoff). Its historical qualification and new ordinary loading prove no general benefit/discovery or complete later-use outcome. Independent protected end state, recurrence, regressions, owner effort and safe store/page joins remain. Failed fbf581fe, refusal and all attempts stay preserved; whole acceptance is incomplete.
 
 ## Desired Behavior
 

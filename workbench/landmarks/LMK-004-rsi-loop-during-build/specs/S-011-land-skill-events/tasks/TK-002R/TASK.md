@@ -34,8 +34,10 @@ Workspace baseline sha256:7b1972d1f1fadf78b251e70af90ead121a42c0fa051b612b25561a
 
 Genuine schema-v1 inventory after native claim `4fb04bab` and committed original coordination bytes `ed55da08`, before record execution: complete=true, 977 files, no findings/busy Git operations. Raw inventory stays private; no ignored recovery files selected. Derived build/cache paths were observed, not adopted as evidence. This digest establishes identity, not semantic acceptance or remote recovery.
 
-- [ ] Diagnosis and prior-chain readback justify one source repair or a truthful no-source-change disposition; existing stops/counters/findings are retained.
-- [ ] If repair is justified, an immutable candidate artifact is available to Q before source merge; exact qualified Stable/Excellent, useful-benefit and no-regression evidence plus source checks/review release only that merge.
-- [ ] The exact accepted source has separately authorized verified personal adoption, or an explicit blocked adoption receipt; blocked adoption cannot satisfy personal-use acceptance.
-- [ ] TK-002S or matching existing TK-003 receives exact receipts for independent later observed loading/use; no fixture injection, self-report or source presence substitutes for that evidence.
-- [ ] Source/privacy/writer boundaries and scoped checks/QA are preserved; no new campaign/attempt reset or whole-Landmark completion is inferred.
+- [x] Diagnosis and prior-chain readback justify one source repair or a truthful no-source-change disposition; existing stops/counters/findings are retained.
+- [x] If repair is justified, an immutable candidate artifact is available to Q before source merge; exact qualified Stable/Excellent, useful-benefit and no-regression evidence plus source checks/review release only that merge. Conditional new-source route not invoked: unchanged accepted one-branch repair reused.
+- [x] The exact accepted source has separately authorized verified personal adoption, or an explicit blocked adoption receipt; blocked adoption cannot satisfy personal-use acceptance.
+- [x] TK-002S or matching existing TK-003 receives exact receipts for independent later observed loading/use; no fixture injection, self-report or source presence substitutes for that evidence.
+- [x] Source/privacy/writer boundaries and scoped checks/QA are preserved; no new campaign/attempt reset or whole-Landmark completion is inferred.
+
+Scoped outcome and QA: root accepted exact historical source/adoption/load evidence; [public handoff](../../../../../../wiki/history/S-011.md#tk-002r-accepted-sourceadoption-handoff) retains first FAIL, open notes, original refusal and unknowns. No new source/Q/install effect. TK-002S gets the independent later-use inputs, not a completed use claim; S-007/TK-001F is the proposed real assignment. Protected end state, recurrence/effort and safe store/page joins remain S's work.
