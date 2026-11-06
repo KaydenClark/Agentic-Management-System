@@ -219,9 +219,12 @@ def _headings(body):
     return heads
 
 
-def sections(body):
+def sections(body, source_anchors=None):
     lines = body.splitlines(keepends=True)
     heads = _headings(body)
+    if source_anchors is not None:
+        heads = [(start, end, heading, source_anchors[start], level)
+                 for start, end, heading, _anchor, level in heads]
     title = next((h[2] for h in heads if h[4] == 1), '')
     result = []
     context = []
@@ -268,9 +271,13 @@ class Corpus:
             body = raw[offset:].decode('utf-8').replace('\r\n', '\n')
             claims = _claims(body)
             entries = _entries(body)
-            prose = ENTRY.sub('', body)
-            prose = re.sub(r'<!-- jot-legacy-source .*?<!-- /jot-legacy-source -->', '', prose, flags=re.S)
-            title, parts, anchors = sections(BINDING.sub('', prose))
+            # Omit history from maintained text without renumbering real page
+            # anchors. Historical headings remain visible in the original page.
+            blank = lambda match: '\n' * match[0].count('\n')
+            prose = ENTRY.sub(blank, body)
+            prose = re.sub(r'<!-- jot-legacy-source .*?<!-- /jot-legacy-source -->', blank, prose, flags=re.S)
+            source_anchors = {head[0]: head[3] for head in _headings(body)}
+            title, parts, anchors = sections(BINDING.sub(blank, prose), source_anchors)
             if any(c['anchor'] not in anchors for c in claims):
                 raise MemoryError('invalid-bindings')
             page = {'path': name, 'title': title or Path(name).stem, 'metadata': meta, 'revision': 'sha256:' + digest(raw), 'body': body, 'parts': parts, 'entries': entries, 'claims': claims}
@@ -322,11 +329,11 @@ def _source_bytes(corpus, identity):
         raise MemoryError('unsupported-source')
     if not name.startswith(corpus.wiki + '/') and not (name in root_docs or name.startswith(('workbench/docs/', 'workbench/landmarks/', 'workbench/specs/', 'grill-board/'))):
         raise MemoryError('unsupported-source')
-    handling(path, required=name.startswith(corpus.wiki + '/'))
+    _metadata, offset = handling(path, required=name.startswith(corpus.wiki + '/'))
     raw = path.read_bytes()
     if not anchor:
         return raw
-    text = raw.decode('utf-8')
+    text = raw[offset:].decode('utf-8')
     if anchor.lower().startswith('jot-'):
         # Hash exact retained native block, including its original labels and bytes.
         for match in ENTRY.finditer(text):

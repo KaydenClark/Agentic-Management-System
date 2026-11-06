@@ -23,6 +23,12 @@ relevant existing articles and reconcile changed knowledge into those articles
 before finishing. This router links the articles and live owners; it never
 duplicates Task state.
 
+If the relevant route lacks context, retrieve bounded context and read the named sources.
+
+- [Memory query and source checks](guidebooks/wiki-maintenance.md#recover-and-check-with-ams-memory) — maintained prose, public Jots/corrections and source fingerprints.
+
+Native Jot retains capture and exact-entry operations.
+
 - [Wiki definition and maintenance rules](SCHEMA.md#purpose-and-ownership) - purpose, ownership, metadata and article maintenance.
 - [Jot method](../docs/SKILLS.md) - when to read and update existing articles.
 - [Wiki maintenance procedure](guidebooks/wiki-maintenance.md) — source intake, ingest, durable query filing, correction and bounded semantic lint.

@@ -22,10 +22,12 @@ This Wiki follows root `AGENTS.md`; this file bounds Wiki maintenance.
 2. Read relevant articles for understanding, history and progress.
 3. Follow their sources to current rules, assignments and proof; recheck live
    state before acting.
-4. When a topic route lacks needed continuation context, use bounded
-   `jot search --query TOPIC`; include private jots only with explicit
-   `--include-private` within unchanged local access. Read relevant omitted
-   entries explicitly. Keep private filenames out of the shared router.
+4. When a route lacks context, use `uv run ams-memory query "TOPIC" --limit 6 --max-chars 6400`
+   for bounded maintained prose and public Jots/corrections; follow [the procedure](guidebooks/wiki-maintenance.md#recover-and-check-with-ams-memory).
+   Native `jot read/search` still serves exact entries; capture/correction uses native Jot.
+   Private Jot reads require explicit `--include-private` within unchanged local access;
+   `ams-memory` excludes private content. Read omitted sources explicitly and keep private
+   filenames out of the shared router.
 5. Retrieve focused knowledge; compare claim kind, state, sources and corrections with live owners.
 
 ## Authority And Scope

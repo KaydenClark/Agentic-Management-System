@@ -18,7 +18,7 @@ Fresh agents recover understanding, exact owner corrections, reasons, constraint
 
 ## Current evidence and problem
 
-Base `adde5f4da1d8a8b78d9bcbc6bd490c18f8a3b37a`: MEMORY routes maintained prose; native Jot search covers entries only. Page freshness lacks claim/source binding; consolidation is manual; no memory CLI/evaluation runner exists. S-000C's repair and pending owner QA remain intact.
+At base `adde5f4da1d8a8b78d9bcbc6bd490c18f8a3b37a`, MEMORY routed prose and native Jot searched entries; retrieval, claim freshness, consolidation and evaluation gaps motivated this Spec. S-000C evidence/owner QA remain intact.
 
 ## Acceptance Criteria
 
@@ -31,9 +31,9 @@ Base `adde5f4da1d8a8b78d9bcbc6bd490c18f8a3b37a`: MEMORY routes maintained prose;
 
 ## Public contract and decisions
 
-Use project Python CLI `ams-memory query|check|consolidate|evaluate`, with readable/JSON results; additive src/ams, tests, entrypoint, eval fixtures and scoped Wiki/docs. Do not edit receipted workbench/tools or shared skills. Implementors use journey/TDD at public seams.
+Use project Python `ams-memory query|check|consolidate|evaluate`, readable/JSON results, additive src/ams/tests/entrypoint/evals and scoped docs. Managed tools/shared skills stay unchanged; use journey/TDD at public seams.
 
-Compared managed-Jot extension (package adoption coupling) and hosted vector/graph service (sync/service burden). Choose project CLI plus native Jot: reversible and testable, accepting adapter maintenance and semantic review. Ranking changes need local evidence.
+Project CLI plus native Jot avoids managed-package coupling and hosted graph/vector sync. It accepts adapter maintenance/semantic review; ranking changes need local evidence.
 
 Git Markdown claim bindings carry stable IDs, explanation anchors, source identities, observed revision/digest/date and supersession; a page may bind several claims/sources. Use a compact machine-readable block compatible with Wiki validation. Never infer claim plane from page type. Preserve exactly 6 Projection, 5 Intent, 4 Enduring Context, 3 Grounding, 2 Canon, 1 Actuality and both traversal directions. Memory functions are independent of these roles.
 
@@ -41,17 +41,17 @@ The [scoped read/apply contract](../../../../wiki/context-wiki-maintenance.md#pl
 
 ## Dependencies, scope and documentation
 
-No external blocker. Use Python 3.14, markdown-it-py/pytest and standard library. Update scoped procedure/topic/routes/synthesis and necessary operating docs. Native history owns evidence; S-000C is no dependency.
+No external blocker or S-000C dependency. Use Python3.14, markdown-it-py/pytest and standard library. Reconcile procedure/topic/routes/synthesis and operating docs; native history owns evidence.
 
-Excluded: paid services, DB migrations, deployment, catalog changes/install, unrelated upgrades, autonomous confirmation and broad corpus rewrite. Missing evidence limits claims, never requirements. Research links in the topic inspire design; they prove no AMS result.
+Exclude paid services, DB migrations, deployment, catalog changes/install, unrelated upgrades, autonomous confirmation and broad rewrites. Evidence gaps limit claims, not requirements; research inspiration proves no AMS result.
 
 ## Verification Procedure
 
-Test public CLI recall, correction context, change/restore, whole-plan refusal, consolidation readback, bounds, unknowns and privacy/path failures. Baseline is pinned MEMORY navigation plus native Jot, with identical question/budget/source scope; missing CLI is no score. Compare actual baseline/candidate answers, then fresh-agent correction and session-continuity checks. Run render/doctor/Wiki/layout/hygiene, pytest and independent Review on a fresh assembled candidate. Separate pre-existing findings and unperformed owner QA.
+Exercise CLI recall/corrections, change/restore, consolidation preflight/readback, bounds, unknowns and privacy/path failures. Compare pinned MEMORY/native-Jot baseline and candidate with identical questions/budgets/sources; missing CLI is no score. Judge actual answers and fresh-agent correction/session continuity. Fresh assembled checks: render/doctor/Wiki/layout/hygiene, pytest and independent Review. Retain prior findings and unperformed owner QA.
 
 ## Task coverage and ready frontier
 
-1. [TK-002U](tasks/TK-002U/TASK.md), stopped open: recall/freshness/baseline, R1/R2/R5/R6.
+1. [TK-002U](tasks/TK-002U/TASK.md), local checks passed; root inspecting: recall/freshness/baseline, R1/R2/R5/R6.
 2. [TK-002V](tasks/TK-002V/TASK.md), blocked by working TK-002U CLI/bindings: consolidation, R3/R2/R6.
 3. [TK-002W](tasks/TK-002W/TASK.md), blocked by TK-002V correction/readback: context/full evaluation, R4/R5 and integrated R1-R6.
 
@@ -59,7 +59,7 @@ Serialize shared writers. Tasks include Check/QA/repair/hand-back; root owns ind
 
 ## Completion Result
 
-TK-002U remains open. [Stopped candidate/report](../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserve failures and limited passing development checks. Owner authorized bounded continuation; public export remains held. Claim bindings, final Check/QA and root inspection precede next Task; no acceptance or measured answer/effort benefit is claimed.
+TK-002U local reader/check/evaluation candidate:26 focused passes,4/4 pre-anchor development checks,4claims/6sources; [retained report](../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves failures/limits. Root inspection precedes closure/next Task. Public export, assembled Review and R3/R4/full R5 remain; no answer/effort benefit or owner acceptance claimed.
 
 ## Supersession
 

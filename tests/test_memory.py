@@ -266,3 +266,20 @@ def test_empty_evaluation_cases_are_not_a_passing_comparison(room):
     cases.write_text(json.dumps({'version': 1, 'split': 'development', 'source_revision': 'a'*40, 'budget': {'limit': 6, 'max_chars': 6400}, 'cases': []}))
     result = cli(room, 'evaluate', '--cases', str(cases), ok=False)
     assert result['reason'] == 'invalid-evaluation'
+
+
+def test_interleaved_jot_heading_keeps_real_maintained_source_anchor(room):
+    maintained = '## Purpose\n\nMaintained orchard explanation.\n'
+    historical = jot('JOT-interleaved', '## Purpose\n\nHistorical orchard evidence.')
+    evidence = page(room, 'interleaved.md', '# Interleaved source\n' + historical + '\n' + maintained)
+    subprocess.run(['git', '-C', str(room), 'add', '--', str(evidence)], check=True)
+    owner = room / 'workbench/wiki/context-violet.md'
+    owner.write_text(owner.read_text() + bindings([{'id': 'interleaved-source', 'anchor': 'purpose', 'sources': [source('workbench/wiki/interleaved.md#purpose-1', maintained.encode())]}]))
+    result = cli(room, 'query', 'maintained orchard', '--max-chars', '12000')
+    hit = next(h for h in result['hits'] if h['page'].endswith('/interleaved.md') and h['kind'] == 'section')
+    assert hit['anchor'] == 'purpose-1'
+    assert cli(room, 'check')['claims'][0]['sources'][0]['status'] == 'unchanged'
+    evidence.write_text(evidence.read_text().replace('Historical orchard evidence.', 'Historical orchard changed evidence.'))
+    assert cli(room, 'check')['claims'][0]['sources'][0]['status'] == 'unchanged'
+    evidence.write_text(evidence.read_text().replace('Maintained orchard explanation.', 'Maintained orchard changed explanation.'))
+    assert cli(room, 'check')['claims'][0]['sources'][0]['status'] == 'possibly-stale'

@@ -9,34 +9,38 @@
 **Planned verification:** Public ams-memory query/check/evaluate exercises, source change/restore and privacy refusal tests, focused pytest and native checks.
 **Claimed by:** codex-wiki-retrieval
 **Current claimant:** codex-wiki-retrieval
-**Next gate:** Authorized bounded TK-002U repair, Check/QA and local handback; public export held.
+**Next gate:** Root inspects final anchor delta before native close/releasing TK-002V; public export held.
 
 ## Assignment
 
-High-tier implementor uses journey, TDD and writing-for-agents; recover Spec and its linked contract at Map b9417d2 plus this prepared Task's final revision. Read actual CLI/package and native Jot interfaces before implementation. One writer owns additive project Python code, tests, pyproject entrypoint, evaluation fixtures and scoped docs; do not edit managed workbench/tools or shared skills. Serialize this checkout with the orchestrator; report actual model/harness, never infer them from the tier.
+One High-tier source/record writer uses journey, TDD and writing-for-agents; recover Spec and linked contract. Serialize the Spec branch. Own additive Python/tests/entrypoint/evals and scoped docs; do not edit managed tools/shared skills. Evidence names actual model/harness.
 
-Deliver `ams-memory query`, `check` and a runnable initial `evaluate` path. Cross input parsing, eligible Markdown section/Jot/correction parsing, contextual keyword ranking, source binding/fingerprinting, bounded readable/JSON output and tests. Start with at least two real routed AMS topics, including Wiki's independent Landmark correction, and a compact development question set. General eligible Wiki recall must work; do not hardcode question answers. Use Markdown claim metadata compatible with native validation, supporting several claims/sources per page and retained observation/supersession lineage. Source references are identities/links, not arbitrary recursive ingestion.
+Deliver read-only `ams-memory query/check/evaluate`: parsing, contextual deterministic keyword ranking, bounded Markdown/JSON, claim fingerprinting and tests. General eligible Wiki recall covers maintained prose, native Jots/correction context and source identities; no hardcoded answers or recursive reference ingestion. At least two routed real topics include Wiki's independent Landmark correction. Several claim/source bindings retain observed revision/digest/date and supersession in native-compatible Markdown.
 
-Freeze question/source/budget identity and capture an actual baseline through pinned MEMORY navigation plus native Jot before candidate comparison. Distinguish source-hit checks from answer judgments. The initial runner may record explicit unmeasured independent/human fields; missing CLI at baseline is never an accuracy failure. Final broader evaluation stays in TK-002W.
-
-Size: one narrow usable recall/change-detection path, including tests, QA and repair, fits one High run. Keep optional ranking experiments out unless observed keyword failures justify them. No paid services or required embeddings. Hand back committed candidate, CLI demo, fixture/source identities, actual results, remaining gaps and updated owners to S-000D/orchestrator.
+Freeze actual navigation/native-Jot baseline with identical case/source/budget scope before tuning. Separate source-hit measures from answer judgments; initial independent/human fields may remain unmeasured. TK-002W owns broader evaluation. No paid services/required embeddings; optional ranking experiments require observed failure. Hand back committed candidate, CLI/results, identities, preservation and remaining limits after Check/QA/repair.
 
 ## Acceptance
 
-- [ ] MEMORY-first query retrieves a prose-only claim and relevant native entry/source references with title, heading, subject, state, correction context and bounded continuation; query is read-only.
-- [ ] `check` reports exactly the bound explanations affected by changed public source bytes; missing/unavailable/unbound sources and restored bytes are explicit. Neither the source nor verification/confirmation state is rewritten.
-- [ ] Several claim/source bindings survive rebuild with observed revisions/digests/dates and supersession; derived cache deletion changes no durable knowledge.
-- [ ] Public CLI tests prove private/restricted/ignored content is excluded before body reads, malformed handling metadata fails closed, symlink/path escapes refuse, and referenced secrets/arbitrary external bodies are not ingested.
-- [ ] Initial real AMS development cases execute through evaluate with pinned navigation/Jot baseline and candidate outputs, context/source measures and explicit judgment/owner-effort limits. Wrong/stale answers are retained as failures, not silently regraded.
-- [ ] Implementor Check/QA and focused tests/native Wiki validation pass; exact prior sources/confirmations are preserved. R1/R2 remaining corpus or behavior limits are explicit, never claimed complete from a skeleton alone.
+- [x] MEMORY-first query retrieves a prose-only claim and relevant native entry/source references with title, heading, subject, state, correction context and bounded continuation; query is read-only.
+- [x] `check` reports exactly the bound explanations affected by changed public source bytes; missing/unavailable/unbound sources and restored bytes are explicit. Neither the source nor verification/confirmation state is rewritten.
+- [x] Several claim/source bindings survive rebuild with observed revisions/digests/dates and supersession; derived cache deletion changes no durable knowledge.
+- [x] Public CLI tests prove private/restricted/ignored content is excluded before body reads, malformed handling metadata fails closed, symlink/path escapes refuse, and referenced secrets/arbitrary external bodies are not ingested.
+- [x] Initial real AMS development cases execute through evaluate with pinned navigation/Jot baseline and candidate outputs, context/source measures and explicit judgment/owner-effort limits. Wrong/stale answers are retained as failures, not silently regraded.
+- [x] Implementor Check/QA and focused tests/native Wiki validation pass; exact prior sources/confirmations are preserved. R1/R2 remaining corpus or behavior limits are explicit, never claimed complete from a skeleton alone.
 
 ## Starting preservation
 
-Claim originals committed as `9ccae2f`. Workspace baseline sha256:296c63314038c19e04f8b3f7e372a2295a934102a1ef3e6da008071a9938db24. Native inventory is explicitly incomplete: pre-existing `REBASE_HEAD` residue, no active rebase directories; root independently verified. It remains untouched. Public retrieval corpus frozen at `280725648ed4a2a7d0e97236fd51def5c02aaa65` before implementation; private recovery retains source and inventory bytes. Local publication hold prevents remote recovery proof. Owned-path preservation will be checked separately; no complete workspace-closeout claim.
+Claim originals:9ccae2f. Workspace baseline sha256:296c63314038c19e04f8b3f7e372a2295a934102a1ef3e6da008071a9938db24 is explicitly incomplete: pre-existing REBASE_HEAD residue, no active rebase directories. Metadata untouched; no complete workspace-closeout claim. Public corpus frozen at280725648ed4a2a7d0e97236fd51def5c02aaa65; private recovery retains original bytes. Publication hold prevents remote recovery proof.
 
-## Continuation
+## Continuation and local proof
 
-Stopped candidate `9419c9a` and [report](../../../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) retain FAIL-118–124, actual chronology and evidence limits; Receipt1 below is unchanged. Owner directly answered the bounded restart question: “Authorize bounded continuation”. Current run completes only TK-002U before root inspection; publication remains held. Exact question/answer is captured in the existing Wiki topic before source repair.
+Owner answered the exact bounded restart question “Authorize bounded continuation”; [native source](../../../../../../wiki/context-wiki-maintenance.md#jot-4a2097ca-5bd6-456f-83c9-3bdbe7a79a29). [Stopped/corrective report](../../../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) retains FAIL-118–125, red/green chronology and limits; Receipt1 below is unchanged.
+
+FAIL-122–124 repaired by focused red/green cycles, including interleaved historical heading anchors. Final focused suite26passed. Real console query/check works;4claims/6sources across Wiki-memory/AMS-purpose report unchanged. Observations bind inspected19778a2 on2026-11-06, including original/corrected owner-source lineage. Disposable real-source copies prove exactly affected explanations for change/restore/missing/unavailable; owners remain unchanged.
+
+Frozen development comparison4/4passed before final anchor correction, with same prepared source/cases/budget; source-hit/context checks only. Final selector change has focused regression and real-console source check. Baseline/case SHA-256:58d3762db47301181fea0f5ec73143636a2a94984b4802386ab75d61b648ab30 / a97481ff93a26f8ed20031acf21e424d273fcd31f99379e84c7cfea37645e785. Safe capture reproduces baseline bytes exactly. Global native search still rejects pre-existing malformed coherence-topic Jot; valid routed reads remain separately recorded.
+
+Preservation:87earlier Jot blocks,18history files,228managed/skill files and Receipt1 unchanged. Native Wiki/layout/hygiene pass; doctor retains known unrelated findings. Cold-start MEMORY/Wiki AGENTS route the procedure/CLI. Private recovery retains actual JSON checks, synthetic real-source exercise and preservation manifest. No independent answers, stale-answer judgments, held-out transfer or owner effort measured; root owns fresh assembled checks/Review and TK-002V/W. Root inspects final anchor delta before native close. Public export held; no push/merge/deployment/Human QA.
 
 ## Receipt
 
