@@ -6,6 +6,8 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import subprocess
+import sys
 from urllib.parse import urlparse
 import uuid
 
@@ -71,6 +73,34 @@ class NoModelExecutor:
         self.calls += 1
         return {'kind': 'synthetic-no-model-controller-test', 'modelCalls': 0,
                 'executionCompleted': True, 'effect_key': effect_key}
+
+
+def test_fifo_refusal_is_bounded_and_does_not_mutate_existing_pending_intent(controller):
+    c = controller
+    reserved = c.store.begin_effect(c.store.claim(c.job, 'fifo-probe-owner'), 0)
+    c.store.release(reserved['job'])
+    key = reserved['effect']['effect_key']
+    os.mkfifo(c.evidence.root / key, 0o600)
+    before = c.store.snapshot(c.namespace)
+    program = '''import sys
+from ams.native_worker import PrivateEvidence
+e=PrivateEvidence(sys.argv[1],case_root=sys.argv[2])
+assert e.lookup(sys.argv[3],sys.argv[4])['outcome']=='conflict'
+print('refused',flush=True)
+'''
+    # This bounded private read must not consume/release/re-arm a durable slot.
+    with subprocess.Popen([sys.executable, '-c', program, str(c.evidence.root),
+                           str(c.evidence.root.parent / 'case'), key, c.payload_digest],
+                          stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True) as process:
+        try:
+            stdout, stderr = process.communicate(timeout=1)
+            assert process.returncode == 0, stderr.decode()
+            assert stdout == b'refused\n'
+        finally:
+            if process.poll() is None:
+                process.kill()
+            process.wait(timeout=3)
+    assert c.store.snapshot(c.namespace) == before
 
 
 def test_existing_durable_slot_recovers_private_artifact_without_executing_again(controller):

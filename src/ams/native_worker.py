@@ -471,13 +471,18 @@ class PrivateEvidence:
         return self.root / key
 
     def _read(self, key):
-        fd = os.open(self._target(key), os.O_RDONLY | os.O_NOFOLLOW)
-        with os.fdopen(fd, 'rb') as stream:
-            info = os.fstat(stream.fileno())
+        # Reject FIFOs/devices without waiting for a peer before fstat can
+        # establish that this descriptor is a bounded private ordinary file.
+        fd = os.open(self._target(key), os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+        try:
+            info = os.fstat(fd)
             if (not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid()
                     or info.st_mode & 0o077 or info.st_size > self.LIMIT):
                 raise NativeProtocolError('native evidence is not a bounded private ordinary file')
-            raw = stream.read(self.LIMIT + 1)
+            with os.fdopen(fd, 'rb', closefd=False) as stream:
+                raw = stream.read(self.LIMIT + 1)
+        finally:
+            os.close(fd)
         if len(raw) > self.LIMIT:
             raise NativeProtocolError('native evidence exceeds its byte bound')
         return raw

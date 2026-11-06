@@ -491,3 +491,59 @@ def test_private_execution_artifact_refuses_case_access_and_conflicting_bytes(tm
     assert evidence.lookup(key, 'e' * 64)['outcome'] == 'conflict'
     (evidence.root / key).write_text('{incomplete')
     assert evidence.lookup(key, 'd' * 64)['outcome'] == 'conflict'
+
+
+@pytest.mark.parametrize('operation', ['lookup', 'publish'])
+def test_private_fifo_is_refused_before_blocking_read(tmp_path, operation):
+    case = tmp_path / 'case'
+    case.mkdir()
+    evidence = native_worker.PrivateEvidence(tmp_path / 'private', case_root=case)
+    os.mkfifo(evidence.root / ('a' * 64), 0o600)
+    program = '''from ams.native_worker import PrivateEvidence,NativeProtocolError
+import sys
+e=PrivateEvidence(sys.argv[1],case_root=sys.argv[2])
+if sys.argv[3]=='lookup':
+    assert e.lookup('a'*64,'b'*64)['outcome']=='conflict'
+else:
+    try:e.publish('a'*64,'b'*64,{'kind':'synthetic-no-model'})
+    except NativeProtocolError:pass
+    else:raise AssertionError('FIFO publication was accepted')
+print('refused',flush=True)
+'''
+    process = subprocess.Popen([sys.executable, '-c', program, str(evidence.root), str(case), operation],
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE, start_new_session=True)
+    try:
+        stdout, stderr = process.communicate(timeout=1)
+        assert process.returncode == 0, stderr.decode()
+        assert stdout == b'refused\n'
+    finally:
+        if process.poll() is None:
+            process.kill()
+        process.wait(timeout=3)
+
+
+@pytest.mark.parametrize('kind,outcome', [('symlink', 'unavailable'), ('hardlink', 'conflict'),
+                                        ('permissions', 'conflict'), ('oversize', 'conflict'),
+                                        ('directory', 'conflict')])
+def test_private_packet_file_guards_remain_closed(tmp_path, kind, outcome):
+    case = tmp_path / 'case'
+    case.mkdir()
+    evidence = native_worker.PrivateEvidence(tmp_path / 'private', case_root=case)
+    key, payload = 'a' * 64, 'b' * 64
+    evidence.publish(key, payload, {'kind': 'synthetic-no-model'})
+    target = evidence.root / key
+    if kind == 'symlink':
+        original = evidence.root / 'original'
+        target.rename(original)
+        target.symlink_to(original)
+    elif kind == 'hardlink':
+        os.link(target, evidence.root / 'second-link')
+    elif kind == 'permissions':
+        target.chmod(0o644)
+    elif kind == 'oversize':
+        with target.open('r+b') as stream:
+            stream.truncate(evidence.LIMIT + 1)
+    else:
+        target.unlink()
+        target.mkdir()
+    assert evidence.lookup(key, payload)['outcome'] == outcome
