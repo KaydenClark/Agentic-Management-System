@@ -175,3 +175,14 @@ Preserve the historical FAIL-107 row and reconcile by exact source, not by numbe
 |---|---|---|---|---|---|---|---|---|
 | OA-S005-20261106-FIFO-dc2cc96 | 2026-11-06 | unknown | unknown | source model/harness unknown; owner-assistant bounded AST probe | S-005/TK-003 private receipt read; originating skill/copy unknown | Exact dc2cc96 _Store.read blocks opening an owned mode-0600 FIFO before S_ISREG validation; one-second fixture timeout, rather than recoverable refusal. Board lock can remain held; no data leak or real-user outage observed. | Refuse unsafe receipt types promptly without public writes; retain private words/retry controls and release the lock. | [Source-bound F-002](REPORT-s005-ci-owner-assistant-2026-11-06.md#f-002---private-fifo-receipt-blocks-before-the-regular-file-refusal); source module SHA256 b7c7557163c276dc916ed5a48dc0964449e7bf4bf497e25610fd9ad3cb8bed85; S-005/TK-003 codex-s005-feedback; owner-assistant; test/unresolved. |
 | OA-S005-20261106-FIFO-HARNESS-1 | 2026-11-06 | unknown | OpenAI | exact model unknown; owner-assistant Python AST harness | Regular-invalid-receipt control for F-002 | First control lacked AnswerRefused binding and raised NameError; no control pass was established. | Supply imported exception names without changing the extracted product class; rerun only the bounded probe and retain both results. | [F-002 reproduction](REPORT-s005-ci-owner-assistant-2026-11-06.md#bounded-reproduction); one corrected rerun exits0/refused-recoverably; FIFO still times out; harness miss corrected, product finding unresolved. |
+
+Owner-assistant correction readback, 2026-11-06 — OA-S005-20261106-FIFO-dc2cc96
+is ingested by the active S-005 writer as FAIL258/260; the harness miss maps to
+FAIL259. At actual PR174089c065, bounded exact-helper/Store rechecks promptly
+refuse regular-invalid, existing FIFO and post-stat FIFO substitution, all exit0.
+The source uses nonblocking/no-follow open plus pre/post identity checks.
+[Corrective evidence and limits](REPORT-s005-ci-owner-assistant-2026-11-06.md#f-002-corrective-readback---2026-11-06)
+records source SHA, current successful CI and the separate author lock regression.
+The original report/intake remains; no new numeric ID, repair, full-suite,
+HTTP/owner-QA, merge or deployment claim. F002 is corrected at the named source;
+remaining S005 coverage/consumption/final-capture/delivery gates stay open.
