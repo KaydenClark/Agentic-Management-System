@@ -10,7 +10,7 @@
 **Blockers:** S-003 site shell content exists at checked dev commit `259b7a905639cc6ab621220b160fc813c5bc43f1`; whole-Spec completion remains separate.
 **Confirmation:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
 **Execution approval:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
-**Next gate:** Checked dev delivery, final S-005 page cards and actual owner Human QA; only the owner promotes dev to main. Spec acceptance remains open.
+**Next gate:** Inspect TK-003A source-transition plan before claim; final S-005 page cards and owner Human QA remain open. Only the owner promotes dev to main.
 
 ## Intent and authority
 
