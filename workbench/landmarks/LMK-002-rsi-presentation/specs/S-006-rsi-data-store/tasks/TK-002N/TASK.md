@@ -31,3 +31,15 @@ On 2026-11-05 the owner explicitly requested this implementation under orchestra
 Workspace baseline sha256:c14ddee907fe55fad1283f171e8477063dbf9e4c5bc2b7b2a945abf4d2005308
 
 Captured after the remote native claim and committed rendered projections, before product changes. Raw inventory remains in local private recovery.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-006-rsi-data-store | b1365c0fd79ccd81c9c029ab441c7f2da8f9c628 | ahead 1 behind 0 | 0 | Intentional import red then15 unit pass. Live attempt1:12 unavailable failures/15pass because REST exited before authenticator setup. Diagnosed and readiness200. Live attempt2:26pass/1fail: unfiltered DELETE hit baseline21000 WHERE-clause guard before authorization denial. STOP under RUNBOOK. No full repository or fresh-candidate verification. | S006 scoped release and starting inventory; schema source is not registered production migration | TK002N incomplete and stopped. Needs scoped correction: namespace-filtered mutation probes preserving denial assertions; stable improvement-chain counter distinct from occurrence identity, enforced in Python and SQL with post-attempt3 recurrence/newcase/newcampaign negative proof. Source CLI entrypoint/docs and final checks remain. O/P stay unreleased; no production schema, model run, qualification or benefit claim. | 523e83b0279d15f95ed6e8c78b0e43adef097c12c57a7a50d7093bb633a03427 |
+
+## Stopped implementation candidate
+
+Source preserves the safe allowlisted lineage API and isolated database schema source, not completed acceptance. The isolated local Supabase/PostgREST deployment uses fresh test credentials and no production key. Its startup ordering was corrected after the first failed live suite. The second live suite passed 26 checks and failed the client DELETE probe: the existing baseline refuses unfiltered DELETE before authorization, so this was not proof of role denial. No further source correction or test retry followed the RUNBOOK stop.
+
+Parent inspection also found that the required family attribute does not currently govern candidate counters; a new occurrence can reset its candidate chain. This must be fixed and adversely proved before release. The stored occurrence identity must remain distinct from the stable improvement chain. Native CLI migration registration is unavailable because the installed Supabase binary is killed by the host even for help. The schema source was applied only to an isolated local test database. No production migration, completed lineage, recovered job, worker release, model call, qualification or improvement is claimed.

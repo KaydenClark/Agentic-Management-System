@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Close TK-002N with verification and documentation proof.
+**Next gate:** Resolve stopped TK-002N client-denial proof and stable-chain identity findings; TK-002O remains blocked.
 
 ## Intent and authority
 
