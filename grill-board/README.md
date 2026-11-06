@@ -190,3 +190,137 @@ automatic refresh/unsaved words and the concrete web-to-agent round walkthrough.
 Optional `AMS_BOARD_CAPTURE_DIR` saves disposable screenshots to a chosen local
 output directory. The existing CI Playwright step includes both test files.
 Agent browser checks do not establish owner Human QA.
+
+## Content-bound website review cards
+
+S-005/TK-001 is natively closed. Immutable262d28e produced48 cards through the actual isolated Next build/serve path, including39 skill articles and visitor404; a second generation made no changes. This older local slice is not current expanded coverage or protected-deployment/data-state proof. The local Board/CLI owns review state; public pages receive none.
+
+`ams-pages generate` freezes one already-fetched trusted source SHA, exports only tracked Git bytes, runs one isolated build and server, consumes the postbuild page-list projection from explicit committed owner declarations, compares all actual built/served routes, then creates cards/index/approval anchor through the existing Board lock/CAS. Missing or ambiguous owners refuse; no Spec/Task or landing is invented. Include every skill article and the visitor404 (`/_not-found`, fetched through a nonexistent URL expecting404). Only `_global-error.html` is an internal framework fallback.
+
+```sh
+uv run ams-pages generate --project . --source-repo SOURCE_CHECKOUT \
+  --ref origin/dev --candidate FULL_CANDIDATE_SHA \
+  --image sha256:95a34da32a840bd9b3b09a5b773591c16923e350174b1c50e1200c75bf15eaa9
+```
+
+The image must already exist on the supported local Docker engine. Only the owned Git export is mounted; candidate processes receive isolated container HOME, no host credentials/configuration, and only explicitly validated public anonymous site configuration when requested with `--public-config JSON`. Public package acquisition precedes network-disconnected build/serving. Runtime refusal has no host-build fallback. Exact owned process groups/containers are cleaned and read back, including interruption; genuine permission/cleanup failures refuse before Board writes.
+
+Provenance remains explicit: existing historical landings retain their meaning; `verified-containment` identifies actual presence, not creation; `pending-candidate` uses null landing and the collector's frozen candidate with integration pending. Nonempty repository-relative sources and current owners are required before writes. Changed owners, sources or provenance create a replacement card even when content is identical; old answered bytes stay intact with appended supersession. Otherwise an unchanged card preserves its original candidate occurrence, while the index binds the latest build pin. Changed/removed content appends stale history. Returning content gets a new card occurrence. Identical reruns do nothing.
+
+The hash is `sha256:` plus UTF-8 SHA-256 over canonical `<main id="main">`: drop script/style/comments and review-mark/exclude subtrees; retain decoded text and href/src/alt in source order, join with spaces, collapse ASCII whitespace and trim. Footer identity is outside it. Retained independent vectors are under `tests/fixtures/grill_board/pages/`.
+
+For RSI, only freshness/last-successful-read text may be excluded: changed results and availability must change the review hash. A network-isolated unavailable-state build cannot represent different protected-deployment HTML. Actual RSI review needs the existing PR165 freshness correction and a trusted immutable deployed-artifact seam; credentials never enter the candidate build. Explicit `--inventory FILE --built-html FILE --candidate SHA` remains an injected-artifact seam, not live proof by itself.
+
+Approvals stay in the committed owner record; no Supabase approval mirror/public query is added. Actual private criticism must not enter public committed raw evidence. Original failed checks/receipts, scoped corrections and unperformed live outcomes remain in the Task; green fixture tests supply no owner Human QA.
+
+### Committed page approvals
+
+Page Confirm rechecks the committed card, page path, hash and current index
+entry while holding the Board lock. Stale cards, changed identities, dirty or
+unsafe index files refuse before any write. A valid Confirm retains the normal
+single card/approval commit, with no second confirmation. A Confirm note stays
+private and adds no voice entry.
+
+`uv run ams-pages status` reads the committed index and approval record at HEAD;
+`--ref FULL_COMMIT` inspects an earlier committed snapshot. It reports each
+page's current hash and local `approved` or `draft` state. Approval references
+retain path, hash, date, card and the original line's committing SHA across
+later insertions. Working-tree edits are ignored by readback; malformed
+committed approval records refuse. Quoted, fenced or other-section examples
+are not approvals. A changed main-content hash reports draft; footer-only
+changes retain the matching approval. This state is never a public-site query.
+
+### Private page feedback
+
+The committed manifest declares `pageReview.voice` and
+`pageReview.privateFeedback`; one Python reader resolves both. The configured
+voice location supplies card references and the private location supplies
+capture/replay. New feedback writes reject unsafe or uncommitted
+configuration; known receipts are reconciled before current-card checks.
+
+Page returns, ratings and Too taxing capture the exact original privately
+before public writes. The ignored local store requires owned, nonlinked
+directories and private file permissions. Raw words never enter a Git object,
+approval, card or public log. Non-page cards retain their existing behavior.
+
+`grill-board/voice-and-taste.md` contains only safe page/hash/date/card/kind,
+event and version references. Interpretation and disposition start as pending;
+they are distinct from the private original. Each return, rating or flag adds
+one entry and increments its version in the same commit as the card section.
+New page cards name the current voice version; legacy open cards receive an
+appended reference, while answered history stays unchanged. Storage alone
+does not prove a later draft consumed feedback; TK-001E verifies that use.
+
+The Board checks the card, current page index and render-time voice SHA under
+its repository lock. A stale or conflicting input refuses before public writes
+and keeps copyable words on screen. Without a valid private-feedback context,
+page notes still refuse. Keep these words private when copying them.
+
+If a save outcome is uncertain, keep the displayed original and use **Check or
+retry this exact action**. Its durable event identity reconciles the original
+commit before current-card checks, without repeating the version increment.
+Recovery repairs only recognized bytes from its own pending write; unrelated
+working or staged changes remain for agent reconciliation. Do not replace the
+original action with a newly submitted event while its outcome is unknown.
+
+Metadata cannot contain any line separator recognized by the card parser; generated Page/hash/candidate/owner fields are checked before writes. Note refusal also recognizes the fixed approval record when a Page marker is damaged. Historical/containment provenance requires an explicit branch; an absent PR remains labeled unknown, with no branch inferred.
+
+### Read-only page coverage
+
+`uv run ams-pages check` freezes the fetched `origin/dev` source once, then
+reads its declared page inventory and the review repository's committed HEAD.
+`pageReview.inventory` in the manifest names the inventory path. Use
+`--source-repo PATH` when the canonical AMS source and review checkout differ;
+`--candidate FULL_SHA` also verifies the expected source ref identity.
+
+The command names missing/removed pages, absent or malformed current cards,
+changed origin/pending provenance, mismatched card identity/hash, extra open
+questions and unavailable voice references. Uncommitted drafts are ignored.
+Success reports pages/current cards and both immutable revisions; it writes no
+cards, approvals, voice entries or commits. If the committed review HEAD or
+source ref moves during a check, that run refuses and must be repeated.
+
+`check --recompute --image SHA256` uses the same owned build, cleanup and
+protected-capture validation as generation, then compares actual served hashes.
+Use the existing `--protected-artifact` and all independent observer pins for
+populated protected content. A different local unavailable-data build cannot
+stand for that content. Every build/capture must finish verified cleanup. Automatic generation also
+rechecks its starting manifest SHA under the write lock; a changed layout
+refuses before card writes.
+Explicit `--inventory`/`--built-html` inputs remain labeled fixture artifacts,
+never live deployment proof. Final owner QA still needs one assembled READY
+source and its fresh complete capture/readback.
+
+### Protected capture boundary
+
+For protected page identity, an authenticated outer observer fetches every route from one immutable Vercel deployment. Keep its raw HTML and capture files private and outside the Git export/build. Recover repository, project, deployment, source SHA and immutable origin from the authenticated Vercel observation; supply the exact capture digest independently. A manifest's own claim of trust is insufficient, and the CLI never derives the expected digest from an incoming manifest.
+
+`ams.protected_pages.collect_protected(artifact_directory, built_snapshot, expected_pins=...)` performs no requests and receives no credentials. `manifest.json` schema1 names the independent pins, `observer: authenticated-vercel-web-fetch`, UTC `observed_at`, and `pages`: route → `{file, sha256, url, status, content_type}`. HTML files are unique regular files under `pages/`; symlinks, hardlinks, traversal, oversize/tampered files and missing/extra routes refuse. Expect200 for pages and404 for the visitor surface fetched at a nonexistent URL.
+
+Every response must carry exactly the pinned footer `data-commit-sha` and a Next deployment marker: the root document's `data-dpl-id` or a Next resource's `dpl` query. All present markers must agree with the independent deployment pin; conflicting document/resource markers or absence of both refuse. Static page hashes must equal the same pinned local build. Only `/rsi` may differ in data-dependent content; the original protected HTML supplies its hash, including real results and availability. The shared contract excludes freshness only. Login responses, mixed deployments, old source, redirect/status/type mismatches and missing observer pins refuse before Board writes. No local unavailable-state fallback is permitted.
+
+Automatic CLI collection accepts `--protected-artifact DIR --protected-project PROJECT --protected-deployment DEPLOYMENT --protected-origin IMMUTABLE_ORIGIN --protected-capture-sha256 OBSERVER_DIGEST` alongside the pinned build arguments above. The ordinary build and verified cleanup finish before protected files are consumed. Injected `--built-html` input cannot claim this mode.
+
+Successful collection returns a validated capture bound to the exact raw HTML, inventory and candidate. Generation accepts that in-process result, not a serialized evidence dictionary; replay revalidates the artifact. Safe protection identity/digest goes into the committed index. New verified cards are labeled `protected-capture`; an existing occurrence gets an appended verification receipt, preserving its answer and original context. Ordinary builds remain explicitly pending. A fresh capture with identical content/ownership updates snapshot evidence without re-asking unchanged cards, including older card templates. Hash or owner changes still append staleness. This verifies the observed snapshot; it supplies no owner decision or later-data freshness guarantee.
+
+Automatic collection requires the committed `pageReview.inventory` declaration.
+The internal build seam accepts that resolved path explicitly; it has no layout
+fallback. A current unanswered card held for rewrite blocks coverage.
+
+## Carry criticism into a subsequent draft
+
+After private capture, the drafting agent reads the local original and its safe
+voice entry. Keep original words private. Cite the applicable voice path/version,
+source commit/blob, feedback event and page/hash in the draft's review notes.
+Record safe interpretation separately: preference or defect, project guidance
+or an unproven reusable hypothesis. Append an application/disposition supplement
+to the existing voice history; preserve the original pending entry. Apply the
+correction in the existing source owner lane, or state a reasoned unresolved
+disposition and responsible owner.
+
+An independent reviewer reads that version and the exact resulting draft, checks
+the actual application and names both version and draft hash. Changed content
+needs fresh review. A rating or version citation alone supplies no consumption
+proof. [The synthetic occurrence](../tests/fixtures/page-feedback-consumption/README.md)
+is a short replay with planted failures; it preserves actual agent/reviewer
+judgments and does not substitute for new owner feedback, real site work or QA.

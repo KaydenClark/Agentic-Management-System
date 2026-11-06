@@ -30,7 +30,7 @@ from pathlib import Path
 PRIORITIES = {"P1": "Interrupt", "P2": "Committed", "P3": "Secondary", "P4": "Backlog"}
 VALUES = {"V1": "Quick Win", "V2": "Strategic Value", "V3": "Fill-In", "V4": "Defer / Eliminate"}
 FIELD = re.compile(r"^\*\*([^*]+):\*\*[ \t]*(.*)$")
-SECTIONS = ("## Answer", "## Rating", "## Flag")
+SECTIONS = ("## Answer", "## Rating", "## Flag", "## Stale", "## Verification", "## Voice record")
 RATINGS = ("1", "2", "3", "4", "5")
 FLAG_LINE = "**Too taxing:** yes"
 
@@ -50,6 +50,9 @@ class Card:
     flag: dict | None = None  # the `## Flag` section, when the owner flagged it too taxing
     sha: str = ""  # SHA-256 of the exact committed bytes this Card was parsed from
     commit: str = ""  # the commit those bytes were read at
+    stale: dict | None = None
+    verification: dict | None = None
+    voice_record: dict | None = None
 
     @property
     def rating(self):
@@ -58,7 +61,7 @@ class Card:
     @property
     def waiting(self):
         """Still waiting on the owner: neither answered nor held for rewrite."""
-        return self.answer is None and self.flag is None
+        return self.answer is None and self.flag is None and self.stale is None
 
     @property
     def sort_key(self):
@@ -120,6 +123,9 @@ def parse_card(name, text):
         answer=answers[0] if answers else None,
         ratings=ratings,
         flag=flags[0] if flags else None,
+        stale=next((f for h, f in sections if h == "## Stale"), None),
+        verification=next((f for h, f in reversed(sections) if h == "## Verification"), None),
+        voice_record=next((f for h, f in reversed(sections) if h == "## Voice record"), None),
     )
 
 

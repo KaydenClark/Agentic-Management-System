@@ -88,5 +88,10 @@
       "landmarks": "workbench/landmark-tracker/landmarks"
     },
     "markdown": "TRACKER.md"
+  },
+  "pageReview": {
+    "voice": "grill-board/voice-and-taste.md",
+    "privateFeedback": ".local/page-feedback",
+    "inventory": "site/page-list.json"
   }
 }

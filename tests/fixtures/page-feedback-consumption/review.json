@@ -1,0 +1,35 @@
+{
+  "synthetic": true,
+  "result": "pass",
+  "scope": "Actual independent content and Standards review of the retained draft; replay implementation excluded. No owner QA or Task closure.",
+  "reviewed_candidate": "b2fdbe9c7781d3ac2f229175d8f88a9e2a434313",
+  "draft_hash": "sha256:674a1b19715f944b55be7576c07319db979fd7a29ac2bd782999dc1d6bb8ffdf",
+  "draft_file_sha256": "1ce748190df446de20e4a05e60d0fcb2baa974f8de2747c9c9c02ea962443253",
+  "voice_record": "grill-board/voice-and-taste.md version 1",
+  "voice_source_commit": "c818ef14e859f79c19535b659e49119809976e98",
+  "voice_blob_sha256": "dd98166250d3d617787b2fd324183fba963920751b68ff9b05196f2fb2dc5521",
+  "recorded_at": "2026-11-06T18:00:35.603614+00:00",
+  "method": {
+    "skill": "code-review",
+    "sha256": "8b5f8d1e037da1c28ca5d9d20c0f8db1b6b78a869b5d541321e43bd1c012090c"
+  },
+  "reviewers": [
+    {
+      "actor": "consumption_spec_review",
+      "axis": "Spec/content",
+      "harness": "Codex",
+      "model": "unknown",
+      "findings": 0,
+      "judgment": "The universal reliability promise is removed. The single local observation is retained beside its limits. Evidence-strength defect and project guidance are distinguished from unproved reusable benefit."
+    },
+    {
+      "actor": "consumption_standards_review",
+      "axis": "Standards",
+      "harness": "Codex",
+      "model": "unknown",
+      "findings": 0,
+      "judgment": "Sources, chronology, safe artifacts and append-only interpretation preserve privacy and pending gates; no documented breach or heuristic finding."
+    }
+  ],
+  "public_identity_format": "Role aliases; canonical thread identifiers remain in private recovery."
+}

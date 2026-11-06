@@ -194,3 +194,29 @@ Supersedes: none
 
 S-006: The owner answered "Approve this history import" to the explicit question authorizing the local writer to import real AMS build-history rows from main771bd1e264ff15ab89217c8f91f79fc38c57f96b and devfe9870fe93f715c859fc5059b0b4c52f38f4a640 into existing Supabase project hqvtnpvwwppbeurponnn, refreshing changed sourced rows and retaining the eight archived facts, using the existing local service key. This resolves the fresh import-approval hold for these exact data pins and destination only. Use the corrected checked collector, preserve original three S008 facts and historical identity declarations, require direct current canonical metadata and pinned readcheck, and do not delete rows or expose/copy keys. Approval is not proof of a successful import, whole-S006 acceptance, owner Human QA, or authority to resume stopped W.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-dff65e4a-661b-4c5c-a1c2-9a7beb45eaac
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T05:56:31.101Z
+Author: Kayden; applied by the assigned S-005 writer
+Source: Owner twelve-item implementation request and confirmation correction in AMS conversation, 2026-11-05; scoped delegation from root orchestrator
+Topic: active-spec-approvals
+Supersedes: none
+
+S-005: The owner requested implementation of content-bound review cards for every built website route, stale approvals, and versioned criticism consumed by the next draft and its review. The owner then corrected the repeated checkpoint: "Were my two confirmations not enough?" The orchestrator applies the presented recommendation: approvals remain in the committed owner record only; no Supabase approval mirror or publishable-key approval path. This is the applied confirmed recommendation, not a fabricated selected-option quote. Public pages expose no review status or private criticism. Required S-004 card/answer inputs are delivered; its separate owner Human QA remains open. The current scoped implementation launch releases S-005 only as inputs become available; it grants neither website promotion nor Human QA. Actual private criticism is excluded from public committed raw evidence.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T05:56:51.951Z
+Author: Kayden; applied by the assigned S-005 writer
+Source: Owner twelve-item implementation request and exact confirmation correction in AMS conversation, 2026-11-05; scoped delegation from root orchestrator
+Topic: active-spec-approvals
+Supersedes: JOT-dff65e4a-661b-4c5c-a1c2-9a7beb45eaac
+
+S-005: The owner requested implementation of content-bound review cards for every built website route, stale approvals, and versioned criticism consumed by the next draft and its review. The exact subsequent owner correction was: "We're my two confirmations not enough? I'm confused now". The root orchestrator applies the presented recommendation: approvals remain in the committed owner record only; no Supabase approval mirror or publishable-key approval path. This is the applied confirmed recommendation, not a fabricated selected-option quote. Public pages expose no review status or private criticism. Required S-004 card/answer inputs are delivered; its separate owner Human QA remains open. The current scoped implementation launch releases S-005 only as inputs become available; it grants neither website promotion nor Human QA. Actual private criticism is excluded from public committed raw evidence. This corrects the prior entry's abbreviated and misspelled quotation; the authorization scope is unchanged.
+<!-- /jot-entry -->

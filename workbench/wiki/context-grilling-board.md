@@ -5,8 +5,9 @@ sensitivity: normal
 knowledge_role: curated
 provenance:
   - /jot capture; each claim names its source and date
+  - S-005 PR174 scoped correction and independent review at 8c761db, 2026-11-06
 source_paths: []
-last_verified: 2026-11-04
+last_verified: 2026-11-06
 ---
 
 # Grilling Board and DQC-backed intent
@@ -30,6 +31,8 @@ The Python Board and terminal use the same native owning operations. The Board r
 The DQC-backed lifecycle was delivered in [PR161](https://github.com/KaydenClark/Agentic-Management-System/pull/161), merge `3fea0317a9bf7a138de5d06ea6e86b592c151572`; [the delivery observation](#jot-02e0bbe1-17d7-481f-9092-da7b4a4935b4) identifies its checks and limits. This establishes the shared native lifecycle, full readbacks and round handoff, not every subsequent design requirement. [S-004 — Grill Board cards and answers](../landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) owns implementation evidence and remaining gates; owner Human QA and Spec acceptance are not supplied by this synthesis.
 
 The later [owner correction](#jot-c9dcebb6-4d50-4d6d-95d7-30d723d66d53) requires search, filters, batch actions and other controls in the supplied redesign to function. Their omission is an implementation gap, not a settled choice. The README's earlier “by choice” description is superseded for those omissions; preserving it as current intent would contradict the owner. This Wiki repair explains that gap and changes no Board product behavior. The public [demo Board owner](../landmarks/LMK-003-ams-website/specs/S-009-demo-grill-board/SPEC.md) uses samples and does not replace the real local Board.
+
+Page review adds a separate content-bound view under [S-005](../landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/SPEC.md). A content occurrence can retain its original build identity while the current index moves; changed owners, sources or provenance need a fresh card and preserved supersession history. Missing route ownership refuses collection. The [page-review guide](../../grill-board/README.md#content-bound-website-review-cards) owns the contracts. [Verified feedback source089c065](https://github.com/KaydenClark/Agentic-Management-System/commit/089c065275679a4e5988a775b003d5385fbc397b) supplies content-bound local approvals, ignored private originals, safe versioned interpretation and stable event replay, including bounded refusal of unsafe receipt files. These are component results, not whole-Spec acceptance or actual owner actions. The [coverage Task](../landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/tasks/TK-000K/TASK.md) adds a read-only check of committed cards against one frozen inventory; optional recomputation uses the same protected/build seam. Stored feedback and covered pages alone do not demonstrate downstream use. [The TK-001E occurrence](../../tests/fixtures/page-feedback-consumption/README.md) now retains one synthetic criticism consumed by an actual subsequent agent draft and independent version-bound review; its replay checks recorded integrity and planted gaps, not a new model judgment. Real owner feedback, real-site consumption and broad RSI benefit remain unproved. [S-005 history](history/S-005.md) preserves earlier guards, failed checks and capture limits. A final QA queue needs the exact assembled protected deployment and genuine owner judgments.
 
 ## Evidence and sources
 

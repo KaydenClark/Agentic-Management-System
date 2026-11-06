@@ -1,0 +1,21 @@
+{
+  "synthetic": true,
+  "feedback_commit": "c818ef14e859f79c19535b659e49119809976e98",
+  "draft_commit": "590ce07d8b61f52a78e43ae53cfe62255bcb8864",
+  "review_commit": "a3df3a807b7eb4f672261c18b32fa0f358662906",
+  "regeneration_commit": "291f6e409b0231da7e2282b854cdedd322acad29",
+  "draft_hash": "sha256:674a1b19715f944b55be7576c07319db979fd7a29ac2bd782999dc1d6bb8ffdf",
+  "voice_version": 1,
+  "cards": 2,
+  "stale_cards": 1,
+  "current_cards": 1,
+  "exact_retries": 2,
+  "retry_added_commit_or_version": false,
+  "original_packet_unchanged": true,
+  "raw_original_absent_from_git_objects": true,
+  "elapsed_seconds": 0.734,
+  "owner_actions": 0,
+  "site_changes": 0,
+  "review_public_export_commit": "07a74722b7e8d1b99ac068cf8b5bf98e97242ff1",
+  "review_public_export_sha256": "30a93dd1dc1ff09c2febd47749456787012b98b25b225afc15ace6e60e449a9a"
+}
