@@ -10,6 +10,8 @@
 
 ## Assignment
 
+**Claimed by:** codex-s005-feedback
+**Current claimant:** codex-s005-feedback
 Target `main` on the existing Spec branch; no `site/` edits. Read AGENTS, the parent Spec, Board guide, DDR-000J/000X and ADR-002U. The confirmed launch and Nov6 expanded approval carry this scope forward. The parent privacy contract supersedes earlier public-verbatim instructions, retained in S-005 history.
 
 Deliver:
