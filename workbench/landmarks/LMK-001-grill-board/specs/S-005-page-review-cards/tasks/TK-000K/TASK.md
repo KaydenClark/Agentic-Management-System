@@ -39,3 +39,5 @@ Hand back to S-005 with `close`.
 - [ ] A second open card for one page makes `check` exit non-zero.
 - [ ] Live: after TK-001's live run, `check` against `origin/dev` exits 0.
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
+
+Workspace baseline sha256:248e6840a3518a52d70b5d05c3ba1bf24eee78abd235135447528e2b64a5cf58
