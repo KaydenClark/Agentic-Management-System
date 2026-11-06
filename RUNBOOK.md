@@ -5,7 +5,6 @@
 Check branch, remotes, locks and dirt (`git status --short --branch`).
 Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
 [Wiki](workbench/wiki/MEMORY.md), both trackers, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
-Planning also reads `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031`; copying here needs owner approval.
 
 ## Workflows
 

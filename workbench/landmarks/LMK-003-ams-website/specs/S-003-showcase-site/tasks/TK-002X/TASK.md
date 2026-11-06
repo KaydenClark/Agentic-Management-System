@@ -6,7 +6,7 @@
 **Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Content, Route, Trust, Owner presentation
-**Planned verification:** Pin remote main/dev; inspect every conflict against its owners and dated history; regenerate projections; prove dev website bytes survive; run repository controls, a fresh site build before tests, and candidate checks.
+**Planned verification:** Pinned refs, conflict/byte preservation, rendered projections, repository checks, fresh build/site/browser QA.
 **Claimed by:** codex-s003-baseline
 **Current claimant:** codex-s003-baseline
 
@@ -16,42 +16,44 @@ Owner request and confirmed execution scope, 2026-11-05: "Establish one coherent
 
 Pass condition: "a checked candidate contains both current project meaning and existing website functionality, with no lost requirements, changes, or evidence."
 
-One S-003 writer uses the existing Feature/S-003-website-shell-and-ams-orientation branch in an isolated clone. Source inputs are main adde5f4da1d8a8b78d9bcbc6bd490c18f8a3b37a and dev ae231ee6c3d168f286c95a6b843df8d154c65101, reverified before integration. Preserve both histories, completed and interrupted Task receipts, original failed evidence, current canonical controls and six-plane definitions. Reconcile maintained knowledge without changing immutable sourced entries. Regenerate TASKBOARD from owning records rather than hand-resolving its conflicts.
+One writer uses Feature/S-003-website-shell-and-ams-orientation in an isolated clone. Pinned inputs: main adde5f4da1d8a8b78d9bcbc6bd490c18f8a3b37a; dev ae231ee6c3d168f286c95a6b843df8d154c65101. Preserve both histories, accepted requirements, failed evidence, immutable Jots/receipts and six-plane definitions; regenerate projections from owners. Leave active Wiki-memory/Board checkouts and unpublished work untouched.
 
-No active checkout is switched or modified. The unpushed Wiki-memory branch and the Board writer's dirty work are outside this candidate. This Task does not restart PR #101 or a stopped campaign, implement sibling features, change attempt limits, install skills, use paid services, grant Human QA, or promote dev into main. Website delivery targets dev; the owner alone controls dev-to-main promotion. Return the candidate and exact checks to the orchestrator before merge. Other requested website features remain in their existing Specs and Tasks.
+Target checked dev; orchestrator inspects before merge, owner alone promotes dev to main. No campaign restart (including PR101), attempt reset, sibling feature implementation, paid service, skill installation, Human QA or production promotion is included. Other requested outcomes retain their existing owners.
 
 ## Acceptance
 
-- [ ] Exact current main/dev revisions are pinned, and both are ancestors of the candidate.
-- [ ] Every conflict has an ownership/chronology disposition; current controls and knowledge, website requirements, failed evidence and receipt identities survive.
-- [ ] Existing website source and tests survive without regressions, with a fresh build completed before site tests.
-- [ ] Generated projections match their owners; applicable repository checks pass or identify precise unresolved blockers.
-- [ ] The candidate is pushed on the existing S-003 branch and presented for checked dev integration; no owner acceptance or production promotion is inferred.
+- [x] Exact pinned main/dev revisions are ancestors of the candidate.
+- [x] Ownership/chronology dispositions preserve controls, knowledge, requirements, failed evidence and receipt identities.
+- [x] Existing website behavior passes fresh-build, site and browser checks; changed glossary projection follows Canon.
+- [x] Generated projections and repository checks pass after the scoped corrections; original failures remain recorded.
+- [ ] Pushed candidate is presented for checked dev integration; no owner acceptance or production promotion is inferred.
 
 ## Starting inventory
 
-Workspace baseline sha256:42d67e833329f5edfc4481777be79a12be8c44bfd133024e523c26883c590800. The original native claim and generated projection were committed before this snapshot; raw inventory is retained privately outside the checkout. This binding precedes conflict resolution.
+Workspace baseline sha256:42d67e833329f5edfc4481777be79a12be8c44bfd133024e523c26883c590800. Native claim/projection originals were committed before the complete snapshot; separate binding preceded resolution. Raw inventory remains private outside the checkout.
 
 ## Conflict dispositions
 
-Every conflict was inspected against both source trees and dated changes; neither side was selected wholesale for the assembly.
-
 | Owner/path | Resolution and reason |
 |---|---|
-| AGENTS, RUNBOOK, SKILLS | Retain main's later approved policy relocation, claim/receipt, RSI intake, shared CI and delivery routes; owner-only site promotion remains. |
-| ARCHITECTURE | Retain main's later ownership table, DQC/execution links and routes; dev's presentation/read-only boundary remains. |
-| GLOSSARY | Keep main's six claim planes and DQC lanes; retain dev's sourced Workbench meaning. Regenerate the site projection from this owner. |
-| TASKBOARD.page-001/002 | Regenerate both from reconciled Spec/Task records, not conflict text. |
-| S-007 Spec | Combine main's lineage/learning/uncertainty requirements with dev's live-reader state, on-site links, skill trends and evidence pointers; shorten duplicate prose within the existing limit. |
-| S-013 Spec | Retain dev's bounded failed-review/correction evidence and main's continuing acceptance limits; no criterion is silently completed. |
-| Wiki MEMORY | Keep main's delivered maintenance route alongside both sets of existing routes. |
-| feedback-improvement topic | Preserve all immutable Jots, bounded-recovery history, current capability ownership and campaign/attempt limits. |
-| adoption topic | Keep dev's named capability/decision accounting and main's later immutable owner correction; retain gaps and unknown parity, removing duplicate prose only. |
-| S-013 history | Preserve every incoming row from both parents byte-for-byte. |
+| AGENTS, RUNBOOK, SKILLS | Preserve main's later policy relocation and RSI/delivery routes. Exception: remove stale RUNBOOK planning pointer per preserved [JOT-b66f8d31](../../../../../../wiki/context-owner-answers-coherence.md#jot-b66f8d31-3731-4017-8502-dd54c9eba23e); continuation belongs in Workbench records/ignored handoffs. |
+| ARCHITECTURE | Preserve main's later ownership table, DQC/execution links and presentation/read-only routes. |
+| GLOSSARY | Main's six claim planes/DQC lanes plus dev's sourced Workbench meaning; regenerate site projection. |
+| TASKBOARD.page-001/002 | Regenerate from reconciled Spec/Task owners. |
+| S-007 Spec | Preserve main lineage/learning/uncertainty and dev live-reader, on-site links, skill trends and evidence; shorten duplicate prose within limits. |
+| S-013 Spec | Preserve failed Review/correction evidence, requirements and acceptance limits; no criterion is completed. |
+| Wiki MEMORY | Preserve main maintenance route and both sets of existing routes. |
+| feedback-improvement topic | Preserve all Jots, bounded recovery, capability ownership and campaign/attempt limits. |
+| adoption topic | Preserve named capability/decision accounting, later owner Jot, gaps and unknown parity; remove duplicate prose only. |
+| S-013 history | Preserve both parents' incoming rows byte-for-byte. |
 
-The canonical glossary permits initial terms without a named group and adds nine terms. Its existing site parser/rendering did not support that owner shape. Expected red reproduced the parser refusal; the focused correction preserves old anchors and exact definitions while rendering every canonical addition. All other original site paths remain.
+Glossary compatibility: initial ungrouped terms and nine additions require a parser/rendering correction. Expected red proved the refusal; source-derived output preserves anchors and all definitions. Intent5 remains defined in the original explanation, not a completed S-010 stack view.
 
-Canonical failure intake for this execution wave is recorded in FAIL-126 through FAIL-129; no private Wiki-writer rows were copied. IDs were allocated above its observed maximum to avoid collision.
+## Verification and limits
+
+Source671b822: fresh build;263/263 site tests;841 Python passed/5 skipped;2406/2406 browser checks at375/1280/1440, both themes, scripts-disabled text and negative controls. Four glossary screenshots inspected at375/1280 in both themes. Repository/site hygiene0; layout/Wiki/ADR valid. Across both pinned parents,149 Jot entries,132 receipt rows,25 S013 history rows and106 main failure rows preserved;151 other site files byte-equal dev. Seven governance definitions exact main; Workbench definition exact dev. RUNBOOK pointer-only exception is rechecked at the next immutable head; unchanged runtime/site evidence retains its exact source scope.
+
+FAIL126–136 retain the wave observations and failed checks; no unpublished Wiki-writer rows copied. Earlier failed native receipt is preserved below. Shared CI, independent candidate Review and dev integration remain separate from this local proof; no whole-Spec, Human QA or deployment claim.
 
 ## Receipt
 
