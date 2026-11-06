@@ -42,9 +42,7 @@ Captured after the remote native claim and committed rendered projections, befor
 
 ## Stopped implementation candidate
 
-Source preserves the safe allowlisted lineage API and isolated database schema source, not completed acceptance. The isolated local Supabase/PostgREST deployment uses fresh test credentials and no production key. Its startup ordering was corrected after the first failed live suite. The second live suite passed 26 checks and failed the client DELETE probe: the existing baseline refuses unfiltered DELETE before authorization, so this was not proof of role denial. No further source correction or test retry followed the RUNBOOK stop.
-
-Parent inspection also found that the required family attribute does not currently govern candidate counters; a new occurrence can reset its candidate chain. This must be fixed and adversely proved before release. The stored occurrence identity must remain distinct from the stable improvement chain. Native CLI migration registration is unavailable because the installed Supabase binary is killed by the host even for help. The schema source was applied only to an isolated local test database. No production migration, completed lineage, recovered job, worker release, model call, qualification or improvement is claimed.
+Receipt 1 preserves source b1365c0, failed startup/client-denial proof and the stable-chain finding. Receipts 2–3 retain scoped correction and superseding source checks. No failed receipt is replaced; production migration, model/campaign/qualification and global remote-recovery limits remain.
 
 ## Same-Task correction release
 

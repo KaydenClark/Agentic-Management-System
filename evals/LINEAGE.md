@@ -32,6 +32,12 @@ row IDs. Their identity/state/grade must match those rows. A run without a
 result stays a run; an interrupted outcome cannot silently become a pass.
 Each run uses one of its comparison's declared current/candidate sources,
 and a canonical run's skills commit must match that exact linked source.
+Candidate parents retain their development-origin case. A comparison can use
+a different immutable deciding case in the same stable chain, without copying
+source attempts. Each case's textual `rsi_task_id` names the existing RSI
+evaluation task; `record_id` and `artifact_digest` identify its immutable
+version. A real result must match that deciding task as well as its canonical
+run/state/grade. Later-use `task_id` instead names an implementation Task.
 Adoption references the retained exact source; rejected/inconclusive outcomes
 cannot claim adoption through this graph. These consistency checks do not
 certify the truth of a supplied qualification or adoption receipt.

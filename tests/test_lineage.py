@@ -15,7 +15,7 @@ def chain(namespace="test-lineage"):
                     is_test=True, synthetic=True)
     return [
         row("failure", "occurrence-1", {}, {"failure_id": "FAIL-034", "family": "grilling-resume", "chain_id": "grilling-resume-repair-r1"}),
-        row("case", "case-v1", {"failure": "occurrence-1"}, {"version": 1}),
+        row("case", "case-v1", {"failure": "occurrence-1"}, {"version": 1, "rsi_task_id": "development-task"}),
         row("candidate", "baseline", {"case": "case-v1"}, {"attempt": 0, "skills_commit": "c" * 40}),
         row("candidate", "candidate-1", {"case": "case-v1", "previous_candidate": "baseline"},
             {"attempt": 1, "skills_commit": "d" * 40}),
@@ -119,6 +119,24 @@ def test_run_cannot_use_undeclared_comparison_source():
     run["parents"]["candidate"] = "candidate-2"
     with pytest.raises(lineage.Refused, match="run candidate"):
         lineage.validate_graph(records + [run])
+
+
+def fresh_case_chain(namespace="test-lineage"):
+    records = chain(namespace)
+    fresh = deepcopy(records[1]); fresh["record_id"] = "held-out-case-v1"
+    fresh["artifact_digest"] = "9" * 64
+    fresh["attributes"]["rsi_task_id"] = "held-out-task"
+    records[4]["parents"]["case"] = fresh["record_id"]
+    return records[:4] + [fresh] + records[4:]
+
+
+def test_comparison_case_is_distinct_from_candidate_development_origin():
+    records = fresh_case_chain()
+    assert lineage.validate_graph(records) == records
+    by_id = {r["record_id"]: r for r in records}
+    assert by_id["candidate-1"]["parents"]["case"] == "case-v1"
+    assert by_id["comparison-1"]["parents"]["case"] == "held-out-case-v1"
+    assert {"case-v1", "held-out-case-v1"} <= {r["record_id"] for r in lineage.trace(records, "use-1")}
 
 
 def test_readback_rejects_tampering_and_transport_errors_never_echo_body():

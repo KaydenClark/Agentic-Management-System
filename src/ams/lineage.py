@@ -38,7 +38,7 @@ PARENTS = {
     "use": {"adoption": "adoption"},
 }
 ATTRS = {
-    "failure": {"failure_id", "family", "chain_id"}, "case": {"version"},
+    "failure": {"failure_id", "family", "chain_id"}, "case": {"version", "rsi_task_id"},
     "candidate": {"attempt", "skills_commit"},
     "comparison": {"campaign_id", "contract_digest"}, "run": {"run_key"},
     "result": {"execution_state", "passed"}, "disposition": {"decision"},
@@ -150,9 +150,8 @@ def validate_graph(records):
                 prior = by_id[parents["previous_candidate"]]
                 require(prior["attributes"]["attempt"] == attempt - 1, "candidate attempt skips predecessor")
             attempts.add((family, attempt))
-        if kind == "comparison":
-            require(all(by_id[parents[p]]["parents"]["case"] == parents["case"]
-                        for p in ("current_candidate", "candidate")), "comparison case differs")
+        # Candidate.case remains its development origin. Comparison.case may
+        # be a fresh deciding case; the parent checks above preserve its chain.
         if kind == "run":
             comparison = by_id[parents["comparison"]]["parents"]
             require(parents["candidate"] in {comparison["current_candidate"], comparison["candidate"]},

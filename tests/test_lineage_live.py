@@ -15,7 +15,7 @@ import uuid
 import pytest
 
 from ams import lineage, rsi_rows, writer
-from test_lineage import chain, exhausted_chain, recurrence_reset
+from test_lineage import chain, exhausted_chain, fresh_case_chain, recurrence_reset
 
 
 @dataclass
@@ -167,16 +167,16 @@ def test_database_undeclared_source_cannot_join_comparison(local):
     assert store.read(namespace) == records
 
 
-@pytest.mark.parametrize("cross", ["case", "chain"])
-def test_database_crosscase_or_chain_joins_refuse(local, cross):
+@pytest.mark.parametrize("cross", ["missing-case", "chain"])
+def test_database_missing_case_or_crosschain_joins_refuse(local, cross):
     store, _, namespace = local
     records = chain(namespace)
     saved = store.append(records, expected_head=None)
     case = deepcopy(records[1]); case["record_id"] = "different-case"
-    if cross == "case":
+    if cross == "missing-case":
         comparison = deepcopy(records[4]); comparison["record_id"] = "different-case-comparison"
-        comparison["parents"]["case"] = case["record_id"]
-        new = [case, comparison]
+        comparison["parents"]["case"] = "missing-case"
+        new = [comparison]
     else:
         failure = deepcopy(records[0]); failure["record_id"] = "different-chain-occurrence"
         failure["attributes"].update(failure_id="FAIL-999", chain_id="different-chain")
@@ -186,6 +186,13 @@ def test_database_crosscase_or_chain_joins_refuse(local, cross):
         new = [failure, case, candidate]
     with pytest.raises(lineage.Refused, match="HTTP 4"):
         raw_append(store, namespace, new, head=saved[-1]["record_digest"])
+    assert store.read(namespace) == records
+
+
+def test_database_comparison_reads_fresh_case_without_recreating_source_attempts(local):
+    store, _, namespace = local
+    records = fresh_case_chain(namespace)
+    raw_append(store, namespace, records)
     assert store.read(namespace) == records
 
 
@@ -206,6 +213,36 @@ def test_database_existing_run_source_must_match_declared_candidate(local):
     records = chain(namespace)[:6]
     for record in records: record["synthetic"] = False
     records[-1]["attributes"].update(run_key=run_key, rsi_run_id=saved[0]["id"])
+    with pytest.raises(lineage.Refused, match="HTTP 4"):
+        raw_append(store, namespace, records)
+    assert store.read(namespace) == []
+
+
+def test_database_existing_result_must_match_deciding_evaluation_task(local):
+    store, _, namespace = local
+    run_key = "wrong-case-" + uuid.uuid4().hex
+    run = dict(run_key=run_key, arm="ams", provider="schema-probe", model="no-model-call",
+               effort="none", runtime_commit="a"*40, controls_commit="a"*40,
+               skills_commit="d"*40, grader_version="a"*40, state="completed",
+               started_at="2026-11-05T00:00:00Z", finished_at="2026-11-05T00:00:00Z",
+               source_kind="commit", source_ref="a"*40, strength="anecdote", is_test=True,
+               detail={"purpose": "synthetic wrong-case rejection probe; no model invocation"})
+    rsi_rows.check_run(run)
+    saved_run = store._call("POST", "rsi_runs", run)[0]
+    result = rsi_rows.result_for(saved_run, task_id="wrong-existing-evaluation-task",
+        split="held_out", trial=1, execution_state="completed", passed=True,
+        source_kind="commit", source_ref="a"*40, strength="anecdote",
+        metric_unknowns={key: {"reason": "synthetic schema probe; not measured", "source": "schema-probe"}
+                         for key in rsi_rows.METRICS}, **{key: None for key in rsi_rows.METRICS})
+    rsi_rows.check_result(result)
+    saved_result = store._call("POST", "rsi_results", result)[0]
+    records = fresh_case_chain(namespace)[:8]
+    for record in records: record["synthetic"] = False
+    run_record = next(r for r in records if r["kind"] == "run")
+    result_record = next(r for r in records if r["kind"] == "result")
+    run_record["attributes"].update(run_key=run_key, rsi_run_id=saved_run["id"])
+    result_record["attributes"]["rsi_result_id"] = saved_result["id"]
+    assert saved_result["task_id"] != next(r for r in records if r["record_id"] == "held-out-case-v1")["attributes"]["rsi_task_id"]
     with pytest.raises(lineage.Refused, match="HTTP 4"):
         raw_append(store, namespace, records)
     assert store.read(namespace) == []

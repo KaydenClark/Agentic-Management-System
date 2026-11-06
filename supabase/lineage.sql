@@ -47,6 +47,7 @@ declare
   link record;
   parent public.rsi_lineage;
   other public.rsi_lineage;
+  deciding_case public.rsi_lineage;
   last_row public.rsi_lineage;
   expected_kind text;
   value record;
@@ -72,7 +73,7 @@ begin
     raise exception 'test/synthetic labels required' using errcode='23514'; end if;
   case new.kind
     when 'failure' then needed:=array['failure_id','family','chain_id']; required_roles:='{}';
-    when 'case' then needed:=array['version']; required_roles:='{"failure":"failure"}';
+    when 'case' then needed:=array['version','rsi_task_id']; required_roles:='{"failure":"failure"}';
     when 'candidate' then needed:=array['attempt','skills_commit']; required_roles:='{"case":"case"}';
     when 'comparison' then needed:=array['campaign_id','contract_digest']; required_roles:='{"case":"case","current_candidate":"candidate","candidate":"candidate"}';
     when 'run' then needed:=array['run_key']; required_roles:='{"comparison":"comparison","candidate":"candidate"}';
@@ -142,9 +143,9 @@ begin
         raise exception 'candidate attempt skips predecessor' using errcode='23514'; end if;
     end if;
   elsif new.kind='comparison' then
-    if exists (select 1 from public.rsi_lineage where namespace=new.namespace
-      and record_id in (p->>'current_candidate',p->>'candidate') and parents->>'case' <> p->>'case') then
-      raise exception 'comparison case differs' using errcode='23514'; end if;
+    -- The deciding case may differ from either source's development origin.
+    -- Typed parents above still enforce one stable improvement chain.
+    null;
   elsif new.kind='run' then
     select * into parent from public.rsi_lineage where namespace=new.namespace and record_id=p->>'comparison';
     if p->>'candidate' not in (parent.parents->>'current_candidate',parent.parents->>'candidate') then
@@ -158,8 +159,11 @@ begin
       or ((a->>'execution_state')='completed') <> (jsonb_typeof(a->'passed')='boolean') then
       raise exception 'result state/grade differs' using errcode='23514'; end if;
     select * into parent from public.rsi_lineage where namespace=new.namespace and record_id=p->>'run';
+    select * into other from public.rsi_lineage where namespace=new.namespace and record_id=parent.parents->>'comparison';
+    select * into deciding_case from public.rsi_lineage where namespace=new.namespace and record_id=other.parents->>'case';
     if not new.synthetic and not exists(select 1 from public.rsi_results where id=(a->>'rsi_result_id')::bigint
       and run_id=(parent.attributes->>'rsi_run_id')::bigint and is_test=new.is_test
+      and task_id=deciding_case.attributes->>'rsi_task_id'
       and execution_state=a->>'execution_state' and passed is not distinct from (a->>'passed')::boolean) then
       raise exception 'real result identity missing' using errcode='23514'; end if;
   elsif new.kind='disposition' then
