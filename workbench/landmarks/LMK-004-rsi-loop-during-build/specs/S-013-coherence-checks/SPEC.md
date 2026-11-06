@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Complete TK-003.
+**Next gate:** Implement released TK-001D; other holds remain.
 
 ## Intent and authority
 
@@ -120,3 +120,7 @@ Pending.
 ## Feedback-loop planning boundary
 
 Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+
+### Scoped continuation
+
+The owner's 2026-11-06 implementation request and approval release TK-001D's preparation-only hold for independent detection/reporting. Its Task records the bounded scope; all other named release conditions and stopped campaigns remain. This is implementation authority, not evidence of acceptance or Human QA.
