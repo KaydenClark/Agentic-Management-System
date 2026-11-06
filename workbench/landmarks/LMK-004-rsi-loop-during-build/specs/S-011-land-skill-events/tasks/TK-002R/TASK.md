@@ -3,10 +3,12 @@
 **Task ID:** TK-002R
 **Spec ID:** S-011
 **Slice:** One diagnosed source change reaches checked qualification and adoption evidence
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Shared owner; Merge gate; Personal use
 **Planned verification:** One exact original/adverse/regression case across source process, accepted-version qualification and authorized adoption readback; no trial in preparation.
+**Claimed by:** codex-s011-reuse-records
+**Current claimant:** codex-s011-reuse-records
 
 ## Assignment
 

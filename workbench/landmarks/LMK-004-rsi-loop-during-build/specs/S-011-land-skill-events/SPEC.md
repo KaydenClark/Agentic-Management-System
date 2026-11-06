@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
 **Execution approval:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
-**Next gate:** Root accepted the exact reuse/adoption packet and released TK-002R's native records/handoff run. Complete that scoped receipt; TK-002S still needs independent later-use proof. Old claims/stops and whole-Spec gaps remain.
+**Next gate:** Close TK-002R with verification and documentation proof.
 
 ## Intent and authority
 
