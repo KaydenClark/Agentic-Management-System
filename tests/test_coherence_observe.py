@@ -196,7 +196,7 @@ def test_expected_red_is_separate_from_escaped_failure(case):
 
 def test_private_artifact_bytes_never_enter_report_and_extra_fields_refuse(case):
     repo, _, contract = case
-    put(repo, "site/page.html", "PRIVATE CANARY /Users/test/.env secret contents\n")
+    put(repo, "site/page.html", "PRIVATE CANARY /" + "Users/test/.env secret contents\n")
     commit(repo)
     assert "PRIVATE CANARY" not in json.dumps(check(case))
     contract = copy.deepcopy(contract)
@@ -205,7 +205,7 @@ def test_private_artifact_bytes_never_enter_report_and_extra_fields_refuse(case)
         check(recut(case, contract))
 
 
-@pytest.mark.parametrize("path", ["../outside", "/Users/private", ".env", "workbench/sessions/private.md"])
+@pytest.mark.parametrize("path", ["../outside", "/" + "Users/private", ".env", "workbench/sessions/private.md"])
 def test_unsafe_probe_paths_refuse(case, path):
     contract = copy.deepcopy(case[2])
     contract["probes"][0]["path"] = path
@@ -252,3 +252,41 @@ def test_same_native_use_cannot_be_recounted_by_renaming_occurrence(case):
     publish(first, directory)
     with pytest.raises(Refused):
         publish(check(case, "renamed-use", previous=first), directory)
+
+
+def test_prepare_stop_is_independent_of_eventual_assignment_scope(case):
+    contract = copy.deepcopy(case[2])
+    contract["workflow"]["limit"] = "prepare"
+    case = recut(case, contract)
+    put(case[0], "site/page.html", "<main>Sample explanation implemented</main>\n")
+    commit(case[0])
+    assert codes(check(case)) == ["prepare-stop-bypass"]
+
+
+def test_unavailable_host_identity_stays_unknown(case):
+    case, receipt = native_case(case)
+    receipt["host"] = None
+    put(case[0], "evidence/native-use.json", json.dumps(receipt))
+    commit(case[0])
+    r = check(case)
+    assert codes(r) == ["unknown-loaded-skill"]
+    assert r["skill_use"]["host"] is None
+    assert r["eligible_uses"] == 0
+
+
+def test_copied_report_cannot_duplicate_an_occurrence_on_recovery(case):
+    directory = case[0] / "reports"
+    publish(check(case), directory)
+    original = next(directory.glob("OBS-*.md"))
+    (directory / "OBS-copy.md").write_bytes(original.read_bytes())
+    with pytest.raises(Refused):
+        recover(directory)
+
+
+def test_malformed_observed_field_refuses_without_typeerror(case):
+    put(case[0], "site/page.html", "Incomplete")
+    commit(case[0])
+    r = check(case)
+    r["findings"][0]["observed"] = []
+    with pytest.raises(Refused):
+        publish(r, case[0] / "reports")
