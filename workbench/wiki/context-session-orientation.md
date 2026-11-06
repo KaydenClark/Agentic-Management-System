@@ -22,6 +22,13 @@ Full evidence: the [loop report](../feedback/REPORT-context-recovery-before-answ
 
 ## Owner direction
 
+Current correction (Kayden, direct AMS chat, 2026-11-06): read and follow the
+RUNBOOK silently on every single start. Do not announce routine orientation.
+This supersedes the earlier requirement to open replies with an Orientation
+note; mandatory context recovery remains. AGENTS and RUNBOOK carry this rule.
+The note-based trial criteria and results below are historical evidence for
+the earlier requirement, not the current success criterion.
+
 Source: Kayden, AMS chat, 2026-11-06, after [FAIL-132](../feedback/WORKBENCH_FEEDBACK.md).
 
 - Agents recovering intent before answering is foundational: agents always do
@@ -63,7 +70,7 @@ found:
 5. RUNBOOK pointed planners at a CONTINUE file the owner had ruled out; the
    correction lived only in one harness's private memory. Fixed.
 
-## What changed
+## Earlier changes (before the silent-orientation correction)
 
 - AGENTS: "Every session is work, including questions and discussion. Before
   your first answer or action, follow RUNBOOK, the operating manual, and open
@@ -75,7 +82,7 @@ found:
   stay within the 3,000-character control limit.
 - New Landmark LMK-000B owns the findings. New `ams-orientation` trial tool.
 
-## How the test works
+## Historical test procedure
 
 `uv run ams-orientation run --provider claude|codex --revision REV [--overlay FILES] [--case ID] [--model M]`
 ([README](../../evals/session-orientation/README.md), code `src/ams/orientation_trial.py`,
@@ -110,8 +117,22 @@ rigid templates. TK-002Y tests and fixes this.
 
 ## Open
 
-- TK-002Y: Codex note (ready).
+- TK-002Y's note requirement is superseded by the owner's silent-orientation
+  correction; its trial criterion needs reconciliation before further use.
 - Headless runs read RUNBOOK even at baseline, unlike the FAIL-132 desktop
   session. The trial does not yet cover interactive desktop sessions.
 - Cause 3 (`align-concept` reachability) and cause 4 (recurrence tracking).
 - Owner's S-002 Spec-versus-Landmark question.
+
+<!-- jot-entry -->
+### JOT-af08ae99-9f14-4460-9e36-0a86602052ad
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T21:31:55.914Z
+Author: Kayden
+Source: Kayden, direct AMS chat instruction, 2026-11-06
+Topic: session-orientation
+Supersedes: none
+
+I need you to read the runbook silently. You do it on every single start, You do not need to announce it
+<!-- /jot-entry -->

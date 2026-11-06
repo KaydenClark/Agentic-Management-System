@@ -5,8 +5,8 @@
 Every session, questions included, before replying or acting: check git status,
 remotes, locks; read AGENTS, ARCHITECTURE, GLOSSARY, TRACKER, TASKBOARD, [Wiki](workbench/wiki/MEMORY.md),
 [SKILLS](workbench/docs/SKILLS.md), assigned Spec/Task and the topic's records and failures.
-Open with **Orientation**: records read, existing work, owner answers,
-contradictions. Overrides answer-first style. No CONTINUE files.
+Perform orientation silently; do not announce reading or routine checks.
+Report findings or contradictions only when relevant to the request. No CONTINUE files.
 
 ## Workflows
 
