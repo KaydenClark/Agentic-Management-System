@@ -44,6 +44,12 @@ FAIL-215 records independent Review FAIL at immutable `cf85db03df69897d367cb59aa
 
 The accepted minimal correction uses one monotonic total preparation/execution deadline and one separate aggregate cleanup deadline, with remaining time applied to each RPC, interrupt, unsubscribe and owned host close. Targeted red/green and final immutable retest evidence will be appended here. Prior failures, assessment runs, counters and no-model proof scopes remain intact; this is no trial reset or full P acceptance.
 
+## Component MessagePhase failure
+
+FAIL-217 records source/schema mismatch at `cf85db03df69897d367cb59aacdcb1268534c273`: parser and inert peer used unsupported `final`. Exact Codex0.159.3 generated MessagePhase is `commentary` or `final_answer`; null/missing is unknown. The offline experimental v2 schema is pinned by SHA-256 `e77b7d1436a78f431a74b2cb263a862e92ae40d70411bc63835b47ab2168827c`. No real host call was needed to establish the defect.
+
+The schema-backed positive `final_answer` and negative unsupported `final` controls were RED before the minimal parser/peer correction, then GREEN together with the unknown-phase negative. Current coherent source/review evidence will be appended after the in-scope history and deadline changes freeze. Native loading, runtime identity, cleanup and semantic qualification remain separate unknowns.
+
 ## Verified source seams and gaps
 
 At main `cfc0bc4c7f2cd167cea2972016edee076b479b73`, `trial_campaign.Campaign.run_one` journals before one released slot, refuses an attempted slot and requires its predecessor. It is not a durable multiworker scheduler. `trial_runtime.ClaudeAdapter` explicitly requires empty tools/MCP and rejects native tool use. Private source packs prove no native discovery/installation. Do not change its stopped protocol.
