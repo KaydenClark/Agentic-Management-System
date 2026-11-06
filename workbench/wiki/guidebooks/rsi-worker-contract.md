@@ -17,6 +17,19 @@ last_verified: 2026-11-04
 
 [S-000B](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-000B-rsi-worker/SPEC.md) owns execution; [S-006](../../landmarks/LMK-002-rsi-presentation/specs/S-006-rsi-data-store/SPEC.md) owns durable truth. Worker/RPC/schema availability remains unproven. Stage A used no database, credential or model call.
 
+## Implemented pre-model interfaces
+
+The availability sentence above records Stage A on November4. The later scoped launch and [TK-002P](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-000B-rsi-worker/tasks/TK-002P/TASK.md) retain current bounded proof and failed checks. `ams.native_worker` now provides:
+
+- `run_owned`: bounded byte IO, owned POSIX-group cleanup and interruption propagation. A denied disappearance probe remains unknown; only observed disappearance permits success.
+- `NativeRpc` and `CodexHost`: one dedicated native server, strict bounded stdio and cancellation of its connection-scoped standalone commands before closing the server. Actual tool sessions can have separate process groups. Model-turn cleanup still needs its own proof.
+- `PrivateEvidence`: exclusive, fsynced private execution artifacts outside the case tree; safe reconciliation returns identities/digests. Missing evidence remains unavailable. Capture supplies no semantic grade.
+- `run_slot`: consume an existing S-006 job using an independently retained job digest and matching executor input digest. Claims/fences/slots remain in S-006. Existing consumed slots reconcile without another invocation; this function never creates/renames campaigns or namespaces and always leaves assessment unknown. The caller supplies the qualified release and fresh gates.
+
+Run `uv run pytest -q tests/test_native_worker.py tests/test_native_worker_live.py`. Actual isolated-store checks require an operator-supplied `AMS_LINEAGE_TEST_CONFIG` pointing to a private loopback configuration; otherwise those checks skip. They allocate distinct synthetic no-model controller identities, leaving the frozen grilling case and original attempt chain untouched. Preserve their rows and private failure evidence.
+
+Native host checks additionally need independently pinned binary, permissions and runtime/source closure. The observed bounded profile keeps root/tmp/network denied and grants read access only to the case plus its pinned runtime; conflicting workspace-root denial and the cache-writing Apple interpreter shim failed and remain recorded. Use the host's supported profile/cancellation interfaces. Private operator replay scripts/captures remain with the Task evidence. Raw packets, paths, credentials and skill text never enter this guide or public projections. A read-only account/capacity snapshot and skill discovery establish neither actual model execution nor loaded skill use. The frozen real invocation retains its grader/labels/conditions/capacity gates.
+
 ## Verified source seams and gaps
 
 At main `cfc0bc4c7f2cd167cea2972016edee076b479b73`, `trial_campaign.Campaign.run_one` journals before one released slot, refuses an attempted slot and requires its predecessor. It is not a durable multiworker scheduler. `trial_runtime.ClaudeAdapter` explicitly requires empty tools/MCP and rejects native tool use. Private source packs prove no native discovery/installation. Do not change its stopped protocol.

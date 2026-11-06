@@ -1,5 +1,6 @@
 """Isolated synthetic controller identities; never reserve the grilling slot."""
 from dataclasses import dataclass, field
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -110,3 +111,36 @@ def test_independent_job_and_input_pins_refuse_before_claim(controller):
         native_worker.run_slot(c.store, c.job, 'wrong-input', 0, c.evidence,
                                NoModelExecutor('0' * 64), expected_job_digest=c.job_digest)
     assert c.store.snapshot(c.namespace) == before
+
+
+def test_competing_controllers_execute_one_claimed_native_slot(controller):
+    c = controller
+    execute = NoModelExecutor(c.payload_digest)
+    def run(actor):
+        try:
+            return native_worker.run_slot(c.store, c.job, actor, 0, c.evidence, execute,
+                                          expected_job_digest=c.job_digest)
+        except recovery.DatabaseRefused as error:
+            assert error.database_code == 'PT409'
+            return None
+    with ThreadPoolExecutor(max_workers=2) as workers:
+        results = list(workers.map(run, ['controller-one', 'controller-two']))
+    assert sum(result is not None for result in results) == 1
+    assert execute.calls == 1
+    assert len(json.loads(c.store.snapshot(c.namespace)['snapshot_text'])['effects']) == 1
+
+
+@pytest.mark.parametrize('gate', ['approval', 'unknown-capacity', 'exhausted-capacity', 'stop'])
+def test_controller_does_not_execute_past_held_server_gates(controller, gate):
+    c = controller
+    job = c.store.gates(c.job, approved=gate != 'approval',
+                        capacity='unknown' if gate == 'unknown-capacity' else 'exhausted' if gate == 'exhausted-capacity' else 'available',
+                        observed_at=datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z'),
+                        capacity_digest='f' * 64, stopped=gate == 'stop')
+    execute = NoModelExecutor(c.payload_digest)
+    with pytest.raises(recovery.DatabaseRefused) as held:
+        native_worker.run_slot(c.store, job, 'held-controller', 0, c.evidence, execute,
+                               expected_job_digest=c.job_digest)
+    assert held.value.database_code == 'PT409'
+    assert execute.calls == 0
+    assert not json.loads(c.store.snapshot(c.namespace)['snapshot_text'])['effects']
