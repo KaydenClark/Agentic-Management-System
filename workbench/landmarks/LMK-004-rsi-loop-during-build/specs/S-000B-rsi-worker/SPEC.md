@@ -10,7 +10,7 @@
 **Blockers:** none for mapping
 **Confirmation:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
 **Execution approval:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
-**Next gate:** TK-002P implements and checks the pre-model adapter/cleanup; actual calls retain the frozen case/grader/label/conditions/capacity gates.
+**Next gate:** Close TK-002P with verification and documentation proof.
 
 ## Intent and authority
 

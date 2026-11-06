@@ -3,10 +3,12 @@
 **Task ID:** TK-002P
 **Spec ID:** S-000B
 **Slice:** A fresh worker resumes one authorized case without repeating an effect
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Continuation
 **Planned verification:** Representative public-seam demonstration, adverse cases, focused checks and scoped QA.
+**Claimed by:** codex-s000b-native
+**Current claimant:** codex-s000b-native
 
 ## Assignment
 
