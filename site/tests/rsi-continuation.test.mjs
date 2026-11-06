@@ -37,13 +37,15 @@ test('every public run without result rows remains visible with unknown grade',(
  assert.match(html,/pass grade.*unknown/i);
 });
 const ENV={NEXT_PUBLIC_SUPABASE_URL:'https://fixture.supabase.co',NEXT_PUBLIC_SUPABASE_ANON_KEY:'fixture-publishable-key'};
-const event={id:901,kind:'merge',subject:'194',summary:'Synthetic merge contract fixture',occurred_at:'2026-11-06T12:00:00Z',recorded_at:'2026-11-06T12:01:00Z',source_kind:'commit',source_ref:'a'.repeat(40),source_url:'https://github.com/KaydenClark/Agentic-Management-System/commit/'+ 'a'.repeat(40),strength:'recorded_fact',is_test:false};
+const {readFile}=await import('node:fs/promises');
+const producerFixture=JSON.parse(await readFile(new URL('../app/rsi/fixtures/merge-from-writer.json',import.meta.url),'utf8'));
+const event={...producerFixture.row,id:901,recorded_at:'2026-11-06T12:01:00Z'};
 const ok=body=>({ok:true,status:200,json:async()=>body});
 test('public activity selects only approved columns, drops test rows and unselected detail',async()=>{
  const calls=[];const out=await loader.loadBuildEvents({env:ENV,fetchImpl:async(url,init)=>{calls.push({url:String(url),init});return ok([{...event,detail:{private:'MUST-NOT-EXPOSE'}},{...event,id:902,is_test:true}]);}});
  assert.equal(out.ok,true);assert.equal(out.data.events.length,1);assert.equal(out.data.unsupported,0);assert.ok(Number.isFinite(Date.parse(out.readAt)));
  const url=new URL(calls[0].url);assert.equal(url.pathname,'/rest/v1/build_events');assert.equal(url.searchParams.get('is_test'),'is.false');assert.ok(!url.searchParams.get('select').split(',').some(key=>['detail','summary'].includes(key)));
- assert.ok(!JSON.stringify(out).includes('MUST-NOT-EXPOSE'));assert.deepEqual(Object.keys(out.data.events[0]).sort(),Object.keys(event).filter(key=>key!=='summary').sort());
+ assert.ok(!JSON.stringify(out).includes('MUST-NOT-EXPOSE'));assert.deepEqual(Object.keys(out.data.events[0]).sort(),Object.keys(event).filter(key=>!['summary','detail'].includes(key)).sort());
 });
 test('public activity distinguishes successful empty and failure without leaking keys',async()=>{
  const empty=await loader.loadBuildEvents({env:ENV,fetchImpl:async()=>ok([])});assert.equal(empty.ok,true);assert.deepEqual(empty.data,{events:[],unsupported:0});assert.ok(empty.readAt);
@@ -77,15 +79,15 @@ test('a next supported event is read and rendered without a source list edit; so
  const {ActivityEvidence}=await import('../app/rsi/activity.tsx');
  let rows=[event];const fetchImpl=async()=>ok(rows);
  const firstRead=await loader.loadBuildEvents({env:ENV,fetchImpl});assert.deepEqual(firstRead.data.events.map(row=>row.id),[901]);
- rows=[event,{...event,id:902,subject:'195',source_ref:'b'.repeat(40),source_url:event.source_url.replaceAll('a'.repeat(40),'b'.repeat(40))}];
+ rows=[event,{...event,id:902,subject:'PR #195',source_ref:'b'.repeat(40),source_url:'https://github.com/KaydenClark/Agentic-Management-System/commit/'+'b'.repeat(40)}];
  const secondRead=await loader.loadBuildEvents({env:ENV,fetchImpl});assert.equal(secondRead.ok,true);
  const html=renderToStaticMarkup(createElement(ActivityEvidence,{loaded:secondRead}));for(const id of [901,902])assert.ok(html.includes(`id="rsi-event-${id}"`));
  rows=[event,{...event,id:902}];assert.equal((await loader.loadBuildEvents({env:ENV,fetchImpl})).ok,false);
 });
 
 test('private core fields and unknown kinds cannot enter the public merge-fact projection',async()=>{
- const marker='PRIVATE-REVIEW-/Users/owner/criticism';
- const variants=[{summary:marker},{subject:marker},{kind:'private_review'},{source_kind:'path',source_ref:marker},{source_ref:marker},{source_url:'https://private.example/'+marker},{occurred_at:marker},{source_url:event.source_url.replaceAll('a'.repeat(40),'b'.repeat(40))}];
+ const marker='PRIVATE-REVIEW-private/owner-only-criticism.md';
+ const variants=[{summary:marker},{subject:marker},{kind:'private_review'},{source_kind:'path',source_ref:marker},{source_ref:marker},{source_url:'https://private.example/'+marker},{occurred_at:marker},{source_url:'https://github.com/KaydenClark/Agentic-Management-System/commit/'+'b'.repeat(40)}];
  for(const over of variants){
   const out=await loader.loadBuildEvents({env:ENV,fetchImpl:async()=>ok([{...event,...over}])});
   assert.ok(!JSON.stringify(out).includes(marker),'private core text escaped the projection');
@@ -93,4 +95,24 @@ test('private core fields and unknown kinds cannot enter the public merge-fact p
   assert.equal(out.data.events.length+out.data.unsupported,1);
   if(!('summary' in over))assert.equal(out.data.unsupported,1);
  }
+});
+
+test('protected-main Python merge_event output is accepted without changing the producer',async()=>{
+ const {readFile}=await import('node:fs/promises');
+ const fixture=JSON.parse(await readFile(new URL('../app/rsi/fixtures/merge-from-writer.json',import.meta.url),'utf8'));
+ const row={...fixture.row,id:9901,recorded_at:'2026-11-06T12:01:00Z'};
+ const out=await loader.loadBuildEvents({env:ENV,fetchImpl:async()=>ok([row])});
+ assert.equal(out.ok,true);assert.equal(out.data.events.length,1);assert.equal(out.data.unsupported,0);
+ assert.equal(out.data.events[0].subject,fixture.row.subject);
+});
+test('final plotted coverage includes every run in that version before series are linked',()=>{
+ const repeat={...second,id:803,run_key:'fixture-repeat-803'};
+ const data={runs:[first,second,repeat],results:[...results(first,'fixture-a','dev',[true]),...results(second,'fixture-a','dev',[false]),...results(repeat,'fixture-a','dev',[false])]};
+ const view=versionView(data);assert.equal(view.series.length,2);assert.deepEqual(view.series.map(s=>s.points[0].rows.length).sort(),[1,2]);
+ assert.ok(view.series.every(s=>s.points.length===1&&!s.points[0].marks.some(m=>m.kind==='regression')));
+});
+test('impossible calendar dates are explicitly unsupported, never a public event or successful-empty',async()=>{
+ const control=await loader.loadBuildEvents({env:ENV,fetchImpl:async()=>ok([event])});assert.equal(control.data.events.length,1);
+ const out=await loader.loadBuildEvents({env:ENV,fetchImpl:async()=>ok([{...event,occurred_at:'2026-02-30T12:00:00Z'}])});
+ assert.equal(out.ok,true);assert.equal(out.data.events.length,0);assert.equal(out.data.unsupported,1);
 });

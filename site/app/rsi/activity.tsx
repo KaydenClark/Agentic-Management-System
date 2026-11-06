@@ -28,7 +28,7 @@ export function ActivityEvidence({ loaded, now }: { loaded: ReadResult<BuildActi
                 <ol className={styles.points}>
                   {shown.map((event) => (
                     <li key={event.id} id={`rsi-event-${event.id}`} className={styles.row} data-activity-event="">
-                      <p><a href={`#rsi-event-${event.id}`}>Event {event.id}</a>: <strong>Git merge for PR {event.subject}</strong>. Kind <code>{event.kind}</code>; subject <code>{event.subject}</code>.</p>
+                      <p><a href={`#rsi-event-${event.id}`}>Event {event.id}</a>: <strong>Git merge for {event.subject}</strong>. Kind <code>{event.kind}</code>; subject <code>{event.subject}</code>.</p>
                       <p>Occurred <time dateTime={event.occurred_at}>{event.occurred_at}</time>; recorded <time dateTime={event.recorded_at}>{event.recorded_at}</time>. Strength: <span data-strength="">{event.strength.replaceAll("_", " ")}</span>.</p>
                       <p>Source: <code>{event.source_kind} {event.source_ref}</code>{event.source_url ? <>. Source URL: <code>{event.source_url}</code></> : ". Source URL not recorded."}</p>
                     </li>

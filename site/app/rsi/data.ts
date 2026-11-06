@@ -219,22 +219,24 @@ export function seriesViews(data: RsiData): SeriesView[] {
     );
     const order = new Map(versions.map((v, i) => [v.id, i]));
 
-    // Exact observed coverage only: task IDs and attempt counts per run and
-    // split. Missing immutable case versions prevent benchmark-equivalence
-    // claims; even matching coverage supplies only a descriptive series.
-    const attemptsByRun = new Map<number, Map<string, number>>();
-    for (const row of rows) {
-      const attempts = attemptsByRun.get(row.run_id) ?? new Map<string, number>();
-      attempts.set(row.task_id, (attempts.get(row.task_id) ?? 0) + 1);
-      attemptsByRun.set(row.run_id, attempts);
-    }
-    const coverageByRun = new Map([...attemptsByRun].map(([id, attempts]) =>
-      [id, JSON.stringify([...attempts].sort((a, b) => a[0].localeCompare(b[0])))],
-    ));
-    const groups = new Map<string, RsiResult[]>();
+    // Coverage belongs to the final plotted point: pool every matching run
+    // in each version first, then separate differing per-task attempt counts.
+    // Immutable case versions remain unknown even when these counts match.
+    const pointRows = new Map<string, RsiResult[]>();
+    const dimensions = (r: RsiResult) => [plan.view === "task" ? r.task_id : "", r.arm, r.provider, r.model, r.effort, r.grader_version];
     for (const r of rows) {
-      const key = [plan.view === "task" ? r.task_id : "", r.arm, r.provider, r.model, r.effort, r.grader_version, coverageByRun.get(r.run_id)!].join("\u0000");
-      groups.set(key, [...(groups.get(key) ?? []), r]);
+      const key = JSON.stringify([...dimensions(r), versionOf(r).id]);
+      pointRows.set(key, [...(pointRows.get(key) ?? []), r]);
+    }
+    const groups = new Map<string, RsiResult[]>();
+    const coverageByGroup = new Map<string, string>();
+    for (const vrows of pointRows.values()) {
+      const attempts = new Map<string, number>();
+      for (const row of vrows) attempts.set(row.task_id, (attempts.get(row.task_id) ?? 0) + 1);
+      const coverage = JSON.stringify([...attempts].sort((a, b) => a[0].localeCompare(b[0])));
+      const key = JSON.stringify([...dimensions(vrows[0]), coverage]);
+      coverageByGroup.set(key, coverage);
+      groups.set(key, [...(groups.get(key) ?? []), ...vrows]);
     }
 
     const series: Series[] = [...groups.entries()].map(([key, group]) => {
@@ -252,7 +254,7 @@ export function seriesViews(data: RsiData): SeriesView[] {
         points.push(point);
       }
       const head = group[0];
-      return { key, taskId: plan.view === "task" ? head.task_id : null, arm: head.arm, provider: head.provider, model: head.model, effort: head.effort, graderVersion: head.grader_version, observedTasks: [...new Set(group.map((r) => r.task_id))].sort(), coverage: coverageByRun.get(head.run_id)!, points };
+      return { key, taskId: plan.view === "task" ? head.task_id : null, arm: head.arm, provider: head.provider, model: head.model, effort: head.effort, graderVersion: head.grader_version, observedTasks: [...new Set(group.map((r) => r.task_id))].sort(), coverage: coverageByGroup.get(key)!, points };
     });
     series.sort(
       (a, b) => order.get(a.points[0].version.id)! - order.get(b.points[0].version.id)! || (a.taskId ?? "").localeCompare(b.taskId ?? "") || a.key.localeCompare(b.key),

@@ -135,10 +135,16 @@ export async function loadRsiData(options: LoadOptions = {}): Promise<LoadResult
 // The first reviewed public producer path is exact Git-derived merge facts.
 // Other kinds/locators need their own safe contract, not a general text filter.
 function supportedMerge(row: Record<string, unknown>): boolean {
-  const iso = (v: unknown) => typeof v === "string" &&
-    /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,6})?(?:Z|[+-]\d{2}:\d{2})$/.test(v) && Number.isFinite(Date.parse(v));
+  const iso = (v: unknown) => {
+    if (typeof v !== "string" ||
+      !/^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.test(v) ||
+      !Number.isFinite(Date.parse(v))) return false;
+    // Date.parse normalizes impossible dates such as February30; compare
+    // the calendar date after UTC normalization instead of accepting it.
+    return new Date(`${v.slice(0, 10)}T00:00:00Z`).toISOString().slice(0, 10) === v.slice(0, 10);
+  };
   return row.kind === "merge" && row.source_kind === "commit" && row.strength === "recorded_fact" &&
-    typeof row.subject === "string" && /^[1-9]\d*$/.test(row.subject) && Number.isSafeInteger(Number(row.subject)) &&
+    typeof row.subject === "string" && /^PR #[1-9]\d*$/.test(row.subject) && Number.isSafeInteger(Number(row.subject.slice(4))) &&
     typeof row.source_ref === "string" && /^[a-f0-9]{40}$/.test(row.source_ref) &&
     row.source_url === `https://github.com/KaydenClark/Agentic-Management-System/commit/${row.source_ref}` &&
     iso(row.occurred_at) && iso(row.recorded_at);
