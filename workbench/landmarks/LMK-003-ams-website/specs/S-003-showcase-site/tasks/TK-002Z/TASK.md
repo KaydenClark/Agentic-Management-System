@@ -3,10 +3,12 @@
 **Task ID:** TK-002Z
 **Spec ID:** S-003
 **Slice:** Every built public page supplies truthful review ownership automatically
-**Status:** ready
+**Status:** in-progress
 **Blockers:** TK-002X
 **Destination:** spec-acceptance: Route, Trust, Owner presentation
 **Planned verification:** Real Next build versus inventory, automatic new-route fixture, missing/ambiguous-owner and classification controls, idempotence, source provenance and affected repository/site checks.
+**Claimed by:** codex-s003-inventory
+**Current claimant:** codex-s003-inventory
 
 ## Assignment
 
