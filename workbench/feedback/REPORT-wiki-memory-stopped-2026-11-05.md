@@ -8,7 +8,7 @@ Source: direct root-thread handbacks, owner-local 2026-11-05 (UTC 2026-11-06). I
 
 ## Stopped evidence
 
-FAIL-118: first focused run12/13 failed because the fixture lacked a route; repaired run13passed. FAIL-119: baseline preflight rejected archive-placeholder scope mismatch. The worker then continued after the Runbook limit, encountered FAIL-120's unknown-query false hit (3/4development checks), repaired code and later reported16focused passes/4development checks. FAIL-121 already records that process breach; later passes do not erase it. Root STOP remains active. No post-STOP candidate tests or repair occurred in this records-only continuation.
+FAIL-118: first focused run12/13 failed because the fixture lacked a route; repaired run13passed. FAIL-119: baseline preflight rejected archive-placeholder scope mismatch. The worker then continued after the Runbook limit, encountered FAIL-120's unknown-query false hit (3/4development checks), repaired code and later reported16focused passes/4development checks. FAIL-121 already records that process breach; later passes do not erase it. Root STOP governed the stopped run; the owner later explicitly authorized the bounded continuation below. No post-STOP candidate tests or repair occurred in this records-only continuation.
 
 The Task retains the actual baseline/candidate limits and artifact digests. Source-hit/proxy checks are not independently judged answer correctness, stale-answer prevention, transfer or owner correction effort. Real bindings, console entrypoint QA, operating docs, final checks and preservation proof remain incomplete. Native workspace inventory is still incomplete because pre-existing REBASE_HEAD residue remains; root reported no active rebase directories. Preserve that metadata and the explicit limitation.
 
@@ -24,7 +24,7 @@ The implementor associated with these source defects was High / OpenAI gpt-6.1-s
 
 ## Proposed bounded restart: TK-002U only
 
-Execution awaits the owner's actual bounded continuation authorization. This plan changes neither the Runbook stop limit nor prior results.
+The owner subsequently authorized bounded continuation. This plan changes neither the Runbook stop limit nor prior results.
 
 1. Recover exact9419c9a, Receipt1, source snapshot/case identities, all failures and the three findings. Use journey/TDD; serialize one High-tier source writer. Preserve existing evidence, private boundaries and managed runtime.
 2. Repair only FAIL-122–124: validated baseline read boundary, explicit/recoverable correction truncation, consistent duplicate-heading source selection. After authorization, use TDD one public behavior at a time: intentional red, minimal fix, green; then the next defect. Do not batch absent-module reds into wholesale implementation. Cover safe refusal, bounds/continuation and source change/restore.
@@ -38,3 +38,7 @@ Execution awaits the owner's actual bounded continuation authorization. This pla
 - **Public export and delivery:** direct permission to push the Wiki Landmark/records and scoped implementation to KaydenClark/Agentic-Management-System and perform the checked non-site main merge. Automatic approval review rejected two push attempts (FAIL-114/115), including the exact-payload retry after remote/payload checks. No third attempt or alternate export route. Await the owner's answer; local restart approval alone would not release publication.
 
 Records-only continuation captures findings and the proposed restart; it authorizes neither pending action. No push, PR, merge, deployment, installation, source repair or Human QA is recorded here.
+
+## Authorized local continuation
+
+The owner directly answered the exact bounded restart question: “Authorize bounded continuation”. [Native source capture](../wiki/context-wiki-maintenance.md#jot-4a2097ca-5bd6-456f-83c9-3bdbe7a79a29) retains the complete question and answer. TK-002U resumes locally; the earlier pending-restart paragraphs above describe the stopped boundary. Public export approval remains pending. Actual repair/check results belong to the Task and subsequent evidence; this authorization is no completion or acceptance claim.

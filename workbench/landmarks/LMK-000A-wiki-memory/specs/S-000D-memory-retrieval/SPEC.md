@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
 **Execution approval:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
-**Next gate:** Owner restart decision for TK-002U; [bounded scope and separate publication hold](../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md).
+**Next gate:** Authorized TK-002U repair and local handback; root inspects before TK-002V. Public export held.
 
 ## Outcome and authority
 
@@ -59,7 +59,7 @@ Serialize shared writers. Tasks include Check/QA/repair/hand-back; root owns ind
 
 ## Completion Result
 
-Partial candidate9419c9a remains stopped under FAIL-118–121; all acceptance stays open. [Supplemental static findings and bounded restart](../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserve three defects and incomplete real bindings/docs/final checks/preservation. Recorded16focused/4development passes are retrieval observations, not final QA, independent answers or owner effort. Owner restart and public-export decisions remain separate; no assembled Review or acceptance.
+TK-002U remains open. [Stopped candidate/report](../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserve failures and limited passing development checks. Owner authorized bounded continuation; public export remains held. Claim bindings, final Check/QA and root inspection precede next Task; no acceptance or measured answer/effort benefit is claimed.
 
 ## Supersession
 

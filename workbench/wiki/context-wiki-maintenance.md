@@ -26,6 +26,8 @@ The Wiki is AMS's knowledge base and memory, independently owned by [Wiki memory
 
 The five-improvement Map/Plan remains the destination; candidate9419c9a is partial and stopped, not delivered memory behavior. [The stopped-candidate report](../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves source-linked supplemental static findings, observed retrieval-only evidence and the bounded TK-002U restart proposal. Owner restart and public-export decisions remain separate and unanswered; no source repair, retest, assembled Review, owner QA or acceptance follows from records capture. The native Task retains execution state and Receipt1.
 
+Local restart after the stopped candidate is [explicitly authorized](#jot-4a2097ca-5bd6-456f-83c9-3bdbe7a79a29); the original failures and separate public-export hold remain. See [S-000D](../landmarks/LMK-000A-wiki-memory/specs/S-000D-memory-retrieval/SPEC.md) for current scope and evidence.
+
 ## Planned memory interface
 
 S-000D selects the project-owned `ams-memory query/check/consolidate/evaluate` seam under delegated planning authority. This is a preparation contract, not delivered behavior.
@@ -177,4 +179,19 @@ Topic: wiki-maintenance
 Supersedes: none
 
 Records-only stopped-candidate observation, source9419c9a2eec14bf5224fcbba4af1d3208c1a1466 versus28e4b122b7503348fcc119bfb98640dda2632a03. Root's fresh independent High/OpenAI gpt-6.1-sol/Codex Standards and Spec reviewer handbacks (owner-local2026-11-05) identify three static defects: baseline route body read before privacy/path checks; superseded correction text silently clipped to600characters without recoverable continuation; duplicate heading anchors disagree between retrieval and source selection. No private disclosure was observed; reviewers ran no tests/edits/public actions and gave no assembled SpecPASS or HumanQA. FAIL-121 already records continuation past the Runbook stop limit; do not duplicate it. The existing five-improvement Map/Plan remains required, but implementation is partial and stopped. The owning report preserves exact candidate, evidence limits and bounded TK-002U restart proposal. Two owner answers remain pending separately: corrective restart after STOP, and direct public export/checked non-site main delivery. Source/tests/evaluation artifacts and Receipt1 remain frozen; records-only capture grants no restart, retest, native closure or publication authority.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-4a2097ca-5bd6-456f-83c9-3bdbe7a79a29
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T05:58:07.218Z
+Author: Kayden; captured by codex-wiki-retrieval
+Source: chat:ams-wiki-memory-2026-11-05
+Topic: wiki-maintenance
+Supersedes: none
+
+Bounded continuation authorization, direct root-thread owner response, 2026-11-05. Exact question: "May I start a new bounded corrective run from stopped commit 9419c9a to finish the first Wiki implementation Task, then continue the remaining two planned Tasks? The first run had an unexpected output-bound fixture failure and evaluation preflight failure, then continued past RUNBOOK.md’s ‘second failed test; stop’ rule. Its later 16 passing tests and 4/4 development checks are preserved but do not erase that stop. The candidate is committed, the tree is clean, and no further source changes or tests will run without this continuation approval. Public publication remains subject to the separate pending approval."
+
+Exact owner answer: "Authorize bounded continuation". This explicitly releases the local restart after FAIL-118–124; it does not erase those failures or the Runbook stop rule. Root delegates only the remaining TK-002U repair, Check/QA, documentation and local committed handback in this run; it inspects the exact candidate before releasing TK-002V. Public export/main delivery remain separately pending: no push, connector export, remote claim, PR, merge, deployment or Human QA. Prior source candidate9419c9a and Receipt1 remain preserved.
 <!-- /jot-entry -->
