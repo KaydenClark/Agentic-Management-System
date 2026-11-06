@@ -24,15 +24,13 @@ Observer/root did not author/qualify the accepted repair. Consume R's source aeb
 
 Record visible owner prompts/interventions and coverage; off-platform effort stays unknown. Retain F's failures/regressions and earlier scope-reconfirmation failure. Success or zero visible prompts proves no overall benefit/zero effort. Invent no historical totals, baseline, repetitions, time savings or recurrence rate.
 
-### Clearly synthetic recurrence control — not executed
+### Synthetic recurrence control — completed once, retained privately
 
-After release, a separate preparer may use a disposable PRIVATE clone of the pinned F candidate: canonical branch plus one extra per-Task branch with a unique harmless commit and unrelated preservation marker. No F-author checkout/public-ref change, native claim in that clone, skill injection or product/model execution. Keep exact plant identity/manifest undisclosed until root's first normal read-only inventory; retain base/source, plant UTC and marker/commit digests privately.
-
-First inventory should detect/link the branch to S-003 F-001 scatter and loaded9b6e953 before owner prompting, preserve unique/unrelated work and continue canonically. Retain failure; no deleting the plant to fake success or resetting trials. This is synthetic detection evidence, not a production incident, model campaign, qualification or general benefit. No clone/plant exists now.
+The [initial checkpoint](../../../../../../wiki/history/S-011.md#tk-002s-initial-observation-checkpoint) records the single released private F-candidate control: one extra per-Task ref/unique harmless commit and unrelated marker. Root detected/linked F-001 plus loaded9b6e953 before unblinding/owner prompt; independent manifest comparison verified preservation. Only Git setup/inventory ran; no author checkout/public ref, fixture claim, injection, model/tool-adapter or product action. Retain the private evidence and unique/unrelated work; do not repeat, delete or rename the control. This is synthetic detection, not a production incident, qualification or benefit result.
 
 ### Release, budgets and whole acceptance
 
-Root inspects this exact plan, then releases observation/control. Before execution: supported S claim, committed original coordination bytes, genuine complete snapshot, separate digest-binding commit. R is the completed native input; one S-011 record writer/existing branch. Budget one ordinary-use window/one first-inventory control; no new model/qualification calls, source edits, install, purchase or reset. Any new call retains its actual capacity/authority gates; PR101/land/r1 stops remain. Task/Spec8000-character limits and checked-dev/root-merge/owner-only promotion apply; leave receipt space and link detailed evidence to History.
+Root's inspected plan/release, supported S claim and genuine separately bound inventory are recorded below/in History. R is delivered; retain one S-011 record writer/existing branch. The one control is spent; resume only this ordinary-use episode's missing end-state/joins. No new model/qualification call, source edit, install, purchase or reset is granted. Actual call gates and PR101/land/r1 stops remain. Task/Spec8000-character limits, checked dev/root merge and owner-only promotion apply; keep detailed evidence in History.
 
 Full safe S-006 writer/store -> S-007 reader -> protected-dev joins remain missing. They block complete S/TK-001G claims, not ordinary observation/F public activity; PR175 is no blanket blocker. No private store write is authorized. Later joins need their own authorized producer/readback, safe source/use/disposition IDs, failures/freshness; no private logs/locators/criticism on public pages. Distinguish unavailable/stale/empty and audit fitness/useful improvement. Partial observation closes neither S, old TK-003 nor Landmark; return proven evidence and missing owner/artifact to TK-001G.
 
@@ -48,3 +46,9 @@ Native claim fc601011 and committed original coordination bytes0a099d4d precede 
 - [ ] Exact Task/source/adoption/load/dev identities and executed checks/QA are handed to TK-001G; no old Task closure, stopped-campaign restart, installation or production promotion is inferred.
 
 Open checkpoint: [one synthetic detection/preservation result](../../../../../../wiki/history/S-011.md#tk-002s-initial-observation-checkpoint), one in-progress episode, prior denominator/total effort unknown. Protected F end state and full safe joins are unperformed; no S close or general benefit claim.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-011-shared-skill-repair | a47ab6d85c835d92ea6b299431bac2c6f549ec28 | ahead 0 behind 0 | 0 | First synthetic inventory detected F001/tree9b6 before unblinding/prompt; refs, unique content and marker preserved. Installed804/tree9b6 exact; record checks pass. | S011 Spec/History/S; private baseline/control/coverage evidence retained. | CONTINUED: S003 repair/F protected endstate and full authorized safe joins pending; prior denominator/full human effort unknown. S stays in-progress; no completion/benefit claim. | c36213a9e67e645dca3f382e2bc7cddc6f9e9a348133449ae654f565ad52dbf1 |
