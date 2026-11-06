@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** Content-bound page reviews and versioned feedback consumed by later drafts.
 **Blockers:** none
-**Next gate:** S-003 complete route owners and trusted protected RSI artifact; then finish TK-001 coverage and fresh Review.
+**Next gate:** PR178 checked dev delivery, then same-revision protected capture/cards and TK-001 completion; later Tasks remain separate.
 
 
 ## Intent and authority
@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns source, checks and preserved failures. Servitor built dev63870b54efba9b9028dc8c1ae194f3fef85138ae's49 public routes;42 lacked owner declarations, so collection refused before writes with cleanup verified. Container/SIGINT checks pass. Sources, ownership refresh and private-note guards address independent findings; actual protected coverage remains open. S-003 owns complete metadata, RSI freshness and protected artifact/readback. S-004 Human QA/redesign remain separate; historical landed content is never current approval proof.
+No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns evidence and failures. Current-main84ded45 passes fresh960 tests/6 skips; CI958/8 plus10 browser checks; separate Standards/Spec each82 pass with no material corrective finding. Frozen PR178211dd1b independently builds50 public routes,39 skill articles and visitor404; disposable generation/readback covers50 current cards and a no-op rerun with cleanup verified. This built-only proof is not protected dev coverage. Current dev e10216e lacks that final inventory; require checked PR178 delivery and a complete authenticated capture of its exact deployed revision. Raw page-note refusal stays until private capture; later Tasks and owner QA remain open.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 
