@@ -3,10 +3,12 @@
 **Task ID:** TK-002O
 **Spec ID:** S-006
 **Slice:** A worker recovers one job and exports a safe checkpoint
-**Status:** ready
+**Status:** in-progress
 **Blockers:** TK-002N
 **Destination:** spec-acceptance: Recovery
 **Planned verification:** Representative public-seam demonstration, adverse cases, focused checks and scoped QA.
+**Claimed by:** codex-s006-recovery
+**Current claimant:** codex-s006-recovery
 
 ## Assignment
 

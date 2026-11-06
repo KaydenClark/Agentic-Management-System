@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Implement O from verified N; N publication remains held and W stays stopped.
+**Next gate:** Close TK-002O with verification and documentation proof.
 
 ## Intent and authority
 
