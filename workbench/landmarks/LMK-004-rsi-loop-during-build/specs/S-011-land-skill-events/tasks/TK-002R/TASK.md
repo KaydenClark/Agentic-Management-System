@@ -30,6 +30,10 @@ Hand back exact source/candidate/merge/install identities, matching qualificatio
 
 ## Acceptance
 
+Workspace baseline sha256:7b1972d1f1fadf78b251e70af90ead121a42c0fa051b612b25561a02be1e4855
+
+Genuine schema-v1 inventory after native claim `4fb04bab` and committed original coordination bytes `ed55da08`, before record execution: complete=true, 977 files, no findings/busy Git operations. Raw inventory stays private; no ignored recovery files selected. Derived build/cache paths were observed, not adopted as evidence. This digest establishes identity, not semantic acceptance or remote recovery.
+
 - [ ] Diagnosis and prior-chain readback justify one source repair or a truthful no-source-change disposition; existing stops/counters/findings are retained.
 - [ ] If repair is justified, an immutable candidate artifact is available to Q before source merge; exact qualified Stable/Excellent, useful-benefit and no-regression evidence plus source checks/review release only that merge.
 - [ ] The exact accepted source has separately authorized verified personal adoption, or an explicit blocked adoption receipt; blocked adoption cannot satisfy personal-use acceptance.
