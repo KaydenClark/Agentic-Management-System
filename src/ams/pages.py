@@ -171,7 +171,7 @@ def _new_card(row, digest, candidate, *, protected=False):
     provenance = "**Integration:** pending\n" if kind == "pending-candidate" else (
         f'**{provenance_label}:** {landed["branch"]} {landed["commit"]} PR {pr if pr is not None else "unknown"}\n')
     sources = ", ".join(row["sources"])
-    verification = ('Protected deployment content verified; current snapshot evidence is in grill-board/pages/index.json. '
+    verification = ('Protected deployment content verified for this occurrence; see its appended verification receipt. '
                     if protected else 'Protected-deployment verification is pending; ')
     return (f'# Review {row["path"]}: {row["title"]} at {digest}\n\n'
             '**Topic:** Website pages\n**Priority:** P2\n'
@@ -205,8 +205,7 @@ def _same_owners(parsed, row, digest, candidate):
             return False
     # Older committed cards used a prose source suffix and had no structured
     # header. Preserve their occurrence when only the template/proof changes.
-    prefix, marker, sources = parsed.context.rpartition('Sources: ')
-    return bool(marker and sources.endswith('.') and sources[:-1].split(', ') == row['sources'])
+    return parsed.context.endswith('Sources: ' + ', '.join(row['sources']) + '.')
 
 
 def _verification_suffix(proof):
@@ -250,7 +249,7 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
                 # sources and provenance still match. Keep that occurrence's
                 # original candidate; the index binds the latest build pin.
                 reuse = _same_owners(parsed, row, digest, candidate)
-                if (reuse and protection is not None and parsed.fields.get('Verification') != 'protected-capture'
+                if (reuse and protection is not None
                         and not (parsed.verification and parsed.verification.get('State') == 'protected-capture')):
                     writes[f'{CARDS}/{name}'] = existing + (b'' if existing.endswith(b'\n') else b'\n') + _verification_suffix(protection)
             if not reuse:
@@ -270,6 +269,8 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
                 if not isinstance(parsed, Card) or any(parsed.fields.get(key) != value for key, value in required.items()):
                     raise PageRefused(f"{path}: generated card is not valid Board content")
                 writes[f"{CARDS}/{name}"] = new_card.encode()
+                if protection is not None:
+                    writes[f"{CARDS}/{name}"] += _verification_suffix(protection)
                 if old:
                     old_rel = f'{CARDS}/{old["card"]}'
                     old_blob = committed_blob(root, old_rel, base)

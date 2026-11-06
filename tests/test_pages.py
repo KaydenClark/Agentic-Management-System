@@ -387,9 +387,11 @@ def test_evidence_dictionary_alone_cannot_assert_protected_verification(room):
 
 
 @pytest.mark.parametrize('legacy', [False, True])
-def test_proof_upgrade_does_not_reask_already_approved_identical_content(room, legacy):
+@pytest.mark.parametrize('source', ['site/app/page.tsx', 'site/Synthetic, page.tsx', 'site/Sources: page.tsx'])
+def test_proof_upgrade_does_not_reask_already_approved_identical_content(room, legacy, source):
     candidate = git(room, 'rev-parse', 'HEAD')
     listed = inventory(room, ('/',))
+    listed['pages'][0]['sources'] = [source]
     pages.generate(room, listed, {'/': html()}, candidate=candidate)
     card = load_cards(room / 'grill-board/cards')[0][0]
     if legacy:
@@ -430,6 +432,23 @@ def test_protected_generation_binds_evidence_without_reasking_unchanged_content(
     assert (room / 'grill-board/cards' / card.file).read_bytes() == original
     index = json.loads((room / 'grill-board/pages/index.json').read_text())
     assert index['protection'] == later['protection']
+
+
+def test_ordinary_build_retains_historical_proof_without_claiming_current_snapshot_verification(room):
+    candidate = git(room, 'rev-parse', 'HEAD')
+    listed = inventory(room, ('/',))
+    captured = validated_capture(room, listed, candidate)
+    pages.generate(room, listed, captured['html'], candidate=candidate, protection=captured['verified_capture'])
+    before = load_cards(room / 'grill-board/cards')[0][0]
+    original = (room / 'grill-board/cards' / before.file).read_bytes()
+    result = pages.generate(room, listed, {'/': html()}, candidate=candidate)
+    cards, refused = load_cards(room / 'grill-board/cards')
+    assert not refused and len(cards) == 1 and cards[0].file == before.file
+    assert not result['protected_verified']
+    assert (room / 'grill-board/cards' / before.file).read_bytes() == original
+    assert cards[0].verification['Capture SHA256'] == captured['protection']['capture_sha256']
+    assert 'current snapshot evidence' not in cards[0].context
+    assert json.loads((room / 'grill-board/pages/index.json').read_text())['protection'] is None
 
 
 @pytest.mark.parametrize('mutation', ['html', 'inventory', 'candidate'])
