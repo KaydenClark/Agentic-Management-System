@@ -3,14 +3,14 @@
 **Task ID:** TK-003A
 **Spec ID:** S-010
 **Slice:** Accept two audited RSI source revisions; reject unknown or meaning-changing drift
-**Status:** blocked
+**Status:** ready
 **Blockers:** none
 **Destination:** spec-acceptance: S-010 Acceptance Criteria
 **Planned verification:** Audit source transition; reject unknown digest and changed workflow; retain existing adverse controls. Fresh build, focused and site tests, project checks and exact-head CI.
 
 ## Release
 
-Preparation only: orchestrator inspection of this assignment and source transition precedes claim. The named source, not S-011 completion, is required; no cross-Spec Task edge is asserted. The record writer releases blocked status when met.
+The orchestrator inspected the assignment and exact S-011 source transition and released this bounded Task. The named source, not S-011 completion, is required; no cross-Spec Task edge is asserted.
 
 ## Assignment
 
