@@ -35,7 +35,7 @@ export function decode(text) {
 // A small tag-stack reader: enough for React's well-formed output. Records,
 // for every element carrying a tracked attribute, its visible text, its
 // ancestors' attributes and the tag names inside it.
-export function readPage(html, trackedAttrs = TRACKED) {
+export function readPage(html, trackedAttrs = TRACKED, trackedTags = []) {
   const body = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style|template)\b[^>]*>[\s\S]*?<\/\1>/gi, '');
   const stack = [];
   const tracked = [];
@@ -58,7 +58,7 @@ export function readPage(html, trackedAttrs = TRACKED) {
     const attrs = parseAttrs(rawAttrs);
     for (const frame of stack) if (frame.record) frame.record.inner.push({ name, attrs });
     const frame = { name, attrs, record: null };
-    if (trackedAttrs.some((a) => a in attrs)) {
+    if (trackedTags.includes(name) || trackedAttrs.some((a) => a in attrs)) {
       frame.record = { name, attrs, ancestors: stack.map((f) => ({ name: f.name, attrs: f.attrs })), inner: [], text: '' };
       tracked.push(frame.record);
     }

@@ -8,7 +8,7 @@
 **Updated:** 2026-11-06
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Next gate:** Complete TK-003.
+**Next gate:** Close TK-0034 with verification and documentation proof.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 

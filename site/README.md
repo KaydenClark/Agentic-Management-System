@@ -103,3 +103,21 @@ The current article source pin is published catalog main `fb7ad23c963e183b930b23
 `npm test` includes `rsi-repairs.test.mjs`: refresh timestamps stay visible but are excluded from review hashes; changed results and availability remain hash-bound. Different graders never pool counts or share a trend. `runsWithoutResults(data)` renders real stopped/failed runs separately, with source, model and grader provenance and stop marks, without assigning a task, split or trial score; test runs stay hidden.
 
 `node tests/rsi-bars.check.mjs` checks actual candidate-bar computed fills, double borders and at least 3:1 border/interior contrast in light, manual-dark and system-dark modes, including a planted solid-fill failure. It also checks run-only fixtures at 375 and 1280 pixels in both themes. It requires Playwright and a browser; `PLAYWRIGHT_MODULE` can name an existing module, `BROWSER_CHANNEL=chrome` selects installed Chrome, and `SHOTS_DIR` optionally saves screenshots. No network access is used.
+
+### Reader navigation and attribution
+
+Reader links stay on-site, including source disclosures and skill credits.
+Project citations retain their public path and revision in accessible metadata;
+About's native source disclosures expose the full identity. Historical examples
+keep their explicit evidence revision. Only generated current-build revision
+text is excluded from page hashes; source paths and historical revisions remain
+part of the content.
+
+Skill bodies and summaries accept on-site destinations. Public source and
+license URIs in credit metadata render as wrapped citation text, preserving the
+author, adaptation notice and any recorded upstream revision. The private
+catalog pin remains unchanged; its source is never copied into the site.
+`npm test` checks every built anchor, including cross-page fragments, plus
+source identities and attribution retention.
+
+`node tests/keyboard.check.mjs URL` checks document-start traversal after middle focus, native closed/open details, a labeled derived visibility counterexample, and planted reachability/focus/early-stop faults without reloading them. Run it before the retained PR151 enlarged-text matrix; the matrix uses root text enlargement, not CSS zoom.
