@@ -159,6 +159,52 @@ Carrying cost: one sentence in an always-loaded file, kept by the owner/root.
 F-2 and F-3 are separate interventions. Keeping them out of this pass keeps
 the prediction readable.
 
+## Pass 1 change and trial results (2026-11-06)
+
+Owner direction after step 3 ([context](../wiki/context-session-orientation.md#owner-direction)):
+the findings belong to new Landmark LMK-000B, not S-002; every session is work;
+enforce recovery through the RUNBOOK; test on Anthropic and OpenAI models.
+Applied: the AGENTS line now covers every session including questions, and
+RUNBOOK "Get oriented" requires a first-reply **Orientation** note that
+overrides answer-first style, with the CONTINUE pointer removed. Both stay
+within the 3,000-character control budget.
+
+Trial: `ams-orientation` ([README](../../evals/session-orientation/README.md)),
+3 prompts, read-only sessions in temporary worktrees at `1e139b2`. Candidate =
+`1e139b2` plus the changed AGENTS.md and RUNBOOK.md only, so FAIL-132 and this
+report were not visible to workers. One run per prompt and condition.
+
+| Provider / model | Condition | Read RUNBOOK | Orientation note |
+|---|---|---|---|
+| Anthropic claude-opus-5-5, Claude Code `-p` | baseline | 3/3 | 0/3 |
+| Anthropic claude-opus-5-5 | candidate, final RUNBOOK | 3/3 | 3/3 |
+| OpenAI gpt-6.1-sol (configured default), Codex exec | baseline | 3/3 | 0/3 |
+| OpenAI gpt-6.1-sol | candidate, final RUNBOOK | 3/3 | 0/3 |
+
+An earlier, longer candidate RUNBOOK gave the same split (Claude 3/3 notes,
+Codex 0/3).
+
+Observations from reading the transcripts:
+
+- Headless sessions on both providers read RUNBOOK even at baseline. This
+  differs from FAIL-132's interactive desktop session, which did not. The
+  trial does not reproduce the desktop condition; that gap stays open.
+- Codex reads every listed record and its answers use recorded owner
+  decisions (for example, the next-work answer recovers the settled dashboard
+  readback). It skips only the visible note. The owner's user-level Codex
+  instructions say "Lead with the answer" and "Do not force responses into
+  rigid templates", and they outweigh the RUNBOOK's override line. Inference
+  from instructions and outputs; not isolated by a run without that file.
+- One Claude candidate run cited the overlay commit's title, "Orientation
+  trial overlay", which hinted at the change. The harness now uses a neutral
+  commit message. Results above are not rerun for that.
+
+Decision: retain the AGENTS and RUNBOOK change provisionally for Anthropic.
+For OpenAI the prediction failed; the next owner choice is whether the
+user-level Codex instructions should defer to a project's RUNBOOK
+orientation. Reconsider if Claude notes stop appearing in desktop sessions or
+repeated runs. One run per cell supports this job only, not a general claim.
+
 ## Challenged Or Rejected Findings
 
 - "Record volume alone causes the failure": weakened. FAIL-017 and FAIL-034

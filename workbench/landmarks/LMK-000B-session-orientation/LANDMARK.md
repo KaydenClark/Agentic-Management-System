@@ -7,7 +7,7 @@
 **Updated:** 2026-11-06
 **Catalog description:** Every session follows the RUNBOOK and shows the recovered intent before its first answer or action.
 **Blockers:** none
-**Next gate:** Owner review of the first orientation trial results in the [loop report](../../feedback/REPORT-context-recovery-before-answer-2026-11-06.md).
+**Next gate:** Owner choice on user-level Codex instructions that override the RUNBOOK note; [trial results](../../feedback/REPORT-context-recovery-before-answer-2026-11-06.md#pass-1-change-and-trial-results-2026-11-06).
 
 ## Direction
 

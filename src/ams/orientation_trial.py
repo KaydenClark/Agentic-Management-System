@@ -95,7 +95,7 @@ def run(provider, revision, case, out, *, overlay=(), model=None, repo=Path.cwd(
         for path in overlay:
             shutil.copyfile(repo / path, worktree / path)
         if overlay:
-            subprocess.run(["git", "-C", str(worktree), "commit", "-qam", "Orientation trial overlay"], check=True)
+            subprocess.run(["git", "-C", str(worktree), "commit", "-qam", "Update controls"], check=True)
         proc = subprocess.run(command(provider, case["prompt"], worktree, model), cwd=worktree,
                               stdin=subprocess.DEVNULL, capture_output=True, text=True, timeout=1800)
     finally:
