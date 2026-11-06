@@ -1,7 +1,7 @@
 // The /rsi page's data seam (S-007 TK-002). Turns S-006's rsi_runs and
 // rsi_results rows into the page's series: per task and per version, held-out
-// and dev apart, one series per arm, provider, model and effort, so a model
-// change always starts a new series. Runs on the server only. It counts rows
+// and dev apart, one series per arm, provider, model, effort and grader, so
+// changing a model or evaluator starts a new series. Server only. It counts rows
 // and compares counts; it computes no statistic (headlines with intervals
 // are TK-003 and come from the loop's own method).
 import { SERIES, type SeriesId, type SeriesPlan, type Split } from "./series";
@@ -98,7 +98,23 @@ export interface Series {
   provider: string;
   model: string;
   effort: string;
+  graderVersion: string;
   points: readonly Point[];
+}
+
+export interface RunEvidence {
+  run: RsiRun;
+  marks: readonly Mark[];
+}
+
+// Runs have no task or split column. Keep terminal attempts with no public
+// results separate from trial points rather than inventing a grade or split.
+export function runsWithoutResults(data: RsiData): RunEvidence[] {
+  const withResults = new Set(data.results.filter((r) => r.is_test === false).map((r) => r.run_id));
+  return data.runs
+    .filter((r) => r.is_test === false && (r.state === "stopped" || r.state === "failed") && !withResults.has(r.id))
+    .sort((a, b) => a.started_at.localeCompare(b.started_at) || a.id - b.id)
+    .map((run) => ({ run, marks: runMarks([run]) }));
 }
 
 export interface SeriesView extends SeriesPlan {
@@ -203,7 +219,7 @@ export function seriesViews(data: RsiData): SeriesView[] {
 
     const groups = new Map<string, RsiResult[]>();
     for (const r of rows) {
-      const key = [plan.view === "task" ? r.task_id : "", r.arm, r.provider, r.model, r.effort].join("\u0000");
+      const key = [plan.view === "task" ? r.task_id : "", r.arm, r.provider, r.model, r.effort, r.grader_version].join("\u0000");
       groups.set(key, [...(groups.get(key) ?? []), r]);
     }
 
@@ -222,7 +238,7 @@ export function seriesViews(data: RsiData): SeriesView[] {
         points.push(point);
       }
       const head = group[0];
-      return { key, taskId: plan.view === "task" ? head.task_id : null, arm: head.arm, provider: head.provider, model: head.model, effort: head.effort, points };
+      return { key, taskId: plan.view === "task" ? head.task_id : null, arm: head.arm, provider: head.provider, model: head.model, effort: head.effort, graderVersion: head.grader_version, points };
     });
     series.sort(
       (a, b) => order.get(a.points[0].version.id)! - order.get(b.points[0].version.id)! || (a.taskId ?? "").localeCompare(b.taskId ?? "") || a.key.localeCompare(b.key),
