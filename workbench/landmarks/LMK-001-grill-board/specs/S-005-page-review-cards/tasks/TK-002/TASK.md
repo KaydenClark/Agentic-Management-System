@@ -42,3 +42,9 @@ Hand back to S-005 with `close`.
 Preparation: published prerequisite TK-001 is done at800a67b. Exact PR174 main delivery is approval-blocked. This continuation remains local; it does not change that held PR head or claim delivery.
 
 Workspace baseline sha256:64986c46643318243bc3bb1e5aba64064430cdfbe4b85768d01b02cd82a18e6f
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-005-page-review-cards | 3f021946ac96b18cb010f1d8730db2b0987901ae | ahead 4 behind 0 | 0 | Local continuation: expected index-drift red; guard green1; focused101 pass. Added compatibility cases:13 pass/1 failed, CRLF blob versus Git text newline normalization. Failure retained before correction. | Approval guard/readback and Board guide; original receipt chains unchanged. | Correct normalized line comparison, then focused/full checks and independent review. Local only; PR174 exact merge remains approval-blocked. No close or owner QA. | 8e6b6f77791886c62a1ea47f755466e1780578e058025e0d1fada720d6539d4d |

@@ -90,7 +90,10 @@ def read_approvals(root, rev='HEAD'):
             if origin is None:
                 raise AnswerRefused('the approval line commit identity is unavailable')
             blamed.append((line[1:], origin))
-    if [text for text, _ in blamed] != (lines[:-1] if lines[-1] == '' else lines):
+    # Git's text-mode subprocess output normalizes CRLF. Compare line content
+    # with the same normalization; never rewrite the committed record bytes.
+    expected_lines = lines[:-1] if lines[-1] == '' else lines
+    if [text.removesuffix('\r') for text, _ in blamed] != [line.removesuffix('\r') for line in expected_lines]:
         raise AnswerRefused('the approval line identities differ from the committed record')
     entries, inside, fence = [], False, None
     for line, origin in blamed:
