@@ -26,7 +26,7 @@ The board is the part of the AMS a non-developer is most likely to use. Showing 
 
 ## Current Verified State
 
-- The checked demo landed in dev via PR177; PR178 delivered its page-review inventory with actual containment provenance. TK-0030 records its scoped checks and limitations. Legacy TK-001/TK-002 remain open for evidence reconciliation; Spec acceptance and Human QA remain outstanding. The dev deployment reported ERROR, with platform repair separate. The real Board card rules are specified in S-004.
+- The checked demo landed in dev via PR177; PR178 delivered its page-review inventory with actual containment provenance. TK-0030 records its scoped checks and limitations. Legacy TK-001/TK-002 remain open for evidence reconciliation; Spec acceptance and Human QA remain outstanding. The 40acb3a deployment reported ERROR; later platform verification is tracked in the [S-003 report](../../../../feedback/coherence/REPORT-S003-vercel-40ac-2026-11-06.md). The real Board card rules are specified in S-004.
 
 History: [S-009 history](../../../../wiki/history/S-009.md).
 
