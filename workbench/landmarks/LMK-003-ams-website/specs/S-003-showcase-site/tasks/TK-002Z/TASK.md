@@ -29,3 +29,7 @@ S-005 owns Python collector/Board/cards. Coordinate the flat pages output and po
 - [ ] Adding one declared fixture page/article automatically yields its inventory entry; no manual card row is required. Missing/ambiguous ownership, unsupported classification and stale coverage fail.
 - [ ] Generation is deterministic/idempotent and runs from Git-free frozen inputs; pending candidates contain no invented landing or self-referential hash.
 - [ ] S-005 can consume the generated flat inventory before requests/Board writes. Affected checks and scoped QA pass; exact source and limits are returned for checked dev delivery.
+
+## Starting inventory
+
+Workspace baseline sha256:2ea064d22681213beb226e4a9eca397b64ba656035b3f7a780c272f89b80c3fc. Original claim/projection committed first; prior generated public build/manifests copied and verified privately outside the checkout before this complete snapshot. No product changes preceded the separate digest binding.
