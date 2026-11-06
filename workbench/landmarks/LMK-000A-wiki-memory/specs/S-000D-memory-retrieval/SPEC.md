@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
 **Execution approval:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
-**Next gate:** Complete TK-002V.
+**Next gate:** Close TK-002V with verification and documentation proof.
 
 ## Outcome and authority
 

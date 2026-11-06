@@ -3,10 +3,12 @@
 **Task ID:** TK-002V
 **Spec ID:** S-000D
 **Slice:** Source-bound consolidation plan, guarded apply and corrected retrieval across affected owners
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-002U
 **Destination:** spec-acceptance: R3, R2 correction lineage, R6 preservation
 **Planned verification:** Public consolidate plan/apply/readback with retained-source hashes; stale/missing/private multi-target rejection and focused regression tests.
+**Claimed by:** codex-wiki-consolidation
+**Current claimant:** codex-wiki-consolidation
 
 ## Assignment
 
