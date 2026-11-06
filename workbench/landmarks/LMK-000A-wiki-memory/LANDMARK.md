@@ -7,7 +7,7 @@
 **Updated:** 2026-11-05
 **Catalog description:** Persistent source-backed knowledge lets agents continue across sessions without starting from zero.
 **Blockers:** none
-**Next gate:** Root verifies TK-002U local done receipt/artifacts before releasing TK-002V; public export remains held.
+**Next gate:** Owner restart answer for stopped TK-002V; [scope and separate public-export hold](../../feedback/REPORT-wiki-consolidation-stopped-2026-11-06.md).
 
 ## Direction
 

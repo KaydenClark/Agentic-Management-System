@@ -9,6 +9,7 @@
 **Planned verification:** Public consolidate plan/apply/readback with retained-source hashes; stale/missing/private multi-target rejection and focused regression tests.
 **Claimed by:** codex-wiki-consolidation
 **Current claimant:** codex-wiki-consolidation
+**Next gate:** Owner restart answer; [bounded scope and static findings](../../../../../../feedback/REPORT-wiki-consolidation-stopped-2026-11-06.md).
 
 ## Assignment
 
@@ -35,11 +36,11 @@ Claim originals:04fa67d. Workspace baseline sha256:75d82589cab0072970907a459a378
 
 ## Stopped local implementation, 2026-11-05
 
-Implementor:High/OpenAI gpt-6.1-sol/Codex, codex-wiki-consolidation. Current unclosed candidate adds ams-memory consolidate read-only request/plan and explicit apply:<plan_id> plus revision acknowledgment. Agent supplies literal prose changes and classified evidence; native add/correct uses existing runtime after disposable preflight. Whole-plan target/source checks precede writes; local originals/journal retain mid-write recovery. Managed tools/shared skills unchanged.
+Implementor:High/OpenAI gpt-6.1-sol/Codex, codex-wiki-consolidation. Current unclosed candidate adds ams-memory consolidate read-only request/plan and explicit apply:<plan_id> plus revision acknowledgment. Agent supplies literal prose changes and classified evidence; native add/correct uses existing runtime after disposable preflight. Revision/disposable-native checks exist, but supplemental static review finds source-identity preflight gaps; local originals/journal retain mid-write recovery. Managed tools/shared skills unchanged.
 
 Actual TDD: absent command red → explicit-owner plan green; absent apply red → guarded two-target apply green; absent native adapter red → native correction/query green; unresolved evidence append red → green; omitted-owner red → first green attempt still failed. Earlier aggregate15 consolidation cases passed, covering stale/missing/private/symlink/changed-source refusal, unsupported targets, pending intent, inference labels and recoverable injected write failure. Later additions were only individually exercised. The original26 retrieval/baseline tests and expanded suite have NOT been rerun on this candidate.
 
-FAIL-127 was the first unexpected verification failure (explicit owner skipped during discovery; repaired). FAIL-128 is the second: omitted-owner ranking selects synthesis because section headings are absent from scoring; it then refuses for missing incoming link. STOP enforced immediately. No further repair, native validation, operational-doc adoption, aggregate QA, Task close, publication or acceptance. Existing-owner auto discovery, adversarial schema/privacy coverage and final checks remain unfinished. Root must not release TK-002W from this receipt.
+FAIL-127 was the first unexpected verification failure (explicit owner skipped during discovery; repaired). FAIL-128 is the second: omitted-owner ranking selects synthesis because section headings are absent from scoring; it then refuses for missing incoming link. STOP enforced immediately. No further repair, native validation, operational-doc adoption, aggregate QA, Task close, publication or acceptance. Existing-owner discovery, source-identity preflight, corrected-Jot context and final QA remain unfinished; [restart scope](../../../../../../feedback/REPORT-wiki-consolidation-stopped-2026-11-06.md) preserves static findings129/130. Root must not release TK-002W from this receipt.
 
 Native-correction fixture preserved original source, source JOT block, old observation and exact synthetic confirmed readback; current experimental correction/summary/query retained supersession. This is one synthetic public fixture, not owner QA or general correctness proof. Private evidence copies retain requests/plans/applied fixture and failure input. No source-publication authority is inferred.
 

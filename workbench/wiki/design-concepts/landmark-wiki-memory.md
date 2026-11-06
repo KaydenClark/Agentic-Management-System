@@ -28,7 +28,7 @@ Memory functions describe how context is used: historical events, maintained und
 
 ## Open and unresolved
 
-The owner authorized bounded local continuation after the stopped candidate. The read-only query/check path now recovers maintained sections and native correction context, with inspected claim/source bindings; [the operating procedure](../guidebooks/wiki-maintenance.md#recover-and-check-with-ams-memory) explains bounds and refusal behavior. [The retained stopped report](../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves earlier defects and limits. Public export remains separately held; this reader does not establish general session continuity. Answer correctness, stale-claim prevention and owner correction effort require actual evidence; automated retrieval metrics cannot stand in for human judgment. Optional embeddings/reranking need a useful local comparison before adoption; no external service is mandatory.
+The owner authorized the prior bounded continuation; TK-002U is now natively done locally. The read-only query/check path now recovers maintained sections and native correction context, with inspected claim/source bindings; [the operating procedure](../guidebooks/wiki-maintenance.md#recover-and-check-with-ams-memory) explains bounds and refusal behavior. [The retained stopped report](../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves earlier defects and limits. [Consolidation stopped after the next Runbook limit](../../feedback/REPORT-wiki-consolidation-stopped-2026-11-06.md); its static findings and bounded restart need a new owner answer. TK-002W remains blocked and public export separately held; the reader does not establish general session continuity. Answer correctness, stale-claim prevention and owner correction effort require actual evidence; automated retrieval metrics cannot stand in for human judgment. Optional embeddings/reranking need a useful local comparison before adoption; no external service is mandatory.
 
 ## Where the work lives
 
@@ -42,6 +42,7 @@ The owner authorized bounded local continuation after the stopped candidate. The
 
 ## History
 
+- 2026-11-06: Records-only capture preserves TK-002U local completion and the later consolidation STOP/static findings; new continuation and public-export answers remain separate.
 - 2026-11-05: Explicit owner restart released bounded local repair; read-only recall/source-check behavior and its limits are explained in the procedure, with preserved original evidence.
 
 - 2026-11-05: Records-only continuation captured the partial stopped candidate, static review and pending restart/publication decisions; original intent and source evidence remain preserved.

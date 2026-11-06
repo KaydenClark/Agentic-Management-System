@@ -24,9 +24,9 @@ The Wiki is AMS's knowledge base and memory, independently owned by [Wiki memory
 
 ## Partial stopped implementation
 
-The five-improvement Map/Plan remains the destination; candidate9419c9a is partial and stopped, not delivered memory behavior. [The stopped-candidate report](../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves source-linked supplemental static findings, observed retrieval-only evidence and the bounded TK-002U restart proposal. Owner restart and public-export decisions remain separate and unanswered; no source repair, retest, assembled Review, owner QA or acceptance follows from records capture. The native Task retains execution state and Receipt1.
+The five-improvement Map/Plan remains required. [Prior bounded continuation](#jot-4a2097ca-5bd6-456f-83c9-3bdbe7a79a29) led to TK-002U's native local closure; its read-only recall/source-check path,26focused passes and6unchanged real sources are scoped evidence, not full memory acceptance. [The earlier stopped report](../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) retains prior failures and corrections.
 
-Local restart after the stopped candidate is [explicitly authorized](#jot-4a2097ca-5bd6-456f-83c9-3bdbe7a79a29); the original failures and separate public-export hold remain. See [S-000D](../landmarks/LMK-000A-wiki-memory/specs/S-000D-memory-retrieval/SPEC.md) for current scope and evidence.
+TK-002V then stopped correctly after FAIL-128. [The consolidation report](../feedback/REPORT-wiki-consolidation-stopped-2026-11-06.md) preserves actual greens, read-only owner-selection diagnosis, two supplemental static findings and proposed bounded restart. The new owner restart and separate public-export answers are pending; prior approval does not waive this STOP. Native Tasks/receipts own execution; TK-002W remains blocked. Records capture supplies no repair, retest, closure, publication or Human QA.
 
 ## Planned memory interface
 
@@ -199,3 +199,16 @@ Exact owner answer: "Authorize bounded continuation". This explicitly releases t
 <!-- ams-memory-bindings
 {"version":1,"claims":[{"id":"wiki-independent-owner","anchor":"current-maintenance-path","supersedes":null,"sources":[{"identity":"workbench/wiki/context-wiki-maintenance.md#jot-b3247909-9721-4842-a83f-61adc5da2e13","reviewed_public":true,"observations":[{"sha256":"340619cd4ba9f1d07683004bd7e83597ed90c410fbc2998ad94da93c27740abf","revision":"19778a2529f9ec0ae8bc8e2faa8bd4dd057e4fce","observed_at":"2026-11-06"}]},{"identity":"workbench/wiki/context-wiki-maintenance.md#jot-ee356d5a-8394-47ee-9bc9-09fa308014b3","reviewed_public":true,"observations":[{"sha256":"5ef9e7565888088ca15ffa82bfd3d8bf48d7761511194ac5eb5111137945c36e","revision":"19778a2529f9ec0ae8bc8e2faa8bd4dd057e4fce","observed_at":"2026-11-06"}],"role":"superseded-context","superseded_by":"workbench/wiki/context-wiki-maintenance.md#jot-b3247909-9721-4842-a83f-61adc5da2e13"}]},{"id":"wiki-five-improvements","anchor":"current-maintenance-path","supersedes":null,"sources":[{"identity":"workbench/wiki/context-wiki-maintenance.md#jot-72534303-7521-4d2c-98d2-96b1bcb3825a","reviewed_public":true,"observations":[{"sha256":"52262124c6b7b0ffa1b9f27460bf39646fb415c8f29441191390da23bab85c7e","revision":"19778a2529f9ec0ae8bc8e2faa8bd4dd057e4fce","observed_at":"2026-11-06"}]}]}]}
 -->
+
+<!-- jot-entry -->
+### JOT-ca4f26e3-a9e3-4701-bee0-1a08c5b8ef30
+Kind: observation
+State: current
+Recorded: 2026-11-06T06:45:16.817Z
+Author: codex-wiki-prepare
+Source: workbench/feedback/REPORT-wiki-consolidation-stopped-2026-11-06.md
+Topic: wiki-maintenance
+Supersedes: none
+
+Stopped consolidation observation, captured2026-11-06: TK-002U is natively done locally at36cf26e (sourcef924010,26focused passes,6real sources unchanged); its prior failure/authorization/receipt history remains. TK-002V stopped properly after second unexpected verification FAIL-128 at03c17ab90b78fd7d5e1c0dd13777cb6cdc49276e, code/receiptf1621c89020ae2b1bef37f3dcc294cd15e2e8762. Root's owner-selection diagnosis used recorded input/source only, not new test execution. Fresh independent High/OpenAI gpt-6.1-sol/Codex Standards and Spec reviews found static source-selection preservation gaps before writes (FAIL-129), and corrected-Jot source parsing without full predecessor context (FAIL-130). No current real-source mutation/exploit or new real-case execution is claimed; no tests/public actions/native verdict/HumanQA occurred in review. The report owns the bounded V restart proposal and evidence limits. V remains open and W blocked. New owner continuation and separate public-export/checked-main answers are both pending; prior bounded approval does not waive this STOP. All five improvements and independent Wiki memory ownership remain required. Records capture grants no repair, retest, native closure or publication.
+<!-- /jot-entry -->

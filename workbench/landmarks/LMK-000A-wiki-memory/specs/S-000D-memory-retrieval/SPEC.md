@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
 **Execution approval:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
-**Next gate:** Close TK-002V with verification and documentation proof.
+**Next gate:** Owner bounded-restart answer for TK-002V; [scope and separate export hold](../../../../feedback/REPORT-wiki-consolidation-stopped-2026-11-06.md).
 
 ## Outcome and authority
 
@@ -52,14 +52,14 @@ Exercise CLI recall/corrections, change/restore, consolidation preflight/readbac
 ## Task coverage and ready frontier
 
 1. [TK-002U](tasks/TK-002U/TASK.md), locally closed: recall/freshness/baseline, R1/R2/R5/R6.
-2. [TK-002V](tasks/TK-002V/TASK.md), blocked by working TK-002U CLI/bindings: consolidation, R3/R2/R6.
+2. [TK-002V](tasks/TK-002V/TASK.md), stopped open after TK-002U local closure: consolidation, R3/R2/R6.
 3. [TK-002W](tasks/TK-002W/TASK.md), blocked by TK-002V correction/readback: context/full evaluation, R4/R5 and integrated R1-R6.
 
 Serialize shared writers. Tasks include Check/QA/repair/hand-back; root owns independent probes/Review/delivery. Stopped implementation grants no success claim.
 
 ## Completion Result
 
-TK-002U local reader/check/evaluation candidate:26 focused passes,4/4 pre-anchor development checks,4claims/6sources; [retained report](../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves failures/limits. Root accepted the final anchor repair and authorized local closure; it verifies done artifacts before the next Task. Public export, assembled Review and R3/R4/full R5 remain; no answer/effort benefit or owner acceptance claimed.
+TK-002U local reader/check/evaluation candidate:26 focused passes,4/4 pre-anchor development checks,4claims/6sources; [retained report](../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves failures/limits. Root accepted the final anchor repair and authorized local closure; it verifies done artifacts before the next Task. TK-002V then stopped at FAIL-128; [static findings and bounded restart](../../../../feedback/REPORT-wiki-consolidation-stopped-2026-11-06.md) remain open, and TK-002W stays blocked. New restart/public-export answers are separately pending; no assembled Review, answer/effort benefit or owner acceptance.
 
 ## Supersession
 
