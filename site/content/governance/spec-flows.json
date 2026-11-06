@@ -1,0 +1,33 @@
+{
+  "spec": {
+    "states": ["planned", "active", "blocked", "needs-review", "complete", "superseded"],
+    "transitions": [
+      {"from":"planned", "to":"active", "action":"Activate prepared work with confirmation and execution approval"},
+      {"from":"active", "to":"complete", "action":"Complete after the required acceptance, review, approval and delivery evidence"},
+      {"from":"needs-review", "to":"complete", "action":"Complete after the same required gates are met"}
+    ]
+  },
+  "delivery": {
+    "states": ["Explore", "Promote", "Prepare", "Journey", "Judge", "Complete"],
+    "transitions": [
+      {"from":"Explore", "to":"Promote", "action":"Confirm the idea and reconcile supported decisions"},
+      {"from":"Promote", "to":"Prepare", "action":"Carry the accepted destination into a plan"},
+      {"from":"Prepare", "to":"Journey", "action":"Start authorized implementation after execution approval"},
+      {"from":"Journey", "to":"Judge", "action":"Return implemented work and its checks for assessment"},
+      {"from":"Judge", "to":"Complete", "action":"After the required judgments and scoped delivery permission, deliver and clean up"}
+    ]
+  },
+  "review": {
+    "states": ["Candidate", "Independent review", "Verify", "Corrective work", "New candidate", "Owner QA", "Approved candidate"],
+    "transitions": [
+      {"from":"Candidate", "to":"Independent review", "action":"A separate reviewer examines the identified result"},
+      {"from":"Independent review", "to":"Corrective work", "action":"A failed review names a finding and its repair"},
+      {"from":"Corrective work", "to":"New candidate", "action":"Repair the affected work and check it again"},
+      {"from":"New candidate", "to":"Independent review", "action":"Review the revised result"},
+      {"from":"Independent review", "to":"Verify", "action":"A passing review proceeds to verification"},
+      {"from":"Verify", "to":"Owner QA", "action":"The owner examines the identified result"},
+      {"from":"Owner QA", "to":"Corrective work", "action":"An owner finding returns the affected work for repair"},
+      {"from":"Owner QA", "to":"Approved candidate", "action":"Owner approval binds the identified content; delivery still needs its scoped permission"}
+    ]
+  }
+}
