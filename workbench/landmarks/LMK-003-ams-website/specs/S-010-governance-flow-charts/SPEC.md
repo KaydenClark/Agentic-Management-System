@@ -1,14 +1,16 @@
 # S-010 - Governance stack and flow charts
 
 **Spec ID:** S-010
-**Status:** planned
+**Status:** active
 **Priority:** 3
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-06
 **Catalog description:** Site pages explaining the governance stack and drawing the AMS workflows as diagrams that match the code they depict.
-**Blockers:** S-003
-**Next gate:** Task planning after the site shell (S-003) exists.
+**Blockers:** S-003 site shell content exists at checked dev commit `259b7a905639cc6ab621220b160fc813c5bc43f1`; whole-Spec completion remains separate.
+**Confirmation:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
+**Execution approval:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
+**Next gate:** Complete TK-002.
 
 ## Intent and authority
 
@@ -24,7 +26,8 @@ The governance stack is what makes the AMS auditable rather than a set of prompt
 
 ## Current Verified State
 
-- No pages or diagrams exist. The lifecycle states and transitions live in the Workbench tools in `workbench/tools/`.
+- TK-001 delivered the Task lifecycle chart on the Spec branch; TK-002 through TK-004 and assembled acceptance remain open.
+- At assembled candidate `987c3314b26764772b7331d500e30c1c3b8a3ebc` (including checked `dev` `6cdb647d2d415a8400d1d26cad2614b492c03926`), site build and 282 site tests passed; the RSI browser integration check passed. The Task chart and audited runtime sources are byte-identical to `d774b5113d0e19bc3e35a7467ce03a321a9eb948`, where shared CI passed Python and site jobs and earlier browser and Python checks apply to that unchanged scope. This does not establish independent Review, Human QA or delivery.
 
 History: [S-010 history](../../../../wiki/history/S-010.md).
 
@@ -52,10 +55,6 @@ History: [S-010 history](../../../../wiki/history/S-010.md).
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Task lifecycle diagram generated from the code's status set, with a drift test, on `dev` | ready | none | pending |
-| TK-002 | Spec lifecycle, idea-to-delivered and review-and-return diagrams under the same test | ready | TK-001 | pending |
-| TK-003 | Governance stack page with worked examples | ready | none | pending |
-| TK-004 | Branch model, orchestrator and RSI round diagrams | ready | TK-001 | pending |
 
 ### TK-001 - First generated diagram
 
