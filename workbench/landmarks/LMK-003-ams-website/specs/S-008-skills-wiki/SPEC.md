@@ -18,11 +18,11 @@ The owner chose site-written articles modeled on https://www.aihero.dev/skills a
 
 ## Outcome
 
-A reader browses the skills that operate the AMS by Workbench stage, opens any one, and learns what it does, when to reach for it, what it needs and refuses, how to tell it is working and where it fits.
+A reader browses AMS skills by Workbench stage and learns what each does, when to use it, its requirements and refusals, working signs and workflow fit.
 
 ## Why It Matters
 
-The skills are how agents operate the AMS. Explaining them faithfully, without publishing private files, shows the method behind the results.
+Faithful explanations show the method behind AMS results without publishing private files.
 
 ## Current Verified State
 
@@ -51,9 +51,9 @@ History: [S-008 history](../../../../wiki/history/S-008.md).
 
 ## Decisions And Contracts
 
-- Articles are written for the site; skill files are not copied.
-- Adapted skills are credited to their source, never labeled original.
-- The nine-section article is the owner's (2026-11-01).
+- Write site articles; do not copy skill files.
+- Credit adapted skills to their source, never as original.
+- The owner chose the nine-section article (2026-11-01).
 - Stages come from the chart, names from the repository at the pin; where they differ the repository name wins and this Spec leaves the chart alone.
 - No "used to build this site" marks; that record belongs to the Supabase backend and GitHub (owner, 2026-11-01).
 
