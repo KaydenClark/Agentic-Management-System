@@ -5,10 +5,10 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-05
+**Updated:** 2026-11-06
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Next gate:** Claim TK-002X for the owner-authorized baseline reconciliation; preserve existing stopped corrective runs.
+**Next gate:** Close TK-002X with verification and documentation proof.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 

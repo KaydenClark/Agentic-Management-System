@@ -3,10 +3,12 @@
 **Task ID:** TK-002X
 **Spec ID:** S-003
 **Slice:** Current project meaning and website behavior share a checked baseline
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Content, Route, Trust, Owner presentation
 **Planned verification:** Pin remote main/dev; inspect every conflict against its owners and dated history; regenerate projections; prove dev website bytes survive; run repository controls, a fresh site build before tests, and candidate checks.
+**Claimed by:** codex-s003-baseline
+**Current claimant:** codex-s003-baseline
 
 ## Assignment
 
