@@ -153,3 +153,46 @@ current central log and route it to the existing TK-003 claimant. No duplicate
 Task, PR, message/comment to another person, build, full suite, merge,
 deployment or permission change was performed. This branch remains an
 unmerged records-only checkpoint; no CI-triggering PR was opened.
+
+## F-002 corrective readback - 2026-11-06
+
+**Current disposition: corrected at source and bounded rechecked.** This append
+supersedes F-002's earlier unresolved status only for the identified FIFO defect;
+the original observation, both timeouts and harness miss remain unchanged.
+
+The active S-005 writer received this intake through the existing project
+workflow: current [canonical intake](https://github.com/KaydenClark/Agentic-Management-System/blob/089c065275679a4e5988a775b003d5385fbc397b/workbench/feedback/WORKBENCH_FEEDBACK.md)
+maps the original occurrence and recurrence to **FAIL-258/260**, and the reporter
+control miss to **FAIL-259**. [TK-003's continued and re-closed record](https://github.com/KaydenClark/Agentic-Management-System/blob/089c065275679a4e5988a775b003d5385fbc397b/workbench/landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/tasks/TK-003/TASK.md)
+preserves the original claimant, prior close, receipts and failing Review.
+No duplicate Task or competing correction was created by owner-assistant.
+
+Actual inspected PR174 head is `089c065275679a4e5988a775b003d5385fbc397b`;
+its description still names the earlier0d head. The correction originated at
+`060e0e9e83de17c5273586c79852cca9b4209162`. Current
+[`_receipt_identity` and `_Store.read`](https://github.com/KaydenClark/Agentic-Management-System/blob/089c065275679a4e5988a775b003d5385fbc397b/src/ams/page_feedback.py#L155-L208)
+precheck regular type, ownership, links, mode and size; open with
+`O_NONBLOCK | O_NOFOLLOW`; then compare opened device/inode identity.
+Current module SHA-256 is
+`c9b1e15c6be6fa01a568facd84f3f41c3c1783a236cfb16cb28d1ab649ba3a20`.
+
+Owner-assistant re-exercised only the exact AST-extracted helper and Store class,
+with the required exception bindings, in disposable synthetic storage. The
+regular-invalid control, existing FIFO, and a regular-to-FIFO substitution after
+stat all returned `refused-recoverably`, exit0, within their two-second parent
+limits. No product methods were altered. This independently confirms bounded
+low-level refusal; it is not an independent HTTP, Board-lock, privacy-matrix or
+full-suite run.
+
+The new [FIFO regression module](https://github.com/KaydenClark/Agentic-Management-System/blob/089c065275679a4e5988a775b003d5385fbc397b/tests/test_page_feedback_fifo.py)
+separately checks unchanged Git/voice/private-original bytes and lock acquisition
+by another process while the caller remains alive, including substitution.
+[Actual089 exact-head CI42257305656](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/42257305656)
+is successful. Author/reviewer counts and their source/environment limitations
+remain in the current Task and canonical intake; owner-assistant did not rerun
+those suites or transfer older-source results.
+
+PR174 remains draft and unmerged. TK-003's bounded re-close is not whole-Spec
+acceptance. Coverage, downstream consumption, exact assembled protected-dev
+capture/readback, actual owner QA and delivery authority retain their gates.
+No new actionable defect was established by this corrective watch.
