@@ -46,3 +46,13 @@ Full original Acceptance above remains unchanged/unchecked. Public activity and 
 Workspace baseline sha256:0c40e6470f51241a2a2fb1a82ec9845106102f92f50a0a8331b6c7439f11489e
 
 Native claim2f8aeac01335c28f5f87e09f358bcc5a47017053; committed originals e5102da9eae2d61b71c4972e30a08403ff6a8425 precede the genuine complete snapshot. All original file copies and committed blobs were independently verified; raw evidence stays private. This binding precedes product work.
+
+## Continuation evidence
+
+The [public software checkpoint](../../../../../../wiki/history/S-007.md#public-software-checkpoint) records the checked subset, adverse observations and original full-F gaps. F remains open.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-007-rsi-chart-pages | f641cd89b9dd3a3d56dcdcdef0f720785322ad58 | ahead 0 behind 0 | 3 | f641 fresh: build/inventory/hashes; site345; Python867/6skip; post-build hygiene0; render/layout/ADR/wiki/whitespace pass. Browser293/294: real375px no-JS nav-focus FAIL; original281/293 retained. Focused13 + Python producer1 pass. | S007 History public software checkpoint; Spec next gate; F continuation evidence. | Continued, not closed: S003-owned pre-existing no-JS nav failure; no live event write/readback or private lineage/later-use joins; original full F Acceptance, owner Human QA and promotion remain open. Root reserves dev merge; stopped attempts unchanged. | c9e2d2ce3977f715c9f37e3037e73c25afdb5b2c3f623c90945db969441b5e0f |
