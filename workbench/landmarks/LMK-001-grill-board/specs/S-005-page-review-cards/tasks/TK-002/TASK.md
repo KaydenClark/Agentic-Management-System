@@ -32,14 +32,14 @@ Hand back to S-005 with `close`.
 
 ## Acceptance
 
-- [ ] In a temporary Git repository, confirming a fixture page card writes one approval line naming its path and hash, in one commit, with no second confirmation.
-- [ ] Must fail: confirming a stale card, or a card whose hash differs from the index, writes nothing and leaves both files byte-identical.
-- [ ] Approve a fixture page, change one character in its `<main>`, regenerate: `status` shows `draft`. Must fail: `approved` on changed content.
-- [ ] Readback parses committed approval identity without overwriting prior entries; a changed current hash reports `draft` locally.
-- [ ] No Supabase approval migration, publicly readable approval row, site approval query or public review status is introduced.
-- [ ] `uv run pytest` passes; render and doctor show no blocking finding.
+- [x] In a temporary Git repository, confirming a fixture page card writes one approval line naming its path and hash, in one commit, with no second confirmation.
+- [x] Must fail: confirming a stale card, or a card whose hash differs from the index, writes nothing and leaves both files byte-identical.
+- [x] Approve a fixture page, change one character in its `<main>`, regenerate: `status` shows `draft`. Must fail: `approved` on changed content.
+- [x] Readback parses committed approval identity without overwriting prior entries; a changed current hash reports `draft` locally.
+- [x] No Supabase approval migration, publicly readable approval row, site approval query or public review status is introduced.
+- [x] `uv run pytest` passes; render and doctor show no blocking finding.
 
-Preparation: published prerequisite TK-001 is done at800a67b. Exact PR174 main delivery is approval-blocked. This continuation remains local; it does not change that held PR head or claim delivery.
+Initial preparation used a local claim after published TK-001 closed at800a67b. A later collector failure made that held source unready. Corrective publication supersedes the old approval target; exact-head CI/native close and main permission remain separate.
 
 Workspace baseline sha256:64986c46643318243bc3bb1e5aba64064430cdfbe4b85768d01b02cd82a18e6f
 

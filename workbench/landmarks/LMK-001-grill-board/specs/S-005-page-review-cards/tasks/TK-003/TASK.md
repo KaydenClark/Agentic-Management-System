@@ -39,6 +39,6 @@ Hand back to S-005 with `close`.
 - [ ] Must fail: an open page card that names no voice record version fails the test.
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
 
-Local preparation: published TK-001 is done at800a67b. Exact PR174 main delivery remains approval-blocked; this continuation leaves its held head unchanged. TK-002 remains separately in progress pending publication.
+Initial local preparation left800a67b unchanged. Its later collector failure requires a corrected public candidate before delivery. TK-002 remains in progress pending exact-head CI/native close; this Task has only its claim/baseline, with implementation paused.
 
 Workspace baseline sha256:77b8702e5c168d8ea307b5c62fcffeb0f5ab555e304d05be9de27cbba50ffcb9
