@@ -17,6 +17,10 @@ APPROVAL_LINE = re.compile(
     r'Confirmed: Approve page (?P<path>/[^ ]*) \(.+\) at content hash (?P<hash>sha256:[0-9a-f]{64})\.$')
 
 
+def approval_recommendation(path, title, digest):
+    return f'Approve page {path} ({title}) at content hash {digest}.'
+
+
 def committed_ref(root, rev='HEAD'):
     return _git(root, 'rev-parse', '--verify', '--end-of-options', f'{rev}^{{commit}}').strip()
 
@@ -54,7 +58,7 @@ def validate_page_confirmation(root, base, card, card_blob):
     if (actual.stale is not None or not ROUTE.fullmatch(path) or not HASH.fullmatch(digest)
             or actual.fields.get('Owner record') != APPROVALS
             or actual.fields.get('Write after') != '## Approvals'
-            or actual.fields.get('Recommendation') != f"Approve page {path} ({actual.fields.get('Title', '')}) at content hash {digest}."):
+            or actual.fields.get('Recommendation') != approval_recommendation(path, actual.fields.get('Title', ''), digest)):
         raise AnswerRefused('the page card has no valid current approval identity')
     current = read_page_index(root, base)['pages'].get(path)
     if current is None or current['hash'] != digest or current['card'] != card.file:
@@ -83,7 +87,9 @@ def read_approvals(root, rev='HEAD'):
         raise AnswerRefused('the committed approval record needs one unique Approvals section')
     blamed = []
     origin = None
-    for line in _git(root, 'blame', '--line-porcelain', '--root', commit, '--', APPROVALS).split('\n'):
+    # Required identity fields contain no whitespace. Preserve their originating
+    # commit through line-ending-only formatting without hiding identity edits.
+    for line in _git(root, 'blame', '-w', '--line-porcelain', '--root', commit, '--', APPROVALS).split('\n'):
         if re.fullmatch(r'[0-9a-f]{40,64} \d+ \d+(?: \d+)?', line):
             origin = line.split(' ', 1)[0]
         elif line.startswith('\t'):

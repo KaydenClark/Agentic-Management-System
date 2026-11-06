@@ -16,7 +16,7 @@ from .grill_board.answers import (
     AnswerRefused, _git, _write_and_commit, committed_blob, repository_lock,
 )
 from .grill_board.cards import Card, load_cards, parse_card
-from .page_approvals import APPROVALS, INDEX, page_status
+from .page_approvals import APPROVALS, INDEX, approval_recommendation, page_status
 
 CARDS = "grill-board/cards"
 LINE_BREAKS = "\n\r\v\f\x1c\x1d\x1e\x85\u2028\u2029"
@@ -182,7 +182,7 @@ def _new_card(row, digest, candidate, *, protected=False):
             f'**Sources:** {json.dumps(row["sources"], ensure_ascii=True)}\n'
             f'{provenance}'
             f'**Spec:** {row["spec"]}\n**Task:** {row["task"]}\n'
-            f'**Recommendation:** Approve page {row["path"]} ({row["title"]}) at content hash {digest}.\n'
+            f'**Recommendation:** {approval_recommendation(row["path"], row["title"], digest)}\n'
             f'**Owner record:** {APPROVALS}\n**Write after:** ## Approvals\n\n'
             f'Inspect this page at built candidate {candidate}. '
             f'{verification}This local card supplies no public review status. '

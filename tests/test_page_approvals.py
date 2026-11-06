@@ -146,13 +146,32 @@ def test_reader_preserves_unicode_and_accepts_committed_crlf_records(room):
     listed = inventory(room, ('/',))
     listed['pages'][0]['title'] = 'Synthetic café (reader)'
     pages.generate(room, listed, {'/': html()}, candidate=git(room, 'rev-parse', 'HEAD'))
-    card, _ = confirm(room)
+    card, approved = confirm(room)
     record = room / pages.APPROVALS
     record.write_bytes(record.read_bytes().replace(b'\n', b'\r\n'))
     git(room, 'add', pages.APPROVALS)
     git(room, 'commit', '-qm', 'Synthetic CRLF record')
-    assert read_approvals(room)[0]['card'] == card.file
+    entry = read_approvals(room)[0]
+    assert entry['card'] == card.file and entry['commit'] == approved
     assert pages.page_status(room)['pages']['/']['state'] == 'approved'
+
+
+@pytest.mark.parametrize('field', ['path', 'hash', 'date', 'card'])
+def test_substantive_approval_identity_edits_keep_their_actual_committing_sha(room, field):
+    from ams.page_approvals import read_approvals
+    prepare(room)
+    card, _ = confirm(room)
+    old, new = {
+        'path': ('Approve page / (', 'Approve page /synthetic-other ('),
+        'hash': (card.fields['Content hash'], 'sha256:' + 'a' * 64),
+        'date': ('2026-11-07', '2026-11-08'),
+        'card': (card.file, 'page-synthetic-other.md'),
+    }[field]
+    record = room / pages.APPROVALS
+    record.write_text(record.read_text().replace(old, new))
+    git(room, 'add', pages.APPROVALS)
+    git(room, 'commit', '-qm', 'Synthetic substantive approval correction')
+    assert read_approvals(room)[0]['commit'] == git(room, 'rev-parse', 'HEAD')
 
 
 def test_guard_uses_the_committed_recommendation_and_card_identity(room):
