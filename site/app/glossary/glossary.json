@@ -1,5 +1,5 @@
 {
-  "intro": "Shared AMS terms; [Blueprint](BLUEPRINT.md) owns the destination.",
+  "intro": "[Blueprint](BLUEPRINT.md) owns the destination.",
   "sections": [
     {
       "heading": "Language",
@@ -12,42 +12,79 @@
             {
               "term": "AMS",
               "id": "ams",
-              "definition": "A reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. Its methods can be packaged for anyone to reuse; this project adds RSI to improve them through actual work."
+              "definition": "Reusable AI workflows, rules, skills and tools developing intent and carrying it into verified outcomes; RSI through actual work."
             },
             {
               "term": "RSI loop",
               "id": "rsi-loop",
-              "definition": "Recursive self-improvement through actual work: observe friction, propose a bounded change, compare outcomes, decide its disposition and examine later use. A loop record proves no improvement."
+              "definition": "Recursive self-improvement: observe friction, propose bounded change, compare outcomes, decide disposition, check later use. Recording proves no benefit."
             },
             {
               "term": "Alignment assessment",
               "id": "alignment-assessment",
-              "definition": "Application of approved Alignment Check r1 to a named candidate and scope over three assessment runs."
+              "definition": "Approved Alignment Check r1 on a named candidate/scope in three runs."
             },
             {
               "term": "Alignment Score",
               "id": "alignment-score",
-              "definition": "The percentage of passed applicable checks pooled across the three assessment runs; distinct from fitness level and acceptance."
+              "definition": "Applicable checks passed, pooled across three runs as a percentage; separate from fitness/acceptance."
             },
             {
               "term": "Fitness level",
               "id": "fitness-level",
-              "definition": "The r1 classification: Excellent at three passing runs, Stable at two, Functional at one and Broken at none; any Critical failure overrides the count to Broken."
+              "definition": "r1: Excellent at three passing runs, Stable at two, Functional at one, Broken at none or any Critical failure."
             },
             {
               "term": "Improvement attempt",
               "id": "improvement-attempt",
-              "definition": "One assessed version of an improvement candidate; each candidate gets at most three, excluding baseline."
+              "definition": "Assessed improvement version; three attempts per candidate maximum, excluding baseline."
             },
             {
               "term": "Workbench",
               "id": "workbench",
               "definition": "An agentic management system that brings people, agents, project records, artifacts and tools together to carry intent into outcomes."
+            }
+          ]
+        },
+        {
+          "heading": "Governance core",
+          "id": "group-governance-core",
+          "note": "",
+          "terms": [
+            {
+              "term": "Governance Plane",
+              "id": "governance-plane",
+              "definition": "A claim's role for a target/operation; artifacts can hold claims on one or several planes."
+            },
+            {
+              "term": "Projection",
+              "id": "projection",
+              "definition": "6: Snapshot summary of each plane's claims as of its last visit."
             },
             {
               "term": "Intent",
               "id": "intent",
-              "definition": "What the owner wants, with reasons, boundaries and corrections. Retain whether confirmed or unresolved."
+              "definition": "5: What the owner wants, with reasons, boundaries, corrections and confirmation status."
+            },
+            {
+              "term": "Enduring Context",
+              "id": "enduring-context",
+              "definition": "4: Our knowledge of what exists, what Canon and Grounding say exists or should change, and Intent and what to do with it."
+            },
+            {
+              "term": "Grounding",
+              "id": "grounding",
+              "definition": "3: Evidence and proofs used to establish and support the authoritative source of truth."
+            },
+            {
+              "term": "Canon",
+              "id": "canon",
+              "definition": "2: The authoritative source of truth for the target: what governs."
+            },
+            {
+              "term": "Actuality",
+              "id": "actuality",
+              "definition": "1: What exists and is being worked on."
             }
           ]
         },
@@ -57,66 +94,81 @@
           "note": "",
           "terms": [
             {
+              "term": "Destination Question Card (DQC)",
+              "id": "destination-question-card-dqc",
+              "definition": "Stable evolving question/concept record owning readbacks, confirmations and history; a Board card presents it."
+            },
+            {
+              "term": "Concept lane",
+              "id": "concept-lane",
+              "definition": "Intent/concepts in DQCs, projected in TRACKER.md, linked to execution by stable ID."
+            },
+            {
+              "term": "Execution lane",
+              "id": "execution-lane",
+              "definition": "Landmark, Spec and Task work, projected in TASKBOARD.md, linked to originating DQCs."
+            },
+            {
               "term": "Implementation Task",
               "id": "implementation-task",
-              "definition": "A bounded assigned slice under a Spec, owning execution state and proof."
+              "definition": "Assigned bounded Spec slice owning execution state and proof."
             },
             {
               "term": "Evaluation task",
               "id": "evaluation-task",
-              "definition": "A repeatable test case; one attempt at it is a trial. Neither is an implementation assignment."
+              "definition": "Repeatable test case; attempts are trials, neither is an implementation assignment."
             },
             {
               "term": "Evidence audit",
               "id": "evidence-audit",
-              "definition": "A maintained assessment of claims against dated, candidate-specific evidence, keeping reassessment history."
+              "definition": "Claims checked against dated candidate evidence; reassessments retained."
             },
             {
               "term": "Improvement record",
               "id": "improvement-record",
-              "definition": "The link from an observed problem through hypothesis and comparison to an actual disposition and later-use check."
+              "definition": "Problem linked to hypothesis, comparison, disposition and later-use check."
             },
             {
               "term": "Review receipt",
               "id": "review-receipt",
-              "definition": "An actual assessment of a named candidate and scope, recording reviewer involvement, findings and limits."
+              "definition": "Actual candidate/scope review naming reviewer, findings and limits."
             },
             {
               "term": "Human QA receipt",
               "id": "human-qa-receipt",
-              "definition": "Sourced human judgment of the named experience or candidate. Agent checks cannot supply it."
+              "definition": "Sourced human judgment of a named experience/candidate; agents cannot supply it."
             }
           ]
         },
         {
           "heading": "Feedback dispositions",
           "id": "group-feedback-dispositions",
-          "note": "A disposition describes how a finding was handled and grants no execution or release authority; without an established one, keep it pending and name the missing owner or evidence.",
+          "note": "Finding outcomes; pending until sourced, granting no authority.",
           "terms": [
             {
               "term": "diagnostic",
               "id": "diagnostic",
-              "definition": "Names the diagnostic that makes the condition visible and whether it is implemented or proposed."
+              "definition": "Named diagnostic: implemented or proposed."
             },
             {
               "term": "test",
               "id": "test",
-              "definition": "Names the test that detects the condition, with its actual result or implementation gap."
+              "definition": "Detecting test, actual result or implementation gap."
             },
             {
               "term": "repaired",
               "id": "repaired",
-              "definition": "Names the implementing revision and its verification. Later-use benefit remains a separate claim."
+              "definition": "Repair revision and verification; later-use benefit is separate."
             },
             {
               "term": "declined",
               "id": "declined",
-              "definition": "Names the actual decision source and reason for declining the proposed action."
+              "definition": "Declining decision source and reason."
             },
             {
               "term": "accepted-open",
               "id": "accepted-open",
-              "definition": "Names the actual acceptance of follow-up work and its owning Spec; the problem remains open."
+              "definition": "Accepted follow-up and Spec; problem remains open."
             }
           ]
         }

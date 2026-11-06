@@ -2,14 +2,39 @@
 
 ## Get oriented
 
-Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md), [Wiki](workbench/wiki/MEMORY.md), [Taskboard](TASKBOARD.md), assigned Spec/Task and [skill](workbench/docs/SKILLS.md).
+Check branch, remotes, locks and dirt (`git status --short --branch`).
+Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
+[Wiki](workbench/wiki/MEMORY.md), both trackers, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
+Planning also reads `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031`; copying here needs owner approval.
 
+## Workflows
+
+`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in their owning records.
+Run each role at its [model tier](workbench/docs/adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
+
+Use Landmark -> Spec -> Task; at most six active Landmarks. Specs need no slots;
+block Tasks only on required inputs ([ADR-003J](workbench/docs/adr/003J-limit-active-landmarks-not-specs.md)).
 
 ## Test And Build
 
-Red/green/refactor when practical; never weaken checks. Run `uv run pytest`, `git diff --check`, `uv run ams-hygiene` and `node workbench/tools/workbench-layout.mjs validate --project .`. With `node workbench/tools/spec-workbench.mjs`, run `render`, `doctor`, `next --json`, `show SPEC_ID`. Render: no diff; doctor: no global blockers. Repeat on fresh checkout. Site: `npm run build`, `npm test`; root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`. [Shared CI](workbench/wiki/context-shared-ci.md).
+Diagnose failures; use red/green/refactor when practical. Never weaken checks;
+name unavailable checks. Three strikes: run, failed test, second failed test;
+stop and report both attempts.
 
-`uv run ams-board` (loopback); also `uv run`:
+```sh
+uv run pytest
+node workbench/tools/spec-workbench.mjs render
+node workbench/tools/spec-workbench.mjs doctor
+node workbench/tools/spec-workbench.mjs next --json
+node workbench/tools/workbench-layout.mjs validate --project .
+git diff --check
+uv run ams-hygiene
+```
+
+Repeat on a fresh candidate checkout. `site/`: `npm run build`, `npm test`.
+Root: `uv run ams-hygiene --site site`. Live tests: `AMS_LIVE=1`.
+
+`uv run ams-board` (loopback). Concepts: `node workbench/tools/landmark-tracker.mjs show --committed --json`; [Board procedure](grill-board/README.md). Other commands use `uv run`:
 
 - `ams-keycheck`; `ams-writer record-merge|readcheck SHA`
 - `ams-history import [--refresh-changed]|readcheck --ref SHA --dev-ref origin/dev`
@@ -19,6 +44,23 @@ Red/green/refactor when practical; never weaken checks. Run `uv run pytest`, `gi
 
 [Trial contracts](evals/TRIALS.md); stopped series stay stopped.
 
+## Shared CI VM
+
+Use [shared CI](workbench/wiki/context-shared-ci.md) VM `workbench-ci` and AMS runner;
+no GitHub-hosted fallback. Skip forks; inspect before internal execution.
+Keep keys and `AMS_LIVE` out of CI.
+
+## Delivery and recovery
+
+Commit coherent steps with what/why; the [guard](.agents/hooks/require-committed.sh) checks dirt.
+Never commit to main, stash, reset or discard to clean.
+Merge current, checked non-site PRs into main with merge commits.
+Site: feature -> checked dev; only owner merges dev -> main.
+Follow [delivery reporting](workbench/docs/SKILLS.md#delivery).
+
+Recover via Spec/Task and Wiki; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+Handoffs stay local and ignored in `workbench/sessions/handoffs/`; publish Tasks.
+
 ## Clean up
 
-`land`: verify publication and containment; keep unfinished work on its Spec branch; report blockers. Rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+Use `land` after checks: verify publication/containment and no owned dirt. Retain unfinished Spec work; report blockers.

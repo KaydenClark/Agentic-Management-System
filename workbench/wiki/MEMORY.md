@@ -25,9 +25,13 @@ duplicates Task state.
 
 - [Wiki definition and maintenance rules](SCHEMA.md#purpose-and-ownership) - purpose, ownership, metadata and article maintenance.
 - [Jot method](../docs/SKILLS.md) - when to read and update existing articles.
+- [Wiki maintenance procedure](guidebooks/wiki-maintenance.md) — source intake, ingest, durable query filing, correction and bounded semantic lint.
 
-- [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — detection, feedback consumption, visible learning and later-use proof; planning only.
+- [Canonical failure log](../feedback/WORKBENCH_FEEDBACK.md) — all failures, failed model tier/provider, activity, correct outcome and repair evidence.
+- [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — confirmed Stage A readback and delivered preparation, resolved publication hold and continuing Stage B/campaign limits.
 - [Shared skills refocus](context-skills-refocus.md) — confirmed jobs, composition, prerequisites, attribution and the Prepare-only boundary; links the AMS preparation-bypass failure.
+
+- [Maintained Wiki repair](context-wiki-maintenance.md) — approved maintenance diagnosis, bounded repair scope and execution authority.
 
 ## Source Precedence
 
@@ -42,7 +46,7 @@ correction. The Wiki routes to owners and authorizes nothing.
 
 | Go to | For |
 |---|---|
-| [AGENTS.md](../../AGENTS.md) | Authority, scope, safety, and the work loop |
+| [AGENTS.md](../../AGENTS.md) | Authority, scope, safety and collaboration |
 | [BLUEPRINT.md](../../BLUEPRINT.md) | What the product is, who it serves, the outcomes it promises and what it is not |
 | [GLOSSARY.md](../../GLOSSARY.md) | Shared AMS terms and feedback dispositions |
 | [ARCHITECTURE.md](../../ARCHITECTURE.md) | Which artifact owns each kind of truth and the routes to it |
@@ -68,9 +72,16 @@ an AMS glossary entry.
 - [Workbench meanings of AI coding terms](vocabulary-workbench-meanings-of-ai-coding-terms.md) - AI coding words with a distinct Workbench meaning
 - [Continuity terms](vocabulary-continuity-terms.md) - notepads, scoped handoffs and artifact identifiers
 - [Stance terms](vocabulary-stance-terms.md) - the job each stance does inside an assigned role
-- [Governance core](vocabulary-governance-core.md) - claim roles, authority, lanes, collections and decision records
+- [Governance core](vocabulary-governance-core.md) - six claim planes in stack order, downward and upward use, authority and decision records
 - [Continuity and evidence boundaries](vocabulary-continuity-and-evidence-boundaries.md) - what transport, promotion and host checks do and do not establish
 - [AI coding reference](ai-coding-reference.md) - general AI coding words restated in Workbench words
+
+## Landmark Synthesis Pages
+
+- [Grill Board](design-concepts/landmark-grill-board.md) — confirmed DQC lifecycle, pending branch context and unresolved redesign controls.
+- [RSI presentation](design-concepts/landmark-rsi-presentation.md) — traceable read-only presentation, honest empty states and data/evidence limits.
+- [AMS website](design-concepts/landmark-ams-website.md) — public explanation, sample demonstration and owner-controlled production promotion.
+- [RSI Loop](design-concepts/landmark-rsi-loop.md) — capability ownership, confirmed Stage A preparation and continuing execution holds.
 
 ## History
 
@@ -94,11 +105,14 @@ One page per Spec and Landmark. The Spec holds the destination; its page holds h
 - [S-012 history](history/S-012.md) - closes, verdicts, approvals and corrections for S-012 (Python lifecycle CLI)
 - [S-013 history](history/S-013.md) - closes, verdicts, approvals and corrections for S-013 (coherence checks)
 
+- [S-000C history](history/S-000C.md) - preparation and evidence for maintained Wiki understanding.
+
 ## Routing
 
 | Question | Read first |
 |---|---|
-| What is AMS and why is the first loop a website? | [AMS purpose](context-ams-purpose.md) — owner clarification, scope and rationale. |
+| What is the Grilling Board, and how do DQCs carry its questions and updates? | [Grilling Board and DQC-backed intent](context-grilling-board.md) — purpose, shared DQC question/answer/round flow, delivered lifecycle and later functional redesign gap. |
+| What is AMS and why is the first loop a website? | [AMS purpose](context-ams-purpose.md) — reusable system purpose, website as first application/evidence surface and current RSI limits. |
 | What should the website explain, and where are skill improvements proved? | [Website presentation](context-website-presentation.md) — this build proves shared skill improvements and displays the RSI log; owner corrections and site history. |
 | How was the Workbench adopted, and what moved where? | [Workbench adoption](context-workbench-adoption.md) — package identity, Port/Fold/Keep/Retire map, checks and open gaps. |
 | Which Specs are active, and who approved them? | [Active Spec approvals](context-active-spec-approvals.md) — the owner's confirmed Jot entries each active Spec cites for Confirmation and Execution approval. |

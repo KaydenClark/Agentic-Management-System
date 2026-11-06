@@ -44,7 +44,13 @@ export function parseGlossary(md) {
     }
     const term = text.match(/^\*\*(.+?)\*\*:\s*([\s\S]+)$/);
     if (term) {
-      if (!group) throw new Error(`term ${term[1]} is outside a group`);
+      if (!section) throw new Error(`term ${term[1]} is outside a section`);
+      // Canonical terms can precede a named group. Keep their first term as
+      // the label so the existing AMS group anchor survives source reformatting.
+      if (!group) {
+        group = { heading: term[1].trim(), id: uniqueId(`group-${slug(term[1])}`), note: '', terms: [] };
+        section.groups.push(group);
+      }
       group.terms.push({ term: term[1].trim(), id: uniqueId(slug(term[1])), definition: join1(term[2].split('\n')) });
       continue;
     }

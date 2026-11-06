@@ -17,7 +17,7 @@ Captured context. Claim labels preserve intent and uncertainty; capture alone su
 
 ## Cleanup responsibilities, 2026-11-02
 
-The [owner correction](#jot-fdaea0bd-5afa-4a88-ad43-dc8b41656c17) assigns the cleanup obligation, shared CI, delivery and recovery rules to [AGENTS](../../AGENTS.md#delivery-and-recovery). [RUNBOOK Clean up](../../RUNBOOK.md#clean-up) owns the actions after Test And Build: inspect owned state, publish and verify the authorized target, remove contained temporary scaffolding, and leave clean owned checkouts with explicit retained items or blockers. Earlier merge authority and recovery protections remain.
+The [owner correction](#jot-fdaea0bd-5afa-4a88-ad43-dc8b41656c17) established cleanup, shared CI, delivery and recovery obligations. Following the [2026-11-03 document-ownership correction](context-workbench-adoption.md#jot-9abd9e46-08ae-4283-a950-a96e6095759f), [RUNBOOK](../../RUNBOOK.md#delivery-and-recovery) owns their procedures. [RUNBOOK Clean up](../../RUNBOOK.md#clean-up) owns the actions after Test And Build: inspect owned state, publish and verify the authorized target, remove contained temporary scaffolding, and leave clean owned checkouts with explicit retained items or blockers. Earlier merge authority and recovery protections remain.
 
 <!-- jot-entry -->
 ### JOT-eadaca6e-98eb-4872-bfbc-fdaf9c3a4b06

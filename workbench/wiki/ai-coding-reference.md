@@ -148,7 +148,7 @@ Attribution: [AI Coding Dictionary, Context window](https://www.aihero.dev/ai-co
 
 The information relevant to the task that the agent has right now. It measures quality, not quantity: most failures trace to a needed fact that was never loaded or that sat buried.
 
-**In the Workbench.** Not the context window (the actual run of tokens) and not the session (the running history). Context Map, Enduring Context and Working context are different terms: the Context Map is the navigable relationships among Workbench concepts, Enduring Context is a Governance Plane for durable reference, and Working context is the unfinished reasoning a notepad preserves.
+**In the Workbench.** Not the context window (the actual run of tokens) and not the session (the running history). Context Map is the navigable relationships among Workbench concepts. [Enduring Context](vocabulary-governance-core.md#enduring-context) is what we know about Actuality, Canon, Grounding and Intent, including what to do with Intent; it is a claim role in the stack. Working context is the unfinished reasoning a notepad preserves.
 
 Attribution: [AI Coding Dictionary, Context](https://www.aihero.dev/ai-coding-dictionary/context).
 

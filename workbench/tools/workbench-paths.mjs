@@ -202,8 +202,9 @@ export function trackerDeclaration(manifest) {
   if (declared === undefined) return null;
   if (!declared || typeof declared !== 'object' || Array.isArray(declared)) throw invalidTracker('must be an object with root and collections');
   const keys = Object.keys(declared).sort();
-  if (JSON.stringify(keys) !== JSON.stringify(['collections', 'root'])) throw invalidTracker(`must declare exactly root and collections; found ${keys.join(', ') || 'nothing'}`);
+  if (JSON.stringify(keys) !== JSON.stringify(['collections', 'root']) && JSON.stringify(keys) !== JSON.stringify(['collections', 'markdown', 'root'])) throw invalidTracker(`must declare exactly root and collections; found ${keys.join(', ') || 'nothing'}`);
   if (!isSafeRelative(declared.root)) throw invalidTracker(`root is unsafe: ${declared.root}`);
+  if (declared.markdown !== undefined && declared.markdown !== 'TRACKER.md') throw invalidTracker('markdown must be root TRACKER.md');
   const collections = declared.collections;
   if (!collections || typeof collections !== 'object' || Array.isArray(collections)) throw invalidTracker('collections must be an object');
   const names = Object.keys(collections).sort();
@@ -217,6 +218,7 @@ export function trackerDeclaration(manifest) {
   if (collections['destination-questions'] === collections.landmarks) throw invalidTracker('collections must be distinct directories');
   return {
     root: declared.root,
+    ...(declared.markdown ? { markdown: declared.markdown } : {}),
     projection: `${declared.root}/${TRACKER_PROJECTION}`,
     collections: Object.fromEntries(TRACKER_COLLECTIONS.map(name => [name, collections[name]]))
   };
