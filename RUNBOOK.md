@@ -2,15 +2,15 @@
 
 ## Get oriented
 
-Every session, questions included, before replying or acting: check git status,
+Every session, including questions: before replying or acting, check Git status,
 remotes, locks; read AGENTS, ARCHITECTURE, GLOSSARY, TRACKER, TASKBOARD, [Wiki](workbench/wiki/MEMORY.md),
 [SKILLS](workbench/docs/SKILLS.md), assigned Spec/Task and topic records and failures.
-Perform orientation silently; do not announce reading or routine checks.
+Orient silently; do not announce routine reading or checks.
 Report only relevant findings. No CONTINUE files.
 
 ## Workflows
 
-`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in their owning records.
+`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in owners.
 Use each role's [model tier](workbench/docs/adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
 
 Use Landmark -> Spec -> Task; at most six active Landmarks. Specs need no slots;
@@ -33,7 +33,7 @@ uv run ams-hygiene
 ```
 
 Repeat on a fresh checkout. `site/`: `npm run build`, `npm test`.
-`uv run ams-hygiene --site site`. Live: `AMS_LIVE=1`.
+Root: `uv run ams-hygiene --site site`. Live: `AMS_LIVE=1`. [Coherence](workbench/wiki/guidebooks/coherence-observations.md).
 
 `uv run ams-board` (loopback). `node workbench/tools/landmark-tracker.mjs show --committed --json`; [Board procedure](grill-board/README.md). Commands use `uv run`:
 
