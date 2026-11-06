@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-The owner chose site-written articles modeled on https://www.aihero.dev/skills and its `/grilling` depth/tone (2026-11-01), supplied `skills-by-workbench-stage.svg` and set the template below. KaydenClark/skills is private: never publish its files. Authority/endpoint: JOT-ba986c8a.
+The owner chose site-written articles modeled on https://www.aihero.dev/skills and its `/grilling` depth/tone (2026-11-01), supplied `skills-by-workbench-stage.svg` and set the template below. KaydenClark/skills is private: never publish its files. Authority/endpoint: JOT-ba986c8a. Bounded PR #111 inspection and recovery: [JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8](../../../../wiki/context-website-presentation.md#jot-54c3a590-89e6-4bf7-95ef-4c50771e7ac8); current-base checks and review precede dev containment.
 
 ## Outcome
 
