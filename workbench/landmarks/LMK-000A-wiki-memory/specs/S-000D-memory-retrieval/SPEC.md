@@ -1,7 +1,7 @@
 # S-000D - Source-backed memory recovery
 
 **Spec ID:** S-000D
-**Status:** planned
+**Status:** active
 **Priority:** 1
 **Owner:** Kayden; codex-wiki-memory orchestrator
 **Stance:** Builder
