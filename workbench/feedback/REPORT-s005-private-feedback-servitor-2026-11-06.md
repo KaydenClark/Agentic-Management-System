@@ -64,3 +64,14 @@ including actual HTTP/browser regressions. Each FIFO test proves unchanged
 commit/voice/original bytes and a separate process acquiring the lock while
 the original caller remains alive. Fresh full checks and corrective Review/CI
 remain, so these focused results do not requalify closure by themselves.
+
+Independent FIFO reviews found one record-compaction breach (FAIL261): claimant
+fields were removed. Both exact fields were restored from d94694c, without
+another claim or changes to runtime/tests, receipts or continuation. Both
+bounded rereviews at76d2bf9 now report0 remaining findings. Spec execution
+passed47 backend/FIFO cases; its two HTTP cases were sandbox-denied before
+requests (FAIL262/263). Standards executable review used the wrong editable
+source after a filename miss, so its9 passes/3 failures are not candidate
+proof (FAIL264-268). Its source/record judgment is read-only and separately
+qualified. No model or harness identity was invented. Fresh full060 and new
+exact-head CI remain required; no closure is inferred from focused checks.
