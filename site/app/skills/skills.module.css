@@ -311,9 +311,9 @@
 @media (min-width: 1296px) {
   .wikiNav {
     position: sticky;
-    top: var(--space-24);
+    top: calc(var(--sticky-header-height, var(--header-fallback)) + var(--space-12));
     align-self: start;
-    max-height: calc(var(--page-min-height) - var(--space-48));
+    max-height: calc(var(--page-min-height) - var(--sticky-header-height, var(--header-fallback)) - var(--space-24));
     overflow-y: auto;
     padding-inline-end: var(--space-12);
     border-inline-end: var(--border-width) solid var(--line);
