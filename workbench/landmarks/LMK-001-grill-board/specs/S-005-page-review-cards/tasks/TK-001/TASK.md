@@ -16,12 +16,12 @@ Target `main` via PR174. Parent Spec/Board guide govern; site and other-owner fi
 
 ## Acceptance
 
-- [ ] Complete owned current build produces correct cards/index/anchor in one commit; unchanged rerun is a no-op.
-- [ ] Independent hash vectors, edit/footer staleness, immutable history and stale-write refusal pass.
-- [ ] New/missing/removed routes, ref drift, dirty/unsafe paths and execution errors are safe, without invented ownership or unrelated changes.
-- [ ] Actual runtime/interruption cleanup and private-context isolation are proved.
-- [ ] Actual pinned protected candidate covers every skill article and visitor404 with cards and Board readback; result/availability changes stay hash-bound.
-- [ ] Required pytest/render/doctor and repository/current-candidate checks pass or name unavailability.
+- [x] Complete owned current build produces correct cards/index/anchor in one commit; unchanged rerun is a no-op.
+- [x] Independent hash vectors, edit/footer staleness, immutable history and stale-write refusal pass.
+- [x] New/missing/removed routes, ref drift, dirty/unsafe paths and execution errors are safe, without invented ownership or unrelated changes.
+- [x] Actual runtime/interruption cleanup and private-context isolation are proved.
+- [x] Actual pinned protected candidate covers every skill article and visitor404 with cards and Board readback; result/availability changes stay hash-bound.
+- [x] Required pytest/render/doctor and repository/current-candidate checks pass or name unavailability.
 
 ## Recovery
 

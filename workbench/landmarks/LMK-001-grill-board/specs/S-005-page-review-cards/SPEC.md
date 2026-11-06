@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** Content-bound page reviews and versioned feedback consumed by later drafts.
 **Blockers:** none
-**Next gate:** Required current CI and native TK-001 close; preserve the dependency Standards finding before main delivery.
+**Next gate:** Native TK-001 close, then approval/private feedback; refresh final cards at assembled dev.
 
 
 ## Intent and authority
@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns evidence/failures. Source930d9c2 passes fresh967 tests/6 skips and separate89-test Standards/Spec reviews; shared CI is queued. Exact protected47e3c88 supplies50 current cards,39 skill articles and visitor404;3 stale histories remain and rerun is a no-op. All50 selected cards pass owned HTTP readback with cleanup; no owner action occurred. Source/deployment/footer/document markers and manifest digest44b7a64e bind unchanged private HTML, including real populated RSI. S003's failure-table schema finding remains open. Original804 public files remain in history;4 private cache originals are copied, original nodeids not located, so workspace release is not claimed. Private feedback, later Tasks and owner QA remain open.
+No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns evidence/failures. Source930d9c2 passes fresh967 tests/6 skips and separate89-test Standards/Spec reviews; shared CI965/8 skips plus10 browser passes. Exact protected47e3c88 supplies50 current cards,39 skill articles and visitor404;3 stale histories remain and rerun is a no-op. All50 selected cards pass owned HTTP readback with cleanup; no owner action occurred. Source/deployment/footer/document markers and manifest digest44b7a64e bind unchanged private HTML, including real populated RSI. S003's failure-table schema finding remains open. Original804 public files remain in history;4 private cache originals are copied, original nodeids not located, so workspace release is not claimed. Later devb699f10 includes navigation/governance changes: refresh the final queue after assembly. Private feedback, later Tasks and owner QA remain open.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 

@@ -1,6 +1,6 @@
 # Vercel adapter artifact layout blocks protected review coverage
 
-**Disposition:** accepted-open, existing S-003 ownership; no new owner preference.
+**Disposition:** deployed inventory layout repaired; separate hash-reader and ledger findings remain with existing S-003 ownership. No new owner preference.
 **Source:** dev `40acb3a491a55599e5b1f00fd92a27315739a4a9`, after PR178.
 **Deployment:** `dpl_3U2SoEgLBFPcTaduX2u4Qnr2DX3k`, immutable origin `https://agentic-management-system-site-ctewgjcvo.vercel.app`.
 **Observed state:** ERROR, `BUILD_UTILS_SPAWN_1`, build step.
@@ -80,3 +80,37 @@ an unavailable real-build assertion, then a hash-test archive lacked its helper.
 These are retained review harness failures, not evidence of product failure.
 Neither review supplied deployed audit or owner QA; the later adapter failure
 is a distinct uncovered execution boundary.
+
+## Delivered inventory repair and remaining utility gap
+
+PR186 delivered source3104402 into dev47e3c88. Both shared workflows passed;
+the exact deployment was READY. An independent adapter-enabled build produced
+50 public inventory entries from51 scoped HTML artifacts, with all50 canonical
+hashes equal to its ordinary-layout build and owned cleanup verified. S-005
+then authenticated all50 protected responses at47e3c88 and validated their
+source/deployment identities, including populated RSI. These observations
+resolve the deployed inventory failure above, not whole-site acceptance.
+
+The separate directory reader remains incomplete. The report at
+[PR142's hash-reader review](https://github.com/KaydenClark/Agentic-Management-System/pull/142#discussion_r4491854021)
+was independently reproduced on47e3c88: a synthetic adapter fixture containing
+one manifest-bound scoped page returns1 inventory entry but0 pages through
+`readBuiltPages` in `site/scripts/page-hash.mjs`. The reader and its printer are
+unchanged at devb699f10f4e08a0ea72f2915e0c14c0744385cbcd. Existing S-003
+ownership should reconcile artifact enumeration without weakening coverage or
+altering canonical content identity. No competing site correction was made.
+
+S-005 hashes actual served bodies directly and does not call that directory
+reader. All50 protected47 bodies independently match the site's pure
+`contentHash` function and the committed card index. This protects the existing
+capture's identities; it does not qualify the separate directory utility.
+
+The independent Standards finding in source310's failure ledger also remains:
+nine-column failure rows189/190 follow a three-column alias-table header,
+hiding six fields in rendered Markdown. Preserve row/alias bytes and restore
+the complete failure-table header through its existing owner.
+
+Dev has advanced after the47 capture. The final owner queue must be regenerated
+and read back against one exact assembled READY dev revision, including later
+navigation/governance changes. Neither the47 snapshot nor this report claims
+that final queue, owner QA, private-feedback completion or main promotion.
