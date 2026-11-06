@@ -28,7 +28,7 @@ Memory functions describe how context is used: historical events, maintained und
 
 ## Open and unresolved
 
-Preparation is not working retrieval or verified session continuity. Answer correctness, stale-claim prevention and owner correction effort require actual evidence; automated retrieval metrics cannot stand in for human judgment. Optional embeddings/reranking need a useful local comparison before adoption; no external service is mandatory.
+Map/Plan is preserved; implementation candidate9419c9a is partial and stopped. [Supplemental static review and the bounded restart proposal](../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserve defects and evidence limits without declaring working memory or verified session continuity. Owner restart and public-export answers remain pending separately. Answer correctness, stale-claim prevention and owner correction effort require actual evidence; automated retrieval metrics cannot stand in for human judgment. Optional embeddings/reranking need a useful local comparison before adoption; no external service is mandatory.
 
 ## Where the work lives
 
@@ -42,4 +42,5 @@ Preparation is not working retrieval or verified session continuity. Answer corr
 
 ## History
 
+- 2026-11-05: Records-only continuation captured the partial stopped candidate, static review and pending restart/publication decisions; original intent and source evidence remain preserved.
 - 2026-11-05: Owner-authorized Map/Plan created this synthesis and its dedicated Landmark after the owner corrected the proposed RSI classification. Original owner statements and S-000C history remain preserved.

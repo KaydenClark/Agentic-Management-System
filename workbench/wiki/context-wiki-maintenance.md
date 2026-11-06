@@ -20,7 +20,11 @@ Captured context. Claim labels preserve intent and uncertainty; capture alone su
 
 The Wiki is AMS's knowledge base and memory, independently owned by [Wiki memory and session continuity](design-concepts/landmark-wiki-memory.md). [The owner's correction](#jot-b3247909-9721-4842-a83f-61adc5da2e13) rejects classifying this critical capability as RSI and requests its own Landmark. Fresh agents should recover established understanding, owner intent/corrections, reasons, constraints, unresolved questions and live-owner routes without starting from zero. [All five accepted improvements](#jot-72534303-7521-4d2c-98d2-96b1bcb3825a) belong to [S-000D](../landmarks/LMK-000A-wiki-memory/specs/S-000D-memory-retrieval/SPEC.md); its evaluation is functional Wiki acceptance. Historical S-000C placement and evidence below remain unchanged.
 
-[The routed procedure](guidebooks/wiki-maintenance.md) makes source intake, ingest, durable query filing and bounded semantic lint concrete within the existing schema. The existing [Grill Board](context-grilling-board.md), [AMS purpose](context-ams-purpose.md) and [RSI](context-feedback-improvement-loop-plan.md) owners explain current meaning above their retained captures. [MEMORY's four Landmark routes](MEMORY.md#landmark-synthesis-pages) connect their wider relationships. This operation creates no duplicate capability owner, product redesign or new execution authority.
+[The routed procedure](guidebooks/wiki-maintenance.md) makes source intake, ingest, durable query filing and bounded semantic lint concrete within the existing schema. The existing [Grill Board](context-grilling-board.md), [AMS purpose](context-ams-purpose.md) and [RSI](context-feedback-improvement-loop-plan.md) owners explain current meaning above their retained captures. [MEMORY's Landmark routes](MEMORY.md#landmark-synthesis-pages) connect their wider relationships. This operation creates no duplicate capability owner, product redesign or new execution authority.
+
+## Partial stopped implementation
+
+The five-improvement Map/Plan remains the destination; candidate9419c9a is partial and stopped, not delivered memory behavior. [The stopped-candidate report](../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves source-linked supplemental static findings, observed retrieval-only evidence and the bounded TK-002U restart proposal. Owner restart and public-export decisions remain separate and unanswered; no source repair, retest, assembled Review, owner QA or acceptance follows from records capture. The native Task retains execution state and Receipt1.
 
 ## Planned memory interface
 
@@ -160,4 +164,17 @@ Topic: wiki-maintenance
 Supersedes: none
 
 Scoped execution binding, captured by codex-wiki-prepare after native ID allocation: LMK-000A (Wiki memory and session continuity), S-000D (Source-backed memory recovery) are the destination records for the five recommendations Kayden explicitly approved on 2026-11-05. The agent selected these identities under the delegated Map/Plan instruction; the identifiers were not spoken by the owner. Exact owner approval remains JOT-72534303-7521-4d2c-98d2-96b1bcb3825a: "Yes to all 5. /Orchestrate mapping and planning it, once it's prepared, delegate implementation as well. Make sure you are using the best skills for the job, and having the sub agents do the best skills for the job too." The later exact owner correction/own-Landmark instruction remains JOT-b3247909-9721-4842-a83f-61adc5da2e13. Confirmation and execution approval apply to all five within S-000D; implementation follows checked preparation and delegation. No new four-section readback, working behavior or owner acceptance is asserted.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-5cdd8819-e742-418e-8014-985d1baffbf3
+Kind: observation
+State: current
+Recorded: 2026-11-06T05:53:34.055Z
+Author: codex-wiki-prepare
+Source: workbench/feedback/REPORT-wiki-memory-stopped-2026-11-05.md
+Topic: wiki-maintenance
+Supersedes: none
+
+Records-only stopped-candidate observation, source9419c9a2eec14bf5224fcbba4af1d3208c1a1466 versus28e4b122b7503348fcc119bfb98640dda2632a03. Root's fresh independent High/OpenAI gpt-6.1-sol/Codex Standards and Spec reviewer handbacks (owner-local2026-11-05) identify three static defects: baseline route body read before privacy/path checks; superseded correction text silently clipped to600characters without recoverable continuation; duplicate heading anchors disagree between retrieval and source selection. No private disclosure was observed; reviewers ran no tests/edits/public actions and gave no assembled SpecPASS or HumanQA. FAIL-121 already records continuation past the Runbook stop limit; do not duplicate it. The existing five-improvement Map/Plan remains required, but implementation is partial and stopped. The owning report preserves exact candidate, evidence limits and bounded TK-002U restart proposal. Two owner answers remain pending separately: corrective restart after STOP, and direct public export/checked non-site main delivery. Source/tests/evaluation artifacts and Receipt1 remain frozen; records-only capture grants no restart, retest, native closure or publication authority.
 <!-- /jot-entry -->

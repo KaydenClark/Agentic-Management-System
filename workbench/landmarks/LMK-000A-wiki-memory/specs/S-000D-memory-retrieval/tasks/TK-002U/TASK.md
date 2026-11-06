@@ -9,6 +9,7 @@
 **Planned verification:** Public ams-memory query/check/evaluate exercises, source change/restore and privacy refusal tests, focused pytest and native checks.
 **Claimed by:** codex-wiki-retrieval
 **Current claimant:** codex-wiki-retrieval
+**Next gate:** Owner restart decision; [static findings and bounded scope](../../../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md).
 
 ## Assignment
 
@@ -37,13 +38,13 @@ Claim originals committed as `9ccae2f`. Workspace baseline sha256:296c63314038c1
 
 Actor: OpenAI gpt-6.1-sol / High on Codex; journey/TDD/writing-for-agents/codebase-design. Root STOP follows FAIL-118–121; no further code/retests authorized. Task and acceptance stay open.
 
-Additive candidate: `ams.memory` query/check/evaluate, entrypoint,16 tests and four frozen development cases. Expected TDD red13: absent module. Unexpected sequence:12pass/1fail fixture(118), repaired13pass; archive-manifest refusal(119); repaired preflight, then3/4evaluation(120 false unknown hit); threshold/source guards repaired,16focused and4/4development passed before root STOP arrived. No final Check/QA or independent Review.
+Additive candidate: `ams.memory` query/check/evaluate, entrypoint,16 tests and four frozen development cases. Expected TDD red13: absent module. Unexpected sequence:12pass/1fail fixture(118), repaired13pass; archive-manifest refusal(119); repaired preflight, then3/4evaluation(120 false unknown hit); threshold/source guards repaired,16focused and4/4development passed before root STOP arrived. No final Check/QA or assembled Review. Supplemental static findings are linked below.
 
 Baseline: public prepared revision `280725648ed4a2a7d0e97236fd51def5c02aaa65`, unchanged cases and limit6/max6400. Global native Jot search blocks on pre-existing malformed `context-owner-answers-coherence.md`; valid routed native reads are separately retained. Baseline source hits3/3; requested Wiki correction Jot missed under bound; unknown global search unavailable. Candidate same-source source/context checks4/4, correction source present, unknown abstained. These are development retrieval observations, not independent answers, stale-answer judgments, transfer or owner-effort measurements.
 
 Cases/baseline: `evals/wiki-memory/`. Private recovery retains both evaluations, initial archive-inclusive baseline, public snapshot and incomplete inventory. Failure120 evaluation sha256:741a1b0beb87ca3e5608f804f8d560c33500cd73605ecdfd2f0cd9f4452538fe; later evaluation sha256:11e38e9ccf86122fe868690696146dac971487e69c95207234601180071245e8. Tool output retains pytest results. Wiki sources/Jots/confirmations, managed tools and shared skills remain untouched.
 
-Remaining: real multi-claim/source metadata and observed lineage on two topics; source selector/safety and baseline edge-case QA; concise operating documentation; final required native/check suite and preservation proof. Public console entrypoint is declared but not exercised; current demos use `uv run --no-sync python -m ams.memory`. R1/R2/R5/R6 and the Task are not accepted complete. Root must obtain bounded continuation authority before implementation or retest, then inspect source/candidate and arrange independent probes. Publication remains separately held; no push, merge, deployment or Human QA.
+Remaining: real two-topic bindings/observed lineage, baseline/source preflight, console entrypoint/docs, final checks and preservation. [The stopped-candidate report](../../../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) records three supplemental static defects and proposes one-behavior-at-a-time TDD repair. Current demos used python-module invocation; console QA is unperformed. R1/R2/R5/R6 remain incomplete. Root awaits owner restart permission before source edits or retests; public export/main delivery needs its separate answer. No closure, push, deployment or Human QA.
 
 ## Receipt
 

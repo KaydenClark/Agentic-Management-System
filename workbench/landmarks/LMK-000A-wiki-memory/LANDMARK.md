@@ -7,7 +7,7 @@
 **Updated:** 2026-11-05
 **Catalog description:** Persistent source-backed knowledge lets agents continue across sessions without starting from zero.
 **Blockers:** none
-**Next gate:** Orchestrator checks prepared S-000D graph, activates and delegates TK-002U; publication separately gated.
+**Next gate:** Owner restart decision for stopped TK-002U; [scope and separate publication hold](../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md).
 
 ## Direction
 

@@ -78,7 +78,7 @@ an AMS glossary entry.
 
 ## Landmark Synthesis Pages
 
-- [Wiki memory and session continuity](design-concepts/landmark-wiki-memory.md) — critical AMS knowledge base, recovery across sessions, five accepted improvements and functional evaluation independent of RSI.
+- [Wiki memory and session continuity](design-concepts/landmark-wiki-memory.md) — critical AMS knowledge base, five accepted improvements and partial stopped implementation; restart/publication decisions remain separate from functional acceptance.
 - [Grill Board](design-concepts/landmark-grill-board.md) — confirmed DQC lifecycle, pending branch context and unresolved redesign controls.
 - [RSI presentation](design-concepts/landmark-rsi-presentation.md) — traceable read-only presentation, honest empty states and data/evidence limits.
 - [AMS website](design-concepts/landmark-ams-website.md) — public explanation, sample demonstration and owner-controlled production promotion.

@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
 **Execution approval:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
-**Next gate:** Root obtains bounded TK-002U continuation after Runbook STOP; publication separately held.
+**Next gate:** Owner restart decision for TK-002U; [bounded scope and separate publication hold](../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md).
 
 ## Outcome and authority
 
@@ -51,15 +51,15 @@ Test public CLI recall, correction context, change/restore, whole-plan refusal, 
 
 ## Task coverage and ready frontier
 
-1. [TK-002U](tasks/TK-002U/TASK.md), ready after activation: recall/freshness/baseline, R1/R2/R5/R6.
+1. [TK-002U](tasks/TK-002U/TASK.md), stopped open: recall/freshness/baseline, R1/R2/R5/R6.
 2. [TK-002V](tasks/TK-002V/TASK.md), blocked by working TK-002U CLI/bindings: consolidation, R3/R2/R6.
 3. [TK-002W](tasks/TK-002W/TASK.md), blocked by TK-002V correction/readback: context/full evaluation, R4/R5 and integrated R1-R6.
 
-Serialize shared writers. Tasks include Check/QA/repair/hand-back; root owns independent probes/Review/delivery. Unclaimed preparation grants no success claim.
+Serialize shared writers. Tasks include Check/QA/repair/hand-back; root owns independent probes/Review/delivery. Stopped implementation grants no success claim.
 
 ## Completion Result
 
-TK-002U stopped open under Runbook limit (FAIL-118–121). Additive query/check/evaluate candidate has16 focused tests and4 same-source development retrieval checks passing after recorded failures; final Check/QA, real claim bindings and documentation remain. No independent answer/effort measurement, Review, publication or owner acceptance. Root must obtain continuation authority; TK-002V/W remain blocked.
+Partial candidate9419c9a remains stopped under FAIL-118–121; all acceptance stays open. [Supplemental static findings and bounded restart](../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserve three defects and incomplete real bindings/docs/final checks/preservation. Recorded16focused/4development passes are retrieval observations, not final QA, independent answers or owner effort. Owner restart and public-export decisions remain separate; no assembled Review or acceptance.
 
 ## Supersession
 
