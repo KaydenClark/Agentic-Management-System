@@ -1,7 +1,7 @@
 # RSI repair: bounded branch delivery and closeout
 
 Owner: Kayden direct AMS chat, 2026-11-06. Every edit to AMS/shared skills is RSI work.
-Status: bounded skill qualification accepted; catalog source merged and installed; AMS adoption pending.
+Status: prior bounded catalog candidate qualified, merged and installed; reached-template correction and dependent AMS adoption are prepared and unclaimed.
 Source-delivery capability: [S-011](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/SPEC.md), within [LMK-004](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md).
 
 ## Confirmed scope and authority
@@ -38,7 +38,7 @@ Development failures and review findings are in [canonical intake](../feedback/W
 
 ## Delivery and later use
 
-Catalog qualification, source publication and personal installation are verified below. Remaining: exact AMS candidate review/CI, main delivery and guarded cleanup of this repair's branches/worktrees. Supersede obsolete AMS PR208 without merging its rejected model. Later recurrence and comparative benefit remain distinct from publication, installation and the bounded installed-use exercise.
+Catalog qualification, source publication and personal installation are verified below. Remaining: TK-003C reached-template correction through checked source publication/installation, then TK-003D exact AMS review/CI, main delivery and guarded cleanup. Supersede obsolete AMS PR208 without merging its rejected model. Later recurrence and comparative benefit remain distinct from publication, installation and the bounded installed-use exercise.
 
 ## Bounded qualification and source delivery, 2026-11-06
 
@@ -70,7 +70,7 @@ The owner required Map/Plan before further Journey and explicitly assigned Direc
 
 Map counts: 0 Specs, 2 Tasks, 0 empty tasks/
 
-Counts compare new records against AMS main at a96c248; this amendment revises existing S-011 and creates no Task at Map stage. Plan is the next operation.
+Counts compare new records against AMS main at a96c248. The Map checkpoint revised existing S-011 without creating Tasks; the subsequent Plan prepared two unclaimed Tasks. TK-003C is the ready frontier; TK-003D waits for its verified published/installed artifact.
 
 ## Remaining Plan before Journey
 
