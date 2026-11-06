@@ -10,7 +10,7 @@
 **Blockers:** none for mapping
 **Confirmation:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
 **Execution approval:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
-**Next gate:** Close TK-002P with verification and documentation proof.
+**Next gate:** TK-002P stopped after native permission-canary refusal; correct the diagnosed profile/runtime mismatch, then recheck. Real model calls retain their frozen grader/labels/conditions/capacity gates.
 
 ## Intent and authority
 
