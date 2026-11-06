@@ -5,12 +5,12 @@
 **Priority:** 1
 **Owner:** Kayden; codex-wiki-memory orchestrator
 **Stance:** Builder
-**Updated:** 2026-11-05
+**Updated:** 2026-11-06
 **Catalog description:** Recover, check and consolidate bounded Wiki understanding across sessions with traceable sources.
 **Blockers:** none
 **Confirmation:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
 **Execution approval:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
-**Next gate:** Orchestrator checks preparation, activates and delegates TK-002U; publication remains separately gated.
+**Next gate:** Close TK-002U with verification and documentation proof.
 
 ## Outcome and authority
 

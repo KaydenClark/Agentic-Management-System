@@ -3,10 +3,12 @@
 **Task ID:** TK-002U
 **Spec ID:** S-000D
 **Slice:** Bounded maintained-section/Jot recall with claim-source change reporting and runnable evaluation
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: R1, R2, R5 initial baseline, R6 preservation
 **Planned verification:** Public ams-memory query/check/evaluate exercises, source change/restore and privacy refusal tests, focused pytest and native checks.
+**Claimed by:** codex-wiki-retrieval
+**Current claimant:** codex-wiki-retrieval
 
 ## Assignment
 
