@@ -75,3 +75,10 @@ source after a filename miss, so its9 passes/3 failures are not candidate
 proof (FAIL264-268). Its source/record judgment is read-only and separately
 qualified. No model or harness identity was invented. Fresh full060 and new
 exact-head CI remain required; no closure is inferred from focused checks.
+
+Fresh immutable FIFO product060e0e9 completes1049 passed/4 skipped in405.56s
+with explicit Docker/SIGINT and actual browser checks. Later76d2 restores
+only claimant metadata; source/test bytes remain the same. Both bounded
+rereviews report0 remaining findings. Current-head CI and native re-close
+remain, and the latest native Spec FAIL stays historical until assembled
+Review resolves it. No result here supplies final coverage or owner QA.
