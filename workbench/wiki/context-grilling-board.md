@@ -452,3 +452,16 @@ Supersedes: JOT-7f16abf6-5b54-4214-8854-8f66418dd673
 
 Whole LLM_Workbench dashboard scope remains settled, including Destination Tracker, Taskboard, Grilling Board, Drafts to approve and Wiki. Owner correction, exact words: "No, and I already answered this. I come back to the agent and tell them I am finished with my round, they then update the workbench with the answers from my round, correct anything that needs to be corrected, and then adjusts the DQCs and grilling board so that I can do the next round. Questions should track how many rounds they have gone through." This closes the automatic-agent-continuation question: owner returns to the agent to initiate round processing; do not ask this settled question again. Per-question round counts are required. Owner rejected the tracker-management question as unclear and bundled; no tracker editing choice is settled by that question. Next frontier: ask one plain question about changing a Task status from the dashboard. Individual answers remain distinct from confirmation of the assembled readback. No dashboard implementation begins during alignment. The owner separately explicitly approved publishing the existing 20 commits; publication is distinct from unfinished Wiki candidate acceptance or restart authority.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-d0561022-e411-46c8-96c4-cf4229ab3004
+Kind: intent
+State: unresolved
+Recorded: 2026-11-06T19:49:31.588Z
+Author: Kayden
+Source: Kayden direct AMS alignment correction, 2026-11-06
+Topic: grilling-board
+Supersedes: none
+
+Settled owner answer, exact words: "YES. Why is that a question that is unclear? Of course agents need to update the status of the trackers. If they didnt then what would be the point of them? Who else would be responsible for it? YES of course the agent needs to update the status of the TASK, SPEC, LANDMARK on the tracker and taskboard for the next agent. If they dont its a critical failure of the workbench because the next cold start agent wouldnt know how to use the workbench." Agent maintenance of Task, Spec and Landmark status and consistent tracker/taskboard projections is a required Workbench responsibility, not an optional design decision. Cold-start continuity is part of the required observable outcome. Preserve exact DQC intent and existing execution ownership. Do not reopen this settled responsibility; do not infer a blanket prohibition on all dashboard editing from this answer. Whole-dashboard scope, owner-triggered round processing and per-question round counts remain settled. No further consequential owner design choice has been identified in this alignment; next is an assembled readback for confirmation and scoped handoff. This answer does not itself confirm that assembled readback or authorize implementation during alignment.
+<!-- /jot-entry -->
