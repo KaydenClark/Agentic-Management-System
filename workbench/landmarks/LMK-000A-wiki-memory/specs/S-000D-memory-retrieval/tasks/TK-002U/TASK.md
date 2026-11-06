@@ -3,13 +3,14 @@
 **Task ID:** TK-002U
 **Spec ID:** S-000D
 **Slice:** Bounded maintained-section/Jot recall with claim-source change reporting and runnable evaluation
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: R1, R2, R5 initial baseline, R6 preservation
 **Planned verification:** Public ams-memory query/check/evaluate exercises, source change/restore and privacy refusal tests, focused pytest and native checks.
 **Claimed by:** codex-wiki-retrieval
 **Current claimant:** codex-wiki-retrieval
 **Next gate:** Root verifies local done receipt/artifacts before releasing TK-002V; public export held.
+**Proof:** 26focused passed; real console6sources unchanged; scoped native/hygiene pass.
 
 ## Assignment
 
@@ -48,3 +49,4 @@ Preserved87Jots/18history/228managed files and Receipt1; private recovery retain
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-000D-wiki-memory | 28e4b122b7503348fcc119bfb98640dda2632a03 | ahead 6 behind 0 | 7 | STOPPED: expected missing-module red13; FAIL118 12pass/1fail; corrected13pass; FAIL119 baseline refusal; FAIL120 evaluation3/4; later focused16pass and development4/4 before root STOP. Final checks/QA not run. | Task/Spec and feedback preserve stopped state; real binding/operating docs unfinished. | FAIL121 Runbook stop bypass; owner continuation required. Task open; publication held. R1/R2/R5/R6 incomplete. | a502c6a2db09a723cd1f0cc1da5ce2f3fbbb375387ef8dc5fcc20fb3b5926bc5 |
 | 2 | Feature/S-000D-wiki-memory | f92401062a41bfd74b671f2e0ba34273a549877e | ahead 11 behind 0 | 0 | Final source f924010:26focused passed; post-selector real console4claims/6sources unchanged; Wiki/layout/hygiene/diff pass. Prior same-source development4/4 retained; full assembled tests belong to root. | Real two-topic bindings, MEMORY/Wiki AGENTS cold-start routing, operating/eval docs;87Jots/18history/228managed files and Receipt1 preserved. | Root inspects final anchor delta before native close. Public export held; assembled Review/full R5/R3/R4 remain. No Human QA. | 0b1d243e5249ebdb956b76ca9cd006f46bc3e1a99b33db6f179005b7f63104a0 |
+| 3 | Feature/S-000D-wiki-memory | 519043cc1b2d4e5adc729dd0408150a0b641b0af | ahead 13 behind 0 | 0 | 26focused passed; real console6sources unchanged; scoped native/hygiene pass. | Bindings, operating/cold-start routes, eval evidence and preservation recorded. | Public export held; assembled Review and remaining Spec Tasks pending. Git state at close: unpushed (ahead 13 behind 0 of origin/main); recorded reason: Explicit public export approval pending; all owned work committed; authorized local endpoint.; close attribution: {"agent":"codex-wiki-retrieval","claimant":"codex-wiki-retrieval","onBehalfOf":null} | f0b0fbe384f075923a7598c57cdc4c59c960b03c2184752b8af236b4f13a089c |

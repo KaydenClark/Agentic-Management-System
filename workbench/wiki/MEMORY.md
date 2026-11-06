@@ -113,6 +113,7 @@ One page per Spec and Landmark. The Spec holds the destination; its page holds h
 - [S-013 history](history/S-013.md) - closes, verdicts, approvals and corrections for S-013 (coherence checks)
 
 - [S-000C history](history/S-000C.md) - preparation and evidence for maintained Wiki understanding.
+- [S-000D history](history/S-000D.md) - local Task closure evidence and publication limits for source-backed memory.
 
 ## Routing
 
