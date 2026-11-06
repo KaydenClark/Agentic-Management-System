@@ -3,7 +3,7 @@
 **Task ID:** TK-001
 **Spec ID:** S-005
 **Slice:** A generator writes one review card per page in the dev page list, bound to the built page's content hash, and marks a card stale when the hash changes
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Every page covered
 **Planned verification:** pytest against a fixture page list and built pages in a temporary Git repository; live run against origin/dev
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Nothing in `site/` changes; the site is only read.
+**Claimed by:** codex-s005-pages
+**Current claimant:** codex-s005-pages
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`, its Decisions), `grill-board/README.md`, `grill-board/card-example.md`, DDR-000X, ADR-002U and the board code in `src/ams/grill_board/` (`cards.py`, `answers.py`: `repository_lock`, `_write_and_commit`). Read the page list with `git fetch origin dev && git show origin/dev:site/page-list.json`; orchestrator A is its only writer and `path` is stable.
 

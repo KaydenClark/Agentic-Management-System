@@ -5,12 +5,12 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator B (local)
 **Stance:** Builder
-**Updated:** 2026-11-05
+**Updated:** 2026-11-06
 **Confirmation:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** A Grill Board review card for every website page, where the owner approves or criticizes the site and the criticism becomes the voice and taste record.
 **Blockers:** none
-**Next gate:** Implement and check content-bound page coverage, then consume recorded criticism in a subsequent draft/review. S-004 Human QA remains separate.
+**Next gate:** Close TK-001 with verification and documentation proof.
 
 ## Intent and authority
 
