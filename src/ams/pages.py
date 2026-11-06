@@ -163,7 +163,7 @@ def _stamp(now):
     return (now or datetime.now(timezone.utc)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def _new_card(row, digest, candidate):
+def _new_card(row, digest, candidate, *, protected=False):
     landed = row.get("landed")
     kind = row.get("provenance_kind", "historical-landing")
     provenance_label = "Verified containment" if kind == "verified-containment" else "Landed"
@@ -171,22 +171,25 @@ def _new_card(row, digest, candidate):
     provenance = "**Integration:** pending\n" if kind == "pending-candidate" else (
         f'**{provenance_label}:** {landed["branch"]} {landed["commit"]} PR {pr if pr is not None else "unknown"}\n')
     sources = ", ".join(row["sources"])
+    verification = ('Protected deployment content verified; current snapshot evidence is in grill-board/pages/index.json. '
+                    if protected else 'Protected-deployment verification is pending; ')
     return (f'# Review {row["path"]}: {row["title"]} at {digest}\n\n'
             '**Topic:** Website pages\n**Priority:** P2\n'
             '**Priority reason:** Review this exact candidate before website acceptance.\n'
             '**Value:** V1\n**Value reason:** A content-bound decision prevents repeated review.\n'
             f'**Page:** {row["path"]}\n**Title:** {row["title"]}\n**Content hash:** {digest}\n'
             f'**Candidate:** {candidate}\n**Provenance kind:** {kind}\n'
+            f'**Verification:** {"protected-capture" if protected else "built-candidate"}\n'
             f'{provenance}'
             f'**Spec:** {row["spec"]}\n**Task:** {row["task"]}\n'
             f'**Recommendation:** Approve page {row["path"]} ({row["title"]}) at content hash {digest}.\n'
             f'**Owner record:** {APPROVALS}\n**Write after:** ## Approvals\n\n'
             f'Inspect this page at built candidate {candidate}. '
-            'Protected-deployment verification is pending; this local card supplies no public review status. '
+            f'{verification}This local card supplies no public review status. '
             f'Sources: {sources}.\n')
 
 
-def generate(root, listed, built, *, candidate, now=None):
+def generate(root, listed, built, *, candidate, now=None, protection=None):
     """Commit one complete built snapshot; append supersession, never rewrite history.
 
     ``built`` maps every public built route to its served HTML. Injection is
@@ -195,6 +198,15 @@ def generate(root, listed, built, *, candidate, now=None):
     """
     if not re.fullmatch(r"[0-9a-f]{40,64}", candidate):
         raise PageRefused("candidate must be an immutable commit")
+    if protection is not None:
+        from .protected_pages import protection_record
+        if not isinstance(protection, dict):
+            raise PageRefused('protected generation requires an observer evidence record')
+        pins = dict(protection)
+        observed_at = pins.pop('observed_at', None)
+        protection = protection_record(pins, observed_at)
+        if protection['candidate'] != candidate:
+            raise PageRefused('protected evidence differs from the generated candidate')
     rows = _metadata(listed, built)
     hashes = {path: content_hash(built[path]) for path in rows}
     root = Path(root).resolve()
@@ -217,7 +229,7 @@ def generate(root, listed, built, *, candidate, now=None):
                 # Reuse an unchanged content occurrence only while its owners,
                 # sources and provenance still match. Keep that occurrence's
                 # original candidate; the index binds the latest build pin.
-                expected = _new_card(row, digest, parsed.fields.get("Candidate", candidate)).encode()
+                expected = _new_card(row, digest, parsed.fields.get("Candidate", candidate), protected=protection is not None).encode()
                 reuse = existing.startswith(expected)
             if not reuse:
                 slug = path.strip("/").replace("/", "-") or "home"
@@ -228,7 +240,7 @@ def generate(root, listed, built, *, candidate, now=None):
                     # answered history. A fresh occurrence gets a new filename.
                     suffix += 1
                     name = f"{stem}-{suffix}.md"
-                new_card = _new_card(row, digest, candidate)
+                new_card = _new_card(row, digest, candidate, protected=protection is not None)
                 parsed = parse_card(name, new_card)
                 required = {"Page": path, "Content hash": digest, "Candidate": candidate,
                             "Title": row["title"], "Spec": row["spec"], "Task": row["task"],
@@ -256,7 +268,7 @@ def generate(root, listed, built, *, candidate, now=None):
                 raise PageRefused(f"{path}: removed route does not name its current committed card")
             writes[relative] = old_blob + (b"" if old_blob.endswith(b"\n") else b"\n") + (
                 f'\n## Stale\n\n**Removed in:** {candidate}\n**Stale since:** {_stamp(now)}\n').encode()
-        writes[INDEX] = (json.dumps({"candidate": candidate, "pages": entries}, indent=2, sort_keys=True) + "\n").encode()
+        writes[INDEX] = (json.dumps({"candidate": candidate, "pages": entries, "protection": protection}, indent=2, sort_keys=True) + "\n").encode()
         if committed_blob(root, APPROVALS, base) is None:
             writes[APPROVALS] = b"# Website page approvals\n\nOwner-facing content-bound decisions; no public-site status.\n\n## Approvals\n"
         transaction = []
@@ -270,7 +282,7 @@ def generate(root, listed, built, *, candidate, now=None):
             mode = _git(root, "ls-tree", base, "--", relative).split(" ", 1)[0] if old is not None else "100644"
             transaction.append((relative, path, mode, old, new))
         if not transaction:
-            return {"changed": False, "pages": len(rows), "commit": base, "candidate": candidate}
+            return {"changed": False, "pages": len(rows), "commit": base, "candidate": candidate, "protected_verified": protection is not None}
         for _, path, *_ in transaction:
             path.parent.mkdir(parents=True, exist_ok=True)
         try:
@@ -278,7 +290,7 @@ def generate(root, listed, built, *, candidate, now=None):
                                        f"Review cards bind the complete website build at {candidate}; historical answers remain unchanged.")
         except AnswerRefused as error:
             raise PageRefused(str(error)) from error
-        return {"changed": True, "pages": len(rows), "commit": commit, "candidate": candidate}
+        return {"changed": True, "pages": len(rows), "commit": commit, "candidate": candidate, "protected_verified": protection is not None}
 
 
 def main(argv=None):
@@ -294,7 +306,17 @@ def main(argv=None):
     parser.add_argument("--image", help="approved local immutable Node Docker image sha256 identity")
     parser.add_argument("--public-config", type=Path, help="explicit public read-only site configuration JSON; no inherited values")
     parser.add_argument("--timeout", type=float, default=300)
+    parser.add_argument('--protected-artifact', type=Path, help='private capture emitted by a trusted authenticated outer observer')
+    parser.add_argument('--protected-project')
+    parser.add_argument('--protected-deployment')
+    parser.add_argument('--protected-origin')
+    parser.add_argument('--protected-capture-sha256', help='independent observer digest, not a self-declared trust flag')
     args = parser.parse_args(argv)
+    protected_pins = [args.protected_project, args.protected_deployment, args.protected_origin, args.protected_capture_sha256]
+    if args.protected_artifact and (not all(protected_pins) or args.built_html):
+        parser.error('protected capture requires automatic collection and every independent observer pin')
+    if not args.protected_artifact and any(protected_pins):
+        parser.error('protected observer pins require --protected-artifact')
     if args.built_html and (not args.inventory or args.image or args.source_repo or args.ref or args.public_config):
         parser.error("injected HTML requires --inventory and cannot be combined with automatic build options")
     if not args.built_html and (args.inventory or not args.image):
@@ -311,9 +333,19 @@ def main(argv=None):
                                         build_start=runtime, public_config=config)
             if not runtime.cleanup_verified:
                 raise PageRefused("owned runtime cleanup is not verified; no Board write")
-            result = generate(args.project, collected["inventory"], collected["html"], candidate=collected["candidate"])
-            result.update(input_mode="pinned-container-build", build_image=args.image,
+            if args.protected_artifact:
+                from .protected_pages import collect_protected
+                from .page_build import AMS_ORIGIN
+                collected = collect_protected(args.protected_artifact, collected, expected_pins={
+                    'repository': AMS_ORIGIN, 'project': args.protected_project,
+                    'deployment': args.protected_deployment, 'candidate': args.candidate,
+                    'origin': args.protected_origin, 'capture_sha256': args.protected_capture_sha256})
+            result = generate(args.project, collected["inventory"], collected["html"], candidate=collected["candidate"],
+                              protection=collected.get('protection'))
+            result.update(input_mode="protected-capture" if args.protected_artifact else "pinned-container-build", build_image=args.image,
                           route_kinds=collected["kinds"], excluded=collected["excluded"], cleanup_verified=True)
+            if collected.get('protection'):
+                result['protection'] = collected['protection']
     except (PageRefused, AnswerRefused, OSError, json.JSONDecodeError) as error:
         parser.exit(1, f"ams-pages: {error}\n")
     print(json.dumps(result, sort_keys=True))

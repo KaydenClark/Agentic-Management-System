@@ -342,3 +342,76 @@ def test_built_card_does_not_claim_unverified_protected_deployment(room):
     assert f'built candidate {candidate}' in card.context
     assert 'Protected-deployment verification is pending' in card.context
     assert 'protected dev candidate' not in card.context
+
+
+def protected_evidence(candidate):
+    return {'repository': 'https://github.com/KaydenClark/Agentic-Management-System.git',
+            'project': 'prj_Synthetic', 'deployment': 'dpl_Synthetic', 'candidate': candidate,
+            'origin': 'https://synthetic-immutable.vercel.app', 'capture_sha256': 'b' * 64,
+            'observed_at': '2026-11-06T09:00:00+00:00'}
+
+
+def test_protected_generation_binds_evidence_without_reasking_unchanged_content(room):
+    candidate = git(room, 'rev-parse', 'HEAD')
+    listed = inventory(room, ('/',))
+    proof = protected_evidence(candidate)
+    first = pages.generate(room, listed, {'/': html()}, candidate=candidate, protection=proof)
+    card = load_cards(room / 'grill-board/cards')[0][0]
+    assert first['protected_verified']
+    assert card.fields['Verification'] == 'protected-capture'
+    assert 'Protected deployment content verified' in card.context
+    assert 'verification is pending' not in card.context
+    assert not pages.generate(room, listed, {'/': html()}, candidate=candidate, protection=proof)['changed']
+    later = {**proof, 'capture_sha256': 'c' * 64, 'observed_at': '2026-11-06T10:00:00+00:00'}
+    original = (room / 'grill-board/cards' / card.file).read_bytes()
+    pages.generate(room, listed, {'/': html()}, candidate=candidate, protection=later)
+    assert len(load_cards(room / 'grill-board/cards')[0]) == 1
+    assert (room / 'grill-board/cards' / card.file).read_bytes() == original
+    index = json.loads((room / 'grill-board/pages/index.json').read_text())
+    assert index['protection'] == later
+
+
+@pytest.mark.parametrize('refuse', [False, True])
+def test_cli_checks_protected_capture_after_clean_build_before_any_board_write(room, monkeypatch, capsys, refuse):
+    import ams.page_build as build
+    import ams.protected_pages as protected
+    candidate = git(room, 'rev-parse', 'HEAD')
+    proof = protected_evidence(candidate)
+    class Runtime:
+        cleanup_verified = True
+        def __init__(self, *args, **kwargs): pass
+    monkeypatch.setattr(build, 'DockerBuild', Runtime)
+    built = {'candidate': candidate, 'inventory': inventory(room, ('/',)), 'html': {'/': html()},
+             'kinds': {'/': 'page'}, 'excluded': {}}
+    monkeypatch.setattr(build, 'collect_current', lambda *a, **k: built)
+    observed = []
+    def capture(directory, snapshot, *, expected_pins):
+        assert snapshot is built and git(room, 'rev-parse', 'HEAD') == candidate
+        assert directory == room / 'private-capture'
+        assert expected_pins == {key: value for key, value in proof.items() if key != 'observed_at'}
+        observed.append(True)
+        if refuse: raise pages.PageRefused('synthetic protected identity refusal')
+        return {**built, 'protection': proof}
+    monkeypatch.setattr(protected, 'collect_protected', capture)
+    command = ['generate', '--project', str(room), '--candidate', candidate, '--image', 'sha256:' + '1' * 64,
+               '--protected-artifact', str(room / 'private-capture'), '--protected-project', proof['project'],
+               '--protected-deployment', proof['deployment'], '--protected-origin', proof['origin'],
+               '--protected-capture-sha256', proof['capture_sha256']]
+    if refuse:
+        with pytest.raises(SystemExit) as error: pages.main(command)
+        assert error.value.code == 1 and git(room, 'rev-parse', 'HEAD') == candidate
+        assert not list((room / 'grill-board/cards').glob('*.md'))
+    else:
+        pages.main(command)
+        result = json.loads(capsys.readouterr().out)
+        assert result['input_mode'] == 'protected-capture' and result['protected_verified']
+        assert result['protection'] == proof
+    assert observed == [True]
+
+
+def test_protected_cli_requires_independent_pins_before_execution(room):
+    candidate = git(room, 'rev-parse', 'HEAD')
+    with pytest.raises(SystemExit) as error:
+        pages.main(['generate', '--project', str(room), '--candidate', candidate,
+                    '--image', 'sha256:' + '1' * 64, '--protected-artifact', str(room / 'capture')])
+    assert error.value.code == 2 and git(room, 'rev-parse', 'HEAD') == candidate
