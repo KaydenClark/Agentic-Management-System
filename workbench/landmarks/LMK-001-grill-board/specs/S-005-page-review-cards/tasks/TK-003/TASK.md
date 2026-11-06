@@ -3,7 +3,7 @@
 **Task ID:** TK-003
 **Spec ID:** S-005
 **Slice:** Preserve original page feedback privately; bind safe committed voice entries and later page cards to its version.
-**Status:** in-progress
+**Status:** done
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Criticism becomes the voice record; Agents cite it
 **Planned verification:** synthetic private-note canaries never enter Git; safe version/card writes are atomic, stale writes refuse, and originals remain recoverable
@@ -13,6 +13,7 @@
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Nothing in `site/` changes.
 **Claimed by:** codex-s005-feedback
 **Current claimant:** codex-s005-feedback
+**Proof:** 642:1047/4skip;CI422486:1034/9+11browser;128focused;Reviews0.
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), `grill-board/README.md` (answers, rating and flag), DDR-000J, DDR-000X, ADR-002U, the TK-001 generator and `src/ams/grill_board/answers.py`.
 
@@ -32,14 +33,14 @@ Hand back to S-005 with `close`.
 
 ## Acceptance
 
-- [ ] In a disposable fixture, a return, rating/comment and flag preserve the exact synthetic original privately and atomically commit only safe card/voice references with page/hash/date/kind/version, incrementing the version.
-- [ ] Must fail: a unique synthetic private-note canary in any Git blob, card, approval, voice record, public log or exported evidence. Original and safe interpretation remain separate and traceable; originals survive interruption/retry without duplicate effects.
-- [ ] Must fail: criticism on a page card whose commit leaves the voice record unchanged fails the test.
-- [ ] Editing the voice record after render makes the write refuse; card and record stay byte-identical.
-- [ ] Must fail: an open page card that names no voice record version fails the test.
-- [ ] `uv run pytest` passes; render and doctor show no blocking finding.
+- [x] In a disposable fixture, a return, rating/comment and flag preserve the exact synthetic original privately and atomically commit only safe card/voice references with page/hash/date/kind/version, incrementing the version.
+- [x] Must fail: a unique synthetic private-note canary in any Git blob, card, approval, voice record, public log or exported evidence. Original and safe interpretation remain separate and traceable; originals survive interruption/retry without duplicate effects.
+- [x] Must fail: criticism on a page card whose commit leaves the voice record unchanged fails the test.
+- [x] Editing the voice record after render makes the write refuse; card and record stay byte-identical.
+- [x] Must fail: an open page card that names no voice record version fails the test.
+- [x] `uv run pytest` passes; render and doctor show no blocking finding.
 
-TK-002 is natively closed. TK-003 correction642 passes fresh1047/4 skips and128 focused checks including actual HTTP/browser; independent corrective reviews45 each find0 remaining issues. Exact d2 CI1034/9 skips plus10 browser/all14 steps passes. Earlier fullf13 and failed attempts remain in FAIL237-256. The retry browser test is now wired into explicit CI; new-head CI/native close remain. TK-000K work is separate and does not imply final protected coverage. No actual owner notes, consumption or HumanQA.
+TK-003 is natively closed from clean pushed dc2cc96. Product642 passes fresh1047/4 skips and128 focused checks; exact CI42248684793 passes1034/9 skips plus11 browser. Both independent corrective and record reviews pass. Private originals and starting snapshots are retained; no workspace release, actual owner feedback, coverage completion, consumption or HumanQA is claimed.
 
 Workspace baseline sha256:77b8702e5c168d8ea307b5c62fcffeb0f5ab555e304d05be9de27cbba50ffcb9
 
@@ -49,3 +50,4 @@ Workspace baseline sha256:77b8702e5c168d8ea307b5c62fcffeb0f5ab555e304d05be9de27c
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-005-page-review-cards | 6d06b13a501d6e558d9cd047382ce9c4fada39ac | ahead 0 behind 0 | 13 | Uncommitted TK003:36 focused pass; actual browser retry1 pass. Earlier142pass/1fail stale refusal and28pass/1fail invalid fixture verdict retained; browser encoding miss retained. Seven interruption cuts pass; raw canaries absent in all Git objects. | Board private-feedback guide; source dependency report; central FAIL237-244. | Full/fresh checks, independent Review, publication/CI and native close remain. No owner notes, final assembled capture, consumption or HumanQA; main merge remains unapproved. | 238bb69a990386fb09e2c7b96d04396cc3a2759d970611a82c733d54c000581a |
 | 2 | Feature/S-005-page-review-cards | d2c9d211a44bb4e6b98b9fdc6eac05733a13f5c6 | ahead 5 behind 0 | 4 | Fresh642:1047pass/4skip,128focused incl actual browser/HTTP; independent corrective45x2,0 findings. Exact d2 CI1034pass/9skip plus10browser/all14steps succeeded. Added existing retry browser test to explicit CI list; new-head CI remains. | Private feedback guide/configuration; FAIL246/248 corrected. FAIL254-256 retains reviewer/publication harness limits. TK000K own expected-red work is outside this passed source. | New-head browser CI and native close. Coverage/consumption/final assembled dev capture/ownerQA/main permission remain; no actual owner notes or workspace release. | bcb5d3e466acba3dfd7578eabf3a06a91dd502ca835255f7d3cd8c27eca81bbc |
+| 3 | Feature/S-005-page-review-cards | dc2cc96151cd2788750e8a1e556245b8b8cb755f | ahead 0 behind 0 | 0 | 642:1047/4skip;CI422486:1034/9+11browser;128focused;Reviews0. | Board guide/manifest/FAIL246+248. | Coverage/consumption/final dev/ownerQA/main permission; originals retained.; close attribution: {"agent":"codex-servitor-pr174","claimant":"codex-s005-feedback","onBehalfOf":"codex-s005-feedback"} | 138d451c7f8edbd55de1008f4466302da626f6b8e08c3adcf0c00199abafac9f |

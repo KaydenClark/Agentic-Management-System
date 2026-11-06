@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** Content-bound page reviews and versioned feedback consumed by later drafts.
 **Blockers:** none
-**Next gate:** Close TK-000K with verification and documentation proof.
+**Next gate:** Complete TK-000K.
 
 
 ## Intent and authority
@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. TK-001 and TK-002 are closed. TK-003 correction642 passes fresh1047/4 skips and128 focused checks with actual browser/HTTP; both corrective reviews find0 remaining issues. Exact d2 CI1034/9 skips plus10 browser/all14 steps succeeds. The existing private-feedback browser test is now added to explicit CI; new-head CI/native close remain. FAIL210-256 retains failed checks and late intake. Committed50 cards still pin protected47; private86 preparation is historical proof. Final capture must use assembled READY dev. S003 ledger/adapter reader are repaired; RSI comparability/real-loop work remains with its owner. TK-000K has a genuine956-file start with75 private originals copied before product; implementation is in progress. Consumption, final coverage, owner QA and main delivery remain open. Original nodeids is not located; no workspace release.
+No Spec acceptance is claimed. TK-001, TK-002 and TK-003 are closed. Private-feedback product642 passes fresh1047/4 skips and128 focused checks; exact dc2 CI1034/9 skips plus11 browser/all14 steps succeeds. Both corrective and record reviews find0 remaining issues. Native TK-003 close names the original claimant and actual checked source. FAIL210-256 retains failed attempts and late intake. Committed50 cards still pin protected47; private86 preparation is historical proof. Final capture must use assembled READY dev. S003 ledger/adapter reader are repaired; RSI comparability/real-loop work remains with its owner. TK-000K has a genuine956-file start with75 copied private originals; implementation remains in progress. Consumption, final coverage, owner QA and main delivery remain open. Original nodeids is not located; no workspace release.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 
