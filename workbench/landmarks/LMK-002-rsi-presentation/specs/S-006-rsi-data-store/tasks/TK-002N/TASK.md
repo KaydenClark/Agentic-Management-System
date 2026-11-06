@@ -25,3 +25,9 @@ Planning source: owner RSI Map/Plan request of 2026-11-04 and mapped base 8319e8
 ## Scoped implementation release
 
 On 2026-11-05 the owner explicitly requested this implementation under orchestrate/carry and confirmed the readback. Start with an isolated test namespace; preserve synthetic labels, privacy, original identities and stopped campaigns. This releases owner:feedback-loop-implementation only for this Task. No model campaign, installation or production promotion is released.
+
+## Starting inventory
+
+Workspace baseline sha256:c14ddee907fe55fad1283f171e8477063dbf9e4c5bc2b7b2a945abf4d2005308
+
+Captured after the remote native claim and committed rendered projections, before product changes. Raw inventory remains in local private recovery.
