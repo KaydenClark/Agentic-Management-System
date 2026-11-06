@@ -21,6 +21,7 @@ generated rows as an independent queue. An empty board means no projected work.
 <!-- hot-specs:start -->
 | Spec | Current slice | Owner | Blocker | Latest meaningful event | Next gate |
 |---|---|---|---|---|---|
+| [LMK-000B](workbench/landmarks/LMK-000B-session-orientation/LANDMARK.md) | TK-002Y: Make Codex sessions open with the RUNBOOK Orientation note (ready) | Kayden | none | No history recorded yet. | TK-002Y is ready: make Codex sessions open with the Orientation note. Claude already passes. |
 | [S-001](workbench/specs/S-001-ams/SPEC.md) | Acceptance / owner gate | Kayden | none | TK-003: Task closed (2026-11-02) | Confirm acceptance criteria and completion result. |
 | [S-002](workbench/landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/SPEC.md) | TK-002: A noise-floor run of the current version against itself on a fixed task set records per-task flip rate and spread (in-progress; runs 1, feature/s002-qualification-results @ 84756ac, dirty 4) | Kayden; orchestrator B (local) | none | TK-000V: Task closed (2026-11-01) | TK-000Y bounded structured-output correction; no further model calls or additional trial-store rows are released. |
 

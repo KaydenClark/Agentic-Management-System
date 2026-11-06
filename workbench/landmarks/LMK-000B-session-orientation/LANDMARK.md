@@ -7,7 +7,7 @@
 **Updated:** 2026-11-06
 **Catalog description:** Every session follows the RUNBOOK and shows the recovered intent before its first answer or action.
 **Blockers:** none
-**Next gate:** Owner choice on user-level Codex instructions that override the RUNBOOK note; [trial results](../../feedback/REPORT-context-recovery-before-answer-2026-11-06.md#pass-1-change-and-trial-results-2026-11-06).
+**Next gate:** TK-002Y is ready: make Codex sessions open with the Orientation note. Claude already passes.
 
 ## Direction
 
@@ -22,7 +22,7 @@ manual, the manual changes how it trains them.
 ## Why It Matters
 
 The same failure is logged across Anthropic and OpenAI workers (FAIL-008, 009,
-017, 034, 131, 132). Agents answered or redesigned without recovering recorded
+017, 034, 131, 132, 133). Agents answered or redesigned without recovering recorded
 intent, the owner had to restate settled decisions, and new sessions produced
 competing versions. Recording intent does no good if sessions do not recover it.
 
@@ -47,6 +47,10 @@ No ADR yet.
 
 None yet. Findings F-1 to F-4 in the loop report are pending dispositions under
 this Landmark.
+
+## Direct Tasks
+
+- [TK-002Y - Make Codex sessions open with the RUNBOOK Orientation note](tasks/TK-002Y/TASK.md) (ready)
 
 ## Boundaries
 
