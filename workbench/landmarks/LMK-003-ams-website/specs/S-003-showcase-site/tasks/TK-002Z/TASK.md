@@ -28,11 +28,11 @@ S-005 owns Python collector/Board/cards. Coordinate the flat pages output and po
 - [x] Existing seven rows remain byte-equivalent as objects; additional entries have real owner records and honest provenance, with unknown original introduction left unknown.
 - [x] Adding one declared fixture page/article automatically yields its inventory entry; no manual card row is required. Missing/ambiguous ownership, unsupported classification and stale coverage fail.
 - [x] Generation is deterministic/idempotent and runs from Git-free frozen inputs; pending candidates contain no invented landing or self-referential hash.
-- [ ] S-005 can consume the generated flat inventory before requests/Board writes. Affected checks and scoped QA pass; exact source and limits are returned for checked dev delivery.
+- [x] S-005 can consume the generated flat inventory before requests/Board writes. Affected checks and scoped QA pass; exact source and limits are returned for checked dev delivery.
 
 ## Current integration
 
-Merged checked dev e10216e: demo S009/TK0030 retains verified containment63870b54/PR177; governance S010/TK001 retains e10216e/PR179. Real build projects50 surfaces:49 pages plus visitor404,39 skill articles; only internal error excluded. Original7 remain deep-equal. Exact read-only metadata/artifact functions from S0050c39df8 accept the output and pending/null, rejecting7 adverse controls. No cards or S005 records written. Old262 collection proves only the696b05a interface; protected/current card delivery remains S005 work, not a circular Z gate. Final checks pending.
+Merged checked dev e10216e: demo S009/TK0030 retains verified containment63870b54/PR177; governance S010/TK001 retains e10216e/PR179. Real build projects50 surfaces:49 pages plus visitor404,39 skill articles; only internal error excluded. Original7 remain deep-equal. Exact read-only metadata/artifact functions from S0050c39df8 accept the output and pending/null, rejecting7 adverse controls. No cards or S005 records written. Old262 collection proves only the696b05a interface; protected/current card delivery remains S005 work, not a circular Z gate. Fresh immutable8e9f12b build and292 site tests pass; root/site hygiene0, layout/render/doctor checks pass. Final CI/root assembly review remains the merge gate. The complete1316-item start remains retained:921 tracked originals at the bound ancestor and395 ignored originals privately, with no workspace-release claim.
 
 ## Starting inventory
 
