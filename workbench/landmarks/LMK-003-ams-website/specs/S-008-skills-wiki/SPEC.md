@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Close TK-0033 with verification and documentation proof.
+**Next gate:** Independent review and dev containment of TK-0033; owner page approvals and Human QA on protected `dev`; only the owner merges `dev` -> `main`. Refocus fidelity remains unchecked.
 
 ## Intent and authority
 
