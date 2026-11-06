@@ -1,7 +1,7 @@
 # RSI repair: bounded branch delivery and closeout
 
 Owner: Kayden direct AMS chat, 2026-11-06. Every edit to AMS/shared skills is RSI work.
-Status: candidate implementation; qualification and delivery pending.
+Status: bounded skill qualification accepted; catalog source merged and installed; AMS adoption pending.
 Source-delivery capability: [S-011](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/SPEC.md), within [LMK-004](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md).
 
 ## Confirmed scope and authority
@@ -39,3 +39,13 @@ Development failures and review findings are in [canonical intake](../feedback/W
 ## Delivery and later use
 
 Pending: current-head skill qualification and review; catalog main merge/verification; personal-catalog published-source installation preserving imports; supported AMS tool adoption, controls/Wiki reconciliation and CI; guarded cleanup of this repair's branches/worktrees. Supersede obsolete AMS PR208 without merging its rejected model. Later observed use and recurrence checks remain distinct from source publication and installation.
+
+## Bounded qualification and source delivery, 2026-11-06
+
+Independent gpt-6.1-sol/high evaluation and native r1 scoring accepted orchestrate90/90, journey90/90, land96/96 and setup-workbench96/96: each Excellent, three passing runs, complete/qualified within the declared bounded routing scope. Protected calibration11/11 and existing deterministic r1 controls42/42 passed. Per-skill exclusions and65 original-condition coverage rows are in [the safe summary](../../evals/bounded-delivery/qualification-summary.json); raw responses, calibration oracle and full packets remain verified private local recovery. No whole-skill fitness or comparative useful-benefit claim is made. The mismatched-access baseline artifacts remain diagnostics; native score was used without fabricating a matched-baseline history record. Earlier campaign attempts/stops are unchanged.
+
+The final native suite passed13/13, including actual Spec and Landmark Task close, checked local merge, remote/local branch deletion with another Taskready and parentactive, plus standalone main closeout. The earlier full package suite passed65/65; exact-current CatalogCI42307528949 passed. Independent Astra Standards and Spec reviews passed exact candidate619aa37440858dd5af3e5260955ed0023e0fa582; their earlier failures remain retained.
+
+[Skills PR71](https://github.com/KaydenClark/skills/pull/71) merged the exact candidate into main at4db09e3dc463667f7e5106ecc8b7aa6d1dfbfc21; fresh fetch proves containment and unchanged merged content. Post-merge CI and installation are recorded separately when observed.
+
+Published-main CatalogCI42309160258 passed at4db09e3. Registered maintenance installed that exact published main in the active personal catalog; maintenance check passed, Git is clean on main,318 local/imported files remain retained and the Claude discovery link is unchanged. Published-source maintenance was used without an import refresh. This is installation evidence, not a general later-use benefit claim.
