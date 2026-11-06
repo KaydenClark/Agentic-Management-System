@@ -182,7 +182,8 @@ test('the page explains where a confirmed answer goes', () => {
   assert.ok(where, 'no #where-answers-go section');
   assert.match(where, /<h2[^>]*>Where a confirmed answer goes<\/h2>/);
   const text = visibleText(where);
-  assert.match(text, /written straight into the record that owns the question/, 'does not say the answer lands in its owning record');
+  assert.match(text, /exact displayed readback on that DQC/, 'does not explain confirmation in the DQC');
+  assert.match(text, /Confirmation does not start implementation/, 'does not distinguish confirmation from implementation');
   assert.match(text, /nothing is sent, saved or shared/, 'does not say the demo keeps nothing');
   assert.match(text, /too taxing/i, 'does not explain the flag');
   assert.match(text, /Each color means one thing/, 'does not state the color meanings (DDR-000M)');

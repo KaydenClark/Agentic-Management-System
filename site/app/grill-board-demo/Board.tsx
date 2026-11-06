@@ -7,22 +7,20 @@ import { useMemo, useState, type ReactNode } from "react";
 import type { Card, Grade, Topic } from "./data";
 
 type Verdict = "confirm" | "wording" | "why" | "change" | "later";
-type LaneKey = "open" | "pending" | "stale" | "answered" | "later" | "applied" | "settled";
+type LaneKey = "open" | "pending" | "stale" | "answered" | "later";
 type Sort = "vp" | "pv" | "rev";
 
 const LANES: { key: LaneKey; label: string; hue: string; rest: boolean }[] = [
   { key: "open", label: "All open", hue: "h-none", rest: false },
   { key: "pending", label: "To answer", hue: "h-owner", rest: false },
   { key: "stale", label: "Revisit", hue: "h-returned", rest: false },
-  { key: "answered", label: "Answered · awaiting an agent", hue: "h-agent", rest: false },
+  { key: "answered", label: "Sample confirmed", hue: "h-agent", rest: false },
   { key: "later", label: "Not now", hue: "h-owner", rest: true },
-  { key: "applied", label: "Applied", hue: "h-agent", rest: true },
-  { key: "settled", label: "Settled elsewhere", hue: "h-none", rest: true },
 ];
 const LANE_NAME: Record<string, string> = {
   pending: "To answer",
   stale: "Revisit · re-answer",
-  answered: "Answered · awaiting an agent",
+  answered: "Sample confirmed",
   later: "Not now",
 };
 const LANE_HUE: Record<string, string> = { pending: "h-owner", stale: "h-returned", answered: "h-agent", later: "h-owner" };
@@ -166,7 +164,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
       : "Note · optional with Confirm, required with the three change verdicts";
   const saveLine =
     verdict === "confirm"
-      ? `Kept in this browser only · on the real board this is written into ${sel.owner}`
+      ? "Sample confirmation kept in this tab only · no record changed"
       : verdict
         ? "Kept in this browser only · nothing is sent or saved"
         : `No verdict yet · ${idx + 1} of ${order.length} shown`;
@@ -206,26 +204,17 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
                 <span className="gb-topic-bar">
                   <span className="gb-track"><span className="gb-fill" style={{ width: `${Math.round((100 * done) / tc.length)}%` }} /></span>
                   {hasRevisit && <span className="dot tone h-returned" title="Has a question to re-answer" />}
-                  {hasWaiting && <span className="dot tone h-agent" title="Has answers awaiting an agent" />}
+                  {hasWaiting && <span className="dot tone h-agent" title="Has sample confirmations" />}
                 </span>
               </button>
             );
           })}
         </div>
 
-        <section aria-label="Rounds and promotion" className="gb-round">
-          <div className="gb-eyebrow">This round</div>
-          <div className="gb-round-line">Round 1 · {answeredNow} answered, {confirmedNow} confirmed</div>
-          <button type="button" className="ghost semibold">End this round</button>
-          <div className="gb-small">Records which cards are confirmed. Starts no agent, promotes nothing.</div>
-          <div className="gb-rule" />
-          <div className="gb-ready">
-            <span className="dot tone h-agent" />
-            <span className="grow">Confirmed, ready to promote</span>
-            <span className="gb-round-count">{confirmedNow}</span>
-          </div>
-          <button type="button" className="ghost">Promote selected…</button>
-          <div className="gb-small">In this demo, nothing is handed to an agent.</div>
+        <section aria-label="Sample round" className="gb-round">
+          <div className="gb-eyebrow">Sample round</div>
+          <div className="gb-round-line">{answeredNow} answered, {confirmedNow} confirmed in this tab</div>
+          <div className="gb-small">These choices are only a preview. No real round or project record changes.</div>
         </section>
 
         <div className="gb-raillinks">

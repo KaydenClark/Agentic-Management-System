@@ -1,5 +1,4 @@
 import Board from "./Board";
-import { AgentBanner } from "./Islands";
 import { CARDS, TOPICS } from "./data";
 import "./board.css";
 
@@ -19,23 +18,15 @@ function WhereAnswersGo() {
         remembered on this device.
       </p>
       <p>
-        The real Grill Board runs on the owner&apos;s own computer, not on this site. Agents post only the questions
-        that need the owner&apos;s answer. When the owner confirms one:
+        The real Grill Board runs on the owner&apos;s computer. Each question is backed by a Destination Question Card
+        (DQC), which holds its proposal, reasons, source and history. Confirming preserves the exact displayed readback
+        on that DQC; corrections and quality feedback retain their own state.
       </p>
-      <ol>
-        <li>
-          The answer is written straight into the record that owns the question, for example the reunion plan&apos;s
-          Venue section. There is no second confirmation step.
-        </li>
-        <li>
-          The card shows as <strong>Answered · awaiting an agent</strong> until an agent has made the change it asks
-          for, then as <strong>Applied</strong>.
-        </li>
-        <li>
-          Ratings and the &ldquo;too taxing&rdquo; flag are kept as records too. A question flagged too taxing is
-          rewritten before it is asked again.
-        </li>
-      </ol>
+      <p>
+        After a round, an agent reviews changes and reconciles confirmed, authorized understanding into the relevant
+        project records. Confirmation does not start implementation; execution has its own approval. A Too taxing
+        flag holds a question for rewriting. This demo performs none of those real actions.
+      </p>
       <p className="gb-small">
         Each color means one thing: orange is trouble, yellow is why a choice is worth it, blue waits on you, green is
         the agents, purple came back to you. Grey needs nothing from you.
@@ -66,7 +57,6 @@ export default function GrillBoardDemoPage() {
             <a className="textlink" href="#where-answers-go">Where a confirmed answer goes</a>
           </span>
         </div>
-        <AgentBanner />
 
         <Board topics={TOPICS} cards={CARDS}>
           <WhereAnswersGo />
