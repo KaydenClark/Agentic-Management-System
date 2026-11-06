@@ -426,3 +426,16 @@ Supersedes: none
 
 LLM_Workbench source recovery, 2026-11-03: The Grill Board is the question-answering section of one local Workbench Dashboard, intended to reduce owner orchestration by putting context and actual proposed text beside decisions. The five sections are Destination Tracker (Landmarks and DQCs), Taskboard (Specs and Tasks), Grilling Board, Drafts to approve, and Wiki; other sections project their existing owners rather than create a new source of truth. The Board groups questions by topic and supports an owner-selected queue: independent Priority and Value filters, plus decision kind, workflow stage and destination scale where the source data supports them. Grades remain separate and have accessible reasons. Search and batch selection operate on real items; a batch is not an automatic recommended batch. Cards carry current understanding, full proposal, why, consequences, sources and revision/history; read existing answers before asking again. Confirm binds the displayed revision and exact approved content; Rework wording, Change the why and Change preserve the owner note and do not confirm replacement wording. An unanswered question remains pending. Source revisions and owner answers remain recoverable; agents route answers to real owners, reassess affected Priority and Value, and keep confirmation distinct from execution and publication. Source reader and drafts distinguish current text from proposals. The producer implements APIs and a local dashboard service; source inspection alone does not prove every destination feature is delivered. AMS must adapt these behaviors to its existing native DQC and execution owners rather than install a competing answer store; existing conflict and retry protections remain. The supplied Grilling Board Redesign HTML is the visual reference; AMS implementation and owner QA remain open.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-7f16abf6-5b54-4214-8854-8f66418dd673
+Kind: intent
+State: unresolved
+Recorded: 2026-11-06T19:37:23.940Z
+Author: Kayden
+Source: Kayden direct AMS alignment chat, 2026-11-06
+Topic: grilling-board
+Supersedes: none
+
+Alignment answer: "The whole dashboad. Give me the workbench dashboard from LLM_Workbench with the two trackers, and the grilling board." This settles whole-dashboard scope rather than a Grilling Board-only first delivery. Destination Tracker presents Landmarks/DQCs and Taskboard presents Specs/Tasks under existing owners. The owner asks which remaining choices could contradict the intended design. This is an individual interview answer, not confirmation of an assembled revised readback. Remaining frontier: source behavior versus known source defects, always-available local service, and whether owner answers should trigger agent processing. Preserve prior visual reference, functional controls, DQC/history protections and authority limits. No implementation starts during this alignment.
+<!-- /jot-entry -->
