@@ -508,6 +508,9 @@ async function selfTest(browser, server, origin) {
 async function toyProblems(page, plant) {
   const problems = [];
   if (!(await page.$('[data-toy]'))) return ['no interactive toy ([data-toy]) on the page'];
+  // Finish the page's ordinary prefetch and font loads before observing the
+  // keyboard interaction; every request after the window opens still fails.
+  await settleBoard(page);
   if (plant) await plant(page);
   const store = () => page.evaluate(() => JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage), document.cookie]));
   const before = await store();
