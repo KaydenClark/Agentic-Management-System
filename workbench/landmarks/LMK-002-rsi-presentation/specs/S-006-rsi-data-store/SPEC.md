@@ -28,6 +28,8 @@ Sourced rows make charts auditable; private writes protect credentials.
 
 ## Current Verified State
 
+N isolated lineage: [proof](tasks/TK-002N/TASK.md#proof). Production migration remains unperformed.
+
 Schema/provenance, writer/readback, conflict refusal, sources and key handling are met ([TK-000B](tasks/TK-000B/TASK.md#proof), [live limits](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01)). Private assessments and explicit unknown metrics are met (TK-000Q/R/S and TK-000P).
 
 Build history is incomplete: the approved pinned import at 771bd1e passed, but later coverage is unverified. Further import requires fresh approval and cannot rewrite S-008 creation provenance with --refresh-changed. TK-000W remains stopped/unaccepted; whole-Spec binding and actual Human QA are open. See [history](../../../../wiki/history/S-006.md).

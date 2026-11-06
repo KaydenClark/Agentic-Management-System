@@ -18,9 +18,9 @@ Planning source: owner RSI Map/Plan request of 2026-11-04 and mapped base 8319e8
 
 ## Acceptance
 
-- [ ] A caller writes and reads back one complete linked safe lineage with original IDs and pins; orphaned or conflicting records fail.
-- [ ] Private/raw evidence and privileged operations are inaccessible to the presentation role; outage is not reported as publication.
-- [ ] Focused checks and scoped QA prove the public seam; the exact revision and limits are handed back.
+- [x] A caller writes and reads back one complete linked safe lineage with original IDs and pins; orphaned or conflicting records fail.
+- [x] Private/raw evidence and privileged operations are inaccessible to the presentation role; outage is not reported as publication.
+- [x] Focused checks and scoped QA prove the public seam; the exact revision and limits are handed back.
 
 ## Scoped implementation release
 
@@ -47,3 +47,7 @@ Receipt 1 preserves source b1365c0, failed startup/client-denial proof and the s
 ## Same-Task correction release
 
 The parent orchestrator released bounded correction under the confirmed owner implementation scope: use filtered mutation probes without weakening denial assertions; separate stable chain identity from occurrences/families and preserve exhausted attempts across recurrence/new case/campaign; repair owned record budget and run full tests with permitted loopback sockets. Historical failures above remain. No new RSI campaign or attempt reset is authorized.
+
+## Source acceptance
+
+Parent accepted N source/API d03bb10 after exact-head CI42175365518,185 focused/live checks and804 verified original file bytes. Scope: isolated lineage only; whole-Spec acceptance, production migration and workspace release remain separate.
