@@ -290,3 +290,24 @@ def test_malformed_observed_field_refuses_without_typeerror(case):
     r["findings"][0]["observed"] = []
     with pytest.raises(Refused):
         publish(r, case[0] / "reports")
+
+
+def test_prepare_can_update_records_without_implementation_release(case):
+    contract = copy.deepcopy(case[2])
+    contract["workflow"].update(limit="prepare", allowed_paths=["site", "workbench"])
+    case = recut(case, contract)
+    put(case[0], "workbench/wiki/design.md", "Planned behavior, without implementation.\n")
+    commit(case[0])
+    assert codes(check(case)) == []
+
+
+def test_recovery_refuses_a_recurrence_with_its_parent_removed(case):
+    directory = case[0] / "reports"
+    first = check(case)
+    publish(first, directory)
+    second = check(case, "fixture-use-2", previous=first)
+    publish(second, directory)
+    original = directory / ("OBS-" + hashlib.sha256(first["occurrence_id"].encode()).hexdigest()[:32] + ".md")
+    original.unlink()
+    with pytest.raises(Refused):
+        recover(directory)

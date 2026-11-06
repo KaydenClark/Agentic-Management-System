@@ -170,6 +170,13 @@ def task_path(repo, source, spec_id, task_id):
     return hits[0]
 
 
+def preparation_record(path):
+    """Record edits can prepare work; eventual product scope grants no phase release."""
+    return path.endswith(".md") and (path in ("TRACKER.md", "TASKBOARD.md") or
+        re.fullmatch(r"TASKBOARD\.page-\d+\.md", path) is not None or
+        path.startswith(tuple("workbench/" + lane + "/" for lane in ("specs", "landmarks", "wiki", "docs", "feedback"))))
+
+
 def observe(repo, source, candidate, contract_path, occurrence_id, observed_at, *, previous=None):
     for sha in (source, candidate):
         identity(sha, SHA)
@@ -226,8 +233,9 @@ def observe(repo, source, candidate, contract_path, occurrence_id, observed_at, 
     changed = git(repo, "diff", "--name-only", "-z", source, candidate).decode().split("\0")
     out_of_scope = [p for p in changed if p and not any(p == allowed or p.startswith(allowed + "/")
                                                        for allowed in w["allowed_paths"])]
-    if out_of_scope:
-        finding("prepare-stop-bypass" if w["limit"] == "prepare" else "assignment-scope",
+    past_prepare = w["limit"] == "prepare" and any(p and not preparation_record(p) for p in changed)
+    if past_prepare or out_of_scope:
+        finding("prepare-stop-bypass" if past_prepare else "assignment-scope",
                 "changes-within-frozen-scope", "out-of-scope-change", target=repair_owner)
     skill_use = None
     if c["skill"] is not None:
@@ -238,7 +246,7 @@ def observe(repo, source, candidate, contract_path, occurrence_id, observed_at, 
         else:
             receipt = decode(raw)
             fields(receipt, "kind host use_id source_commit installed_digest loaded_digest use_observed")
-            require(receipt["kind"] == "native-loaded-use" and receipt["host"] in ("codex", "claude"), "invalid native observation")
+            require(receipt["kind"] == "native-loaded-use" and receipt["host"] in ("codex", "claude", None), "invalid native observation")
             identity(receipt["use_id"])
             for key, pattern in (("source_commit", SHA), ("installed_digest", DIGEST), ("loaded_digest", DIGEST)):
                 if receipt[key] is not None:
@@ -246,7 +254,7 @@ def observe(repo, source, candidate, contract_path, occurrence_id, observed_at, 
             require(type(receipt["use_observed"]) is bool, "native use must be observed separately")
             skill_use = {**receipt, "receipt_digest": digest(raw),
                          "condition": "intentional-baseline" if s["intentional_baseline"] else "accepted-version"}
-            if any(receipt[k] is None for k in ("source_commit", "installed_digest", "loaded_digest")) or not receipt["use_observed"]:
+            if any(receipt[k] is None for k in ("host", "source_commit", "installed_digest", "loaded_digest")) or not receipt["use_observed"]:
                 skill_use["condition"] = "unknown"
                 finding("unknown-loaded-skill", "native-loaded-use-evidence", "unavailable")
             elif receipt["source_commit"] != s["expected_commit"] or any(
@@ -308,12 +316,12 @@ def validate_report(report):
         fields(f, "id failure_id code probe_id owner expected observed severity disposition next_action previous_finding")
         require(type(f["code"]) is str and f["code"] in REASONS, "unknown finding code")
         expected, observed = REASONS[f["code"]]
-        require(f["expected"] == expected and f["observed"] in observed and
+        require(f["expected"] == expected and type(f["observed"]) is str and f["observed"] in observed and
                 f["severity"] == ("unknown" if f["code"].startswith("unknown-") else "error") and
                 f["disposition"] == "pending" and f["next_action"] == "inspect-and-route-to-existing-owner",
                 "invalid finding facts")
         require(f["failure_id"] == report["failure_id"], "failure identity differs")
-        require(f["probe_id"] is None or f["probe_id"] in probe_ids, "unknown finding probe")
+        require(f["probe_id"] is None or (type(f["probe_id"]) is str and f["probe_id"] in probe_ids), "unknown finding probe")
         require(f["id"] == "COH-" + digest(f"{report['occurrence_id']}:{f['code']}:{f['probe_id']}".encode())[:24],
                 "finding identity differs")
         if f["previous_finding"] is not None:
@@ -327,7 +335,7 @@ def validate_report(report):
     s = report["skill_use"]
     if s is not None:
         fields(s, "kind host use_id source_commit installed_digest loaded_digest use_observed receipt_digest condition")
-        require(s["kind"] == "native-loaded-use" and s["host"] in ("codex", "claude"), "invalid host identity")
+        require(s["kind"] == "native-loaded-use" and s["host"] in ("codex", "claude", None), "invalid host identity")
         identity(s["use_id"])
         for k, pattern in (("source_commit", SHA), ("installed_digest", DIGEST), ("loaded_digest", DIGEST), ("receipt_digest", DIGEST)):
             if s[k] is not None:
@@ -404,19 +412,43 @@ def publish(report, directory):
 
 
 def recover(directory, spec_id=None, task_id=None):
-    reports = []
+    reports, occurrences, uses = [], set(), set()
     for path in sorted(ordinary_directory(directory).glob("OBS-*.md")):
         require(not path.is_symlink() and path.is_file() and path.stat().st_size <= LIMIT, "invalid report file")
         text = path.read_text()
         require(text.count(MARKER) == 1 and text.endswith("\n```\n"), "invalid observation report")
         report = decode(text.split(MARKER)[1][:-5])
         validate_report(report)
+        require(path.name == "OBS-" + digest(report["occurrence_id"].encode())[:32] + ".md" and
+                report["occurrence_id"] not in occurrences, "duplicate or renamed occurrence")
+        occurrences.add(report["occurrence_id"])
+        if report["skill_use"] is not None:
+            use = (report["synthetic"], report["skill_use"]["use_id"])
+            require(use not in uses, "native use belongs to duplicate occurrences")
+            uses.add(use)
         require(report_text(report) == text, "observation report has changed")
-        owners = [report["owner"], *(f["owner"] for f in report["findings"])]
-        if any((spec_id is None or o["spec_id"] == spec_id) and
-               (task_id is None or o["task_id"] == task_id) for o in owners):
-            reports.append(report)
-    return reports
+        reports.append(report)
+    by_occurrence = {r["occurrence_id"]: r for r in reports}
+    for report in reports:
+        prior_id = report["previous_occurrence"]
+        if prior_id is not None:
+            prior = by_occurrence.get(prior_id)
+            require(prior is not None and prior_id != report["occurrence_id"] and
+                    prior["observed_at"] <= report["observed_at"] and
+                    all(prior[k] == report[k] for k in ("family", "failure_id", "owner", "synthetic")),
+                    "recurrence parent missing or different")
+            for f in report["findings"]:
+                expected = next((p["id"] for p in prior["findings"] if p["code"] == f["code"] and p["probe_id"] == f["probe_id"]), None)
+                require(f["previous_finding"] == expected, "recurrence finding differs")
+        # Equal observation times are allowed; still reject a forged cycle.
+        visited = {report["occurrence_id"]}
+        while prior_id is not None:
+            require(prior_id not in visited and prior_id in by_occurrence, "cyclic or missing recurrence")
+            visited.add(prior_id)
+            prior_id = by_occurrence[prior_id]["previous_occurrence"]
+    return [report for report in reports if any(
+        (spec_id is None or owner["spec_id"] == spec_id) and (task_id is None or owner["task_id"] == task_id)
+        for owner in [report["owner"], *(f["owner"] for f in report["findings"])])]
 
 
 def main(argv=None):
