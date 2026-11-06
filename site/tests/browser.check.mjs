@@ -579,12 +579,17 @@ try {
         await context.close();
       }
     }
-    const noJs = await browser.newContext({ viewport: { width: WIDTHS[0], height: HEIGHT }, javaScriptEnabled: false });
-    const p = await noJs.newPage();
-    await p.goto(`${server.url}${route.path}`);
-    const text = (await p.textContent('main')) ?? '';
-    check(`${route.name}: page text readable with scripts disabled`, text.trim().length > 40 && (route.name !== 'home' || /Agentic Management System/.test(text)), `${text.trim().length} chars`);
-    await noJs.close();
+    // Script-free access includes native keyboard navigation, not text alone.
+    for (const theme of THEMES) for (const width of [375, 1280]) {
+      const noJs = await browser.newContext({ viewport: { width, height: HEIGHT }, colorScheme: theme, javaScriptEnabled: false });
+      const p = await noJs.newPage();
+      await p.goto(`${server.url}${route.path}`);
+      const text = (await p.textContent('main')) ?? '';
+      check(`${route.name} ${theme} ${width}px: page text readable with scripts disabled`, text.trim().length > 40 && (route.name !== 'home' || /Agentic Management System/.test(text)), `${text.trim().length} chars`);
+      const problems = await keyboardProblems(p);
+      check(`${route.name} ${theme} ${width}px: script-free keyboard reveals every control with visible focus`, !problems.length, problems.join(' | '));
+      await noJs.close();
+    }
   }
 
   // The /start toy: keyboard to the last stage, no requests, no storage, and
