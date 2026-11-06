@@ -5,12 +5,12 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-04
+**Updated:** 2026-11-06
 **Catalog description:** Traceable RSI charts from Supabase, with honest empty states.
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Complete TK-002.
+**Next gate:** Close TK-0031 with verification and documentation proof.
 
 ## Intent and authority
 
