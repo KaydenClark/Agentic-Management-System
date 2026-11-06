@@ -5,7 +5,7 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
 **Stance:** Builder
-**Updated:** 2026-11-03
+**Updated:** 2026-11-06
 **Catalog description:** Checks that keep the AMS coherent: up to Spec, skills pinned and in sync, `dev` measured against `main`, and independent Spec review.
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
@@ -119,4 +119,7 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+The 2026-11-02 preparation request granted no implementation authority. TK-001D's later scoped release is recorded in [its Task](tasks/TK-001D/TASK.md); other holds, stopped experiments and failed evidence retain their scope. See [plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+
+
+Detection replay and limits: [procedure](../../../../wiki/guidebooks/coherence-observations.md).
