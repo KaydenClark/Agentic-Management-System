@@ -1,14 +1,16 @@
 # S-010 - Governance stack and flow charts
 
 **Spec ID:** S-010
-**Status:** planned
+**Status:** active
 **Priority:** 3
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
 **Updated:** 2026-11-01
 **Catalog description:** Site pages explaining the governance stack and drawing the AMS workflows as diagrams that match the code they depict.
-**Blockers:** S-003
-**Next gate:** Task planning after the site shell (S-003) exists.
+**Blockers:** S-003 site shell content exists at checked dev commit `259b7a905639cc6ab621220b160fc813c5bc43f1`; whole-Spec completion remains separate.
+**Confirmation:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
+**Execution approval:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
+**Next gate:** Convert and claim the first bounded Task; independent Review and Human QA remain open.
 
 ## Intent and authority
 
@@ -52,10 +54,6 @@ History: [S-010 history](../../../../wiki/history/S-010.md).
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Task lifecycle diagram generated from the code's status set, with a drift test, on `dev` | ready | none | pending |
-| TK-002 | Spec lifecycle, idea-to-delivered and review-and-return diagrams under the same test | ready | TK-001 | pending |
-| TK-003 | Governance stack page with worked examples | ready | none | pending |
-| TK-004 | Branch model, orchestrator and RSI round diagrams | ready | TK-001 | pending |
 
 ### TK-001 - First generated diagram
 
