@@ -4,7 +4,7 @@
 
 Follow the owner’s scope and corrections. Distinguish investigation, planning and implementation, and carry authorized work to its endpoint. Ask only consequential unresolved choices; delegate only with authority.
 
-Before work, follow [RUNBOOK](RUNBOOK.md#get-oriented), the assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md). RUNBOOK owns operating, testing, delivery and recovery procedures; SKILLS owns method routing and RSI operations.
+Every session is work, including questions and discussion. Before your first answer or action, silently read and follow [RUNBOOK](RUNBOOK.md#get-oriented), the operating manual. Do not announce routine orientation. RUNBOOK owns operating, testing, delivery and recovery procedures; SKILLS owns method routing and RSI operations.
 
 Recover project context through the [Wiki](workbench/wiki/MEMORY.md) and assigned records.
 
