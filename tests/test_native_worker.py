@@ -286,3 +286,45 @@ def test_native_notification_retains_the_observed_emission_timestamp(tmp_path):
                                  environment=dict(os.environ), timeout=3, cleanup_grace=0.1) as peer:
         assert peer.call('echo', {}) == {}
         assert peer.events[0]['emittedAtMs'] == 1700000000000
+
+
+COMMAND_PEER = r'''
+import json,os,signal,subprocess,sys
+commands={}
+def emit(value):print(json.dumps(value),flush=True)
+for line in sys.stdin:
+    value=json.loads(line)
+    if 'id' not in value:continue
+    identity,method=value['id'],value['method']
+    if method=='initialize':emit({'id':identity,'result':{'userAgent':'inert-fixture'}})
+    elif method=='command/exec':
+        process=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)'],start_new_session=True)
+        commands[value['params']['processId']]=(process,identity)
+        emit({'method':'fixture/detachedProcess','params':{'pid':process.pid}})
+    elif method=='command/exec/terminate':
+        process,original=commands.pop(value['params']['processId'])
+        os.killpg(process.pid,signal.SIGKILL);process.wait()
+        emit({'id':original,'result':{'exitCode':-9,'stdout':'','stderr':''}})
+        emit({'id':identity,'result':{}})
+'''
+
+
+def test_host_cancels_a_separate_native_command_group_on_interruption(tmp_path):
+    sentinel = subprocess.Popen([sys.executable, '-c', 'import time;time.sleep(60)'], start_new_session=True)
+    pid = None
+    try:
+        with pytest.raises(KeyboardInterrupt):
+            with native_worker.CodexHost([sys.executable, '-u', '-c', COMMAND_PEER], cwd=tmp_path,
+                                         environment=dict(os.environ), timeout=3, cleanup_grace=0.1) as host:
+                host.start_command(['inert'], timeout_ms=5000)
+                event = host.rpc.next_event()
+                pid = event['params']['pid']
+                assert alive(pid)
+                raise KeyboardInterrupt
+        assert dead_within([pid])
+        assert sentinel.poll() is None
+    finally:
+        if pid is not None:
+            reap_owned_fixture([pid])
+        sentinel.kill()
+        sentinel.wait(timeout=3)

@@ -14,6 +14,7 @@ import selectors
 import signal
 import subprocess
 import time
+import uuid
 
 
 class CleanupIncomplete(RuntimeError):
@@ -336,3 +337,82 @@ class NativeRpc:
         event = self.events[self._event_cursor]
         self._event_cursor += 1
         return event
+
+
+class CodexHost:
+    """A dedicated server and its connection-scoped standalone tool commands.
+
+    This pre-model seam uses supported command cancellation before terminating
+    the server group. It does not yet establish model-turn cleanup or qualify
+    a case, and accepts no model-call authority from these utility commands.
+    """
+    def __init__(self, arguments, *, cwd, environment, timeout=15, cleanup_grace=1):
+        self.rpc = NativeRpc(arguments, cwd=cwd, environment=environment,
+                             timeout=timeout, cleanup_grace=cleanup_grace)
+        self.cwd, self.timeout = str(cwd), timeout
+        self.commands = {}
+        self.closed, self.cleanup_unconfirmed = False, False
+
+    def __enter__(self):
+        try:
+            self.rpc.__enter__()
+            self.initialization = self.rpc.call('initialize', {
+                'clientInfo': {'name': 'ams-native-worker', 'version': '0.1.0'},
+                'capabilities': {'experimentalApi': True}})
+            self.rpc.notify('initialized')
+            return self
+        except BaseException:
+            self.close()
+            raise
+
+    def __exit__(self, *exception):
+        self.close()
+
+    def start_command(self, arguments, *, timeout_ms=10000, output_bytes_cap=65536):
+        if self.closed or self.cleanup_unconfirmed:
+            raise NativeProtocolError('native command host is not available')
+        identity = 'ams-command-' + uuid.uuid4().hex
+        # This client is synchronous. Install ownership before a send that may
+        # be interrupted after the host started a separate process session.
+        request = self.rpc._next_id
+        self.commands[identity] = request
+        observed = self.rpc.request('command/exec', {
+            'command': list(arguments), 'cwd': self.cwd, 'processId': identity,
+            'streamStdoutStderr': True, 'timeoutMs': timeout_ms, 'outputBytesCap': output_bytes_cap})
+        if observed != request:
+            raise NativeProtocolError('native command request identity differs')
+        return identity
+
+    def wait_command(self, identity, *, timeout=None):
+        if identity not in self.commands:
+            raise NativeProtocolError('native command is not owned by this connection')
+        result = self.rpc.wait(self.commands[identity], timeout=timeout)
+        self.commands.pop(identity)
+        if (type(result) is not dict or set(result) != {'exitCode', 'stdout', 'stderr'}
+                or type(result['exitCode']) is not int
+                or any(type(result[key]) is not str for key in ('stdout', 'stderr'))):
+            raise NativeProtocolError('native command result is malformed')
+        return result
+
+    def terminate_command(self, identity):
+        if identity not in self.commands:
+            raise NativeProtocolError('native command is not owned by this connection')
+        self.rpc.call('command/exec/terminate', {'processId': identity}, timeout=min(5, self.timeout))
+        return self.wait_command(identity, timeout=min(5, self.timeout))
+
+    def close(self):
+        if self.cleanup_unconfirmed:
+            raise CleanupIncomplete('native tool cancellation remains unconfirmed')
+        if self.closed:
+            return
+        try:
+            with _defer_interrupts():
+                try:
+                    for identity in list(self.commands):
+                        self.terminate_command(identity)
+                finally:
+                    self.rpc.close()
+            self.closed = True
+        except BaseException:
+            self.cleanup_unconfirmed = True
+            raise
