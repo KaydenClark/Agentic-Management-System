@@ -3,7 +3,7 @@
 **Task ID:** TK-0035
 **Spec ID:** S-003
 **Slice:** Hash CLI covers every manifest-bound public artifact in both supported build layouts
-**Status:** deferred
+**Status:** ready
 **Blockers:** none
 **Destination:** spec-acceptance: Review coverage and Trust; complete built page/hash enumeration
 **Planned verification:** Classic/APP_PAGE route-hash equality, exact manifests and adverse controls, unchanged pure-hash vectors, fresh build before site tests, credential-free adapter proof and checked dev delivery.
@@ -34,3 +34,7 @@ Before product edits after coordinator release: recover actual current dev (incl
 First reproduce the one-page adapter omission through the public reader/CLI seam, retaining exact source/manifest identities and expected red. Add matched classic/cache fixtures with planted missing/extra/duplicate/wrong-owner/malformed/symlink cases before the smallest extraction/repair. Keep pure-function/vector identity checks separate from enumeration. Exercise the current actual build and, as needed, the retained no-credential Vercel adapter procedure; fixtures alone are not deployment readiness. Report exact route/hash sets, error refusals, side-effect preservation and candidate refs.
 
 Update site/README.md for the actual utility contract. Coordinate any changed collector seam with the established S005 writer, never generate duplicate cards. Reconcile current S010 governance/glossary work before final base; no UI/helper edits are planned. Root reserves dev merges; only owner promotes dev->main. Report the source, executed Check/QA, real remaining gaps and both merge/completion answers.
+
+## Plan release, 2026-11-06
+
+Coordinator inspected exact cae67a1646f0994574c9090840200433aaa23c87 and passed this bounded plan under existing confirmed items1/2/12. This releases native claim and implementation; no new owner confirmation. Preserve the withdrawn TK003 brief and all older Task receipts. Native claim, fresh starting snapshot and separate literal digest binding precede product edits.
