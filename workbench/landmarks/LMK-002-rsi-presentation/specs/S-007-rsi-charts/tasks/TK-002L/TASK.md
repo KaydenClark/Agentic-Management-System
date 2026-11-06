@@ -13,9 +13,9 @@
 
 ## Assignment
 
-Owner approval in website repair chat, 2026-11-04: approved four previously reported fixes and requested actual skill failures, model tier, failed activity and correct outcome. Use existing `Feature/S-007-rsi-chart-pages` into `dev`; only owner promotes dev to main. Source baseline dev `ae231ee`. Review findings: PR154 discussion4457357231 and PR142 discussion4457543895, discussion4450929584, discussion4450929591.
+Owner approved four reported fixes in website repair chat, 2026-11-04, requesting actual skill failures, tier, failed activity and correct outcome. Use `Feature/S-007-rsi-chart-pages` into `dev`; only owner promotes to main. Baseline dev `ae231ee`. Findings: PR154 discussion4457357231 and PR142 discussion4457543895, discussion4450929584, discussion4450929591.
 
-One writer `codex-rsi-four-fixes` owns this corrective Task and its source/tests/docs. Preserve TK-002 claimant `ams-records-site` and all prior receipts. Initial inventory: clean retained S-007 checkout, behind published branch, no overlapping dirt; existing PR162 merged. No redesign, new campaign, grader changes, invented scores or Human QA. Record only attributable observed failures; tier unknown without reliable evidence. Hand back exact candidate, checks and publication limits to S-007.
+Writer `codex-rsi-four-fixes` owns this Task and source/tests/docs. Preserve TK-002 claimant `ams-records-site` and receipts. Initial checkout clean, behind published branch, no overlapping dirt; PR162 merged. No redesign, campaign, grader changes, invented scores or Human QA. Record attributable failures; tier unknown without evidence. Return exact candidate, checks and publication limits.
 
 ## Acceptance
 
@@ -29,17 +29,17 @@ Workspace baseline sha256:eb5a7cca4ddbafa39d4daab2c03211289a0e85911273e2d00cfa6b
 
 ## Check and QA checkpoint
 
-Focused red: four new render tests failed for timestamp hashing, both grader cases and absent run-only evidence; Chrome reproduced identical candidate/baseline fills. Green: build and 266 site tests pass, including 20 reader/repair tests. Browser actual CSS passes contrasting candidate interior and double border in light/manual-dark/system-dark with a planted solid-fill negative control. Run-only source fixtures visible at 375/1280 in both themes without overflow or invented points. No live database/model calls or owner QA. Python suite and fresh-candidate verification pending.
+Focused red: four render tests failed timestamp hashing, both grader cases and absent run-only evidence; Chrome reproduced identical fills. Green: build and 266 site tests, including 20 reader/repair tests. Actual CSS passes candidate contrast/double border in light/manual-dark/system-dark with planted solid-fill negative. Run-only fixtures visible at 375/1280 in both themes without overflow or invented points. No live database/model calls or owner QA. Python and fresh-candidate verification were pending.
 
 [Failure evidence and attribution limits](../../../../../../feedback/REPORT-s007-four-fixes-2026-11-04.md): historical skill/model tier unknown; current harness Codex, exact model/tier unknown. PR164 merged during this run; its accepted canonical log is preserved with appended FAIL-035 through FAIL-051. Earlier IDs remain intact.
 
 ## Final local verification and delivery boundary
 
-Fresh checkout at5cc0cdf: build and266/266 site tests passed; full Python811 passed/4 skipped (200.79s). Product bytes equal4e3aa13. Root and built-site hygiene0; Wiki, decisions, layout, render and whitespace checks pass. Doctor retains pre-existing unrelated attention/slice findings. Browser checks and screenshots are fixture-only, not a deployed readback. React server-component review: stable row keys, no new client state/effects, no extra fetches.
+Fresh5cc0cdf: build,266 site tests,811 Python passed/4 skipped; product bytes equal4e3aa13. Root/built-site hygiene0; Wiki, decisions, layout, render and whitespace pass. Doctor retains unrelated attention/slice findings. Browser checks use fixtures, not deployed readback. React review found stable keys, no new client state/effects or fetches.
 
-Public push was denied by automatic approval review: explicit publication approval is required. Remote feature tip remains7af73e7 (claim only); product/verification commits are local. No PR, shared CI, dev merge, deployment, owner QA or production promotion is claimed. Native close is not attempted while required delivery is blocked.
+Automatic approval review denied public push; remote feature then remained7af73e7. No PR, CI, merge, deployment, owner QA or production promotion was claimed at that point; native close was held. The later approval and publication are recorded below.
 
-Initial preservation gap: baseline recorded dirty generated Taskboard, so the original-commit-before-snapshot sequence was incomplete. Exact original bytes have a verified independent local copy. No chronology is reconstructed. Native accounting remains incomplete because the feature ref is unpushed; ignored local test caches/evidence also remain local. Preserve this checkout, its commits and local recovery until publication is authorized.
+Initial preservation gap: baseline included dirty generated Taskboard, so original-commit-before-snapshot was incomplete. Exact original bytes have a verified independent local copy; no chronology was reconstructed. Native accounting remained incomplete due to unpushed ref and local ignored caches/evidence. Retain recovery until disposition.
 
 ## Receipt
 
@@ -50,7 +50,7 @@ Initial preservation gap: baseline recorded dirty generated Taskboard, so the or
 
 ## Publication approval resumed
 
-Owner,2026-11-04: approved merging into dev and main for the things belonging in each, after the explicit public-publication request. Scope: checked website PR into dev; records-only PR into main. This releases the earlier public-push blocker without granting Human QA or broad website promotion. Remote dev remainsae231ee and feature7af73e7; no overlapping site work found. Another published writer used FAIL-034, so these entries move to unused FAIL-035 through FAIL-051. Existing FAIL-034 is preserved on its owner branch.
+Owner,2026-11-04: approved checked website PR into dev and records-only PR into main after the public-publication request. This releases the push blocker, not Human QA or broad website promotion. Dev remainedae231ee, feature7af73e7; no overlapping site work. Another writer used FAIL-034; these entries moved to FAIL-035–051, preserving FAIL-034 on its owner branch.
 
 ## Checked publication candidate
 
