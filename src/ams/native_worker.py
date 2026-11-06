@@ -6,15 +6,20 @@ execution. Raw native output belongs only in the controller's private evidence.
 from __future__ import annotations
 
 from contextlib import contextmanager
+import hashlib
 import math
 import json
 import os
+from pathlib import Path
 import select
 import selectors
 import signal
+import stat
 import subprocess
 import time
 import uuid
+
+from ams import recovery
 
 
 class CleanupIncomplete(RuntimeError):
@@ -416,3 +421,167 @@ class CodexHost:
         except BaseException:
             self.cleanup_unconfirmed = True
             raise
+
+
+class PrivateEvidence:
+    """Immutable private effect artifacts, never a second execution ledger.
+
+    A matching artifact proves captured execution bytes only. It supplies no
+    semantic grade, owner approval, invocation permission or attempt counter.
+    The trusted controller owns this directory outside the untrusted case.
+    """
+    LIMIT = 64 * 1024 * 1024
+
+    def __init__(self, root, *, case_root):
+        supplied, case = Path(root), Path(case_root)
+        if supplied.is_symlink() or case.is_symlink() or not case.is_dir():
+            raise NativeProtocolError('private evidence requires ordinary separate roots')
+        self.root, case = supplied.resolve(), case.resolve()
+        if self.root.is_relative_to(case) or case.is_relative_to(self.root):
+            raise NativeProtocolError('private evidence must be outside the untrusted case tree')
+        self.root.mkdir(mode=0o700, exist_ok=True)
+        info = self.root.stat()
+        if info.st_uid != os.getuid() or info.st_mode & 0o077:
+            raise NativeProtocolError('private evidence requires an owner-only directory')
+
+    def _target(self, key):
+        if type(key) is not str or len(key) != 64 or any(c not in '0123456789abcdef' for c in key):
+            raise NativeProtocolError('invalid native evidence identity')
+        return self.root / key
+
+    def _read(self, key):
+        fd = os.open(self._target(key), os.O_RDONLY | os.O_NOFOLLOW)
+        with os.fdopen(fd, 'rb') as stream:
+            info = os.fstat(stream.fileno())
+            if (not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid()
+                    or info.st_mode & 0o077 or info.st_size > self.LIMIT):
+                raise NativeProtocolError('native evidence is not a bounded private ordinary file')
+            raw = stream.read(self.LIMIT + 1)
+        if len(raw) > self.LIMIT:
+            raise NativeProtocolError('native evidence exceeds its byte bound')
+        return raw
+
+    @staticmethod
+    def _observation(key, payload, outcome, artifact=None):
+        value = {'effect_key': key, 'payload_digest': payload, 'outcome': outcome,
+                 'object_id': 'native-' + key if artifact else None, 'artifact_digest': artifact}
+        result = {**value, 'proof_digest': recovery.digest(value)}
+        recovery.validate_observation(result)
+        return result
+
+    def lookup(self, key, payload):
+        self._target(key)
+        self._target(payload)
+        try:
+            raw = self._read(key)
+        except NativeProtocolError:
+            return self._observation(key, payload, 'conflict')
+        except OSError:
+            # Missing local bytes do not prove a reserved native call absent.
+            return self._observation(key, payload, 'unavailable')
+        artifact = hashlib.sha256(raw).hexdigest()
+        try:
+            value = _json_message(raw)
+            valid = (set(value) == {'format_version', 'effect_key', 'payload_digest', 'packet'}
+                     and type(value['format_version']) is int and value['format_version'] == 1
+                     and value['effect_key'] == key and value['payload_digest'] == payload
+                     and type(value['packet']) is dict and recovery.canonical(value).encode() == raw)
+        except (NativeProtocolError, ValueError, UnicodeError):
+            valid = False
+        return self._observation(key, payload, 'matched' if valid else 'conflict', artifact)
+
+    def contains(self, key):
+        try:
+            self._target(key).lstat()
+            return True
+        except FileNotFoundError:
+            return False
+        except OSError:
+            raise NativeProtocolError('native evidence availability is unknown') from None
+
+    def publish(self, key, payload, packet):
+        path = self._target(key)
+        self._target(payload)
+        if type(packet) is not dict:
+            raise NativeProtocolError('native execution packet must be structured private evidence')
+        value = {'format_version': 1, 'effect_key': key, 'payload_digest': payload, 'packet': packet}
+        raw = recovery.canonical(value).encode()
+        if len(raw) > self.LIMIT:
+            raise NativeProtocolError('native evidence exceeds its byte bound')
+        try:
+            fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+        except FileExistsError:
+            if self._read(key) != raw:
+                raise NativeProtocolError('immutable native execution artifact differs')
+        else:
+            with os.fdopen(fd, 'wb') as stream:
+                stream.write(raw)
+                stream.flush()
+                os.fsync(stream.fileno())
+            directory = os.open(self.root, os.O_RDONLY)
+            try:
+                os.fsync(directory)
+            finally:
+                os.close(directory)
+        result = self.lookup(key, payload)
+        if result['outcome'] != 'matched':
+            raise NativeProtocolError('native execution artifact did not read back')
+        return result
+
+
+def run_slot(store, job, claimant, slot_index, evidence, executor, *, expected_job_digest, lease_seconds=300):
+    """Consume one existing released native worker slot; never create a campaign.
+
+    The expected job digest must come from the independently retained release,
+    not the mutable request being inspected. The trusted caller owns actual
+    approval/grader/capacity verification and selects the exact executor source.
+    Its payload digest binds the frozen input. This helper never grants those
+    judgments, changes namespace/counters or turns captured execution into a grade.
+    """
+    definition = recovery._job(job)
+    if (job['job_digest'] != expected_job_digest or type(slot_index) is not int
+            or not 0 <= slot_index < len(definition['slots'])):
+        raise NativeProtocolError('native job differs from the independent release pin')
+    slot = definition['slots'][slot_index]
+    if (slot['effect_type'] != 'native-call' or slot['role'] != 'worker'
+            or executor.payload_digest != slot['payload_digest']):
+        raise NativeProtocolError('native executor input or frozen slot differs')
+    claimed = store.claim(job, claimant, lease_seconds=lease_seconds)
+    original_error = None
+    released, result = None, None
+    try:
+        if claimed['job_digest'] != expected_job_digest:
+            raise NativeProtocolError('claimed native job differs from the release pin')
+        reserved = store.begin_effect(claimed, slot_index)
+        effect = reserved['effect']
+        expected_key = recovery.effect_key(definition, slot)
+        if (type(reserved.get('execute')) is not bool or effect.get('effect_key') != expected_key
+                or effect.get('payload_digest') != slot['payload_digest']
+                or reserved['job'].get('job_digest') != expected_job_digest):
+            raise NativeProtocolError('native intent readback differs from its frozen identity')
+        observed = evidence.lookup(expected_key, slot['payload_digest'])
+        executed = False
+        if reserved['execute'] and observed['outcome'] == 'unavailable' and not evidence.contains(expected_key):
+            # The durable intent precedes the invocation. An existing or
+            # uncertain native intent never reaches this execution branch.
+            packet = executor.execute(expected_key)
+            observed = evidence.publish(expected_key, slot['payload_digest'], packet)
+            executed = True
+        sealed = store.observe_effect(reserved['job'], expected_key, observed)
+        result = {'executed': executed, 'effect': sealed['effect'], 'observation': observed,
+                  'assessment_result': 'unknown'}
+    except BaseException as error:
+        original_error = error
+        raise
+    finally:
+        try:
+            live = store.get_job(definition['namespace'], definition['job_id'])
+            if live.get('claimant') == claimant and live.get('fence') == claimed['fence']:
+                released = store.release(live)
+            elif original_error is None:
+                raise NativeProtocolError('native claim ownership changed before release')
+        except BaseException:
+            if original_error is None:
+                raise
+            original_error.add_note('Durable claim release unconfirmed; original intent and pending evidence remain retained.')
+    return {**result, 'job': released}

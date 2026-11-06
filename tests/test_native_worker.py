@@ -328,3 +328,35 @@ def test_host_cancels_a_separate_native_command_group_on_interruption(tmp_path):
             reap_owned_fixture([pid])
         sentinel.kill()
         sentinel.wait(timeout=3)
+
+
+def test_private_execution_artifact_reconciles_the_input_identity_without_grading(tmp_path):
+    case = tmp_path / 'case'
+    case.mkdir()
+    evidence = native_worker.PrivateEvidence(tmp_path / 'private-evidence', case_root=case)
+    key, payload = 'a' * 64, 'b' * 64
+    assert evidence.lookup(key, payload)['outcome'] == 'unavailable'
+    packet = {'kind': 'synthetic-no-model-controller-test', 'modelCalls': 0, 'executionCompleted': True}
+    written = evidence.publish(key, payload, packet)
+    assert written['outcome'] == 'matched'
+    assert evidence.lookup(key, payload) == written
+    assert set(written) == {'effect_key', 'payload_digest', 'outcome', 'object_id', 'artifact_digest', 'proof_digest'}
+    assert 'executionCompleted' not in json.dumps(written)
+    assert evidence.publish(key, payload, packet) == written
+    assert (evidence.root / key).stat().st_mode & 0o777 == 0o600
+    with pytest.raises(native_worker.NativeProtocolError):
+        evidence.publish(key, payload, {**packet, 'modelCalls': 1})
+    assert evidence.lookup(key, payload) == written
+
+
+def test_private_execution_artifact_refuses_case_access_and_conflicting_bytes(tmp_path):
+    case = tmp_path / 'case'
+    case.mkdir()
+    with pytest.raises(native_worker.NativeProtocolError):
+        native_worker.PrivateEvidence(case / 'evidence', case_root=case)
+    evidence = native_worker.PrivateEvidence(tmp_path / 'private', case_root=case)
+    key = 'c' * 64
+    evidence.publish(key, 'd' * 64, {'kind': 'synthetic-no-model'})
+    assert evidence.lookup(key, 'e' * 64)['outcome'] == 'conflict'
+    (evidence.root / key).write_text('{incomplete')
+    assert evidence.lookup(key, 'd' * 64)['outcome'] == 'conflict'
