@@ -3,12 +3,13 @@
 **Task ID:** TK-0034
 **Spec ID:** S-003
 **Slice:** Recover PR151 and verify native document-start traversal
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation, Trust; bounded PR151 keyboard recovery
 **Planned verification:** Real-source native/fault controls before original64 enlarged cases; fresh build, repository/site/browser checks, review and checked dev delivery.
 **Claimed by:** codex-s003-keyboard
 **Current claimant:** codex-s003-keyboard
+**Proof:** PR190 source1dca8b51eb66374a7348e4dca383f5d30f3573e6 is in checked dev86cd758ccdbe5a9064dfeb7a224a8d4d0372e2ee; CI42221342323/42221342294 all steps successful. Receipt2 retains local qualification.
 
 
 
@@ -48,3 +49,4 @@ Workspace baseline sha256:ef8b5abbcc86dddf628cb5ed52644535682d4a9e907d01bbc89750
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-003-website-shell-and-ams-orientation | 6c00e5f83489b7cc52f6fc1a561473a15882bee4 | ahead 1 behind 0 | 0 | Fresh47e3002 site build passes50-route inventory. Private offline Playwright install failed ENOTCACHED, then permitted pinned1.64.1 install succeeded. First focused browser proof timed out locating unmerged PR151 Source identities before detector assertions; no meaningful red/green or64-case result. STOP/report retained. | TK0034 claim and fresh baseline published before source edits; canonical FAIL198/199 and source-bound S010200 intake. | Task remains in-progress. Recover actual PR151 disclosure source or explicitly supported equivalent fixture; no retry after stop. Byte-identical detector extraction/new focused script are a checkpoint only; original64 matrix, controls, checks/review/dev containment remain. | 1cb65bda94dc7d434065a933e226a0e98ec9ad0ff0c02bfac5c784807a785399 |
 | 2 | Feature/S-003-website-shell-and-ams-orientation | ef3bb6c685c371d2a080de95c4eb266ea4246260 | ahead 0 behind 0 | 2 | Frozen ef3bb6c: fresh build/footer;312 site,10 native/derived controls BEFORE64/64 original enlarged cases,2746 full browser;867 Python/5skip; root/site hygiene0,layout/doctor/diff pass. Valid4/7RED to7/7GREEN; original failed artifacts unchanged. | Recovered26 original151 hunks by chronology; actual on-site identity/credits and original feature negatives retained. Root independent bounded source review ef3: no material finding; two375px enlarged disclosure screenshots inspected. | In-progress: final-record CI and verified checkeddev containment remain with root; then native closure under codex-s003-keyboard. Native workspace checker incomplete for main discovery/inherited refs/generated caches (FAIL202); no workspace release, HumanQA, deployment/main or wholeS003 claim. | 1b2dd90ba798f202426f7b83faa055629b038dd1d92fbe9a37b55760950e183b |
+| 3 | Feature/S-003-website-shell-and-ams-orientation | a3b787cca1fcdc8a1186787a97256b0da4f7fe75 | ahead 0 behind 0 | 0 | PR190 source1dca8b51eb66374a7348e4dca383f5d30f3573e6 is in checked dev86cd758ccdbe5a9064dfeb7a224a8d4d0372e2ee; CI42221342323/42221342294 all steps successful. Receipt2 retains local qualification. | Task34 acceptance/closure; prior receipts preserved. | Bounded Task delivered to checkeddev. HumanQA, production and wholeS003 remain open; historical FAIL202 workspace-guard limits do not establish complete preservation or release.; close attribution: {"agent":"codex-s003-keyboard","claimant":"codex-s003-keyboard","onBehalfOf":null} | 5f01dc67a73f81952c5ed70ac7a186c7e97f3139d90961bf605fe41e2904318b |
