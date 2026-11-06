@@ -4,12 +4,11 @@
 **Spec ID:** S-005
 **Slice:** One pinned current build generates complete review cards and append-only staleness.
 **Status:** in-progress
+**Claimed by:** codex-s005-pages
+**Current claimant:** codex-s005-pages
 **Blockers:** none
 **Destination:** spec-acceptance: Every page covered
 **Planned verification:** pytest against a fixture page list and built pages in a temporary Git repository; live run against origin/dev
-
-
-
 
 ## Assignment
 
