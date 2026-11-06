@@ -27,3 +27,7 @@ No active checkout is switched or modified. The unpushed Wiki-memory branch and 
 - [ ] Existing website source and tests survive without regressions, with a fresh build completed before site tests.
 - [ ] Generated projections match their owners; applicable repository checks pass or identify precise unresolved blockers.
 - [ ] The candidate is pushed on the existing S-003 branch and presented for checked dev integration; no owner acceptance or production promotion is inferred.
+
+## Starting inventory
+
+Workspace baseline sha256:42d67e833329f5edfc4481777be79a12be8c44bfd133024e523c26883c590800. The original native claim and generated projection were committed before this snapshot; raw inventory is retained privately outside the checkout. This binding precedes conflict resolution.
