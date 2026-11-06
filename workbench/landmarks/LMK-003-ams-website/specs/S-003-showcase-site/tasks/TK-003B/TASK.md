@@ -28,7 +28,7 @@ Workspace baseline sha256:98981019e2c257656b90c432d1a99db16048079a9c8f7ebc808b12
 
 - [x] Real current-base no-JS375 clipping is reproduced with existing detector and diagnosed; smallest source repair reveals every real nav link by native document-start Tab at375/1280, both themes and script states, preserving focus and core text.
 - [x] Real adverse controls and prefocused-middle positive pass before original64 enlarged-text matrix; original64 and new no-JS cases pass without weakened checks, fake focus/scroll, filtering or erased faults.
-- [ ] Fresh build/strict utilities/site/shared-browser/link/privacy and required repository/CI checks preserve current features/source identities; reviewed exact candidate is contained in checked dev with evidence and remaining gaps reconciled. Whole-S003, F browser acceptance, Human QA and promotion are not inferred.
+- [x] Fresh build/strict utilities/site/shared-browser/link/privacy and required repository/CI checks preserve current features/source identities; reviewed exact candidate is contained in checked dev with evidence and remaining gaps reconciled. Whole-S003, F browser acceptance, Human QA and promotion are not inferred.
 
 ## Receipt
 
