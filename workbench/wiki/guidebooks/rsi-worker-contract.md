@@ -50,3 +50,25 @@ On crash after success but before receipt, a fresh worker queries the authoritat
 TK-002O exports allowlisted safe lineage/job/receipt projections with schema/reader revision, export ID, namespace, exact record IDs, per-record canonical byte digest, predecessor/head, completeness boundary/counts and manifest digest. Raw assessment packets/transcripts, prompts/labels/private locators/host paths/secrets never enter Git. A redacted checkpoint restores only its declared safe projection and operational identities; unavailable private evidence remains missing and cannot be recreated or qualify a result. Complete means complete for that declared projection, not a full private evidence backup.
 
 Restore validates hashes, graph closure/counts, schema/reader, sources, namespace and expected head before writing. Empty compatible destination may reconstruct identical safe identities; matching destination is a no-op; strict matching-prefix append requires expected-head fencing and full validation. Partial, unsupported, stale-divergent, changed same-ID bytes, absent parents and private fields refuse atomically, with no overwrite, renumber or attempt reset. Outage leaves local evidence pending, unpublished. Reconcile against Supabase before replay; Git export is recovery only, never a parallel writable authority.
+
+<!-- jot-entry -->
+### JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T11:18:06.741Z
+Author: Kayden (captured by Codex S000B writer)
+Source: Kayden, current AMS twelve-outcome execution request item5 and two-confirmation correction
+Topic: rsi-worker-contract
+Supersedes: none
+
+Exact owner item5 in the current twelve-outcome /Orchestrate and /carry request:
+
+"Implement and prove the native worker—S-000B/TK-002P.
+Use the frozen grilling-native-resume-v1 development case; I verified its recorded SHA-256. Implement a real-tool adapter under the existing host’s supported permissions. Prove process cleanup—including interruption—before trusting its lifecycle. Keep the stopped PR #101 campaign stopped.
+Pass condition: a real native invocation loads the identified skill, uses the permitted tools, preserves unrelated files, and resumes in a fresh process without repeating a consumed execution slot.
+The installed CLIs are present. Their versions alone do not prove authentication, subscription capacity, or model/skill loading."
+
+This records the existing confirmed S-000B/TK-002P implementation launch, not another confirmation request or delivery judgment. Preserve r1, its three assessment runs, initial candidate -> retry -> retry -> stop with baseline excluded, existing stops and all prior evidence. Neither a new Task nor campaign name resets exhausted attempts. Candidate agents receive no credentials, protected grader material or publication authority. Keep unrelated work and active Wiki/Board writers untouched.
+
+Implementation consumes the exact verified S-006 job/recovery artifact after its named checks; whole-Spec completion and TK-002Q execution are not prerequisites. Before model calls, independently freeze the exact host/model, sources, qualified protected grader, applicable owner-approved semantic labels, case/controls/repetitions, useful-effect margin, uncertainty method and available subscription capacity. Unknown/exhausted capacity, required approval and explicit stop remain stopping boundaries. No paid fallback, personal installation, stopped-PR101 repair/restart or production promotion is granted here. Actual Human QA and owner-controlled dev-to-main promotion remain separate.
+<!-- /jot-entry -->

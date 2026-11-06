@@ -1,20 +1,20 @@
 # S-000B - Resumable RSI worker
 
 **Spec ID:** S-000B
-**Status:** planned
+**Status:** active
 **Priority:** 1
 **Owner:** Kayden
 **Stance:** Builder
-**Updated:** 2026-11-04
+**Updated:** 2026-11-06
 **Catalog description:** Local Python execution and recovery for authorized RSI campaigns, with durable Supabase state.
 **Blockers:** none for mapping
-**Confirmation:** Sourced owner answers and separation-of-concerns direction in the linked Wiki; assembled implementation readback pending.
-**Execution approval:** none for implementation; Map/Plan preparation only.
-**Next gate:** TK-002M completes design and preparation; implementation requires a later scoped launch.
+**Confirmation:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
+**Execution approval:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
+**Next gate:** TK-002P implements and checks the pre-model adapter/cleanup; actual calls retain the frozen case/grader/label/conditions/capacity gates.
 
 ## Intent and authority
 
-[Owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) places the RSI Loop at LMK-004 and permits capability separation. Supabase Free stores durable state; Python executes outside it. The owner uses subscription meters, not API-dollar budgets. This Spec maps the worker; TK-002P is prepared and held. No stopped campaign is restarted.
+[Owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) places the RSI Loop at LMK-004 and permits capability separation. Supabase Free stores durable state; Python executes outside it. The owner uses subscription meters, not API-dollar budgets. The later scoped owner launch above releases TK-002P implementation, preserving the Stage A contracts and actual-call prerequisites. No stopped campaign is restarted.
 
 ## Outcome
 
@@ -26,7 +26,7 @@ A database of results alone does not execute the loop. Session-bound coordinatio
 
 ## Current Verified State
 
-All criteria are unverified. Existing trial_campaign.run_one executes one released slot; the narrow trial_runtime adapter is tool-free. These are reusable seams, not proof of real-tool execution or autonomous recovery. No worker acceptance is claimed.
+Worker criteria remain unverified. Existing trial_campaign.run_one executes one released slot; the narrow trial_runtime adapter is tool-free. These are reusable seams, not proof of real-tool execution or autonomous recovery. The coordinator released S-006 recovery artifact `3856614eeb8ec2e158db003025a7a75ee29bfc2f` after its isolated SQL/PostgREST checks, independent Standards/Spec rechecks and [full CI](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/42207150002). This supplies the named dependency, not whole-S006 acceptance, production storage, worker proof or a model-call release.
 
 ## Desired Behavior
 
@@ -53,7 +53,7 @@ Real execution needs supported harness authentication, appropriate local tools, 
 
 ## Vertical Implementation Slices
 
-TK-002P consumes the [worker contract](../../../../wiki/guidebooks/rsi-worker-contract.md) and frozen Stage A fixture; implementation stays held.
+TK-002P consumes the [worker contract](../../../../wiki/guidebooks/rsi-worker-contract.md), exact verified S-006 recovery API and frozen Stage A fixture. Pre-model implementation is released; calls require the independently frozen and verified conditions in those owners. TK-002Q execution is not a prerequisite.
 
 ## Acceptance Criteria
 

@@ -3,8 +3,8 @@
 **Task ID:** TK-002P
 **Spec ID:** S-000B
 **Slice:** A fresh worker resumes one authorized case without repeating an effect
-**Status:** blocked
-**Blockers:** owner:feedback-loop-implementation
+**Status:** ready
+**Blockers:** none
 **Destination:** spec-acceptance: Continuation
 **Planned verification:** Representative public-seam demonstration, adverse cases, focused checks and scoped QA.
 
@@ -13,6 +13,10 @@
 One writer owns the local Python worker and its tests/docs. Exercise one bounded authorized case through real harness tools, durable job claim, receipt, interruption and fresh-process recovery. Distinguish actual loaded skill identity from configured identity and natural routing from explicit invocation per host. Reconcile unknown external completion before replay. Stop on unknown or exhausted meter, explicit stop, required approval or third failed candidate attempt; baseline is excluded. Never restart a stopped campaign, grant installation, expose secrets or silently change frozen conditions. Release only after Stage A and later explicit implementation launch, the S-006 job/recovery artifact and the Stage A frozen S-002 case contract and fixture identity are verified; TK-002Q execution is not a prerequisite; no cross-Spec native edge is assumed.
 
 Planning source: owner RSI Map/Plan request of 2026-11-04 and mapped base 8319e81f399923f920a686e8f68dad3f40cfe7f5. Size to one representative case with Check, QA, repair and hand-back in one run. Preserve all prior evidence and existing holds. Hand back exact revision, checks, observed result, remaining gaps and responsible owner.
+
+## Scoped implementation release
+
+The Spec's current owner Jot records the later twelve-outcome launch. The coordinator verified and released exact S-006 recovery artifact `3856614eeb8ec2e158db003025a7a75ee29bfc2f`, including full CI and both independent rechecks. Implement/check the pre-model adapter, supported-permission canaries, owned process cleanup and recovery integration. Real calls remain held until the frozen native-case grader, applicable approved labels, source/host/model/conditions and current subscription capacity are verified. This is no Q-execution prerequisite, stopped-campaign release, production migration or publication workaround. No earlier receipt, frozen fixture or exhausted attempt changes.
 
 ## Acceptance
 
