@@ -1,12 +1,11 @@
-// /rsi: the RSI chart page (S-007). A server component: it reads S-006's
-// rsi_runs and rsi_results with the publishable key at build and on each
-// revalidation, so the content is server-rendered and the key never ships to
-// the browser. With no rows, or when the read fails, every chart place shows
-// its honest empty state (TK-001). The skill trends (TK-002J) lead, drawn
-// from the recorded loops only.
+// /rsi reads existing public activity and trial contracts independently.
+// Successful envelopes retain their actual origin-read times in Next's cache;
+// stale timestamps and cold failures never establish an empty current store.
 import type { Metadata } from "next";
 import { seriesViews, runsWithoutResults } from "./data";
-import { loadRsiData } from "./supabase";
+import { loadCachedEvidence } from "./cached";
+import { readState } from "./read-state";
+import { ActivityEvidence } from "./activity";
 import { RsiView } from "./view";
 import { RepairEvidence } from "./repair";
 import { RoundTwoEvidence } from "./round-two";
@@ -22,10 +21,12 @@ export const metadata: Metadata = {
 export const revalidate = 300;
 
 export default async function RsiPage() {
-  const loaded = await loadRsiData();
-  if (!loaded.ok) console.warn(`/rsi: results could not be loaded (${loaded.reason})`);
+  const evidence = await loadCachedEvidence();
+  const loaded = evidence.trials;
+  const state = readState(loaded, loaded.data.results.length === 0 && loaded.data.runs.length === 0);
   return (
-    <RsiView views={seriesViews(loaded.data)} runEvidence={runsWithoutResults(loaded.data)} unavailable={!loaded.ok} readAt={loaded.readAt}>
+    <RsiView views={seriesViews(loaded.data)} runEvidence={runsWithoutResults(loaded.data)} unavailable={!loaded.ok} readAt={loaded.readAt} stale={state === "stale"}>
+      <ActivityEvidence loaded={evidence.activity} />
       <SkillTrends records={recordedLoops()} />
       <RoundTwoEvidence />
       <RepairEvidence />

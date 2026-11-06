@@ -99,6 +99,8 @@ export interface Series {
   model: string;
   effort: string;
   graderVersion: string;
+  observedTasks: readonly string[];
+  coverage: string;
   points: readonly Point[];
 }
 
@@ -107,12 +109,12 @@ export interface RunEvidence {
   marks: readonly Mark[];
 }
 
-// Runs have no task or split column. Keep terminal attempts with no public
+// Runs have no task or split column. Keep all attempts with no public
 // results separate from trial points rather than inventing a grade or split.
 export function runsWithoutResults(data: RsiData): RunEvidence[] {
   const withResults = new Set(data.results.filter((r) => r.is_test === false).map((r) => r.run_id));
   return data.runs
-    .filter((r) => r.is_test === false && (r.state === "stopped" || r.state === "failed") && !withResults.has(r.id))
+    .filter((r) => r.is_test === false && !withResults.has(r.id))
     .sort((a, b) => a.started_at.localeCompare(b.started_at) || a.id - b.id)
     .map((run) => ({ run, marks: runMarks([run]) }));
 }
@@ -217,9 +219,21 @@ export function seriesViews(data: RsiData): SeriesView[] {
     );
     const order = new Map(versions.map((v, i) => [v.id, i]));
 
+    // Exact observed coverage only: task IDs and attempt counts per run and
+    // split. Missing immutable case versions prevent benchmark-equivalence
+    // claims; even matching coverage supplies only a descriptive series.
+    const attemptsByRun = new Map<number, Map<string, number>>();
+    for (const row of rows) {
+      const attempts = attemptsByRun.get(row.run_id) ?? new Map<string, number>();
+      attempts.set(row.task_id, (attempts.get(row.task_id) ?? 0) + 1);
+      attemptsByRun.set(row.run_id, attempts);
+    }
+    const coverageByRun = new Map([...attemptsByRun].map(([id, attempts]) =>
+      [id, JSON.stringify([...attempts].sort((a, b) => a[0].localeCompare(b[0])))],
+    ));
     const groups = new Map<string, RsiResult[]>();
     for (const r of rows) {
-      const key = [plan.view === "task" ? r.task_id : "", r.arm, r.provider, r.model, r.effort, r.grader_version].join("\u0000");
+      const key = [plan.view === "task" ? r.task_id : "", r.arm, r.provider, r.model, r.effort, r.grader_version, coverageByRun.get(r.run_id)!].join("\u0000");
       groups.set(key, [...(groups.get(key) ?? []), r]);
     }
 
@@ -238,7 +252,7 @@ export function seriesViews(data: RsiData): SeriesView[] {
         points.push(point);
       }
       const head = group[0];
-      return { key, taskId: plan.view === "task" ? head.task_id : null, arm: head.arm, provider: head.provider, model: head.model, effort: head.effort, graderVersion: head.grader_version, points };
+      return { key, taskId: plan.view === "task" ? head.task_id : null, arm: head.arm, provider: head.provider, model: head.model, effort: head.effort, graderVersion: head.grader_version, observedTasks: [...new Set(group.map((r) => r.task_id))].sort(), coverage: coverageByRun.get(head.run_id)!, points };
     });
     series.sort(
       (a, b) => order.get(a.points[0].version.id)! - order.get(b.points[0].version.id)! || (a.taskId ?? "").localeCompare(b.taskId ?? "") || a.key.localeCompare(b.key),
