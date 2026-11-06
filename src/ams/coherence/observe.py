@@ -7,6 +7,7 @@ This does not execute product code, install skills, or qualify improvements.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 from datetime import datetime
 import hashlib
 import json
@@ -230,7 +231,9 @@ def observe(repo, source, candidate, contract_path, occurrence_id, observed_at, 
             raw = blob(repo, source, ref["path"], optional=True) if ref else None
             if not raw or digest(raw) != ref["sha256"]:
                 finding("missing-" + kind, "verified-existing-" + kind, "absent-or-changed", target=repair_owner)
-    changed = git(repo, "diff", "--name-only", "-z", source, candidate).decode().split("\0")
+    # Treat moves as a removal plus addition: scope and Prepare apply to
+    # both endpoints, regardless of Git configuration or rename similarity.
+    changed = git(repo, "diff", "--no-renames", "--name-only", "-z", source, candidate).decode().split("\0")
     out_of_scope = [p for p in changed if p and not any(p == allowed or p.startswith(allowed + "/")
                                                        for allowed in w["allowed_paths"])]
     past_prepare = w["limit"] == "prepare" and any(p and not preparation_record(p) for p in changed)
@@ -373,9 +376,42 @@ def ordinary_directory(directory, *, create=False):
     return directory
 
 
+@contextmanager
+def publication_lock(directory):
+    # Lock the existing directory inode: no removable lock-file name, stale
+    # lock cleanup, or inherited publisher state. Only cooperating publishers
+    # on a local filesystem with directory flock and atomic hard links are
+    # supported. Unsupported hosts refuse; there is no unlocked fallback.
+    try:
+        import fcntl
+    except ImportError:
+        raise Refused("directory publication locking unavailable") from None
+    require(hasattr(os, "O_DIRECTORY") and hasattr(os, "O_NOFOLLOW"),
+            "directory publication locking unavailable")
+    fd = None
+    try:
+        try:
+            fd = os.open(directory, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            raise Refused("report publication busy or directory locking unavailable") from None
+        yield
+    finally:
+        # Descriptor close releases the lock, including process termination.
+        if fd is not None:
+            os.close(fd)
+
+
 def publish(report, directory):
     text = report_text(report)
     directory = ordinary_directory(directory, create=True)
+    with publication_lock(directory):
+        return _publish_locked(report, directory, text)
+
+
+def _publish_locked(report, directory, text):
+    # Recovery, native-use uniqueness, recurrence validation and atomic
+    # publication form one operation across distinct local processes.
     retained = recover(directory)
     if report["previous_occurrence"] is not None:
         previous = [p for p in retained if p["occurrence_id"] == report["previous_occurrence"]]

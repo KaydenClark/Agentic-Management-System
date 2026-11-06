@@ -393,6 +393,8 @@ def test_competing_processes_preserve_native_use_and_other_owner(case):
     assert (winner.returncode, output.strip()) == (0, "created"), error
     assert {r["occurrence_id"] for r in fresh_recover(directory)} == {"other-owner", "first-contender"}
     assert publish(first, directory) == "unchanged"
+    with pytest.raises(Refused):
+        publish(second, directory)
     assert all((directory / name).read_bytes() == raw for name, raw in original.items())
 
 
@@ -415,3 +417,28 @@ def test_interrupted_publisher_releases_lock_and_retains_temporary(case):
     assert (successor.returncode, output.strip()) == (0, "created"), error
     assert {r["occurrence_id"] for r in fresh_recover(directory)} == {"retained-owner", "successor"}
     assert all((directory / name).read_bytes() == raw for name, raw in {**temporary, **originals}.items())
+
+
+def test_unavailable_directory_lock_refuses_without_publication(case, monkeypatch):
+    import fcntl
+    def unavailable(*args):
+        raise OSError("synthetic unsupported locking")
+    monkeypatch.setattr(fcntl, "flock", unavailable)
+    directory = case[0] / "reports"
+    with pytest.raises(Refused, match="locking unavailable"):
+        publish(check(case), directory)
+    assert list(directory.iterdir()) == []
+
+
+def test_corrupted_directory_is_preserved_and_refuses_new_reports(case):
+    directory = case[0] / "reports"
+    publish(check(case), directory)
+    original = next(directory.glob("OBS-*.md"))
+    duplicate = directory / "OBS-copy.md"
+    duplicate.write_bytes(original.read_bytes())
+    before = {p.name: p.read_bytes() for p in directory.iterdir()}
+    with pytest.raises(Refused):
+        publish(check(case, "later"), directory)
+    with pytest.raises(Refused):
+        recover(directory)
+    assert {p.name: p.read_bytes() for p in directory.iterdir()} == before
