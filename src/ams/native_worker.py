@@ -245,7 +245,8 @@ class NativeRpc:
         if 'method' in value:
             if 'id' in value:
                 raise RequiredApproval('native server decision requires approval; execution held')
-            if type(value['method']) is not str or set(value) - {'method', 'params', 'jsonrpc'}:
+            if (type(value['method']) is not str or set(value) - {'method', 'params', 'jsonrpc', 'emittedAtMs'}
+                    or ('emittedAtMs' in value and (type(value['emittedAtMs']) is not int or value['emittedAtMs'] < 0))):
                 raise NativeProtocolError('native notification shape differs')
             self.events.append(value)
         elif ('id' in value and type(value['id']) is int and value['id'] in self._pending

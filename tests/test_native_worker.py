@@ -278,3 +278,11 @@ def test_native_server_approval_request_is_a_stop_boundary(tmp_path):
         with native_worker.NativeRpc([sys.executable, '-u', '-c', RPC_PEER], cwd=tmp_path,
                                      environment=dict(os.environ), timeout=3, cleanup_grace=0.1) as peer:
             peer.call('needsApproval', {})
+
+
+def test_native_notification_retains_the_observed_emission_timestamp(tmp_path):
+    program = RPC_PEER.replace("{'observed':True}}", "{'observed':True},'emittedAtMs':1700000000000}")
+    with native_worker.NativeRpc([sys.executable, '-u', '-c', program], cwd=tmp_path,
+                                 environment=dict(os.environ), timeout=3, cleanup_grace=0.1) as peer:
+        assert peer.call('echo', {}) == {}
+        assert peer.events[0]['emittedAtMs'] == 1700000000000
