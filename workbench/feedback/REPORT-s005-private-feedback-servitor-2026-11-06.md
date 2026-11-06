@@ -55,3 +55,12 @@ Review/current CI. Prior green checks do not cover this case. FAIL259 retains
 the reporter's first missing-binding control and corrected regular-file rerun.
 No real-user outage/data leak, new owner notes, Task completion or main merge
 is claimed. The immutable external source report remains owned by its writer.
+
+The corrective implementation prechecks the regular file/identity, opens with
+nonblocking and no-follow flags, then rechecks identity/type/ownership/mode/size.
+Two bounded tests first time out on the unchanged source: an existing FIFO and
+a file substituted with FIFO during open. Corrected130 focused cases pass,
+including actual HTTP/browser regressions. Each FIFO test proves unchanged
+commit/voice/original bytes and a separate process acquiring the lock while
+the original caller remains alive. Fresh full checks and corrective Review/CI
+remain, so these focused results do not requalify closure by themselves.

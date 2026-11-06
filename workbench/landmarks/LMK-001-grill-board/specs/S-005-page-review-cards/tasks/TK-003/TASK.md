@@ -10,26 +10,15 @@
 
 ## Assignment
 
-**Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Nothing in `site/` changes.
-**Claimed by:** codex-s005-feedback
-**Current claimant:** codex-s005-feedback
-**Proof:** 642:1047/4skip;CI422486:1034/9+11browser;128focused;Reviews0.
-
-Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), `grill-board/README.md` (answers, rating and flag), DDR-000J, DDR-000X, ADR-002U, the TK-001 generator and `src/ams/grill_board/answers.py`.
-
-Owner intent, relayed 2026-11-01: criticism becomes the voice and taste record that feeds the loop. The owner's voice is not prose the owner writes; it is the owner's recorded feedback. The parent Spec's later privacy contract governs: original criticism stays private, separate from interpretation; only safe voice/version/disposition records may enter public Git. The owner's expanded implementation approval of 2026-11-06 does not waive that privacy rule. Earlier verbatim-public instructions are superseded, with their correction retained in S-005 history.
+Target `main` on the existing Spec branch; no `site/` edits. Read AGENTS, the parent Spec, Board guide, DDR-000J/000X and ADR-002U. The confirmed launch and Nov6 expanded approval carry this scope forward. The parent privacy contract supersedes earlier public-verbatim instructions, retained in S-005 history.
 
 Deliver:
 
-1. **Private originals and safe record.** Preserve exact original notes in ignored private local storage, with page/hash/date/card/kind and a stable identity; never commit raw private words, private paths or raw evidence. `grill-board/voice-and-taste.md` retains a `**Version:**` counter and append-only `## Entries` containing safe page/hash/date/card/kind/version references and a safe interpretation/disposition, explicitly distinct from the original. Do not automatically quote or copy private originals into cards, approvals, the voice record, logs or public evidence. Keep unavailable interpretation visibly pending rather than inventing it. Synthetic test originals remain labeled synthetic.
-2. **One checked operation.** A page return, rating or flag preserves its original privately and commits only the safe card section, voice entry and version increment through Board lock/CAS. Check the voice record's render-time SHA like the owning record. Missing private capture or stale/conflicting public bytes refuse without a partial Git write; preserve copyable owner words and recover any private pending outcome without duplicating an event. Confirm adds no voice entry; a Confirm note must also remain private. Non-page cards retain their existing behavior. Keep the current page-note refusal guard until this complete private path is verified; never remove it merely to make a feedback test pass.
-3. **Version stamp.** The generator writes `**Voice record:** grill-board/voice-and-taste.md version N` on each new page card; an open page card made before this Task gets an appended `## Voice record` section. Existing sections are never edited.
+1. Preserve exact originals in secure ignored local storage with stable event ID and page/hash/date/card/kind. Never commit original words, actual private locations or raw evidence. The safe voice record has a Version counter and append-only Entries with page/hash/date/card/kind/version, separate interpretation and disposition. Leave unknown interpretation pending; label synthetic originals synthetic.
+2. Under Board lock/CAS, return/rate/flag privately captures before committing only safe card/voice/version writes. Check render-time voice SHA. Stale/conflicting public bytes or missing private capture refuse without partial Git writes. Keep copyable words and the exact retry identity. Reconcile crashes/retries without duplicate events, commits or versions; retain unrelated work. Refuse unsafe receipt types promptly and release the lock, including substitution races. Confirm adds no voice entry and its note stays private; non-page behavior stays. Retain the page-note guard until this complete path qualifies.
+3. New cards name the applicable voice path/version. Append one Voice record section to legacy open cards; never edit existing sections or answered history.
 
-Tell orchestrator A the record's path, so A adds the pointer from the site's contributing notes on `dev` and cites the version when drafting. Do not edit `site/`.
-
-Out of scope: comparing ratings across pages (S-002 loop); applying criticism to a page (orchestrator A, in a new candidate); approval rows (TK-002); publishing private originals. TK-001E consumes the applicable version/original under its own authorization; a stored version alone proves no later use.
-
-Hand back to S-005 with `close`.
+Hand off the safe record path/version to orchestrator A for its contributing pointer and drafts; A owns site changes. S-002 owns rating comparisons. TK-001E owns later consumption and applying criticism; storage alone proves none. Hand back through native close after actual verification.
 
 ## Acceptance
 
@@ -40,7 +29,7 @@ Hand back to S-005 with `close`.
 - [ ] Must fail: an open page card that names no voice record version fails the test.
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
 
-Local65 close is historical and unqualified after newly verified FIFO finding FAIL258/260. Native failing Review continued this same Task and original claimant. Prior checks/receipts remain; bounded unsafe-type refusal and lock-release regression, fresh checks, corrective Review and exact CI are required. No owner notes, final QA or main delivery.
+Local65 close is historical after FAIL258/260. Native Review continues this Task/original claimant. Both bounded FIFO controls first timed out, then corrected130 focused HTTP/browser/page cases pass. Fresh checks, corrective Review/current CI remain. Prior receipts and originals stay; no actual owner notes, final QA or main delivery.
 
 Workspace baseline sha256:77b8702e5c168d8ea307b5c62fcffeb0f5ab555e304d05be9de27cbba50ffcb9
 

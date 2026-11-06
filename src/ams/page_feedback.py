@@ -152,19 +152,28 @@ def _private_store(root, *, create=False):
             os.close(fd)
 
 
+def _receipt_identity(info):
+    if (not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid()
+            or stat.S_IMODE(info.st_mode) != 0o600 or info.st_size > 65536):
+        raise FeedbackOutcomeUnknown('The private feedback record needs recovery; keep your note and original action.')
+    return info.st_dev, info.st_ino
+
+
 class _Store:
     def __init__(self, directory_fd):
         self.fd = directory_fd
 
     def read(self, event_id):
+        name = event_id + '.json'
         try:
-            fd = os.open(event_id + '.json', os.O_RDONLY | os.O_NOFOLLOW, dir_fd=self.fd)
+            identity = _receipt_identity(os.stat(name, dir_fd=self.fd, follow_symlinks=False))
+            # A FIFO substituted after stat must not block before fstat can
+            # reject it. Regular files retain their ordinary read behavior.
+            fd = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=self.fd)
         except FileNotFoundError:
             return None
         try:
-            info = os.fstat(fd)
-            if (not stat.S_ISREG(info.st_mode) or info.st_nlink != 1 or info.st_uid != os.getuid()
-                    or stat.S_IMODE(info.st_mode) != 0o600 or info.st_size > 65536):
+            if _receipt_identity(os.fstat(fd)) != identity:
                 raise FeedbackOutcomeUnknown('The private feedback record needs recovery; keep your note and original action.')
             with os.fdopen(fd, 'rb', closefd=False) as source:
                 raw = source.read(65537)
