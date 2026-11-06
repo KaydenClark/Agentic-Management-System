@@ -159,6 +159,7 @@ export default function Glossary() {
           </div>
         </div>
         <ContextLink href="/how-it-works#example">Follow a real implementation assignment</ContextLink>
+        <ContextLink href="/governance">See the Task lifecycle</ContextLink>
         <figure className={styles.diagram} aria-labelledby="judgment-caption">
           <p className={styles.origin}>Candidate + scope</p>
           <ul className={styles.branches}>

@@ -148,6 +148,7 @@ export default function HowItWorks() {
 
       <section className={styles.section} aria-labelledby="governance">
         <h2 id="governance">Who may decide, and what counts as proof?</h2>
+        <p>See the <Link href="/governance">Task lifecycle</Link> for the states and transitions the tools use.</p>
         <p>
           The owner’s request sets the purpose and scope. Project rules constrain permitted actions; the Spec
           states the outcome to judge, and the Task assigns a piece of work. A status view displays those records
