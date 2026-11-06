@@ -224,7 +224,11 @@ def render_open(cards_dir, topic, cards, card):
     if card.fields.get("Recommendation"):
         extras += f"""<div class="box tone h-agent"><div class="box-head"><span class="dot rest"></span>Agent recommendation</div>
 <p>{escape(card.fields["Recommendation"])}</p></div>\n"""
-    if card.flag and card.flag.get('Migrated'):
+    if getattr(card, 'stale', None) is not None:
+        target = card.stale.get('Superseded by', '')
+        state = '<span class="pill tone h-none">Stale content · history only</span>'
+        verdict = f'<p>Read the current <a href="/?{urlencode({"topic": topic, "card": target})}">replacement review card</a>. This content approval is no longer current.</p>'
+    elif card.flag and card.flag.get('Migrated'):
         target = card.flag['Migrated']
         state = '<span class="pill tone h-none">Legacy history · DQC owns the question</span>'
         verdict = f'<p>Continue on <a href="/?{urlencode({"card":target})}">{escape(target)}</a>. This legacy card and its history are preserved.</p>'

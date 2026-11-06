@@ -9,6 +9,7 @@ dependencies = [
 
 [project.scripts]
 ams-board = "ams.grill_board.server:main"
+ams-pages = "ams.pages:main"
 ams-keycheck = "ams.keycheck:main"
 ams-writer = "ams.writer:main"
 ams-history = "ams.build_history:main"

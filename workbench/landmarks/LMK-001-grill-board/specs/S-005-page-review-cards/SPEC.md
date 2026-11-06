@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** A Grill Board review card for every website page, where the owner approves or criticizes the site and the criticism becomes the voice and taste record.
 **Blockers:** none
-**Next gate:** Close TK-001 with verification and documentation proof.
+**Next gate:** Scoped release of the TK-001 verification stop; then finish current-build collection and unchanged behavioral/regression checks.
 
 ## Intent and authority
 
@@ -26,9 +26,9 @@ Without a durable approval tied to exact content, the owner and agents cannot te
 
 ## Current Verified State
 
-- Not met: all four acceptance criteria; S-005 is planned and not activated.
+- No acceptance criterion is claimed complete. S-005 is activated under the confirmed scoped implementation launch; TK-001 is stopped after two verification failures. Its Task owns the exact source/checkpoint and next required release.
 - The S-004 board serves committed cards from `grill-board/cards/` with Priority and Value; Confirm writes into an owning record; ratings and too-taxing flags commit on the card; every write holds one repository flock and moves the branch by compare-and-swap ([README](../../../../../grill-board/README.md)).
-- Orchestrator A, its only writer, keeps `site/page-list.json` on `dev`: path (stable), title, Spec, Task, `landed` {branch, commit, pr}, sources and status. It lists `/` and `/rsi`. Pages on `dev` still show draft marks (S-003 TK-004, PR #82), which DDR-001B withdraws; removing them is S-003 site work.
+- S-003 owns the website inventory. At dev `ae231ee`, its seven page-list entries omit the skills index and 39 articles. Historical `landed.commit` values remain provenance; current content review must use one complete frozen current build. No live card coverage or current deployed-content approval is established here.
 
 History: [S-005 history](../../../../wiki/history/S-005.md).
 

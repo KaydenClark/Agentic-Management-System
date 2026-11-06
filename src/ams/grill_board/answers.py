@@ -175,7 +175,7 @@ def _commit_on(root, base, writes, subject, body):
         _git(root, "read-tree", base, env=env)
         for relative, _, mode, _, new in writes:
             blob = _git(root, "hash-object", "-w", "--stdin", data=new).strip()
-            _git(root, "update-index", "--cacheinfo", f"{mode},{blob},{relative}", env=env)
+            _git(root, "update-index", "--add", "--cacheinfo", f"{mode},{blob},{relative}", env=env)
         tree = _git(root, "write-tree", env=env).strip()
     finally:
         os.unlink(index)
@@ -208,7 +208,7 @@ def _insert_after(text, anchor, block):
 def _replace(path, data):
     """Write data to a fresh, exclusively created temporary file beside path
     (never following a planted name), keep path's mode, then swap it in."""
-    mode = stat.S_IMODE(path.stat().st_mode)
+    mode = stat.S_IMODE(path.stat().st_mode) if path.exists() else 0o644
     handle, tmp = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.", suffix=".answer-tmp")
     try:
         with os.fdopen(handle, "wb") as out:
@@ -279,6 +279,8 @@ def _checked_card(cards_dir, card, card_sha):
     """(root, base, card_rel, card_file, mode, committed bytes) once the branch
     is attached and the card is exactly what the page showed. Call under the lock."""
     root = repo_root(cards_dir)
+    if getattr(card, "stale", None) is not None:
+        raise AnswerRefused(f"{card.file} is stale; read its current replacement")
     if not _git(root, "symbolic-ref", "-q", "--short", "HEAD").strip():
         raise AnswerRefused("HEAD is detached; answers commit on a branch")
     base = _git(root, "rev-parse", "--verify", "HEAD^{commit}").strip()
@@ -330,11 +332,14 @@ def _write_and_commit(root, base, writes, subject, body):
         commit = _commit_on(root, base, writes, subject, body)
     except (AnswerRefused, OSError) as error:
         for _, path, _, old, _ in writes:  # put back exactly the committed bytes this call replaced
-            _replace(path, old)
+            if old is None:
+                path.unlink(missing_ok=True)
+            else:
+                _replace(path, old)
         raise AnswerRefused(f"nothing was kept: {error}") from None
     # The branch now holds the write; stage the same bytes so the tree reads clean.
     try:
-        _git(root, "update-index", "--", *[relative for relative, *_ in writes])
+        _git(root, "update-index", "--add", "--", *[relative for relative, *_ in writes])
     except AnswerRefused as error:
         raise AnswerWrittenIndexStale(f"committed {commit[:7]}, but refreshing the index failed ({error}); run git status") from None
     return commit
