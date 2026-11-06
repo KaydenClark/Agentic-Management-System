@@ -49,3 +49,9 @@ The final native suite passed13/13, including actual Spec and Landmark Task clos
 [Skills PR71](https://github.com/KaydenClark/skills/pull/71) merged the exact candidate into main at4db09e3dc463667f7e5106ecc8b7aa6d1dfbfc21; fresh fetch proves containment and unchanged merged content. Post-merge CI and installation are recorded separately when observed.
 
 Published-main CatalogCI42309160258 passed at4db09e3. Registered maintenance installed that exact published main in the active personal catalog; maintenance check passed, Git is clean on main,318 local/imported files remain retained and the Claude discovery link is unchanged. Published-source maintenance was used without an import refresh. This is installation evidence, not a general later-use benefit claim.
+
+## AMS adoption starting evidence
+
+Workspace baseline sha256:04ebf107df088142fff169ea8807b24f0c5e425861c0d120e719c84c83d478cd
+
+Starting tracked originals are committed and pushed at39625c3. The installed published runtime produced a complete tracked-record snapshot with no path findings or active Git operations, targetmain, before managed-tool or control changes. Raw inventory remains private local recovery. This digest binding is a separate commit; it is not a reconstructed earlier snapshot.
