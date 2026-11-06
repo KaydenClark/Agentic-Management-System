@@ -15,3 +15,15 @@ Considered and rejected: a permanent development trunk with `main` as an owner-a
 Consequences: There is no `integration` branch. The owner's only merge gate is `dev` -> `main` for the site.
 
 Provenance: Owner decision review, 2026-11-01, with the owner's correction. Owner answer, 2026-11-01 (round 1).
+
+## Amendment, 2026-11-06
+
+The owner's [Spec branch model](../../wiki/context-workbench-adoption.md#jot-9dad0413-d13a-4949-91c4-2b78574cbc39)
+supersedes the direct-to-main implementation route above. One
+`feature/spec-####-<spec-name>` branch holds all work for a Spec creating new things
+until the entire Spec is complete. Ready intent/docs publish to main separately
+from unfinished implementation. Completed implementation integrates into dev,
+then main, under applicable checks. Agents retain checked non-site merge authority;
+website dev-to-main promotion remains the owner's. Commit and push owned work
+instead of stashing it; cleanup requires completion and verified containment.
+The [RUNBOOK](../../../RUNBOOK.md#delivery-and-recovery) owns the current procedure.
