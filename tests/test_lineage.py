@@ -106,6 +106,21 @@ def test_unrelated_chain_parent_cannot_replace_candidate_origin():
         lineage.validate_graph(records + [other, case, candidate])
 
 
+def test_run_can_use_declared_current_candidate_arm():
+    records = chain()
+    records[5]["parents"]["candidate"] = "baseline"
+    # This arm is read back before any result, disposition or adoption exists.
+    assert lineage.validate_graph(records[:6]) == records[:6]
+
+
+def test_run_cannot_use_undeclared_comparison_source():
+    records = exhausted_chain()
+    run = deepcopy(records[5]); run["record_id"] = "undeclared-source-run"
+    run["parents"]["candidate"] = "candidate-2"
+    with pytest.raises(lineage.Refused, match="run candidate"):
+        lineage.validate_graph(records + [run])
+
+
 def test_readback_rejects_tampering_and_transport_errors_never_echo_body():
     calls = []
     def http(method, url, headers, body):

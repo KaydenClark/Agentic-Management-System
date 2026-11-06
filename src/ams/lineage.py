@@ -154,7 +154,9 @@ def validate_graph(records):
             require(all(by_id[parents[p]]["parents"]["case"] == parents["case"]
                         for p in ("current_candidate", "candidate")), "comparison case differs")
         if kind == "run":
-            require(by_id[parents["comparison"]]["parents"]["candidate"] == parents["candidate"], "run candidate differs")
+            comparison = by_id[parents["comparison"]]["parents"]
+            require(parents["candidate"] in {comparison["current_candidate"], comparison["candidate"]},
+                    "run candidate differs")
         if kind == "disposition":
             run = by_id[by_id[parents["result"]]["parents"]["run"]]
             require(run["parents"]["comparison"] == parents["comparison"], "result comparison differs")

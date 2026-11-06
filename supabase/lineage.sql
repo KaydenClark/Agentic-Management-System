@@ -147,9 +147,11 @@ begin
       raise exception 'comparison case differs' using errcode='23514'; end if;
   elsif new.kind='run' then
     select * into parent from public.rsi_lineage where namespace=new.namespace and record_id=p->>'comparison';
-    if parent.parents->>'candidate' <> p->>'candidate' then raise exception 'run candidate differs' using errcode='23514'; end if;
+    if p->>'candidate' not in (parent.parents->>'current_candidate',parent.parents->>'candidate') then
+      raise exception 'run candidate differs' using errcode='23514'; end if;
+    select * into other from public.rsi_lineage where namespace=new.namespace and record_id=p->>'candidate';
     if not new.synthetic and not exists(select 1 from public.rsi_runs where id=(a->>'rsi_run_id')::bigint
-      and run_key=a->>'run_key' and is_test=new.is_test) then
+      and run_key=a->>'run_key' and is_test=new.is_test and skills_commit=other.attributes->>'skills_commit') then
       raise exception 'real run identity missing' using errcode='23514'; end if;
   elsif new.kind='result' then
     if a->>'execution_state' not in ('completed','runner_error','auth_error','timeout','capped','interrupted')

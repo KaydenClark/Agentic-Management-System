@@ -14,7 +14,7 @@ import uuid
 
 import pytest
 
-from ams import lineage, writer
+from ams import lineage, rsi_rows, writer
 from test_lineage import chain, exhausted_chain, recurrence_reset
 
 
@@ -140,6 +140,72 @@ def test_real_row_references_cannot_be_invented(local):
     for record in records: record["synthetic"] = False
     records[5]["attributes"]["rsi_run_id"] = 9223372036854775807
     records[6]["attributes"]["rsi_result_id"] = 9223372036854775807
+    with pytest.raises(lineage.Refused, match="HTTP 4"):
+        raw_append(store, namespace, records)
+    assert store.read(namespace) == []
+
+
+def test_database_reads_declared_current_and_candidate_run_arms(local):
+    store, _, namespace = local
+    records = chain(namespace)[:6]
+    current = deepcopy(records[-1]); current["record_id"] = "current-arm-run"
+    current["attributes"]["run_key"] = "current-arm"
+    current["parents"]["candidate"] = "baseline"
+    records.append(current)
+    raw_append(store, namespace, records)
+    assert store.read(namespace) == records
+
+
+def test_database_undeclared_source_cannot_join_comparison(local):
+    store, _, namespace = local
+    records = exhausted_chain(namespace)
+    saved = store.append(records, expected_head=None)
+    run = deepcopy(records[5]); run["record_id"] = "undeclared-run"
+    run["parents"]["candidate"] = "candidate-2"
+    with pytest.raises(lineage.Refused, match="HTTP 4"):
+        raw_append(store, namespace, [run], head=saved[-1]["record_digest"])
+    assert store.read(namespace) == records
+
+
+@pytest.mark.parametrize("cross", ["case", "chain"])
+def test_database_crosscase_or_chain_joins_refuse(local, cross):
+    store, _, namespace = local
+    records = chain(namespace)
+    saved = store.append(records, expected_head=None)
+    case = deepcopy(records[1]); case["record_id"] = "different-case"
+    if cross == "case":
+        comparison = deepcopy(records[4]); comparison["record_id"] = "different-case-comparison"
+        comparison["parents"]["case"] = case["record_id"]
+        new = [case, comparison]
+    else:
+        failure = deepcopy(records[0]); failure["record_id"] = "different-chain-occurrence"
+        failure["attributes"].update(failure_id="FAIL-999", chain_id="different-chain")
+        case["parents"]["failure"] = failure["record_id"]
+        candidate = deepcopy(records[3]); candidate["record_id"] = "different-chain-candidate"
+        candidate["parents"]["case"] = case["record_id"]
+        new = [failure, case, candidate]
+    with pytest.raises(lineage.Refused, match="HTTP 4"):
+        raw_append(store, namespace, new, head=saved[-1]["record_digest"])
+    assert store.read(namespace) == records
+
+
+def test_database_existing_run_source_must_match_declared_candidate(local):
+    store, _, namespace = local
+    # This is deliberately adversarial schema data: no model was invoked.
+    # The lineage batch must reject; it cannot become a non-synthetic result.
+    run_key = "source-mismatch-" + uuid.uuid4().hex
+    run = dict(run_key=run_key, arm="ams", provider="schema-probe", model="no-model-call",
+               effort="none", runtime_commit="a"*40, controls_commit="a"*40,
+               skills_commit="e"*40, grader_version="a"*40, state="completed",
+               started_at="2026-11-05T00:00:00Z", finished_at="2026-11-05T00:00:00Z",
+               source_kind="commit", source_ref="a"*40, strength="anecdote", is_test=True,
+               detail={"purpose": "synthetic source-mismatch rejection probe"})
+    rsi_rows.check_run(run)
+    saved = store._call("POST", "rsi_runs", run)
+    assert len(saved) == 1
+    records = chain(namespace)[:6]
+    for record in records: record["synthetic"] = False
+    records[-1]["attributes"].update(run_key=run_key, rsi_run_id=saved[0]["id"])
     with pytest.raises(lineage.Refused, match="HTTP 4"):
         raw_append(store, namespace, records)
     assert store.read(namespace) == []

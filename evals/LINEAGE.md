@@ -30,6 +30,8 @@ comparison → run → result → disposition → adoption → later use. Runs a
 results without a synthetic label must reference the existing canonical RSI
 row IDs. Their identity/state/grade must match those rows. A run without a
 result stays a run; an interrupted outcome cannot silently become a pass.
+Each run uses one of its comparison's declared current/candidate sources,
+and a canonical run's skills commit must match that exact linked source.
 Adoption references the retained exact source; rejected/inconclusive outcomes
 cannot claim adoption through this graph. These consistency checks do not
 certify the truth of a supplied qualification or adoption receipt.
