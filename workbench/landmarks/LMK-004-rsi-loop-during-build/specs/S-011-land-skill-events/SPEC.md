@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
 **Execution approval:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
-**Next gate:** S-003 repair is delivered/F294 reported passing; await F delivery/protected readback and full safe joins. TK-002S stays open with one synthetic detection/preservation result, not general benefit. Old claims/stops remain.
+**Next gate:** F software is delivered through checked deva33b43d; await protected readback/full safe joins. TK-002S stays open with one synthetic detection/preservation result, not general benefit. Old claims/stops remain.
 
 ## Intent and authority
 
