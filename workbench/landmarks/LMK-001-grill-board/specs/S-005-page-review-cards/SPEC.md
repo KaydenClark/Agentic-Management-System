@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** Content-bound page reviews and versioned feedback consumed by later drafts.
 **Blockers:** none
-**Next gate:** Close TK-001E with verification and documentation proof.
+**Next gate:** Complete TK-000K.
 
 
 ## Intent and authority
@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. TK-001/TK-002/TK-003 are closed. Coverage and synthetic consumption pass independent review. Correctedbae fresh1088/4 skips with actual Docker/browser; exactbae CI1075/9 skips plus11 browser succeeds. Earlier failures remain preserved. TK-001E’s four criteria are met; checked proof records/current CI and native close remain. TK-000K’s live criterion stays open: frozen0fa verified50 pages/cards, both CLI modes and50HTTP readbacks, but fetched dev advanced tocb14e01 while PR200 assembly/acceptance remains. Committed cards still pin47; private86/0fa are historical. Final assembled READY capture, whole Review/acceptance, owner QA, main permission and workspace release remain open. [Coverage](../../../../feedback/REPORT-s005-coverage-servitor-2026-11-06.md), [consumption](../../../../feedback/REPORT-s005-feedback-consumption-servitor-2026-11-06.md).
+No Spec acceptance is claimed. TK-001/TK-002/TK-003 are closed. Coverage and synthetic consumption pass independent review. Correctedbae fresh1088/4 skips with actual Docker/browser; exactbae CI1075/9 skips plus11 browser succeeds. Earlier failures remain preserved. TK-001E is natively closed against checked4a4; close-record validation/publication remains. TK-000K’s live criterion stays open: frozen0fa verified50 pages/cards, both CLI modes and50HTTP readbacks, but fetched dev advanced tocb14e01 while PR200 assembly/acceptance remains. Committed cards still pin47; private86/0fa are historical. Final assembled READY capture, whole Review/acceptance, owner QA, main permission and workspace release remain open. [Coverage](../../../../feedback/REPORT-s005-coverage-servitor-2026-11-06.md), [consumption](../../../../feedback/REPORT-s005-feedback-consumption-servitor-2026-11-06.md).
 
 History: [S-005](../../../../wiki/history/S-005.md).
 
