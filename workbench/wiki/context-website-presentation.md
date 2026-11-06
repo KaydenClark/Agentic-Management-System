@@ -368,3 +368,20 @@ Supersedes: none
 
 For every skill the RSI loop works on, the RSI page shows whether RSI is actually improving it over time. Each RSI loop contributes one plotted point per skill: the Alignment Score of the version that loop kept, pooled over the deciding tier's runs, with its fitness level. Kayden chose two views from the prototypes: a per-skill line chart (one point per loop, a running average line, a fitness-level strip, and a visible break where a new test contract or model starts a new line) and a skills-by-loops Fitness level per loop strip. The High and Small tier runs stay visible per skill as secondary marks that never decide the point. Better colors are wanted: Excellent is green. Results are real recorded data; there are no more empty-looking results where real results exist. Kayden approved implementation through orchestrate.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8634622a-512b-44d9-9b99-0f973c450356
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T07:38:36.032Z
+Author: Kayden (captured by Codex S003 writer)
+Source: chat:ams-12-outcomes-two-confirmations-20261105
+Topic: website-presentation
+Supersedes: none
+
+On 2026-11-05 Kayden requested twelve AMS outcomes through orchestrate and carry, including implementation of the missing visitor experience in S-009 and S-010. He then clarified that his two prior confirmations were sufficient. This captures that existing confirmed intent and execution approval; it requests no new confirmation and establishes no implementation proof.
+
+Kayden authorizes implementation of S-009 (demo Grill Board) and S-010 (governance stack and flow charts), with bounded Tasks, Check, QA, independent Review and checked website delivery into dev. S-009 recovers the retained PR76 work: clearly labeled everyday sample cards and local-only interactions that send no answers. S-010 explains governance and the complete chart inventory using the current six claim-plane definitions and actual lifecycle states/transitions; verification must detect diagram drift. Both experiences must connect to the tour, glossary, navigation and review inventory, and work at375px and desktop in both themes. Shared S-003 integration remains separately assigned; this entry does not assign another writer's files.
+
+Preserve historical evidence, prior failed attempts, active Wiki/Board writers and all unchanged boundaries. PR101 stays stopped; initial candidate -> retry -> retry -> stop remains, baseline excluded. This website authority grants no new model campaign, evaluator qualification, personal skill installation or wider rollout. Public pages expose no review status/private criticism, and samples send no answers. Human QA is actual owner judgment; only Kayden controls dev-to-main promotion. Earlier preparation-only entries remain historical; this later scoped implementation instruction releases S-009/S-010 execution only, not unrelated holds.
+<!-- /jot-entry -->
