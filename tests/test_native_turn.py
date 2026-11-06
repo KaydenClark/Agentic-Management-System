@@ -7,6 +7,7 @@ from pathlib import Path
 import signal
 import subprocess
 import sys
+import time
 
 import pytest
 
@@ -74,7 +75,7 @@ for line in sys.stdin:
         if mode=='reroute':event('model/rerouted',{'threadId':thread,'turnId':turn,'fromModel':data['model'],'toModel':'other','reason':'modelNotAvailable'})
         if mode not in ('no-final','failed','interrupted'):
             event('item/completed',{'threadId':'foreign-thread' if mode=='wrong-id' else thread,'turnId':turn,'completedAtMs':3,
-                'item':{'id':'answer','type':'agentMessage','phase':'final','text':'Which concrete occurrence? Recommended first occurrence; why and impact.'}})
+                'item':{'id':'answer','type':'agentMessage','phase':'final' if mode=='unsupported-phase' else None if mode=='unknown-phase' else 'final_answer','text':'Which concrete occurrence? Recommended first occurrence; why and impact.'}})
         terminal('failed' if mode=='failed' else 'interrupted' if mode=='interrupted' else 'completed')
         continue
     elif method=='turn/interrupt':
@@ -185,7 +186,7 @@ class MemoryStore:
         definition = recovery._job(job)
         key = recovery.effect_key(definition, definition['slots'][slot_index])
         self.effect = {'effect_key': key, 'payload_digest': definition['slots'][slot_index]['payload_digest'],
-                       'intent_fence': job['fence'], 'state': 'intent'}
+                       'job_id': definition['job_id'], 'intent_fence': job['fence'], 'state': 'pending'}
         result = {'job': dict(self.job), 'effect': dict(self.effect), 'execute': not self.consumed}
         self.consumed = True
         return result
@@ -199,6 +200,11 @@ class MemoryStore:
         self.calls.append('release')
         self.job.update(claimant=None, lease_until=None, version=self.job['version'] + 1)
         return dict(self.job)
+
+    def snapshot(self, namespace):
+        text = recovery.canonical({'namespace': namespace, 'jobs': [self.job],
+                                   'effects': [self.effect] if self.consumed else []})
+        return {'snapshot_text': text, 'head': hashlib.sha256(text.encode()).hexdigest()}
 
 
 def execute_case(root, call, store=None, reader=readiness, cleanup=True, lease_seconds=300):
@@ -427,3 +433,120 @@ raise AssertionError('The inert controller did not receive SIGINT')
     finally:
         sentinel.kill()
         sentinel.wait(timeout=3)
+
+
+@pytest.mark.parametrize('stage', ['preparation', 'cleanup'])
+def test_one_total_deadline_and_one_aggregate_cleanup_budget(make_case, stage):
+    root, call = make_case('normal' if stage == 'preparation' else 'input')
+    peer = root / 'peer.py'
+    original = "request=value['id'];method=value['method'];params=value.get('params')"
+    delay = ';time.sleep(0.15)' if stage == 'preparation' else ";time.sleep(0.2 if method in ('turn/interrupt','thread/unsubscribe') else 0)"
+    peer.write_text(peer.read_text().replace(original, original + delay))
+    data = call.data
+    data['sources'][str(peer)] = hashlib.sha256(peer.read_bytes()).hexdigest()
+    call = native_turn.NativeCall(data)
+    store = MemoryStore(call)
+    started = time.monotonic()
+    with pytest.raises((native_turn.NativeProtocolError, native_turn.CleanupIncomplete, recovery.Refused)):
+        execute_case(root, call, store)
+    assert time.monotonic() - started < 0.85, 'Fresh per-operation budgets exceeded the declared total bounds'
+    assert not list((root / 'evidence').iterdir())
+    assert store.consumed is (stage == 'cleanup')
+
+
+@pytest.mark.parametrize('mode', ['unsupported-phase', 'unknown-phase'])
+def test_only_schema_terminal_phase_can_supply_a_normal_final_response(make_case, mode):
+    # Codex0.159.3 generated schema e77b7d14: commentary | final_answer;
+    # absent/null phase is explicitly unknown, not a spelling alias.
+    root, call = make_case(mode)
+    store = MemoryStore(call)
+    with pytest.raises(native_turn.NativeProtocolError):
+        execute_case(root, call, store)
+    assert store.consumed and not list((root / 'evidence').iterdir())
+
+
+class HistoryPeer:
+    """Only the three supported persisted-history reads are available."""
+    def __init__(self, call, mode='normal'):
+        self.call_input, self.mode, self.calls = call, mode, []
+
+    def call(self, method, params, *, timeout):
+        assert method in ('thread/read', 'thread/turns/list', 'thread/items/list')
+        assert 0 < timeout <= 5
+        self.calls.append((method, params))
+        c = self.call_input.data
+        if self.mode == 'not-found':
+            raise native_turn.NativeProtocolError('inert history unavailable')
+        if method == 'thread/read':
+            return {'thread': {'id': 'foreign' if self.mode == 'wrong-thread' else 'retained-thread',
+                               'cliVersion': 'inert-version', 'modelProvider': c['provider'], 'model': c['model'], 'turns': []}}
+        if method == 'thread/turns/list':
+            first = params.get('cursor') is None
+            return {'data': [] if first else [{'id': 'different-turn' if self.mode == 'missing-turn' else 'retained-turn',
+                                               'items': [], 'status': 'completed', 'itemsView': 'summary'}],
+                    'nextCursor': 'turn-page2' if first or self.mode == 'cursor-loop' else None}
+        items = [{'id': 'user', 'type': 'userMessage', 'content': [
+                    {'type': 'skill', 'name': c['skill']['name'], 'path': c['skill']['path']},
+                    {'type': 'text', 'text': c['prompt'], 'text_elements': []}]},
+                 {'id': 'final', 'type': 'agentMessage', 'phase': 'final_answer', 'text': 'Retained private question?'}]
+        return {'data': [{'turnId': 'foreign' if self.mode == 'wrong-item-turn' else 'retained-turn', 'item': item}
+                         for item in items], 'nextCursor': None}
+
+
+def history_pin(call, job, effect):
+    return {'format_version': 1, 'effect_key': effect['effect_key'], 'input_digest': call.payload_digest,
+            'job_digest': job['job_digest'], 'release_digest': call.data['release_digest'],
+            'source_commit': call.data['source_commit'], 'thread_id': 'retained-thread', 'turn_id': 'retained-turn',
+            'cli_version': 'inert-version', 'native_binding_digest': recovery.digest('independently retained inert binding')}
+
+
+@pytest.mark.parametrize('mode', ['normal', 'wrong-thread', 'missing-turn', 'wrong-item-turn', 'cursor-loop', 'not-found'])
+def test_missing_packet_history_reconciliation_is_bounded_read_only_and_never_retry_permission(make_case, mode):
+    root, call = make_case()
+    store = MemoryStore(call)
+    reserved = store.begin_effect(store.claim(store.job, 'interrupted', lease_seconds=300), 0)
+    store.release(reserved['job'])
+    pin = history_pin(call, store.job, reserved['effect'])
+    peer = HistoryPeer(call, mode)
+    before = store.snapshot('test-inert-turn')
+    result = native_turn.reconcile_native_history(peer, store, store.job, call, pin,
+        expected_pin_digest=recovery.digest(pin), expected_job_digest=store.job['job_digest'], max_pages=4)
+    assert result['status'] == ('observed' if mode == 'normal' else 'unavailable' if mode == 'not-found' else 'untrusted')
+    assert result['execution_allowed'] is False and result['assessment_result'] == 'unknown'
+    assert result['observed_model'] is None and result['cleanup']['status'] == 'unknown'
+    assert result['observation']['outcome'] == 'unavailable'
+    assert store.snapshot('test-inert-turn') == before
+    assert len(peer.calls) <= 5 and all(method in ('thread/read', 'thread/turns/list', 'thread/items/list') for method, _ in peer.calls)
+    if mode == 'normal':
+        assert result['private_history']['final_response'] == 'Retained private question?'
+    assert not (root / 'evidence').exists()
+
+
+def test_history_pin_mismatch_refuses_before_any_store_or_native_read(make_case):
+    _, call = make_case()
+    store = MemoryStore(call)
+    reserved = store.begin_effect(store.claim(store.job, 'interrupted', lease_seconds=300), 0)
+    pin = history_pin(call, store.job, reserved['effect'])
+    expected = recovery.digest(pin)
+    pin['turn_id'] = 'untrusted-replacement'
+    peer = HistoryPeer(call)
+    with pytest.raises(recovery.Refused, match='independent'):
+        native_turn.reconcile_native_history(peer, store, store.job, call, pin,
+            expected_pin_digest=expected, expected_job_digest=store.job['job_digest'])
+    assert peer.calls == []
+
+
+@pytest.mark.parametrize('limit', [{'max_pages': 2}, {'max_bytes': 64}])
+def test_history_aggregate_limits_preserve_unknown_and_consumed_intent(make_case, limit):
+    _, call = make_case()
+    store = MemoryStore(call)
+    reserved = store.begin_effect(store.claim(store.job, 'interrupted', lease_seconds=300), 0)
+    pin = history_pin(call, store.job, reserved['effect'])
+    peer = HistoryPeer(call)
+    before = store.snapshot('test-inert-turn')
+    result = native_turn.reconcile_native_history(peer, store, store.job, call, pin,
+        expected_pin_digest=recovery.digest(pin), expected_job_digest=store.job['job_digest'], **limit)
+    assert result['status'] == 'untrusted' and result['execution_allowed'] is False
+    assert result['observation']['outcome'] == 'unavailable'
+    assert store.snapshot('test-inert-turn') == before
+    assert len(peer.calls) <= 3

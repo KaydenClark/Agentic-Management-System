@@ -40,6 +40,13 @@ def hex_digest(value):
     return type(value) is str and len(value) == 64 and all(c in '0123456789abcdef' for c in value)
 
 
+def _remaining(deadline):
+    value = deadline - time.monotonic()
+    if value <= 0:
+        raise NativeProtocolError('native total deadline expired')
+    return value
+
+
 def file_digest(path, limit=512 * 1024 * 1024):
     """Hash ordinary descriptors without blocking on a FIFO or following a link."""
     fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
@@ -236,6 +243,69 @@ class _TurnRpc(native_worker.NativeRpc):
         super().__init__(*args, **kwargs)
         self.requests, self.sink = [], None
         self.message_count, self.max_events = 0, max_events
+        self.active_deadline = None
+
+    def __enter__(self):
+        # Keep the reviewed general owner unchanged. This turn transport needs
+        # a caller-owned aggregate close deadline, including the host group.
+        try:
+            _remaining(self.active_deadline)
+            with native_worker._defer_interrupts():
+                self._process = subprocess.Popen(self.arguments, cwd=self.cwd, env=self.environment,
+                    stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                    start_new_session=True, bufsize=0)
+            self._readers = {self._process.stdout.fileno(): 'stdout', self._process.stderr.fileno(): 'stderr'}
+            for pipe in (self._process.stdin, self._process.stdout, self._process.stderr):
+                os.set_blocking(pipe.fileno(), False)
+            return self
+        except BaseException:
+            # NativeTurnSession retains and closes any acquired process using
+            # its independent cleanup budget, preserving the original error.
+            raise
+
+    def request(self, method, params=None):
+        self.timeout = _remaining(self.active_deadline)
+        return super().request(method, params)
+
+    def _pump(self, deadline, pending=b''):
+        _remaining(self.active_deadline)
+        return super()._pump(min(deadline, self.active_deadline), pending)
+
+    def close(self, deadline=None):
+        if self._cleanup_unconfirmed:
+            raise CleanupIncomplete('native bounded host cleanup remains unconfirmed')
+        if self._process is None:
+            return
+        process, errors = self._process, []
+        try:
+            with native_worker._defer_interrupts():
+                try:
+                    native_worker._signal_owned_group(process, native_worker.signal.SIGTERM)
+                    try:
+                        process.wait(timeout=min(0.02, max(0, (deadline - time.monotonic()) / 3)))
+                    except subprocess.TimeoutExpired:
+                        pass
+                except BaseException as error:
+                    errors.append(error)
+                try:
+                    # Even an exited leader may have left same-group children.
+                    native_worker._signal_owned_group(process, native_worker.signal.SIGKILL)
+                    process.wait(timeout=max(0, deadline - time.monotonic()))
+                    native_worker._confirm_group_gone(process, max(0, deadline - time.monotonic()))
+                except BaseException as error:
+                    errors.append(error)
+                finally:
+                    for pipe in (process.stdin, process.stdout, process.stderr):
+                        if pipe is not None:
+                            pipe.close()
+        except BaseException as error:
+            errors.append(error)
+        if time.monotonic() >= deadline:
+            errors.append(CleanupIncomplete('native aggregate cleanup deadline expired'))
+        if errors:
+            self._cleanup_unconfirmed = True
+            raise CleanupIncomplete('owned native host cleanup is unconfirmed within its deadline') from errors[0]
+        self._process = None
 
     def _message(self, value):
         self.message_count += 1
@@ -270,9 +340,13 @@ class NativeTurnSession:
         self.closed_success, self.cleanup_unconfirmed = False, False
         self.cleanup, self.cleanup_errors, self.trace = {'status': 'unknown'}, (), None
         self.server_pid = None
+        self.deadline = time.monotonic() + limits['timeout_seconds']
+        self.cleanup_deadline = None
 
     def __enter__(self):
         try:
+            self.rpc.active_deadline = self.deadline
+            _remaining(self.deadline)
             self.trace = _Trace(self.trace_root, self.call, self.call.payload_digest)
             self.trace.record({'kind': 'native-preparation-not-execution', 'input_digest': self.call.payload_digest})
             self.rpc.sink = self.trace.record
@@ -295,9 +369,11 @@ class NativeTurnSession:
             error.add_note('native turn cleanup remains unconfirmed (' + type(cleanup).__name__ + ')')
 
     def prepare(self):
+        _remaining(self.deadline)
         self._configuration()
         self._start_thread()
         self.prepared = True
+        _remaining(self.deadline)
 
     def _configuration(self):
         c = self.call.data
@@ -379,6 +455,8 @@ class NativeTurnSession:
             raise NativeProtocolError('native item exceeds the frozen local tool grant')
         if kind in ('agentMessage', 'plan') and type(item.get('text')) is not str:
             raise NativeProtocolError('native message text is malformed')
+        if kind == 'agentMessage' and item.get('phase') not in (None, 'commentary', 'final_answer'):
+            raise NativeProtocolError('native message phase differs from the pinned schema')
         if kind == 'userMessage' and type(item.get('content')) is not list:
             raise NativeProtocolError('native user-message content is malformed')
         if kind == 'commandExecution' and (
@@ -395,7 +473,7 @@ class NativeTurnSession:
             raise NativeProtocolError('native item completion conflicts')
         self.completed_items[identity] = item
         self.active_items.discard(identity)
-        if kind == 'agentMessage' and item.get('phase') == 'final':
+        if kind == 'agentMessage' and item.get('phase') == 'final_answer':
             if type(item.get('text')) is not str or not item['text'].strip():
                 raise NativeProtocolError('native final response is empty')
             if self.final_response is not None and self.final_response != item['text']:
@@ -455,6 +533,7 @@ class NativeTurnSession:
 
     def _drain(self, deadline=None):
         while self.rpc._event_cursor < len(self.rpc.events):
+            _remaining(self.rpc.active_deadline)
             self._event(self.rpc.next_event())
         if deadline is not None and self.terminal is None:
             self._event(self.rpc.next_event(timeout=max(0.001, deadline - time.monotonic())))
@@ -480,18 +559,20 @@ class NativeTurnSession:
         self.trace.record({'kind': 'native-intent-binding', 'effect_key': effect_key, 'input_digest': self.call.payload_digest})
         c, primary = self.call.data, None
         try:
+            _remaining(self.deadline)
             self._configuration()
             self._drain()
             before_turn()
+            _remaining(self.deadline)
             self.turn_requested = True
             self.turn_request = self.rpc._next_id
-            deadline = time.monotonic() + c['limits']['timeout_seconds']
+            deadline = self.deadline
             self.rpc.timeout = max(0.001, deadline - time.monotonic())
             try:
                 result = self.rpc.call('turn/start', {'threadId': self.thread_id, 'model': c['model'], 'effort': c['effort'],
                     'permissions': c['profile_id'], 'approvalPolicy': 'never', 'approvalsReviewer': 'user',
                     'input': [{'type': 'skill', 'name': c['skill']['name'], 'path': c['skill']['path']},
-                              {'type': 'text', 'text': c['prompt']}]}, timeout=max(0.001, deadline - time.monotonic()))
+                              {'type': 'text', 'text': c['prompt'], 'text_elements': []}]}, timeout=max(0.001, deadline - time.monotonic()))
                 self._bind_turn(result.get('turn') if type(result) is dict else None)
                 while self.terminal is None:
                     self._drain(deadline)
@@ -502,6 +583,7 @@ class NativeTurnSession:
             self._drain()
             if self.terminal == 'completed' and self.final_response is None:
                 raise NativeProtocolError('normal native completion lacks a final response')
+            _remaining(self.deadline)
         except BaseException as error:
             primary = error
             raise
@@ -513,6 +595,7 @@ class NativeTurnSession:
                     raise
                 primary.add_note('native turn cleanup remains unconfirmed (' + type(cleanup).__name__ + ')')
         self.call.verify_sources()
+        _remaining(self.cleanup_deadline)
         return {'format_version': 1, 'effect_key': effect_key, 'input_digest': self.call.payload_digest,
                 'turn_status': self.terminal, 'capture_status': 'complete' if self.terminal == 'completed' and not self.incomplete_reason else 'incomplete',
                 'incomplete_reason': self.incomplete_reason, 'final_response': self.final_response,
@@ -527,6 +610,13 @@ class NativeTurnSession:
         if self.closed_success:
             return
         errors = []
+        if self.cleanup_deadline is None:
+            self.cleanup_deadline = time.monotonic() + self.call.data['limits']['cancel_seconds']
+        # Keep part of the SAME budget for killing/reaping the host even when
+        # a cancellation/unsubscribe peer consumes all protocol time.
+        reserve = min(0.05, self.call.data['limits']['cancel_seconds'] / 3)
+        protocol_deadline = self.cleanup_deadline - reserve
+        self.rpc.active_deadline = protocol_deadline
         try:
             with native_worker._defer_interrupts():
                 try:
@@ -539,7 +629,7 @@ class NativeTurnSession:
                         self._drain()
                     except BaseException as error:
                         errors.append(error)
-                    cancel_deadline = time.monotonic() + self.call.data['limits']['cancel_seconds']
+                    cancel_deadline = protocol_deadline
                     for identity in list(self.turn_ids):
                         try:
                             remaining = cancel_deadline - time.monotonic()
@@ -560,22 +650,25 @@ class NativeTurnSession:
                         errors.append(CleanupIncomplete('native turn/items lack terminal ownership evidence'))
                 if self.thread_id is not None:
                     try:
-                        self.rpc.timeout = self.call.data['limits']['cancel_seconds']
+                        self.rpc.timeout = _remaining(protocol_deadline)
                         value = self.rpc.call('thread/unsubscribe', {'threadId': self.thread_id})
                         if type(value) is not dict or value.get('status') not in ('unsubscribed', 'notSubscribed', 'notLoaded'):
                             raise NativeProtocolError('native unsubscribe response is malformed')
                     except BaseException as error:
                         errors.append(error)
                 try:
-                    self.rpc.close()
+                    self.rpc.close(self.cleanup_deadline)
                 except BaseException as error:
                     errors.append(error)
         except BaseException as error:
             errors.append(error)
         if self.thread_requested:
             try:
+                _remaining(self.cleanup_deadline)
                 proof = self.cleanup_reader({'server_pid': self.server_pid, 'thread_id': self.thread_id,
-                                              'turn_id': self.turn_id, 'events': self.rpc.events}) if self.cleanup_reader else None
+                                              'turn_id': self.turn_id, 'events': self.rpc.events,
+                                              'deadline': self.cleanup_deadline}) if self.cleanup_reader else None
+                _remaining(self.cleanup_deadline)
                 require(type(proof) is dict and proof.keys() == {'status', 'mode', 'input_digest', 'proof_digest'}
                         and proof['status'] == 'confirmed' and proof['mode'] == self.transport_kind
                         and proof['input_digest'] == self.call.payload_digest and hex_digest(proof['proof_digest']),
@@ -601,6 +694,9 @@ class NativeTurnSession:
             if len(errors) > 1:
                 errors[0].add_note(str(len(errors) - 1) + ' additional native cleanup facts retained')
             raise errors[0]
+        if time.monotonic() >= self.cleanup_deadline:
+            self.cleanup_unconfirmed = True
+            raise CleanupIncomplete('native aggregate cleanup deadline expired')
         self.closed_success = True
 
 
@@ -637,10 +733,12 @@ class _Executor:
 
 def run_native_slot(store, job, claimant, slot_index, evidence, call, *, expected_job_digest,
                     readiness_reader=None, session_factory=None, cleanup_reader=None, lease_seconds=300):
+    started = time.monotonic()
     if readiness_reader is None:
         raise recovery.Refused('accepted external readiness is required before a native intent')
     require(isinstance(call, NativeCall) and callable(readiness_reader), 'native input/readiness reader differs')
     definition, c = recovery._job(job), call.data
+    deadline = started + c['limits']['timeout_seconds']
     require(job['job_digest'] == expected_job_digest and type(slot_index) is int and 0 <= slot_index < len(definition['slots']),
             'native job differs from its independent pin')
     require(all(definition[key] == c[key] for key in ('case_digest', 'skills_commit', 'source_commit', 'release_digest'))
@@ -650,8 +748,10 @@ def run_native_slot(store, job, claimant, slot_index, evidence, call, *, expecte
     live = store.get_job(definition['namespace'], definition['job_id'])
     require(live['job_digest'] == expected_job_digest, 'current native job differs from its independent pin')
     proof = _readiness(readiness_reader, call, live)
+    _remaining(deadline)
     _gates(live, call, proof)
     call.verify_sources()
+    _remaining(deadline)
     if session_factory is None:
         require(proof['mode'] == 'native', 'inert release cannot start a native host')
         require(c['command'][-1] == 'app-server' and '--no-daemon' in c['command']
@@ -661,6 +761,7 @@ def run_native_slot(store, job, claimant, slot_index, evidence, call, *, expecte
         session = session_factory(call)
     require(session.transport_kind == proof['mode'], 'inert release cannot authorize a native transport')
     require(callable(session.cleanup_reader), 'independent cleanup observer is required before native intent')
+    session.deadline = deadline
     with session:
         session.prepare()
         live = store.get_job(definition['namespace'], definition['job_id'])
@@ -668,6 +769,170 @@ def run_native_slot(store, job, claimant, slot_index, evidence, call, *, expecte
         proof = _readiness(readiness_reader, call, live)
         _gates(live, call, proof)
         call.verify_sources()
+        _remaining(deadline)
         executor = _Executor(store, live, claimant, call, readiness_reader, session)
         return native_worker.run_slot(_FencedStore(store, executor), live, claimant, slot_index, evidence, executor,
                                       expected_job_digest=expected_job_digest, lease_seconds=lease_seconds)
+
+
+def reconcile_native_history(rpc, store, job, call, pin, *, expected_pin_digest, expected_job_digest,
+                             slot_index=0, max_pages=8, max_items=512, max_bytes=4 * 1024 * 1024,
+                             timeout_seconds=5):
+    """Missing-packet recovery: bounded private reads, never another invocation.
+
+    The expected pin digest must come from independently retained original
+    request/trace evidence, not from the history being inspected. The caller
+    owns the initialized read-only RPC transport. This function performs no
+    claim, intent, observation, resume or turn mutation. Even matching terminal
+    history supplies no cleanup/runtime-model/skill/semantic qualification and
+    therefore yields only an unavailable safe observation, never retry rights.
+    """
+    fields = {'format_version', 'effect_key', 'input_digest', 'job_digest', 'release_digest',
+              'source_commit', 'thread_id', 'turn_id', 'cli_version', 'native_binding_digest'}
+    require(type(pin) is dict and pin.keys() == fields and pin['format_version'] == 1
+            and type(pin['format_version']) is int and hex_digest(expected_pin_digest)
+            and recovery.digest(pin) == expected_pin_digest, 'native history differs from its independent pin')
+    require(all(hex_digest(pin[key]) for key in ('effect_key', 'input_digest', 'job_digest', 'release_digest', 'native_binding_digest')),
+            'native history pin has incomplete artifact identities')
+    require(all(type(pin[key]) is str and 0 < len(pin[key]) <= 256 for key in ('thread_id', 'turn_id', 'cli_version')),
+            'native history pin has malformed native identities')
+    definition, c = recovery._job(job), call.data
+    require(job['job_digest'] == expected_job_digest == pin['job_digest']
+            and pin['input_digest'] == call.payload_digest and pin['release_digest'] == c['release_digest']
+            and pin['source_commit'] == c['source_commit'], 'native history independent source binding differs')
+    require(type(slot_index) is int and 0 <= slot_index < len(definition['slots']), 'native history slot is not frozen')
+    slot = definition['slots'][slot_index]
+    require(slot['effect_type'] == 'native-call' and slot['payload_digest'] == call.payload_digest
+            and recovery.effect_key(definition, slot) == pin['effect_key'], 'native history effect/input join differs')
+    require(type(max_pages) is int and 1 <= max_pages <= 32 and type(max_items) is int and 1 <= max_items <= 4096
+            and type(max_bytes) is int and 1 <= max_bytes <= 64 * 1024 * 1024
+            and type(timeout_seconds) in (int, float) and math.isfinite(timeout_seconds) and 0 < timeout_seconds <= 30,
+            'native history reads need finite aggregate bounds')
+    deadline = time.monotonic() + timeout_seconds
+    capture, bytes_read, pages, entries = [], 0, 0, 0
+    result = {'status': 'unavailable', 'effect_key': pin['effect_key'], 'execution_allowed': False,
+              'assessment_result': 'unknown', 'observed_model': None, 'skill_load': {'status': 'unknown'},
+              'cleanup': {'status': 'unknown'}, 'private_history': None, 'history_digest': None,
+              'observation': native_worker.PrivateEvidence._observation(pin['effect_key'], call.payload_digest, 'unavailable')}
+
+    def retain(value):
+        nonlocal bytes_read
+        bytes_read += len(recovery.canonical(value).encode())
+        require(bytes_read <= max_bytes, 'native history aggregate byte limit exceeded')
+        _remaining(deadline)
+
+    def read(method, params):
+        # Only these literal read methods are reachable; opaque cursors are data.
+        remaining = _remaining(deadline)
+        previous = getattr(rpc, 'timeout', None)
+        if previous is not None:
+            rpc.timeout = min(previous, remaining)
+        try:
+            value = rpc.call(method, params, timeout=remaining)
+        finally:
+            if previous is not None:
+                rpc.timeout = previous
+        retain(value)
+        capture.append({'method': method, 'response': value})
+        return value
+
+    def paged(method, params):
+        nonlocal pages, entries
+        cursor, seen, values = None, set(), []
+        while True:
+            require(pages < max_pages and entries < max_items, 'native history aggregate page/item limit exceeded')
+            page = read(method, {**params, 'cursor': cursor, 'limit': min(100, max_items - entries), 'sortDirection': 'asc'})
+            pages += 1
+            require(type(page) is dict and type(page.get('data')) is list, 'native history page is malformed')
+            entries += len(page['data'])
+            require(entries <= max_items, 'native history aggregate item limit exceeded')
+            values.extend(page['data'])
+            cursor = page.get('nextCursor')
+            if cursor is None:
+                return values
+            require(type(cursor) is str and cursor and cursor not in seen, 'native history cursor repeats or differs')
+            seen.add(cursor)
+
+    try:
+        snapshot = store.snapshot(definition['namespace'])
+        text = snapshot.get('snapshot_text')
+        require(type(text) is str and snapshot.get('head') == hashlib.sha256(text.encode()).hexdigest(),
+                'authoritative history snapshot identity differs')
+        retain(text)
+        state = native_worker._json_message(text)
+        require(state.get('namespace') == definition['namespace'], 'authoritative history namespace differs')
+        jobs = [row for row in state.get('jobs', []) if row.get('job_digest') == expected_job_digest]
+        effects = [row for row in state.get('effects', []) if row.get('effect_key') == pin['effect_key']]
+        require(len(jobs) == 1 and len(effects) == 1 and effects[0].get('job_id') == definition['job_id']
+                and effects[0].get('payload_digest') == call.payload_digest
+                and type(effects[0].get('intent_fence')) is int and effects[0]['intent_fence'] >= 1
+                and effects[0].get('state') in ('pending', 'uncertain', 'completed'),
+                'authoritative consumed intent is missing or conflicting')
+        meta = read('thread/read', {'threadId': pin['thread_id'], 'includeTurns': False})
+        thread = meta.get('thread') if type(meta) is dict else None
+        require(type(thread) is dict and thread.get('id') == pin['thread_id']
+                and thread.get('cliVersion') == pin['cli_version'] and thread.get('modelProvider') == c['provider']
+                and thread.get('model') in (None, c['model']), 'persisted native thread identity differs')
+        turns = paged('thread/turns/list', {'threadId': pin['thread_id'], 'itemsView': 'full'})
+        seen, target = set(), None
+        for turn in turns:
+            require(type(turn) is dict and type(turn.get('id')) is str and turn['id'] and turn['id'] not in seen
+                    and turn.get('status') in ('inProgress', 'completed', 'failed', 'interrupted')
+                    and type(turn.get('items')) is list, 'persisted native turn identity/shape differs')
+            seen.add(turn['id'])
+            if turn['id'] == pin['turn_id']:
+                target = turn
+        require(target is not None, 'pinned native turn is not present; absence is not established')
+        rows = paged('thread/items/list', {'threadId': pin['thread_id'], 'turnId': pin['turn_id']})
+        items, final, source_input = {}, None, False
+        expected_input = [{'type': 'skill', 'name': c['skill']['name'], 'path': c['skill']['path']},
+                          {'type': 'text', 'text': c['prompt']}]
+        for row in rows:
+            item = row.get('item') if type(row) is dict else None
+            require(type(row) is dict and row.get('turnId') == pin['turn_id'] and type(item) is dict
+                    and type(item.get('id')) is str and item['id'] and item['id'] not in items,
+                    'persisted native item identity differs')
+            kind = item.get('type')
+            require(kind in ('userMessage', 'agentMessage', 'commandExecution', 'reasoning', 'plan'),
+                    'persisted native item exceeds the frozen local grant')
+            items[item['id']] = item
+            if kind == 'userMessage':
+                require(type(item.get('content')) is list, 'persisted input is malformed')
+                # UserInput.text_elements has a documented [] default. Preserve
+                # exact prompt/skill bytes while accepting that native default.
+                content = []
+                for value in item['content']:
+                    require(type(value) is dict, 'persisted input element is malformed')
+                    if value.get('type') == 'text':
+                        require(value.keys() <= {'type', 'text', 'text_elements'} and value.get('text_elements', []) == [],
+                                'persisted input formatting differs from the frozen call')
+                        value = {key: data for key, data in value.items() if key != 'text_elements'}
+                    content.append(value)
+                source_input = source_input or content == expected_input
+            elif kind == 'agentMessage':
+                require(type(item.get('text')) is str and item.get('phase') in (None, 'commentary', 'final_answer'),
+                        'persisted message phase/text differs from pinned schema')
+                if item.get('phase') == 'final_answer':
+                    require(item['text'].strip() and (final is None or final == item['text']), 'persisted final response conflicts')
+                    final = item['text']
+            elif kind == 'commandExecution':
+                require(type(item.get('command')) is str and type(item.get('commandActions')) is list
+                        and item.get('cwd') == c['cwd'] and item.get('status') in ('inProgress', 'completed', 'failed', 'declined')
+                        and (item.get('exitCode') is None or type(item['exitCode']) is int)
+                        and (item.get('processId') is None or type(item['processId']) is str), 'persisted command item is malformed')
+        require(source_input, 'persisted input is not the independently pinned call')
+        require(target['status'] != 'completed' or final is not None, 'normal persisted completion lacks a final response')
+        if target.get('itemsView', 'full') == 'full':
+            declared = {item.get('id'): item for item in target['items'] if type(item) is dict}
+            require(len(declared) == len(target['items']) and declared == items, 'persisted turn/items pages conflict')
+        result.update(status='observed' if target['status'] in ('completed', 'failed', 'interrupted') else 'incomplete',
+                      private_history={'thread_id': pin['thread_id'], 'turn_id': pin['turn_id'],
+                                       'turn_status': target['status'], 'items': list(items.values()), 'final_response': final},
+                      history_digest=recovery.digest(capture))
+    except (NativeProtocolError, recovery.Unavailable, OSError):
+        result['status'] = 'unavailable'
+    except (recovery.Refused, ValueError, TypeError, KeyError):
+        result['status'] = 'untrusted'
+    finally:
+        result['private_read_capture'] = capture
+    return result

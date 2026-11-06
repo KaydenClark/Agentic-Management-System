@@ -12,7 +12,7 @@ import uuid
 import pytest
 
 from ams import lineage, native_turn, recovery
-from test_native_turn import MemoryStore, execute_case, make_case, readiness, utc
+from test_native_turn import HistoryPeer, MemoryStore, execute_case, history_pin, make_case, readiness, utc
 
 
 @pytest.fixture
@@ -78,6 +78,24 @@ def test_actual_consumed_intent_without_packet_never_starts_a_turn(turn_store):
     result = execute_case(root, call, store)
     assert result['executed'] is False and result['effect']['state'] == 'uncertain'
     assert result['assessment_result'] == 'unknown'
+    assert '"method": "turn/start"' not in (root / 'requests').read_text()
+
+
+def test_read_only_native_history_does_not_complete_or_rearm_actual_consumed_intent(turn_store):
+    root, call, store, _ = turn_store
+    reserved = store.begin_effect(store.claim(store.job, 'uncertain-native-owner'), 0)
+    live = store.release(reserved['job'])
+    pin = history_pin(call, live, reserved['effect'])
+    before = store.snapshot(recovery._job(live)['namespace'])
+    peer = HistoryPeer(call)
+    history = native_turn.reconcile_native_history(peer, store, live, call, pin,
+        expected_pin_digest=recovery.digest(pin), expected_job_digest=live['job_digest'])
+    assert history['status'] == 'observed' and history['execution_allowed'] is False
+    assert history['assessment_result'] == 'unknown' and history['cleanup']['status'] == 'unknown'
+    assert history['observation']['outcome'] == 'unavailable'
+    assert store.snapshot(recovery._job(live)['namespace']) == before
+    result = execute_case(root, call, store)
+    assert result['executed'] is False and result['effect']['state'] == 'uncertain'
     assert '"method": "turn/start"' not in (root / 'requests').read_text()
 
 
