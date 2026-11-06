@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Deliver checked N to main; then release O. W stays stopped.
+**Next gate:** Implement O from verified N; N publication remains held and W stays stopped.
 
 ## Intent and authority
 
@@ -63,7 +63,7 @@ Approved import 771bd1e passed; later build-history coverage is unverified. Furt
 
 ## Vertical Implementation Slices
 
-[N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md): N released for isolated lineage; O waits for verified N.
+[N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md): N verified in isolation; O released on that artifact.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
