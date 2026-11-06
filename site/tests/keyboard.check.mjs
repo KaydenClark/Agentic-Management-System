@@ -77,6 +77,32 @@ try {
     check(`negative: ${name}`, !before.length && matches(errors) && retained, { before, errors, retained });
     await context.close();
   }
+  // The real shell must reveal links natively without relying on hydration.
+  for (const route of ['/rsi', '/start']) for (const javaScriptEnabled of [false, true]) {
+    for (const width of [375, 1280]) for (const theme of ['light', 'dark']) {
+      const context = await browser.newContext({ viewport: { width, height: 812 }, colorScheme: theme, javaScriptEnabled });
+      const page = await context.newPage();
+      await page.goto(`${base}${route}`, { waitUntil: 'networkidle' });
+      const errors = await keyboardProblems(page);
+      const text = (await page.textContent('main')) ?? '';
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+      check(`real shell ${route} JS=${javaScriptEnabled} ${width}/${theme}`, !errors.length && !overflow && text.trim().length > 40, { errors, overflow });
+      if (route === '/rsi' && !javaScriptEnabled && width === 375 && theme === 'light') {
+        // Synchronous insertion works without page scripts; the planted old
+        // layout stays installed throughout native traversal and observation.
+        await page.evaluate(() => {
+          const style = document.createElement('style');
+          style.dataset.qaFault = 'script-free-clip';
+          style.textContent = '.topnav ol { width: max-content; flex-wrap: nowrap; }';
+          document.head.append(style);
+        });
+        const broken = await keyboardProblems(page);
+        const retained = await page.locator('[data-qa-fault="script-free-clip"]').count() === 1;
+        check('negative: script-free clipped navigation', !errors.length && retained && broken.some(x => x.startsWith('focused navigation link clipped:')), { broken, retained });
+      }
+      await context.close();
+    }
+  }
 } finally {
   await browser.close();
 }
