@@ -3,6 +3,10 @@
 **Disposition:** bounded correction qualified locally; fresh checks, independent
 review and delivery remain required. No owner QA or permission waiver.
 
+Central intake: [FAIL-210 and diagnostic cases211–220](WORKBENCH_FEEDBACK.md).
+These rows were added late after the repair; FAIL-221 retains that recording
+failure rather than backdating compliance. Prior receipt/source bytes remain.
+
 The fresh b8e2236 approval-continuation suite finished984 passed,6 skipped and
 one failure in `test_poll_interruption_is_reraised_after_owned_cleanup`.
 `owned_process.send(0)` raised EPERM. Collector bytes are identical to held
@@ -54,3 +58,8 @@ pass, including actual interruption and the enabled Docker/SIGINT pair. Private
 diagnostics retain both original and corrected results. Fresh full verification
 and independent review follow; approval/private-feedback completion, final
 assembled-dev capture, public delivery and actual owner QA remain separate.
+
+Fresh source5ef89a6 subsequently passes989 tests/6 skips, including the enabled
+real Docker checks. Independent Spec review finds no runtime defect; Standards
+review requires the central intake above. Its record correction/review and
+exact-head shared CI remain before readiness. No protected-main retry occurred.
