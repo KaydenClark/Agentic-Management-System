@@ -35,3 +35,9 @@ Size: one representative occurrence through the full path; widen only through an
 The owner's 2026-11-06 request to get the described features and RSI loop working for consolidated dev QA, followed by “I authorize and approve. Let that carry through where it needs to”, releases this Task's earlier preparation-only hold. Continue the delivered Stage A release graph: D detection is independent of N/O/P, whose owners remain unchanged. This run is bounded to read-only coherence checks, safe occurrence reports, replay/recurrence and operator QA evidence. It releases no model comparison, stopped campaign, skill installation, production schema application, deployment or owner acceptance.
 
 Current remote main and dev records were inspected before assignment: TK-001D has no claimant, no existing S-013 feature branch or active local detection worker was found, and S-006/TK-002O remains with codex-s006-recovery. Reports target the existing feedback/coherence lane and link existing Spec/Task owners; no second master plan or failure counter is introduced.
+
+## Starting inventory
+
+Workspace baseline sha256:2b5a920549983ac3ac11a7f7717585a915dd1d2ab730a2140cb4172cf7bdf818
+
+Claim and scoped release originals are committed before this complete snapshot. Raw inventory remains outside the checkout in local private recovery.
