@@ -182,3 +182,20 @@ def test_automatic_cli_refusal_and_unverified_cleanup_never_write_cards(room, mo
         pages.main(command)
     assert cleanup.value.code == 1 and git(room, 'rev-parse', 'HEAD') == candidate
     assert not list((room / 'grill-board/cards').glob('*.md'))
+
+
+def test_pending_candidate_keeps_landing_unknown_and_binds_actual_candidate(room):
+    listed = inventory(room, ('/new-page',))
+    listed['pages'][0].update(provenance_kind='pending-candidate', landed=None)
+    candidate = git(room, 'rev-parse', 'HEAD')
+    pages.generate(room, listed, {'/new-page': html('New synthetic page')}, candidate=candidate)
+    card = load_cards(room / 'grill-board/cards')[0][0]
+    assert card.fields['Provenance kind'] == 'pending-candidate'
+    assert card.fields['Candidate'] == candidate and card.fields['Integration'] == 'pending'
+    assert 'Landed' not in card.fields and 'Verified containment' not in card.fields
+    index = json.loads((room / 'grill-board/pages/index.json').read_text())['pages']['/new-page']
+    assert index['landed'] is None and index['candidate'] == candidate and index['integration'] == 'pending'
+    bad = inventory(room, ('/second-page',))
+    bad['pages'][0].update(provenance_kind='pending-candidate', spec='')
+    with pytest.raises(pages.PageRefused, match='invalid spec'):
+        pages.generate(room, bad, {'/second-page': html()}, candidate=candidate)

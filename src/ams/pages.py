@@ -112,11 +112,15 @@ def _metadata(listed, built):
         for key in ("title", "spec", "task"):
             if not isinstance(row.get(key), str) or not row[key].strip() or "\n" in row[key] or "\r" in row[key]:
                 raise PageRefused(f"{path}: invalid {key}")
-        landed = row.get("landed", {})
-        if not re.fullmatch(r"[0-9a-f]{40,64}", landed.get("commit", "")):
-            raise PageRefused(f"{path}: no immutable landed commit")
-        if row.get("provenance_kind", "historical-landing") not in {"historical-landing", "verified-containment"}:
+        kind = row.get("provenance_kind", "historical-landing")
+        if kind not in {"historical-landing", "verified-containment", "pending-candidate"}:
             raise PageRefused(f"{path}: unsupported provenance kind; current ownership and actual containment are required")
+        landed = row.get("landed")
+        if kind == "pending-candidate":
+            if landed is not None:
+                raise PageRefused(f"{path}: pending candidate cannot assert a landing")
+        elif not isinstance(landed, dict) or not re.fullmatch(r"[0-9a-f]{40,64}", landed.get("commit", "")):
+            raise PageRefused(f"{path}: no immutable landed commit")
         result[path] = row
     missing = sorted(set(result) - set(built))
     uncovered = sorted(set(built) - set(result))
@@ -142,9 +146,11 @@ def _stamp(now):
 
 
 def _new_card(row, digest, candidate):
-    landed = row["landed"]
+    landed = row.get("landed")
     kind = row.get("provenance_kind", "historical-landing")
     provenance_label = "Verified containment" if kind == "verified-containment" else "Landed"
+    provenance = "**Integration:** pending\n" if kind == "pending-candidate" else (
+        f'**{provenance_label}:** {landed.get("branch", "dev")} {landed["commit"]} PR {landed.get("pr", "unknown")}\n')
     sources = ", ".join(row.get("sources", []))
     return (f'# Review {row["path"]}: {row["title"]} at {digest}\n\n'
             '**Topic:** Website pages\n**Priority:** P2\n'
@@ -152,7 +158,7 @@ def _new_card(row, digest, candidate):
             '**Value:** V1\n**Value reason:** A content-bound decision prevents repeated review.\n'
             f'**Page:** {row["path"]}\n**Title:** {row["title"]}\n**Content hash:** {digest}\n'
             f'**Candidate:** {candidate}\n**Provenance kind:** {kind}\n'
-            f'**{provenance_label}:** {landed.get("branch", "dev")} {landed["commit"]} PR {landed.get("pr", "unknown")}\n'
+            f'{provenance}'
             f'**Spec:** {row["spec"]}\n**Task:** {row["task"]}\n'
             f'**Recommendation:** Approve page {row["path"]} ({row["title"]}) at content hash {digest}.\n'
             f'**Owner record:** {APPROVALS}\n**Write after:** ## Approvals\n\n'
@@ -207,8 +213,10 @@ def generate(root, listed, built, *, candidate, now=None):
                         raise PageRefused(f"{path}: previous card is missing")
                     writes[old_rel] = old_blob + (b"" if old_blob.endswith(b"\n") else b"\n") + (
                         f'\n## Stale\n\n**Superseded by:** {name}\n**Stale since:** {_stamp(now)}\n').encode()
-            entries[path] = {"title": row["title"], "landed": row["landed"]["commit"],
+            entries[path] = {"title": row["title"], "landed": row["landed"]["commit"] if row.get("landed") else None,
                              "provenance_kind": row.get("provenance_kind", "historical-landing"), "hash": digest, "card": name}
+            if row.get("provenance_kind") == "pending-candidate":
+                entries[path].update(candidate=candidate, integration="pending")
         for path in previous.get("pages", {}).keys() - rows.keys():
             old = previous["pages"][path]
             relative = f'{CARDS}/{old["card"]}'
