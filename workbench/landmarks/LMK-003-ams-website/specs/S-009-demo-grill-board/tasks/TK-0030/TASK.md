@@ -3,10 +3,12 @@
 **Task ID:** TK-0030
 **Spec ID:** S-009
 **Slice:** Recover the existing demo as a usable visitor experience with accurate current Board context
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: S-009 Acceptance Criteria
 **Planned verification:** Built-site tests and browser interaction, storage and network checks at 375px and desktop in both themes; inspect script-disabled content and current S-004 behavior.
+**Claimed by:** codex-s009-demo
+**Current claimant:** codex-s009-demo
 
 ## Assignment
 

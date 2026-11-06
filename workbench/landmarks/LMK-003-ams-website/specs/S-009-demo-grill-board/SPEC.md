@@ -5,12 +5,12 @@
 **Priority:** 3
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-06
 **Catalog description:** A public demo of the Grill Board with sample cards asking non-engineering questions, showing what a non-developer might use it for.
 **Blockers:** S-003
 **Confirmation:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
 **Execution approval:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
-**Next gate:** Recover and verify the demo against the checked site shell.
+**Next gate:** Close TK-0030 with verification and documentation proof.
 
 ## Intent and authority
 
