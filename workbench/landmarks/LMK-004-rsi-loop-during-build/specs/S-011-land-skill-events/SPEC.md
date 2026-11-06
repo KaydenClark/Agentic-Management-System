@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
 **Execution approval:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
-**Next gate:** Prepare template correction then dependent AMS adoption; older holds remain.
+**Next gate:** Close TK-003C with verification and documentation proof.
 
 ## Intent and authority
 

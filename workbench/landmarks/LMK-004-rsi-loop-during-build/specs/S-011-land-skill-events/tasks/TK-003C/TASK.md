@@ -3,10 +3,12 @@
 **Task ID:** TK-003C
 **Spec ID:** S-011
 **Slice:** New Workbenches follow their project's promotion authority
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Bounded repair acceptance
 **Planned verification:** Both generated outputs reject the stale broad gate; setup/package checks, applicable changed-source qualification, independent review, exact-head CI, published containment and registered personal installation.
+**Claimed by:** codex-bounded-setup-guidance
+**Current claimant:** codex-bounded-setup-guidance
 
 ## Assignment
 
