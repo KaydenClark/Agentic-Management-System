@@ -12,7 +12,7 @@ npm run build
 npm test
 ```
 
-`npm run build` is a plain `next build`. `npm test` runs `node --test "tests/**/*.test.mjs"` (Node's built-in runner; the glob is quoted so Node expands it, which needs Node 21 or later). The tests read the prerendered HTML in `.next/server/app/`, so run `npm run build` first and rebuild after each commit: the footer test compares the built SHA with the current commit.
+`npm run build` runs `next build`, then generates the page-review inventory through `postbuild`. `npm test` runs `node --test "tests/**/*.test.mjs"` (Node's built-in runner; the glob is quoted so Node expands it, which needs Node 21 or later). The tests read the prerendered HTML in `.next/server/app/`, so run `npm run build` first and rebuild after each commit: the footer test compares the built SHA with the current commit.
 
 `npm test` is browser-free and takes a few seconds. Besides the page tests it runs `tests/hygiene.test.mjs` over every file the site serves (prerendered HTML and RSC in `.next/server/app/`, client JS and CSS in `.next/static/`): no host path (`/home/`, `/Users/`, `C:\Users\`, `file:///` with a drive or host directory), Supabase secret or service-role key, JWT, API token, private key block, email address, reference to the private GPT_OS repository or agent session link; and no HTML or CSS resource (script, `<link>`, image, CSS `url()` or `@import`) loaded from a host other than Supabase or GitHub. The patterns live in `tests/hygiene.mjs`; its planted-fault cases plant into a copy of a built page.
 
@@ -46,6 +46,14 @@ The public site shows no review state: no page carries a draft, approval or revi
 - **Current hashes:** `npm run page-hashes` (after a build) prints each page's route and hash; `--json` prints JSON.
 - **Recording an owner review:** reviews come only from the owner, in chat until the Grill Board exists (DDR-000X); an agent never creates one. Rebuild, run `npm run page-hashes`, and have the owner review the exact route and hash. The record is a dated note of the approval itself: who approved, the date, the channel, and each route and hash approved, written in paraphrase and never quoting the owner. It belongs with the Grill Board's records (S-005), never on the public site.
 - **Tests:** `tests/page-hash.test.mjs` (in `npm test`) checks the vectors; that every built page has a hash; that the hash ignores a review mark, the footer commit, scripts and `data-review-exclude` regions, and changes when one character of content changes; that `npm run page-hashes` prints every page; and that no built page shows review state (a `data-review-mark` element, a note announcing draft, approval or review, or not-approved wording), after catching each of those planted into a built page.
+
+## Build inventory for owner review
+
+`page-list.json` keeps historical page receipts and declarative `owner_rules`; its flat `pages` list is regenerated after each build. `npm run pages:generate` regenerates it manually, and `npm run pages:check` refuses a stale projection. Both use frozen repository records and build artifacts without Git or host configuration. The S-005 collector reads this projection after its own immutable candidate build, before requests or Board writes.
+
+For a new route, add a rule with `route`, current `spec` and `task` IDs, and public repository-relative `sources`. The IDs must exist together in the Workbench records. A route pattern such as `/skills/[name]` substitutes `{name}` in source paths and covers every actual built article automatically. Missing or overlapping ownership refuses; adding a page needs no manual card or generated row. Next route/prerender manifests must exactly match the public HTML artifacts. `/_not-found` is the visitor404 review surface; only `_global-error.html` is excluded as an internal framework fallback.
+
+The original seven historical rows remain intact. Existing additional pages retain explicit `verified-containment` receipts for their actual checked dev integration: that proves containment, not original creation. Each receipt names its real branch and immutable commit, with a positive PR number when known. Declarations carry no inherited landing claim, so a newly discovered page defaults to `provenance_kind: "pending-candidate"` and `landed: null`. Its card receives the actual immutable candidate SHA from the collector and says integration pending. Preserve an existing truthful receipt when regenerating; update it only from an actual integration record. No review state or private criticism enters the public pages.
 
 ## Theme token check
 

@@ -39,6 +39,8 @@ function decode(s) {
   });
 }
 
+export { decode as decodeHTMLText };
+
 function attributes(source) {
   const out = [];
   const re = /([^\s"'>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?/g;
