@@ -29,7 +29,7 @@ Traceable, labeled evidence lets readers assess whether the loop works.
 ## Current Verified State
 
 - Whole-Spec acceptance remains unverified. [TK-001](tasks/TK-001/TASK.md#receipt) closed the bounded empty-state slice.
-- [TK-002](tasks/TK-002/TASK.md) closed the bounded live reader after exact-source build/tests and protected devf3 readback; [current evidence](tasks/TK-002/CURRENT-CHECK.md) preserves historical failures and limits. [TK-003](tasks/TK-003/TASK.md) is the next native gate; later lineage work retains its own input verification. Native main-route/own-ref accounting remains unverified (last check incomplete); originals are retained. No workspace release, full assignment closeout, improvement or Spec acceptance is claimed.
+- [TK-002](tasks/TK-002/TASK.md) closed the checked live reader; [proof and limits](tasks/TK-002/CURRENT-CHECK.md) retain failures and originals. Native accounting remains unverified; no workspace release, full closeout or Spec acceptance. TK-003 is next; lineage inputs remain unverified.
 
 History: [S-007 history](../../../../wiki/history/S-007.md).
 
