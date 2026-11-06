@@ -357,6 +357,7 @@ class CodexHost:
         self.cwd, self.timeout = str(cwd), timeout
         self.commands = {}
         self.closed, self.cleanup_unconfirmed = False, False
+        self.cleanup_errors = ()
 
     def __enter__(self):
         try:
@@ -366,12 +367,19 @@ class CodexHost:
                 'capabilities': {'experimentalApi': True}})
             self.rpc.notify('initialized')
             return self
-        except BaseException:
-            self.close()
+        except BaseException as error:
+            self.__exit__(type(error), error, error.__traceback__)
             raise
 
-    def __exit__(self, *exception):
-        self.close()
+    def __exit__(self, exception_type, exception, traceback):
+        try:
+            self.close()
+        except BaseException as cleanup_error:
+            if exception is None:
+                raise
+            # Keep the original failure/interrupt and the separate cleanup
+            # uncertainty; raw peer payloads do not belong in exception notes.
+            exception.add_note('native cleanup remains unconfirmed (' + type(cleanup_error).__name__ + ')')
 
     def start_command(self, arguments, *, timeout_ms=10000, output_bytes_cap=65536):
         if self.closed or self.cleanup_unconfirmed:
@@ -392,11 +400,13 @@ class CodexHost:
         if identity not in self.commands:
             raise NativeProtocolError('native command is not owned by this connection')
         result = self.rpc.wait(self.commands[identity], timeout=timeout)
-        self.commands.pop(identity)
         if (type(result) is not dict or set(result) != {'exitCode', 'stdout', 'stderr'}
                 or type(result['exitCode']) is not int
                 or any(type(result[key]) is not str for key in ('stdout', 'stderr'))):
             raise NativeProtocolError('native command result is malformed')
+        # Receiving bytes is not a terminal state. A malformed/uncertain
+        # completion retains cancellation ownership and cannot close cleanly.
+        self.commands.pop(identity)
         return result
 
     def terminate_command(self, identity):
@@ -410,17 +420,28 @@ class CodexHost:
             raise CleanupIncomplete('native tool cancellation remains unconfirmed')
         if self.closed:
             return
+        failures = []
         try:
             with _defer_interrupts():
-                try:
-                    for identity in list(self.commands):
+                for identity in list(self.commands):
+                    try:
                         self.terminate_command(identity)
-                finally:
+                    except BaseException as error:
+                        failures.append(error)
+                try:
                     self.rpc.close()
-            self.closed = True
-        except BaseException:
+                except BaseException as error:
+                    failures.append(error)
+        except BaseException as error:
+            # Include an interruption delivered when the signal mask restores.
+            failures.append(error)
+        if failures:
+            self.cleanup_errors = tuple(failures)
             self.cleanup_unconfirmed = True
-            raise
+            if len(failures) > 1:
+                failures[0].add_note(str(len(failures) - 1) + ' additional native cleanup failures retained')
+            raise failures[0]
+        self.closed = True
 
 
 class PrivateEvidence:

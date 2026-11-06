@@ -330,6 +330,137 @@ def test_host_cancels_a_separate_native_command_group_on_interruption(tmp_path):
         sentinel.wait(timeout=3)
 
 
+ADVERSARIAL_COMMAND_PEER = r'''
+import json,os,pathlib,signal,subprocess,sys
+root=pathlib.Path(sys.argv[1]);mode=sys.argv[2];commands={};attempts=[]
+def emit(value):print(json.dumps(value),flush=True)
+for line in sys.stdin:
+    value=json.loads(line)
+    if 'id' not in value:continue
+    identity=value['id'];method=value['method']
+    if method=='initialize':emit({'id':identity,'result':{}})
+    elif method=='command/exec':
+        child=subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)'],
+            start_new_session=True,stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
+        commands[value['params']['processId']]=(child,identity)
+        emit({'method':'fixture/started','params':{'pid':child.pid}})
+        if mode=='malformed':emit({'id':identity,'result':{'exitCode':'0','stdout':'','stderr':''}})
+    elif method=='command/exec/terminate':
+        key=value['params']['processId'];attempts.append(key)
+        (root/'attempts.json').write_text(json.dumps(attempts))
+        if mode=='first-refused' and len(attempts)==1:
+            emit({'id':identity,'error':{'code':-32000,'message':'planted cancellation refusal'}})
+            continue
+        child,original=commands.pop(key);os.killpg(child.pid,signal.SIGKILL);child.wait()
+        if mode!='malformed':emit({'id':original,'result':{'exitCode':-9,'stdout':'','stderr':''}})
+        emit({'id':identity,'result':{}})
+'''
+
+
+@pytest.mark.parametrize('body_error', [False, True])
+def test_malformed_completion_keeps_ownership_and_cancels_before_unknown_close(tmp_path, body_error):
+    sentinel = subprocess.Popen([sys.executable, '-c', 'import time;time.sleep(60)'], start_new_session=True)
+    pid = None
+    host = native_worker.CodexHost([sys.executable, '-u', '-c', ADVERSARIAL_COMMAND_PEER,
+                                   str(tmp_path), 'malformed'], cwd=tmp_path,
+                                  environment=dict(os.environ), timeout=0.3, cleanup_grace=0.1)
+    original = RuntimeError('original body failure')
+    try:
+        with pytest.raises(RuntimeError if body_error else native_worker.NativeProtocolError) as failure:
+            with host:
+                identity = host.start_command(['inert'])
+                pid = host.rpc.next_event()['params']['pid']
+                if body_error:
+                    raise original
+                host.wait_command(identity)
+        assert (tmp_path / 'attempts.json').exists(), 'Malformed completion lost native cancellation ownership'
+        assert json.loads((tmp_path / 'attempts.json').read_text()) == [identity]
+        assert dead_within([pid]), 'Malformed completion left a separate owned process alive'
+        assert identity in host.commands
+        assert host.cleanup_unconfirmed and not host.closed
+        assert host.cleanup_errors
+        assert sentinel.poll() is None
+        if body_error:
+            assert failure.value is original
+            assert any('cleanup' in note for note in original.__notes__)
+        else:
+            assert 'result is malformed' in str(failure.value)
+    finally:
+        if pid is not None:
+            reap_owned_fixture([pid])
+        sentinel.kill()
+        sentinel.wait(timeout=3)
+
+
+@pytest.mark.parametrize('body_interrupt,transport_failure', [(False, False), (True, False), (True, True)])
+def test_one_cancellation_failure_does_not_abandon_other_owned_commands(tmp_path, body_interrupt, transport_failure):
+    sentinel = subprocess.Popen([sys.executable, '-c', 'import time;time.sleep(60)'], start_new_session=True)
+    pids = []
+    host = native_worker.CodexHost([sys.executable, '-u', '-c', ADVERSARIAL_COMMAND_PEER,
+                                   str(tmp_path), 'first-refused'], cwd=tmp_path,
+                                  environment=dict(os.environ), timeout=0.3, cleanup_grace=0.1)
+    interrupted = KeyboardInterrupt()
+    try:
+        with pytest.raises(KeyboardInterrupt if body_interrupt else native_worker.NativeProtocolError) as failure:
+            with host:
+                if transport_failure:
+                    close_transport = host.rpc.close
+                    def failing_transport_close():
+                        close_transport()
+                        raise RuntimeError('planted transport cleanup failure')
+                    host.rpc.close = failing_transport_close
+                first = host.start_command(['first'])
+                pids.append(host.rpc.next_event()['params']['pid'])
+                second = host.start_command(['second'])
+                pids.append(host.rpc.next_event()['params']['pid'])
+                if body_interrupt:
+                    raise interrupted
+        assert json.loads((tmp_path / 'attempts.json').read_text()) == [first, second]
+        assert alive(pids[0]), 'The planted refusal did not leave its owned command unresolved'
+        assert dead_within([pids[1]]), 'The remaining command was not cancelled after the first refusal'
+        assert first in host.commands and second not in host.commands
+        assert host.cleanup_unconfirmed and not host.closed
+        assert len(host.cleanup_errors) == (2 if transport_failure else 1)
+        assert sentinel.poll() is None
+        if body_interrupt:
+            assert failure.value is interrupted
+            assert any('cleanup' in note for note in interrupted.__notes__)
+    finally:
+        reap_owned_fixture(pids)
+        sentinel.kill()
+        sentinel.wait(timeout=3)
+
+
+def test_cleanup_interrupt_is_retained_while_remaining_cancellation_is_attempted(tmp_path):
+    host = native_worker.CodexHost([sys.executable, '-u', '-c', ADVERSARIAL_COMMAND_PEER,
+                                   str(tmp_path), 'pending'], cwd=tmp_path,
+                                  environment=dict(os.environ), timeout=0.3, cleanup_grace=0.1)
+    pids, attempts = [], []
+    interrupted = KeyboardInterrupt()
+    try:
+        with pytest.raises(KeyboardInterrupt) as failure:
+            with host:
+                first = host.start_command(['first'])
+                pids.append(host.rpc.next_event()['params']['pid'])
+                second = host.start_command(['second'])
+                pids.append(host.rpc.next_event()['params']['pid'])
+                terminate = host.terminate_command
+                def interrupted_first(identity):
+                    attempts.append(identity)
+                    if identity == first:
+                        raise interrupted
+                    return terminate(identity)
+                host.terminate_command = interrupted_first
+        assert failure.value is interrupted
+        assert attempts == [first, second]
+        assert host.cleanup_errors == (interrupted,)
+        assert alive(pids[0]) and dead_within([pids[1]])
+        assert first in host.commands and second not in host.commands
+        assert host.cleanup_unconfirmed and not host.closed
+    finally:
+        reap_owned_fixture(pids)
+
+
 def test_private_execution_artifact_reconciles_the_input_identity_without_grading(tmp_path):
     case = tmp_path / 'case'
     case.mkdir()
