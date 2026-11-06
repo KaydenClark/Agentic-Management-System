@@ -1,5 +1,7 @@
 """Content-bound page review behavior through disposable Git records."""
+import hashlib
 import json
+import tempfile
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
@@ -351,24 +353,96 @@ def protected_evidence(candidate):
             'observed_at': '2026-11-06T09:00:00+00:00'}
 
 
+def validated_capture(room, listed, candidate, *, observed_at='2026-11-06T09:00:00+00:00'):
+    """Synthetic outer-observer artifact, not live deployment evidence."""
+    from ams.protected_pages import collect_protected
+    artifact = Path(tempfile.mkdtemp(prefix='synthetic-capture-', dir=room.parent))
+    (artifact / 'pages').mkdir()
+    proof = protected_evidence(candidate)
+    pins = {key: value for key, value in proof.items() if key not in {'capture_sha256', 'observed_at'}}
+    manifest = {**pins, 'schema': 1, 'observer': 'authenticated-vercel-web-fetch',
+                'observed_at': observed_at, 'pages': {}}
+    baseline = {row['path']: html() for row in listed['pages']}
+    for i, (route, page) in enumerate(baseline.items()):
+        observed = (page + f'<footer><span data-commit-sha="{candidate}"></span></footer>'
+                    f'<script src="/_next/static/synthetic.js?dpl={proof["deployment"]}"></script>')
+        relative = f'pages/{i}.html'
+        (artifact / relative).write_bytes(observed.encode())
+        manifest['pages'][route] = {'file': relative, 'sha256': hashlib.sha256(observed.encode()).hexdigest(),
+                                    'url': pins['origin'] + route, 'status': 200, 'content_type': 'text/html'}
+    raw = (json.dumps(manifest, sort_keys=True) + '\n').encode()
+    (artifact / 'manifest.json').write_bytes(raw)
+    built = {'candidate': candidate, 'inventory': listed, 'html': baseline,
+             'kinds': {route: 'page' for route in baseline}, 'excluded': {}}
+    return collect_protected(artifact, built, expected_pins={**pins, 'capture_sha256': hashlib.sha256(raw).hexdigest()})
+
+
+def test_evidence_dictionary_alone_cannot_assert_protected_verification(room):
+    candidate = git(room, 'rev-parse', 'HEAD')
+    with pytest.raises(pages.PageRefused, match='validated|capture'):
+        pages.generate(room, inventory(room, ('/',)), {'/': html()}, candidate=candidate,
+                       protection=protected_evidence(candidate))
+    assert git(room, 'rev-parse', 'HEAD') == candidate
+    assert not list((room / 'grill-board/cards').glob('*.md'))
+
+
+@pytest.mark.parametrize('legacy', [False, True])
+def test_proof_upgrade_does_not_reask_already_approved_identical_content(room, legacy):
+    candidate = git(room, 'rev-parse', 'HEAD')
+    listed = inventory(room, ('/',))
+    pages.generate(room, listed, {'/': html()}, candidate=candidate)
+    card = load_cards(room / 'grill-board/cards')[0][0]
+    if legacy:
+        path = room / 'grill-board/cards' / card.file
+        path.write_text(''.join(line for line in path.read_text().splitlines(keepends=True)
+                                if not line.startswith(('**Verification:**', '**Sources:**'))))
+        git(room, 'add', '.'); git(room, 'commit', '-qm', 'synthetic legacy template')
+        card = load_cards(room / 'grill-board/cards')[0][0]
+    card_sha, owner_sha = render_hashes(room / 'grill-board/cards', card)
+    answer(room / 'grill-board/cards', card, 'confirm', '', card_sha, owner_sha)
+    answered = (room / 'grill-board/cards' / card.file).read_bytes()
+    captured = validated_capture(room, listed, candidate)
+    pages.generate(room, listed, captured['html'], candidate=candidate, protection=captured['verified_capture'])
+    cards, refused = load_cards(room / 'grill-board/cards')
+    assert not refused and len(cards) == 1 and cards[0].file == card.file
+    assert cards[0].answer and not cards[0].stale and not cards[0].waiting
+    assert (room / 'grill-board/cards' / card.file).read_bytes().startswith(answered)
+
+    assert cards[0].verification['State'] == 'protected-capture'
+    from ams.grill_board.server import render_open
+    assert 'This content was verified on the protected deployment' in render_open(room / 'grill-board/cards', 'Website pages', cards, cards[0])
+
 def test_protected_generation_binds_evidence_without_reasking_unchanged_content(room):
     candidate = git(room, 'rev-parse', 'HEAD')
     listed = inventory(room, ('/',))
-    proof = protected_evidence(candidate)
-    first = pages.generate(room, listed, {'/': html()}, candidate=candidate, protection=proof)
+    captured = validated_capture(room, listed, candidate)
+    first = pages.generate(room, listed, captured['html'], candidate=candidate, protection=captured['verified_capture'])
     card = load_cards(room / 'grill-board/cards')[0][0]
     assert first['protected_verified']
     assert card.fields['Verification'] == 'protected-capture'
     assert 'Protected deployment content verified' in card.context
     assert 'verification is pending' not in card.context
-    assert not pages.generate(room, listed, {'/': html()}, candidate=candidate, protection=proof)['changed']
-    later = {**proof, 'capture_sha256': 'c' * 64, 'observed_at': '2026-11-06T10:00:00+00:00'}
+    assert not pages.generate(room, listed, captured['html'], candidate=candidate, protection=captured['verified_capture'])['changed']
+    later = validated_capture(room, listed, candidate, observed_at='2026-11-06T10:00:00+00:00')
     original = (room / 'grill-board/cards' / card.file).read_bytes()
-    pages.generate(room, listed, {'/': html()}, candidate=candidate, protection=later)
+    pages.generate(room, listed, later['html'], candidate=candidate, protection=later['verified_capture'])
     assert len(load_cards(room / 'grill-board/cards')[0]) == 1
     assert (room / 'grill-board/cards' / card.file).read_bytes() == original
     index = json.loads((room / 'grill-board/pages/index.json').read_text())
-    assert index['protection'] == later
+    assert index['protection'] == later['protection']
+
+
+@pytest.mark.parametrize('mutation', ['html', 'inventory', 'candidate'])
+def test_validated_capture_cannot_be_reused_after_snapshot_mutation(room, mutation):
+    candidate = git(room, 'rev-parse', 'HEAD')
+    listed = inventory(room, ('/',))
+    captured = validated_capture(room, listed, candidate)
+    if mutation == 'html': captured['html']['/'] += '<footer>Synthetic alteration outside canonical content</footer>'
+    elif mutation == 'inventory': listed['pages'][0]['title'] = 'Synthetic changed owner title'
+    else: candidate = 'c' * 40
+    with pytest.raises(pages.PageRefused, match='validated capture differs'):
+        pages.generate(room, listed, captured['html'], candidate=candidate, protection=captured['verified_capture'])
+    assert not list((room / 'grill-board/cards').glob('*.md'))
 
 
 @pytest.mark.parametrize('refuse', [False, True])
@@ -376,12 +450,14 @@ def test_cli_checks_protected_capture_after_clean_build_before_any_board_write(r
     import ams.page_build as build
     import ams.protected_pages as protected
     candidate = git(room, 'rev-parse', 'HEAD')
-    proof = protected_evidence(candidate)
+    listed = inventory(room, ('/',))
+    captured = validated_capture(room, listed, candidate)
+    proof = captured['protection']
     class Runtime:
         cleanup_verified = True
         def __init__(self, *args, **kwargs): pass
     monkeypatch.setattr(build, 'DockerBuild', Runtime)
-    built = {'candidate': candidate, 'inventory': inventory(room, ('/',)), 'html': {'/': html()},
+    built = {'candidate': candidate, 'inventory': listed, 'html': {'/': html()},
              'kinds': {'/': 'page'}, 'excluded': {}}
     monkeypatch.setattr(build, 'collect_current', lambda *a, **k: built)
     observed = []
@@ -391,7 +467,7 @@ def test_cli_checks_protected_capture_after_clean_build_before_any_board_write(r
         assert expected_pins == {key: value for key, value in proof.items() if key != 'observed_at'}
         observed.append(True)
         if refuse: raise pages.PageRefused('synthetic protected identity refusal')
-        return {**built, 'protection': proof}
+        return captured
     monkeypatch.setattr(protected, 'collect_protected', capture)
     command = ['generate', '--project', str(room), '--candidate', candidate, '--image', 'sha256:' + '1' * 64,
                '--protected-artifact', str(room / 'private-capture'), '--protected-project', proof['project'],

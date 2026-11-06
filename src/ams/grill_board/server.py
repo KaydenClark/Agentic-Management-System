@@ -216,6 +216,10 @@ def render_open(cards_dir, topic, cards, card):
         index = cards.index(card)
         before, after = cards[index - 1], cards[(index + 1) % len(cards)]
     extras = ""
+    if getattr(card, 'verification', None) and card.verification.get('State') == 'protected-capture':
+        extras += ('<div class="block"><div class="eyebrow">Verification</div><p>'
+                   'This content was verified on the protected deployment. The earlier context below is preserved history. '
+                   f'Observed {escape(card.verification.get("Observed at", ""))}.</p></div>\n')
     if card.context:
         extras += f'<div class="block"><div class="eyebrow">Context</div><p class="context">{escape(card.context)}</p></div>\n'
     if card.fields.get("Why it matters"):

@@ -180,6 +180,7 @@ def _new_card(row, digest, candidate, *, protected=False):
             f'**Page:** {row["path"]}\n**Title:** {row["title"]}\n**Content hash:** {digest}\n'
             f'**Candidate:** {candidate}\n**Provenance kind:** {kind}\n'
             f'**Verification:** {"protected-capture" if protected else "built-candidate"}\n'
+            f'**Sources:** {json.dumps(row["sources"], ensure_ascii=True)}\n'
             f'{provenance}'
             f'**Spec:** {row["spec"]}\n**Task:** {row["task"]}\n'
             f'**Recommendation:** Approve page {row["path"]} ({row["title"]}) at content hash {digest}.\n'
@@ -187,6 +188,31 @@ def _new_card(row, digest, candidate, *, protected=False):
             f'Inspect this page at built candidate {candidate}. '
             f'{verification}This local card supplies no public review status. '
             f'Sources: {sources}.\n')
+
+
+def _same_owners(parsed, row, digest, candidate):
+    expected = parse_card('expected.md', _new_card(row, digest, candidate))
+    if not isinstance(expected, Card):
+        return False
+    keys = ('Page', 'Title', 'Content hash', 'Spec', 'Task', 'Provenance kind',
+            'Integration', 'Landed', 'Verified containment', 'Recommendation', 'Owner record', 'Write after')
+    if any(parsed.fields.get(key) != expected.fields.get(key) for key in keys):
+        return False
+    if 'Sources' in parsed.fields:
+        try:
+            return json.loads(parsed.fields['Sources']) == row['sources']
+        except ValueError:
+            return False
+    # Older committed cards used a prose source suffix and had no structured
+    # header. Preserve their occurrence when only the template/proof changes.
+    prefix, marker, sources = parsed.context.rpartition('Sources: ')
+    return bool(marker and sources.endswith('.') and sources[:-1].split(', ') == row['sources'])
+
+
+def _verification_suffix(proof):
+    return ('\n## Verification\n\n**State:** protected-capture\n'
+            f'**Candidate:** {proof["candidate"]}\n**Deployment:** {proof["deployment"]}\n'
+            f'**Capture SHA256:** {proof["capture_sha256"]}\n**Observed at:** {proof["observed_at"]}\n').encode()
 
 
 def generate(root, listed, built, *, candidate, now=None, protection=None):
@@ -199,14 +225,8 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
     if not re.fullmatch(r"[0-9a-f]{40,64}", candidate):
         raise PageRefused("candidate must be an immutable commit")
     if protection is not None:
-        from .protected_pages import protection_record
-        if not isinstance(protection, dict):
-            raise PageRefused('protected generation requires an observer evidence record')
-        pins = dict(protection)
-        observed_at = pins.pop('observed_at', None)
-        protection = protection_record(pins, observed_at)
-        if protection['candidate'] != candidate:
-            raise PageRefused('protected evidence differs from the generated candidate')
+        from .protected_pages import verified_record
+        protection = verified_record(protection, candidate, listed, built)
     rows = _metadata(listed, built)
     hashes = {path: content_hash(built[path]) for path in rows}
     root = Path(root).resolve()
@@ -229,8 +249,10 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
                 # Reuse an unchanged content occurrence only while its owners,
                 # sources and provenance still match. Keep that occurrence's
                 # original candidate; the index binds the latest build pin.
-                expected = _new_card(row, digest, parsed.fields.get("Candidate", candidate), protected=protection is not None).encode()
-                reuse = existing.startswith(expected)
+                reuse = _same_owners(parsed, row, digest, candidate)
+                if (reuse and protection is not None and parsed.fields.get('Verification') != 'protected-capture'
+                        and not (parsed.verification and parsed.verification.get('State') == 'protected-capture')):
+                    writes[f'{CARDS}/{name}'] = existing + (b'' if existing.endswith(b'\n') else b'\n') + _verification_suffix(protection)
             if not reuse:
                 slug = path.strip("/").replace("/", "-") or "home"
                 stem = f"page-{slug}-{digest[7:19]}"
@@ -341,7 +363,7 @@ def main(argv=None):
                     'deployment': args.protected_deployment, 'candidate': args.candidate,
                     'origin': args.protected_origin, 'capture_sha256': args.protected_capture_sha256})
             result = generate(args.project, collected["inventory"], collected["html"], candidate=collected["candidate"],
-                              protection=collected.get('protection'))
+                              protection=collected.get('verified_capture'))
             result.update(input_mode="protected-capture" if args.protected_artifact else "pinned-container-build", build_image=args.image,
                           route_kinds=collected["kinds"], excluded=collected["excluded"], cleanup_verified=True)
             if collected.get('protection'):

@@ -5,6 +5,7 @@ not establish its own trust: the caller supplies deployment pins and the exact
 capture digest from the trusted outer observation, outside the candidate build.
 """
 import hashlib
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from html.parser import HTMLParser
 import json
@@ -18,6 +19,36 @@ from .pages import PageRefused, VOID, _metadata, _safe_file, content_hash
 
 
 PIN_FIELDS = {'repository', 'project', 'deployment', 'candidate', 'origin', 'capture_sha256'}
+_CAPTURE_SEAL = object()
+
+
+@dataclass(frozen=True)
+class _VerifiedCapture:
+    record_json: str
+    snapshot_sha256: str
+    seal: object
+
+
+def _snapshot_digest(candidate, inventory, html):
+    # Bind raw bytes too: a caller may not change even an excluded/footer
+    # region after the observer artifact has been validated.
+    snapshot = {'candidate': candidate, 'inventory': inventory,
+                'html_sha256': {route: hashlib.sha256(page.encode('utf-8')).hexdigest()
+                                for route, page in html.items()}}
+    return hashlib.sha256(json.dumps(snapshot, sort_keys=True, ensure_ascii=True).encode()).hexdigest()
+
+
+def verified_record(capture, candidate, inventory, html):
+    """Accept only the in-process result of validation for these exact inputs.
+
+    This is a data-flow check, not authentication of arbitrary host code.
+    Serialized records are evidence summaries; replay revalidates artifacts.
+    """
+    if not isinstance(capture, _VerifiedCapture) or capture.seal is not _CAPTURE_SEAL:
+        raise PageRefused('protected generation requires a validated capture result')
+    if capture.snapshot_sha256 != _snapshot_digest(candidate, inventory, html):
+        raise PageRefused('validated capture differs from the generated snapshot')
+    return json.loads(capture.record_json)
 
 
 class _Identity(HTMLParser):
@@ -175,4 +206,6 @@ def collect_protected(artifact_directory, built_snapshot, *, expected_pins):
             raise PageRefused(f'{route}: protected static content differs from the frozen build')
         content_hash(page)  # RSI must still provide the complete canonical main surface.
         html[route] = page
-    return {**built_snapshot, 'html': html, 'protection': proof}
+    verified = _VerifiedCapture(json.dumps(proof, sort_keys=True),
+                                _snapshot_digest(pins['candidate'], built_snapshot['inventory'], html), _CAPTURE_SEAL)
+    return {**built_snapshot, 'html': html, 'protection': proof, 'verified_capture': verified}

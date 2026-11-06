@@ -30,7 +30,7 @@ from pathlib import Path
 PRIORITIES = {"P1": "Interrupt", "P2": "Committed", "P3": "Secondary", "P4": "Backlog"}
 VALUES = {"V1": "Quick Win", "V2": "Strategic Value", "V3": "Fill-In", "V4": "Defer / Eliminate"}
 FIELD = re.compile(r"^\*\*([^*]+):\*\*[ \t]*(.*)$")
-SECTIONS = ("## Answer", "## Rating", "## Flag", "## Stale")
+SECTIONS = ("## Answer", "## Rating", "## Flag", "## Stale", "## Verification")
 RATINGS = ("1", "2", "3", "4", "5")
 FLAG_LINE = "**Too taxing:** yes"
 
@@ -51,6 +51,7 @@ class Card:
     sha: str = ""  # SHA-256 of the exact committed bytes this Card was parsed from
     commit: str = ""  # the commit those bytes were read at
     stale: dict | None = None
+    verification: dict | None = None
 
     @property
     def rating(self):
@@ -122,6 +123,7 @@ def parse_card(name, text):
         ratings=ratings,
         flag=flags[0] if flags else None,
         stale=next((f for h, f in sections if h == "## Stale"), None),
+        verification=next((f for h, f in reversed(sections) if h == "## Verification"), None),
     )
 
 
