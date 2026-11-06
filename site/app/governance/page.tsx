@@ -37,13 +37,13 @@ export default function Governance() {
       </section>
       <section aria-labelledby="delivery-flow">
         <h2 id="delivery-flow">From idea to delivery</h2>
-        <p>These are stages of work, not record statuses. Journey includes implementation, checks, QA and submission; Judge includes review, verification and approval. Complete includes delivery and cleanup.</p>
+        <p>These are stages of work, not record statuses. Journey includes implementation, checks, QA and submission; Judge includes review, verification and approval. Complete includes delivery and cleanup; delivery needs the permission applicable to that action.</p>
         <Diagram id="delivery-flow-caption" transitions={flows.delivery.transitions} caption="Each stage publishes its result; confirmation and execution approval are distinct decisions." />
       </section>
       <section aria-labelledby="review-flow">
         <h2 id="review-flow">Review and return</h2>
         <p>A reviewer judges a named candidate. A finding returns the affected work to its owner; the corrected candidate needs a fresh assessment. An owner finding can also return the work. A changed concept may return to earlier discovery and planning.</p>
-        <Diagram id="review-flow-caption" transitions={flows.review.transitions} caption="Arrows show passing and return paths; they are alternatives. Neither a merge nor an agent check supplies the owner's judgment." />
+        <Diagram id="review-flow-caption" transitions={flows.review.transitions} caption="Arrows show passing and return paths; they are alternatives. Approval binds the identified content. Delivery still needs its scoped permission; neither a merge nor an agent check supplies the owner's judgment." />
       </section>
     </>
   );

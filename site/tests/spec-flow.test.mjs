@@ -20,8 +20,8 @@ const specStates = [...observed.matchAll(/'([^']+)'/g)].map(match => match[1]);
 // Source fingerprints make these audited handler paths a mandatory reinspection
 // point, rather than presenting a copied transition model as runtime execution.
 const specEdges = ['planned:active', 'active:complete', 'needs-review:complete'];
-const reviewStages = ['Candidate', 'Independent review', 'Verify', 'Corrective work', 'New candidate', 'Owner QA'];
-const reviewEdges = ['Candidate:Independent review', 'Independent review:Corrective work', 'Corrective work:New candidate', 'New candidate:Independent review', 'Independent review:Verify', 'Verify:Owner QA', 'Owner QA:Corrective work'];
+const reviewStages = ['Candidate', 'Independent review', 'Verify', 'Corrective work', 'New candidate', 'Owner QA', 'Approved candidate'];
+const reviewEdges = ['Candidate:Independent review', 'Independent review:Corrective work', 'Corrective work:New candidate', 'New candidate:Independent review', 'Independent review:Verify', 'Verify:Owner QA', 'Owner QA:Corrective work', 'Owner QA:Approved candidate'];
 function check(chart, states, edges) {
   assert.deepEqual(sort(chart.states), sort(states));
   assert.deepEqual(sort(edgeKeys(chart.transitions)), sort(edges));
