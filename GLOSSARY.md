@@ -1,6 +1,6 @@
 # AMS Glossary
 
-[Blueprint](BLUEPRINT.md) owns the destination.
+[Blueprint](BLUEPRINT.md) governs.
 
 ## Language
 
@@ -14,16 +14,16 @@ Recursive self-improvement: observe friction, propose bounded change, compare ou
 Approved Alignment Check r1 on a named candidate/scope in three runs.
 
 **Alignment Score**:
-Applicable checks passed, pooled across three runs as a percentage; separate from fitness/acceptance.
+Applicable checks passed, pooled over three runs (%); separate from fitness/acceptance.
 
 **Fitness level**:
-r1: Excellent at three passing runs, Stable at two, Functional at one, Broken at none or any Critical failure.
+r1: Excellent=3 passing runs; Stable=2; Functional=1; Broken=0 or any Critical failure.
 
 **Improvement attempt**:
 Assessed improvement version; three attempts per candidate maximum, excluding baseline.
 
 **Workbench**:
-AMS people, agents, records, artifacts and tools.
+An agentic management system that brings people, agents, project records, artifacts and tools together to carry intent into outcomes.
 
 ### Governance core
 
@@ -60,22 +60,22 @@ Intent/concepts in DQCs, projected in TRACKER.md, linked to execution by stable 
 Landmark, Spec and Task work, projected in TASKBOARD.md, linked to originating DQCs.
 
 **Implementation Task**:
-Assigned bounded Spec slice owning execution state and proof.
+Assigned Spec slice owning execution state and proof.
 
 **Evaluation task**:
-Repeatable test case; attempts are trials, neither is an implementation assignment.
+Repeatable test case; trials are attempts, distinct from implementation Tasks.
 
 **Evidence audit**:
-Claims checked against dated candidate evidence; reassessments retained.
+Claims checked against dated candidate evidence; retain reassessments.
 
 **Improvement record**:
 Problem linked to hypothesis, comparison, disposition and later-use check.
 
 **Review receipt**:
-Actual candidate/scope review naming reviewer, findings and limits.
+Candidate/scope review: reviewer, findings and limits.
 
 **Human QA receipt**:
-Sourced human judgment of a named experience/candidate; agents cannot supply it.
+Sourced human judgment of a named candidate/experience; never agent-supplied.
 
 ### Feedback dispositions
 

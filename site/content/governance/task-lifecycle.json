@@ -1,0 +1,11 @@
+{
+  "states": ["ready", "in-progress", "blocked", "needs-review", "done", "deferred"],
+  "transitions": [
+    {"from": "ready", "to": "in-progress", "action": "Claim eligible work"},
+    {"from": "ready", "to": "blocked", "action": "A required capability is missing"},
+    {"from": "blocked", "to": "in-progress", "action": "Claim after the missing capability becomes available"},
+    {"from": "in-progress", "to": "blocked", "action": "Close finds a required capability missing"},
+    {"from": "in-progress", "to": "done", "action": "Close with recorded proof"},
+    {"from": "done", "to": "ready", "action": "A failed review or owner QA continues the Task"}
+  ]
+}

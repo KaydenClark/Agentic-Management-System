@@ -1,14 +1,16 @@
 # S-009 - Demo Grill Board page
 
 **Spec ID:** S-009
-**Status:** planned
+**Status:** active
 **Priority:** 3
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-06
 **Catalog description:** A public demo of the Grill Board with sample cards asking non-engineering questions, showing what a non-developer might use it for.
 **Blockers:** S-003
-**Next gate:** Task planning after the site shell (S-003) exists.
+**Confirmation:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
+**Execution approval:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
+**Next gate:** Reconcile legacy TK-001/TK-002 evidence and remaining Spec acceptance.
 
 ## Intent and authority
 
@@ -24,7 +26,7 @@ The board is the part of the AMS a non-developer is most likely to use. Showing 
 
 ## Current Verified State
 
-- No demo page exists. The real board's card rules are specified in S-004.
+- The checked demo landed in dev via PR177; PR178 delivered its page-review inventory with actual containment provenance. TK-0030 records its scoped checks and limitations. Legacy TK-001/TK-002 remain open for evidence reconciliation; Spec acceptance and Human QA remain outstanding. The 40acb3a deployment reported ERROR; later platform verification is tracked in the [S-003 report](../../../../feedback/coherence/REPORT-S003-vercel-40ac-2026-11-06.md). The real Board card rules are specified in S-004.
 
 History: [S-009 history](../../../../wiki/history/S-009.md).
 
@@ -54,8 +56,6 @@ History: [S-009 history](../../../../wiki/history/S-009.md).
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
-| TK-001 | Demo page with labeled sample cards in the real card shape, deployed to `dev` | ready | none | pending |
-| TK-002 | Local-only interaction for rating, flag and answer, with the "where it goes" explanation | ready | TK-001 | pending |
 
 ### TK-001 - Sample cards
 

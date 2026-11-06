@@ -6,7 +6,9 @@
  * recorded in grill-board/theme/tokens.json (DDR-000Y). The theme block below
  * is generated from that file (npm run tokens:gen) and checked byte for byte
  * by tests/tokens-json.test.mjs; type and spacing tokens after it are
- * hand-written.
+ * hand-written. Site-only colors the Grill Board does not use (the /rsi
+ * fitness levels) sit in a second marked block right after it, which
+ * tests/tokens-json.test.mjs also checks.
  *
  * Colors are signals with one stated meaning each (DDR-000M). The greys are
  * the page, not signals. Light is the default; the system's dark preference
@@ -122,6 +124,51 @@
 }
 /* END theme tokens */
 
+/* BEGIN site tokens: hand-written, not recorded in grill-board/theme/tokens.json */
+/* Fitness levels on /rsi (S-007 TK-002J). Each color means one fitness level
+   and nothing else on that page (DDR-000M); Broken is the trouble hue itself.
+   Every fill carries its level's name or initial in its -on color, which
+   meets WCAG AA contrast on it, so the colors are never the only cue. */
+
+:root,
+[data-theme="light"],
+.t-light {
+  --level-excellent: #157A47; /* Fitness level Excellent: all three deciding runs passed */
+  --level-excellent-on: #FFFFFF; /* Text on an Excellent fill */
+  --level-stable: #24739A; /* Fitness level Stable: two deciding runs passed */
+  --level-stable-on: #FFFFFF; /* Text on a Stable fill */
+  --level-functional: #E2A72E; /* Fitness level Functional: one deciding run passed */
+  --level-functional-on: #0A0A0A; /* Text on a Functional fill */
+  --level-broken: var(--heat); /* Fitness level Broken: trouble, no deciding run passed or a critical check failed */
+  --level-broken-on: #0A0A0A; /* Text on a Broken fill */
+}
+
+[data-theme="dark"],
+.t-dark {
+  --level-excellent: #3FC27F; /* Fitness level Excellent: all three deciding runs passed */
+  --level-excellent-on: #0A0A0A; /* Text on an Excellent fill */
+  --level-stable: #5BB3D9; /* Fitness level Stable: two deciding runs passed */
+  --level-stable-on: #0A0A0A; /* Text on a Stable fill */
+  --level-functional: #E8B84A; /* Fitness level Functional: one deciding run passed */
+  --level-functional-on: #0A0A0A; /* Text on a Functional fill */
+  --level-broken: var(--heat); /* Fitness level Broken: trouble, no deciding run passed or a critical check failed */
+  --level-broken-on: #0A0A0A; /* Text on a Broken fill */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --level-excellent: #3FC27F; /* Fitness level Excellent: all three deciding runs passed */
+    --level-excellent-on: #0A0A0A; /* Text on an Excellent fill */
+    --level-stable: #5BB3D9; /* Fitness level Stable: two deciding runs passed */
+    --level-stable-on: #0A0A0A; /* Text on a Stable fill */
+    --level-functional: #E8B84A; /* Fitness level Functional: one deciding run passed */
+    --level-functional-on: #0A0A0A; /* Text on a Functional fill */
+    --level-broken: var(--heat); /* Fitness level Broken: trouble, no deciding run passed or a critical check failed */
+    --level-broken-on: #0A0A0A; /* Text on a Broken fill */
+  }
+}
+/* END site tokens */
+
 :root {
   /* Type: self-hosted from @fontsource (no third-party requests). */
   --font-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -131,16 +178,17 @@
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
-  --text-body: 16px; /* canvas page body */
-  --text-ui: 15px; /* buttons */
-  --text-nav: 14px; /* top-bar links */
-  --text-small: 13px; /* eyebrows, pills, footer */
-  --text-brand: 26px; /* header wordmark */
-  --text-h2: 34px; /* section headings */
-  --text-h1: 48px; /* page title */
-  --leading-body: 1.55;
+  --text-body: 1.125rem; /* 18px at the default root size; prose */
+  --text-ui: 1.0625rem; /* 17px; buttons */
+  --text-nav: 1rem; /* 16px; navigation */
+  --text-small: 0.9375rem; /* 15px; labels, captions and sources */
+  --text-brand: 1.875rem; /* 30px; header wordmark and diagram titles */
+  --text-h2: 2.25rem; /* 36px; section headings */
+  --text-h3: 1.4375rem; /* 23px; sub-section headings */
+  --text-h1: clamp(2.25rem, 6vw, 3.25rem); /* 36–52px; titles reflow on narrow screens */
+  --leading-body: 1.65;
   --leading-tight: 1;
-  --leading-heading: 1.1;
+  --leading-heading: 1.15;
   --tracking-eyebrow: 0.08em;
 
   /* Spacing, named by size in px. */
@@ -168,38 +216,147 @@
   --control-min-height: 44px;
   --icon-size: 16px;
   --content-basis: 320px;
-  --measure: 68ch;
   --page-min-height: 100vh;
 
   /* Page container (owner feedback 11/01/2026): the header, <main> and the
      footer share one centred column, so the page content lines up with the
-     header's edge. --container-wide is for wide pages (the coming Grill Board
-     page); apply it with .container-wide. */
-  --container: 960px;
+     header's edge. The column is a reading width (a 736px content box), and
+     every block in <main> fills it, so text, cards and the header share both
+     edges. --container-wide is for wide pages (the coming Grill Board page);
+     apply it with .container-wide. */
+  --container: 784px;
   --container-wide: 1280px;
   --page-gutter: clamp(16px, 4vw, 24px);
+  /* Skills wiki: the navigation pane's width left of the reading column
+     (S-008, after aihero.dev/skills); the column keeps its measure. */
+  --wiki-nav-width: 232px;
 
-  /* Top bar: one row (title, links, toggle) where it fits. */
-  --topnav-order: 0;
-  --topnav-flex: 1 1 auto;
-  --brand-flex: 0 1 auto;
+  /* Top bar: title over its tagline and the theme toggle on the first row,
+     the reading-order links stretched across the row below. */
+  --text-tagline: 0.875rem; /* 14px; the header tagline under the wordmark */
+  --brand-gap: 2px; /* wordmark to tagline */
+  --layer-header: 10;
+  --layer-skip: 20;
+  --header-nav-height: max(var(--control-min-height), calc(var(--text-nav) * var(--leading-body) + var(--space-8) * 2 + var(--border-width) * 2));
+  /* Conservative no-script clearance includes room for a native scrollbar.
+     Header.tsx replaces it with the measured height after hydration. */
+  --header-fallback: calc(var(--header-nav-height) + var(--space-12) * 2 + var(--space-20) + var(--border-width));
 
   /* /start diagrams and toy. */
   --node-basis: 112px; /* a lifecycle node's minimum width */
   --stop-basis: 56px; /* a toy track stop's minimum width */
   --dot-size: 10px; /* a holder dot */
   --dot-size-live: 14px; /* the dot of the stage the work is on */
-  --hub-size: 300px; /* the What the AMS is picture */
+  --hub-size: 20rem; /* the What the AMS is picture */
   --ring-width: 3; /* the loop ring's stroke, in picture units */
   --motion-quick: 0.2s; /* a stage change; none under reduced motion */
+  --dot-scale-live: 1.4; /* --dot-size-live over --dot-size, as a transform so the label below never moves */
+
+  /* Press feedback on buttons: a slight shrink while held, eased out so it
+     answers at once. No transition under reduced motion. */
+  --motion-press: 160ms;
+  --press-scale: 0.97;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* /skills wiki. */
+  --text-h1-skill: clamp(2rem, 7vw, var(--text-h1)); /* an article's title, the skill name: --text-h1 at most */
+  --text-h2-section: 1.875rem; /* 30px; an article's section headings */
+  --text-code: 0.92em; /* inline code, relative to its text */
+  --step-size: 28px; /* a main-flow step number on the index */
+  --target-min: 24px; /* smallest link target (WCAG 2.2 target size) */
+  --rule-width: 4px; /* the request blockquote's leading rule */
+
+  /* /rsi skill trends. */
+  --text-chart: 0.8125rem; /* 13px in chart units; SVG axis and strip labels */
+  --chart-basis: 300px; /* a skill-trend card's minimum width */
 }
 
-/* Narrow screens: title and theme toggle share the first row of the top bar,
-   the reading-order links take their own row below and wrap. */
-@media (max-width: 880px) {
+/* Narrow screens put the scrollable navigation below the two controls. */
+@media (max-width: 959px) {
   :root {
-    --topnav-order: 2;
-    --topnav-flex: 1 1 100%;
-    --brand-flex: 1 1 0;
+    --header-fallback: calc(var(--control-min-height) + var(--space-6) + var(--header-nav-height) + var(--space-12) * 2 + var(--space-20) + var(--border-width));
   }
+}
+
+/*
+ * Demo Grill Board (/grill-board-demo, S-009): type, spacing and size values
+ * from the Grilling Board canvas's board page, hand-written like the tokens
+ * above. No colors: the board uses the theme block's tokens and mixes.
+ */
+:root {
+  /* Spacing steps the board uses beyond the shared scale, named by size in px. */
+  --space-1: 1px;
+  --space-2: 2px;
+  --space-3: 3px;
+  --space-5: 5px;
+  --space-7: 7px;
+  --space-9: 9px;
+  --space-11: 11px;
+  --space-16: 16px;
+  --space-22: 22px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-40: 40px;
+
+  /* Type sizes. */
+  --gb-text-tag: 11.5px; /* Sample label */
+  --gb-text-label: 12px; /* eyebrows, counts, row meta */
+  --gb-text-grade: 12.5px; /* grade badges, small print */
+  --gb-text-control: 13.5px; /* strips, round box, reasons */
+  --gb-text-row: 14.5px; /* row titles, concerns */
+  --gb-text-agent: 15.5px; /* agent recommendation */
+  --gb-text-question: 19px; /* the question */
+  --gb-text-star: 20px; /* rating stars */
+  --gb-text-where: 22px; /* where-answers-go heading */
+  --gb-text-card-sm: 26px; /* card title at 375 px */
+  --gb-text-topic: 28px; /* topic heading */
+  --gb-text-card: 32px; /* card title */
+
+  /* Leading and tracking. */
+  --gb-leading-ui: 1.5;
+  --gb-leading-label: 1.3;
+  --gb-leading-row: 1.35;
+  --gb-leading-card: 1.18;
+  --gb-leading-where: 1.2;
+  --gb-leading-tag: 1.6;
+  --gb-leading-worth: 1.65;
+  --gb-tracking-label: 0.06em;
+
+  /* Strokes and rings. */
+  --gb-stroke-2: 2px;
+  --gb-radio-on: 6px;
+  --gb-focus-width: 3px;
+  --gb-ring-gap: 2px;
+  --gb-ring: 4px;
+
+  /* Radii beyond the shared set. */
+  --gb-radius-bar: 1px;
+  --gb-radius-track: 2px;
+  --gb-radius-progress: 4px;
+  --gb-radius-tag: 6px;
+  --gb-radius-box: 12px;
+
+  /* Sizes. */
+  --gb-bar-width: 4px;
+  --gb-bar-1: 5px;
+  --gb-bar-2: 7px;
+  --gb-bar-3: 10px;
+  --gb-bar-4: 12px;
+  --gb-progress: 8px;
+  --gb-dot: 10px;
+  --gb-glyph: 13px;
+  --gb-check: 18px;
+  --gb-control-xs: 28px;
+  --gb-control-sm: 30px;
+  --gb-control-md: 32px;
+  --gb-control-lg: 36px;
+  --gb-control-xl: 40px;
+  --gb-option-min: 48px;
+  --gb-pick-width: 32px;
+  --gb-search-min: 180px;
+  --gb-rail-basis: 232px;
+  --gb-queue-basis: 340px;
+  --gb-main-basis: 480px;
+  --gb-card-max: 760px;
+  --gb-moreline-indent: 48px;
 }

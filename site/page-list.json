@@ -1,5 +1,5 @@
 {
-  "about": "Every page live on the dev deployment, one entry each, for orchestrator B's Grill Board page review cards (S-005). Orchestrator A is the only writer. The review card computes the content hash from the built page; this list names the page and where it came from.",
+  "about": "Build-derived public page inventory for the local review Board. Owner declarations and historical provenance are inputs; generated rows preserve truthful historical landing, verified containment or pending-candidate status. This file is not public-site review UI.",
   "pages": [
     {
       "path": "/",
@@ -37,13 +37,13 @@
     },
     {
       "path": "/start",
-      "title": "Start here",
+      "title": "About",
       "spec": "S-003",
-      "task": "TK-002",
+      "task": "TK-001P",
       "landed": {
         "branch": "dev",
-        "commit": "0418ac716d4ad48440f512ea90420d45bf2b4eec",
-        "pr": 23
+        "commit": "992a5f86b7171fe837fb58dea3e91b3b7c59a9e4",
+        "pr": 67
       },
       "sources": [
         "site/app/start/",
@@ -68,6 +68,907 @@
         "site/app/shell/PageOrder.tsx"
       ],
       "status": "draft"
+    },
+    {
+      "path": "/why",
+      "title": "Why",
+      "spec": "S-003",
+      "task": "TK-003",
+      "landed": {
+        "branch": "dev",
+        "commit": "ea66a1bac7856933ae2fdbaab1ec6c44a5ef0d1b",
+        "pr": 84
+      },
+      "sources": [
+        "site/app/why/",
+        "site/app/tour/",
+        "site/app/nav.ts"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/glossary",
+      "title": "Glossary",
+      "spec": "S-003",
+      "task": "TK-003",
+      "landed": {
+        "branch": "dev",
+        "commit": "ea66a1bac7856933ae2fdbaab1ec6c44a5ef0d1b",
+        "pr": 84
+      },
+      "sources": [
+        "site/app/glossary/",
+        "site/scripts/gen-glossary.mjs",
+        "GLOSSARY.md",
+        "site/app/tour/",
+        "site/app/nav.ts"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/about",
+      "title": "About (compatibility route)",
+      "spec": "S-003",
+      "task": "TK-001P",
+      "landed": {
+        "branch": "dev",
+        "commit": "63d9fbe0a6a5af415e7ee79d514a4f9d8e515628",
+        "pr": 84
+      },
+      "sources": [
+        "site/app/about/",
+        "site/app/start/",
+        "site/app/nav.ts"
+      ],
+      "status": "draft"
+    },
+    {
+      "path": "/_not-found",
+      "title": "Agentic Management System",
+      "spec": "S-003",
+      "task": "TK-001",
+      "sources": [
+        "site/app/layout.tsx",
+        "site/app/shell/Shell.tsx",
+        "site/package-lock.json"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills",
+      "title": "Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-001",
+      "sources": [
+        "site/app/skills/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/start/skills.mjs",
+        "site/content/skills/"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/align-concept",
+      "title": "align-concept | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/align-concept.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/align-docs",
+      "title": "align-docs | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/align-docs.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/ask-workbench",
+      "title": "ask-workbench | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/ask-workbench.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/audit-workbench",
+      "title": "audit-workbench | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/audit-workbench.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/author-skill",
+      "title": "author-skill | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/author-skill.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/brainstorm",
+      "title": "brainstorm | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/brainstorm.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/carry",
+      "title": "carry | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/carry.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/code-review",
+      "title": "code-review | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/code-review.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/codebase-design",
+      "title": "codebase-design | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/codebase-design.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/diagnose-and-propose",
+      "title": "diagnose-and-propose | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/diagnose-and-propose.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/diagnosing-bugs",
+      "title": "diagnosing-bugs | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/diagnosing-bugs.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/domain-modeling",
+      "title": "domain-modeling | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/domain-modeling.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/evaluate-workbench",
+      "title": "evaluate-workbench | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/evaluate-workbench.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/explore-kb",
+      "title": "explore-kb | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/explore-kb.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/grilling",
+      "title": "grilling | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/grilling.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/handoff",
+      "title": "handoff | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/handoff.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/improve-codebase-architecture",
+      "title": "improve-codebase-architecture | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/improve-codebase-architecture.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/improve-workbench",
+      "title": "improve-workbench | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/improve-workbench.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/jot",
+      "title": "jot | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/jot.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/journey",
+      "title": "journey | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/journey.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/land",
+      "title": "land | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/land.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/map",
+      "title": "map | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/map.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/oracle",
+      "title": "oracle | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/oracle.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/orchestrate",
+      "title": "orchestrate | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/orchestrate.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/plan",
+      "title": "plan | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/plan.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/pr",
+      "title": "pr | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/pr.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/promote",
+      "title": "promote | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/promote.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/prototype",
+      "title": "prototype | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/prototype.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/readback",
+      "title": "readback | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/readback.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/reconcile",
+      "title": "reconcile | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/reconcile.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/research",
+      "title": "research | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/research.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/resolving-merge-conflicts",
+      "title": "resolving-merge-conflicts | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/resolving-merge-conflicts.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/retro",
+      "title": "retro | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/retro.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/setup-workbench",
+      "title": "setup-workbench | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/setup-workbench.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/sitrep",
+      "title": "sitrep | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/sitrep.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/tdd",
+      "title": "tdd | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/tdd.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/triage",
+      "title": "triage | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/triage.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/wayfinder",
+      "title": "wayfinder | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/wayfinder.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/skills/writing-for-agents",
+      "title": "writing-for-agents | Skills | Agentic Management System",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/writing-for-agents.md"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
+        "pr": 176
+      }
+    },
+    {
+      "path": "/governance",
+      "title": "Agentic Management System",
+      "spec": "S-010",
+      "task": "TK-001",
+      "sources": [
+        "site/app/governance/page.tsx",
+        "site/app/governance/page.module.css",
+        "site/content/governance/task-lifecycle.json"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "e10216e653b5e18f4785175f422f35f39e6f96f0",
+        "pr": 179
+      }
+    },
+    {
+      "path": "/grill-board-demo",
+      "title": "Grill Board demo | Agentic Management System",
+      "spec": "S-009",
+      "task": "TK-0030",
+      "sources": [
+        "site/app/grill-board-demo/page.tsx",
+        "site/app/grill-board-demo/Board.tsx",
+        "site/app/grill-board-demo/Islands.tsx",
+        "site/app/grill-board-demo/data.ts",
+        "site/app/grill-board-demo/board.css",
+        "site/app/nav.ts",
+        "site/app/how-it-works/page.tsx"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "63870b54efba9b9028dc8c1ae194f3fef85138ae",
+        "pr": 177
+      }
     }
-  ]
+  ],
+  "owner_rules": [
+    {
+      "route": "/skills",
+      "spec": "S-008",
+      "task": "TK-001",
+      "sources": [
+        "site/app/skills/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/start/skills.mjs",
+        "site/content/skills/"
+      ]
+    },
+    {
+      "route": "/skills/[name]",
+      "spec": "S-008",
+      "task": "TK-002",
+      "sources": [
+        "site/app/skills/[name]/page.tsx",
+        "site/app/skills/content.mjs",
+        "site/app/skills/Markdown.tsx",
+        "site/content/skills/{name}.md"
+      ]
+    },
+    {
+      "route": "/_not-found",
+      "spec": "S-003",
+      "task": "TK-001",
+      "sources": [
+        "site/app/layout.tsx",
+        "site/app/shell/Shell.tsx",
+        "site/package-lock.json"
+      ]
+    },
+    {
+      "route": "/grill-board-demo",
+      "spec": "S-009",
+      "task": "TK-0030",
+      "sources": [
+        "site/app/grill-board-demo/page.tsx",
+        "site/app/grill-board-demo/Board.tsx",
+        "site/app/grill-board-demo/Islands.tsx",
+        "site/app/grill-board-demo/data.ts",
+        "site/app/grill-board-demo/board.css",
+        "site/app/nav.ts",
+        "site/app/how-it-works/page.tsx"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "63870b54efba9b9028dc8c1ae194f3fef85138ae",
+        "pr": 177
+      }
+    },
+    {
+      "route": "/governance",
+      "spec": "S-010",
+      "task": "TK-001",
+      "sources": [
+        "site/app/governance/page.tsx",
+        "site/app/governance/page.module.css",
+        "site/content/governance/task-lifecycle.json"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "e10216e653b5e18f4785175f422f35f39e6f96f0",
+        "pr": 179
+      }
+    }
+  ],
+  "excluded": {
+    "_global-error.html": "internal framework fallback"
+  }
 }

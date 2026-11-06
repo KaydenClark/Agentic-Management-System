@@ -3,16 +3,18 @@
 **Task ID:** TK-001Q
 **Spec ID:** S-003
 **Slice:** Visitors use a full-width navigation menu that stays visible
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation, Route
 **Planned verification:** Open a long page, scroll, use the home icon and theme toggle, and tab through the menu at desktop and 375px. Run focused header/navigation checks and site build.
+**Claimed by:** s003-frontend
+**Current claimant:** s003-frontend
 
 ## Authority and inputs
 
-[Approved five-item owner readback](../../../../../../wiki/context-website-presentation.md#jot-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458), AMS website feedback chat, 2026-11-02. Preparation only: this record grants no execution, claim, deployment or dev-to-main promotion authority. A ready record describes available inputs; the next agent needs its implementation assignment. No completion or Human QA is recorded.
+[Approved five-item owner readback](../../../../../../wiki/context-website-presentation.md#jot-74a9fff6-dcf2-4e5b-91fb-8ae4765c9458), AMS website feedback chat, 2026-11-02. Execution is authorized by the [S-003 orchestration assignment](../../../../../../wiki/context-website-presentation.md#jot-4adf0b91-665d-4abb-8644-4835b40e905a). Complete a checked feature PR into dev; Human QA and owner-only dev-to-main promotion remain separate.
 
-Source recovery baseline: c8cd5ee (planning checkout). Recover the current parent Spec, relevant decisions and current `origin/dev` implementation before coding; this baseline is not evidence of the deployed website. The additional website-only example-link feedback is pending its individual readback; do not invent an exemption for GitHub sources or silently treat the old source-link requirement as a new owner decision.
+Source recovery baseline: c8cd5ee (planning checkout). Recover the current parent Spec, relevant decisions and current `origin/dev` implementation before coding; this baseline is not evidence of the deployed website. The confirmed website-only material/link rule is assigned to TK-002B (JOT-09260032). Preserve provenance and useful on-site material; coordinate shared-file changes serially.
 
 ## Assignment
 
@@ -32,3 +34,13 @@ For implementation, branch from current `origin/dev`, target a checked feature P
 ## Hand-back
 
 Return the candidate/PR, observable result, checks actually run, screenshots where relevant and remaining gaps to S-003. No implementation is performed by this planning change.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | codex/s003-navigation | d929eeec1dd517132494797753a56abdd5f914a9 | ahead 0 behind 0 | 0 | Sourced929eeec1dd517132494797753a56abdd5f914a9: production build and217site tests pass. First focused browser330/347pass,17fail (clipped contrast undecidable and header prefetch interfering with toy network check). After repair browser347/347pass. Second completed navigation matrix76/80pass:4phone cases clip focused links at100/200-percent in both themes. Original no-JS RAF harness was canceled without a completed matrix; log retained. Three-strike STOP, no full keyboard QA or completion. | site README, shared header/styles and browser detectors; exact geometry and both failed attempts retained locally | Draft PR148 pushed, no merge. Owner-authorized corrective run must establish focus-scroll cause and fully reveal focused nav links, then rerun the80case matrix and affected browser checks on one completed frozen build. R/T/B remain undispatched; Human QA and production remain owner gates. | 8cba4c66ee76d3a3f21b2b2e28377a95f4fc58dc3434f1234568be289d0f975e |
+
+## Current continuation
+
+The later bounded corrective run TK-002D established the native-focus cause, repaired full-link visibility and met the inherited header behavior with its actual verification. This original failed run remains unchanged; native incomplete-run retirement is unavailable. Follow TK-002D and the parent Spec for current delivery.

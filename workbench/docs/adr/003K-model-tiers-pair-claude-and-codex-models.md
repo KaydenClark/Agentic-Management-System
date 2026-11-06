@@ -1,7 +1,7 @@
 ---
 date: 2026-11-02
 canonicalized_in:
-  - RUNBOOK.md
+  - workbench/docs/SKILLS.md
 supersedes:
   - 003A-implementors-run-on-opus-or-sonnet.md
 ---

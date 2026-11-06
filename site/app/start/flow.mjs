@@ -159,7 +159,7 @@ export const ownerAlso = [
 
 // What agents do beyond the lifecycle stages they hold.
 export const agentsAlso = [
-  { line: "Merge work that is not deployed into main themselves, once checks pass.", sources: [src.ddr000H, src.adr003F] },
+  { line: "Merge non-site work into main themselves, once checks pass.", sources: [src.ddr000H, src.adr003F] },
 ];
 
 // The three orchestrators, all Claude, split by risk (ADR-002Z).

@@ -28,10 +28,13 @@
   border-top: var(--border-width) solid var(--line-strong);
 }
 
+/* Empty places stay honest but compact (TK-002J): two to a row where the
+   column allows, with a short frame, so recorded results lead the page. */
 .places {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-24);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--content-basis)), 1fr));
+  gap: var(--space-18);
+  align-items: start;
 }
 
 .place {
@@ -60,10 +63,10 @@
   line-height: var(--leading-heading);
 }
 
-/* An empty plot frame: dashed and muted like the canvas's grade-4 style.
-   There is no chart-height token, so the frame keeps a fixed shape. */
+/* An empty plot frame: dashed and muted like the canvas's grade-4 style,
+   kept short so an empty place does not look like a result. */
 .plot {
-  aspect-ratio: 3 / 1;
+  height: var(--space-48);
   background: var(--ground);
   border: var(--border-width) dashed var(--line-strong);
   border-radius: var(--radius-control);
@@ -94,3 +97,247 @@
 .next {
   font-size: var(--text-small);
 }
+
+/* TK-002: rows from Supabase. Still greys only: a series line is ink on the
+   ground, a regression is told by its square point and its written mark,
+   not by a hue. Long identifiers (commits, model IDs) wrap at 375px. */
+
+.note {
+  padding: var(--space-8) var(--space-12);
+  background: var(--raised);
+  border-left: var(--border-width) solid var(--line-strong);
+  border-radius: var(--radius-control);
+}
+
+.filled {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-18);
+}
+
+.series {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding-top: var(--space-12);
+  border-top: var(--border-width) solid var(--line);
+}
+
+.seriesTitle {
+  margin: 0;
+  font-size: var(--text-body);
+  font-weight: var(--weight-semibold);
+}
+
+.provenance,
+.version,
+.counts,
+.row {
+  overflow-wrap: anywhere;
+}
+
+.provenance {
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.line {
+  width: 100%;
+  height: auto;
+  background: var(--ground);
+  border-radius: var(--radius-control);
+}
+
+.frame {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: var(--border-width);
+}
+
+.stroke {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.dot {
+  fill: var(--ink);
+}
+
+.regressionDot {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.points {
+  margin: 0;
+  padding-left: var(--space-18);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.point {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.version,
+.counts {
+  margin: 0;
+}
+
+.marks {
+  margin: 0;
+  padding-left: var(--space-18);
+}
+
+.mark {
+  font-size: var(--text-small);
+}
+
+.rows {
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+.rows ul {
+  margin: 0;
+  padding-left: var(--space-18);
+}
+
+.rowsTitle {
+  margin: 0;
+  color: var(--ink);
+}
+
+.strength {
+  font-weight: var(--weight-semibold);
+  color: var(--ink);
+}
+.repair { margin-bottom: var(--space-48); }
+.repair code { overflow-wrap: anywhere; white-space: normal; }
+.evidenceBars { list-style: none; padding: 0; display: grid; gap: var(--space-12); }
+.evidenceBars li { overflow-wrap: anywhere; }
+.evidenceTrack { display: block; height: var(--space-18); margin-top: var(--space-4); background: var(--raised); border: var(--border-width) solid var(--line-strong); }
+.evidenceBar { display: block; height: 100%; background: currentColor; }
+.overBudget { background: var(--heat); }
+
+.comparison { border-top: var(--space-4) solid var(--line-strong); }
+.comparisonRuns { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-18); }
+.comparisonRuns h4 { margin: 0 0 var(--space-8); }
+.comparisonRow { display: grid; grid-template-columns: calc(var(--space-48) * 2) minmax(0, 1fr) calc(var(--space-48) + var(--space-24)); gap: var(--space-12); align-items: center; padding: var(--space-4) 0; color: var(--ink); text-decoration: none; }
+.comparisonRow:hover, .comparisonRow:focus-visible { text-decoration: underline; }
+.comparisonRow strong { text-align: right; font-variant-numeric: tabular-nums; }
+.comparisonTrack { height: var(--space-24); background: var(--raised); border: var(--border-width) solid var(--line-strong); }
+.comparisonBar { display: block; height: 100%; background: var(--ink); }
+.comparisonBar.candidateBar, .armBar.candidateBar { background: var(--raised); border-block: var(--space-4) double var(--ink); box-sizing: border-box; }
+.evidenceDetails { padding-top: var(--space-12); border-top: var(--border-width) solid var(--line); }
+.evidenceDetails summary { cursor: pointer; font-weight: var(--weight-semibold); }
+.evidenceDetails p { margin-top: var(--space-12); }
+.evidenceTable { border-collapse: collapse; width: 100%; margin-top: var(--space-12); }
+.evidenceTable caption { text-align: left; color: var(--muted); padding-bottom: var(--space-8); }
+.evidenceTable th, .evidenceTable td { text-align: left; padding: var(--space-8); border-bottom: var(--border-width) solid var(--line); }
+@media (max-width: 480px) {
+  .comparisonRow { grid-template-columns: calc(var(--space-48) + var(--space-24)) minmax(0, 1fr) calc(var(--space-48) + var(--space-14)); gap: var(--space-8); font-size: var(--text-small); }
+}
+
+/* S-011 TK-003: shared-skill repair round two. Greys only: pass and fail
+   are told by filled and dashed marks and by their words, never by a hue. */
+.skillResults { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-24); }
+.skillResult { display: flex; flex-direction: column; gap: var(--space-8); padding-top: var(--space-18); border-top: var(--border-width) solid var(--line); overflow-wrap: anywhere; }
+.skillResult h4 { margin: 0; }
+.skillResult p { margin: 0; }
+.armRows { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-12); }
+.armRow { display: flex; flex-direction: column; gap: var(--space-6); }
+.armLink { display: grid; grid-template-columns: calc(var(--space-48) * 2) minmax(0, 1fr) max-content; gap: var(--space-12); align-items: center; color: var(--ink); text-decoration: none; }
+.armLink:hover, .armLink:focus-visible { text-decoration: underline; }
+.armLink strong { font-variant-numeric: tabular-nums; }
+.armTrack { height: var(--space-24); background: var(--raised); border: var(--border-width) solid var(--line-strong); }
+.armBar { display: block; height: 100%; background: var(--ink); }
+.runMarks { display: flex; flex-wrap: wrap; gap: var(--space-6); font-size: var(--text-small); }
+.runMark { padding: var(--space-4) var(--space-8); border-radius: var(--radius-badge); border: var(--border-width) solid var(--ink); font-variant-numeric: tabular-nums; }
+.runPass { background: var(--ink); color: var(--ground); }
+.runFail { background: var(--surface); color: var(--ink); border-style: dashed; }
+.comparisonArms { padding: var(--space-8) var(--space-12); background: var(--raised); border-radius: var(--radius-control); font-size: var(--text-small); }
+.comparisonArms p { margin: 0; }
+.comparisonArms ul { margin: var(--space-4) 0 0; padding-left: var(--space-18); }
+.devGroup { display: flex; flex-direction: column; gap: var(--space-6); }
+.devGroup h4 { margin: 0; overflow-wrap: anywhere; }
+.devRuns { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--space-8); font-size: var(--text-small); }
+.devTrack { position: relative; display: block; height: var(--space-18); margin-top: var(--space-4); background: var(--raised); border: var(--border-width) solid var(--line-strong); }
+.devBand { position: absolute; top: 0; bottom: 0; background: var(--line); border-inline: var(--border-width) dashed var(--muted); }
+.devCeiling { position: absolute; top: calc(var(--space-4) * -1); bottom: calc(var(--space-4) * -1); border-left: var(--space-4) solid var(--muted); }
+.devBar { position: relative; display: block; height: 50%; top: 25%; background: var(--ink); }
+.skillEvidence { padding-top: var(--space-12); border-top: var(--border-width) solid var(--line); }
+.skillEvidence h4 { margin: 0 0 var(--space-8); }
+.evidenceList { margin: 0; padding-left: var(--space-18); display: grid; gap: var(--space-4); overflow-wrap: anywhere; }
+@media (max-width: 480px) {
+  .armLink { grid-template-columns: calc(var(--space-48) + var(--space-24)) minmax(0, 1fr); font-size: var(--text-small); }
+  .armLink strong { grid-column: 1 / -1; }
+}
+
+/* S-007 TK-002J: skill trends. The four fitness-level colors are the only
+   hues here and mean fitness levels only (DDR-000M); Broken is the trouble
+   hue. Marks that never decide a point (attempts not kept, High and Small
+   runs) are grey and hollow, told apart by shape. */
+.trends { margin-bottom: var(--space-48); }
+.trends code { overflow-wrap: anywhere; white-space: normal; }
+.trendTerms { margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--chart-basis)), 1fr)); gap: var(--space-12); font-size: var(--text-small); }
+.trendTerms div { padding: var(--space-12); background: var(--surface); border: var(--border-width) solid var(--line); border-radius: var(--radius-control); }
+.trendTerms dt { font-weight: var(--weight-semibold); }
+.trendTerms dd { margin: var(--space-4) 0 0; color: var(--muted); }
+.trendLegend { display: flex; flex-direction: column; gap: var(--space-8); padding: var(--space-12) var(--space-18); background: var(--surface); border: var(--border-width) solid var(--line); border-radius: var(--radius-card); font-size: var(--text-small); }
+.trendLegend ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--content-basis)), 1fr)); gap: var(--space-6) var(--space-18); }
+.trendLegend li { display: flex; gap: var(--space-8); align-items: flex-start; }
+.trendLegend p { margin: 0; }
+.legendTitle { margin: 0; font-size: var(--text-body); }
+.swatch { flex: none; width: var(--space-48); height: var(--space-24); margin-top: var(--space-4); overflow: visible; }
+.trendGrid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--chart-basis)), 1fr)); gap: var(--space-18); }
+.trendCard { display: flex; flex-direction: column; gap: var(--space-8); min-width: 0; padding: var(--space-18); background: var(--surface); border: var(--border-width) solid var(--line); border-radius: var(--radius-card); overflow-wrap: anywhere; }
+.trendTitle { margin: 0; font-size: var(--text-h3); }
+.trendOutcome { margin: 0; font-weight: var(--weight-semibold); }
+.trendMeta { margin: 0; padding: 0; list-style: none; font-size: var(--text-small); color: var(--muted); }
+.trendFigure { display: grid; grid-template-columns: var(--space-48) minmax(0, 1fr); grid-template-areas: "gap breaks" "axis plot" "gap2 ticks" "gap3 strip"; column-gap: var(--space-4); font-size: var(--text-chart); }
+.chartBreaks { grid-area: breaks; position: relative; height: calc(var(--space-18) * 2); }
+.chartLabel { position: absolute; top: 0; white-space: nowrap; font-weight: var(--weight-semibold); color: var(--ink); }
+.labelEnd { text-align: right; }
+.labelLower { top: var(--space-18); }
+.chartAxis { grid-area: axis; position: relative; }
+.axisLabel { position: absolute; right: 0; transform: translateY(-50%); color: var(--muted); line-height: var(--leading-tight); }
+.trendChart { grid-area: plot; display: block; width: 100%; height: auto; background: var(--ground); border-radius: var(--radius-control); overflow: visible; }
+.chartTicks { grid-area: ticks; position: relative; height: var(--space-24); }
+.tickLabel { position: absolute; top: var(--space-4); transform: translateX(-50%); white-space: nowrap; color: var(--muted); }
+.chartStrip { grid-area: strip; position: relative; height: var(--space-48); }
+.stripCell { position: absolute; top: 0; bottom: 0; display: flex; flex-direction: column; line-height: var(--leading-heading); align-items: center; justify-content: center; border-radius: var(--radius-badge); font-weight: var(--weight-semibold); white-space: nowrap; overflow: hidden; }
+.levelSwatch { flex: none; display: inline-flex; align-items: center; justify-content: center; width: var(--space-48); height: var(--space-24); border-radius: var(--radius-badge); font-weight: var(--weight-semibold); }
+.gridLine { stroke: var(--line); stroke-width: 1; }
+.breakLine { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.trendLine { fill: none; stroke: var(--line-strong); stroke-width: 1.5; }
+.averageLine { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.notKeptMark { fill: var(--surface); stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 2 1.5; }
+.secondaryMark { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+.regressionRing { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 3 2; }
+.trendPoint { stroke: var(--ink); stroke-width: 2; }
+.levelExcellent { fill: var(--level-excellent); background: var(--level-excellent); color: var(--level-excellent-on); }
+.levelStable { fill: var(--level-stable); background: var(--level-stable); color: var(--level-stable-on); }
+.levelFunctional { fill: var(--level-functional); background: var(--level-functional); color: var(--level-functional-on); }
+.levelBroken { fill: var(--level-broken); background: var(--level-broken); color: var(--level-broken-on); }
+.trendPoints { margin: 0; padding-left: var(--space-18); display: grid; gap: var(--space-6); font-size: var(--text-small); }
+.trendPoints a { color: var(--ink); }
+.trendSubList { margin: var(--space-4) 0 0; padding-left: var(--space-18); color: var(--muted); }
+.trendSecondary { margin: var(--space-4) 0 0; color: var(--muted); }
+.levelScroll { overflow-x: auto; }
+.levelTable { border-collapse: separate; border-spacing: var(--space-4); width: 100%; font-size: var(--text-small); }
+.levelTable th { text-align: left; font-weight: var(--weight-semibold); padding: var(--space-4); }
+.levelTable thead th { color: var(--muted); }
+.levelCell { padding: 0; border-radius: var(--radius-badge); }
+.levelCell a { display: flex; flex-direction: column; padding: var(--space-6) var(--space-8); min-height: var(--target-min); color: inherit; text-decoration: none; font-variant-numeric: tabular-nums; border-radius: var(--radius-badge); }
+.levelCell a:hover { text-decoration: underline; }
+.levelName { font-weight: var(--weight-semibold); white-space: nowrap; }
+.levelBreak { border-left: var(--space-4) dashed var(--ink); }
+.levelBreakText { font-size: var(--text-tagline); }
+.levelNone { padding: var(--space-6) var(--space-8); color: var(--muted); border: var(--border-width) dashed var(--line-strong); border-radius: var(--radius-badge); }
+.levelTable code { overflow-wrap: normal; }

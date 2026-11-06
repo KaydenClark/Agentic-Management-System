@@ -11,7 +11,13 @@
     "start": "next start",
     "test": "node --test \"tests/**/*.test.mjs\"",
     "check:browser": "node tests/browser.check.mjs",
-    "tokens:gen": "node scripts/gen-tokens.mjs --write"
+    "check:skills-source": "node tests/skills-source.check.mjs",
+    "page-hashes": "node scripts/page-hashes.mjs",
+    "tokens:gen": "node scripts/gen-tokens.mjs --write",
+    "glossary:gen": "node scripts/gen-glossary.mjs --write",
+    "postbuild": "node scripts/page-inventory.mjs --write",
+    "pages:generate": "node scripts/page-inventory.mjs --write",
+    "pages:check": "node scripts/page-inventory.mjs --check"
   },
   "dependencies": {
     "@fontsource/ibm-plex-mono": "5.3.0",

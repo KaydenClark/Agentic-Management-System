@@ -26,3 +26,7 @@ Hand back to S-003 with `close`.
 - [ ] The quickstart replay test gets the output the page shows.
 - [ ] Every page links forward and back.
 - [ ] Build and tests pass.
+
+## Reconciled disposition — 2026-11-02
+
+The owner corrections in context-website-presentation.md withdraw the separate quickstart, command replay and resume requirements. Source f148c7c is contained in dev76b9c564692a1e979cffbebbe30063b73588efb6; historical claimant remains on records/s003-tk003-tk004. Current orientation and visual-glossary work belongs to TK-001P and TK-001R under the new assignment. Do not execute the superseded brief. The native lifecycle has no withdrawn/incomplete-run closure; retain this blocked record and evidence rather than fabricate completion or steal its claim.
