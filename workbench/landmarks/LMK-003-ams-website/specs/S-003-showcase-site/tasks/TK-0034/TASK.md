@@ -14,13 +14,13 @@
 
 ## Assignment
 
-Twice-confirmed item8 and [JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8](../../../../../../wiki/context-website-presentation.md#jot-54c3a590-89e6-4bf7-95ef-4c50771e7ac8) authorize actual PR151 recovery in this same Task. All prior requirements/evidence remain at a130232f49feb614dce8a8e37193d498d74aa636. No new gate, attempt reset, claim or baseline. Genuine starting binding47e300267bb10f599708516cd0cfc496d8546d8a and receipt1 remain unchanged.
+Twice-confirmed item8 and [JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8](../../../../../../wiki/context-website-presentation.md#jot-54c3a590-89e6-4bf7-95ef-4c50771e7ac8) authorize actual PR151 recovery in this same Task. Full scope: a130232f49feb614dce8a8e37193d498d74aa636; original binding47e300267bb10f599708516cd0cfc496d8546d8a/receipts retained. No new gate, attempt reset, claim or baseline.
 
 Reconcile source8e211a119e80e20f9282d21a51beaea966cdc770's26 source/test/doc hunks against checked devb699f10f4e08a0ea72f2915e0c14c0744385cbcd by ownership/chronology. Original coordination/build/footer:21fc0e8e401f306a02d76eb9ed4063f2f8862089. Preserve old TK002B STOP/claimant/receipt and both failure logs at ad763022ac8192c7059d1a244e0e4dbd9c5e0c03; do not merge the historical whole tree or change current dev's separate TK002B record.
 
 Restore actual native Source identities disclosure and on-site reader/credit behavior with original meaningful tests. Keep accessible full paths/revisions, historical ce39c6a pins, author/adaptation/license/publicURI metadata and catalog pin; copy no private source. Only generated current-build SHA text is hash-excluded; path/historical-pin changes invalidate hashes. Preserve six planes, demo/graphs,50-page inventory, WikiNav/TOC/39chips/navigation/styles/rules. S010 owns pending six glossary backlinks; S003 only151 Inline/citation hunks. Flag S007 Servitor semantic collisions, never overwrite new charts.
 
-S008 named helper packet is satisfied at checked devb699: exact PR18062ef5f13a65bc807438186ffabd81ed0c4a92578, native0033 closure, independent root review and both successful final CI runs. Full packet/tree/counts remain at a130232. Preserve prewindow settling and its cold/settled/planted controls, without URL filtering. S003 owns bounded shared-helper changes; S010 governance/glossary content.
+S008 named helper packet is satisfied at checked devb699: exact PR18062ef5f13a65bc807438186ffabd81ed0c4a92578, native0033 closure, independent root review and both successful final CI runs. Packet/tree/counts: a130232. Preserve prewindow settling and its cold/settled/planted controls, without URL filtering. S003 owns bounded shared-helper changes; S010 governance/glossary content.
 
 Build restored151 before pinned Playwright1.64.1 controls. Native closed-details links must be omitted, opened links checked and visible-unreachable links caught with faults retained. Native hidden rect counts vary; keep an explicitly DERIVED nonempty-rect/checkVisibility-false counterexample, not forced geometry or removed Tab/focus checks.
 
@@ -40,7 +40,7 @@ Workspace baseline sha256:ef8b5abbcc86dddf628cb5ed52644535682d4a9e907d01bbc89750
 
 - [x] Actual151 source/reader/attribution behavior, full identity, historical pins/hash controls and original tests work; newer features survive.
 - [x] Middle-focus traversal reaches all controls with visible focus; nativeclosed/open, derivedvisibility and unreachable/focus/earlystop negatives precede unchanged64 matrix.
-- [ ] All64, checks/review and checkeddev containment evidenced without weakening; original/adapted artifacts identifiable; HumanQA/promotion separate.
+- [x] All64, checks/review and checkeddev containment evidenced without weakening; original/adapted artifacts identifiable; HumanQA/promotion separate.
 
 ## Receipt
 
