@@ -10,7 +10,7 @@
 **Blockers:** none for mapping
 **Confirmation:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
 **Execution approval:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
-**Next gate:** Implement accepted thread/turn software continuation (guidebook plan digest); external readiness precedes intent. Actual calls, P acceptance and main merge remain held.
+**Next gate:** Keep checked software in draft; native qualification, invocation, P acceptance and main merge remain held.
 
 ## Intent and authority
 
@@ -26,7 +26,7 @@ A database of results alone does not execute the loop. Session-bound coordinatio
 
 ## Current Verified State
 
-Receipts2/4 retain ownership/cancellation and FIFO Review FAILs. Independent recheck passed the bounded `15edd40` pre-model subset. Exact `271e63a` refresh passes actual standalone permissions, cancellation/controller SIGINT and synthetic utility crash -> fresh-process non-repeat; proofset `55ea79c2`. Full author/fresh suites each pass928/skip206; required fresh record checks pass. S-006 `3856614eeb8ec2e158db003025a7a75ee29bfc2f` has isolated checks, independent Review and CI; its protected publication remains separate. Model calls remain0. Real model-turn cleanup/loading, exact semantic qualification/freeze/capacity and frozen-case result remain unverified. No whole-S006/P acceptance or production release follows; stopped protocols stand.
+Independent final delta Review passed `9cca984` exact input-sequence binding; deadline/MessagePhase corrections retain their checked scope. cf85/632 FAILs remain in FAIL-215/217/219. Author history19 passes; one corrected fresh candidate at metadata `596f797` (same product) passes977/skips214 with required record checks. Earlier standalone271e and prior632 proofs retain their scope. Accepted O `3856614eeb8ec2e158db003025a7a75ee29bfc2f` remains separately protected. This slice made no model/skill/grader calls. One read-only account/meter attempt stopped at initialize with PermissionError; authentication, capacity and cleanup remain unknown. Actual native loading/cleanup/runtime identity, approved labels/qualified grader/freeze/current capacity and real ed0 outcome remain unverified; P/main acceptance stays held.
 
 ## Desired Behavior
 

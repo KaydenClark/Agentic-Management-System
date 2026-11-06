@@ -58,6 +58,16 @@ The coordinator released one bounded same-Task recovery. `9cca984bccbab6a8ceef42
 
 The original independent reproducer remains byte-identical (SHA-256 `f51accd41df56cb9be8fab909da928cc1dbe74af17cee90e585667b80b2a6f1c`): observed/two inputs before, untrusted/no retry/store unchanged after. Exact-single, extra-before/after/after-final/across-page, duplicate, different, reordered, split and missing controls gave5 expected REDs/5 existing passes before the correction and all GREEN after. The targeted history set passes19; independent delta review and one corrected-candidate full/fresh check remain pending. No real call or qualification is implied.
 
+## Checked software checkpoint
+
+Product `9cca984bccbab6a8ceef4219942199c23d78e376` (native_turn module SHA-256 `c73d22386e94ae31c1b312b0287408dacf2edef2680d8e3e721cbd16a803b4d8`) passed independent bounded delta review: the unchanged extra-input reproducer returns untrusted, execution disallowed, assessment unknown and store unchanged; the reviewer's10 sequence controls pass. Earlier independent deadline/MessagePhase fixes retain their checked scope. The cf85/632 FAILs and FAIL-215/217/219 remain recorded.
+
+Author history checks pass19. Exactly one corrected fresh-candidate full check at metadata `596f7976d29e122759aaacd4c51b1baf09812d57` (identical product) exits0 with977 passed/214 skipped; fresh render/doctor/next/layout/ADR/hygiene/whitespace/Taskboard checks pass and the checkout is clean. The separate prior author/fresh967 suites remain632 evidence; neither is relabeled as corrected-source qualification. Primitive/O bytes and guarded Task receipts stay unchanged.
+
+This is checked pre-model software progress only. Actual native worker preflight/skill use/model-turn cleanup/runtime identity, exact approved labels/qualified grader/frozen conditions/current capacity and real-case result remain held. P stays open; protected O/PR175 publication and main merge remain separate.
+
+A separately authorized one-shot read-only account/subscription check at2026-11-06T17:21:55Z verified unchanged binary/schema/runtime/config-source pins before launch, then stopped with PermissionError after attempting initialize. Effective containment was not established, so no account/meter request ran; authentication, subscription capacity and owned-process cleanup remain unknown. A supported read-only exact-binary process inventory found no candidates; without a retained owned PID that is not complete cleanup proof. No retry, thread, turn, command, tool, skill, model, grader or store write followed. Sanitized evidence stays private. A private-helper SyntaxError caught before execution and a default-context process-inventory EPERM remain separate harness/environment diagnostics, not model attempts. No capacity, reservation, semantic qualification or call authority follows.
+
 ## Verified source seams and gaps
 
 At main `cfc0bc4c7f2cd167cea2972016edee076b479b73`, `trial_campaign.Campaign.run_one` journals before one released slot, refuses an attempted slot and requires its predecessor. It is not a durable multiworker scheduler. `trial_runtime.ClaudeAdapter` explicitly requires empty tools/MCP and rejects native tool use. Private source packs prove no native discovery/installation. Do not change its stopped protocol.
