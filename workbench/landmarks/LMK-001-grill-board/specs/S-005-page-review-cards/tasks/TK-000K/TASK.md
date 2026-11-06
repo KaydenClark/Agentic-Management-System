@@ -41,3 +41,17 @@ Hand back to S-005 with `close`.
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
 
 Workspace baseline sha256:248e6840a3518a52d70b5d05c3ba1bf24eee78abd235135447528e2b64a5cf58
+
+## Current implementation
+
+The existing read-only checker/CLI is under verification. Normal check freezes the fetched source inventory and reads one committed review snapshot; recompute shares the existing collector, cleanup and protected overlay. Manifest-declared inventory paths follow the single reader. Explicit injected inputs stay fixture evidence.
+
+Retain approved historical/verified/pending provenance: pending has landed:null and must bind the frozen candidate/integration-pending state. No landing is invented. Coverage also refuses damaged extra page questions and missing/future voice references on open cards, while keeping stale/answered history.
+
+Uncommitted coverage/collector/capture/page/approval/feedback/browser checks pass199 with2 Docker skips (no image configured for that focused run). The27-case coverage matrix includes input drift, damaged extra page cards and missing/future voice references. Fresh full with the approved image, independent Review, current CI and actual current-dev live coverage remain before close. Final assembled QA/consumption/owner judgments and main permission remain separate. No site edit or actual owner feedback.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-005-page-review-cards | 089c065275679a4e5988a775b003d5385fbc397b | ahead 13 behind 0 | 10 | Uncommitted checker:199focused/2Docker skips;27coverage cases. Expected reds: missing checker/CLI, wrong-owner and unsafe queue/input drift controls; corrected greens. Current source data remains old47. | Coverage command/manifest path/RUNBOOK/Board guide. Native baseline248e and75 ignored originals preserved. | Fresh full with image, independent Review, exact CI, actual current-dev check. Final assembled capture/E/ownerQA/main permission remain; no site changes or owner actions. | acdcbcb6493f6a8a125cd9dc5a464f5117be9240e20481c576d4dca58571823f |

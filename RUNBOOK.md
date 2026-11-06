@@ -2,7 +2,7 @@
 
 ## Get oriented
 
-Inspect Git state (`git status --short --branch`), remotes and locks.
+Inspect Git state, remotes and locks.
 Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
 [Wiki](workbench/wiki/MEMORY.md), both trackers, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
 Planning reads `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031`; copying needs owner approval.
@@ -29,6 +29,7 @@ node workbench/tools/spec-workbench.mjs next --json
 node workbench/tools/workbench-layout.mjs validate --project .
 git diff --check
 uv run ams-hygiene
+uv run ams-pages check
 ```
 
 Repeat on a fresh checkout. `site/`: `npm run build`, `npm test`.

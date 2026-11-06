@@ -91,6 +91,7 @@
   },
   "pageReview": {
     "voice": "grill-board/voice-and-taste.md",
-    "privateFeedback": ".local/page-feedback"
+    "privateFeedback": ".local/page-feedback",
+    "inventory": "site/page-list.json"
   }
 }

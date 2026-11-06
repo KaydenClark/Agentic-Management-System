@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. TK-001/TK-002/TK-003 are closed. FIFO correction060 passes fresh1049/4 skips and130 focused HTTP/browser/page checks. Exact0d CI1036/9 skips plus11 browser/all14steps succeeds; independent source/record reviews clear the restored original claimant fields. Native re-close preserves the first close, failing Review, Continuation1 and earlier receipts. FAIL258-268 retains source/control and reviewer source/environment limits. Close-record Review/CI remain. TK-000K retains its956-file start/75 copied ignored originals and incomplete prototype. Committed cards still pin47; private86 preparation is historical. Final capture must use assembled READY dev. Coverage/consumption, whole Review/acceptance, owner QA, main permission and workspace release remain open.
+No Spec acceptance is claimed. TK-001/TK-002/TK-003 are closed. FIFO product060 passes fresh1049/4 skips and130 focused checks; exact0d CI1036/9 skips plus11 browser and independent corrective reviews pass. Native re-close089 preserves prior close/failing Review/Continuation/receipts; its exact CI also succeeds. FAIL258-268 retains source and harness limits. TK-000K has a genuine956-file start/75 copied ignored originals. Its uncommitted readonly CLI passes199 focused checks/2 Docker skips, including27 coverage/input-drift cases; fresh full, independent Review, CI and current-dev live proof remain. Committed cards still pin47; private86 preparation is historical. Final capture must use assembled READY dev. Coverage/consumption, whole Review/acceptance, owner QA, main permission and workspace release remain open.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 
@@ -79,7 +79,7 @@ Disposable Git fixtures exercise built HTML injection, actual current-build coll
 ```bash
 node workbench/tools/spec-workbench.mjs show S-005
 uv run pytest
-uv run ams-pages check   # TK-000K; unavailable until delivered
+uv run ams-pages check   # TK-000K; current implementation under verification
 ```
 
 ## Documentation Impact

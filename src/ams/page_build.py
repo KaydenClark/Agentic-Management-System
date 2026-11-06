@@ -23,6 +23,7 @@ from urllib.parse import urlsplit
 
 from .grill_board.answers import AnswerRefused, _git
 from .pages import PageRefused, _metadata, _safe_file, content_hash
+from .project_paths import safe_relative
 
 AMS_ORIGIN = "https://github.com/KaydenClark/Agentic-Management-System.git"
 PUBLIC_CONFIG = {"NEXT_PUBLIC_SUPABASE_URL", "NEXT_PUBLIC_SUPABASE_ANON_KEY"}
@@ -349,7 +350,7 @@ def built_routes(exported):
 
 
 def collect_current(source, ref, expected_candidate, *, build_start, public_config=None,
-                    expected_origin=AMS_ORIGIN):
+                    expected_origin=AMS_ORIGIN, inventory_relative=None):
     """Build/start one frozen tree through the supplied owned execution seam.
 
     ``build_start(exported_root, candidate, public_config)`` is a context manager
@@ -357,6 +358,9 @@ def collect_current(source, ref, expected_candidate, *, build_start, public_conf
     runner; injection supplies inert deterministic fixtures, never live proof.
     """
     source = Path(source).resolve()
+    if inventory_relative is not None and (not safe_relative(inventory_relative)
+            or not inventory_relative.endswith('.json')):
+        raise PageRefused('the declared page inventory path is unsafe')
     config = public_configuration(public_config)
     candidate = _pin(source, ref, expected_candidate, expected_origin)
     with _export(source, candidate) as exported:
@@ -364,7 +368,7 @@ def collect_current(source, ref, expected_candidate, *, build_start, public_conf
             # The pinned build may regenerate this projection from its committed
             # owner declarations. Read that output, never a stale prebuild list.
             try:
-                inventory = _safe_file(exported, "site/page-list.json")
+                inventory = _safe_file(exported, inventory_relative or "site/page-list.json")
                 listed = json.loads(inventory.read_text())
             except (OSError, json.JSONDecodeError) as error:
                 raise PageRefused("pinned build has no readable page-owner inventory") from error

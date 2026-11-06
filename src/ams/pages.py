@@ -18,6 +18,7 @@ from .grill_board.answers import (
 from .grill_board.cards import Card, load_cards, parse_card
 from .page_approvals import APPROVALS, CARDS, INDEX, approval_recommendation, page_status
 from .page_feedback import INITIAL_VOICE, card_voice_version, read_voice
+from .project_paths import feedback_paths
 
 LINE_BREAKS = "\n\r\v\f\x1c\x1d\x1e\x85\u2028\u2029"
 VOID = set("area base br col embed hr img input link meta param source track wbr".split())
@@ -214,7 +215,7 @@ def _verification_suffix(proof):
             f'**Capture SHA256:** {proof["capture_sha256"]}\n**Observed at:** {proof["observed_at"]}\n').encode()
 
 
-def generate(root, listed, built, *, candidate, now=None, protection=None):
+def generate(root, listed, built, *, candidate, now=None, protection=None, expected_manifest_sha=None):
     """Commit one complete built snapshot; append supersession, never rewrite history.
 
     ``built`` maps every public built route to its served HTML. Injection is
@@ -234,6 +235,9 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
             raise PageRefused("HEAD is detached; page cards commit on a branch")
         base = _git(root, "rev-parse", "HEAD").strip()
         try:
+            if (expected_manifest_sha is not None
+                    and feedback_paths(root, base).manifest_sha != expected_manifest_sha):
+                raise PageRefused('the review manifest changed during collection; no cards were written')
             voice = read_voice(root, base)
         except AnswerRefused as error:
             raise PageRefused(str(error)) from error
@@ -335,16 +339,46 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
         return {"changed": True, "pages": len(rows), "commit": commit, "candidate": candidate, "protected_verified": protection is not None}
 
 
+def _capture_arguments(args, parser):
+    pins = [args.protected_project, args.protected_deployment, args.protected_origin, args.protected_capture_sha256]
+    if args.protected_artifact and (not all(pins) or args.built_html or args.inventory):
+        parser.error('protected capture requires automatic collection and every independent observer pin')
+    if not args.protected_artifact and any(pins):
+        parser.error('protected observer pins require --protected-artifact')
+
+
+def _collect_for_review(args, *, review_commit=None):
+    """The same frozen, cleanup-verified build/capture seam for writes and checks."""
+    from .page_build import AMS_ORIGIN, DockerBuild, collect_current
+    runtime = DockerBuild(args.image, timeout=args.timeout)
+    config = json.loads(args.public_config.read_text()) if args.public_config else None
+    paths = feedback_paths(args.project, review_commit or 'HEAD')
+    collected = collect_current(args.source_repo or args.project, args.ref or 'origin/dev', args.candidate,
+                                build_start=runtime, public_config=config, inventory_relative=paths.inventory)
+    if not runtime.cleanup_verified:
+        raise PageRefused('owned runtime cleanup is not verified; no review result')
+    if args.protected_artifact:
+        from .protected_pages import collect_protected
+        collected = collect_protected(args.protected_artifact, collected, expected_pins={
+            'repository': AMS_ORIGIN, 'project': args.protected_project,
+            'deployment': args.protected_deployment, 'candidate': args.candidate,
+            'origin': args.protected_origin, 'capture_sha256': args.protected_capture_sha256})
+    collected.update(input_mode='protected-capture' if args.protected_artifact else 'pinned-container-build',
+                     build_image=args.image, cleanup_verified=True, review_manifest_sha=paths.manifest_sha)
+    return collected
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["generate", "status"])
+    parser.add_argument("command", choices=["generate", "status", "check"])
+    parser.add_argument('--recompute', action='store_true', help='check: compare served hashes through the existing build/capture seam')
     parser.add_argument("--project", type=Path, default=Path.cwd())
     parser.add_argument("--inventory", type=Path)
     parser.add_argument("--built-html", type=Path,
                         help="JSON object mapping every public route to served HTML from the pinned candidate")
     parser.add_argument("--candidate")
     parser.add_argument("--source-repo", type=Path, help="trusted source checkout; defaults to --project")
-    parser.add_argument("--ref", help="generate: fetched source ref (origin/dev); status: committed review ref (HEAD)")
+    parser.add_argument("--ref", help="generate/check: fetched source ref (origin/dev); status: committed review ref (HEAD)")
     parser.add_argument("--image", help="approved local immutable Node Docker image sha256 identity")
     parser.add_argument("--public-config", type=Path, help="explicit public read-only site configuration JSON; no inherited values")
     parser.add_argument("--timeout", type=float, default=300)
@@ -355,7 +389,7 @@ def main(argv=None):
     parser.add_argument('--protected-capture-sha256', help='independent observer digest, not a self-declared trust flag')
     args = parser.parse_args(argv)
     if args.command == 'status':
-        if any((args.candidate, args.inventory, args.built_html, args.source_repo, args.image,
+        if any((args.recompute, args.candidate, args.inventory, args.built_html, args.source_repo, args.image,
                 args.public_config, args.protected_artifact, args.protected_project,
                 args.protected_deployment, args.protected_origin, args.protected_capture_sha256)):
             parser.error('status reads committed review records; build and capture options do not apply')
@@ -364,13 +398,18 @@ def main(argv=None):
         except (AnswerRefused, OSError) as error:
             parser.exit(1, f'ams-pages: {error}\n')
         return
+    _capture_arguments(args, parser)
+    if args.command == 'check':
+        from .page_coverage import CoverageRefused, run_check
+        try:
+            print(json.dumps(run_check(args, parser), sort_keys=True))
+        except (CoverageRefused, PageRefused, AnswerRefused, OSError, json.JSONDecodeError) as error:
+            parser.exit(1, f'ams-pages: {error}\n')
+        return
+    if args.recompute:
+        parser.error('--recompute applies only to check')
     if not args.candidate:
         parser.error('generate requires --candidate')
-    protected_pins = [args.protected_project, args.protected_deployment, args.protected_origin, args.protected_capture_sha256]
-    if args.protected_artifact and (not all(protected_pins) or args.built_html):
-        parser.error('protected capture requires automatic collection and every independent observer pin')
-    if not args.protected_artifact and any(protected_pins):
-        parser.error('protected observer pins require --protected-artifact')
     if args.built_html and (not args.inventory or args.image or args.source_repo or args.ref or args.public_config):
         parser.error("injected HTML requires --inventory and cannot be combined with automatic build options")
     if not args.built_html and (args.inventory or not args.image):
@@ -380,23 +419,11 @@ def main(argv=None):
             result = generate(args.project, json.loads(args.inventory.read_text()), json.loads(args.built_html.read_text()), candidate=args.candidate)
             result["input_mode"] = "injected-artifact"
         else:
-            from .page_build import DockerBuild, collect_current
-            runtime = DockerBuild(args.image, timeout=args.timeout)
-            config = json.loads(args.public_config.read_text()) if args.public_config else None
-            collected = collect_current(args.source_repo or args.project, args.ref or "origin/dev", args.candidate,
-                                        build_start=runtime, public_config=config)
-            if not runtime.cleanup_verified:
-                raise PageRefused("owned runtime cleanup is not verified; no Board write")
-            if args.protected_artifact:
-                from .protected_pages import collect_protected
-                from .page_build import AMS_ORIGIN
-                collected = collect_protected(args.protected_artifact, collected, expected_pins={
-                    'repository': AMS_ORIGIN, 'project': args.protected_project,
-                    'deployment': args.protected_deployment, 'candidate': args.candidate,
-                    'origin': args.protected_origin, 'capture_sha256': args.protected_capture_sha256})
+            collected = _collect_for_review(args)
             result = generate(args.project, collected["inventory"], collected["html"], candidate=collected["candidate"],
-                              protection=collected.get('verified_capture'))
-            result.update(input_mode="protected-capture" if args.protected_artifact else "pinned-container-build", build_image=args.image,
+                              protection=collected.get('verified_capture'),
+                              expected_manifest_sha=collected['review_manifest_sha'])
+            result.update(input_mode=collected['input_mode'], build_image=args.image,
                           route_kinds=collected["kinds"], excluded=collected["excluded"], cleanup_verified=True)
             if collected.get('protection'):
                 result['protection'] = collected['protection']

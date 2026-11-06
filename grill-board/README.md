@@ -265,6 +265,32 @@ original action with a newly submitted event while its outcome is unknown.
 
 Metadata cannot contain any line separator recognized by the card parser; generated Page/hash/candidate/owner fields are checked before writes. Note refusal also recognizes the fixed approval record when a Page marker is damaged. Historical/containment provenance requires an explicit branch; an absent PR remains labeled unknown, with no branch inferred.
 
+### Read-only page coverage
+
+`uv run ams-pages check` freezes the fetched `origin/dev` source once, then
+reads its declared page inventory and the review repository's committed HEAD.
+`pageReview.inventory` in the manifest names the inventory path. Use
+`--source-repo PATH` when the canonical AMS source and review checkout differ;
+`--candidate FULL_SHA` also verifies the expected source ref identity.
+
+The command names missing/removed pages, absent or malformed current cards,
+changed origin/pending provenance, mismatched card identity/hash, extra open
+questions and unavailable voice references. Uncommitted drafts are ignored.
+Success reports pages/current cards and both immutable revisions; it writes no
+cards, approvals, voice entries or commits. If the committed review HEAD or
+source ref moves during a check, that run refuses and must be repeated.
+
+`check --recompute --image SHA256` uses the same owned build, cleanup and
+protected-capture validation as generation, then compares actual served hashes.
+Use the existing `--protected-artifact` and all independent observer pins for
+populated protected content. A different local unavailable-data build cannot
+stand for that content. Every build/capture must finish verified cleanup. Automatic generation also
+rechecks its starting manifest SHA under the write lock; a changed layout
+refuses before card writes.
+Explicit `--inventory`/`--built-html` inputs remain labeled fixture artifacts,
+never live deployment proof. Final owner QA still needs one assembled READY
+source and its fresh complete capture/readback.
+
 ### Protected capture boundary
 
 For protected page identity, an authenticated outer observer fetches every route from one immutable Vercel deployment. Keep its raw HTML and capture files private and outside the Git export/build. Recover repository, project, deployment, source SHA and immutable origin from the authenticated Vercel observation; supply the exact capture digest independently. A manifest's own claim of trust is insufficient, and the CLI never derives the expected digest from an incoming manifest.
