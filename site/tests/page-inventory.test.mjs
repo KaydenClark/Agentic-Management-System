@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync, symlinkSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -46,6 +47,57 @@ function fixture() {
   addArticle('alpha'); addArticle('beta');
   return { root, site, put, json, rules, paths, prerender, addArticle, cleanup: () => rmSync(root, { recursive: true, force: true }) };
 }
+
+function appPageCache(f) {
+  const files = {};
+  for (const [artifact, entry] of [
+    ['index.html', '/page'], ['skills.html', '/skills/page'],
+    ['_not-found.html', '/_not-found/page'], ['_global-error.html', '/_global-error/page'],
+    ['skills/alpha.html', '/skills/[name]/page'], ['skills/beta.html', '/skills/[name]/page'],
+  ]) {
+    const source = join(f.site, '.next/server/app', artifact);
+    const owner = createHash('sha256').update(entry).digest('hex');
+    const target = `site/.next/server/route-cache/APP_PAGE/${owner}/$/${artifact}`;
+    f.put(target, readFileSync(source));
+    rmSync(source);
+    files[artifact] = join(f.root, target);
+  }
+  return files;
+}
+
+test('the supported APP_PAGE cache layout has the same complete public inventory as classic output', () => {
+  const f = fixture();
+  try {
+    const classic = generateInventory(f.site).inventory;
+    appPageCache(f);
+    const cached = generateInventory(f.site, { write: true });
+    assert.deepEqual(cached.inventory, classic);
+    assert.equal(cached.kinds['/_not-found'], 'visitor-404');
+    assert.equal(generateInventory(f.site, { check: true }).changed, false);
+  } finally { f.cleanup(); }
+});
+
+test('APP_PAGE cache coverage rejects missing, unknown, duplicate, wrong-owner and unsafe layouts', () => {
+  for (const [change, expected] of [
+    [(_f, files) => rmSync(files['skills/alpha.html']), /missing.*\/skills\/alpha/],
+    [(f) => f.put(`site/.next/server/route-cache/APP_PAGE/${'a'.repeat(64)}/$/unregistered.html`, html('Unknown')), /owner|unknown/],
+    [(f, files) => f.put('site/.next/server/app/skills/alpha.html', readFileSync(files['skills/alpha.html'])), /duplicate/],
+    [(f, files) => { rmSync(files['skills/alpha.html']); f.put(`site/.next/server/route-cache/APP_PAGE/${'a'.repeat(64)}/$/skills/alpha.html`, html('Wrong owner')); }, /owner/],
+    [(f) => f.put('site/.next/server/route-cache/APP_PAGE/not-a-hash/skills/alpha.html', html('Bad layout')), /cache.*layout|cache.*artifact/],
+    [(_f, files) => { rmSync(files['skills/alpha.html']); symlinkSync(files['skills/beta.html'], files['skills/alpha.html']); }, /symlink/],
+    [(f, files) => { rmSync(join(f.site, '.next/server/route-cache/APP_PAGE'), { recursive: true }); symlinkSync(join(f.site, '.next/server/app'), join(f.site, '.next/server/route-cache/APP_PAGE')); }, /symlink/],
+    [(f) => f.put('site/.next/server/app/unregistered.html', html('Unregistered')), /extra.*\/unregistered/],
+  ]) {
+    const f = fixture();
+    try {
+      const files = appPageCache(f);
+      change(f, files);
+      const before = readFileSync(join(f.site, 'page-list.json'));
+      assert.throws(() => generateInventory(f.site, { write: true }), expected);
+      assert.deepEqual(readFileSync(join(f.site, 'page-list.json')), before);
+    } finally { f.cleanup(); }
+  }
+});
 
 test('a build automatically supplies ownership for each article and visitor404 without changing historical metadata', () => {
   const f = fixture();
