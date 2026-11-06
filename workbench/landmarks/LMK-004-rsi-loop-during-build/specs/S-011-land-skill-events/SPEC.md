@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
 **Execution approval:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
-**Next gate:** Inspect TK-002S's plan observing in-progress S-007/TK-001F before claim/control execution. R is delivered; protected end state, recurrence/effort and safe store/page joins still gate S completion. Old claims/stops remain.
+**Next gate:** Close TK-002S with verification and documentation proof.
 
 ## Intent and authority
 
