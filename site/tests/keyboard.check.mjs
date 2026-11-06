@@ -77,6 +77,19 @@ try {
     check(`negative: ${name}`, !before.length && matches(errors) && retained, { before, errors, retained });
     await context.close();
   }
+  // The real shell must reveal links natively without relying on hydration.
+  for (const route of ['/rsi', '/start']) for (const javaScriptEnabled of [false, true]) {
+    for (const width of [375, 1280]) for (const theme of ['light', 'dark']) {
+      const context = await browser.newContext({ viewport: { width, height: 812 }, colorScheme: theme, javaScriptEnabled });
+      const page = await context.newPage();
+      await page.goto(`${base}${route}`, { waitUntil: 'networkidle' });
+      const errors = await keyboardProblems(page);
+      const text = (await page.textContent('main')) ?? '';
+      const overflow = await page.evaluate(() => document.documentElement.scrollWidth > innerWidth);
+      check(`real shell ${route} JS=${javaScriptEnabled} ${width}/${theme}`, !errors.length && !overflow && text.trim().length > 40, { errors, overflow });
+      await context.close();
+    }
+  }
 } finally {
   await browser.close();
 }
