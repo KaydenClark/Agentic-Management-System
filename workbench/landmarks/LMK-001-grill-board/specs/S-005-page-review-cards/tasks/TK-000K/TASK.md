@@ -48,12 +48,15 @@ The existing read-only checker/CLI is under verification. Normal check freezes t
 
 Retain approved historical/verified/pending provenance: pending has landed:null and must bind the frozen candidate/integration-pending state. No landing is invented. Coverage also refuses damaged extra page questions and missing/future voice references on open cards, while keeping stale/answered history.
 
-Uncommitted coverage/collector/capture/page/approval/feedback/browser checks pass199 with2 Docker skips (no image configured for that focused run). The27-case coverage matrix includes input drift, damaged extra page cards and missing/future voice references. Fresh full with the approved image, independent Review, current CI and actual current-dev live coverage remain before close. Final assembled QA/consumption/owner judgments and main permission remain separate. No site edit or actual owner feedback.
+Initial uncommitted coverage/collector/capture/page/approval/feedback/browser checks passed199 with2 Docker skips (no image configured for that focused run). The27-case coverage matrix includes input drift, damaged extra page cards and missing/future voice references. Fresh full with the approved image, independent Review, current CI and actual current-dev live coverage remain before close. Final assembled QA/consumption/owner judgments and main permission remain separate. No site edit or actual owner feedback.
 
 ## Receipt
 
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-005-page-review-cards | 089c065275679a4e5988a775b003d5385fbc397b | ahead 13 behind 0 | 10 | Uncommitted checker:199focused/2Docker skips;27coverage cases. Expected reds: missing checker/CLI, wrong-owner and unsafe queue/input drift controls; corrected greens. Current source data remains old47. | Coverage command/manifest path/RUNBOOK/Board guide. Native baseline248e and75 ignored originals preserved. | Fresh full with image, independent Review, exact CI, actual current-dev check. Final assembled capture/E/ownerQA/main permission remain; no site changes or owner actions. | acdcbcb6493f6a8a125cd9dc5a464f5117be9240e20481c576d4dca58571823f |
+| 2 | Feature/S-005-page-review-cards | 6c468919f821e7b89d2a7008632233650be9f6c8 | ahead 17 behind 0 | 4 | 97d8:136scoped with actual Docker/SIGINT;both correctiveReviews0. Initial0baf full1076/4skips;correctedfreshfull running. Prior201pass/3fixturefail retained281-283. | Coverage report,RUNBOOK,Board guide,manifest,Wiki;FAIL269-285 preserved. | Corrected full/exactCI/current-dev live;consumption,assembledQA,main permission and release remain. No site changes or owner actions. | d70f2a7481d8fca83271b92f1a34ceb52bcd77bf7a1ac51813157846ff9f2646 |
+
+## Verification progress
 
 Initial pinned0baf fresh full passes1076/4 skips with actual approved Docker/browser. Independent review found held-card coverage (FAIL-276) and inherited path fallback (FAIL-278); corrective controls and fixture misses are retained in [coverage proof](../../../../../../feedback/REPORT-s005-coverage-servitor-2026-11-06.md). Corrected full, delta reviews, CI and live proof remain.
