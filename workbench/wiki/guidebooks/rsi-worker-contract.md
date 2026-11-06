@@ -38,6 +38,12 @@ Add a supported, bounded thread/turn executor with explicit pinned skill mapping
 
 The software slice uses inert peers/processes and distinct synthetic isolated-store identities only. Actual host canaries need later coordinator release; no model, skill or grader call, frozen-case slot, install, source-skill change, held evaluator import, production write or main merge is included. Keep exact installed804 runtime sources and ed0 bytes, required hooks, private raw packets and safe store fields. Missing runtime-model/load/descendant evidence remains unknown. Native configuration and acknowledgments do not fill it. Draft193 and P remain open until their actual acceptance conditions hold.
 
+## Component deadline failure
+
+FAIL-215 records independent Review FAIL at immutable `cf85db03df69897d367cb59aacdcb1268534c273`: an inert peer delayed each reply by0.15s; execution/cancellation budgets were each0.3s, yet11 requests returned complete/cleanup-confirmed after1.779s. The source restarted preparation/revalidation budgets per RPC and reset unsubscribe time. The retained private reproducer/log are the RED evidence; no native model or skill call occurred.
+
+The accepted minimal correction uses one monotonic total preparation/execution deadline and one separate aggregate cleanup deadline, with remaining time applied to each RPC, interrupt, unsubscribe and owned host close. Targeted red/green and final immutable retest evidence will be appended here. Prior failures, assessment runs, counters and no-model proof scopes remain intact; this is no trial reset or full P acceptance.
+
 ## Verified source seams and gaps
 
 At main `cfc0bc4c7f2cd167cea2972016edee076b479b73`, `trial_campaign.Campaign.run_one` journals before one released slot, refuses an attempted slot and requires its predecessor. It is not a durable multiworker scheduler. `trial_runtime.ClaudeAdapter` explicitly requires empty tools/MCP and rejects native tool use. Private source packs prove no native discovery/installation. Do not change its stopped protocol.
