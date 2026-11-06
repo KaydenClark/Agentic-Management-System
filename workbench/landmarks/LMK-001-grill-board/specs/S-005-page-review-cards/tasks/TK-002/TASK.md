@@ -3,7 +3,7 @@
 **Task ID:** TK-002
 **Spec ID:** S-005
 **Slice:** Confirming a page card records an owner-facing approval bound to its current hash in Git
-**Status:** ready
+**Status:** in-progress
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Approval bound to content
 **Planned verification:** pytest with fixture cards, current hashes, stale approvals and append-only committed approval readback
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Nothing in `site/` changes.
+**Claimed by:** codex-s005-approvals
+**Current claimant:** codex-s005-approvals
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`, its approval-storage decision), `grill-board/README.md`, DDR-000O, DDR-000X, ADR-002U, ADR-003C, ADR-003H, the TK-001 generator and hash contract, `src/ams/writer.py` and `tests/test_writer.py`, and `supabase/migrations/`. Run Supabase commands only in orchestrator B's main checkout, where the service key lives; never print it.
 
