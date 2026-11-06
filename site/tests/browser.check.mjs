@@ -176,7 +176,9 @@ async function keyboardProblems(page) {
   await page.evaluate(() => { document.activeElement?.blur?.(); window.scrollTo(0, 0); });
   const total = await page.evaluate(() => {
     const native = 'a[href], area[href], button, input:not([type="hidden"]), select, textarea, summary, iframe, audio[controls], video[controls], [contenteditable=""], [contenteditable="true"]';
-    const visible = (el) => el.getClientRects().length > 0 && getComputedStyle(el).visibility !== 'hidden';
+    // Closed <details> descendants can retain client rects despite not being painted.
+    const visible = (el) => el.getClientRects().length > 0 && el.checkVisibility({ visibilityProperty: true });
+    document.querySelectorAll('[data-qa-i]').forEach(el => el.removeAttribute('data-qa-i'));
     const els = [...document.querySelectorAll(`${native}, [tabindex]`)]
       .filter((el) => !el.disabled && !el.closest('[inert]') && visible(el))
       // tabindex="-1" on a non-interactive element (a skip-link target) is a
@@ -445,6 +447,26 @@ async function selfTest(browser, server, origin) {
     check(`self-test: planted ${what} is caught`, before.length === 0 && matches(after), after.slice(0, 2).join(' | ') || 'not caught');
     await context.close();
   }
+  // Closed details descendants are not painted or tabbable. Once opened, each
+  // descendant becomes subject to the same reachability and indicator checks.
+  {
+    const { context, page } = await openPage(browser, `${server.url}/skills/grilling`, { width: 375, theme: 'light', origin });
+    const closed = page.locator('nav[aria-label="Skills wiki"] details').first();
+    const summary = closed.locator('summary');
+    const link = closed.locator('a').first();
+    const initial = await link.evaluate(el => ({rects:el.getClientRects().length, visible:el.checkVisibility({visibilityProperty:true})}));
+    const before = await keyboardProblems(page);
+    await page.reload({ waitUntil: 'networkidle' });
+    await closed.evaluate(d => { d.open = true; });
+    const opened = await link.evaluate(el => el.checkVisibility({visibilityProperty:true}));
+    const after = await keyboardProblems(page);
+    await page.reload({ waitUntil: 'networkidle' });
+    await closed.evaluate(d => { d.open = true; });
+    await link.evaluate(el => { el.tabIndex = -1; el.textContent = 'QA unreachable details link'; });
+    const broken = await keyboardProblems(page);
+    check('self-test: closed details omitted and opened links checked', initial.rects > 0 && !initial.visible && opened && !before.length && !after.length && broken.some(x=>x.includes('not reachable by Tab: a "QA unreachable details link"')), JSON.stringify({initial, opened, before, after, broken}));
+    await context.close();
+  }
   // An external font: the request must be seen and blocked.
   const { context, page, log } = await openPage(browser, server.url, { width: 375, theme: 'light', origin });
   const before = foreign(log).length;
@@ -486,6 +508,9 @@ async function selfTest(browser, server, origin) {
 async function toyProblems(page, plant) {
   const problems = [];
   if (!(await page.$('[data-toy]'))) return ['no interactive toy ([data-toy]) on the page'];
+  // Finish the page's ordinary prefetch and font loads before observing the
+  // keyboard interaction; every request after the window opens still fails.
+  await settleBoard(page);
   if (plant) await plant(page);
   const store = () => page.evaluate(() => JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage), document.cookie]));
   const before = await store();
@@ -606,6 +631,12 @@ try {
         check(`${tag}: axe WCAG A/AA (contrast included)`, !p.length, p.join(' | '));
         p = await keyboardProblems(page);
         check(`${tag}: keyboard reaches every control with a visible focus`, !p.length, p.join(' | '));
+        if (route.path.startsWith('/skills/')) {
+          await page.reload({ waitUntil: 'networkidle' });
+          await page.locator('nav[aria-label="Skills wiki"] details').evaluateAll(ds => ds.forEach(d => { d.open = true; }));
+          p = await keyboardProblems(page);
+          check(`${tag}: keyboard reaches every expanded wiki control`, !p.length, p.join(' | '));
+        }
         p = await motionProblems(page);
         check(`${tag}: reduced motion respected`, !p.length, p.join(' | '));
         if (shots) {
