@@ -11,6 +11,7 @@ create table public.rsi_lineage (
   record_id text not null,
   kind text not null,
   failure_id text not null,
+  chain_id text not null,
   is_test boolean not null,
   synthetic boolean not null,
   format_version integer not null default 1 check (format_version = 1),
@@ -26,7 +27,9 @@ create table public.rsi_lineage (
   check (record_digest = encode(sha256(convert_to(record_text, 'UTF8')), 'hex'))
 );
 create unique index rsi_lineage_attempt_identity on public.rsi_lineage
-  (namespace, failure_id, ((attributes->>'attempt')::integer)) where kind = 'candidate';
+  (namespace, chain_id, ((attributes->>'attempt')::integer)) where kind = 'candidate';
+create unique index rsi_lineage_occurrence_identity on public.rsi_lineage
+  (namespace, failure_id) where kind = 'failure';
 alter table public.rsi_lineage enable row level security;
 revoke all on public.rsi_lineage from public, anon, authenticated;
 grant select, insert on public.rsi_lineage to service_role;
@@ -48,6 +51,7 @@ declare
   expected_kind text;
   value record;
   family text;
+  occurrence_role text;
 begin
   if tg_op <> 'INSERT' then raise exception 'immutable lineage' using errcode='PT409'; end if;
   if jsonb_typeof(r) <> 'object' or (r - array['namespace','record_id','kind','parents','attributes',
@@ -67,7 +71,7 @@ begin
   if (new.is_test <> (new.namespace like 'test-%')) or (new.synthetic and not new.is_test) then
     raise exception 'test/synthetic labels required' using errcode='23514'; end if;
   case new.kind
-    when 'failure' then needed:=array['failure_id','family']; required_roles:='{}';
+    when 'failure' then needed:=array['failure_id','family','chain_id']; required_roles:='{}';
     when 'case' then needed:=array['version']; required_roles:='{"failure":"failure"}';
     when 'candidate' then needed:=array['attempt','skills_commit']; required_roles:='{"case":"case"}';
     when 'comparison' then needed:=array['campaign_id','contract_digest']; required_roles:='{"case":"case","current_candidate":"candidate","candidate":"candidate"}';
@@ -103,17 +107,31 @@ begin
     raise exception 'stale lineage head' using errcode='PT409'; end if;
   new.ordinal := coalesce(last_row.ordinal,0)+1;
   new.recorded_at := clock_timestamp();
-  family := case when new.kind='failure' then a->>'failure_id' else null end;
+  -- Explicit chain_id is distinct from both the Markdown occurrence ID and
+  -- broad failure family. Campaign/case names never key candidate counters.
+  family := case when new.kind='failure' then a->>'chain_id' else null end;
+  if new.kind='failure' and exists(select 1 from public.rsi_lineage where
+    namespace=new.namespace and kind='failure' and chain_id=family
+    and attributes->>'family'<>a->>'family') then
+    raise exception 'stable chain family changed' using errcode='23514'; end if;
   for link in select * from jsonb_each(p) loop
     expected_kind := coalesce(required_roles->>link.key,'candidate');
     select * into parent from public.rsi_lineage where namespace=new.namespace and record_id=link.value #>> '{}';
     if not found or parent.kind<>expected_kind or parent.is_test<>new.is_test or parent.synthetic<>new.synthetic then
       raise exception 'missing or incompatible lineage parent' using errcode='23514'; end if;
-    if family is not null and family<>parent.failure_id then
-      raise exception 'conflicting failure identity' using errcode='23514'; end if;
-    family := parent.failure_id;
+    if family is not null and family<>parent.chain_id then
+      raise exception 'conflicting improvement chain' using errcode='23514'; end if;
+    family := parent.chain_id;
   end loop;
-  new.failure_id := family;
+  new.chain_id := family;
+  if new.kind='failure' then new.failure_id:=a->>'failure_id';
+  else
+    occurrence_role:=case new.kind when 'case' then 'failure' when 'candidate' then 'case'
+      when 'comparison' then 'case' when 'run' then 'comparison' when 'result' then 'run'
+      when 'disposition' then 'comparison' when 'adoption' then 'candidate' when 'use' then 'adoption' end;
+    select failure_id into new.failure_id from public.rsi_lineage
+      where namespace=new.namespace and record_id=p->>occurrence_role;
+  end if;
   if new.kind='candidate' then
     if (a->>'attempt')::integer not between 0 and 3
       or ((a->>'attempt')::integer>0) <> (p ? 'previous_candidate') then
@@ -189,8 +207,8 @@ begin
   if head is distinct from p_expected_head then raise exception 'stale lineage head' using errcode='PT409'; end if;
   for item in select * from jsonb_array_elements(p_records) loop
     if exists(select 1 from public.rsi_lineage where namespace=p_namespace and record_id=(item->>'record_text')::jsonb->>'record_id') then continue; end if;
-    insert into public.rsi_lineage(namespace,ordinal,record_id,kind,failure_id,is_test,synthetic,record_text,record_digest,previous_digest)
-      values(p_namespace,0,'pending','pending','pending',true,true,item->>'record_text',item->>'record_digest',head);
+    insert into public.rsi_lineage(namespace,ordinal,record_id,kind,failure_id,chain_id,is_test,synthetic,record_text,record_digest,previous_digest)
+      values(p_namespace,0,'pending','pending','pending','pending',true,true,item->>'record_text',item->>'record_digest',head);
     head:=item->>'record_digest'; added:=added+1;
   end loop;
   return added;

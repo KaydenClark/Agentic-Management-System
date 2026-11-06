@@ -6,21 +6,21 @@
 **Owner:** Kayden; orchestrator B (local, holds the Supabase keys)
 **Stance:** Builder
 **Updated:** 2026-11-06
-**Catalog description:** Supabase schema and local Python writer for RSI results, build history, cost and tokens; the site reads under RLS.
+**Catalog description:** Supabase provenance, Python writer and read-only RSI/build/usage presentation.
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Resolve stopped TK-002N client-denial proof and stable-chain identity findings; TK-002O remains blocked.
+**Next gate:** Verify corrected TK-002N; O requires its checked artifact.
 
 ## Intent and authority
 
-The [Stage A owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorized preparation only. On 2026-11-05 the owner explicitly launched TK-002N/TK-002O implementation, starting with an isolated test namespace, and confirmed the execution readback. This releases only their implementation hold; O still requires verified N. Model campaigns, installation, stopped campaigns and production promotion retain their separate gates.
+[Stage A](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) was preparation only. Owner launch/confirmed readback, 2026-11-05: implement N in an isolated test namespace; O requires verified N. Campaign, installation, stopped-work and promotion gates remain.
 
-The owner decided that Python pushes RSI results to Supabase as they arrive and the site reads from it; everything the site shows, build history included, lives there. Token counts go with the RSI data. The service key stays in the gitignored local environment; the site receives only its publishable key.
+Python writes RSI results, build history and tokens to Supabase as they arrive; site data reads use its publishable key. Service key: local ignored environment.
 
 ## Outcome
 
-One Supabase project holds every row the site presents; a local Python writer fills it; the site reads with the publishable key, never writes.
+One Supabase project holds all site data. Local Python writes; publishable clients only read.
 
 ## Why It Matters
 
@@ -35,7 +35,7 @@ Build history is incomplete: the approved pinned import at 771bd1e passed, but l
 ## Desired Behavior
 
 - Existing RSI result/run tables retain task, split, control arm, runtime/controls/skills commits, provider/model/effort, completion, grade and source. Assessments remain separate from behavioral trials.
-- Presentation data is read-only to clients; private assessments and operational state are not publicly readable. Only the authorized worker writes lifecycle records; candidate agents receive no database credentials.
+- Clients read safe data only; assessments and operations stay private. Only authorized workers write lifecycle records; candidates receive no database credentials.
 - Supabase owns worker-written, commit-pinned cases, runs, candidates, comparisons and dispositions. Git fixtures/contracts are referenced artifacts, not competing live statuses. Markdown owns failure intake; ingestion references stable ID, source revision and corrections, without duplicate occurrences.
 - Link failures, case versions, experiment contracts, candidate parents, jobs, results, decisions and adoption/use receipts. Extend existing identities rather than creating a second ledger. Table/queue technology is left to implementation.
 - Persist job authorization, claim, attempt, stage, next action and stop/block reason. Atomic claims and version conflicts prevent duplicate ownership; interrupted or uncertain writes reconcile before replay. S-000B owns execution semantics.
@@ -61,7 +61,7 @@ Build history is incomplete: the approved pinned import at 771bd1e passed, but l
 
 ## Vertical Implementation Slices
 
-[TK-002N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md); N released for isolated lineage implementation, O waits for verified N.
+[N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md): N released for isolated lineage; O waits for verified N.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|

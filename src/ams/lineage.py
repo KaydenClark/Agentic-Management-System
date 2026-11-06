@@ -38,7 +38,7 @@ PARENTS = {
     "use": {"adoption": "adoption"},
 }
 ATTRS = {
-    "failure": {"failure_id", "family"}, "case": {"version"},
+    "failure": {"failure_id", "family", "chain_id"}, "case": {"version"},
     "candidate": {"attempt", "skills_commit"},
     "comparison": {"campaign_id", "contract_digest"}, "run": {"run_key"},
     "result": {"execution_state", "passed"}, "disposition": {"decision"},
@@ -117,9 +117,14 @@ def validate_record(record):
 
 
 def validate_graph(records):
-    """Verify a topological snapshot, preserving occurrence and family identity."""
+    """Verify occurrences and their stable improvement chains separately.
+
+    ``failure_id`` names the intake occurrence, ``family`` its broad category,
+    and ``chain_id`` the stable improvement history across recurrences.
+    Candidate attempts belong to that chain, including across new case names.
+    """
     require(type(records) is list, "lineage must be a list")
-    by_id, roots, attempts = {}, {}, set()
+    by_id, roots, attempts, occurrences, chain_families = {}, {}, set(), set(), {}
     namespace = records[0].get("namespace") if records and type(records[0]) is dict else None
     for record in records:
         validate_record(record)
@@ -130,7 +135,13 @@ def validate_graph(records):
             expected = PARENTS[kind].get(role, "candidate")
             require(pid in by_id and by_id[pid]["kind"] == expected, "missing or wrong-kind parent")
             require(all(record[f] == by_id[pid][f] for f in ("is_test", "synthetic")), "parent evidence labels differ")
-        family = attrs["failure_id"] if kind == "failure" else roots[next(iter(parents.values()))]
+        family = attrs["chain_id"] if kind == "failure" else roots[next(iter(parents.values()))]
+        if kind == "failure":
+            require(attrs["failure_id"] not in occurrences, "duplicate failure occurrence")
+            occurrences.add(attrs["failure_id"])
+            require(family not in chain_families or chain_families[family] == attrs["family"],
+                    "stable chain family cannot change")
+            chain_families[family] = attrs["family"]
         require(all(roots[p] == family for p in parents.values()), "conflicting failure identities")
         if kind == "candidate":
             attempt = attrs["attempt"]
@@ -215,7 +226,14 @@ class Store:
                 require(record["namespace"] == namespace and row["ordinal"] == after + 1, "lineage readback namespace/gap")
                 previous, after = row["record_digest"], row["ordinal"]
                 rows.append(row)
-        validate_graph([json.loads(row["record_text"]) for row in rows])
+        records = [json.loads(row["record_text"]) for row in rows]
+        validate_graph(records)
+        chains = {}
+        for row, record in zip(rows, records):
+            chain_id = (record["attributes"]["chain_id"] if record["kind"] == "failure"
+                        else chains[next(iter(record["parents"].values()))])
+            require(row.get("chain_id") == chain_id, "lineage readback chain projection differs")
+            chains[record["record_id"]] = chain_id
         return rows
 
     def read(self, namespace):
@@ -244,26 +262,37 @@ class Store:
 
 def main(argv=None, *, dotenv_path=None):
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--rest-path", choices=("", "/rest/v1"), default="/rest/v1")
     sub = parser.add_subparsers(dest="command", required=True)
     put = sub.add_parser("append"); put.add_argument("file", type=Path)
     put.add_argument("--expected-head", required=True, help="digest, or empty for a new namespace")
     get = sub.add_parser("read"); get.add_argument("namespace")
+    get.add_argument("--trace", metavar="RECORD_ID")
     args = parser.parse_args(argv)
     settings = keycheck.load_settings(dotenv_path=dotenv_path)
     if settings.key is None:
         print("loaded: no"); return 1
-    store = Store(settings.url, settings.key)
+    store = Store(settings.url, settings.key, rest_path=args.rest_path)
     try:
         if args.command == "append":
             records = json.loads(args.file.read_text())
             rows = store.append(records, expected_head=args.expected_head or None)
         else:
             rows = store.rows(args.namespace)
-        print(json.dumps({"published": True, "count": len(rows),
+        output = {"published": True, "count": len(rows),
                           "head": rows[-1]["record_digest"] if rows else None,
-                          "synthetic_count": sum(r["synthetic"] for r in rows)}))
+                          "synthetic_count": sum(r["synthetic"] for r in rows)}
+        if args.command == "read" and args.trace:
+            records = trace([json.loads(r["record_text"]) for r in rows], args.trace)
+            output["trace"] = [{k: r[k] for k in ("record_id", "kind", "parents", "source_commit", "artifact_digest", "synthetic")}
+                               for r in records]
+        print(json.dumps(output))
         return 0
     except (Refused, OSError, ValueError) as error:
         # File and parser errors can contain private input. Never echo them.
         print("published: no; " + (str(error) if isinstance(error, Refused) else "invalid local evidence"))
         return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

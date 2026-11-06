@@ -14,7 +14,7 @@ def chain(namespace="test-lineage"):
                     artifact_digest="b" * 64, occurred_at="2026-11-05T00:00:00Z",
                     is_test=True, synthetic=True)
     return [
-        row("failure", "occurrence-1", {}, {"failure_id": "FAIL-034", "family": "grilling-resume"}),
+        row("failure", "occurrence-1", {}, {"failure_id": "FAIL-034", "family": "grilling-resume", "chain_id": "grilling-resume-repair-r1"}),
         row("case", "case-v1", {"failure": "occurrence-1"}, {"version": 1}),
         row("candidate", "baseline", {"case": "case-v1"}, {"attempt": 0, "skills_commit": "c" * 40}),
         row("candidate", "candidate-1", {"case": "case-v1", "previous_candidate": "baseline"},
@@ -44,7 +44,7 @@ def test_complete_chain_preserves_identity_and_synthetic_label():
     lambda rs: rs[-1].update(synthetic=False),
     lambda rs: rs[3]["attributes"].update(attempt=3),
     lambda rs: rs[0]["attributes"].update(transcript="private"),
-    lambda rs: rs[0]["attributes"].update(failure_id="/Users/owner/private"),
+    lambda rs: rs[0]["attributes"].update(failure_id="/not-a-record-id"),
     lambda rs: rs[0].update(source_commit="main"),
     lambda rs: rs[0].update(namespace="production"),
     lambda rs: rs[6]["attributes"].update(execution_state="timeout"),
@@ -65,6 +65,45 @@ def test_new_case_name_cannot_reset_exhausted_candidate_family():
     new_baseline["parents"]["case"] = "case-v2"
     with pytest.raises(lineage.Refused, match="attempt"):
         lineage.validate_graph(rows + [next_case, new_baseline])
+
+
+def exhausted_chain(namespace="test-lineage"):
+    records = chain(namespace)
+    for attempt in (2, 3):
+        candidate = deepcopy(records[3])
+        candidate["record_id"] = "candidate-" + str(attempt)
+        candidate["attributes"]["attempt"] = attempt
+        candidate["parents"]["previous_candidate"] = "candidate-" + str(attempt - 1)
+        records.append(candidate)
+    return records
+
+
+def recurrence_reset(records, attempt):
+    occurrence = deepcopy(records[0]); occurrence["record_id"] = "occurrence-2"
+    occurrence["attributes"]["failure_id"] = "FAIL-035"
+    case = deepcopy(records[1]); case["record_id"] = "fresh-case"
+    case["parents"]["failure"] = "occurrence-2"
+    candidate = deepcopy(records[2]); candidate["record_id"] = "fresh-candidate"
+    candidate["parents"]["case"] = "fresh-case"; candidate["attributes"]["attempt"] = attempt
+    if attempt: candidate["parents"]["previous_candidate"] = "candidate-3"
+    return [occurrence, case, candidate]
+
+
+@pytest.mark.parametrize("attempt", [0, 4])
+def test_recurrence_cannot_reset_underlying_exhausted_chain(attempt):
+    records = exhausted_chain()
+    with pytest.raises(lineage.Refused, match="attempt"):
+        lineage.validate_graph(records + recurrence_reset(records, attempt))
+
+
+def test_unrelated_chain_parent_cannot_replace_candidate_origin():
+    records = chain()
+    other = deepcopy(records[0]); other["record_id"] = "other-occurrence"
+    other["attributes"] = {"failure_id": "FAIL-999", "family": "grilling-resume", "chain_id": "unrelated-chain"}
+    case = deepcopy(records[1]); case["record_id"] = "other-case"; case["parents"]["failure"] = other["record_id"]
+    candidate = deepcopy(records[3]); candidate["record_id"] = "mixed-candidate"; candidate["parents"]["case"] = case["record_id"]
+    with pytest.raises(lineage.Refused, match="conflicting"):
+        lineage.validate_graph(records + [other, case, candidate])
 
 
 def test_readback_rejects_tampering_and_transport_errors_never_echo_body():
