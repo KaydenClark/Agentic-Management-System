@@ -22,22 +22,18 @@ Size: one representative occurrence through the full path; widen only through an
 
 ## Acceptance
 
-- [ ] Feedback is consumed: preserve original criticism separately from interpretation; a subsequent page draft and its review name the applicable feedback version and show application or a reasoned unresolved disposition. A stored rating with no downstream use must fail.
-- [ ] A reviewer can replay the representative demonstration in under a minute from retained safe evidence/fixtures; actual external execution time is reported separately.
-- [ ] Original, adverse and regression observations name exact source and skill identities; no planned check is reported as performed.
-- [ ] Applicable checks and scoped QA pass; unmet outcomes remain open with a responsible owner.
+- [x] Feedback is consumed: preserve original criticism separately from interpretation; a subsequent page draft and its review name the applicable feedback version and show application or a reasoned unresolved disposition. A stored rating with no downstream use must fail.
+- [x] A reviewer can replay the representative demonstration in under a minute from retained safe evidence/fixtures; actual external execution time is reported separately.
+- [x] Original, adverse and regression observations name exact source and skill identities; no planned check is reported as performed.
+- [x] Applicable checks and scoped QA pass; unmet outcomes remain open with a responsible owner.
 
 Workspace baseline sha256:852ec2c768c31516f48dec950789f5f81dc6de152871c7cf710edd0d50b47b4c
 
-## Initial capture and draft
+## Verified result
 
-The genuine964-file baseline852ec2/78 copied ignored originals precedes this work. One labeled synthetic rating/criticism was captured through the delivered private-feedback interface. Exact originals remain private; feedback version1 and its safe source identity bind the subsequent agent draft. Safe case/draft artifacts are in tests/fixtures/page-feedback-consumption. An appended application supplement preserves the original pending entry. Actual independent review, adverse replay, checks and delivery remain; no actual owner feedback, site change or campaign is claimed.
+One labeled synthetic criticism reached an actual subsequent agent draft and independent version1 review, with immutable private original and append-only safe application. Both draft, replay/code and safe-export review axes report0 findings. [Proof and limits](../../../../../../feedback/REPORT-s005-feedback-consumption-servitor-2026-11-06.md) retains exact identities, actual timing and every failed check. Genuine baseline852ec2/78 independent originals remains preserved.
 
-[Consumption evidence](../../../../../../feedback/REPORT-s005-feedback-consumption-servitor-2026-11-06.md): actual synthetic draft99.53s, both content review axes0; initial replay9/1.90s and original-case retry0.734s. Exact version/source and private-original separation retained. Revised assertions/regressions, code delta review, fresh full, exact CI and native close remain.
-
-## Verification progress
-
-Both actual draft and replay/code reviews pass with0 findings. Revised106 regression checks pass. Fresha473 failed only the host-path hygiene gate (1087passed/4skipped/1failed); FAIL292/293 retains it and its reproduction. Safe reviewer aliases preserve original private judgments and fifth local export commit; replay9/2.76s and hygiene0 now pass. Corrected fresh full and exact CI remain before close. The private0fa deployment capture is historical after newer dev work; final current-dev coverage stays open with TK-000K.
+Correctedbae5871 fresh full passes1088/4 skips in436.82s with approved Docker/browser; exact CI42270478892/job128073420358 passes1075/9 skips plus11 browser/all14 steps. Revised106 regressions and bounded replay pass. FAIL292/293 preserves the a473 hygiene failure and safe role correction. All four Task criteria are met; checked records/current CI and native close remain before durable handback. Current-dev coverage, assembled Review/ownerQA/main permission and workspace release remain separate.
 
 ## Receipt
 
