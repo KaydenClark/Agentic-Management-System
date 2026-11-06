@@ -148,6 +148,7 @@ export default function HowItWorks() {
 
       <section className={styles.section} aria-labelledby="governance">
         <h2 id="governance">Who may decide, and what counts as proof?</h2>
+        <p>See the <Link href="/governance">Task lifecycle</Link> for the states and transitions the tools use.</p>
         <p>
           The owner’s request sets the purpose and scope. Project rules constrain permitted actions; the Spec
           states the outcome to judge, and the Task assigns a piece of work. A status view displays those records
@@ -181,7 +182,7 @@ export default function HowItWorks() {
         <p>
           In this project, answers and page-review judgments belong to the relevant work and identified content.
           A displayed card is not an answer or approval. The local board is separate from this presentation
-          website: this section explains its role.
+          website: this section explains its role. Try the <Link href="/grill-board-demo">sample Grill Board</Link> to explore everyday questions locally.
         </p>
         <Signal kind="returned" label="Returned for correction">
           <p>

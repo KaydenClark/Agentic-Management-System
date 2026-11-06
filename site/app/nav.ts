@@ -11,7 +11,9 @@ export const nav: readonly NavEntry[] = [
   { href: "/start", label: "About" },
   { href: "/why", label: "Why" },
   { href: "/how-it-works", label: "How it works" },
+  { href: "/grill-board-demo", label: "Grill Board demo" },
   { href: "/skills", label: "Skills" },
+  { href: "/governance", label: "Governance" },
   { href: "/rsi", label: "RSI results" },
   { href: "/glossary", label: "Glossary" },
 ];

@@ -29,7 +29,7 @@ export const FAQ_RANGE = [3, 6];
 // Site routes an article may link besides /skills/<name>: the reading order
 // of app/nav.ts (a test keeps the two equal; nav.ts is TypeScript, which
 // this plain module cannot import).
-export const SITE_ROUTES = ['/', '/start', '/why', '/how-it-works', '/skills', '/rsi', '/glossary'];
+export const SITE_ROUTES = ['/', '/start', '/why', '/how-it-works', '/grill-board-demo', '/skills', '/governance', '/rsi', '/glossary'];
 // The skills repository is private: a link to it is a 404 for readers.
 export const PRIVATE_SKILLS_REPO = /github\.com\/KaydenClark\/skills(?![\w.-])/i;
 
