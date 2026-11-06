@@ -17,6 +17,24 @@ last_verified: 2026-11-01
 
 Record of the first Workbench Adoption of AMS: what ran, what moved where, what was checked and what remains open. It explains; the manifest, tool receipt and controls own the live state. A Spec evidence row for this Adoption is still owed (see Open gaps).
 
+## Current branch and delivery model, 2026-11-06
+
+The [owner's correction](#jot-9dad0413-d13a-4949-91c4-2b78574cbc39) establishes one
+`feature/spec-####-<spec-name>` branch for each Spec creating new things, retained
+for its entire lifecycle. Tasks, fixes, intent and docs share that branch.
+Ready intent/docs reach main independently of unfinished implementation;
+completed implementation reaches dev before main. Commit and push attributable
+work instead of stashing it. Partial delivery does not close the Spec branch:
+cleanup follows completion, verified merges and preservation checks.
+
+[RUNBOOK](../../RUNBOOK.md#delivery-and-recovery) owns the procedure;
+[SKILLS Delivery](../docs/SKILLS.md#delivery) explains selective record publication
+and the unchanged owner-only website promotion gate. The manifest now names
+`dev` as implementation integration and `main` as default/publication destination.
+This supersedes the earlier direct-to-main implementation route and generic
+per-Task branch defaults. The adoption snapshot below remains historical;
+existing branches have not been renamed or consolidated by this rule update.
+
 ## Request and scope
 
 Kind: intent. State: confirmed. Source: Kayden, owner instruction approved 2026-11-01: "Run `setup-workbench` (mode Adopt) on the AMS repo; verify `render`, `doctor` and `next`; merge through a checked PR." The coordinator excluded product Specs, landmarks and decision records from this step: porting S-001/S-003, their decisions and landmarks follows in the next PR.
@@ -68,4 +86,17 @@ Topic: workbench-adoption
 Supersedes: none
 
 Owner correction: AGENTS.md still contains material that belongs elsewhere, specifically the three-strike rule. Authorized repair: keep core authority, safety and collaboration rules in AGENTS; route testing, CI, scheduling, RSI and delivery procedures to their existing owning documents. Relocation preserves the existing policies; this request does not retire the three-strike stop or authorize deployment.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-9dad0413-d13a-4949-91c4-2b78574cbc39
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T21:20:49.323Z
+Author: Kayden
+Source: Kayden direct AMS chat, 2026-11-06; intended branch model and instruction to update the recorded model first
+Topic: workbench-adoption
+Supersedes: none
+
+Owner-defined model: One feature/spec-####-<spec-name> branch per Spec creating new things. All its Tasks, fixes, intent capture, and documentation use that branch. Intent and documentation are published to main as they become ready, while unfinished implementation stays on the Spec branch. Completed implementation is integrated into dev, then main, following applicable checks and existing website promotion authority. The Spec branch stays open until the entire Spec is completed; once its remaining work is merged and verified, clean up the branch. Commit and push attributable uncommitted work instead of stashing it; determine the safe destination and remaining checks before merging. Owner follow-up: update the recorded model and the instructions used first. This supersedes direct-to-main implementation and per-Task work branches; it grants no website dev-to-main promotion, Spec acceptance or cleanup of uncontained work.
 <!-- /jot-entry -->

@@ -9,8 +9,8 @@ Planning reads `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031
 
 ## Workflows
 
-`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in their owning records.
-Run each role at its [model tier](workbench/docs/adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
+`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in owners.
+Use each role’s [model tier](workbench/docs/adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
 
 Use Landmark -> Spec -> Task; at most six active Landmarks. Specs need no slots;
 block Tasks only on required inputs ([ADR-003J](workbench/docs/adr/003J-limit-active-landmarks-not-specs.md)).
@@ -31,8 +31,8 @@ git diff --check
 uv run ams-hygiene
 ```
 
-Repeat on a fresh checkout. `site/`: `npm run build`, `npm test`.
-Root: `uv run ams-hygiene --site site`. Live: `AMS_LIVE=1`. [Coherence](workbench/wiki/guidebooks/coherence-observations.md).
+Repeat in a fresh checkout. `site/`: `npm run build`, `npm test`.
+`uv run ams-hygiene --site site`. Live: `AMS_LIVE=1`. [Coherence](workbench/wiki/guidebooks/coherence-observations.md).
 
 `uv run ams-board` (loopback). `node workbench/tools/landmark-tracker.mjs show --committed --json`; [Board procedure](grill-board/README.md). Commands use `uv run`:
 
@@ -52,15 +52,17 @@ Keep keys/`AMS_LIVE` out of CI.
 
 ## Delivery and recovery
 
-Commit coherent steps with what/why; the [guard](.agents/hooks/require-committed.sh) checks dirt.
-Never commit to main, stash, reset or discard to clean.
-Merge current, checked non-site PRs into main with merge commits.
-Site: feature -> checked dev; only owner merges dev -> main.
-Follow [delivery reporting](workbench/docs/SKILLS.md#delivery).
+One `feature/spec-####-<spec-name>` branch per Spec creating new things, for all
+Tasks, fixes, intent/docs. Commit/push owned work; never stash, reset,
+discard to clean or commit to main. Publish ready intent/docs to main separately
+from unfinished code. Code: Spec -> checked dev -> checked main;
+only owner promotes website work. Merge commits; follow the
+[delivery procedure](workbench/docs/SKILLS.md#delivery).
 
-Recover: Spec/Task, Wiki; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
-Handoffs stay local and ignored in `workbench/sessions/handoffs/`; publish Tasks.
+Recover via Spec/Task, Wiki; rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+Handoffs stay ignored in `workbench/sessions/handoffs/`; publish Tasks.
 
 ## Clean up
 
-`land` after checks: verify publication/containment and no owned dirt. Retain unfinished Spec work; report blockers.
+Keep the Spec branch until completion and all remaining work merged
+and verified. Then `land` for guarded cleanup; report blockers.

@@ -58,6 +58,15 @@ invocation remain setup gaps. A path check is not host activation.
 
 ## Delivery
 
+The owner's [2026-11-06 model](../wiki/context-workbench-adoption.md#jot-9dad0413-d13a-4949-91c4-2b78574cbc39)
+and [RUNBOOK](../../RUNBOOK.md#delivery-and-recovery) override generic personal-skill branch defaults:
+
+- One `feature/spec-####-<spec-name>` branch per Spec creating new things. All its Tasks, fixes, intent capture and documentation use that branch; do not create independent Task or records work branches.
+- Publish ready intent and documentation to `main` as they become ready. If the Spec branch contains unfinished implementation or unreleased website work, deliver only the ready record commits/diff through a record-only PR. Any temporary publication branch transports that selection; it is not another work branch for the Spec. Never merge the whole unfinished candidate to publish its records.
+- Integrate completed implementation from the Spec branch into `dev`, then `main`, with applicable checks on each exact candidate. Agents may merge checked non-site promotions; website `dev` to `main` remains owner-only. A mixed `dev` containing unreleased website work cannot be merged wholesale under non-site authority.
+- Keep the Spec branch open through partial deliveries. Clean it up only after the entire Spec is completed and its remaining work is merged and verified, with containment and ignored-file safeguards.
+- Commit and push attributable uncommitted work instead of stashing it or leaving preservation-only dirt. Determine ownership, destination and checks; keep unfinished implementation recoverable in a draft PR. Never merge failing or incomplete work merely to clean up.
+
 The project controls own branch targets, required review, Human QA and publication.
 Read back owners, diff, candidate, target, checks and limits; report push, merge and deployment separately. Record only eligible Review and actual Human QA. An implementor's QA is not independent review. Setup, a successful check, a pushed
 branch or a PR never grants permission to merge main or deploy.
