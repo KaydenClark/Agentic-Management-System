@@ -223,3 +223,15 @@ Current main/dev and all 12 open PR heads were inspected at this reconciliation.
 | `de50063b5b89b46cdd32a3ae25323b4f2c7fc906` | FAIL-196 | `S013:de50063b5b89b46cdd32a3ae25323b4f2c7fc906:remote-task-id-collision` | native Task collision |
 | `de50063b5b89b46cdd32a3ae25323b4f2c7fc906` | FAIL-197 | `S013:de50063b5b89b46cdd32a3ae25323b4f2c7fc906:allocator-prefix-missing` | allocator discovery |
 | `de50063b5b89b46cdd32a3ae25323b4f2c7fc906` | FAIL-198 | `S013:de50063b5b89b46cdd32a3ae25323b4f2c7fc906:allocator-parent-missing` | allocator discovery retry |
+
+### Later coordinator/reviewer discovery intake
+
+These named occurrences are coordinator-supplied read-only diagnostics in the same de50063 review/recovery context; the installed package revision was not supplied, so the context SHA does not purport to pin those package bytes. No checkout mutation, new trial, claim or acceptance follows.
+
+| Stable source-bound occurrence | Observed diagnostic | Correction and limit |
+|---|---|---|
+| S013:de50063b5b89b46cdd32a3ae25323b4f2c7fc906:root-runtime-template-path-guess | Guessed assets/runtime/templates/tools/spec-workbench.mjs was absent. | File inventory resolved assets/runtime/workbench/tools/spec-workbench.mjs; coordinator reports the same done-only recovery. No managed-runtime edit or bypass. |
+| S013:de50063b5b89b46cdd32a3ae25323b4f2c7fc906:root-runbook-path-guess | Guessed workbench/RUNBOOK.md was absent. | File inventory resolved root RUNBOOK.md; no source mutation. |
+| S013:de50063b5b89b46cdd32a3ae25323b4f2c7fc906:root-task-landmark-path-guess | Guessed S-013 Task under LMK-002 was absent. | File inventory resolved the actual LMK-004 owner; no identity or Task edit. |
+| S013:de50063b5b89b46cdd32a3ae25323b4f2c7fc906:root-taskboard-diff-path-guess | Read-only diff used workbench/TASKBOARD paths and returned no diff, which did not establish preservation. | Corrected root paths retained the S-007 stale-projection evidence; no generated projection was represented as an original. |
+| S013:de50063b5b89b46cdd32a3ae25323b4f2c7fc906:spec-python-pytest-unavailable | Independent Spec review's default interpreter lacked pytest. | Qualified cached command actually passed 33 focused tests in 10.11s; retain unavailable invocation separately. Actual reviewer model/tier unknown; no install or checkout write. |
