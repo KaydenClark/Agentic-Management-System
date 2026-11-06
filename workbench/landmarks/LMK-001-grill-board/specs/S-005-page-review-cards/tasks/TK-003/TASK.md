@@ -3,7 +3,7 @@
 **Task ID:** TK-003
 **Spec ID:** S-005
 **Slice:** Preserve original page feedback privately; bind safe committed voice entries and later page cards to its version.
-**Status:** ready
+**Status:** in-progress
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Criticism becomes the voice record; Agents cite it
 **Planned verification:** synthetic private-note canaries never enter Git; safe version/card writes are atomic, stale writes refuse, and originals remain recoverable
@@ -11,6 +11,8 @@
 ## Assignment
 
 **Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Nothing in `site/` changes.
+**Claimed by:** codex-s005-feedback
+**Current claimant:** codex-s005-feedback
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), `grill-board/README.md` (answers, rating and flag), DDR-000J, DDR-000X, ADR-002U, the TK-001 generator and `src/ams/grill_board/answers.py`.
 
