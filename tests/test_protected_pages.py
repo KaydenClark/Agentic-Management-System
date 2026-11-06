@@ -75,6 +75,32 @@ def test_protected_capture_uses_exact_authenticated_results_and_full_routes(capt
     assert built == before
 
 
+def test_adapter_document_deployment_marker_verifies_without_asset_queries(capture):
+    from ams.protected_pages import collect_protected
+    artifact, manifest, built, pins = capture
+    for route, row in manifest['pages'].items():
+        page = (artifact / row['file']).read_text().replace('?dpl=' + DEPLOYMENT, '')
+        rewrite(artifact, manifest, route, f'<html data-dpl-id="{DEPLOYMENT}">{page}</html>')
+    result = collect_protected(artifact, built, expected_pins=seal(artifact, manifest, pins))
+    assert all(f'data-dpl-id="{DEPLOYMENT}"' in page for page in result['html'].values())
+
+
+@pytest.mark.parametrize('defect', ['wrong-document', 'conflicting-asset', 'missing-both'])
+def test_document_identity_cannot_hide_missing_or_conflicting_deployment(capture, defect):
+    from ams.protected_pages import collect_protected
+    artifact, manifest, built, pins = capture
+    page = (artifact / manifest['pages']['/rsi']['file']).read_text()
+    if defect == 'wrong-document':
+        page = f'<html data-dpl-id="dpl_Other">{page}</html>'
+    elif defect == 'conflicting-asset':
+        page = f'<html data-dpl-id="{DEPLOYMENT}">{page.replace(DEPLOYMENT, "dpl_Other")}</html>'
+    else:
+        page = '<html>' + page.replace('?dpl=' + DEPLOYMENT, '') + '</html>'
+    rewrite(artifact, manifest, '/rsi', page)
+    with pytest.raises(PageRefused, match='identity'):
+        collect_protected(artifact, built, expected_pins=seal(artifact, manifest, pins))
+
+
 @pytest.mark.parametrize('field,value', [('candidate', 'b' * 40), ('project', 'prj_Other'),
                                         ('deployment', 'dpl_Other'), ('origin', 'https://different.vercel.app')])
 def test_independent_identity_pins_refuse_mixed_or_old_captures(capture, field, value):

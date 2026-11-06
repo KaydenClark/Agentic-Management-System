@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** Content-bound page reviews and versioned feedback consumed by later drafts.
 **Blockers:** none
-**Next gate:** S-003 adapter-layout repair and matching READY deployment; then protected capture/cards and TK-001 completion.
+**Next gate:** Fresh document-identity checks/Review and protected card readback; retain the open dependency Standards finding before delivery.
 
 
 ## Intent and authority
@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns evidence and failures. Current-main84ded45 passes fresh960 tests/6 skips; final3e41 CI958/8 plus10 browser checks; separate Standards/Spec each82 pass with no material corrective finding. PR178 landed in dev40acb3a: its isolated build collects50 public routes, but matching Vercel deployment fails inventory postbuild. An isolated no-op-adapter build reproduces0 legacy versus51 scoped HTML artifacts; [S-003 layout report](../../../../feedback/REPORT-s003-vercel-artifact-layout-servitor-2026-11-06.md) routes the correction to its existing owner. The earlier50-card/HTTP/no-op proof remains built-only. Protected coverage, private feedback, later Tasks and owner QA remain open.
+No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns evidence/failures. Historical3e41 CI958/8 plus10 browser checks predates current identity support. S003 repair310 passes our independent adapter50-route/hash/cleanup check; dev47e3c88 is READY. Its exact isolated build/cleanup and complete authenticated50-route capture validate with pinned project/deployment, footer and document data-dpl-id. Real populated RSI HTML supplies its hash; no local fallback. Two expected reds preceded strict document/resource-marker support; fresh full checks, Review and generated-card readback remain. S003's failure-table schema finding stays open. Private feedback, later Tasks, actual owner QA and whole-Spec acceptance remain open.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 

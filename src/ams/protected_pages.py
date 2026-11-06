@@ -58,6 +58,8 @@ class _Identity(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if tag == 'html' and 'data-dpl-id' in attrs:
+            self.deployments.add(attrs['data-dpl-id'])
         if tag not in VOID:
             self.stack.append(tag)
         if 'footer' in self.stack and 'data-commit-sha' in attrs:
