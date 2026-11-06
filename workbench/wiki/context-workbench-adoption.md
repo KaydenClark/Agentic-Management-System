@@ -199,3 +199,28 @@ The endpoint is a **published, installed and verified workflow repair**, with an
 
 Existing unfinished-branch consolidation, unrelated Spec acceptance and production website promotion are excluded. **No changes will begin until you confirm this full scope.**
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-3a2975df-e456-4141-bf6b-27ae716f1f98
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T23:53:37.053Z
+Author: Kayden (owner words); Codex (filing context)
+Source: Kayden, AMS chat 2026-11-06, exact full-scope confirmation and later delegation instruction; S-011 clerical filing by Codex
+Topic: workbench-adoption
+Supersedes: none
+
+Owner authorization, Kayden's AMS conversation, 2026-11-06. Exact confirmation and execution instruction for the unchanged readback at [JOT-bc41fc6e-de68-4769-b8e6-0419470558c5](#jot-bc41fc6e-de68-4769-b8e6-0419470558c5):
+
+> Confirmed. Implement the full scope across the skills, runtime, and AMS, verify the workflow, and carry it through publication, installation, and cleanup. Keep website promotion and unrelated unfinished work untouched.
+
+The owner also instructed, exactly:
+
+> Record the changes to the skills for the RSI Loop, and you can merge the skills into Kaydenclark/skills once they are stable or excellent and meet the requirements and dont fail with any of the recorded failures
+
+> Every time we edit the skills and AMS, its for the RSI.
+
+Administrative filing by Codex, not an owner quotation or newly confirmed requirement: S-011 is the existing Workbench destination for this bounded shared-delivery repair. Filing the already confirmed scope here supplies its stable owner identity; it does not claim that Kayden spoke that ID, approve this agent's mapping as new intent, or accept the whole older Spec. The exact readback and its confirmation remain unchanged. Its reached-instruction consistency requirement covers the remaining generic README/Specs-and-Tasks template correction; subsequent AMS adoption depends on verified published and installed source.
+
+The owner's later tool-linked instruction requires root to be Director, delegate execution to Dispatchers, have them coordinate implementors, and complete Map/Plan before the remaining Journey. This sentence reports that instruction; it is not presented as a replacement exact quotation. Earlier missing preparation remains FAIL-201, with no backdated claim. The older TK-002/TK-003 campaign, frozen Terra/benefit criteria, website promotion, unrelated unfinished work and broader rollout remain excluded. This capture records existing scoped confirmation and execution authority, not Human QA, implementation evidence, acceptance or a new grant.
+<!-- /jot-entry -->

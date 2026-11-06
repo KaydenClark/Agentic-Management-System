@@ -8,13 +8,13 @@
 **Updated:** 2026-11-06
 **Catalog description:** Repair shared delivery with attributable qualification and RSI proof.
 **Blockers:** none
-**Confirmation:** [Scoped owner sources](#intent-and-authority)
-**Execution approval:** [Scoped owner sources](#intent-and-authority)
+**Confirmation:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
+**Execution approval:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
 **Next gate:** Prepare template correction then dependent AMS adoption; older holds remain.
 
 ## Intent and authority
 
-Earlier authority remains in [history](../../../../wiki/history/S-011.md); frozen Terra/dev contracts and stops remain. The [confirmed bounded readback](../../../../wiki/context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) separately authorizes the current repair through installation and cleanup. The owner now requires Map/Plan before remaining Journey through Director -> Dispatcher -> implementor. No past preparation is backdated.
+Earlier authority remains in [history](../../../../wiki/history/S-011.md); frozen Terra/dev contracts and stops remain. The [confirmed bounded readback](../../../../wiki/context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) separately authorizes the current repair through installation and cleanup. The owner requires Map/Plan before remaining Journey through Director -> Dispatcher -> implementor; no backdating.
 
 ## Outcome
 
@@ -22,11 +22,11 @@ Shared skills preserve bounded delivery branches, authorized delivery, truthful 
 
 ## Why It Matters
 
-Repair shared causes of lost delivery and exposed handoffs.
+Prevent lost delivery and exposed handoffs.
 
 ## Current Verified State
 
-Earlier failed/held results remain in history. The [repair record](../../../../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) identifies observed source delivery/install, the newly found template contradiction and pending AMS adoption. Whole-Spec acceptance remains incomplete.
+[Repair evidence](../../../../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) retains source/install observations and the template/adoption gap; older results remain in history. Whole-Spec acceptance is incomplete.
 
 ## Desired Behavior
 
@@ -100,7 +100,7 @@ Prior FAILED qualification stays preserved. Whole-Spec and held-Task acceptance 
 
 ## Remaining Limitations Or Follow-Up Specs
 
-[S-000A](../S-000A-skills-refocus/SPEC.md) owns catalog refocus; it is not resumed. Qualification, benefit and presentation gaps retain their receipts.
+[S-000A](../S-000A-skills-refocus/SPEC.md) owns catalog refocus; it is not resumed. Qualification/benefit/presentation gaps retain their receipts.
 
 ## Supersession
 
