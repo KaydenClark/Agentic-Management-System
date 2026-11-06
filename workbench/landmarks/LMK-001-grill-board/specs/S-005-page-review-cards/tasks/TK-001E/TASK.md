@@ -3,10 +3,12 @@
 **Task ID:** TK-001E
 **Spec ID:** S-005
 **Slice:** A recorded correction reaches the next draft and review
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-003
 **Destination:** spec-acceptance: Feedback loop connection
 **Planned verification:** One observable original-case demonstration, planted failure, replay/resume and affected regression checks; applicable RUNBOOK checks.
+**Claimed by:** codex-s005-consumption
+**Current claimant:** codex-s005-consumption
 
 ## Assignment
 
