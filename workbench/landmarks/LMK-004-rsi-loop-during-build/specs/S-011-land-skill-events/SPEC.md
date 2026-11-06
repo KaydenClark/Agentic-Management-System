@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
 **Execution approval:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
-**Next gate:** TK-002R closed only the accepted unchanged source/adoption/load handoff. TK-002S awaits scoped later-use execution and real S-007/TK-001F evidence; old TK-002/TK-003 claims and prerequisites remain.
+**Next gate:** Inspect TK-002S's plan observing in-progress S-007/TK-001F before claim/control execution. R is delivered; protected end state, recurrence/effort and safe store/page joins still gate S completion. Old claims/stops remain.
 
 ## Intent and authority
 
@@ -58,7 +58,7 @@ Exact qualification/adoption authority gate source delivery. S-006 owns trial/as
 
 ## Vertical Implementation Slices
 
-[TK-002R](tasks/TK-002R/TASK.md) reconciles matching source/adoption evidence; [TK-002S](tasks/TK-002S/TASK.md) proves independent later use. Old TK-002/TK-003 claims and prerequisites remain. No rewrite or reinstall is prescribed.
+[TK-002R](tasks/TK-002R/TASK.md) delivered matching source/adoption evidence; [TK-002S](tasks/TK-002S/TASK.md) plans one independent ordinary-use observation and synthetic recurrence control. Old claims/prerequisites remain; no rewrite/reinstall.
 
 
 ## Acceptance Criteria
