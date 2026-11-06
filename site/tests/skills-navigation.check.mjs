@@ -76,6 +76,13 @@ try {
       if(state){reached=true;check(state.top>=state.header-1 && state.bottom<=813, `${width}/${theme}/js=${javascriptEnabled}/zoom=${zoom}: keyboard obscured ${JSON.stringify(state)}`);break;}
     }
     check(reached, `${width}/${theme}/js=${javascriptEnabled}/zoom=${zoom}: keyboard cannot reach wiki navigation`);
+    await p.keyboard.press('Tab');
+    const onSummary=await p.evaluate(()=>document.activeElement?.matches('nav[aria-label="Skills wiki"] summary'));
+    check(onSummary, `${width}/${theme}/js=${javascriptEnabled}/zoom=${zoom}: stage summary is not next in tab order`);
+    await p.keyboard.press('Enter');
+    check(await p.evaluate(()=>document.activeElement?.parentElement?.open===true), `${width}/${theme}/js=${javascriptEnabled}/zoom=${zoom}: stage did not open from keyboard`);
+    await p.keyboard.press('Tab');
+    check(await p.evaluate(()=>document.activeElement?.matches('nav[aria-label="Skills wiki"] details[open] a')), `${width}/${theme}/js=${javascriptEnabled}/zoom=${zoom}: opened links unreachable`);
     await c.close();
   }
   // Actual keyboard traversal from the document start on the wide sidebar.
