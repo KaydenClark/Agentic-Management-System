@@ -3,12 +3,13 @@
 **Task ID:** TK-0031
 **Spec ID:** S-007
 **Slice:** Preserve the stopped record and verify the four existing fixes on current dev
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Comparable series, regressions, read states and traceability.
 **Planned verification:** Preserve original TK-002L receipt rows byte-for-byte; satisfy record budgets; test timestamp, evidence and availability hash, grader isolation and run-only evidence; check actual bar contrast, responsive fixtures, build and required checks.
 **Claimed by:** codex-rsi-recovery
 **Current claimant:** codex-rsi-recovery
+**Proof:** PR165 exact d17d03d71b3c76f2060d969b90c5d7296cd4e0cf passed site and Python shared CI; root reviewed source and receipts and trusted immutable-main gate passed. Merged dev 6cdb647d2d415a8400d1d26cad2614b492c03926; fresh dev e10216e653b5e18f4785175f422f35f39e6f96f0 contains candidate. Current-base build, 279 site tests, browser fixtures and hygiene passed; prior checkpoint full Python 841 passed, 5 skipped.
 
 ## Assignment
 
@@ -31,6 +32,7 @@ Workspace baseline sha256:7a1c61ba565d56e09c7be07037d60c7c39306f09d1b941d2b2256c
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-007-rsi-chart-pages | b8ee5fcfc16d31d3c800e73e67ed4af93c6297a0 | ahead 131 behind 0 | 0 | Focused chart tests 4/4, build and 267 site tests passed. Root and site hygiene 0 after offline dependency install; layout valid. Initial uv --no-sync hygiene could not spawn from empty environment. Sandboxed Chrome browser check exited SIGABRT with cleanup EPERM before assertions; second unexpected verification failure, stopped. | TK-002L condensed; original receipt rows unchanged. | Browser QA, full Python, fresh-candidate checks, CI, review and dev containment remain. | da20302f37cc263d8fd06144caf333381e88ae2c5d17b33502bc434f0db2d654 |
+| 2 | Feature/S-007-rsi-chart-pages | b3fb419928222fc5a092eadda131675b0317de73 | ahead 0 behind 0 | 0 | PR165 exact d17d03d71b3c76f2060d969b90c5d7296cd4e0cf passed site and Python shared CI; root reviewed source and receipts and trusted immutable-main gate passed. Merged dev 6cdb647d2d415a8400d1d26cad2614b492c03926; fresh dev e10216e653b5e18f4785175f422f35f39e6f96f0 contains candidate. Current-base build, 279 site tests, browser fixtures and hygiene passed; prior checkpoint full Python 841 passed, 5 skipped. | Condensed TK-002L while preserving receipt rows; retained failures and requirements; TK-0031 records verification and workspace limits. | Whole S-007 acceptance, actual lineage, live readback, Human QA and production promotion remain open. Workspace preservation checker remains incomplete; retain clone and evidence.; close attribution: {"agent":"codex-rsi-recovery","claimant":"codex-rsi-recovery","onBehalfOf":null} | 873436a64c6406f8b986994c2c6503c08ef03a4018921fc4b431d6986159097e |
 
 ## Assembled verification
 
