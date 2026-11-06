@@ -3,12 +3,13 @@
 **Task ID:** TK-0030
 **Spec ID:** S-009
 **Slice:** Recover the existing demo as a usable visitor experience with accurate current Board context
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: S-009 Acceptance Criteria
 **Planned verification:** Built-site tests and browser interaction, storage and network checks at 375px and desktop in both themes; inspect script-disabled content and current S-004 behavior.
 **Claimed by:** codex-s009-demo
 **Current claimant:** codex-s009-demo
+**Proof:** d5b015f site build, 275 site tests, 2461 browser checks and 2 complementary privacy checks; Python 841 passed 5 skipped with loopback. Built-demo reload cleared rating, flag and note. PR177 merge 63870b54 and PR178 inventory 40acb3a contained in dev.
 Workspace baseline sha256:4106561b4e83a48bea8672f3a5cf2bc2060c8dc44e40957a807543b68ddd3d15
 
 The snapshot was captured at claim commit 3523bff before product work and its digest bound in e793ba6. The native-compatible literal above was corrected later in c023ef0; it was not present in that earlier binding commit.
@@ -19,8 +20,23 @@ Recover the existing S-009 prototype and preserve its source history. Deliver la
 
 ## Acceptance
 
-- [ ] Visitors can inspect and interact with clearly labeled everyday samples; each card shows the required signals and reasons.
-- [ ] Demo interactions send and store nothing, and reloading clears them; existing site theme preference is separate.
-- [ ] The explanation distinguishes real current Board behavior from the local simulation and does not imply execution or application.
-- [ ] The page is usable at 375px and desktop in both themes, with readable core content when scripts are disabled.
-- [ ] The checked candidate and route metadata are handed back for S-003 integration and page review.
+- [x] Visitors can inspect and interact with clearly labeled everyday samples; each card shows the required signals and reasons.
+- [x] Demo interactions send and store nothing, and reloading clears them; existing site theme preference is separate.
+- [x] The explanation distinguishes real current Board behavior from the local simulation and does not imply execution or application.
+- [x] The page is usable at 375px and desktop in both themes, with readable core content when scripts are disabled.
+- [x] The checked candidate and route metadata are handed back for S-003 integration and page review.
+
+## Checked delivery and limits
+
+Product candidate d5b015fe135153c1e35747093750b81d9e21c24d passed the site build, 275 site tests and 2461 browser checks. Its demo interactions and privacy checks also passed at the two complementary theme/viewport combinations, and phone-light and desktop-dark screenshots were inspected. The built d5b015f demo was additionally exercised for reload: sample rating, flag and note reset. The loopback-capable Python run passed 841 tests with 5 skipped; the restricted-sandbox failure remains in the canonical feedback log. Current dev retains the identical demo source files.
+
+PR177 merged at 63870b54efba9b9028dc8c1ae194f3fef85138ae. PR178 delivered the page inventory at 40acb3a491a55599e5b1f00fd92a27315739a4a9 with S-009/TK-0030 and PR177's actual containment provenance. Both are contained in dev. This is the Task's metadata handback, not Human QA, Spec acceptance or protected-page verification. The 40acb3a deployment reported ERROR; later platform verification is tracked in the [S-003 report](../../../../../../feedback/coherence/REPORT-S003-vercel-40ac-2026-11-06.md). Legacy TK-001/TK-002 and their proof remain for later reconciliation.
+
+The original workspace snapshot and late literal correction above remain preserved. Its native preservation check reported accounted=false, remoteRecoverable=false and complete=false, with missing discovery route, retained refs not remotely verified and unselected ignored evidence. The workspace is retained; no release or full remote-recovery claim is made.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-009-demo-grill-board-page | 40acb3a491a55599e5b1f00fd92a27315739a4a9 | ahead 76 behind 0 | 1 | d5b015f site build; 275 site tests; 2461 browser checks and 2 complementary interaction/privacy checks; Python 841 passed 5 skipped with loopback; targeted built-demo reload reset passed. Current dev retains demo source bytes; PR177 and PR178 containment verified. | Task acceptance and delivery provenance; native snapshot and late binding preserved. | Spec acceptance, legacy Task reconciliation, independent Review, Human QA, protected deployment verification and owner-only main promotion remain. Dev deployment ERROR; platform repair separate. Workspace preservation check incomplete; workspace retained. | a97b46321ddb21e97e3ec225d141b315c4acdf90abf2ffa2475a3f55cecc7d02 |
+| 2 | Feature/S-009-demo-grill-board-page | 4c7b94dc3a8a482e1de413e042d6816e82602ceb | ahead 0 behind 0 | 0 | d5b015f site build, 275 site tests, 2461 browser checks and 2 complementary privacy checks; Python 841 passed 5 skipped with loopback. Built-demo reload cleared rating, flag and note. PR177 merge 63870b54 and PR178 inventory 40acb3a contained in dev. | TK-0030 acceptance, native receipt and inventory provenance; original workspace snapshot and late binding retained. | S-009 Spec and legacy Tasks remain open; independent Review, Human QA, protected deployment verification and owner-only main promotion remain. Dev deployment ERROR; platform repair separate. Workspace preservation check incomplete; workspace retained.; close attribution: {"agent":"codex-s009-demo","claimant":"codex-s009-demo","onBehalfOf":null} | 58a6970896492f4f5a8d74e0635ff42d90b13cd9ce6d166d2f23d6fa7b9a83ab |
