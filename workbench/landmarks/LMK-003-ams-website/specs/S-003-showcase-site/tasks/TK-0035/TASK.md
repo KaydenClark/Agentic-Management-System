@@ -3,10 +3,12 @@
 **Task ID:** TK-0035
 **Spec ID:** S-003
 **Slice:** Hash CLI covers every manifest-bound public artifact in both supported build layouts
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Review coverage and Trust; complete built page/hash enumeration
 **Planned verification:** Classic/APP_PAGE route-hash equality, exact manifests and adverse controls, unchanged pure-hash vectors, fresh build before site tests, credential-free adapter proof and checked dev delivery.
+**Claimed by:** codex-s003-hash-reader
+**Current claimant:** codex-s003-hash-reader
 
 ## Assignment
 
