@@ -79,8 +79,11 @@ begin
     or coalesce(x->>'namespace','') !~ '^[a-z][a-z0-9_-]{2,79}$'
     or jsonb_typeof(x->'slots') is distinct from 'array' or jsonb_array_length(x->'slots') not between 1 and 64
     then raise exception 'unsafe job definition' using errcode='23514'; end if;
-  for entry in select * from jsonb_each(x-array['slots','is_test','synthetic','namespace']) loop
-    if jsonb_typeof(entry.value) is distinct from 'string' or (entry.value#>>'{}') !~
+  if p_text is distinct from public.ams_canonical_jsonb(x) then
+    raise exception 'job JSON must retain canonical reader bytes' using errcode='23514'; end if;
+  for entry in select * from jsonb_each(x-array['slots','is_test','synthetic']) loop
+    if jsonb_typeof(entry.value) is distinct from 'string'
+      or (entry.value#>>'{}') ~ '^(sk-|sb_secret_|eyJ[^.]*\.[^.]*\.[^.]*$)' or (entry.value#>>'{}') !~
       (case when entry.key like '%digest' then '^[0-9a-f]{64}$' when entry.key like '%commit' then '^[0-9a-f]{40}$'
       else '^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$' end) then
       raise exception 'invalid job identity/pin' using errcode='23514'; end if;
@@ -95,6 +98,7 @@ begin
       or jsonb_typeof(s->'effect_type') is distinct from 'string'
       or coalesce(s->>'role','') not in('worker','grader','publication','checkpoint')
       or coalesce(s->>'effect_type','') not in('native-call','keyed-file')
+      or s->>'arm' ~ '^(sk-|sb_secret_|eyJ[^.]*\.[^.]*\.[^.]*$)'
       or jsonb_typeof(s->'arm') is distinct from 'string' or coalesce(s->>'arm','') !~ '^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$'
       or jsonb_typeof(s->'repetition') is distinct from 'number' or coalesce(s->>'repetition','') !~ '^[1-9][0-9]*$'
       or (s->>'repetition')::numeric>9223372036854775807
@@ -113,6 +117,11 @@ begin
   if p_digest is distinct from encode(sha256(convert_to(p_text,'UTF8')),'hex')
     or jsonb_typeof(x) is distinct from 'object' or (select count(*) from jsonb_object_keys(x))<>6
     or x-array['effect_key','payload_digest','outcome','object_id','artifact_digest','proof_digest']<>'{}'::jsonb
+    or p_text is distinct from public.ams_canonical_jsonb(x)
+    or jsonb_typeof(x->'effect_key') is distinct from 'string'
+    or jsonb_typeof(x->'payload_digest') is distinct from 'string'
+    or jsonb_typeof(x->'proof_digest') is distinct from 'string'
+    or x->>'object_id' ~ '^(sk-|sb_secret_|eyJ[^.]*\.[^.]*\.[^.]*$)'
     or x->>'effect_key' is distinct from p_key or x->>'payload_digest' is distinct from p_payload
     or jsonb_typeof(x->'outcome') is distinct from 'string'
     or coalesce(x->>'outcome','') not in('matched','absent','unavailable','conflict')
@@ -161,7 +170,7 @@ end; $$;
 create function ams_recovery_private.operate(p_action text,p_request jsonb) returns jsonb
 language plpgsql security definer set search_path='' as $$
 declare ns text; jid text; j public.rsi_jobs; e public.rsi_effects; x jsonb; slot jsonb; material jsonb; required text[];
-  c public.rsi_lineage; k public.rsi_lineage; seen jsonb; candidate_closed boolean;
+  c public.rsi_lineage; k public.rsi_lineage; seen jsonb; candidate_closed boolean; field text;
 begin
   perform ams_recovery_private.require_service();
   if coalesce(jsonb_typeof(p_request),'') is distinct from 'object' then raise exception 'invalid recovery request' using errcode='23514'; end if;
@@ -179,6 +188,12 @@ begin
     when 'restore' then array['manifest_text','manifest_digest','expected_head','expected_manifest_digest','reader_digest','schema_digest'] else null end;
   if required is null or not(p_request ?& required) or p_request-required<>'{}'::jsonb then
     raise exception 'recovery request fields are allowlisted' using errcode='23514'; end if;
+  -- All other declared request fields are strings. Do not turn JSON numbers
+  -- into identities, pins, claimant labels or receipt text with ->> coercion.
+  foreach field in array (required-array['expected_version','fence','lease_seconds','slot_index','approved','stopped','expected_head']) loop
+    if jsonb_typeof(p_request->field) is distinct from 'string' then
+      raise exception 'recovery request string type differs' using errcode='23514';end if;
+  end loop;
   if p_action='restore' then return ams_recovery_private.restore(p_request); end if;
   if p_action='create' then
     if p_request-array['job_text','job_digest']<>'{}'::jsonb then raise exception 'unsafe create request' using errcode='23514'; end if;
@@ -205,6 +220,7 @@ begin
     select * into c from public.rsi_lineage where namespace=ns and record_id=x->>'case_id' and kind='case';
     select * into k from public.rsi_lineage where namespace=ns and record_id=x->>'candidate_id' and kind='candidate';
     if c.record_id is null or k.record_id is null or c.chain_id<>k.chain_id
+      or k.chain_id ~ '^(sk-|sb_secret_|eyJ[^.]*\.[^.]*\.[^.]*$)'
       or c.is_test<>(x->>'is_test')::boolean or c.synthetic<>(x->>'synthetic')::boolean
       or k.is_test<>c.is_test or k.synthetic<>c.synthetic or c.record_text::jsonb->>'artifact_digest'<>x->>'case_digest'
       or k.attributes->>'skills_commit'<>x->>'skills_commit' then
@@ -219,7 +235,7 @@ begin
   end if;
   if j.job_id is null then raise exception 'missing job' using errcode='23514'; end if;
   if jsonb_typeof(p_request->'expected_version') is distinct from 'number' or coalesce(p_request->>'expected_version','') !~ '^[1-9][0-9]*$'
-    or (p_request->>'expected_version')::bigint<>j.version then raise exception 'stale job version' using errcode='PT409'; end if;
+    or (p_request->>'expected_version')::numeric<>j.version then raise exception 'stale job version' using errcode='PT409'; end if;
   if p_action='gates' then
     if p_request-array['namespace','job_id','expected_version','approved','capacity','observed_at','capacity_digest','stopped']<>'{}'::jsonb
       or jsonb_typeof(p_request->'approved') is distinct from 'boolean' or jsonb_typeof(p_request->'stopped') is distinct from 'boolean'
@@ -243,7 +259,7 @@ begin
     if p_request-array['namespace','job_id','expected_version','claimant','lease_seconds']<>'{}'::jsonb
       or coalesce(p_request->>'claimant','') !~ '^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$'
       or jsonb_typeof(p_request->'lease_seconds') is distinct from 'number' or coalesce(p_request->>'lease_seconds','') !~ '^[1-9][0-9]*$'
-      or (p_request->>'lease_seconds')::integer not between 1 and 300 then raise exception 'invalid lease' using errcode='23514'; end if;
+      or (p_request->>'lease_seconds')::numeric not between 1 and 300 then raise exception 'invalid lease' using errcode='23514'; end if;
     if j.lease_until>clock_timestamp()
       or j.terminal_state='completed' or (j.terminal_state is not null and not exists(select 1 from public.rsi_effects
         where namespace=ns and job_id=jid and state<>'completed')) then
@@ -261,13 +277,13 @@ begin
     or coalesce(p_request->>'fence','') !~ '^[1-9][0-9]*$'
     or jsonb_typeof(p_request->'claimant') is distinct from 'string' then
     raise exception 'invalid fenced claim' using errcode='23514'; end if;
-  if p_request->>'claimant' is distinct from j.claimant or (p_request->>'fence')::bigint is distinct from j.fence
+  if p_request->>'claimant' is distinct from j.claimant or (p_request->>'fence')::numeric is distinct from j.fence::numeric
     or j.lease_until is null or j.lease_until<=clock_timestamp() then
     raise exception 'stale fence/lease' using errcode='PT409'; end if;
   if p_action='renew' then
     if jsonb_typeof(p_request->'lease_seconds') is distinct from 'number'
       or coalesce(p_request->>'lease_seconds','') !~ '^[1-9][0-9]*$' or
-      (p_request->>'lease_seconds')::integer not between 1 and 300 then raise exception 'invalid lease' using errcode='23514';end if;
+      (p_request->>'lease_seconds')::numeric not between 1 and 300 then raise exception 'invalid lease' using errcode='23514';end if;
     update public.rsi_jobs set version=version+1,lease_until=clock_timestamp()+make_interval(secs=>(p_request->>'lease_seconds')::integer)
       where namespace=ns and job_id=jid returning * into j;
     return jsonb_build_object('job',to_jsonb(j));
@@ -302,7 +318,7 @@ begin
     if slot is null then raise exception 'unknown frozen slot' using errcode='23514'; end if;
     material:=jsonb_build_object('protocol',1,'chain_id',j.chain_id,'attempt',j.attempt,'case_digest',j.case_digest,
       'role',slot->>'role','arm',slot->>'arm','repetition',slot->'repetition');
-    if (p_request->>'key_text')::jsonb is distinct from material or p_request->>'effect_key' is distinct from
+    if p_request->>'key_text' is distinct from public.ams_canonical_jsonb(material) or p_request->>'effect_key' is distinct from
        encode(sha256(convert_to(p_request->>'key_text','UTF8')),'hex') then raise exception 'execution slot identity changed' using errcode='23514'; end if;
     select * into e from public.rsi_effects where namespace=ns and effect_key=p_request->>'effect_key';
     if e.effect_key is not null then
@@ -363,7 +379,7 @@ language plpgsql security definer set search_path='' as $$
 declare m jsonb; s jsonb; before jsonb; after jsonb; current_data jsonb; ns text; category text;
   row jsonb; prior jsonb; listed jsonb; jobdef jsonb; material jsonb; slot jsonb; observed jsonb;
   j public.rsi_jobs; existing public.rsi_effects; record_id text; nhead text; batch jsonb; count_records integer:=0;
-  expected_keys text[]; actual_hash text;
+  expected_keys text[]; actual_hash text; field text; string_fields text[]; integer_fields text[]; nullable_fields text[];
 begin
   perform ams_recovery_private.require_service();
   if jsonb_typeof(p_request->'manifest_text') is distinct from 'string'
@@ -378,8 +394,9 @@ begin
   m:=(p_request->>'manifest_text')::jsonb;
   expected_keys:=array['format_version','reader_version','reader_digest','schema_digest','projection','namespace',
     'complete','export_id','previous_export','snapshot_text','source_head','counts','records'];
-  if coalesce(jsonb_typeof(m),'') is distinct from 'object' or not(m ?& expected_keys) or m-expected_keys<>'{}'::jsonb
-    or m->'format_version'<>'1'::jsonb or m->'reader_version'<>'1'::jsonb or m->'complete'<>'true'::jsonb
+  if p_request->>'manifest_text' is distinct from public.ams_canonical_jsonb(m)
+    or coalesce(jsonb_typeof(m),'') is distinct from 'object' or not(m ?& expected_keys) or m-expected_keys<>'{}'::jsonb
+    or m->>'format_version' is distinct from '1' or m->>'reader_version' is distinct from '1' or m->'complete'<>'true'::jsonb
     or m->>'projection' is distinct from 'safe-lineage-job-effects-v1'
     or m->>'reader_digest' is distinct from p_request->>'reader_digest'
     or m->>'schema_digest' is distinct from p_request->>'schema_digest'
@@ -396,7 +413,9 @@ begin
     or (m->'counts')-array['lineage','jobs','effects','externals']<>'{}'::jsonb then
     raise exception 'incomplete checkpoint projection' using errcode='23514'; end if;
   foreach category in array array['lineage','jobs','effects','externals'] loop
-    if coalesce(jsonb_typeof(s->category),'') is distinct from 'array'
+    if jsonb_typeof(m->'counts'->category) is distinct from 'number'
+      or coalesce(m->'counts'->>category,'') !~ '^(0|[1-9][0-9]*)$'
+      or coalesce(jsonb_typeof(s->category),'') is distinct from 'array'
       or m->'counts'->category is distinct from to_jsonb(jsonb_array_length(s->category)) then
       raise exception 'checkpoint counts differ' using errcode='23514'; end if;
     for row in select * from jsonb_array_elements(s->category) loop
@@ -410,9 +429,26 @@ begin
       if coalesce(jsonb_typeof(row),'') is distinct from 'object' or not(row ?& expected_keys) or row-expected_keys<>'{}'::jsonb
         or (select count(*) from jsonb_array_elements(m->'records') r where r->>'kind'=category and r->>'id'=record_id)<>1 then
         raise exception 'unsafe/duplicate checkpoint record' using errcode='23514'; end if;
+      case category
+        when 'lineage' then string_fields:=array['record_text','record_digest'];integer_fields:=array['ordinal','format_version'];nullable_fields:=array['previous_digest'];
+        when 'jobs' then string_fields:=array['job_text','job_digest','chain_id'];integer_fields:=array['attempt','version','fence'];nullable_fields:=array['terminal_state','evidence_digest'];
+        when 'effects' then string_fields:=array['effect_key','job_id','key_text','payload_digest','state'];integer_fields:=array['intent_fence','version'];nullable_fields:=array['observation_text','receipt_digest'];
+        when 'externals' then string_fields:=array['table','digest'];integer_fields:=array['id'];nullable_fields:=array[]::text[];
+      end case;
+      foreach field in array string_fields loop
+        if jsonb_typeof(row->field) is distinct from 'string' then raise exception 'checkpoint string type differs' using errcode='23514';end if;
+      end loop;
+      foreach field in array integer_fields loop
+        if jsonb_typeof(row->field) is distinct from 'number' or coalesce(row->>field,'') !~ '^(0|[1-9][0-9]*)$'
+          or (row->>field)::numeric>9223372036854775807 or (field not in('attempt','fence') and (row->>field)::numeric<1) then
+          raise exception 'checkpoint integer type differs' using errcode='23514';end if;
+      end loop;
+      foreach field in array nullable_fields loop
+        if jsonb_typeof(row->field) not in('null','string') then raise exception 'checkpoint nullable string type differs' using errcode='23514';end if;
+      end loop;
       select r into listed from jsonb_array_elements(m->'records') r where r->>'kind'=category and r->>'id'=record_id;
       if not(listed ?& array['kind','id','text','digest']) or listed-array['kind','id','text','digest']<>'{}'::jsonb
-        or (listed->>'text')::jsonb is distinct from row or listed->>'digest' is distinct from
+        or listed->>'text' is distinct from public.ams_canonical_jsonb(row) or listed->>'digest' is distinct from
           encode(sha256(convert_to(listed->>'text','UTF8')),'hex') then
         raise exception 'checkpoint record digest differs' using errcode='23514'; end if;
       count_records:=count_records+1;
@@ -437,7 +473,8 @@ begin
   -- Hash-only external references disclose no raw packets/rows. Lock matching
   -- canonical parents through commit; absent/redacted evidence is not invented.
   for row in select * from jsonb_array_elements(s->'externals') loop
-    if coalesce(row->>'id','') !~ '^[1-9][0-9]*$' or coalesce(row->>'digest','') !~ '^[0-9a-f]{64}$' then
+    if jsonb_typeof(row->'table') is distinct from 'string' or jsonb_typeof(row->'id') is distinct from 'number'
+      or jsonb_typeof(row->'digest') is distinct from 'string' or coalesce(row->>'id','') !~ '^[1-9][0-9]*$' or coalesce(row->>'digest','') !~ '^[0-9a-f]{64}$' then
       raise exception 'invalid external parent identity' using errcode='23514';end if;
     if row->>'table'='rsi_runs' then
       perform 1 from public.rsi_runs where id=(row->>'id')::bigint for share;
@@ -456,6 +493,10 @@ begin
     jobdef:=ams_recovery_private.validate_job(row->>'job_text',row->>'job_digest');
     if jobdef->>'namespace'<>ns or coalesce(row->>'attempt','') !~ '^[0-3]$'
       or coalesce(row->>'version','') !~ '^[1-9][0-9]*$' or coalesce(row->>'fence','') !~ '^(0|[1-9][0-9]*)$'
+      or jsonb_typeof(row->'attempt') is distinct from 'number'
+      or jsonb_typeof(row->'version') is distinct from 'number'
+      or jsonb_typeof(row->'fence') is distinct from 'number'
+      or jsonb_typeof(row->'chain_id') is distinct from 'string'
       or (row->>'version')::bigint<=(row->>'fence')::bigint
       or (jsonb_typeof(row->'terminal_state') is distinct from 'null' and row->>'terminal_state' not in('completed','failed','stopped'))
       or (jsonb_typeof(row->'evidence_digest') is distinct from 'null' and coalesce(row->>'evidence_digest','') !~ '^[0-9a-f]{64}$') then
@@ -477,6 +518,12 @@ begin
     if coalesce(row->>'effect_key','') !~ '^[0-9a-f]{64}$' or row->>'effect_key' is distinct from
       encode(sha256(convert_to(row->>'key_text','UTF8')),'hex') or coalesce(row->>'payload_digest','') !~ '^[0-9a-f]{64}$'
       or coalesce(row->>'intent_fence','') !~ '^[1-9][0-9]*$' or coalesce(row->>'version','') !~ '^[1-9][0-9]*$'
+      or jsonb_typeof(row->'effect_key') is distinct from 'string'
+      or jsonb_typeof(row->'job_id') is distinct from 'string'
+      or jsonb_typeof(row->'key_text') is distinct from 'string'
+      or jsonb_typeof(row->'payload_digest') is distinct from 'string'
+      or jsonb_typeof(row->'intent_fence') is distinct from 'number'
+      or jsonb_typeof(row->'version') is distinct from 'number'
       or coalesce(row->>'state','') not in('pending','uncertain','absent','completed') then
       raise exception 'invalid effect projection' using errcode='23514';end if;
     select * into j from public.rsi_jobs where namespace=ns and job_id=row->>'job_id';
@@ -485,7 +532,10 @@ begin
     select entry into slot from jsonb_array_elements(j.job_text::jsonb->'slots') entry where
       jsonb_build_object('protocol',1,'chain_id',j.chain_id,'attempt',j.attempt,'case_digest',j.case_digest,
         'role',entry->>'role','arm',entry->>'arm','repetition',entry->'repetition')=material;
-    if slot is null or slot->>'payload_digest' is distinct from row->>'payload_digest' then
+    if slot is null or slot->>'payload_digest' is distinct from row->>'payload_digest'
+      or row->>'key_text' is distinct from public.ams_canonical_jsonb(jsonb_build_object(
+        'protocol',1,'chain_id',j.chain_id,'attempt',j.attempt,'case_digest',j.case_digest,
+        'role',slot->>'role','arm',slot->>'arm','repetition',slot->'repetition')) then
       raise exception 'restored effect outside frozen slots' using errcode='23514';end if;
     if jsonb_typeof(row->'observation_text')='null' then
       if row->>'state'<>'pending' or jsonb_typeof(row->'receipt_digest') is distinct from 'null' then

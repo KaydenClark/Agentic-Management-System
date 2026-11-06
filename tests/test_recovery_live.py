@@ -167,7 +167,7 @@ def test_equivalent_slot_encoding_cannot_reserve_another_effect(local):
              "effect_key":hashlib.sha256(differently_encoded.encode()).hexdigest()}
     with pytest.raises(recovery.DatabaseRefused) as duplicate:
         local.store._rpc("begin",request,mutating=True)
-    assert duplicate.value.database_code=="23505"
+    assert duplicate.value.database_code=="23514"
 
 
 def test_renew_release_and_same_label_cannot_steal_active_claim(local):

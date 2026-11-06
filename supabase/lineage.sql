@@ -35,6 +35,25 @@ revoke all on public.rsi_lineage from public, anon, authenticated;
 grant select, insert on public.rsi_lineage to service_role;
 revoke update, delete, truncate on public.rsi_lineage from service_role;
 
+-- Persist the same sorted, compact JSON bytes that the Python reader requires.
+-- Accepted record strings are restricted ASCII identities/pins, not free text.
+create function public.ams_canonical_jsonb(p_value jsonb) returns text
+language plpgsql immutable strict security invoker set search_path = '' as $$
+declare rendered text;
+begin
+  if jsonb_typeof(p_value)='object' then
+    select string_agg(to_jsonb(entry.key)::text||':'||public.ams_canonical_jsonb(entry.value),',' order by entry.key collate "C")
+      into rendered from jsonb_each(p_value) entry;
+    return '{'||coalesce(rendered,'')||'}';
+  elsif jsonb_typeof(p_value)='array' then
+    select string_agg(public.ams_canonical_jsonb(entry.value),',' order by entry.ordinality)
+      into rendered from jsonb_array_elements(p_value) with ordinality entry(value,ordinality);
+    return '['||coalesce(rendered,'')||']';
+  else return p_value::text;end if;
+end; $$;
+revoke all on function public.ams_canonical_jsonb(jsonb) from public,anon,authenticated;
+grant execute on function public.ams_canonical_jsonb(jsonb) to service_role;
+
 create function public.ams_guard_lineage() returns trigger
 language plpgsql security invoker set search_path = '' as $$
 declare
@@ -53,6 +72,7 @@ declare
   value record;
   family text;
   occurrence_role text;
+  field text;
 begin
   if tg_op <> 'INSERT' then raise exception 'immutable lineage' using errcode='PT409'; end if;
   if jsonb_typeof(r) <> 'object' or (r - array['namespace','record_id','kind','parents','attributes',
@@ -66,6 +86,16 @@ begin
     or coalesce(r->>'artifact_digest','') !~ '^[0-9a-f]{64}$'
     or coalesce(r->>'occurred_at','') !~ '^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?Z$'
   then raise exception 'unsafe lineage shape' using errcode='23514'; end if;
+  foreach field in array array['namespace','record_id','kind','source_commit','artifact_digest','occurred_at'] loop
+    if jsonb_typeof(r->field) is distinct from 'string' then
+      raise exception 'lineage identities and pins must be strings' using errcode='23514'; end if;
+  end loop;
+  if new.record_text is distinct from public.ams_canonical_jsonb(r) then
+    raise exception 'lineage JSON must retain canonical reader bytes' using errcode='23514'; end if;
+  if substring(r->>'occurred_at' from 12 for 2)::integer>23
+    or substring(r->>'occurred_at' from 15 for 2)::integer>59
+    or substring(r->>'occurred_at' from 18 for 2)::integer>59 then
+    raise exception 'lineage timestamp exceeds reader range' using errcode='23514';end if;
   perform (r->>'occurred_at')::timestamptz;
   new.namespace := r->>'namespace'; new.record_id := r->>'record_id'; new.kind := r->>'kind';
   new.is_test := (r->>'is_test')::boolean; new.synthetic := (r->>'synthetic')::boolean;
@@ -116,6 +146,8 @@ begin
     and attributes->>'family'<>a->>'family') then
     raise exception 'stable chain family changed' using errcode='23514'; end if;
   for link in select * from jsonb_each(p) loop
+    if jsonb_typeof(link.value) is distinct from 'string' or (link.value#>>'{}') !~ '^[A-Za-z0-9][A-Za-z0-9_.:-]{0,199}$' then
+      raise exception 'lineage parent identity must be a string' using errcode='23514'; end if;
     expected_kind := coalesce(required_roles->>link.key,'candidate');
     select * into parent from public.rsi_lineage where namespace=new.namespace and record_id=link.value #>> '{}';
     if not found or parent.kind<>expected_kind or parent.is_test<>new.is_test or parent.synthetic<>new.synthetic then
@@ -134,7 +166,7 @@ begin
       where namespace=new.namespace and record_id=p->>occurrence_role;
   end if;
   if new.kind='candidate' then
-    if (a->>'attempt')::integer not between 0 and 3
+    if (a->>'attempt')::numeric not between 0 and 3
       or ((a->>'attempt')::integer>0) <> (p ? 'previous_candidate') then
       raise exception 'candidate attempt identity' using errcode='23514'; end if;
     if p ? 'previous_candidate' then
@@ -198,7 +230,10 @@ begin
     raise exception 'duplicate lineage identity in batch' using errcode='23514'; end if;
   perform pg_catalog.pg_advisory_xact_lock(710006,hashtext(p_namespace));
   for item in select * from jsonb_array_elements(p_records) loop
-    if item - array['record_text','record_digest'] <> '{}'::jsonb
+    if jsonb_typeof(item) is distinct from 'object' or not(item ?& array['record_text','record_digest'])
+      or jsonb_typeof(item->'record_text') is distinct from 'string'
+      or jsonb_typeof(item->'record_digest') is distinct from 'string'
+      or item - array['record_text','record_digest'] <> '{}'::jsonb
       or item->>'record_digest' is distinct from encode(sha256(convert_to(item->>'record_text','UTF8')),'hex')
       or (item->>'record_text')::jsonb->>'namespace' is distinct from p_namespace then
       raise exception 'lineage batch identity/digest differs' using errcode='23514'; end if;
