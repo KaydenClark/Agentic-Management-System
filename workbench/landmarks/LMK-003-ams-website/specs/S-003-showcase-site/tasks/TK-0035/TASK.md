@@ -42,3 +42,9 @@ Update site/README.md for the actual utility contract. Coordinate any changed co
 Coordinator inspected exact cae67a1646f0994574c9090840200433aaa23c87 and passed this bounded plan under existing confirmed items1/2/12. This releases native claim and implementation; no new owner confirmation. Preserve the withdrawn TK003 brief and all older Task receipts. Native claim, fresh starting snapshot and separate literal digest binding precede product edits.
 
 Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d42da83436fd
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-003-website-shell-and-ams-orientation | 2d05203062e77fd958c399e7712f7847e9865ece | ahead 1 behind 0 | 0 | Intentional red:9 omission/refusal fixture cases fail. First extraction green exposed stale page.path duplicate guard; corrected page.route. Second run23/24: API root-symlink refuses, CLI alias assumption fails because no directory argument. STOP/report preserved before same-Task correction. | Shared strict reader and both wrappers checkpointed; canonical FAIL206/207, original hash core retained privately. | In-progress. Root authorized API-only alias-test correction; retain real build-tree CLI negatives. Corrected focused suite, verifieddevaf5 reconciliation, actual adapter/current build, checks/review/dev containment remain. No UI/model/store/card changes. | ad800793c426d260deb472f84bfef52b11043cf720b85d07958706e974493d4d |
