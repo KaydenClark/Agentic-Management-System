@@ -3,14 +3,14 @@
 **Task ID:** TK-003B
 **Spec ID:** S-003
 **Slice:** Script-free and enhanced native keyboard navigation through the real shared shell
-**Status:** deferred
+**Status:** ready
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation, Trust and Route; real native keyboard access with and without scripts
 **Planned verification:** Current-base reproduction and adverse controls; real 375/desktop theme/script matrix, original64 enlarged-text cases, fresh build/strict utilities/site/shared-browser checks and reviewed checked-dev containment.
 
 ## Assignment
 
-PREPARATION ONLY, unclaimed. Confirmed program items8/12 and [JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8](../../../../../../wiki/context-website-presentation.md#jot-54c3a590-89e6-4bf7-95ef-4c50771e7ac8) supply existing owner scope; this plan grants no new execution. Release condition: coordinator inspects this published plan/F artifacts and releases this Task; no new owner gate or cross-Spec dependency. Before execution: supported deferred-to-ready/claim, published genuine fresh complete inventory and separate literal baseline binding. No Task34/35 baseline reuse or retrospective claim.
+Coordinator accepted published plan c68a7abe57b5d360e535c9c6458e861953216be9 and released this bounded Task under confirmed items8/12 and [JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8](../../../../../../wiki/context-website-presentation.md#jot-54c3a590-89e6-4bf7-95ef-4c50771e7ac8). No new owner checkpoint. Before product: supported native claim, committed/published owned originals, genuine fresh complete inventory and separate literal baseline binding. No Task34/35 baseline reuse or retrospective claim.
 
 One S003 writer owns source/test/docs through delivery on Feature/S-003-website-shell-and-ams-orientation. Starting checked dev4b66b5e663e5ec5c65df1cd947a4a76282028043; mainc787b2958fa7a23f55c6406f3ce367a91e9162dc remains separate. Refresh refs/claims; preserve Wiki/Board checkouts, local/evidence work and legacy claims without competing writers. F serializes canonical feedback; coordinate intake, never append concurrently.
 
