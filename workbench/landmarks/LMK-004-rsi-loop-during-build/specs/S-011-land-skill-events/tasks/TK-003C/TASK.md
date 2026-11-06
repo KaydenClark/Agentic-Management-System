@@ -38,3 +38,9 @@ Use this AMS checkout only as the serialized writer of this Task's native claim/
 No AMS adoption merge, site change, website promotion, broader installation or held campaign restart. Native TK-002/TK-003 and frozen acceptance remain untouched. One coherent run crosses generic contract -> generated outputs -> regression/qualification -> source publication -> installed source -> RSI proof; separate file-layer Tasks would hide this path. There is no assembly branch or prerequisite edge.
 
 Return exact source/AMS commits, both merge answers, executed Check and implementor QA against each acceptance line, independent-review identities, published/installed artifacts, and remaining findings. A local file, pushed branch, score label or source merge alone is not the endpoint. This Task concerns bounded delivery while S-011 remains active, not whole-Spec post-Judge completion.
+
+## Starting preservation evidence
+
+Workspace baseline sha256:8f88409d8671900d5f955818f154dc817d0946b313a97330e9efcde927cafef7
+
+Genuine current snapshot after remote claim46c459ffb2918bd25b124b954195fc8b6ad7ebf5, targetmain, complete=true. Raw inventory remains private local recovery. This separate binding preserves the original AMS adoption baseline unchanged.
