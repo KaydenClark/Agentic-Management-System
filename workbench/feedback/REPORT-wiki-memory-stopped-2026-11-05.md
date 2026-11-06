@@ -32,7 +32,7 @@ The owner subsequently authorized bounded continuation. This plan changes neithe
 4. Complete/exercise the declared CLI entrypoint and concise operating docs. Run appropriate focused checks, scoped native checks and owned-path/source/confirmation preservation only after authorized restart. Report incomplete workspace inventory honestly; do not clear REBASE_HEAD or invent a full closeout.
 5. Hand back a fresh committed candidate with exact checks, remaining gaps and immutable evidence. Root independently inspects it before deciding native closure or releasing TK-002V. TK-002V/W retain their existing artifact dependencies; all five improvements remain required.
 
-## Two separate pending approvals
+## Original stopped approval boundaries
 
 - **Corrective restart:** permission to resume only the bounded TK-002U work above after the Runbook STOP. Until an actual answer arrives: no source/test/evaluation edits, candidate retests, native close or further implementation.
 - **Public export and delivery:** direct permission to push the Wiki Landmark/records and scoped implementation to KaydenClark/Agentic-Management-System and perform the checked non-site main merge. Automatic approval review rejected two push attempts (FAIL-114/115), including the exact-payload retry after remote/payload checks. No third attempt or alternate export route. Await the owner's answer; local restart approval alone would not release publication.
@@ -42,3 +42,11 @@ Records-only continuation captures findings and the proposed restart; it authori
 ## Authorized local continuation
 
 The owner directly answered the exact bounded restart question: “Authorize bounded continuation”. [Native source capture](../wiki/context-wiki-maintenance.md#jot-4a2097ca-5bd6-456f-83c9-3bdbe7a79a29) retains the complete question and answer. TK-002U resumes locally; the earlier pending-restart paragraphs above describe the stopped boundary. Public export approval remains pending. Actual repair/check results belong to the Task and subsequent evidence; this authorization is no completion or acceptance claim.
+
+## Corrective-run evidence
+
+The High / OpenAI gpt-6.1-sol / Codex implementor repaired FAIL-122–124 in one focused red/green cycle each: restricted baseline-body guard failed then passed; long superseded context silently cut600 characters then recovered in full at larger bound with explicit small-bound truncation; duplicate heading source was unavailable then matched the retrieval anchor and passed subtree change/restore. Empty evaluation and source-manifest preflight each had their own intentional red/green control. Aggregate focused suite:25passed. These intentional detecting reds are not unexpected verification failures.
+
+Real console query/check and the frozen four-case same-source development evaluation pass. Four claims across Wiki-memory/AMS-purpose bind six inspected sources at revision19778a2, observed2026-11-06; source correction lineage is retained. Disposable copies of those real sources passed exactly-affected-claim change, restoration, missing and unavailable checks; real owner/source bytes were not mutated. All87 earlier Jot blocks,18 history files,228 managed/shared-skill files and Receipt1 remain byte-identical. Hardened baseline capture reproduces the original committed baseline byte for byte. Private local recovery retains actual output JSON and preservation manifests; the Task binds final evidence.
+
+FAIL-125 retains a pre-write system-Python import diagnostic, corrected by using project Python; root clarified that this is not a failed test. Unexpected verification failures in the corrective run:0. Focused Wiki/layout/hygiene checks pass. Doctor retains previously identified unrelated S-011/stale-claim/legibility/permission findings. Full fresh assembled tests, independent Review and remaining Tasks belong to root/later work; no Human QA or publication is claimed.

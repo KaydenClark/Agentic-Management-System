@@ -209,10 +209,60 @@ def test_untracked_reviewed_source_is_not_read(room, monkeypatch):
 
 def test_empty_baseline_cannot_establish_same_source(room):
     from ams.memory import evaluate, MemoryError
-    cases = {'version': 1, 'cases': [], 'budget': {'limit': 6, 'max_chars': 6400}}
+    cases = {'version': 1, 'split': 'development', 'source_revision': 'a'*40, 'cases': [{'id': 'valid', 'query': 'violet', 'expected_sources': []}], 'budget': {'limit': 6, 'max_chars': 6400}}
     with pytest.raises(MemoryError, match='invalid-baseline'):
         evaluate(room, cases, {'version': 1, 'source_revision': 'a'*40, 'wiki_sha256': {}, 'budget': cases['budget']})
 
 
 def test_partial_lexical_overlap_does_not_answer_unknown(room):
     assert cli(room, 'query', 'quasar marmalade orchard')['status'] == 'unknown'
+
+
+def test_long_correction_context_is_recoverable_and_truncation_explicit(room):
+    old = 'violet obsolete orchard ' + 'retained source evidence ' * 300
+    with (room / 'workbench/wiki/context-violet.md').open('a') as f:
+        f.write(jot('JOT-old-long', old))
+        f.write(jot('JOT-current-long', 'Violet orchard now has the corrected independent owner.', 'JOT-old-long'))
+    roomy = cli(room, 'query', 'violet obsolete orchard', '--limit', '1', '--max-chars', '18000')
+    hit = roomy['hits'][0]
+    assert hit['id'] == 'JOT-current-long'
+    previous = hit['correction_context'][0]
+    assert previous['content'] == old
+    assert previous['content_truncated'] is False
+    small = cli(room, 'query', 'violet obsolete orchard', '--limit', '1', '--max-chars', '4000')
+    assert len(json.dumps(small, ensure_ascii=False, indent=2)) + 1 <= 4000
+    short = small['hits'][0]['correction_context'][0]
+    assert short['content_truncated'] is True
+    assert short['continuation'] == 'workbench/wiki/context-violet.md#jot-old-long'
+    assert small['truncated'] and small['continuation']
+    assert cli(room, 'query', 'violet obsolete orchard', '--limit', '1', '--max-chars', '18000')['hits'][0]['correction_context'][0]['content'] == old
+
+
+def test_duplicate_heading_binding_selects_same_anchor_and_subtree(room):
+    selected = '## Purpose\n\nSecond meadow evidence.\n\n### Detail\n\nNested retained evidence.\n\n'
+    original = '# Repeated source\n\n## Purpose\n\nFirst meadow evidence.\n\n' + selected + '## Limits\n\nUnrelated limit.\n'
+    evidence = page(room, 'repeated.md', original)
+    subprocess.run(['git', '-C', str(room), 'add', '--', str(evidence)], check=True)
+    owner = room / 'workbench/wiki/context-violet.md'
+    owner.write_text(owner.read_text() + bindings([{'id': 'second-source', 'anchor': 'purpose', 'sources': [source('workbench/wiki/repeated.md#purpose-1', selected.encode())]}]))
+    initial = cli(room, 'check')['claims'][0]['sources'][0]
+    assert initial['status'] == 'unchanged'
+    found = cli(room, 'query', 'second meadow', '--max-chars', '12000')
+    assert any(h['anchor'] == 'purpose-1' for h in found['hits'])
+    evidence.write_text(evidence.read_text().replace('First meadow', 'Changed first meadow'))
+    assert cli(room, 'check')['claims'][0]['sources'][0]['status'] == 'unchanged'
+    saved = evidence.read_bytes()
+    evidence.write_text(evidence.read_text().replace('Nested retained', 'Nested changed'))
+    changed = cli(room, 'check')
+    assert changed['claims'][0]['sources'][0]['status'] == 'possibly-stale'
+    previous = room / 'previous-duplicate.json'
+    previous.write_text(json.dumps(changed))
+    evidence.write_bytes(saved)
+    assert cli(room, 'check', '--previous', str(previous))['claims'][0]['sources'][0]['status'] == 'restored'
+
+
+def test_empty_evaluation_cases_are_not_a_passing_comparison(room):
+    cases = room / 'empty-cases.json'
+    cases.write_text(json.dumps({'version': 1, 'split': 'development', 'source_revision': 'a'*40, 'budget': {'limit': 6, 'max_chars': 6400}, 'cases': []}))
+    result = cli(room, 'evaluate', '--cases', str(cases), ok=False)
+    assert result['reason'] == 'invalid-evaluation'

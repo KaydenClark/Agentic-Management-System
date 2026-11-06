@@ -48,6 +48,26 @@ Before finishing, read touched explanations and their affected routes against th
 
 For a correction exercise, copy only the needed public source pages into an isolated disposable fixture outside the working checkout. Label all planted claims and corrections synthetic. Introduce a contradiction between source, current explanation and an affected route; read and detect it before repair. Apply the correction to the actual explanation, relevant summary/link and retained history. Read the answer again through the corrected route and prove the earlier source bytes remain. A successful exercise establishes that bounded maintenance path, not clean-baseline improvement, generalization or owner acceptance. Record its real result and limitations in the assigned work owner.
 
+## Recover and check with ams-memory
+
+```sh
+uv run ams-memory query "Wiki memory independent Landmark owner correction" --json
+uv run ams-memory query "AMS reusable workflows purpose" --limit 3 --max-chars 12000
+uv run ams-memory check --json
+```
+
+Query reads MEMORY first, ranks up to three matching routes, then uses bounded fallback only when those routes yield no matching sections/entries. Eligible flat Wiki topics and declared article/history collections are searched; hidden/ignored/private/restricted pages and archive are excluded. Malformed handling, bindings or Jots exclude that page with a reason. A matched route may omit other relevant pages: follow the returned pointers. Ranking is deterministic keyword overlap, requiring two distinct terms for multiword queries; it is no semantic answer judge.
+
+The default limit is6 and full JSON bound6400 characters; supported limits are1–20 and1000–48000 characters. Results retain title, heading, state, revision digest, route and source pointers. Clipped claim/correction text is labeled; read its named page/anchor or increase the bound to recover it. Old entries remain superseded context, never current hits. References are identities; query does not recursively ingest their bodies. There is no durable index or cache to maintain.
+
+Claim bindings use one JSON object (`version: 1`, `claims: [...]`) in an HTML comment named `ams-memory-bindings`. Each claim has a stable `id`, explanation `anchor`, optional `supersedes` and `sources`. Each source declares its repository-relative `identity`, explicit `reviewed_public: true` and retained `observations` (`sha256`, inspected Git `revision`, `observed_at` date). Several claims/sources can share a page. The [Wiki topic](../context-wiki-maintenance.md) and [AMS purpose](../context-ams-purpose.md) contain inspected examples, including retained source supersession.
+
+Fingerprint only reviewed, tracked public Markdown. Supported sources are eligible Wiki notes, named root controls and project docs/Spec/Landmark records; ignored/hidden/symlink/private/restricted paths and unsupported external bodies refuse. A Jot anchor fingerprints its exact retained block. Other heading anchors fingerprint that heading's subtree through the next equal/higher heading, with repeated headings suffixed `-1`, `-2`, matching retrieval anchors. Sources without anchors fingerprint the complete reviewed file. Inspect the actual source before recording metadata; metadata alone grants no exposure authority.
+
+`check` reports each bound explanation as unchanged, possibly-stale, missing or unavailable; pages without bindings remain explicitly unbound. It writes nothing and never refreshes dates/confirmations. To distinguish returned bytes from an intervening edit, save a check result in ignored local recovery, then run `check --previous SAVED_JSON --json`; `SAVED_JSON` is the actual prior result path. Matching a prior historical observation is `restored-historical`, still requiring review. Restored bytes prove neither truth nor acceptance.
+
+The [development evaluation](../../../evals/wiki-memory/README.md) compares pinned navigation/native-Jot context with candidate retrieval on identical sources and bounds. Independent answers, stale-answer repetition and owner effort remain unmeasured. Consolidation, function/detail bundles and fresh-agent evaluation retain their assigned Tasks; this reader supplies no execution authority.
+
 ## History
 
 - 2026-11-04: S-000C repair connected existing schema/Jot rules to an operational intake, ingest, durable-query and semantic-correction path; no new mandatory framework or product change.

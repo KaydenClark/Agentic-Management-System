@@ -30,7 +30,7 @@ Local restart after the stopped candidate is [explicitly authorized](#jot-4a2097
 
 ## Planned memory interface
 
-S-000D selects the project-owned `ams-memory query/check/consolidate/evaluate` seam under delegated planning authority. This is a preparation contract, not delivered behavior.
+S-000D selects the project-owned `ams-memory query/check/consolidate/evaluate` seam. TK-002U supplies the local read-only query/check and initial development-evaluation path; [operating details](guidebooks/wiki-maintenance.md#recover-and-check-with-ams-memory) describe bounds, source binding and refusal behavior. Consolidation and function/detail bundles retain later Task gates. Local checks are neither publication nor owner acceptance.
 
 Queries start from MEMORY/routes before bounded fallback; cap results/characters, report truncation/continuation and rank deterministically. Sources are links/identities, not permission to recursively ingest linked content. Default content is eligible Wiki sections/Jots; procedures and current work are bounded pointers to existing owners. Fingerprint only explicitly reviewed public bindings; remote sources require authorized snapshots. No wholesale extraction or secret-bearing root blobs.
 
@@ -195,3 +195,7 @@ Bounded continuation authorization, direct root-thread owner response, 2026-11-0
 
 Exact owner answer: "Authorize bounded continuation". This explicitly releases the local restart after FAIL-118–124; it does not erase those failures or the Runbook stop rule. Root delegates only the remaining TK-002U repair, Check/QA, documentation and local committed handback in this run; it inspects the exact candidate before releasing TK-002V. Public export/main delivery remain separately pending: no push, connector export, remote claim, PR, merge, deployment or Human QA. Prior source candidate9419c9a and Receipt1 remain preserved.
 <!-- /jot-entry -->
+
+<!-- ams-memory-bindings
+{"version":1,"claims":[{"id":"wiki-independent-owner","anchor":"current-maintenance-path","supersedes":null,"sources":[{"identity":"workbench/wiki/context-wiki-maintenance.md#jot-b3247909-9721-4842-a83f-61adc5da2e13","reviewed_public":true,"observations":[{"sha256":"340619cd4ba9f1d07683004bd7e83597ed90c410fbc2998ad94da93c27740abf","revision":"19778a2529f9ec0ae8bc8e2faa8bd4dd057e4fce","observed_at":"2026-11-06"}]},{"identity":"workbench/wiki/context-wiki-maintenance.md#jot-ee356d5a-8394-47ee-9bc9-09fa308014b3","reviewed_public":true,"observations":[{"sha256":"5ef9e7565888088ca15ffa82bfd3d8bf48d7761511194ac5eb5111137945c36e","revision":"19778a2529f9ec0ae8bc8e2faa8bd4dd057e4fce","observed_at":"2026-11-06"}],"role":"superseded-context","superseded_by":"workbench/wiki/context-wiki-maintenance.md#jot-b3247909-9721-4842-a83f-61adc5da2e13"}]},{"id":"wiki-five-improvements","anchor":"current-maintenance-path","supersedes":null,"sources":[{"identity":"workbench/wiki/context-wiki-maintenance.md#jot-72534303-7521-4d2c-98d2-96b1bcb3825a","reviewed_public":true,"observations":[{"sha256":"52262124c6b7b0ffa1b9f27460bf39646fb415c8f29441191390da23bab85c7e","revision":"19778a2529f9ec0ae8bc8e2faa8bd4dd057e4fce","observed_at":"2026-11-06"}]}]}]}
+-->

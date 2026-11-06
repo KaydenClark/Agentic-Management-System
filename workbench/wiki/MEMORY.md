@@ -31,7 +31,7 @@ duplicates Task state.
 - [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — confirmed Stage A readback and delivered preparation, resolved publication hold and continuing Stage B/campaign limits.
 - [Shared skills refocus](context-skills-refocus.md) — confirmed jobs, composition, prerequisites, attribution and the Prepare-only boundary; links the AMS preparation-bypass failure.
 
-- [Wiki memory and maintenance](context-wiki-maintenance.md) — source-backed session continuity, accepted memory improvements and independent Wiki ownership; retained bounded repair evidence.
+- [Wiki memory and maintenance](context-wiki-maintenance.md) — source-backed session continuity, local bounded recall/source checks, accepted improvements and independent Wiki ownership; retained repair evidence.
 
 ## Source Precedence
 

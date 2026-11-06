@@ -205,8 +205,7 @@ def _entries(body):
     return result
 
 
-def sections(body):
-    lines = body.splitlines(keepends=True)
+def _headings(body):
     heads = []
     counts = {}
     for index, token in enumerate(tokens := MD.parse(body)):
@@ -217,6 +216,12 @@ def sections(body):
         count = counts.get(anchor, 0)
         counts[anchor] = count + 1
         heads.append((token.map[0], token.map[1], heading, anchor + (f'-{count}' if count else ''), int(token.tag[1:])))
+    return heads
+
+
+def sections(body):
+    lines = body.splitlines(keepends=True)
+    heads = _headings(body)
     title = next((h[2] for h in heads if h[4] == 1), '')
     result = []
     context = []
@@ -330,15 +335,12 @@ def _source_bytes(corpus, identity):
         raise MemoryError('missing-source-anchor')
     # Only heading sections are supported; links never trigger recursive ingestion.
     lines = text.splitlines(keepends=True)
-    tokens = MD.parse(text)
-    for i, token in enumerate(tokens):
-        if token.type == 'heading_open' and slug(tokens[i + 1].content) == anchor:
-            end = len(lines)
-            for following in tokens[i + 2:]:
-                if following.type == 'heading_open' and int(following.tag[1:]) <= int(token.tag[1:]):
-                    end = following.map[0]
-                    break
-            return ''.join(lines[token.map[0]:end]).encode('utf-8')
+    heads = _headings(text)
+    for i, (start, _end, _heading, source_anchor, level) in enumerate(heads):
+        if source_anchor != anchor:
+            continue
+        end = next((head[0] for head in heads[i + 1:] if head[4] <= level), len(lines))
+        return ''.join(lines[start:end]).encode('utf-8')
     raise MemoryError('missing-source-anchor')
 
 
@@ -455,13 +457,21 @@ def query(root, text, *, limit=6, max_chars=6400):
         hit = deepcopy(original)
         hit['content_truncated'] = False
         for old in hit.get('correction_context', []):
-            old['content'] = old['content'][:600]
+            old['content_truncated'] = False
         result['hits'].append(hit)
         result['omitted'] -= 1
-        if len(encoded(result)) + 1 > max_chars:
+        # Trim only when the complete response exceeds the caller's bound.
+        # Every clipped source keeps its identity and explicit recovery pointer.
+        texts = [hit, *hit.get('correction_context', [])]
+        while len(encoded(result)) + 1 > max_chars:
+            target = max(texts, key=lambda entry: len(entry['content']))
+            if len(target['content']) <= 32:
+                break
             overflow = len(encoded(result)) + 1 - max_chars
-            hit['content'] = hit['content'][:max(0, len(hit['content']) - overflow - 32)]
-            hit['content_truncated'] = True
+            target['content'] = target['content'][:max(32, len(target['content']) - overflow - 32)]
+            target['content_truncated'] = True
+            if target is not hit:
+                target['continuation'] = hit['page'] + '#' + target['id'].lower()
             result['truncated'] = True
         if len(encoded(result)) + 1 > max_chars or not hit['content']:
             result['hits'].pop()
@@ -478,14 +488,38 @@ def query(root, text, *, limit=6, max_chars=6400):
     return result
 
 
+def validate_cases(cases):
+    """Require actual case, revision and budget identities before a comparison."""
+    try:
+        budget = cases['budget']
+        rows = cases['cases']
+        if (cases['version'] != 1 or not isinstance(rows, list) or not 1 <= len(rows) <= 100
+                or not isinstance(cases['split'], str) or not cases['split']
+                or not re.fullmatch(r'[a-f0-9]{40,64}', cases['source_revision'])
+                or set(budget) != {'limit', 'max_chars'}
+                or type(budget['limit']) is not int or not 1 <= budget['limit'] <= 20
+                or type(budget['max_chars']) is not int or not 1000 <= budget['max_chars'] <= 48000):
+            raise ValueError()
+        ids = set()
+        for case in rows:
+            if (not re.fullmatch(r'[a-z0-9-]{1,100}', case['id']) or case['id'] in ids
+                    or not isinstance(case['query'], str) or not case['query'].strip() or len(case['query']) > 500
+                    or not isinstance(case['expected_sources'], list)
+                    or not all(isinstance(source, str) and source for source in case['expected_sources'])):
+                raise ValueError()
+            ids.add(case['id'])
+    except (KeyError, TypeError, ValueError):
+        raise MemoryError('invalid-evaluation') from None
+
+
 def evaluate(root, cases, baseline=None):
-    if cases.get('version') != 1 or not isinstance(cases.get('cases'), list):
-        raise MemoryError('invalid-evaluation')
+    validate_cases(cases)
     root = Path(root)
     mismatches = []
     if baseline is not None:
         if (baseline.get('version') != 1 or not baseline.get('wiki_sha256')
                 or not isinstance(baseline.get('rows'), list)
+                or {row.get('id') for row in baseline['rows']} != {case['id'] for case in cases['cases']}
                 or baseline.get('cases_identity_sha256') != digest(json.dumps(cases, sort_keys=True).encode())
                 or not re.fullmatch(r'[a-f0-9]{40,64}', baseline.get('source_revision', ''))):
             raise MemoryError('invalid-baseline')
@@ -527,6 +561,8 @@ def readable(result):
         lines += [f"\n{hit['page_title']} / {hit['heading']} [{hit['kind']}; {hit['state']}]", f"{hit['page']}#{hit['anchor']} ({hit['revision']})", hit['content']]
         for old in hit.get('correction_context', []):
             lines += [f"Correction context: {old['id']} [superseded]", old['content']]
+            if old.get('content_truncated'):
+                lines.append('Truncated; read ' + old['continuation'])
         if hit.get('source'):
             lines.append('Source: ' + hit['source'])
         for claim in hit.get('claims', []):

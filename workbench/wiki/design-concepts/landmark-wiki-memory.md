@@ -28,7 +28,7 @@ Memory functions describe how context is used: historical events, maintained und
 
 ## Open and unresolved
 
-Map/Plan is preserved; implementation candidate9419c9a is partial and stopped. [Supplemental static review and the bounded restart proposal](../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserve defects and evidence limits without declaring working memory or verified session continuity. Owner restart and public-export answers remain pending separately. Answer correctness, stale-claim prevention and owner correction effort require actual evidence; automated retrieval metrics cannot stand in for human judgment. Optional embeddings/reranking need a useful local comparison before adoption; no external service is mandatory.
+The owner authorized bounded local continuation after the stopped candidate. The read-only query/check path now recovers maintained sections and native correction context, with inspected claim/source bindings; [the operating procedure](../guidebooks/wiki-maintenance.md#recover-and-check-with-ams-memory) explains bounds and refusal behavior. [The retained stopped report](../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves earlier defects and limits. Public export remains separately held; this reader does not establish general session continuity. Answer correctness, stale-claim prevention and owner correction effort require actual evidence; automated retrieval metrics cannot stand in for human judgment. Optional embeddings/reranking need a useful local comparison before adoption; no external service is mandatory.
 
 ## Where the work lives
 
@@ -41,6 +41,8 @@ Map/Plan is preserved; implementation candidate9419c9a is partial and stopped. [
 - [Inspected baseline](https://github.com/KaydenClark/Agentic-Management-System/tree/adde5f4da1d8a8b78d9bcbc6bd490c18f8a3b37a) binds the current-behavior observations; the Spec identifies gaps rather than claiming delivery.
 
 ## History
+
+- 2026-11-05: Explicit owner restart released bounded local repair; read-only recall/source-check behavior and its limits are explained in the procedure, with preserved original evidence.
 
 - 2026-11-05: Records-only continuation captured the partial stopped candidate, static review and pending restart/publication decisions; original intent and source evidence remain preserved.
 - 2026-11-05: Owner-authorized Map/Plan created this synthesis and its dedicated Landmark after the owner corrected the proposed RSI classification. Original owner statements and S-000C history remain preserved.
