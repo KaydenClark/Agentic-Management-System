@@ -18,8 +18,8 @@ function WhereAnswersGo() {
         remembered on this device.
       </p>
       <p>
-        The real Grill Board runs on the owner&apos;s computer. Each question is backed by a Destination Question Card
-        (DQC), which holds its proposal, reasons, source and history. Confirming preserves the exact displayed readback
+        The real Grill Board runs on the owner&apos;s computer. Each question is backed by a <a href="/glossary#destination-question-card-dqc">Destination Question Card
+        (DQC)</a>, which holds its proposal, reasons, source and history. Confirming preserves the exact displayed readback
         on that DQC; corrections and quality feedback retain their own state.
       </p>
       <p>

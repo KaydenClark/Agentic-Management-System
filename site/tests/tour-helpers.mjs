@@ -17,6 +17,7 @@ export const READING_ORDER = [
   '/start',
   '/why',
   '/how-it-works',
+  '/grill-board-demo',
   '/skills',
   '/rsi',
   '/glossary',

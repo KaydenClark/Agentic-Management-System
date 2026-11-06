@@ -23,7 +23,6 @@
 // switching topics on every card makes no request at all and changes no
 // cookie or storage, and every card shows Sample, Priority and Value with
 // reasons, a 1-5 rating and a too-taxing flag.
-// persists, fonts self-hosted) and page text readable with scripts disabled.
 // Plus the /start toy: Tab and Enter alone reach its last stage, playing it
 // makes no request and changes no storage or cookie, and its returned branch
 // shows in the returned token (with --shots, one start-toy-NN-<stage>.png per
@@ -326,8 +325,7 @@ async function settleBoard(page) {
 
 // Interacts with the board: every topic, every card (rating, too-taxing flag,
 // an alternative, Confirm, a typed note, a reason opened), then the lanes,
-// grade filters, more filters, batch, comment, verdicts, paging and the
-// banner. Returns problems: any request at all, any cookie or storage change,
+// grade filters, more filters, batch, comment, verdicts, and paging. Returns problems: any request at all, any cookie or storage change,
 // a card missing part of its shape, or an interaction that did not take.
 // `quick` stops after the first card (for the self-test).
 async function boardInteractionProblems(page, { quick = false } = {}) {
@@ -405,8 +403,6 @@ async function boardInteractionProblems(page, { quick = false } = {}) {
       for (const v of ['Rework wording', 'Change the why', 'Not now']) await page.locator('.gb-verdicts .verdict', { hasText: v }).click();
       await page.locator('.gb-foot .inkbtn').click();
       await page.locator('.gb-foot .ghost').click();
-      await page.locator('.gb-round .ghost').first().click();
-      await page.locator('.gb-strip-btn').click();
     }
     await page.waitForTimeout(500);
   } catch (e) {

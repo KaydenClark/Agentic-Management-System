@@ -174,17 +174,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
 
   return (
     <div className="gb-cols">
-      {/* Left rail */}
-      <aside className="gb-rail">
-        {/* A picture of the real Dashboard's sections, not links: the demo has only this board. */}
-        <ul aria-label="Sections of the real Dashboard (not links in this demo)" className="gb-nav">
-          <li className="gb-navitem">Destination Tracker</li>
-          <li className="gb-navitem">Taskboard</li>
-          <li className="gb-navitem is-current">Grilling Board</li>
-          <li className="gb-navitem">Drafts to approve</li>
-          <li className="gb-navitem">Wiki</li>
-        </ul>
-
+      <section aria-label="Sample topics and round" className="gb-toolbar">
         <div className="gb-topics">
           <div className="gb-topics-head">
             <span className="gb-eyebrow">Topics</span>
@@ -221,7 +211,7 @@ export default function Board({ topics, cards, children }: { topics: Topic[]; ca
           <a className="textlink" href="#where-answers-go">Where a confirmed answer goes</a>
           <a className="textlink" href="#where-answers-go">About these sample questions</a>
         </div>
-      </aside>
+      </section>
 
       {/* Question queue */}
       <section aria-label="Question queue" className="gb-queue">
