@@ -5,22 +5,22 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local, holds the Supabase keys)
 **Stance:** Builder
-**Updated:** 2026-11-03
-**Catalog description:** Supabase schema and local Python writer for RSI results, build history, cost and tokens; the site reads under RLS.
+**Updated:** 2026-11-06
+**Catalog description:** Supabase provenance, Python writer and read-only RSI/build/usage presentation.
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Coverage/W disposition, whole Review, actual owner QA.
+**Next gate:** Close TK-002O with verification and documentation proof.
 
 ## Intent and authority
 
-The [owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes Map/Plan preparation; implementation and trial holds remain.
+[Stage A](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) was preparation only. Owner launch/confirmed readback, 2026-11-05: implement N in an isolated test namespace; O requires verified N. Campaign, installation, stopped-work and promotion gates remain.
 
-The owner decided that Python pushes RSI results to Supabase as they arrive and the site reads from it; everything the site shows, build history included, lives there. Token counts go with the RSI data. The service key stays in the gitignored local environment; the site receives only its publishable key.
+Python writes RSI results, build history and tokens to Supabase as they arrive; site data reads use its publishable key. Service key: local ignored environment.
 
 ## Outcome
 
-One Supabase project holds every row the site presents; a local Python writer fills it; the site reads with the publishable key, never writes.
+One Supabase project holds all site data. Local Python writes; publishable clients only read.
 
 ## Why It Matters
 
@@ -28,14 +28,16 @@ Sourced rows make charts auditable; private writes protect credentials.
 
 ## Current Verified State
 
-Schema/provenance, writer/readback, conflict refusal, sources and key handling are met ([TK-000B](tasks/TK-000B/TASK.md#proof), [live limits](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01)). Private assessments and explicit unknown metrics are met (TK-000Q/R/S and TK-000P).
+N isolated lineage: [proof](tasks/TK-002N/TASK.md#proof). Production migration remains unperformed.
 
-Build history is incomplete: the approved pinned import at 771bd1e passed, but later coverage is unverified. Further import requires fresh approval and cannot rewrite S-008 creation provenance with --refresh-changed. TK-000W remains stopped/unaccepted; whole-Spec binding and actual Human QA are open. See [history](../../../../wiki/history/S-006.md).
+Schema/provenance, writer/readback, conflict refusal, sources and key handling are met ([TK-000B](tasks/TK-000B/TASK.md#proof), [live limits](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01)). Private assessments/unknown metrics: TK-000Q/R/S and TK-000P.
+
+Approved import 771bd1e passed; later build-history coverage is unverified. Further import requires fresh approval and cannot rewrite S-008 creation provenance with --refresh-changed. TK-000W remains stopped/unaccepted; whole-Spec binding and actual Human QA are open. See [history](../../../../wiki/history/S-006.md).
 
 ## Desired Behavior
 
 - Existing RSI result/run tables retain task, split, control arm, runtime/controls/skills commits, provider/model/effort, completion, grade and source. Assessments remain separate from behavioral trials.
-- Presentation data is read-only to clients; private assessments and operational state are not publicly readable. Only the authorized worker writes lifecycle records; candidate agents receive no database credentials.
+- Clients read safe data only; assessments and operations stay private. Only authorized workers write lifecycle records; candidates receive no database credentials.
 - Supabase owns worker-written, commit-pinned cases, runs, candidates, comparisons and dispositions. Git fixtures/contracts are referenced artifacts, not competing live statuses. Markdown owns failure intake; ingestion references stable ID, source revision and corrections, without duplicate occurrences.
 - Link failures, case versions, experiment contracts, candidate parents, jobs, results, decisions and adoption/use receipts. Extend existing identities rather than creating a second ledger. Table/queue technology is left to implementation.
 - Persist job authorization, claim, attempt, stage, next action and stop/block reason. Atomic claims and version conflicts prevent duplicate ownership; interrupted or uncertain writes reconcile before replay. S-000B owns execution semantics.
@@ -61,7 +63,7 @@ Build history is incomplete: the approved pinned import at 771bd1e passed, but l
 
 ## Vertical Implementation Slices
 
-[TK-002N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md); implementation held.
+[N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md): N verified in isolation; O released on that artifact.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
