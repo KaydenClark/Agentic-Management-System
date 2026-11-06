@@ -3,18 +3,18 @@
 **Task ID:** TK-0034
 **Spec ID:** S-003
 **Slice:** Document-start keyboard traversal preserves real reachability in the original enlarged-text matrix
-**Status:** deferred
+**Status:** ready
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation, Trust; bounded PR151 keyboard recovery
 **Planned verification:** Document-start and pre-focused-middle positive controls plus visible-unreachable/focus negative controls before the original64 enlarged-text cases; current-base build, applicable site/root checks, review and checked dev containment.
 
 ## Assignment
 
-Preparation only, unclaimed. Authority is the existing twice-confirmed item8 scope, [JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8](../../../../../../wiki/context-website-presentation.md#jot-54c3a590-89e6-4bf7-95ef-4c50771e7ac8). Deferred is the runtime's backlog state, not an unresolved owner decision. Preparation baseline: dev91fc2baa1ffc0c86f03ea6b331c38429fabfdf80; do not import unmerged S006 history.
+Historical preparation was unclaimed. Authority is the existing twice-confirmed item8 scope, [JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8](../../../../../../wiki/context-website-presentation.md#jot-54c3a590-89e6-4bf7-95ef-4c50771e7ac8). Deferred is the runtime's backlog state, not an unresolved owner decision. Preparation baseline: dev91fc2baa1ffc0c86f03ea6b331c38429fabfdf80; do not import unmerged S006 history.
 
-Named prerequisite: the S008 shared-browser-helper release packet: exact checked candidate/helper diff, native TK0033 closure, independent review, verified dev containment and the delivered request-window settling controls. Coordinator holds this Task unclaimed until that artifact is delivered and verified. Current ac276e13d21628ea118e4dfed5e8e58739dc8d74 is under qualification, not a satisfied prerequisite. This is an artifact condition, not a whole-S008 or cross-Spec Task edge, and requires no new general owner confirmation.
+Historical preparation prerequisite: the S008 shared-browser-helper release packet: exact checked candidate/helper diff, native TK0033 closure, independent review, verified dev containment and the delivered request-window settling controls. Coordinator holds this Task unclaimed until that artifact is delivered and verified. At preparation, ac276e13d21628ea118e4dfed5e8e58739dc8d74 was under qualification, not a satisfied prerequisite. This is an artifact condition, not a whole-S008 or cross-Spec Task edge, and requires no new general owner confirmation.
 
-After coordinator release, recover current dev and the original PR151 stop. Establish the actual native claim, commit owned claim state, capture a new genuine complete workspace snapshot, then separately commit its exact digest binding before product edits. Never reuse an old Task's baseline. One S003 writer then owns the bounded detector correction, controls, adapted private runner, affected checks and report; preserve S008-owned helper changes by chronology. Do not claim or edit product/helper source during this preparation.
+After coordinator release, recover current dev and the original PR151 stop. Establish the actual native claim, commit owned claim state, capture a new genuine complete workspace snapshot, then separately commit its exact digest binding before product edits. Never reuse an old Task's baseline. One S003 writer then owns the bounded detector correction, controls, adapted private runner, affected checks and report; preserve S008-owned helper changes by chronology. The preparation above made no claim or product/helper edits.
 
 PR151 head ad763022ac8192c7059d1a244e0e4dbd9c5e0c03 retains TK002B's in-progress stop, claimant and immutable receipt. Its source8e211a119e80e20f9282d21a51beaea966cdc770 was built with footer21fc0e8e401f306a02d76eb9ed4063f2f8862089. Original enlarged result60/64 has four /start keyboard failures; it is not proved product unreachability. Preserve that history, both failed attempts and receipt checksum; do not rewrite or close that old run as successful. Current dev's separate TK002B record also stays untouched.
 
@@ -33,3 +33,7 @@ Return exact source/artifact identities, control and64-case results, honest gaps
 - [ ] Document-start traversal also passes from a pre-focused middle control, visits every expected reachable control with visible focus, and meaningful visible-unreachable/focus/early-stop controls fail before the unchanged64-case matrix runs.
 - [ ] All64 original enlarged-text cases pass without skips, assertion suppression, fault-erasing reload or zoom substitution; the original failed evidence and separately adapted runner remain identifiable.
 - [ ] Current-base build precedes site tests; applicable checks and independent review pass, the exact candidate is contained in checked dev, and outstanding Human QA/promotion remain explicit.
+
+## Artifact release, 2026-11-06
+
+Coordinator verified the named S008 helper packet: PR180 exact62ef5f13a65bc807438186ffabd81ed0c4a92578, native TK0033 closed, independent root UI/helper review PASS, final-head CI42215385443/42215385400 successful and checked devb699f10f4e08a0ea72f2915e0c14c0744385cbcd containment. Delivered site tree9364ae7fa6215d7352ae88078a8437d867bf92f2 matches the qualified303-site/328-focused/2745-browser candidate. Cold13, settled0 and planted10 controls support the accepted three-line prewindow settle, without URL filtering. This satisfies the artifact condition and releases this Task under JOT54; no new owner approval is requested. S003 now owns only document-start/helper controls; S010 retains governance/glossary. Establish the native claim and fresh recovery baseline next.
