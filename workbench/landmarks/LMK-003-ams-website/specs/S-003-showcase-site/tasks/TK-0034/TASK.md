@@ -3,10 +3,12 @@
 **Task ID:** TK-0034
 **Spec ID:** S-003
 **Slice:** Document-start keyboard traversal preserves real reachability in the original enlarged-text matrix
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation, Trust; bounded PR151 keyboard recovery
 **Planned verification:** Document-start and pre-focused-middle positive controls plus visible-unreachable/focus negative controls before the original64 enlarged-text cases; current-base build, applicable site/root checks, review and checked dev containment.
+**Claimed by:** codex-s003-keyboard
+**Current claimant:** codex-s003-keyboard
 
 ## Assignment
 
