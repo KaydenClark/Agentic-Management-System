@@ -411,3 +411,25 @@ Kayden authorizes implementation of S-009 (demo Grill Board) and S-010 (governan
 
 Preserve historical evidence, prior failed attempts, active Wiki/Board writers and all unchanged boundaries. PR101 stays stopped; initial candidate -> retry -> retry -> stop remains, baseline excluded. This website authority grants no new model campaign, evaluator qualification, personal skill installation or wider rollout. Public pages expose no review status/private criticism, and samples send no answers. Human QA is actual owner judgment; only Kayden controls dev-to-main promotion. Earlier preparation-only entries remain historical; this later scoped implementation instruction releases S-009/S-010 execution only, not unrelated holds.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T08:57:14.738Z
+Author: Kayden (captured by Codex S003 writer)
+Source: chat:ams-12-outcomes-task8-two-confirmations-20261105
+Topic: website-presentation
+Supersedes: none
+
+Source is Kayden's AMS twelve-outcome request of 2026-11-05, beginning with /Orchestrate and /carry please, and his subsequent correction: "We're my two confirmations not enough? I'm confused now". This records the existing twice-confirmed scope and execution authority. It requests no new approval and establishes no implementation, review, acceptance or deployment proof.
+
+Exact task8 owner request:
+"Recover the bounded website fixes.
+Resume #151 only under a scoped release of its stop: establish document-start keyboard traversal, retain real reachability/focus checks, and add negative controls before rerunning the same enlarged-text matrix. Resume #165 by coherently shortening its record while preserving receipts and requirements, then verify the existing chart fixes. Inspect #111’s navigation work against the current shell before reusing it.
+Pass condition: the original failures are resolved without suppressing checks, and current-base candidates are reviewed, tested, and contained in dev."
+
+This is the scoped release for those bounded website recovery operations: S-003/#151 keyboard verification, S-007/#165 record and existing-chart verification, and S-008/#111 inspection against the current shell before reuse. Retain the actual prior failures, requirements, receipts, source identities and stop history. It grants no unchecked reuse or suppression of detecting assertions. Follow the current Spec/Task claim and review workflow, preserve unrelated writers, and deliver checked current-base website candidates into dev.
+
+Earlier S-007 approval/publication Jots remain unchanged. JOT-8634622a-512b-44d9-9b99-0f973c450356 remains the separate S-009/S-010-only authority capture; this entry neither rewrites it nor broadens its original claim. PR101 stays stopped. Preserve r1 and its three assessment runs, with initial candidate -> retry -> retry -> stop and baseline excluded; no Task/campaign rename resets exhausted attempts. No new model trials, evaluator qualification, paid services, shared-skill installation or wider rollout is granted by this website recovery entry. Actual Human QA and owner-controlled dev-to-main promotion remain required; no production promotion or Human QA waiver is implied.
+<!-- /jot-entry -->
