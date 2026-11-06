@@ -3,7 +3,7 @@
 **Task ID:** TK-003
 **Spec ID:** S-005
 **Slice:** Preserve original page feedback privately; bind safe committed voice entries and later page cards to its version.
-**Status:** blocked
+**Status:** ready
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Criticism becomes the voice record; Agents cite it
 **Planned verification:** synthetic private-note canaries never enter Git; safe version/card writes are atomic, stale writes refuse, and originals remain recoverable
@@ -36,3 +36,5 @@ Hand back to S-005 with `close`.
 - [ ] Editing the voice record after render makes the write refuse; card and record stay byte-identical.
 - [ ] Must fail: an open page card that names no voice record version fails the test.
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
+
+Local preparation: published TK-001 is done at800a67b. Exact PR174 main delivery remains approval-blocked; this continuation leaves its held head unchanged. TK-002 remains separately in progress pending publication.
