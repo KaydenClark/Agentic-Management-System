@@ -8,13 +8,13 @@
 **Updated:** 2026-11-06
 **Catalog description:** Repair shared handoff, branch and cleanup behavior, qualify exact sources and prove later use with scoped RSI evidence.
 **Blockers:** none
-**Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** Inspect the existing orchestrate reuse/adoption packet in [history](../../../../wiki/history/S-011.md#2026-11-06-scoped-orchestrate-reuse-and-preparation); then release only matching TK-002R/S artifacts. Old claims/stops remain; no dependent execution or whole-Spec pass.
+**Confirmation:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
+**Execution approval:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
+**Next gate:** Root accepted the exact reuse/adoption packet and released TK-002R's native records/handoff run. Complete that scoped receipt; TK-002S still needs independent later-use proof. Old claims/stops and whole-Spec gaps remain.
 
 ## Intent and authority
 
-The [item 7 instruction](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-9354c241-ca54-44ee-a1e9-859f7a206810) authorizes this outcome and exact-scope reuse without another general confirmation. This assignment prepares R/S for inspection before claims/execution. `KaydenClark/skills` owns source; scoped adoption, later website use and safe dev proof are separate. No cross-project rollout, production promotion or fabricated qualification.
+The [item 7 instruction](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-9354c241-ca54-44ee-a1e9-859f7a206810) authorizes this outcome and exact-scope reuse. Root completed packet inspection and released R's native records/handoff only. `KaydenClark/skills` owns source; adoption, later website use and safe dev proof stay separate. No new source/model/install/store effects, cross-project rollout or promotion.
 
 The [resumed per-PR model correction](../../../../wiki/context-owner-answers-coherence.md#jot-e72ca481-c2b9-4940-86a0-141f6c261913) governs its Claude round. Older Terra-pinned series remain frozen; new campaigns require their actual release inputs.
 
