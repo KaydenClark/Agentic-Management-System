@@ -73,3 +73,11 @@ predeclare their outcomes. Existing unrelated doctor findings remain owned by
 their original records. Reports run only when invoked by an orchestrator; there
 is no continuous watcher. Native receipt authenticity, general semantic grading
 and later real use retain the worker/evaluator/adoption owners.
+
+## Subsequent verified result
+
+Corrected product `c01c5136f834656001e023da259a6348949ddf2c` passed 62 focused coherence checks and the operator replay in 2.292 seconds. A fresh immutable checkout passed **865 tests, 6 skipped in 300.98 seconds**. Wiki, layout, ADR and whitespace checks passed; hygiene reported zero findings. Existing doctor findings remain unchanged (other Tasks/host setup), and local selection output grants no new claim.
+
+Independent `standards_review` and `spec_review` contexts both returned PASS with zero unresolved findings for main `adde5f4` through exact product `c01c513`. Spec review explicitly limits its conclusion to TK-001D's bounded synthetic behavior. [Shared CI42195608915](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/42195608915) succeeded on that exact head on the declared `servitor-ams` runner: full Python suite, hygiene, records/Taskboard and 375px Board steps all passed. Its workflow is unchanged from governing main.
+
+The native lifecycle closed TK-001D using the 44-file tool closure verified byte-for-byte against governing main `adde5f4`. Closure records still need their final exact-head checks and normal non-site main delivery through [PR182](https://github.com/KaydenClark/Agentic-Management-System/pull/182); a native close or merge does not establish whole-Spec acceptance, real loop assembly, owner Human QA or website promotion.
