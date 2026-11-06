@@ -10,11 +10,11 @@
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Inspect TK-001F preparation; TK-003 awaits paired intervals.
+**Next gate:** Claim TK-001F for its accepted software slice.
 
 ## Intent and authority
 
-Stage A's [preparation boundary](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) remains scoped. The [goal10 launch](../../../../wiki/history/S-007.md#goal-10-continuation) releases F's old launch hold; this continuation awaits root inspection before product work.
+Stage A's [preparation boundary](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) remains scoped. The [goal10 launch](../../../../wiki/history/S-007.md#goal-10-continuation) releases F's old launch hold; root accepted its software slice, with producer execution separate.
 
 Owner requires chart places from the first deploy and no fabricated data.
 
@@ -29,7 +29,7 @@ Traceable evidence lets readers assess the loop.
 ## Current Verified State
 
 - Whole-Spec acceptance remains unverified. [TK-001](tasks/TK-001/TASK.md#receipt) closed the bounded empty-state slice.
-- [TK-002](tasks/TK-002/TASK.md) closed the checked live reader; [proof and limits](tasks/TK-002/CURRENT-CHECK.md) retain failures and originals. Native accounting remains unverified; no workspace release, full closeout or Spec acceptance. F is deferred/unclaimed; private lineage and TK-003 interval inputs remain missing.
+- [TK-002](tasks/TK-002/TASK.md) closed the checked live reader; [proof and limits](tasks/TK-002/CURRENT-CHECK.md) retain failures and originals. Native accounting remains unverified; no workspace release, full closeout or Spec acceptance. F software is released; private lineage and TK-003 interval inputs remain missing.
 
 History: [S-007 history](../../../../wiki/history/S-007.md).
 

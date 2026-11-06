@@ -3,7 +3,7 @@
 **Task ID:** TK-001F
 **Spec ID:** S-007
 **Slice:** A reader follows a real failure through progress and workflow changes
-**Status:** deferred
+**Status:** ready
 **Blockers:** none
 **Destination:** spec-acceptance: Feedback loop connection
 **Planned verification:** One observable original-case demonstration, planted failure, replay/resume and affected regression checks; applicable RUNBOOK checks.
@@ -23,36 +23,18 @@ Size: one representative occurrence through the full path; widen only through an
 - [ ] Original, adverse and regression observations name exact source and skill identities; no planned check is reported as performed.
 - [ ] Applicable checks and scoped QA pass; unmet outcomes remain open with a responsible owner.
 
-## Confirmed continuation and writer
+## Accepted plan and software release
 
-The [verbatim goal10 instruction](../../../../../../wiki/history/S-007.md#goal-10-continuation) and confirmed launch resolve the old owner hold. TK-002 is done at b4f85a2cc94d7f8b8c5ea4180e81f05ae897ae33, delivered by PR185 merge4742529967ac9c3713e1e2bb9bc3c374374ed226 and contained in checked dev169d698dd2bc6fa31b3a5e0103d272d3b59fc15d. Its claimant, receipts and workspace limits remain intact.
+Root accepted the full prepared plan at393f24a09aa5527b8e89c3460d8c06a3fe53582d, then released this existing F software slice under confirmed owner goal10. The [verbatim instruction](../../../../../../wiki/history/S-007.md#goal-10-continuation) and [public contract check](../../../../../../wiki/history/S-007.md#public-contract-check) remain its sources. TK-002 is done and delivered through PR185. No general confirmation is missing.
 
-Root assigned sole record/preparation writer codex-s007-f-preparation. F is deferred/unclaimed pending root inspection, not another owner confirmation. Future claim needs current refs/claims, bounded assignment and a genuine snapshot/separate binding before product. Main is c787b2958fa7a23f55c6406f3ce367a91e9162dc; import no unmerged private-lineage work and never move dev into main.
+Sole current S007 writer: codex-s007-public-evidence. Execution requires its native claim, genuine complete starting inventory and separately committed binding before product. Canonical Feature/S-007-rsi-chart-pages targets checked dev; root reserves its merge, owner alone promotes dev to main. Preserve prior claimant/receipts, active Wiki/Board work, stopped campaigns and attempts.
 
-## Bounded proposal for root inspection
+Implement the accepted public build_events reader with on-site anchors/provenance/event/read times, excluding arbitrary detail/private data. Keep activity, Alignment and useful improvement distinct. Conservatively separate differing observed task sets/coverage; retain all series dimensions, failures, attempts, per-task values and denominators. Immutable case-version equivalence remains unknown when absent.
 
-1. Read public `build_events` independently; select core public columns, never arbitrary `detail`. Render on-site evidence rows with full source, strength, event/read times. Label activity recorded facts/improvement unknown; retain separate Alignment/development and trial views.
-2. Separate differing observed task sets/coverage in aggregate series, preserving split/provider/model/effort/grader, failed attempts, per-task results and denominators. Task IDs do not prove immutable case-version equivalence; expose that uncertainty without benchmark or causal benefit claims.
-3. Distinguish populated, successful-empty, stale, failed and result-less states. Failure cannot mean empty success; retained data keeps actual last-success time. Qualify real Next cache/ISR behavior under success/expiry/outage first; no process-local map called durable. Show result-less running/completed/stopped/failed runs with grade unknown.
-4. After reader qualification and exact-payload review, a separately bounded trusted LOCAL producer uses protected-main Python/PostgREST and verifies one real event's public readback. A second event must appear without source edits. Preparation/frontend/C/cloud perform no DB writes.
+First qualify actual Next cache/ISR retention under success, expiry, failed refresh and restart before relying on stale-success behavior. No process-local map is durable. If the framework cannot meet the outcome, return concrete evidence/options to root for that dependent design and continue independent corrections. Implement truthful populated/empty/stale/failed and result-less states with actual last-success times, including running/completed/stopped/failed runs without results.
 
-## Delivered public contract and producer boundary
+Focused red/green checks precede changes. Fresh build and strict inventory/hash verification precede server/browser checks; then site tests,375px/desktop/both themes/JS-disabled/privacy/source/data-state QA, required repository/fresh-candidate checks and exact-head CI. Preserve failed evidence and return canonical intake without racing its writer. No optional probes after required evidence passes.
 
-Use protected-main `ams-writer record-merge`/`insert_event` and existing `build_events`; the [read-only contract check](../../../../../../wiki/history/S-007.md#public-contract-check) records exact public fields, RLS and uniqueness. No new schema/API field is assumed.
+This software release includes no new schema, private-lineage import, model campaign, skill install, database write or deployment. After reader qualification, propose EXACT two real Git-derived merge payloads and trusted LOCAL protected-main record-merge/readback actions for separate root review. No generic correction-payload expansion; no service keys/connectors for frontend/C/cloud. A second supported event must appear without site-source edits;409 alone proves no content identity, and uncertain publication needs reconciliation.
 
-First live proof uses two exact Git-derived PR merge events, one possibly47e3c8804c6b9434a945588492d22c28ef9cb439, through `record-merge` and independent content readback. Root reviews both generated payloads/actions first; no generic correction-payload expansion now. Merge activity proves no trial, grade, adoption or benefit; unsupported kinds cannot imply no activity. Full failure/disposition/workflow joins remain open.
-
-Producer code is trusted protected-main, not candidate imports; credentials stay local. Validate source/strength, exact inserted/duplicate fields and publishable readback;409 alone proves no content identity. Reconcile uncertain writes before retry. Site readers use publishable access only, excluding service keys, raw packets, private locators/criticism and synthetic rows.
-
-## Planned checks, QA and delivery
-
-- Disjoint/overlapping task coverage and same-set controls; retain per-task grades, unknown case identities and denominators.
-- Pagination, malformed/refused/outage reads, test-row/private-detail exclusion, all five states/actual last-success times and result-less runs in every state. Qualify source/cache behavior before claiming stale retention.
-- Fresh build before focused/full site tests; required repository checks/exact-head CI. Browser QA:375px/desktop, both themes, scripts disabled, source/row links, privacy/data states. Root reviews exact candidate before dev merge.
-- After reader qualification/root payload review: separately bounded local producer/readback and matching protected-dev proof; safe replay under one minute, actual external time separate. A second event proves no manual site-source update.
-
-Root reserves dev merges; owner alone promotes dev to main. Preparation publishes only F/Spec/history/projections on the canonical branch. Product and producer releases are separate; checks above are planned, not results.
-
-## Full acceptance and genuine missing inputs
-
-Original Acceptance stays unchanged/unchecked. Public activity/comparison/read states can advance independently of PR175 but cannot complete all failure/assessment/disposition/later-use joins. Safe assessment/lifecycle publication, case-version IDs, native use and recurrence need their owners' verified producer artifacts; private rows stay private, missing fields unknown. TK-003 needs real control arms/paired intervals; bootstrap41 proves no headline. Partial results keep F/Spec outcomes open with exact gaps/next action.
+Full original Acceptance above remains unchanged/unchecked. Public activity and reader repairs advance independently of PR175, but private failure/assessment/disposition/later-use joins, safe publication, case identities and recurrence remain genuinely missing producer artifacts. No fabricated fields, trial/grade/benefit or bootstrap41 headline. TK-003 still needs actual control-arm/paired intervals. Keep F open with a truthful native continued receipt when these gaps remain. Return an immutable candidate, actual checks/QA, exact completed subset/gaps and both merge answers in a dev PR for root inspection.
