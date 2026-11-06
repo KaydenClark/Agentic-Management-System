@@ -1,5 +1,5 @@
 {
-  "intro": "[Blueprint](BLUEPRINT.md) owns the destination.",
+  "intro": "[Blueprint](BLUEPRINT.md) governs.",
   "sections": [
     {
       "heading": "Language",
@@ -27,12 +27,12 @@
             {
               "term": "Alignment Score",
               "id": "alignment-score",
-              "definition": "Applicable checks passed, pooled across three runs as a percentage; separate from fitness/acceptance."
+              "definition": "Applicable checks passed, pooled over three runs (%); separate from fitness/acceptance."
             },
             {
               "term": "Fitness level",
               "id": "fitness-level",
-              "definition": "r1: Excellent at three passing runs, Stable at two, Functional at one, Broken at none or any Critical failure."
+              "definition": "r1: Excellent=3 passing runs; Stable=2; Functional=1; Broken=0 or any Critical failure."
             },
             {
               "term": "Improvement attempt",
@@ -111,17 +111,17 @@
             {
               "term": "Implementation Task",
               "id": "implementation-task",
-              "definition": "Assigned bounded Spec slice owning execution state and proof."
+              "definition": "Assigned Spec slice owning execution state and proof."
             },
             {
               "term": "Evaluation task",
               "id": "evaluation-task",
-              "definition": "Repeatable test case; attempts are trials, neither is an implementation assignment."
+              "definition": "Repeatable test case; trials are attempts, distinct from implementation Tasks."
             },
             {
               "term": "Evidence audit",
               "id": "evidence-audit",
-              "definition": "Claims checked against dated candidate evidence; reassessments retained."
+              "definition": "Claims checked against dated candidate evidence; retain reassessments."
             },
             {
               "term": "Improvement record",
@@ -131,12 +131,12 @@
             {
               "term": "Review receipt",
               "id": "review-receipt",
-              "definition": "Actual candidate/scope review naming reviewer, findings and limits."
+              "definition": "Candidate/scope review: reviewer, findings and limits."
             },
             {
               "term": "Human QA receipt",
               "id": "human-qa-receipt",
-              "definition": "Sourced human judgment of a named experience/candidate; agents cannot supply it."
+              "definition": "Sourced human judgment of a named candidate/experience; never agent-supplied."
             }
           ]
         },

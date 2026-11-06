@@ -6,7 +6,7 @@
 **Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
 **Stance:** Builder
 **Updated:** 2026-11-03
-**Catalog description:** Checks that keep the AMS coherent: up to Spec, skills pinned and in sync, `dev` measured against `main`, and independent Spec review.
+**Catalog description:** Coherence checks: Spec fidelity, pinned/current skills, dev/main drift and independent review.
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
@@ -16,24 +16,24 @@
 
 The [owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes Map/Plan preparation; implementation and trial holds remain.
 
-The owner asked that the system stay coherent and nothing fall behind, with one orchestrator checking that the project stays up to Spec, and that the distance between `dev` and `main` be measured so a long-unmerged trunk does not happen again. Orchestrator C runs in a cloud session, works only through GitHub, holds no secrets and writes no product code.
+Owner requires Spec fidelity and measured dev/main distance to prevent another long-unmerged trunk. Orchestrator C works in the cloud through GitHub only, holds no secrets and writes no product code.
 
 ## Outcome
 
-At any time a reader can see whether delivered work matches its Specs, whether every run used a pinned and current skills commit, and how far `dev` is ahead of `main`. Specs get a review from a context that did not build them.
+Readers see Spec fidelity, pinned/current skills per run and dev/main distance. An independent context reviews each Spec.
 
 ## Why It Matters
 
-An earlier Workbench let its development trunk run thousands of commits ahead of `main` and its records drift from its code. Catching drift early is cheaper than repairing it.
+An earlier Workbench accumulated thousands of unmerged commits and stale records. Catch drift before recovery becomes costly.
 
 ## Current Verified State
 
-Independent review returned candidate `b7efbaba15baa354eafbc92b91a352ae54d94c71` for incomplete legacy accounting and control routes; [TK-001X](tasks/TK-001X/TASK.md) subsequently recorded the bounded accounting correction. No criterion is checked off. The bounded dev recovery and its verification are recorded in [TK-001U](tasks/TK-001U/TASK.md); this does not complete detection or the learning cycle.
+Independent Review returned `b7efbaba15baa354eafbc92b91a352ae54d94c71` for incomplete legacy accounting/control routes; [TK-001X](tasks/TK-001X/TASK.md) records its bounded correction. No criterion is verified. [TK-001U](tasks/TK-001U/TASK.md) retains dev-recovery proof, not complete detection or learning.
 
-- **Drift measured:** the drift check and report exist ([TK-001 receipt](tasks/TK-001/TASK.md#receipt)); the Grill Board item on breach is blocked ([TK-005](tasks/TK-005/TASK.md)).
-- **Up to Spec:** the check and an S-004 report exist ([TK-002 receipt](tasks/TK-002/TASK.md#receipt)).
+- Drift check/report: [TK-001 receipt](tasks/TK-001/TASK.md#receipt); Board breach item blocked on [TK-005](tasks/TK-005/TASK.md).
+- Up-to-Spec check and S-004 report: [TK-002 receipt](tasks/TK-002/TASK.md#receipt).
 - **Skills in sync:** blocked on S-006 rows ([TK-003](tasks/TK-003/TASK.md)).
-- **Independent review:** the procedure and checker exist ([TK-004 receipt](tasks/TK-004/TASK.md#receipt)); the checker is not in the native verdict gate.
+- Review procedure/checker: [TK-004 receipt](tasks/TK-004/TASK.md#receipt); absent from the native verdict gate.
 - **No secrets:** no evidence recorded.
 - `doctor` reports structural findings. `dev` exists on the remote. RUNBOOK does not name the coherence commands.
 
@@ -72,7 +72,7 @@ Distinguish accepted source version, installed bytes, actual host loading and ob
 
 ## Vertical Implementation Slices
 
-Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, no secrets), landed feature -> `main` through a checked PR. Stack: a read-only check script, Git and GitHub reads, a committed report, and tests on fixture repositories.
+Each Task uses C's fresh cloud context (GitHub only, no secrets), targeting checked feature -> main. Stack: read-only check, Git/GitHub reads, committed report and fixture-repository tests.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
