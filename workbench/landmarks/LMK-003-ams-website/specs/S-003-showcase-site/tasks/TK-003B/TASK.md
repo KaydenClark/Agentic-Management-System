@@ -34,6 +34,8 @@ Retain Task002B/PR151 STOP and every Task34/35 receipt/failure. Rerun the SAME o
 
 Fresh immutable-source build BEFORE strict inventory/hash reads and site tests, then browser/server execution. Strict classic/adapter owner-bound artifact guards and pure hash remain; read frozen output before any Next start, never deduplicate runtime caches. Run full site/all-built-route browser/link/privacy/source/focus controls, applicable repository checks and exact-head CI. Include failure-capable controls, both themes and reduced motion; preserve sample no-request and permitted-resource checks. STOP/report after two failed checks; no optional loops after green. Independent exact-source review; root reserves checked-dev merge. Actual Human QA, deployed readback and owner-only dev-to-main remain distinct.
 
+Workspace baseline sha256:98981019e2c257656b90c432d1a99db16048079a9c8f7ebc808b12e02872c202
+
 ## Acceptance
 
 - [ ] Real current-base no-JS375 clipping is reproduced with existing detector and diagnosed; smallest source repair reveals every real nav link by native document-start Tab at375/1280, both themes and script states, preserving focus and core text.
