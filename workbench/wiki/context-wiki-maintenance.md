@@ -148,3 +148,16 @@ The accepted five recommendations, preserving their titles and implementation sc
 
 This preserves approval of the preceding recommendations, not a fabricated four-section readback. The later owner correction makes Wiki/Memory its own Landmark and functional evaluation independent of RSI. Authorized endpoint: Map, Plan, delegated implementation and checked non-site delivery within project controls; no paid services, database migrations, deployments, shared-skill installs/catalog changes or unrelated upgrades.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T05:29:24.240Z
+Author: codex-wiki-prepare
+Source: chat:ams-wiki-memory-2026-11-05
+Topic: wiki-maintenance
+Supersedes: none
+
+Scoped execution binding, captured by codex-wiki-prepare after native ID allocation: LMK-000A (Wiki memory and session continuity), S-000D (Source-backed memory recovery) are the destination records for the five recommendations Kayden explicitly approved on 2026-11-05. The agent selected these identities under the delegated Map/Plan instruction; the identifiers were not spoken by the owner. Exact owner approval remains JOT-72534303-7521-4d2c-98d2-96b1bcb3825a: "Yes to all 5. /Orchestrate mapping and planning it, once it's prepared, delegate implementation as well. Make sure you are using the best skills for the job, and having the sub agents do the best skills for the job too." The later exact owner correction/own-Landmark instruction remains JOT-b3247909-9721-4842-a83f-61adc5da2e13. Confirmation and execution approval apply to all five within S-000D; implementation follows checked preparation and delegation. No new four-section readback, working behavior or owner acceptance is asserted.
+<!-- /jot-entry -->
