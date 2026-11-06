@@ -5,8 +5,9 @@ sensitivity: normal
 knowledge_role: curated
 provenance:
   - /jot capture; each claim names its source and date
+  - S-005 PR174 scoped correction and independent review at 8c761db, 2026-11-06
 source_paths: []
-last_verified: 2026-11-04
+last_verified: 2026-11-06
 ---
 
 # Grilling Board and DQC-backed intent

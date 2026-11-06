@@ -9,8 +9,8 @@ source_paths:
   - workbench/landmarks/LMK-001-grill-board
   - workbench/landmark-tracker/destination-questions
 parent: none
-authorized_by: S-000C Wiki repair under JOT-a66709e3
-last_verified: 2026-11-04
+authorized_by: S-000C Wiki repair under JOT-a66709e3; S-005 PR174 management
+last_verified: 2026-11-06
 ---
 
 # Grill Board
