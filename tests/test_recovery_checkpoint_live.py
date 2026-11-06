@@ -1,5 +1,6 @@
 """Real isolated checkpoint restore; no live authorization is restored."""
 from copy import deepcopy
+from contextlib import contextmanager
 from datetime import datetime,timezone
 import hashlib
 import json
@@ -51,6 +52,12 @@ def raw_restore(store,manifest,*,expected_head=None,expected_pin=None):
         "expected_head":expected_head,"reader_digest":recovery.reader_digest(),"schema_digest":recovery.schema_digest()},mutating=True)
 
 
+@contextmanager
+def rejected(*codes):
+    with pytest.raises(recovery.DatabaseRefused) as caught:yield
+    assert caught.value.database_code in codes
+
+
 def test_complete_checkpoint_restores_ids_receipts_and_matching_noop(local,destination):
     ready=prepared(local);claimed=local.store.claim(ready,"source")
     reserved=local.store.begin_effect(claimed,0)
@@ -93,7 +100,7 @@ def test_stale_or_divergent_restore_retains_newer_canonical_state(local,destinat
     destination.gates(copied,approved=False,capacity="unknown",observed_at=datetime.now(timezone.utc).isoformat().replace("+00:00","Z"),capacity_digest="f"*64)
     current=destination.snapshot(local.namespace)
     for expected in (manifest["source_head"],current["head"]):
-        with pytest.raises(recovery.Refused,match="HTTP 409"):
+        with rejected("PT409"):
             destination.restore(manifest,expected_head=expected,expected_manifest_digest=manifest["manifest_digest"])
         assert destination.snapshot(local.namespace)==current
 
@@ -121,7 +128,7 @@ def test_recomputed_omission_cannot_replace_independently_trusted_checkpoint(loc
     recovery.validate_checkpoint(forged)
     with pytest.raises(recovery.Refused,match="independently pinned"):
         destination.restore(forged,expected_head=None,expected_manifest_digest=manifest["manifest_digest"])
-    with pytest.raises(recovery.Refused,match="HTTP 409"):
+    with rejected("PT409"):
         raw_restore(destination,forged,expected_pin=manifest["manifest_digest"])
     assert json.loads(destination.snapshot(local.namespace)["snapshot_text"])["lineage"]==[]
 
@@ -139,7 +146,7 @@ def test_raw_restore_rejects_private_or_broken_projection_atomically(local,desti
         else:value["case_id"]="missing-case"
         row["job_text"]=recovery.canonical(value);row["job_digest"]=recovery.digest(value)
     forged=resign(manifest,mutate)
-    with pytest.raises(recovery.Refused,match="HTTP 4"):
+    with rejected("PT409" if malformed=="external" else "23514"):
         raw_restore(destination,forged)
     data=json.loads(destination.snapshot(local.namespace)["snapshot_text"])
     assert all(data[k]==[] for k in recovery.SNAPSHOT_KINDS)
@@ -152,6 +159,20 @@ def test_partial_inventory_and_unsupported_reader_refuse(local,destination):
         forged["manifest_digest"]=recovery.digest({k:v for k,v in forged.items() if k!="manifest_digest"})
         with pytest.raises(recovery.Refused):
             destination.restore(forged,expected_head=None,expected_manifest_digest=manifest["manifest_digest"])
-        with pytest.raises(recovery.Refused,match="HTTP 4"):
+        with rejected("23514"):
             raw_restore(destination,forged)
     assert json.loads(destination.snapshot(local.namespace)["snapshot_text"])["jobs"]==[]
+
+
+def test_matching_lineage_prefix_can_append_but_old_snapshot_cannot_roll_back(local,destination):
+    prepared(local);full=local.store.export(local.namespace)
+    initial=chain(local.namespace)[:3]
+    target_config=json.loads(Path(os.environ["AMS_RECOVERY_RESTORE_CONFIG"]).read_text())
+    target_lineage=lineage.Store(target_config["url"],target_config["service_jwt"],rest_path=target_config["rest_path"])
+    target_lineage.append(initial,expected_head=None)
+    older=destination.export(local.namespace)
+    imported=destination.restore(full,expected_head=older["source_head"],expected_manifest_digest=full["manifest_digest"])
+    assert imported["head"]==full["source_head"]
+    with rejected("PT409"):
+        destination.restore(older,expected_head=full["source_head"],expected_manifest_digest=older["manifest_digest"])
+    assert destination.snapshot(local.namespace)["head"]==full["source_head"]

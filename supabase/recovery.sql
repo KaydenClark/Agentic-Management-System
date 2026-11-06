@@ -375,7 +375,7 @@ begin
     or coalesce(jsonb_typeof(s),'')<>'object' or not(s ?& array['namespace','lineage','jobs','effects','externals'])
     or s-array['namespace','lineage','jobs','effects','externals']<>'{}'::jsonb
     or coalesce(jsonb_typeof(m->'records'),'')<>'array' or coalesce(jsonb_typeof(m->'counts'),'')<>'object'
-    or m->'counts'-array['lineage','jobs','effects','externals']<>'{}'::jsonb then
+    or (m->'counts')-array['lineage','jobs','effects','externals']<>'{}'::jsonb then
     raise exception 'incomplete checkpoint projection' using errcode='23514'; end if;
   foreach category in array array['lineage','jobs','effects','externals'] loop
     if coalesce(jsonb_typeof(s->category),'')<>'array'
@@ -486,9 +486,9 @@ begin
       values(ns,row->>'effect_key',row->>'job_id',row->>'key_text',row->>'payload_digest',(row->>'intent_fence')::bigint,
         (row->>'version')::bigint,row->>'state',row->>'observation_text',row->>'receipt_digest');
   end loop;
-  if exists(select 1 from public.rsi_jobs j where namespace=ns and terminal_state='completed' and
-    ((select count(*) from public.rsi_effects e where e.namespace=ns and e.job_id=j.job_id)<>jsonb_array_length(j.job_text::jsonb->'slots')
-      or exists(select 1 from public.rsi_effects e where e.namespace=ns and e.job_id=j.job_id and state<>'completed'))) then
+  if exists(select 1 from public.rsi_jobs stored_job where namespace=ns and terminal_state='completed' and
+    ((select count(*) from public.rsi_effects e where e.namespace=ns and e.job_id=stored_job.job_id)<>jsonb_array_length(stored_job.job_text::jsonb->'slots')
+      or exists(select 1 from public.rsi_effects e where e.namespace=ns and e.job_id=stored_job.job_id and state<>'completed'))) then
     raise exception 'completed job has unresolved frozen slots' using errcode='23514';end if;
   after:=ams_recovery_private.snapshot(ns);
   if after->>'head' is distinct from m->>'source_head' then raise exception 'restored projection differs' using errcode='PT409';end if;

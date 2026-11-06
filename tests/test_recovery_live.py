@@ -97,9 +97,18 @@ def test_stale_fence_cannot_publish_receipt(local):
     adapter=recovery.KeyedFileEffect(local.root)
     observed=adapter.apply(reserved["effect"]["effect_key"],b"safe synthetic effect")
     time.sleep(1.1)
+    # Correct version/fence still cannot publish after lease expiry.
+    with pytest.raises(recovery.DatabaseRefused) as expired:
+        local.store.observe_effect(local.store.get_job(local.namespace,"job-1"),reserved["effect"]["effect_key"],observed)
+    assert expired.value.database_code=="PT409"
     second=local.store.claim(local.store.get_job(local.namespace,"job-1"),"second",lease_seconds=30)
     with pytest.raises(recovery.Refused,match="HTTP 409"):
         local.store.observe_effect(reserved["job"],reserved["effect"]["effect_key"],observed)
+    # Correct current version/actor with only the old fence also refuses.
+    wrong_fence=deepcopy(second);wrong_fence["fence"]=first["fence"]
+    with pytest.raises(recovery.DatabaseRefused) as fenced:
+        local.store.observe_effect(wrong_fence,reserved["effect"]["effect_key"],observed)
+    assert fenced.value.database_code=="PT409"
     recovered=local.store.begin_effect(second,0)
     assert recovered["execute"] is False
     sealed=local.store.observe_effect(recovered["job"],reserved["effect"]["effect_key"],observed)
@@ -156,5 +165,52 @@ def test_equivalent_slot_encoding_cannot_reserve_another_effect(local):
     differently_encoded=json.dumps(material,indent=2)
     request={**local.store._fenced(reserved["job"]),"slot_index":0,"key_text":differently_encoded,
              "effect_key":hashlib.sha256(differently_encoded.encode()).hexdigest()}
-    with pytest.raises(recovery.Refused,match="HTTP 4"):
+    with pytest.raises(recovery.DatabaseRefused) as duplicate:
         local.store._rpc("begin",request,mutating=True)
+    assert duplicate.value.database_code=="23505"
+
+
+def test_renew_release_and_same_label_cannot_steal_active_claim(local):
+    ready=prepared(local);claimed=local.store.claim(ready,"owner")
+    with pytest.raises(recovery.DatabaseRefused) as duplicate:
+        local.store.claim(claimed,"owner")
+    assert duplicate.value.database_code=="PT409"
+    renewed=local.store.renew(claimed,lease_seconds=30)
+    assert renewed["fence"]==claimed["fence"] and renewed["version"]>claimed["version"]
+    released=local.store.release(renewed)
+    assert released["lease_until"] is None and released["claimant"] is None
+    next_owner=local.store.claim(released,"next")
+    assert next_owner["fence"]>claimed["fence"]
+    reserved=local.store.begin_effect(next_owner,0)
+    with pytest.raises(recovery.DatabaseRefused) as incomplete:
+        local.store.finish(reserved["job"],"completed",evidence_digest="f"*64)
+    assert incomplete.value.database_code=="23514"
+
+
+def test_renamed_released_job_cannot_repeat_consumed_slot(local):
+    ready=prepared(local);claimed=local.store.claim(ready,"first")
+    original=local.store.begin_effect(claimed,0)
+    changed=job(local.namespace,job_id="renamed-job");changed.update(campaign_id="new-label",release_digest="1"*64)
+    created=local.store.create_job(changed)
+    gated=local.store.gates(created,approved=True,capacity="available",observed_at=datetime.now(timezone.utc).isoformat().replace("+00:00","Z"),capacity_digest="f"*64)
+    second=local.store.claim(gated,"second")
+    with pytest.raises(recovery.DatabaseRefused) as duplicate:
+        local.store.begin_effect(second,0)
+    assert duplicate.value.database_code=="PT409"
+    assert original["job"]["attempt"]==second["attempt"]==1
+
+
+def test_actual_transport_outage_preserves_intake_for_idempotent_readback(local):
+    # An actual unbound loopback endpoint, not a mocked HTTP result.
+    import socket
+    with socket.socket() as socket_probe:
+        socket_probe.bind(("127.0.0.1",0));port=socket_probe.getsockname()[1]
+    pending=local.root/"outage-pending"
+    unavailable=recovery.Store("http://127.0.0.1:"+str(port),local.config["service_jwt"],rest_path="",pending_dir=pending)
+    with pytest.raises(recovery.Unavailable):unavailable.create_job(job(local.namespace))
+    files=list(pending.glob("*.pending.json"));assert len(files)==1
+    assert local.config["service_jwt"] not in files[0].read_text()
+    assert local.store.get_job(local.namespace,"job-1") is None
+    saved=local.store.create_job(job(local.namespace))
+    assert local.store.create_job(job(local.namespace))["job_digest"]==saved["job_digest"]
+    assert local.store.get_job(local.namespace,"job-1")["version"]==1

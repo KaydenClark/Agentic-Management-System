@@ -32,6 +32,15 @@ MANIFEST_FIELDS = {"format_version", "reader_version", "reader_digest", "schema_
                    "export_id", "previous_export", "snapshot_text", "source_head", "counts", "records", "manifest_digest"}
 
 
+class DatabaseRefused(Refused):
+    """Only safe HTTP/SQLSTATE metadata, never a database body or input text."""
+    def __init__(self,status,body):
+        value=body.get("code") if type(body) is dict else None
+        self.database_code=value if type(value) is str and re.fullmatch(r"[A-Z0-9]{5}",value) else None
+        self.http_status=status
+        super().__init__("recovery refused (HTTP "+str(status)+", SQLSTATE "+str(self.database_code)+")")
+
+
 def _string(value, pattern=lineage.ID):
     return (type(value) is str and pattern.fullmatch(value) and
             not value.startswith(("sb_secret_","sk-")) and not(value.startswith("eyJ") and value.count(".")==2))
@@ -247,7 +256,7 @@ class Store:
             raise Unavailable("recovery unavailable; original safe request remains pending")
         if not 200<=status<300 and pending is not None:
             pending.replace(pending.with_suffix(".refused.json"))
-        require(200<=status<300,"recovery refused (HTTP "+str(status)+")")
+        if not 200<=status<300:raise DatabaseRefused(status,body)
         if body.get("job") is not None:_job(body["job"])
         if action=="create":require(body.get("job",{}).get("job_text")==request["job_text"],"job creation readback differs")
         if action=="restore":
