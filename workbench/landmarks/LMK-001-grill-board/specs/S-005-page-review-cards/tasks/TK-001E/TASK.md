@@ -26,3 +26,5 @@ Size: one representative occurrence through the full path; widen only through an
 - [ ] A reviewer can replay the representative demonstration in under a minute from retained safe evidence/fixtures; actual external execution time is reported separately.
 - [ ] Original, adverse and regression observations name exact source and skill identities; no planned check is reported as performed.
 - [ ] Applicable checks and scoped QA pass; unmet outcomes remain open with a responsible owner.
+
+Workspace baseline sha256:852ec2c768c31516f48dec950789f5f81dc6de152871c7cf710edd0d50b47b4c
