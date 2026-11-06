@@ -1,0 +1,46 @@
+# TK-001A - Scope moves and competing publishers preserve trustworthy observations
+
+**Task ID:** TK-001A
+**Spec ID:** S-013
+**Slice:** A renamed source and competing native-use publications cannot evade or corrupt detection
+**Status:** in-progress
+**Blockers:** none
+**Destination:** spec-acceptance: Feedback loop connection; Prepare boundary; Recurrence and loading
+**Planned verification:** Reproduce both post-merge review findings on c787b29/b932ba0, then public-seam rename and cross-process publication regressions, retained-owner recovery and applicable RUNBOOK checks.
+**Claimed by:** codex-s013-correction
+**Current claimant:** codex-s013-correction
+
+## Assignment
+
+The owner's approved full RSI implementation continues. On 2026-11-06 the coordinating task explicitly requested validation and repair of both unresolved PR182 review findings: [rename endpoints](https://github.com/KaydenClark/Agentic-Management-System/pull/182#discussion_r4491077658) and [native-use publication race](https://github.com/KaydenClark/Agentic-Management-System/pull/182#discussion_r4491077662). This is one later corrective run under the existing Spec. Preserve TK-001D's original status, receipts, review results and delivery evidence; its earlier successful checks did not cover these defects. Until repaired and verified, do not rely on its affected scope/Prepare or concurrent native-use protections. A new Task does not reset any stopped campaign or candidate-attempt chain.
+
+One fresh implementor owns this Task and its source/tests, guidebook, failure evidence, Task/Spec/projection records on Feature/S-013-coherence-checks. Source base: main c787b2958fa7a23f55c6406f3ce367a91e9162dc, containing reviewed b932ba0211e7368c13f4114d09c9f4df222fdb2c. Use the native claim and separate complete inventory binding before product work. Follow Journey; code review and delivery gates remain. C's implementation lane is GitHub-only with no secrets: never call Supabase/Vercel connectors, read credentials or private materials, launch model trials, install skills, or change other owners' branches. Use a non-Astra implementor.
+
+Cross input/CLI, Git change inventory, safe report publication and fresh-process recovery in one bounded behavior. Check the removal and addition sides of a move independently of eventual allowed paths and Prepare record classification. Make native-use uniqueness validation and publication one cross-process critical operation; a losing same-use submission must leave the winning report and unrelated owners' reports recoverable. Preserve same-occurrence replay, conflicting evidence refusal, unknown identities, synthetic labels and safe exports. Cover process interruption/lock release using owned temporary fixtures; no new service or scheduler. Do not repair already-corrupted directories by silently deleting or selecting evidence.
+
+## Acceptance
+
+- [ ] Moving an outside-scope file into an allowed directory still reports the outside change; moving product source into a preparation-record directory still reports a Prepare bypass. Legitimate within-scope moves remain valid.
+- [ ] Two real processes submitting different occurrences for one native use yield exactly one created report and a controlled refusal; the winner and an unrelated owner's report remain readable in a fresh process. Same-occurrence identical replay remains idempotent.
+- [ ] A terminated publisher cannot leave a held lock or a partially published report; retained evidence is not deleted or overwritten.
+- [ ] Original findings reproduce before repair, focused/fresh/full checks and scoped QA pass, and documentation states the lock boundary, platform/support limits and remaining trust limits.
+- [ ] Return exact source and final candidates, tests/QA, both merge answers, retained failed evidence and any actual blocker. Independent review, exact-head shared CI and non-site main delivery remain distinct from whole-Spec acceptance, real native host use and Human QA.
+
+## Starting preservation
+
+Workspace baseline sha256:880606720be44cddca30f995a14ed6e8ef2af00a086456ae2171ed83fc735c89
+
+Complete native schema-1 inventory captured outside the observed checkout after committed claim/original projection 3f01f9b401172e3e888215e75b86f688ee9eb9fa. No ignored paths were present; findings and busy arrays were empty. Raw inventory stays private. This binding precedes product edits; claim and projection originals remain committed.
+
+## Feedback identity qualification
+
+Current S-013 findings: `FAIL-S013-PR182-C4491077658` and `FAIL-S013-PR182-C4491077662`. Historical numeric references and receipts remain exact; the canonical log appends source-qualified provenance. Task-ID collision remains open; no closure or runtime bypass.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-013-coherence-checks | a41c062acda0ab1d840b448b0850423b5054da48 | ahead 0 behind 0 | 2 | Pre-repair 3 failed/1 passed; focused 33 passed; current full 872 passed/6 skipped; exact fresh candidate suite still running; product a41c062acda0ab1d840b448b0850423b5054da48 | coherence-observations guidebook; canonical FAIL-183/184 and diagnostic189-191; corrective S013 report | Fresh full suite pending; independent Standards/Spec review and exact-head shared CI pending; no merge or Human QA; local cooperative-filesystem boundary only | 7b2cdcb7ef1056a1a10a29bc286e23b141dee95c29e90bd3ec7b8c8bd8ebb66d |
+| 2 | Feature/S-013-coherence-checks | eaad62b7fb090bfb3d5646910326da8e54e9555c | ahead 0 behind 0 | 2 | Product a41c062acda0ab1d840b448b0850423b5054da48: red 3 failed/1 passed, focused 33 passed; current full 872 passed/6 skipped 272.89s; fresh exact-candidate full 872 passed/6 skipped 284.52s; required native/layout/wiki/hygiene/replay/diff checks passed with existing nonblocking doctor findings | coherence guidebook; corrective evidence report; canonical FAIL183/184 and diagnostics189-193; original TK001D/report unchanged | Hold close: independent Standards/Spec review and exact-head shared CI pending. Native workspace preservation incomplete for missing integration discovery route; generated bytecode retained outside checkout. No merge, Human QA, real host-use or improvement proof | 28785fb0fa6723c8fda0f4500887f401c5cf3ba72c729283148e9b79328a9ea7 |
+| 3 | Feature/S-013-coherence-checks | 5adfb73ebf1221cc12eaa134a2aa8b6e7f301226 | ahead 1 behind 0 | 2 | Unchanged a41c062: fresh full 872 passed/6 skipped; current full 872/6; focused33; red3fail1pass. Final native doctor FAILS remote-id-collision after complete remote fetch/prune in both checkouts; prior doctor pass had incomplete remote visibility | corrective report later-blocker section; canonical FAIL196 plus discovery197/198; S007 sanitized intake194/195 | Task incomplete: new assigned TK001A collides with published S002 TK001A; native replacement requires done source, unavailable in-progress. Parent lifecycle disposition required; do not close/bypass. Independent reviews and exact-head CI pending; no merge/release | e6f4c6a1bd2a7bb6876e9e3d93ea849938325307655a4842b1da06c36d6b1520 |
+| 4 | Feature/S-013-coherence-checks | ba4784901542e52feca9af9096362e2ac1c8a924 | ahead 1 behind 0 | 3 | Append-only source aliases; original rows/receipt bytes retained; product/tests unchanged a41c062. Independent Standards33pass10.29s at de500 per coordinator | canonical log source-qualified aliases; corrective report; Task provenance pointer | Native in-progress Task-ID recovery unsupported; no close. Spec review active; final exact-head CI pending; no merge or workspace release | 0b99ad64eda3e37d2667f553b083e6e75303d2a40a49a127635aa45637dd6588 |

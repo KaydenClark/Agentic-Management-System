@@ -19,6 +19,16 @@ owns this non-blocking check. The [RSI release graph](rsi-task-release.md) retai
 all producer and assembly gates. This detects bounded observable mismatches;
 it supplies no general semantic grader, repair, scheduler or adoption authority.
 
+## Post-merge correction under verification
+
+PR182 review at `b932ba0` found a rename scope/Prepare bypass and a concurrent
+native-use publication race. Do not rely on those affected protections until
+[TK-001A](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-013-coherence-checks/tasks/TK-001A/TASK.md)
+records the reproduced failures and bounded repair. The corrective candidate
+now tests both move endpoints and serializes local publishers; independent
+review, exact-head CI and delivery remain separate gates. Earlier
+checks and Task closure remain historical evidence, not coverage of these cases.
+
 ## Replay before relying on it
 
 From the project root:
@@ -103,3 +113,35 @@ decision. Canonical failure intake remains
 [WORKBENCH_FEEDBACK](../../feedback/WORKBENCH_FEEDBACK.md); S-006 receives safe
 derived failure/occurrence identities through its own writer. This task adds no
 second failure counter, trial ledger, campaign reset or personal skill copy.
+
+## Local publication synchronization
+
+TK-001A treats a move as deletion plus addition (`git diff --no-renames`), so
+scope and Prepare classify both endpoints independently of Git rename settings.
+An allowed destination cannot hide an outside deletion or product removal.
+
+Each cooperating publisher opens the report directory itself and takes an
+exclusive nonblocking advisory `flock` before recovery, native-use uniqueness,
+recurrence validation and atomic publication. Contention refuses without writing
+a new report; retry the same occurrence later. An identical retained occurrence
+returns `unchanged`; a different occurrence for the same native use refuses.
+Recovery still validates the whole directory before owner filtering. Existing
+corruption refuses without selecting or deleting evidence.
+
+Supported scope is cooperating processes using this API on a stable local
+filesystem supporting directory `flock` and atomic hard links. The corrective
+cross-process and termination tests ran on Darwin with Python 3.14. Other
+hosts/filesystems require their own verification; missing `fcntl`, missing
+required directory-open flags, or a failed lock operation refuse before writing,
+with no unlocked fallback. This is no distributed/storage-service guarantee.
+Directory replacement, uncooperative writers and hostile filesystem mutation
+are outside this advisory-lock boundary.
+
+Complete report bytes are flushed and fsynced to a hidden temporary file before
+an exclusive hard link exposes the report. The OS releases the directory lock
+when its descriptor closes or the publisher terminates. A killed publisher may
+leave `.observation-*` evidence; it is retained, ignored by report recovery and
+never silently cleaned by another publication. Recovery sees ordinary complete
+reports, not these temporary files. This tests process interruption; it makes no
+power-loss durability claim. Synthetic process fixtures establish these bounded
+behaviors, not authenticated host use, benchmark improvement or Human QA.

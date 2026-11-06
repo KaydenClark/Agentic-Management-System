@@ -54,3 +54,7 @@ Claim and scoped release originals are committed before this complete snapshot. 
 Independent Standards and Spec reviews both PASS on product c01c5136f834656001e023da259a6348949ddf2c against main adde5f4da1d8a8b78d9bcbc6bd490c18f8a3b37a, with zero remaining findings. The first reviews failed; all four defects were retained and reproduced red at 3123371 before repair. The reviewer contexts built none of this Task. This is bounded Task review, not whole-Spec acceptance or Human QA.
 
 Operator replay: `uv run python evals/coherence_observation_replay.py`; adverse/regression checks: `uv run pytest -q tests/test_coherence_observe.py`. Recover observations before the responsible Task's next orchestration/completion pass. The procedure states the manual invocation and native-observer trust limits. Synthetic fixtures establish no real native-host use or RSI benefit.
+
+## Later review
+
+Post-merge PR182 review found untested rename and concurrent-publication defects. [TK-001A](../TK-001A/TASK.md) owns their correction; retain the original proof and withhold reliance on those protections until its checked delivery.
