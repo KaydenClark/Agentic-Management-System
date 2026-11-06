@@ -170,3 +170,100 @@ def test_build_artifact_directory_link_refuses_before_reading_outside(source, tm
     with pytest.raises(PageRefused, match="symlink"):
         collect_current(source, "dev", candidate, build_start=linked)
     assert (outside / "index.html").read_text() == "Synthetic private canary"
+
+
+def prepare_container_fixture(source, canary):
+    package = {"name": "synthetic-page-build", "version": "1.0.0", "scripts": {"build": "node fixture-build.mjs"}}
+    (source / "site/package.json").write_text(json.dumps(package))
+    (source / "site/package-lock.json").write_text(json.dumps({"name": package["name"], "version": "1.0.0", "lockfileVersion": 3, "requires": True, "packages": {"": package}}))
+    script = r'''import fs from 'node:fs';
+const forbidden = ['OPENAI_API_KEY','SUPABASE_SERVICE_ROLE_KEY','GITHUB_TOKEN','NODE_OPTIONS'];
+if (forbidden.some(k => process.env[k]) || process.env.HOME !== '/tmp/ams-pages-home') throw Error('private context reached candidate');
+if (fs.existsSync('/workspace/.git') || fs.existsSync(CANARY)) throw Error('host context was mounted');
+let denied = false;
+try { fs.writeFileSync('/etc/ams-page-test','forbidden'); } catch { denied = true; }
+if (!denied) throw Error('container root is writable');
+const pages = {'/':'<main id="main">Synthetic current home</main>', '/skills/new':'<main id="main">Synthetic skill</main>', '/_not-found':'<main id="main">Synthetic visitor404</main>'};
+for (const [route,html] of Object.entries(pages)) {
+ const file = '.next/server/app/' + (route === '/' ? 'index' : route.slice(1)) + '.html';
+ fs.mkdirSync(file.slice(0,file.lastIndexOf('/')), {recursive:true}); fs.writeFileSync(file,html);
+}
+fs.writeFileSync('.next/server/app/_global-error.html','Internal framework fallback');
+const server = `const http=require('node:http'), cp=require('node:child_process');
+const pages=${JSON.stringify(pages)};
+const child=cp.spawn(process.execPath,['-e','setInterval(()=>{},1000)'],{detached:true,stdio:'ignore'}); child.unref();
+http.createServer((req,res)=>{const known=Object.hasOwn(pages,req.url)&&req.url!=='/_not-found';res.writeHead(known?200:404,{'content-type':'text/html'});res.end(known?pages[req.url]:pages['/_not-found']);}).listen(3000,'127.0.0.1');`;
+fs.mkdirSync('node_modules/next/dist/bin',{recursive:true}); fs.writeFileSync('node_modules/next/dist/bin/next',server);
+'''
+    (source / "site/fixture-build.mjs").write_text(script.replace("CANARY", json.dumps(str(canary))))
+    git(source, "add", "."); git(source, "commit", "-qm", "synthetic container execution fixture")
+    return git(source, "rev-parse", "HEAD")
+
+
+def docker_image():
+    import os
+    image = os.environ.get("AMS_PAGES_DOCKER_IMAGE")
+    if not image:
+        pytest.skip("explicit approved immutable Node image required for local container proof")
+    return image
+
+
+def test_real_container_build_served_collection_and_cleanup(source, tmp_path, monkeypatch):
+    from ams.page_build import DockerBuild
+    image = docker_image()
+    canary = tmp_path / "unrelated-private-canary"
+    canary.write_text("must stay private and unchanged")
+    candidate = prepare_container_fixture(source, canary)
+    for key in ["OPENAI_API_KEY", "SUPABASE_SERVICE_ROLE_KEY", "GITHUB_TOKEN", "NODE_OPTIONS"]:
+        monkeypatch.setenv(key, "synthetic-private-canary")
+    runtime = DockerBuild(image, timeout=60)
+    result = collect_current(source, "dev", candidate, build_start=runtime)
+    assert len(result["html"]) == 3 and result["kinds"]["/_not-found"] == "visitor-404"
+    assert runtime.cleanup_verified and runtime.container_id
+    absent = subprocess.run(["docker", "inspect", "--format", "{{.Id}}", runtime.container_id], capture_output=True, text=True)
+    assert absent.returncode != 0 and "no such" in absent.stderr.lower()
+    assert canary.read_text() == "must stay private and unchanged"
+    assert not git(source, "status", "--porcelain")
+
+
+def test_actual_sigint_removes_owned_container_including_detached_child(source, tmp_path):
+    import os, signal, sys, time
+    image = docker_image()
+    canary = tmp_path / "unrelated-private-canary"
+    canary.write_text("unchanged")
+    candidate = prepare_container_fixture(source, canary)
+    marker = tmp_path / "container-ready.json"
+    wrapper = '''import json,sys,time
+from contextlib import contextmanager
+from pathlib import Path
+from ams.page_build import DockerBuild,collect_current
+runtime=DockerBuild(sys.argv[3],timeout=60)
+@contextmanager
+def build(export,candidate,config):
+ with runtime(export,candidate,config) as read:
+  Path(sys.argv[4]).write_text(json.dumps({'id':runtime.container_id}))
+  time.sleep(60)
+  yield read
+collect_current(Path(sys.argv[1]),'dev',sys.argv[2],build_start=build)
+'''
+    env = {**os.environ, "PYTHONPATH": str(Path(__file__).resolve().parents[1] / "src")}
+    log = (tmp_path / "interrupted-container.log").open("wb")
+    process = subprocess.Popen([sys.executable,"-c",wrapper,str(source),candidate,image,str(marker)], env=env, stdout=log, stderr=log, start_new_session=True)
+    identity = None
+    try:
+        until=time.monotonic()+60
+        while not marker.exists() and process.poll() is None and time.monotonic()<until:
+            time.sleep(0.05)
+        assert marker.exists(), "container did not reach ready fixture; inspect retained private log"
+        identity=json.loads(marker.read_text())["id"]
+        os.kill(process.pid,signal.SIGINT)
+        assert process.wait(timeout=20)!=0
+        absent=subprocess.run(["docker","inspect","--format","{{.Id}}",identity],capture_output=True,text=True)
+        assert absent.returncode!=0 and "no such" in absent.stderr.lower(), "owned container survived interruption"
+        assert canary.read_text()=="unchanged"
+    finally:
+        if process.poll() is None:
+            os.kill(process.pid,signal.SIGINT); process.wait(timeout=20)
+        log.close()
+        if identity:
+            subprocess.run(["docker","rm","--force",identity],capture_output=True)
