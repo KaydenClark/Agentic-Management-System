@@ -279,7 +279,8 @@ def _stamp(now):
 
 def _refuse_page_note(card, note):
     """Page criticism needs private capture before it can enter any Git write."""
-    if card.fields.get("Page") and (note or "").strip():
+    page = card.fields.get("Page") or card.fields.get("Owner record") == "grill-board/page-approvals.md"
+    if page and (note or "").strip():
         raise AnswerRefused("Page feedback cannot be saved privately yet. Keep a copy of your note.")
 
 

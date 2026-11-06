@@ -20,6 +20,7 @@ from .grill_board.cards import Card, load_cards, parse_card
 INDEX = "grill-board/pages/index.json"
 APPROVALS = "grill-board/page-approvals.md"
 CARDS = "grill-board/cards"
+LINE_BREAKS = "\n\r\v\f\x1c\x1d\x1e\x85\u2028\u2029"
 VOID = set("area base br col embed hr img input link meta param source track wbr".split())
 NAMED = {"amp": "&", "lt": "<", "gt": ">", "quot": '"', "apos": "'", "nbsp": "\u00a0"}
 ATTR = re.compile(r'''([^\s"'>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+)))?''')
@@ -110,12 +111,13 @@ def _metadata(listed, built):
         if path in result:
             raise PageRefused(f"duplicate page path: {path}")
         for key in ("title", "spec", "task"):
-            if not isinstance(row.get(key), str) or not row[key].strip() or "\n" in row[key] or "\r" in row[key]:
+            if not isinstance(row.get(key), str) or not row[key].strip() or any(char in LINE_BREAKS for char in row[key]):
                 raise PageRefused(f"{path}: invalid {key}")
         sources = row.get("sources")
         if not isinstance(sources, list) or not sources or any(
             not isinstance(source, str)
             or not source.strip()
+            or any(char in LINE_BREAKS for char in source)
             or not re.fullmatch(r"(?![A-Za-z]:)[^/\\\x00-\x1f]+(?:/[^/\\\x00-\x1f]+)*/?", source)
             or any(part in {".", "..", ".git"} for part in source.rstrip("/").split("/"))
             for source in sources
@@ -130,6 +132,13 @@ def _metadata(listed, built):
                 raise PageRefused(f"{path}: pending candidate cannot assert a landing")
         elif not isinstance(landed, dict) or not re.fullmatch(r"[0-9a-f]{40,64}", landed.get("commit", "")):
             raise PageRefused(f"{path}: no immutable landed commit")
+        if landed is not None:
+            branch = landed.get("branch")
+            if not isinstance(branch, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9/._-]*", branch):
+                raise PageRefused(f"{path}: provenance requires an explicit branch")
+            pr = landed.get("pr")
+            if pr is not None and (type(pr) is not int or pr < 1):
+                raise PageRefused(f"{path}: provenance PR must be a positive number or unknown")
         result[path] = row
     missing = sorted(set(result) - set(built))
     uncovered = sorted(set(built) - set(result))
@@ -158,8 +167,9 @@ def _new_card(row, digest, candidate):
     landed = row.get("landed")
     kind = row.get("provenance_kind", "historical-landing")
     provenance_label = "Verified containment" if kind == "verified-containment" else "Landed"
+    pr = landed.get("pr") if landed else None
     provenance = "**Integration:** pending\n" if kind == "pending-candidate" else (
-        f'**{provenance_label}:** {landed.get("branch", "dev")} {landed["commit"]} PR {landed.get("pr", "unknown")}\n')
+        f'**{provenance_label}:** {landed["branch"]} {landed["commit"]} PR {pr if pr is not None else "unknown"}\n')
     sources = ", ".join(row["sources"])
     return (f'# Review {row["path"]}: {row["title"]} at {digest}\n\n'
             '**Topic:** Website pages\n**Priority:** P2\n'
@@ -218,7 +228,11 @@ def generate(root, listed, built, *, candidate, now=None):
                     suffix += 1
                     name = f"{stem}-{suffix}.md"
                 new_card = _new_card(row, digest, candidate)
-                if not isinstance(parse_card(name, new_card), Card):
+                parsed = parse_card(name, new_card)
+                required = {"Page": path, "Content hash": digest, "Candidate": candidate,
+                            "Title": row["title"], "Spec": row["spec"], "Task": row["task"],
+                            "Owner record": APPROVALS, "Write after": "## Approvals"}
+                if not isinstance(parsed, Card) or any(parsed.fields.get(key) != value for key, value in required.items()):
                     raise PageRefused(f"{path}: generated card is not valid Board content")
                 writes[f"{CARDS}/{name}"] = new_card.encode()
                 if old:

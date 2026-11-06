@@ -285,3 +285,51 @@ def test_page_feedback_notes_never_enter_committed_public_records(room, operatio
     assert git(room, 'rev-parse', 'HEAD') == before
     assert not git(room, 'status', '--porcelain')
     assert all(path.read_bytes() == data for path, data in original.items())
+
+
+@pytest.mark.parametrize('field', ['title', 'spec', 'task', 'sources', 'branch', 'pr'])
+@pytest.mark.parametrize('separator', ['\x85', '\u2028', '\u2029'])
+def test_metadata_cannot_inject_card_fields_through_unicode_lines(room, field, separator):
+    listed = inventory(room, ('/',))
+    row = listed['pages'][0]
+    injected = 'Synthetic' + separator + '**Page:**'
+    if field == 'sources':
+        row[field] = [injected]
+    elif field in {'branch', 'pr'}:
+        row['landed'][field] = injected
+    else:
+        row[field] = injected
+    before = git(room, 'rev-parse', 'HEAD')
+    with pytest.raises(pages.PageRefused):
+        pages.generate(room, listed, {'/': html()}, candidate=before)
+    assert git(room, 'rev-parse', 'HEAD') == before
+    assert not git(room, 'status', '--porcelain')
+
+
+def test_page_note_guard_does_not_depend_on_a_nonempty_page_field(room):
+    listed = inventory(room, ('/',))
+    pages.generate(room, listed, {'/': html()}, candidate=git(room, 'rev-parse', 'HEAD'))
+    card = load_cards(room / 'grill-board/cards')[0][0]
+    path = room / 'grill-board/cards' / card.file
+    path.write_text(path.read_text().replace('**Page:** /', '**Page:**'))
+    git(room, 'add', str(path)); git(room, 'commit', '-qm', 'synthetic damaged page marker')
+    damaged = load_cards(room / 'grill-board/cards')[0][0]
+    card_sha, owner_sha = render_hashes(room / 'grill-board/cards', damaged)
+    before = git(room, 'rev-parse', 'HEAD')
+    with pytest.raises(AnswerRefused, match='privat'):
+        answer(room / 'grill-board/cards', damaged, 'change', 'Synthetic private canary.', card_sha, owner_sha)
+    assert git(room, 'rev-parse', 'HEAD') == before
+    assert not git(room, 'status', '--porcelain')
+
+
+@pytest.mark.parametrize('kind', ['historical-landing', 'verified-containment'])
+def test_provenance_never_invents_a_branch(room, kind):
+    listed = inventory(room, ('/',))
+    row = listed['pages'][0]
+    row['provenance_kind'] = kind
+    row['landed'].pop('branch')
+    before = git(room, 'rev-parse', 'HEAD')
+    with pytest.raises(pages.PageRefused, match='branch'):
+        pages.generate(room, listed, {'/': html()}, candidate=before)
+    assert git(room, 'rev-parse', 'HEAD') == before
+    assert not git(room, 'status', '--porcelain')

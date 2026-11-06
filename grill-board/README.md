@@ -214,3 +214,5 @@ For RSI, only freshness/last-successful-read text may be excluded: changed resul
 Approvals stay in the committed owner record; no Supabase approval mirror/public query is added. Actual private criticism must not enter public committed raw evidence. Original failed checks/receipts, scoped corrections and unperformed live outcomes remain in the Task; green fixture tests supply no owner Human QA.
 
 Until private page-feedback capture is delivered, page-card notes/comments refuse before any Git write, including notes attached to Confirm, ratings or Too taxing. A refused note stays copyable on the local Board; keep it private. Note-free confirmation and numeric actions retain their normal checks. This guard does not implement TK-003's voice record or downstream feedback consumption.
+
+Metadata cannot contain any line separator recognized by the card parser; generated Page/hash/candidate/owner fields are checked before writes. Note refusal also recognizes the fixed approval record when a Page marker is damaged. Historical/containment provenance requires an explicit branch; an absent PR remains labeled unknown, with no branch inferred.
