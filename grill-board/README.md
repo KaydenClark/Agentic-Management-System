@@ -235,7 +235,8 @@ changes retain the matching approval. This state is never a public-site query.
 The committed manifest declares `pageReview.voice` and
 `pageReview.privateFeedback`; one Python reader resolves both. The configured
 voice location supplies card references and the private location supplies
-capture/replay. Unsafe or uncommitted configuration refuses.
+capture/replay. New feedback writes reject unsafe or uncommitted
+configuration; known receipts are reconciled before current-card checks.
 
 Page returns, ratings and Too taxing capture the exact original privately
 before public writes. The ignored local store requires owned, nonlinked
