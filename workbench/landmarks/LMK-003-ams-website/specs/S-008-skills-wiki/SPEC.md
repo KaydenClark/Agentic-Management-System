@@ -5,12 +5,12 @@
 **Priority:** 3
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-06
 **Catalog description:** Site-written articles on the owner's skills, one page per skill grouped by Workbench stage, modeled on aihero.dev/skills.
 **Blockers:** none
 **Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Owner page approvals and Human QA of the 40 pages on protected `dev`; only the owner merges `dev` -> `main`; then `complete`.
+**Next gate:** Close TK-0033 with verification and documentation proof.
 
 ## Intent and authority
 

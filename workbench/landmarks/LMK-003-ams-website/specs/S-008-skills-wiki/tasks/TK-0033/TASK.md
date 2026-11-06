@@ -3,10 +3,12 @@
 **Task ID:** TK-0033
 **Spec ID:** S-008
 **Slice:** Inspect and recover PR #111 navigation on the current website shell
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: S-008 index and article navigation
 **Planned verification:** Built-site tests and browser navigation across the index and all 39 articles; keyboard, anchor clearance, themes, narrow and wide viewports, enlarged text and scripts disabled.
+**Claimed by:** codex-s008-navigation
+**Current claimant:** codex-s008-navigation
 
 ## Assignment
 
