@@ -1,12 +1,12 @@
-# TK-003 - Returns, ratings and too-taxing flags on page cards are appended to the committed voice and taste record, and every page card names its version
+# TK-003 - Preserve private page feedback and commit its safe voice record version
 
 **Task ID:** TK-003
 **Spec ID:** S-005
-**Slice:** Returns, ratings and too-taxing flags on page cards are appended to the committed voice and taste record, and every page card names its version
+**Slice:** Preserve original page feedback privately; bind safe committed voice entries and later page cards to its version.
 **Status:** blocked
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Criticism becomes the voice record; Agents cite it
-**Planned verification:** pytest that criticism lands in the voice record in the same commit
+**Planned verification:** synthetic private-note canaries never enter Git; safe version/card writes are atomic, stale writes refuse, and originals remain recoverable
 
 ## Assignment
 
@@ -14,23 +14,24 @@
 
 Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`), `grill-board/README.md` (answers, rating and flag), DDR-000J, DDR-000X, ADR-002U, the TK-001 generator and `src/ams/grill_board/answers.py`.
 
-Owner intent, relayed 2026-11-01: criticism becomes the voice and taste record that feeds the loop. The owner's voice is not prose the owner writes; it is the owner's recorded feedback.
+Owner intent, relayed 2026-11-01: criticism becomes the voice and taste record that feeds the loop. The owner's voice is not prose the owner writes; it is the owner's recorded feedback. The parent Spec's later privacy contract governs: original criticism stays private, separate from interpretation; only safe voice/version/disposition records may enter public Git. The owner's expanded implementation approval of 2026-11-06 does not waive that privacy rule. Earlier verbatim-public instructions are superseded, with their correction retained in S-005 history.
 
 Deliver:
 
-1. **Record.** `grill-board/voice-and-taste.md`, with a `**Version:**` counter and an append-only `## Entries` section. Each entry names the date (UTC), page path, content hash, card, kind (`Rework wording`, `Change the why`, `Change`, rating N of 5, too taxing) and the owner's note verbatim as a quote, sourced to the card.
-2. **Same commit.** On a page card, a return, a rating or a flag writes the card section and the voice entry, and increments the version, in one commit through the board's lock and compare-and-swap. The voice record's SHA-256 is checked like the owning record's: a change since render refuses and writes nothing. Confirm adds no voice entry, and cards that are not page cards are unchanged.
+1. **Private originals and safe record.** Preserve exact original notes in ignored private local storage, with page/hash/date/card/kind and a stable identity; never commit raw private words, private paths or raw evidence. `grill-board/voice-and-taste.md` retains a `**Version:**` counter and append-only `## Entries` containing safe page/hash/date/card/kind/version references and a safe interpretation/disposition, explicitly distinct from the original. Do not automatically quote or copy private originals into cards, approvals, the voice record, logs or public evidence. Keep unavailable interpretation visibly pending rather than inventing it. Synthetic test originals remain labeled synthetic.
+2. **One checked operation.** A page return, rating or flag preserves its original privately and commits only the safe card section, voice entry and version increment through Board lock/CAS. Check the voice record's render-time SHA like the owning record. Missing private capture or stale/conflicting public bytes refuse without a partial Git write; preserve copyable owner words and recover any private pending outcome without duplicating an event. Confirm adds no voice entry; a Confirm note must also remain private. Non-page cards retain their existing behavior. Keep the current page-note refusal guard until this complete private path is verified; never remove it merely to make a feedback test pass.
 3. **Version stamp.** The generator writes `**Voice record:** grill-board/voice-and-taste.md version N` on each new page card; an open page card made before this Task gets an appended `## Voice record` section. Existing sections are never edited.
 
 Tell orchestrator A the record's path, so A adds the pointer from the site's contributing notes on `dev` and cites the version when drafting. Do not edit `site/`.
 
-Out of scope: comparing ratings across pages (S-002 loop); applying criticism to a page (orchestrator A, in a new candidate); approval rows (TK-002).
+Out of scope: comparing ratings across pages (S-002 loop); applying criticism to a page (orchestrator A, in a new candidate); approval rows (TK-002); publishing private originals. TK-001E consumes the applicable version/original under its own authorization; a stored version alone proves no later use.
 
 Hand back to S-005 with `close`.
 
 ## Acceptance
 
-- [ ] In a temporary Git repository, a return with a note, a rating with a comment and a flag on a fixture page card each append one voice entry with page, hash, date and verbatim note in the same commit as the card section, and increment the version.
+- [ ] In a disposable fixture, a return, rating/comment and flag preserve the exact synthetic original privately and atomically commit only safe card/voice references with page/hash/date/kind/version, incrementing the version.
+- [ ] Must fail: a unique synthetic private-note canary in any Git blob, card, approval, voice record, public log or exported evidence. Original and safe interpretation remain separate and traceable; originals survive interruption/retry without duplicate effects.
 - [ ] Must fail: criticism on a page card whose commit leaves the voice record unchanged fails the test.
 - [ ] Editing the voice record after render makes the write refuse; card and record stay byte-identical.
 - [ ] Must fail: an open page card that names no voice record version fails the test.
