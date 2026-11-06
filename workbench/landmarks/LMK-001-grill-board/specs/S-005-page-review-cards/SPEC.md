@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. TK-001 is closed; the committed50 cards remain pinned to protected47. A later collector failure affects held800a despite historical green CI. Corrected5ef passes fresh989/6 skips,17 collector tests and100/100 original race cases with sentinel safety; product reviews pass. Exact published-head CI/native TK-002 close remain. Central FAIL210-236 retains failures and late intake. Private86 preparation has50 current cards/37 stale histories,34 changed hashes, no-op rerun and50 HTTP selections. Final capture must use assembled dev including pending charts. S003 ledger is fixed; hash-directory/RSI comparability remain open. Original nodeids cache is not located; no workspace release. TK-003, consumption, owner QA and main delivery remain open.
+No Spec acceptance is claimed. TK-001 is closed; the committed50 cards remain pinned to protected47. A later collector failure affects held800a despite historical green CI. Corrected5ef passes fresh989/6 skips,17 collector tests and100/100 original race cases with sentinel safety; product reviews pass. Source272 CI987/8 skips plus10 browser passes; TK-002 is natively closed. Final record CI remains. Central FAIL210-236 retains failures and late intake. Private86 preparation has50 current cards/37 stale histories,34 changed hashes, no-op rerun and50 HTTP selections. Final capture must use assembled dev including pending charts. S003 ledger is fixed; hash-directory/RSI comparability remain open. Original nodeids cache is not located; no workspace release. TK-003, consumption, owner QA and main delivery remain open.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 

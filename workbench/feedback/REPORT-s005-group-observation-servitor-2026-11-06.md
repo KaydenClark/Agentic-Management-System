@@ -63,3 +63,5 @@ Fresh source5ef89a6 subsequently passes989 tests/6 skips, including the enabled
 real Docker checks. Independent Spec review finds no runtime defect; Standards
 review requires the central intake above. Its record correction/review and
 exact-head shared CI remain before readiness. No protected-main retry occurred.
+
+Exact source27291722b10f9db9cfef73237812bc9383960cf5 shared CI42232842207 subsequently passes987 Python tests/8 skips and10 browser tests. TK-002 native close retains the shorthand proof and original receipt bytes: source5ef89a6 is the989/6 local run; source272 is the987/8 plus10 browser CI run. Current record checks/CI, TK-003 implementation, main delivery and owner QA remain separate.
