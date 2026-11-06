@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
+import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -51,6 +51,7 @@ test('a build automatically supplies ownership for each article and visitor404 w
   const f = fixture();
   try {
     const first = generateInventory(f.site, { write: true });
+    assert.equal(existsSync(join(f.site, `page-list.json.tmp-${process.pid}`)), false);
     assert.deepEqual(first.inventory.pages.find(row => row.path === '/'), legacy);
     assert.deepEqual(first.inventory.pages.map(row => row.path).sort(), ['/', '/_not-found', '/skills', '/skills/alpha', '/skills/beta']);
     const article = first.inventory.pages.find(row => row.path === '/skills/alpha');
@@ -66,6 +67,21 @@ test('a build automatically supplies ownership for each article and visitor404 w
     const next = generateInventory(f.site, { write: true });
     assert.equal(next.inventory.pages.find(row => row.path === '/skills/gamma').task, 'TK-002');
     assert.equal(next.inventory.pages.length, 6);
+  } finally { f.cleanup(); }
+});
+
+test('a colliding temporary file refuses without changing unrelated bytes or the owner inventory', () => {
+  const f = fixture();
+  try {
+    assert.equal(generateInventory(f.site).changed, true);
+    const file = join(f.site, 'page-list.json');
+    const temporary = `${file}.tmp-${process.pid}`;
+    const before = readFileSync(file);
+    const sentinel = Buffer.from('unrelated temporary-file owner\n');
+    writeFileSync(temporary, sentinel, { flag: 'wx' });
+    assert.throws(() => generateInventory(f.site, { write: true }), { code: 'EEXIST' });
+    assert.deepEqual(readFileSync(file), before);
+    assert.deepEqual(readFileSync(temporary), sentinel);
   } finally { f.cleanup(); }
 });
 

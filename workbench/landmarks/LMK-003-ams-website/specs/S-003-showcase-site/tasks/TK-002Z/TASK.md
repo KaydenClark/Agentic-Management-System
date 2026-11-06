@@ -35,6 +35,10 @@ S-005 owns Python collector/Board/cards. Coordinate the flat pages output and po
 
 Merged checked dev e10216e. Demo S009/TK0030 and governance S010/TK001 retain actual63870b54/PR177 and e10216e/PR179 containment. Real build:50 surfaces,39 articles, only internal error excluded; original7 preserved. Exact S0050c39 read-only functions accept the output; no Board writes. Old262/696 collection is prior-interface evidence; protected/current cards remain S005 work. Proof and Receipt2 bind current checks/limits. All1316 originals remain:921 tracked and395 privately retained; no workspace-release claim.
 
+## Delivery correction
+
+Root review at0d88 found cleanup deleting an unrelated PID temp (FAIL-181). Same-run Z repair retains claim, closure and receipts. Collision must refuse with sentinel/inventory unchanged; only successful temp creation permits cleanup. Changed-source CI remains required.
+
 ## Starting inventory
 
 Workspace baseline sha256:2ea064d22681213beb226e4a9eca397b64ba656035b3f7a780c272f89b80c3fc. Original claim/projection committed first; prior generated public build/manifests copied and verified privately outside the checkout before this complete snapshot. No product changes preceded the separate digest binding.

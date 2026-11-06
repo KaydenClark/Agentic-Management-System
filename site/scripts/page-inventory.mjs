@@ -175,8 +175,9 @@ export function generateInventory(site = DEFAULT_SITE, { write = false, check = 
   if (check && changed) fail('page-list projection is stale; run pages:generate after a build');
   if (write && changed) {
     const temporary = file + `.tmp-${process.pid}`;
-    try { writeFileSync(temporary, rendered, { flag: 'wx' }); renameSync(temporary, file); }
-    finally { if (existsSync(temporary)) unlinkSync(temporary); }
+    let created = false;
+    try { writeFileSync(temporary, rendered, { flag: 'wx' }); created = true; renameSync(temporary, file); }
+    finally { if (created && existsSync(temporary)) unlinkSync(temporary); }
   }
   return { inventory, kinds, changed };
 }
