@@ -190,7 +190,8 @@ begin
     raise exception 'recovery request fields are allowlisted' using errcode='23514'; end if;
   -- All other declared request fields are strings. Do not turn JSON numbers
   -- into identities, pins, claimant labels or receipt text with ->> coercion.
-  foreach field in array (required-array['expected_version','fence','lease_seconds','slot_index','approved','stopped','expected_head']) loop
+  foreach field in array required loop
+    continue when field=any(array['expected_version','fence','lease_seconds','slot_index','approved','stopped','expected_head']);
     if jsonb_typeof(p_request->field) is distinct from 'string' then
       raise exception 'recovery request string type differs' using errcode='23514';end if;
   end loop;
