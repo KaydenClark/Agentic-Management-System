@@ -218,8 +218,8 @@ Approvals stay in the committed owner record; no Supabase approval mirror/public
 Page Confirm rechecks the committed card, page path, hash and current index
 entry while holding the Board lock. Stale cards, changed identities, dirty or
 unsafe index files refuse before any write. A valid Confirm retains the normal
-single card/approval commit, with no second confirmation. Page notes remain
-blocked until the separate private-feedback path is delivered.
+single card/approval commit, with no second confirmation. A Confirm note stays
+private and adds no voice entry.
 
 `uv run ams-pages status` reads the committed index and approval record at HEAD;
 `--ref FULL_COMMIT` inspects an earlier committed snapshot. It reports each
@@ -230,7 +230,32 @@ committed approval records refuse. Quoted, fenced or other-section examples
 are not approvals. A changed main-content hash reports draft; footer-only
 changes retain the matching approval. This state is never a public-site query.
 
-Until private page-feedback capture is delivered, page-card notes/comments refuse before any Git write, including notes attached to Confirm, ratings or Too taxing. A refused note stays copyable on the local Board; keep it private. Note-free confirmation and numeric actions retain their normal checks. This guard does not implement TK-003's voice record or downstream feedback consumption.
+### Private page feedback
+
+Page returns, ratings and Too taxing capture the exact original privately
+before public writes. The ignored local store requires owned, nonlinked
+directories and private file permissions. Raw words never enter a Git object,
+approval, card or public log. Non-page cards retain their existing behavior.
+
+`grill-board/voice-and-taste.md` contains only safe page/hash/date/card/kind,
+event and version references. Interpretation and disposition start as pending;
+they are distinct from the private original. Each return, rating or flag adds
+one entry and increments its version in the same commit as the card section.
+New page cards name the current voice version; legacy open cards receive an
+appended reference, while answered history stays unchanged. Storage alone
+does not prove a later draft consumed feedback; TK-001E verifies that use.
+
+The Board checks the card, current page index and render-time voice SHA under
+its repository lock. A stale or conflicting input refuses before public writes
+and keeps copyable words on screen. Without a valid private-feedback context,
+page notes still refuse. Keep these words private when copying them.
+
+If a save outcome is uncertain, keep the displayed original and use **Check or
+retry this exact action**. Its durable event identity reconciles the original
+commit before current-card checks, without repeating the version increment.
+Recovery repairs only recognized bytes from its own pending write; unrelated
+working or staged changes remain for agent reconciliation. Do not replace the
+original action with a newly submitted event while its outcome is unknown.
 
 Metadata cannot contain any line separator recognized by the card parser; generated Page/hash/candidate/owner fields are checked before writes. Note refusal also recognizes the fixed approval record when a Page marker is damaged. Historical/containment provenance requires an explicit branch; an absent PR remains labeled unknown, with no branch inferred.
 

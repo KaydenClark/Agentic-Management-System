@@ -9,6 +9,7 @@ from .grill_board.cards import Card, parse_card
 
 INDEX = 'grill-board/pages/index.json'
 APPROVALS = 'grill-board/page-approvals.md'
+CARDS = 'grill-board/cards'
 ROUTE = re.compile(r'/(?:[A-Za-z0-9_-]+(?:/[A-Za-z0-9_-]+)*)?')
 HASH = re.compile(r'sha256:[0-9a-f]{64}')
 CARD_NAME = re.compile(r'[A-Za-z0-9][A-Za-z0-9._-]*\.md')

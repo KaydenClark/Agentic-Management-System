@@ -31,6 +31,7 @@ from .answers import flag as write_flag
 from .answers import rate as write_rate
 from .cards import PRIORITIES, VALUES, CardSourceError, committed_cards, committed_snapshot, load_cards
 from .dqcs import DqcCard, OutcomeUnknown, load_board, submit as submit_dqc
+from ams.page_feedback import FeedbackOutcomeUnknown, render_fields as page_fields, replay_page_submission
 
 HOST = "127.0.0.1"
 DEFAULT_PORT = 8765
@@ -168,6 +169,7 @@ def render_verdicts(cards_dir, topic, card):
         f'<input type="hidden" name="{name}" value="{escape(value, quote=True)}">'
         for name, value in (("card", card.file), ("topic", topic), ("card_sha", card_sha), ("record_sha", record_sha))
     )
+    hidden += hidden_fields(page_fields(cards_dir, card))
     buttons = []
     for value, label in VERDICTS.items():
         kind = "verdict confirm tone h-agent" if value == "confirm" else "verdict tone h-returned"
@@ -184,13 +186,15 @@ def render_verdicts(cards_dir, topic, card):
 </form>"""
 
 
-def render_rating(topic, card):
+def render_rating(topic, card, *, cards_dir=None):
     """One click each: a star POSTs its rating to /rate, "Too taxing" POSTs to
     /flag. The optional comment travels with either click."""
     hidden = "".join(
         f'<input type="hidden" name="{name}" value="{escape(value, quote=True)}">'
         for name, value in (("card", card.file), ("topic", topic), ("card_sha", card.sha))
     )
+    if cards_dir is not None:
+        hidden += hidden_fields(page_fields(cards_dir, card))
     stars = "".join(
         f'<button type="submit" name="rating" value="{n}" class="star{" on" if card.rating and n <= int(card.rating) else ""}" '
         f'aria-pressed="{"true" if str(n) == card.rating else "false"}" aria-label="Rate {n} of 5">&#9733;</button>'
@@ -269,7 +273,7 @@ def render_open(cards_dir, topic, cards, card):
 {extras}<section class="verdict-area" aria-label="Your verdict">
 <div class="eyebrow">Your verdict</div>
 {verdict}
-{render_rating(topic, card)}
+{render_rating(topic, card, cards_dir=cards_dir)}
 <div class="pager">
 <span>{place}</span>
 <span class="buttons"><a class="ghost" href="{link(topic, before)}">Previous</a><a class="inkbtn" href="{link(topic, after)}">Next question</a></span>
@@ -335,7 +339,10 @@ def render_drafts(drafts):
     fields = []
     for name, label in (('note', 'Your note'), ('comment', 'Your comment')):
         if drafts.get(name):
-            fields.append(f'<label>{label}<textarea readonly rows="3">{escape(drafts[name])}</textarea></label>')
+            # HTML drops one leading LF in a textarea; the dummy LF preserves
+            # the submitted first character. Character references retain CR.
+            words = escape(drafts[name]).replace('\r', '&#13;')
+            fields.append(f'<label>{label}<textarea readonly rows="3">\n{words}</textarea></label>')
     retry = ''
     if drafts.get('_uncertain'):
         endpoint = drafts['_endpoint']
@@ -660,9 +667,13 @@ def make_server(cards_dir, port=DEFAULT_PORT):
             status, notice, drafts = 200, None, None
             try:
                 with one_writer:
-                    cards, _, _, _ = load_board(cards_dir, legacy_loader=load_cards)
+                    replayed = (replay_page_submission(cards_dir, form, action)
+                                if action in ('/answer', '/rate', '/flag') and form.get('dqc') != 'yes' else None)
+                    cards, _, _, _ = load_board(cards_dir, legacy_loader=load_cards) if replayed is None else ([], None, None, None)
                     card = next((c for c in cards if c.file == form.get("card")), None)
-                    if action == "/round" or form.get("dqc") == "yes":
+                    if replayed is not None:
+                        notice = ('written', f'Written and committed {replayed[:7]}: the original page-feedback action is saved.')
+                    elif action == "/round" or form.get("dqc") == "yes":
                         if action == '/answer' and form.get('verdict') == 'confirm' and isinstance(card, DqcCard):
                             proposal = card.dqc['lifecycle'].get('proposal') or {}
                             recorded = any(event['eventId'] == form.get('eventId') for event in card.dqc['lifecycle']['events'])
@@ -675,17 +686,20 @@ def make_server(cards_dir, port=DEFAULT_PORT):
                         if card is None:
                             raise AnswerRefused(f"no committed card named {form.get('card')!r}")
                         if action == "/rate":
-                            sha = write_rate(cards_dir, card, form.get("rating", ""), form.get("comment", ""), form.get("card_sha", ""))
+                            sha = write_rate(cards_dir, card, form.get("rating", ""), form.get("comment", ""), form.get("card_sha", ""),
+                                             event_id=form.get('event_id'), voice_sha=form.get('voice_sha'))
                             done = f"rated {form['rating']} of 5 on {card.file}"
                         elif action == "/flag":
-                            sha = write_flag(cards_dir, card, form.get("comment", ""), form.get("card_sha", ""))
+                            sha = write_flag(cards_dir, card, form.get("comment", ""), form.get("card_sha", ""),
+                                             event_id=form.get('event_id'), voice_sha=form.get('voice_sha'))
                             done = f"{card.file} flagged too taxing and held for rewrite"
                         else:
-                            sha = write_answer(cards_dir, card, form.get("verdict", ""), form.get("note", ""), form.get("card_sha", ""), form.get("record_sha", ""))
+                            sha = write_answer(cards_dir, card, form.get("verdict", ""), form.get("note", ""), form.get("card_sha", ""), form.get("record_sha", ""),
+                                               event_id=form.get('event_id'), voice_sha=form.get('voice_sha'))
                             where = card.fields["Owner record"] if form["verdict"] == "confirm" else "the card as a return"
                             done = f"{VERDICTS[form['verdict']]} on {card.file}, recorded in {where}"
                         notice = ("written", f"Written and committed {sha[:7]}: {done}.")
-            except OutcomeUnknown as error:
+            except (OutcomeUnknown, FeedbackOutcomeUnknown) as error:
                 status, notice = 503, ("uncertain", str(error))
                 drafts = {**form, "_uncertain":"yes", "_endpoint":action}
             except (AnswerRefused, CardSourceError) as error:

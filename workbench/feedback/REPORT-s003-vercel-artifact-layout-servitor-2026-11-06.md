@@ -1,6 +1,6 @@
 # Vercel adapter artifact layout blocks protected review coverage
 
-**Disposition:** deployed inventory layout repaired; separate hash-reader and ledger findings remain with existing S-003 ownership. No new owner preference.
+**Disposition:** inventory layout repaired; later source reconciliation below resolves the historical ledger and separate hash-reader findings. Final protected capture remains. No new owner preference.
 **Source:** dev `40acb3a491a55599e5b1f00fd92a27315739a4a9`, after PR178.
 **Deployment:** `dpl_3U2SoEgLBFPcTaduX2u4Qnr2DX3k`, immutable origin `https://agentic-management-system-site-ctewgjcvo.vercel.app`.
 **Observed state:** ERROR, `BUILD_UTILS_SPAWN_1`, build step.
@@ -114,3 +114,14 @@ Dev has advanced after the47 capture. The final owner queue must be regenerated
 and read back against one exact assembled READY dev revision, including later
 navigation/governance changes. Neither the47 snapshot nor this report claims
 that final queue, owner QA, private-feedback completion or main promotion.
+
+## Later source reconciliation
+
+At independently fetched dev `f17dabdc8b82de487f322a9a268e532fe85ad1d2`,
+`readBuiltPages` delegates to the shared strict `readPageArtifacts` reader.
+The website owner reports delivery through PR195 and closure PR197. The
+nine-column failure-table header is also present in the later ledger; the
+earlier malformed-header observation is historical. These are source
+readbacks, not a new execution claim. Preserve the failed receipts above.
+Final capture still requires one exact assembled READY deployment; no owner
+QA or main promotion is supplied by these repairs.

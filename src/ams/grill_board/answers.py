@@ -70,7 +70,10 @@ def sha256(data):
 
 
 def repo_root(cards_dir):
-    return Path(_git(Path(cards_dir), "rev-parse", "--show-toplevel").strip())
+    directory = Path(cards_dir)
+    while not directory.exists() and directory != directory.parent:
+        directory = directory.parent
+    return Path(_git(directory, "rev-parse", "--show-toplevel").strip())
 
 
 def card_path(root, cards_dir, name):
@@ -165,7 +168,7 @@ def _text(blob, relative):
         raise AnswerRefused(f"{relative} is not UTF-8 text") from None
 
 
-def _commit_on(root, base, writes, subject, body):
+def _commit_on(root, base, writes, subject, body, *, before_cas=None):
     """Build a commit of `writes` on top of base in a throwaway index and move
     the branch to it only if HEAD is still base (compare-and-swap)."""
     handle, index = tempfile.mkstemp(prefix="ams-answer-index-")
@@ -180,6 +183,8 @@ def _commit_on(root, base, writes, subject, body):
     finally:
         os.unlink(index)
     commit = _git(root, "commit-tree", tree, "-p", base, "-m", subject, "-m", body).strip()
+    if before_cas is not None:
+        before_cas(commit)
     try:
         _git(root, "update-ref", "-m", f"commit: {subject}", "HEAD", commit, base)
     except AnswerRefused:
@@ -236,21 +241,29 @@ def repository_lock(root):
             fcntl.flock(handle, fcntl.LOCK_UN)
 
 
-def answer(cards_dir, card, verdict, note, card_sha, record_sha, now=None):
+def answer(cards_dir, card, verdict, note, card_sha, record_sha, now=None, *, event_id=None, voice_sha=None):
     """Record the owner's verdict on `card` and commit it; return the commit
     SHA. Raises AnswerRefused, with every file left as it was, otherwise.
     Validation through commit runs under the repository lock."""
     with repository_lock(repo_root(cards_dir)):
+        from ams.page_feedback import PageRequest, is_page_card, save_page_action
+        if is_page_card(cards_dir, card) and (verdict != 'confirm' or note):
+            return save_page_action(cards_dir, card, PageRequest('answer', card.file, verdict, note or '',
+                                                               card_sha, record_sha, voice_sha or '', event_id or ''), now)
         return _answer(cards_dir, card, verdict, note, card_sha, record_sha, now)
 
 
-def rate(cards_dir, card, rating, comment, card_sha, now=None):
+def rate(cards_dir, card, rating, comment, card_sha, now=None, *, event_id=None, voice_sha=None):
     """Append a 1-5 `## Rating` to the card and commit it (DDR-000J). Ratings
     are allowed on answered and flagged cards; a later rating is appended,
     never replacing an earlier one."""
     if rating not in RATINGS:
         raise AnswerRefused(f"a rating is a whole number from 1 to 5, not {rating!r}")
     with repository_lock(repo_root(cards_dir)):
+        from ams.page_feedback import PageRequest, is_page_card, save_page_action
+        if is_page_card(cards_dir, card):
+            return save_page_action(cards_dir, card, PageRequest('rate', card.file, rating, comment or '',
+                                                               card_sha, '', voice_sha or '', event_id or ''), now)
         _refuse_page_note(card, comment)
         when = _stamp(now)
         section = f"## Rating\n\n**Rating:** {rating} of 5\n**Rated:** {when}\n"
@@ -259,11 +272,15 @@ def rate(cards_dir, card, rating, comment, card_sha, now=None):
                                "The owner rated this question; ratings are committed records the RSI loop reads (DDR-000J).")
 
 
-def flag(cards_dir, card, comment, card_sha, now=None):
+def flag(cards_dir, card, comment, card_sha, now=None, *, event_id=None, voice_sha=None):
     """Append the `## Flag` (too taxing) section to the card and commit it.
     The card is then held for rewrite: it leaves the queue and its question
     cannot be asked again unchanged (DDR-000J)."""
     with repository_lock(repo_root(cards_dir)):
+        from ams.page_feedback import PageRequest, is_page_card, save_page_action
+        if is_page_card(cards_dir, card):
+            return save_page_action(cards_dir, card, PageRequest('flag', card.file, '', comment or '',
+                                                               card_sha, '', voice_sha or '', event_id or ''), now)
         _refuse_page_note(card, comment)
         if card.flag is not None:
             raise AnswerRefused(f"{card.file} is already flagged too taxing")
@@ -330,7 +347,7 @@ def _append_to_card(cards_dir, card, card_sha, section, note, subject, body):
     return _write_and_commit(root, base, [(card_rel, card_file, card_mode, card_blob, new)], subject, body)
 
 
-def _write_and_commit(root, base, writes, subject, body):
+def _write_and_commit(root, base, writes, subject, body, *, before_cas=None):
     """Swap in every write, commit exactly them on base by compare-and-swap,
     and put back the committed bytes if anything fails. Call under the lock."""
     if len({path.resolve() for _, path, *_ in writes}) != len(writes):
@@ -338,7 +355,8 @@ def _write_and_commit(root, base, writes, subject, body):
     try:
         for _, path, _, _, new in writes:
             _replace(path, new)
-        commit = _commit_on(root, base, writes, subject, body)
+        commit = (_commit_on(root, base, writes, subject, body) if before_cas is None
+                  else _commit_on(root, base, writes, subject, body, before_cas=before_cas))
     except (AnswerRefused, OSError) as error:
         for _, path, _, old, _ in writes:  # put back exactly the committed bytes this call replaced
             if old is None:
@@ -352,6 +370,26 @@ def _write_and_commit(root, base, writes, subject, body):
     except AnswerRefused as error:
         raise AnswerWrittenIndexStale(f"committed {commit[:7]}, but refreshing the index failed ({error}); run git status") from None
     return commit
+
+
+def _confirmation_write(root, base, card, card_rel, card_file, record_sha, when, note=''):
+    target, anchor = card.fields.get("Owner record", ""), card.fields.get("Write after", "")
+    recommendation = card.fields.get("Recommendation", "")
+    if not target or not anchor:
+        raise AnswerRefused("this card names no owning record and place (Owner record, Write after)")
+    if not recommendation:
+        raise AnswerRefused("this card has no Recommendation to confirm")
+    if target == card_rel:
+        raise AnswerRefused("this card names itself as its owning record; an answer must land in another record")
+    record_file = owned_path(root, target)
+    if record_file.resolve() == card_file.resolve():
+        raise AnswerRefused("this card names itself as its owning record; an answer must land in another record")
+    record_mode, record_blob = _unchanged(root, base, target, record_file, record_sha, "owning record")
+    block = f"**Owner answer ({when[:10]}, Grill Board card `{card.file}`):** Confirmed: {recommendation}\n"
+    if note:
+        block += "\n" + _quote(note)
+    written = _insert_after(_text(record_blob, target), anchor, block)
+    return target, record_file, record_mode, record_blob, written.encode("utf-8")
 
 
 def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
@@ -374,22 +412,7 @@ def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
         from ams.page_approvals import validate_page_confirmation
         validate_page_confirmation(root, base, card, card_blob)
         target, anchor = card.fields.get("Owner record", ""), card.fields.get("Write after", "")
-        recommendation = card.fields.get("Recommendation", "")
-        if not target or not anchor:
-            raise AnswerRefused("this card names no owning record and place (Owner record, Write after)")
-        if not recommendation:
-            raise AnswerRefused("this card has no Recommendation to confirm")
-        if target == card_rel:
-            raise AnswerRefused("this card names itself as its owning record; an answer must land in another record")
-        record_file = owned_path(root, target)
-        if record_file.resolve() == card_file.resolve():
-            raise AnswerRefused("this card names itself as its owning record; an answer must land in another record")
-        record_mode, record_blob = _unchanged(root, base, target, record_file, record_sha, "owning record")
-        block = f"**Owner answer ({when[:10]}, Grill Board card `{card.file}`):** Confirmed: {recommendation}\n"
-        if note:
-            block += "\n" + _quote(note)
-        written = _insert_after(_text(record_blob, target), anchor, block)
-        writes.append((target, record_file, record_mode, record_blob, written.encode("utf-8")))
+        writes.append(_confirmation_write(root, base, card, card_rel, card_file, record_sha, when, note))
         recorded = f"**Written to:** {target}, after `{anchor}`\n"
         subject = f"Grill Board: confirm {card.file} into {target}"
         body = "The owner confirmed this card; its answer is written into the owning record and recorded on the card (ADR-000B)."

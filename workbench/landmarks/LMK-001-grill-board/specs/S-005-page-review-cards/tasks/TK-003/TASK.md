@@ -39,6 +39,12 @@ Hand back to S-005 with `close`.
 - [ ] Must fail: an open page card that names no voice record version fails the test.
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
 
-Initial local preparation left800a67b unchanged. Its later collector failure requires a corrected public candidate before delivery. TK-002 remains in progress pending exact-head CI/native close; this Task has only its claim/baseline, with implementation paused.
+TK-002 is natively closed at published6d06b13 with exact-head CI success. This Task now implements private capture, safe version/card commits and durable event replay in the existing baselined continuation. Synthetic boundary/interruption checks pass36 cases; the actual browser retry passes after correcting its form-encoding expectation. Full/fresh checks and independent Review remain before delivery or close; no actual owner notes were submitted.
 
 Workspace baseline sha256:77b8702e5c168d8ea307b5c62fcffeb0f5ab555e304d05be9de27cbba50ffcb9
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-005-page-review-cards | 6d06b13a501d6e558d9cd047382ce9c4fada39ac | ahead 0 behind 0 | 13 | Uncommitted TK003:36 focused pass; actual browser retry1 pass. Earlier142pass/1fail stale refusal and28pass/1fail invalid fixture verdict retained; browser encoding miss retained. Seven interruption cuts pass; raw canaries absent in all Git objects. | Board private-feedback guide; source dependency report; central FAIL237-244. | Full/fresh checks, independent Review, publication/CI and native close remain. No owner notes, final assembled capture, consumption or HumanQA; main merge remains unapproved. | 238bb69a990386fb09e2c7b96d04396cc3a2759d970611a82c733d54c000581a |
