@@ -3,10 +3,12 @@
 **Task ID:** TK-003B
 **Spec ID:** S-003
 **Slice:** Script-free and enhanced native keyboard navigation through the real shared shell
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Presentation, Trust and Route; real native keyboard access with and without scripts
 **Planned verification:** Current-base reproduction and adverse controls; real 375/desktop theme/script matrix, original64 enlarged-text cases, fresh build/strict utilities/site/shared-browser checks and reviewed checked-dev containment.
+**Claimed by:** codex-s003-nojs-nav
+**Current claimant:** codex-s003-nojs-nav
 
 ## Assignment
 
