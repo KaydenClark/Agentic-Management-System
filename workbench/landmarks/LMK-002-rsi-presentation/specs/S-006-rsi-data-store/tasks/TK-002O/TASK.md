@@ -35,3 +35,9 @@ N is natively done at 3228d58fe3fb8afbfbc04abf01e42fad72c48ac0 (product d03bb10a
 Workspace baseline sha256:059c7b58c9f3dffc63722a4762e37d8188454ea1938e931f290630211cb2eca2
 
 Native claim 10797e22e38f19c9a3b54c57aa5244f941d6c634 and rendered original records were committed before this complete snapshot. Raw inventory stays in local private recovery; retained unrelated refs remain local, without a whole-workspace remote-recovery claim.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-006-rsi-data-store | 6a3dcf5b4c204df866097c5cedc87b0d79aa9057 | ahead 1 behind 0 | 0 | Core19 pass with actual SQL/process races, effect-before-receipt crash recovery, stale fences, gates, native-slot non-repeat and semantic slot uniqueness. Initial schema IF/CASE parse failure fixed. Checkpoint suite26pass/3fail: valid restores HTTP400; PG confirms token counts parse error in restore IF. Negative restore assertions hit same parser failure and are not accepted proof. STOP/report. | Frozen worker/recovery contract retained; API/SQL/tests are incomplete WIP | O incomplete. Fix restore operator grouping and inspect aliases; require semantic SQLSTATEs, then prove complete/partial/divergent/private/pinned restores and outage pending. Root scope correction needed after this checkpoint. No production change, model call, qualification, P release, or N publication retry. | ab31b0722a5f5c3190285a731407623b51eb046b2f1e274cf59455e03981a9ba |
