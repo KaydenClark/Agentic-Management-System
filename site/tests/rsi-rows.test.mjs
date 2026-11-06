@@ -337,3 +337,13 @@ test('load: missing env, a refused request, an error status or a bad body each g
     assert.ok(!JSON.stringify(out).includes(ENV.NEXT_PUBLIC_SUPABASE_ANON_KEY), 'a failure report must not carry the key');
   }
 });
+
+test('GitHub provenance in populated fixture data never becomes a reader exit', async () => {
+  const {readerLinkProblems} = await import('./reader-links.mjs');
+  const data = structuredClone(cases.linkCoverageCase);
+  assert.ok(data.runs.some(run => /github\.com/.test(run.source_url ?? '')), 'fixture must exercise real source_url shape');
+  const before = JSON.stringify(data);
+  const html = render(data);
+  assert.equal(JSON.stringify(data), before, 'presentation must preserve provenance data');
+  assert.deepEqual(readerLinkProblems([{name:'rsi.html',html}]), []);
+});
