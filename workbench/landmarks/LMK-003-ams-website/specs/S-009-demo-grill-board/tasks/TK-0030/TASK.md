@@ -9,6 +9,7 @@
 **Planned verification:** Built-site tests and browser interaction, storage and network checks at 375px and desktop in both themes; inspect script-disabled content and current S-004 behavior.
 **Claimed by:** codex-s009-demo
 **Current claimant:** codex-s009-demo
+**Workspace baseline:** sha256:4106561b4e83a48bea8672f3a5cf2bc2060c8dc44e40957a807543b68ddd3d15
 
 ## Assignment
 
