@@ -2,15 +2,16 @@
 
 ## Get oriented
 
-Inspect Git state (`git status --short --branch`), remotes and locks.
-Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
-[Wiki](workbench/wiki/MEMORY.md), both trackers, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
-Planning reads `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031`; copying needs owner approval.
+Every session, including questions: before replying or acting, check Git status,
+remotes, locks; read AGENTS, ARCHITECTURE, GLOSSARY, TRACKER, TASKBOARD, [Wiki](workbench/wiki/MEMORY.md),
+[SKILLS](workbench/docs/SKILLS.md), assigned Spec/Task and topic records and failures.
+Orient silently; do not announce routine reading or checks.
+Report only relevant findings. No CONTINUE files.
 
 ## Workflows
 
-`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in their owning records.
-Run each role at its [model tier](workbench/docs/adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
+`map` → `plan` → `journey`, or authorized `orchestrate`. Jot corrections in owners.
+Use each role's [model tier](workbench/docs/adr/003K-model-tiers-pair-claude-and-codex-models.md) on your own harness; claim as `claude-…` or `codex-…`.
 
 Use Landmark -> Spec -> Task; at most six active Landmarks. Specs need no slots;
 block Tasks only on required inputs ([ADR-003J](workbench/docs/adr/003J-limit-active-landmarks-not-specs.md)).

@@ -33,6 +33,8 @@ duplicates Task state.
 
 - [Maintained Wiki repair](context-wiki-maintenance.md) — approved maintenance diagnosis, bounded repair scope and execution authority.
 
+- [Session orientation](context-session-orientation.md) — silently read and follow the RUNBOOK and recover intent at every start.
+
 ## Source Precedence
 
 Use AGENTS for authority, Blueprint or the assigned Spec for intended behavior,
