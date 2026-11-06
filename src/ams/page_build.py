@@ -353,11 +353,14 @@ def collect_current(source, ref, expected_candidate, *, build_start, public_conf
     config = public_configuration(public_config)
     candidate = _pin(source, ref, expected_candidate, expected_origin)
     with _export(source, candidate) as exported:
-        try:
-            listed = json.loads((exported / "site/page-list.json").read_text())
-        except (OSError, json.JSONDecodeError) as error:
-            raise PageRefused("pinned tree has no readable page-owner inventory") from error
         with build_start(exported, candidate, config) as read:
+            # The pinned build may regenerate this projection from its committed
+            # owner declarations. Read that output, never a stale prebuild list.
+            try:
+                inventory = _safe_file(exported, "site/page-list.json")
+                listed = json.loads(inventory.read_text())
+            except (OSError, json.JSONDecodeError) as error:
+                raise PageRefused("pinned build has no readable page-owner inventory") from error
             routes, excluded = built_routes(exported)
             # Refuse missing owners before requests or any Board operation.
             _metadata(listed, routes)

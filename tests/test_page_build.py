@@ -384,3 +384,22 @@ def test_poll_interruption_is_reraised_after_owned_cleanup(tmp_path, monkeypatch
         if owned:
             try: os.killpg(owned[0], signal.SIGKILL)
             except ProcessLookupError: pass
+
+
+def test_collection_consumes_owner_projection_produced_by_the_frozen_build(source):
+    page_list = source / 'site/page-list.json'
+    declared = json.loads(page_list.read_text())
+    (source / 'site/declared-owners.json').write_text(json.dumps(declared))
+    stale = {'pages': [row for row in declared['pages'] if row['path'] != '/skills/new']}
+    page_list.write_text(json.dumps(stale))
+    git(source,'add','.');git(source,'commit','-qm','synthetic declared owner awaiting postbuild projection')
+    candidate = git(source,'rev-parse','HEAD')
+    @contextmanager
+    def postbuild(export, frozen, config):
+        with fixture_build(export, frozen, config) as read:
+            generated = (export / 'site/declared-owners.json').read_text()
+            (export / 'site/page-list.json').write_text(generated)
+            yield read
+    result = collect_current(source,'dev',candidate,build_start=postbuild)
+    assert {row['path'] for row in result['inventory']['pages']} == {'/','/skills/new','/_not-found'}
+    assert json.loads(page_list.read_text()) == stale, 'collector changed the source checkout projection'
