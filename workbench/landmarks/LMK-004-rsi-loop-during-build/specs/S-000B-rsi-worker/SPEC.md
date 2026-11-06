@@ -10,7 +10,7 @@
 **Blockers:** none for mapping
 **Confirmation:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
 **Execution approval:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
-**Next gate:** Keep checked software in draft; native qualification, invocation, P acceptance and main merge remain held.
+**Next gate:** STOP after two startup-limited failures; cause review before any further session or signal. Native qualification, P acceptance and main merge remain held.
 
 ## Intent and authority
 
@@ -26,7 +26,7 @@ A database of results alone does not execute the loop. Session-bound coordinatio
 
 ## Current Verified State
 
-Independent final delta Review passed `9cca984` exact input-sequence binding; deadline/MessagePhase corrections retain their checked scope. cf85/632 FAILs remain in FAIL-215/217/219. Author history19 passes; one corrected fresh candidate at metadata `596f797` (same product) passes977/skips214 with required record checks. Earlier standalone271e and prior632 proofs retain their scope. Accepted O `3856614eeb8ec2e158db003025a7a75ee29bfc2f` remains separately protected. This slice made no model/skill/grader calls. One read-only account/meter attempt stopped at initialize with PermissionError; authentication, capacity and cleanup remain unknown. Actual native loading/cleanup/runtime identity, approved labels/qualified grader/freeze/current capacity and real ed0 outcome remain unverified; P/main acceptance stays held.
+Independent delta Review passed `9cca984`; cf85/632 FAILs remain in FAIL-215/217/219. Corrected fresh977pass/214skip and root-verified975b CI42261454122 (14steps;10Board) retain exact scope. Earlier proofs stay source-bound. Two startup-limited checks stopped: second initialize-read NativeProtocolError (errno unknown, ackfalse), owned-close PermissionError/errno1. Later known-owned current absence does not prove historical cleanup or detached descendants. Authentication/capacity/cleanup remain unknown. No account/meter/model/skill/case/store call or third session/signal followed. Real ed0 result, loaded/runtime identity and qualified labels/grader/freeze remain unproved. P stays open; accepted O385/protected175 and main publication remain separate. Details: owning worker contract.
 
 ## Desired Behavior
 

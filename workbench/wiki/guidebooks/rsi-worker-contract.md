@@ -66,7 +66,31 @@ Author history checks pass19. Exactly one corrected fresh-candidate full check a
 
 This is checked pre-model software progress only. Actual native worker preflight/skill use/model-turn cleanup/runtime identity, exact approved labels/qualified grader/frozen conditions/current capacity and real-case result remain held. P stays open; protected O/PR175 publication and main merge remain separate.
 
-A separately authorized one-shot read-only account/subscription check at2026-11-06T17:21:55Z verified unchanged binary/schema/runtime/config-source pins before launch, then stopped with PermissionError after attempting initialize. Effective containment was not established, so no account/meter request ran; authentication, subscription capacity and owned-process cleanup remain unknown. A supported read-only exact-binary process inventory found no candidates; without a retained owned PID that is not complete cleanup proof. No retry, thread, turn, command, tool, skill, model, grader or store write followed. Sanitized evidence stays private. A private-helper SyntaxError caught before execution and a default-context process-inventory EPERM remain separate harness/environment diagnostics, not model attempts. No capacity, reservation, semantic qualification or call authority follows.
+A separately authorized one-shot read-only account/subscription check at2026-11-06T17:21:55Z verified unchanged binary/schema/runtime/config-source pins before launch, then stopped with PermissionError after attempting initialize. Effective containment was not established, so no account/meter request ran; authentication, subscription capacity and owned-process cleanup remain unknown. A supported read-only exact-binary process inventory found no candidates; without a retained owned PID that is not complete cleanup proof. No thread, turn, command, tool, skill, model, grader or store write followed within that attempt. Sanitized evidence stays private. A private-helper SyntaxError caught before execution and a default-context process-inventory EPERM remain separate harness/environment diagnostics, not model attempts. No capacity, reservation, semantic qualification or call authority follows.
+
+## Startup diagnostic STOP and later readback
+
+After cause review, the coordinator released exactly one initialize-only diagnostic using frozen private helper SHA-256 `8cc0e19979c85a4fc6986e1db7dd03eded7745e3c46506db1a2e2ad8955753f8`. Its four inert controls passed; that proof qualified logger behavior only. The actual2026-11-06T18:00:57Z attempt durably saved its owned PID/expected/observed PGID before its sole initialize request. Initialize-read raised NativeProtocolError with errno unknown; acknowledgment remained false. Separate owned-close raised PermissionError/errno1 (EPERM); cleanup stayed unknown. Safe packet SHA-256 `3210e7cdc0633284a4e58221d5ff9ce7d22adeecc240a357f3b9fc5fc3eea7e0` and scope readback `7482b426aadc6b1cb1cb186c9dbdea96932875c780f1ad9d01278aed2ed44dea` remain private. No initialized/account/meter/config-inventory/thread/turn/tool/model/skill/grader/store/case request followed. Binary/schema/runtime/config/source/fixture readbacks and the first4b035cd packet remained unchanged.
+
+Required STOP/report retains both startup-limited failures. Authentication, subscription capacity and actual host/case execution remain unproved; an initialization protocol error is not evidence of an account denial. No third host session, signal, permission change, fallback, campaign/Task reset or actual-call release is authorized. Historical cleanup remains unknown. r1, its three assessment runs, baseline-excluded initial -> retry -> retry -> stop and the stopped PR101 campaign remain unchanged; ed0 stays unused.
+
+The coordinator later inspected only the known owned PID/group/direct children at2026-11-06T18:05:42.266305Z: inventory exit0, matches[], no signals/new sessions. Readback SHA-256 `d79cb0fb82033fd4329786c95298386513b50b428facaaad6e5dfa5c83e88141` proves current scoped absence only; it proves neither historical cleanup nor absence of escaped descendants. It does not clear either failed startup or supply readiness.
+
+The coordinator verified exact metadata `975b36898120ebc274e51ad49fb3ca4207fa7ad6` [CI42261454122](https://github.com/KaydenClark/Agentic-Management-System/actions/runs/42261454122): all14 steps passed, including977 tests/214 skips and10 Board checks. This records checked pre-model software, not actual native skill use, auth/capacity qualification, P completion, protected PR175 publication or main merge. The present continuation changes owning records only; no product/full suite is rerun. TK-002P stays in-progress under the original claimant and baseline.
+
+## Retained TK-002P assignment scope
+
+The following assignment/planning/release prose is retained from975b368 while the Task links here to make room for its append-only receipt. Receipt rows/checksums and starting inventory remain in their owner unchanged.
+
+
+One writer owns worker/tests/docs. Prove one authorized real-tool case with durable claim, receipt, interruption and fresh-process recovery. Record configured/loaded skill and natural/explicit routing; resolve unknown completion before replay. Stop: unknown/exhausted capacity, explicit stop, approval request or third failed candidate; baseline excluded. No campaign restart, install, secret exposure or silent freeze change. Release: Stage A, later launch, exact S-006 recovery and frozen S-002 case/fixture; TK-002Q execution not required, no cross-Spec native edge assumed.
+
+Planning source: owner Map/Plan 2026-11-04 at `8319e81f399923f920a686e8f68dad3f40cfe7f5`. One Check/QA/repair/hand-back run; retain evidence/holds; return revision/checks/result/gaps/owner.
+
+### Scoped implementation release
+
+Owner Jot: twelve-outcome launch. Coordinator accepted S-006 `3856614eeb8ec2e158db003025a7a75ee29bfc2f` (full CI/two independent rechecks), releasing only pre-model adapter/permission canaries/cleanup/recovery. Real calls await qualified native grader/approved labels, frozen source/host/model/conditions and current subscription capacity. No Q dependency, campaign release, production migration or publication workaround; receipts/fixture/exhausted attempts stand.
+
 
 ## Verified source seams and gaps
 
