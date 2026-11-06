@@ -42,6 +42,7 @@ const explainedTermIds = new Set([
   "evidence-audit", "improvement-record", "diagnostic", "test", "repaired", "declined", "accepted-open",
 ]);
 const explainedGroupIds = new Set(["group-ams", "group-records", "group-feedback-dispositions"]);
+const governancePlaneIds = new Set(["projection", "intent", "enduring-context", "grounding", "canon", "actuality"]);
 const additionalGroups = groups
   .map(group => ({ ...group, terms: group.terms.filter(term => !explainedTermIds.has(term.id)) }))
   .filter(group => group.terms.length > 0);
@@ -54,7 +55,7 @@ function Definitions({ ids }: { ids: string[] }) {
         if (!term) throw new Error(`Unknown glossary term: ${id}`);
         return (
           <div key={id}>
-            <dt id={term.id}>{term.term}</dt>
+            <dt id={term.id}>{governancePlaneIds.has(id) ? <a href={`/governance#plane-${id}`}>{term.term}</a> : term.term}</dt>
             <dd><Inline md={term.definition} /></dd>
           </div>
         );

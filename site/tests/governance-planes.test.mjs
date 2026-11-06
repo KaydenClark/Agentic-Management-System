@@ -53,3 +53,20 @@ test('the built governance page explains roles, authority and both directions',(
   assert.ok(pageProblems(html.replace('6 → 5 → 4 → 3 → 2 → 1','missing direction')).length);
   assert.ok(pageProblems(html.replace('aria-labelledby="authority"','aria-labelledby="missing"')).length);
 });
+
+function backlinkProblems(glossaryHtml, governanceHtml) {
+  const problems=[];
+  for(const name of expected) {
+    const id=name.toLowerCase().replaceAll(' ','-');
+    const term=glossaryHtml.match(new RegExp(`<dt\\b[^>]*id="${id}"[^>]*>([\\s\\S]*?)<\\/dt>`))?.[1] ?? '';
+    if(!term.includes(`href="/governance#plane-${id}"`)) problems.push(`missing ${id} backlink`);
+    if(!new RegExp(`\\bid="plane-${id}"`).test(governanceHtml)) problems.push(`missing ${id} target`);
+  }
+  return problems;
+}
+test('each glossary plane links to its matching governance explanation',()=>{
+  const glossaryHtml=builtPage('glossary.html').html, governanceHtml=builtPage('governance.html').html;
+  assert.deepEqual(backlinkProblems(glossaryHtml,governanceHtml),[]);
+  assert.ok(backlinkProblems(glossaryHtml.replace('/governance#plane-projection','/governance#wrong'),governanceHtml).length);
+  assert.ok(backlinkProblems(glossaryHtml,governanceHtml.replace('id="plane-canon"','id="wrong"')).length);
+});

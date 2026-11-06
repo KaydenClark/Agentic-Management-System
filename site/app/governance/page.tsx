@@ -43,7 +43,7 @@ export default function Governance() {
         <figure className={styles.diagram} aria-labelledby="planes-caption">
           <ol className={styles.edges}>
             {planes.map(({ number, name, definition, example }) => (
-              <li key={name}>
+              <li key={name} id={`plane-${name.toLowerCase().replaceAll(" ", "-")}`}>
                 <strong>{number}. {name}</strong>
                 <span>{definition}</span>
                 <span><strong>Example:</strong> {example}</span>
