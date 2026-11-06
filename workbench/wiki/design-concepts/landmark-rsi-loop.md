@@ -25,11 +25,11 @@ No DQCs are assigned to this Landmark in the inspected tracker. Confirmed owner 
 
 ## Open and unresolved
 
-Stage B requires a separate launch; model campaigns, database writes, automation, installation and deployment keep their own authority. Existing stopped campaigns and both catalog pilots retain their conditions. End-to-end autonomous improvement, recurrence reduction and generalization require actual evidence. Inference: maintaining useful Wiki explanations reduces reconstruction for this bounded case; the correction exercise alone supplies no quantified or general RSI benefit.
+Stage B requires a separate launch; model campaigns, database writes, automation, installation and deployment keep their own authority. Existing stopped campaigns and both catalog pilots retain their conditions. End-to-end autonomous improvement, recurrence reduction and generalization require actual evidence. [The owner's correction](../context-wiki-maintenance.md#jot-b3247909-9721-4842-a83f-61adc5da2e13) establishes Wiki memory as independent critical AMS infrastructure under [its own Landmark](landmark-wiki-memory.md). Wiki functional evaluation is not RSI qualification.
 
 ## Where the work lives
 
-[LMK-004 — RSI Loop](../../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md) owns the destination. [The continuation guide](../guidebooks/rsi-loop-continuation.md) links evaluation, worker, data, presentation, detection, source delivery and catalog owners with their release conditions. [The Wiki repair Spec](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-000C-wiki-maintenance/SPEC.md) owns this bounded knowledge-maintenance work. [Grill Board](landmark-grill-board.md) supplies owner feedback; [RSI presentation](landmark-rsi-presentation.md) explains safe evidence; [AMS website](landmark-ams-website.md) explains the first application. [Wiki maintenance](../guidebooks/wiki-maintenance.md) describes ingest and correction without launching held implementation.
+[LMK-004 — RSI Loop](../../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md) owns the RSI destination. [The continuation guide](../guidebooks/rsi-loop-continuation.md) links its capability owners and release conditions. [S-000C](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-000C-wiki-maintenance/SPEC.md) retains the historical bounded Wiki documentation repair; new memory work belongs to [LMK-000A](landmark-wiki-memory.md). [Grill Board](landmark-grill-board.md) supplies owner feedback; [RSI presentation](landmark-rsi-presentation.md) explains safe evidence; [AMS website](landmark-ams-website.md) explains the first application. [Wiki maintenance](../guidebooks/wiki-maintenance.md) describes ingest and correction without launching held RSI implementation.
 
 ## Evidence and Sources
 
@@ -39,4 +39,5 @@ Stage B requires a separate launch; model campaigns, database writes, automation
 
 ## History
 
+- 2026-11-05: Reconciled the owner's correction separating Wiki memory from RSI; retained historical S-000C provenance.
 - 2026-11-04: Created by S-000C authorized Wiki repair from existing Landmark/card sources; distinguishes current confirmed meaning, unresolved claims and implementation evidence. Updated alongside related topic explanations and MEMORY routes.

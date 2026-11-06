@@ -31,7 +31,7 @@ duplicates Task state.
 - [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — confirmed Stage A readback and delivered preparation, resolved publication hold and continuing Stage B/campaign limits.
 - [Shared skills refocus](context-skills-refocus.md) — confirmed jobs, composition, prerequisites, attribution and the Prepare-only boundary; links the AMS preparation-bypass failure.
 
-- [Maintained Wiki repair](context-wiki-maintenance.md) — approved maintenance diagnosis, bounded repair scope and execution authority.
+- [Wiki memory and maintenance](context-wiki-maintenance.md) — source-backed session continuity, accepted memory improvements and independent Wiki ownership; retained bounded repair evidence.
 
 ## Source Precedence
 
@@ -78,6 +78,7 @@ an AMS glossary entry.
 
 ## Landmark Synthesis Pages
 
+- [Wiki memory and session continuity](design-concepts/landmark-wiki-memory.md) — critical AMS knowledge base, recovery across sessions, five accepted improvements and functional evaluation independent of RSI.
 - [Grill Board](design-concepts/landmark-grill-board.md) — confirmed DQC lifecycle, pending branch context and unresolved redesign controls.
 - [RSI presentation](design-concepts/landmark-rsi-presentation.md) — traceable read-only presentation, honest empty states and data/evidence limits.
 - [AMS website](design-concepts/landmark-ams-website.md) — public explanation, sample demonstration and owner-controlled production promotion.

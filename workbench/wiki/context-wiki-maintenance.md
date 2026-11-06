@@ -9,7 +9,7 @@ source_paths:
   - workbench/wiki/SCHEMA.md
   - workbench/wiki/design-concepts/README.md
   - workbench/wiki/features/README.md
-last_verified: 2026-11-04
+last_verified: 2026-11-05
 ---
 
 # Maintained Wiki understanding
@@ -18,7 +18,21 @@ Captured context. Claim labels preserve intent and uncertainty; capture alone su
 
 ## Current maintenance path
 
+The Wiki is AMS's knowledge base and memory, independently owned by [Wiki memory and session continuity](design-concepts/landmark-wiki-memory.md). [The owner's correction](#jot-b3247909-9721-4842-a83f-61adc5da2e13) rejects classifying this critical capability as RSI and requests its own Landmark. Fresh agents should recover established understanding, owner intent/corrections, reasons, constraints, unresolved questions and live-owner routes without starting from zero. [All five accepted improvements](#jot-72534303-7521-4d2c-98d2-96b1bcb3825a) belong to [S-000D](../landmarks/LMK-000A-wiki-memory/specs/S-000D-memory-retrieval/SPEC.md); its evaluation is functional Wiki acceptance. Historical S-000C placement and evidence below remain unchanged.
+
 [The routed procedure](guidebooks/wiki-maintenance.md) makes source intake, ingest, durable query filing and bounded semantic lint concrete within the existing schema. The existing [Grill Board](context-grilling-board.md), [AMS purpose](context-ams-purpose.md) and [RSI](context-feedback-improvement-loop-plan.md) owners explain current meaning above their retained captures. [MEMORY's four Landmark routes](MEMORY.md#landmark-synthesis-pages) connect their wider relationships. This operation creates no duplicate capability owner, product redesign or new execution authority.
+
+## Planned memory interface
+
+S-000D selects the project-owned `ams-memory query/check/consolidate/evaluate` seam under delegated planning authority. This is a preparation contract, not delivered behavior.
+
+Queries start from MEMORY/routes before bounded fallback; cap results/characters, report truncation/continuation and rank deterministically. Sources are links/identities, not permission to recursively ingest linked content. Default content is eligible Wiki sections/Jots; procedures and current work are bounded pointers to existing owners. Fingerprint only explicitly reviewed public bindings; remote sources require authorized snapshots. No wholesale extraction or secret-bearing root blobs.
+
+Exclude ignored/private/restricted content before body reads; reject symlinks, path escape and malformed metadata. Derived caches/results stay ignored outside tracked Wiki, rebuildable and non-governing. Preserve flat collections and sole MEMORY router; no private mode or graph store.
+
+Consolidation returns a source-bound plan: owners, changes, evidence/contradictions, target revisions and unresolved decisions. Apply needs explicit operation authorization and matching revisions; preflight the whole plan and refuse any stale/missing/private/unsupported target before writes. Sources and exact confirmations remain read-only; native entries use native operations. Never auto-stamp verification/confirmation. Preserve recoverable evidence on write failure; semantic synthesis remains agent-owned.
+
+Research inspiration: [Anthropic contextual retrieval](https://www.anthropic.com/engineering/contextual-retrieval) motivates preserving section/document context; [LangGraph memory](https://docs.langchain.com/oss/python/langgraph/memory) distinguishes memory functions; [Graphiti](https://github.com/getzep/graphiti) motivates temporal/source lineage without requiring its graph system; [LongMemEval](https://arxiv.org/abs/2410.10813) informs recall/correction evaluation. These sources are design rationale, not local evidence or mandatory dependencies.
 
 ## Implementor verification, 2026-11-04
 
@@ -85,4 +99,52 @@ Topic: wiki-maintenance
 Supersedes: none
 
 Source intake and durable query, 2026-11-04: directly inspected public AMS DQC-000A (Grilling Board purpose and DQC lifecycle), Board README, topic corrections and Landmark owners at da4f0ca809c6759e9c17ce798c52753dab123a65. Provenance: committed AMS owner records, retained in Git; exposure: public project material, no private inputs. Immutable reference: https://github.com/KaydenClark/Agentic-Management-System/blob/da4f0ca809c6759e9c17ce798c52753dab123a65/workbench/landmark-tracker/destination-questions/DQC-000A.json. Finding: the delivered DQC lifecycle does not establish the later functional redesign. Answer filed in the existing Grill Board explanation, its Landmark synthesis and MEMORY; the stale README omission rationale is narrowly corrected. This is source reconciliation, not new owner confirmation, product implementation, Human QA or measured benefit. Current RSI explanation reconciles later confirmed Stage A/readback and resolved PR169 publication hold while preserving Stage B and stopped-campaign boundaries. All original native entries remain unchanged.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-ee356d5a-8394-47ee-9bc9-09fa308014b3
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T05:23:14.571Z
+Author: Kayden
+Source: chat:ams-wiki-memory-2026-11-05
+Topic: wiki-maintenance
+Supersedes: none
+
+Owner correction, 2026-11-05: “Making sure the wiki works is not part of RSI. It is it’s own very critical part of the agentic management system. The wiki is our knowledge base, our memory, how we make sure agents don’t start from zero every session”. Follow-up instruction: “Make it it’s own landmark.” These direct instructions supersede the agent’s proposed RSI classification for the new work. Wiki/Memory must have its own Landmark; historical S-000C placement and evidence remain preserved. The five accepted memory improvements and Map, Plan, delegated implementation authority remain in scope. Session continuity means fresh agents recover established knowledge, owner intent and corrections, reasons, constraints, unresolved context and routes to live owners without reconstructing chronology. Wiki functional acceptance is distinct from RSI qualification. This records exact owner statements and their operational effect; it fabricates no four-section readback or delivery acceptance.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-b3247909-9721-4842-a83f-61adc5da2e13
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T05:23:26.741Z
+Author: Kayden
+Source: chat:ams-wiki-memory-2026-11-05
+Topic: wiki-maintenance
+Supersedes: JOT-ee356d5a-8394-47ee-9bc9-09fa308014b3
+
+Owner correction, 2026-11-05, exact text: "Making sure the wiki works is not part of RSI. It is it's own very critical part of the agentic management system. The wiki is our knowledge base, our memory, how we make sure agents don't start from zero every session". Follow-up exact instruction: "Make it it's own landmark." These direct instructions supersede the agent's proposed RSI classification for the new work. Wiki/Memory has its own Landmark; preserve S-000C's historical placement and evidence. All five accepted improvements and Map, Plan, delegated implementation authority remain in scope. Session continuity is the first-class outcome, and evaluation is functional Wiki acceptance. This corrects only typographic substitution in the previous capture, preserving the source wording; it adds no four-section readback or delivery acceptance.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-72534303-7521-4d2c-98d2-96b1bcb3825a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T05:23:45.930Z
+Author: Kayden
+Source: chat:ams-wiki-memory-2026-11-05
+Topic: wiki-maintenance
+Supersedes: none
+
+Source: Kayden, AMS Wiki memory discussion, 2026-11-05. Exact approval: "Yes to all 5. /Orchestrate mapping and planning it, once it's prepared, delegate implementation as well. Make sure you are using the best skills for the job, and having the sub agents do the best skills for the job too."
+
+The accepted five recommendations, preserving their titles and implementation scope:
+1. "Retrieve maintained understanding alongside captured entries." Navigation through MEMORY.md first; bounded article-section, Jot and source-reference retrieval preserving title, subject/entity, heading and source context. Start with keyword retrieval; compare optional embeddings/reranking with that baseline only if useful.
+2. "Make freshness specific to claims and their sources." Important claims identify observed source revision/date and superseding correction. Changed source bytes identify affected explanations for review; possible stale never means autonomous rewrite or confirmation.
+3. "Make consolidation a supported operation." Find the existing explanation owner; incorporate additions/evidence/corrections/unresolved contradictions; identify affected summaries and incoming links. Preserve evidence and exact owner confirmations; repeated observations support only a bounded, attributed lesson.
+4. "Serve different amounts and kinds of memory for different tasks." Historical events/lifecycle, maintained understanding, procedures and current/live owner pointers; short explanation, constraints, unresolved questions and deeper evidence links. These memory functions are not additional governance planes. No copied live Task rows.
+5. "Evaluate whether agents remember correctly." Real AMS current-understanding, historical, cross-page, correction and unknown questions; correctness, source retrieval, stale repetition, context size and owner correction effort. Introduced correction followed by fresh-agent recovery; distinguish development/held-out cases and observed/unmeasured results.
+
+This preserves approval of the preceding recommendations, not a fabricated four-section readback. The later owner correction makes Wiki/Memory its own Landmark and functional evaluation independent of RSI. Authorized endpoint: Map, Plan, delegated implementation and checked non-site delivery within project controls; no paid services, database migrations, deployments, shared-skill installs/catalog changes or unrelated upgrades.
 <!-- /jot-entry -->
