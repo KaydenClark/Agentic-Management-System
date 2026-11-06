@@ -38,6 +38,10 @@ Full safe S-006 writer/store -> S-007 reader -> protected-dev joins remain missi
 
 ## Acceptance
 
+Workspace baseline sha256:9b1acbe38eabca76ba8168d2d70e48dc60f057eb9618f4429d2c3120aecee598
+
+Native claim fc601011 and committed original coordination bytes0a099d4d precede the genuine complete schema-v1 snapshot:977 files, no findings/busy Git operations. Raw inventory stays private; no ignored recovery files selected. This separate binding precedes observation/control execution and establishes identity, not acceptance or workspace release.
+
 - [ ] The independent real website Task observes the exact adopted source loaded and used, with protected actual end-state readback and available usage/owner-intervention evidence.
 - [ ] A planted recurrence is detected and linked before owner prompting, with actual eligible-use denominator or explicit unknown; previous successes/regressions remain visible.
 - [ ] Safe source/use/disposition evidence traverses writer/store/public reader and protected checked dev readback; privacy, failure/outage and audit-versus-benefit distinctions hold.
