@@ -1,12 +1,13 @@
 // Renders the skills wiki's restricted Markdown (markdown.mjs) as React
 // elements: no raw HTML ever reaches the page. Site links go through
-// next/link; public links are plain anchors.
+// next/link; public credit URIs remain visible citation text.
 import Link from "next/link";
+import { isReaderHref } from "../reader-links.mjs";
 import type { ReactNode } from "react";
 import type { Block, Inline } from "./markdown.mjs";
 import styles from "./skills.module.css";
 
-export function InlineNodes({ nodes }: { nodes: readonly Inline[] }): ReactNode {
+export function InlineNodes({ nodes, citation = false }: { nodes: readonly Inline[]; citation?: boolean }): ReactNode {
   return nodes.map((n, k) => {
     switch (n.type) {
       case "text":
@@ -20,25 +21,21 @@ export function InlineNodes({ nodes }: { nodes: readonly Inline[] }): ReactNode 
       case "strong":
         return (
           <strong key={k}>
-            <InlineNodes nodes={n.children} />
+            <InlineNodes nodes={n.children} citation={citation} />
           </strong>
         );
       case "em":
         return (
           <em key={k}>
-            <InlineNodes nodes={n.children} />
+            <InlineNodes nodes={n.children} citation={citation} />
           </em>
         );
       case "link":
-        return n.href.startsWith("/") ? (
-          <Link key={k} href={n.href}>
-            <InlineNodes nodes={n.children} />
-          </Link>
-        ) : (
-          <a key={k} href={n.href}>
-            <InlineNodes nodes={n.children} />
-          </a>
-        );
+        if (citation && !isReaderHref(n.href)) {
+          return <span key={k} data-credit-source={n.href}><InlineNodes nodes={n.children} citation /> (<code className={styles.code}>{n.href}</code>)</span>;
+        }
+        if (!isReaderHref(n.href)) throw new Error(`Reader destination must stay on-site: ${n.href}`);
+        return <Link key={k} href={n.href}><InlineNodes nodes={n.children} citation={citation} /></Link>;
     }
   });
 }

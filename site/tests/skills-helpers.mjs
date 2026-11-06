@@ -8,6 +8,7 @@ import {
   TRAILING_SECTIONS, chartSkills, contentDir,
 } from '../app/skills/content.mjs';
 import { siteDir, visibleText } from './helpers.mjs';
+import { isReaderHref } from '../app/reader-links.mjs';
 import { mainOf } from './tour-helpers.mjs';
 
 // The Spec's count of chart skills per stage at the pin (S-008 Desired
@@ -252,7 +253,8 @@ export function wikiLinkProblems(html, { articles, pages, indexIds }) {
   for (const [, href] of html.matchAll(/<a\b[^>]*\bhref="([^"]+)"/gi)) {
     const target = href.replace(/&amp;/g, '&');
     if (PRIVATE_SKILLS_REPO.test(target)) { problems.push(`links the private skills repository: ${target}`); continue; }
-    if (!target.startsWith('/')) continue;
+    if (!isReaderHref(target)) { problems.push(`reader exit: ${target}`); continue; }
+    if (target.startsWith('#')) continue;
     const [path, frag] = target.split('#');
     const skill = path.match(/^\/skills\/([^/]+)$/);
     if (skill) { if (!articles.has(skill[1])) problems.push(`links ${target}, which has no article`); continue; }
@@ -261,4 +263,38 @@ export function wikiLinkProblems(html, { articles, pages, indexIds }) {
     if (!pages.has(name)) problems.push(`links ${target}, which is no built page`);
   }
   return problems;
+}
+
+// Problems with the wiki's navigation pane on a built page: a nav labelled
+// "Skills wiki" linking Overview and every chart skill once, by stage in chart
+// order, main flow first; `current` (a skill name, or null on the index) is
+// the one link marked aria-current="page".
+export function wikiNavProblems(html, chart, current) {
+  const nav = html.match(/<nav\b[^>]*aria-label="Skills wiki"[^>]*>([\s\S]*?)<\/nav>/i);
+  if (!nav) return ['no Skills wiki navigation pane'];
+  const problems = [];
+  if (!/\bdata-review-exclude=/.test(nav[0])) problems.push('the pane is not kept out of the content hash (data-review-exclude)');
+  const links = [...nav[1].matchAll(/<a\b([^>]*)>/gi)].map((m) => ({
+    href: m[1].match(/\bhref="([^"]+)"/)?.[1],
+    current: /\baria-current="page"/.test(m[1]),
+  }));
+  const want = ['/skills', ...chart.flatMap((st) => [...st.main, ...st.used].map((n) => `/skills/${n}`))];
+  const got = links.map((l) => l.href);
+  if (got.join('|') !== want.join('|')) problems.push(`the pane links ${got.join(', ')}; expected ${want.join(', ')}`);
+  const marked = links.filter((l) => l.current).map((l) => l.href);
+  const expected = current ? `/skills/${current}` : '/skills';
+  if (marked.join('|') !== expected) problems.push(`the pane marks ${marked.join(', ') || 'nothing'} current; expected ${expected}`);
+  return problems;
+}
+
+// Problems with a built article's "On this page" list: one jump link per ##
+// section, in order, each to that section's heading id.
+export function tocProblems(html) {
+  const art = articleOf(html);
+  if (!art) return ['no <article data-skill>'];
+  const toc = art.inner.match(/<nav\b[^>]*aria-label="On this page"[^>]*>([\s\S]*?)<\/nav>/i);
+  if (!toc) return ['no On this page list'];
+  const heads = [...art.inner.matchAll(/<h2\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/h2>/gi)].map((m) => `#${m[1]}:${text(m[2])}`);
+  const links = [...toc[1].matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi)].map((m) => `${m[1]}:${text(m[2])}`);
+  return links.join('|') === heads.join('|') ? [] : [`On this page lists ${links.join(', ')}; the sections are ${heads.join(', ')}`];
 }

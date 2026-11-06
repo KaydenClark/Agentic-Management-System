@@ -30,7 +30,7 @@ test('the fixture articles load in index order with every supported block', () =
   const table = g.sections[1].blocks.find((b) => b.type === 'table');
   assert.equal(table.rows.length, 3);
   assert.match(inlineText(table.rows[2][0]), /a pipe \| inside/);
-  assert.ok(g.links.includes('/skills#align') && g.links.includes('https://example.com/skills'));
+  assert.ok(g.links.includes('/skills#align') && g.creditSources.includes('https://example.com/skills') && !g.links.includes('https://example.com/skills'));
   assert.equal(articles[1].credit, 'original');
 });
 
@@ -112,7 +112,11 @@ const article = [
   ['a link to the private skills repository', grilling.replace('https://example.com/skills', 'https://github.com/KaydenClark/skills'), /private skills repository/],
   ['a link to a skill not on the chart', grilling.replace('(/skills/map)', '(/skills/teach)'), /not a chart skill/],
   ['a link to an unknown site route', grilling.replace('(/start)', '(/limits)'), /not a site route/],
-  ['an http link', grilling.replace('https://example.com/skills', 'http://example.com/skills'), /only \/skills\/<name>/],
+  ['an http link', grilling.replace('https://example.com/skills', 'http://example.com/skills'), /public https:\/\/ URI/],
+  ['an external body link', grilling.replace('(/start)', '(https://example.com/reading)'), /reader links must stay on-site/],
+  ['a protocol-relative body link', grilling.replace('(/start)', '(//github.com/example/repo)'), /reader links must stay on-site/],
+  ['a case-varied external body link', grilling.replace('(/start)', '(HTTPS://GITHUB.COM/example/repo)'), /reader links must stay on-site/],
+  ['a protocol-relative credit URI', grilling.replace('https://example.com/skills', '//github.com/example/repo'), /public https:\/\/ URI/],
   ['a # title in the body', grilling.replace('## What it does\n', '# grilling\n\n## What it does\n'), /# headings/],
   ['text before the first section', grilling.replace('## What it does\n', 'Intro.\n\n## What it does\n'), /open with a ## section/],
 ];

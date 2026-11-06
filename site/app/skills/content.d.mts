@@ -25,6 +25,7 @@ export type Article = {
   pin: string;
   credit: "original" | "adapted";
   creditText: Inline[];
+  creditSources: string[];
   creditLicense: string | null;
   stage: SkillStage;
   flow: "main" | "used";

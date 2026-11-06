@@ -1,6 +1,7 @@
 // The page list is a build projection. Owner declarations and existing origin
 // receipts remain inputs; the collector supplies the current candidate identity.
 import { existsSync, lstatSync, readFileSync, readdirSync, renameSync, unlinkSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -82,23 +83,50 @@ function routePattern(route) {
   };
 }
 
+function buildPath(root, name) {
+  let file = root;
+  for (const part of name.split('/')) {
+    file = join(file, part);
+    try { if (lstatSync(file).isSymbolicLink()) fail('build symlinks cannot supply public artifacts'); }
+    catch (error) { if (error.code !== 'ENOENT') throw error; }
+  }
+  return file;
+}
+
 export function readBuild(site = DEFAULT_SITE) {
-  const next = join(site, '.next');
-  const manifest = json(join(next, 'app-path-routes-manifest.json'));
-  const prerendered = Object.keys(json(join(next, 'prerender-manifest.json')).routes);
+  const next = buildPath(site, '.next');
+  const manifest = json(buildPath(next, 'app-path-routes-manifest.json'));
+  const prerendered = Object.keys(json(buildPath(next, 'prerender-manifest.json')).routes);
   const expected = new Set();
+  const owners = new Map();
   for (const [entry, route] of Object.entries(manifest)) {
-    if (!entry.endsWith('/page') || route === '/_global-error') continue;
+    if (!entry.endsWith('/page')) continue;
     const paths = route.includes('[') ? prerendered.filter(path => routePattern(route)(path) !== null) : [route];
     if (!paths.length) fail(`route ${route} has no verifiable prerendered artifact`);
-    for (const path of paths) expected.add(path);
+    for (const path of paths) {
+      if (route !== '/_global-error') expected.add(path);
+      if (!owners.has(path)) owners.set(path, new Set());
+      owners.get(path).add(createHash('sha256').update(entry).digest('hex'));
+    }
   }
-  const app = join(next, 'server', 'app');
-  if (!existsSync(app)) fail('build has no public artifacts');
+  const app = buildPath(next, 'server/app');
+  const cache = buildPath(next, 'server/route-cache/APP_PAGE');
+  // Next16's supported adapter uses getRouteCacheKey: APP_PAGE/source hash/$/route.
+  // Read that exact owner-bound layout, never unrelated adapter/fallback outputs.
+  const artifacts = [
+    ...walk(app).filter(file => file.endsWith('.html')).map(file => ({ file, artifact: relative(app, file).replace(/\\/g, '/') })),
+    ...walk(cache).filter(file => file.endsWith('.html')).map(file => {
+      const name = relative(cache, file).replace(/\\/g, '/');
+      const match = /^([a-f0-9]{64})\/\$\/(.+\.html)$/.exec(name);
+      if (!match) fail(`unsupported APP_PAGE cache artifact ${name}`);
+      const path = routeOf(match[2]);
+      if (!owners.get(path)?.has(match[1])) fail(`APP_PAGE cache owner differs for ${path}`);
+      return { file, artifact: match[2] };
+    }),
+  ];
   const pages = [];
   const excluded = {};
-  for (const file of walk(app).filter(file => file.endsWith('.html'))) {
-    const artifact = relative(app, file).replace(/\\/g, '/');
+  for (const { file, artifact } of artifacts) {
     if (artifact === INTERNAL) { excluded[artifact] = 'internal framework fallback'; continue; }
     const path = routeOf(artifact);
     if (!ROUTE.test(path) || pages.some(page => page.path === path)) fail(`unsupported/duplicate artifact route ${path}`);
@@ -109,7 +137,9 @@ export function readBuild(site = DEFAULT_SITE) {
     pages.push({ path, title: decodeHTMLText(title).replace(/\s+/g, ' ').trim(), kind: path === '/_not-found' ? 'visitor-404' : 'page' });
   }
   const have = new Set(pages.map(page => page.path));
-  if (!have.size || expected.size !== have.size || [...expected].some(path => !have.has(path))) fail('route manifest/artifact coverage differs');
+  const missing = [...expected].filter(path => !have.has(path)).sort(compare);
+  const extra = [...have].filter(path => !expected.has(path)).sort(compare);
+  if (!have.size || missing.length || extra.length) fail(`route manifest/artifact coverage differs: missing=${JSON.stringify(missing)}; extra=${JSON.stringify(extra)}`);
   return { pages: pages.sort((a, b) => compare(a.path, b.path)), excluded };
 }
 

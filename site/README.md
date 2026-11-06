@@ -53,6 +53,8 @@ The public site shows no review state: no page carries a draft, approval or revi
 
 For a new route, add a rule with `route`, current `spec` and `task` IDs, and public repository-relative `sources`. The IDs must exist together in the Workbench records. A route pattern such as `/skills/[name]` substitutes `{name}` in source paths and covers every actual built article automatically. Missing or overlapping ownership refuses; adding a page needs no manual card or generated row. Next route/prerender manifests must exactly match the public HTML artifacts. `/_not-found` is the visitor404 review surface; only `_global-error.html` is excluded as an internal framework fallback.
 
+The supported Next16.4.3 layouts are classic `.next/server/app/<route>.html` and adapter `.next/server/route-cache/APP_PAGE/<source-hash>/$/<route>.html`. The cache hash must equal SHA-256 of that route's owning app-manifest entry, matching Next's `getRouteCacheKey`. Both layouts must give one unambiguous complete public route set; missing/unknown pages, duplicate copies, malformed cache paths, wrong owners and symlinks refuse. Adapter output/fallback trees and other cache kinds are not substituted for public-page artifacts. Coverage errors name missing/extra public routes. A passing local adapter build still requires actual current deployment/readback verification.
+
 The original seven historical rows remain intact. Existing additional pages retain explicit `verified-containment` receipts for their actual checked dev integration: that proves containment, not original creation. Each receipt names its real branch and immutable commit, with a positive PR number when known. Declarations carry no inherited landing claim, so a newly discovered page defaults to `provenance_kind: "pending-candidate"` and `landed: null`. Its card receives the actual immutable candidate SHA from the collector and says integration pending. Preserve an existing truthful receipt when regenerating; update it only from an actual integration record. No review state or private criticism enters the public pages.
 
 ## Theme token check
@@ -107,3 +109,21 @@ The current article source pin is published catalog main `fb7ad23c963e183b930b23
 Use the existing authenticated Vercel connector: list this project's `dev` deployments, select a READY deployment whose Git SHA matches the intended candidate, then fetch its exact `/rsi` URL with `vercel_web_fetch_vercel_url`. Keep protection enabled. Retain only a safe summary: deployment/Git identity, HTTP status, exact `data-commit-sha` footer, successful-read timestamp and whether real linked rows or an explicit successful-empty state render. An unavailable response never establishes zero trials. A later successful-read timestamp can establish refresh activity; deployment metadata or a footer alone cannot establish a database read. Do not publish raw protected HTML, share links/tokens, credentials or private row contents.
 
 The footer identifies the deployed Git revision, while fixture tests identify their tested source; a records-only follow-up does not prove that its own SHA has deployed. Keep those identities separate and repeat readback after dev changes. The dated TK-002 evidence owns the observed results; this procedure makes no continuing live-state claim.
+
+### Reader navigation and attribution
+
+Reader links stay on-site, including source disclosures and skill credits.
+Project citations retain their public path and revision in accessible metadata;
+About's native source disclosures expose the full identity. Historical examples
+keep their explicit evidence revision. Only generated current-build revision
+text is excluded from page hashes; source paths and historical revisions remain
+part of the content.
+
+Skill bodies and summaries accept on-site destinations. Public source and
+license URIs in credit metadata render as wrapped citation text, preserving the
+author, adaptation notice and any recorded upstream revision. The private
+catalog pin remains unchanged; its source is never copied into the site.
+`npm test` checks every built anchor, including cross-page fragments, plus
+source identities and attribution retention.
+
+`node tests/keyboard.check.mjs URL` checks document-start traversal after middle focus, native closed/open details, a labeled derived visibility counterexample, and planted reachability/focus/early-stop faults without reloading them. Run it before the retained PR151 enlarged-text matrix; the matrix uses root text enlargement, not CSS zoom.

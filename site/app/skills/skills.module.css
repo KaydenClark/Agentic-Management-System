@@ -274,3 +274,141 @@
 .pin .code {
   color: var(--ink);
 }
+
+/* Wiki frame: the navigation pane left of the page on wide screens, above it
+   on narrow ones. The pane sits in the column's left margin, so the page keeps
+   the column's measure. The breakpoint is the narrowest viewport whose margin
+   holds the pane, its gap and a gutter: (1296 - 784) / 2 + 24 - (232 + 24) =
+   24px from the edge (--container, --page-gutter, --wiki-nav-width,
+   --space-24); below it the pane would run off the left edge. */
+
+.wiki {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+}
+
+.wikiMain {
+  min-width: 0;
+}
+
+@media (min-width: 1296px) {
+  .wiki {
+    display: grid;
+    grid-template-columns: var(--wiki-nav-width) minmax(0, 1fr);
+    gap: var(--space-24);
+    margin-inline-start: calc(-1 * (var(--wiki-nav-width) + var(--space-24)));
+  }
+}
+
+.wikiNav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  font-size: var(--text-nav);
+}
+
+@media (min-width: 1296px) {
+  .wikiNav {
+    position: sticky;
+    top: calc(var(--sticky-header-height, var(--header-fallback)) + var(--space-12));
+    align-self: start;
+    max-height: calc(var(--page-min-height) - var(--sticky-header-height, var(--header-fallback)) - var(--space-24));
+    overflow-y: auto;
+    padding-inline-end: var(--space-12);
+    border-inline-end: var(--border-width) solid var(--line);
+  }
+}
+
+.wikiNav a,
+.navGroup summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-height: var(--target-min);
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-control);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.wikiNav a:hover,
+.navGroup summary:hover {
+  background: var(--raised);
+}
+
+.wikiNav a[aria-current="page"] {
+  background: var(--raised);
+  font-weight: var(--weight-semibold);
+}
+
+.navOverview {
+  font-weight: var(--weight-medium);
+}
+
+.navStages,
+.navSkills {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navGroup summary {
+  cursor: pointer;
+  font-weight: var(--weight-medium);
+}
+
+.navSkills {
+  padding-inline-start: var(--space-12);
+}
+
+.navSkills a {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  overflow-wrap: anywhere;
+}
+
+/* The first skill also used at the stage, after its main flow. */
+.navAlso {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: var(--border-width) dashed var(--line);
+}
+
+.navNum {
+  flex: none;
+  min-width: var(--space-24);
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  color: var(--muted);
+}
+
+/* Article: the headings it holds, under its lead. */
+
+.toc {
+  padding: var(--space-12) var(--space-14);
+  background: var(--surface);
+  border: var(--border-width) solid var(--line);
+  border-radius: var(--radius-card);
+}
+
+.tocHead {
+  font-family: var(--font-mono);
+  font-size: var(--text-small);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.toc ol {
+  margin: var(--space-6) 0 0;
+  padding-inline-start: var(--space-24);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.toc a {
+  color: var(--ink);
+  text-underline-offset: var(--focus-offset);
+}

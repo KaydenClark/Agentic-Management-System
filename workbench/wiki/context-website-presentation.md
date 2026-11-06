@@ -450,3 +450,7 @@ This is the scoped release for those bounded website recovery operations: S-003/
 
 Earlier S-007 approval/publication Jots remain unchanged. JOT-8634622a-512b-44d9-9b99-0f973c450356 remains the separate S-009/S-010-only authority capture; this entry neither rewrites it nor broadens its original claim. PR101 stays stopped. Preserve r1 and its three assessment runs, with initial candidate -> retry -> retry -> stop and baseline excluded; no Task/campaign rename resets exhausted attempts. No new model trials, evaluator qualification, paid services, shared-skill installation or wider rollout is granted by this website recovery entry. Actual Human QA and owner-controlled dev-to-main promotion remain required; no production promotion or Human QA waiver is implied.
 <!-- /jot-entry -->
+
+### Current deployment recovery — 2026-11-06
+
+The later inventory build failure on dev40acb3a is historical. Authenticated readback of READY dev86cd758ccdbe5a9064dfeb7a224a8d4d0372e2ee independently confirmed HTTP200, the exact footer SHA, linked stored rows in both task/version views and a successful-read timestamp. [TK-002 CHECK](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002/CHECK.md#recovered-current-deployment--2026-11-06) retains the dated safe evidence and original failed deployment. This verifies the recovered identified deployment, without certifying later deployments, whole-Spec acceptance or owner QA.

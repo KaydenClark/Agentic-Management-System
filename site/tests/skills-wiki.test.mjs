@@ -15,7 +15,7 @@ import { READING_ORDER } from './tour-helpers.mjs';
 import {
   INDEX_PAGE, STAGE_COUNTS, articleNameOf, articlePage, articleShapeProblems, contentFile, contentNames, coverageProblems,
   creditPageProblems, creditProblems, indexProblems, pinProblems, siteRouteProblems, stageLabelProblems, usedMarkProblems,
-  wikiLinkProblems,
+  tocProblems, wikiLinkProblems, wikiNavProblems,
 } from './skills-helpers.mjs';
 
 // A built article in the renderer's shape, with sections replaceable.
@@ -143,7 +143,9 @@ test('the used-mark check catches faults (self-test)', () => {
 
 test('the link check catches faults (self-test)', () => {
   const ctx = { articles: new Set(['grilling']), pages: new Set(['start.html', 'skills.html', 'index.html']), indexIds: new Set(['align']) };
-  assert.deepEqual(wikiLinkProblems('<a href="/skills/grilling">g</a><a href="/skills#align">a</a><a href="/start">s</a><a href="https://example.com">e</a>', ctx), []);
+  assert.deepEqual(wikiLinkProblems('<a href="/skills/grilling">g</a><a href="/skills#align">a</a><a href="/start">s</a>', ctx), []);
+  assert.ok(wikiLinkProblems('<a href="https://example.com">e</a>', ctx).length, 'an external reader link passes');
+  assert.ok(wikiLinkProblems('<a href="//github.com/x/y">e</a>', ctx).length, 'a protocol-relative reader exit passes');
   assert.ok(wikiLinkProblems('<a href="/skills/readback">r</a>', ctx).length, 'a link to a missing article passes');
   assert.ok(wikiLinkProblems('<a href="/skills#nowhere">n</a>', ctx).length, 'a link to a missing index anchor passes');
   assert.ok(wikiLinkProblems('<a href="/glossary">g</a>', ctx).length, 'a link to a missing page passes');
@@ -216,4 +218,46 @@ test('the routes an article may link equal the reading order in nav.ts', () => {
   const navHrefs = [...readFileSync(join(siteDir, 'app', 'nav.ts'), 'utf8').matchAll(/href:\s*"([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(siteRouteProblems(SITE_ROUTES, navHrefs), [], 'against app/nav.ts');
   assert.deepEqual(siteRouteProblems(SITE_ROUTES, READING_ORDER), [], 'against READING_ORDER');
+});
+
+const NAV_STAGES = [{ id: 'a', name: 'A', main: ['one'], used: ['two'] }, { id: 'b', name: 'B', main: ['three'], used: [] }];
+const navPage = (links) => `<main><nav aria-label="Skills wiki" data-review-exclude="">${links}</nav></main>`;
+const navLink = (href, current) => `<a href="${href}"${current ? ' aria-current="page"' : ''}>x</a>`;
+
+test('the navigation pane check catches faults (self-test)', () => {
+  const all = ['/skills', '/skills/one', '/skills/two', '/skills/three'];
+  const page = (cur, hrefs = all) => navPage(hrefs.map((h) => navLink(h, h === cur)).join(''));
+  assert.deepEqual(wikiNavProblems(page('/skills/two'), NAV_STAGES, 'two'), []);
+  assert.deepEqual(wikiNavProblems(page('/skills'), NAV_STAGES, null), []);
+  assert.ok(wikiNavProblems('<main></main>', NAV_STAGES, null).length, 'a page with no pane passes');
+  assert.ok(wikiNavProblems(page('/skills', all.slice(0, 3)), NAV_STAGES, null).length, 'a pane missing a skill passes');
+  assert.ok(wikiNavProblems(page('/skills', [all[0], all[2], all[1], all[3]]), NAV_STAGES, null).length, 'a pane out of chart order passes');
+  assert.ok(wikiNavProblems(page('/skills/one'), NAV_STAGES, 'two').length, 'the wrong current skill passes');
+  assert.ok(wikiNavProblems(page('/skills').replace(' data-review-exclude=""', ''), NAV_STAGES, null).length, 'a hashed pane passes');
+});
+
+test('/skills and every article carry the navigation pane, linking every skill with the current page marked', () => {
+  assert.deepEqual(wikiNavProblems(builtPage(INDEX_PAGE).html, stages, null), []);
+  for (const { name, html } of builtArticles()) assert.deepEqual(wikiNavProblems(html, stages, articleNameOf(name)), [], name);
+});
+
+test('the On this page check catches faults (self-test)', () => {
+  const page = (toc) => `<article data-skill="x"><nav aria-label="On this page">${toc}</nav><h2 id="a">A</h2><h2 id="b">B</h2></article>`;
+  assert.deepEqual(tocProblems(page('<a href="#a">A</a><a href="#b">B</a>')), []);
+  assert.ok(tocProblems(page('<a href="#a">A</a>')).length, 'a missing heading passes');
+  assert.ok(tocProblems(page('<a href="#b">B</a><a href="#a">A</a>')).length, 'headings out of order pass');
+  assert.ok(tocProblems('<article data-skill="x"><h2 id="a">A</h2></article>').length, 'no list passes');
+});
+
+test('every article lists its headings under On this page, in order, each linking its section', () => {
+  for (const { name, html } of builtArticles()) assert.deepEqual(tocProblems(html), [], name);
+});
+
+test('every skill chip on /start links its article', () => {
+  const html = builtPage('start.html').html;
+  for (const { name } of chartSkills(stages)) {
+    const chip = html.match(new RegExp(`<li\\b[^>]*data-skill="${name}"[^>]*>([\\s\\S]*?)</li>`));
+    assert.ok(chip, `no chip for ${name}`);
+    assert.match(chip[1], new RegExp(`<a\\b[^>]*href="/skills/${name}"`), `${name} chip has no link`);
+  }
 });
