@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "split": "development",
+  "source_revision": "280725648ed4a2a7d0e97236fd51def5c02aaa65",
+  "budget": {"limit": 6, "max_chars": 6400},
+  "cases": [
+    {"id": "wiki-owner", "query": "Wiki memory independent Landmark owner correction", "route": "workbench/wiki/context-wiki-maintenance.md", "native_query": "own landmark", "expected_sources": ["workbench/wiki/context-wiki-maintenance.md"], "expected_jot": "JOT-b3247909-9721-4842-a83f-61adc5da2e13"},
+    {"id": "ams-purpose", "query": "AMS reusable workflows tools purpose website first application", "route": "workbench/wiki/context-ams-purpose.md", "native_query": "reusable", "expected_sources": ["workbench/wiki/context-ams-purpose.md"]},
+    {"id": "plane-roles", "query": "Governance planes classify claims artifact downward upward", "route": "workbench/wiki/vocabulary-governance-core.md", "native_query": "Governance", "expected_sources": ["workbench/wiki/vocabulary-governance-core.md"]},
+    {"id": "unknown", "query": "quasar marmalade telemetry", "route": null, "native_query": "quasar marmalade telemetry", "expected_sources": [], "expect_abstention": true}
+  ]
+}

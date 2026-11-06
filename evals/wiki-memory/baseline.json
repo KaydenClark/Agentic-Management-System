@@ -1,0 +1,212 @@
+{
+  "version": 1,
+  "method": "MEMORY route (recorded human selection) plus executable native Jot search",
+  "source_revision": "280725648ed4a2a7d0e97236fd51def5c02aaa65",
+  "cases_sha256": "a97481ff93a26f8ed20031acf21e424d273fcd31f99379e84c7cfea37645e785",
+  "cases_identity_sha256": "85ee1a9a3368a1724daca1254e1a0f713f369ef75f6fe9e66d02a0910afdec84",
+  "budget": {
+    "limit": 6,
+    "max_chars": 6400
+  },
+  "wiki_sha256": {
+    "workbench/wiki/AGENTS.md": "a0d950acb07c9117576291970836f3c4e4052594d835f7bee9e180ab21851b50",
+    "workbench/wiki/MEMORY.md": "3bad9059446b1d849ad41268eb0606470e1156e9359c198de6d965f3d9b37d2a",
+    "workbench/wiki/SCHEMA.md": "9d5d78e8923731b240557d4cec9da1412f6d81de55606a3ae4f269def587f9d8",
+    "workbench/wiki/ai-coding-reference--harness.md": "cee762ee1d76a80ba785755b236b76a7606e08d8cbf29604f224eb328c5ee857",
+    "workbench/wiki/ai-coding-reference--model-provider.md": "f53fa3ef5ce0f71d8a5f81e249c59e683a0247f90760ae2ec61c153861f6a180",
+    "workbench/wiki/ai-coding-reference--session.md": "09642557b8f16d8fd1f2b543f139d2e1e5567d52542205a6b9d56a01fdbc2bd1",
+    "workbench/wiki/ai-coding-reference.md": "307cf0b7a8c6c5d65206667dbaa698542b321a5bb90d6712a3b23c9c2bee0152",
+    "workbench/wiki/context-active-spec-approvals.md": "24cf32d6df6ab3da7a94f095ed549b65ff2a1fa6b3f0a7b5890ec671d0723cf8",
+    "workbench/wiki/context-ams-purpose.md": "8e39b9334d25579071430aba07d503c52863c96c7b6fd9dc662d4550ef91eb2d",
+    "workbench/wiki/context-feedback-improvement-loop-plan.md": "92d9434a99c5819f037fc14abbc95172d6ea476fb3bb957e3b1869e0dc2c476d",
+    "workbench/wiki/context-grilling-board.md": "5440d8568664bcf211d2d1410171888f09c918fb279bbba8afd25ceb918a6e39",
+    "workbench/wiki/context-owner-answers-coherence.md": "e085128beb7d029ad73f488770f0c3b30d2d977c03fb68f75480dafac00adaca",
+    "workbench/wiki/context-shared-ci.md": "bc37a5511fe81d4cb551bb0c16acf651a796544a60a3559c4f0471b8db4d4e98",
+    "workbench/wiki/context-skills-refocus.md": "5a26ad262b4c8aa74befd2c8b170ae569820a8df728f08f55fc378857fce2a17",
+    "workbench/wiki/context-spec-history.md": "ecbdd2c8a8f1f70be8786442281d667f7cb5bc52f42750678270368880708b05",
+    "workbench/wiki/context-website-presentation.md": "e522b606140ded85170416a2e2357dc8f51fbb60094eb1343f1577f46c7ec0c3",
+    "workbench/wiki/context-wiki-maintenance.md": "3372a28e49b338e92b9caf0ad862a7ff74ab9ac2f94278776c64e8d0e3131780",
+    "workbench/wiki/context-workbench-adoption.md": "c1abe5297921a106fb0715023f8b3d4752d79ccccedb9f9b68d55137cd7e6fd7",
+    "workbench/wiki/design-concepts/README.md": "d8eab7370111aeed97375c9754b6b8ab474195bdeaf2e0c0d8a4f90cf46d62d3",
+    "workbench/wiki/design-concepts/landmark-ams-website.md": "4e7fb740278ef1517e419a6016e4da7406ce5458cbc999c8163c2c1415250d63",
+    "workbench/wiki/design-concepts/landmark-grill-board.md": "4acf7380897a8ce5440033f2a4616babbcb7b473ef874479760ea147068cbbc7",
+    "workbench/wiki/design-concepts/landmark-rsi-loop.md": "2b07cdee02c7f16646bed9f6b2a21a71c9074b07059875f000b1d8b3074bbeaf",
+    "workbench/wiki/design-concepts/landmark-rsi-presentation.md": "c4b843da6ff544e926274792f5650da97cd1c7ca9a8a0f61666939318c2c4c8f",
+    "workbench/wiki/design-concepts/landmark-wiki-memory.md": "2eda4a06b762ac708e171183c663bab50997355d509cb8d59b62bd2ddf11d296",
+    "workbench/wiki/features/README.md": "ddf240fe6a3f5db675d1aa52fab14e56bfaa8963b2e0b4a18c5404a28fec48e5",
+    "workbench/wiki/guidebooks/rsi-case-contract.md": "aee21034c611fed57912d509f6e7d2a8475ccf3afffb2f487a6d074e202fba4b",
+    "workbench/wiki/guidebooks/rsi-loop-continuation.md": "38297206a94ad084cd0bdc9e54cb1303a1af153d244a2df5f610fe2b2ddab0b3",
+    "workbench/wiki/guidebooks/rsi-loop-readback-2026-11-04.md": "0cd78478c1983467048d8aaf16a8291c9d38494a3e0a97d12be87bf17ee90682",
+    "workbench/wiki/guidebooks/rsi-task-release.md": "15ad2f2cdee986fa3ad423e5df2ab0fc7e8df15ff2c240a90c711ec04e0b9c3a",
+    "workbench/wiki/guidebooks/rsi-worker-contract.md": "11a84494f920910b9f05c84a9b301ba6b470d8022f14118bceb4e9315f142294",
+    "workbench/wiki/guidebooks/wiki-maintenance.md": "02397da3dc70f646dd1197341e934005bff197977058979ea0f95d9d37a48e0e",
+    "workbench/wiki/history/LMK-001.md": "1658b3974b1cb0a286f0829246f1cc6e57ceee55f8dd5432ee5cc0a5562864d9",
+    "workbench/wiki/history/LMK-002.md": "1415d3bcb72a051384b1a23ddbaf351991ede141fa52a5830c5e341f5d8ccaa2",
+    "workbench/wiki/history/LMK-003.md": "09366650a67830b8cacc5e6bb8dbd1a235c7bfafc07c31b99e3a58e554ce0563",
+    "workbench/wiki/history/LMK-004.md": "67270c140924a906c79d722e9d390259a1d0e28efd1702a4f2c93b34e12729f4",
+    "workbench/wiki/history/S-000C.md": "4f910f7ec693321e4cf88c8d0d8aac5491d2d6d8ca316f45e212cce5c14e40fc",
+    "workbench/wiki/history/S-001.md": "3dd4192b0fe01e244833508bfa981ea3a30037dbd8bb8c1aa2429b4772618c4d",
+    "workbench/wiki/history/S-002.md": "2d1c7d5b4ecf9819ae0e4d70932d50730775ca49be3a6dd756de39229a040c20",
+    "workbench/wiki/history/S-003.md": "88445604393a7adf890bd2432cebcf5384ec02a53ba691eb526231257a8688a1",
+    "workbench/wiki/history/S-004.md": "587ce7e3874f950c9639414aebc4d83ece404149bbe7927feec10a6b8183782f",
+    "workbench/wiki/history/S-005.md": "672551f0d7c742d390c6bdb4407b9055af0799e616b79f35b015e65a097bc465",
+    "workbench/wiki/history/S-006.md": "9aeebf77e29ef26b94560028f7ecb890c7357de92580a003fed830d685bddfbd",
+    "workbench/wiki/history/S-007.md": "46903c29f5ae60b859f8ab59c8a1ffb9c7a5c243c85d52354a0b552e56698b04",
+    "workbench/wiki/history/S-008.md": "1539874d9f663fcfee45fdc92c1b16a928b0f91b5cea2518a19b747d2a36ef8b",
+    "workbench/wiki/history/S-009.md": "32cba2c08820dfb62428b5ec2ac4c5d2af3fd6f5c0fd103ce2a9c9e9f5632fa8",
+    "workbench/wiki/history/S-010.md": "97c5e46f66fd8847daea3c582f6732cf79f6db9f2bb9367bcb13cf517e7171d6",
+    "workbench/wiki/history/S-011.md": "e51cfa59bac1e4511e2f21b336d072b77e496bfe4b4c7558dcd6c09f9048062d",
+    "workbench/wiki/history/S-012.md": "78c84cabb940ee472e0e124b9f43a97695cfcddd207cac1826bfca77b79c60a1",
+    "workbench/wiki/history/S-013.md": "186e6c2c436dcdd140a50849123499f6743184a82a71f20d0cff74f39cbbb834",
+    "workbench/wiki/vocabulary-chats-and-roles.md": "5d07a6c0970a152f0a4d5848690b34e6f8012e9240eeafc51791b83b01ebb157",
+    "workbench/wiki/vocabulary-continuity-and-evidence-boundaries.md": "42cbd7d2e4e9908afd3005c62088f9e83bd54a4de1a16231a50d27ec8300470e",
+    "workbench/wiki/vocabulary-continuity-terms.md": "3555a61ca34023bbc1e8bd360c782146e6efe543694ea99bd4e80f931cd8b2b4",
+    "workbench/wiki/vocabulary-destination-and-direction.md": "96931bce936c13fd23350610a169c8e1bc2033425d38d81ca9872015a50dfd69",
+    "workbench/wiki/vocabulary-feedback-disposition.md": "a0dab64f8dacdece51b753da6d1e7f2c422fef8ff2dd1871daa5c8495fea75a7",
+    "workbench/wiki/vocabulary-governance-core.md": "8f400a3f88376ece823c02eb26d2b858da0869d2ea4d14af7387fcb61db1538f",
+    "workbench/wiki/vocabulary-specs-and-tasks.md": "563f6441b8f8a23af04ad192b9c61332da082f89736ffff2786e09df6295149e",
+    "workbench/wiki/vocabulary-stance-terms.md": "9f77b9d1693f37704eab7de8a0b7b60e6cfc71d9aeac206dcb37cb8e74fb4279",
+    "workbench/wiki/vocabulary-workbench-meanings-of-ai-coding-terms.md": "2d00f7e1356003c7064175e3108e72a0178c735f574ccb92a67e8a5c932843c9",
+    "workbench/wiki/vocabulary-workbench-room-and-artifacts.md": "2decdbc5a3bb1522d4432166e8e0be74a9cd6fb132eb72ce3d53074343acb42b",
+    "workbench/wiki/vocabulary-workflow-verbs.md": "421ed363768bab595edf168e2c6cc95ec07da353eb8629f32e9e2da9fd409671"
+  },
+  "rows": [
+    {
+      "id": "wiki-owner",
+      "route": "workbench/wiki/context-wiki-maintenance.md",
+      "navigation": "---\ntype: project\nstatus: partial\nsensitivity: normal\nknowledge_role: curated\nprovenance:\n  - /jot capture; each claim names its source and date\nsource_paths:\n  - workbench/wiki/SCHEMA.md\n  - workbench/wiki/design-concepts/README.md\n  - workbench/wiki/features/README.md\nlast_verified: 2026-11-05\n---\n\n# Maintained Wiki understanding\n\nCaptured context. Claim labels preserve intent and uncertainty; capture alone supplies neither Canon nor implementation proof. The date above checks this page's capture format, not every claim.\n\n## Current maintenance path\n\nThe Wiki is AMS's knowledge base and memory, independently owned by [Wiki memory and session continuity](design-concepts/landmark-wiki-memory.md). [The owner's correction](#jot-b3247909-9721-4842-a83f-61adc5da2e13) rejects classifying this critical capability as RSI and requests its own Landmark. Fresh agents should recover established understanding, owner intent/corrections, reasons, constraints, unresolved questions and live-owner routes without starting from zero. [All five accepted improvements](#jot-72534303-7521-4d2c-98d2-96b1bcb3825a) belong to [S-000D](../landmarks/LMK-000A-wiki-memory/specs/S-000D-memory-retrieval/SPEC.md); its evaluation is functional Wiki acceptance. Historical S-000C placement and evidence below remain unchanged.\n\n[The routed procedure](guidebooks/wiki-maintenance.md) makes source intake, ingest, durable query filing and bounded semantic lint concrete within the existing schema. The existing [Grill Board](context-grilling-board.md), [AMS purpose](context-ams-purpose.md) and [RSI](context-feedback-improvement-loop-plan.md) owners explain current meaning above their retained captures. [MEMORY's four Landmark routes](MEMORY.md#landmark-synthesis-pages) connect their wider relationships. This operation creates no duplicate capability owner, product redesign or new execution authority.\n\n## Planned memory interface\n\nS-000D selects the project-owned `ams-memory query/check/consolidate/evaluate` seam under delegated planning authority. This is a preparation contract, not delivered behavior.\n\nQueries start from MEMORY/routes before bounded fallback; cap results/characters, report truncation/continuation and rank deterministically. Sources are links/identities, not permission to recursively ingest linked content. Default content is eligible Wiki sections/Jots; procedures and current work are bounded pointers to existing owners. Fingerprint only explicitly reviewed public bindings; remote sources require authorized snapshots. No wholesale extraction or secret-bearing root blobs.\n\nExclude ignored/private/restricted content before body reads; reject symlinks, path escape and malformed metadata. Derived caches/results stay ignored outside tracked Wiki, rebuildable and non-governing. Preserve flat collections and sole MEMORY router; no private mode or graph store.\n\nConsolidation returns a source-bound plan: owners, changes, evidence/contradictions, target revisions and unresolved decisions. Apply needs explicit operation authorization and matching revisions; preflight the whole plan and refuse any stale/missing/private/unsupported target before writes. Sources and exact confirmati",
+      "entries": [],
+      "correction_context": [
+        {
+          "id": "JOT-ee356d5a-8394-47ee-9bc9-09fa308014b3",
+          "kind": "intent",
+          "state": "superseded",
+          "at": "2026-11-06T05:23:14.571Z",
+          "author": "Kayden",
+          "source": "chat:ams-wiki-memory-2026-11-05",
+          "topic": "wiki-maintenance",
+          "supersedes": null,
+          "content": "",
+          "recorded_state": "confirmed",
+          "superseded_by": "JOT-b3247909-9721-4842-a83f-61adc5da2e13",
+          "content_truncated": true
+        }
+      ],
+      "native_total_matches": 2,
+      "global_search_status": "blocked",
+      "global_search_error": {
+        "code": "invalid-page",
+        "message": "The Wiki page contains invalid or duplicate jot metadata"
+      },
+      "routed_read_status": "read",
+      "context_chars": 4069,
+      "source_hit": true,
+      "jot_hit": false
+    },
+    {
+      "id": "ams-purpose",
+      "route": "workbench/wiki/context-ams-purpose.md",
+      "navigation": "---\ntype: project\nstatus: active\nsensitivity: normal\nknowledge_role: curated\nprovenance:\n  - Kayden, AMS template creation request, 2026-10-31\nsource_paths:\n  - BLUEPRINT.md\nlast_verified: 2026-11-02\n---\n# AMS purpose and first RSI loop\n\n## Current understanding\n\nAMS is a reusable system of workflows, rules, skills and tools for developing intent with AI and carrying it into verified outcomes. Its shared methods improve through evidence from actual work. The [Blueprint](../../BLUEPRINT.md) owns the final destination; [S-001 — AMS assessment](../specs/S-001-ams/SPEC.md) assesses a bounded build rather than defining AMS or parenting every Landmark. The [owner's purpose correction](#jot-37abcff9-7be7-49a9-9ddb-98e281445cc8) explains that distinction.\n\nThis room joins three kinds of work: building the public website, creating the RSI loop, and improving skills already used across projects. The website makes the system and its evidence understandable to visitors and to the owner returning later. Its own build supplies the first application of the loop; building a website alone proves no skill improvement. Other projects may later contribute evidence with their own versions, context and limits. [AMS website synthesis](design-concepts/landmark-ams-website.md) and [RSI presentation synthesis](design-concepts/landmark-rsi-presentation.md) distinguish explanation from measurement.\n\nShared skill improvements need no invented per-project delivery process. Substantial project adjustments, or adoption into an existing/new project, use `setup-workbench` in that project. Source merge, personal catalog installation and observed host loading remain separate facts. This page is a sufficient owner for AMS purpose; duplicating it in the Feature catalog would add competing maintenance.\n\n## How the parts work together\n\nThe [local Grill Board](context-grilling-board.md) reduces owner coordination by preserving decisions and corrections through stable DQCs. Execution owners carry approved work through Landmarks, Specs and Tasks. The [RSI loop](context-feedback-improvement-loop-plan.md) uses failures and retained successes to compare bounded changes and decide what to keep; the [RSI Loop synthesis](design-concepts/landmark-rsi-loop.md) links its capability owners. Wiki maintenance turns resulting understanding into current, sourced explanations; it supplies neither execution authority nor proof that a method improved outcomes.\n\n## Established meaning, limits and open work\n\nThe Blueprint and sourced owner clarification establish this destination and the website's explanatory role. They do not establish that the full autonomous loop, every website page or a broadly beneficial skill system has been delivered. Follow live Specs and evidence rather than reading the older preparations below as current state. In particular, the old statement that S-002 “owns the loop” is historical: LMK-004 owns the whole destination; S-002 owns evaluation and qualification. Stage A's exact RSI readback is now confirmed and its preparation delivered; Stage B implementation and existing campaigns retain their separate holds. The [current RSI explanation](context-feedback-improvement-loop-plan",
+      "entries": [
+        {
+          "id": "JOT-37abcff9-7be7-49a9-9ddb-98e281445cc8",
+          "kind": "intent",
+          "state": "confirmed",
+          "at": "2026-11-02T17:39:17.735Z",
+          "author": "Kayden",
+          "source": "Kayden, direct BLUEPRINT rewrite request in AMS chat, 2026-11-02",
+          "topic": "ams-purpose",
+          "supersedes": null,
+          "content": "The Blueprint is the future-facing description of the final project destination; S-001 is a bounded assessment Spec, not the owner of that destination. AMS is the reusable system used across projects. This room builds its public presentation website, creates and runs the RSI loop, and updates shared skills already used by the projects. The website explains AMS and shows verified results from its own build and skill improvements; it can later include evidence from other projects. Shared skill improvement does not require a separate delivery or installation into every project. When a substantial change requires project adjustments, or a new or existing project needs adoption, someone runs setup-workbench in that project folder. Rewrite the Blueprint and reconcile misleading current descriptions; this request supplies no website implementation, measured benefit, cross-project action or deployment authority.",
+          "content_truncated": false
+        },
+        {
+          "id": "JOT-340112cd-7c5d-48ae-88e0-187d12df89d5",
+          "kind": "intent",
+          "state": "confirmed",
+          "at": "2026-11-02T17:18:47.413Z",
+          "author": "Owner",
+          "source": "Owner, AMS project definition correction in chat, 2026-11-02",
+          "topic": "ams-purpose",
+          "supersedes": null,
+          "content": "AMS is the reusable system in which anyone can capture, develop and record intent with AI and have agents deliver that intent into reality. It packages workflows, rules, skills and operating methods for use by other people. This project adds recursive self-improvement (RSI), using real work to test and improve the system; that does not make AMS a person-specific system. Correct the project definitions and explanatory copy without repeatedly naming its creator. The linked Workbench Agentic Management System Page is already correct and is a reference, not an edit target. This supersedes the person-centered current definition, preserving historical attribution, the existing RSI proof requirements and publication gates.",
+          "content_truncated": false
+        }
+      ],
+      "correction_context": [],
+      "native_total_matches": 2,
+      "global_search_status": "blocked",
+      "global_search_error": {
+        "code": "invalid-page",
+        "message": "The Wiki page contains invalid or duplicate jot metadata"
+      },
+      "routed_read_status": "read",
+      "context_chars": 6002,
+      "source_hit": true,
+      "jot_hit": null
+    },
+    {
+      "id": "plane-roles",
+      "route": "workbench/wiki/vocabulary-governance-core.md",
+      "navigation": "---\ntype: memory\nstatus: active\nsensitivity: normal\nknowledge_role: curated\nprovenance:\n  - LLM Workbench template wiki: the glossary's Governance core grouping explained\n  - Kayden's six-plane definitions, traversal order and Enduring Context correction, 2026-11-04\nsource_paths:\n  - GLOSSARY.md\n  - workbench/wiki/SCHEMA.md\nlast_verified: 2026-11-04\n---\n\n# Governance core: the vocabulary explained\n\nThese words explain AMS claim roles, what binds an agent, how disagreements\nbetween governing claims and the running system resolve, and the Workbench's\nlanes, collections and decision records.\n\nThe [glossary](../../GLOSSARY.md#governance-core) owns the stack definitions;\nthe [Wiki schema](SCHEMA.md#governance-stack) owns their use in Wiki operations.\nThis article explains the model and preserves the owner's corrections. It\nauthorizes nothing. Later sections retain other Workbench explanations;\ntheir terms are not all entries in the current AMS glossary.\n\n## Governance Plane\n\nPlanes classify claims relative to a target and operation, not whole artifacts.\nOne artifact may contain claims on several planes or only one. For example,\na Spec can contain desired outcomes, learned rationale, supporting test results\nand governing acceptance criteria; those claims retain different roles.\n\nDefinition: [GLOSSARY.md, Governance core](../../GLOSSARY.md#governance-core).\n\n## Governance Stack\n\nAlways display the complete stack downward in the order below, or upward in\nits exact reverse, keeping the plane numbers attached. The numbers describe\nhow Kayden uses the stack, not a ranking for resolving contradictory claims.\n\n| Plane | Meaning |\n|---|---|\n| 6. [Projection](#projection) | Snapshot summaries of each plane's claims at the last visit. |\n| 5. [Intent](#intent) | What the owner wants. |\n| 4. [Enduring Context](#enduring-context) | What we know about what exists, Canon, Grounding, Intent and what to do with it. |\n| 3. [Grounding](#grounding) | Evidence and proofs establishing and supporting the source of truth. |\n| 2. [Canon](#canon) | The authoritative source of truth. |\n| 1. [Actuality](#actuality) | What exists and is being worked on. |\n\n### Projection\n\nA Projection summarizes each plane's claims as of the last time we were\nthere. A Wiki overview, Board card or work summary can present these snapshots.\nKeep source revisions or observation times visible; reading a summary does not\nrefresh its underlying claims or prove that they still describe current state.\n\n### Intent\n\nIntent is what the owner wants, with reasons, boundaries, corrections and\nconfirmation status. A Projection helps the owner develop or revise Intent.\nRecording whether that Intent was delivered does not rewrite what was wanted\nor create a new owner confirmation, acceptance judgment or Human QA receipt.\n\n### Enduring Context\n\nEnduring Context is our knowledge: what we know about what exists; what the\nsource of truth and evidence say exists or should change; and what we know\nabout Intent and what to do with it. It includes rationale, uncertainty and\nlessons, not just historical reference. The name remains Enduring Context.\n\n### Grounding\n\nGrounding is the evidence and proofs we use to establish",
+      "entries": [
+        {
+          "id": "JOT-14f25176-8c50-47f8-8089-2319e079f3a3",
+          "kind": "intent",
+          "state": "confirmed",
+          "at": "2026-11-05T04:13:00.328Z",
+          "author": "codex-wiki-governance",
+          "source": "Kayden direct approval in this Wiki governance-stack chat, 2026-11-04",
+          "topic": "vocabulary-governance-core",
+          "supersedes": null,
+          "content": "Kayden replied \"I approve\" directly to the request to publish codex/wiki-governance-stack to the public KaydenClark/Agentic-Management-System repository, open its PR into main, and merge after CI passes. This explicitly authorizes that bounded documentation delivery. The earlier failed publication attempts remain historical. The approval does not establish owner acceptance, Human QA, deployment or any broader release permission. Continue the checked non-site landing; retain all six definitions and the ordered stack unchanged.",
+          "content_truncated": false
+        },
+        {
+          "id": "JOT-0ad0d283-d165-4b0e-8cc9-9175c7c094f5",
+          "kind": "verification",
+          "state": "current",
+          "at": "2026-11-05T03:52:25.161Z",
+          "author": "codex-wiki-governance",
+          "source": "Codex local documentation readback and fresh-checkout checks, 2026-11-04; source candidate 3039e2220c99c0479ac43998edc4169beb952afa",
+          "topic": "vocabulary-governance-core",
+          "supersedes": null,
+          "content": "Local documentation now defines the six planes in 6-to-1 order, explains downward and upward use, treats planes as claim roles, preserves Enduring Context and makes Projection a dated/revisioned snapshot. All 22 original glossary terms remain; six new entries restore Governance Plane and the five previously missing plane definitions. The compact glossary retains intent development and DQC evolution within its 3000-character limit. Wiki, glossary, layout, decision-record, Taskboard and hygiene checks passed. A fresh checkout of source candidate 3039e22 passed 839 tests with 6 skipped after authorized localhost access; the sandboxed failure and rerun are retained in FAIL-104. Later edits only tighten glossary wording, order explanatory examples and record verification/publication limits. Doctor still reports unrelated existing claims, S-011 dependency, undeclared runtime surfaces and Claude permission drift; none establishes a stack-documentation defect. Publication was refused twice by automatic approval review (FAIL-102/103); the branch remains local with no PR or main merge. The requested documentation is implemented locally; checked public delivery awaits recognized owner approval, and no owner acceptance, browser QA or measured RSI benefit is claimed.",
+          "content_truncated": false
+        }
+      ],
+      "correction_context": [],
+      "native_total_matches": 3,
+      "global_search_status": "blocked",
+      "global_search_error": {
+        "code": "invalid-page",
+        "message": "The Wiki page contains invalid or duplicate jot metadata"
+      },
+      "routed_read_status": "read",
+      "context_chars": 6361,
+      "source_hit": true,
+      "jot_hit": null
+    },
+    {
+      "id": "unknown",
+      "route": null,
+      "navigation": "",
+      "entries": [],
+      "correction_context": [],
+      "native_total_matches": null,
+      "global_search_status": "blocked",
+      "global_search_error": {
+        "code": "invalid-page",
+        "message": "The Wiki page contains invalid or duplicate jot metadata"
+      },
+      "routed_read_status": "blocked",
+      "context_chars": 341,
+      "source_hit": true,
+      "jot_hit": null
+    }
+  ],
+  "independent_answer_correctness": "unmeasured",
+  "stale_answer_repetition": "unmeasured",
+  "owner_correction_effort": "unmeasured",
+  "limits": "Development routes and keywords were inspected by the implementor. This records retrieved context, not independent answers or benefit. Held-out/fresh-agent evaluation belongs to TK-002W."
+}

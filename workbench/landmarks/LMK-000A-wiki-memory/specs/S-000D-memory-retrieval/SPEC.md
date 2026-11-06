@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
 **Execution approval:** [JOT-36034de3-6b3b-4b50-8538-c1a3f54ac123](../../../../wiki/context-wiki-maintenance.md#jot-36034de3-6b3b-4b50-8538-c1a3f54ac123)
-**Next gate:** Close TK-002U with verification and documentation proof.
+**Next gate:** Root obtains bounded TK-002U continuation after Runbook STOP; publication separately held.
 
 ## Outcome and authority
 
@@ -59,7 +59,7 @@ Serialize shared writers. Tasks include Check/QA/repair/hand-back; root owns ind
 
 ## Completion Result
 
-Pending; preparation records no working behavior, measured improvement or owner acceptance.
+TK-002U stopped open under Runbook limit (FAIL-118–121). Additive query/check/evaluate candidate has16 focused tests and4 same-source development retrieval checks passing after recorded failures; final Check/QA, real claim bindings and documentation remain. No independent answer/effort measurement, Review, publication or owner acceptance. Root must obtain continuation authority; TK-002V/W remain blocked.
 
 ## Supersession
 
