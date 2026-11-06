@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns generator/collector source, checks and preserved failures. Servitor built dev259b7a9's48 public routes;41 lacked owner declarations, so collection refused before writes with cleanup verified. Existing container/SIGINT checks pass. Sources, ownership refresh and private-note guards address independent findings; actual protected coverage remains open. S-003 owns complete metadata, RSI freshness and protected artifact/readback. S-004 Human QA/redesign remain separate; historical landed content is never current approval proof.
+No Spec acceptance is claimed. [TK-001](tasks/TK-001/TASK.md) owns source, checks and preserved failures. Servitor built dev63870b54efba9b9028dc8c1ae194f3fef85138ae's49 public routes;42 lacked owner declarations, so collection refused before writes with cleanup verified. Container/SIGINT checks pass. Sources, ownership refresh and private-note guards address independent findings; actual protected coverage remains open. S-003 owns complete metadata, RSI freshness and protected artifact/readback. S-004 Human QA/redesign remain separate; historical landed content is never current approval proof.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 
