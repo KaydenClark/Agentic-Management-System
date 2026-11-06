@@ -226,3 +226,29 @@ def test_symlink_report_destination_refuses(case, tmp_path):
     destination.symlink_to(case[0] / "outside", target_is_directory=True)
     with pytest.raises(Refused):
         publish(check(case), destination)
+
+
+def test_tampered_candidate_contract_cannot_change_frozen_expectation(case):
+    repo, _, original = case
+    contract = copy.deepcopy(original)
+    contract["probes"][0]["contains"] = "Incomplete"
+    put(repo, "evidence/contract.json", json.dumps(contract))
+    put(repo, "site/page.html", "Incomplete")
+    commit(repo)
+    assert codes(check(case)) == ["acceptance-miss"]
+
+
+def test_publishing_raw_or_unknown_nested_fields_refuses(case):
+    r = check(case)
+    r["probes"][0]["private_body"] = "private canary"
+    with pytest.raises(Refused):
+        publish(r, case[0] / "reports")
+
+
+def test_same_native_use_cannot_be_recounted_by_renaming_occurrence(case):
+    case, _ = native_case(case)
+    directory = case[0] / "reports"
+    first = check(case)
+    publish(first, directory)
+    with pytest.raises(Refused):
+        publish(check(case, "renamed-use", previous=first), directory)
