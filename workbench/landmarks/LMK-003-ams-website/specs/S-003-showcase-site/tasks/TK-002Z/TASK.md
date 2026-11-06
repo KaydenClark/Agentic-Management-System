@@ -33,3 +33,9 @@ S-005 owns Python collector/Board/cards. Coordinate the flat pages output and po
 ## Starting inventory
 
 Workspace baseline sha256:2ea064d22681213beb226e4a9eca397b64ba656035b3f7a780c272f89b80c3fc. Original claim/projection committed first; prior generated public build/manifests copied and verified privately outside the checkout before this complete snapshot. No product changes preceded the separate digest binding.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-003-website-shell-and-ams-orientation | 262d28e19b50ec0774f7c58c949cff8e403e8ec3 | ahead 0 behind 0 | 0 | 262d28e: fresh npm build/postbuild48public/1internal; npm test272/272; Python841passed5skipped271.22s with supported loopback permission; root/site hygiene0; layout valid; render unchanged; doctor0globalblockers, baseline selected-slice/informational findings retained. Original7 row objects exact;48 baseline content hashes unchanged. Inventory9/hash6 focused tests passed, with expected TDD red controls retained. Shared CI Python42188021574 and site42188021559 green on exact262d28e. | site/README.md documents build generation, declaration schema,404/internal classification and truthful provenance; page-list original7 preserved. Failure149-162 retained from originating writers; authority Jot8634622a separately sourced. | Task stays in-progress: root released actual immutable S003-to-S005 collection proof at262d28e in the isolated S005 clone, not yet run; no original Board writes. Root assembly review/dev merge and native closure remain. Baseline browser2406 evidence is unchanged-UI evidence only; no new matrix, HumanQA, deployment or production claim. | 481c40e6c09b797616b9f8577bd61ac8add102c462387f126ec2db48d3ca5a0e |
