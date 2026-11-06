@@ -3,10 +3,12 @@
 **Task ID:** TK-001A
 **Spec ID:** S-013
 **Slice:** A renamed source and competing native-use publications cannot evade or corrupt detection
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Feedback loop connection; Prepare boundary; Recurrence and loading
 **Planned verification:** Reproduce both post-merge review findings on c787b29/b932ba0, then public-seam rename and cross-process publication regressions, retained-owner recovery and applicable RUNBOOK checks.
+**Claimed by:** codex-s013-correction
+**Current claimant:** codex-s013-correction
 
 ## Assignment
 
