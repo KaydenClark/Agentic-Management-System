@@ -191,10 +191,10 @@ Optional `AMS_BOARD_CAPTURE_DIR` saves disposable screenshots to a chosen local
 output directory. The existing CI Playwright step includes both test files.
 Agent browser checks do not establish owner Human QA.
 
-## Page review generator: stopped candidate
+## Page review generator: incomplete candidate
 
 S-005/TK-001 owns an incomplete candidate for `ams-pages generate`. It accepts one immutable current candidate, a complete page inventory, and a map from each built public route to its served HTML. It refuses any route-set mismatch, including an unlisted skills article. Historical per-page landed commits supply provenance only. Cards/index are written through the Board repository lock and compare-and-swap; changes append stale sections, preserving earlier answers. Returning to an earlier content hash requires a fresh card occurrence rather than rewriting history.
 
-The content hash matches the existing site contract: `sha256:` plus UTF-8 SHA-256 of canonical `<main id="main">` content. Exclude script/style/comment and `data-review-mark`/`data-review-exclude` subtrees; retain text plus `href`, `src`, `alt` values in source order, decode supported character references, join with spaces, collapse ASCII whitespace and trim. The footer is outside the hash. Retained independent vectors live under `tests/fixtures/grill_board/pages/`; parity tests remain unrun at the stop.
+The content hash matches the existing site contract: `sha256:` plus UTF-8 SHA-256 of canonical `<main id="main">` content. Exclude script/style/comment and `data-review-mark`/`data-review-exclude` subtrees; retain text plus `href`, `src`, `alt` values in source order, decode supported character references, join with spaces, collapse ASCII whitespace and trim. The footer is outside the hash. Retained independent vectors live under `tests/fixtures/grill_board/pages/`; the current focused run passes the retained hash vectors.
 
-This candidate has no Supabase approval row or public review-status path. It has not completed real current-build collection, live coverage or post-change regression checks. See the Task's two preserved failures and scoped continuation requirement before using it for owner approvals. Actual private criticism must not be put into public committed raw evidence.
+This candidate has no Supabase approval row or public review-status path. It has not completed real current-build collection, live coverage or post-change regression checks. The Task preserves two earlier verification failures and the orchestrator-inspected correction; 119 focused generator/Board tests now pass, without claiming live coverage or approval readiness. Actual private criticism must not be put into public committed raw evidence.

@@ -346,6 +346,8 @@ def _write_and_commit(root, base, writes, subject, body):
 
 
 def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
+    if getattr(card, "stale", None) is not None:
+        raise AnswerRefused(f"{card.file} is stale; read its current replacement")
     if verdict not in VERDICTS:
         raise AnswerRefused(f"unknown verdict {verdict!r}")
     label, note = VERDICTS[verdict], (note or "").strip()
