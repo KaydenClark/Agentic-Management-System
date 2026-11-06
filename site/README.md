@@ -119,3 +119,5 @@ author, adaptation notice and any recorded upstream revision. The private
 catalog pin remains unchanged; its source is never copied into the site.
 `npm test` checks every built anchor, including cross-page fragments, plus
 source identities and attribution retention.
+
+`node tests/keyboard.check.mjs URL` checks document-start traversal after middle focus, native closed/open details, a labeled derived visibility counterexample, and planted reachability/focus/early-stop faults without reloading them. Run it before the retained PR151 enlarged-text matrix; the matrix uses root text enlargement, not CSS zoom.

@@ -20,6 +20,31 @@ async function fixture(width = 375, theme = 'light') {
   return { context, page };
 }
 try {
+  {
+    const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
+    const page = await context.newPage();
+    await page.goto(`${base}/skills/grilling`, { waitUntil: 'networkidle' });
+    const details = page.locator('nav[aria-label="Skills wiki"] details').first();
+    const link = details.locator('a').first();
+    const hidden = await link.evaluate(el => !el.checkVisibility({ visibilityProperty: true }));
+    const closed = await keyboardProblems(page);
+    const omitted = await link.evaluate(el => !el.hasAttribute('data-qa-i'));
+    check('native closed-details links omitted', hidden && omitted && !closed.length, closed);
+    // Derived geometry counterexample; not a claim about native hidden rects.
+    await link.evaluate(el => { el.getClientRects = () => [new DOMRect(0, 0, 1, 1)]; });
+    const derived = await keyboardProblems(page);
+    const stillOmitted = await link.evaluate(el => el.getClientRects().length === 1 && !el.hasAttribute('data-qa-i'));
+    check('derived rect-only visibility counterexample', !derived.length && stillOmitted, derived);
+    await link.evaluate(el => { delete el.getClientRects; });
+    await details.evaluate(el => { el.open = true; });
+    const opened = await keyboardProblems(page);
+    const visible = await link.evaluate(el => el.checkVisibility({ visibilityProperty: true }) && el.hasAttribute('data-qa-i'));
+    await link.evaluate(el => { el.tabIndex = -1; el.textContent = 'QA opened unreachable'; window.__qaOpenedFault = true; });
+    const broken = await keyboardProblems(page);
+    const retained = await link.evaluate(el => el.tabIndex === -1 && window.__qaOpenedFault === true);
+    check('native opened links checked and visible unreachable caught', visible && !opened.length && broken.some(x => x.includes('not reachable by Tab: a "QA opened unreachable"')) && retained, { opened, broken, retained });
+    await context.close();
+  }
   for (const width of [375, 1280]) for (const theme of ['light', 'dark']) {
     const { context, page } = await fixture(width, theme);
     const source = page.getByText('Source identities', { exact: true }).first();

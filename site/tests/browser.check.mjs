@@ -380,6 +380,14 @@ async function selfTest(browser, server, origin) {
     const link = closed.locator('a').first();
     const initial = await link.evaluate(el => ({rects:el.getClientRects().length, visible:el.checkVisibility({visibilityProperty:true})}));
     const before = await keyboardProblems(page);
+    const omitted = await link.evaluate(el => !el.hasAttribute('data-qa-i'));
+    // Derived counterexample, not native geometry: nonempty rects alone must
+    // never classify a closed-details descendant as painted or reachable.
+    await page.reload({ waitUntil: 'networkidle' });
+    await link.evaluate(el => { el.getClientRects = () => [new DOMRect(0, 0, 1, 1)]; el.dataset.qaDerived = 'rect-only'; });
+    const derived = await keyboardProblems(page);
+    const derivedOmitted = await link.evaluate(el => el.getClientRects().length > 0 && !el.checkVisibility({visibilityProperty:true}) && !el.hasAttribute('data-qa-i') && el.dataset.qaDerived === 'rect-only');
+    check('self-test: derived rect-only visibility counterexample is excluded', !derived.length && derivedOmitted, JSON.stringify({derived, derivedOmitted}));
     await page.reload({ waitUntil: 'networkidle' });
     await closed.evaluate(d => { d.open = true; });
     const opened = await link.evaluate(el => el.checkVisibility({visibilityProperty:true}));
@@ -388,7 +396,7 @@ async function selfTest(browser, server, origin) {
     await closed.evaluate(d => { d.open = true; });
     await link.evaluate(el => { el.tabIndex = -1; el.textContent = 'QA unreachable details link'; });
     const broken = await keyboardProblems(page);
-    check('self-test: closed details omitted and opened links checked', initial.rects > 0 && !initial.visible && opened && !before.length && !after.length && broken.some(x=>x.includes('not reachable by Tab: a "QA unreachable details link"')), JSON.stringify({initial, opened, before, after, broken}));
+    check('self-test: native closed details omitted and opened links checked', !initial.visible && omitted && opened && !before.length && !after.length && broken.some(x=>x.includes('not reachable by Tab: a "QA unreachable details link"')), JSON.stringify({initial, omitted, opened, before, after, broken}));
     await context.close();
   }
   // An external font: the request must be seen and blocked.

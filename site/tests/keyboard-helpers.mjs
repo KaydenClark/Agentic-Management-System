@@ -1,6 +1,20 @@
 // Native keyboard reachability and visible-focus detector shared by browser checks.
 export async function keyboardProblems(page) {
-  await page.evaluate(() => { document.activeElement?.blur?.(); window.scrollTo(0, 0); });
+  const atStart = await page.evaluate(() => {
+    // Blurring a middle control preserves its sequential Tab starting point.
+    // Focus the document itself, restoring its original attribute immediately;
+    // native Tab then starts before the first control without reloading faults.
+    const body = document.body;
+    const original = body.getAttribute('tabindex');
+    body.setAttribute('tabindex', '-1');
+    body.focus({ preventScroll: true });
+    const focused = document.activeElement === body;
+    if (original === null) body.removeAttribute('tabindex');
+    else body.setAttribute('tabindex', original);
+    window.scrollTo(0, 0);
+    return focused;
+  });
+  if (!atStart) return ['could not establish document-start keyboard traversal'];
   const total = await page.evaluate(() => {
     const native = 'a[href], area[href], button, input:not([type="hidden"]), select, textarea, summary, iframe, audio[controls], video[controls], [contenteditable=""], [contenteditable="true"]';
     // Closed <details> descendants can retain client rects despite not being painted.
