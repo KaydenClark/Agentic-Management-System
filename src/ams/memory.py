@@ -1,4 +1,4 @@
-"""Read-only, navigation-first Wiki recall and explicit claim/source freshness.
+"""Navigation-first Wiki recall, source freshness and explicitly authorized consolidation.
 
 Markdown remains the knowledge owner. This module never follows reference bodies
 unless a claim explicitly marks a supported local source as reviewed public.
@@ -594,7 +594,13 @@ def main(argv=None):
     e = sub.add_parser('evaluate')
     e.add_argument('--cases', required=True)
     e.add_argument('--baseline')
-    for command in (q, c, e):
+    s = sub.add_parser('consolidate')
+    s.add_argument('--request')
+    s.add_argument('--plan')
+    s.add_argument('--apply', action='store_true')
+    s.add_argument('--authorize')
+    s.add_argument('--revisions')
+    for command in (q, c, e, s):
         command.add_argument('--json', action='store_true')
     args = parser.parse_args(argv)
     try:
@@ -602,6 +608,16 @@ def main(argv=None):
             result = query(args.project, args.query, limit=args.limit, max_chars=args.max_chars)
         elif args.command == 'check':
             result = check(args.project, _read_json(args.previous) if args.previous else None)
+        elif args.command == 'consolidate':
+            from .memory_consolidation import consolidation_plan, consolidation_apply
+            if args.apply:
+                if args.request or not args.plan or not args.revisions:
+                    raise MemoryError('invalid-consolidation-invocation')
+                result = consolidation_apply(args.project, _read_json(args.plan), args.authorize, _read_json(args.revisions))
+            else:
+                if not args.request or args.plan or args.authorize or args.revisions:
+                    raise MemoryError('invalid-consolidation-invocation')
+                result = consolidation_plan(args.project, _read_json(args.request))
         else:
             cases = _read_json(args.cases)
             baseline = _read_json(args.baseline) if args.baseline else None
@@ -616,4 +632,6 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
+    # Keep the public exception/helper identities when invoked with python -m.
+    sys.modules.setdefault('ams.memory', sys.modules[__name__])
     sys.exit(main())

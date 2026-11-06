@@ -32,3 +32,19 @@ Size: one correction and its affected explanation/route/synthesis path, includin
 ## Local preservation
 
 Claim originals:04fa67d. Workspace baseline sha256:75d82589cab0072970907a459a3788bfd732b01b249b2f9acb8079519c26800c is incomplete only for retained REBASE_HEAD residue; no path findings. Native snapshot is retained privately; no complete closeout/remote recovery claim. Publication remains held.
+
+## Stopped local implementation, 2026-11-05
+
+Implementor:High/OpenAI gpt-6.1-sol/Codex, codex-wiki-consolidation. Current unclosed candidate adds ams-memory consolidate read-only request/plan and explicit apply:<plan_id> plus revision acknowledgment. Agent supplies literal prose changes and classified evidence; native add/correct uses existing runtime after disposable preflight. Whole-plan target/source checks precede writes; local originals/journal retain mid-write recovery. Managed tools/shared skills unchanged.
+
+Actual TDD: absent command red → explicit-owner plan green; absent apply red → guarded two-target apply green; absent native adapter red → native correction/query green; unresolved evidence append red → green; omitted-owner red → first green attempt still failed. Earlier aggregate15 consolidation cases passed, covering stale/missing/private/symlink/changed-source refusal, unsupported targets, pending intent, inference labels and recoverable injected write failure. Later additions were only individually exercised. The original26 retrieval/baseline tests and expanded suite have NOT been rerun on this candidate.
+
+FAIL-127 was the first unexpected verification failure (explicit owner skipped during discovery; repaired). FAIL-128 is the second: omitted-owner ranking selects synthesis because section headings are absent from scoring; it then refuses for missing incoming link. STOP enforced immediately. No further repair, native validation, operational-doc adoption, aggregate QA, Task close, publication or acceptance. Existing-owner auto discovery, adversarial schema/privacy coverage and final checks remain unfinished. Root must not release TK-002W from this receipt.
+
+Native-correction fixture preserved original source, source JOT block, old observation and exact synthetic confirmed readback; current experimental correction/summary/query retained supersession. This is one synthetic public fixture, not owner QA or general correctness proof. Private evidence copies retain requests/plans/applied fixture and failure input. No source-publication authority is inferred.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Feature/S-000D-wiki-memory | be5dea8d35134c771aeaf915a5c0c66df060a125 | ahead 16 behind 0 | 5 | 15 consolidation cases passed before final additions; unresolved append targeted pass; owner-discovery first green failed; STOP FAIL-127/128; original26 not rerun | Task stopped-candidate evidence; operational docs not adopted | TK-002V incomplete: auto-owner discovery repair, expanded adversarial coverage, aggregate Check/QA/native validation and local closure pending authorized continuation; public export held | 2971f59fd9b503f0ca39880f17bf4cfac7bf5db50be86ba325cfa7806794f4db |
