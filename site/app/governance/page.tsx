@@ -9,7 +9,7 @@ function Diagram({ id, transitions, caption }: { id: string; transitions: Transi
       <ol className={styles.edges}>
         {transitions.map(({ from, to, action }) => (
           <li key={`${from}-${to}`}>
-            <span className={styles.pair}><strong>{from}</strong><span aria-label="to">→</span><strong>{to}</strong></span>
+            <span className={styles.pair}><strong>{from}</strong><span>→ to</span><strong>{to}</strong></span>
             <span>{action}.</span>
           </li>
         ))}
