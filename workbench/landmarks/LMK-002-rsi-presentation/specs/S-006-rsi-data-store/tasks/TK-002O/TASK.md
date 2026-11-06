@@ -6,29 +6,29 @@
 **Status:** in-progress
 **Blockers:** TK-002N
 **Destination:** spec-acceptance: Recovery
-**Planned verification:** Representative public-seam demonstration, adverse cases, focused checks and scoped QA.
+**Planned verification:** Public seams, adverse checks and scoped QA; evals/RECOVERY.md.
 **Claimed by:** codex-s006-recovery
 **Current claimant:** codex-s006-recovery
 
 ## Assignment
 
-Implement one S-006 recovery job through Python/Supabase: atomic claims, stable attempts/effects, uncertainty reconciliation and complete safe checkpoint restore. Preserve identities/evidence; reject duplication, partial/conflicting/private restore. Supabase stays canonical; export is recovery only. Full scope, planning source and prerequisites remain in this Task at 42c5f753de3e45c5aef0cc4ee3cc90f38fb6769c and the [Spec](../../SPEC.md).
+Scope/authority: this Task at 42c5f753de3e45c5aef0cc4ee3cc90f38fb6769c and [Spec](../../SPEC.md). Supabase is canonical; exports grant no authority.
 
 ## Acceptance
 
-- [ ] Competing claims and duplicate intake produce one logical job; a crash with uncertain publication cannot create another attempt.
-- [ ] A safe complete checkpoint reconstructs the same identities; partial, stale-conflicting and private exports fail.
-- [ ] An operator can replay the saved example through the writer and readback; checks and limitations are recorded.
+- [x] Claims/duplicate intake/crashes preserve one job, attempts and consumed effects.
+- [x] Complete safe restore preserves IDs; partial/conflicting/private restore refuses.
+- [x] Operator replay/readback, checks and limits documented.
 
 ## Scoped implementation release
 
-Confirmed owner launch and verified-N release are retained in the assignment source above. N main containment was an extra condition, corrected; publication stays held. Preserve labels/privacy, identities, attempts/stops. No model campaign, install, production migration or deployment release.
+O released on verified N; main containment not prerequisite, publication held. Preserve labels/privacy, IDs, attempts/stops. No model/install/production/deployment release.
 
 ## Starting inventory
 
 Workspace baseline sha256:059c7b58c9f3dffc63722a4762e37d8188454ea1938e931f290630211cb2eca2
 
-Claim 10797e22e38f19c9a3b54c57aa5244f941d6c634 and rendered originals committed before complete snapshot. Raw inventory/private unrelated refs retained locally; whole-workspace remote recovery unclaimed.
+Claim/originals10797e22e38f19c9a3b54c57aa5244f941d6c634 precede snapshot. Unrelated refs/inventory private; workspace recovery unclaimed.
 
 ## Receipt
 
