@@ -19,6 +19,14 @@ owns this non-blocking check. The [RSI release graph](rsi-task-release.md) retai
 all producer and assembly gates. This detects bounded observable mismatches;
 it supplies no general semantic grader, repair, scheduler or adoption authority.
 
+## Open post-merge correction
+
+PR182 review at `b932ba0` found a rename scope/Prepare bypass and a concurrent
+native-use publication race. Do not rely on those affected protections until
+[TK-001A](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-013-coherence-checks/tasks/TK-001A/TASK.md)
+reproduces, repairs and delivers them through the required gates. Earlier
+checks and Task closure remain historical evidence, not coverage of these cases.
+
 ## Replay before relying on it
 
 From the project root:
