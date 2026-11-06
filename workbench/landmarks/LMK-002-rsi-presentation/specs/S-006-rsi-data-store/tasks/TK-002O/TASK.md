@@ -4,7 +4,7 @@
 **Spec ID:** S-006
 **Slice:** A worker recovers one job and exports a safe checkpoint
 **Status:** blocked
-**Blockers:** owner:feedback-loop-implementation, TK-002N
+**Blockers:** TK-002N
 **Destination:** spec-acceptance: Recovery
 **Planned verification:** Representative public-seam demonstration, adverse cases, focused checks and scoped QA.
 
@@ -19,3 +19,7 @@ Planning source: owner RSI Map/Plan request of 2026-11-04 and mapped base 8319e8
 - [ ] Competing claims and duplicate intake produce one logical job; a crash with uncertain publication cannot create another attempt.
 - [ ] A safe complete checkpoint reconstructs the same identities; partial, stale-conflicting and private exports fail.
 - [ ] An operator can replay the saved example through the writer and readback; checks and limitations are recorded.
+
+## Scoped implementation release
+
+On 2026-11-05 the owner explicitly requested this implementation under orchestrate/carry and confirmed the readback. Start with an isolated test namespace; preserve synthetic labels, privacy, original identities and stopped campaigns. This releases owner:feedback-loop-implementation only for this Task. Verified TK-002N remains a prerequisite. No model campaign, installation or production promotion is released.

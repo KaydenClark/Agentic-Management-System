@@ -3,8 +3,8 @@
 **Task ID:** TK-002N
 **Spec ID:** S-006
 **Slice:** A worker saves and reads one linked improvement record
-**Status:** blocked
-**Blockers:** owner:feedback-loop-implementation
+**Status:** ready
+**Blockers:** none
 **Destination:** spec-acceptance: Lifecycle lineage
 **Planned verification:** Representative public-seam demonstration, adverse cases, focused checks and scoped QA.
 
@@ -19,3 +19,7 @@ Planning source: owner RSI Map/Plan request of 2026-11-04 and mapped base 8319e8
 - [ ] A caller writes and reads back one complete linked safe lineage with original IDs and pins; orphaned or conflicting records fail.
 - [ ] Private/raw evidence and privileged operations are inaccessible to the presentation role; outage is not reported as publication.
 - [ ] Focused checks and scoped QA prove the public seam; the exact revision and limits are handed back.
+
+## Scoped implementation release
+
+On 2026-11-05 the owner explicitly requested this implementation under orchestrate/carry and confirmed the readback. Start with an isolated test namespace; preserve synthetic labels, privacy, original identities and stopped campaigns. This releases owner:feedback-loop-implementation only for this Task. No model campaign, installation or production promotion is released.

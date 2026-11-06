@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-The [owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes Map/Plan preparation; implementation and trial holds remain.
+The [Stage A owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorized preparation only. On 2026-11-05 the owner explicitly launched TK-002N/TK-002O implementation, starting with an isolated test namespace, and confirmed the execution readback. This releases only their implementation hold; O still requires verified N. Model campaigns, installation, stopped campaigns and production promotion retain their separate gates.
 
 The owner decided that Python pushes RSI results to Supabase as they arrive and the site reads from it; everything the site shows, build history included, lives there. Token counts go with the RSI data. The service key stays in the gitignored local environment; the site receives only its publishable key.
 
@@ -61,7 +61,7 @@ Build history is incomplete: the approved pinned import at 771bd1e passed, but l
 
 ## Vertical Implementation Slices
 
-[TK-002N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md); implementation held.
+[TK-002N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md); N released for isolated lineage implementation, O waits for verified N.
 
 | Task | Slice | Status | Blockers | Proof |
 |---|---|---|---|---|
