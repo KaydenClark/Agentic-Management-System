@@ -8,58 +8,38 @@
 **Destination:** spec-acceptance: Every page covered
 **Planned verification:** pytest against a fixture page list and built pages in a temporary Git repository; live run against origin/dev
 
+
 ## Assignment
 
-**Target branch:** `main`. Branch from `origin/main`, open a PR into `main` and merge it once current and checked, per `AGENTS.md`. Nothing in `site/` changes; the site is only read.
-**Claimed by:** codex-s005-pages
-**Current claimant:** codex-s005-pages
+Target checked `main` via PR174; S-003 owns read-only site inputs. Preserve claimant, failures/receipts and unrelated work. [Full earlier assignment/checkpoint](https://github.com/KaydenClark/Agentic-Management-System/blob/7eedef9b76a3fa41f3cd0183492cef36cdebc914/workbench/landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/tasks/TK-001/TASK.md); S-005 links current confirmed authority.
 
-Start from a clean clone. Read `AGENTS.md`, this Task, the parent Spec (`../../SPEC.md`, its Decisions), `grill-board/README.md`, `grill-board/card-example.md`, DDR-000X, ADR-002U and the board code in `src/ams/grill_board/` (`cards.py`, `answers.py`: `repository_lock`, `_write_and_commit`). Read the page list with `git fetch origin dev && git show origin/dev:site/page-list.json`; orchestrator A is its only writer and `path` is stable.
+Deliver `ams-pages generate`:
 
-Owner intent, relayed by orchestrator B on 2026-11-01: every website page gets a Grill Board review card so the owner can approve or criticize the whole site there.
+1. Freeze one trusted candidate SHA and export only its Git tree to owned temporary storage. Build/start through supported permissions; collect actual complete routes/served HTML. Historical `landed.commit` is provenance only. Injectable fixture evidence is labeled synthetic, not live proof.
+2. Require explicit Spec/Task/landed ownership for every public surface, including all skill articles and visitor404. Distinguish internal global-error. Ref drift, missing/list-only owners and execution failure refuse before writes. Never invent provenance.
+3. Candidate execution receives no private HOME context or service/provider/Git credentials. Own runtime cleanup through interruption; preserve unrelated files/processes.
+4. SHA-256 canonical `<main id="main">`: exclude footer, script/style/comments and review-mark/exclude subtrees; retain decoded text and href/src/alt in source order; join/collapse ASCII whitespace. Preserve S-003 parity using README contract and `tests/fixtures/grill_board/pages/` vectors.
+5. One current card per route/hash, `grill-board/pages/index.json` (path/title/landed/hash/card/candidate), and `grill-board/page-approvals.md` anchor `## Approvals`. Cards carry Topic, Priority/Value reasons, page/title/hash/candidate, landed provenance, Spec/Task/sources, recommendation and owner/write anchor. Only generated owners commit, through Board flock/CAS. Dirty/unsafe paths or conflicts leave no partial write; identical reruns make no commit.
+6. Content edits create a new card and append dated stale/supersession without rewriting answered/history bytes. Footer-only edits do not invalidate content. Removed routes leave no actionable card; returning content gets a fresh occurrence. Stale cards leave the queue and refuse writes. Keep existing Board behavior and public privacy intact.
 
-Deliver `uv run ams-pages generate` (a new script in `pyproject.toml`):
-
-1. **Read one current candidate.** Pin the current website review/deployment candidate and reconcile its complete built public-route inventory with `site/page-list.json`, including every skills article. Hash the served HTML from that one frozen build, including its current shared shell. `landed.commit` remains provenance; it must never select historical content for a current approval. A route present in only the list or only the build refuses without writing. The build/HTML seam is injectable for safe synthetic fixtures; actual current-build and protected-deployment evidence remain required.
-
-2. **Hash.** Content hash = `sha256:` + SHA-256 hex of the canonical content of `<main id="main">`: drop `script` and `style` and any subtree carrying `data-review-mark` or `data-review-exclude`; join text nodes and `href`, `src` and `alt` values in document order; collapse whitespace to single spaces and trim; encode UTF-8. The footer's commit SHA is outside `<main>`, so a rebuild alone never changes a hash. Commit the contract in `grill-board/README.md` and test vectors (HTML plus expected hash) under `tests/fixtures/grill_board/pages/`, so S-003 TK-004 can match them.
-3. **Cards.** One card per page and hash, `grill-board/cards/page-SLUG-HASH12.md` (`/` is `home`). Header: `Topic: Website pages`; Priority and Value with one-line reasons (DDR-000K); `Page`, `Title`, `Content hash`, `Landed` (branch, commit, PR), `Spec`, `Task`; `Recommendation: Approve page PATH (TITLE) at content hash HASH.`; `Owner record: grill-board/page-approvals.md`; `Write after: ## Approvals`. Context names the sources and the page's path on the protected `dev` deployment. Create `grill-board/page-approvals.md` with that anchor if absent, so Confirm works through the S-004 path.
-4. **Index.** `grill-board/pages/index.json` holds, per listed path, the title, landed commit, hash and current card name.
-5. **Stale.** When a page's hash changes, write the new card and append `## Stale` (`**Superseded by:** NAME`, `**Stale since:**` in UTC) to the previous card. Never edit or remove an existing section; answered history stays byte-for-byte. The board lists stale cards outside the queue and refuses to answer them.
-6. **Idempotent.** A rerun with no change writes nothing and makes no commit. A change is one commit of cards, index and approvals record through the board's lock and compare-and-swap, subject `Grill Board: page cards for N pages`.
-
-Out of scope: approval readback and stale-confirm refusal hardening (TK-002); the voice record (TK-003); the coverage check (TK-000K); any `site/` change. If a page needs a `data-review-exclude` region (live data on `/rsi`), ask orchestrator A; do not edit `site/`.
-
-Hand back to S-005 with `close`.
+No site edits/live Board writes in another checkout. TK-002 approval readback/hardening, TK-003 criticism, TK-000K coverage CLI and TK-001E draft/review consumption remain separate. No Supabase approval rows, public review status or private criticism. Coordinate complete metadata with S-003. Close only after actual acceptance/checks/delivery.
 
 ## Acceptance
 
-- [ ] In a temporary Git repository with a fixture page list of two pages and injected HTML, `generate` writes exactly one card per page, each naming the hash the test vectors predict, plus the index and approvals record, in one commit.
-- [ ] A second run with the same input writes nothing and makes no commit.
-- [ ] Changing one character inside a fixture page's `<main>` writes a new card for the new hash and appends `## Stale` to the old one; changing only the footer SHA changes no hash.
-- [ ] Must fail: a run that rewrites any existing section of an answered card, or a page with no card after a run, fails the test.
-- [ ] The board lists a stale card outside the queue and refuses an answer to it, writing nothing.
-- [ ] Live: against one identified current built candidate, the complete route set (including the skills index and every article) has cards shown under "Website pages"; missing page-list/built coverage refuses.
-- [ ] `uv run pytest` passes; render and doctor show no blocking finding.
+- [ ] Complete owned build produces correct cards/index/approval anchor in one commit; identical rerun is a no-op.
+- [ ] Independent hash vectors, edit/footer staleness, immutable answered history and stale-write refusal pass.
+- [ ] New/missing/removed routes, ref drift, dirty/unsafe paths and execution errors are handled without invented ownership, partial writes or unrelated changes.
+- [ ] Actual runtime/interruption cleanup and private-context isolation are proved.
+- [ ] Actual pinned build covers every skill article and visitor404 with cards and live Board readback.
+- [ ] Required pytest/render/doctor and repository/current-candidate checks pass; unavailable checks named.
 
-## Starting preservation
+## Preservation and progress
 
 Workspace baseline sha256:81dd8dfc83cf2aaa52dcbc6b763823137fe82ede9d053bb84a22225d4f2feb2d
 
-The original claim-state bytes are committed before this inventory. Raw local inventory stays outside the checkout; local retention is not claimed as remote recovery.
+Claim originals preceded the complete private inventory; separate binding preceded work. Local raw retention is not remote recovery.
 
-## Stopped implementation checkpoint
-
-Current source is incomplete and unaccepted. The initial missing-module red was expected. Existing Board tests passed 115/115 before product changes, with approved loopback sockets; the first sandbox baseline failed at socket binding (97 failed/18 passed), an environment limitation rather than a product finding.
-
-Two later verification failures triggered the RUNBOOK stop:
-
-1. Generator creation initially failed because the existing compare-and-swap index writer did not pass `git update-index --add` for newly created files. That defect was corrected before the next run.
-2. The next `tests/test_pages.py -xq` run passed generation/idempotency but failed the stale answered-card diagnostic assertion: expected `stale`, received `already answered` from the existing earlier answer check. Refusal still occurs; the stale-specific requirement and regression evidence remain unresolved. No further product correction or test retry followed.
-
-Implemented seam at the stopped source: `ams.pages.generate(root, inventory, built_html_by_route, candidate=SHA)` compares the exact list/build route sets, hashes the current injected HTML, generates cards/index/approval anchor through the Board lock/CAS, appends stale history, and makes identical reruns a no-op. `landed.commit` is retained separately. CLI accepts `--inventory FILE --built-html FILE --candidate SHA`; these are explicit frozen build artifacts, not proof of an actual build. Automatic pinned-build collection, live current-candidate coverage, remaining new tests, post-change Board regression tests and required full checks are unperformed.
-
-Required scoped continuation: inspect the stopped diagnostic failure and source before correction, preserve both failed runs, finish the real current-build collector/integration, then run the unchanged behavioral and regression gates. A new Task name does not erase this stop. No approval, criticism consumption, Human QA, Supabase path or delivery is claimed.
+Both failures remain below: missing CAS `--add`, then stale diagnostic masked by answered handling. Root inspected/released same-Task correction;119 focused checks passed. No attempt reset or new owner gate. At df2333b, frozen export/owner refusal/actual SIGINT cleanup fixtures pass3/3; sandbox ps refusal was resolved by approved observation. Container/live coverage, full checks, Review and Human QA remain; other Tasks unopened.
 
 ## Receipt
 
@@ -67,11 +47,3 @@ Required scoped continuation: inspect the stopped diagnostic failure and source 
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-005-page-review-cards | 1d4defb14d891e73ac0c3ef0200f3f56fbf71783 | none | 0 | STOPPED source 1d4defb. Before product edits: 115 Board tests passed after approved loopback rerun; initial sandbox run failed socket.bind (97 failed,18 passed). Expected missing-module red retained separately. Post-implementation tests/test_pages.py -xq first failed new-file CAS missing --add; corrected. Second run:1 passed,1 failed, stale answered-card refusal reported already answered instead of stale. No further correction/retry. | S-005 confirmed current-build and committed-only approval contracts; TK-001 stopped checkpoint; Board README and S-005 history. No site edits. | RUNBOOK verification stop: generator incomplete and not mergeable. Scoped release required before correction/retry. Automatic pinned-current-build collector, actual full route coverage, unrun new cases and post-change Board/full checks remain. TK-002/TK-003/coverage/feedback consumption unopened. No close, Human QA, public approval mirror or acceptance. | 32d09afc9162864eb71826644723aa9e03f0b72719fbdb6f92e4e52228567ab4 |
 | 2 | Feature/S-005-page-review-cards | ce15fb2ab430c243cad23ae3c408451e4d0e2e21 | ahead 0 behind 0 | 1 | Source ce15fb2 product bytes: tests/test_pages.py plus existing test_grill_board.py/test_grill_board_answers.py/test_grill_board_ratings.py pass119/119 in86.85s with PYTHONPATH=src and approved loopback. git diff --check passes. Both prior failed runs and first receipt retained. Root inspected and authorized one early stale refusal under standing user scope; no campaign/attempt reset. | S-005 current-build contract and incomplete collector; TK-001 inspected correction; Board README. Prior failed Receipt unchanged. | TK001 incomplete: automatic pinned-current-build collection and live full inventory/card readback pending. Full repository/fresh candidate/shared CI/independent Review unperformed. Other S005 Tasks unopened. No new owner approval gate; next bounded assignment belongs to orchestrator. No Human QA or delivery acceptance. | af6254d52dafbd24a825e3bd5208a6a5d4561eebb4e7a5c2978db60c23c118b8 |
-
-## Inspected same-Task correction
-
-The orchestrator inspected both failures, confirmed that RUNBOOK requires stopping/reporting rather than a new owner approval, and released one bounded continuation under the standing implementation scope. No new claim, Task, campaign or attempt reset was used. An early stale check in `_answer` now produces the explicit refusal before the existing already-answered check; `_checked_card` retains its protection for other callers. Earlier failures and native receipt are unchanged.
-
-`python -m pytest tests/test_pages.py tests/test_grill_board.py tests/test_grill_board_answers.py tests/test_grill_board_ratings.py -xq` with `PYTHONPATH=src` and approved loopback permissions passes **119/119 in 86.85 seconds**. This covers the four new current-content generation, idempotency, append-only supersession, dirty/coverage refusal and hash-vector checks plus 115 existing Board tests. The private original output log is retained outside the checkout. `git diff --check` passes. No full repository, fresh candidate, live build/deployment or Human QA acceptance is asserted.
-
-TK-001 remains incomplete: the CLI currently requires injected frozen inventory/HTML artifacts. Automatic collection from a pinned current build and real complete route/card coverage still need implementation and verification. TK-002 approval status/guard hardening, TK-003 versioned criticism and TK-001E draft/review consumption have not been started. Next action belongs to the S-005 orchestrator; there is no newly invented owner-approval gate.
