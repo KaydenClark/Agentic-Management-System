@@ -1,0 +1,175 @@
+{
+  "schema": "landmark-tracker/destination-question@3",
+  "id": "DQC-000C",
+  "revision": 4,
+  "title": "Question and answer flow",
+  "question": "How do question readbacks and owner answers stay connected?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+      "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [
+    {
+      "type": "dqc",
+      "id": "DQC-000A",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    },
+    {
+      "type": "spec",
+      "id": "S-004",
+      "revision": null,
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "assessment": null
+    }
+  ],
+  "claims": [],
+  "origin": {
+    "title": "Question and answer flow",
+    "question": "How do question readbacks and owner answers stay connected?",
+    "sources": [
+      {
+        "id": "workbench/wiki/context-grilling-board.md#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba",
+        "revision": "aa2467c181989e5ff58d14687e39bea57083d7d3"
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-04T03:56:18.846Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-04T03:56:18.846Z",
+      "reason": "Recover the four original interview branches from sourced intent, dated 2026-11-03; captured now after supported setup.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    },
+    {
+      "revision": 2,
+      "at": "2026-11-04T03:56:20.151Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "dqc",
+            "id": "DQC-000A",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-04T03:56:20.309Z",
+      "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "spec",
+            "id": "S-004",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 4,
+      "at": "2026-11-04T03:56:22.806Z",
+      "reason": "DQC propose",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "pending",
+            "proposal": {
+              "readback": "**Summary**\n\nEach Board card projects a stable DQC and its full proposed readback. Confirmations bind exactly displayed content; correction and quality feedback preserve owner words.\n\n**The why**\n\nChat and Board actions must reach the same owning records.\n\n**The intended result**\n\nThis branch covers the settled flow in DQC-000A, preserving pending revision and confirmation boundaries. It is agent context.\n\n**What I will do**\n\nUse the supported native lifecycle and retain source/history; request no reconfirmation of this derived summary.",
+              "why": "Coverage context from the exact confirmed concept, not a new owner question.",
+              "source": "Derived source-linked branch context from DQC-000A; workbench/wiki/context-grilling-board.md@aa2467c181989e5ff58d14687e39bea57083d7d3#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba; Kayden direct confirmation, 2026-11-03",
+              "scope": "Agent coverage context for the already confirmed DQC-000A; no new owner decision or authorization.",
+              "round": "ams-concept-20261103",
+              "priority": {
+                "value": 1,
+                "reason": "Current confirmed lifecycle implementation and recovery."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Connect owner intent with its actual execution and retained evidence."
+              },
+              "dependencies": [
+                "DQC-000A"
+              ],
+              "actionable": false
+            },
+            "digest": "b4d9366837addf594c2940e17dbcc855154c91249112dd91f3091b86230c93ed",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "ams-seed-20261103-DQC-000C-propose",
+                "type": "propose",
+                "at": "2026-11-04T03:56:22.806Z",
+                "requestDigest": "0c631d5ff174f311381a02f48b795e0150a677246acda1d295920575cd146b34",
+                "source": null,
+                "note": null,
+                "revision": 4,
+                "round": "ams-concept-20261103"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "lifecycle": {
+    "state": "pending",
+    "proposal": {
+      "readback": "**Summary**\n\nEach Board card projects a stable DQC and its full proposed readback. Confirmations bind exactly displayed content; correction and quality feedback preserve owner words.\n\n**The why**\n\nChat and Board actions must reach the same owning records.\n\n**The intended result**\n\nThis branch covers the settled flow in DQC-000A, preserving pending revision and confirmation boundaries. It is agent context.\n\n**What I will do**\n\nUse the supported native lifecycle and retain source/history; request no reconfirmation of this derived summary.",
+      "why": "Coverage context from the exact confirmed concept, not a new owner question.",
+      "source": "Derived source-linked branch context from DQC-000A; workbench/wiki/context-grilling-board.md@aa2467c181989e5ff58d14687e39bea57083d7d3#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba; Kayden direct confirmation, 2026-11-03",
+      "scope": "Agent coverage context for the already confirmed DQC-000A; no new owner decision or authorization.",
+      "round": "ams-concept-20261103",
+      "priority": {
+        "value": 1,
+        "reason": "Current confirmed lifecycle implementation and recovery."
+      },
+      "value": {
+        "value": 1,
+        "reason": "Connect owner intent with its actual execution and retained evidence."
+      },
+      "dependencies": [
+        "DQC-000A"
+      ],
+      "actionable": false
+    },
+    "digest": "b4d9366837addf594c2940e17dbcc855154c91249112dd91f3091b86230c93ed",
+    "confirmations": [],
+    "events": [
+      {
+        "eventId": "ams-seed-20261103-DQC-000C-propose",
+        "type": "propose",
+        "at": "2026-11-04T03:56:22.806Z",
+        "requestDigest": "0c631d5ff174f311381a02f48b795e0150a677246acda1d295920575cd146b34",
+        "source": null,
+        "note": null,
+        "revision": 4,
+        "round": "ams-concept-20261103"
+      }
+    ]
+  }
+}

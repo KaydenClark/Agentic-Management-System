@@ -80,5 +80,13 @@
     "errors": "node workbench/tools/spec-workbench.mjs doctor --json; git status --porcelain",
     "journey": "[JOURNEY_COMMAND]",
     "measure": "[MEASURE_COMMAND]"
+  },
+  "landmarkTracker": {
+    "root": "workbench/landmark-tracker",
+    "collections": {
+      "destination-questions": "workbench/landmark-tracker/destination-questions",
+      "landmarks": "workbench/landmark-tracker/landmarks"
+    },
+    "markdown": "TRACKER.md"
   }
 }

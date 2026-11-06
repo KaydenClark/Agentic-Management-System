@@ -2,6 +2,12 @@
 
 > AMS template adapted from LLM_Workbench `templates/feedback/REPORT_FORMAT.md` at `227d7c2a3ca0`. This is a starting format, not evidence of installed software, approved AMS policy, or completed work.
 
+Every failure, including each failed retry, must first have a stable entry in
+[the canonical failure log](WORKBENCH_FEEDBACK.md), with failed model tier,
+provider, actual model/harness, activity, observed failure and correct outcome.
+Reference its `FAIL-NNN` ID in any detailed report; reports provide supporting
+evidence and never replace central logging. Record unknown metadata explicitly.
+
 A report is an evidence-backed assessment of an assigned harness target. Store
 it at an explicitly supplied destination when an independent review application
 owns the evidence; otherwise use `workbench/feedback/`, with a descriptive name such as
@@ -95,9 +101,9 @@ failing assumption and separate environmental limits from causal findings.
 One finding may have several observations and recurrences. Preserve each
 observation's target revision, scope and state. `not-retested` is not `resolved`;
 closing a finding requires the relevant correction and verification. Existing
-report keys disambiguate occurrences; they do not implement a central longitudinal
-finding store. Independent review applications may own that store; this portable
-format keeps a standalone destination and imposes no service prerequisite.
+report keys disambiguate occurrences; the [canonical Markdown failure log](WORKBENCH_FEEDBACK.md) owns central failure
+intake. Assessment ledgers retain their own evidence and denominators; no service
+is required for failure capture.
 
 Evidence source state is separate from execution outcome: name fresh, stale,
 unavailable, malformed, inaccessible or user-reported material, including its

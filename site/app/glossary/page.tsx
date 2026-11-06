@@ -35,6 +35,16 @@ function Inline({ md }: { md: string }) {
 const groups = glossary.sections.flatMap(section => section.groups);
 const terms = groups.flatMap(group => group.terms);
 const termById = new Map(terms.map(term => [term.id, term]));
+const explainedTermIds = new Set([
+  "ams", "intent", "workbench", "rsi-loop", "improvement-attempt",
+  "alignment-assessment", "alignment-score", "fitness-level",
+  "implementation-task", "evaluation-task", "review-receipt", "human-qa-receipt",
+  "evidence-audit", "improvement-record", "diagnostic", "test", "repaired", "declined", "accepted-open",
+]);
+const explainedGroupIds = new Set(["group-ams", "group-records", "group-feedback-dispositions"]);
+const additionalGroups = groups
+  .map(group => ({ ...group, terms: group.terms.filter(term => !explainedTermIds.has(term.id)) }))
+  .filter(group => group.terms.length > 0);
 
 function Definitions({ ids }: { ids: string[] }) {
   return (
@@ -179,6 +189,15 @@ export default function Glossary() {
         <ContextLink href="/rsi">Explore the RSI evidence</ContextLink>
         <ContextLink href="/how-it-works#governance">Back to how it works</ContextLink>
       </section>
+      {additionalGroups.map(group => {
+        const headingId = explainedGroupIds.has(group.id) ? `${group.id}-additional` : group.id;
+        return (
+          <section key={group.id} className={styles.section} aria-labelledby={headingId}>
+            <h2 id={headingId}>{explainedGroupIds.has(group.id) ? `More ${group.heading.toLowerCase()}` : group.heading}</h2>
+            <Definitions ids={group.terms.map(term => term.id)} />
+          </section>
+        );
+      })}
       <p className={styles.source}><Inline md={glossary.intro} /> Definitions are copied from the project glossary.
         <Source path="GLOSSARY.md">GLOSSARY.md</Source></p>
     </div>

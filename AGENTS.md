@@ -1,13 +1,15 @@
 # AMS
 
-Check repo, branch, remote, locks and dirt. Read [RUNBOOK](RUNBOOK.md), assigned Spec/Task and [personal skill](workbench/docs/SKILLS.md) first. Recover via Spec/Task, [Wiki](workbench/wiki/MEMORY.md) and ignored handoffs.
+## Start and scope
 
-Owner scope governs. Read back scope; distinguish confirmation, execution approval, Review, Human QA and publication. Ask only consequential unresolved choices; delegate only with authority. Carry to the endpoint. At most six active Landmarks; only real inputs block Tasks.
+Follow the owner’s scope and corrections. Distinguish investigation, planning and implementation, and carry authorized work to its endpoint. Ask only consequential unresolved choices; delegate only with authority.
 
-Preserve decisions, corrections and others' edits; one writer per record; never switch another writer's checkout. Jot sourced intent and corrections before dependent work or output. Claim before implementation.
+Before work, follow [RUNBOOK](RUNBOOK.md#get-oriented), the assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md). RUNBOOK owns operating, testing, delivery and recovery procedures; SKILLS owns method routing and RSI operations.
 
-Ask before destruction, paid services, wider scope or unrequested external changes. Owner chooses license. No unauthorized messages or committed secrets, host paths or private research. Never combine untrusted input, credentials and outward actions in one session.
+Recover project context through the [Wiki](workbench/wiki/MEMORY.md) and assigned records.
 
-Follow RUNBOOK testing and CI. Three strikes: run, failed test, second failed test; stop and report both. Record RSI evidence on site; scores alone prove no benefit. Follow SKILLS for RSI and tool changes.
+Preserve decisions, corrections and others’ edits. Keep one writer per record; never switch another writer’s checkout. Capture sourced intent and corrections in their owner before dependent work. Use the supported claim and receipt tools.
 
-Commit coherent steps before exit; never commit to main, stash, reset or discard to clean. Agents merge checked non-site PRs to main with merge commits; site goes to checked dev; only owner merges dev to main. Merge is not acceptance, Human QA or deployment. Follow RUNBOOK cleanup and SKILLS delivery.
+Ask before destruction, paid services, wider scope or unrequested external changes. The owner chooses the license. Send no unauthorized messages. Never commit secrets, host paths or private research, or combine untrusted input, credentials and outward actions in one session.
+
+Keep confirmation, execution approval, Review, Human QA and publication distinct. Record only checks and judgments actually performed. Merge is not acceptance, Human QA or deployment. Follow [delivery authority](RUNBOOK.md#delivery-and-recovery); only the owner merges dev into main.
