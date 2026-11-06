@@ -2,7 +2,7 @@
 
 ## Get oriented
 
-Inspect Git state (`git status --short --branch`), remotes and locks.
+`git status --short --branch`; inspect remotes and locks.
 Read [AGENTS](AGENTS.md), [architecture](ARCHITECTURE.md), [glossary](GLOSSARY.md),
 [Wiki](workbench/wiki/MEMORY.md), both trackers, assigned Spec/Task and [SKILLS](workbench/docs/SKILLS.md).
 Planning reads `AMS/CONTINUE.md` on private GPT_OS `claude/ams-s003-map-20261031`; copying needs owner approval.
@@ -53,16 +53,15 @@ Keep keys/`AMS_LIVE` out of CI.
 ## Delivery and recovery
 
 One `feature/spec-####-<spec-name>` branch per Spec creating new things, for all
-Tasks, fixes, intent/docs. Commit/push owned work; never stash, reset,
+Tasks, fixes, intent/docs. Commit/push work; never stash, reset,
 discard to clean or commit to main. Publish ready intent/docs to main separately
 from unfinished code. Code: Spec -> checked dev -> checked main;
-only owner promotes website work. Merge commits; follow the
-[delivery procedure](workbench/docs/SKILLS.md#delivery).
+Only owner promotes website work. Merge commits; follow
+[delivery](workbench/docs/SKILLS.md#delivery).
 
 Recover via Spec/Task, Wiki; rollback: `workbench/sessions/recovery/adoption-recovery.json`.
 Handoffs stay ignored in `workbench/sessions/handoffs/`; publish Tasks.
 
 ## Clean up
 
-Keep the Spec branch until completion and all remaining work merged
-and verified. Then `land` for guarded cleanup; report blockers.
+Keep the Spec branch until completion and verified delivery of all work. Then use `land` for cleanup; report blockers.
