@@ -28,3 +28,7 @@ Size: one correction and its affected explanation/route/synthesis path, includin
 - [ ] Original evidence, historical native entries and exact owner confirmations match baseline bytes; no source mutation, inferred confirmation, automatic verified timestamp, pending-intent override or duplicate topic occurs.
 - [ ] Repeated observations yield only evidence-linked bounded lessons; unresolved contradictory evidence remains visible in plan and readback. Unsupported/absent source claims cannot become current certainty.
 - [ ] Public CLI/adversarial tests, existing retrieval/change checks, implementor Check/QA and native Wiki validation pass; procedure documents the actual operation and explicit authority/revision boundary.
+
+## Local preservation
+
+Claim originals:04fa67d. Workspace baseline sha256:75d82589cab0072970907a459a3788bfd732b01b249b2f9acb8079519c26800c is incomplete only for retained REBASE_HEAD residue; no path findings. Native snapshot is retained privately; no complete closeout/remote recovery claim. Publication remains held.
