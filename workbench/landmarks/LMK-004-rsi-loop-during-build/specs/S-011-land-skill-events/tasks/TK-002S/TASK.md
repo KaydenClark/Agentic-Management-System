@@ -16,7 +16,7 @@ The [item 7 instruction](../../../../../../wiki/context-feedback-improvement-loo
 
 ### One in-progress ordinary-use observation, 2026-11-06
 
-Observe root's authorized S-007/TK-001F coordination, candidate inspection and checked dev delivery on `Feature/S-007-rsi-chart-pages`. [Pinned F software/Task](https://github.com/KaydenClark/Agentic-Management-System/blob/f641cd89b9dd3a3d56dcdcdef0f720785322ad58/workbench/landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-001F/TASK.md) is in-progress under `codex-s007-public-evidence`. Root reports bounded correction PASS; full/fresh/browser checks are pending. Preserve that writer's checkout, claim and lane.
+Observe root's authorized S-007/TK-001F coordination, candidate inspection and checked dev delivery on `Feature/S-007-rsi-chart-pages`. [Pinned F software/Task](https://github.com/KaydenClark/Agentic-Management-System/blob/f641cd89b9dd3a3d56dcdcdef0f720785322ad58/workbench/landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-001F/TASK.md) is in-progress under `codex-s007-public-evidence`. At enrollment root reported independent software PASS/345 site passes, but browser293/294 held on375px noJS navigation. Preserve earlier e2/harness281/293 separately and that writer's checkout, claim and lane.
 
 Selection is after development results were seen: ordinary in-progress use, not held-out qualification/benefit experimentation. Prior eligible denominator and full active/human effort are unknown. Enroll one window from root release/first inventory to verified delivery/protected readback or bounded handoff. Record UTC start/end and elapsed window, not total work time. Bind each decision/check to its actual immutable F revision if it advances.
 
