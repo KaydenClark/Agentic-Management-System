@@ -3,11 +3,13 @@
 **Task ID:** TK-001
 **Spec ID:** S-010
 **Slice:** Task lifecycle diagram generated from the code's status set, with a drift test, on `dev`
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: S-010 Acceptance Criteria
 
 **Planned verification:** Compare states and transitions with the current native runtime; prove unknown and omitted states and edges fail; build the site before site tests; inspect 375 px and desktop in both themes with JavaScript disabled.
+**Claimed by:** codex-governance-charts
+**Current claimant:** codex-governance-charts
 
 ## Assignment
 

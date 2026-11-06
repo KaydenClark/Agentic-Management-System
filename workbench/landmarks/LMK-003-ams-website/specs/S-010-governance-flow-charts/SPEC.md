@@ -5,12 +5,12 @@
 **Priority:** 3
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-01
+**Updated:** 2026-11-06
 **Catalog description:** Site pages explaining the governance stack and drawing the AMS workflows as diagrams that match the code they depict.
 **Blockers:** S-003 site shell content exists at checked dev commit `259b7a905639cc6ab621220b160fc813c5bc43f1`; whole-Spec completion remains separate.
 **Confirmation:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
 **Execution approval:** [JOT-8634622a-512b-44d9-9b99-0f973c450356](../../../../wiki/context-website-presentation.md)
-**Next gate:** Convert and claim the first bounded Task; independent Review and Human QA remain open.
+**Next gate:** Close TK-001 with verification and documentation proof.
 
 ## Intent and authority
 
