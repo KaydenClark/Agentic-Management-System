@@ -34,26 +34,26 @@ Workspace baseline sha256:42d67e833329f5edfc4481777be79a12be8c44bfd133024e523c26
 
 ## Conflict dispositions
 
-| Owner/path | Resolution and reason |
+| Owner/path | Ownership/chronology resolution |
 |---|---|
-| AGENTS, RUNBOOK, SKILLS | Preserve main's later policy relocation and RSI/delivery routes. Exception: remove stale RUNBOOK planning pointer per preserved [JOT-b66f8d31](../../../../../../wiki/context-owner-answers-coherence.md#jot-b66f8d31-3731-4017-8502-dd54c9eba23e); continuation belongs in Workbench records/ignored handoffs. |
-| ARCHITECTURE | Preserve main's later ownership table, DQC/execution links and presentation/read-only routes. |
-| GLOSSARY | Main's six claim planes/DQC lanes plus dev's sourced Workbench meaning; regenerate site projection. |
-| TASKBOARD.page-001/002 | Regenerate from reconciled Spec/Task owners. |
-| S-007 Spec | Preserve main lineage/learning/uncertainty and dev live-reader, on-site links, skill trends and evidence; shorten duplicate prose within limits. |
-| S-013 Spec | Preserve failed Review/correction evidence, requirements and acceptance limits; no criterion is completed. |
-| Wiki MEMORY | Preserve main maintenance route and both sets of existing routes. |
-| feedback-improvement topic | Preserve all Jots, bounded recovery, capability ownership and campaign/attempt limits. |
-| adoption topic | Preserve named capability/decision accounting, later owner Jot, gaps and unknown parity; remove duplicate prose only. |
-| S-013 history | Preserve both parents' incoming rows byte-for-byte. |
+| AGENTS, RUNBOOK, SKILLS | Main's later policies/routes. RUNBOOK exception: remove stale continuation pointer under preserved [JOT-b66f8d31](../../../../../../wiki/context-owner-answers-coherence.md#jot-b66f8d31-3731-4017-8502-dd54c9eba23e); use records/ignored handoffs. |
+| ARCHITECTURE | Main's later ownership, DQC/execution and presentation/read-only routes. |
+| GLOSSARY | Main's governance/DQC definitions plus dev's sourced Workbench meaning; regenerate site projection. |
+| TASKBOARD.page-001/002 | Regenerate from reconciled owners. |
+| S-007 Spec | Main's lineage/learning/uncertainty plus dev's reader/links/trends/evidence; trim redundancy only. |
+| S-013 Spec | Retain failed Review/correction evidence, requirements and acceptance limits. |
+| Wiki MEMORY | Keep maintenance and both sets of existing routes. |
+| feedback-improvement topic | Preserve Jots, recovery, ownership and campaign/attempt limits. |
+| adoption topic | Preserve every named ledger item, owner Jot, gaps and unknown parity; trim duplicates. |
+| S-013 history | Both parents' rows preserved byte-for-byte. |
 
 Glossary compatibility: initial ungrouped terms and nine additions require a parser/rendering correction. Expected red proved the refusal; source-derived output preserves anchors and all definitions. Intent5 remains defined in the original explanation, not a completed S-010 stack view.
 
 ## Verification and limits
 
-Source671b822: fresh build;263/263 site tests;841 Python passed/5 skipped;2406/2406 browser checks at375/1280/1440, both themes, scripts-disabled text and negative controls. Four glossary screenshots inspected at375/1280 in both themes. Repository/site hygiene0; layout/Wiki/ADR valid. Across both pinned parents,149 Jot entries,132 receipt rows,25 S013 history rows and106 main failure rows preserved;151 other site files byte-equal dev. Seven governance definitions exact main; Workbench definition exact dev. RUNBOOK pointer-only exception is rechecked at the next immutable head; unchanged runtime/site evidence retains its exact source scope.
+Source671b822: fresh build;263 site tests;841 Python passed/5 skipped;2406 browser checks at375/1280/1440, both themes, script-free text and negative controls. Four glossary screenshots inspected. Across both parents:149 Jot entries,132 receipt rows,25 S013 history rows and106 main failure rows preserved;151 unaffected site files byte-equal dev. Governance definitions exact main; Workbench exact dev. Repository/site hygiene0; layout/Wiki/ADR valid. Source57cfd91: final-head rebuild/footer,7 focused checks and263 site tests pass; runtime/styles unchanged, original browser/Python evidence scoped honestly.
 
-FAIL126–136 retain the wave observations and failed checks; no unpublished Wiki-writer rows copied. Earlier failed native receipt is preserved below. Shared CI, independent candidate Review and dev integration remain separate from this local proof; no whole-Spec, Human QA or deployment claim.
+Owned occurrences at Feature/S-003-website-shell-and-ams-orientation:57cfd91 formerly numbered FAIL126–136 now map in order to FAIL137–147. Receipt1 at8165ea3 retains its original numbers/bytes; aliases apply only to our source-pinned occurrences, never foreign Wiki IDs. No foreign rows were copied or history rewritten. Current shared CI, independent Review and dev integration remain separate; no whole-website, Human QA or deployment claim.
 
 ## Receipt
 
