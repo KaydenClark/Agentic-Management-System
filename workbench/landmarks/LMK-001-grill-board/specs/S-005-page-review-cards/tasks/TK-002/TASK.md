@@ -3,7 +3,7 @@
 **Task ID:** TK-002
 **Spec ID:** S-005
 **Slice:** Confirming a page card records an owner-facing approval bound to its current hash in Git
-**Status:** blocked
+**Status:** ready
 **Blockers:** TK-001
 **Destination:** spec-acceptance: Approval bound to content
 **Planned verification:** pytest with fixture cards, current hashes, stale approvals and append-only committed approval readback
@@ -36,3 +36,5 @@ Hand back to S-005 with `close`.
 - [ ] Readback parses committed approval identity without overwriting prior entries; a changed current hash reports `draft` locally.
 - [ ] No Supabase approval migration, publicly readable approval row, site approval query or public review status is introduced.
 - [ ] `uv run pytest` passes; render and doctor show no blocking finding.
+
+Preparation: published prerequisite TK-001 is done at800a67b. Exact PR174 main delivery is approval-blocked. This continuation remains local; it does not change that held PR head or claim delivery.
