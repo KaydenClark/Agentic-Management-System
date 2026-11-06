@@ -193,7 +193,7 @@ Agent browser checks do not establish owner Human QA.
 
 ## Content-bound website review cards
 
-S-005/TK-001 remains open. Immutable262d28e produced48 cards through the actual isolated Next build/serve path, including39 skill articles and visitor404; a second generation made no changes. This older local slice is not current expanded coverage or protected-deployment/data-state proof. The local Board/CLI owns review state; public pages receive none.
+S-005/TK-001 is natively closed. Immutable262d28e produced48 cards through the actual isolated Next build/serve path, including39 skill articles and visitor404; a second generation made no changes. This older local slice is not current expanded coverage or protected-deployment/data-state proof. The local Board/CLI owns review state; public pages receive none.
 
 `ams-pages generate` freezes one already-fetched trusted source SHA, exports only tracked Git bytes, runs one isolated build and server, consumes the postbuild page-list projection from explicit committed owner declarations, compares all actual built/served routes, then creates cards/index/approval anchor through the existing Board lock/CAS. Missing or ambiguous owners refuse; no Spec/Task or landing is invented. Include every skill article and the visitor404 (`/_not-found`, fetched through a nonexistent URL expecting404). Only `_global-error.html` is an internal framework fallback.
 
@@ -212,6 +212,23 @@ The hash is `sha256:` plus UTF-8 SHA-256 over canonical `<main id="main">`: drop
 For RSI, only freshness/last-successful-read text may be excluded: changed results and availability must change the review hash. A network-isolated unavailable-state build cannot represent different protected-deployment HTML. Actual RSI review needs the existing PR165 freshness correction and a trusted immutable deployed-artifact seam; credentials never enter the candidate build. Explicit `--inventory FILE --built-html FILE --candidate SHA` remains an injected-artifact seam, not live proof by itself.
 
 Approvals stay in the committed owner record; no Supabase approval mirror/public query is added. Actual private criticism must not enter public committed raw evidence. Original failed checks/receipts, scoped corrections and unperformed live outcomes remain in the Task; green fixture tests supply no owner Human QA.
+
+### Committed page approvals
+
+Page Confirm rechecks the committed card, page path, hash and current index
+entry while holding the Board lock. Stale cards, changed identities, dirty or
+unsafe index files refuse before any write. A valid Confirm retains the normal
+single card/approval commit, with no second confirmation. Page notes remain
+blocked until the separate private-feedback path is delivered.
+
+`uv run ams-pages status` reads the committed index and approval record at HEAD;
+`--ref FULL_COMMIT` inspects an earlier committed snapshot. It reports each
+page's current hash and local `approved` or `draft` state. Approval references
+retain path, hash, date, card and the original line's committing SHA across
+later insertions. Working-tree edits are ignored by readback; malformed
+committed approval records refuse. Quoted, fenced or other-section examples
+are not approvals. A changed main-content hash reports draft; footer-only
+changes retain the matching approval. This state is never a public-site query.
 
 Until private page-feedback capture is delivered, page-card notes/comments refuse before any Git write, including notes attached to Confirm, ratings or Too taxing. A refused note stays copyable on the local Board; keep it private. Note-free confirmation and numeric actions retain their normal checks. This guard does not implement TK-003's voice record or downstream feedback consumption.
 

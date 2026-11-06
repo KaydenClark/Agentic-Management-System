@@ -371,6 +371,8 @@ def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
     when = _stamp(now)
     writes = []
     if verdict == "confirm":
+        from ams.page_approvals import validate_page_confirmation
+        validate_page_confirmation(root, base, card, card_blob)
         target, anchor = card.fields.get("Owner record", ""), card.fields.get("Write after", "")
         recommendation = card.fields.get("Recommendation", "")
         if not target or not anchor:

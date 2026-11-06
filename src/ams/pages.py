@@ -16,9 +16,8 @@ from .grill_board.answers import (
     AnswerRefused, _git, _write_and_commit, committed_blob, repository_lock,
 )
 from .grill_board.cards import Card, load_cards, parse_card
+from .page_approvals import APPROVALS, INDEX, page_status
 
-INDEX = "grill-board/pages/index.json"
-APPROVALS = "grill-board/page-approvals.md"
 CARDS = "grill-board/cards"
 LINE_BREAKS = "\n\r\v\f\x1c\x1d\x1e\x85\u2028\u2029"
 VOID = set("area base br col embed hr img input link meta param source track wbr".split())
@@ -318,14 +317,14 @@ def generate(root, listed, built, *, candidate, now=None, protection=None):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["generate"])
+    parser.add_argument("command", choices=["generate", "status"])
     parser.add_argument("--project", type=Path, default=Path.cwd())
     parser.add_argument("--inventory", type=Path)
     parser.add_argument("--built-html", type=Path,
                         help="JSON object mapping every public route to served HTML from the pinned candidate")
-    parser.add_argument("--candidate", required=True)
+    parser.add_argument("--candidate")
     parser.add_argument("--source-repo", type=Path, help="trusted source checkout; defaults to --project")
-    parser.add_argument("--ref", help="already fetched source ref; defaults to origin/dev")
+    parser.add_argument("--ref", help="generate: fetched source ref (origin/dev); status: committed review ref (HEAD)")
     parser.add_argument("--image", help="approved local immutable Node Docker image sha256 identity")
     parser.add_argument("--public-config", type=Path, help="explicit public read-only site configuration JSON; no inherited values")
     parser.add_argument("--timeout", type=float, default=300)
@@ -335,6 +334,18 @@ def main(argv=None):
     parser.add_argument('--protected-origin')
     parser.add_argument('--protected-capture-sha256', help='independent observer digest, not a self-declared trust flag')
     args = parser.parse_args(argv)
+    if args.command == 'status':
+        if any((args.candidate, args.inventory, args.built_html, args.source_repo, args.image,
+                args.public_config, args.protected_artifact, args.protected_project,
+                args.protected_deployment, args.protected_origin, args.protected_capture_sha256)):
+            parser.error('status reads committed review records; build and capture options do not apply')
+        try:
+            print(json.dumps(page_status(args.project, args.ref or 'HEAD'), sort_keys=True))
+        except (AnswerRefused, OSError) as error:
+            parser.exit(1, f'ams-pages: {error}\n')
+        return
+    if not args.candidate:
+        parser.error('generate requires --candidate')
     protected_pins = [args.protected_project, args.protected_deployment, args.protected_origin, args.protected_capture_sha256]
     if args.protected_artifact and (not all(protected_pins) or args.built_html):
         parser.error('protected capture requires automatic collection and every independent observer pin')
