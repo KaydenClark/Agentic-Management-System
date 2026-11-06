@@ -250,3 +250,31 @@ def test_nonreading_input_peer_obeys_the_same_deadline(tmp_path):
     finally:
         if pid_file.exists():
             reap_owned_fixture([int(pid_file.read_text())])
+
+
+RPC_PEER = r'''
+import json,sys
+for line in sys.stdin:
+    value=json.loads(line)
+    if 'id' not in value:continue
+    if value['method']=='needsApproval':
+        print(json.dumps({'id':700,'method':'item/commandExecution/requestApproval','params':{}}),flush=True)
+    else:
+        print(json.dumps({'method':'fixture/event','params':{'observed':True}}),flush=True)
+        response=json.dumps({'id':value['id'],'result':value.get('params')},ensure_ascii=False).encode()+b'\n'
+        for byte in response:sys.stdout.buffer.write(bytes([byte]));sys.stdout.buffer.flush()
+'''
+
+
+def test_owned_rpc_reads_fragmented_unicode_response_and_preserves_notifications(tmp_path):
+    with native_worker.NativeRpc([sys.executable, '-u', '-c', RPC_PEER], cwd=tmp_path,
+                                 environment=dict(os.environ), timeout=3, cleanup_grace=0.1) as peer:
+        assert peer.call('echo', {'text': 'α\nλ'}) == {'text': 'α\nλ'}
+        assert peer.events == [{'method': 'fixture/event', 'params': {'observed': True}}]
+
+
+def test_native_server_approval_request_is_a_stop_boundary(tmp_path):
+    with pytest.raises(native_worker.RequiredApproval):
+        with native_worker.NativeRpc([sys.executable, '-u', '-c', RPC_PEER], cwd=tmp_path,
+                                     environment=dict(os.environ), timeout=3, cleanup_grace=0.1) as peer:
+            peer.call('needsApproval', {})
