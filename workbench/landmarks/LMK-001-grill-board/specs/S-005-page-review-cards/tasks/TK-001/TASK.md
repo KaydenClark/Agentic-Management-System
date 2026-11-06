@@ -2,17 +2,17 @@
 
 **Task ID:** TK-001
 **Spec ID:** S-005
-**Slice:** One pinned current build generates complete review cards and append-only staleness.
+**Slice:** Complete content-bound cards from one pinned build.
 **Status:** in-progress
 **Claimed by:** codex-s005-pages
 **Current claimant:** codex-s005-pages
 **Blockers:** none
 **Destination:** spec-acceptance: Every page covered
-**Planned verification:** pytest against a fixture page list and built pages in a temporary Git repository; live run against origin/dev
+**Planned verification:** Fixtures, owned runtime/interruption, protected readback.
 
 ## Assignment
 
-Target checked `main` through [PR174](https://github.com/KaydenClark/Agentic-Management-System/pull/174). Site/other-owner lanes stay read-only. Parent Spec, Board guide and original7eedef9 retain full contracts; meet every criterion below through the frozen-build, ownership, cleanup and locked append-only seams.
+Target `main` via PR174. Parent Spec/Board guide govern; site and other-owner files stay read-only.
 
 ## Acceptance
 
@@ -23,11 +23,11 @@ Target checked `main` through [PR174](https://github.com/KaydenClark/Agentic-Man
 - [ ] Actual pinned protected candidate covers every skill article and visitor404 with cards and Board readback; result/availability changes stay hash-bound.
 - [ ] Required pytest/render/doctor and repository/current-candidate checks pass or name unavailability.
 
-## Preservation and progress
+## Recovery
 
 Workspace baseline sha256:81dd8dfc83cf2aaa52dcbc6b763823137fe82ede9d053bb84a22225d4f2feb2d
 
-Originals remain preserved; private retention is not remote recovery. Keep the native chain below and [frozen sibling seven-row chain](../../../../../../wiki/history/S-005-TK-001-fb12d6e.md) intact. No renumbering, rehashing, acceptance or reset.
+[Sibling chain](../../../../../../wiki/history/S-005-TK-001-fb12d6e.md). Preservation limits in Spec/history; workspace retained.
 
 ## Receipt
 
