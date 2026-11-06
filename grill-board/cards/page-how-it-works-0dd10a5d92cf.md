@@ -18,3 +18,8 @@
 **Write after:** ## Approvals
 
 Inspect this page at built candidate 262d28e19b50ec0774f7c58c949cff8e403e8ec3. Protected-deployment verification is pending; this local card supplies no public review status. Sources: site/app/how-it-works/, site/app/nav.ts, site/app/shell/PageOrder.tsx.
+
+## Stale
+
+**Superseded by:** page-how-it-works-00ac6a46fed4.md
+**Stale since:** 2026-11-06T11:40:12Z

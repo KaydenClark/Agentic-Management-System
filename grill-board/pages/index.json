@@ -1,5 +1,5 @@
 {
-  "candidate": "262d28e19b50ec0774f7c58c949cff8e403e8ec3",
+  "candidate": "47e3c8804c6b9434a945588492d22c28ef9cb439",
   "pages": {
     "/": {
       "card": "page-home-7fdc257fccaf.md",
@@ -23,22 +23,36 @@
       "title": "About (compatibility route)"
     },
     "/glossary": {
-      "card": "page-glossary-658902d27aa5.md",
-      "hash": "sha256:658902d27aa50760e28d7bd6e003a9e569ed9e2bfa836b54d571e9b2c393a8a6",
+      "card": "page-glossary-b4fc1c5e9b05.md",
+      "hash": "sha256:b4fc1c5e9b055ed0c32f46d1ebdadf9b79b026a6290804f7c23c96f925ea23fc",
       "landed": "ea66a1bac7856933ae2fdbaab1ec6c44a5ef0d1b",
       "provenance_kind": "historical-landing",
       "title": "Glossary"
     },
+    "/governance": {
+      "card": "page-governance-dfbbcdcf4a54.md",
+      "hash": "sha256:dfbbcdcf4a546119029c1da3072945a19511cd18960d34c3e0ee8fa799efe11c",
+      "landed": "e10216e653b5e18f4785175f422f35f39e6f96f0",
+      "provenance_kind": "verified-containment",
+      "title": "Agentic Management System"
+    },
+    "/grill-board-demo": {
+      "card": "page-grill-board-demo-64b068cec959.md",
+      "hash": "sha256:64b068cec959c22ac1d29e6f0bd9685c52b6f37f6c4ec5c669454464b868ea13",
+      "landed": "63870b54efba9b9028dc8c1ae194f3fef85138ae",
+      "provenance_kind": "verified-containment",
+      "title": "Grill Board demo | Agentic Management System"
+    },
     "/how-it-works": {
-      "card": "page-how-it-works-0dd10a5d92cf.md",
-      "hash": "sha256:0dd10a5d92cfe8d006b88954b22b3c0fdd727e9faed52f114794900833b04a9a",
+      "card": "page-how-it-works-00ac6a46fed4.md",
+      "hash": "sha256:00ac6a46fed4989db5b38a67dd609784048a2179876296d6b2b0460bbfeac769",
       "landed": "0418ac716d4ad48440f512ea90420d45bf2b4eec",
       "provenance_kind": "historical-landing",
       "title": "How it works"
     },
     "/rsi": {
-      "card": "page-rsi-f904998cd593.md",
-      "hash": "sha256:f904998cd593a09c1f64985df76178d98252588b08cd7f9ac5521b2bb1fb9b0c",
+      "card": "page-rsi-ed6b470db724.md",
+      "hash": "sha256:ed6b470db724232696fa728dd0ccd4f9d9963ce7c40d2ac1d0975e5d59384c8e",
       "landed": "fceec125c75590d49b828e636e081edd4983fec4",
       "provenance_kind": "historical-landing",
       "title": "RSI results"
@@ -337,5 +351,14 @@
       "provenance_kind": "historical-landing",
       "title": "Why"
     }
+  },
+  "protection": {
+    "candidate": "47e3c8804c6b9434a945588492d22c28ef9cb439",
+    "capture_sha256": "44b7a64ef82fc9fba3d458183db5809a1a9c601a23cb9c0c0add7cb27622061c",
+    "deployment": "dpl_8iTY4Lk2cmC9tbFixJZ1KJKZYf5j",
+    "observed_at": "2026-11-06T11:24:33Z",
+    "origin": "https://agentic-management-system-site-71kmbxw5o.vercel.app",
+    "project": "prj_AW53nWMo9WMHfLujOjUOjMH51frE",
+    "repository": "https://github.com/KaydenClark/Agentic-Management-System.git"
   }
 }

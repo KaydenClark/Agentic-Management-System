@@ -18,3 +18,8 @@
 **Write after:** ## Approvals
 
 Inspect this page at built candidate 262d28e19b50ec0774f7c58c949cff8e403e8ec3. Protected-deployment verification is pending; this local card supplies no public review status. Sources: site/app/glossary/, site/scripts/gen-glossary.mjs, GLOSSARY.md, site/app/tour/, site/app/nav.ts.
+
+## Stale
+
+**Superseded by:** page-glossary-b4fc1c5e9b05.md
+**Stale since:** 2026-11-06T11:40:12Z
