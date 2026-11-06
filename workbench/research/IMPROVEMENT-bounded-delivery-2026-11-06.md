@@ -68,6 +68,19 @@ Independent AMS Standards and Spec reviews pass candidate661a0efa23f1bde6d6be0cc
 
 The owner required Map/Plan before further Journey and explicitly assigned Director -> Dispatcher -> implementor execution after challenging the earlier missing preparation (FAIL-201). S-011 now maps only remaining work; no preparation, Task or claim is backdated. Director inspection found setup's generic README and Specs/Tasks templates retained an overbroad promotion gate (FAIL-203). Their changed source needs its own proportionate regression, qualification, review, publication and personal installation before dependent AMS delivery. Prior PR71 bounded evidence is unchanged and cannot qualify a later candidate. Frozen campaigns, old claims/blockers, website promotion and unrelated work remain excluded.
 
-Map counts: 0 Specs, 0 Tasks, 0 empty tasks/
+Map counts: 0 Specs, 2 Tasks, 0 empty tasks/
 
 Counts compare new records against AMS main at a96c248; this amendment revises existing S-011 and creates no Task at Map stage. Plan is the next operation.
+
+## Remaining Plan before Journey
+
+Map checkpoint3bee6bea5eddb5df5fa4061a8f086caae6a8d53d was committed, pushed and count-validated before Task preparation. Counts mean new records against maina96c248: one existing S-011 amended, zero new Specs and two new native Tasks. Neither Task is claimed.
+
+1. [TK-003C](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/tasks/TK-003C/TASK.md): ready; no blockers. One implementor owns generic setup template correction through generated-output regression, applicable changed-source qualification/review, checked source publication and registered personal installation. This is independently useful for newly generated rooms.
+2. [TK-003D](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/tasks/TK-003D/TASK.md): blocked by TK-003C's verified published/installed artifact. One implementor owns remaining AMS adoption through exact checks/review, checked main, truthful RSI/original-workspace closeout and eligible cleanup or explicit retention.
+
+The stack crosses project authority -> shared method/template -> generated records/package integrity -> published/installed source -> supported AMS runtime/controls/Wiki -> checked target -> native proof/guarded cleanup. The ready frontier is TK-003C only; TK-003D's edge requires the actual artifact, not merely status. Writers serialize the shared AMS Spec/Task/history/report/projection lane; catalog authoring uses its own managed checkout. No assembly branch or unrelated campaign dependency is introduced.
+
+Original scope coverage: PR71 and retained bounded scenarios cover the unchanged methods/runtime and required positive/refusal paths, within their original scope. TK-003C covers the newly found reached-template contradiction and new-candidate qualification/publication/install; TK-003D covers current AMS consistency, independent exact-head verification, main delivery, knowledge/RSI reconciliation, original preservation and cleanup. Existing installed-use proof stays bounded; no Task claims general benefit or completes frozen Terra/site acceptance. Both assignments retain failures and explicit exclusions.
+
+The original adoption snapshot and digest binding stay authoritative for their actual starting scope. Any additional Task snapshot must be genuinely current after native claim and separately bound before remaining edits. Unrelated linked-worktree findings may prevent global native complete=true; they are preserved rather than removed to make a check green. The Director may perform the managed host archive only after the active implementor stops and returns verified eligibility.

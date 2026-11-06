@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-Earlier repair, Terra qualification and dev-presentation authority remain in [history](../../../../wiki/history/S-011.md); stopped campaigns stay stopped. The [confirmed bounded readback](../../../../wiki/context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) separately authorizes the current repair through installation and cleanup. The owner now requires Map/Plan before remaining Journey through Director -> Dispatcher -> implementor. No past preparation is backdated.
+Earlier authority remains in [history](../../../../wiki/history/S-011.md); frozen Terra/dev contracts and stops remain. The [confirmed bounded readback](../../../../wiki/context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) separately authorizes the current repair through installation and cleanup. The owner now requires Map/Plan before remaining Journey through Director -> Dispatcher -> implementor. No past preparation is backdated.
 
 ## Outcome
 
@@ -58,7 +58,7 @@ The skills repository's process governs repair delivery. Older campaign merge/in
 
 ## Vertical Implementation Slices
 
-[TK-002R](tasks/TK-002R/TASK.md): held exact-case fallback; old claims/stops remain.
+[TK-002R](tasks/TK-002R/TASK.md) stays held. Remaining plan: [TK-003C](tasks/TK-003C/TASK.md) delivers corrected templates; [TK-003D](tasks/TK-003D/TASK.md) depends on its published/installed artifact for AMS adoption.
 
 
 ## Acceptance Criteria
@@ -80,11 +80,11 @@ Frozen criteria remain unchecked. Wrong targets, moved tips or unpreserved bytes
 
 ## Testing Seams
 
-Original/adverse exercises, catalog/RUNBOOK and site checks; scorer/persistence require qualifying packets.
+Older campaign: original/adverse, catalog/RUNBOOK/site checks and qualifying scorer packets. Bounded repair: generated-output/catalog regression and AMS non-site main checks.
 
 ## Verification Procedure
 
-RUNBOOK checks, exact skill-candidate evidence and site build/tests on the dev candidate.
+Older campaign retains exact skill evidence and dev site build/tests. Bounded Tasks require exact-head Runbook/fresh-checkout checks, source/install identity, review, main containment and genuine closeout.
 
 ## Documentation Impact
 
@@ -100,7 +100,7 @@ Prior FAILED qualification stays preserved. Whole-Spec and held-Task acceptance 
 
 ## Remaining Limitations Or Follow-Up Specs
 
-Qualification, benefit and presentation gaps retain their receipts. [S-000A](../S-000A-skills-refocus/SPEC.md) owns catalog refocus; this repair neither resumes it nor broadens installation.
+[S-000A](../S-000A-skills-refocus/SPEC.md) owns catalog refocus; it is not resumed. Qualification, benefit and presentation gaps retain their receipts.
 
 ## Supersession
 
