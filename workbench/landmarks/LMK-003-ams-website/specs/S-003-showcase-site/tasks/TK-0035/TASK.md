@@ -6,7 +6,7 @@
 **Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Review coverage and Trust; complete built page/hash enumeration
-**Planned verification:** Classic/APP_PAGE route-hash equality, exact manifests and adverse controls, unchanged pure-hash vectors, fresh build before site tests, credential-free adapter proof and checked dev delivery.
+**Planned verification:** Strict route/hash parity, adverse controls, exact pure identity, frozen build/tests, actual adapter and checkeddev.
 **Claimed by:** codex-s003-hash-reader
 **Current claimant:** codex-s003-hash-reader
 
@@ -34,8 +34,8 @@ Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d4
 
 ## Acceptance
 
-- [ ] One strict acyclic seam yields exact classic/adapter public path/hash sets and stable API/CLI shape; all39 articles,/skills/visitor404 retained, only global-error excluded.
-- [ ] All malformed/missing/extra/duplicate/ambiguous/wrong-owner/symlink cases refuse; pure identity/vectors/path-pin controls, ownership/provenance/atomic writer and existing site behavior stay intact.
+- [x] One strict acyclic seam yields exact classic/adapter public path/hash sets and stable API/CLI shape; all39 articles,/skills/visitor404 retained, only global-error excluded.
+- [x] All malformed/missing/extra/duplicate/ambiguous/wrong-owner/symlink cases refuse; pure identity/vectors/path-pin controls, ownership/provenance/atomic writer and existing site behavior stay intact.
 - [ ] Real adapter/control proof, fresh build/checks/QA, independent review/current CI and actual checkeddev containment are evidenced with honest limits.
 
 ## Receipt
