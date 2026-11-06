@@ -3,12 +3,13 @@
 **Task ID:** TK-002Z
 **Spec ID:** S-003
 **Slice:** Every built public page supplies truthful review ownership automatically
-**Status:** in-progress
+**Status:** done
 **Blockers:** TK-002X
 **Destination:** spec-acceptance: Route, Trust, Owner presentation
 **Planned verification:** Real Next build versus inventory, automatic new-route fixture, missing/ambiguous-owner and classification controls, idempotence, source provenance and affected repository/site checks.
 **Claimed by:** codex-s003-inventory
 **Current claimant:** codex-s003-inventory
+**Proof:** 8e9f12b fresh build50surfaces/39articles,292site tests;16focused inventory/hash tests; root/site hygiene0,layout/render/doctor pass. Exact S0050c39 read-only metadata/artifact functions accept50 and pending/null,7adverse controls refuse. Original7 exact; every parent Jot/receipt retained. No Board writes.1316 starting originals preserved.
 
 ## Assignment
 
@@ -32,7 +33,7 @@ S-005 owns Python collector/Board/cards. Coordinate the flat pages output and po
 
 ## Current integration
 
-Merged checked dev e10216e: demo S009/TK0030 retains verified containment63870b54/PR177; governance S010/TK001 retains e10216e/PR179. Real build projects50 surfaces:49 pages plus visitor404,39 skill articles; only internal error excluded. Original7 remain deep-equal. Exact read-only metadata/artifact functions from S0050c39df8 accept the output and pending/null, rejecting7 adverse controls. No cards or S005 records written. Old262 collection proves only the696b05a interface; protected/current card delivery remains S005 work, not a circular Z gate. Fresh immutable8e9f12b build and292 site tests pass; root/site hygiene0, layout/render/doctor checks pass. Final CI/root assembly review remains the merge gate. The complete1316-item start remains retained:921 tracked originals at the bound ancestor and395 ignored originals privately, with no workspace-release claim.
+Merged checked dev e10216e. Demo S009/TK0030 and governance S010/TK001 retain actual63870b54/PR177 and e10216e/PR179 containment. Real build:50 surfaces,39 articles, only internal error excluded; original7 preserved. Exact S0050c39 read-only functions accept the output; no Board writes. Old262/696 collection is prior-interface evidence; protected/current cards remain S005 work. Proof and Receipt2 bind current checks/limits. All1316 originals remain:921 tracked and395 privately retained; no workspace-release claim.
 
 ## Starting inventory
 
@@ -43,3 +44,4 @@ Workspace baseline sha256:2ea064d22681213beb226e4a9eca397b64ba656035b3f7a780c272
 | Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
 |---|---|---|---|---|---|---|---|---|
 | 1 | Feature/S-003-website-shell-and-ams-orientation | 262d28e19b50ec0774f7c58c949cff8e403e8ec3 | ahead 0 behind 0 | 0 | 262d28e: fresh npm build/postbuild48public/1internal; npm test272/272; Python841passed5skipped271.22s with supported loopback permission; root/site hygiene0; layout valid; render unchanged; doctor0globalblockers, baseline selected-slice/informational findings retained. Original7 row objects exact;48 baseline content hashes unchanged. Inventory9/hash6 focused tests passed, with expected TDD red controls retained. Shared CI Python42188021574 and site42188021559 green on exact262d28e. | site/README.md documents build generation, declaration schema,404/internal classification and truthful provenance; page-list original7 preserved. Failure149-162 retained from originating writers; authority Jot8634622a separately sourced. | Task stays in-progress: root released actual immutable S003-to-S005 collection proof at262d28e in the isolated S005 clone, not yet run; no original Board writes. Root assembly review/dev merge and native closure remain. Baseline browser2406 evidence is unchanged-UI evidence only; no new matrix, HumanQA, deployment or production claim. | 481c40e6c09b797616b9f8577bd61ac8add102c462387f126ec2db48d3ca5a0e |
+| 2 | Feature/S-003-website-shell-and-ams-orientation | b73e43200e8173737f1643e8ecf7c714df395c4c | ahead 0 behind 0 | 0 | 8e9f12b fresh build50surfaces/39articles,292site tests;16focused inventory/hash tests; root/site hygiene0,layout/render/doctor pass. Exact S0050c39 read-only metadata/artifact functions accept50 and pending/null,7adverse controls refuse. Original7 exact; every parent Jot/receipt retained. No Board writes.1316 starting originals preserved. | site/README.md inventory workflow; page-list declared owners and generated projection; Task acceptance/provenance; canonical175-178. | Z interface acceptance met. PR178 final CI,root assembly review and checked dev merge pending. S005 protected/current cards, inherited S010 contrast repair, actual HumanQA and owner-only production promotion remain separate work. Old262 proof applies only to696b05a. Private originals retained; no workspace-release or remote-recoverability claim.; close attribution: {"agent":"codex-s003-inventory","claimant":"codex-s003-inventory","onBehalfOf":null} | 9f7c90bbc55e7c03fba91fedd8ce5c4e64e04b469735e35a894f6048a0039f51 |
