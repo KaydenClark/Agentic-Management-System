@@ -11,35 +11,32 @@
 **Current claimant:** codex-s003-hash-reader
 
 
+
 ## Assignment
 
-Confirmed items1/2/12 authorize this bounded utility correction. Full approved plan/source evidence: cae67a1646f0994574c9090840200433aaa23c87. Root passed/released it; claimant codex-s003-hash-reader published originals184daac333cc4906635e0e39a33ef54158eee3dd before the new complete968-file snapshot; binding99c349defe6a91e28fc15b7279c4afc1c4cc3d5d below predates product. No oldZ/Task34 snapshot or attempt reset. Preserve all older receipts/failures and the withdrawn TK003 brief; do not execute it.
+Confirmed items1/2/12; approved full plan cae67a1646f0994574c9090840200433aaa23c87 retains all requirements. Claimant codex-s003-hash-reader published originals184daac333cc4906635e0e39a33ef54158eee3dd BEFORE the new complete968-file snapshot, separately bound99c349defe6a91e28fc15b7279c4afc1c4cc3d5d. Never reuse Z/34 baselines, execute withdrawn TK003 or reset attempts; preserve all old evidence.
 
-Published S005800a67b870ee99d0241e716a15907ce7841e7f2b artifact report proves the adapter omission: inventory1 versus readBuiltPages0. Pure contentHash matched all50 protected bodies and S005 hashes served bodies directly; neither is a broken path or a competing writer target.
+S005 report800a67b870ee99d0241e716a15907ce7841e7f2b proves inventory1/readBuiltPages0 on an adapter fixture. Its served-body hashing/pure50-body contract was already correct; no competing card/store repair. One S003 slice spans strict manifest/HTML enumeration -> unchanged hash -> existing API/human+JSON CLI -> docs/verification -> checkeddev.
 
-One S003 writer owns manifest/HTML -> readBuiltPages -> unchanged hash -> human/JSON CLI -> verification/docs -> checkeddev. Preserve legitimate explicit site-root/fixture API and {name,route,html} rows. CLI still takes json mode only, not a directory argument. Declared public routes cannot yield silentzero/partial output. Reuse one strict acyclic enumeration seam with inventory: current inventory imports hash decoding, so importing inventory back into hash is invalid. No duplicate weak parser, broad cache scan or fallback.
+Use one acyclic shared strict classic/APP_PAGE seam, never inventory/hash circular imports, parallel weak parsers, broad scans or fallbacks. Preserve readBuiltPages(siteRoot), legitimate manifest fixtures and {name,route,html} shape; CLI accepts json mode, not a directory argument. Enforce exact source-owner hashes/cache shape/manifest coverage, all39 articles,/skills and visitor404, excluding only global-error. Derive later-page coverage from manifests. Missing/extra/duplicate/ambiguous/wrong-owner/malformed and file/directory symlinks refuse, never silentzero/partial output. Root-alias negative is API-only; build-tree CLI negatives remain.
 
-Support classic app and explicit owner-hash/$/route APP_PAGE layouts; validate manifest source owners, exact paths and complete route sets. Include all39 skill articles,/skills and visitor404; only internal_global-error is excluded. Derive counts/automatic later-page coverage from real manifests. Missing/extra/duplicate/ambiguous/wrong-owner/malformed and file/directory symlink artifacts refuse. Explicit root-symlink refusal is API-only; real build-tree symlink CLI controls remain. Preserve inventory current owners/provenance, original7 metadata and atomic collision behavior.
+Keep canonicalContent/contentHash core and vectors EXACT: only existing generated provenance/freshness exclusions; changed main text/href/src/alt, paths/historical pins and RSI results/availability stay hash-bound. Preserve original7 metadata, current ownership/provenance and atomic collision safety. No dependencies, UI/browser helpers, public status/private criticism, cards/store/model calls, grader/campaign/skill/install or paid-service changes.
 
-Canonical <main> content identity, canonicalContent/contentHash core and independent vectors are unchanged. Keep only existing contractual generated-provenance/freshness exclusions; changed text/href/src/alt, paths/historical pins and RSI results/availability stay hash-bound. No new dependencies, UI/browser-helper changes, public status/private criticism, cards/store/model calls, grader/skill/campaign/install or paid-service changes.
+Reconcile checked dev through933e386020c729f7af94822c6066e62f6403ce06 (S010 charts and S007 records); retain all their source/receipts/family diagnostics, newer navigation/demo and protected Wiki/Board writers. Mainc787 and unmerged S005/S006 promotions remain held. Root reserves dev merges; owner-only production and HumanQA stay separate.
 
-Checkeddevaf5d6363fbeefb786f0ae3fe77fa32eb469b76a8 (S010c07) is reconciled before final qualification; preserve its planes/glossary and newer navigation/demo/chart behavior. Mainc787 and unmerged S005/S006 promotions remain held. Protect active Wiki/Board checkouts. Root reserves dev merge; owner-only dev->main and actual HumanQA remain separate.
+## Verification
 
-## Verification and delivery
+Retain intentional9-case RED, actual206/207 failures/nativeSTOP1 and209 safe-extraction harness failure/STOP2. Corrected focused24/24 passes. Require matching classic/cache API+CLI sets, all adverse controls, exact pure core/vectors/provenance negatives and unchanged inventory side effects. Fresh immutable build BEFORE site tests and utility checks, BEFORE Next start: runtime cache duplicates must refuse, not be deleted/deduplicated.
 
-Retain original9-case intentional red, actual extraction/test failures206/207 and nativeSTOP receipt1. The released API-only alias correction passes24/24 focused cases. Meaningful matched classic/cache API+CLI tests must prove same exact path/hash set and all adverse refusals; verify unchanged pure core/vectors and provenance negatives separately.
-
-Build a frozen immutable candidate before site tests and inventory/hash checks, BEFORE any Next start: runtime cache population can otherwise create duplicate copies; keep strict refusals, not cleanup/deduplication. Use actual credential-free Vercel adapter reproduction as needed, pinned installed source/package identities, matched classic/adapter sets, no server/settings/deployment/auth forwarding. Preserve original failed harness evidence; fixtures/local adapter builds are not protected deployment readiness.
-
-Update site/README.md for the actual API/utility and freeze timing. Required checks, independent review and actual checkeddev containment need exact source/artifact pins, executed Check/QA and honest remaining gaps. Coordinate any collector seam with established S005 writer, no duplicate cards. Return both merge/completion answers. No full-S003, workspace release/remote-completeness, HumanQA or production claim.
+Use actual credential-free Vercel adapter reproduction with verified installed package/source pins and supported safe Python filter, distinct output retaining failed archives/dirs/logs. No server, settings, auth forwarding or deployment. Fixtures/local adapter proof do not establish protected deployment readiness. Site README owns the API/frozen timing; S005 writer owns its collector/cards. Return executed Check/QA, independent review, current-head CI/actual checkeddev containment, exact artifacts/limits and both delivery answers; no whole-S003/workspace-release/remote-completeness/HumanQA claim.
 
 Workspace baseline sha256:fd3aad28d8f109ac6f2bd84071ac241d86dd2f45298e08801299d42da83436fd
 
 ## Acceptance
 
-- [ ] Reader/CLI and inventory share one strict acyclic seam with exact classic/adapter public path/hash coverage; legitimate API/output shape and all39 articles+/skills+visitor404 survive, only global-error omitted.
-- [ ] Missing/extra/duplicate/ambiguous/wrong-owner/malformed/symlink inputs refuse without silentzero. Pure hash/vectors and path/pin invalidation remain exact; ownership/provenance/atomic writer and current site behavior preserved.
-- [ ] Meaningful controls, real credential-free adapter proof, fresh build before tests, required checks/review and actual checkeddev containment are evidenced with source/limit truth; no HumanQA/production claim.
+- [ ] One strict acyclic seam yields exact classic/adapter public path/hash sets and stable API/CLI shape; all39 articles,/skills/visitor404 retained, only global-error excluded.
+- [ ] All malformed/missing/extra/duplicate/ambiguous/wrong-owner/symlink cases refuse; pure identity/vectors/path-pin controls, ownership/provenance/atomic writer and existing site behavior stay intact.
+- [ ] Real adapter/control proof, fresh build/checks/QA, independent review/current CI and actual checkeddev containment are evidenced with honest limits.
 
 ## Receipt
 
