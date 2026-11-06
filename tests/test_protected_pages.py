@@ -101,6 +101,24 @@ def test_document_identity_cannot_hide_missing_or_conflicting_deployment(capture
         collect_protected(artifact, built, expected_pins=seal(artifact, manifest, pins))
 
 
+@pytest.mark.parametrize('field', ['document', 'footer', 'asset'])
+def test_duplicate_attributes_cannot_discard_a_conflicting_identity(capture, field):
+    from ams.protected_pages import collect_protected
+    artifact, manifest, built, pins = capture
+    page = (artifact / manifest['pages']['/rsi']['file']).read_text()
+    if field == 'document':
+        page = f'<html data-dpl-id="dpl_Other" data-dpl-id="{DEPLOYMENT}">{page}</html>'
+    elif field == 'footer':
+        page = page.replace(f'data-commit-sha="{CANDIDATE}"',
+                            f'data-commit-sha="{"b" * 40}" data-commit-sha="{CANDIDATE}"')
+    else:
+        source = f'src="/_next/static/synthetic.js?dpl={DEPLOYMENT}"'
+        page = page.replace(source, f'src="/_next/static/synthetic.js?dpl=dpl_Other" {source}')
+    rewrite(artifact, manifest, '/rsi', page)
+    with pytest.raises(PageRefused, match='identity'):
+        collect_protected(artifact, built, expected_pins=seal(artifact, manifest, pins))
+
+
 @pytest.mark.parametrize('field,value', [('candidate', 'b' * 40), ('project', 'prj_Other'),
                                         ('deployment', 'dpl_Other'), ('origin', 'https://different.vercel.app')])
 def test_independent_identity_pins_refuse_mixed_or_old_captures(capture, field, value):

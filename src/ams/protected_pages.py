@@ -57,16 +57,14 @@ class _Identity(HTMLParser):
         self.origin, self.stack, self.commits, self.deployments = origin, [], set(), set()
 
     def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
-        if tag == 'html' and 'data-dpl-id' in attrs:
-            self.deployments.add(attrs['data-dpl-id'])
+        if tag == 'html':
+            self.deployments.update(value for name, value in attrs if name == 'data-dpl-id')
         if tag not in VOID:
             self.stack.append(tag)
-        if 'footer' in self.stack and 'data-commit-sha' in attrs:
-            self.commits.add(attrs['data-commit-sha'])
-        for name in ('src', 'href'):
-            value = attrs.get(name)
-            if not isinstance(value, str):
+        if 'footer' in self.stack:
+            self.commits.update(value for name, value in attrs if name == 'data-commit-sha')
+        for name, value in attrs:
+            if name not in {'src', 'href'} or not isinstance(value, str):
                 continue
             url = urlsplit(value)
             if url.path.startswith('/_next/') and (not url.netloc or f'{url.scheme}://{url.netloc}' == self.origin):
