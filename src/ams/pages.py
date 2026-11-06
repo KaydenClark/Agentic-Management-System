@@ -112,6 +112,15 @@ def _metadata(listed, built):
         for key in ("title", "spec", "task"):
             if not isinstance(row.get(key), str) or not row[key].strip() or "\n" in row[key] or "\r" in row[key]:
                 raise PageRefused(f"{path}: invalid {key}")
+        sources = row.get("sources")
+        if not isinstance(sources, list) or not sources or any(
+            not isinstance(source, str)
+            or not source.strip()
+            or not re.fullmatch(r"(?![A-Za-z]:)[^/\\\x00-\x1f]+(?:/[^/\\\x00-\x1f]+)*/?", source)
+            or any(part in {".", "..", ".git"} for part in source.rstrip("/").split("/"))
+            for source in sources
+        ):
+            raise PageRefused(f"{path}: sources must name nonempty repository-relative paths")
         kind = row.get("provenance_kind", "historical-landing")
         if kind not in {"historical-landing", "verified-containment", "pending-candidate"}:
             raise PageRefused(f"{path}: unsupported provenance kind; current ownership and actual containment are required")
@@ -151,7 +160,7 @@ def _new_card(row, digest, candidate):
     provenance_label = "Verified containment" if kind == "verified-containment" else "Landed"
     provenance = "**Integration:** pending\n" if kind == "pending-candidate" else (
         f'**{provenance_label}:** {landed.get("branch", "dev")} {landed["commit"]} PR {landed.get("pr", "unknown")}\n')
-    sources = ", ".join(row.get("sources", []))
+    sources = ", ".join(row["sources"])
     return (f'# Review {row["path"]}: {row["title"]} at {digest}\n\n'
             '**Topic:** Website pages\n**Priority:** P2\n'
             '**Priority reason:** Review this exact candidate before website acceptance.\n'
@@ -163,7 +172,7 @@ def _new_card(row, digest, candidate):
             f'**Recommendation:** Approve page {row["path"]} ({row["title"]}) at content hash {digest}.\n'
             f'**Owner record:** {APPROVALS}\n**Write after:** ## Approvals\n\n'
             f'Inspect this path on the protected dev candidate {candidate}. '
-            f'This local card supplies no public review status. Sources: {sources or "owning page inventory"}.\n')
+            f'This local card supplies no public review status. Sources: {sources}.\n')
 
 
 def generate(root, listed, built, *, candidate, now=None):
@@ -187,13 +196,19 @@ def generate(root, listed, built, *, candidate, now=None):
         writes, entries = {}, {}
         for path, row in rows.items():
             digest, old = hashes[path], previous.get("pages", {}).get(path)
+            reuse = False
             if old and old["hash"] == digest:
                 name = old["card"]
                 existing = committed_blob(root, f"{CARDS}/{name}", base)
                 parsed = parse_card(name, existing.decode()) if existing else None
-                if not isinstance(parsed, Card) or parsed.stale or parsed.fields.get("Page") != path or parsed.fields.get("Content hash") != digest:
+                if not isinstance(parsed, Card) or parsed.stale is not None or parsed.fields.get("Page") != path or parsed.fields.get("Content hash") != digest:
                     raise PageRefused(f"{path}: index does not name its current committed card")
-            else:
+                # Reuse an unchanged content occurrence only while its owners,
+                # sources and provenance still match. Keep that occurrence's
+                # original candidate; the index binds the latest build pin.
+                expected = _new_card(row, digest, parsed.fields.get("Candidate", candidate)).encode()
+                reuse = existing.startswith(expected)
+            if not reuse:
                 slug = path.strip("/").replace("/", "-") or "home"
                 stem = f"page-{slug}-{digest[7:19]}"
                 name, suffix = stem + ".md", 1
@@ -222,7 +237,7 @@ def generate(root, listed, built, *, candidate, now=None):
             relative = f'{CARDS}/{old["card"]}'
             old_blob = committed_blob(root, relative, base)
             parsed = parse_card(old["card"], old_blob.decode()) if old_blob else None
-            if not isinstance(parsed, Card) or parsed.stale or parsed.fields.get("Page") != path or parsed.fields.get("Content hash") != old["hash"]:
+            if not isinstance(parsed, Card) or parsed.stale is not None or parsed.fields.get("Page") != path or parsed.fields.get("Content hash") != old["hash"]:
                 raise PageRefused(f"{path}: removed route does not name its current committed card")
             writes[relative] = old_blob + (b"" if old_blob.endswith(b"\n") else b"\n") + (
                 f'\n## Stale\n\n**Removed in:** {candidate}\n**Stale since:** {_stamp(now)}\n').encode()

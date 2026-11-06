@@ -12,15 +12,13 @@
 
 ## Assignment
 
-Target checked `main` via [PR174](https://github.com/KaydenClark/Agentic-Management-System/pull/174); site source is read-only. Keep claimant, every receipt/failure and unrelated work. Original assignment/checkpoints remain at7eedef9 in this Task's history. Parent Spec and Board README own detailed content-hash/card/CLI contracts.
+Target checked `main` via [PR174](https://github.com/KaydenClark/Agentic-Management-System/pull/174). Site/other writers stay read-only. Preserve claimant, receipts/failures and unrelated work; original assignment is at7eedef9. Parent Spec and Board README own detailed contracts.
 
-Deliver one trusted frozen SHA → Git-only export → supported isolated build/start → postbuild owner projection → built/served route comparison → content-bound cards/index/approval anchor. Historical landed commits supply provenance, never content. Explicit current owners are required for all public pages,39+ skill articles and visitor404; exclude internal global-error only. Distinguish historical landing, verified containment and pending-candidate/null; never invent ownership/integration.
+One frozen trusted SHA → Git-only export → isolated build/start → postbuild owner projection → complete built/served route comparison → cards/index/approval anchor. Require explicit current owners/sources for every public page,39+ skill articles and visitor404; exclude only internal global-error. Distinguish historical landing, containment and pending/null provenance; never invent ownership/integration or use old landing content.
 
-Exclude private HOME/provider/service/Git context; own interruption cleanup and preserve unrelated work. Fixtures prove only their scope. RSI results/availability stay hash-bound; freshness only is excluded. Protected HTML needs a trusted immutable artifact seam.
+Exclude private host context; verify owned interruption cleanup. Fixtures prove their scope only. RSI results/availability stay bound; exclude freshness only and require trusted protected HTML.
 
-Board flock/CAS commits generated owners only. Identical reruns are no-ops; dirty/unsafe/conflicting paths refuse atomically. Edits/removals append stale history; retain answered bytes, refuse stale writes and create fresh returning occurrences. Footer-only changes do not stale; preserve Board behavior.
-
-Parent Spec privacy/promotion rules hold; site/other writers remain read-only. TK-002/003/000K/001E stay separate. Close only on acceptance/checks/delivery.
+Use Board flock/CAS and atomic dirty/unsafe/conflict refusal. Preserve answered bytes; append stale history for edits/removals, new returning occurrences and changed metadata. Identical reruns are no-ops; footer-only changes do not stale. Spec privacy/promotion rules hold; later Tasks remain separate. Close only on acceptance/checks/delivery.
 
 ## Acceptance
 

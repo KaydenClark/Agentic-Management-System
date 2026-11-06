@@ -28,7 +28,7 @@ def source(tmp_path):
     git(root, "add", ".")
     git(root, "commit", "-qm", "fixture provenance")
     provenance = git(root, "rev-parse", "HEAD")
-    rows = [{"path": p, "title": "Synthetic " + p, "spec": "S-003", "task": "TK-001", "landed": {"branch": "dev", "commit": provenance, "pr": 1}} for p in ["/", "/skills/new", "/_not-found"]]
+    rows = [{"path": p, "title": "Synthetic " + p, "spec": "S-003", "task": "TK-001", "sources": ["site/content.txt"], "landed": {"branch": "dev", "commit": provenance, "pr": 1}} for p in ["/", "/skills/new", "/_not-found"]]
     (root / "site/page-list.json").write_text(json.dumps({"pages": rows}))
     (root / "site/content.txt").write_text("Pinned current content")
     git(root, "add", ".")

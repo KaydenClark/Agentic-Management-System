@@ -251,6 +251,7 @@ def rate(cards_dir, card, rating, comment, card_sha, now=None):
     if rating not in RATINGS:
         raise AnswerRefused(f"a rating is a whole number from 1 to 5, not {rating!r}")
     with repository_lock(repo_root(cards_dir)):
+        _refuse_page_note(card, comment)
         when = _stamp(now)
         section = f"## Rating\n\n**Rating:** {rating} of 5\n**Rated:** {when}\n"
         return _append_to_card(cards_dir, card, card_sha, section, comment,
@@ -263,6 +264,7 @@ def flag(cards_dir, card, comment, card_sha, now=None):
     The card is then held for rewrite: it leaves the queue and its question
     cannot be asked again unchanged (DDR-000J)."""
     with repository_lock(repo_root(cards_dir)):
+        _refuse_page_note(card, comment)
         if card.flag is not None:
             raise AnswerRefused(f"{card.file} is already flagged too taxing")
         section = f"## Flag\n\n{FLAG_LINE}\n**Flagged:** {_stamp(now)}\n"
@@ -273,6 +275,12 @@ def flag(cards_dir, card, comment, card_sha, now=None):
 
 def _stamp(now):
     return (now or datetime.now(timezone.utc)).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _refuse_page_note(card, note):
+    """Page criticism needs private capture before it can enter any Git write."""
+    if card.fields.get("Page") and (note or "").strip():
+        raise AnswerRefused("Page feedback cannot be saved privately yet. Keep a copy of your note.")
 
 
 def _checked_card(cards_dir, card, card_sha):
@@ -351,6 +359,7 @@ def _answer(cards_dir, card, verdict, note, card_sha, record_sha, now):
     if verdict not in VERDICTS:
         raise AnswerRefused(f"unknown verdict {verdict!r}")
     label, note = VERDICTS[verdict], (note or "").strip()
+    _refuse_page_note(card, note)
     if card.answer is not None:
         raise AnswerRefused(f"{card.file} is already answered")
     if card.flag is not None:

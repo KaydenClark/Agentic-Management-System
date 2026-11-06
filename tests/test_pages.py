@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from ams import pages
-from ams.grill_board.answers import AnswerRefused, answer, render_hashes
+from ams.grill_board.answers import AnswerRefused, answer, flag, rate, render_hashes
 from ams.grill_board.cards import load_cards
 
 
@@ -199,3 +199,89 @@ def test_pending_candidate_keeps_landing_unknown_and_binds_actual_candidate(room
     bad['pages'][0].update(provenance_kind='pending-candidate', spec='')
     with pytest.raises(pages.PageRefused, match='invalid spec'):
         pages.generate(room, bad, {'/second-page': html()}, candidate=candidate)
+
+
+@pytest.mark.parametrize('sources', [None, [], 'site/app/page.tsx', [''], [17], ['source\n**Owner record:** unsafe'], ['../outside'], ['/outside']])
+def test_missing_or_unsafe_sources_refuse_before_any_write(room, sources):
+    listed = inventory(room, ('/',))
+    if sources is None:
+        listed['pages'][0].pop('sources')
+    else:
+        listed['pages'][0]['sources'] = sources
+    before = git(room, 'rev-parse', 'HEAD')
+    with pytest.raises(pages.PageRefused, match='sources'):
+        pages.generate(room, listed, {'/': html()}, candidate=before)
+    assert git(room, 'rev-parse', 'HEAD') == before
+    assert not git(room, 'status', '--porcelain')
+    assert not list((room / 'grill-board/cards').glob('*.md'))
+
+
+def test_equal_content_refreshes_changed_owners_and_provenance_without_rewriting_history(room):
+    listed = inventory(room, ('/new',))
+    row = listed['pages'][0]
+    row.update(provenance_kind='pending-candidate', landed=None)
+    candidate = git(room, 'rev-parse', 'HEAD')
+    pages.generate(room, listed, {'/new': html()}, candidate=candidate)
+    first = load_cards(room / 'grill-board/cards')[0][0]
+    card_sha, owner_sha = render_hashes(room / 'grill-board/cards', first)
+    answer(room / 'grill-board/cards', first, 'confirm', '', card_sha, owner_sha)
+    original = (room / 'grill-board/cards' / first.file).read_bytes()
+    current = git(room, 'rev-parse', 'HEAD')
+    row.update(title='Current synthetic title', spec='S-008', task='TK-002',
+               sources=['site/app/new/page.tsx'], provenance_kind='verified-containment',
+               landed={'branch': 'dev', 'commit': current, 'pr': 2})
+    result = pages.generate(room, listed, {'/new': html()}, candidate=current)
+    assert result['changed']
+    cards, refused = load_cards(room / 'grill-board/cards')
+    assert not refused
+    replacement = next(card for card in cards if card.waiting)
+    assert replacement.file != first.file
+    assert replacement.fields['Content hash'] == first.fields['Content hash']
+    assert replacement.fields['Candidate'] == current
+    assert replacement.fields['Title'] == row['title']
+    assert replacement.fields['Spec'] == row['spec'] and replacement.fields['Task'] == row['task']
+    assert replacement.fields['Provenance kind'] == 'verified-containment'
+    assert 'Integration' not in replacement.fields and 'Landed' not in replacement.fields
+    assert row['sources'][0] in (room / 'grill-board/cards' / replacement.file).read_text()
+    assert (room / 'grill-board/cards' / first.file).read_bytes().startswith(original)
+    assert next(card for card in cards if card.file == first.file).stale
+    index = json.loads((room / 'grill-board/pages/index.json').read_text())
+    assert index['pages']['/new']['card'] == replacement.file
+    assert not pages.generate(room, listed, {'/new': html()}, candidate=current)['changed']
+
+
+def test_unchanged_content_and_owners_keep_the_original_card_when_the_build_pin_moves(room):
+    listed = inventory(room, ('/',))
+    listed['pages'][0]['sources'] = ['site/app/Synthetic page.tsx']
+    candidate = git(room, 'rev-parse', 'HEAD')
+    pages.generate(room, listed, {'/': html()}, candidate=candidate)
+    card = load_cards(room / 'grill-board/cards')[0][0]
+    original = (room / 'grill-board/cards' / card.file).read_bytes()
+    current = git(room, 'rev-parse', 'HEAD')
+    pages.generate(room, listed, {'/': html(footer='new build pin')}, candidate=current)
+    cards, refused = load_cards(room / 'grill-board/cards')
+    assert not refused and len(cards) == 1 and cards[0].file == card.file
+    assert (room / 'grill-board/cards' / card.file).read_bytes() == original
+    index = json.loads((room / 'grill-board/pages/index.json').read_text())
+    assert index['candidate'] == current and cards[0].fields['Candidate'] == candidate
+
+
+@pytest.mark.parametrize('operation', ['confirm', 'change', 'rework-wording', 'change-the-why', 'rate', 'flag'])
+def test_page_feedback_notes_never_enter_committed_public_records(room, operation):
+    listed = inventory(room, ('/',))
+    pages.generate(room, listed, {'/': html()}, candidate=git(room, 'rev-parse', 'HEAD'))
+    card = load_cards(room / 'grill-board/cards')[0][0]
+    card_sha, owner_sha = render_hashes(room / 'grill-board/cards', card)
+    before = git(room, 'rev-parse', 'HEAD')
+    original = {p: p.read_bytes() for p in (room / 'grill-board').rglob('*') if p.is_file()}
+    note = 'Synthetic private feedback must remain outside public Git.'
+    with pytest.raises(AnswerRefused, match='privat'):
+        if operation == 'rate':
+            rate(room / 'grill-board/cards', card, '4', note, card_sha)
+        elif operation == 'flag':
+            flag(room / 'grill-board/cards', card, note, card_sha)
+        else:
+            answer(room / 'grill-board/cards', card, operation, note, card_sha, owner_sha)
+    assert git(room, 'rev-parse', 'HEAD') == before
+    assert not git(room, 'status', '--porcelain')
+    assert all(path.read_bytes() == data for path, data in original.items())
