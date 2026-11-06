@@ -3,7 +3,7 @@
 **Task ID:** TK-002S
 **Spec ID:** S-011
 **Slice:** An independent website task proves later use of one adopted source
-**Status:** blocked
+**Status:** ready
 **Blockers:** TK-002R
 **Destination:** spec-acceptance: Personal use; RSI readback; Visible on dev
 **Planned verification:** Real independent website Task with observed native loading/end state, recurrence and safe writer/store/dev readback; retained example replay under one minute.
