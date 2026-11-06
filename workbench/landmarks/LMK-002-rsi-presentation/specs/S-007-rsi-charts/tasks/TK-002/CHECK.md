@@ -21,3 +21,9 @@ Native workspace-closeout first rejected an abbreviated baseline commit; the ful
 ## Evidence-recording failure
 
 At c5be834, appending this supplemental report made TASK.md 10614 characters against its 8000-character limit. Hygiene detected the failure. This report now retains the detailed evidence; TASK.md links it and retains its original history and supported native receipt. No limit or check was weakened. Canonical feedback intake was sent before repair.
+
+## Projection correction and bounded continuation
+
+Fresh checking of 6e58a67 found that native receipt creation had not been followed by native Taskboard regeneration: render changed only the S-007 receipt summary and the resulting S-000C pagination placement. This second evidence-recording failure triggered a stop; the coordinator inspected the diff and explicitly authorized same-Task continuation for native regeneration and fresh checks, preserving the failed evidence. No projection was hand edited and no other owner's record was changed. Original claimant and receipt bytes remain unchanged.
+
+The 6e58a67 shared checks subsequently passed: Python run 42204694654 and site run 42204694651. The next records-only candidate needs its own exact-head shared checks. No unavailable local Docker result or known-blocked main-only discovery check is rerun or relabeled successful. Native Task close remains reserved to a separate coordinator decision; current deployment regression remains owned by S-003.
