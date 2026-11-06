@@ -109,3 +109,19 @@ Live tests opt in through `AMS_LINEAGE_TEST_CONFIG` and
 `AMS_RECOVERY_RESTORE_CONFIG`. They use actual isolated PostgreSQL/PostgREST,
 independent processes, crash-after-effect recovery, strict SQLSTATE adverse
 controls, lost-leaf/whole-chain attacks and unchanged-target assertions.
+
+Raw-RPC regressions also bypass Python to reject null, omitted and wrongly
+typed slot roles, effect types and observation outcomes. Null control/checkpoint
+parameters refuse without partial writes; only an explicit keyed-file contract
+can retry a proven-absent effect.
+
+The canonical-parent positive test additionally needs `canonical_parent_fixture`
+with `run_id` and `result_id` in the private source config. Provision matching
+existing canonical rows in both isolated databases before running it, preserving
+their IDs and all hashed metadata; these parents are outside the safe checkpoint.
+The retained fixtures are `is_test=true`, `model=no-model-call`, with unknown
+metrics and an ungraded runner-error result. They are constructed as canonical
+reference fixtures from the start, never by relabeling a synthetic lineage chain.
+Bookkeeping guards and ordinary constraints are enabled during the proof. The
+test verifies exact parent equality, hidden client reads, pinned restore and
+idempotent readback; it establishes no real model measurement or public event.

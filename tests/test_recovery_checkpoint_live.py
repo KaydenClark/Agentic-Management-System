@@ -5,6 +5,7 @@ from datetime import datetime,timezone
 import hashlib
 import json
 import os
+import uuid
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -176,3 +177,89 @@ def test_matching_lineage_prefix_can_append_but_old_snapshot_cannot_roll_back(lo
     with rejected("PT409"):
         destination.restore(older,expected_head=full["source_head"],expected_manifest_digest=older["manifest_digest"])
     assert destination.snapshot(local.namespace)["head"]==full["source_head"]
+
+
+@pytest.mark.parametrize("field",["manifest_text","manifest_digest","expected_manifest_digest","expected_head"])
+def test_raw_invalid_restore_pin_types_refuse_atomically(local,destination,field):
+    prepared(local);manifest=local.store.export(local.namespace)
+    payload={k:v for k,v in manifest.items() if k!="manifest_digest"}
+    request={"manifest_text":recovery.canonical(payload),"manifest_digest":manifest["manifest_digest"],
+        "expected_manifest_digest":manifest["manifest_digest"],"expected_head":None,
+        "reader_digest":recovery.reader_digest(),"schema_digest":recovery.schema_digest()}
+    request[field]={} if field=="expected_head" else None
+    before=destination.snapshot(local.namespace)
+    with rejected("23514"):destination._rpc("restore",request,mutating=True)
+    assert destination.snapshot(local.namespace)==before
+
+
+def test_matching_preexisting_canonical_parents_restore_without_raw_evidence(local,destination):
+    # A separately provisioned canonical-reference schema fixture, never a
+    # synthetic lineage chain relabeled as observed model measurements.
+    fixture=local.config.get("canonical_parent_fixture")
+    if fixture is None:pytest.skip("matching canonical-parent fixture not supplied")
+    namespace="test-canonical-restore-"+uuid.uuid4().hex
+    target_config=json.loads(Path(os.environ["AMS_RECOVERY_RESTORE_CONFIG"]).read_text())
+    source=lineage.Store(local.config["url"],local.config["service_jwt"],rest_path=local.config["rest_path"])
+    target=lineage.Store(target_config["url"],target_config["service_jwt"],rest_path=target_config["rest_path"])
+    refs={}
+    for table,key in (("rsi_runs","run_id"),("rsi_results","result_id")):
+        source_rows=source._call("GET",table+"?id=eq."+str(fixture[key]))
+        assert len(source_rows)==1 and source_rows==target._call("GET",table+"?id=eq."+str(fixture[key]))
+        refs[table]=source_rows[0]
+        assert refs[table]["is_test"] is True and refs[table]["model"]=="no-model-call"
+        for config in (local.config,target_config):
+            public=lineage.Store(config["url"],config["anon_jwt"],rest_path=config["rest_path"])
+            assert public._call("GET",table+"?id=eq."+str(fixture[key]))==[]
+    assert refs["rsi_results"]["execution_state"]=="runner_error" and refs["rsi_results"]["passed"] is None
+    def record(kind,name,parents,attributes):
+        return dict(namespace=namespace,kind=kind,record_id=name,parents=parents,attributes=attributes,
+                    source_commit="a"*40,artifact_digest="b"*64,occurred_at="2026-11-06T00:00:00Z",
+                    is_test=True,synthetic=False)
+    records=[
+        record("failure","fixture-occurrence",{},dict(failure_id="schema-fixture-only",family="canonical-restore-fixture",chain_id="canonical-restore-fixture")),
+        record("case","case-v1",dict(failure="fixture-occurrence"),dict(version=1,rsi_task_id=refs["rsi_results"]["task_id"])),
+        record("candidate","baseline",dict(case="case-v1"),dict(attempt=0,skills_commit="c"*40)),
+        record("candidate","candidate-1",dict(case="case-v1",previous_candidate="baseline"),dict(attempt=1,skills_commit="d"*40)),
+        record("comparison","fixture-comparison",dict(case="case-v1",current_candidate="baseline",candidate="candidate-1"),dict(campaign_id="canonical-fixture-only",contract_digest="e"*64)),
+        record("run","fixture-run",dict(comparison="fixture-comparison",candidate="candidate-1"),dict(run_key=refs["rsi_runs"]["run_key"],rsi_run_id=fixture["run_id"])),
+        record("result","fixture-result",dict(run="fixture-run"),dict(execution_state="runner_error",passed=None,rsi_result_id=fixture["result_id"])),
+    ]
+    source.append(records,expected_head=None)
+    from test_recovery import job
+    definition=job(namespace);definition.update(synthetic=False,campaign_id="canonical-fixture-only")
+    local.store.create_job(definition)
+    manifest=local.store.export(namespace)
+    projection=json.loads(manifest["snapshot_text"])
+    assert len(projection["externals"])==2
+    assert all(row.keys()=={"table","id","digest"} for row in projection["externals"])
+    assert all(not json.loads(row["record_text"])["synthetic"] for row in projection["lineage"])
+    assert all(json.loads(row["record_text"])["is_test"] for row in projection["lineage"])
+    restored=destination.restore(manifest,expected_head=None,expected_manifest_digest=manifest["manifest_digest"])
+    assert restored["restored"] is True and restored["head"]==manifest["source_head"]
+    assert target.read(namespace)==records
+    assert destination.restore(manifest,expected_head=restored["head"],expected_manifest_digest=manifest["manifest_digest"])["restored"] is False
+
+
+@pytest.mark.parametrize("field",["projection","effect-state","observation-outcome","slot-role","slot-effect-type"])
+def test_raw_restore_null_enums_refuse_without_partial_write(local,destination,field):
+    claimed=local.store.claim(prepared(local),"source")
+    reserved=local.store.begin_effect(claimed,0)
+    observed=recovery.KeyedFileEffect(local.root).lookup(reserved["effect"]["effect_key"],reserved["effect"]["payload_digest"])
+    local.store.observe_effect(reserved["job"],reserved["effect"]["effect_key"],observed)
+    manifest=local.store.export(local.namespace)
+    def mutate(data):
+        if field.startswith("slot-"):
+            definition=json.loads(data["jobs"][0]["job_text"])
+            definition["slots"][0]["role" if field=="slot-role" else "effect_type"]=None
+            data["jobs"][0].update(job_text=recovery.canonical(definition),job_digest=recovery.digest(definition))
+        elif field=="effect-state":data["effects"][0]["state"]=None
+        elif field=="observation-outcome":
+            observation=json.loads(data["effects"][0]["observation_text"]);observation["outcome"]=None
+            data["effects"][0]["observation_text"]=recovery.canonical(observation)
+    forged=resign(manifest,mutate)
+    if field=="projection":
+        forged["projection"]=None
+        forged["manifest_digest"]=recovery.digest({k:v for k,v in forged.items() if k!="manifest_digest"})
+    before=destination.snapshot(local.namespace)
+    with rejected("23514"):raw_restore(destination,forged)
+    assert destination.snapshot(local.namespace)==before
