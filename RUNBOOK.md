@@ -53,15 +53,16 @@ Keep keys/`AMS_LIVE` out of CI.
 
 ## Delivery and recovery
 
-Commit coherent steps with what/why; the [guard](.agents/hooks/require-committed.sh) checks dirt.
-Never commit to main, stash, reset or discard to clean.
-Merge current, checked non-site PRs into main with merge commits.
-Site: feature -> checked dev; only owner merges dev -> main.
-Follow [delivery reporting](workbench/docs/SKILLS.md#delivery).
+Use short-lived branches; name each work owner and target.
+Ready project records/non-site work -> checked main; website -> checked dev.
+Only owner promotes website dev -> main. Commit coherent steps; push owned work.
+Never stash, reset, discard to clean or commit on main.
+Follow [delivery](workbench/docs/SKILLS.md#delivery).
 
-Recover: Spec/Task, Wiki; adoption rollback: `workbench/sessions/recovery/adoption-recovery.json`.
+Recover via work owner/Wiki; rollback: `workbench/sessions/recovery/adoption-recovery.json`.
 Handoffs stay local and ignored in `workbench/sessions/handoffs/`; publish Tasks.
 
 ## Clean up
 
-`land` after checks: verify publication/containment and no owned dirt. Retain unfinished Spec work; report blockers.
+After verified target containment, reconcile owners and use `land` for guarded
+branch/worktree cleanup. Parent completion is separate; retain blockers.

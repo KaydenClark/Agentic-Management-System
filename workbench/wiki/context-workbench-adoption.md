@@ -17,6 +17,12 @@ last_verified: 2026-11-01
 
 Record of the first Workbench Adoption of AMS: what ran, what moved where, what was checked and what remains open. It explains; the manifest, tool receipt and controls own the live state. A Spec evidence row for this Adoption is still owed (see Open gaps).
 
+## Current delivery model, 2026-11-06
+
+The [exact confirmed repair scope](#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) establishes bounded delivery branches independent of Landmark/Spec lifetime. Tasks can belong to Specs or directly to Landmarks; ordinary project maintenance uses its real owner. Ready project records/non-site work reaches main; website work reaches dev under the unchanged owner promotion gate. Verified delivery, owner reconciliation and guarded cleanup close a change branch while parent acceptance may remain open.
+
+[RUNBOOK](../../RUNBOOK.md#delivery-and-recovery) and [SKILLS Delivery](../docs/SKILLS.md#delivery) govern the route. The [RSI repair record](../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) owns source, qualification and adoption evidence. The manifest keeps main as default/general integration and explicitly permits main/dev verification targets. The earlier S-011 continuing-branch instruction and premature PR208 model are historical, superseded for new work by this owner-confirmed scope; unrelated unfinished candidates remain preserved. Adoption details below retain their original dates and observations.
+
 ## Request and scope
 
 Kind: intent. State: confirmed. Source: Kayden, owner instruction approved 2026-11-01: "Run `setup-workbench` (mode Adopt) on the AMS repo; verify `render`, `doctor` and `next`; merge through a checked PR." The coordinator excluded product Specs, landmarks and decision records from this step: porting S-001/S-003, their decisions and landmarks follows in the next PR.

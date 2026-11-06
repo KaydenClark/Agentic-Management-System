@@ -15,6 +15,10 @@ last_verified: 2026-11-02
 
 Captured context. Claim labels preserve intent and uncertainty; capture alone supplies neither Canon nor implementation proof. The date above checks this page's capture format, not every claim.
 
+## Current branch-rule supersession, 2026-11-06
+
+The [new exact confirmed scope](context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) supersedes the continuing Spec-branch convention in historical JOT-0c8b00a9-901a-41c7-924e-1af73e48c7d6 for new work. Keep that original decision and its S-011 context intact. Current [delivery](../../RUNBOOK.md#delivery-and-recovery) uses bounded branches, main for ready project records/non-site work, dev for website work and owner-only website promotion. This amendment neither accepts old candidates nor deletes unfinished work.
+
 ## Cleanup responsibilities, 2026-11-02
 
 The [owner correction](#jot-fdaea0bd-5afa-4a88-ad43-dc8b41656c17) established cleanup, shared CI, delivery and recovery obligations. Following the [2026-11-03 document-ownership correction](context-workbench-adoption.md#jot-9abd9e46-08ae-4283-a950-a96e6095759f), [RUNBOOK](../../RUNBOOK.md#delivery-and-recovery) owns their procedures. [RUNBOOK Clean up](../../RUNBOOK.md#clean-up) owns the actions after Test And Build: inspect owned state, publish and verify the authorized target, remove contained temporary scaffolding, and leave clean owned checkouts with explicit retained items or blockers. Earlier merge authority and recovery protections remain.
