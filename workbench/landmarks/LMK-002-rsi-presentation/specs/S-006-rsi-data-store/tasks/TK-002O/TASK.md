@@ -29,3 +29,9 @@ On 2026-11-05 the owner explicitly requested this implementation under orchestra
 ## Verified prerequisite and scoped continuation
 
 N is natively done at 3228d58fe3fb8afbfbc04abf01e42fad72c48ac0 (product d03bb10a0045bf55bd7b0b629afa18a8951a8918), with accepted isolated write/readback and exact-head CI. On 2026-11-06 the orchestrator released O under the confirmed owner implementation request. N main containment is not this Task's prerequisite. This corrects the extra sequencing condition previously added to the Spec; N publication remains separately held. Preserve all stopped work, identity/attempt limits and isolated-only scope; no production/model/installation/deployment authority is added.
+
+## Starting inventory
+
+Workspace baseline sha256:059c7b58c9f3dffc63722a4762e37d8188454ea1938e931f290630211cb2eca2
+
+Native claim 10797e22e38f19c9a3b54c57aa5244f941d6c634 and rendered original records were committed before this complete snapshot. Raw inventory stays in local private recovery; retained unrelated refs remain local, without a whole-workspace remote-recovery claim.
