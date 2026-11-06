@@ -9,15 +9,15 @@
 **Planned verification:** Public ams-memory query/check/evaluate exercises, source change/restore and privacy refusal tests, focused pytest and native checks.
 **Claimed by:** codex-wiki-retrieval
 **Current claimant:** codex-wiki-retrieval
-**Next gate:** Root inspects final anchor delta before native close/releasing TK-002V; public export held.
+**Next gate:** Root verifies local done receipt/artifacts before releasing TK-002V; public export held.
 
 ## Assignment
 
-One High-tier source/record writer uses journey, TDD and writing-for-agents; recover Spec and linked contract. Serialize the Spec branch. Own additive Python/tests/entrypoint/evals and scoped docs; do not edit managed tools/shared skills. Evidence names actual model/harness.
+One High-tier source/record writer uses journey/TDD/writing-for-agents on the Spec branch; evidence names actual model/harness. Own additive Python/tests/entrypoint/evals and scoped docs, never managed tools/shared skills.
 
-Deliver read-only `ams-memory query/check/evaluate`: parsing, contextual deterministic keyword ranking, bounded Markdown/JSON, claim fingerprinting and tests. General eligible Wiki recall covers maintained prose, native Jots/correction context and source identities; no hardcoded answers or recursive reference ingestion. At least two routed real topics include Wiki's independent Landmark correction. Several claim/source bindings retain observed revision/digest/date and supersession in native-compatible Markdown.
+Deliver read-only query/check/evaluate across parsing, contextual deterministic keywords, bounded Markdown/JSON, claim fingerprinting and tests. General eligible prose/Jot/correction/source recall must work without hardcoded answers or recursive body ingestion. Two real routed topics include Wiki's independent Landmark correction. Multi-claim/source metadata retains observed revision/digest/date/supersession.
 
-Freeze actual navigation/native-Jot baseline with identical case/source/budget scope before tuning. Separate source-hit measures from answer judgments; initial independent/human fields may remain unmeasured. TK-002W owns broader evaluation. No paid services/required embeddings; optional ranking experiments require observed failure. Hand back committed candidate, CLI/results, identities, preservation and remaining limits after Check/QA/repair.
+Freeze executable navigation/native-Jot baseline with identical case/source/budget before tuning. Distinguish source measures from independent answers/effort; broader evaluation belongs to TK-002W. No paid services/required embeddings. Hand back committed CLI, QA/check results, source/case identities, preservation and remaining limits.
 
 ## Acceptance
 
@@ -34,13 +34,13 @@ Claim originals:9ccae2f. Workspace baseline sha256:296c63314038c19e04f8b3f7e372a
 
 ## Continuation and local proof
 
-Owner answered the exact bounded restart question “Authorize bounded continuation”; [native source](../../../../../../wiki/context-wiki-maintenance.md#jot-4a2097ca-5bd6-456f-83c9-3bdbe7a79a29). [Stopped/corrective report](../../../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) retains FAIL-118–125, red/green chronology and limits; Receipt1 below is unchanged.
+Owner explicitly authorized bounded continuation; [exact native source](../../../../../../wiki/context-wiki-maintenance.md#jot-4a2097ca-5bd6-456f-83c9-3bdbe7a79a29). [Corrective report](../../../../../../feedback/REPORT-wiki-memory-stopped-2026-11-05.md) preserves FAIL-118–125, red/green cycles and limits. Both prior receipts below remain unchanged.
 
-FAIL-122–124 repaired by focused red/green cycles, including interleaved historical heading anchors. Final focused suite26passed. Real console query/check works;4claims/6sources across Wiki-memory/AMS-purpose report unchanged. Observations bind inspected19778a2 on2026-11-06, including original/corrected owner-source lineage. Disposable real-source copies prove exactly affected explanations for change/restore/missing/unavailable; owners remain unchanged.
+Source f924010:26focused passes; console query/check4claims/6unchanged sources. Two real topics retain observations at19778a2/2026-11-06 and owner-source supersession. Disposable real-source copies prove exactly affected explanations on edit/restore/missing/unavailable without changing owners. Root inspected the final interleaved-heading fix and authorized local native closure.
 
-Frozen development comparison4/4passed before final anchor correction, with same prepared source/cases/budget; source-hit/context checks only. Final selector change has focused regression and real-console source check. Baseline/case SHA-256:58d3762db47301181fea0f5ec73143636a2a94984b4802386ab75d61b648ab30 / a97481ff93a26f8ed20031acf21e424d273fcd31f99379e84c7cfea37645e785. Safe capture reproduces baseline bytes exactly. Global native search still rejects pre-existing malformed coherence-topic Jot; valid routed reads remain separately recorded.
+[Development cases/baseline](../../../../../../../evals/wiki-memory/README.md) retain exact prepared2807256/source/case/budget identities and4/4 pre-anchor checks; final selector change has focused regression plus real console check. Safe capture reproduces baseline bytes. Global native search's existing malformed coherence Jot remains explicit; valid routed reads are separate.
 
-Preservation:87earlier Jot blocks,18history files,228managed/skill files and Receipt1 unchanged. Native Wiki/layout/hygiene pass; doctor retains known unrelated findings. Cold-start MEMORY/Wiki AGENTS route the procedure/CLI. Private recovery retains actual JSON checks, synthetic real-source exercise and preservation manifest. No independent answers, stale-answer judgments, held-out transfer or owner effort measured; root owns fresh assembled checks/Review and TK-002V/W. Root inspects final anchor delta before native close. Public export held; no push/merge/deployment/Human QA.
+Preserved87Jots/18history/228managed files and Receipt1; private recovery retains actual outputs/manifests. Wiki/layout/hygiene/diff pass; doctor has known unrelated findings. MEMORY/Wiki AGENTS route operating docs. Independent answers, stale repetition, transfer and owner effort remain unmeasured. Root owns assembled checks/Review and TK-002V/W. Public export held; no push, merge, deployment or Human QA.
 
 ## Receipt
 
