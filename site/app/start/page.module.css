@@ -318,6 +318,18 @@
   color: var(--ink);
 }
 
+/* Each chip opens its skills wiki article. */
+.skillLink {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: var(--focus-offset);
+}
+
+.skillLink:hover {
+  text-decoration-color: currentColor;
+}
+
 .skillNote {
   font-size: var(--text-small);
   color: var(--muted);

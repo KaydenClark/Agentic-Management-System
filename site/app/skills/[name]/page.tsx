@@ -53,6 +53,17 @@ export default async function SkillArticle({ params }: Params) {
             <InlineNodes nodes={a.summary} />
           </p>
         </header>
+        {/* The article's own headings as jump links: navigation, not content. */}
+        <nav aria-label="On this page" className={styles.toc} data-review-exclude="">
+          <p className={styles.tocHead}>On this page</p>
+          <ol>
+            {a.sections.map((s) => (
+              <li key={s.id}>
+                <a href={`#${s.id}`}>{s.title}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
         {a.sections.map((s) => (
           <section key={s.id} className={styles.section} aria-labelledby={s.id} data-section={s.id}>
             <h2 id={s.id}>{s.title}</h2>
