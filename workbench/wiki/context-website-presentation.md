@@ -411,3 +411,20 @@ Kayden authorizes implementation of S-009 (demo Grill Board) and S-010 (governan
 
 Preserve historical evidence, prior failed attempts, active Wiki/Board writers and all unchanged boundaries. PR101 stays stopped; initial candidate -> retry -> retry -> stop remains, baseline excluded. This website authority grants no new model campaign, evaluator qualification, personal skill installation or wider rollout. Public pages expose no review status/private criticism, and samples send no answers. Human QA is actual owner judgment; only Kayden controls dev-to-main promotion. Earlier preparation-only entries remain historical; this later scoped implementation instruction releases S-009/S-010 execution only, not unrelated holds.
 <!-- /jot-entry -->
+
+## Protected reader evidence — 2026-11-06
+
+Independent authenticated readback of dev `517184e46a4b3ba0ebda36a54a6744e1b7c3b606` established a working stored-row reader, beyond READY metadata: HTTP 200, the exact deployed footer, linked result rows in both task and version views, and a successful-read timestamp. [TK-002](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002/TASK.md) owns the dated safe summary and verification limits; [the site procedure](../../site/README.md#protected-dev-reader-readback) explains reproducible protected access. Raw protected responses and access tokens stay private. This closes the earlier observation gap for that identified deployment; later dev revisions still require readback. It establishes neither whole-Spec acceptance, owner Human QA nor improved outcomes.
+
+<!-- jot-entry -->
+### JOT-7a282d6d-3ca7-47bd-bc90-4c662fa6ab52
+Kind: observation
+State: current
+Recorded: 2026-11-06T10:35:27.226Z
+Author: codex-s007-reader-readback
+Source: Authenticated Vercel connector readback, dev 517184e46a4b3ba0ebda36a54a6744e1b7c3b606, 2026-11-06; S-007 TK-002
+Topic: website-presentation
+Supersedes: none
+
+Protected dev returned HTTP 200 with the exact footer SHA, stored result links in both task and version views and last successful read 2026-11-06T10:21:12.288Z. No unavailable message rendered. This establishes reader behavior only for the identified deployment; it grants no whole-Spec acceptance, owner QA, improvement claim or later deployment certification. Safe summary belongs TK-002; authenticated readback procedure belongs site/README.md. Raw protected HTML and access details remain private.
+<!-- /jot-entry -->

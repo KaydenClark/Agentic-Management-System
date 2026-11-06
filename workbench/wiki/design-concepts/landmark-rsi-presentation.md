@@ -25,7 +25,7 @@ No DQCs are assigned to this Landmark in the inspected tracker. There are no car
 
 ## Open and unresolved
 
-Inference: storage, lineage and chart behavior must be checked together before treating a displayed result as evidence. Their separate Specs own those checks and present delivery limits. This article neither reads live Supabase nor certifies the protected deployment. [The RSI explanation](../context-feedback-improvement-loop-plan.md) preserves Stage B/campaign holds; presentation readiness cannot release a campaign or imply broad benefit.
+Inference: storage, lineage and chart behavior must be checked together before treating a displayed result as evidence. Their separate Specs own those checks and present delivery limits. The [dated reader observation](../context-website-presentation.md#protected-reader-evidence--2026-11-06) now establishes protected stored-row rendering on one identified dev deployment; it does not certify later deployments or assembled chart acceptance. [The RSI explanation](../context-feedback-improvement-loop-plan.md) preserves Stage B/campaign holds; presentation readiness cannot release a campaign or imply broad benefit.
 
 ## Where the work lives
 
