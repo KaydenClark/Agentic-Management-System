@@ -8,7 +8,7 @@
 **Updated:** 2026-11-06
 **Catalog description:** Explain AMS and its evidence.
 **Blockers:** none
-**Next gate:** Complete TK-003.
+**Next gate:** Claim TK-002Z for built-page coverage.
 **Confirmation:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-5b41bab8-c88f-49c4-be9c-b438285490b0](../../../../wiki/context-active-spec-approvals.md)
 
@@ -18,7 +18,7 @@ The [owner brief](../../../../wiki/context-website-presentation.md) governs shel
 
 ## Outcome
 
-Explain AMS purpose, intent-to-work/feedback and evidence, plainly for non-engineers with technical sources. Present AMS without operating it.
+Explain AMS purpose, workflow/feedback and evidence plainly for non-engineers, with technical sources. Present AMS without operating it.
 
 ## Why It Matters
 
@@ -56,6 +56,8 @@ Navigation shows current page, tour order/start/finish and direct subject links,
 Introduce/link RSI charts (S-007), site-written skill summaries (S-008), the demo Grill Board with non-engineering questions (S-009), and governance/flow charts (S-010). Keep private skill source private.
 
 No Under-the-hood/build-history page. S-007 explains S-006 evidence/results; S-008 explains skills. Prose need not map every sentence to a row. Activity proves no improvement.
+
+Review inventory derives from built public routes and declared owners: every skill article and visitor404, with only the internal error fallback excluded. S-005 owns cards/private review.
 
 ### Data and approvals
 
