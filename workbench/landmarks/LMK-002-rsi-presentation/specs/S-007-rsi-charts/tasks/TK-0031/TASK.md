@@ -3,10 +3,12 @@
 **Task ID:** TK-0031
 **Spec ID:** S-007
 **Slice:** Preserve the stopped record and verify the four existing fixes on current dev
-**Status:** ready
+**Status:** in-progress
 **Blockers:** none
 **Destination:** spec-acceptance: Comparable series, regressions, read states and traceability.
 **Planned verification:** Preserve original TK-002L receipt rows byte-for-byte; satisfy record budgets; test timestamp, evidence and availability hash, grader isolation and run-only evidence; check actual bar contrast, responsive fixtures, build and required checks.
+**Claimed by:** codex-rsi-recovery
+**Current claimant:** codex-rsi-recovery
 
 ## Assignment
 
