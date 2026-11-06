@@ -10,7 +10,7 @@
 **Blockers:** none for mapping
 **Confirmation:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
 **Execution approval:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
-**Next gate:** Independently recheck private-file correction `15edd40` before native utilities; real skill calls still require qualified labels/grader and frozen conditions.
+**Next gate:** Keep the checked pre-model component in draft; qualify exact labels/grader/frozen conditions before real skill calls. No main merge or P acceptance.
 
 ## Intent and authority
 
@@ -26,7 +26,7 @@ A database of results alone does not execute the loop. Session-bound coordinatio
 
 ## Current Verified State
 
-Pre-model `0bcac2e52f4e46c5c516e4f98a9671691db110a6` retains native utility permissions/cancellation and synthetic crash/fresh-process non-repeat proof. Receipt2 preserves `7a594ce` ownership/cancellation Review FAIL. Independent recheck passed both repairs and10 store cases but found FIFO-open hang. Private-file correction `15edd40` passes32 process/file and9 store checks; recheck holds native calls. S-006 `3856614eeb8ec2e158db003025a7a75ee29bfc2f` has isolated checks, independent Review and full CI. Real model-turn cleanup/loading, semantic qualification and frozen-case result remain unverified. No graded pass, whole-S006 acceptance, production storage or model-call release follows; stopped/tool-free protocols stay unchanged.
+Receipts2/4 retain ownership/cancellation and FIFO Review FAILs. Independent recheck passed the bounded `15edd40` pre-model subset. Exact `271e63a` refresh passes actual standalone permissions, cancellation/controller SIGINT and synthetic utility crash -> fresh-process non-repeat; proofset `55ea79c2`. Full author/fresh suites each pass928/skip206; required fresh record checks pass. S-006 `3856614eeb8ec2e158db003025a7a75ee29bfc2f` has isolated checks, independent Review and CI; its protected publication remains separate. Model calls remain0. Real model-turn cleanup/loading, exact semantic qualification/freeze/capacity and frozen-case result remain unverified. No whole-S006/P acceptance or production release follows; stopped protocols stand.
 
 ## Desired Behavior
 
