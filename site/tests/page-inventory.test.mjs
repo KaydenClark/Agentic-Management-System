@@ -185,6 +185,23 @@ test('a later article cannot inherit an earlier verified containment receipt', (
   } finally { f.cleanup(); }
 });
 
+test('containment names a real branch and a positive or unknown PR before writing', () => {
+  for (const landed of [
+    { commit: 'b'.repeat(40), pr: 176 },
+    { branch: 'dev\nother', commit: 'b'.repeat(40), pr: 176 },
+    { branch: 'dev', commit: 'b'.repeat(40), pr: 0 },
+  ]) {
+    const f = fixture();
+    try {
+      Object.assign(f.rules[0], { provenance_kind: 'verified-containment', landed });
+      f.json('site/page-list.json', { owner_rules: f.rules, pages: [legacy] });
+      const before = readFileSync(join(f.site, 'page-list.json'), 'utf8');
+      assert.throws(() => generateInventory(f.site, { write: true }), /branch|PR/i);
+      assert.equal(readFileSync(join(f.site, 'page-list.json'), 'utf8'), before);
+    } finally { f.cleanup(); }
+  }
+});
+
 test('the current real build and committed review projection have exact coverage', () => {
   const result = generateInventory(undefined, { check: true });
   assert.equal(result.changed, false);

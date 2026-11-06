@@ -122,6 +122,10 @@ function validateOwner(row, records, project) {
   if (kind === 'pending-candidate') {
     if (row.landed !== null) fail('pending candidate must have landed:null');
   } else if (!row.landed || !SHA.test(row.landed.commit ?? '')) fail('historical/verified containment needs an immutable commit');
+  if (row.landed !== null) {
+    if (typeof row.landed?.branch !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9/._-]*$/.test(row.landed.branch)) fail('provenance needs an explicit branch');
+    if (row.landed.pr != null && (!Number.isSafeInteger(row.landed.pr) || row.landed.pr < 1)) fail('provenance PR must be positive or unknown');
+  }
 }
 
 export function generateInventory(site = DEFAULT_SITE, { write = false, check = false } = {}) {

@@ -858,6 +858,44 @@
         "commit": "259b7a905639cc6ab621220b160fc813c5bc43f1",
         "pr": 176
       }
+    },
+    {
+      "path": "/governance",
+      "title": "Agentic Management System",
+      "spec": "S-010",
+      "task": "TK-001",
+      "sources": [
+        "site/app/governance/page.tsx",
+        "site/app/governance/page.module.css",
+        "site/content/governance/task-lifecycle.json"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "e10216e653b5e18f4785175f422f35f39e6f96f0",
+        "pr": 179
+      }
+    },
+    {
+      "path": "/grill-board-demo",
+      "title": "Grill Board demo | Agentic Management System",
+      "spec": "S-009",
+      "task": "TK-0030",
+      "sources": [
+        "site/app/grill-board-demo/page.tsx",
+        "site/app/grill-board-demo/Board.tsx",
+        "site/app/grill-board-demo/Islands.tsx",
+        "site/app/grill-board-demo/data.ts",
+        "site/app/grill-board-demo/board.css",
+        "site/app/nav.ts",
+        "site/app/how-it-works/page.tsx"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "63870b54efba9b9028dc8c1ae194f3fef85138ae",
+        "pr": 177
+      }
     }
   ],
   "owner_rules": [
@@ -892,6 +930,42 @@
         "site/app/shell/Shell.tsx",
         "site/package-lock.json"
       ]
+    },
+    {
+      "route": "/grill-board-demo",
+      "spec": "S-009",
+      "task": "TK-0030",
+      "sources": [
+        "site/app/grill-board-demo/page.tsx",
+        "site/app/grill-board-demo/Board.tsx",
+        "site/app/grill-board-demo/Islands.tsx",
+        "site/app/grill-board-demo/data.ts",
+        "site/app/grill-board-demo/board.css",
+        "site/app/nav.ts",
+        "site/app/how-it-works/page.tsx"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "63870b54efba9b9028dc8c1ae194f3fef85138ae",
+        "pr": 177
+      }
+    },
+    {
+      "route": "/governance",
+      "spec": "S-010",
+      "task": "TK-001",
+      "sources": [
+        "site/app/governance/page.tsx",
+        "site/app/governance/page.module.css",
+        "site/content/governance/task-lifecycle.json"
+      ],
+      "provenance_kind": "verified-containment",
+      "landed": {
+        "branch": "dev",
+        "commit": "e10216e653b5e18f4785175f422f35f39e6f96f0",
+        "pr": 179
+      }
     }
   ],
   "excluded": {
