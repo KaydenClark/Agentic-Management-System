@@ -10,7 +10,7 @@
 **Blockers:** none for mapping
 **Confirmation:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
 **Execution approval:** [JOT-d04bb644-433f-4c2a-9817-a147e0e1f0f2](../../../../wiki/guidebooks/rsi-worker-contract.md#jot-d04bb644-433f-4c2a-9817-a147e0e1f0f2)
-**Next gate:** Repair the independently reproduced component cleanup failures; inert red/green and independent recheck precede further native utilities. Real skill-case calls still require qualified labels/grader and frozen conditions.
+**Next gate:** Independently recheck cleanup correction `6c65e14` before further native utilities. Real skill-case calls still need qualified labels/grader and frozen conditions.
 
 ## Intent and authority
 
@@ -26,7 +26,7 @@ A database of results alone does not execute the loop. Session-bound coordinatio
 
 ## Current Verified State
 
-Pre-model `0bcac2e52f4e46c5c516e4f98a9671691db110a6` retains process/store checks, native utility permission/cancellation and synthetic crash/fresh-process non-repeat proof. Independent Review FAIL at unchanged `7a594ce` methods proves malformed completion loses command ownership and first cancellation failure skips remaining commands; receipt2 preserves both. Native calls are held for bounded repair/recheck. S-006 `3856614eeb8ec2e158db003025a7a75ee29bfc2f` has verified isolated checks, independent Review and full CI. Real model-turn cleanup, skill loading, semantic qualification and the frozen-case outcome remain unverified. No graded pass, whole-S006 acceptance, production storage or model-call release follows. Existing stopped/tool-free protocols remain unchanged.
+Pre-model `0bcac2e52f4e46c5c516e4f98a9671691db110a6` retains process/store checks, native utility permission/cancellation and synthetic crash/fresh-process non-repeat proof. Independent Review FAIL at unchanged `7a594ce` methods proves malformed completion loses command ownership and first cancellation failure skips remaining commands; receipt2 preserves both. Correction `6c65e14` passes25 inert/process and8 isolated-store checks; independent recheck holds native calls. S-006 `3856614eeb8ec2e158db003025a7a75ee29bfc2f` has verified isolated checks, independent Review and full CI. Real model-turn cleanup, skill loading, semantic qualification and the frozen-case outcome remain unverified. No graded pass, whole-S006 acceptance, production storage or model-call release follows. Existing stopped/tool-free protocols remain unchanged.
 
 ## Desired Behavior
 

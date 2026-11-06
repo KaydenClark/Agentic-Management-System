@@ -19,10 +19,10 @@ last_verified: 2026-11-04
 
 ## Implemented pre-model interfaces
 
-The availability sentence above records Stage A on November4. The later scoped launch and [TK-002P](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-000B-rsi-worker/tasks/TK-002P/TASK.md) retain current bounded proof and failed checks. `ams.native_worker` now provides:
+The availability sentence above records Stage A on November 4. The later scoped launch and [TK-002P](../../landmarks/LMK-004-rsi-loop-during-build/specs/S-000B-rsi-worker/tasks/TK-002P/TASK.md) retain current bounded proof and failed checks. `ams.native_worker` now provides:
 
 - `run_owned`: bounded byte IO, owned POSIX-group cleanup and interruption propagation. A denied disappearance probe remains unknown; only observed disappearance permits success.
-- `NativeRpc` and `CodexHost`: one dedicated native server, strict bounded stdio and cancellation of its connection-scoped standalone commands before closing the server. Actual tool sessions can have separate process groups. Model-turn cleanup still needs its own proof.
+- `NativeRpc` and `CodexHost`: one dedicated native server, strict bounded stdio and cancellation of its connection-scoped standalone commands before closing the server. Actual tool sessions can have separate process groups. Malformed completion retains ownership/unknown outcome; cancellation attempts cover all tracked commands, retaining failures and the original exception. Receipt2 records an independent cleanup Review FAIL; the source correction needs independent recheck. Model-turn cleanup still needs its own proof.
 - `PrivateEvidence`: exclusive, fsynced private execution artifacts outside the case tree; safe reconciliation returns identities/digests. Missing evidence remains unavailable. Capture supplies no semantic grade.
 - `run_slot`: consume an existing S-006 job using an independently retained job digest and matching executor input digest. Claims/fences/slots remain in S-006. Existing consumed slots reconcile without another invocation; this function never creates/renames campaigns or namespaces and always leaves assessment unknown. The caller supplies the qualified release and fresh gates.
 
