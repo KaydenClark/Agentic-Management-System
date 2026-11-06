@@ -10,7 +10,7 @@
 **Execution approval:** [JOT-3f414c7a-684a-4625-b07a-11e7b73e83b2](../../../../wiki/context-active-spec-approvals.md)
 **Catalog description:** Content-bound page reviews and versioned feedback consumed by later drafts.
 **Blockers:** none
-**Next gate:** Close TK-003 with verification and documentation proof.
+**Next gate:** Complete TK-000K.
 
 
 ## Intent and authority
@@ -27,7 +27,7 @@ Exact content identity prevents stale approvals; consumed feedback prevents repe
 
 ## Current Verified State
 
-No Spec acceptance is claimed. TK-001/TK-002 are closed. FIFO correction060 passes fresh1049/4 skips and130 focused HTTP/browser/page checks, including existing and substituted FIFO, prompt refusal, unchanged originals/public state and lock release while the caller stays alive. Both corrective reviews clear the restored original claimant fields after FAIL261. Receipts3/Continuation1 remain exact. FAIL258-268 retains source FIFO/report/control and reviewer source/environment limits. Local65 close remains historical; native failing Review continued TK-003 with its original claimant. Current CI/native re-close remain. TK-000K retains its956-file start/75 copied ignored originals and incomplete prototype. Committed cards still pin47; private86 preparation is historical. Final capture must use assembled READY dev. Coverage/consumption, owner QA, main permission and workspace release remain open.
+No Spec acceptance is claimed. TK-001/TK-002/TK-003 are closed. FIFO correction060 passes fresh1049/4 skips and130 focused HTTP/browser/page checks. Exact0d CI1036/9 skips plus11 browser/all14steps succeeds; independent source/record reviews clear the restored original claimant fields. Native re-close preserves the first close, failing Review, Continuation1 and earlier receipts. FAIL258-268 retains source/control and reviewer source/environment limits. Close-record Review/CI remain. TK-000K retains its956-file start/75 copied ignored originals and incomplete prototype. Committed cards still pin47; private86 preparation is historical. Final capture must use assembled READY dev. Coverage/consumption, whole Review/acceptance, owner QA, main permission and workspace release remain open.
 
 History: [S-005](../../../../wiki/history/S-005.md).
 
