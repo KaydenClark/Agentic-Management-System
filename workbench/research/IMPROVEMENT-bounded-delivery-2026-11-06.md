@@ -1,7 +1,7 @@
 # RSI repair: bounded branch delivery and closeout
 
 Owner: Kayden direct AMS chat, 2026-11-06. Every edit to AMS/shared skills is RSI work.
-Status: bounded AMS adoption merged; TK-003D closed natively; PR212 publishes receipt; Director owns guarded archive.
+Status: adoption/closure published; primary AMS checkout and branch retained after host archive refusal (FAIL-218).
 Source-delivery capability: [S-011](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/SPEC.md), within [LMK-004](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md).
 
 ## Confirmed scope and authority
@@ -90,4 +90,4 @@ Fresh gpt-6-astra/high noncontributor Standards and Spec reviews PASS exact23447
 
 Actual04eb native result: exit1/accounted=false/remoteRecoverable=false/complete=false, zero original-byte/index findings; global1 unaccountedref,8 nonremote refs,13 nonremote worktrees,2 missing historical worktrees retained. Actual8f/3c checks also have zero original-byte/index findings after8f recovery, retaining all their global failures/pending continuation bytes. Six8f working originals and all seven index objects are in main. Its working projection was uncommitted: isolated immutable46c render reconstructed/hash-verified blob40ee705e and SHA25660156737954feb603681f20c42db23a69aefd67548e14bbf2d26a05f554955a9. Independent0644 private copy is native-accepted local-only original, not remote recovery or preservation all along. No snapshot/checker changes.
 
-Source archive/local deletion is Director-observed;003C receipt unchanged. AMS active checkout remains for closure/publication, then Director guard recheck/archive. PR208 two uncontained commits, unrelated material and raw global findings remain. Safe summary links proof/limits; no website promotion, Human QA, general benefit or whole-S-011 acceptance.
+Source archive/local deletion is Director-observed;003C receipt unchanged. AMS primary checkout/branch retained: host refused archive (FAIL-218); no removal. Director retains it without retry. PR208 two uncontained commits, unrelated material and raw global findings remain. Safe summary links proof/limits; no website promotion, Human QA, general benefit or whole-S-011 acceptance.
