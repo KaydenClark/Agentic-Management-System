@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
 **Execution approval:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
-**Next gate:** Dispatcher verifies TK-003C artifact before TK-003D; older campaigns stay held.
+**Next gate:** Close TK-003D with verification and documentation proof.
 
 ## Intent and authority
 

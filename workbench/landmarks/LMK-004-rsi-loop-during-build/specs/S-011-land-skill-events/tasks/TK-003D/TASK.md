@@ -3,10 +3,12 @@
 **Task ID:** TK-003D
 **Spec ID:** S-011
 **Slice:** AMS publishes the verified bounded workflow and closes eligible owned scaffolding
-**Status:** blocked
+**Status:** in-progress
 **Blockers:** TK-003C
 **Destination:** spec-acceptance: Bounded repair acceptance
 **Planned verification:** Verified catalog publication/install prerequisite; exact-head AMS review/CI, fresh-checkout and merged-main checks, genuine original closeout with all findings, and guarded owned cleanup.
+**Claimed by:** codex-bounded-ams-delivery
+**Current claimant:** codex-bounded-ams-delivery
 
 ## Assignment
 
