@@ -1,0 +1,199 @@
+{
+  "schema": "landmark-tracker/destination-question@3",
+  "id": "DQC-000L",
+  "revision": 3,
+  "title": "RSI: Worker location and resources",
+  "question": "Where should repair and evaluation run, and what resource use can continue without asking?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "chat:ams-rsi-alignment-20261106",
+      "revision": null
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [],
+  "claims": [],
+  "origin": {
+    "title": "RSI: Worker location and resources",
+    "question": "Where should repair and evaluation run, and what resource use can continue without asking?",
+    "sources": [
+      {
+        "id": "chat:ams-rsi-alignment-20261106",
+        "revision": null
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-07T00:08:47.574Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-07T00:08:47.574Z",
+      "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    },
+    {
+      "revision": 2,
+      "at": "2026-11-07T00:09:19.008Z",
+      "reason": "DQC propose",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "pending",
+            "proposal": {
+              "readback": "**Question:** Where should repair and evaluation run, and what resource use can continue without asking?\n\n**Recommended answer:** Start with the existing local Python-worker direction and subscription harnesses, using the established model/attempt limits. Make offline or unavailable workers visible. Choose the actual machine, scheduling, concurrency and any cloud execution explicitly; add no paid service by inference.\n\n**Why:** A hosted database does not execute repairs. I assumed a local worker without establishing which host is reliably available.\n\n**Intended impact:** Determines availability, compute authority, scheduling and practical throughput.",
+              "why": "A hosted database does not execute repairs. I assumed a local worker without establishing which host is reliably available.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000H",
+                "DQC-000J",
+                "DQC-000K"
+              ]
+            },
+            "digest": "17a573cc6e8b399b01bc87603ba1fbe9731668e8a0a47b19ebb188f75c3112af",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000L-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:19.008Z",
+                "requestDigest": "0800bd6d6cc2a65456d828aa25d2bfe293cfc1eb225681305bbfe6f074bb21bc",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-07T00:52:05.789Z",
+      "reason": "DQC correct",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "needs-rewrite",
+            "proposal": {
+              "readback": "**Question:** Where should repair and evaluation run, and what resource use can continue without asking?\n\n**Recommended answer:** Start with the existing local Python-worker direction and subscription harnesses, using the established model/attempt limits. Make offline or unavailable workers visible. Choose the actual machine, scheduling, concurrency and any cloud execution explicitly; add no paid service by inference.\n\n**Why:** A hosted database does not execute repairs. I assumed a local worker without establishing which host is reliably available.\n\n**Intended impact:** Determines availability, compute authority, scheduling and practical throughput.",
+              "why": "A hosted database does not execute repairs. I assumed a local worker without establishing which host is reliably available.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000H",
+                "DQC-000J",
+                "DQC-000K"
+              ]
+            },
+            "digest": "17a573cc6e8b399b01bc87603ba1fbe9731668e8a0a47b19ebb188f75c3112af",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000L-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:19.008Z",
+                "requestDigest": "0800bd6d6cc2a65456d828aa25d2bfe293cfc1eb225681305bbfe6f074bb21bc",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-firstpass-20261106-DQC-000L-answer",
+                "type": "correct",
+                "at": "2026-11-07T00:52:05.789Z",
+                "requestDigest": "ee1aa11bdf3c541aeb94ab430a43eca07729d16b9a32a07229644702da1c2cb9",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "note": "On Servitor, using the AMS Website project to prove things work. It should be tested on real work.",
+                "kind": "change",
+                "revision": 3,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "lifecycle": {
+    "state": "needs-rewrite",
+    "proposal": {
+      "readback": "**Question:** Where should repair and evaluation run, and what resource use can continue without asking?\n\n**Recommended answer:** Start with the existing local Python-worker direction and subscription harnesses, using the established model/attempt limits. Make offline or unavailable workers visible. Choose the actual machine, scheduling, concurrency and any cloud execution explicitly; add no paid service by inference.\n\n**Why:** A hosted database does not execute repairs. I assumed a local worker without establishing which host is reliably available.\n\n**Intended impact:** Determines availability, compute authority, scheduling and practical throughput.",
+      "why": "A hosted database does not execute repairs. I assumed a local worker without establishing which host is reliably available.",
+      "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+      "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+      "round": "rsi-cross-project-20261106",
+      "priority": {
+        "value": 1,
+        "reason": "Owner requested first-pass alignment before further decisions."
+      },
+      "value": {
+        "value": 1,
+        "reason": "Expose an unresolved choice affecting the shared RSI loop."
+      },
+      "dependencies": [
+        "DQC-000H",
+        "DQC-000J",
+        "DQC-000K"
+      ]
+    },
+    "digest": "17a573cc6e8b399b01bc87603ba1fbe9731668e8a0a47b19ebb188f75c3112af",
+    "confirmations": [],
+    "events": [
+      {
+        "eventId": "rsi-align-20261106-DQC-000L-v1",
+        "type": "propose",
+        "at": "2026-11-07T00:09:19.008Z",
+        "requestDigest": "0800bd6d6cc2a65456d828aa25d2bfe293cfc1eb225681305bbfe6f074bb21bc",
+        "source": null,
+        "note": null,
+        "revision": 2,
+        "round": "rsi-cross-project-20261106"
+      },
+      {
+        "eventId": "rsi-firstpass-20261106-DQC-000L-answer",
+        "type": "correct",
+        "at": "2026-11-07T00:52:05.789Z",
+        "requestDigest": "ee1aa11bdf3c541aeb94ab430a43eca07729d16b9a32a07229644702da1c2cb9",
+        "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+        "note": "On Servitor, using the AMS Website project to prove things work. It should be tested on real work.",
+        "kind": "change",
+        "revision": 3,
+        "round": "rsi-cross-project-20261106"
+      }
+    ]
+  }
+}

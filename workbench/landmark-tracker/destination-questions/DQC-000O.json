@@ -1,0 +1,255 @@
+{
+  "schema": "landmark-tracker/destination-question@3",
+  "id": "DQC-000O",
+  "revision": 3,
+  "title": "RSI: Conditional merge authority",
+  "question": "Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?",
+  "answer": "**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?\n\n**Recommended answer:** Yes. Encode your conditional approval for the exact assessed candidate, linked stored evidence, accepted qualification, benefit/regression requirements and repository checks. Preserve existing stopped work and attempt limits. Do not add another routine permission request; changed candidates need matching evidence.\n\n**Why:** You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.\n\n**Intended impact:** Turns the approval into an enforceable delivery rule rather than a reminder or a self-reported grade.",
+  "confirmation": {
+    "basis": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+    "revision": 3
+  },
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "chat:ams-rsi-alignment-20261106",
+      "revision": null
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [],
+  "claims": [],
+  "origin": {
+    "title": "RSI: Conditional merge authority",
+    "question": "Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?",
+    "sources": [
+      {
+        "id": "chat:ams-rsi-alignment-20261106",
+        "revision": null
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-07T00:08:47.832Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-07T00:08:47.832Z",
+      "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    },
+    {
+      "revision": 2,
+      "at": "2026-11-07T00:09:20.718Z",
+      "reason": "DQC propose",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "pending",
+            "proposal": {
+              "readback": "**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?\n\n**Recommended answer:** Yes. Encode your conditional approval for the exact assessed candidate, linked stored evidence, accepted qualification, benefit/regression requirements and repository checks. Preserve existing stopped work and attempt limits. Do not add another routine permission request; changed candidates need matching evidence.\n\n**Why:** You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.\n\n**Intended impact:** Turns the approval into an enforceable delivery rule rather than a reminder or a self-reported grade.",
+              "why": "You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000I",
+                "DQC-000N"
+              ]
+            },
+            "digest": "2d0a1529c6428b6460f76cb026887d723351d26e30b3ce4029f95f08540a6eb5",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000O-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:20.718Z",
+                "requestDigest": "d60f9548d1b993518f1f462a71d40e59652fe8817d96b045315c506588cbe4fd",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-07T00:52:07.623Z",
+      "reason": "DQC confirm",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "confirmed",
+            "proposal": {
+              "readback": "**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?\n\n**Recommended answer:** Yes. Encode your conditional approval for the exact assessed candidate, linked stored evidence, accepted qualification, benefit/regression requirements and repository checks. Preserve existing stopped work and attempt limits. Do not add another routine permission request; changed candidates need matching evidence.\n\n**Why:** You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.\n\n**Intended impact:** Turns the approval into an enforceable delivery rule rather than a reminder or a self-reported grade.",
+              "why": "You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000I",
+                "DQC-000N"
+              ]
+            },
+            "digest": "2d0a1529c6428b6460f76cb026887d723351d26e30b3ce4029f95f08540a6eb5",
+            "confirmations": [
+              {
+                "readback": "**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?\n\n**Recommended answer:** Yes. Encode your conditional approval for the exact assessed candidate, linked stored evidence, accepted qualification, benefit/regression requirements and repository checks. Preserve existing stopped work and attempt limits. Do not add another routine permission request; changed candidates need matching evidence.\n\n**Why:** You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.\n\n**Intended impact:** Turns the approval into an enforceable delivery rule rather than a reminder or a self-reported grade.",
+                "proposal": {
+                  "readback": "**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?\n\n**Recommended answer:** Yes. Encode your conditional approval for the exact assessed candidate, linked stored evidence, accepted qualification, benefit/regression requirements and repository checks. Preserve existing stopped work and attempt limits. Do not add another routine permission request; changed candidates need matching evidence.\n\n**Why:** You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.\n\n**Intended impact:** Turns the approval into an enforceable delivery rule rather than a reminder or a self-reported grade.",
+                  "why": "You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.",
+                  "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                  "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner requested first-pass alignment before further decisions."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                  },
+                  "dependencies": [
+                    "DQC-000I",
+                    "DQC-000N"
+                  ]
+                },
+                "digest": "2d0a1529c6428b6460f76cb026887d723351d26e30b3ce4029f95f08540a6eb5",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                "revision": 3,
+                "eventId": "rsi-firstpass-20261106-DQC-000O-answer",
+                "at": "2026-11-07T00:52:07.623Z"
+              }
+            ],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000O-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:20.718Z",
+                "requestDigest": "d60f9548d1b993518f1f462a71d40e59652fe8817d96b045315c506588cbe4fd",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-firstpass-20261106-DQC-000O-answer",
+                "type": "confirm",
+                "at": "2026-11-07T00:52:07.623Z",
+                "requestDigest": "a3bceeb05c1b0391809b092b13f1e2fbc87df05fba44429426da67f8caec7809",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "note": "Yes, they are authorize to merge. the orchestrator merges them. Or who ever is fixing the skill. its part of completing it. merging it into main and cleaning up the branch you left behind.",
+                "revision": 3,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "lifecycle": {
+    "state": "confirmed",
+    "proposal": {
+      "readback": "**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?\n\n**Recommended answer:** Yes. Encode your conditional approval for the exact assessed candidate, linked stored evidence, accepted qualification, benefit/regression requirements and repository checks. Preserve existing stopped work and attempt limits. Do not add another routine permission request; changed candidates need matching evidence.\n\n**Why:** You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.\n\n**Intended impact:** Turns the approval into an enforceable delivery rule rather than a reminder or a self-reported grade.",
+      "why": "You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.",
+      "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+      "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+      "round": "rsi-cross-project-20261106",
+      "priority": {
+        "value": 1,
+        "reason": "Owner requested first-pass alignment before further decisions."
+      },
+      "value": {
+        "value": 1,
+        "reason": "Expose an unresolved choice affecting the shared RSI loop."
+      },
+      "dependencies": [
+        "DQC-000I",
+        "DQC-000N"
+      ]
+    },
+    "digest": "2d0a1529c6428b6460f76cb026887d723351d26e30b3ce4029f95f08540a6eb5",
+    "confirmations": [
+      {
+        "readback": "**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?\n\n**Recommended answer:** Yes. Encode your conditional approval for the exact assessed candidate, linked stored evidence, accepted qualification, benefit/regression requirements and repository checks. Preserve existing stopped work and attempt limits. Do not add another routine permission request; changed candidates need matching evidence.\n\n**Why:** You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.\n\n**Intended impact:** Turns the approval into an enforceable delivery rule rather than a reminder or a self-reported grade.",
+        "proposal": {
+          "readback": "**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?\n\n**Recommended answer:** Yes. Encode your conditional approval for the exact assessed candidate, linked stored evidence, accepted qualification, benefit/regression requirements and repository checks. Preserve existing stopped work and attempt limits. Do not add another routine permission request; changed candidates need matching evidence.\n\n**Why:** You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.\n\n**Intended impact:** Turns the approval into an enforceable delivery rule rather than a reminder or a self-reported grade.",
+          "why": "You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.",
+          "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+          "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+          "round": "rsi-cross-project-20261106",
+          "priority": {
+            "value": 1,
+            "reason": "Owner requested first-pass alignment before further decisions."
+          },
+          "value": {
+            "value": 1,
+            "reason": "Expose an unresolved choice affecting the shared RSI loop."
+          },
+          "dependencies": [
+            "DQC-000I",
+            "DQC-000N"
+          ]
+        },
+        "digest": "2d0a1529c6428b6460f76cb026887d723351d26e30b3ce4029f95f08540a6eb5",
+        "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+        "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+        "revision": 3,
+        "eventId": "rsi-firstpass-20261106-DQC-000O-answer",
+        "at": "2026-11-07T00:52:07.623Z"
+      }
+    ],
+    "events": [
+      {
+        "eventId": "rsi-align-20261106-DQC-000O-v1",
+        "type": "propose",
+        "at": "2026-11-07T00:09:20.718Z",
+        "requestDigest": "d60f9548d1b993518f1f462a71d40e59652fe8817d96b045315c506588cbe4fd",
+        "source": null,
+        "note": null,
+        "revision": 2,
+        "round": "rsi-cross-project-20261106"
+      },
+      {
+        "eventId": "rsi-firstpass-20261106-DQC-000O-answer",
+        "type": "confirm",
+        "at": "2026-11-07T00:52:07.623Z",
+        "requestDigest": "a3bceeb05c1b0391809b092b13f1e2fbc87df05fba44429426da67f8caec7809",
+        "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+        "note": "Yes, they are authorize to merge. the orchestrator merges them. Or who ever is fixing the skill. its part of completing it. merging it into main and cleaning up the branch you left behind.",
+        "revision": 3,
+        "round": "rsi-cross-project-20261106"
+      }
+    ]
+  }
+}

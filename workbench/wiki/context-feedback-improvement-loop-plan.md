@@ -28,6 +28,22 @@ The owner launched Stage A and explicitly confirmed the [exact four-section read
 
 Earlier statements that the assembled readback was unconfirmed or publication blocked refer to earlier stages; they are not the current frontier. Confirmation covers meaning and Stage A executable preparation. A separate Stage B launch is still required. This Wiki repair starts no model trials, database writes, automation, skill installation, deployment or stopped campaigns, and does not select a catalog pilot. The [live release owners](guidebooks/rsi-loop-continuation.md) govern any future action. Merge, installation, observed loading, Human QA and website promotion retain separate authority.
 
+## Cross-project real-use alignment — 2026-11-06
+
+The owner requested a first-pass question tree before resolving the agent's proposed observer, upload, worker, grading, merge and distribution choices. The existing destination is retained: skills and their produced Workbenches are AMS, and actual owner-requested work supplies valuable evidence. Cross-project collection and sharing mechanics are pending. The question readback format is Question / Recommended answer / Why / Intended impact; corrected wording is presented again before moving on. This interview does not release implementation.
+
+Pending branches: [1. Coverage (DQC-000E)](../landmark-tracker/destination-questions/DQC-000E.json); [2. Run boundaries (DQC-000F)](../landmark-tracker/destination-questions/DQC-000F.json); [3. Success and failure (DQC-000G)](../landmark-tracker/destination-questions/DQC-000G.json); [4. Evidence and privacy (DQC-000H)](../landmark-tracker/destination-questions/DQC-000H.json); [5. Recording authority (DQC-000I)](../landmark-tracker/destination-questions/DQC-000I.json); [6. Capture and transport (DQC-000J)](../landmark-tracker/destination-questions/DQC-000J.json); [7. Repair triggers and priority (DQC-000K)](../landmark-tracker/destination-questions/DQC-000K.json); [8. Worker location and resources (DQC-000L)](../landmark-tracker/destination-questions/DQC-000L.json); [9. Repair scope and pruning (DQC-000M)](../landmark-tracker/destination-questions/DQC-000M.json); [10. Fitness, Alignment and regression (DQC-000N)](../landmark-tracker/destination-questions/DQC-000N.json); [11. Conditional merge authority (DQC-000O)](../landmark-tracker/destination-questions/DQC-000O.json); [12. Sharing accepted versions (DQC-000P)](../landmark-tracker/destination-questions/DQC-000P.json); [13. Website and completion proof (DQC-000Q)](../landmark-tracker/destination-questions/DQC-000Q.json). Exact proposals and dependencies live on those DQCs. Coverage is the first ready question; the owner may provide context across the whole tree before individual resolution. The first pass preserves explicit acceptances on coverage (DQC-000E), repair timing (DQC-000K) and conditional merge (DQC-000O). DQC-000E now preserves the confirmed GPT_OS-independent reporting readback and earlier coverage history. DQC-000F now holds the confirmed revised question 2; DQC-000G now holds confirmed question 3. At the owner’s request DQC-000I/question 5 storage ownership is the pending frontier; question 4 remains open. Other answers/corrections are retained for revised readbacks. No prior stopped campaign is resumed.
+
+## First-pass corrections and expert findings — 2026-11-06
+
+The owner requests shared per-skill failure capture outside the application project, with GPT_OS allowed as orchestrator. This reopens the earlier project-Markdown intake recommendation; the exact central owner remains under discussion. Owner feedback is the real-use failure signal. Repairs run on Servitor after the current work or at a chosen time and must demonstrate new useful work without recurrence.
+
+The owner identifies the dedicated pruning skill and the author → prune → three-run regression audit → grade → repair cycle. The inspected dedicated prune-artifact draft exists separately, while the installed author-skill still routes to writing-for-agents. This is a source/install mismatch, not authority to replace or install either skill. The website should expose longitudinal skill quality and errors, including failed improvement rounds, with Fitness/Alignment and model/provider context. Aggregate recurrence needs observed-use counts as well as failures; the counting rule is still pending.
+
+Expert source checks: ADR-003H specifies Python-to-Supabase results delivery with a local secret; ADR-003G preserves fixed-model comparisons and trusted graders. GitHub webhooks can notify about pushed records but cannot observe owner-reported failures that have not been recorded. GitHub source/delivery and Supabase results are distinct responsibilities; no new canonical owner is silently selected. Repo visibility is private on the inspected live metadata; private repository material must not automatically be published as public skill content.
+
+Publication observation: records-only PR211 passed its required CI on f172024, but automatic approval review rejected merge because it required direct owner merge authorization. No merge was performed and no alternate route was used. Continue the interview; later first-pass record commits change the PR head and require fresh checks.
+
 ## Relationships and unresolved proof
 
 The [AMS purpose](context-ams-purpose.md) explains why the website build is the first application. The [Grill Board](context-grilling-board.md) supplies sourced owner corrections and quality feedback; [RSI presentation](design-concepts/landmark-rsi-presentation.md) displays evidence at its supported strength. [Wiki maintenance](guidebooks/wiki-maintenance.md) makes the resulting knowledge retrievable, but a successful local correction exercise is not broad RSI benefit.
@@ -185,4 +201,95 @@ Topic: feedback-improvement-loop-plan
 Supersedes: JOT-8529e8c1-690d-42b2-a501-dcc1dcce4a06
 
 Kayden challenged the repeated merge-approval requests in the direct AMS chat on 2026-11-04: "I don't know how many times we need to fix this so you can commit, PR, and merge things automatically". This continuation treated that instruction as authorization for routine checked delivery within the existing AMS scope. The original FAIL-079/080 denials explicitly distinguished trusted user authorization from permission quoted in repository policy. After verifying the unchanged non-site candidate 7dbcc98829627ea2152c616cc99035bcc26b31f2, passed independent metadata reviews and successful shared CI run 41799304048, the same GitHub connector merged PR169 into main at 3e3078810753035f289f20e5f9bc268a61e0fbd3. Fresh clone of main verified the merge and its candidate parent. The former publication hold is resolved for PR169; both refusals remain historical evidence. No approval setting or reviewer policy changed, and one successful merge does not establish that standing authorization will be recognized in every future session. Stage B implementation, campaigns, database writes, automation, installation, Human QA and website dev-to-main promotion retain their existing authority boundaries.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-518f030f-a794-4b89-9846-e383bbf5bafb
+Kind: intent
+State: current
+Recorded: 2026-11-07T00:10:11.402Z
+Author: Kayden; source-linked summary by Codex
+Source: chat:ams-rsi-alignment-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden requested align-concept before further RSI decisions: expose agent-selected choices and uncertainty, create the question tree for an owner first pass, then resolve each using Question / Recommended answer / Why / Intended impact as that question’s readback. Corrected or rejected wording must receive a revised readback before proceeding. No extra unchanged per-question readback is required. This request authorizes alignment and knowledge recording only. Prior owner statements identify skills and their produced Workbenches as AMS, real owner-requested work as valuable run evidence, Supabase as the shared lifecycle destination and Stable/Excellent as the conditional skill-merge requirement. The exact mechanics and boundaries remain pending in DQC-000E (Coverage), DQC-000F (Run boundaries), DQC-000G (Success and failure), DQC-000H (Evidence and privacy), DQC-000I (Recording authority), DQC-000J (Capture and transport), DQC-000K (Repair triggers and priority), DQC-000L (Worker location and resources), DQC-000M (Repair scope and pruning), DQC-000N (Fitness, Alignment and regression), DQC-000O (Conditional merge authority), DQC-000P (Sharing accepted versions), DQC-000Q (Website and completion proof). Agent recommendations are provisional; silence is not an owner answer. Current frontier is coverage; other branches accept first-pass context without being treated as settled.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8a1bdb74-34d9-4a01-93ad-00216a7880a4
+Kind: intent
+State: current
+Recorded: 2026-11-07T00:53:10.008Z
+Author: Kayden; source-linked first-pass summary by Codex
+Source: chat:ams-rsi-alignment-first-pass-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+First-pass owner answers, 2026-11-06: capture participating Workbench skill uses by the owner, Codex and Claude across Mac, PC and cloud. The owner reports failures and agents record them in a shared per-skill history, not in the application project where the work happened; GPT_OS is the allowed orchestrator location. Whether GitHub/skills, GPT_OS or Supabase owns each record remains an expert recommendation to resolve with the owner. Capture promptly; the later question 2 correction requires repair after work finishes, except blocking failures recorded as critical and repaired in a new chat so the original session can resume. Run on Servitor and prove behavior through actual AMS website work. Pruning means the existing dedicated pruning skill, created to remove duplication from author-skill/writing-for-agents, not generic automatic shortening. The intended author -> dedicated prune -> regression audit cycle grades each of three runs and derives skill Fitness and Alignment from them; preserve failures and repeat repairs until accepted Stable/Excellent without recorded regressions. The orchestrator or fixer owns eligible main merge and branch cleanup as part of completion. An automated or user-run updater shares accepted skills. Public website intent is aggregate improvement over hundreds of uses/assessments, with per-skill run history, Fitness, Alignment, model tier/provider and recurrence trends, rather than an isolated result. The repository may hold private information while skills and safe results are open-source showcase material. Exact answers are retained in DQC-000E–000Q. Explicit unchanged acceptances are retained on coverage, repair timing and conditional merge; corrected/expanded proposals remain pending their revised readbacks. Four improvement rounds versus the existing candidate-attempt limit, successful-use denominators and exact score acceptance remain open distinctions for later questions. This is alignment recording, not installation, a new campaign or execution launch.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-e3bf52ba-193c-4692-a5a5-665cc396ffac
+Kind: intent
+State: confirmed
+Recorded: 2026-11-07T01:08:01.389Z
+Author: Kayden
+Source: chat:ams-rsi-q1-independent-confirmation-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden explicitly confirmed the exact DQC-000E revised readback: shared skill reporting works from any project on Mac, PC or cloud without requiring GPT_OS. GPT_OS may configure it, but is not a runtime or working-directory prerequisite. The repair worker is separate on Servitor. Exact owner reply: Yes, that is what I mean; it should work from any project on Mac, PC or cloud without requiring GPT_OS; move to question 2. The native DQC confirmation preserves the exact original reply and displayed readback. This confirms meaning only. DQC-000F now holds the pending revised question 2: what constitutes a use, use/outcome records, immediate failure intake and deferred repair timing. No implementation or new model campaign is authorized.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-bfcce808-fb92-4ec2-9b10-2f3e2a80b219
+Kind: intent
+State: confirmed
+Recorded: 2026-11-07T01:08:37.350Z
+Author: Kayden; sourced summary by Codex
+Source: chat:ams-rsi-q1-independent-confirmation-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: JOT-e3bf52ba-193c-4692-a5a5-665cc396ffac
+
+Question 1 is confirmed: shared reporting works from any project on Mac, PC or cloud without requiring GPT_OS. GPT_OS may configure it but is not a working-directory or runtime prerequisite; repair execution is separate on Servitor. Exact confirmation and displayed readback are preserved in DQC-000E. The preceding Jot summarized the owner reply but incorrectly labelled that summary as exact wording; use the DQC snapshot for exact text. The owner requested proceeding to question 2. DQC-000F holds its revised pending readback about use boundaries, outcome capture, immediate failure intake and later repair timing. This confirms meaning only and releases no implementation or new model campaign.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-e1d61f3c-e65e-410f-9c72-b54e4fbc1108
+Kind: intent
+State: current
+Recorded: 2026-11-07T01:12:18.119Z
+Author: Kayden; sourced correction summary by Codex
+Source: chat:ams-rsi-q2-blocking-repair-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Question 2 correction: log failures immediately, but start repairs after the current work is finished. Exception: a failure blocking that work is recorded as critical and repaired in a new chat so the original session can resume with the fixed skill. Exact owner correction is preserved in DQC-000F and DQC-000K. Revised question 2 is pending; the broader earlier timing recommendation in question 7 is reopened while preserving its confirmation history. This records an operational blocking-failure requirement without editing frozen assessment check classes or launching a repair, chat, installation or campaign.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-066c5fbe-ff69-4f7e-981f-23d9dba5a670
+Kind: intent
+State: confirmed
+Recorded: 2026-11-07T01:14:36.728Z
+Author: Kayden; sourced confirmation summary by Codex
+Source: chat:ams-rsi-q2-confirmation-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden replied confirmed to the exact revised question 2 displayed in chat. DQC-000F retains the native exact readback/confirmation snapshot. Record use outcomes and failures immediately; start repairs after current work finishes, except blocking failures recorded as critical and repaired in a separate chat so the original session can resume with the fixed skill. Question 2 settles this timing correction affecting question 7; preserve older confirmation history without re-asking the settled timing choice. The pending frontier is DQC-000G/question 3: shared per-skill failure history and regression cases. Exact storage ownership remains unresolved for question 5. This confirms meaning and does not release implementation or a model campaign.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-bcb802eb-4a64-49f0-a9cb-8907d84e40b1
+Kind: intent
+State: current
+Recorded: 2026-11-07T01:19:20.711Z
+Author: Kayden; sourced answers and proposal summary by Codex
+Source: chat:ams-rsi-q3-confirm-q5-storage-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden accepted question 3 with This is correct and explicitly requested proceeding directly to question 5 about storage. The exact question 3 readback and confirmation are retained in DQC-000G. DQC-000I now proposes Supabase as shared use/failure/job/result history and the skills Git repository as versioned source/regression-case/rubric assets. A per-environment pending queue handles transport; per-skill failure logs are views over central records. This ownership recommendation remains pending, and reopens the older project-Markdown intake design rather than claiming a migration occurred. Question 4 privacy/access/retention remains unanswered; question 6 will settle the interface. Confirmed blocking-repair timing and Servitor ownership remain. No implementation or database changes were performed.
 <!-- /jot-entry -->
