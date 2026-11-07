@@ -156,7 +156,7 @@ Round: rsi-cross-project-20261106. Dependencies: none.
 
 ## DQC-000F — RSI: Run boundaries
 
-Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
+Revision 5; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
 
 <pre>**Question:** What counts as a skill use, what do we record, and when does a failure enter the RSI loop?
 
@@ -173,6 +173,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 - propose at r2
 - correct at r3: When me, you \(codex\), or claude uses one of the workbench skills that we are doing RSI on\. we should log the failures and run the RSI loop on it\. The benefits of an RSI loop is that its recorded and can be started as soon as its logged in the system as needing to be fixed\.
 - propose at r4
+- correct at r5: Repair should start after the work is finished, unless its blocking that work\. In which case the failure is recorded as a critical failure and should be worked on in a new chat so that this session can pick back up with the fixed skill\.
 
 ## DQC-000G — RSI: Success and failure
 

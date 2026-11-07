@@ -3453,7 +3453,7 @@
         "at": "2026-11-07T00:08:47.038Z"
       },
       "corrections": [],
-      "revision": 4,
+      "revision": 5,
       "history": [
         {
           "revision": 1,
@@ -3631,10 +3631,87 @@
               }
             }
           ]
+        },
+        {
+          "revision": 5,
+          "at": "2026-11-07T01:12:00.999Z",
+          "reason": "DQC correct",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "needs-rewrite",
+                "proposal": {
+                  "readback": "**Question:** What counts as a skill use, what do we record, and when does a failure enter the RSI loop?\n\n**Recommended answer:** Whenever you, Codex or Claude use a participating Workbench skill to perform an operation, record that use and its outcome. One requested operation is one use, even across resumed chats; separately invoked skills have linked uses. Record the skill version, model tier/provider and whether the work completed, failed or was interrupted. Record reported failures immediately and mark them as needing repair. Repair can start after the current work or at the designated time, as agreed in question 7.\n\n**Why:** Real work supplies the failure cases and evidence of value. Recording successful uses as well as failures gives us the denominator needed to determine whether errors decrease. Prompt capture preserves findings without requiring repairs to interrupt your work.\n\n**Intended impact:** Every participating skill has a traceable use history. A reported failure becomes a durable RSI input immediately, and later results can show whether repairs reduce recurrence during real work.",
+                  "why": "Real work supplies the failure cases and evidence of value. Recording successful uses as well as failures gives us the denominator needed to determine whether errors decrease. Prompt capture preserves findings without requiring repairs to interrupt your work.",
+                  "source": "Kayden AMS alignment chat, 2026-11-06; exact displayed readbacks and owner corrections.",
+                  "scope": "Concept alignment only; no implementation, installation, database writes, campaign launch or deployment.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Current sequential interview frontier requested by owner."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Preserve exact meaning and prevent an unconfirmed implementation choice."
+                  },
+                  "dependencies": [
+                    "DQC-000E"
+                  ]
+                },
+                "digest": "cc20666350498df25056aa88a87e4c534fb51ab3855a604cf874e96e6031dd6f",
+                "confirmations": [],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000F-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:15.566Z",
+                    "requestDigest": "5bb5e3c261065c1ae8d21cf92159837e5b29eb5787105716258c754a634119d5",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-firstpass-20261106-DQC-000F-answer",
+                    "type": "correct",
+                    "at": "2026-11-07T00:52:02.358Z",
+                    "requestDigest": "fbbbd198369419c2864c95c101fdf705c92afa497650a6fd0303971d4a6787ba",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "note": "When me, you (codex), or claude uses one of the workbench skills that we are doing RSI on. we should log the failures and run the RSI loop on it. The benefits of an RSI loop is that its recorded and can be started as soon as its logged in the system as needing to be fixed.",
+                    "kind": "change",
+                    "revision": 3,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q2-real-use-v2",
+                    "type": "propose",
+                    "at": "2026-11-07T01:07:23.287Z",
+                    "requestDigest": "038c1de50802d4d7fd90dddb4dff94794dcb1757e41bdfdbe544732cfeb4343e",
+                    "source": null,
+                    "note": null,
+                    "revision": 4,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q2-blocking-repair-correction",
+                    "type": "correct",
+                    "at": "2026-11-07T01:12:00.999Z",
+                    "requestDigest": "40491d8b14191db2638aaa17eee5da6d02ed7be7bae8d14e3ba73a35d7663806",
+                    "source": "Kayden AMS alignment chat, 2026-11-06: question 2 correction on blocking failures and separate repair chats.",
+                    "note": "Repair should start after the work is finished, unless its blocking that work. In which case the failure is recorded as a critical failure and should be worked on in a new chat so that this session can pick back up with the fixed skill.",
+                    "kind": "change",
+                    "revision": 5,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
-        "state": "pending",
+        "state": "needs-rewrite",
         "proposal": {
           "readback": "**Question:** What counts as a skill use, what do we record, and when does a failure enter the RSI loop?\n\n**Recommended answer:** Whenever you, Codex or Claude use a participating Workbench skill to perform an operation, record that use and its outcome. One requested operation is one use, even across resumed chats; separately invoked skills have linked uses. Record the skill version, model tier/provider and whether the work completed, failed or was interrupted. Record reported failures immediately and mark them as needing repair. Repair can start after the current work or at the designated time, as agreed in question 7.\n\n**Why:** Real work supplies the failure cases and evidence of value. Recording successful uses as well as failures gives us the denominator needed to determine whether errors decrease. Prompt capture preserves findings without requiring repairs to interrupt your work.\n\n**Intended impact:** Every participating skill has a traceable use history. A reported failure becomes a durable RSI input immediately, and later results can show whether repairs reduce recurrence during real work.",
           "why": "Real work supplies the failure cases and evidence of value. Recording successful uses as well as failures gives us the denominator needed to determine whether errors decrease. Prompt capture preserves findings without requiring repairs to interrupt your work.",
@@ -3685,6 +3762,17 @@
             "source": null,
             "note": null,
             "revision": 4,
+            "round": "rsi-cross-project-20261106"
+          },
+          {
+            "eventId": "rsi-q2-blocking-repair-correction",
+            "type": "correct",
+            "at": "2026-11-07T01:12:00.999Z",
+            "requestDigest": "40491d8b14191db2638aaa17eee5da6d02ed7be7bae8d14e3ba73a35d7663806",
+            "source": "Kayden AMS alignment chat, 2026-11-06: question 2 correction on blocking failures and separate repair chats.",
+            "note": "Repair should start after the work is finished, unless its blocking that work. In which case the failure is recorded as a critical failure and should be worked on in a new chat so that this session can pick back up with the fixed skill.",
+            "kind": "change",
+            "revision": 5,
             "round": "rsi-cross-project-20261106"
           }
         ]
