@@ -219,7 +219,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000G.
 
 ## DQC-000I — RSI: Recording authority
 
-Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000I.json)
+Revision 5; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000I.json)
 
 <pre>**Question:** Which system should own the per-skill failure history, regression cases and RSI results?
 
@@ -250,6 +250,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G.
 - propose at r2
 - correct at r3: I am not sure if supabase should own the lifecycle of Kaydenclark/skills\. I need you to be the expert and find out the best system for me\.
 - propose at r4
+- confirm at r5: Confirmed\. Supabase should hold the failure history and RSI results, and the skills repo should hold the skills and regression tests\. back to question 4
 
 ## DQC-000J — RSI: Capture and transport
 
