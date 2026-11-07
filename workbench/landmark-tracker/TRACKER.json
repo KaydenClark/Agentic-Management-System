@@ -4710,7 +4710,7 @@
         "at": "2026-11-07T00:08:47.745Z"
       },
       "corrections": [],
-      "revision": 1,
+      "revision": 2,
       "history": [
         {
           "revision": 1,
@@ -4721,14 +4721,89 @@
               "field": "captured"
             }
           ]
+        },
+        {
+          "revision": 2,
+          "at": "2026-11-07T00:09:20.184Z",
+          "reason": "DQC propose",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "pending",
+                "proposal": {
+                  "readback": "**Question:** How should real uses, regression cases and grading combine to qualify a repaired skill?\n\n**Recommended answer:** Record real work as observed-use evidence, preserve its findings as development/regression cases, and use independent evaluators with the existing r1 rules. Require accepted Stable/Excellent assessment, useful benefit and no disqualifying regression; state the evaluated scope and hosts.\n\n**Why:** Real work shows value directly. Controlled comparisons and regression checks protect that value; one real run cannot stand in for unperformed grading runs.\n\n**Intended impact:** Defines qualification without devaluing real work, hiding failures or claiming untested cross-host fitness.",
+                  "why": "Real work shows value directly. Controlled comparisons and regression checks protect that value; one real run cannot stand in for unperformed grading runs.",
+                  "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                  "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner requested first-pass alignment before further decisions."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                  },
+                  "dependencies": [
+                    "DQC-000G",
+                    "DQC-000M"
+                  ]
+                },
+                "digest": "9b62a106ab5b4b89f62e1fe08b5d567b4a1c6dcaffef667c1b5744c63e5a3368",
+                "confirmations": [],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000N-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:20.184Z",
+                    "requestDigest": "7414650bf804de34c2262d9d714647474157eb97ee9d928c650c052e71ac7f0b",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
         "state": "pending",
-        "proposal": null,
-        "digest": null,
+        "proposal": {
+          "readback": "**Question:** How should real uses, regression cases and grading combine to qualify a repaired skill?\n\n**Recommended answer:** Record real work as observed-use evidence, preserve its findings as development/regression cases, and use independent evaluators with the existing r1 rules. Require accepted Stable/Excellent assessment, useful benefit and no disqualifying regression; state the evaluated scope and hosts.\n\n**Why:** Real work shows value directly. Controlled comparisons and regression checks protect that value; one real run cannot stand in for unperformed grading runs.\n\n**Intended impact:** Defines qualification without devaluing real work, hiding failures or claiming untested cross-host fitness.",
+          "why": "Real work shows value directly. Controlled comparisons and regression checks protect that value; one real run cannot stand in for unperformed grading runs.",
+          "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+          "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+          "round": "rsi-cross-project-20261106",
+          "priority": {
+            "value": 1,
+            "reason": "Owner requested first-pass alignment before further decisions."
+          },
+          "value": {
+            "value": 1,
+            "reason": "Expose an unresolved choice affecting the shared RSI loop."
+          },
+          "dependencies": [
+            "DQC-000G",
+            "DQC-000M"
+          ]
+        },
+        "digest": "9b62a106ab5b4b89f62e1fe08b5d567b4a1c6dcaffef667c1b5744c63e5a3368",
         "confirmations": [],
-        "events": []
+        "events": [
+          {
+            "eventId": "rsi-align-20261106-DQC-000N-v1",
+            "type": "propose",
+            "at": "2026-11-07T00:09:20.184Z",
+            "requestDigest": "7414650bf804de34c2262d9d714647474157eb97ee9d928c650c052e71ac7f0b",
+            "source": null,
+            "note": null,
+            "revision": 2,
+            "round": "rsi-cross-project-20261106"
+          }
+        ]
       }
     },
     {

@@ -296,10 +296,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000K.
 
 ## DQC-000N — RSI: Fitness, Alignment and regression
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000N.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000N.json)
 
-How should real uses, regression cases and grading combine to qualify a repaired skill?
+<pre>**Question:** How should real uses, regression cases and grading combine to qualify a repaired skill?
 
+**Recommended answer:** Record real work as observed-use evidence, preserve its findings as development/regression cases, and use independent evaluators with the existing r1 rules. Require accepted Stable/Excellent assessment, useful benefit and no disqualifying regression; state the evaluated scope and hosts.
+
+**Why:** Real work shows value directly. Controlled comparisons and regression checks protect that value; one real run cannot stand in for unperformed grading runs.
+
+**Intended impact:** Defines qualification without devaluing real work, hiding failures or claiming untested cross-host fitness.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000M.
+
+- propose at r2
 
 ## DQC-000O — RSI: Conditional merge authority
 
