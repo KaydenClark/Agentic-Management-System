@@ -10,17 +10,17 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Coverage/W, Review and owner QA.
+**Next gate:** Land N/O source. W stays stopped. Coverage, Review and owner QA remain open.
 
 ## Intent and authority
 
-[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac); no execution release or reset of prior stops.
+[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac). Separate Nov. 5 launch authorized isolated N, then O. Prior stops remain.
 
 Python writes RSI/build/usage data to Supabase; the site reads only. Service credentials stay gitignored/local; the site gets the publishable key.
 
 ## Outcome
 
-One Supabase project supplies site rows; Python writes, the publishable-key site only reads.
+One Supabase project supplies site rows. Python writes and the site reads.
 
 ## Why It Matters
 
@@ -28,19 +28,19 @@ Sourced rows make charts auditable; private writes protect keys.
 
 ## Current Verified State
 
-Schema/provenance, writer/readback, conflicts, sources and keys have [TK-000B proof](tasks/TK-000B/TASK.md#proof) with [live limits](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01); private assessments/unknown metrics have TK-000Q/R/S/P evidence.
+[TK-000B proof](tasks/TK-000B/TASK.md#proof) covers schema, writer, conflicts, sources and keys within [live limits](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01). TK-000Q/R/S/P cover private assessments and unknown metrics.
 
-Build import at 771bd1e passed; later coverage is unverified and needs fresh import approval. Do not rewrite S-008 provenance through refresh-changed. TK-000W stays stopped/unaccepted; whole-Spec binding and owner QA remain open. See [history](../../../../wiki/history/S-006.md).
+Import `771bd1e` passed. Later coverage needs fresh import approval. Preserve S-008 provenance and the TK-000W stop. See [history](../../../../wiki/history/S-006.md).
 
 ## Desired Behavior
 
-- Supabase owns shared failure/improvement history and worker-written cases/runs/candidates/comparisons/dispositions. Git owns skills, regression tests and fixtures/contracts, not competing live statuses. Markdown is local intake/recovery; transport preserves stable IDs, revisions and corrections.
+- Supabase owns shared failure/improvement history and worker records. Git owns skills, tests, fixtures and contracts. Markdown is local intake/recovery. Transport preserves stable IDs, revisions and corrections.
 - Link chat, request, loading, use and failure identities; distinguish recurrence occurrences, skill/candidate/parent pins, jobs, cases, contracts, decisions and adoption/later-use receipts. Skipped explicit requests remain failed requested uses. Replayed transport creates no duplicate occurrence; extend existing identities, not another ledger.
 - Retain task/split/control arm, runtime/control/skill commits, provider/model/effort, completion, source, grade and three actual audit run identities/class counts/Critical results. Partial sets remain partial. Assessments and behavioral trials stay distinct; new grading cannot relabel historical r1 results or erase attempts.
 - Persist authorization, claim, attempt, stage, next action and stop/block reason. Atomic ownership/version checks prevent duplicate jobs; reconcile interrupted/uncertain effects before replay. S-000B owns execution; table/queue choice remains implementation detail.
 - Only trusted workers write. Presentation clients are read-only; candidates receive no credentials and cannot change graders. Private assessments/operations and raw transcripts remain private/local; public projections contain safe derived fields and evidence identities only.
 - Safe Git exports retain schema/completeness checkpoints for recovery. Restore preserves IDs, attempts and corrections and refuses stale conflicts. Exports are not writable authorities; exclude secrets, host paths and raw/private packets.
-- Distinguish measured usage, subscription capacity and optional API-equivalent estimates; unknown is not zero or a bill. Free-plan outages/capacity failures retain visible pending local evidence, never false publication. No paid upgrade or raw-evidence upload is implied.
+- Separate measured usage, subscription capacity and optional API estimates. Keep unknowns and pending local evidence visible through outages. Paid upgrades and raw uploads require separate authority.
 - Build events come from real Spec/Task/PR/commit history, including returns/corrections. Seeds carry source/strength; synthetic/test rows never reach the site.
 
 ## Decisions And Contracts
@@ -61,7 +61,7 @@ Build import at 771bd1e passed; later coverage is unverified and needs fresh imp
 
 ## Vertical Implementation Slices
 
-[TK-002N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md); implementation held.
+[TK-002N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md). Isolated [lineage](tasks/TK-002N/TASK.md#proof) and [recovery](tasks/TK-002O/TASK.md#proof) passed at `3856614`. Production migration remains open.
 
 ## Acceptance Criteria
 
