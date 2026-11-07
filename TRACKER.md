@@ -267,7 +267,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000I.
 
 ## DQC-000L — RSI: Worker location and resources
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000L.json)
+Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000L.json)
 
 <pre>**Question:** Where should repair and evaluation run, and what resource use can continue without asking?
 
@@ -282,6 +282,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000H, DQC-000J, DQC-000K.
 
 - propose at r2
+- correct at r3: On Servitor, using the AMS Website project to prove things work\. It should be tested on real work\.
 
 ## DQC-000M — RSI: Repair scope and pruning
 
