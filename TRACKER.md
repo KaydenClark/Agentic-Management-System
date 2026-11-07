@@ -134,6 +134,36 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000E — Finish the Workbench Dashboard in AMS
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
 
-What does the AMS Workbench Dashboard include, where does its code come from, and how does it look?
+<pre>## Summary
+
+Finish the AMS Workbench Dashboard. The current Python Grilling Board becomes one section of it. I add three more sections, Destination Tracker, Taskboard and Wiki, by pulling the working code from LLM_Workbench's Dashboard into AMS. Everything looks like the Grilling Board Redesign artifact. Drafts to approve is left out.
+
+## The why
+
+You have asked for this Dashboard from the start, and a working one already exists in LLM_Workbench, so rebuilding it from scratch wastes time. You approve things on GitHub, so a Drafts section only adds backlog. AMS does not share code with other projects; the skills do. So the Dashboard is built here first and turned into skills later.
+
+## The intended result
+
+- `uv run ams-board` opens one local Dashboard on your machine, never on Vercel.
+- The top bar has search and a light/dark switch. The tabs are Destination Tracker, Taskboard, Grilling Board and Wiki.
+- Tracker, Taskboard and Wiki show AMS's own records and only display them.
+- The Grilling Board keeps working as it does now.
+- Every part looks like the Redesign artifact, and its controls, such as search and filters, really work.
+- Nothing in AMS links back to or updates LLM_Workbench.
+
+## What I will do
+
+1. Copy the LLM_Workbench page code for the three sections into AMS and have the Python Board supply the data they need.
+2. Style the whole Dashboard from the Redesign artifact. Where it does not draw a section, use its colors and parts.
+3. Test it and show it to you in the browser.
+4. Do the work on the S-004 branch and open a draft PR.
+
+Then stop. Not included: Drafts to approve, turning the Dashboard into skills (the next job), the public website, and your Human QA.</pre>
+
+Source: workbench/wiki/context-grilling-board\.md@75862efddf475ce3e4f57c25f4002bf625642c53\#jot-97b271e2-af5c-4901-a9ae-4f87fa65f759. Scope: Add Destination Tracker, Taskboard and Wiki sections and the Dashboard frame to the AMS Python Board in the Redesign look; S-004 branch and draft PR; stop before skills, Drafts, website and Human QA.
+
+Round: dashboard-round-1. Dependencies: none.
+
+- propose at r2
