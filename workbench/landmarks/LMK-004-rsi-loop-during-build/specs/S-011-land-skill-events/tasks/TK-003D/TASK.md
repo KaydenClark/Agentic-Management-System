@@ -42,3 +42,9 @@ No website source/content change, dev-to-main promotion, unrelated unfinished-wo
 This single remaining run crosses installed prerequisite -> supported adoption/coherent records -> exact checks/review -> checked main -> original preservation/RSI reconciliation -> guarded cleanup. It depends only on the concrete artifact from TK-003C; there is no assembly branch or unrelated campaign edge.
 
 Return exact candidate/target SHAs, current PR state, both merge answers, executed Check and implementor QA against each criterion, independent-review scope, native closeout result, cleanup/retained-item receipt and actual next gate. A pushed branch or passing check alone does not finish the assignment.
+
+## Starting preservation evidence
+
+Workspace baseline sha256:3c75a223750702cfd7bbd62aa051ac1612aceb309381c2a9aa7664d293e9ee37
+
+Genuine complete Task snapshot after native remote claim d2e907e224b6a40818702c88bb554cbb70874e84, target main. Raw inventory remains private recovery; original pre-adoption snapshot and binding remain unchanged.
