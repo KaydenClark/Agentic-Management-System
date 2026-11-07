@@ -134,7 +134,7 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000E — RSI: Coverage
 
-Revision 5; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+Revision 6; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
 
 <pre>**Question:** Should shared skill reporting work from any project and environment, independently of whether GPT_OS is present?
 
@@ -152,6 +152,7 @@ Round: rsi-cross-project-20261106. Dependencies: none.
 - confirm at r3: Yes, Because of this we need to be very smart about how we do this\. Can we create something that we can have in GPT\_OS \(that is on both Mac and PC, and can be created as an environment for the cloud\) that would allow us to send info back to supabase? Do we need to send info back or can supabase collect it from github as long as the projects as pushing back to Kaydenclark/skills?
 - propose at r4
 - propose at r5
+- confirm at r6: Yes, that's what I mean\. It should work from any project on my Mac, PC, or in the cloud without requiring GPT\_OS\. Let's move to question 2\.
 
 ## DQC-000F — RSI: Run boundaries
 
