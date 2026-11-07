@@ -16,7 +16,7 @@ PUBLIC_COLUMNS = {
     "audit_run_id", "audit_set_id", "skill", "skills_commit", "contract_version",
     "contract_digest", "provider", "model", "model_tier", "quality_passed",
     "quality_total", "regression_passed", "regression_total", "critical_missed",
-    "evidence_complete", "passed", "completed_at", "recorded_at",
+    "evidence_complete", "passed", "completed_at", "recorded_at", "assessment_grade",
 }
 STAMP = "2026-11-07T09:30:00Z"
 SHA = "a" * 40
@@ -187,3 +187,46 @@ def test_audit_concurrent_replay_and_set_capacity_preserve_one_history(rest):
     query = "/rsi_skill_audit_results?" + urlencode({"audit_set_id": "eq." + prefix})
     assert len(rest(query, role="anon")[1]) == 3
     assert rpc(rest, "ams_get_skill_audit", p_audit_run_id=row["audit_run_id"])[1]["model"] == row["model"]
+
+
+
+@pytest.mark.parametrize(("run_changes", "expected"), [
+    ([dict(quality_passed=6, quality_total=7, regression_passed=4, regression_total=4),
+      dict(quality_passed=6, quality_total=6, regression_passed=4, regression_total=4, critical_missed=True),
+      dict(quality_passed=7, quality_total=7, regression_passed=4, regression_total=4)], "Broken"),
+    ([{}, {}, {"quality_passed": 7, "regression_passed": 4}], "Functional"),
+    ([{}, {}, {"quality_passed": 7}], "Stable"),
+    ([{}, {}, {}], "Excellent"),
+    ([{}, {}, {"evidence_complete": False}], None),
+    ([{}, {}, {"quality_passed": 7, "evidence_complete": False}], "Stable"),
+    ([dict(quality_passed=0, quality_total=0, regression_passed=0, regression_total=0,
+           critical_missed=None)] * 3, None),
+    ([{}, {"critical_missed": True}], None),
+    ([{"is_test": True}] * 3, None),
+    ([{}, {"quality_passed": 7}, {"is_public": False, "critical_missed": True}], None),
+    ([{}, {}, dict(completion_state="interrupted", completed_at=None,
+                   is_public=False, evidence_complete=False)], None),
+], ids=["critical", "regression", "quality", "clean", "incomplete-evidence", "observed-miss",
+        "no-applicable-checks", "two-runs", "all-test", "private-third", "interrupted-third"])
+def test_public_assessment_grade_requires_three_visible_completed_runs(rest, run_changes, expected):
+    set_id = "grade-" + uuid4().hex
+    rows = [audit(f"{set_id}-{index}", set_id, **changes) for index, changes in enumerate(run_changes)]
+    for row in rows:
+        status, saved = append_audit(rest, row)
+        assert status == 200, saved
+        assert "assessment_grade" not in saved
+
+    visible_ids = [row["audit_run_id"] for row in rows if row["is_public"] and not row["is_test"]]
+    query = "/rsi_skill_audit_results?" + urlencode({"audit_set_id": "eq." + set_id})
+    for role in ("anon", "authenticated", "service"):
+        status, projected, _ = rest(query, role=role)
+        assert status == 200
+        assert {row["audit_run_id"] for row in projected} == set(visible_ids)
+        assert all(row["assessment_grade"] == expected for row in projected)
+    if expected == "Broken":
+        assert sum(row["quality_passed"] for row in projected) == 19
+        assert sum(row["quality_total"] for row in projected) == 20
+        assert sum(row["regression_passed"] for row in projected) == 12
+        assert sum(row["regression_total"] for row in projected) == 12
+        one_run = "/rsi_skill_audit_results?" + urlencode({"audit_run_id": "eq." + visible_ids[0]})
+        assert rest(one_run, role="anon")[1][0]["assessment_grade"] == "Broken"

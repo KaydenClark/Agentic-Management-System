@@ -102,11 +102,30 @@ grant select (
   provider, model, model_tier, quality_passed, quality_total, regression_passed, regression_total,
   critical_missed, evidence_complete, passed, completed_at, recorded_at, is_public, is_test, completion_state
 ) on ams_rsi_private.skill_audits to anon, authenticated;
+-- Grade only a full public assessment set. The append boundary caps the set
+-- at three runs, so a hidden or interrupted run cannot contribute to its grade.
+-- An observed miss determines severity. Excellent requires complete evidence
+-- and at least one applicable check. A public grade carries no qualification.
 create view public.rsi_skill_audit_results with (security_invoker = true, security_barrier = true) as
   select audit_run_id, audit_set_id, skill, skills_commit, contract_version, contract_digest,
     provider, model, model_tier, quality_passed, quality_total, regression_passed, regression_total,
-    critical_missed, evidence_complete, passed, completed_at, recorded_at
-  from ams_rsi_private.skill_audits
+    critical_missed, evidence_complete, passed, completed_at, recorded_at,
+    (
+      select case when count(*) = 3 then
+        case
+          when bool_or(graded.critical_missed) then 'Broken'
+          when bool_or(graded.regression_passed < graded.regression_total) then 'Functional'
+          when bool_or(graded.quality_passed < graded.quality_total) then 'Stable'
+          when bool_and(graded.evidence_complete) and bool_or(
+            graded.quality_total > 0 or graded.regression_total > 0 or graded.critical_missed is not null
+          ) then 'Excellent'
+        end
+      end
+      from ams_rsi_private.skill_audits as graded
+      where graded.audit_set_id = run.audit_set_id
+        and graded.is_public and not graded.is_test and graded.completion_state = 'completed'
+    ) as assessment_grade
+  from ams_rsi_private.skill_audits as run
   where is_public and not is_test and completion_state = 'completed';
 revoke all on public.rsi_skill_audit_results from public, anon, authenticated, service_role;
 grant select on public.rsi_skill_audit_results to anon, authenticated, service_role;
