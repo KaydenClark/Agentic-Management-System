@@ -4550,9 +4550,12 @@
       "id": "DQC-000H",
       "title": "RSI: Evidence and privacy",
       "question": "What may leave each project, what stays private, and what may the public website show?",
-      "answer": null,
-      "answered": false,
-      "confirmation": null,
+      "answer": "**Question:** What do we save, and what do we show on the website?\n\n**Recommended answer:**\n\nSave:\n\n- What the skill did wrong.\n- What we changed to fix it.\n- Whether the tests passed or failed afterward.\n\nShow on the website:\n\n- Each skill’s scores and grades over time.\n- Which model and provider did the work.\n- Failed repair attempts as well as successful ones.\n- Whether failures become less common as you use the skills.\n\nKeep private project files and conversations off the website. The agent fixing a skill can use a private example when it needs one and has permission.\n\n**Why:** People should be able to see whether the skills are getting better without seeing your private work.\n\n**Intended impact:** You can look at a skill’s history and answer: “Have our changes made this skill more reliable?”",
+      "answered": true,
+      "confirmation": {
+        "basis": "Kayden AMS alignment chat, 2026-11-06: owner requested plain-language question 4 and explicitly confirmed its replacement readback.",
+        "revision": 6
+      },
       "expectedResult": null,
       "result": null,
       "uncertainty": [],
@@ -4669,7 +4672,7 @@
         "at": "2026-11-07T00:08:47.210Z"
       },
       "corrections": [],
-      "revision": 5,
+      "revision": 6,
       "history": [
         {
           "revision": 1,
@@ -4925,10 +4928,124 @@
               }
             }
           ]
+        },
+        {
+          "revision": 6,
+          "at": "2026-11-07T01:44:26.168Z",
+          "reason": "DQC confirm",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "confirmed",
+                "proposal": {
+                  "readback": "**Question:** What do we save, and what do we show on the website?\n\n**Recommended answer:**\n\nSave:\n\n- What the skill did wrong.\n- What we changed to fix it.\n- Whether the tests passed or failed afterward.\n\nShow on the website:\n\n- Each skill’s scores and grades over time.\n- Which model and provider did the work.\n- Failed repair attempts as well as successful ones.\n- Whether failures become less common as you use the skills.\n\nKeep private project files and conversations off the website. The agent fixing a skill can use a private example when it needs one and has permission.\n\n**Why:** People should be able to see whether the skills are getting better without seeing your private work.\n\n**Intended impact:** You can look at a skill’s history and answer: “Have our changes made this skill more reliable?”",
+                  "why": "People should be able to see whether the skills are getting better without seeing your private work.",
+                  "source": "Kayden AMS alignment chat, 2026-11-06: owner requested plain-language question 4 and explicitly confirmed its replacement readback.",
+                  "scope": "Concept alignment only. No implementation, installation, database writes, access change or deployment.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Current owner-requested interview question."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Preserve agreed meaning and expose the next choice in plain language."
+                  },
+                  "dependencies": [
+                    "DQC-000I"
+                  ]
+                },
+                "digest": "ace679c6509a2307a2a43f12883b07a1f9980fe82f694525063500b500af8a19",
+                "confirmations": [
+                  {
+                    "readback": "**Question:** What do we save, and what do we show on the website?\n\n**Recommended answer:**\n\nSave:\n\n- What the skill did wrong.\n- What we changed to fix it.\n- Whether the tests passed or failed afterward.\n\nShow on the website:\n\n- Each skill’s scores and grades over time.\n- Which model and provider did the work.\n- Failed repair attempts as well as successful ones.\n- Whether failures become less common as you use the skills.\n\nKeep private project files and conversations off the website. The agent fixing a skill can use a private example when it needs one and has permission.\n\n**Why:** People should be able to see whether the skills are getting better without seeing your private work.\n\n**Intended impact:** You can look at a skill’s history and answer: “Have our changes made this skill more reliable?”",
+                    "proposal": {
+                      "readback": "**Question:** What do we save, and what do we show on the website?\n\n**Recommended answer:**\n\nSave:\n\n- What the skill did wrong.\n- What we changed to fix it.\n- Whether the tests passed or failed afterward.\n\nShow on the website:\n\n- Each skill’s scores and grades over time.\n- Which model and provider did the work.\n- Failed repair attempts as well as successful ones.\n- Whether failures become less common as you use the skills.\n\nKeep private project files and conversations off the website. The agent fixing a skill can use a private example when it needs one and has permission.\n\n**Why:** People should be able to see whether the skills are getting better without seeing your private work.\n\n**Intended impact:** You can look at a skill’s history and answer: “Have our changes made this skill more reliable?”",
+                      "why": "People should be able to see whether the skills are getting better without seeing your private work.",
+                      "source": "Kayden AMS alignment chat, 2026-11-06: owner requested plain-language question 4 and explicitly confirmed its replacement readback.",
+                      "scope": "Concept alignment only. No implementation, installation, database writes, access change or deployment.",
+                      "round": "rsi-cross-project-20261106",
+                      "priority": {
+                        "value": 1,
+                        "reason": "Current owner-requested interview question."
+                      },
+                      "value": {
+                        "value": 1,
+                        "reason": "Preserve agreed meaning and expose the next choice in plain language."
+                      },
+                      "dependencies": [
+                        "DQC-000I"
+                      ]
+                    },
+                    "digest": "ace679c6509a2307a2a43f12883b07a1f9980fe82f694525063500b500af8a19",
+                    "source": "Kayden AMS alignment chat, 2026-11-06: owner requested plain-language question 4 and explicitly confirmed its replacement readback.",
+                    "scope": "Concept alignment only. No implementation, installation, database writes, access change or deployment.",
+                    "revision": 6,
+                    "eventId": "rsi-q4-plain-owner-confirm",
+                    "at": "2026-11-07T01:44:26.168Z"
+                  }
+                ],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000H-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:16.710Z",
+                    "requestDigest": "a85bada6a142b15699f9da6b3b4f52ff1ef33adfcbf31a32f56c9c5198fcd94d",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-firstpass-20261106-DQC-000H-answer",
+                    "type": "correct",
+                    "at": "2026-11-07T00:52:03.485Z",
+                    "requestDigest": "ee3b428276002118ef0dfd9dff8b2011193cce6f57ee6c2d0f2eb227825232e1",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "note": "For the website, I just want the results We should log the fitness level, alignment score, model tier, and provider used for each run. So if we had 4 runs of the RSI loop to get the skills to a passing excellent state, I want to see that. The website is supposed to show hundreds of tests, no single test result. We are showing improvements over time, not run results. How have skills X, Y, Z, A, B, C improved over the last 500 runs? Are we getting better at making skills? Is this a worth while effort? Are we having less errors over time when I run them? Are they doing what we designed them to do? Is the system working? That is what the tests are supposed to show. None of that should be conflicting with privacy. The Agentic Management system is open Source. My skills repo is only private so we can keep private info on there, my skills themselves are not private, they are open source. The website is to show them off.",
+                    "kind": "change",
+                    "revision": 3,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q4-public-results-private-evidence-v2",
+                    "type": "propose",
+                    "at": "2026-11-07T01:38:17.152Z",
+                    "requestDigest": "f7df5a2dbcc6ec58419f7fd33b47ba10e1da87f91c09d932bc6d73a1bee23fe0",
+                    "source": null,
+                    "note": null,
+                    "revision": 4,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q4-plain-language-v3",
+                    "type": "propose",
+                    "at": "2026-11-07T01:44:25.364Z",
+                    "requestDigest": "8b8bfa4b41acb5fcc7e91fcb871b8232aac0d0225d7ed63015e908820bf955ed",
+                    "source": null,
+                    "note": null,
+                    "revision": 5,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q4-plain-owner-confirm",
+                    "type": "confirm",
+                    "at": "2026-11-07T01:44:26.168Z",
+                    "requestDigest": "5222c9767cc493ebd5798b5a00efd4816f613b86ed2d16f057eb1218f12c43aa",
+                    "source": "Kayden AMS alignment chat, 2026-11-06: owner requested plain-language question 4 and explicitly confirmed its replacement readback.",
+                    "note": "Confirmed. Let's move to question 6, and keep it in simple plain language like this.",
+                    "revision": 6,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
-        "state": "pending",
+        "state": "confirmed",
         "proposal": {
           "readback": "**Question:** What do we save, and what do we show on the website?\n\n**Recommended answer:**\n\nSave:\n\n- What the skill did wrong.\n- What we changed to fix it.\n- Whether the tests passed or failed afterward.\n\nShow on the website:\n\n- Each skill’s scores and grades over time.\n- Which model and provider did the work.\n- Failed repair attempts as well as successful ones.\n- Whether failures become less common as you use the skills.\n\nKeep private project files and conversations off the website. The agent fixing a skill can use a private example when it needs one and has permission.\n\n**Why:** People should be able to see whether the skills are getting better without seeing your private work.\n\n**Intended impact:** You can look at a skill’s history and answer: “Have our changes made this skill more reliable?”",
           "why": "People should be able to see whether the skills are getting better without seeing your private work.",
@@ -4948,7 +5065,35 @@
           ]
         },
         "digest": "ace679c6509a2307a2a43f12883b07a1f9980fe82f694525063500b500af8a19",
-        "confirmations": [],
+        "confirmations": [
+          {
+            "readback": "**Question:** What do we save, and what do we show on the website?\n\n**Recommended answer:**\n\nSave:\n\n- What the skill did wrong.\n- What we changed to fix it.\n- Whether the tests passed or failed afterward.\n\nShow on the website:\n\n- Each skill’s scores and grades over time.\n- Which model and provider did the work.\n- Failed repair attempts as well as successful ones.\n- Whether failures become less common as you use the skills.\n\nKeep private project files and conversations off the website. The agent fixing a skill can use a private example when it needs one and has permission.\n\n**Why:** People should be able to see whether the skills are getting better without seeing your private work.\n\n**Intended impact:** You can look at a skill’s history and answer: “Have our changes made this skill more reliable?”",
+            "proposal": {
+              "readback": "**Question:** What do we save, and what do we show on the website?\n\n**Recommended answer:**\n\nSave:\n\n- What the skill did wrong.\n- What we changed to fix it.\n- Whether the tests passed or failed afterward.\n\nShow on the website:\n\n- Each skill’s scores and grades over time.\n- Which model and provider did the work.\n- Failed repair attempts as well as successful ones.\n- Whether failures become less common as you use the skills.\n\nKeep private project files and conversations off the website. The agent fixing a skill can use a private example when it needs one and has permission.\n\n**Why:** People should be able to see whether the skills are getting better without seeing your private work.\n\n**Intended impact:** You can look at a skill’s history and answer: “Have our changes made this skill more reliable?”",
+              "why": "People should be able to see whether the skills are getting better without seeing your private work.",
+              "source": "Kayden AMS alignment chat, 2026-11-06: owner requested plain-language question 4 and explicitly confirmed its replacement readback.",
+              "scope": "Concept alignment only. No implementation, installation, database writes, access change or deployment.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Current owner-requested interview question."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Preserve agreed meaning and expose the next choice in plain language."
+              },
+              "dependencies": [
+                "DQC-000I"
+              ]
+            },
+            "digest": "ace679c6509a2307a2a43f12883b07a1f9980fe82f694525063500b500af8a19",
+            "source": "Kayden AMS alignment chat, 2026-11-06: owner requested plain-language question 4 and explicitly confirmed its replacement readback.",
+            "scope": "Concept alignment only. No implementation, installation, database writes, access change or deployment.",
+            "revision": 6,
+            "eventId": "rsi-q4-plain-owner-confirm",
+            "at": "2026-11-07T01:44:26.168Z"
+          }
+        ],
         "events": [
           {
             "eventId": "rsi-align-20261106-DQC-000H-v1",
@@ -4989,6 +5134,16 @@
             "source": null,
             "note": null,
             "revision": 5,
+            "round": "rsi-cross-project-20261106"
+          },
+          {
+            "eventId": "rsi-q4-plain-owner-confirm",
+            "type": "confirm",
+            "at": "2026-11-07T01:44:26.168Z",
+            "requestDigest": "5222c9767cc493ebd5798b5a00efd4816f613b86ed2d16f057eb1218f12c43aa",
+            "source": "Kayden AMS alignment chat, 2026-11-06: owner requested plain-language question 4 and explicitly confirmed its replacement readback.",
+            "note": "Confirmed. Let's move to question 6, and keep it in simple plain language like this.",
+            "revision": 6,
             "round": "rsi-cross-project-20261106"
           }
         ]

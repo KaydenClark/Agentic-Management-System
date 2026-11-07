@@ -200,7 +200,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000F.
 
 ## DQC-000H — RSI: Evidence and privacy
 
-Revision 5; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000H.json)
+Revision 6; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000H.json)
 
 <pre>**Question:** What do we save, and what do we show on the website?
 
@@ -233,6 +233,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000I.
 - correct at r3: For the website, I just want the results We should log the fitness level, alignment score, model tier, and provider used for each run\. So if we had 4 runs of the RSI loop to get the skills to a passing excellent state, I want to see that\. The website is supposed to show hundreds of tests, no single test result\. We are showing improvements over time, not run results\. How have skills X, Y, Z, A, B, C improved over the last 500 runs? Are we getting better at making skills? Is this a worth while effort? Are we having less errors over time when I run them? Are they doing what we designed them to do? Is the system working? That is what the tests are supposed to show\. None of that should be conflicting with privacy\. The Agentic Management system is open Source\. My skills repo is only private so we can keep private info on there, my skills themselves are not private, they are open source\. The website is to show them off\.
 - propose at r4
 - propose at r5
+- confirm at r6: Confirmed\. Let's move to question 6, and keep it in simple plain language like this\.
 
 ## DQC-000I — RSI: Recording authority
 
