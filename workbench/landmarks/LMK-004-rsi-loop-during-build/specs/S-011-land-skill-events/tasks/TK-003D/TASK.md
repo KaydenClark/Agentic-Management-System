@@ -28,8 +28,8 @@ Reconcile observed source/adoption/merge identities, checks, failures, installat
 
 ## Acceptance
 
-- [ ] TK-003C's checked published and installed source artifact is independently verified before this Task starts; actual owner/target/branch/authority are explicit.
-- [ ] Current skills/runtime/AMS controls and reached Wiki agree with the confirmed model; source/installation/observed bounded-use evidence retains its actual identities and limits.
+- [x] TK-003C's checked published and installed source artifact is independently verified before this Task starts; actual owner/target/branch/authority are explicit.
+- [x] Current skills/runtime/AMS controls and reached Wiki agree with the confirmed model; source/installation/observed bounded-use evidence retains its actual identities and limits.
 - [ ] Exact assembled candidate passes required CI, native/record/Wiki/hygiene/fresh-checkout checks and independent review; failed or unavailable evidence remains explicit.
 - [ ] Authorized checked merge is proven contained in freshly fetched AMS/main, and the resulting target tree is verified separately from PR checks.
 - [ ] Original-byte and actual-workspace closeout findings are preserved; unrelated active/dirty/ignored work and uncontained historical evidence remain untouched.
@@ -48,3 +48,15 @@ Return exact candidate/target SHAs, current PR state, both merge answers, execut
 Workspace baseline sha256:3c75a223750702cfd7bbd62aa051ac1612aceb309381c2a9aa7664d293e9ee37
 
 Genuine complete Task snapshot after native remote claim d2e907e224b6a40818702c88bb554cbb70874e84, target main. Raw inventory remains private recovery; original pre-adoption snapshot and binding remain unchanged.
+
+## Check and implementor QA
+
+Prerequisite: authenticated skills CI42319489381 at2c52150 and published-main CI42321456109 ataf42a289 pass. Installed setup158 tracked files match af42; identity is packagebc6134e42. Actual native claim verifies executionAuthority and done prerequisite; current claimant is codex-bounded-ams-delivery. AMS/main targeta96c248 and PR210 base are verified.
+
+Consistency: inspected the complete changed controls, delivery DDR, manifest and reached Wiki vocabulary. Main/dev destinations, project-owned promotion, real Task/record ownership and guarded cleanup agree. Historical frozen criteria, old claims/stops and actual source/package receipt identities remain. All42 managed tool hashes validate with no available byte updates; source cleanup is Director-observed, not a rewritten native receipt.
+
+Fresh f4b7c63 data checkout: layout, ADR, Wiki, deterministic render/projection and hygiene0 pass; whitespace passes. Doctor has five pre-existing findings and no global blocker: two stale claims, old TK-003 blocked by TK-002, undeclared surfaces and nonblocking permission-scope drift. No permission/configuration changes were made.
+
+The full local suite at b1424c8 cannot pass the unchanged deny-network/deny-home profile: 702 pass, 6 skip, 124 fail, 39 errors (FAIL-214). Required full shared CI, independent exact-candidate Standards/Spec review and resulting-main verification remain open. Candidate execution stayed isolated. All812 original-adoption and814 current-Task Git blob hashes are in current branch history; actual native remote preservation is still pending integration. This object audit does not substitute for the closeout checker or prove global completeness.
+
+Merge answers at this checkpoint: mechanically mergeable into main; not yet eligible while exact-head CI/review are pending. Task incomplete until main containment, resulting checks and truthful closeout/retention are recorded. Whole-Spec acceptance and owner Human QA remain excluded.
