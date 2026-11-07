@@ -12,6 +12,15 @@ last_verified: 2026-11-04
 
 # RSI loop continuation
 
+## Current Map handoff — 2026-11-07
+
+The [current instruction](../context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) is mapped in LMK-004 and S-002/S-000B/S-006/S-007/S-011/S-013/S-000A. Next operation is Plan for one complete improvement on a real AMS website task on Servitor. Select the exact case and candidate-loading/observer fixtures, reconcile existing Tasks and release conditions, and cover three-run severity scoring, shared history, eligible automatic adoption and later recurrence evidence. Map creates no Tasks and launches no work.
+
+Earlier Stage A fixtures, readback and release graph below remain historical preparation and frozen evidence. Their passing-run-count skill grades, local-Markdown shared-history ownership and manual-only adoption assumptions must not override the updated Specs. Reconcile those contracts during Plan before consuming them for new execution. Do not rerun exhausted attempts or treat this handoff as a Stage B launch. No new build sequence is supplied by Map.
+
+Map counts: 0 Specs, 0 Tasks, 0 empty tasks/
+
+
 ## Two-stage continuation (2026-11-04)
 
 The [new owner request](../context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes this preparation, not implementation. Spec and Task records own acceptance and execution; this is a recovery route, not a second tracker. The owner launched TK-002M and confirmed the [exact readback](rsi-loop-readback-2026-11-04.md). Stage A delivers the [case](rsi-case-contract.md), [worker/recovery](rsi-worker-contract.md) and [bounded release graph](rsi-task-release.md). A later explicit Stage B launch releases only scoped work after those gates. Both S-000A catalog pilots retain their existing scope; no pilot priority is decided here.

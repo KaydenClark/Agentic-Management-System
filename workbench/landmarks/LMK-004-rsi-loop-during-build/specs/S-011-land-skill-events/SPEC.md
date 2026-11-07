@@ -14,6 +14,9 @@
 
 ## Intent and authority
 
+[Current RSI destination](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) maps the Servitor proof and optional participation. This updates requirements only: no Task activation, model trial, database write or installation occurs through Map. Existing receipts, frozen comparisons and stopped attempts retain their scope.
+
+
 Earlier authority remains in [history](../../../../wiki/history/S-011.md); frozen Terra/dev contracts and stops remain. The [confirmed bounded readback](../../../../wiki/context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) separately authorizes the current repair through installation and cleanup. The owner requires Map/Plan before remaining Journey through Director -> Dispatcher -> implementor; no backdating.
 
 ## Outcome
@@ -30,6 +33,10 @@ Prevent lost delivery and exposed handoffs.
 
 ## Desired Behavior
 
+- For the mapped Servitor loop, repair the underlying cause through author-skill and prune-artifact, preserving connected workflow behavior. Exercise the draft and related skills in the separate AMS website test session before qualified delivery.
+- Eligible Stable/Excellent repairs with complete required checks, useful benefit and no regression merge through the skills repository workflow, then automatically update everyday Servitor skills. Verify accepted source, installed bytes and actual later loading separately; failed update remains incomplete and recoverable. Draft success or source merge alone cannot count as adoption. This destination does not authorize installation during Map.
+
+
 - Resolve source/package/installed identities; installed text alone does not prove repository source or host activation.
 - Reconcile handoff routing and privacy before writing: ignored `workbench/sessions/handoffs/`, never a published root handoff. Published Tasks carry actionable work.
 - New work uses short-lived bounded branches, independent of parent lifetime. Preserve frozen older branch-reuse cases; inspect claims, writers and unique work. Aliases are not cleanup.
@@ -40,7 +47,7 @@ Prevent lost delivery and exposed handoffs.
 
 ## Decisions And Contracts
 
-S-002's r1 scoring, three-run evidence, qualification, attempt and benefit safeguards remain; stopped PR101 and call/row holds stay unchanged. Studied cases are development; missing proof stays missing. Author/review source in KaydenClark/skills; private raw evidence/skill text stay private. Publish safe claims/counts/identities only. No project copies or wider rollout.
+S-002 owns new skill severity grading and separate scores; historical r1 comparisons, three-run evidence, qualification, attempt and benefit safeguards remain; stopped PR101 and call/row holds stay unchanged. Studied cases are development; missing proof stays missing. Author/review source in KaydenClark/skills; private raw evidence/skill text stay private. Publish safe claims/counts/identities only. No project copies or wider rollout.
 
 The [prune-artifact addition](../../../../wiki/context-owner-answers-coherence.md#jot-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf) keeps its separate finite suite and original comparison/attempts. General Mid/Small defaults, frozen Terra series and Stable/Excellent/useful-benefit/no-regression/install gates remain; Map or a score grants none.
 
@@ -62,6 +69,10 @@ The skills repository's process governs repair delivery. Older campaign merge/in
 
 
 ## Acceptance Criteria
+
+- [ ] **Automatic eligible adoption:** a qualified merged repair reaches everyday Servitor skills without a repeated manual update step; record merge, update and later loaded identities. Reject a failed/Functional/Broken draft, preserve unrelated catalog work and report failed installation rather than declaring use.
+- [ ] **Connected repair:** author-skill and prune-artifact repair the cause while related-skill and original-case regressions pass in the separate website session. Cosmetic pruning or isolated score gain with workflow damage fails.
+
 
 - [ ] **Baseline and contract:** failures and exact pins precede repair; cases and criteria are frozen. A retrospective favorable-only test plan fails.
 - [ ] **Shared owner:** repaired skill source is reviewed and merged in `KaydenClark/skills`; an AMS-only copy fails.

@@ -5,7 +5,7 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-03
+**Updated:** 2026-11-07
 **Catalog description:** Website pages that chart RSI results from Supabase, present and honestly empty from the first deploy, with every number linked to its rows.
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
@@ -13,6 +13,9 @@
 **Next gate:** Complete TK-002.
 
 ## Intent and authority
+
+[Current RSI destination](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) maps the Servitor proof and optional participation. This updates requirements only: no Task activation, model trial, database write or installation occurs through Map. Existing receipts, frozen comparisons and stopped attempts retain their scope.
+
 
 The [owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes Map/Plan preparation; implementation and trial holds remain.
 
@@ -34,6 +37,10 @@ The site exists partly to show whether the loop works. Only traceable, labeled n
 History: [S-007 history](../../../../wiki/history/S-007.md).
 
 ## Desired Behavior
+
+- RSI Charts show each skill’s Quality Score, Regression Score, Critical result and overall severity grade as distinct results, with actual completed audit counts (including fewer than three), versioned denominators, failed attempts and evidence limits. Whole-Workbench Alignment remains a separately labeled assessment.
+- Show requested/loading/use failures distinctly; skipped explicitly requested skills count as failed requested uses and Critical failures. Later-use views identify the accepted version actually loaded and recurrence; no uses means no recurrence rate, not a proven fix.
+
 
 - Follow S-003's shared data contract: distinguish populated, successful-empty, loading and unavailable states; identify the last successful read and any retained data. A failed read never becomes “no trials.” Static explanations and chart spaces remain visible.
 - Explain the website build using sourced S-006 build events alongside the measured results. Readable prose connects the events; it need not itself be stored as rows. Distinguish build activity, assessments and demonstrated improvement. This page supplies the build-evidence explanation; S-003 has no separate “Under the hood” page.
@@ -75,6 +82,10 @@ Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the 
 |---|---|---|---|---|
 
 ## Acceptance Criteria
+
+- [ ] **Actual audits:** two stored runs display two, never the intended three; failed or unavailable reads do not imply zero audits. The synthetic 95% Quality / 100% Regression / Critical failure example displays Broken and cannot be mistaken for live results.
+- [ ] **Separate meanings:** skill grades, each score, Critical results and whole-Workbench Alignment remain distinct. Accepted-but-not-loaded and no-later-use states cannot imply success or zero recurrence.
+
 
 - [ ] **Feedback connection:** safe failures, stopped attempts, assessments and dispositions render from S-006 with source, scope, freshness and next action. Workflow explanations link changed steps to evidence. Activity/audits alone cannot imply benefit.
 - [ ] **Read states:** populated, empty, pending and unavailable follow S-003; failed reads cannot mean zero results, retained data needs its timestamp.

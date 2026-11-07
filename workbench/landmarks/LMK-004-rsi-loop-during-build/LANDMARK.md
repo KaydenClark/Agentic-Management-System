@@ -4,16 +4,20 @@
 **Status:** active
 **Priority:** 2
 **Owner:** Kayden
-**Updated:** 2026-11-04
+**Updated:** 2026-11-07
 **Catalog description:** The measured self-improvement loop, run on the website build and the work after it, with safeguards that keep its results honest.
 **Blockers:** none
-**Next gate:** Stage A delivered by PR169 at 3e307881; separate Stage B launch remains required.
+**Next gate:** Plan the first complete Servitor proof against the mapped capability owners; implementation and stopped campaigns remain held.
 
 ## Direction
 
 The RSI Loop turns failures from real agent work into demonstrated improvements to shared skills and the Workbench, then checks whether those improvements persist. The website build is the first application; later work supplies further evidence. The [owner map](../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) establishes this as a Landmark composed of independently verifiable capabilities.
 
-Failures enter one Markdown log. Diagnosis identifies the owning cause; cases and comparisons use the existing Fitness/Alignment checks. The external Python worker carries authorized execution and recovery, Supabase holds durable cases/runs/candidates/comparisons/dispositions, and presentation shows safe evidence. Qualified Stable/Excellent changes need useful benefit and no regression before merge; adoption and later observed loading remain distinct.
+The [current owner instruction](../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) requires one complete skill improvement on a real AMS website task on Servitor as the first proof. RSI is an optional addition to participating Workbenches; Workbench setup and shared skills remain usable without it.
+
+A per-chat Python observer records requested, loaded and used skills and failures. Skipping an explicitly requested skill is Critical. The orchestrator schedules routine repair after current work and blocking repair in a separate chat, with one active repair per skill. Repair uses author-skill and prune-artifact and exercises the draft plus related skills in a separate website test session on Servitor. Eligible repairs pass qualification, merge and automatically update everyday skills. Later use proves the accepted version loaded and measures recurrence.
+
+Supabase owns shared failure/improvement history; Git owns skills and regression tests. Existing Markdown failure intake remains a local capture/recovery surface until implemented transport reconciles stable occurrences into the shared history. Three skill audits report separate Quality/Regression scores, Critical result and worst-failure grade (S-002), while whole-Workbench Alignment stays separate. S-007 shows safe results and actual audit counts. These are required outcomes, not claims about the current runtime.
 
 Use subscription-meter capacity with Mid/Small Codex or Claude workers, High when needed. Preserve initial attempt -> retry -> retry -> stop, baseline excluded, and prior frozen campaign conditions. This mapping purchases nothing, starts no trials and grants no installation/deployment authority.
 
@@ -22,6 +26,9 @@ Individual skills and declared coupled bundles can improve; bundle results do no
 Capability ownership crosses existing landmark placements: S-006 and S-007 remain in LMK-002 and supply storage and presentation. Their placement does not duplicate ownership. S-012's general lifecycle CLI is separate from S-000B's RSI worker. The existing S-000A catalog refocus and S-011 source repairs retain scope and stops.
 
 ## Why It Matters
+
+A repair must fix the underlying problem, preserve the connected workflow and reach everyday use. Later evidence must show whether the problem returns.
+
 
 Outside research does not settle whether shaping an agent's environment improves results, so the AMS has to measure it against a no-AMS control and a plain-instruction control, and report the answer either way. An earlier loop built its apparatus and never ran it; this one runs on real work from day one.
 
@@ -37,6 +44,12 @@ Outside research does not settle whether shaping an agent's environment improves
 History: [LMK-004 history](../../wiki/history/LMK-004.md).
 
 ## End-to-end acceptance
+
+- [ ] **First proof on Servitor:** one real website failure reaches root-cause diagnosis, author-skill/prune-artifact repair, connected draft-session tests, three qualified audits, eligible merge, automatic everyday update and observed later use. A merged but never loaded repair fails.
+- [ ] **Observer and scheduling:** a skipped requested skill creates a Critical failed-use record; routine work finishes before repair starts, a blocker uses a separate chat, and competing triggers never run two repairs for the same skill.
+- [ ] **Optional participation:** a Workbench without RSI can use the skills without observer/reporting setup; no activity is silently collected from nonparticipants.
+- [ ] **Audit contract:** Quality-only failure in one of three runs prevents Excellent; any Critical failure yields Broken. Actual completed audit count, missing evidence and qualification remain visible; whole-Workbench Alignment is separate.
+
 
 - [ ] One reported failure reaches diagnosis, controlled repair, qualification, no-regression decision, authorized adoption and later-use evidence, traceable through Supabase and the public-safe view.
 - [ ] Interrupt and redeliver work: continuation preserves claims, evidence and attempt limits without duplicate external effects or owner relaying each step.
@@ -88,6 +101,9 @@ The decision records under this landmark, one line each, linked to their record.
 - [TK-002M - Finish the RSI loop design and prepare its executable Task graph](tasks/TK-002M/TASK.md) (Stage A preparation closed and delivered by PR169)
 
 ## Verification Procedure
+
+Use the observer/harness, scorer, writer/readback and chart seams in the linked Specs. Evidence must join chat/request IDs, case and candidate pins, three actual run IDs, source merge, everyday installed/loaded identity and later eligible uses. Mapping inspected repository scorer and destination records only; no Servitor execution or live database evidence was collected. The existing scorer still implements the earlier passing-run-count grade: that is an implementation gap, not the new skill contract.
+
 
 ```bash
 node workbench/tools/spec-workbench.mjs show LMK-004

@@ -5,7 +5,7 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
 **Stance:** Builder
-**Updated:** 2026-11-06
+**Updated:** 2026-11-07
 **Catalog description:** Checks that keep the AMS coherent: up to Spec, skills pinned and in sync, `dev` measured against `main`, and independent Spec review.
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
@@ -13,6 +13,9 @@
 **Next gate:** Complete TK-003.
 
 ## Intent and authority
+
+[Current RSI destination](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) maps the Servitor proof and optional participation. This updates requirements only: no Task activation, model trial, database write or installation occurs through Map. Existing receipts, frozen comparisons and stopped attempts retain their scope.
+
 
 The [owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes Map/Plan preparation; implementation and trial holds remain.
 
@@ -40,6 +43,9 @@ No criterion is checked off. Drift and up-to-Spec checks exist ([TK-001](tasks/T
 - **Preparation routing.** Detect a large shared-skill or other AMS change proceeding without its Map/Plan or past a Prepare stop. Route the [recorded failure](../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) and recurrence to [S-000A](../S-000A-skills-refocus/SPEC.md) for source repair; check preparation before claiming a reliability improvement. This addition is preparation only.
 
 ### Failure detection and use evidence
+
+The S-000B per-chat Python observer supplies events. Detect requests, loading, actual use and failures distinctly; skipping an explicitly requested skill is Critical and counts as failed requested use, including a skill named in chat. Unknown observation must remain unknown; the mere presence of a skill file proves no use. This observer does not give the secret-free coherence actor access to credentials. Route failures to the owning cause and one active repair per skill; do not misclassify every tool/environment problem as a skill defect.
+
 
 Detect and route observed mismatches before owner prompting, preserving a separate occurrence for each recurrence. Link detection to the existing failure intake and S-006 safe identities; classify suspected cause without asserting skill causation from involvement alone. Count eligible successful uses alongside failures for later recurrence measurement.
 
@@ -69,6 +75,10 @@ Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, 
 |---|---|---|---|---|
 
 ## Acceptance Criteria
+
+- [ ] **Requested skill:** plant an explicit request that never loads or runs; record a Critical failed requested use with its request identity before owner intervention. Excluding it because it did not load fails.
+- [ ] **Later version:** later work verifies the accepted loaded revision and detects recurrence; a stale version cannot prove the accepted repair failed or succeeded without that distinction.
+
 
 - [ ] **Feedback loop connection:** Detection closes the reporting gap: an orchestrator exercises acceptance beyond green checks, records an unreported mismatch with source/candidate identity, assigns its existing owner and next action, and preserves recurrence. A planted failure that reaches completion without a finding must fail.
 - [ ] **Prepare boundary:** TK-001D detects and routes a planted missing-Map/Plan or Prepare-stop bypass, including cross-repository skill work, before owner intervention. A document reminder alone fails.

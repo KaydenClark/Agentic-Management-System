@@ -5,7 +5,7 @@
 **Priority:** 1
 **Owner:** Kayden; future assigned catalog-refocus orchestrator
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-07
 **Catalog description:** Prove two job-preserving skill improvements, then refocus the catalog with honest dependencies, composition, attribution and evidence.
 **Blockers:** none
 **Confirmation:** [JOT-fe0364a6-270b-4205-a86a-c49f637e3b22](../../../../wiki/context-skills-refocus.md)
@@ -13,6 +13,9 @@
 **Next gate:** Owner reviews prepared Tasks and pilot contract; no activation, claim or skill implementation.
 
 ## Intent and authority
+
+[Current RSI destination](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) maps the Servitor proof and optional participation. This updates requirements only: no Task activation, model trial, database write or installation occurs through Map. Existing receipts, frozen comparisons and stopped attempts retain their scope.
+
 
 [Confirmed direction](../../../../wiki/context-skills-refocus.md): improve recognizable jobs and reliability without replacing workflows. Both pilots must pass before catalog rollout. The [preparation bypass](../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) needs an AMS-wide remedy. Current authority ends at Prepare and checked documentation delivery.
 
@@ -49,6 +52,9 @@ Execution, qualification, merge, installation, activation, later use and present
 
 ## Non-Goals
 
+Mandatory RSI enrollment for skill users. Workbench setup and shared skills remain independently usable; the optional Servitor RSI observer/repair capability belongs to S-000B.
+
+
 Forced rewrites; unapproved retirement; new discovery folders/services/evaluation framework; managed-tool edits outside setup-workbench; campaign resets or global-benefit claims.
 
 ## Dependencies And Blockers
@@ -60,6 +66,9 @@ Preparation has no missing input. Execution needs owner authorization. Candidate
 The eight [prepared assignments](../../../../research/PREPARE-skills-refocus-2026-11-02.md) own their instructions, blockers and proof in TASK.md. All remain held at Prepare.
 
 ## Acceptance Criteria
+
+- [ ] **Optional RSI:** shared skills and Workbench setup work without observer, reporting credentials or automatic enrollment. Dedicated repair composition uses author-skill and prune-artifact under S-011 without discarding either method’s connected contracts.
+
 
 - [ ] **Pilots:** both exact candidates preserve their jobs and responsibilities, meet frozen observed-outcome/reliability and applicable qualification criteria, retain failures and pass relevant regressions. Walkthrough/format-only passes fail.
 - [ ] **System routing:** a large shared-skill request and another AMS change reach existing Workbench records, respect Prepare-only scope and resume without duplicates; S-013 detects a planted bypass before owner intervention.
