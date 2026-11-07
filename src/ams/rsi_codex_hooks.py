@@ -24,6 +24,8 @@ def digest(*values):
 
 def observe(project, payload):
     project = Path(project).resolve()
+    # Participation belongs to this project and defaults off; malformed or
+    # symlinked configuration cannot silently enable observation.
     config_path = project / CONFIG
     if not config_path.is_file() or config_path.is_symlink():
         return
@@ -40,11 +42,14 @@ def observe(project, payload):
         return
     if not isinstance(prompt, str) or len(prompt) > 262144 or Path(cwd).resolve() != project:
         return
+    # Accept only a leading explicit invocation with no second skill token.
+    # The prompt is examined in memory and never enters the event payload.
     match = FIRST.match(prompt)
     mentions = MENTION.findall(prompt)
     if match is None or mentions != [match.group(1)] or match.group(1) not in skills:
         return
     skill = match.group(1)
+    # Hash host IDs before persistence; one turn can reserve only one request.
     chat_id = 'codex-chat-' + digest(session)
     event_id = 'codex-request-' + digest(session, turn)
     outbox = Outbox(project)
