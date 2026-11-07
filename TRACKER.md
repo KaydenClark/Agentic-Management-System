@@ -152,10 +152,21 @@ Round: rsi-cross-project-20261106. Dependencies: none.
 
 ## DQC-000F — RSI: Run boundaries
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
 
-What counts as one skill use, and when is it finished?
+<pre>**Question:** What counts as one skill use, and when is it finished?
 
+**Recommended answer:** One requested operation is one use, with linked child skill uses. Preserve its identity across pauses and resumed chats. Record completion, cancellation, interruption and reopening separately.
+
+**Why:** I chose these boundaries without asking. Counting chats or file reads as uses would distort outcomes and recurrence.
+
+**Intended impact:** Determines run counts, attribution, completion triggers and recovery behavior.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
+
+- propose at r2
 
 ## DQC-000G — RSI: Success and failure
 

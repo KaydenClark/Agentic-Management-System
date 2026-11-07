@@ -1,7 +1,7 @@
 {
-  "schema": "landmark-tracker/destination-question@2",
+  "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000F",
-  "revision": 1,
+  "revision": 2,
   "title": "RSI: Run boundaries",
   "question": "What counts as one skill use, and when is it finished?",
   "answer": null,
@@ -41,6 +41,86 @@
           "field": "captured"
         }
       ]
+    },
+    {
+      "revision": 2,
+      "at": "2026-11-07T00:09:15.566Z",
+      "reason": "DQC propose",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "pending",
+            "proposal": {
+              "readback": "**Question:** What counts as one skill use, and when is it finished?\n\n**Recommended answer:** One requested operation is one use, with linked child skill uses. Preserve its identity across pauses and resumed chats. Record completion, cancellation, interruption and reopening separately.\n\n**Why:** I chose these boundaries without asking. Counting chats or file reads as uses would distort outcomes and recurrence.\n\n**Intended impact:** Determines run counts, attribution, completion triggers and recovery behavior.",
+              "why": "I chose these boundaries without asking. Counting chats or file reads as uses would distort outcomes and recurrence.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000E"
+              ]
+            },
+            "digest": "b0231e0574833716e5f9f275bda958049ff72226fd2f5579b927b0f9195a02f2",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000F-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:15.566Z",
+                "requestDigest": "5bb5e3c261065c1ae8d21cf92159837e5b29eb5787105716258c754a634119d5",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
     }
-  ]
+  ],
+  "lifecycle": {
+    "state": "pending",
+    "proposal": {
+      "readback": "**Question:** What counts as one skill use, and when is it finished?\n\n**Recommended answer:** One requested operation is one use, with linked child skill uses. Preserve its identity across pauses and resumed chats. Record completion, cancellation, interruption and reopening separately.\n\n**Why:** I chose these boundaries without asking. Counting chats or file reads as uses would distort outcomes and recurrence.\n\n**Intended impact:** Determines run counts, attribution, completion triggers and recovery behavior.",
+      "why": "I chose these boundaries without asking. Counting chats or file reads as uses would distort outcomes and recurrence.",
+      "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+      "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+      "round": "rsi-cross-project-20261106",
+      "priority": {
+        "value": 1,
+        "reason": "Owner requested first-pass alignment before further decisions."
+      },
+      "value": {
+        "value": 1,
+        "reason": "Expose an unresolved choice affecting the shared RSI loop."
+      },
+      "dependencies": [
+        "DQC-000E"
+      ]
+    },
+    "digest": "b0231e0574833716e5f9f275bda958049ff72226fd2f5579b927b0f9195a02f2",
+    "confirmations": [],
+    "events": [
+      {
+        "eventId": "rsi-align-20261106-DQC-000F-v1",
+        "type": "propose",
+        "at": "2026-11-07T00:09:15.566Z",
+        "requestDigest": "5bb5e3c261065c1ae8d21cf92159837e5b29eb5787105716258c754a634119d5",
+        "source": null,
+        "note": null,
+        "revision": 2,
+        "round": "rsi-cross-project-20261106"
+      }
+    ]
+  }
 }
