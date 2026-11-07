@@ -134,7 +134,7 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000E — Finish the Workbench Dashboard in AMS
 
-Revision 5; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+Revision 7; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
 
 <pre>## Summary
 
@@ -166,6 +166,8 @@ Source: Kayden, AMS chat, 2026-11-07 \(kayden-ams-chat-2026-11-07\). Scope: Add 
 
 Round: dashboard-round-1. Dependencies: none.
 
+- [landmark:LMK-001](workbench/landmarks/LMK-001-grill-board/LANDMARK.md) (room): Confirmed Dashboard concept belongs to the Grill Board landmark
+- [spec:S-004](workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) (room): S-004 owns building the confirmed Dashboard sections
 - propose at r2
 - propose at r4
 - confirm at r5: Confirmed

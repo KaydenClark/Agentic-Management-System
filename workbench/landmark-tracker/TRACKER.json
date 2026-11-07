@@ -392,13 +392,20 @@
           "itemRevision": null,
           "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
           "assessment": null
+        },
+        {
+          "dqc": "DQC-000E",
+          "itemRevision": null,
+          "reason": "S-004 owns building the confirmed Dashboard sections",
+          "assessment": null
         }
       ],
       "relatedBy": [
         "DQC-000A",
         "DQC-000B",
         "DQC-000C",
-        "DQC-000D"
+        "DQC-000D",
+        "DQC-000E"
       ]
     },
     {
@@ -467,10 +474,17 @@
           "itemRevision": null,
           "reason": "Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred.",
           "assessment": null
+        },
+        {
+          "dqc": "DQC-000E",
+          "itemRevision": null,
+          "reason": "Confirmed Dashboard concept belongs to the Grill Board landmark",
+          "assessment": null
         }
       ],
       "relatedBy": [
-        "DQC-000A"
+        "DQC-000A",
+        "DQC-000E"
       ]
     }
   ],
@@ -2341,11 +2355,13 @@
         "state": "unassessed"
       },
       "distribution": {
-        "items": 1,
-        "denominator": 1,
+        "items": 3,
+        "denominator": 3,
         "status": "incomplete",
         "counted": [
-          "dqc:DQC-000E"
+          "dqc:DQC-000E",
+          "spec:S-004",
+          "landmark:LMK-001"
         ],
         "numerators": {
           "Idea": 0,
@@ -2368,7 +2384,9 @@
           "Verified": 0
         },
         "unassessed": [
-          "dqc:DQC-000E"
+          "dqc:DQC-000E",
+          "spec:S-004",
+          "landmark:LMK-001"
         ],
         "unknown": [],
         "invalid": [],
@@ -2378,6 +2396,60 @@
             "status": "incomplete",
             "counted": [
               "dqc:DQC-000E"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          },
+          "spec": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "spec:S-004"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          },
+          "landmark": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "landmark:LMK-001"
             ],
             "numerators": {
               "Idea": 0,
@@ -2413,11 +2485,58 @@
             "revision": null,
             "holder": "DQC-000E",
             "itemRevision": null
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
+          },
+          {
+            "key": "landmark:LMK-001",
+            "type": "landmark",
+            "id": "LMK-001",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": null,
+            "itemRevision": null
           }
         ],
         "unassessedPercent": 100
       },
-      "related": [],
+      "related": [
+        {
+          "type": "landmark",
+          "id": "LMK-001",
+          "home": "workbench/landmarks/LMK-001-grill-board/LANDMARK.md",
+          "key": "landmark:LMK-001",
+          "revision": null,
+          "reason": "Confirmed Dashboard concept belongs to the Grill Board landmark",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
+        },
+        {
+          "type": "spec",
+          "id": "S-004",
+          "home": "workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md",
+          "key": "spec:S-004",
+          "revision": null,
+          "reason": "S-004 owns building the confirmed Dashboard sections",
+          "resolution": "room",
+          "state": "unassessed",
+          "assessment": null
+        }
+      ],
       "relatedBy": [],
       "lineage": {
         "key": "dqc:DQC-000E",
@@ -2425,7 +2544,22 @@
         "id": "DQC-000E",
         "resolution": "tracker",
         "state": "unassessed",
-        "related": []
+        "related": [
+          {
+            "key": "landmark:LMK-001",
+            "type": "landmark",
+            "id": "LMK-001",
+            "resolution": "room",
+            "state": "unassessed"
+          },
+          {
+            "key": "spec:S-004",
+            "type": "spec",
+            "id": "S-004",
+            "resolution": "room",
+            "state": "unassessed"
+          }
+        ]
       },
       "claims": [],
       "reconciliation": [],
@@ -2452,7 +2586,7 @@
         "at": "2026-11-07T09:17:53.116Z"
       },
       "corrections": [],
-      "revision": 5,
+      "revision": 7,
       "history": [
         {
           "revision": 1,
@@ -2660,6 +2794,38 @@
                     "round": "dashboard-round-1"
                   }
                 ]
+              }
+            }
+          ]
+        },
+        {
+          "revision": 6,
+          "at": "2026-11-07T09:36:17.633Z",
+          "reason": "Confirmed Dashboard concept belongs to the Grill Board landmark",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "landmark",
+                "id": "LMK-001",
+                "revision": null
+              }
+            }
+          ]
+        },
+        {
+          "revision": 7,
+          "at": "2026-11-07T09:36:17.749Z",
+          "reason": "S-004 owns building the confirmed Dashboard sections",
+          "changes": [
+            {
+              "field": "related",
+              "from": null,
+              "to": {
+                "type": "spec",
+                "id": "S-004",
+                "revision": null
               }
             }
           ]

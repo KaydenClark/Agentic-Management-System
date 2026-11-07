@@ -6,12 +6,12 @@
 **Priority:** 1
 **Owner:** Kayden; codex-s004-director
 **Stance:** Builder
-**Updated:** 2026-11-04
+**Updated:** 2026-11-07
 **Catalog description:** Local DQC readback cards and TRACKER.md, with shared actions and stable execution links.
 **Blockers:** none
 **Confirmation:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
 **Execution approval:** [JOT-285d9127-f10b-4928-b302-23131f2f42fe](../../../../wiki/context-grilling-board.md)
-**Next gate:** Owner Human QA and Spec acceptance of the local Board.
+**Next gate:** Build confirmed DQC-000E Dashboard sections; then owner Human QA.
 
 ## Intent and authority
 

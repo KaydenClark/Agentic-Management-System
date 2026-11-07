@@ -1,7 +1,7 @@
 {
   "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000E",
-  "revision": 5,
+  "revision": 7,
   "title": "Finish the Workbench Dashboard in AMS",
   "question": "What does the AMS Workbench Dashboard include, where does its code come from, and how does it look?",
   "answer": "## Summary\n\nFinish the AMS Workbench Dashboard. The current Python Grilling Board becomes one section of it. I add three more sections, Destination Tracker, Taskboard and Wiki, by pulling the working code from LLM_Workbench's Dashboard into AMS. Everything looks like the Grilling Board Redesign artifact. Drafts to approve is left out.\n\n## The why\n\nYou have asked for this Dashboard from the start, and a working one already exists in LLM_Workbench, so rebuilding it from scratch wastes time. You approve things on GitHub, so a Drafts section only adds backlog. AMS does not share code with other projects; the skills do. So the Dashboard is built here first and turned into skills later.\n\n## The intended result\n\n- `uv run ams-board` opens one local Dashboard on your machine, never on Vercel.\n- The top bar has search and a light/dark switch. The tabs are Destination Tracker, Taskboard, Grilling Board and Wiki.\n- Tracker, Taskboard and Wiki show AMS's own records and only display them.\n- The Grilling Board keeps working as it does now.\n- Every part looks like the Redesign artifact, and its controls, such as search and filters, really work.\n- Nothing in AMS links back to or updates LLM_Workbench.\n\n## What I will do\n\n1. Copy the LLM_Workbench page code for the three sections into AMS and have the Python Board supply the data they need.\n2. Style the whole Dashboard from the Redesign artifact. Where it does not draw a section, use its colors and parts.\n3. Test it and show it to you in the browser.\n4. Do the work on the S-004 branch and open a draft PR.\n\nThen stop. Not included: Drafts to approve, turning the Dashboard into skills (the next job), the public website, and your Human QA.",
@@ -24,7 +24,22 @@
   ],
   "landmarks": [],
   "assessment": null,
-  "related": [],
+  "related": [
+    {
+      "type": "landmark",
+      "id": "LMK-001",
+      "revision": null,
+      "reason": "Confirmed Dashboard concept belongs to the Grill Board landmark",
+      "assessment": null
+    },
+    {
+      "type": "spec",
+      "id": "S-004",
+      "revision": null,
+      "reason": "S-004 owns building the confirmed Dashboard sections",
+      "assessment": null
+    }
+  ],
   "claims": [],
   "origin": {
     "title": "Finish the Workbench Dashboard in AMS",
@@ -245,6 +260,38 @@
                 "round": "dashboard-round-1"
               }
             ]
+          }
+        }
+      ]
+    },
+    {
+      "revision": 6,
+      "at": "2026-11-07T09:36:17.633Z",
+      "reason": "Confirmed Dashboard concept belongs to the Grill Board landmark",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "landmark",
+            "id": "LMK-001",
+            "revision": null
+          }
+        }
+      ]
+    },
+    {
+      "revision": 7,
+      "at": "2026-11-07T09:36:17.749Z",
+      "reason": "S-004 owns building the confirmed Dashboard sections",
+      "changes": [
+        {
+          "field": "related",
+          "from": null,
+          "to": {
+            "type": "spec",
+            "id": "S-004",
+            "revision": null
           }
         }
       ]
