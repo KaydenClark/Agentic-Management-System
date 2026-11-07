@@ -12,8 +12,8 @@
     "Verified"
   ],
   "workbench": {
-    "items": 22,
-    "denominator": 22,
+    "items": 23,
+    "denominator": 23,
     "status": "incomplete",
     "counted": [
       "dqc:DQC-000A",
@@ -33,6 +33,7 @@
       "dqc:DQC-000O",
       "dqc:DQC-000P",
       "dqc:DQC-000Q",
+      "dqc:DQC-000R",
       "spec:S-004",
       "task:S-004/TK-002H",
       "task:S-004/TK-002I",
@@ -77,6 +78,7 @@
       "dqc:DQC-000O",
       "dqc:DQC-000P",
       "dqc:DQC-000Q",
+      "dqc:DQC-000R",
       "spec:S-004",
       "task:S-004/TK-002H",
       "task:S-004/TK-002I",
@@ -87,7 +89,7 @@
     "invalid": [],
     "bySourceType": {
       "dqc": {
-        "items": 17,
+        "items": 18,
         "status": "incomplete",
         "counted": [
           "dqc:DQC-000A",
@@ -106,7 +108,8 @@
           "dqc:DQC-000N",
           "dqc:DQC-000O",
           "dqc:DQC-000P",
-          "dqc:DQC-000Q"
+          "dqc:DQC-000Q",
+          "dqc:DQC-000R"
         ],
         "numerators": {
           "Idea": 0,
@@ -419,6 +422,18 @@
         "itemRevision": null
       },
       {
+        "key": "dqc:DQC-000R",
+        "type": "dqc",
+        "id": "DQC-000R",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000R",
+        "itemRevision": null
+      },
+      {
         "key": "spec:S-004",
         "type": "spec",
         "id": "S-004",
@@ -501,7 +516,8 @@
       "DQC-000N",
       "DQC-000O",
       "DQC-000P",
-      "DQC-000Q"
+      "DQC-000Q",
+      "DQC-000R"
     ]
   },
   "items": [
@@ -657,6 +673,15 @@
       "key": "dqc:DQC-000Q",
       "type": "dqc",
       "id": "DQC-000Q",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000R",
+      "type": "dqc",
+      "id": "DQC-000R",
       "resolution": "tracker",
       "state": "unassessed",
       "holders": [],
@@ -9158,6 +9183,150 @@
             "round": "rsi-cross-project-20261106"
           }
         ]
+      }
+    },
+    {
+      "id": "DQC-000R",
+      "title": "RSI: Full alignment readback and continuation",
+      "question": "What is settled, what remains open, and where should the next alignment chat resume?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000R"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000R"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000R"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000R",
+            "type": "dqc",
+            "id": "DQC-000R",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000R",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000R",
+        "type": "dqc",
+        "id": "DQC-000R",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-full-readback-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Full alignment readback and continuation",
+        "question": "What is settled, what remains open, and where should the next alignment chat resume?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-full-readback-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T01:59:10.604Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T01:59:10.604Z",
+          "reason": "Owner requested a complete plain-language readback to move the unfinished alignment to a new chat.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
       }
     }
   ],

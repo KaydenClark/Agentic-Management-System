@@ -1,0 +1,46 @@
+{
+  "schema": "landmark-tracker/destination-question@2",
+  "id": "DQC-000R",
+  "revision": 1,
+  "title": "RSI: Full alignment readback and continuation",
+  "question": "What is settled, what remains open, and where should the next alignment chat resume?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "chat:ams-rsi-full-readback-20261106",
+      "revision": null
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [],
+  "claims": [],
+  "origin": {
+    "title": "RSI: Full alignment readback and continuation",
+    "question": "What is settled, what remains open, and where should the next alignment chat resume?",
+    "sources": [
+      {
+        "id": "chat:ams-rsi-full-readback-20261106",
+        "revision": null
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-07T01:59:10.604Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-07T01:59:10.604Z",
+      "reason": "Owner requested a complete plain-language readback to move the unfinished alignment to a new chat.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    }
+  ]
+}

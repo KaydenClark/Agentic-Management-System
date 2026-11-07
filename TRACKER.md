@@ -435,3 +435,9 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000I, DQC-000N, DQC-000P.
 
 - propose at r2
 - correct at r3: It should show the run history, how has each improvement run gone? Does a stable version have less failures? I honestly dont know what to show here\. Its probably part of why this RSI Loop is not set up\.
+
+## DQC-000R — RSI: Full alignment readback and continuation
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000R.json)
+
+What is settled, what remains open, and where should the next alignment chat resume?
