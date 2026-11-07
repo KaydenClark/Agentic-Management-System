@@ -194,7 +194,7 @@ def test_outbox_reconciles_interrupted_delivery_without_rewriting_remote(tmp_pat
     assert writes == ['request-1', 'audit-1']
 
 
-@pytest.mark.parametrize('reply', [b'', b'garbage', b'{}'])
+@pytest.mark.parametrize('reply', [b'', b'garbage', b'{}', b'{"extra": NaN}'])
 def test_bad_remote_readback_never_implies_absent_or_acknowledged(tmp_path, reply):
     from ams.keycheck import Settings
     from ams.rsi_observer import Outbox, Store
@@ -320,3 +320,42 @@ def test_audit_record_enforces_provider_wire_limit_before_enqueue(tmp_path):
     packet['conditions']['provider'] = 'p' * 63 + ':'
     result = cli(tmp_path, ['audit-record', '--test'], packet)
     assert result['completed_audit_run_ids'] == ['audit-1', 'audit-2', 'audit-3']
+
+
+def test_status_refuses_dangling_state_symlink(tmp_path):
+    state = tmp_path / 'workbench/rsi-observer/.local/observer.sqlite3'
+    state.parent.mkdir(parents=True)
+    state.symlink_to(tmp_path / 'missing.sqlite3')
+    assert 'local file' in cli(tmp_path, ['status', 'chat-1'], ok=False)
+
+
+def test_flush_counts_only_rows_it_acknowledges(tmp_path):
+    from ams.rsi_observer import Outbox
+
+    outbox = Outbox(tmp_path)
+    outbox.record(event('request-1', 'skill_requested', skill='setup-workbench'))
+
+    class ConcurrentTransport:
+        def deliver(self, channel, row):
+            assert outbox.flush(NoopTransport()) == {'acknowledged': 1}
+
+    class NoopTransport:
+        def deliver(self, channel, row):
+            pass
+
+    assert outbox.flush(ConcurrentTransport()) == {'acknowledged': 0}
+
+
+def test_nonfinite_extra_remote_field_is_malformed(tmp_path):
+    from ams.keycheck import Settings
+    from ams.rsi_observer import Outbox, Store
+
+    outbox = Outbox(tmp_path)
+    outbox.record(event('request-1', 'skill_requested', skill='setup-workbench'))
+    row = outbox.status('chat-1')['events'][0]
+    def http(method, url, headers, body):
+        return 200, json.dumps(dict(row, extra=float('nan'))).encode()
+
+    with pytest.raises(ValueError, match='malformed JSON'):
+        outbox.flush(Store(Settings('http://example.invalid', 'sb_secret_fixture'), http))
+    assert outbox.status('chat-1')['pending_event_ids'] == ['request-1']
