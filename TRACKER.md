@@ -286,7 +286,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000H, DQC-000J, DQC-000K.
 
 ## DQC-000M — RSI: Repair scope and pruning
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000M.json)
+Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000M.json)
 
 <pre>**Question:** What may a repair change, and what does pruning a skill mean?
 
@@ -301,6 +301,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000K.
 
 - propose at r2
+- correct at r3: "What does a pruning skill mean" is a scary question\. Its our pruning skill\. The one I had us create to replace the duplicated process in author skill and writing for agents\. This is how we create skills\. We use '/author-skill, add it everything we need to make it work, prune it using the '/prune skill we made, and then run it through the regression audit\. each run gets an alignment score on the rubric, and the whole skill gets a fitness level grade between broken and excellent and an alignment score based on those 3 runs\. We log the result for the RSI loop, its failures, etc\. And then run it again where we author skill, prune and run it through the regression audit until we get a stable or excellent skill that passes the alignment score, and doesn't fail any more of the failures we have recorded \(regressed\)
 
 ## DQC-000N — RSI: Fitness, Alignment and regression
 
