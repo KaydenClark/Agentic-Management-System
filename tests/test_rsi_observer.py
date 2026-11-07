@@ -123,12 +123,23 @@ def test_audit_grade_is_worst_failure_across_three_runs(tmp_path, failed_check, 
 
 def test_partial_audit_distinguishes_actual_run_from_missing_and_interrupted(tmp_path):
     packet = audit_packet()
-    packet['runs'].pop()
-    packet['runs'][1].update(completion_state='interrupted', completed_at=None, rows=[])
-    partial = cli(tmp_path, ['audit-score'], packet)
+    packet['runs'] = packet['runs'][:2]
+    unrun = dict(packet, runs=packet['runs'][:1])
+    partial = cli(tmp_path, ['audit-score'], unrun)
     assert partial['completed_audit_run_ids'] == ['audit-1']
     assert partial['grade'] is None and partial['evidence_complete'] is False
     assert partial['quality'] == {'passed': 1, 'total': 1}
+
+    interrupted = packet['runs'][1]
+    critical = dict(interrupted['rows'][-1], result='No')
+    interrupted.update(completion_state='interrupted', completed_at=None, rows=[critical])
+    partial = cli(tmp_path, ['audit-score'], packet)
+    assert partial['completed_audit_run_ids'] == ['audit-1']
+    assert partial['critical_missed'] is True and partial['grade'] == 'Broken'
+    assert partial['evidence_complete'] is False and partial['qualified'] is False
+    assert partial['quality'] == partial['regression'] == {'passed': 1, 'total': 2}
+    assert partial['runs'][1]['audit_run_id'] == 'audit-2'
+    assert partial['runs'][1]['rows'][0]['reported_result'] == 'missing'
 
     packet = audit_packet()
     packet['runs'][-1]['rows'] = []
@@ -282,3 +293,19 @@ def test_skill_audit_requires_exact_shared_rubric_identity(tmp_path):
     packet = audit_packet()
     packet['rubric'] = dict(packet['rubric'], checkVersion=True)
     assert 'approved r1' in cli(tmp_path, ['audit-score'], packet, ok=False)
+
+
+@pytest.mark.parametrize(('failed_check', 'grade', 'qualified'), [
+    (0, 'Stable', True), (1, 'Functional', False), (2, 'Broken', False),
+])
+def test_evaluator_qualification_does_not_qualify_failed_regressions_or_critical(
+    tmp_path, failed_check, grade, qualified
+):
+    packet = audit_packet()
+    packet['evaluator'].update(qualification='qualified',
+                               qualification_evidence=packet['runs'][0]['rows'][0]['evidence'])
+    packet['runs'][-1]['rows'][failed_check]['result'] = 'No'
+    result = cli(tmp_path, ['audit-score'], packet)
+    assert result['grade'] == grade and result['evidence_complete'] is True
+    assert result['qualified'] is qualified
+    assert result['evaluator_qualified'] is True

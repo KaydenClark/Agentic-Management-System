@@ -112,8 +112,6 @@ def _score_run(run, inventory, candidate):
         supplied[check_id] = row
     rows = []
     for check_id, check_class in inventory.items():
-        if state == 'interrupted' and check_id not in supplied:
-            continue
         row = supplied.get(check_id, {'result': 'missing'})
         result = row['result']
         if result == 'N/A':
@@ -139,7 +137,7 @@ def score(packet):
     runs = [_score_run(run, inventory, packet['candidate']) for run in supplied]
     require(len({run['audit_run_id'] for run in runs}) == len(runs), 'duplicate audit run ID')
     completed = [run for run in runs if run['completion_state'] == 'completed']
-    rows = [row for run in completed for row in run['rows']]
+    rows = [row for run in runs for row in run['rows']]
     pooled = {name: counts(rows, name) for name in CLASSES}
     evidence_complete = len(completed) == 3 and all(run['evidence_complete'] for run in completed)
     has_checks = any(result['total'] for result in pooled.values())
@@ -147,13 +145,14 @@ def score(packet):
     for check_class, level in zip(CLASSES, ('Stable', 'Functional', 'Broken')):
         if critical(pooled[check_class]):
             grade = level
-    qualified = (evidence_complete and has_checks and
-                 packet['evaluator']['qualification'] == 'qualified')
+    evaluator_qualified = packet['evaluator']['qualification'] == 'qualified'
+    qualified = evaluator_qualified and evidence_complete and grade in ('Excellent', 'Stable')
     return {'version': VERSION, 'audit_set_id': packet['audit_set_id'], 'contract_digest': contract_digest,
             'completed_audit_run_ids': [run['audit_run_id'] for run in completed],
             'quality': pooled['Quality'], 'regression': pooled['Regression'],
             'critical_missed': critical(pooled['Critical']), 'grade': grade,
-            'evidence_complete': evidence_complete, 'qualified': qualified, 'runs': runs}
+            'evidence_complete': evidence_complete, 'evaluator_qualified': evaluator_qualified,
+            'qualified': qualified, 'runs': runs}
 
 
 def transport_rows(packet, result, *, is_test, is_public):
