@@ -314,10 +314,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000M.
 
 ## DQC-000O — RSI: Conditional merge authority
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000O.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000O.json)
 
-Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?
+<pre>**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?
 
+**Recommended answer:** Yes. Encode your conditional approval for the exact assessed candidate, linked stored evidence, accepted qualification, benefit/regression requirements and repository checks. Preserve existing stopped work and attempt limits. Do not add another routine permission request; changed candidates need matching evidence.
+
+**Why:** You explicitly described conditional merge approval. I proposed GitHub enforcement, but its exact scope and evidence requirements need alignment.
+
+**Intended impact:** Turns the approval into an enforceable delivery rule rather than a reminder or a self-reported grade.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000I, DQC-000N.
+
+- propose at r2
 
 ## DQC-000P — RSI: Sharing accepted versions
 
