@@ -443,3 +443,42 @@ Supersedes: none
 
 Owner answers, 2026-11-07 (interview choices; the assembled readback is not yet confirmed). Ask: finish the grilling board by adding the working Workbench Dashboard from LLM_Workbench (integration 9d5e1f25) to AMS instead of redesigning it, then fix from there. Answers: (1) It is an AMS local tool on localhost, not the public site or Vercel. (2) The Grilling Board is one section of the Workbench Dashboard; add the rest of the Dashboard to the existing Python Board. It neither replaces nor runs beside it. (3) Pull the code into AMS; LLM_Workbench is not updated. The AMS website does not update or distribute to other projects. The skills distribute, so the skills should own the Dashboard. (4) Build it in AMS first, then create skills from it. (5) Look: use the Grilling Board Redesign artifact, not the LLM_Workbench look or the current AMS colors. Owner: 'That is what I have been asking for since the beginning.' (6) Tracker, Taskboard and Wiki only display their owners' records; owner actions stay in the Grilling Board (confirmed). (7) Leave Drafts to approve out for now: it created unneeded backlog, and the owner approves things on GitHub. (8) Recording: use as few DQCs as needed, correct the concept as the owner corrects it, and summarize it into one readback. Agent finding: the Redesign artifact draws the Dashboard frame (header search, theme, five section tabs) and the full Grilling Board view, but not the insides of Tracker, Taskboard or Wiki.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-62e54e02-653c-47ad-9dea-e9ce24e4d1f3
+Kind: intent
+State: confirmed
+Recorded: 2026-11-07T09:21:07.571Z
+Author: Claude Code
+Source: Kayden, AMS chat, 2026-11-07
+Topic: grilling-board
+Supersedes: JOT-97b271e2-af5c-4901-a9ae-4f87fa65f759
+
+Confirmed intent for DQC-000E, Finish the Workbench Dashboard in AMS. Kayden replied "Confirmed" to the displayed readback in the AMS chat on 2026-11-07 (DQC-000E revision 5, digest a10da56739f816929bca7e8ffaf8ab4ba4b141e1dc89b06ac77dcc6e88ba7d88). Confirmation authorizes the four steps in What I will do and stops there; it is not implementation, Review or Human QA. Exact confirmed readback follows.
+
+## Summary
+
+Finish the AMS Workbench Dashboard. The current Python Grilling Board becomes one section of it. I add three more sections, Destination Tracker, Taskboard and Wiki, by pulling the working code from LLM_Workbench's Dashboard into AMS. Everything looks like the Grilling Board Redesign artifact. Drafts to approve is left out.
+
+## The why
+
+You have asked for this Dashboard from the start, and a working one already exists in LLM_Workbench, so rebuilding it from scratch wastes time. You approve things on GitHub, so a Drafts section only adds backlog. AMS does not share code with other projects; the skills do. So the Dashboard is built here first and turned into skills later.
+
+## The intended result
+
+- `uv run ams-board` opens one local Dashboard on your machine, never on Vercel.
+- The top bar has search and a light/dark switch. The tabs are Destination Tracker, Taskboard, Grilling Board and Wiki.
+- Tracker, Taskboard and Wiki show AMS's own records and only display them.
+- The Grilling Board keeps working as it does now.
+- Every part looks like the Redesign artifact, and its controls, such as search and filters, really work.
+- Nothing in AMS links back to or updates LLM_Workbench.
+
+## What I will do
+
+1. Copy the LLM_Workbench page code for the three sections into AMS and have the Python Board supply the data they need.
+2. Style the whole Dashboard from the Redesign artifact. Where it does not draw a section, use its colors and parts.
+3. Test it and show it to you in the browser.
+4. Do the work on the S-004 branch and open a draft PR.
+
+Then stop. Not included: Drafts to approve, turning the Dashboard into skills (the next job), the public website, and your Human QA.
+<!-- /jot-entry -->
