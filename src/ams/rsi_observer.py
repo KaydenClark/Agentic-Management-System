@@ -146,6 +146,7 @@ class Outbox:
     def record_audit(self, packet, *, is_test=False, is_public=False):
         result = skill_audit.score(packet)
         rows = skill_audit.transport_rows(packet, result, is_test=is_test, is_public=is_public)
+        # A scoring preview with no runs has no durable evidence to append.
         if not rows:
             return result
         contract = {key: value for key, value in packet.items() if key != 'runs'}
@@ -162,6 +163,8 @@ class Outbox:
             for row, supplied in zip(rows, packet['runs']):
                 run = dict(supplied, completed_at=row['completed_at'])
                 self._insert(db, 'audit', row, private=run)
+            # Rescore the retained immutable runs together with newly recorded IDs.
+            # A partial packet cannot erase earlier evidence.
             saved_runs = db.execute('''
                 SELECT private FROM outbox WHERE channel='audit'
                 AND json_extract(content,'$.audit_set_id')=? ORDER BY sequence
