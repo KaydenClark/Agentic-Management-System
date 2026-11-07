@@ -44,6 +44,10 @@ Expert source checks: ADR-003H specifies Python-to-Supabase results delivery wit
 
 Publication observation: records-only PR211 passed its required CI on f172024, but automatic approval review rejected merge because it required direct owner merge authorization. No merge was performed and no alternate route was used. Continue the interview; later first-pass record commits change the PR head and require fresh checks.
 
+## Sharing skills without requiring RSI — question 6 pending
+
+The owner requires distributed skills to be usable without the RSI loop. The revised proposal keeps reporting in the owner personal Codex/Claude setup, separate from the shared skill files. Recipients need no reporting tool or Supabase account and do not send activity to the owner system. This replaces the unconfirmed per-skill mandatory logging proposal, not any implemented runtime. Exact source and pending readback: [DQC-000J](../landmark-tracker/destination-questions/DQC-000J.json).
+
 ## Relationships and unresolved proof
 
 The [AMS purpose](context-ams-purpose.md) explains why the website build is the first application. The [Grill Board](context-grilling-board.md) supplies sourced owner corrections and quality feedback; [RSI presentation](design-concepts/landmark-rsi-presentation.md) displays evidence at its supported strength. [Wiki maintenance](guidebooks/wiki-maintenance.md) makes the resulting knowledge retrievable, but a successful local correction exercise is not broad RSI benefit.
@@ -318,4 +322,17 @@ Topic: feedback-improvement-loop-plan
 Supersedes: none
 
 Kayden confirmed the plain-language replacement for question 4 and requested question 6 with the same simple language. The exact plain question 4 and owner confirmation are preserved in DQC-000H. Keep public skill scores/grades, model/provider and failed/successful repair history visible over time, with private project files/conversations off the website. The authorized repair agent may use a private example with permission. Earlier raw-record proposals remain historical; no new blanket local-only rule is introduced. The current pending frontier is DQC-000J/question 6: instructions in participating skills to call one shared reporting tool at start, failure and finish/stop, with offline queuing and coding-app checks where supported. This recommendation is pending and has not been built or installed. Preserve plain language in the remaining interview; do not stack abstractions.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-c958ef6a-3159-49c1-ba48-0ff8e216c157
+Kind: intent
+State: current
+Recorded: 2026-11-07T01:49:06.214Z
+Author: Kayden; sourced correction and proposal summary by Codex
+Source: chat:ams-rsi-q6-independent-shared-skills-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Question 6 owner correction: handing out skills must not require recipients to run the RSI loop; they should simply be able to use the skills. DQC-000J preserves the exact correction. The pending replacement readback moves reporting instructions/tools to the owner personal coding setup, retaining the same shared skill files with no mandatory reporting service/account or automatic transmission of recipients activity. Owner Mac/PC/cloud environments are enrolled separately; reporting remains independent of GPT_OS. Supported app checks can help detect missed reports, but exact host coverage must be verified rather than assumed. The earlier recommendation to add mandatory reporting calls to each shared skill is superseded as a proposal; no installed skill or personal configuration was changed. Question 6 remains pending confirmation.
 <!-- /jot-entry -->
