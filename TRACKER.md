@@ -131,3 +131,93 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 - [dqc:DQC-000A](workbench/landmark-tracker/destination-questions/DQC-000A.json) (tracker): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
 - [spec:S-004](workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) (room): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
 - propose at r4
+
+## DQC-000E — RSI: Coverage
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+
+Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?
+
+
+## DQC-000F — RSI: Run boundaries
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
+
+What counts as one skill use, and when is it finished?
+
+
+## DQC-000G — RSI: Success and failure
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000G.json)
+
+Who decides whether real work succeeded, and what failures must be captured?
+
+
+## DQC-000H — RSI: Evidence and privacy
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000H.json)
+
+What may leave each project, what stays private, and what may the public website show?
+
+
+## DQC-000I — RSI: Recording authority
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000I.json)
+
+Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?
+
+
+## DQC-000J — RSI: Capture and transport
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+
+Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?
+
+
+## DQC-000K — RSI: Repair triggers and priority
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000K.json)
+
+When should findings become repair work, and may repairs run while your original task continues?
+
+
+## DQC-000L — RSI: Worker location and resources
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000L.json)
+
+Where should repair and evaluation run, and what resource use can continue without asking?
+
+
+## DQC-000M — RSI: Repair scope and pruning
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000M.json)
+
+What may a repair change, and what does pruning a skill mean?
+
+
+## DQC-000N — RSI: Fitness, Alignment and regression
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000N.json)
+
+How should real uses, regression cases and grading combine to qualify a repaired skill?
+
+
+## DQC-000O — RSI: Conditional merge authority
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000O.json)
+
+Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?
+
+
+## DQC-000P — RSI: Sharing accepted versions
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000P.json)
+
+After merge, should participating machines update automatically, on startup, or only when you request it?
+
+
+## DQC-000Q — RSI: Website and completion proof
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000Q.json)
+
+What must the website show, and what evidence makes this shared loop complete?

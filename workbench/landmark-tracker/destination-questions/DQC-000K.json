@@ -1,0 +1,46 @@
+{
+  "schema": "landmark-tracker/destination-question@2",
+  "id": "DQC-000K",
+  "revision": 1,
+  "title": "RSI: Repair triggers and priority",
+  "question": "When should findings become repair work, and may repairs run while your original task continues?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "chat:ams-rsi-alignment-20261106",
+      "revision": null
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [],
+  "claims": [],
+  "origin": {
+    "title": "RSI: Repair triggers and priority",
+    "question": "When should findings become repair work, and may repairs run while your original task continues?",
+    "sources": [
+      {
+        "id": "chat:ams-rsi-alignment-20261106",
+        "revision": null
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-07T00:08:47.471Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-07T00:08:47.471Z",
+      "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    }
+  ]
+}

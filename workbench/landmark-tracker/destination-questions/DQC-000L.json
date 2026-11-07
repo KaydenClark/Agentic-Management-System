@@ -1,0 +1,46 @@
+{
+  "schema": "landmark-tracker/destination-question@2",
+  "id": "DQC-000L",
+  "revision": 1,
+  "title": "RSI: Worker location and resources",
+  "question": "Where should repair and evaluation run, and what resource use can continue without asking?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "chat:ams-rsi-alignment-20261106",
+      "revision": null
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [],
+  "claims": [],
+  "origin": {
+    "title": "RSI: Worker location and resources",
+    "question": "Where should repair and evaluation run, and what resource use can continue without asking?",
+    "sources": [
+      {
+        "id": "chat:ams-rsi-alignment-20261106",
+        "revision": null
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-07T00:08:47.574Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-07T00:08:47.574Z",
+      "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    }
+  ]
+}

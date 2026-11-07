@@ -1,0 +1,46 @@
+{
+  "schema": "landmark-tracker/destination-question@2",
+  "id": "DQC-000O",
+  "revision": 1,
+  "title": "RSI: Conditional merge authority",
+  "question": "Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "chat:ams-rsi-alignment-20261106",
+      "revision": null
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [],
+  "claims": [],
+  "origin": {
+    "title": "RSI: Conditional merge authority",
+    "question": "Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?",
+    "sources": [
+      {
+        "id": "chat:ams-rsi-alignment-20261106",
+        "revision": null
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-07T00:08:47.832Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-07T00:08:47.832Z",
+      "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    }
+  ]
+}

@@ -12,14 +12,27 @@
     "Verified"
   ],
   "workbench": {
-    "items": 9,
-    "denominator": 9,
+    "items": 22,
+    "denominator": 22,
     "status": "incomplete",
     "counted": [
       "dqc:DQC-000A",
       "dqc:DQC-000B",
       "dqc:DQC-000C",
       "dqc:DQC-000D",
+      "dqc:DQC-000E",
+      "dqc:DQC-000F",
+      "dqc:DQC-000G",
+      "dqc:DQC-000H",
+      "dqc:DQC-000I",
+      "dqc:DQC-000J",
+      "dqc:DQC-000K",
+      "dqc:DQC-000L",
+      "dqc:DQC-000M",
+      "dqc:DQC-000N",
+      "dqc:DQC-000O",
+      "dqc:DQC-000P",
+      "dqc:DQC-000Q",
       "spec:S-004",
       "task:S-004/TK-002H",
       "task:S-004/TK-002I",
@@ -51,6 +64,19 @@
       "dqc:DQC-000B",
       "dqc:DQC-000C",
       "dqc:DQC-000D",
+      "dqc:DQC-000E",
+      "dqc:DQC-000F",
+      "dqc:DQC-000G",
+      "dqc:DQC-000H",
+      "dqc:DQC-000I",
+      "dqc:DQC-000J",
+      "dqc:DQC-000K",
+      "dqc:DQC-000L",
+      "dqc:DQC-000M",
+      "dqc:DQC-000N",
+      "dqc:DQC-000O",
+      "dqc:DQC-000P",
+      "dqc:DQC-000Q",
       "spec:S-004",
       "task:S-004/TK-002H",
       "task:S-004/TK-002I",
@@ -61,13 +87,26 @@
     "invalid": [],
     "bySourceType": {
       "dqc": {
-        "items": 4,
+        "items": 17,
         "status": "incomplete",
         "counted": [
           "dqc:DQC-000A",
           "dqc:DQC-000B",
           "dqc:DQC-000C",
-          "dqc:DQC-000D"
+          "dqc:DQC-000D",
+          "dqc:DQC-000E",
+          "dqc:DQC-000F",
+          "dqc:DQC-000G",
+          "dqc:DQC-000H",
+          "dqc:DQC-000I",
+          "dqc:DQC-000J",
+          "dqc:DQC-000K",
+          "dqc:DQC-000L",
+          "dqc:DQC-000M",
+          "dqc:DQC-000N",
+          "dqc:DQC-000O",
+          "dqc:DQC-000P",
+          "dqc:DQC-000Q"
         ],
         "numerators": {
           "Idea": 0,
@@ -224,6 +263,162 @@
         "itemRevision": null
       },
       {
+        "key": "dqc:DQC-000E",
+        "type": "dqc",
+        "id": "DQC-000E",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000E",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000F",
+        "type": "dqc",
+        "id": "DQC-000F",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000F",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000G",
+        "type": "dqc",
+        "id": "DQC-000G",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000G",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000H",
+        "type": "dqc",
+        "id": "DQC-000H",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000H",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000I",
+        "type": "dqc",
+        "id": "DQC-000I",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000I",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000J",
+        "type": "dqc",
+        "id": "DQC-000J",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000J",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000K",
+        "type": "dqc",
+        "id": "DQC-000K",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000K",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000L",
+        "type": "dqc",
+        "id": "DQC-000L",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000L",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000M",
+        "type": "dqc",
+        "id": "DQC-000M",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000M",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000N",
+        "type": "dqc",
+        "id": "DQC-000N",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000N",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000O",
+        "type": "dqc",
+        "id": "DQC-000O",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000O",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000P",
+        "type": "dqc",
+        "id": "DQC-000P",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000P",
+        "itemRevision": null
+      },
+      {
+        "key": "dqc:DQC-000Q",
+        "type": "dqc",
+        "id": "DQC-000Q",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000Q",
+        "itemRevision": null
+      },
+      {
         "key": "spec:S-004",
         "type": "spec",
         "id": "S-004",
@@ -293,7 +488,20 @@
       "DQC-000A",
       "DQC-000B",
       "DQC-000C",
-      "DQC-000D"
+      "DQC-000D",
+      "DQC-000E",
+      "DQC-000F",
+      "DQC-000G",
+      "DQC-000H",
+      "DQC-000I",
+      "DQC-000J",
+      "DQC-000K",
+      "DQC-000L",
+      "DQC-000M",
+      "DQC-000N",
+      "DQC-000O",
+      "DQC-000P",
+      "DQC-000Q"
     ]
   },
   "items": [
@@ -332,6 +540,123 @@
       "key": "dqc:DQC-000D",
       "type": "dqc",
       "id": "DQC-000D",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000E",
+      "type": "dqc",
+      "id": "DQC-000E",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000F",
+      "type": "dqc",
+      "id": "DQC-000F",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000G",
+      "type": "dqc",
+      "id": "DQC-000G",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000H",
+      "type": "dqc",
+      "id": "DQC-000H",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000I",
+      "type": "dqc",
+      "id": "DQC-000I",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000J",
+      "type": "dqc",
+      "id": "DQC-000J",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000K",
+      "type": "dqc",
+      "id": "DQC-000K",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000L",
+      "type": "dqc",
+      "id": "DQC-000L",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000M",
+      "type": "dqc",
+      "id": "DQC-000M",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000N",
+      "type": "dqc",
+      "id": "DQC-000N",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000O",
+      "type": "dqc",
+      "id": "DQC-000O",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000P",
+      "type": "dqc",
+      "id": "DQC-000P",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000Q",
+      "type": "dqc",
+      "id": "DQC-000Q",
       "resolution": "tracker",
       "state": "unassessed",
       "holders": [],
@@ -2295,6 +2620,1878 @@
             "round": "ams-concept-20261103"
           }
         ]
+      }
+    },
+    {
+      "id": "DQC-000E",
+      "title": "RSI: Coverage",
+      "question": "Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000E"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000E"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000E"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000E",
+            "type": "dqc",
+            "id": "DQC-000E",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000E",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000E",
+        "type": "dqc",
+        "id": "DQC-000E",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Coverage",
+        "question": "Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:46.937Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:46.937Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000F",
+      "title": "RSI: Run boundaries",
+      "question": "What counts as one skill use, and when is it finished?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000F"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000F"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000F"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000F",
+            "type": "dqc",
+            "id": "DQC-000F",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000F",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000F",
+        "type": "dqc",
+        "id": "DQC-000F",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Run boundaries",
+        "question": "What counts as one skill use, and when is it finished?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.038Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.038Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000G",
+      "title": "RSI: Success and failure",
+      "question": "Who decides whether real work succeeded, and what failures must be captured?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000G"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000G"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000G"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000G",
+            "type": "dqc",
+            "id": "DQC-000G",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000G",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000G",
+        "type": "dqc",
+        "id": "DQC-000G",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Success and failure",
+        "question": "Who decides whether real work succeeded, and what failures must be captured?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.124Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.124Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000H",
+      "title": "RSI: Evidence and privacy",
+      "question": "What may leave each project, what stays private, and what may the public website show?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000H"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000H"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000H"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000H",
+            "type": "dqc",
+            "id": "DQC-000H",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000H",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000H",
+        "type": "dqc",
+        "id": "DQC-000H",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Evidence and privacy",
+        "question": "What may leave each project, what stays private, and what may the public website show?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.210Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.210Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000I",
+      "title": "RSI: Recording authority",
+      "question": "Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000I"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000I"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000I"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000I",
+            "type": "dqc",
+            "id": "DQC-000I",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000I",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000I",
+        "type": "dqc",
+        "id": "DQC-000I",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Recording authority",
+        "question": "Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.299Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.299Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000J",
+      "title": "RSI: Capture and transport",
+      "question": "Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000J"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000J"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000J"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000J",
+            "type": "dqc",
+            "id": "DQC-000J",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000J",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000J",
+        "type": "dqc",
+        "id": "DQC-000J",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Capture and transport",
+        "question": "Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.385Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.385Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000K",
+      "title": "RSI: Repair triggers and priority",
+      "question": "When should findings become repair work, and may repairs run while your original task continues?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000K"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000K"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000K"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000K",
+            "type": "dqc",
+            "id": "DQC-000K",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000K",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000K",
+        "type": "dqc",
+        "id": "DQC-000K",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Repair triggers and priority",
+        "question": "When should findings become repair work, and may repairs run while your original task continues?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.471Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.471Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000L",
+      "title": "RSI: Worker location and resources",
+      "question": "Where should repair and evaluation run, and what resource use can continue without asking?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000L"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000L"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000L"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000L",
+            "type": "dqc",
+            "id": "DQC-000L",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000L",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000L",
+        "type": "dqc",
+        "id": "DQC-000L",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Worker location and resources",
+        "question": "Where should repair and evaluation run, and what resource use can continue without asking?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.574Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.574Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000M",
+      "title": "RSI: Repair scope and pruning",
+      "question": "What may a repair change, and what does pruning a skill mean?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000M"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000M"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000M"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000M",
+            "type": "dqc",
+            "id": "DQC-000M",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000M",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000M",
+        "type": "dqc",
+        "id": "DQC-000M",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Repair scope and pruning",
+        "question": "What may a repair change, and what does pruning a skill mean?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.658Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.658Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000N",
+      "title": "RSI: Fitness, Alignment and regression",
+      "question": "How should real uses, regression cases and grading combine to qualify a repaired skill?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000N"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000N"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000N"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000N",
+            "type": "dqc",
+            "id": "DQC-000N",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000N",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000N",
+        "type": "dqc",
+        "id": "DQC-000N",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Fitness, Alignment and regression",
+        "question": "How should real uses, regression cases and grading combine to qualify a repaired skill?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.745Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.745Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000O",
+      "title": "RSI: Conditional merge authority",
+      "question": "Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000O"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000O"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000O"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000O",
+            "type": "dqc",
+            "id": "DQC-000O",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000O",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000O",
+        "type": "dqc",
+        "id": "DQC-000O",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Conditional merge authority",
+        "question": "Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.832Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.832Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000P",
+      "title": "RSI: Sharing accepted versions",
+      "question": "After merge, should participating machines update automatically, on startup, or only when you request it?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000P"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000P"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000P"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000P",
+            "type": "dqc",
+            "id": "DQC-000P",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000P",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000P",
+        "type": "dqc",
+        "id": "DQC-000P",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Sharing accepted versions",
+        "question": "After merge, should participating machines update automatically, on startup, or only when you request it?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:47.929Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:47.929Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
+      }
+    },
+    {
+      "id": "DQC-000Q",
+      "title": "RSI: Website and completion proof",
+      "question": "What must the website show, and what evidence makes this shared loop complete?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000Q"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000Q"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000Q"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000Q",
+            "type": "dqc",
+            "id": "DQC-000Q",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000Q",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000Q",
+        "type": "dqc",
+        "id": "DQC-000Q",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "chat:ams-rsi-alignment-20261106",
+          "revision": null
+        }
+      ],
+      "origin": {
+        "title": "RSI: Website and completion proof",
+        "question": "What must the website show, and what evidence makes this shared loop complete?",
+        "sources": [
+          {
+            "id": "chat:ams-rsi-alignment-20261106",
+            "revision": null
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T00:08:48.031Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T00:08:48.031Z",
+          "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
       }
     }
   ],

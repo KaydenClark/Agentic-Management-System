@@ -1,0 +1,46 @@
+{
+  "schema": "landmark-tracker/destination-question@2",
+  "id": "DQC-000Q",
+  "revision": 1,
+  "title": "RSI: Website and completion proof",
+  "question": "What must the website show, and what evidence makes this shared loop complete?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "chat:ams-rsi-alignment-20261106",
+      "revision": null
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [],
+  "claims": [],
+  "origin": {
+    "title": "RSI: Website and completion proof",
+    "question": "What must the website show, and what evidence makes this shared loop complete?",
+    "sources": [
+      {
+        "id": "chat:ams-rsi-alignment-20261106",
+        "revision": null
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-07T00:08:48.031Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-07T00:08:48.031Z",
+      "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    }
+  ]
+}

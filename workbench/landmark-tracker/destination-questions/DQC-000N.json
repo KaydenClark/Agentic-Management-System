@@ -1,0 +1,46 @@
+{
+  "schema": "landmark-tracker/destination-question@2",
+  "id": "DQC-000N",
+  "revision": 1,
+  "title": "RSI: Fitness, Alignment and regression",
+  "question": "How should real uses, regression cases and grading combine to qualify a repaired skill?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "chat:ams-rsi-alignment-20261106",
+      "revision": null
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [],
+  "claims": [],
+  "origin": {
+    "title": "RSI: Fitness, Alignment and regression",
+    "question": "How should real uses, regression cases and grading combine to qualify a repaired skill?",
+    "sources": [
+      {
+        "id": "chat:ams-rsi-alignment-20261106",
+        "revision": null
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-07T00:08:47.745Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-07T00:08:47.745Z",
+      "reason": "Capture an unresolved choice from the agent proposal before the owner first pass; alignment only.",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    }
+  ]
+}
