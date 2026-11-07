@@ -179,22 +179,23 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 
 ## DQC-000G — RSI: Success and failure
 
-Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000G.json)
+Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000G.json)
 
-<pre>**Question:** Who decides whether real work succeeded, and what failures must be captured?
+<pre>**Question:** How should failures you report become a shared per-skill history that prevents recurrence?
 
-**Recommended answer:** Use the requested outcome, observable checks and your corrections. Capture problems during work and discoveries afterward; allow success with recorded friction. Keep unknown outcomes explicit and diagnose cause before blaming a skill.
+**Recommended answer:** When you report that a skill failed at its intended job, the agent records the failure centrally against that skill, outside the application project. Preserve what should have happened, what actually happened, the skill version, relevant evidence and severity. Give the failure a stable identity; link later occurrences rather than losing them in a summary. Turn each actionable failure into a regression case that checks the intended behavior on new work. Keep the original failure and record repair versions and retest results, including recurrence. Decide the exact division of storage between the skills repository and Supabase in question 5.
 
-**Why:** A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.
+**Why:** Your reports identify failures that matter in real use. A persistent per-skill history lets later repairs recover those failures and prove they can complete new work without repeating them.
 
-**Intended impact:** Makes real owner-requested work first-class evidence without inventing success or assigning every problem to a skill.</pre>
+**Intended impact:** A failure discovered in any project becomes reusable evidence and regression coverage for that skill. Fixes remain traceable to the failures they address, and historical failures remain visible after repair.</pre>
 
-Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+Source: Kayden AMS alignment chat, 2026-11-06: question 3 first-pass correction, confirmed questions 1 and 2, and new-work regression requirement\.. Scope: Meaning-only question 3; exact storage ownership remains pending in question 5\. No implementation, migration, database writes, trials or installation\..
 
 Round: rsi-cross-project-20261106. Dependencies: DQC-000F.
 
 - propose at r2
 - correct at r3: I do when I use the skills\. I tell you when things fail, you record the failures\. That is what I want us to be able to look at\. How do we maintain a per skill failure log that we can use for regression testing\. When a skill fails at something it is supposed to do, it needs to be logged somewhere\. Is that is Kaydenclark/skills? Is that is GPT\_OS? It should not be in the project where we were doing the updates \(unless that project is GPT\_OS because that is our orchestrator project and can be used like that\)
+- propose at r4
 
 ## DQC-000H — RSI: Evidence and privacy
 
