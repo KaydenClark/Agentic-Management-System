@@ -14,6 +14,8 @@ last_verified: 2026-11-04
 
 ## Current Map handoff — 2026-11-07
 
+Local delivery is incomplete: FAIL-210/213 retain two hygiene failures (eight oversized records initially; LMK-004 still 8597 characters after native pagination). RUNBOOK stop applies before another repair. FAIL-211 retains automatic review’s publication refusal. Resolve these delivery boundaries before treating this as a checked Map integration. No implementation authority changes.
+
 The [current instruction](../context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) is mapped in LMK-004 and S-002/S-000B/S-006/S-007/S-011/S-013/S-000A. Next operation is Plan for one complete improvement on a real AMS website task on Servitor. Select the exact case and candidate-loading/observer fixtures, reconcile existing Tasks and release conditions, and cover three-run severity scoring, shared history, eligible automatic adoption and later recurrence evidence. Map creates no Tasks and launches no work.
 
 Earlier Stage A fixtures, readback and release graph below remain historical preparation and frozen evidence. Their passing-run-count skill grades, local-Markdown shared-history ownership and manual-only adoption assumptions must not override the updated Specs. Reconcile those contracts during Plan before consuming them for new execution. Do not rerun exhausted attempts or treat this handoff as a Stage B launch. No new build sequence is supplied by Map.
