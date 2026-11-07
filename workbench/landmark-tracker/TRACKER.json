@@ -3175,7 +3175,7 @@
         "at": "2026-11-07T00:08:47.124Z"
       },
       "corrections": [],
-      "revision": 1,
+      "revision": 2,
       "history": [
         {
           "revision": 1,
@@ -3186,14 +3186,87 @@
               "field": "captured"
             }
           ]
+        },
+        {
+          "revision": 2,
+          "at": "2026-11-07T00:09:16.137Z",
+          "reason": "DQC propose",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "pending",
+                "proposal": {
+                  "readback": "**Question:** Who decides whether real work succeeded, and what failures must be captured?\n\n**Recommended answer:** Use the requested outcome, observable checks and your corrections. Capture problems during work and discoveries afterward; allow success with recorded friction. Keep unknown outcomes explicit and diagnose cause before blaming a skill.\n\n**Why:** A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.\n\n**Intended impact:** Makes real owner-requested work first-class evidence without inventing success or assigning every problem to a skill.",
+                  "why": "A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.",
+                  "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                  "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner requested first-pass alignment before further decisions."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                  },
+                  "dependencies": [
+                    "DQC-000F"
+                  ]
+                },
+                "digest": "7da613c78e37452020b9f4f2e64f8c08e4a1aa8730a2e0d192c35dace048ecbe",
+                "confirmations": [],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000G-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:16.137Z",
+                    "requestDigest": "b6f119feef4b4fb0b9824ca8f2c34660d41c037edf19dd582b483aa5c6c521f9",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
         "state": "pending",
-        "proposal": null,
-        "digest": null,
+        "proposal": {
+          "readback": "**Question:** Who decides whether real work succeeded, and what failures must be captured?\n\n**Recommended answer:** Use the requested outcome, observable checks and your corrections. Capture problems during work and discoveries afterward; allow success with recorded friction. Keep unknown outcomes explicit and diagnose cause before blaming a skill.\n\n**Why:** A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.\n\n**Intended impact:** Makes real owner-requested work first-class evidence without inventing success or assigning every problem to a skill.",
+          "why": "A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.",
+          "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+          "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+          "round": "rsi-cross-project-20261106",
+          "priority": {
+            "value": 1,
+            "reason": "Owner requested first-pass alignment before further decisions."
+          },
+          "value": {
+            "value": 1,
+            "reason": "Expose an unresolved choice affecting the shared RSI loop."
+          },
+          "dependencies": [
+            "DQC-000F"
+          ]
+        },
+        "digest": "7da613c78e37452020b9f4f2e64f8c08e4a1aa8730a2e0d192c35dace048ecbe",
         "confirmations": [],
-        "events": []
+        "events": [
+          {
+            "eventId": "rsi-align-20261106-DQC-000G-v1",
+            "type": "propose",
+            "at": "2026-11-07T00:09:16.137Z",
+            "requestDigest": "b6f119feef4b4fb0b9824ca8f2c34660d41c037edf19dd582b483aa5c6c521f9",
+            "source": null,
+            "note": null,
+            "revision": 2,
+            "round": "rsi-cross-project-20261106"
+          }
+        ]
       }
     },
     {

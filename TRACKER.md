@@ -170,10 +170,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 
 ## DQC-000G — RSI: Success and failure
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000G.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000G.json)
 
-Who decides whether real work succeeded, and what failures must be captured?
+<pre>**Question:** Who decides whether real work succeeded, and what failures must be captured?
 
+**Recommended answer:** Use the requested outcome, observable checks and your corrections. Capture problems during work and discoveries afterward; allow success with recorded friction. Keep unknown outcomes explicit and diagnose cause before blaming a skill.
+
+**Why:** A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.
+
+**Intended impact:** Makes real owner-requested work first-class evidence without inventing success or assigning every problem to a skill.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000F.
+
+- propose at r2
 
 ## DQC-000H — RSI: Evidence and privacy
 
