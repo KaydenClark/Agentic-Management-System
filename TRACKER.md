@@ -242,10 +242,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 
 ## DQC-000K — RSI: Repair triggers and priority
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000K.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000K.json)
 
-When should findings become repair work, and may repairs run while your original task continues?
+<pre>**Question:** When should findings become repair work, and may repairs run while your original task continues?
 
+**Recommended answer:** Capture immediately; normally queue diagnosis after completion or interruption. Group related failures without erasing occurrences. Keep your active work moving; surface urgent blockers promptly. Do not silently repair an installed skill during its current use.
+
+**Why:** I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.
+
+**Intended impact:** Controls when the loop acts and how it competes with useful project work.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000I.
+
+- propose at r2
 
 ## DQC-000L — RSI: Worker location and resources
 
