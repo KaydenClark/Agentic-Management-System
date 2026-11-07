@@ -1,7 +1,7 @@
 # RSI repair: bounded branch delivery and closeout
 
 Owner: Kayden direct AMS chat, 2026-11-06. Every edit to AMS/shared skills is RSI work.
-Status: TK-003C source delivered and natively closed; TK-003D held for artifact inspection.
+Status: TK-003C source published/installed and closed; TK-003D claimed for checked AMS main delivery.
 Source-delivery capability: [S-011](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/SPEC.md), within [LMK-004](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md).
 
 ## Confirmed scope and authority
@@ -38,7 +38,7 @@ Development failures and review findings are in [canonical intake](../feedback/W
 
 ## Delivery and later use
 
-Catalog qualification, source publication and personal installation are verified below. Remaining: TK-003C reached-template correction through checked source publication/installation, then TK-003D exact AMS review/CI, main delivery and guarded cleanup. Supersede obsolete AMS PR208 without merging its rejected model. Later recurrence and comparative benefit remain distinct from publication, installation and the bounded installed-use exercise.
+Catalog publication, installation and the TK-003C correction are verified below. TK-003D owns remaining exact AMS review/CI, main delivery and preservation/cleanup. PR208 is closed/superseded; its two uncontained rejected-model commits and checkout remain retained. Later recurrence and comparative benefit remain separate.
 
 ## Bounded qualification and source delivery, 2026-11-06
 
@@ -64,31 +64,26 @@ Actual AMS update used the supported explicit tools-update route: exactly spec-w
 
 Independent AMS Standards and Spec reviews pass candidate661a0efa23f1bde6d6be0ccc96d4b43defeeb68b against maina96c248; FAIL-199 preserves the initial missed reached-page contradiction and its correction. The first AMS CI run42311150004 passed onb7a5be0; current-candidate CI is separate. Disposable supported rollback restored the actual recorded originals, verified valid with4 available updates; reapply verified all42 current hashes, with only recovery receipt metadata differing from the candidate. Wrong-home/missing-directory setup failures are retained as FAIL-200; the live room was not rolled back. Final delivery remains [AMS PR210](https://github.com/KaydenClark/Agentic-Management-System/pull/210) to main, with owned cleanup after verified containment.
 
-## Remaining preparation and newly reached contradiction
+## Preparation chronology and boundaries
 
-The owner required Map/Plan before further Journey and explicitly assigned Director -> Dispatcher -> implementor execution after challenging the earlier missing preparation (FAIL-201). S-011 now maps only remaining work; no preparation, Task or claim is backdated. Director inspection found setup's generic README and Specs/Tasks templates retained an overbroad promotion gate (FAIL-203). Their changed source needs its own proportionate regression, qualification, review, publication and personal installation before dependent AMS delivery. Prior PR71 bounded evidence is unchanged and cannot qualify a later candidate. Frozen campaigns, old claims/blockers, website promotion and unrelated work remain excluded.
+FAIL-201 preserves the owner's Map/Plan-before-Journey and Director -> Dispatcher -> implementor correction. Map checkpoint3bee6bea5eddb5df5fa4061a8f086caae6a8d53d preceded the two native Task preparations; no work is backdated. FAIL-203 identified generic reached-template guidance outside PR71's qualified scope. TK-003C owns that correction through fresh source qualification, review, publication and installation; TK-003D owns dependent AMS consistency, exact checks/review, checked main and original-workspace closeout. The current native Tasks and [history](../wiki/history/S-011.md) own their actual states, not the earlier preparation frontier.
 
 Map counts: 0 Specs, 2 Tasks, 0 empty tasks/
 
-Counts compare new records against AMS main at a96c248. The Map checkpoint revised existing S-011 without creating Tasks; the subsequent Plan prepared two unclaimed Tasks. TK-003C is the ready frontier; TK-003D waits for its verified published/installed artifact.
-
-## Remaining Plan before Journey
-
-Map checkpoint3bee6bea5eddb5df5fa4061a8f086caae6a8d53d was committed, pushed and count-validated before Task preparation. Counts mean new records against maina96c248: one existing S-011 amended, zero new Specs and two new native Tasks. Neither Task is claimed.
-
-1. [TK-003C](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/tasks/TK-003C/TASK.md): ready; no blockers. One implementor owns generic setup template correction through generated-output regression, applicable changed-source qualification/review, checked source publication and registered personal installation. This is independently useful for newly generated rooms.
-2. [TK-003D](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/tasks/TK-003D/TASK.md): blocked by TK-003C's verified published/installed artifact. One implementor owns remaining AMS adoption through exact checks/review, checked main, truthful RSI/original-workspace closeout and eligible cleanup or explicit retention.
-
-The stack crosses project authority -> shared method/template -> generated records/package integrity -> published/installed source -> supported AMS runtime/controls/Wiki -> checked target -> native proof/guarded cleanup. The ready frontier is TK-003C only; TK-003D's edge requires the actual artifact, not merely status. Writers serialize the shared AMS Spec/Task/history/report/projection lane; catalog authoring uses its own managed checkout. No assembly branch or unrelated campaign dependency is introduced.
-
-Original scope coverage: PR71 and retained bounded scenarios cover the unchanged methods/runtime and required positive/refusal paths, within their original scope. TK-003C covers the newly found reached-template contradiction and new-candidate qualification/publication/install; TK-003D covers current AMS consistency, independent exact-head verification, main delivery, knowledge/RSI reconciliation, original preservation and cleanup. Existing installed-use proof stays bounded; no Task claims general benefit or completes frozen Terra/site acceptance. Both assignments retain failures and explicit exclusions.
-
-The original adoption snapshot and digest binding stay authoritative for their actual starting scope. Any additional Task snapshot must be genuinely current after native claim and separately bound before remaining edits. Unrelated linked-worktree findings may prevent global native complete=true; they are preserved rather than removed to make a check green. The Director may perform the managed host archive only after the active implementor stops and returns verified eligibility.
+Counts compare new records with maina96c248: S-011 was amended, with no new Spec or artificial assembly branch. Writers serialize shared records. PR71 retains its original unchanged-method/runtime scope; TK-003C's new evidence does not reset frozen Terra/site campaigns or establish general benefit. The original adoption snapshot/binding remains authoritative; later genuinely current Task snapshots are separate. Native closeout must inspect all original-byte/index findings as well as unrelated retained-workspace findings. The Director may archive this managed checkout only after the active writer stops and returns verified eligibility.
 
 ## Preparation authority correction
 
 Native remote claim of TK-003C refused before writing because the prepared Spec used local source anchors rather than direct current Jot citations (FAIL-204). Structural Map counts and next selection did not prove that claim precondition. The new [source-bound filing](../wiki/context-workbench-adoption.md#jot-3a2975df-e456-4141-bf6b-27ae716f1f98) quotes actual existing confirmation/execution authority and separately labels S-011 routing as Codex's clerical mapping, not a new owner quote or acceptance. It preserves the exact earlier8290-character readback and old campaign limits. The actual exported executionAuthority check is run read-only before a future retry; no local-claim bypass or validator change is authorized.
 
-## TK-003C current qualification
+## TK-003C published result
 
 Source is reviewed, merged and installed; native close succeeded. Attempt2 is scoped Excellent51/51 with verified finding resolution, without a benefit claim. [History](../wiki/history/S-011.md) and the [safe summary](../../evals/bounded-delivery/qualification-summary.json) retain both attempts, exact receipts and cleanup disposition.
+
+## TK-003D adoption and delivery
+
+The Dispatcher verified TK-003C's published/installed artifact before remote claimd2e907e224b6a40818702c88bb554cbb70874e84. Current Task inventory is complete, digest3c75a223750702cfd7bbd62aa051ac1612aceb309381c2a9aa7664d293e9ee37, separately bound atb1424c8ef1001150c792382b7f80448e8dd87756 before remaining edits; neither earlier snapshot was replaced. Authenticated PR210 targets maina96c2486697aeb14d71a6fc6020b9775674f0a1c.
+
+Direct installed-source comparison found all158 tracked setup files byte-identical to skills/mainaf42a289546d631ac3c2c13c5f1fa65c02365a35; packagebc6134e42d80bd7356a07cfd701b7bb65a4d306dedb18a7b97c8d163e2f7651a verifies. Exact prerequisite CatalogCI42319489381 and published-mainCI42321456109 are successful. Tools verify validates all42 AMS hashes with no available tool-byte changes: historical producera9545e05 remains truthful; template/reference changes do not justify a forged receipt. Personal-catalog structural verification passes while native autodiscovery remains unverified.
+
+Director reports source cleanup completed after its writer stopped: exact2c52150 containment, no dirty/ignored/hidden-index entries and absent remote branch were rechecked; managed source worktree was archived and local branch deleted with guarded -d from containing mainaf42a289. The TK-003C native receipt/checksum remains unchanged historical evidence. AMS candidate checks, final independent review, merge, resulting-main verification and original-workspace closeout are still pending.

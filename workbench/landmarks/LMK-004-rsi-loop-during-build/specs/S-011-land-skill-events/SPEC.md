@@ -26,7 +26,7 @@ Prevent lost delivery and exposed handoffs.
 
 ## Current Verified State
 
-[Repair evidence](../../../../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) retains source/install observations and the template/adoption gap; older results remain in history. Whole-Spec acceptance is incomplete.
+[Repair evidence](../../../../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) retains verified source/install results; TK-003D owns AMS delivery. Whole-Spec acceptance is incomplete.
 
 ## Desired Behavior
 

@@ -1019,7 +1019,7 @@
     },
     "cleanup": {
       "remoteBranch": "absent after guarded published-main cleanup",
-      "local": "retained managed source worktree and occupied local branch until active implementor stops",
+      "local": "completed by Director after source implementor stopped: managed worktree archived and absent; guarded local branch -d succeeded",
       "branch": "setup-promotion-guidance",
       "expectedHead": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
       "contained": true,
@@ -1027,7 +1027,8 @@
       "untracked": 0,
       "hiddenIndexFlags": 0,
       "owner": "Director",
-      "nextAction": "Recheck guards, archive managed source attachment after implementor stops, then guarded local branch deletion"
+      "nextAction": "Source cleanup complete; TK-003D carries AMS delivery and preservation closeout",
+      "observer": "Director handback; current receipt preserves original native close text/checksum"
     },
     "nativeTask": {
       "id": "TK-003C",
