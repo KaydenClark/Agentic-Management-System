@@ -1,0 +1,9 @@
+# Optional Codex request observer
+
+This is an opt-in example, not an installed hook. Consult the [official hook contract](https://learn.chatgpt.com/docs/hooks) and review/trust the exact hook definition before use. Preserve every existing hook: merge the two event entries from `codex-hooks.example.json` into the project's existing `.codex/hooks.json`; do not replace that file or its `Stop` hook. Hook installation and trust are separate actions and are not performed here. The sample command runs from the project root and uses the existing offline Python environment; it suppresses errors and never blocks a turn.
+
+To participate, create `workbench/rsi-observer/codex-opt-in.json` from the example, list only the skills this project wants observed, and set `enabled` to `true`. Absence, disabled or invalid configuration makes the adapter a no-op. Keep the project-local outbox private. Remove the flag or set it false to stop new observations. No credentials or network access are needed to record; separate trusted transport authority is required to flush.
+
+The adapter records a request only when the prompt begins with exactly one `$skill` token and that skill is allowlisted. Other forms, mentions and ambiguous multiple tokens do not establish a request. It derives opaque identifiers from the session and turn, stores the first observed timestamp for replay, and records only the skill and derived identity; prompt text, transcripts and raw session or turn IDs are not saved. An explicit request alone does not show the skill was loaded or used.
+
+`SessionStart` has a source but no stable occurrence ID, so resume is a no-op; a later prompt in the same session retains the same chat identity. Stop, turn end and session end do not establish finished work. Only a separately supported Workbench signal can provide completion, load or use evidence. Hook delivery, trust, host startup and worker lifecycle remain unverified here.
