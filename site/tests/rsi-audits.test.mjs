@@ -29,3 +29,8 @@ test('model handles with slashes and legacy anon JWTs work; service JWTs never l
  const out=await loadSkillAudits({env:{...env,NEXT_PUBLIC_SUPABASE_ANON_KEY:jwt('anon')},fetchImpl:async(url,init)=>{headers=init.headers;return ok([{...row,model:'openai/codex'}])}}); assert.equal(out.ok,true); assert.equal(headers.Authorization,'Bearer '+jwt('anon'));
  let called=false;const denied=await loadSkillAudits({env:{...env,NEXT_PUBLIC_SUPABASE_ANON_KEY:jwt('service_role')},fetchImpl:async()=>{called=true;return ok([])}}); assert.equal(denied.ok,false);assert.equal(called,false);
 });
+
+test('empty score denominators are unavailable and do not create an assessment grade',async()=>{
+ const loaded=await loadSkillAudits({env,fetchImpl:async()=>ok([{...row,quality_passed:0,quality_total:0,regression_passed:0,regression_total:0,passed:null,evidence_complete:false,critical_missed:null}])});
+ const html=render(loaded);assert.match(html,/Quality: score unavailable/);assert.match(html,/Regression: score unavailable/);assert.doesNotMatch(html,/0 of 0/);assert.match(html,/whole assessment grade/);
+});
