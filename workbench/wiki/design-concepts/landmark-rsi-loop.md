@@ -25,6 +25,8 @@ The earlier tracker snapshot had no RSI question cards. A new [cross-project rea
 
 ## Open and unresolved
 
+The owner now limits current RSI testing to Servitor using real AMS website work and requires Workbench setup to work independently, with RSI optionally added later. The [question 6 replacement](../landmark-tracker/destination-questions/DQC-000J.json) is pending; earlier PC/cloud capture scope is not active work. Shared skills remain usable without RSI.
+
 Stage B requires a separate launch; model campaigns, database writes, automation, installation and deployment keep their own authority. Existing stopped campaigns and both catalog pilots retain their conditions. End-to-end autonomous improvement, recurrence reduction and generalization require actual evidence. Inference: maintaining useful Wiki explanations reduces reconstruction for this bounded case; the correction exercise alone supplies no quantified or general RSI benefit.
 
 ## Where the work lives

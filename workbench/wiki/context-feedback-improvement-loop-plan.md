@@ -46,7 +46,11 @@ Publication observation: records-only PR211 passed its required CI on f172024, b
 
 ## Sharing skills without requiring RSI — question 6 pending
 
-The owner requires distributed skills to be usable without the RSI loop. The revised proposal keeps reporting in the owner personal Codex/Claude setup, separate from the shared skill files. Recipients need no reporting tool or Supabase account and do not send activity to the owner system. This replaces the unconfirmed per-skill mandatory logging proposal, not any implemented runtime. Exact source and pending readback: [DQC-000J](../landmark-tracker/destination-questions/DQC-000J.json).
+The owner requires distributed skills to be usable without the RSI loop. The later owner correction narrows current work to a Servitor test and requires separate Workbench and optional RSI setups. The revised proposal keeps reporting separate from the shared skill files and makes no PC/cloud rollout part of this test. Recipients need no reporting tool or Supabase account and do not send activity to the owner system. This replaces the unconfirmed per-skill mandatory logging proposal, not any implemented runtime. Exact source and pending readback: [DQC-000J](../landmark-tracker/destination-questions/DQC-000J.json).
+
+## Separate Workbench and RSI setup — question 6 pending
+
+Workbench setup must stand on its own; the owner can choose to add RSI later. Current RSI testing is limited to Servitor and real AMS website work. This narrows the earlier cross-Mac/PC/cloud capture scope, preserves the GPT_OS-independent design and independently usable shared skills, and grants no deployment or installation authority. The exact correction and pending replacement readback live in [DQC-000J](../landmark-tracker/destination-questions/DQC-000J.json); [DQC-000E](../landmark-tracker/destination-questions/DQC-000E.json) retains earlier coverage acceptance and the new scope correction. No already-confirmed unrelated decision is reopened.
 
 ## Relationships and unresolved proof
 
@@ -335,4 +339,17 @@ Topic: feedback-improvement-loop-plan
 Supersedes: none
 
 Question 6 owner correction: handing out skills must not require recipients to run the RSI loop; they should simply be able to use the skills. DQC-000J preserves the exact correction. The pending replacement readback moves reporting instructions/tools to the owner personal coding setup, retaining the same shared skill files with no mandatory reporting service/account or automatic transmission of recipients activity. Owner Mac/PC/cloud environments are enrolled separately; reporting remains independent of GPT_OS. Supported app checks can help detect missed reports, but exact host coverage must be verified rather than assumed. The earlier recommendation to add mandatory reporting calls to each shared skill is superseded as a proposal; no installed skill or personal configuration was changed. Question 6 remains pending confirmation.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-6b5c1f76-fe8f-4b80-b28f-be9523a2907f
+Kind: intent
+State: current
+Recorded: 2026-11-07T01:54:24.092Z
+Author: Kayden; sourced scope correction and proposal summary by Codex
+Source: chat:ams-rsi-separate-systems-servitor-20261106
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Owner correction narrows current RSI work to testing on Servitor rather than logging across every environment. Workbench setup and RSI must be separate systems: a Workbench is usable without RSI, and RSI can be established later by choice. Exact owner words are preserved in DQC-000J and DQC-000E. The earlier all-Mac/PC/cloud capture proposal is outside current scope; GPT_OS independence and independently usable shared skills remain preserved. Revised question 6 proposes separate setups, no Workbench rebuild when RSI is added, and continued Workbench use when RSI is turned off, tested through real AMS website work on Servitor. That replacement readback awaits confirmation. Existing Supabase failure/result and Git skill/regression ownership and confirmed blocking-repair timing remain. No actual test campaign, implementation, installation or environment change has started.
 <!-- /jot-entry -->
