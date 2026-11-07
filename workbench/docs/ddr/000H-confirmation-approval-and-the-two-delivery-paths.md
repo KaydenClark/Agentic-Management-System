@@ -15,3 +15,7 @@ Considered and rejected: a permanent development trunk with `main` as an owner-a
 Consequences: There is no `integration` branch. The owner's only merge gate is `dev` -> `main` for the site.
 
 Provenance: Owner decision review, 2026-11-01, with the owner's correction. Owner answer, 2026-11-01 (round 1).
+
+## Amendment, 2026-11-06: bounded delivery branches
+
+The [confirmed repair scope](../../wiki/context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) separates continuing work ownership from branch lifetime. A short-lived branch carries a bounded related change; Tasks may belong to Specs or Landmarks, and project maintenance uses its existing owner. Ready records/non-site changes reach checked main; website code/content reaches checked dev, retaining owner-only website promotion. After verified integration, reconcile evidence and clean up the delivered branch even while its parent remains open. Temporary assembly branches serve concrete dependencies. Preserve unfinished work and historical decisions. [RUNBOOK](../../../RUNBOOK.md#delivery-and-recovery) owns the procedure; optional delivery targets supply structural verification, never authority.

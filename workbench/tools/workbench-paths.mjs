@@ -128,7 +128,24 @@ export function declaredGit(root) {
     failure.code = 'invalid-manifest';
     throw failure;
   }
-  return { defaultBranch: declared.defaultBranch, integrationBranch: declared.integrationBranch };
+  if (declared.deliveryTargets !== undefined && (!Array.isArray(declared.deliveryTargets) || !declared.deliveryTargets.length || declared.deliveryTargets.some(name => !isBranchName(name)) || new Set(declared.deliveryTargets).size !== declared.deliveryTargets.length || !declared.deliveryTargets.includes(declared.integrationBranch))) {
+    const failure = new Error('manifest git.deliveryTargets must be unique branch names including integrationBranch');
+    failure.code = 'invalid-manifest';
+    throw failure;
+  }
+  return { defaultBranch: declared.defaultBranch, integrationBranch: declared.integrationBranch, ...(declared.deliveryTargets ? { deliveryTargets: [...declared.deliveryTargets] } : {}) };
+}
+
+// A declared target permits structural verification, never publication or promotion.
+export function deliveryTarget(root, requested) {
+  const git = declaredGit(root);
+  const target = requested ?? git?.integrationBranch;
+  if (!git || !(git.deliveryTargets ?? [git.integrationBranch]).includes(target)) {
+    const failure = new Error('Select a declared delivery target; manifest configuration grants no merge authority');
+    failure.code = 'invalid-delivery-target';
+    throw failure;
+  }
+  return target;
 }
 
 export function isSafeRelative(value) {

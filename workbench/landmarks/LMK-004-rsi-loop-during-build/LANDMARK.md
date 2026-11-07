@@ -4,39 +4,49 @@
 **Status:** active
 **Priority:** 2
 **Owner:** Kayden
-**Updated:** 2026-11-04
-**Catalog description:** The measured self-improvement loop, run on the website build and the work after it, with safeguards that keep its results honest.
+**Updated:** 2026-11-07
+**Catalog description:** Measured skill improvement on website work, with qualification and later-use evidence.
 **Blockers:** none
-**Next gate:** Stage A delivered by PR169 at 3e307881; separate Stage B launch remains required.
+**Next gate:** Implement TK-003E/F/G, then prove the first Servitor case in TK-003H. Earlier campaign stops remain.
 
 ## Direction
 
-The RSI Loop turns failures from real agent work into demonstrated improvements to shared skills and the Workbench, then checks whether those improvements persist. The website build is the first application; later work supplies further evidence. The [owner map](../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) establishes this as a Landmark composed of independently verifiable capabilities.
+The RSI Loop improves shared skills/Workbench methods from real failures and checks persistence. The [owner map](../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) assigns independently verifiable capabilities; website work supplies the first proof.
 
-Failures enter one Markdown log. Diagnosis identifies the owning cause; cases and comparisons use the existing Fitness/Alignment checks. The external Python worker carries authorized execution and recovery, Supabase holds durable cases/runs/candidates/comparisons/dispositions, and presentation shows safe evidence. Qualified Stable/Excellent changes need useful benefit and no regression before merge; adoption and later observed loading remain distinct.
+The [current owner instruction](../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) requires one complete skill improvement on a real AMS website task on Servitor as the first proof. RSI is an optional addition to participating Workbenches; Workbench setup and shared skills remain usable without it.
+
+A per-chat Python observer records requested, loaded and used skills and failures. Skipping an explicitly requested skill is Critical. The orchestrator schedules routine repair after current work and blocking repair in a separate chat, with one active repair per skill. Repair uses author-skill and prune-artifact and exercises the draft plus related skills in a separate website test session on Servitor. Eligible repairs pass qualification, merge and automatically update everyday skills. Later use proves the accepted version loaded and measures recurrence.
+
+Supabase owns shared failure/improvement history; Git owns skills and regression tests. Existing Markdown failure intake remains a local capture/recovery surface until implemented transport reconciles stable occurrences into the shared history. Three skill audits report separate Quality/Regression scores, Critical result and worst-failure grade (S-002), while whole-Workbench Alignment stays separate. S-007 shows safe results and actual audit counts. These are required outcomes, not claims about the current runtime.
 
 Use subscription-meter capacity with Mid/Small Codex or Claude workers, High when needed. Preserve initial attempt -> retry -> retry -> stop, baseline excluded, and prior frozen campaign conditions. This mapping purchases nothing, starts no trials and grants no installation/deployment authority.
 
 Individual skills and declared coupled bundles can improve; bundle results do not prove each component improved. Historical failures and previously successful behavior form development/regression evidence; fresh work tests generalization. Recurrence and owner interventions are measured per eligible use. Preserve failed attempts, uncertainty and previous decisions.
 
-Capability ownership crosses existing landmark placements: S-006 and S-007 remain in LMK-002 and supply storage and presentation. Their placement does not duplicate ownership. S-012's general lifecycle CLI is separate from S-000B's RSI worker. The existing S-000A catalog refocus and S-011 source repairs retain scope and stops.
+S-006/S-007 remain cross-landmark storage/presentation owners in LMK-002. S-012’s lifecycle CLI is distinct from S-000B. S-000A/S-011 retain scope and stops.
 
 ## Why It Matters
 
-Outside research does not settle whether shaping an agent's environment improves results, so the AMS has to measure it against a no-AMS control and a plain-instruction control, and report the answer either way. An earlier loop built its apparatus and never ran it; this one runs on real work from day one.
+A repair must fix the underlying problem, preserve the connected workflow and reach everyday use. Later evidence must show whether the problem returns.
+
+Measure against no-AMS and plain-instruction controls and report either outcome; research and apparatus alone prove no benefit.
 
 ## What Success Looks Like
 
-- [ ] The loop and its safeguards are specified and the first trial, the site build, has produced rows in Supabase (S-002).
-- [ ] At least one improvement that started from a failed result has a recorded disposition (S-002).
-- [ ] Agents using the land skill no longer miss a landing event, shown by a rerun of the failing case after a change made through the skills repository's own process (S-011).
-- [ ] A Python lifecycle CLI exists and is compared with the current Node lifecycle tools on the same tasks (S-012).
-- [ ] Coherence checks report up-to-Spec state, skills pin and sync, and `dev`-ahead-of-`main` distance, and independent Spec review happens (S-013).
-- [ ] Shared skills teach distinct methods with verified reliability/capability outcomes, truthful composition/prerequisite labels and preserved workflows/credit; AMS no longer bypasses preparation for source changes (S-000A).
+- [ ] Site-build trial and safeguards produce traceable Supabase rows and a failed-result improvement disposition (S-002).
+- [ ] Repaired land skill passes the missed-event case through the skills source process (S-011).
+- [ ] Python lifecycle CLI is compared with Node on identical tasks (S-012).
+- [ ] Coherence reports up-to-Spec, skills pin/sync and dev/main distance; independent Spec review occurs (S-013).
+- [ ] Distinct shared methods preserve workflow/credit and truthful prerequisites/composition, with verified outcomes and no AMS preparation bypass (S-000A).
 
-History: [LMK-004 history](../../wiki/history/LMK-004.md).
+[History](../../wiki/history/LMK-004.md) retains prior evidence.
 
 ## End-to-end acceptance
+
+- [ ] **First proof on Servitor:** one real website failure reaches root-cause diagnosis, author-skill/prune-artifact repair, connected draft-session tests, three qualified audits, eligible merge, automatic everyday update and observed later use. A merged but never loaded repair fails.
+- [ ] **Observer and scheduling:** a skipped requested skill creates a Critical failed-use record; routine work finishes before repair starts, a blocker uses a separate chat, and competing triggers never run two repairs for the same skill.
+- [ ] **Optional participation:** a Workbench without RSI can use the skills without observer/reporting setup; no activity is silently collected from nonparticipants.
+- [ ] **Audit contract:** Quality-only failure in one of three runs prevents Excellent; any Critical failure yields Broken. Actual completed audit count, missing evidence and qualification remain visible; whole-Workbench Alignment is separate.
 
 - [ ] One reported failure reaches diagnosis, controlled repair, qualification, no-regression decision, authorized adoption and later-use evidence, traceable through Supabase and the public-safe view.
 - [ ] Interrupt and redeliver work: continuation preserves claims, evidence and attempt limits without duplicate external effects or owner relaying each step.
@@ -45,27 +55,7 @@ History: [LMK-004 history](../../wiki/history/LMK-004.md).
 
 ## Decision Records
 
-The decision records under this landmark, one line each, linked to their record.
-
-- [The RSI loop design](../../docs/adr/archive/002F-the-rsi-loop-design.md)
-- [The first RSI trial is building the site](../../docs/ddr/000W-the-first-rsi-trial-is-building-the-site.md)
-- [One improvement procedure, starting from failed results](../../docs/adr/002A-one-improvement-procedure-starting-from-failed-results.md)
-- [A repeated failure first checks the earlier fix](../../docs/adr/002B-a-repeated-failure-first-checks-the-earlier-fix.md)
-- [Measure the noise floor before trusting a change](../../docs/adr/002G-measure-the-noise-floor-before-trusting-a-change.md)
-- [Every round runs two control arms](../../docs/adr/002H-every-round-runs-two-control-arms.md)
-- [Comparisons use paired per-task statistics](../../docs/adr/002I-comparisons-use-paired-per-task-statistics.md)
-- [Every ledger row records cost and run state](../../docs/adr/002J-every-ledger-row-records-cost-and-run-state.md)
-- [Graders come from the accepted version](../../docs/adr/002K-graders-come-from-the-accepted-version.md)
-- [Trials run in a sandbox](../../docs/adr/002L-trials-run-in-a-sandbox.md)
-- [More than two held-out tasks before a public number](../../docs/adr/002M-more-than-two-held-out-tasks-before-a-public-number.md)
-- [Studied held-out tasks retire to the dev set](../../docs/adr/002N-studied-held-out-tasks-retire-to-the-dev-set.md)
-- [One standing campaign approval](../../docs/adr/archive/002O-one-standing-campaign-approval.md)
-- [Each RSI run pins the skills commit](../../docs/adr/002R-each-rsi-run-pins-the-skills-commit.md)
-- [Three strikes, then stop](../../docs/adr/002W-three-strikes-then-stop.md)
-- [Measure how far dev runs ahead of main](../../docs/adr/002T-measure-how-far-dev-runs-ahead-of-main.md)
-- [No session holds untrusted input, secrets and outward actions together](../../docs/adr/002P-no-session-holds-untrusted-input-secrets-and-outward-actions-together.md)
-- [Three orchestrators split the work by risk](../../docs/adr/002Z-three-orchestrators-split-the-work-by-risk.md)
-- [The AMS runtime is a small Python CLI](../../docs/adr/000X-the-ams-runtime-is-a-small-python-cli.md)
+[Current owner intent](../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) governs the new destination; historical campaign decisions remain frozen. S-002 owns evaluation/control/attempt contracts, S-000B recovery, S-006 storage and S-011 delivery. See the [decision catalog](../../docs/adr/) and [first website trial](../../docs/ddr/000W-the-first-rsi-trial-is-building-the-site.md). The [prior decision index](https://github.com/KaydenClark/Agentic-Management-System/blob/5f0c1d783cdf04fdf9fd87c5c54caf61aaf132a8/workbench/landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md#decision-records) preserves every earlier reference; this Map resets none.
 
 ## Capability owners
 
@@ -89,13 +79,9 @@ The decision records under this landmark, one line each, linked to their record.
 
 ## Verification Procedure
 
-```bash
-node workbench/tools/spec-workbench.mjs show LMK-004
-node workbench/tools/spec-workbench.mjs show S-002
-node workbench/tools/spec-workbench.mjs doctor
-```
+Use linked Spec observer/harness, scorer, writer/readback and chart seams. Join chat/request IDs, case/candidate pins, three actual run IDs, merge/update/loaded versions and later uses. Mapping inspected records/scorer only, not Servitor or live Supabase. Existing code’s passing-run-count grade is an implementation gap.
 
-Loop results are confirmed from the Supabase rows they produced, each naming its commit, skills pin and trial arm.
+`node workbench/tools/spec-workbench.mjs show LMK-004`, `show S-002` and `doctor` inspect records. Runtime proof comes from produced Supabase rows naming commit, skill pin and trial arm.
 
 ## Reached Result
 

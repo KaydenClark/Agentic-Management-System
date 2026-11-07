@@ -5,45 +5,43 @@
 **Priority:** 1
 **Owner:** Kayden; orchestrator B (local, holds the Supabase keys)
 **Stance:** Builder
-**Updated:** 2026-11-06
-**Catalog description:** Supabase provenance, Python writer and read-only RSI/build/usage presentation.
+**Updated:** 2026-11-07
+**Catalog description:** Supabase RSI/build/usage history, Python writer and RLS site reads.
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** N/O delivery checks and review; TK-000W remains stopped.
+**Next gate:** Land N/O source. W stays stopped. Coverage, Review and owner QA remain open.
 
 ## Intent and authority
 
-[Stage A](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) was preparation only. Owner launch/confirmed readback, 2026-11-05: implement N in an isolated test namespace; O requires verified N. Campaign, installation, stopped-work and promotion gates remain.
+[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac). Separate Nov. 5 launch authorized isolated N, then O. Prior stops remain.
 
-Python writes RSI results, build history and tokens to Supabase as they arrive; site data reads use its publishable key. Service key: local ignored environment.
+Python writes RSI/build/usage data to Supabase; the site reads only. Service credentials stay gitignored/local; the site gets the publishable key.
 
 ## Outcome
 
-One Supabase project holds all site data. Local Python writes; publishable clients only read.
+One Supabase project supplies site rows. Python writes and the site reads.
 
 ## Why It Matters
 
-Sourced rows make charts auditable; private writes protect credentials.
+Sourced rows make charts auditable; private writes protect keys.
 
 ## Current Verified State
 
-N isolated lineage: [proof](tasks/TK-002N/TASK.md#proof). N/O product3856614: [recovery proof](tasks/TK-002O/TASK.md#proof); final delivery CI pending. Production migration remains unperformed.
+[TK-000B proof](tasks/TK-000B/TASK.md#proof) covers schema, writer, conflicts, sources and keys within [live limits](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01). TK-000Q/R/S/P cover private assessments and unknown metrics.
 
-Schema/provenance, writer/readback, conflict refusal, sources and key handling are met ([TK-000B](tasks/TK-000B/TASK.md#proof), [live limits](tasks/TK-000L/TASK.md#resumed-local-verification-2026-11-01)). Private assessments/unknown metrics: TK-000Q/R/S and TK-000P.
-
-Approved import 771bd1e passed; later build-history coverage is unverified. Further import requires fresh approval and cannot rewrite S-008 creation provenance with --refresh-changed. TK-000W remains stopped/unaccepted; whole-Spec binding and actual Human QA are open. See [history](../../../../wiki/history/S-006.md).
+Import `771bd1e` passed. Later coverage needs fresh import approval. Preserve S-008 provenance and the TK-000W stop. See [history](../../../../wiki/history/S-006.md).
 
 ## Desired Behavior
 
-- Existing RSI result/run tables retain task, split, control arm, runtime/controls/skills commits, provider/model/effort, completion, grade and source. Assessments remain separate from behavioral trials.
-- Clients read safe data only; assessments and operations stay private. Only authorized workers write lifecycle records; candidates receive no database credentials.
-- Supabase owns worker-written, commit-pinned cases, runs, candidates, comparisons and dispositions. Git fixtures/contracts are referenced artifacts, not competing live statuses. Markdown owns failure intake; ingestion references stable ID, source revision and corrections, without duplicate occurrences.
-- Link failures, case versions, experiment contracts, candidate parents, jobs, results, decisions and adoption/use receipts. Extend existing identities rather than creating a second ledger. Table/queue technology is left to implementation.
-- Persist job authorization, claim, attempt, stage, next action and stop/block reason. Atomic claims and version conflicts prevent duplicate ownership; interrupted or uncertain writes reconcile before replay. S-000B owns execution semantics.
-- Keep raw transcripts local/private. Store only safe derived fields and evidence identities. Git-committed exports preserve safe records, schema and completeness checkpoints; restore preserves attempts/corrections and refuses stale conflicts. Exports are recovery copies, not writable authorities; exclude secrets, host paths and private raw packets.
-- Distinguish measured usage, subscription-meter availability and optional API-equivalent estimates; unknown is never zero or an invented bill. Free-plan outages/capacity failures remain visible; retain pending local evidence without claiming publication. No paid upgrade or cloud upload of raw evidence is implied.
-- Build history comes from real Spec/Task/PR/commit events, including returns and corrections. Seeds carry source and strength; synthetic/test rows never reach the site.
+- Supabase owns shared failure/improvement history and worker records. Git owns skills, tests, fixtures and contracts. Markdown is local intake/recovery. Transport preserves stable IDs, revisions and corrections.
+- Link chat, request, loading, use and failure identities; distinguish recurrence occurrences, skill/candidate/parent pins, jobs, cases, contracts, decisions and adoption/later-use receipts. Skipped explicit requests remain failed requested uses. Replayed transport creates no duplicate occurrence; extend existing identities, not another ledger.
+- Retain task/split/control arm, runtime/control/skill commits, provider/model/effort, completion, source, grade and three actual audit run identities/class counts/Critical results. Partial sets remain partial. Assessments and behavioral trials stay distinct; new grading cannot relabel historical r1 results or erase attempts.
+- Persist authorization, claim, attempt, stage, next action and stop/block reason. Atomic ownership/version checks prevent duplicate jobs; reconcile interrupted/uncertain effects before replay. S-000B owns execution; table/queue choice remains implementation detail.
+- Only trusted workers write. Presentation clients are read-only; candidates receive no credentials and cannot change graders. Private assessments/operations and raw transcripts remain private/local; public projections contain safe derived fields and evidence identities only.
+- Safe Git exports retain schema/completeness checkpoints for recovery. Restore preserves IDs, attempts and corrections and refuses stale conflicts. Exports are not writable authorities; exclude secrets, host paths and raw/private packets.
+- Separate measured usage, subscription capacity and optional API estimates. Keep unknowns and pending local evidence visible through outages. Paid upgrades and raw uploads require separate authority.
+- Build events come from real Spec/Task/PR/commit history, including returns/corrections. Seeds carry source/strength; synthetic/test rows never reach the site.
 
 ## Decisions And Contracts
 
@@ -63,12 +61,12 @@ Approved import 771bd1e passed; later build-history coverage is unverified. Furt
 
 ## Vertical Implementation Slices
 
-[N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md): N verified in isolation; O released on that artifact.
-
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
+[TK-002N/O contract](../../../../wiki/guidebooks/rsi-worker-contract.md). Isolated [lineage](tasks/TK-002N/TASK.md#proof) and [recovery](tasks/TK-002O/TASK.md#proof) passed at `3856614`. Production migration remains open.
 
 ## Acceptance Criteria
+
+- [ ] **Shared history:** replay one event twice and retain one occurrence; a genuine later recurrence retains a second linked occurrence. Skipped requested use stays in failed-request counts. Git test/source pins and Supabase history resolve to the same candidate.
+- [ ] **Versioned audits:** store partial and complete audit sets truthfully, preserve actual counts and class denominators, and retain historical r1 grade semantics. A new label silently rewriting old results fails.
 
 - [x] **Schema/provenance:** required identities are enforced; a missing skills commit fails. [Proof][p].
 - [x] **No client writes:** publishable-key mutations fail, safe SELECT works, raw assessment reads fail. [Proof][p].
@@ -96,13 +94,7 @@ S-002 writes its rows here; S-007 reads them.
 
 ## Verification Procedure
 
-```bash
-node workbench/tools/spec-workbench.mjs show S-006
-uv run pytest
-# before close, in B's checkout after merge
-uv run ams-history import --refresh-changed
-uv run ams-history readcheck --ref SHA --dev-ref origin/dev
-```
+RUNBOOK checks and S-006 writer/history readback on the named candidate. Imports require the separately approved scope; Map writes no database rows.
 
 ## Documentation Impact
 
@@ -110,7 +102,7 @@ uv run ams-history readcheck --ref SHA --dev-ref origin/dev
 
 ## Review and Human QA
 
-Presentation Human QA belongs to S-007. Completion requires actual candidate owner Human QA; engineering or independent source review does not supply it.
+S-007 owns presentation Human QA; Spec completion needs actual owner QA, not engineering/source review.
 
 ## Completion Result
 

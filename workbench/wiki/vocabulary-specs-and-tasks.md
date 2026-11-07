@@ -7,7 +7,7 @@ provenance:
   - LLM Workbench template wiki: the glossary's Specs and Tasks grouping explained
 source_paths:
   - GLOSSARY.md
-last_verified: 2026-11-01
+last_verified: 2026-11-06
 ---
 
 # Specs and Tasks: the vocabulary explained
@@ -71,7 +71,7 @@ Definition: [GLOSSARY.md, Specs and Tasks](../../GLOSSARY.md#specs-and-tasks).
 
 ## Human QA
 
-Version cadence is a default, not the sole trigger. Actual per-Spec content-bound approval is distinct from monitoring or a green suite; only the owner promotes integration to main. Failure returns to Align and delivery at the implicated scope, without assuming every defect changes design.
+Version cadence is a default, not the sole trigger. Actual per-Spec content-bound approval is distinct from monitoring or a green suite; only the owner promotes website work from dev to main, following [the current delivery model](../docs/SKILLS.md#delivery). Failure returns to Align and delivery at the implicated scope, without assuming every defect changes design.
 
 Definition: [GLOSSARY.md, Specs and Tasks](../../GLOSSARY.md#specs-and-tasks).
 

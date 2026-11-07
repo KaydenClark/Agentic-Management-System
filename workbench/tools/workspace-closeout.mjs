@@ -5,8 +5,8 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import {spawnSync} from 'node:child_process';
-import {declaredGit,findRoot,isMainModule,laneRelative,markdownLinkTargets,readManifest} from './workbench-paths.mjs';
-import {findSpec} from './spec-workbench.mjs';
+import {declaredGit,deliveryTarget,findRoot,isMainModule,laneRelative,markdownLinkTargets,readManifest} from './workbench-paths.mjs';
+import {findSpec,findLandmarkParent} from './spec-workbench.mjs';
 
 const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
 const SHA=/^[a-f0-9]{40,64}$/;
@@ -57,9 +57,18 @@ function selectedIgnored(root,names){
  return out;
 }
 function taskOwner(root,specId,taskId){
- const spec=findSpec(root,specId);const task=(spec.records??[]).find(row=>row.id===taskId);
+ const spec=/^LMK-/.test(specId??'')?findLandmarkParent(root,specId):findSpec(root,specId);const task=(spec.records??[]).find(row=>row.id===taskId);
  if(!task)fail('unknown-task','Closeout requires an existing record-backed Task.');
  return{specId:spec.id,taskId:task.id,specPath:spec.relativePath,taskPath:task.relativePath,claimant:task.currentClaimant,status:task.status};
+}
+function assignmentOwner(root,options){
+ if(!options.record)return taskOwner(root,options.spec,options.task);
+ if(options.spec||options.task)fail('ambiguous-owner','Choose a record or a parent/Task, not both.');
+ const file=safePath(root,options.record),stat=fs.lstatSync(file);
+ if(!stat.isFile()||stat.isSymbolicLink()||stat.nlink!==1||!options.record.endsWith('.md')||text(root,['ls-files','--error-unmatch','--',options.record],true)===null)fail('unknown-ownership','Project work requires a tracked ordinary Markdown owner.');
+ if(path.basename(file)==='TASK.md'||/^\*\*(?:Task ID|Current claimant):\*\*/m.test(fs.readFileSync(file,'utf8')))fail('native-task-owner','Native Task records require their parent/Task route and verified current claimant.');
+ if(typeof options.authority!=='string'||!options.authority.trim())fail('unknown-ownership','Name the assignment authority source; this attribution grants no authority.');
+ return{kind:'record',recordPath:options.record,specPath:options.record,taskPath:options.record,claimant:options.owner,authority:options.authority};
 }
 function worktrees(root){
  const parts=nul(git(root,['worktree','list','--porcelain','-z']));const result=[];let item;
@@ -99,9 +108,9 @@ function context(project){
  return{root,manifest,branches,repository:{workbenchId:manifest.workbenchId,originHash:hash(origin),roots},origin};
 }
 export function snapshotWorkspace(project,options){
- const c=context(project);const owner=taskOwner(c.root,options.spec,options.task);
+ const c=context(project);const owner=assignmentOwner(c.root,options);
  if(!options.owner||owner.claimant!==options.owner)fail('unknown-ownership','Snapshot owner must match the Task current claimant.');
- const ignored=options.ignored??[];const data={repository:c.repository,workspace:c.root,owner:{...owner,name:options.owner},scope:{ignored},...inventory(c.root,{ignored})};
+ const ignored=options.ignored??[];const data={repository:c.repository,workspace:c.root,owner:{...owner,name:options.owner},target:deliveryTarget(c.root,options.target),scope:{ignored},...inventory(c.root,{ignored})};
  return{schemaVersion:1,operation:'snapshot',complete:data.findings.length===0&&data.busy.length===0,digest:hash(JSON.stringify(data)),data,limitations:['Local evidence contains paths and hashes; keep it in approved private recovery.','A pinned digest detects changed evidence; it does not authenticate the observer or certify semantic completeness.']};
 }
 function readJson(file){
@@ -175,12 +184,12 @@ export function checkWorkspace(project,options){
   const owner=baseline.data.owner;
   if(!owner||typeof owner.taskPath!=='string'||typeof owner.specPath!=='string')fail('invalid-baseline','Starting snapshot has no owning Task.');
   safePath(c.root,owner.taskPath);safePath(c.root,owner.specPath);
-  const actualOwner=taskOwner(c.root,owner.specId,owner.taskId);
+  const actualOwner=assignmentOwner(c.root,owner.kind==='record'?{record:owner.recordPath,owner:owner.name,authority:owner.authority}:{spec:owner.specId,task:owner.taskId});
   if(actualOwner.taskPath!==owner.taskPath||actualOwner.specPath!==owner.specPath||actualOwner.claimant!==owner.name)fail('wrong-owner','The baseline paths do not resolve to their named Task.');
   const pinned=text(c.root,['show',`${options.baselineCommit}:${owner.taskPath}`],true);
   if(!pinned?.includes(`Workspace baseline sha256:${baseline.digest}`)||git(c.root,['merge-base','--is-ancestor',baseline.data.head,options.baselineCommit],true)===null)fail('unpinned-baseline','The owning Task at the baseline commit does not bind this snapshot.');
   if(dispositions.schemaVersion!==1||!Array.isArray(dispositions.items))fail('invalid-dispositions','Dispositions require schemaVersion 1 and items.');
-  result.owner={specId:owner.specId,taskId:owner.taskId,specPath:owner.specPath,taskPath:owner.taskPath};
+  result.owner={...owner};
   result.baseline={digest:baseline.digest,commit:options.baselineCommit};
   const now=inventory(c.root,baseline.data.scope);result.observedHead=now.head;result.findings.push(...now.findings);result.activity=activity(c.root,now);
   if(now.busy.length)finding('active-git-operation',{operations:now.busy});
@@ -193,7 +202,10 @@ export function checkWorkspace(project,options){
    if(item.kind==='worktree'&&typeof identity==='string'){try{identity=fs.realpathSync(identity);}catch{identity=path.resolve(identity);}}
    const key=`${item.kind}:${identity}`;if(declarations.has(key))finding('duplicate-disposition',{item:key});declarations.set(key,item);
   }
-  const integrationRef=`refs/heads/${c.branches.integrationBranch}`;
+  const target=deliveryTarget(c.root,baseline.data.target);
+  if(options.target!==undefined&&options.target!==target)fail('wrong-target','Closeout must use the destination pinned by the starting snapshot.');
+  result.target=target;
+  const integrationRef=`refs/heads/${target}`;
   const requested=new Set([integrationRef]);
   for(const item of dispositions.items)if(typeof item?.ref==='string'&&/^refs\/heads\/[A-Za-z0-9][A-Za-z0-9._/-]*$/.test(item.ref)&&!item.ref.includes('..'))requested.add(item.ref);
   const remote=remoteRefs(c.root,[...requested]);let recoverable=remote!==null;
@@ -365,7 +377,7 @@ export function checkWorkspace(project,options){
   const finalRemote=remoteRefs(c.root,[...requested]);
   const finalAdvertised=advertisedNames.length?remoteRefs(c.root,advertisedNames):new Map();
   if(remote&&(!finalRemote||!same([...remote],[...finalRemote])||!advertised||!finalAdvertised||!same([...advertised],[...finalAdvertised]))){recoverable=false;finding('remote-changed-during-check');}
-  result.remoteObservation={at:new Date().toISOString(),integration:integration??null};
+  result.remoteObservation={at:new Date().toISOString(),target,integration:integration??null};
   result.accounted=accounted;
   result.remoteRecoverable=recoverable;
   result.complete=accounted&&recoverable&&!result.findings.length;
@@ -373,10 +385,10 @@ export function checkWorkspace(project,options){
  }catch(error){finding(error.code??'evidence-unavailable',{message:error.message});}
  return result;
 }
-const USAGE='Usage: workspace-closeout.mjs snapshot --project PATH --spec S-ID --task TK-ID --owner NAME [--ignored RELATIVE_PATH] | check --project PATH --baseline FILE --baseline-commit SHA --dispositions FILE';
+const USAGE='Usage: workspace-closeout.mjs snapshot --project PATH (--spec S-ID|LMK-ID --task TK-ID | --record TRACKED.md --authority SOURCE) --owner NAME [--target BRANCH] [--ignored RELATIVE_PATH] | check --project PATH --baseline FILE --baseline-commit SHA --dispositions FILE';
 export function parseCloseoutArgs(argv){
  const command=argv[0],options={ignored:[]};if(!['snapshot','check'].includes(command))fail('invalid-command',USAGE);
- const allowed=new Map([['--project','project'],['--spec','spec'],['--task','task'],['--owner','owner'],['--ignored','ignored'],['--baseline','baseline'],['--baseline-commit','baselineCommit'],['--dispositions','dispositions']]);
+ const allowed=new Map([['--project','project'],['--spec','spec'],['--task','task'],['--owner','owner'],['--record','record'],['--authority','authority'],['--target','target'],['--ignored','ignored'],['--baseline','baseline'],['--baseline-commit','baselineCommit'],['--dispositions','dispositions']]);
  for(let i=1;i<argv.length;i++){
   const key=allowed.get(argv[i]);if(!key||!argv[i+1]||argv[i+1].startsWith('--'))fail('invalid-argument',USAGE);
   const value=argv[++i];if(key==='ignored')options.ignored.push(value);else if(Object.hasOwn(options,key))fail('invalid-argument','Duplicate closeout argument.');else options[key]=value;

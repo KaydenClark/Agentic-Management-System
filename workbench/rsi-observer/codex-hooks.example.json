@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [{"hooks": [{"type": "command", "command": "sh -c 'uv run --offline python -m ams.rsi_codex_hooks >/dev/null 2>&1 || true'"}]}],
+    "SessionStart": [{"matcher": "resume", "hooks": [{"type": "command", "command": "sh -c 'uv run --offline python -m ams.rsi_codex_hooks >/dev/null 2>&1 || true'"}]}]
+  }
+}

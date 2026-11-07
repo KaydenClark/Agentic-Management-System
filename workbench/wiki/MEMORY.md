@@ -33,6 +33,8 @@ duplicates Task state.
 
 - [Maintained Wiki repair](context-wiki-maintenance.md) — approved maintenance diagnosis, bounded repair scope and execution authority.
 
+- [Session orientation](context-session-orientation.md) — silently read and follow the RUNBOOK and recover intent at every start.
+
 ## Source Precedence
 
 Use AGENTS for authority, Blueprint or the assigned Spec for intended behavior,
@@ -81,7 +83,7 @@ an AMS glossary entry.
 - [Grill Board](design-concepts/landmark-grill-board.md) — confirmed DQC lifecycle, pending branch context and unresolved redesign controls.
 - [RSI presentation](design-concepts/landmark-rsi-presentation.md) — traceable read-only presentation, honest empty states and data/evidence limits.
 - [AMS website](design-concepts/landmark-ams-website.md) — public explanation, sample demonstration and owner-controlled production promotion.
-- [RSI Loop](design-concepts/landmark-rsi-loop.md) — capability ownership, confirmed Stage A preparation and continuing execution holds.
+- [RSI Loop](design-concepts/landmark-rsi-loop.md) — Servitor-first optional loop, severity-based skill audits, automatic eligible adoption and continuing execution holds.
 
 ## History
 
@@ -114,7 +116,7 @@ One page per Spec and Landmark. The Spec holds the destination; its page holds h
 | What is the Grilling Board, and how do DQCs carry its questions and updates? | [Grilling Board and DQC-backed intent](context-grilling-board.md) — purpose, shared DQC question/answer/round flow, delivered lifecycle and later functional redesign gap. |
 | What is AMS and why is the first loop a website? | [AMS purpose](context-ams-purpose.md) — reusable system purpose, website as first application/evidence surface and current RSI limits. |
 | What should the website explain, and where are skill improvements proved? | [Website presentation](context-website-presentation.md) — this build proves shared skill improvements and displays the RSI log; owner corrections and site history. |
-| How was the Workbench adopted, and what moved where? | [Workbench adoption](context-workbench-adoption.md) — package identity, Port/Fold/Keep/Retire map, checks and open gaps. |
+| How do branches deliver and close, and how was the Workbench adopted? | [Workbench adoption](context-workbench-adoption.md#current-delivery-model-2026-11-06) — bounded branches, main/dev destinations, independent parent acceptance and guarded cleanup; historical adoption retained. |
 | Which Specs are active, and who approved them? | [Active Spec approvals](context-active-spec-approvals.md) — the owner's confirmed Jot entries each active Spec cites for Confirmation and Execution approval. |
 | Who approves merges, where does the Supabase service key live, and may C use the shared connectors? | [Owner answers to coherence findings](context-owner-answers-coherence.md) — owner corrections of 2026-11-01: agents merge non-site work, the key stays local, C never calls the connectors. |
 | Which research informed the templates? | [Research basis](../research/template-research-basis.md) — inspected sources, design implications and limits. |
