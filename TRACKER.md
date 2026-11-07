@@ -273,19 +273,24 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G.
 
 ## DQC-000J — RSI: Capture and transport
 
-Revision 8; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+Revision 9; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
 
-<pre>**Question:** How do we record your skill use without making other people run the RSI loop?
+<pre>**Question:** Should Workbench setup and RSI setup be separate, with the current RSI test limited to Servitor?
 
-**Recommended answer:** Keep reporting instructions and tools in your personal coding setup, separate from the skills you share. Your Codex/Claude setup tells agents to report participating skill uses and failures through the shared reporting tool. Add automatic checks where the coding app supports them. Use the same skill files yourself and when sharing them. Someone receiving a skill can just use it: no reporting tool, Supabase account or RSI loop is required, and their activity is not sent to your system. Your Mac, PC and cloud environments get the reporting setup separately. Reports still survive connection problems and temporary cloud sessions as discussed.
+**Recommended answer:** Yes. Keep two separate setups:
 
-**Why:** The skills teach people how to do the work. Your own setup collects evidence to improve those skills. Keeping those responsibilities separate lets you share the skills without imposing your improvement system on other people.
+- **Workbench setup:** Create and use a Workbench without installing the RSI tools or connecting to Supabase.
+- **RSI setup:** Add the improvement loop later if you choose, without rebuilding the Workbench. Turning RSI off must leave the Workbench usable.
 
-**Intended impact:** Your uses feed the RSI loop, while other people can use the same skills independently.</pre>
+For now, test RSI only on Servitor, using real AMS website work. Logging across the PC and cloud is outside this test. The skills you share remain usable without RSI.
 
-Source: Kayden AMS alignment chat, 2026-11-06: question 6 distribution correction; reporting must remain separate from shared skill requirements\.. Scope: Concept alignment only\. No personal configuration, shared skill, reporting runtime or installation is changed\. Exact host capture capabilities remain to be verified during authorized implementation\..
+**Why:** Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.
 
-Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
+**Intended impact:** You can first set up and use a Workbench on its own, then add RSI and test that it records failures and supports repairs. You control whether and when RSI is used.</pre>
+
+Source: Kayden AMS alignment chat, 2026-11-06: limit current RSI testing to Servitor and separate Workbench setup from optional later RSI setup\.. Scope: Revised concept/readback only\. Current proposed test scope is Servitor and real AMS website work; PC/cloud rollout is excluded\. No Workbench update, RSI implementation, test campaign, installation, service or database change is launched\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000H, DQC-000I.
 
 - propose at r2
 - correct at r3: I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best\. What do I have set up? What does the research and our CDRs tell us to do?
@@ -294,6 +299,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 - correct at r6: My one issue with writing it into the skill itself, is what happens when I hand these skills out? I dont want other people to have to run the RSI Loop, I want them to be able to just use the skills\.
 - propose at r7
 - correct at r8: I want to be able to test that, instead of being able to log failures everywhere\. Let's just do it here on servitor, and I should be able to set up the workbench independently of the RSI Loop\. I should also be able to establish the RSI Loop later if I want\. These should be two separate systems\.
+- propose at r9
 
 ## DQC-000K — RSI: Repair triggers and priority
 
