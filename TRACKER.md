@@ -350,6 +350,18 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000O.
 
 ## DQC-000Q — RSI: Website and completion proof
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000Q.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000Q.json)
 
-What must the website show, and what evidence makes this shared loop complete?
+<pre>**Question:** What must the website show, and what evidence makes this shared loop complete?
+
+**Recommended answer:** Show each skill and the Workbench it produces, real uses, failures, repair history, rejected attempts, grades, version adoption and later recurrence from canonical safe records. Show freshness and coverage. Prove one complete real-work loop, then verify the promised Mac, PC and cloud paths before claiming that coverage.
+
+**Why:** I assumed a setup-workbench pilot and specific views. You established the website as the evidence surface for AMS; its exact presentation and completion standard remain choices.
+
+**Intended impact:** Defines visible accountability and prevents a working demo or successful upload from being reported as a complete RSI loop.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000I, DQC-000N, DQC-000P.
+
+- propose at r2
