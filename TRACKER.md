@@ -179,7 +179,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 
 ## DQC-000G — RSI: Success and failure
 
-Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000G.json)
+Revision 5; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000G.json)
 
 <pre>**Question:** How should failures you report become a shared per-skill history that prevents recurrence?
 
@@ -196,6 +196,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000F.
 - propose at r2
 - correct at r3: I do when I use the skills\. I tell you when things fail, you record the failures\. That is what I want us to be able to look at\. How do we maintain a per skill failure log that we can use for regression testing\. When a skill fails at something it is supposed to do, it needs to be logged somewhere\. Is that is Kaydenclark/skills? Is that is GPT\_OS? It should not be in the project where we were doing the updates \(unless that project is GPT\_OS because that is our orchestrator project and can be used like that\)
 - propose at r4
+- confirm at r5: Let's go to question 5 now\. This is correct, but I care more about how this connects with \#5, how are we storing this info
 
 ## DQC-000H — RSI: Evidence and privacy
 
