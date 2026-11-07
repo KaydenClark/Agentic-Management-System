@@ -64,8 +64,6 @@ def observe(project, payload):
     chat_id = 'codex-chat-' + digest(session)
     event_id = 'codex-request-' + digest(session, turn)
     outbox = Outbox(project)
-    # Reserve the first observation time by identity. Replays retain it instead
-    # of changing an immutable event; no prompt, transcript or raw host ID is stored.
     with outbox._open(create=True) as db:
         db.execute('BEGIN IMMEDIATE')
         db.execute('CREATE TABLE IF NOT EXISTS codex_request_times (id TEXT PRIMARY KEY, skill TEXT NOT NULL, occurred_at TEXT NOT NULL)')
@@ -91,7 +89,7 @@ def main():
         raw = sys.stdin.read(262145)
         if len(raw) <= 262144:
             observe(args.project, json.loads(raw))
-    except (OSError, ValueError, TypeError, sqlite3.Error):
+    except (OSError, ValueError, TypeError, RecursionError, sqlite3.Error):
         pass  # Observer failure cannot block the user's turn or emit prompt data.
     return 0
 

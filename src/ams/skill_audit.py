@@ -72,7 +72,6 @@ def _contract(packet):
         require(isinstance(entries, list) and bool(entries), f'{field} must be recorded')
         for entry in entries:
             assessment.text(entry, field)
-    # Evaluator eligibility needs an identified grader and evidence tied to the candidate.
     # Require frozen evaluator metadata with a nonblank model, a full prompt_revision and an explicit qualified or unqualified state.
     evaluator = packet.get('evaluator')
     require(isinstance(evaluator, dict), 'frozen evaluator is required')
@@ -85,7 +84,7 @@ def _contract(packet):
                                 packet['candidate'], 'evaluator qualification')
     # Require candidate-bound qualification proof and an identified evaluator model other than unknown or unavailable for a qualified claim.
     if qualification == 'qualified':
-        require(proof and evaluator['model'].lower() not in ('unknown', 'unavailable'),
+        require(proof and evaluator['model'].strip().lower() not in ('unknown', 'unavailable'),
                 'qualified evaluator requires model identity and proof')
     # Shared checks retain their approved classes. Skill-specific additions cover regression or Critical checks.
     # Require an inventory list of unique opaque check IDs and their Quality, Regression or Critical classes, retain the approved class for any shared check, and allow skill-specific IDs only for Regression or Critical.

@@ -30,7 +30,6 @@ CHANNELS = {
 }
 
 
-# Use a fixed wire shape, with null for unavailable or inapplicable fields.
 # Accept an observation object containing only event_id, chat_id, occurred_at, kind, skill, skill_revision, request_event_id, outcome and evidence_id, fill omitted fields with null, and validate the event and chat tokens and canonical UTC event time.
 def _event(payload):
     require(isinstance(payload, dict) and payload.keys() <= EVENT_FIELDS, 'unknown observation fields')
@@ -177,8 +176,6 @@ class Outbox:
             for row, supplied in zip(rows, packet['runs']):
                 run = dict(supplied, completed_at=row['completed_at'])
                 self._insert(db, 'audit', row, private=run)
-            # Rescore the retained immutable runs together with newly recorded IDs.
-            # A partial packet cannot erase earlier evidence.
             # Recover all retained private runs for the set in record order, rescore them together, and commit only after the recovered set validates so a partial upload cannot remove earlier runs or commit a conflicting or fourth run.
             saved_runs = db.execute('''
                 SELECT private FROM outbox WHERE channel='audit'
@@ -196,8 +193,6 @@ class Outbox:
             ).fetchall() if db is not None else []
         status = {'chat_id': chat_id, 'work_status': 'unknown', 'requested_uses': {},
                   'critical_failure_ids': [], 'failure_ids': [], 'pending_event_ids': [], 'events': []}
-        # Work state comes from the latest explicit status by event time.
-        # Request, load and use remain separate. Only an evidenced skip classifies as Critical.
         # Choose the latest explicit work_status by event time with record order breaking equal timestamps, keep failure IDs separately, and track each request with its skill, load_event_ids, resolved outcome and use_event_id.
         latest_status_at = ''
         for content, delivered in events:

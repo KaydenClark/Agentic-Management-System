@@ -359,3 +359,23 @@ def test_nonfinite_extra_remote_field_is_malformed(tmp_path):
     with pytest.raises(ValueError, match='malformed JSON'):
         outbox.flush(Store(Settings('http://example.invalid', 'sb_secret_fixture'), http))
     assert outbox.status('chat-1')['pending_event_ids'] == ['request-1']
+
+
+@pytest.mark.parametrize('model', [' unknown ', '\tUNAVAILABLE\n'])
+def test_qualified_evaluator_rejects_padded_reserved_identity(model):
+    from ams.skill_audit import score
+
+    packet = audit_packet()
+    packet['evaluator'].update(model=model, qualification='qualified',
+                               qualification_evidence=packet['runs'][0]['rows'][0]['evidence'])
+    with pytest.raises(ValueError, match='model identity and proof'):
+        score(packet)
+
+
+def test_qualified_evaluator_accepts_identified_model():
+    from ams.skill_audit import score
+
+    packet = audit_packet()
+    packet['evaluator'].update(model=' Fixture Grader ', qualification='qualified',
+                               qualification_evidence=packet['runs'][0]['rows'][0]['evidence'])
+    assert score(packet)['qualified'] is True
