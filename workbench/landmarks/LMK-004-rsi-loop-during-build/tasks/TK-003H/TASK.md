@@ -4,7 +4,7 @@
 **Landmark ID:** LMK-004
 **Slice:** One real Servitor website task traces an improvement to later skill use
 **Status:** blocked
-**Blockers:** TK-003E, TK-003F, TK-003G
+**Blockers:** TK-003E, TK-003F, TK-003G, TK-003I
 **Destination:** spec-acceptance: First proof on Servitor
 **Planned verification:** Observable behavior and controls below; exact-candidate Check and QA.
 
