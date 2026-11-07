@@ -1,7 +1,7 @@
 # RSI repair: bounded branch delivery and closeout
 
 Owner: Kayden direct AMS chat, 2026-11-06. Every edit to AMS/shared skills is RSI work.
-Status: bounded AMS adoption merged; native receipt owns closure, PR212 publishes proof, Director owns guarded archive.
+Status: bounded AMS adoption merged; TK-003D closed natively; PR212 publishes receipt; Director owns guarded archive.
 Source-delivery capability: [S-011](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/SPEC.md), within [LMK-004](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md).
 
 ## Confirmed scope and authority
