@@ -1,7 +1,7 @@
 # RSI repair: bounded branch delivery and closeout
 
 Owner: Kayden direct AMS chat, 2026-11-06. Every edit to AMS/shared skills is RSI work.
-Status: prior source installed; TK-003C attempt2 qualifies and awaits independent review/delivery. TK-003D stays blocked.
+Status: TK-003C source delivered and natively closed; TK-003D held for artifact inspection.
 Source-delivery capability: [S-011](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/SPEC.md), within [LMK-004](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md).
 
 ## Confirmed scope and authority
@@ -91,4 +91,4 @@ Native remote claim of TK-003C refused before writing because the prepared Spec 
 
 ## TK-003C current qualification
 
-Attempt1 930cbc1: Excellent48/51, finding retained. Attempt2 2c52150: Excellent51/51, native A02-01 verified-resolved, no rejected retests. retentionAccepted=false deliberately excludes useful-benefit claims (FAIL-211). Fixed17/3/classes and actual proof remain in [history](../wiki/history/S-011.md) and the [safe summary](../../evals/bounded-delivery/qualification-summary.json).
+Source is reviewed, merged and installed; native close succeeded. Attempt2 is scoped Excellent51/51 with verified finding resolution, without a benefit claim. [History](../wiki/history/S-011.md) and the [safe summary](../../evals/bounded-delivery/qualification-summary.json) retain both attempts, exact receipts and cleanup disposition.

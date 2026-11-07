@@ -1031,7 +1031,12 @@
     },
     "nativeTask": {
       "id": "TK-003C",
-      "status": "in-progress; ready for native close"
+      "status": "done",
+      "claimant": "codex-bounded-setup-guidance",
+      "receiptHead": "ea754542d1a00ee9ae097cc780316d99a3fc1716",
+      "receiptChecksum": "5b5c0d1def05866948652285423d78cd307a52c280f5f1eaa99edfe965d699ae",
+      "recordBranch": "feature/bounded-delivery-adoption",
+      "remaining": "Dispatcher independently verifies artifact before TK-003D; Director archives managed source worktree after implementor stops; AMS main delivery remains"
     }
   }
 }

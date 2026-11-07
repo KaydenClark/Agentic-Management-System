@@ -3,12 +3,13 @@
 **Task ID:** TK-003C
 **Spec ID:** S-011
 **Slice:** New Workbenches follow their project's promotion authority
-**Status:** in-progress
+**Status:** done
 **Blockers:** none
 **Destination:** spec-acceptance: Bounded repair acceptance
 **Planned verification:** Both generated outputs reject the stale broad gate; setup/package checks, applicable changed-source qualification, independent review, exact-head CI, published containment and registered personal installation.
 **Claimed by:** codex-bounded-setup-guidance
 **Current claimant:** codex-bounded-setup-guidance
+**Proof:** skills PR73 candidate2c52150 mainaf42a28; CI42319489381/42321456109 pass; packagebc6134e42; r1 Excellent51/51, A02 verified-resolved; Astra Standards/Spec PASS; source-only install318 preserved; six installed outputs pass
 
 ## Assignment
 
@@ -26,12 +27,12 @@ Use this AMS checkout only as the serialized writer of this Task's native claim/
 
 ## Acceptance
 
-- [ ] Both generic README and Specs/Tasks generated outputs defer promotion to project controls, with no stale universal owner-only-main rule or AMS-only policy.
-- [ ] Regression exercises actual generated outputs and fails for the original wrong guidance; applicable catalog/setup/package checks pass on the exact candidate.
-- [ ] Changed setup source meets its scoped Stable/Excellent/no-applicable-regression gate, independent pruning and review; prior PR71 evidence retains its original scope.
-- [ ] Checked candidate is contained in published skills/main; published-result verification and registered personal installation preserve imports and discovery.
-- [ ] Source, package, installed identities and actual checks/failures/limits are reconciled to S-011's existing RSI owners; native Task proof is truthful.
-- [ ] Eligible owned catalog branch/worktree cleanup follows containment and preservation guards, or specific retained findings and the responsible next action are recorded.
+- [x] Both generic README and Specs/Tasks generated outputs defer promotion to project controls, with no stale universal owner-only-main rule or AMS-only policy.
+- [x] Regression exercises actual generated outputs and fails for the original wrong guidance; applicable catalog/setup/package checks pass on the exact candidate.
+- [x] Changed setup source meets its scoped Stable/Excellent/no-applicable-regression gate, independent pruning and review; prior PR71 evidence retains its original scope.
+- [x] Checked candidate is contained in published skills/main; published-result verification and registered personal installation preserve imports and discovery.
+- [x] Source, package, installed identities and actual checks/failures/limits are reconciled to S-011's existing RSI owners; native Task proof is truthful.
+- [x] Eligible owned catalog branch/worktree cleanup follows containment and preservation guards, or specific retained findings and the responsible next action are recorded.
 
 ## Scope and hand-back
 
@@ -44,3 +45,9 @@ Return exact source/AMS commits, both merge answers, executed Check and implemen
 Workspace baseline sha256:8f88409d8671900d5f955818f154dc817d0946b313a97330e9efcde927cafef7
 
 Genuine current snapshot after remote claim46c459ffb2918bd25b124b954195fc8b6ad7ebf5, targetmain, complete=true. Raw inventory remains private local recovery. This separate binding preserves the original AMS adoption baseline unchanged.
+
+## Receipt
+
+| Run | Branch | HEAD SHA | Upstream | Dirty | Tests | Docs touched | Remaining gap | Checksum |
+|---|---|---|---|---|---|---|---|---|
+| 1 | feature/bounded-delivery-adoption | ea754542d1a00ee9ae097cc780316d99a3fc1716 | ahead 0 behind 0 | 0 | skills PR73 candidate2c52150 mainaf42a28; CI42319489381/42321456109 pass; packagebc6134e42; r1 Excellent51/51, A02 verified-resolved; Astra Standards/Spec PASS; source-only install318 preserved; six installed outputs pass | workbench/research/IMPROVEMENT-bounded-delivery-2026-11-06.md; evals/bounded-delivery/qualification-summary.json; S-011 history; FAIL203-211 | TK-003D artifact inspection and AMS main delivery remain; Director archives contained source worktree after implementor stops. No whole-Spec, Human QA or benefit claim.; close attribution: {"agent":"codex-bounded-setup-guidance","claimant":"codex-bounded-setup-guidance","onBehalfOf":null} | 5b5c0d1def05866948652285423d78cd307a52c280f5f1eaa99edfe965d699ae |

@@ -5,12 +5,12 @@
 **Priority:** 1
 **Owner:** Kayden; shared-skill repair orchestrator
 **Stance:** Builder
-**Updated:** 2026-11-06
+**Updated:** 2026-11-07
 **Catalog description:** Repair shared delivery with attributable qualification and RSI proof.
 **Blockers:** none
 **Confirmation:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
 **Execution approval:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
-**Next gate:** Review TK-003C source, publish/install; earlier holds remain.
+**Next gate:** Dispatcher verifies TK-003C artifact before TK-003D; older campaigns stay held.
 
 ## Intent and authority
 
