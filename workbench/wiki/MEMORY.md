@@ -28,7 +28,7 @@ duplicates Task state.
 - [Wiki maintenance procedure](guidebooks/wiki-maintenance.md) — source intake, ingest, durable query filing, correction and bounded semantic lint.
 
 - [Canonical failure log](../feedback/WORKBENCH_FEEDBACK.md) — all failures, failed model tier/provider, activity, correct outcome and repair evidence.
-- [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — confirmed Stage A preparation, pending cross-project real-use question tree, and continuing execution limits.
+- [Feedback-to-improvement loop plan](context-feedback-improvement-loop-plan.md) — confirmed Stage A preparation, Servitor-only optional-RSI alignment and continuation readback, and continuing execution limits.
 - [Shared skills refocus](context-skills-refocus.md) — confirmed jobs, composition, prerequisites, attribution and the Prepare-only boundary; links the AMS preparation-bypass failure.
 
 - [Maintained Wiki repair](context-wiki-maintenance.md) — approved maintenance diagnosis, bounded repair scope and execution authority.
