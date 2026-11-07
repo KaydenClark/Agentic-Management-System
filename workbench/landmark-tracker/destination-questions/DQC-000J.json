@@ -1,7 +1,7 @@
 {
   "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000J",
-  "revision": 3,
+  "revision": 4,
   "title": "RSI: Capture and transport",
   "question": "Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?",
   "answer": null,
@@ -146,23 +146,91 @@
           }
         }
       ]
+    },
+    {
+      "revision": 4,
+      "at": "2026-11-07T01:44:26.811Z",
+      "reason": "DQC propose",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "pending",
+            "proposal": {
+              "readback": "**Question:** How should the skills send their results and failures to Supabase?\n\n**Recommended answer:** Give all participating skills one shared reporting tool. Add instructions to each skill telling the agent to use it:\n\n- When the skill starts work.\n- When you report a failure or a check finds a problem.\n- When the work finishes or stops.\n\nThe tool sends the reports to Supabase. If it cannot connect, it keeps them on that machine and sends them later.\n\nSet up the tool on your Mac, PC and cloud environments. It works from any project without GPT_OS. Where the coding app supports it, add automatic checks to help catch missing reports.\n\n**Why:** The skills all follow the same reporting steps, while one tool handles saving and sending. We can fix that tool once instead of maintaining different logging code in every skill.\n\n**Intended impact:** You can use a skill normally, tell the agent when something failed, and have that report reach the shared history without copying it yourself.",
+              "why": "The skills all follow the same reporting steps, while one tool handles saving and sending. We can fix that tool once instead of maintaining different logging code in every skill.",
+              "source": "Kayden AMS alignment chat, 2026-11-06: first-pass preference for skill logging, request for expert advice, confirmed storage/reporting boundaries and request to move to question 6 in plain language.",
+              "scope": "Concept alignment only. No implementation, installation, database writes, access change or deployment.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Current owner-requested interview question."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Preserve agreed meaning and expose the next choice in plain language."
+              },
+              "dependencies": [
+                "DQC-000E",
+                "DQC-000H",
+                "DQC-000I"
+              ]
+            },
+            "digest": "e39edf074aa4fa5592fb01d93e7a3c97e5907ad1dcb5c58f9ff392e593d9f5ea",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000J-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:17.898Z",
+                "requestDigest": "afb09c733c8ca73f45c2b87f3774bc38f41d0ae9a97301e7d0f1d74a833cbcb4",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-firstpass-20261106-DQC-000J-answer",
+                "type": "correct",
+                "at": "2026-11-07T00:52:04.542Z",
+                "requestDigest": "ee999f07200c4763b5426cb231e097d4b7abe9f58ff4c2cbd8b1a58bec970af7",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "note": "I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best. What do I have set up? What does the research and our CDRs tell us to do?",
+                "kind": "change",
+                "revision": 3,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-q6-shared-tool-plain-v2",
+                "type": "propose",
+                "at": "2026-11-07T01:44:26.811Z",
+                "requestDigest": "389a42802fd8abfed4e9c76c09fe69cdf1b7515526eaae615bfe86a997c05ae4",
+                "source": null,
+                "note": null,
+                "revision": 4,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "lifecycle": {
-    "state": "needs-rewrite",
+    "state": "pending",
     "proposal": {
-      "readback": "**Question:** Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?\n\n**Recommended answer:** Use a shared observer once per participating harness, integrated with setup-workbench for project identity. Prefer supported host events; add explicit lifecycle calls where observation is incomplete. Use restricted authenticated ingestion; leave the exact packaging and endpoint technology open until feasibility is checked.\n\n**Why:** I selected an observer and Supabase Edge Function too early. The requirement is reliable capture with bounded access; the exact technology remains a proposal.\n\n**Intended impact:** Avoids duplicating logging instructions across skills and makes unsupported capture paths visible.",
-      "why": "I selected an observer and Supabase Edge Function too early. The requirement is reliable capture with bounded access; the exact technology remains a proposal.",
-      "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
-      "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+      "readback": "**Question:** How should the skills send their results and failures to Supabase?\n\n**Recommended answer:** Give all participating skills one shared reporting tool. Add instructions to each skill telling the agent to use it:\n\n- When the skill starts work.\n- When you report a failure or a check finds a problem.\n- When the work finishes or stops.\n\nThe tool sends the reports to Supabase. If it cannot connect, it keeps them on that machine and sends them later.\n\nSet up the tool on your Mac, PC and cloud environments. It works from any project without GPT_OS. Where the coding app supports it, add automatic checks to help catch missing reports.\n\n**Why:** The skills all follow the same reporting steps, while one tool handles saving and sending. We can fix that tool once instead of maintaining different logging code in every skill.\n\n**Intended impact:** You can use a skill normally, tell the agent when something failed, and have that report reach the shared history without copying it yourself.",
+      "why": "The skills all follow the same reporting steps, while one tool handles saving and sending. We can fix that tool once instead of maintaining different logging code in every skill.",
+      "source": "Kayden AMS alignment chat, 2026-11-06: first-pass preference for skill logging, request for expert advice, confirmed storage/reporting boundaries and request to move to question 6 in plain language.",
+      "scope": "Concept alignment only. No implementation, installation, database writes, access change or deployment.",
       "round": "rsi-cross-project-20261106",
       "priority": {
         "value": 1,
-        "reason": "Owner requested first-pass alignment before further decisions."
+        "reason": "Current owner-requested interview question."
       },
       "value": {
         "value": 1,
-        "reason": "Expose an unresolved choice affecting the shared RSI loop."
+        "reason": "Preserve agreed meaning and expose the next choice in plain language."
       },
       "dependencies": [
         "DQC-000E",
@@ -170,7 +238,7 @@
         "DQC-000I"
       ]
     },
-    "digest": "b0cdd5f2945346b057f880c0b4398e04ae1706ec618e7317699ffc5cf2d69a0e",
+    "digest": "e39edf074aa4fa5592fb01d93e7a3c97e5907ad1dcb5c58f9ff392e593d9f5ea",
     "confirmations": [],
     "events": [
       {
@@ -192,6 +260,16 @@
         "note": "I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best. What do I have set up? What does the research and our CDRs tell us to do?",
         "kind": "change",
         "revision": 3,
+        "round": "rsi-cross-project-20261106"
+      },
+      {
+        "eventId": "rsi-q6-shared-tool-plain-v2",
+        "type": "propose",
+        "at": "2026-11-07T01:44:26.811Z",
+        "requestDigest": "389a42802fd8abfed4e9c76c09fe69cdf1b7515526eaae615bfe86a997c05ae4",
+        "source": null,
+        "note": null,
+        "revision": 4,
         "round": "rsi-cross-project-20261106"
       }
     ]

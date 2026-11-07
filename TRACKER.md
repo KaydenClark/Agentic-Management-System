@@ -272,22 +272,31 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G.
 
 ## DQC-000J — RSI: Capture and transport
 
-Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
 
-<pre>**Question:** Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?
+<pre>**Question:** How should the skills send their results and failures to Supabase?
 
-**Recommended answer:** Use a shared observer once per participating harness, integrated with setup-workbench for project identity. Prefer supported host events; add explicit lifecycle calls where observation is incomplete. Use restricted authenticated ingestion; leave the exact packaging and endpoint technology open until feasibility is checked.
+**Recommended answer:** Give all participating skills one shared reporting tool. Add instructions to each skill telling the agent to use it:
 
-**Why:** I selected an observer and Supabase Edge Function too early. The requirement is reliable capture with bounded access; the exact technology remains a proposal.
+- When the skill starts work.
+- When you report a failure or a check finds a problem.
+- When the work finishes or stops.
 
-**Intended impact:** Avoids duplicating logging instructions across skills and makes unsupported capture paths visible.</pre>
+The tool sends the reports to Supabase. If it cannot connect, it keeps them on that machine and sends them later.
 
-Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+Set up the tool on your Mac, PC and cloud environments. It works from any project without GPT_OS. Where the coding app supports it, add automatic checks to help catch missing reports.
+
+**Why:** The skills all follow the same reporting steps, while one tool handles saving and sending. We can fix that tool once instead of maintaining different logging code in every skill.
+
+**Intended impact:** You can use a skill normally, tell the agent when something failed, and have that report reach the shared history without copying it yourself.</pre>
+
+Source: Kayden AMS alignment chat, 2026-11-06: first-pass preference for skill logging, request for expert advice, confirmed storage/reporting boundaries and request to move to question 6 in plain language\.. Scope: Concept alignment only\. No implementation, installation, database writes, access change or deployment\..
 
 Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 
 - propose at r2
 - correct at r3: I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best\. What do I have set up? What does the research and our CDRs tell us to do?
+- propose at r4
 
 ## DQC-000K — RSI: Repair triggers and priority
 
