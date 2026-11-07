@@ -188,10 +188,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000F.
 
 ## DQC-000H — RSI: Evidence and privacy
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000H.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000H.json)
 
-What may leave each project, what stays private, and what may the public website show?
+<pre>**Question:** What may leave each project, what stays private, and what may the public website show?
 
+**Recommended answer:** Share version identities, safe outcome/failure summaries and evidence references. Keep raw transcripts and private project material at their authorized source. Separate private shared records from public-safe presentation; decide retention and remote access for repair evidence explicitly.
+
+**Why:** I assumed local-only raw evidence and public-safe summaries. That affects whether another machine can reproduce and repair a finding.
+
+**Intended impact:** Sets the data boundary, retention expectations and the evidence available to remote repairs.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000G.
+
+- propose at r2
 
 ## DQC-000I — RSI: Recording authority
 
