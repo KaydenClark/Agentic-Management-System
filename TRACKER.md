@@ -272,27 +272,17 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G.
 
 ## DQC-000J — RSI: Capture and transport
 
-Revision 6; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+Revision 7; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
 
-<pre>**Question:** How should the skills send their results and failures to Supabase?
+<pre>**Question:** How do we record your skill use without making other people run the RSI loop?
 
-**Recommended answer:** Give all participating skills one shared reporting tool. Add instructions to each skill telling the agent to use it:
+**Recommended answer:** Keep reporting instructions and tools in your personal coding setup, separate from the skills you share. Your Codex/Claude setup tells agents to report participating skill uses and failures through the shared reporting tool. Add automatic checks where the coding app supports them. Use the same skill files yourself and when sharing them. Someone receiving a skill can just use it: no reporting tool, Supabase account or RSI loop is required, and their activity is not sent to your system. Your Mac, PC and cloud environments get the reporting setup separately. Reports still survive connection problems and temporary cloud sessions as discussed.
 
-- When the skill starts work.
-- When you report a failure or a check finds a problem.
-- When the work finishes or stops.
+**Why:** The skills teach people how to do the work. Your own setup collects evidence to improve those skills. Keeping those responsibilities separate lets you share the skills without imposing your improvement system on other people.
 
-The tool sends the reports to Supabase. If it cannot connect, it keeps them on that machine and sends them later.
+**Intended impact:** Your uses feed the RSI loop, while other people can use the same skills independently.</pre>
 
-A temporary cloud session must send its reports or save them outside that session before it is deleted.
-
-Set up the tool on your Mac, PC and cloud environments. It works from any project without GPT_OS. Where the coding app supports it, add automatic checks to help catch missing reports.
-
-**Why:** The skills all follow the same reporting steps, while one tool handles saving and sending. We can fix that tool once instead of maintaining different logging code in every skill.
-
-**Intended impact:** You can use a skill normally, tell the agent when something failed, and have that report reach the shared history without copying it yourself.</pre>
-
-Source: Kayden AMS alignment chat, 2026-11-06: first-pass preference for skill logging, request for expert advice, confirmed storage/reporting boundaries and request to move to question 6 in plain language\.. Scope: Concept alignment only\. No implementation, installation, database writes, access change or deployment\..
+Source: Kayden AMS alignment chat, 2026-11-06: question 6 distribution correction; reporting must remain separate from shared skill requirements\.. Scope: Concept alignment only\. No personal configuration, shared skill, reporting runtime or installation is changed\. Exact host capture capabilities remain to be verified during authorized implementation\..
 
 Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 
@@ -301,6 +291,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 - propose at r4
 - propose at r5
 - correct at r6: My one issue with writing it into the skill itself, is what happens when I hand these skills out? I dont want other people to have to run the RSI Loop, I want them to be able to just use the skills\.
+- propose at r7
 
 ## DQC-000K — RSI: Repair triggers and priority
 
