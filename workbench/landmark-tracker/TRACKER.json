@@ -2745,7 +2745,7 @@
         "at": "2026-11-07T00:08:46.937Z"
       },
       "corrections": [],
-      "revision": 4,
+      "revision": 5,
       "history": [
         {
           "revision": 1,
@@ -2967,27 +2967,126 @@
               }
             }
           ]
+        },
+        {
+          "revision": 5,
+          "at": "2026-11-07T01:07:22.082Z",
+          "reason": "DQC propose",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "pending",
+                "proposal": {
+                  "readback": "**Question:** Should shared skill reporting work from any project and environment, independently of whether GPT_OS is present?\n\n**Recommended answer:** Yes. Provide one reusable reporting tool that participating skills can call from their current environment. GPT_OS may install or configure it, but neither the project nor the reporting tool must run inside GPT_OS. The repair worker runs separately on Servitor.\n\n**Why:** Your skills operate across independent projects, machines and cloud environments. Tying reporting to one checkout would leave gaps and constrain how you work.\n\n**Intended impact:** You continue working in the project you choose. Its skill failures reach the same shared history and repair queue without relocating the project or requiring a full GPT_OS installation.",
+                  "why": "Your skills operate across independent projects, machines and cloud environments. Tying reporting to one checkout would leave gaps and constrain how you work.",
+                  "source": "Kayden AMS alignment chat, 2026-11-06; exact displayed readbacks and owner corrections.",
+                  "scope": "Concept alignment only; no implementation, installation, database writes, campaign launch or deployment.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Current sequential interview frontier requested by owner."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Preserve exact meaning and prevent an unconfirmed implementation choice."
+                  },
+                  "dependencies": []
+                },
+                "digest": "0790b3951ba4317c47596d02889f2edf0347f309fd51266c785a1dad0c6e6718",
+                "confirmations": [
+                  {
+                    "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+                    "proposal": {
+                      "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+                      "why": "I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.",
+                      "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                      "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                      "round": "rsi-cross-project-20261106",
+                      "priority": {
+                        "value": 1,
+                        "reason": "Owner requested first-pass alignment before further decisions."
+                      },
+                      "value": {
+                        "value": 1,
+                        "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                      },
+                      "dependencies": []
+                    },
+                    "digest": "af204dbc4ba6a36857d4d700ac73a985d7703d139f6585f35574e0bc4774eba3",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                    "revision": 3,
+                    "eventId": "rsi-firstpass-20261106-DQC-000E-answer",
+                    "at": "2026-11-07T00:52:01.825Z"
+                  }
+                ],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000E-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:15.024Z",
+                    "requestDigest": "685d3b2859e67f0ab3371fc1db4e25e9fa3c30231d02644b516c2c195d5cd862",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-firstpass-20261106-DQC-000E-answer",
+                    "type": "confirm",
+                    "at": "2026-11-07T00:52:01.825Z",
+                    "requestDigest": "f1b523fba7fba7f7475c678d4981fb8a1f04c09cf56e6b63a2efbe9f757736dc",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "note": "Yes, Because of this we need to be very smart about how we do this. Can we create something that we can have in GPT_OS (that is on both Mac and PC, and can be created as an environment for the cloud) that would allow us to send info back to supabase? Do we need to send info back or can supabase collect it from github as long as the projects as pushing back to Kaydenclark/skills?",
+                    "revision": 3,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-firstpass-20261106-DQC-000E-transport-v2",
+                    "type": "propose",
+                    "at": "2026-11-07T00:52:09.219Z",
+                    "requestDigest": "03bb13fcb4f44840b0e0bb522679c904779fde5322711093b116c4296a95dc82",
+                    "source": null,
+                    "note": null,
+                    "revision": 4,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q1-independent-v3",
+                    "type": "propose",
+                    "at": "2026-11-07T01:07:22.082Z",
+                    "requestDigest": "8d15d88c74bb4f08753403bea0bddf4ddf9beb063d2100f98e81c8a321f4a086",
+                    "source": null,
+                    "note": null,
+                    "revision": 5,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
         "state": "pending",
         "proposal": {
-          "readback": "**Question:** Should GPT_OS provide one shared reporting capability for the Mac, PC and cloud, and should it send use/failure records directly or rely on GitHub pushes?\n\n**Recommended answer:** Provide one reusable reporting capability reachable from GPT_OS and cloud environments. Participating skills call it to record owner-reported failures and use outcomes centrally, without writing their shared skill-failure log into the project being worked on. Prefer direct delivery through a restricted intake, with a durable local queue when offline. Use GitHub for source versions, regression-case changes and repair delivery, and optionally to forward committed reports; a push is not a substitute for capturing a real-use failure. Keep the detailed ownership and transport choices pending in questions 5 and 6.\n\n**Why:** GitHub observes repository events, not unrecorded owner feedback or unfinished work. Existing ADR-003H already uses a Python writer to send RSI results to Supabase. One shared reporting implementation can serve skills on all environments without giving every skill a database secret or duplicating logging code.\n\n**Intended impact:** Real owner-requested work becomes a shared RSI input wherever it happens, including before setup-workbench has created project records. Transport interruptions preserve pending evidence; Supabase-versus-GitHub ownership and exact implementation remain explicit later decisions.",
-          "why": "GitHub observes repository events, not unrecorded owner feedback or unfinished work. Existing ADR-003H already uses a Python writer to send RSI results to Supabase. One shared reporting implementation can serve skills on all environments without giving every skill a database secret or duplicating logging code.",
-          "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
-          "scope": "Meaning-only revised question 1 follow-up; coverage acceptance is retained. No implementation, installation, deployment, database writes or new campaign launch.",
+          "readback": "**Question:** Should shared skill reporting work from any project and environment, independently of whether GPT_OS is present?\n\n**Recommended answer:** Yes. Provide one reusable reporting tool that participating skills can call from their current environment. GPT_OS may install or configure it, but neither the project nor the reporting tool must run inside GPT_OS. The repair worker runs separately on Servitor.\n\n**Why:** Your skills operate across independent projects, machines and cloud environments. Tying reporting to one checkout would leave gaps and constrain how you work.\n\n**Intended impact:** You continue working in the project you choose. Its skill failures reach the same shared history and repair queue without relocating the project or requiring a full GPT_OS installation.",
+          "why": "Your skills operate across independent projects, machines and cloud environments. Tying reporting to one checkout would leave gaps and constrain how you work.",
+          "source": "Kayden AMS alignment chat, 2026-11-06; exact displayed readbacks and owner corrections.",
+          "scope": "Concept alignment only; no implementation, installation, database writes, campaign launch or deployment.",
           "round": "rsi-cross-project-20261106",
           "priority": {
             "value": 1,
-            "reason": "Owner first-pass follow-up must be read back before advancing."
+            "reason": "Current sequential interview frontier requested by owner."
           },
           "value": {
             "value": 1,
-            "reason": "Choose a shared reporting direction without prematurely settling ownership or transport details."
+            "reason": "Preserve exact meaning and prevent an unconfirmed implementation choice."
           },
           "dependencies": []
         },
-        "digest": "42757fecf8d681fed58dc57f42ba6e46b5ac747023e1b614cc256c184fe15b9a",
+        "digest": "0790b3951ba4317c47596d02889f2edf0347f309fd51266c785a1dad0c6e6718",
         "confirmations": [
           {
             "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
@@ -3044,6 +3143,16 @@
             "source": null,
             "note": null,
             "revision": 4,
+            "round": "rsi-cross-project-20261106"
+          },
+          {
+            "eventId": "rsi-q1-independent-v3",
+            "type": "propose",
+            "at": "2026-11-07T01:07:22.082Z",
+            "requestDigest": "8d15d88c74bb4f08753403bea0bddf4ddf9beb063d2100f98e81c8a321f4a086",
+            "source": null,
+            "note": null,
+            "revision": 5,
             "round": "rsi-cross-project-20261106"
           }
         ]

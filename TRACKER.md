@@ -134,23 +134,24 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000E — RSI: Coverage
 
-Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+Revision 5; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
 
-<pre>**Question:** Should GPT_OS provide one shared reporting capability for the Mac, PC and cloud, and should it send use/failure records directly or rely on GitHub pushes?
+<pre>**Question:** Should shared skill reporting work from any project and environment, independently of whether GPT_OS is present?
 
-**Recommended answer:** Provide one reusable reporting capability reachable from GPT_OS and cloud environments. Participating skills call it to record owner-reported failures and use outcomes centrally, without writing their shared skill-failure log into the project being worked on. Prefer direct delivery through a restricted intake, with a durable local queue when offline. Use GitHub for source versions, regression-case changes and repair delivery, and optionally to forward committed reports; a push is not a substitute for capturing a real-use failure. Keep the detailed ownership and transport choices pending in questions 5 and 6.
+**Recommended answer:** Yes. Provide one reusable reporting tool that participating skills can call from their current environment. GPT_OS may install or configure it, but neither the project nor the reporting tool must run inside GPT_OS. The repair worker runs separately on Servitor.
 
-**Why:** GitHub observes repository events, not unrecorded owner feedback or unfinished work. Existing ADR-003H already uses a Python writer to send RSI results to Supabase. One shared reporting implementation can serve skills on all environments without giving every skill a database secret or duplicating logging code.
+**Why:** Your skills operate across independent projects, machines and cloud environments. Tying reporting to one checkout would leave gaps and constrain how you work.
 
-**Intended impact:** Real owner-requested work becomes a shared RSI input wherever it happens, including before setup-workbench has created project records. Transport interruptions preserve pending evidence; Supabase-versus-GitHub ownership and exact implementation remain explicit later decisions.</pre>
+**Intended impact:** You continue working in the project you choose. Its skill failures reach the same shared history and repair queue without relocating the project or requiring a full GPT_OS installation.</pre>
 
-Source: Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks\.. Scope: Meaning-only revised question 1 follow-up; coverage acceptance is retained\. No implementation, installation, deployment, database writes or new campaign launch\..
+Source: Kayden AMS alignment chat, 2026-11-06; exact displayed readbacks and owner corrections\.. Scope: Concept alignment only; no implementation, installation, database writes, campaign launch or deployment\..
 
 Round: rsi-cross-project-20261106. Dependencies: none.
 
 - propose at r2
 - confirm at r3: Yes, Because of this we need to be very smart about how we do this\. Can we create something that we can have in GPT\_OS \(that is on both Mac and PC, and can be created as an environment for the cloud\) that would allow us to send info back to supabase? Do we need to send info back or can supabase collect it from github as long as the projects as pushing back to Kaydenclark/skills?
 - propose at r4
+- propose at r5
 
 ## DQC-000F — RSI: Run boundaries
 
