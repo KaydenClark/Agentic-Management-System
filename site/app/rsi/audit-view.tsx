@@ -6,6 +6,11 @@ import styles from './rsi.module.css';
 
 export function AuditEvidence({loaded,now}:{loaded:ReadResult<SkillAudit[]>;now?:number}) {
   const state=readState(loaded,loaded.data.length===0,now);
+  const sets = new Map<string, SkillAudit[]>();
+  for (const row of loaded.data) sets.set(row.audit_set_id, [...(sets.get(row.audit_set_id) ?? []), row]);
+  const assessments = [...sets.values()].filter(rows => rows.length === 3 && rows[0].assessment_grade !== null && rows.every(row =>
+    row.assessment_grade === rows[0].assessment_grade && row.skill === rows[0].skill && row.skills_commit === rows[0].skills_commit &&
+    row.contract_version === rows[0].contract_version && row.contract_digest === rows[0].contract_digest));
   return <section className={styles.place} aria-labelledby="skill-audits" data-audits="" data-read-state={state}>
     <h2 id="skill-audits">Completed skill audits</h2>
     <p>The count is completed public audit runs, including failures and incomplete evidence. An incomplete run may not establish a whole assessment grade. Assessment grade is separate from each run outcome and does not establish qualification or demonstrated improvement. Audit scores describe checks. Ordinary skill uses and repair attempts are not audits.</p>
@@ -13,6 +18,16 @@ export function AuditEvidence({loaded,now}:{loaded:ReadResult<SkillAudit[]>;now?
       {state==='stale' ? <Signal kind="heat" label="Audit data may be stale"><p>This retained successful read is older than five minutes. The refresh outcome is unknown; newer audits may be missing.</p></Signal> : null}
       <p className={styles.muted}>Last successful audit read: <time dateTime={loaded.readAt!}>{loaded.readAt}</time>. A read time is not a producer heartbeat.</p>
       {loaded.data.length === 0 ? <p>No completed public audits were present at this successful read{state==='stale' ? '; the current count is unknown' : ''}.</p> : <>
+        {assessments.map(rows => {
+          const sum = (key: 'quality_passed' | 'quality_total' | 'regression_passed' | 'regression_total') => rows.reduce((n, row) => n + row[key], 0);
+          const qTotal = sum('quality_total'), rTotal = sum('regression_total');
+          const critical = rows.some(row => row.critical_missed === true) ? 'Missed' : rows.some(row => row.critical_missed === false) ? 'No miss recorded' : 'Unknown';
+          return <div key={rows[0].audit_set_id} className={styles.row} data-assessment-set={rows[0].audit_set_id}>
+            <h3>Assessment <code>{rows[0].audit_set_id}</code> · {rows[0].skill}</h3>
+            <p>Grade: <strong>{rows[0].assessment_grade}</strong>. Pooled Quality: {qTotal ? `${sum('quality_passed')} of ${qTotal}` : 'score unavailable'}. Pooled Regression: {rTotal ? `${sum('regression_passed')} of ${rTotal}` : 'score unavailable'}. Critical: {critical}.</p>
+            <p>Three completed public runs: {rows.map((row, i) => <span key={row.audit_run_id}>{i ? ', ' : ''}<a href={`#rsi-audit-${row.audit_run_id}`}>{row.audit_run_id}</a></span>)}.</p>
+          </div>;
+        })}
         <p><a href="#audit-rows">{loaded.data.length} completed audit{loaded.data.length===1?'':'s'}</a> in this read.</p>
         <ol id="audit-rows" className={styles.points}>{loaded.data.map(row => <li key={row.audit_run_id} className={styles.row} id={`rsi-audit-${row.audit_run_id}`} data-audit-id={row.audit_run_id}>
           <p><strong>{row.passed===true?'Passed':row.passed===false?'Failed':!row.evidence_complete?'Incomplete':row.quality_total===0 && row.regression_total===0 && row.critical_missed===null?'No applicable checks':'Unestablished'}</strong> · <code>{row.skill}</code>. Quality: {row.quality_total ? `${row.quality_passed} of ${row.quality_total}` : 'score unavailable'}. Regression: {row.regression_total ? `${row.regression_passed} of ${row.regression_total}` : 'score unavailable'}. Critical: {row.critical_missed===null?'Unknown':row.critical_missed?'Missed':'No miss recorded'}. Evidence: {row.evidence_complete?'complete':'incomplete'}.</p>

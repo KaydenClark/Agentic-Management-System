@@ -46,3 +46,9 @@ test('assessment grade stays distinct from run outcome, scores and Critical',asy
  const unknown=render({...loaded,data:[{...loaded.data[0],assessment_grade:null}]});assert.match(unknown,/Assessment grade: <strong>Unknown/);
  assert.equal((await loadSkillAudits({env,fetchImpl:async()=>ok([{...row,assessment_grade:'Invented'}])})).ok,false);
 });
+
+test('three same-set public rows show pooled scores and authoritative severity',async()=>{
+ const rows=[{...row,audit_run_id:'a',quality_passed:7,quality_total:8,regression_passed:4,regression_total:4,assessment_grade:'Broken'}, {...row,audit_run_id:'b',quality_passed:6,quality_total:6,regression_passed:4,regression_total:4,critical_missed:false,assessment_grade:'Broken'}, {...row,audit_run_id:'c',quality_passed:6,quality_total:6,regression_passed:4,regression_total:4,critical_missed:false,assessment_grade:'Broken'}];
+ const loaded=await loadSkillAudits({env,fetchImpl:async()=>ok(rows)});const html=render(loaded);assert.match(html,/data-assessment-set="set-1"/);assert.match(html,/Grade: <strong>Broken/);assert.match(html,/Pooled Quality: 19 of 20/);assert.match(html,/Pooled Regression: 12 of 12/);assert.match(html,/Critical: Missed/);for(const item of rows)assert.ok(html.includes('href="#rsi-audit-'+item.audit_run_id+'"'));
+ const partial=render({...loaded,data:rows.slice(0,2)});assert.doesNotMatch(partial,/data-assessment-set=/);
+});
