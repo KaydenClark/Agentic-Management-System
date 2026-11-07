@@ -1039,5 +1039,60 @@
       "recordBranch": "feature/bounded-delivery-adoption",
       "remaining": "Dispatcher independently verifies artifact before TK-003D; Director archives managed source worktree after implementor stops; AMS main delivery remains"
     }
+  },
+  "amsDelivery": {
+    "candidate": "23447862f452f75e1e85a21d09a90ada1ac1f9ad",
+    "target": "d489a9041f3a98e9153d2cf3a2bc5e659b96e3d6",
+    "tree": "74c5d76bce47894f78eddc1c699d6cabe8c239d7",
+    "pr": 210,
+    "ci": {
+      "run": 42324298665,
+      "result": "success",
+      "pytestPassed": 865,
+      "skipped": 6,
+      "browserPassed": 10
+    },
+    "review": {
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "freshNoncontributors": true,
+      "files": 26,
+      "standards": "PASS",
+      "spec": "PASS",
+      "standardsSha256": "b419bf9e20349cbe969041b6f1b661693dc9702f579749f7fd2649523e7fe06a",
+      "specSha256": "70f9a46851c10f0f43883dc65c0b08b951ae8cdc7d2d35da322ff2a4b23e7715"
+    },
+    "resultChecks": "separate remote-main fresh native/Wiki/projection/hygiene pass; full CI reuse only for identical tree",
+    "preservation": {
+      "startingScopes": [
+        "04eb",
+        "8f88",
+        "3c75"
+      ],
+      "actualNativeChecks": true,
+      "remainingOriginalByteFindings": 0,
+      "remainingOriginalIndexFindings": 0,
+      "globalComplete": false,
+      "globalAccounted": false,
+      "globalRemoteRecoverable": false,
+      "original04ebCodes": {
+        "unaccounted-ref": 1,
+        "retained-ref-not-remote": 8,
+        "retained-worktree-not-remote": 13,
+        "missing-original-worktree": 2
+      },
+      "priorTaskFilesInMain": 6,
+      "priorTaskIndexVersionsInMain": 7,
+      "projection": {
+        "gitObject": "40ee705e0ca4d2c83c7122a031086dc6eacaa5a0",
+        "sha256": "60156737954feb603681f20c42db23a69aefd67548e14bbf2d26a05f554955a9",
+        "recovery": "reconstructed/hash-verified isolated immutable46c render; independent0644 local-only original, native accepted",
+        "originallyCommitted": false,
+        "remoteRecoverable": false
+      },
+      "boundary": "Raw findings/snapshots remain unchanged/private; global refs/worktrees and current continuation pending publication remain explicit"
+    },
+    "cleanup": "Source Director archive/local deletion observed; AMS active writer retained pending checked closure and Director guard recheck/archive; preserve PR208 and unrelated work",
+    "limits": "No whole-Spec acceptance, website promotion, owner Human QA or benefit claim"
   }
 }
