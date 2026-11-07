@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-a85076a7-25a3-45bd-bd33-220c62d87882](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Land N/O source. W stays stopped. Coverage, Review and owner QA remain open.
+**Next gate:** Coverage, whole-Spec Review and owner QA remain open. TK-000W stays stopped.
 
 ## Intent and authority
 
