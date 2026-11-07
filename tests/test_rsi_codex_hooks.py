@@ -70,3 +70,9 @@ def test_wrong_project_and_disabled_flag_do_not_record(tmp_path):
     config(tmp_path)
     value=prompt(tmp_path); value['cwd']=str(tmp_path/'elsewhere')
     run(tmp_path,value); assert events(tmp_path)==[]
+
+
+def test_deeply_nested_json_fails_open(tmp_path):
+    result = run(tmp_path, '[' * 100000 + '0' + ']' * 100000)
+    assert result.returncode == 0 and not result.stdout and not result.stderr
+    assert events(tmp_path) == []
