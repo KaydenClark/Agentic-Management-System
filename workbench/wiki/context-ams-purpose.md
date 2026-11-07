@@ -11,7 +11,37 @@ last_verified: 2026-11-02
 ---
 # AMS purpose and first RSI loop
 
-AMS is a reusable system of workflows, rules, skills and tools through which people capture, develop and record intent with AI, and agents carry that intent into verified outcomes. This room builds its public presentation website, runs RSI and improves shared skills already used across projects. The website shows verified results, first from its own build and skill improvements, with evidence from other projects possible later. Project setup or Workbench adjustments use `setup-workbench` in the affected project; shared skill improvements need no separate per-project delivery. [Blueprint](../../BLUEPRINT.md) owns the final destination; S-001 assesses the current build. This note preserves the reasons and sourced corrections, including the [2026-11-02 clarification](#jot-37abcff9-7be7-49a9-9ddb-98e281445cc8).
+## Current understanding
+
+AMS is a reusable system of workflows, rules, skills and tools for developing intent with AI and carrying it into verified outcomes. Its shared methods improve through evidence from actual work. The [Blueprint](../../BLUEPRINT.md) owns the final destination; [S-001 — AMS assessment](../specs/S-001-ams/SPEC.md) assesses a bounded build rather than defining AMS or parenting every Landmark. The [owner's purpose correction](#jot-37abcff9-7be7-49a9-9ddb-98e281445cc8) explains that distinction.
+
+This room joins three kinds of work: building the public website, creating the RSI loop, and improving skills already used across projects. The website makes the system and its evidence understandable to visitors and to the owner returning later. Its own build supplies the first application of the loop; building a website alone proves no skill improvement. Other projects may later contribute evidence with their own versions, context and limits. [AMS website synthesis](design-concepts/landmark-ams-website.md) and [RSI presentation synthesis](design-concepts/landmark-rsi-presentation.md) distinguish explanation from measurement.
+
+Shared skill improvements need no invented per-project delivery process. Substantial project adjustments, or adoption into an existing/new project, use `setup-workbench` in that project. Source merge, personal catalog installation and observed host loading remain separate facts. This page is a sufficient owner for AMS purpose; duplicating it in the Feature catalog would add competing maintenance.
+
+## How the parts work together
+
+The [local Grill Board](context-grilling-board.md) reduces owner coordination by preserving decisions and corrections through stable DQCs. Execution owners carry approved work through Landmarks, Specs and Tasks. The [RSI loop](context-feedback-improvement-loop-plan.md) uses failures and retained successes to compare bounded changes and decide what to keep; the [RSI Loop synthesis](design-concepts/landmark-rsi-loop.md) links its capability owners. Wiki maintenance turns resulting understanding into current, sourced explanations; it supplies neither execution authority nor proof that a method improved outcomes.
+
+## Established meaning, limits and open work
+
+The Blueprint and sourced owner clarification establish this destination and the website's explanatory role. They do not establish that the full autonomous loop, every website page or a broadly beneficial skill system has been delivered. Follow live Specs and evidence rather than reading the older preparations below as current state. In particular, the old statement that S-002 “owns the loop” is historical: LMK-004 owns the whole destination; S-002 owns evaluation and qualification. Stage A's exact RSI readback is now confirmed and its preparation delivered; Stage B implementation and existing campaigns retain their separate holds. The [current RSI explanation](context-feedback-improvement-loop-plan.md#current-understanding) preserves that correction without reopening decisions.
+
+Website work follows feature → dev → main; the owner retains dev-to-main promotion. A local Board implementation is not a deployment of the public demonstration, and successful checks or merges are not owner Human QA. Historical Supabase counts, deployment checks and stopped attempts below describe their dates/candidates only. This repair performs no live database/model activity and claims no general RSI benefit.
+
+## Evidence and sources
+
+- [Blueprint at the intake revision](https://github.com/KaydenClark/Agentic-Management-System/blob/da4f0ca809c6759e9c17ce798c52753dab123a65/BLUEPRINT.md): immutable destination source; the live Blueprint above owns changes.
+- [Purpose correction](#jot-37abcff9-7be7-49a9-9ddb-98e281445cc8): owner source, 2026-11-02; original wording retained below.
+- [Architecture](../../ARCHITECTURE.md#ownership) routes authority, requirements, procedures, knowledge and proof to their owners. [Wiki procedure](guidebooks/wiki-maintenance.md) keeps these explanations coherent.
+
+## Maintenance history
+
+- 2026-11-04: S-000C repair reconciled the reusable-system purpose, website/evidence relationship and newer RSI ownership/holds; linked the four Landmark explanations. All original dated context and exact JOT entries remain below as historical sources.
+
+## Retained dated context
+
+The following material preserves earlier observations and preparations in place. Its dates and superseding current explanation matter; it is not a second current execution plan.
 
 ## 2026-10-31: Owner clarification
 

@@ -11,9 +11,39 @@ last_verified: 2026-11-04
 
 # Grilling Board and DQC-backed intent
 
-Current concept owner: [DQC-000A](../landmark-tracker/destination-questions/DQC-000A.json), retaining the exact confirmed readback. [TRACKER.md](../../TRACKER.md) projects concepts; [TASKBOARD.md](../../TASKBOARD.md) projects execution. [S-004](../landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) owns current implementation evidence and remaining gates; the [Board guide](../../grill-board/README.md) owns use. Dated entries below retain sources, corrections and verification limits.
+## Current understanding
 
-Captured context. Claim labels preserve intent and uncertainty; capture alone supplies neither Canon nor implementation proof. The date above checks this page's capture format, not every claim.
+The Grilling Board is the owner's local attention surface: a place to inspect a complete proposed answer, its reasons and sources, then confirm or correct it without reconstructing chats. A card is a view of a stable Destination Question Card (DQC), not a second question store. [DQC-000A — Grilling Board purpose and DQC lifecycle](../landmark-tracker/destination-questions/DQC-000A.json) owns the evolving concept and exact confirmed readback; [the original confirmation](#jot-af34e4a9-efdf-4688-91d9-0c2d2b0685ba) remains unchanged. [TRACKER.md](../../TRACKER.md) projects concepts; [TASKBOARD.md](../../TASKBOARD.md) projects execution. Stable references connect those lanes without turning a confirmed idea into completed work.
+
+This capability already has this maintained topic owner; a duplicate feature page would split its explanation. The [Grill Board Landmark synthesis](design-concepts/landmark-grill-board.md) explains its wider relationship to page review and the [AMS purpose](context-ams-purpose.md). The local Board and public website demonstration have different jobs and owners.
+
+## Question, answer and update flow
+
+At interview start, agents capture the main branches as DQCs, recover settled answers, and propose a full readback with reasons, source, scope, dependencies and separate Priority/Value reasons. The owner confirms the exact displayed revision, or returns exact words through Rework wording, Change the why or Change. Ratings and **Too taxing** are quality feedback; Too taxing means orchestration tax and holds the question for agent rewriting. Feedback confirms no replacement wording. Pending revisions keep earlier confirmed versions recoverable and do not inherit their confirmation.
+
+The Python Board and terminal use the same native owning operations. The Board reads committed HEAD, so an uncommitted edit is not a displayed update. A stale submission refuses rather than overwrites; an uncertain save retains its original event for exact retry. [The operating guide](../../grill-board/README.md#owner-actions-and-recovery) gives the actual recovery path.
+
+**Finish this round** records changed DQCs, answers and quality events and carries unanswered questions/dependencies forward. An agent then reviews every change, reconciles confirmed and authorized understanding into existing Wiki and document owners, commits those changes, and records sourced reconciliation plus the next frontier. The button runs no background AI or implementation dispatch. [Round continuation](../../grill-board/README.md#agent-capture-and-round-continuation) owns commands; [Wiki maintenance](guidebooks/wiki-maintenance.md) explains intake, durable answers and semantic checks. Confirmation, execution authority, Review, Human QA and publication remain distinct.
+
+## Publication during grilling
+
+The owner requested repair of repeated publication blocks on 2026-11-06. [AGENTS](../../AGENTS.md#publication-during-grilling) now requires agents to recover the existing publication scope and provide the actual owner authorization, destination and outgoing diff to approval review. A save-hook instruction is not publication permission. If delivery is denied, preserve the local commit, report the blocker once and continue authorized local grilling without reopening settled interview answers. Unfinished code stays in a draft PR. This repair grants no additional publication or merge authority and changes no approval settings. A successful push proves that attempt, not future reviewer decisions. [FAIL-181](../feedback/WORKBENCH_FEEDBACK.md) records the recurrence, rejected repair and limits.
+
+## Established behavior and remaining gap
+
+The DQC-backed lifecycle was delivered in [PR161](https://github.com/KaydenClark/Agentic-Management-System/pull/161), merge `3fea0317a9bf7a138de5d06ea6e86b592c151572`; [the delivery observation](#jot-02e0bbe1-17d7-481f-9092-da7b4a4935b4) identifies its checks and limits. This establishes the shared native lifecycle, full readbacks and round handoff, not every subsequent design requirement. [S-004 — Grill Board cards and answers](../landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) owns implementation evidence and remaining gates; owner Human QA and Spec acceptance are not supplied by this synthesis.
+
+The later [owner correction](#jot-c9dcebb6-4d50-4d6d-95d7-30d723d66d53) requires search, filters, batch actions and other controls in the supplied redesign to function. Their omission is an implementation gap, not a settled choice. The README's earlier “by choice” description is superseded for those omissions; preserving it as current intent would contradict the owner. This Wiki repair explains that gap and changes no Board product behavior. The public [demo Board owner](../landmarks/LMK-003-ams-website/specs/S-009-demo-grill-board/SPEC.md) uses samples and does not replace the real local Board.
+
+## Evidence and sources
+
+- [DQC-000A — Grilling Board purpose and DQC lifecycle at the intake revision](https://github.com/KaydenClark/Agentic-Management-System/blob/da4f0ca809c6759e9c17ce798c52753dab123a65/workbench/landmark-tracker/destination-questions/DQC-000A.json): preserved confirmation, exact text, source lineage and related execution identities; live link above owns later changes.
+- [Board guide at the same source revision](https://github.com/KaydenClark/Agentic-Management-System/blob/da4f0ca809c6759e9c17ce798c52753dab123a65/grill-board/README.md): documented committed reader and transaction/round behavior; its omission wording is corrected by the later owner intent linked above, not accepted as authority.
+- [S-004 history](history/S-004.md) retains lifecycle judgments; [Grill Board Landmark history](history/LMK-001.md) retains wider history. The dated entries below preserve observation scope: early unavailable/disconnected states describe their inspected revisions, not today's complete capability.
+
+## History
+
+- 2026-11-04: S-000C repair reconciled confirmed DQC meaning, delivered lifecycle and later redesign gap into this current explanation. Immutable internal source intake and the durable answer “Does DQC delivery mean the supplied redesign is complete?” update this owner, Landmark synthesis, guide and MEMORY. Earlier captures and exact confirmation remain byte-preserved below.
 
 <!-- jot-entry -->
 ### JOT-e26f9c60-59ef-4f8f-8fe4-80bab6b41029

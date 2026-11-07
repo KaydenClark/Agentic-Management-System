@@ -3,16 +3,18 @@
 **Spec ID:** S-013
 **Status:** active
 **Priority:** 2
-**Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
+**Owner:** Kayden; orchestrator C (cloud, no secrets)
 **Stance:** Builder
-**Updated:** 2026-11-03
-**Catalog description:** Checks that keep the AMS coherent: up to Spec, skills pinned and in sync, `dev` measured against `main`, and independent Spec review.
+**Updated:** 2026-11-07
+**Catalog description:** Spec conformance, skill pins/sync, dev/main drift and independent review.
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Next gate:** Complete TK-003.
 
 ## Intent and authority
+
+[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac); no execution release or reset of prior stops.
 
 The owner asked that the system stay coherent and nothing fall behind, with one orchestrator checking that the project stays up to Spec, and that the distance between `dev` and `main` be measured so a long-unmerged trunk does not happen again. Orchestrator C runs in a cloud session, works only through GitHub, holds no secrets and writes no product code.
 
@@ -26,25 +28,22 @@ An earlier Workbench let its development trunk run thousands of commits ahead of
 
 ## Current Verified State
 
-No criterion is checked off.
-
-- **Drift measured:** the drift check and report exist ([TK-001 receipt](tasks/TK-001/TASK.md#receipt)); the Grill Board item on breach is blocked ([TK-005](tasks/TK-005/TASK.md)).
-- **Up to Spec:** the check and an S-004 report exist ([TK-002 receipt](tasks/TK-002/TASK.md#receipt)).
-- **Skills in sync:** blocked on S-006 rows ([TK-003](tasks/TK-003/TASK.md)).
-- **Independent review:** the procedure and checker exist ([TK-004 receipt](tasks/TK-004/TASK.md#receipt)); the checker is not in the native verdict gate.
-- **No secrets:** no evidence recorded.
-- `doctor` reports structural findings. `dev` exists on the remote. RUNBOOK does not name the coherence commands.
-
-History: [S-013 history](../../../../wiki/history/S-013.md).
+No criterion is checked off. Drift and up-to-Spec checks exist ([TK-001](tasks/TK-001/TASK.md), [TK-002](tasks/TK-002/TASK.md)); Board breach reporting waits on TK-005 and skills sync on S-006 rows. Independent review tooling exists ([TK-004](tasks/TK-004/TASK.md)) but is not in the native verdict gate. Secret-free execution has no recorded proof. RUNBOOK lacks coherence commands. See [history](../../../../wiki/history/S-013.md).
 
 ## Desired Behavior
 
-- **Up to Spec.** For each active Spec, compare delivered behavior on `main` or `dev` with its acceptance criteria and report gaps.
-- **Skills pinned and in sync.** Every RSI row names a skills commit; report rows whose commit is behind the current skills `main` and sessions that could not install skills.
-- **`dev` ahead of `main`.** Report commits and days `dev` is ahead of `main`, with a threshold that raises a Grill Board item.
-- **Independent Spec review.** A fresh-context reviewer passes or returns the exact assembled commit against the Spec's conditions; a changed commit needs a fresh review.
-- Reports are committed records; findings are visible, never silently fixed.
-- **Preparation routing.** Detect a large shared-skill or other AMS change proceeding without its Map/Plan or past a Prepare stop. Route the [recorded failure](../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) and recurrence to [S-000A](../S-000A-skills-refocus/SPEC.md) for source repair; check preparation before claiming a reliability improvement. This addition is preparation only.
+- Compare each active Spec with delivered main/dev behavior and report evidenced gaps.
+- Check every RSI row’s skills pin against current skills main; report missing/stale versions and failed installations. Measure dev-ahead-of-main commits/days and create a Grill Board item above threshold.
+- A fresh-context reviewer evaluates the exact Spec candidate; changed content needs fresh review. Commit reports; never silently fix findings.
+- Detect large shared-skill/AMS work bypassing Map/Plan or Prepare stops. Route the [known failure](../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) to S-000A and verify preparation before claiming improvement. This addition releases no implementation.
+
+### Failure detection and use evidence
+
+S-000B’s per-chat Python observer supplies request/loading/use/failure events. Skipping an explicit skill request (including chat invocation) is Critical and a failed requested use. Unknown observation stays unknown; file presence proves no use. This grants the secret-free C actor no credentials.
+
+Detect/report mismatches before owner prompting; retain each recurrence occurrence and S-006 identity. Diagnose owning causes rather than inferring skill causation from involvement. Route to one active repair per skill; count successful eligible uses alongside failures.
+
+Distinguish accepted source, installed bytes, actual loading and observed use. Report accidental stale loading separately from intentional baseline pins; never upgrade a frozen comparison silently. S-000B owns recovery, S-002 qualification/retention and S-011 authorized adoption. C remains secret-free.
 
 ## Decisions And Contracts
 
@@ -66,10 +65,10 @@ History: [S-013 history](../../../../wiki/history/S-013.md).
 
 Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, no secrets), landed feature -> `main` through a checked PR. Stack: a read-only check script, Git and GitHub reads, a committed report, and tests on fixture repositories.
 
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
-
 ## Acceptance Criteria
+
+- [ ] **Requested skill:** plant an explicit request that never loads or runs; record a Critical failed requested use with its request identity before owner intervention. Excluding it because it did not load fails.
+- [ ] **Later version:** later work verifies the accepted loaded revision and detects recurrence; a stale version cannot prove the accepted repair failed or succeeded without that distinction.
 
 - [ ] **Feedback loop connection:** Detection closes the reporting gap: an orchestrator exercises acceptance beyond green checks, records an unreported mismatch with source/candidate identity, assigns its existing owner and next action, and preserves recurrence. A planted failure that reaches completion without a finding must fail.
 - [ ] **Prepare boundary:** TK-001D detects and routes a planted missing-Map/Plan or Prepare-stop bypass, including cross-repository skill work, before owner intervention. A document reminder alone fails.
@@ -79,6 +78,8 @@ Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, 
 - [ ] **Skills in sync.** Rows without a skills commit, or behind the current skills `main`, are listed. *Must fail:* an unpinned row passing.
 - [ ] **Independent review.** A review names its exact commit and comes from a context that did not build the Spec. *Must fail:* a review by the builder's own session, or one reused after the commit changed.
 - [ ] **No secrets.** C's session configuration holds no Supabase or Vercel secret, and C never calls the Supabase or Vercel connectors shared with the other orchestrators (owner, 2026-11-01, [JOT-dfb739bc](../../../../wiki/context-owner-answers-coherence.md)). *Must fail:* a secret in C's environment, or a C call to either connector.
+
+- [ ] **Recurrence and loading:** detect a planted recurrence and a stale loaded skill without owner intervention; link the occurrence and actual version. A source merge treated as proof of host use fails; an intentional baseline silently upgraded fails.
 
 ## RSI and website connection
 
@@ -118,4 +119,6 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-Owner instruction, 2026-11-02: map and plan the feedback-to-improvement loop using existing Specs; stop before implementation. The new Task is preparation only and has an explicit execution hold. Earlier approvals, stopped experiments and failed evidence retain their original scope. See [cross-Spec plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+The 2026-11-02 preparation request granted no implementation authority. TK-001D's later scoped release is recorded in [its Task](tasks/TK-001D/TASK.md); other holds, stopped experiments and failed evidence retain their scope. See [plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
+
+Detection replay and limits: [procedure](../../../../wiki/guidebooks/coherence-observations.md).

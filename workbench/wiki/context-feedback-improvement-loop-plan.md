@@ -10,58 +10,46 @@ source_paths:
 last_verified: 2026-11-02
 ---
 
-# Feedback-to-improvement loop: mapped destination and prepared route
+# Feedback-to-improvement loop: current understanding and prepared route
 
-## Intent and boundary
+<a id="current-mapped-destination"></a>
 
-The owner wants feedback to produce demonstrated improvements in shared skills, orchestrators to catch and record failures without prompting, and the website to show actual progress and the workflow as it evolves. This request authorizes mapping, planning and normal documentation delivery only. Implementation remains held; existing campaign stops and earlier bounded authority are unchanged. No new Spec is needed: existing capability owners cover the destination.
+## Current understanding
 
-## Stack and ownership
+The [2026-11-07 Map request](#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) establishes the current destination: optional RSI, per-chat Python observation, deferred routine/separate blocking repair, one active repair per skill, author-skill/prune-artifact, a separate real website draft session on Servitor, and qualified merge followed by automatic everyday updates. First proof includes actual later loading and recurrence evidence. This supersedes older destination wording about manual-only adoption and Markdown-owned shared failure history; it does not rewrite old receipts or launch held work.
 
-Work and owner feedback → orchestration/QA detection → existing finding and Task records → diagnosis of product, instruction, shared skill or tool cause → bounded repair and comparison → disposition → personal installation and observed later use → safe S-006 writer/Supabase records → S-007 website and evolving workflow explanation. S-005 owns page feedback and taste; S-013 owns detection/coherence; S-002 owns the assembled learning cycle; S-011 supplies the already planned shared repair. S-006 remains the storage owner; its existing schema is inspected before any extension.
+S-002 now distinguishes skill Quality and Regression percentages, Critical result and worst-failure grade across three audits from whole-Workbench Alignment. S-006 owns shared Supabase history; Git owns skills/tests. S-007 displays actual audit counts and public-safe results. The repository scorer at main 5f0c1d78 still implements the previous passing-run-count grade, so implementation must close that gap. Servitor, observer runtime and live database behavior were not inspected in this mapping. Plan selects the first case and concrete fixtures; no unresolved owner choice prevents mapping.
 
-Detection and truthful reporting do not wait for semantic evaluator qualification. Qualification gates retention and benefit claims, not reporting a mismatch. Do not silently convert every owner preference into a universal skill rule. Preserve original feedback, agent interpretation, causal evidence and disposition separately.
 
-## Sequence and genuine dependencies
+Every edit to AMS or the shared skills is RSI work, per the [owner correction](#jot-e0b1c5cf-e727-41eb-a52d-1883d6cc68c1). The current [bounded-delivery repair](../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) links its confirmed scope, failures, candidate qualification and publication/adoption evidence. Earlier stopped campaigns and Stage B release conditions remain separate.
 
-1. **[S-013/TK-001D](../landmarks/LMK-004-rsi-loop-during-build/specs/S-013-coherence-checks/tasks/TK-001D/TASK.md) — An orchestrator detects and routes an unreported failure.** No new artifact prerequisite; first technical frontier.
-2. **[S-005/TK-001E](../landmarks/LMK-001-grill-board/specs/S-005-page-review-cards/tasks/TK-001E/TASK.md) — A recorded correction reaches the next draft and review.** Uses existing TK-003 voice record before proving consumption.
-3. **[S-007/TK-001F](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-001F/TASK.md) — A reader follows a real failure through progress and workflow changes.** Uses existing TK-002 live row presentation before widening to learning history.
-4. **[S-002/TK-001G](../landmarks/LMK-004-rsi-loop-during-build/specs/S-002-rsi-loop/tasks/TK-001G/TASK.md) — One feedback finding completes repair, adoption and recurrence observation.** Requires the three preceding paths and S-011 later-use evidence to prove the assembled cycle.
+The RSI Loop turns failures from real agent work into demonstrated improvements to shared skills and the Workbench, then checks later use for recurrence and regression. [LMK-004 — RSI Loop](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md) owns this whole destination; [its synthesis](design-concepts/landmark-rsi-loop.md) explains the capability relationships. S-002 owns evaluation/qualification, S-000B worker execution/recovery, S-006 durable data, S-007 presentation, S-013 detection, S-011 source delivery and S-000A catalog refocus. Follow the [continuation guide](guidebooks/rsi-loop-continuation.md) for actual owners and release conditions, not a copied queue here.
 
-Each slice is one observable full path, not a schema/API/UI shard. Existing S-005/TK-001 and TK-003, S-007/TK-002, and S-011 Tasks retain their work; do not duplicate them. At execution, release prerequisites only from verified delivered artifacts, never a green label. Narrow overbroad inherited whole-Spec blockers only through the supported lifecycle after proving their required inputs exist.
+Existing local failures enter [WORKBENCH_FEEDBACK.md](../feedback/WORKBENCH_FEEDBACK.md); the mapped shared-history owner is Supabase, with identity-preserving transport still to implement. Diagnosis identifies whether the cause belongs to a skill, tool, environment, control or coordination. Cases and comparisons declare an observable outcome and intended useful benefit before evaluating the candidate against the current version and applicable controls. Historical r1 assessments remain intact; current skill severity qualification, Stable/Excellent, useful benefit and no regression all matter; a higher static score alone does not prove improved work. Failed attempts and inconclusive results remain evidence. Adoption and later observed use are distinct from source publication.
 
-## Ready frontier and assembly
+Worker-written, commit-pinned cases/runs/candidates/comparisons/dispositions belong in Supabase; raw transcripts remain local/private and safe Git exports are recovery copies. The Python worker runs outside Supabase, initially locally. An available database proves no running worker. Available Codex/Claude subscription meters govern model work, Mid/Small by default and High when needed. Preserve initial attempt → retry → retry → stop, baseline excluded; repairs or renames reset no counter or stopped campaign.
 
-Execution frontier: none for this newly planned work. Every new Task carries owner:feedback-loop-implementation, reflecting the explicit stop before implementation. Once execution is authorized, S-013 detection is the first new independent slice; existing prerequisite work retains its own authority and writers. Do not reopen S-002 PR 101 or reset attempts. An unavailable evaluator blocks its comparison, not unrelated reporting or website work.
+## Confirmed preparation and execution boundary
 
-One writer per owner; A owns site changes targeting dev, B owns local feedback/storage/loop work, C owns independent coherence reporting without secrets or product writes. Shared skill repairs occur in KaydenClark/skills using author-skill and qualified evaluation, with only authorized personal catalog installation. Other projects are not modified.
+The owner launched Stage A and explicitly confirmed the [exact four-section readback](guidebooks/rsi-loop-readback-2026-11-04.md), sourced by [the confirmation entry](#jot-6a1d5383-d939-47b2-bd45-51e702c12550). Its body SHA-256 remains `427c3f0d3c109b3ce05011433920b2f74b7044b068c41a6e8d58b08a93d9e853`. Stage A delivered the [case contract](guidebooks/rsi-case-contract.md), [worker contract](guidebooks/rsi-worker-contract.md) and [bounded release graph](guidebooks/rsi-task-release.md). [The later delivery observation](#jot-9280ecbd-819b-4559-bf34-6f342a7402a9) records PR169's merge at `3e3078810753035f289f20e5f9bc268a61e0fbd3`: the earlier publication refusal is resolved, with both refusals preserved as history.
 
-## Acceptance demonstration
+Earlier statements that the assembled readback was unconfirmed or publication blocked refer to earlier stages; they are not the current frontier. Confirmation covers meaning and Stage A executable preparation. A separate Stage B launch is still required. This Wiki repair starts no model trials, database writes, automation, skill installation, deployment or stopped campaigns, and does not select a catalog pilot. The [live release owners](guidebooks/rsi-loop-continuation.md) govern any future action. Merge, installation, observed loading, Human QA and website promotion retain separate authority.
 
-Give one feedback item once. Observe capture, diagnosis, assignment, bounded repair, baseline/candidate evidence, retain/revise/reject disposition, actual personal skill loading in later website work, and a safe public explanation. Plant a recurrence that is detected before owner intervention. Interrupt and resume coordination without duplicate claims or lost findings. Show failed/stopped/unknown evidence and stale/read-error states honestly. Track owner interventions and recurrence alongside outcomes; audit delta alone is not benefit.
+## Relationships and unresolved proof
 
-## Capability setup and remaining limits
+The [AMS purpose](context-ams-purpose.md) explains why the website build is the first application. The [Grill Board](context-grilling-board.md) supplies sourced owner corrections and quality feedback; [RSI presentation](design-concepts/landmark-rsi-presentation.md) displays evidence at its supported strength. [Wiki maintenance](guidebooks/wiki-maintenance.md) makes the resulting knowledge retrievable, but a successful local correction exercise is not broad RSI benefit.
 
-Reuse existing records, board, runner, writer, Supabase and website. No new service is selected. Verify the execution host and continuation facility during the assembled Task; use a bounded existing heartbeat only under subsequent execution authority. Automatic proposing remains behind the existing trusted-grader/cost/manual-round gate. Human QA and dev-to-main promotion remain owner actions. Current records and code demonstrate incomplete connections, not completed behavior. Planned verification is not proof.
+The [preparation-bypass failure](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) remains a recurrence case, not an implemented systemic repair by this page. End-to-end autonomous improvement, later-use benefit and unfamiliar-work generalization still need their actual evidence. The existing schema and contracts explain how to collect it; their existence supplies none of those outcomes.
 
-Native dependency limitation: qualified cross-Spec Task edges are unsupported. The assembly Task retains its execution hold until its named artifact prerequisites are verified; no whole-Spec completion gate is substituted.
+## Evidence and sources
 
-## Later catalog-refocus correction
+- [LMK-004 source at the intake revision](https://github.com/KaydenClark/Agentic-Management-System/blob/da4f0ca809c6759e9c17ce798c52753dab123a65/workbench/landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md) and the linked live owner distinguish destination and current authority.
+- [Pinned confirmed readback](https://github.com/KaydenClark/Agentic-Management-System/blob/da4f0ca809c6759e9c17ce798c52753dab123a65/workbench/wiki/guidebooks/rsi-loop-readback-2026-11-04.md) retains exact meaning; [Landmark history](history/LMK-004.md) owns lifecycle chronology.
+- Research links in earlier source revisions are design hypotheses, not demonstrated local benefit. This repair relies on inspected AMS owners and preserves their sources rather than reasserting unverified research conclusions.
 
-The owner-recorded [preparation bypass](../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) is a concrete recurrence case for S-013/TK-001D. [S-000A](../landmarks/LMK-004-rsi-loop-during-build/specs/S-000A-skills-refocus/SPEC.md) separately owns the newly requested catalog-wide destination and repair side. The earlier statement that this feedback-loop mapping needed no new Spec applies to that earlier scope, not all future skill work. Both additions remain Prepare-only; existing holds, campaigns and evidence are unchanged.
+## History
 
-## 2026-11-03: one failure intake file
-
-Source: Kayden's AMS chat, 2026-11-03. The owner directed that every failure
-be recorded in the same Markdown file with the failed model tier, provider,
-activity and correct outcome, so failures can guide skill repair.
-[WORKBENCH_FEEDBACK.md](../feedback/WORKBENCH_FEEDBACK.md) is that canonical
-log for all failure categories, superseding its harness-only intake scope.
-Detailed reports and trial ledgers remain evidence, linked by failure ID.
-Missing actor metadata stays unknown. New failed retries receive separate rows.
-This authorizes this logging consolidation, not the earlier held cross-Spec
-automation, shared-skill repairs, new trials or installation.
+- 2026-11-04: S-000C repair reconciled the confirmed Stage A readback, delivered preparation and resolved PR169 publication hold with unchanged Stage B/campaign stops. Original entries remain byte-preserved below; a historical unresolved entry cannot reopen subsequently confirmed meaning.
 
 <!-- jot-entry -->
 ### JOT-9179f5d2-dd33-42ed-b679-5bf49c79c078
@@ -87,4 +75,160 @@ Topic: feedback-improvement-loop-plan
 Supersedes: none
 
 Owner answers to round 1 (settle interview choices; assembled intent still unconfirmed). A1: the Wiki records the full alignment so a later chat can update the Specs from it; both Wiki and Specs carry the destination. B1: the loop improves shared skills and AMS Workbench controls, tools and instructions alike ('RSI is RSI'). C1 confirmed: failures canonical in WORKBENCH_FEEDBACK.md; cases, runs, candidates, comparisons and dispositions canonical in Supabase, worker-written and commit-pinned; raw transcripts local and private with only derived fields in Supabase; a Git-committed export of Supabase rows. D1: Mid and Small tier models by default, High only when needed; Codex and Claude both allowed while the owner's metered plan has capacity. Correction: the owner pays no per-token API cost, so the cap is a number of attempts, not dollars. D2: a skill change may be merged once it is Stable or Excellent and has not regressed. E1 (owner correction, FAIL-034): a case passes when it passes the existing Fitness and Alignment checks AMS already uses; the agent should have recovered this from S-002 r1 rather than proposing a new criterion. Pending clarifications: target Spec for the later update, attempt-cap value, High-tier escalation trigger, meter-exhaustion behavior, who merges and whether installation stays an owner command, and how r1 applies to per-case runs.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-d07bee36-7b4a-4029-8124-1a4120e97ccd
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T06:59:35.737Z
+Author: Kayden (captured by Codex)
+Source: Kayden's AMS chat, 2026-11-03, explicit attempt-limit confirmation and map request
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Owner confirmation and Map authorization, 2026-11-03. Kayden explicitly retains the existing attempt limit and confirms that useful-benefit requirements remain alongside Fitness and Alignment qualification. He requests this agent to map the destination now, not hand it off to Claude. A1/B1/C1/D1/D2/E1 answers in JOT-f2ce313b remain settled: Wiki explains intent and Specs own requirements; shared skills and Workbench controls/tools/instructions are RSI targets; Markdown owns failure intake; Supabase owns worker-written commit-pinned cases/runs/candidates/comparisons/dispositions; raw transcripts remain local/private, with safe derived fields and a Git-committed export. Codex/Claude run on available subscription meters, Mid/Small by default and High when needed; no API-dollar cap. Initial attempt -> retry -> retry -> stop, baseline excluded; repair/rename does not reset attempts. Qualified Stable/Excellent skills without regression may merge under existing checks and useful-benefit requirements; this does not grant installation, restart stopped campaigns or replace their frozen model conditions. Existing attempts are not an unresolved choice. S-002 remains lifecycle owner, S-006 data, S-007 presentation, S-013 detection, S-011 shared-skill delivery. This request authorizes Map and its normal documentation delivery only: no new Tasks, claims, model trials, backend changes, installation or deployment. The earlier assembled readback remains proposed; these sourced answers and the explicit mapping request supply the scope of this map.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-0968ba30-e2b1-4784-8df4-b887f76949f0
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:05:12.012Z
+Author: Kayden (captured by Codex)
+Source: Kayden's AMS chat, 2026-11-04, separation-of-concerns and RSI Landmark corrections
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+The owner permits more than one Spec for separation of concerns and identifies the RSI Loop as a LANDMARK. This supersedes the mapping interpretation that S-002 owns the whole lifecycle. Reuse LMK-004 as RSI Loop; S-002 owns evaluation/qualification, new planned S-000B worker execution/recovery, S-006 persistence, S-007 presentation, S-013 detection and S-011 source delivery. Cross-landmark links preserve existing placements and evidence. Mapping only, zero new Tasks; attempt and acceptance requirements remain unchanged.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-ceab17ab-3842-4b20-992a-4f0ad562eb65
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:16:39.699Z
+Author: Kayden (captured by Codex)
+Source: Kayden's AMS chat, 2026-11-04, RSI Landmark correction and explicit merge approval
+Topic: feedback-improvement-loop-plan
+Supersedes: JOT-d07bee36-7b4a-4029-8124-1a4120e97ccd
+
+The owner identifies the RSI Loop as a Landmark and permits capability-specific Specs. LMK-004 owns the whole destination; S-002 evaluation/qualification; S-000B execution/recovery; S-006 persistence; S-007 presentation; S-013 detection; S-011 shared-source delivery. This corrects only the earlier S-002 whole-lifecycle ownership interpretation. All other confirmed terms in the superseded entry remain: unchanged three-attempt limit with baseline excluded, metered Mid/Small Codex/Claude and High when needed, no API-dollar cap, existing Fitness/Alignment and Stable/Excellent/no-regression/useful-benefit gates, Markdown intake, canonical Supabase records with safe Git exports, local/private raw transcripts, and separate installation authority. Mapping creates one planned worker Spec and zero Tasks. The owner now explicitly approves merging this mapping into main; implementation and stopped trials remain unauthorized by this map.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-55876e5d-6957-4a4e-917b-8ba7245adee2
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:28:56.703Z
+Author: Kayden (captured by Codex)
+Source: Kayden's AMS chat, 2026-11-04, RSI loop Map and Plan preparation request
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+The owner wants the RSI Loop to finish pointing in the mapped direction and requests orchestration of Map and Plan for the unrecorded remainder. Prepare a recoverable next chat to finish loop design and executable preparation, followed by a separate later chat to implement the prepared loop. This instruction authorizes current documentation and preparation, not implementation, model trials, database writes, automation, installation, or deployment. The earlier assembled readback is not confirmed wholesale by this request; the design stage must confirm the exact assembled readback and resolve genuinely open choices before affected implementation. Existing confirmed answers, attempts, stopped campaigns and separate release authorities remain in force.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-df911047-15f2-444b-84c8-35e347675c36
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:39:57.714Z
+Author: Kayden (captured by Codex)
+Source: Kayden direct approval in AMS chat, 2026-11-04, publication question reply
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden explicitly answered "Approve push, PR, and checked merge" to publication of the 19 documentation-only RSI Map/Plan files to public KaydenClark/Agentic-Management-System, opening a PR and merging into main after shared CI passes. This approval addresses the automatic approval-review publication refusals; it authorizes no implementation, model trials, installation or deployment. Existing design confirmation, stopped campaigns, attempts and separate authorities remain unchanged.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-af4af602-47bf-4669-b131-65694f17ca37
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:57:47.544Z
+Author: Kayden (captured by Codex)
+Source: chat:stage-a-launch-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+On 2026-11-04 Kayden instructed: “Launch Stage A: finish design, confirm the readback, and deliver executable preparation.” This releases owner:rsi-design-launch for LMK-004/TK-002M only. Activate that design assignment; preserve all child implementation holds. The assembled readback still requires actual confirmation. No software implementation, actual model trials, database writes, automation, personal installation, deployment, stopped-campaign resumption or wider catalog work is authorized. Both S-000A pilots and all prior attempt, qualification and separate release gates remain unchanged.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-6a1d5383-d939-47b2-bd45-51e702c12550
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T08:05:56.881Z
+Author: Kayden (captured by Codex)
+Source: chat:stage-a-readback-confirmation-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Kayden explicitly replied “Confirm the readback as written.” to the exact assembled four-section readback presented in the AMS chat on 2026-11-04. The exact body is preserved in guidebooks/rsi-loop-readback-2026-11-04.md, SHA-256 427c3f0d3c109b3ce05011433920b2f74b7044b068c41a6e8d58b08a93d9e853 (UTF-8, from Summary heading through final newline). This confirms meaning and Stage A documentation/executable preparation only. It does not authorize Stage B software implementation, model trials, database writes, automation, personal installation or deployment; prior attempt limits, stopped campaigns and both catalog pilots retain their scope and holds. The linked exact body supersedes earlier unconfirmed assembled wording only; sourced prior answers remain settled.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8529e8c1-690d-42b2-a501-dcc1dcce4a06
+Kind: verification
+State: current
+Recorded: 2026-11-04T08:23:25.859Z
+Author: Codex Stage A record writer
+Source: chat:stage-a-publication-refusal-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Root reports final Stage A candidate 5cd3b976d7909d2ce4973cfb3d6ceebb90bd3054 passed both fresh independent Standards and Spec delta reviews with zero findings, and shared CI run 41798333987 passed 839 tests/6 skipped plus 10 browser checks. Draft PR169 targets main. Automatic approval review rejected its merge twice before execution: first, trusted user authorization for the asserted owner-only default-branch merge was absent despite green CI; second, after root supplied exact scoped non-site payload and pinned-policy evidence through the same connector action, trusted user content still lacked explicit promotion authority and repository policy claims could not supply it. No merge occurred, no alternate route was attempted. Main remains cfc0bc4c7f2cd167cea2972016edee076b479b73. These are publication approval refusals FAIL-079/080, not model trials or RSI candidate strikes. Record the concrete final PR/head and obtain explicit user merge approval; changed metadata still requires final delta review/CI. Readback and preparation are complete, checked default-branch delivery is blocked; Stage B, model campaigns, DB writes, automation, installation and deployment remain held.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-9280ecbd-819b-4559-bf34-6f342a7402a9
+Kind: verification
+State: current
+Recorded: 2026-11-04T15:21:31.453Z
+Author: Codex
+Source: chat:automatic-merge-authority-20261104
+Topic: feedback-improvement-loop-plan
+Supersedes: JOT-8529e8c1-690d-42b2-a501-dcc1dcce4a06
+
+Kayden challenged the repeated merge-approval requests in the direct AMS chat on 2026-11-04: "I don't know how many times we need to fix this so you can commit, PR, and merge things automatically". This continuation treated that instruction as authorization for routine checked delivery within the existing AMS scope. The original FAIL-079/080 denials explicitly distinguished trusted user authorization from permission quoted in repository policy. After verifying the unchanged non-site candidate 7dbcc98829627ea2152c616cc99035bcc26b31f2, passed independent metadata reviews and successful shared CI run 41799304048, the same GitHub connector merged PR169 into main at 3e3078810753035f289f20e5f9bc268a61e0fbd3. Fresh clone of main verified the merge and its candidate parent. The former publication hold is resolved for PR169; both refusals remain historical evidence. No approval setting or reviewer policy changed, and one successful merge does not establish that standing authorization will be recognized in every future session. Stage B implementation, campaigns, database writes, automation, installation, Human QA and website dev-to-main promotion retain their existing authority boundaries.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-e0b1c5cf-e727-41eb-a52d-1883d6cc68c1
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T22:21:16.664Z
+Author: Kayden
+Source: Kayden direct AMS chat, 2026-11-06; confirmed bounded-delivery repair scope and RSI qualification corrections
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Every edit to the skills and AMS is RSI work. The owner confirmed implementing the full bounded-delivery workflow repair across orchestrate, journey, land, setup-workbench, bundled runtime and AMS, with verification, public source delivery, personal-catalog installation and guarded cleanup. Keep website promotion and unrelated unfinished work untouched. Record changes for the RSI Loop; skills may merge only after Stable or Excellent qualification, meeting requirements and passing all applicable recorded-failure regressions. Preserve failed attempts, historical stopped campaigns and separate publication, installation and later-use evidence. This is the authorized current repair, not a restart or reset of an earlier stopped campaign.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-7862917b-48cb-41bc-8f21-0ddfc611cdac
+Kind: intent
+State: current
+Recorded: 2026-11-07T07:56:57.779Z
+Author: Kayden; captured by Codex
+Source: Kayden direct RSI Map request, 2026-11-07; prior confirmed grading and test-session decisions inspected at a72f1cd1
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Map the RSI Loop from the supplied intended results. First proof: one complete skill improvement on a real AMS website task on Servitor. RSI is optional for participating Workbenches. A per-chat Python observer distinguishes requests, loading, use and failures; skipping an explicitly requested skill is Critical and a failed requested use. Routine repairs start after current work; blocking repairs use a separate chat; one repair may be active per skill. Repair through author-skill and prune-artifact; test draft and related skills in a separate AMS website session on Servitor. Eligible repairs pass required checks, merge and automatically update everyday skills. Preserve attempt limits. Three audit runs report separate Quality and Regression scores, Critical result and worst-failure overall grade; shared Alignment questions supply Quality checks, per-skill tests supply Regression, whole-Workbench Alignment stays separate. Supabase owns shared failure/improvement history; Git owns skills/regression tests. RSI Charts display public-safe results and actual audit counts; later use verifies accepted version and recurrence. Prior confirmed DQC-000N revision 14 (a434c5973e369f07fff17637748cebc01a4b851e), inspected in the alignment checkout, defines Excellent = no misses across three runs, Stable = Quality-only misses, Functional = Regression misses without Critical, Broken = any Critical miss. Prior test-session/update confirmation and requested-use confirmation were also inspected in the same topic at a72f1cd1. Current Map authorization supplies the destination, not implementation, campaign launch, installation now, or acceptance. Existing historical stops and scoped delivery/qualification remain. The first exact case and fixtures belong to Plan.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-b26faa14-5462-4a1b-979b-fcafecae147d
+Kind: intent
+State: confirmed
+Recorded: 2026-11-07T08:10:46.081Z
+Author: Kayden
+Source: Kayden direct RSI Map completion reply, 2026-11-07
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+After the agent reported the two hygiene failures and automatic publication-review refusal, the agent asked: May I finish that correction, complete verification, and publish the checked records? Kayden replied: yes, please finish. This authorizes resuming the record-size correction, completing verification and publishing the records-only RSI Map through its checked main delivery endpoint. It does not launch RSI implementation, model campaigns, installation or website promotion.
 <!-- /jot-entry -->

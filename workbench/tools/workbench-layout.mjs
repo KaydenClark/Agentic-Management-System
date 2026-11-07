@@ -974,6 +974,7 @@ export function validateManifest(project, { allowMissingTracker = false } = {}) 
   if (manifest.git !== undefined && (!manifest.git || typeof manifest.git !== 'object' || Array.isArray(manifest.git) || !isBranchName(manifest.git.defaultBranch) || !isBranchName(manifest.git.integrationBranch))) {
     return fail('invalid-manifest', 'Manifest git block must declare defaultBranch and integrationBranch as Git branch names.', { git: manifest.git });
   }
+  try { declaredGit(project); } catch (error) { return fail('invalid-manifest', error.message); }
   if (manifest.legibility !== undefined) {
     const issue = legibilityShapeIssue(manifest.legibility);
     if (issue) return fail('invalid-manifest', `Manifest legibility block ${issue}.`, { legibility: manifest.legibility });

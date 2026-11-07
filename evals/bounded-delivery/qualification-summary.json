@@ -1,0 +1,1098 @@
+{
+  "candidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+  "scope": "bounded pre-delivery routing only",
+  "nativeOperation": "score; not a fabricated matched-baseline history record",
+  "skills": {
+    "orchestrate": {
+      "level": "Excellent",
+      "passingRuns": 3,
+      "alignment": {
+        "passed": 90,
+        "applicable": 90,
+        "percentageNumerator": 100,
+        "percentageDenominator": 1
+      },
+      "qualification": "qualified",
+      "assessmentAccepted": true,
+      "packetSha256": "a86eb970a849357451506699c9590d5e78371c679f38c50dd7c896b0f293b54c",
+      "resultSha256": "d83aa586b84fcc431567984aaf79d44681e27008edc75b96feee3b211696778f"
+    },
+    "journey": {
+      "level": "Excellent",
+      "passingRuns": 3,
+      "alignment": {
+        "passed": 90,
+        "applicable": 90,
+        "percentageNumerator": 100,
+        "percentageDenominator": 1
+      },
+      "qualification": "qualified",
+      "assessmentAccepted": true,
+      "packetSha256": "04ad043d1afae2c2e847a89920c36da5e47041e3bbaea1cd03cd698622229712",
+      "resultSha256": "92f69ae5d2c3e0b6af7335749399c9b1a5872743fe177575fdccda110b8587a8"
+    },
+    "land": {
+      "level": "Excellent",
+      "passingRuns": 3,
+      "alignment": {
+        "passed": 96,
+        "applicable": 96,
+        "percentageNumerator": 100,
+        "percentageDenominator": 1
+      },
+      "qualification": "qualified",
+      "assessmentAccepted": true,
+      "packetSha256": "cce70aa8fed391154d07f261e07404d219f47633580164ef714d41dac0db42d9",
+      "resultSha256": "b72c12fc6a67c6a13d601d2b7b4520c87d74468a07135b4b2fafa589d5282664"
+    },
+    "setup-workbench": {
+      "level": "Excellent",
+      "passingRuns": 3,
+      "alignment": {
+        "passed": 96,
+        "applicable": 96,
+        "percentageNumerator": 100,
+        "percentageDenominator": 1
+      },
+      "qualification": "qualified",
+      "assessmentAccepted": true,
+      "packetSha256": "59c28217bf891e1a77f2757522998831a021696debb2fc18b76cabf4f63e821f",
+      "resultSha256": "8ea06104adce954bfb801fb9e3702d195583a567afd0e38ce82ee2e57cbd9aa7"
+    }
+  },
+  "historicalCoverage": [
+    {
+      "findingId": "FAIL-006",
+      "checkId": "A02-01",
+      "class": "Quality",
+      "obligation": "declared main/dev routes and composed interfaces",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native cases1–6,13; all three artifact cases2/3",
+      "retainedDisposition": "bounded predicate verified; historical unrelated coherence findings unchanged",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-007",
+      "checkId": "A02-01",
+      "class": "Quality",
+      "obligation": "declared main/dev routes and composed interfaces",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native cases1–6,13; all three artifact cases2/3",
+      "retainedDisposition": "bounded predicate verified; historical unrelated coherence findings unchanged",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-010",
+      "checkId": "A04-01",
+      "class": "Quality",
+      "obligation": "delivered branch can close before parent completion",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native cases11/12 plus every artifact case1",
+      "retainedDisposition": "bounded predicate verified; no historical inventory cleanup claimed",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-012",
+      "checkId": "A01-05",
+      "class": "Critical",
+      "obligation": "owner-accurate branch naming/topology",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed scope and all three artifacts explicitly supersede permanent-Spec lifetime rule",
+      "retainedDisposition": "sourced prospective supersession; original branch/history/naming events not erased or cleaned",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-019",
+      "checkId": "A01-05",
+      "class": "Critical",
+      "obligation": "owner-accurate branch naming/topology",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed scope and all three artifacts explicitly supersede permanent-Spec lifetime rule",
+      "retainedDisposition": "sourced prospective supersession; original branch/history/naming events not erased or cleaned",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-013",
+      "checkId": "A04-06",
+      "class": "Critical",
+      "obligation": "private handoff/publication/install boundaries",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native private-original case8/package privacy test; all three artifact cases1/3",
+      "retainedDisposition": "bounded privacy/claim predicates verified; no original external job closure",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-015",
+      "checkId": "A06-03",
+      "class": "Critical",
+      "obligation": "dirty/unpushed/partial state cannot be called complete",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifacts preserve gaps; native close/push/merge proof cases11/12",
+      "retainedDisposition": "bounded claim predicate verified; earlier stopped campaign remains stopped",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-016",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "trusted policy and isolated execution authority",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "all three artifacts separate trusted control from candidate code; scoped local fixture run authorization",
+      "retainedDisposition": "bounded routing authority predicate verified; no whole trust-boundary qualification",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-024",
+      "checkId": "A04-02",
+      "class": "Quality",
+      "obligation": "missing runtime/catalog prerequisites must not be bypassed",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifacts Check/readiness/no-install boundaries; package missing-catalog and Check cases",
+      "retainedDisposition": "bounded prerequisite/refusal predicate verified; no active installation claim",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-025",
+      "checkId": "A04-05",
+      "class": "Critical",
+      "obligation": "committed originals, truthful starting baseline and preserved bytes",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native case8/package original/index preservation; every artifact rejects reconstructed start",
+      "retainedDisposition": "bounded preservation predicate verified; historical unverified original boundary not retroactively repaired",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-045",
+      "checkId": "A04-05",
+      "class": "Critical",
+      "obligation": "committed originals, truthful starting baseline and preserved bytes",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native case8/package original/index preservation; every artifact rejects reconstructed start",
+      "retainedDisposition": "bounded preservation predicate verified; historical unverified original boundary not retroactively repaired",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-026",
+      "checkId": "A06-04",
+      "class": "Quality",
+      "obligation": "three complete runs and qualified evidence before eligible merge",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "372 explicit current rows; protected11-probe comparison; current final native results",
+      "retainedDisposition": "current bounded qualification completed; no reset of prior attempt count",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-046",
+      "checkId": "A04-02",
+      "class": "Quality",
+      "obligation": "full immutable original baseline/candidate binding, not guessed ID",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native full-Git-SHA fixtures and every artifact fullSHA/placeholder boundary",
+      "retainedDisposition": "bounded binding predicate verified; no invented original SHA",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-047",
+      "checkId": "A04-02",
+      "class": "Quality",
+      "obligation": "full immutable original baseline/candidate binding, not guessed ID",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native full-Git-SHA fixtures and every artifact fullSHA/placeholder boundary",
+      "retainedDisposition": "bounded binding predicate verified; no invented original SHA",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-053",
+      "checkId": "A04-03",
+      "class": "Critical",
+      "obligation": "original receipts/hashes and attribution must remain intact",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "package legacy history/verdict retention tests; native claimant-bypass refusal; every artifact preserves receipts/identity",
+      "retainedDisposition": "bounded unchanged-receipt/owner guard verified; no historical receipt rewritten",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-054",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "applicable artifact budgets without split/weakening",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "catalog0failures, package control/budget remedy tests, unchanged source review and current test-delta inspection",
+      "retainedDisposition": "current named artifact rules verified; no unrelated historical size-goal fulfillment claimed",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-001",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "applicable artifact budgets without split/weakening",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "catalog0failures, package control/budget remedy tests, unchanged source review and current test-delta inspection",
+      "retainedDisposition": "current named artifact rules verified; no unrelated historical size-goal fulfillment claimed",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-014",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "applicable artifact budgets without split/weakening",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "catalog0failures, package control/budget remedy tests, unchanged source review and current test-delta inspection",
+      "retainedDisposition": "current named artifact rules verified; no unrelated historical size-goal fulfillment claimed",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-023",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "applicable artifact budgets without split/weakening",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "catalog0failures, package control/budget remedy tests, unchanged source review and current test-delta inspection",
+      "retainedDisposition": "current named artifact rules verified; no unrelated historical size-goal fulfillment claimed",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-017",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "respect confirmed scope/preparation/authorized endpoint",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "exact8290-character confirmation and three bounded artifacts with no fictitious live endpoint",
+      "retainedDisposition": "bounded scope predicate verified; broader build/Prepare failures remain historical",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-018",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "respect confirmed scope/preparation/authorized endpoint",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "exact8290-character confirmation and three bounded artifacts with no fictitious live endpoint",
+      "retainedDisposition": "bounded scope predicate verified; broader build/Prepare failures remain historical",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-028",
+      "checkId": "A06-03",
+      "class": "Critical",
+      "obligation": "fresh targeted ref evidence, honest cached or unknown refs",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifacts require fresh full refs and leave absent real-case values unset",
+      "retainedDisposition": "bounded ref/claim decision verified; no real historical network action retested",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-033",
+      "checkId": "A06-03",
+      "class": "Critical",
+      "obligation": "fresh targeted ref evidence, honest cached or unknown refs",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifacts require fresh full refs and leave absent real-case values unset",
+      "retainedDisposition": "bounded ref/claim decision verified; no real historical network action retested",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-065",
+      "checkId": "A06-03",
+      "class": "Critical",
+      "obligation": "fresh targeted ref evidence, honest cached or unknown refs",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifacts require fresh full refs and leave absent real-case values unset",
+      "retainedDisposition": "bounded ref/claim decision verified; no real historical network action retested",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-070",
+      "checkId": "A06-03",
+      "class": "Critical",
+      "obligation": "fresh targeted ref evidence, honest cached or unknown refs",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifacts require fresh full refs and leave absent real-case values unset",
+      "retainedDisposition": "bounded ref/claim decision verified; no real historical network action retested",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-071",
+      "checkId": "A06-03",
+      "class": "Critical",
+      "obligation": "fresh targeted ref evidence, honest cached or unknown refs",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifacts require fresh full refs and leave absent real-case values unset",
+      "retainedDisposition": "bounded ref/claim decision verified; no real historical network action retested",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-098",
+      "checkId": "A06-03",
+      "class": "Critical",
+      "obligation": "fresh targeted ref evidence, honest cached or unknown refs",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifacts require fresh full refs and leave absent real-case values unset",
+      "retainedDisposition": "bounded ref/claim decision verified; no real historical network action retested",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-180",
+      "checkId": "A06-03",
+      "class": "Critical",
+      "obligation": "fresh targeted ref evidence, honest cached or unknown refs",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifacts require fresh full refs and leave absent real-case values unset",
+      "retainedDisposition": "bounded ref/claim decision verified; no real historical network action retested",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-044",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-058",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-068",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-069",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-079",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-080",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-096",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-102",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-103",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-106",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-114",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-115",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-181",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-182",
+      "checkId": "A04-04",
+      "class": "Critical",
+      "obligation": "recover settled exact authority; preserve actual denial and no bypass",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "confirmed current authority, all three artifact permission/production/refusal gates, protected Critical authorization control",
+      "retainedDisposition": "bounded no-bypass/authority-recovery predicate verified; original reviewer refusal states remain unchanged, future reviewer behavior unproved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-032",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "complete outgoing diff whitespace",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "independent full base92f39d6→619aa374 git diff --check returned0",
+      "retainedDisposition": "current exact diff verified; historical failed CI retained",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-059",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "complete outgoing diff whitespace",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "independent full base92f39d6→619aa374 git diff --check returned0",
+      "retainedDisposition": "current exact diff verified; historical failed CI retained",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-060",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "complete outgoing diff whitespace",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "independent full base92f39d6→619aa374 git diff --check returned0",
+      "retainedDisposition": "current exact diff verified; historical failed CI retained",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-043",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "retain reached final artifact budgets and portable native interface",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "catalog0failures/package generated-control rules/independent source review",
+      "retainedDisposition": "current bounded rules verified; no unrelated expanded Task/Spec record repaired",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-081",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "retain reached final artifact budgets and portable native interface",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "catalog0failures/package generated-control rules/independent source review",
+      "retainedDisposition": "current bounded rules verified; no unrelated expanded Task/Spec record repaired",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-099",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "retain reached final artifact budgets and portable native interface",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "catalog0failures/package generated-control rules/independent source review",
+      "retainedDisposition": "current bounded rules verified; no unrelated expanded Task/Spec record repaired",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-179",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "retain reached final artifact budgets and portable native interface",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "catalog0failures/package generated-control rules/independent source review",
+      "retainedDisposition": "current bounded rules verified; no unrelated expanded Task/Spec record repaired",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-184",
+      "checkId": "A02-05",
+      "class": "Quality",
+      "obligation": "retain reached final artifact budgets and portable native interface",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "catalog0failures/package generated-control rules/independent source review",
+      "retainedDisposition": "current bounded rules verified; no unrelated expanded Task/Spec record repaired",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-051",
+      "checkId": "A02-04",
+      "class": "Quality",
+      "obligation": "recover actual parser and paths rather than guessing capability",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifact source/parser citations and actual native13cases",
+      "retainedDisposition": "current bounded supported interface verified; historical invocation mistakes preserved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-072",
+      "checkId": "A02-04",
+      "class": "Quality",
+      "obligation": "recover actual parser and paths rather than guessing capability",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifact source/parser citations and actual native13cases",
+      "retainedDisposition": "current bounded supported interface verified; historical invocation mistakes preserved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-083",
+      "checkId": "A02-04",
+      "class": "Quality",
+      "obligation": "recover actual parser and paths rather than guessing capability",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifact source/parser citations and actual native13cases",
+      "retainedDisposition": "current bounded supported interface verified; historical invocation mistakes preserved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-085",
+      "checkId": "A02-04",
+      "class": "Quality",
+      "obligation": "recover actual parser and paths rather than guessing capability",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifact source/parser citations and actual native13cases",
+      "retainedDisposition": "current bounded supported interface verified; historical invocation mistakes preserved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-086",
+      "checkId": "A02-04",
+      "class": "Quality",
+      "obligation": "recover actual parser and paths rather than guessing capability",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifact source/parser citations and actual native13cases",
+      "retainedDisposition": "current bounded supported interface verified; historical invocation mistakes preserved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-100",
+      "checkId": "A02-04",
+      "class": "Quality",
+      "obligation": "recover actual parser and paths rather than guessing capability",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "three artifact source/parser citations and actual native13cases",
+      "retainedDisposition": "current bounded supported interface verified; historical invocation mistakes preserved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-175",
+      "checkId": "A08-02",
+      "class": "Quality",
+      "obligation": "supported paths with symlink refusal and portable fixtures",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native case7 plus current positive-only test diff",
+      "retainedDisposition": "current exercised path forms verified; no universal path-host guarantee",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-176",
+      "checkId": "A08-02",
+      "class": "Quality",
+      "obligation": "supported paths with symlink refusal and portable fixtures",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native case7 plus current positive-only test diff",
+      "retainedDisposition": "current exercised path forms verified; no universal path-host guarantee",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-185",
+      "checkId": "A08-03",
+      "class": "Quality",
+      "obligation": "distinguish environment setup failure from behavior",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native13pass/package65pass after retained earlier environment diagnosis",
+      "retainedDisposition": "local native toolchain reached behavior; original environmental event preserved",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-186",
+      "checkId": "A04-01",
+      "class": "Quality",
+      "obligation": "duplicate import must not prevent native module loading",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "current native13 cases actually load changed runtime; package65 on identical runtime",
+      "retainedDisposition": "current module-loading failure condition retested successfully; first failure retained",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-187",
+      "checkId": "A01-01",
+      "class": "Critical",
+      "obligation": "exact confirmed body must survive bounded metadata capture",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "independent full8290-character equality/hash in evidence manifest",
+      "retainedDisposition": "exact-content capture verified; original refused metadata attempt retained",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-188",
+      "checkId": "A04-01",
+      "class": "Quality",
+      "obligation": "native fixture titles/checkbox/ref contracts must be valid",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "reviewed corrected final test source and native13pass",
+      "retainedDisposition": "current fixtures executed successfully; original failed attempts remain recorded",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-189",
+      "checkId": "A04-01",
+      "class": "Quality",
+      "obligation": "native fixture titles/checkbox/ref contracts must be valid",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "reviewed corrected final test source and native13pass",
+      "retainedDisposition": "current fixtures executed successfully; original failed attempts remain recorded",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-190",
+      "checkId": "A04-03",
+      "class": "Critical",
+      "obligation": "--record cannot bypass a native Task current claimant",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "native Landmark claimant case5 plus every artifact explicit native-task-owner/unknown-ownership refusal",
+      "retainedDisposition": "original repaired current-candidate obligation explicitly retested; no broader owner trust claim",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    },
+    {
+      "findingId": "FAIL-191",
+      "checkId": "A06-02",
+      "class": "Critical",
+      "obligation": "maintain approved main default and declared-target exception/anti-stash assertions",
+      "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
+      "boundedRetestEvidence": "package65pass current instruction/runtime bytes; independent prior reviews and current delta inspect",
+      "retainedDisposition": "updated current-owner test expectation verified; old expected topology preserved as historical failure",
+      "globalHistoricalClosureClaimed": false,
+      "originalObservationUnmodified": true
+    }
+  ],
+  "excludedChecks": {
+    "orchestrate": {
+      "A03-03": "No active catalog discovery/activation claim; exact candidate source loading only.",
+      "A05-01": "No interrupted-session restart campaign; current completed/pending discrimination remains A05-02.",
+      "A05-03": "No new knowledge-capture workflow is claimed; source/history fidelity remains area1/A06-05.",
+      "A05-04": "No saved-lesson retrieval/recovery campaign is claimed.",
+      "A07-01": "No real external receiving-branch delivery claim at the pre-delivery gate.",
+      "A07-02": "No active installed-package identity claim; assessed candidate source identity is separately pinned.",
+      "A07-03": "No native active installation/later-use claim; decision artifacts and local fixture operations only.",
+      "A07-04": "Not Audit_Workbench self-adoption.",
+      "A09-01": "Actual project update/adoption is a separate later claim.",
+      "A09-02": "Updater preservation is outside this bounded routing assessment; non-upgrade preservation remains Critical A04-05.",
+      "A09-03": "No partial-upgrade execution/status claim.",
+      "A09-04": "No post-upgrade recovery claim.",
+      "A10-01": "No matched paired execution or useful-benefit claim; baseline arms are development diagnostics.",
+      "A10-02": "No comparative benefit/harm/cost claim; prior adverse attempts remain retained.",
+      "A10-03": "No comparative improvement deciding trial; these are fresh candidate decisions only.",
+      "A04-07": "No changed retry interface in this role; native retry is assessed under land/setup.",
+      "A08-02": "No changed path-normalization interface in this role; native path forms are assessed under land/setup."
+    },
+    "journey": {
+      "A03-03": "No active catalog discovery/activation claim; exact candidate source loading only.",
+      "A05-01": "No interrupted-session restart campaign; current completed/pending discrimination remains A05-02.",
+      "A05-03": "No new knowledge-capture workflow is claimed; source/history fidelity remains area1/A06-05.",
+      "A05-04": "No saved-lesson retrieval/recovery campaign is claimed.",
+      "A07-01": "No real external receiving-branch delivery claim at the pre-delivery gate.",
+      "A07-02": "No active installed-package identity claim; assessed candidate source identity is separately pinned.",
+      "A07-03": "No native active installation/later-use claim; decision artifacts and local fixture operations only.",
+      "A07-04": "Not Audit_Workbench self-adoption.",
+      "A09-01": "Actual project update/adoption is a separate later claim.",
+      "A09-02": "Updater preservation is outside this bounded routing assessment; non-upgrade preservation remains Critical A04-05.",
+      "A09-03": "No partial-upgrade execution/status claim.",
+      "A09-04": "No post-upgrade recovery claim.",
+      "A10-01": "No matched paired execution or useful-benefit claim; baseline arms are development diagnostics.",
+      "A10-02": "No comparative benefit/harm/cost claim; prior adverse attempts remain retained.",
+      "A10-03": "No comparative improvement deciding trial; these are fresh candidate decisions only.",
+      "A04-07": "No changed retry interface in this role; native retry is assessed under land/setup.",
+      "A08-02": "No changed path-normalization interface in this role; native path forms are assessed under land/setup."
+    },
+    "land": {
+      "A03-03": "No active catalog discovery/activation claim; exact candidate source loading only.",
+      "A05-01": "No interrupted-session restart campaign; current completed/pending discrimination remains A05-02.",
+      "A05-03": "No new knowledge-capture workflow is claimed; source/history fidelity remains area1/A06-05.",
+      "A05-04": "No saved-lesson retrieval/recovery campaign is claimed.",
+      "A07-01": "No real external receiving-branch delivery claim at the pre-delivery gate.",
+      "A07-02": "No active installed-package identity claim; assessed candidate source identity is separately pinned.",
+      "A07-03": "No native active installation/later-use claim; decision artifacts and local fixture operations only.",
+      "A07-04": "Not Audit_Workbench self-adoption.",
+      "A09-01": "Actual project update/adoption is a separate later claim.",
+      "A09-02": "Updater preservation is outside this bounded routing assessment; non-upgrade preservation remains Critical A04-05.",
+      "A09-03": "No partial-upgrade execution/status claim.",
+      "A09-04": "No post-upgrade recovery claim.",
+      "A10-01": "No matched paired execution or useful-benefit claim; baseline arms are development diagnostics.",
+      "A10-02": "No comparative benefit/harm/cost claim; prior adverse attempts remain retained.",
+      "A10-03": "No comparative improvement deciding trial; these are fresh candidate decisions only."
+    },
+    "setup-workbench": {
+      "A03-03": "No active catalog discovery/activation claim; exact candidate source loading only.",
+      "A05-01": "No interrupted-session restart campaign; current completed/pending discrimination remains A05-02.",
+      "A05-03": "No new knowledge-capture workflow is claimed; source/history fidelity remains area1/A06-05.",
+      "A05-04": "No saved-lesson retrieval/recovery campaign is claimed.",
+      "A07-01": "No real external receiving-branch delivery claim at the pre-delivery gate.",
+      "A07-02": "No active installed-package identity claim; assessed candidate source identity is separately pinned.",
+      "A07-03": "No native active installation/later-use claim; decision artifacts and local fixture operations only.",
+      "A07-04": "Not Audit_Workbench self-adoption.",
+      "A09-01": "Actual project update/adoption is a separate later claim.",
+      "A09-02": "Updater preservation is outside this bounded routing assessment; non-upgrade preservation remains Critical A04-05.",
+      "A09-03": "No partial-upgrade execution/status claim.",
+      "A09-04": "No post-upgrade recovery claim.",
+      "A10-01": "No matched paired execution or useful-benefit claim; baseline arms are development diagnostics.",
+      "A10-02": "No comparative benefit/harm/cost claim; prior adverse attempts remain retained.",
+      "A10-03": "No comparative improvement deciding trial; these are fresh candidate decisions only."
+    }
+  },
+  "scopeLimits": [
+    "All Yes rows apply only to the predeclared30/32check bounded inventory, not every behavior of the four skills.",
+    "All original historical failures and refusal events remain source records; current scoped retests/supersession do not globally close them.",
+    "The final13-case native suite is one shared execution, not three independent native trials.",
+    "Worker instruction/runtime/bundle bytes were verified identical; newly added tests have separately reviewed final source and final log.",
+    "No paired improvement, broad host fitness, live installation, AMS adoption, Human QA or release claim is made."
+  ],
+  "privateEvidenceManifestSha256": "ef4d125d1ec7a9135204b1c4e4bd3a8dac94c85e7b8591a7e6a78cdab16a5e32",
+  "catalogSource": {
+    "pr": "https://github.com/KaydenClark/skills/pull/71",
+    "merge": "4db09e3dc463667f7e5106ecc8b7aa6d1dfbfc21",
+    "containment": "verified from fresh main ref",
+    "installation": "registered published-source update/check verified active main4db09e3; imported files retained",
+    "postMergeCI": "42309160258: success"
+  },
+  "setupGuidanceCorrection": {
+    "scope": "Setup copy/seed promotion guidance and explicitly supplied-source authority decisions only; not whole Setup fitness or useful benefit",
+    "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+    "baseline": "4db09e3dc463667f7e5106ecc8b7aa6d1dfbfc21",
+    "packageSha256": "bc6134e42d80bd7356a07cfd701b7bb65a4d306dedb18a7b97c8d163e2f7651a",
+    "createSha256": "7838a618b65c540368a78b2a19a7846c2c680c69bc4b35ef29a1cf53683b71d8",
+    "contractSha256": "ff416823f39141009f8b0d0bb7947cca26a06035af78cc8416cec41056d65eb2",
+    "nativeOperation": "score(packet, actualPriorFindings); no fabricated matched-baseline history record",
+    "attempt1": {
+      "candidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac",
+      "alignment": {
+        "passed": 48,
+        "applicable": 51,
+        "percentageNumerator": 1600,
+        "percentageDenominator": 17
+      },
+      "level": "Excellent",
+      "passingRuns": 3,
+      "evidenceState": "complete",
+      "qualification": "qualified",
+      "assessmentAccepted": true,
+      "retentionAccepted": false,
+      "findings": [
+        {
+          "findingId": "setup-guidance-correction:A02-01",
+          "checkId": "A02-01",
+          "class": "Quality",
+          "status": "open",
+          "sourceRunId": "setup-guidance-1",
+          "candidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac",
+          "lastCandidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac"
+        }
+      ],
+      "packetSha256": "ecc6d52806c1b22af24548bec3538c67163acf20264d54a4252d67ff09f0ab88",
+      "resultSha256": "e7e094d8714c5fe002a9dd95e01321a1c73f474b18e0c0499ea32138353ece3a"
+    },
+    "attempt2": {
+      "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+      "alignment": {
+        "passed": 51,
+        "applicable": 51,
+        "percentageNumerator": 100,
+        "percentageDenominator": 1
+      },
+      "level": "Excellent",
+      "passingRuns": 3,
+      "evidenceState": "complete",
+      "qualification": "qualified",
+      "assessmentAccepted": true,
+      "retentionAccepted": false,
+      "findings": [
+        {
+          "findingId": "setup-guidance-correction:A02-01",
+          "checkId": "A02-01",
+          "class": "Quality",
+          "status": "verified-resolved",
+          "sourceRunId": "setup-guidance-1",
+          "candidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac",
+          "lastCandidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac",
+          "resolvedAt": "setup-guidance-correction-candidate-2-2c52150",
+          "repairedRevision": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f"
+        }
+      ],
+      "rejectedRetests": [],
+      "packetSha256": "d78e97388b908e1bc2ed882877091f64d06c624471e6e2f9a3ff84c6911bb122",
+      "resultSha256": "2a462ac730918faa8f042011303ac5bfff63529bb1b09d1f35ecefa418f0e693"
+    },
+    "conditions": {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "runs": 3,
+      "eachRun": "all three original authority scenarios; actual current Create observations",
+      "applicableChecks": 17,
+      "critical": 7,
+      "quality": 10,
+      "regression": 0,
+      "calibration": "unchanged bounded method; 11 protected probes matched; native scorer controls42/42",
+      "pruning": "independent gpt-6.1-sol/high, no changes required"
+    },
+    "checks": {
+      "actualOutputRegression": "four old-output assertion failures plus parent; candidate/post-pruning5/5",
+      "package": "77/77",
+      "maintenance": "8/8",
+      "workflowCleanup": "8 cases",
+      "ciRunner": "6/6",
+      "currentHeadCI": {
+        "run": 42319489381,
+        "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+        "result": "success"
+      }
+    },
+    "sourceDelivery": {
+      "pr": "https://github.com/KaydenClark/skills/pull/73",
+      "state": "merged; resulting published main checked; registered source installation verified",
+      "target": "main",
+      "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+      "publishedMain": "af42a289546d631ac3c2c13c5f1fa65c02365a35",
+      "containment": "fresh fetch and ancestry pass; resulting tree identical to reviewed candidate",
+      "mainCI": {
+        "run": 42321456109,
+        "result": "success",
+        "catalog": "pass",
+        "guardedRemoteCleanup": "pass"
+      },
+      "installed": {
+        "before": "4db09e3dc463667f7e5106ecc8b7aa6d1dfbfc21",
+        "installed": "af42a289546d631ac3c2c13c5f1fa65c02365a35",
+        "branch": "main",
+        "clean": true,
+        "registeredFiles": 318,
+        "localFilesPreserved": true,
+        "localInventorySha256": "8fe6ca1a6a9cbcd3584e7318c8d6cd9f46248fd22022e7957e70f79e2e5238e3",
+        "discoveryUnchanged": true,
+        "locationUnchanged": true,
+        "createSha256": "7838a618b65c540368a78b2a19a7846c2c680c69bc4b35ef29a1cf53683b71d8",
+        "package": "bc6134e42d80bd7356a07cfd701b7bb65a4d306dedb18a7b97c8d163e2f7651a",
+        "importRefresh": false,
+        "maintenanceCheck": "pass"
+      },
+      "installedUse": {
+        "outputs": 6,
+        "result": "pass",
+        "boundary": "Explicit hash-bound installed-package copy under established isolation; no native host autodiscovery, full Genesis or benefit claim"
+      }
+    },
+    "limits": [
+      "retentionAccepted intentionally stays false because useful-benefit comparison is outside native score",
+      "Original FAIL-203 retest and actual attempt-one failure remain preserved",
+      "Prior PR71 evidence keeps its original source/scope; frozen older campaigns remain held",
+      "Installation is exact published-source verification and bounded explicit use; no owner QA, comparative benefit or whole-Setup/S-011 acceptance"
+    ],
+    "independentReview": {
+      "tier": "Frontier",
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "freshContexts": true,
+      "noncontributors": true,
+      "standards": {
+        "result": "PASS",
+        "findings": 0,
+        "sha256": "97b43a584d67ccf88bb72fd10f9734ae7731551773982568022e80f4ae8995cc"
+      },
+      "spec": {
+        "result": "PASS",
+        "findings": 0,
+        "sha256": "8afc0452e1f871c51ab8efb70774dfdd7c9e017ec225b6f823717e1c9f38389d"
+      },
+      "base": "4db09e3dc463667f7e5106ecc8b7aa6d1dfbfc21",
+      "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+      "identityBoundary": "Exact dispatch model designation; no independent runtime attestation claimed"
+    },
+    "cleanup": {
+      "remoteBranch": "absent after guarded published-main cleanup",
+      "local": "completed by Director after source implementor stopped: managed worktree archived and absent; guarded local branch -d succeeded",
+      "branch": "setup-promotion-guidance",
+      "expectedHead": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+      "contained": true,
+      "ignored": 0,
+      "untracked": 0,
+      "hiddenIndexFlags": 0,
+      "owner": "Director",
+      "nextAction": "Source cleanup complete; TK-003D carries AMS delivery and preservation closeout",
+      "observer": "Director handback; current receipt preserves original native close text/checksum"
+    },
+    "nativeTask": {
+      "id": "TK-003C",
+      "status": "done",
+      "claimant": "codex-bounded-setup-guidance",
+      "receiptHead": "ea754542d1a00ee9ae097cc780316d99a3fc1716",
+      "receiptChecksum": "5b5c0d1def05866948652285423d78cd307a52c280f5f1eaa99edfe965d699ae",
+      "recordBranch": "feature/bounded-delivery-adoption",
+      "remaining": "Dispatcher independently verifies artifact before TK-003D; Director archives managed source worktree after implementor stops; AMS main delivery remains"
+    }
+  },
+  "amsDelivery": {
+    "candidate": "23447862f452f75e1e85a21d09a90ada1ac1f9ad",
+    "target": "d489a9041f3a98e9153d2cf3a2bc5e659b96e3d6",
+    "tree": "74c5d76bce47894f78eddc1c699d6cabe8c239d7",
+    "pr": 210,
+    "ci": {
+      "run": 42324298665,
+      "result": "success",
+      "pytestPassed": 865,
+      "skipped": 6,
+      "browserPassed": 10
+    },
+    "review": {
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "freshNoncontributors": true,
+      "files": 26,
+      "standards": "PASS",
+      "spec": "PASS",
+      "standardsSha256": "b419bf9e20349cbe969041b6f1b661693dc9702f579749f7fd2649523e7fe06a",
+      "specSha256": "70f9a46851c10f0f43883dc65c0b08b951ae8cdc7d2d35da322ff2a4b23e7715"
+    },
+    "resultChecks": "separate remote-main fresh native/Wiki/projection/hygiene pass; full CI reuse only for identical tree",
+    "preservation": {
+      "startingScopes": [
+        "04eb",
+        "8f88",
+        "3c75"
+      ],
+      "actualNativeChecks": true,
+      "remainingOriginalByteFindings": 0,
+      "remainingOriginalIndexFindings": 0,
+      "globalComplete": false,
+      "globalAccounted": false,
+      "globalRemoteRecoverable": false,
+      "original04ebCodes": {
+        "unaccounted-ref": 1,
+        "retained-ref-not-remote": 8,
+        "retained-worktree-not-remote": 13,
+        "missing-original-worktree": 2
+      },
+      "priorTaskFilesInMain": 6,
+      "priorTaskIndexVersionsInMain": 7,
+      "projection": {
+        "gitObject": "40ee705e0ca4d2c83c7122a031086dc6eacaa5a0",
+        "sha256": "60156737954feb603681f20c42db23a69aefd67548e14bbf2d26a05f554955a9",
+        "recovery": "reconstructed/hash-verified isolated immutable46c render; independent0644 local-only original, native accepted",
+        "originallyCommitted": false,
+        "remoteRecoverable": false
+      },
+      "boundary": "Raw findings/snapshots remain unchanged/private; global refs/worktrees and current continuation pending publication remain explicit"
+    },
+    "cleanup": "Source Director archive/local deletion observed; AMS active writer retained pending checked closure and Director guard recheck/archive; preserve PR208 and unrelated work",
+    "limits": "No whole-Spec acceptance, website promotion, owner Human QA or benefit claim"
+  }
+}

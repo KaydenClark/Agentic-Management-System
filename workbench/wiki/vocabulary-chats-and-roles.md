@@ -36,13 +36,13 @@ Definition: [GLOSSARY.md, Chats and roles](../../GLOSSARY.md#chats-and-roles).
 
 ## Role
 
-Director covers the project/integration, Dispatcher its Spec/branch, and Worker its Task. Branches express work scope; the request and `AGENTS.md` still establish permission. Delegation through handoffs within a role follows [AGENTS](../docs/SKILLS.md).
+Director covers the project/integration, Dispatcher its Spec and deliveries, and Worker its Task. Branches express work scope; the request and `AGENTS.md` still establish permission. Delegation through handoffs within a role follows [AGENTS](../docs/SKILLS.md).
 
 Definition: [GLOSSARY.md, Chats and roles](../../GLOSSARY.md#chats-and-roles).
 
 ## Director
 
-It oversees independent review before integration and escalates owner choices. The owner remains the human above the Director; Human QA and main promotion remain owner acts. It never executes a Task or acquires authority merely by occupying a branch.
+It oversees independent review before integration and escalates owner choices. The owner remains the human above the Director; Human QA and reserved website dev-to-main promotion remain owner acts. It never executes a Task or acquires authority merely by occupying a branch.
 
 Definition: [GLOSSARY.md, Chats and roles](../../GLOSSARY.md#chats-and-roles).
 
