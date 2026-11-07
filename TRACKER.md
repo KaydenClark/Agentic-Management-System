@@ -156,22 +156,23 @@ Round: rsi-cross-project-20261106. Dependencies: none.
 
 ## DQC-000F — RSI: Run boundaries
 
-Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
+Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
 
-<pre>**Question:** What counts as one skill use, and when is it finished?
+<pre>**Question:** What counts as a skill use, what do we record, and when does a failure enter the RSI loop?
 
-**Recommended answer:** One requested operation is one use, with linked child skill uses. Preserve its identity across pauses and resumed chats. Record completion, cancellation, interruption and reopening separately.
+**Recommended answer:** Whenever you, Codex or Claude use a participating Workbench skill to perform an operation, record that use and its outcome. One requested operation is one use, even across resumed chats; separately invoked skills have linked uses. Record the skill version, model tier/provider and whether the work completed, failed or was interrupted. Record reported failures immediately and mark them as needing repair. Repair can start after the current work or at the designated time, as agreed in question 7.
 
-**Why:** I chose these boundaries without asking. Counting chats or file reads as uses would distort outcomes and recurrence.
+**Why:** Real work supplies the failure cases and evidence of value. Recording successful uses as well as failures gives us the denominator needed to determine whether errors decrease. Prompt capture preserves findings without requiring repairs to interrupt your work.
 
-**Intended impact:** Determines run counts, attribution, completion triggers and recovery behavior.</pre>
+**Intended impact:** Every participating skill has a traceable use history. A reported failure becomes a durable RSI input immediately, and later results can show whether repairs reduce recurrence during real work.</pre>
 
-Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+Source: Kayden AMS alignment chat, 2026-11-06; exact displayed readbacks and owner corrections\.. Scope: Concept alignment only; no implementation, installation, database writes, campaign launch or deployment\..
 
 Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 
 - propose at r2
 - correct at r3: When me, you \(codex\), or claude uses one of the workbench skills that we are doing RSI on\. we should log the failures and run the RSI loop on it\. The benefits of an RSI loop is that its recorded and can be started as soon as its logged in the system as needing to be fixed\.
+- propose at r4
 
 ## DQC-000G — RSI: Success and failure
 
