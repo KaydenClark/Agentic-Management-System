@@ -10,14 +10,13 @@
 **Blockers:** none
 **Confirmation:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
 **Execution approval:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
-**Next gate:** Bounded adoption delivered; preserve workspace findings; older TK-002/TK-003 campaigns remain held.
+**Next gate:** Preserve bounded-adoption findings; TK-002/TK-003 stay held.
 
 ## Intent and authority
 
-[Current RSI destination](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) maps the Servitor proof and optional participation. This updates requirements only: no Task activation, model trial, database write or installation occurs through Map. Existing receipts, frozen comparisons and stopped attempts retain their scope.
+[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac); no execution release or reset of prior stops.
 
-
-Earlier authority remains in [history](../../../../wiki/history/S-011.md); frozen Terra/dev contracts and stops remain. The [confirmed bounded readback](../../../../wiki/context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) separately authorizes the current repair through installation and cleanup. The owner requires Map/Plan before remaining Journey through Director -> Dispatcher -> implementor; no backdating.
+[History](../../../../wiki/history/S-011.md) retains frozen Terra/dev stops. The [bounded readback](../../../../wiki/context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) separately authorizes installation/cleanup; Map/Plan precedes Director → Dispatcher → implementor Journey, without backdating.
 
 ## Outcome
 
@@ -33,19 +32,24 @@ Prevent lost delivery and exposed handoffs.
 
 ## Desired Behavior
 
-<!-- workbench-record-section max=7000 -->
-- [Part 1](SPEC.md.part-desired-behavior-001.4fa2987b40c42d985cff9c7d10abe81ae7ef2e10f56efe732fa4b3e7a9beb271.md)
-<!-- /workbench-record-section -->
+- Resolve source/package/installed/loaded identities; byte presence proves no host use.
+- Handoffs stay local/ignored in `workbench/sessions/handoffs/`; published Tasks carry execution. Preserve privacy and routing.
+- New work uses bounded short-lived branches; retain older frozen reuse cases. Inspect claims/writers/unique work before ref changes; aliases are not cleanup.
+- Cleanup requires exact target containment and preservation of active writers, unique commits and ignored recovery. Report refusals/retained items.
+- Older campaigns retain Terra 6.1 baseline/candidate pins, controls/r1 inventory, consecutive/adverse/refusal/regression cases, failures and attempts.
+- For the Servitor loop, author-skill and prune-artifact repair the cause while preserving connected workflows. Test draft and related skills in a separate real website session before delivery.
+- Eligible Stable/Excellent repairs need complete checks, useful benefit and no regression. Merge through the source repository, then automatically update everyday Servitor skills. Record accepted source, installed bytes and later actual loading separately; update failure remains incomplete/recoverable. No draft/merge-only adoption claim; Map installs nothing.
+- Show safe evidence on the RSI page on dev: exact pins, conditions, qualification, failures, unknowns and disposition. Separate audit results from behavioral benefit; no whole-AMS claim from scores or static checks.
 
 ## Decisions And Contracts
 
-S-002 owns new skill severity grading and separate scores; historical r1 comparisons, three-run evidence, qualification, attempt and benefit safeguards remain; stopped PR101 and call/row holds stay unchanged. Studied cases are development; missing proof stays missing. Author/review source in KaydenClark/skills; private raw evidence/skill text stay private. Publish safe claims/counts/identities only. No project copies or wider rollout.
+S-002 owns new skill severity/scores; historical r1 evidence, qualification, attempts and benefit safeguards remain. PR101/call/row holds stay stopped. Studied cases are development; missing proof stays missing. Author/review in KaydenClark/skills; publish safe identities/counts only, not private skill text/raw evidence. No project copies or wider rollout.
 
-The [prune-artifact addition](../../../../wiki/context-owner-answers-coherence.md#jot-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf) keeps its separate finite suite and original comparison/attempts. General Mid/Small defaults, frozen Terra series and Stable/Excellent/useful-benefit/no-regression/install gates remain; Map or a score grants none.
+[Prune-artifact](../../../../wiki/context-owner-answers-coherence.md#jot-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf) retains its finite suite and attempts. General Mid/Small defaults, frozen Terra series and qualified Stable/Excellent/useful-benefit/no-regression gates remain. Map grants no installation now.
 
 ### Current bounded contract
 
-The confirmed readback owns the current requirements/scenarios. Reached setup instructions and templates must defer promotion to project controls, without AMS policy. Create captures the project-authorized merge actor, branch and conditions; permitted main delivery, owner-opted staging and the unresolved-authority stop remain. Website/unrelated work stay excluded. Changed setup needs scoped Stable/Excellent, verified native finding retests and no applicable recorded-failure regression before merge/install; PR71 qualifies only its original scope.
+The confirmed readback governs. Reached setup instructions/templates defer promotion to project controls without imposing AMS policy. Create captures authorized actor, branch and conditions; preserve permitted main delivery, opted staging and unresolved-authority stops. Exclude website/unrelated work. Setup changes require scoped qualification, native finding retests and all applicable failure regressions before merge/install; PR71 qualifies only its original scope.
 
 ## Non-Goals
 
@@ -59,25 +63,20 @@ The skills repository's process governs repair delivery. Older campaign merge/in
 
 [TK-002R](tasks/TK-002R/TASK.md) stays held. Remaining plan: [TK-003C](tasks/TK-003C/TASK.md) delivers corrected templates; [TK-003D](tasks/TK-003D/TASK.md) depends on its published/installed artifact for AMS adoption.
 
-
 ## Acceptance Criteria
 
-- [ ] **Automatic eligible adoption:** a qualified merged repair reaches everyday Servitor skills without a repeated manual update step; record merge, update and later loaded identities. Reject a failed/Functional/Broken draft, preserve unrelated catalog work and report failed installation rather than declaring use.
-- [ ] **Connected repair:** author-skill and prune-artifact repair the cause while related-skill and original-case regressions pass in the separate website session. Cosmetic pruning or isolated score gain with workflow damage fails.
-
-
-- [ ] **Baseline and contract:** failures and exact pins precede repair; cases and criteria are frozen. A retrospective favorable-only test plan fails.
-- [ ] **Shared owner:** repaired skill source is reviewed and merged in `KaydenClark/skills`; an AMS-only copy fails.
-- [ ] **Reliable behavior:** original and regression cases cover consecutive branch reuse, authorized publication, preservation, eligible cleanup and local ignored handoffs. Unperformed behavior fails.
-- [ ] **Merge gate:** Terra 6.1 tests and three-run r1 audit establish eligible Stable or Excellent with complete required evidence and no unresolved Critical/Regression findings. A level label alone fails.
-- [ ] **Personal use:** accepted source is installed in the personal catalog and later AMS skill use is observed; a file copy alone fails activation/use.
-- [ ] **RSI readback:** actual results, failures, pins, conditions, qualification and disposition are readable through existing evidence routes; no reset or omitted failure.
-- [ ] **Visible on dev:** safe RSI charts/log link to their source and separate audits from trial benefit; no private source, synthetic results or unearned improvement headline.
+- [ ] **Baseline:** frozen cases, criteria and exact failure/version identities precede repair; retrospective favorable-only tests fail.
+- [ ] **Source:** reviewed repair merges in KaydenClark/skills; an AMS-only copy fails.
+- [ ] **Behavior:** original/regression cases cover consecutive branch reuse, authorized publication, preservation, eligible cleanup and ignored handoffs. Unperformed checks fail.
+- [ ] **Historical merge gate:** pinned Terra 6.1 and three-run r1 evidence establish eligible Stable/Excellent without unresolved Critical/Regression findings; labels alone fail.
+- [ ] **Servitor adoption:** new skill scoring follows S-002; qualified merge automatically updates everyday skills, preserving unrelated catalog work. Record merge/update/later-loading identities. Reject failed, Functional or Broken drafts; installation failure cannot count as use.
+- [ ] **Connected repair:** author-skill/prune-artifact fix the cause and pass original/related-skill cases in the separate website session. Cosmetic pruning or score gain with workflow damage fails.
+- [ ] **Readback/dev:** safe source-linked results, failures, conditions and dispositions appear through existing routes and dev charts; no private/synthetic data, reset attempts or unearned benefit.
 
 ### Bounded repair acceptance
 
-- [ ] Published/installed setup generates promotion guidance governed by project controls; both reached outputs have regression proof and new-source qualification/review.
-- [ ] Dependent AMS adoption reaches checked main with the confirmed model, source/use proof, retained RSI failures/limits and safe cleanup or explained retention.
+- [ ] Published/installed setup defers promotion to project controls; both reached outputs have regression proof, new-source qualification and review.
+- [ ] Dependent AMS adoption reaches checked main with the confirmed model, source/use proof, retained failures/limits and safe cleanup or explained retention.
 
 Frozen criteria remain unchecked. Wrong targets, moved tips or unpreserved bytes must refuse unsafe closeout.
 

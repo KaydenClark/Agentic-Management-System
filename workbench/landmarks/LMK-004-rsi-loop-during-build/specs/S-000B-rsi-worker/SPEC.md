@@ -6,7 +6,7 @@
 **Owner:** Kayden
 **Stance:** Builder
 **Updated:** 2026-11-07
-**Catalog description:** Local Python execution and recovery for authorized RSI campaigns, with durable Supabase state.
+**Catalog description:** Python campaign execution/recovery with durable Supabase state.
 **Blockers:** none for mapping
 **Confirmation:** Current destination supplied by the owner’s 2026-11-07 Map request; linked source retains prior confirmed decisions.
 **Execution approval:** none for implementation; Map/Plan preparation only.
@@ -14,28 +14,34 @@
 
 ## Intent and authority
 
-[Current RSI destination](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) maps the Servitor proof and optional participation. This updates requirements only: no Task activation, model trial, database write or installation occurs through Map. Existing receipts, frozen comparisons and stopped attempts retain their scope.
-
+[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac); no execution release or reset of prior stops.
 
 [Owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination) places the RSI Loop at LMK-004 and permits capability separation. Supabase Free stores durable state; Python executes outside it. The owner uses subscription meters, not API-dollar budgets. This Spec maps the worker; TK-002P is prepared and held. No stopped campaign is restarted.
 
 ## Outcome
 
-An authorized campaign continues through eligible work without the owner launching every step. A fresh worker resumes durable state after interruption without duplicate effects, lost evidence or reset attempts.
+Authorized campaigns continue without repeated owner initiation; fresh workers resume without duplicate effects, lost evidence or reset attempts.
 
 ## Why It Matters
 
-A database of results alone does not execute the loop. Session-bound coordination leaves the owner relaying work and cannot reliably recover crashes or ambiguous external writes.
+Durable execution removes owner relaying and recovers crashes/uncertain writes; stored results alone do not execute a loop.
 
 ## Current Verified State
 
-All criteria are unverified. Existing trial_campaign.run_one executes one released slot; the narrow trial_runtime adapter is tool-free. These are reusable seams, not proof of real-tool execution or autonomous recovery. No worker acceptance is claimed.
+All criteria remain unverified. trial_campaign.run_one executes one released slot; trial_runtime is tool-free. Neither proves real-tool execution or autonomous recovery.
 
 ## Desired Behavior
 
-<!-- workbench-record-section max=7000 -->
-- [Part 1](SPEC.md.part-desired-behavior-001.96f6135312720946cc99b2d433275769d94ba69116a9fdc44b3d7619f1e90ae6.md)
-<!-- /workbench-record-section -->
+- Run locally in Python on Servitor with supported Codex/Claude harnesses, isolated workspaces and actual case tools. Expose host availability; a database is not a worker. No always-on hosting or paid upgrade is authorized.
+- A per-chat event-driven observer distinguishes skill request, loading, use and failure, with chat/event and observed version identities. Unknown/interrupted observation cannot become success. S-013 classifies/detects; S-006 stores shared history.
+- Routine repair starts after current work finishes; blocking repair uses a separate chat. At most one repair is active per skill across participating chats. Duplicate triggers join its history; completion, ownership and attempts survive interruption.
+- Test draft and related skills in a separate real AMS website session on Servitor. Preserve loaded identities and task end state; do not replace everyday skills before eligible merge.
+- Workbench setup and skill use remain independent of optional RSI. No silent enrollment, observation or credential/Supabase requirement for nonparticipants.
+- Consume S-006 durable jobs linked to existing Spec/Task scope, frozen S-002 contracts, sources and campaign authority. No second tracker. Record actual provider/model/effort, host and loaded versions; Mid/Small default, High with reason, conditions frozen within comparisons. Preserve older pins; author and deciding evaluator are independent, with candidate-inaccessible accepted-version graders.
+- Continue only within campaign authority; stop at approvals, unavailable/exhausted meters, explicit stops or exhausted attempts. Unknown capacity is not unlimited. No silent paid calls or model/provider substitution. Baseline excluded: initial → retry → retry → stop. Rename, repair, restart or redelivery resets nothing.
+- Separate transport recovery from model attempts. Reconcile uncertain completion before replay; retain every actual attempt. Atomic bounded claims/progress receipts prevent concurrent writers, duplicate jobs, commits or result rows. Recover evidence or block when an interrupted effect is unknown.
+- Recovery, candidate revision and adoption monitoring have distinct states. Grader failure is neither measured skill failure nor pass. Under S-011, eligible merged repairs automatically update everyday Servitor skills, with source/install/later-loading evidence; Map installs nothing. Other scopes need their own authority.
+- Keep credentials inside trusted execution/writer boundaries; candidates cannot access private graders, secrets or unrestricted publication. Preserve sandbox rules and unrelated work. Scheduling implementation need not introduce a service.
 
 ## Decisions And Contracts
 
@@ -47,7 +53,7 @@ Defining scoring rules (S-002), model training, installation before eligible mer
 
 ## Dependencies And Blockers
 
-Real execution needs supported harness authentication, appropriate local tools, writable isolated state, an authorized campaign, S-002 contracts and S-006 persistence. Missing inputs block only their consumer. Website completion is not a prerequisite to independent worker verification.
+Execution needs authenticated supported harnesses/tools, isolated writable state, campaign authority, S-002 contracts and S-006 persistence. Missing inputs block only consumers; website completion is not required for independent worker checks.
 
 ## Vertical Implementation Slices
 
@@ -58,7 +64,6 @@ TK-002P consumes the [worker contract](../../../../wiki/guidebooks/rsi-worker-co
 - [ ] **Scheduling:** routine work completes before repair; a blocking failure receives a distinct repair chat. Two chats reporting the same skill cannot produce concurrent repairs. Crash/restart preserves the active claim and attempt history.
 - [ ] **Observation and isolation:** requested-but-unused is retained for Critical classification, unavailable observation is visible, and draft test use cannot overwrite everyday skills before qualification/merge.
 - [ ] **Optional setup:** a nonparticipating Workbench still uses shared skills without RSI collection or credentials.
-
 
 - [ ] **Real execution:** a case needing Git/filesystem tools reaches its verified end state with actual loaded skill identity. A text-only success claim fails.
 - [ ] **Continuation:** one campaign advances eligible stages without repeated initiation; a fresh process recovers the same identities. A chat-only handoff fails.
@@ -78,7 +83,7 @@ RUNBOOK will name supported worker operations when implemented; Wiki explains ow
 
 ## Review and Human QA
 
-Independent review covers the exact candidate; actual owner judgment evaluates unattended operation. Neither this map nor static checks supply those receipts.
+Independent review names the candidate; owner judgment evaluates unattended operation. Map/static checks supply neither.
 
 ## Completion Result
 

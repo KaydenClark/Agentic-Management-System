@@ -219,3 +219,16 @@ Supersedes: none
 
 Map the RSI Loop from the supplied intended results. First proof: one complete skill improvement on a real AMS website task on Servitor. RSI is optional for participating Workbenches. A per-chat Python observer distinguishes requests, loading, use and failures; skipping an explicitly requested skill is Critical and a failed requested use. Routine repairs start after current work; blocking repairs use a separate chat; one repair may be active per skill. Repair through author-skill and prune-artifact; test draft and related skills in a separate AMS website session on Servitor. Eligible repairs pass required checks, merge and automatically update everyday skills. Preserve attempt limits. Three audit runs report separate Quality and Regression scores, Critical result and worst-failure overall grade; shared Alignment questions supply Quality checks, per-skill tests supply Regression, whole-Workbench Alignment stays separate. Supabase owns shared failure/improvement history; Git owns skills/regression tests. RSI Charts display public-safe results and actual audit counts; later use verifies accepted version and recurrence. Prior confirmed DQC-000N revision 14 (a434c5973e369f07fff17637748cebc01a4b851e), inspected in the alignment checkout, defines Excellent = no misses across three runs, Stable = Quality-only misses, Functional = Regression misses without Critical, Broken = any Critical miss. Prior test-session/update confirmation and requested-use confirmation were also inspected in the same topic at a72f1cd1. Current Map authorization supplies the destination, not implementation, campaign launch, installation now, or acceptance. Existing historical stops and scoped delivery/qualification remain. The first exact case and fixtures belong to Plan.
 <!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-b26faa14-5462-4a1b-979b-fcafecae147d
+Kind: intent
+State: confirmed
+Recorded: 2026-11-07T08:10:46.081Z
+Author: Kayden
+Source: Kayden direct RSI Map completion reply, 2026-11-07
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+After the agent reported the two hygiene failures and automatic publication-review refusal, the agent asked: May I finish that correction, complete verification, and publish the checked records? Kayden replied: yes, please finish. This authorizes resuming the record-size correction, completing verification and publishing the records-only RSI Map through its checked main delivery endpoint. It does not launch RSI implementation, model campaigns, installation or website promotion.
+<!-- /jot-entry -->

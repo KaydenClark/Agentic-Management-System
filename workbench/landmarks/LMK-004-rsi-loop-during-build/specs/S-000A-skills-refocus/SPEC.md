@@ -6,7 +6,7 @@
 **Owner:** Kayden; future assigned catalog-refocus orchestrator
 **Stance:** Builder
 **Updated:** 2026-11-07
-**Catalog description:** Prove two job-preserving skill improvements, then refocus the catalog with honest dependencies, composition, attribution and evidence.
+**Catalog description:** Qualify two preserved-job pilots before catalog refocus; retain dependencies, composition, credit and evidence.
 **Blockers:** none
 **Confirmation:** [JOT-fe0364a6-270b-4205-a86a-c49f637e3b22](../../../../wiki/context-skills-refocus.md)
 **Execution approval:** Not granted; Map and Plan only, stopping at Prepare.
@@ -14,8 +14,7 @@
 
 ## Intent and authority
 
-[Current RSI destination](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) maps the Servitor proof and optional participation. This updates requirements only: no Task activation, model trial, database write or installation occurs through Map. Existing receipts, frozen comparisons and stopped attempts retain their scope.
-
+[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac); no execution release or reset of prior stops.
 
 [Confirmed direction](../../../../wiki/context-skills-refocus.md): improve recognizable jobs and reliability without replacing workflows. Both pilots must pass before catalog rollout. The [preparation bypass](../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) needs an AMS-wide remedy. Current authority ends at Prepare and checked documentation delivery.
 
@@ -33,9 +32,16 @@ The [Wiki](../../../../wiki/context-skills-refocus.md#source-and-evidence-bounda
 
 ## Desired Behavior
 
-<!-- workbench-record-section max=7000 -->
-- [Part 1](SPEC.md.part-desired-behavior-001.239cad039c101e61612d4e650cece503b03a8f3994d1630aefba858c624b353a.md)
-<!-- /workbench-record-section -->
+- Each skill owns a distinct job/method, consequential decisions, observable result, checks and recovery. Preserve useful responsibilities through edits/approved moves.
+- Plan produces vertical Tasks that fit source recovery, implementation, verification, repair and hand-back within the implementor’s smart zone. Preserve real blockers, safe parallelism, writer isolation and accepted refactor exceptions; reject layer fragments, unlimited Tasks or unrelated scenarios.
+- Diagnosing Bugs uses reproducible evidence to distinguish causes; unresolved causes need evidence/next experiment, never invented certainty. Repairs retain existing authority.
+- Helpers may become separate skills; callers specify invocation, inputs, result checks and failure handling. Preserve independent pruning; citation/recommendation is not execution.
+- Primitive executes no skill; Compound executes at least one, including conditional helpers. Keep flat discovery. Label Workbench-required when setup-workbench supplies required artifacts/conventions/helpers; expose conditional and tool/host prerequisites.
+- Preserve author/revision, notices, evolution and inspiration/adaptation credit; do not misrepresent imports as original.
+- Consolidation/retirement requires owner approval and evidence of non-use, unhelpfulness or a replacement retaining useful duties. Missing telemetry is not non-use.
+- Freeze pilot cases, controls, conditions, costs, qualification and pass/stop rules before edits/trials. Compare matched outcomes and retain failures; scores, brevity and walkthroughs alone prove no benefit.
+- Both pilots must qualify before rollout. Account for every current skill with verified improvement, supported no-change or another bounded assignment; no catalog-sized Task.
+- Repair preparation at its earliest source and demonstrate cross-repository recognition, Map/Plan, recovery and Prepare stops. S-013 detects recurrence; reminders or this document alone fail the systemic outcome.
 
 ## Decisions And Contracts
 
@@ -47,21 +53,19 @@ Execution, qualification, merge, installation, activation, later use and present
 
 Mandatory RSI enrollment for skill users. Workbench setup and shared skills remain independently usable; the optional Servitor RSI observer/repair capability belongs to S-000B.
 
-
 Forced rewrites; unapproved retirement; new discovery folders/services/evaluation framework; managed-tool edits outside setup-workbench; campaign resets or global-benefit claims.
 
 ## Dependencies And Blockers
 
-Preparation has no missing input. Execution needs owner authorization. Candidate work needs the frozen pilot contract; rollout needs qualifying results for both pilots and its release decision. Only actual inputs/writer conflicts block parallel Tasks. S-006/S-007 own later stored/site evidence; S-008 owns public articles. Native cross-Spec Task edges are unsupported: verify exact prerequisite artifacts at release, never substitute whole-Spec completion blockers.
+Preparation is ready; execution needs approval and frozen pilot contracts; rollout needs both qualified pilots and release. Only input/writer conflicts block Tasks. S-006/S-007 own later stored/site evidence; S-008 owns public articles. Native cross-Spec Task edges are unsupported: verify exact prerequisite artifacts at release, never substitute whole-Spec completion blockers.
 
 ## Vertical Implementation Slices
 
-The eight [prepared assignments](../../../../research/PREPARE-skills-refocus-2026-11-02.md) own their instructions, blockers and proof in TASK.md. All remain held at Prepare.
+Eight [prepared assignments](../../../../research/PREPARE-skills-refocus-2026-11-02.md) own instructions/blockers/proof; all stay held at Prepare.
 
 ## Acceptance Criteria
 
 - [ ] **Optional RSI:** shared skills and Workbench setup work without observer, reporting credentials or automatic enrollment. Dedicated repair composition uses author-skill and prune-artifact under S-011 without discarding either method’s connected contracts.
-
 
 - [ ] **Pilots:** both exact candidates preserve their jobs and responsibilities, meet frozen observed-outcome/reliability and applicable qualification criteria, retain failures and pass relevant regressions. Walkthrough/format-only passes fail.
 - [ ] **System routing:** a large shared-skill request and another AMS change reach existing Workbench records, respect Prepare-only scope and resume without duplicates; S-013 detects a planted bypass before owner intervention.

@@ -14,10 +14,7 @@
 
 ## Intent and authority
 
-[Current RSI destination](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) maps the Servitor proof and optional participation. This updates requirements only: no Task activation, model trial, database write or installation occurs through Map. Existing receipts, frozen comparisons and stopped attempts retain their scope.
-
-
-The [owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes Map/Plan preparation; implementation and trial holds remain.
+[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac); no execution release or reset of prior stops.
 
 The owner named "a site page showing the improvement charts" as an example Spec, asked that chart places exist from the start so the owner can see where data will appear, and ruled out fabricated data.
 
@@ -38,9 +35,14 @@ History: [S-007 history](../../../../wiki/history/S-007.md).
 
 ## Desired Behavior
 
-<!-- workbench-record-section max=7000 -->
-- [Part 1](SPEC.md.part-desired-behavior-001.f750b1a616173c47a9aaf09ee04d357a053262c1b13481945c6934fabf860fbd.md)
-<!-- /workbench-record-section -->
+- Follow S-003’s populated, successful-empty, loading and unavailable states; show last successful read and retained-data timestamp. A failed read is never “no trials.” Static explanations/chart spaces remain visible from first deploy.
+- An empty chart says no trials are recorded, explains task/trial/version and the next expected event. Never fabricate sample results. Synthetic/test rows do not render.
+- Explain the website build from sourced S-006 events, linking activity to results or absent evidence. S-003 needs no separate build-history page. Prose may explain; Supabase owns displayed numbers.
+- Show per-task/version results, development versus held-out, provider/model/effort/system/skills/host, source/strength, sample size/denominators and freshness. Model/contract/case-set changes form distinct series. Imports or broader detection cannot masquerade as worsening reliability. Every number links to rows.
+- Display regressions, failed attempts, rejected/removed versions, variants and fired stops. Public improvement headlines require held-out tasks, controls, prior version/baseline and interval; an interval containing zero means no detected difference at that size.
+- Per-skill and whole-Workbench views join canonical failure IDs, lifecycle stage/age/blockers, candidate lineage/dispositions, paired comparisons and later recurrence per eligible use. Show owner interventions, runtime and available usage alongside outcomes. A skill/case matrix distinguishes pass, failure, unrun and unavailable.
+- Skill results separately show Quality Score, Regression Score, Critical result and severity grade, with actual completed audit counts (even fewer than three), versioned denominators and qualification limits. Whole-Workbench Alignment is a separately labeled assessment; activity/audits alone prove no benefit/generalization.
+- Distinguish request, loading and use failures. Skipped explicit requests count as Critical failed requested uses. Later-use views identify accepted versions actually loaded; no uses means no recurrence rate, not a proven fix. No hand-maintained numeric website dataset replaces Supabase.
 
 ## Decisions And Contracts
 
@@ -60,14 +62,10 @@ History: [S-007 history](../../../../wiki/history/S-007.md).
 
 Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the owner merges `dev` -> `main`. Stack: a Next.js route in `site/`, Supabase reads with the publishable key, the build, render tests on labeled fixtures and the protected `dev` deployment.
 
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
-
 ## Acceptance Criteria
 
 - [ ] **Actual audits:** two stored runs display two, never the intended three; failed or unavailable reads do not imply zero audits. The synthetic 95% Quality / 100% Regression / Critical failure example displays Broken and cannot be mistaken for live results.
 - [ ] **Separate meanings:** skill grades, each score, Critical results and whole-Workbench Alignment remain distinct. Accepted-but-not-loaded and no-later-use states cannot imply success or zero recurrence.
-
 
 - [ ] **Feedback connection:** safe failures, stopped attempts, assessments and dispositions render from S-006 with source, scope, freshness and next action. Workflow explanations link changed steps to evidence. Activity/audits alone cannot imply benefit.
 - [ ] **Read states:** populated, empty, pending and unavailable follow S-003; failed reads cannot mean zero results, retained data needs its timestamp.
@@ -122,4 +120,4 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-This Map does not activate website implementation or held Tasks. Existing approval scopes and stopped experiments remain. See the [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination).
+Map releases no website work or held Tasks; prior scopes/stops remain.

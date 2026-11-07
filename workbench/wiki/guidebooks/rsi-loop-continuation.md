@@ -14,7 +14,7 @@ last_verified: 2026-11-04
 
 ## Current Map handoff — 2026-11-07
 
-Local delivery is incomplete: FAIL-210/213 retain two hygiene failures (eight oversized records initially; LMK-004 still 8597 characters after native pagination). RUNBOOK stop applies before another repair. FAIL-211 retains automatic review’s publication refusal. Resolve these delivery boundaries before treating this as a checked Map integration. No implementation authority changes.
+The owner authorized finishing the correction and checked publication in [JOT-b26faa14](../context-feedback-improvement-loop-plan.md#jot-b26faa14-5462-4a1b-979b-fcafecae147d). Prior failed checks/refusal remain in FAIL-210/211/213; the Map now condenses original records without splitting. The reusable writer/policy mismatch remains open under [FAIL-215](../../feedback/REPORT-setup-workbench-size-rules-2026-11-07.md) for a new chat. Verification and delivery require actual receipts; this grants no RSI implementation authority.
 
 The [current instruction](../context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac) is mapped in LMK-004 and S-002/S-000B/S-006/S-007/S-011/S-013/S-000A. Next operation is Plan for one complete improvement on a real AMS website task on Servitor. Select the exact case and candidate-loading/observer fixtures, reconcile existing Tasks and release conditions, and cover three-run severity scoring, shared history, eligible automatic adoption and later recurrence evidence. Map creates no Tasks and launches no work.
 
