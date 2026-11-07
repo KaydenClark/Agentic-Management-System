@@ -1,7 +1,7 @@
 {
   "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000E",
-  "revision": 2,
+  "revision": 3,
   "title": "Finish the Workbench Dashboard in AMS",
   "question": "What does the AMS Workbench Dashboard include, where does its code come from, and how does it look?",
   "answer": null,
@@ -13,6 +13,10 @@
     {
       "id": "workbench/wiki/context-grilling-board.md",
       "revision": "75862efddf475ce3e4f57c25f4002bf625642c53#jot-97b271e2-af5c-4901-a9ae-4f87fa65f759"
+    },
+    {
+      "id": "kayden-ams-chat-2026-11-07",
+      "revision": null
     }
   ],
   "landmarks": [],
@@ -81,6 +85,21 @@
                 "round": "dashboard-round-1"
               }
             ]
+          }
+        }
+      ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-07T09:18:46.948Z",
+      "reason": "Owner correction: this chat is the source for the DQC, not the Wiki",
+      "changes": [
+        {
+          "field": "source",
+          "from": null,
+          "to": {
+            "id": "kayden-ams-chat-2026-11-07",
+            "revision": null
           }
         }
       ]
