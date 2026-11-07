@@ -309,3 +309,14 @@ def test_evaluator_qualification_does_not_qualify_failed_regressions_or_critical
     assert result['grade'] == grade and result['evidence_complete'] is True
     assert result['qualified'] is qualified
     assert result['evaluator_qualified'] is True
+
+
+def test_audit_record_enforces_provider_wire_limit_before_enqueue(tmp_path):
+    packet = audit_packet()
+    packet['conditions']['provider'] = 'p' * 65
+    assert 'provider has an invalid format' in cli(tmp_path, ['audit-record', '--test'], packet, ok=False)
+    assert not (tmp_path / 'workbench').exists()
+
+    packet['conditions']['provider'] = 'p' * 63 + ':'
+    result = cli(tmp_path, ['audit-record', '--test'], packet)
+    assert result['completed_audit_run_ids'] == ['audit-1', 'audit-2', 'audit-3']

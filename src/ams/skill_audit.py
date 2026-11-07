@@ -40,6 +40,7 @@ def critical(count):
     return count['passed'] != count['total'] if count['total'] else None
 
 
+# Bind each skill audit set to its version, source pins, evaluator and fixed check inventory.
 def _contract(packet):
     require(isinstance(packet, dict) and packet.get('version') == VERSION,
             f'expected {VERSION} audit input')
@@ -51,7 +52,8 @@ def _contract(packet):
             'shared checks must pin the approved r1 inventory')
     conditions = packet.get('conditions')
     require(isinstance(conditions, dict), 'frozen audit conditions are required')
-    token(conditions.get('provider'), 'provider')
+    # Match Supabase's 64-character provider token before any run can enter the outbox.
+    token(conditions.get('provider'), 'provider', r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,63}')
     token(conditions.get('model'), 'model', r'[A-Za-z0-9][A-Za-z0-9_.:/-]{0,127}')
     require(conditions.get('model_tier') in ('small', 'mid', 'high'), 'invalid model tier')
     for field in ('effort', 'host'):
@@ -61,6 +63,7 @@ def _contract(packet):
         require(isinstance(entries, list) and bool(entries), f'{field} must be recorded')
         for entry in entries:
             assessment.text(entry, field)
+    # Evaluator eligibility needs an identified grader and evidence tied to the candidate.
     evaluator = packet.get('evaluator')
     require(isinstance(evaluator, dict), 'frozen evaluator is required')
     assessment.text(evaluator.get('model'), 'evaluator model')
@@ -72,6 +75,7 @@ def _contract(packet):
     if qualification == 'qualified':
         require(proof and evaluator['model'].lower() not in ('unknown', 'unavailable'),
                 'qualified evaluator requires model identity and proof')
+    # Shared checks retain their approved classes. Skill-specific additions cover regression or Critical checks.
     inventory = packet.get('inventory')
     require(isinstance(inventory, list), 'frozen audit inventory is required')
     checks = {}
@@ -110,6 +114,8 @@ def _score_run(run, inventory, candidate):
         require(result in ('Yes', 'No', 'N/A') or result in assessment.GAPS, 'invalid check result')
         require(row.get('class', inventory[check_id]) == inventory[check_id], 'audit check class differs from inventory')
         supplied[check_id] = row
+    # Score every frozen check in an actual run, even when the run stops early.
+    # A justified N/A is excluded. Missing or unproved results count as No.
     rows = []
     for check_id, check_class in inventory.items():
         row = supplied.get(check_id, {'result': 'missing'})
@@ -136,15 +142,19 @@ def score(packet):
     require(isinstance(supplied, list) and len(supplied) <= 3, 'audit set has at most three actual run records')
     runs = [_score_run(run, inventory, packet['candidate']) for run in supplied]
     require(len({run['audit_run_id'] for run in runs}) == len(runs), 'duplicate audit run ID')
+    # Pool checks from actual runs, including interruptions. Only completed IDs count as completions.
     completed = [run for run in runs if run['completion_state'] == 'completed']
     rows = [row for run in runs for row in run['rows']]
     pooled = {name: counts(rows, name) for name in CLASSES}
     evidence_complete = len(completed) == 3 and all(run['evidence_complete'] for run in completed)
     has_checks = any(result['total'] for result in pooled.values())
+    # A clean grade requires three fully evidenced runs with checks. The worst recorded miss sets severity.
     grade = 'Excellent' if evidence_complete and has_checks else None
     for check_class, level in zip(CLASSES, ('Stable', 'Functional', 'Broken')):
         if critical(pooled[check_class]):
             grade = level
+    # A qualified evaluator can assess any grade. Only complete Stable or Excellent skills qualify here.
+    # Repair acceptance and useful benefit remain separate decisions.
     evaluator_qualified = packet['evaluator']['qualification'] == 'qualified'
     qualified = evaluator_qualified and evidence_complete and grade in ('Excellent', 'Stable')
     return {'version': VERSION, 'audit_set_id': packet['audit_set_id'], 'contract_digest': contract_digest,

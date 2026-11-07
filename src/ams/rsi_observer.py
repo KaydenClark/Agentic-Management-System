@@ -30,6 +30,7 @@ CHANNELS = {
 }
 
 
+# Use a fixed wire shape, with null for unavailable or inapplicable fields.
 def _event(payload):
     require(isinstance(payload, dict) and payload.keys() <= EVENT_FIELDS, 'unknown observation fields')
     event = {field: payload.get(field) for field in EVENT_FIELDS}
@@ -49,6 +50,8 @@ def _event(payload):
     if event['skill_revision'] is not None:
         assessment.revision(event['skill_revision'], 'observed skill revision')
         require(event['skill'] is not None, 'observed revision needs a skill')
+    # Loads, observed uses, failures and finished or blocked work states each require evidence.
+    # A skip also requires an explicit request. Unknown use can remain unresolved.
     outcome = event['outcome']
     if kind == 'skill_loaded':
         require(event['skill_revision'] is not None and event['evidence_id'] is not None,
@@ -105,6 +108,7 @@ class Outbox:
         identity = row[identity_key]
         content = canonical(row)
         details = canonical(private) if private is not None else None
+        # Replay only identical content. A changed payload cannot replace evidence under an existing identity.
         previous = db.execute('SELECT content, private FROM outbox WHERE channel=? AND id=?',
                               (channel, identity)).fetchone()
         if previous is not None:
@@ -118,6 +122,7 @@ class Outbox:
         event = _event(payload)
         with self._open(create=True) as db:
             db.execute('BEGIN IMMEDIATE')
+            # Validate the earlier same-chat request and its single resolved use in the recording transaction.
             parent_id = event['request_event_id']
             if parent_id is not None:
                 parent_row = db.execute("SELECT content FROM outbox WHERE channel='observation' AND id=?",
@@ -146,6 +151,7 @@ class Outbox:
         contract = {key: value for key, value in packet.items() if key != 'runs'}
         with self._open(create=True) as db:
             db.execute('BEGIN IMMEDIATE')
+            # Freeze the set contract and retain private evidence atomically with the safe transport rows.
             set_id = result['audit_set_id']
             saved = db.execute('SELECT contract, is_test FROM audit_sets WHERE id=?', (set_id,)).fetchone()
             if saved is None:
@@ -171,6 +177,8 @@ class Outbox:
             ).fetchall() if db is not None else []
         status = {'chat_id': chat_id, 'work_status': 'unknown', 'requested_uses': {},
                   'critical_failure_ids': [], 'failure_ids': [], 'pending_event_ids': [], 'events': []}
+        # Work state comes from the latest explicit status by event time.
+        # Request, load and use remain separate. Only an evidenced skip classifies as Critical.
         latest_status_at = ''
         for content, delivered in events:
             event = json.loads(content)
@@ -200,6 +208,7 @@ class Outbox:
             pending = db.execute(
                 'SELECT sequence, channel, content FROM outbox WHERE delivered=0 ORDER BY sequence'
             ).fetchall() if db is not None else []
+        # Deliver in record order so linked requests reach the writer first. Keep failures pending for replay.
         for sequence, channel, content in pending:
             row = json.loads(content)
             transport.deliver(channel, row)
@@ -228,6 +237,8 @@ class Store:
 
     def deliver(self, channel, row):
         relation, identity, time_key = CHANNELS[channel]
+        # Only a successful read of JSON null authorizes an append.
+        # Confirm the persisted projection before the caller acknowledges the local row.
         saved = self._call('ams_get_' + relation, {'p_' + identity: row[identity]})
         if saved is None:
             saved = self._call('ams_append_' + relation, {'p_row': row})
