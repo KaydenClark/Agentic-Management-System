@@ -1,7 +1,7 @@
 {
   "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000G",
-  "revision": 2,
+  "revision": 3,
   "title": "RSI: Success and failure",
   "question": "Who decides whether real work succeeded, and what failures must be captured?",
   "answer": null,
@@ -86,10 +86,66 @@
           }
         }
       ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-07T00:52:02.923Z",
+      "reason": "DQC correct",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "needs-rewrite",
+            "proposal": {
+              "readback": "**Question:** Who decides whether real work succeeded, and what failures must be captured?\n\n**Recommended answer:** Use the requested outcome, observable checks and your corrections. Capture problems during work and discoveries afterward; allow success with recorded friction. Keep unknown outcomes explicit and diagnose cause before blaming a skill.\n\n**Why:** A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.\n\n**Intended impact:** Makes real owner-requested work first-class evidence without inventing success or assigning every problem to a skill.",
+              "why": "A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000F"
+              ]
+            },
+            "digest": "7da613c78e37452020b9f4f2e64f8c08e4a1aa8730a2e0d192c35dace048ecbe",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000G-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:16.137Z",
+                "requestDigest": "b6f119feef4b4fb0b9824ca8f2c34660d41c037edf19dd582b483aa5c6c521f9",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-firstpass-20261106-DQC-000G-answer",
+                "type": "correct",
+                "at": "2026-11-07T00:52:02.923Z",
+                "requestDigest": "de47b8d6afc1fdbc4ae29b82f14ee6282faea8ad315842689df273ab339a513d",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "note": "I do when I use the skills. I tell you when things fail, you record the failures. That is what I want us to be able to look at. How do we maintain a per skill failure log that we can use for regression testing. When a skill fails at something it is supposed to do, it needs to be logged somewhere. Is that is Kaydenclark/skills? Is that is GPT_OS? It should not be in the project where we were doing the updates (unless that project is GPT_OS because that is our orchestrator project and can be used like that)",
+                "kind": "change",
+                "revision": 3,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "lifecycle": {
-    "state": "pending",
+    "state": "needs-rewrite",
     "proposal": {
       "readback": "**Question:** Who decides whether real work succeeded, and what failures must be captured?\n\n**Recommended answer:** Use the requested outcome, observable checks and your corrections. Capture problems during work and discoveries afterward; allow success with recorded friction. Keep unknown outcomes explicit and diagnose cause before blaming a skill.\n\n**Why:** A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.\n\n**Intended impact:** Makes real owner-requested work first-class evidence without inventing success or assigning every problem to a skill.",
       "why": "A final agent message or a failed command alone cannot judge the whole job. Automatic capture cannot detect every semantic failure.",
@@ -119,6 +175,17 @@
         "source": null,
         "note": null,
         "revision": 2,
+        "round": "rsi-cross-project-20261106"
+      },
+      {
+        "eventId": "rsi-firstpass-20261106-DQC-000G-answer",
+        "type": "correct",
+        "at": "2026-11-07T00:52:02.923Z",
+        "requestDigest": "de47b8d6afc1fdbc4ae29b82f14ee6282faea8ad315842689df273ab339a513d",
+        "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+        "note": "I do when I use the skills. I tell you when things fail, you record the failures. That is what I want us to be able to look at. How do we maintain a per skill failure log that we can use for regression testing. When a skill fails at something it is supposed to do, it needs to be logged somewhere. Is that is Kaydenclark/skills? Is that is GPT_OS? It should not be in the project where we were doing the updates (unless that project is GPT_OS because that is our orchestrator project and can be used like that)",
+        "kind": "change",
+        "revision": 3,
         "round": "rsi-cross-project-20261106"
       }
     ]

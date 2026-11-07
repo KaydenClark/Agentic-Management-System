@@ -172,7 +172,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 
 ## DQC-000G — RSI: Success and failure
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000G.json)
+Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000G.json)
 
 <pre>**Question:** Who decides whether real work succeeded, and what failures must be captured?
 
@@ -187,6 +187,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000F.
 
 - propose at r2
+- correct at r3: I do when I use the skills\. I tell you when things fail, you record the failures\. That is what I want us to be able to look at\. How do we maintain a per skill failure log that we can use for regression testing\. When a skill fails at something it is supposed to do, it needs to be logged somewhere\. Is that is Kaydenclark/skills? Is that is GPT\_OS? It should not be in the project where we were doing the updates \(unless that project is GPT\_OS because that is our orchestrator project and can be used like that\)
 
 ## DQC-000H — RSI: Evidence and privacy
 
