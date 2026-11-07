@@ -134,7 +134,7 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000E — Finish the Workbench Dashboard in AMS
 
-Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+Revision 5; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
 
 <pre>## Summary
 
@@ -168,3 +168,4 @@ Round: dashboard-round-1. Dependencies: none.
 
 - propose at r2
 - propose at r4
+- confirm at r5: Confirmed
