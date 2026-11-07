@@ -35,3 +35,5 @@ Use `version: skill-audit-v1`, an `audit_set_id`, `skill`, and full `skills_comm
 Actual runs contribute applicable checks to the assessment totals, including interrupted runs. Missing, unknown, refused or interrupted evidence contributes a No. Only completed runs count as completed, and unrun slots contribute no checks. Exact scores use passed/total, and zero totals mean unavailable. Skill qualification requires three complete runs, a qualified evaluator and a Stable or Excellent grade. Repair acceptance and useful benefit are separate decisions. Historical r1 scoring keeps its own entry point and semantics.
 
 `audit-record` retains the frozen packet and runs in the private local database. Each transport row contains the allowlisted identity, model metadata, completion and score counts only. Completed rows stay private by default. Use `--test` for synthetic fixtures, and use `--public` only with publication authority. Interrupted rows stay private.
+
+Workspace baseline sha256:76789d71e0558105b577dce4b27e0228044698bf0353cb621005b0262ce90231
