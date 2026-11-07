@@ -3334,9 +3334,12 @@
       "id": "DQC-000F",
       "title": "RSI: Run boundaries",
       "question": "What counts as one skill use, and when is it finished?",
-      "answer": null,
-      "answered": false,
-      "confirmation": null,
+      "answer": "**Question:** What do we record for each skill use, and when and where should repairs happen?\n\n**Recommended answer:** Record each participating skill use, its version, model tier/provider, outcome and reported failures. One requested operation remains one use across resumed chats, with linked uses for other invoked skills. Record failures immediately. Start repairs after the current work finishes. If a failure blocks that work, record it as a critical failure and start the repair in a new chat. Preserve the original session’s continuation so it can resume with the fixed skill once the repair is verified and the repaired version is available to that session.\n\n**Why:** Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.\n\n**Intended impact:** Real work builds the shared failure and use history. Routine repairs follow completed work; critical blockers get a separate repair chat that returns a usable fix to the original session.",
+      "answered": true,
+      "confirmation": {
+        "basis": "Kayden AMS alignment chat, 2026-11-06: confirmed, immediately after the revised question 2 readback.",
+        "revision": 7
+      },
       "expectedResult": null,
       "result": null,
       "uncertainty": [],
@@ -3453,7 +3456,7 @@
         "at": "2026-11-07T00:08:47.038Z"
       },
       "corrections": [],
-      "revision": 6,
+      "revision": 7,
       "history": [
         {
           "revision": 1,
@@ -3795,10 +3798,135 @@
               }
             }
           ]
+        },
+        {
+          "revision": 7,
+          "at": "2026-11-07T01:14:35.754Z",
+          "reason": "DQC confirm",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "confirmed",
+                "proposal": {
+                  "readback": "**Question:** What do we record for each skill use, and when and where should repairs happen?\n\n**Recommended answer:** Record each participating skill use, its version, model tier/provider, outcome and reported failures. One requested operation remains one use across resumed chats, with linked uses for other invoked skills. Record failures immediately. Start repairs after the current work finishes. If a failure blocks that work, record it as a critical failure and start the repair in a new chat. Preserve the original session’s continuation so it can resume with the fixed skill once the repair is verified and the repaired version is available to that session.\n\n**Why:** Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.\n\n**Intended impact:** Real work builds the shared failure and use history. Routine repairs follow completed work; critical blockers get a separate repair chat that returns a usable fix to the original session.",
+                  "why": "Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.",
+                  "source": "Kayden AMS alignment chat, 2026-11-06: question 2 correction on blocking failures and separate repair chats.",
+                  "scope": "Concept alignment only. Revised question 2 awaits confirmation; no actual repair, new chat, installation or campaign is launched.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner correction requires a revised readback before advancing."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Separate routine repairs from blocking-failure recovery."
+                  },
+                  "dependencies": [
+                    "DQC-000E"
+                  ]
+                },
+                "digest": "eeb237798f2a46a25d6be9ab8e90c638bc3a5b684647c17769fc22acb09fb4c0",
+                "confirmations": [
+                  {
+                    "readback": "**Question:** What do we record for each skill use, and when and where should repairs happen?\n\n**Recommended answer:** Record each participating skill use, its version, model tier/provider, outcome and reported failures. One requested operation remains one use across resumed chats, with linked uses for other invoked skills. Record failures immediately. Start repairs after the current work finishes. If a failure blocks that work, record it as a critical failure and start the repair in a new chat. Preserve the original session’s continuation so it can resume with the fixed skill once the repair is verified and the repaired version is available to that session.\n\n**Why:** Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.\n\n**Intended impact:** Real work builds the shared failure and use history. Routine repairs follow completed work; critical blockers get a separate repair chat that returns a usable fix to the original session.",
+                    "proposal": {
+                      "readback": "**Question:** What do we record for each skill use, and when and where should repairs happen?\n\n**Recommended answer:** Record each participating skill use, its version, model tier/provider, outcome and reported failures. One requested operation remains one use across resumed chats, with linked uses for other invoked skills. Record failures immediately. Start repairs after the current work finishes. If a failure blocks that work, record it as a critical failure and start the repair in a new chat. Preserve the original session’s continuation so it can resume with the fixed skill once the repair is verified and the repaired version is available to that session.\n\n**Why:** Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.\n\n**Intended impact:** Real work builds the shared failure and use history. Routine repairs follow completed work; critical blockers get a separate repair chat that returns a usable fix to the original session.",
+                      "why": "Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.",
+                      "source": "Kayden AMS alignment chat, 2026-11-06: question 2 correction on blocking failures and separate repair chats.",
+                      "scope": "Concept alignment only. Revised question 2 awaits confirmation; no actual repair, new chat, installation or campaign is launched.",
+                      "round": "rsi-cross-project-20261106",
+                      "priority": {
+                        "value": 1,
+                        "reason": "Owner correction requires a revised readback before advancing."
+                      },
+                      "value": {
+                        "value": 1,
+                        "reason": "Separate routine repairs from blocking-failure recovery."
+                      },
+                      "dependencies": [
+                        "DQC-000E"
+                      ]
+                    },
+                    "digest": "eeb237798f2a46a25d6be9ab8e90c638bc3a5b684647c17769fc22acb09fb4c0",
+                    "source": "Kayden AMS alignment chat, 2026-11-06: confirmed, immediately after the revised question 2 readback.",
+                    "scope": "Concept alignment only. Revised question 2 awaits confirmation; no actual repair, new chat, installation or campaign is launched.",
+                    "revision": 7,
+                    "eventId": "rsi-q2-blocking-owner-confirm",
+                    "at": "2026-11-07T01:14:35.754Z"
+                  }
+                ],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000F-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:15.566Z",
+                    "requestDigest": "5bb5e3c261065c1ae8d21cf92159837e5b29eb5787105716258c754a634119d5",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-firstpass-20261106-DQC-000F-answer",
+                    "type": "correct",
+                    "at": "2026-11-07T00:52:02.358Z",
+                    "requestDigest": "fbbbd198369419c2864c95c101fdf705c92afa497650a6fd0303971d4a6787ba",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "note": "When me, you (codex), or claude uses one of the workbench skills that we are doing RSI on. we should log the failures and run the RSI loop on it. The benefits of an RSI loop is that its recorded and can be started as soon as its logged in the system as needing to be fixed.",
+                    "kind": "change",
+                    "revision": 3,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q2-real-use-v2",
+                    "type": "propose",
+                    "at": "2026-11-07T01:07:23.287Z",
+                    "requestDigest": "038c1de50802d4d7fd90dddb4dff94794dcb1757e41bdfdbe544732cfeb4343e",
+                    "source": null,
+                    "note": null,
+                    "revision": 4,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q2-blocking-repair-correction",
+                    "type": "correct",
+                    "at": "2026-11-07T01:12:00.999Z",
+                    "requestDigest": "40491d8b14191db2638aaa17eee5da6d02ed7be7bae8d14e3ba73a35d7663806",
+                    "source": "Kayden AMS alignment chat, 2026-11-06: question 2 correction on blocking failures and separate repair chats.",
+                    "note": "Repair should start after the work is finished, unless its blocking that work. In which case the failure is recorded as a critical failure and should be worked on in a new chat so that this session can pick back up with the fixed skill.",
+                    "kind": "change",
+                    "revision": 5,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q2-blocking-repair-v3",
+                    "type": "propose",
+                    "at": "2026-11-07T01:12:02.151Z",
+                    "requestDigest": "bb18ecd096fa468fddf7fddb0573cc7d3e4d78f419561013674ed3479ebcdb91",
+                    "source": null,
+                    "note": null,
+                    "revision": 6,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q2-blocking-owner-confirm",
+                    "type": "confirm",
+                    "at": "2026-11-07T01:14:35.754Z",
+                    "requestDigest": "045f45ffa99c5faec1f520b23fb024417a5aacf324db311782b0b0b2e4b593f3",
+                    "source": "Kayden AMS alignment chat, 2026-11-06: confirmed, immediately after the revised question 2 readback.",
+                    "note": "confirmed",
+                    "revision": 7,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
-        "state": "pending",
+        "state": "confirmed",
         "proposal": {
           "readback": "**Question:** What do we record for each skill use, and when and where should repairs happen?\n\n**Recommended answer:** Record each participating skill use, its version, model tier/provider, outcome and reported failures. One requested operation remains one use across resumed chats, with linked uses for other invoked skills. Record failures immediately. Start repairs after the current work finishes. If a failure blocks that work, record it as a critical failure and start the repair in a new chat. Preserve the original session’s continuation so it can resume with the fixed skill once the repair is verified and the repaired version is available to that session.\n\n**Why:** Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.\n\n**Intended impact:** Real work builds the shared failure and use history. Routine repairs follow completed work; critical blockers get a separate repair chat that returns a usable fix to the original session.",
           "why": "Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.",
@@ -3818,7 +3946,35 @@
           ]
         },
         "digest": "eeb237798f2a46a25d6be9ab8e90c638bc3a5b684647c17769fc22acb09fb4c0",
-        "confirmations": [],
+        "confirmations": [
+          {
+            "readback": "**Question:** What do we record for each skill use, and when and where should repairs happen?\n\n**Recommended answer:** Record each participating skill use, its version, model tier/provider, outcome and reported failures. One requested operation remains one use across resumed chats, with linked uses for other invoked skills. Record failures immediately. Start repairs after the current work finishes. If a failure blocks that work, record it as a critical failure and start the repair in a new chat. Preserve the original session’s continuation so it can resume with the fixed skill once the repair is verified and the repaired version is available to that session.\n\n**Why:** Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.\n\n**Intended impact:** Real work builds the shared failure and use history. Routine repairs follow completed work; critical blockers get a separate repair chat that returns a usable fix to the original session.",
+            "proposal": {
+              "readback": "**Question:** What do we record for each skill use, and when and where should repairs happen?\n\n**Recommended answer:** Record each participating skill use, its version, model tier/provider, outcome and reported failures. One requested operation remains one use across resumed chats, with linked uses for other invoked skills. Record failures immediately. Start repairs after the current work finishes. If a failure blocks that work, record it as a critical failure and start the repair in a new chat. Preserve the original session’s continuation so it can resume with the fixed skill once the repair is verified and the repaired version is available to that session.\n\n**Why:** Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.\n\n**Intended impact:** Real work builds the shared failure and use history. Routine repairs follow completed work; critical blockers get a separate repair chat that returns a usable fix to the original session.",
+              "why": "Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.",
+              "source": "Kayden AMS alignment chat, 2026-11-06: question 2 correction on blocking failures and separate repair chats.",
+              "scope": "Concept alignment only. Revised question 2 awaits confirmation; no actual repair, new chat, installation or campaign is launched.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner correction requires a revised readback before advancing."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Separate routine repairs from blocking-failure recovery."
+              },
+              "dependencies": [
+                "DQC-000E"
+              ]
+            },
+            "digest": "eeb237798f2a46a25d6be9ab8e90c638bc3a5b684647c17769fc22acb09fb4c0",
+            "source": "Kayden AMS alignment chat, 2026-11-06: confirmed, immediately after the revised question 2 readback.",
+            "scope": "Concept alignment only. Revised question 2 awaits confirmation; no actual repair, new chat, installation or campaign is launched.",
+            "revision": 7,
+            "eventId": "rsi-q2-blocking-owner-confirm",
+            "at": "2026-11-07T01:14:35.754Z"
+          }
+        ],
         "events": [
           {
             "eventId": "rsi-align-20261106-DQC-000F-v1",
@@ -3870,6 +4026,16 @@
             "source": null,
             "note": null,
             "revision": 6,
+            "round": "rsi-cross-project-20261106"
+          },
+          {
+            "eventId": "rsi-q2-blocking-owner-confirm",
+            "type": "confirm",
+            "at": "2026-11-07T01:14:35.754Z",
+            "requestDigest": "045f45ffa99c5faec1f520b23fb024417a5aacf324db311782b0b0b2e4b593f3",
+            "source": "Kayden AMS alignment chat, 2026-11-06: confirmed, immediately after the revised question 2 readback.",
+            "note": "confirmed",
+            "revision": 7,
             "round": "rsi-cross-project-20261106"
           }
         ]

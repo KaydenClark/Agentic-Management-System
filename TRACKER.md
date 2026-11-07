@@ -156,7 +156,7 @@ Round: rsi-cross-project-20261106. Dependencies: none.
 
 ## DQC-000F — RSI: Run boundaries
 
-Revision 6; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
+Revision 7; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
 
 <pre>**Question:** What do we record for each skill use, and when and where should repairs happen?
 
@@ -175,6 +175,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 - propose at r4
 - correct at r5: Repair should start after the work is finished, unless its blocking that work\. In which case the failure is recorded as a critical failure and should be worked on in a new chat so that this session can pick back up with the fixed skill\.
 - propose at r6
+- confirm at r7: confirmed
 
 ## DQC-000G — RSI: Success and failure
 
