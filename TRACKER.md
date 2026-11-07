@@ -305,7 +305,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000K.
 
 ## DQC-000N — RSI: Fitness, Alignment and regression
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000N.json)
+Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000N.json)
 
 <pre>**Question:** How should real uses, regression cases and grading combine to qualify a repaired skill?
 
@@ -320,6 +320,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000M.
 
 - propose at r2
+- correct at r3: Audits against failures to be able to complete new work without recreating the failure\.
 
 ## DQC-000O — RSI: Conditional merge authority
 
