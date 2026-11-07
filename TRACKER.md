@@ -278,10 +278,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000H, DQC-000J, DQC-000K.
 
 ## DQC-000M — RSI: Repair scope and pruning
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000M.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000M.json)
 
-What may a repair change, and what does pruning a skill mean?
+<pre>**Question:** What may a repair change, and what does pruning a skill mean?
 
+**Recommended answer:** Diagnose the owning cause first. Simplify or remove instructions only when evidence supports it, preserving requirements and provenance. Allow shared-skill and produced-Workbench repairs within their assigned scope; route unrelated product defects and third-party changes to their owners.
+
+**Why:** I assumed the smallest repair was preferred, but pruning must not become automatic shortening or uncontrolled changes to every project.
+
+**Intended impact:** Defines repair boundaries and protects useful behavior while reducing avoidable complexity.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000K.
+
+- propose at r2
 
 ## DQC-000N — RSI: Fitness, Alignment and regression
 

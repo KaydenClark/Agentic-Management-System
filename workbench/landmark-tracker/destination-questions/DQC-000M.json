@@ -1,7 +1,7 @@
 {
-  "schema": "landmark-tracker/destination-question@2",
+  "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000M",
-  "revision": 1,
+  "revision": 2,
   "title": "RSI: Repair scope and pruning",
   "question": "What may a repair change, and what does pruning a skill mean?",
   "answer": null,
@@ -41,6 +41,88 @@
           "field": "captured"
         }
       ]
+    },
+    {
+      "revision": 2,
+      "at": "2026-11-07T00:09:19.565Z",
+      "reason": "DQC propose",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "pending",
+            "proposal": {
+              "readback": "**Question:** What may a repair change, and what does pruning a skill mean?\n\n**Recommended answer:** Diagnose the owning cause first. Simplify or remove instructions only when evidence supports it, preserving requirements and provenance. Allow shared-skill and produced-Workbench repairs within their assigned scope; route unrelated product defects and third-party changes to their owners.\n\n**Why:** I assumed the smallest repair was preferred, but pruning must not become automatic shortening or uncontrolled changes to every project.\n\n**Intended impact:** Defines repair boundaries and protects useful behavior while reducing avoidable complexity.",
+              "why": "I assumed the smallest repair was preferred, but pruning must not become automatic shortening or uncontrolled changes to every project.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000G",
+                "DQC-000K"
+              ]
+            },
+            "digest": "dc9a0c16bf38569b5cccdc477b9fb03d0aa60fd7e6d92b4efe72b42ddd7601de",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000M-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:19.565Z",
+                "requestDigest": "b2e8b79d9ec86497587bb1d846e03131fd3fd32907f4faa84c76a6d393f60da2",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
     }
-  ]
+  ],
+  "lifecycle": {
+    "state": "pending",
+    "proposal": {
+      "readback": "**Question:** What may a repair change, and what does pruning a skill mean?\n\n**Recommended answer:** Diagnose the owning cause first. Simplify or remove instructions only when evidence supports it, preserving requirements and provenance. Allow shared-skill and produced-Workbench repairs within their assigned scope; route unrelated product defects and third-party changes to their owners.\n\n**Why:** I assumed the smallest repair was preferred, but pruning must not become automatic shortening or uncontrolled changes to every project.\n\n**Intended impact:** Defines repair boundaries and protects useful behavior while reducing avoidable complexity.",
+      "why": "I assumed the smallest repair was preferred, but pruning must not become automatic shortening or uncontrolled changes to every project.",
+      "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+      "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+      "round": "rsi-cross-project-20261106",
+      "priority": {
+        "value": 1,
+        "reason": "Owner requested first-pass alignment before further decisions."
+      },
+      "value": {
+        "value": 1,
+        "reason": "Expose an unresolved choice affecting the shared RSI loop."
+      },
+      "dependencies": [
+        "DQC-000G",
+        "DQC-000K"
+      ]
+    },
+    "digest": "dc9a0c16bf38569b5cccdc477b9fb03d0aa60fd7e6d92b4efe72b42ddd7601de",
+    "confirmations": [],
+    "events": [
+      {
+        "eventId": "rsi-align-20261106-DQC-000M-v1",
+        "type": "propose",
+        "at": "2026-11-07T00:09:19.565Z",
+        "requestDigest": "b2e8b79d9ec86497587bb1d846e03131fd3fd32907f4faa84c76a6d393f60da2",
+        "source": null,
+        "note": null,
+        "revision": 2,
+        "round": "rsi-cross-project-20261106"
+      }
+    ]
+  }
 }
