@@ -1,11 +1,14 @@
 {
   "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000K",
-  "revision": 2,
+  "revision": 3,
   "title": "RSI: Repair triggers and priority",
   "question": "When should findings become repair work, and may repairs run while your original task continues?",
-  "answer": null,
-  "confirmation": null,
+  "answer": "**Question:** When should findings become repair work, and may repairs run while your original task continues?\n\n**Recommended answer:** Capture immediately; normally queue diagnosis after completion or interruption. Group related failures without erasing occurrences. Keep your active work moving; surface urgent blockers promptly. Do not silently repair an installed skill during its current use.\n\n**Why:** I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.\n\n**Intended impact:** Controls when the loop acts and how it competes with useful project work.",
+  "confirmation": {
+    "basis": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+    "revision": 3
+  },
   "expectedResult": null,
   "result": null,
   "uncertainty": [],
@@ -87,10 +90,95 @@
           }
         }
       ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-07T00:52:05.261Z",
+      "reason": "DQC confirm",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "confirmed",
+            "proposal": {
+              "readback": "**Question:** When should findings become repair work, and may repairs run while your original task continues?\n\n**Recommended answer:** Capture immediately; normally queue diagnosis after completion or interruption. Group related failures without erasing occurrences. Keep your active work moving; surface urgent blockers promptly. Do not silently repair an installed skill during its current use.\n\n**Why:** I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.\n\n**Intended impact:** Controls when the loop acts and how it competes with useful project work.",
+              "why": "I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000G",
+                "DQC-000I"
+              ]
+            },
+            "digest": "d6ed6dff7bfdf520f20fa7bbc254dcb493f86538868a6ae0cfd51f9db83bb892",
+            "confirmations": [
+              {
+                "readback": "**Question:** When should findings become repair work, and may repairs run while your original task continues?\n\n**Recommended answer:** Capture immediately; normally queue diagnosis after completion or interruption. Group related failures without erasing occurrences. Keep your active work moving; surface urgent blockers promptly. Do not silently repair an installed skill during its current use.\n\n**Why:** I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.\n\n**Intended impact:** Controls when the loop acts and how it competes with useful project work.",
+                "proposal": {
+                  "readback": "**Question:** When should findings become repair work, and may repairs run while your original task continues?\n\n**Recommended answer:** Capture immediately; normally queue diagnosis after completion or interruption. Group related failures without erasing occurrences. Keep your active work moving; surface urgent blockers promptly. Do not silently repair an installed skill during its current use.\n\n**Why:** I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.\n\n**Intended impact:** Controls when the loop acts and how it competes with useful project work.",
+                  "why": "I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.",
+                  "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                  "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner requested first-pass alignment before further decisions."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                  },
+                  "dependencies": [
+                    "DQC-000G",
+                    "DQC-000I"
+                  ]
+                },
+                "digest": "d6ed6dff7bfdf520f20fa7bbc254dcb493f86538868a6ae0cfd51f9db83bb892",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                "revision": 3,
+                "eventId": "rsi-firstpass-20261106-DQC-000K-answer",
+                "at": "2026-11-07T00:52:05.261Z"
+              }
+            ],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000K-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:18.440Z",
+                "requestDigest": "02b92758d240e613409cf02bb6b644bb841674972309ef464cac159a126a0071",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-firstpass-20261106-DQC-000K-answer",
+                "type": "confirm",
+                "at": "2026-11-07T00:52:05.261Z",
+                "requestDigest": "0d927bf7a12446203f4006035237495f97cc8c8f5c244c5a8af6ba31cd8d3c0a",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "note": "I like your recommended answer. Capture into Kaydenclark/skills or supabase, then then fix when we are done, or at a designated time.",
+                "revision": 3,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "lifecycle": {
-    "state": "pending",
+    "state": "confirmed",
     "proposal": {
       "readback": "**Question:** When should findings become repair work, and may repairs run while your original task continues?\n\n**Recommended answer:** Capture immediately; normally queue diagnosis after completion or interruption. Group related failures without erasing occurrences. Keep your active work moving; surface urgent blockers promptly. Do not silently repair an installed skill during its current use.\n\n**Why:** I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.\n\n**Intended impact:** Controls when the loop acts and how it competes with useful project work.",
       "why": "I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.",
@@ -111,7 +199,36 @@
       ]
     },
     "digest": "d6ed6dff7bfdf520f20fa7bbc254dcb493f86538868a6ae0cfd51f9db83bb892",
-    "confirmations": [],
+    "confirmations": [
+      {
+        "readback": "**Question:** When should findings become repair work, and may repairs run while your original task continues?\n\n**Recommended answer:** Capture immediately; normally queue diagnosis after completion or interruption. Group related failures without erasing occurrences. Keep your active work moving; surface urgent blockers promptly. Do not silently repair an installed skill during its current use.\n\n**Why:** I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.\n\n**Intended impact:** Controls when the loop acts and how it competes with useful project work.",
+        "proposal": {
+          "readback": "**Question:** When should findings become repair work, and may repairs run while your original task continues?\n\n**Recommended answer:** Capture immediately; normally queue diagnosis after completion or interruption. Group related failures without erasing occurrences. Keep your active work moving; surface urgent blockers promptly. Do not silently repair an installed skill during its current use.\n\n**Why:** I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.\n\n**Intended impact:** Controls when the loop acts and how it competes with useful project work.",
+          "why": "I assumed automatic queuing after a use and background processing, without settling urgency, interruption or priority with you.",
+          "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+          "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+          "round": "rsi-cross-project-20261106",
+          "priority": {
+            "value": 1,
+            "reason": "Owner requested first-pass alignment before further decisions."
+          },
+          "value": {
+            "value": 1,
+            "reason": "Expose an unresolved choice affecting the shared RSI loop."
+          },
+          "dependencies": [
+            "DQC-000G",
+            "DQC-000I"
+          ]
+        },
+        "digest": "d6ed6dff7bfdf520f20fa7bbc254dcb493f86538868a6ae0cfd51f9db83bb892",
+        "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+        "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+        "revision": 3,
+        "eventId": "rsi-firstpass-20261106-DQC-000K-answer",
+        "at": "2026-11-07T00:52:05.261Z"
+      }
+    ],
     "events": [
       {
         "eventId": "rsi-align-20261106-DQC-000K-v1",
@@ -121,6 +238,16 @@
         "source": null,
         "note": null,
         "revision": 2,
+        "round": "rsi-cross-project-20261106"
+      },
+      {
+        "eventId": "rsi-firstpass-20261106-DQC-000K-answer",
+        "type": "confirm",
+        "at": "2026-11-07T00:52:05.261Z",
+        "requestDigest": "0d927bf7a12446203f4006035237495f97cc8c8f5c244c5a8af6ba31cd8d3c0a",
+        "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+        "note": "I like your recommended answer. Capture into Kaydenclark/skills or supabase, then then fix when we are done, or at a designated time.",
+        "revision": 3,
         "round": "rsi-cross-project-20261106"
       }
     ]
