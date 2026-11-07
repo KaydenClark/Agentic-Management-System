@@ -332,10 +332,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000I, DQC-000N.
 
 ## DQC-000P — RSI: Sharing accepted versions
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000P.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000P.json)
 
-After merge, should participating machines update automatically, on startup, or only when you request it?
+<pre>**Question:** After merge, should participating machines update automatically, on startup, or only when you request it?
 
+**Recommended answer:** Offer an explicit enrollment policy for checked updates between uses, with pinned versions for active work, preservation of local edits and a rollback path. Record installed and actually loaded versions. Choose the update timing and enrollment scope with you.
+
+**Why:** I assumed a distribution policy without your direction. Merging shared source does not make a repaired version available in every environment.
+
+**Intended impact:** Determines how improvements reach your work and how later use can establish whether the repair held.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000O.
+
+- propose at r2
 
 ## DQC-000Q — RSI: Website and completion proof
 
