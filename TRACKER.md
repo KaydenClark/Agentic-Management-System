@@ -229,7 +229,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000F, DQC-000H.
 
 ## DQC-000J — RSI: Capture and transport
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
 
 <pre>**Question:** Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?
 
@@ -244,6 +244,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 
 - propose at r2
+- correct at r3: I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best\. What do I have set up? What does the research and our CDRs tell us to do?
 
 ## DQC-000K — RSI: Repair triggers and priority
 

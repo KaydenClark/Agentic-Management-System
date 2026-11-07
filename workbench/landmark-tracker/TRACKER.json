@@ -4218,7 +4218,7 @@
         "at": "2026-11-07T00:08:47.385Z"
       },
       "corrections": [],
-      "revision": 2,
+      "revision": 3,
       "history": [
         {
           "revision": 1,
@@ -4276,10 +4276,68 @@
               }
             }
           ]
+        },
+        {
+          "revision": 3,
+          "at": "2026-11-07T00:52:04.542Z",
+          "reason": "DQC correct",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "needs-rewrite",
+                "proposal": {
+                  "readback": "**Question:** Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?\n\n**Recommended answer:** Use a shared observer once per participating harness, integrated with setup-workbench for project identity. Prefer supported host events; add explicit lifecycle calls where observation is incomplete. Use restricted authenticated ingestion; leave the exact packaging and endpoint technology open until feasibility is checked.\n\n**Why:** I selected an observer and Supabase Edge Function too early. The requirement is reliable capture with bounded access; the exact technology remains a proposal.\n\n**Intended impact:** Avoids duplicating logging instructions across skills and makes unsupported capture paths visible.",
+                  "why": "I selected an observer and Supabase Edge Function too early. The requirement is reliable capture with bounded access; the exact technology remains a proposal.",
+                  "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                  "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner requested first-pass alignment before further decisions."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                  },
+                  "dependencies": [
+                    "DQC-000E",
+                    "DQC-000H",
+                    "DQC-000I"
+                  ]
+                },
+                "digest": "b0cdd5f2945346b057f880c0b4398e04ae1706ec618e7317699ffc5cf2d69a0e",
+                "confirmations": [],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000J-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:17.898Z",
+                    "requestDigest": "afb09c733c8ca73f45c2b87f3774bc38f41d0ae9a97301e7d0f1d74a833cbcb4",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-firstpass-20261106-DQC-000J-answer",
+                    "type": "correct",
+                    "at": "2026-11-07T00:52:04.542Z",
+                    "requestDigest": "ee999f07200c4763b5426cb231e097d4b7abe9f58ff4c2cbd8b1a58bec970af7",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "note": "I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best. What do I have set up? What does the research and our CDRs tell us to do?",
+                    "kind": "change",
+                    "revision": 3,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
-        "state": "pending",
+        "state": "needs-rewrite",
         "proposal": {
           "readback": "**Question:** Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?\n\n**Recommended answer:** Use a shared observer once per participating harness, integrated with setup-workbench for project identity. Prefer supported host events; add explicit lifecycle calls where observation is incomplete. Use restricted authenticated ingestion; leave the exact packaging and endpoint technology open until feasibility is checked.\n\n**Why:** I selected an observer and Supabase Edge Function too early. The requirement is reliable capture with bounded access; the exact technology remains a proposal.\n\n**Intended impact:** Avoids duplicating logging instructions across skills and makes unsupported capture paths visible.",
           "why": "I selected an observer and Supabase Edge Function too early. The requirement is reliable capture with bounded access; the exact technology remains a proposal.",
@@ -4311,6 +4369,17 @@
             "source": null,
             "note": null,
             "revision": 2,
+            "round": "rsi-cross-project-20261106"
+          },
+          {
+            "eventId": "rsi-firstpass-20261106-DQC-000J-answer",
+            "type": "correct",
+            "at": "2026-11-07T00:52:04.542Z",
+            "requestDigest": "ee999f07200c4763b5426cb231e097d4b7abe9f58ff4c2cbd8b1a58bec970af7",
+            "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+            "note": "I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best. What do I have set up? What does the research and our CDRs tell us to do?",
+            "kind": "change",
+            "revision": 3,
             "round": "rsi-cross-project-20261106"
           }
         ]
