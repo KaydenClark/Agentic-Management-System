@@ -438,6 +438,88 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000I, DQC-000N, DQC-000P.
 
 ## DQC-000R — RSI: Full alignment readback and continuation
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000R.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000R.json)
 
-What is settled, what remains open, and where should the next alignment chat resume?
+<pre>## Summary
+
+AMS is the skills and the Workbenches they produce. The RSI loop should help us find out whether those skills are getting better through real work.
+
+**Workbench setup and RSI setup are separate.**
+
+- A Workbench must work without RSI tools, an RSI account or a connection to the RSI database.
+- RSI can be added later without rebuilding the Workbench. Turning RSI off must leave the Workbench usable.
+- People receiving the skills can simply use them. They do not need our RSI setup, and their activity is not sent to our system.
+- The current RSI test is limited to Servitor, using real AMS website work. PC and cloud logging are outside the current scope.
+- Neither system requires working inside GPT_OS.
+
+**What gets recorded**
+
+Record each participating skill use, the skill version, model tier/provider, outcome and reported failures. One requested operation remains one use across resumed chats; other invoked skills have linked uses.
+
+When Kayden reports a failure, record what should have happened, what happened instead, the evidence, the skill version and its severity. Give each failure a stable ID. Keep later occurrences, failed repairs and retest results linked to it. A successful repair does not erase the original failure.
+
+**When repairs happen**
+
+Record failures immediately. Start repairs after the current work finishes. If a failure blocks that work, record it as critical and repair it in a new chat. Preserve the original session so it can resume with the verified fixed skill once that version is available to it.
+
+**Where the information lives**
+
+| Information | Home |
+|---|---|
+| Skill uses, failure history, repair progress and RSI results | Supabase |
+| Skills, regression tests, test inputs, rubric and grader versions | KaydenClark/skills |
+| Reports waiting to be sent | The reporting tool's local queue |
+
+The per-skill failure log is a view of the shared Supabase history. It does not become a separate log in every application project. Test cases in Git refer back to the failures they cover. Results identify the exact skill and test versions used. Keep safe recovery exports without making them another writable source of live status.
+
+**How skills are repaired**
+
+Kayden supplied this process: use author-skill to make the skill do its whole job, use the dedicated pruning skill, then run the regression audit. Pruning is the specific skill created to remove duplicated authoring/pruning work; its meaning is already established.
+
+Each audit run gets an Alignment score. Three audit runs give the skill its overall Fitness grade, from Broken through Excellent, and its overall Alignment score. Save failures and results, repair the skill and test again. The tests must show that it can do new work without repeating recorded failures. Passing the old example by itself is insufficient.
+
+Existing attempt limits and stopped campaigns remain in force. Three audit runs in one assessment are different from three candidate repair attempts; do not silently reset either history.
+
+A qualifying Stable or Excellent repair, with the required Alignment, regression, useful-benefit and repository checks satisfied, is authorized to merge into the skills repository's main branch. The orchestrator or fixer completes the merge and branch cleanup. A merge is separate from installing or actually using that version. Production website promotion remains owner-controlled.
+
+**What the website shows**
+
+Show each skill's scores and grades over time, the model tier/provider used, failed and successful improvement attempts, and whether errors become less common during real use. The purpose is to understand improvement across hundreds of uses and tests, rather than spotlight one successful result.
+
+Keep private project files and conversations off the website. A repair agent may use a private example when it needs one and has permission. The skills and suitable regression tests are open-source material; private contents of the repository are not automatically public.
+
+## The why
+
+Real work is the reason for this loop. Owner-reported failures must become lasting regression tests, and repairs must help with later work. More logs, a merged change or a high grade alone cannot tell us whether the skills have become more reliable.
+
+The Workbench must remain useful to someone who never runs RSI. Keeping the setups separate lets us test the improvement system on Servitor without making it a requirement for everybody using the skills.
+
+## The intended result
+
+On Servitor, demonstrate that a Workbench works with RSI absent, and that RSI can be added afterward. Use real AMS website work to record a skill failure, repair it through the author/prune/audit process, keep its results in Supabase, merge an eligible fix, and observe later work for recurrence.
+
+The website should make it possible to answer: Are these skills more reliable? Do Stable or Excellent versions have fewer failures in practice? Are our changes helping us complete the work the skills were designed for?
+
+These are the outcomes to establish, not claims that they have already been demonstrated.
+
+## My next step
+
+Continue alignment in the new chat. Keep the confirmed decisions above and use plain language. Each remaining question uses Question / Recommended answer / Why / Intended impact as its readback. After a correction, present the revised readback before moving on.
+
+Resolve the remaining details:
+
+1. How the optional RSI setup on Servitor captures and sends reports without putting an RSI requirement into shared skills or ordinary Workbench setup. The earlier suggestions to add mandatory reporting to every skill or deploy collectors across every machine were not adopted.
+2. How the Servitor worker starts, waits for finished work and hands critical repairs to another chat. Preserve the already-confirmed repair timing; do not ask that decision again.
+3. Recover the approved grading rules and the actual dedicated pruning skill, then settle remaining repair/test details. An earlier inspection found a separate prune-artifact draft while the installed author-skill still routed pruning through writing-for-agents. Verify current source and installation before changing anything; do not ask Kayden to redefine pruning.
+4. How accepted skills are updated on Servitor: automatically or through a command Kayden runs. The desire for an updater is established; its behavior is not yet settled.
+5. Which website views best show improvement and recurrence, and how to keep comparisons meaningful as models, versions and tests change. Counts of successful uses are needed alongside failures to show error rates.
+
+Resume with the capture question first, then the remaining parts of questions 8–10, 12 and 13. Question 7's timing is already resolved by confirmed question 2. Detailed evidence retention and access rules remain open where they affect the test.
+
+This is an alignment handoff. It authorizes continuing the interview and its records, not starting implementation, installations, database changes, model campaigns or deployment. Earlier stopped work stays stopped. The combined readback is for review; it does not erase the individual confirmations or close the remaining questions.</pre>
+
+Source: Kayden AMS alignment chat, 2026-11-06: all numbered first-pass answers, exact per-question confirmations, later Servitor/separate-system correction and request for complete continuation readback\.. Scope: Combined meaning-only continuation readback with unresolved choices retained\. Prior individual confirmations remain authoritative; no implementation, installation, test campaign, private upload, database mutation or deployment is authorized\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000J.
+
+- propose at r2
