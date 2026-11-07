@@ -272,7 +272,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G.
 
 ## DQC-000J — RSI: Capture and transport
 
-Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+Revision 5; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
 
 <pre>**Question:** How should the skills send their results and failures to Supabase?
 
@@ -283,6 +283,8 @@ Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/D
 - When the work finishes or stops.
 
 The tool sends the reports to Supabase. If it cannot connect, it keeps them on that machine and sends them later.
+
+A temporary cloud session must send its reports or save them outside that session before it is deleted.
 
 Set up the tool on your Mac, PC and cloud environments. It works from any project without GPT_OS. Where the coding app supports it, add automatic checks to help catch missing reports.
 
@@ -297,6 +299,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 - propose at r2
 - correct at r3: I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best\. What do I have set up? What does the research and our CDRs tell us to do?
 - propose at r4
+- propose at r5
 
 ## DQC-000K — RSI: Repair triggers and priority
 
