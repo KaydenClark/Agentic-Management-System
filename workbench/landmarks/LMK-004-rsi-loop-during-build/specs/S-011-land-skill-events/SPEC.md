@@ -5,33 +5,26 @@
 **Priority:** 1
 **Owner:** Kayden; shared-skill repair orchestrator
 **Stance:** Builder
-**Updated:** 2026-11-02
-**Catalog description:** Repair shared handoff, branch and cleanup behavior, prove it with Terra 6.1 and show the scoped RSI evidence.
+**Updated:** 2026-11-06
+**Catalog description:** Repair shared handoff, branch and cleanup behavior, qualify exact sources and prove later use with scoped RSI evidence.
 **Blockers:** none
-**Confirmation:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Execution approval:** [JOT-705f372a-89b7-4f9d-822c-77f7a7a0e689](../../../../wiki/context-owner-answers-coherence.md)
-**Next gate:** TK-002: independently reprune PR58 checkpoint6f2277e, then author same-case retest before final candidate trials. Handoff only this run.
+**Confirmation:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
+**Execution approval:** [JOT-9354c241-ca54-44ee-a1e9-859f7a206810](../../../../wiki/context-feedback-improvement-loop-plan.md)
+**Next gate:** F software is delivered through checked deva33b43d; await protected readback/full safe joins. TK-002S stays open with one synthetic detection/preservation result, not general benefit. Old claims/stops remain.
 
 ## Intent and authority
 
-The owner's 2026-11-02 instruction expands the earlier land-only destination to the shared skills responsible for recurring branch, cleanup and handoff failures. Repair source in `KaydenClark/skills`, update this machine's personal skill catalog after a qualifying repair, and display actual RSI results on `dev`. Skills merge only after Terra 6.1 testing and Stable or Excellent audit results with the required evidence. This grants no cross-project rollout, dev-to-main promotion or fabricated qualification.
+The [item 7 instruction](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-9354c241-ca54-44ee-a1e9-859f7a206810) authorizes this outcome and exact-scope reuse. Root completed packet inspection and released R's native records/handoff only. `KaydenClark/skills` owns source; adoption, later website use and safe dev proof stay separate. No new source/model/install/store effects, cross-project rollout or promotion.
+
+The [resumed per-PR model correction](../../../../wiki/context-owner-answers-coherence.md#jot-e72ca481-c2b9-4940-86a0-141f6c261913) governs its Claude round. Older Terra-pinned series remain frozen; new campaigns require their actual release inputs.
 
 ## Outcome
 
-Shared skills preserve one work branch, authorized delivery, truthful cleanup and local ignored handoffs. Later AMS work uses the repaired personal catalog; readers trace safe evidence without private source.
-
-## Why It Matters
-
-Misnamed branches hide unfinished work; published handoffs expose session context. Repair their shared owner.
+Shared skills preserve one work branch, authorized delivery, truthful cleanup and ignored local handoffs. Later AMS use is traceable through safe evidence.
 
 ## Current Verified State
 
-- Controls now distinguish personal installation and local handoffs. RUNBOOK1193 retains commands; [feedback](../../../../feedback/REPORT-runbook-target-failure-2026-11-02.md) preserves pruning failures.
-- Private PR58 checkpoint `6f2277eaaffef2d6640860d6d257bf101107c10c`: unreviewed partial pruning draft, not merge/install eligible. Full author baseline6e4c06d is retained.
-- [Current evidence and continuation](../../../../feedback/REPORT-shared-skills-attempt-1-2026-11-02.md#continuation-checkpoint-later-contexts-no-reset): workflow v2b attempt two Broken28/78; pruning attempt two not run after independent-pruner capacity failure. Native-checker PASS, useful benefit, installation and later use remain unestablished.
-- PR128 merged the truthful first-context RSI snapshot into dev12f8963; later outcomes are not yet graphed. Protected deployment HTML/live-store readback remains unavailable.
-
-History: [S-011 history](../../../../wiki/history/S-011.md).
+TK-002R's native receipt closes the [accepted one-branch source/adoption/load handoff](../../../../wiki/history/S-011.md#tk-002r-accepted-sourceadoption-handoff). Historical qualification/new ordinary loading prove no general benefit/discovery or complete later-use outcome. Independent protected end state, recurrence, regressions, owner effort and safe store/page joins remain. Failed fbf581fe, refusal and all attempts stay preserved; whole acceptance is incomplete.
 
 ## Desired Behavior
 
@@ -39,7 +32,7 @@ History: [S-011 history](../../../../wiki/history/S-011.md).
 - Reconcile handoff routing and privacy before writing: ignored `workbench/sessions/handoffs/`, never a published root handoff. Published Tasks carry actionable work.
 - Reuse the Spec's branch across runs; inspect ownership, remote claims and unique work before changing refs. Do not create aliases and call them cleanup.
 - Verify exact-head target containment before eligible branch/worktree cleanup. Preserve active writers, unique commits and ignored recovery evidence; report app refusals and retained items.
-- Compare the pinned baseline and candidate with Terra 6.1 under frozen cases, controls and r1 inventory. Include consecutive use, adverse/refusal and regression cases; retain failures and candidate attempt count.
+- Compare exact baseline/candidate under the applicable frozen model/host, cases, controls and r1 inventory. Retain old Terra pins, consecutive-use/adverse/regression coverage, failures and attempt counts.
 - Install only the accepted shared repair in the machine's personal catalog, then distinguish byte verification, discovery, activation and observed later use.
 - Show safe evidence on the RSI page on `dev`: audits separate from behavioral outcomes, exact pins, scope, qualification, failures, unknowns and disposition. No whole-AMS or useful-benefit claim from static checks or an audit level alone.
 
@@ -51,54 +44,56 @@ History: [S-011 history](../../../../wiki/history/S-011.md).
 - Personal installation enables later AMS work; no project-specific copy or portfolio rollout.
 - The [approved prune-artifact addition](../../../../wiki/context-owner-answers-coherence.md#jot-1d568dd6-5ffd-43f5-a6e3-8f58568c92bf) has a separate finite test suite; the original frozen comparison and its attempts remain unchanged.
 
+### General loop delivery boundary
+
+New campaigns follow S-002's Mid/Small subscription-meter defaults; old Terra series, candidates and counters stay frozen. Qualified Stable/Excellent with useful benefit/no regression may merge through checked source delivery without another owner gate. Labels/Map cannot qualify; installation needs scoped authority and holds stay intact.
+
 ## Non-Goals
 
 Editing reusable skill copies in AMS; resetting S-002; replacing the trial runner; production promotion; claiming universal benefit or Human QA.
 
 ## Dependencies And Blockers
 
-The skills repository's process governs repair delivery. Candidate merge/install waits for qualifying Terra evidence. S-006 owns stored trial/assessment data; S-007 owns safe site presentation. Specific missing evidence blocks its claim, not unrelated preparation.
+Exact qualification/adoption authority gate source delivery. S-006 owns trial/assessment storage; S-007 owns safe presentation. Missing proof blocks its claim, not unrelated preparation.
 
 ## Vertical Implementation Slices
 
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
+[TK-002R](tasks/TK-002R/TASK.md) delivered matching source/adoption evidence; [TK-002S](tasks/TK-002S/TASK.md) plans one independent ordinary-use observation and synthetic recurrence control. Old claims/prerequisites remain; no rewrite/reinstall.
+
 
 ## Acceptance Criteria
 
 - [ ] **Baseline and contract:** failures and exact pins precede repair; cases and criteria are frozen. A retrospective favorable-only test plan fails.
 - [ ] **Shared owner:** repaired skill source is reviewed and merged in `KaydenClark/skills`; an AMS-only copy fails.
 - [ ] **Reliable behavior:** original and regression cases cover consecutive branch reuse, authorized publication, preservation, eligible cleanup and local ignored handoffs. Unperformed behavior fails.
-- [ ] **Merge gate:** Terra 6.1 tests and three-run r1 audit establish eligible Stable or Excellent with complete required evidence and no unresolved Critical/Regression findings. A level label alone fails.
+- [ ] **Merge gate:** Applicable frozen-model tests and three-run r1 audit establish eligible Stable/Excellent, useful benefit and no unresolved Critical/Regression findings. Preserve old Terra series; a level label alone fails.
 - [ ] **Personal use:** accepted source is installed in the personal catalog and later AMS skill use is observed; a file copy alone fails activation/use.
 - [ ] **RSI readback:** actual results, failures, pins, conditions, qualification and disposition are readable through existing evidence routes; no reset or omitted failure.
 - [ ] **Visible on dev:** safe RSI charts/log link to their source and separate audits from trial benefit; no private source, synthetic results or unearned improvement headline.
 
 ## Testing Seams
 
-Controlled original/adverse skill exercises, Catalog and RUNBOOK checks, site render/data tests; native scorer/private persistence only with qualifying packets.
+Original/adverse, catalog/RUNBOOK/site checks; scorer/persistence need qualifying packets.
 
 ## Verification Procedure
 
-`node workbench/tools/spec-workbench.mjs show S-011`; applicable RUNBOOK checks, exact skills candidate evidence and site build/tests at `dev` candidate.
+RUNBOOK checks, exact skill-candidate evidence and site build/tests on the dev candidate.
 
 ## Documentation Impact
 
-AGENTS/RUNBOOK own routing and installation authority; Wiki preserves corrections; Tasks and improvement record own proof. Public source links are safe summaries, not private skill text.
+AGENTS/RUNBOOK own authority; Wiki preserves corrections; Tasks own proof. Public evidence excludes private skill text.
 
 ## Review and Human QA
 
-Separate-context skill review and Terra 6.1 assessment; site page Human QA remains the owner's judgment. Agent checks are not Human QA.
+Mid-tier three-run trials and independent Frontier review (ADR-003K); site Human QA is the owner's judgment, not agent checks.
 
 ## Completion Result
 
-Pending.
+The prior attempt FAILED qualification and stays preserved; the owner resumed per-PR repair and qualification. Task and destination acceptance remain incomplete.
 
 ## Remaining Limitations Or Follow-Up Specs
 
-Qualification, benefit, installation/use and protected deployment readback remain unestablished. TK-002/TK-003 are ready and unclaimed; handoff supplies no lifecycle completion.
-
-[S-000A](../S-000A-skills-refocus/SPEC.md) separately maps the catalog-wide refocus. Preserve this Spec's repair, source drafts, attempts and merge/install gates; coordination of shared helpers grants no qualification or rollout authority.
+Qualification, benefit, adoption/use and presentation need separate receipts; draft PRs complete no lifecycle. [S-000A](../S-000A-skills-refocus/SPEC.md) owns catalog refocus. Held repairs and adoption scope stay unchanged.
 
 ## Supersession
 

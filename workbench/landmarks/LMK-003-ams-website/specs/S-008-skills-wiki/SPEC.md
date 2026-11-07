@@ -5,24 +5,24 @@
 **Priority:** 3
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-02
+**Updated:** 2026-11-06
 **Catalog description:** Site-written articles on the owner's skills, one page per skill grouped by Workbench stage, modeled on aihero.dev/skills.
 **Blockers:** none
 **Confirmation:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-ba986c8a-508a-4f4a-94b4-8d0ae8e9641b](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Owner page approvals and Human QA of the 40 pages on protected `dev`; only the owner merges `dev` -> `main`; then `complete`.
+**Next gate:** Independent review and dev containment of TK-0033; owner page approvals and Human QA on protected `dev`; only the owner merges `dev` -> `main`. Refocus fidelity remains unchecked.
 
 ## Intent and authority
 
-The owner chose site-written articles modeled on https://www.aihero.dev/skills and its `/grilling` depth/tone (2026-11-01), supplied `skills-by-workbench-stage.svg` and set the template below. KaydenClark/skills is private: never publish its files. Authority/endpoint: JOT-ba986c8a.
+The owner chose site-written articles modeled on https://www.aihero.dev/skills and its `/grilling` depth/tone (2026-11-01), supplied `skills-by-workbench-stage.svg` and set the template below. KaydenClark/skills is private: never publish its files. Authority/endpoint: JOT-ba986c8a. Bounded PR #111 inspection and recovery: [JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8](../../../../wiki/context-website-presentation.md#jot-54c3a590-89e6-4bf7-95ef-4c50771e7ac8); current-base checks and review precede dev containment.
 
 ## Outcome
 
-A reader browses the skills that operate the AMS by Workbench stage, opens any one, and learns what it does, when to reach for it, what it needs and refuses, how to tell it is working and where it fits.
+A reader browses AMS skills by Workbench stage and learns what each does, when to use it, its requirements and refusals, working signs and workflow fit.
 
 ## Why It Matters
 
-The skills are how agents operate the AMS. Explaining them faithfully, without publishing private files, shows the method behind the results.
+Faithful explanations show the method behind AMS results without publishing private files.
 
 ## Current Verified State
 
@@ -51,9 +51,9 @@ History: [S-008 history](../../../../wiki/history/S-008.md).
 
 ## Decisions And Contracts
 
-- Articles are written for the site; skill files are not copied.
-- Adapted skills are credited to their source, never labeled original.
-- The nine-section article is the owner's (2026-11-01).
+- Write site articles; do not copy skill files.
+- Credit adapted skills to their source, never as original.
+- The owner chose the nine-section article (2026-11-01).
 - Stages come from the chart, names from the repository at the pin; where they differ the repository name wins and this Spec leaves the chart alone.
 - No "used to build this site" marks; that record belongs to the Supabase backend and GitHub (owner, 2026-11-01).
 
@@ -68,20 +68,7 @@ History: [S-008 history](../../../../wiki/history/S-008.md).
 
 ## Vertical Implementation Slices
 
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
-
-### TK-001 - Index and first article
-
-**Stance:** Builder
-
-Proves the index, the article shape, credit and pin criteria on one skill.
-
-### TK-002 - Full set
-
-**Stance:** Builder
-
-Proves the coverage criterion.
+TK-001 (Builder) proves index, article shape, credit and pin on one skill. TK-002 (Builder) proves coverage.
 
 ## Acceptance Criteria
 

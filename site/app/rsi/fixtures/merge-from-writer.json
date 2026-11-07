@@ -1,0 +1,26 @@
+{
+  "scope": "Offline exact protected-main producer output from real public Git metadata; id and recorded_at are supplied only by synthetic readback tests. Never a database write or public site sample.",
+  "producerMain": "c787b2958fa7a23f55c6406f3ce367a91e9162dc",
+  "writerSha256": "3be53db95edb2166ae29711c5b4b6322e744a793444cf8e4bf3e8b57c8004b2c",
+  "gitShow": "47e3c8804c6b9434a945588492d22c28ef9cb439\n40acb3a491a55599e5b1f00fd92a27315739a4a9 310440294ad4fc67f0a99b7a39896740c62eef3d\n2026-11-06T04:16:12-07:00\nMerge pull request #186 from KaydenClark/Feature/S-003-website-shell-and-ams-orientation\nVerify public route inventory in the supported Vercel adapter layout\n",
+  "row": {
+    "kind": "merge",
+    "subject": "PR #186",
+    "summary": "Verify public route inventory in the supported Vercel adapter layout",
+    "occurred_at": "2026-11-06T04:16:12-07:00",
+    "source_kind": "commit",
+    "source_ref": "47e3c8804c6b9434a945588492d22c28ef9cb439",
+    "source_url": "https://github.com/KaydenClark/Agentic-Management-System/commit/47e3c8804c6b9434a945588492d22c28ef9cb439",
+    "strength": "recorded_fact",
+    "is_test": false,
+    "detail": {
+      "pr": 186,
+      "pr_url": "https://github.com/KaydenClark/Agentic-Management-System/pull/186",
+      "branch": "KaydenClark/Feature/S-003-website-shell-and-ams-orientation",
+      "parents": [
+        "40acb3a491a55599e5b1f00fd92a27315739a4a9",
+        "310440294ad4fc67f0a99b7a39896740c62eef3d"
+      ]
+    }
+  }
+}

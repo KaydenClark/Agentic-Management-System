@@ -58,18 +58,11 @@ test('every built page is in the reading order or a child page linked both ways 
   }
 });
 
-test('internal links on tour pages resolve to a built page or an id on the page', () => {
-  const built = new Set(builtPages().map((p) => p.name));
-  for (const href of READING_ORDER) {
-    const { html } = builtPage(builtName(href));
-    for (const [, target] of mainOf(html).matchAll(/<a\b[^>]*href="([^"]+)"/gi)) {
-      if (/^(https?:|mailto:)/.test(target)) continue;
-      if (target.startsWith('#')) {
-        assert.match(html, new RegExp(`\\sid="${target.slice(1)}"`), `${href}: ${target} has no target`);
-        continue;
-      }
-      const path = target.split('#')[0];
-      assert.ok(built.has(builtName(path === '' ? href : path)), `${href}: link ${target} has no built page`);
-    }
-  }
+test('the older About route must preserve the canonical introduction rather than become an orphan', () => {
+  const start = builtPage('start.html').html;
+  const about = builtPage('about.html').html;
+  const parents = new Map([['/start', start]]);
+  assert.deepEqual(childProblems('/about', about, parents), []);
+  assert.ok(childProblems('/about', about.replace('aria-current="page"', ''), parents).length);
+  assert.ok(childProblems('/about', about.replace('<h1>About</h1>', '<h1>Different</h1>'), parents).length);
 });

@@ -88,3 +88,18 @@ Independent repruning then hit agent capacity and left a two-file partial draft.
 The owner now requests continuation by handoff, not another campaign in this run. The source checkpoint is `6f2277eaaffef2d6640860d6d257bf101107c10c` in draft [skills PR58](https://github.com/KaydenClark/skills/pull/58), reported pushed and clean by its implementor: only the two Prune source files changed, an unreviewed capacity-interrupted partial draft. Catalog44/diff/local links pass only; no behavior/fidelity claim. Preserve full author baseline6e4c06d separately. No candidate has eligible Stable/Excellent evidence; no skill merge or installation is established. The actual global personal catalog remains at the previously reported `f2354fd`, untouched by this repair. Installation, activation and later AMS use remain distinct future gates. Owner calibration labels require actual tests of all three examples; example one is not accepted by silence.
 
 The safe first-context snapshot is already on `dev` through [PR128](https://github.com/KaydenClark/Agentic-Management-System/pull/128), merge `12f896395ff4320cf87e203f049a4fe19f00d456`. Its production build and 203 site tests passed at candidate `3f2de6e038e968099c65f58f8163afdc38ba1bf2`; Vercel reported READY at the merged dev SHA, but protected HTML/live-store readback was denied by connection access. This continuation does not change that snapshot or claim later results are already graphed. No dev-to-main promotion occurred.
+
+
+## Per-skill draft continuation
+
+The owner resumed bounded source improvement on 2026-11-02 and required one skill branch/PR per edited skill, targeting main. [S-011 history](../wiki/history/S-011.md#per-skill-draft-continuation) records the eight draft candidates, independent Prune return, author development retest and remaining prerequisites. PR58 and the failed assessments above remain preserved. Source-only draft delivery establishes no fresh Terra/r1 qualification, benefit, merge, installation or later use; TK-002 remains incomplete and TK-003 is not released.
+
+
+## Premature handback and v3.1 failure
+
+Kayden rejected the assistant's invented draft-only endpoint: source size repair and the required three fresh Terra/high trials were unfinished. [S-011 history](../wiki/history/S-011.md#premature-stop-and-failed-v31-round) records the correction and candidate-bound safe aggregates. Eight cores reached894–900 characters, but valid v3.1 round1 at local evidence57194dcd FAILED: candidate Runbook2810 versus900–1500/near900 and native original-bytes-unverified; baseline2996 also failed. Earlier input-invalid execution remains separate. Journey/Prune reference repairs continue through existing PR60/66; development native red→green and pruning959 are not deciding proof. Three fresh matched final rounds and fixed r1 eligibility remain required; no qualification/merge/install. Earlier failures and the insufficient handback Receipt remain preserved.
+
+
+## Owner-ended failed qualification
+
+The owner ended tests: nonpassing is FAILED. [Final safe readback](../wiki/history/S-011.md#owner-ended-failed-qualification) binds candidatefbf581fe: v3.2 round1 candidate Runbook2845/ship481, baseline2923/719, output goals failed. Three full rounds remain incomplete. Journey's bounded original-byte correction passed; one new private note still limits native remote recovery. Focused unchanged-source Runbook2802/ship503 also failed; incident166 had no goal. These are global qualification/development outcomes, not eight individual grades. Per-skill eligible-merge readback remains separate. TK-002 open/TK-003 blocked; no new tests/repairs without instruction. Earlier failures and receipts remain preserved.

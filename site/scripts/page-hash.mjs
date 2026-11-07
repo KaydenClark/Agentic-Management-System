@@ -17,9 +17,9 @@
 //   - encode as UTF-8.
 // The footer is outside <main>, so a rebuild at a new commit changes no hash.
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { readPageArtifacts } from './page-artifacts.mjs';
+export { routeOf } from './page-artifacts.mjs';
 
 export const siteDir = fileURLToPath(new URL('..', import.meta.url));
 
@@ -38,6 +38,8 @@ function decode(s) {
     return NAMED[ref.toLowerCase()] ?? whole;
   });
 }
+
+export { decode as decodeHTMLText };
 
 function attributes(source) {
   const out = [];
@@ -124,25 +126,8 @@ export function hasReviewMark(html) {
   return readMain(html).mark;
 }
 
-// The route of a prerendered file under .next/server/app: index.html is "/",
-// start.html is "/start", a/b.html is "/a/b".
-export function routeOf(name) {
-  const path = name.replace(/\\/g, '/').replace(/\.html$/, '');
-  if (path === 'index') return '/';
-  return `/${path.replace(/\/index$/, '')}`;
-}
-
-// Every prerendered page in a build: [{ name, route, html }]. Next's own
-// _global-error.html does not use the shell, so it is not a page.
+// Explicit site roots (including manifest-backed fixtures) use the same strict
+// artifact validation as inventory; the canonical hash algorithm above is unchanged.
 export function readBuiltPages(dir = siteDir) {
-  const out = join(dir, '.next', 'server', 'app');
-  if (!existsSync(out)) throw new Error('No build output: run `npm run build` in site/ first.');
-  const walk = (d) => readdirSync(d).flatMap((n) => {
-    const p = join(d, n);
-    return statSync(p).isDirectory() ? walk(p) : [p];
-  });
-  return walk(out)
-    .filter((p) => p.endsWith('.html') && relative(out, p) !== '_global-error.html')
-    .map((p) => ({ name: relative(out, p), route: routeOf(relative(out, p)), html: readFileSync(p, 'utf8') }))
-    .sort((a, b) => a.route.localeCompare(b.route));
+  return readPageArtifacts(dir).pages.sort((a, b) => a.route.localeCompare(b.route));
 }

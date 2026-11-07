@@ -8,6 +8,14 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-padding-top: calc(var(--sticky-header-height, var(--header-fallback)) + var(--space-12));
+}
+
+:where([id], a, button, summary) {
+  scroll-margin-block: var(--space-12);
+}
+
 body {
   margin: 0;
   background: var(--ground);
@@ -15,6 +23,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-body);
   line-height: var(--leading-body);
+  overflow-wrap: anywhere;
 }
 
 a {
@@ -27,7 +36,8 @@ a {
 }
 
 .skip-link {
-  position: absolute;
+  position: fixed;
+  z-index: var(--layer-skip);
   left: var(--space-8);
   top: var(--space-8);
   padding: var(--space-8) var(--space-12);
@@ -62,30 +72,43 @@ a {
 }
 
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-header);
   background: var(--surface);
   border-bottom: var(--border-width) solid var(--line);
 }
 
 .topbar-inner {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--space-6) var(--space-12);
-  padding-block: var(--space-6);
+  width: 100%;
+  padding: var(--space-12) var(--page-gutter);
 }
 
-/* The wordmark over its tagline, on the first row with the theme toggle. */
 .brand {
-  flex: 1 1 0;
-  min-width: 0;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--brand-gap);
+  align-items: center;
+  justify-content: center;
+  min-width: var(--control-min-height);
+  min-height: var(--control-min-height);
+  border-radius: var(--radius-control);
+  color: var(--ink);
   text-decoration: none;
 }
 
-.brand .eyebrow {
+.brand:hover {
+  background: var(--raised);
+}
+
+.brand svg {
+  width: var(--space-24);
+  height: var(--space-24);
+}
+
+.eyebrow {
   font-size: var(--text-tagline);
 }
 
@@ -105,8 +128,7 @@ a {
 }
 
 .theme-toggle {
-  order: 1;
-  margin-left: auto;
+  justify-self: end;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,13 +165,13 @@ a {
   height: var(--icon-size);
 }
 
-/* Reading-order links in the top bar: a row of their own under the title
-   and toggle, each link stretched so the row spans the column; on narrow
-   screens three links a row (tokens.css). */
+/* A scrollable navigation row keeps every link available at enlarged text
+   sizes. Its own scrollbar never moves the page horizontally. */
 .topnav {
-  order: 2;
-  flex: 1 1 100%;
   min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) var(--raised);
 }
 
 .topnav ol {
@@ -157,13 +179,44 @@ a {
   padding: 0;
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-4);
+  width: max-content;
+  min-width: 100%;
 }
 
 .topnav li {
-  flex: var(--navitem-flex);
   display: flex;
+  flex: none;
+}
+
+/* Native focus may leave partly visible horizontal links clipped. Without
+   the client reveal enhancement, wrap so every link remains fully visible. */
+@media (scripting: none) {
+  .topnav ol {
+    width: auto;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 959px) {
+  .topbar-inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .brand {
+    justify-self: start;
+  }
+
+  .topnav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+
+  .theme-toggle {
+    grid-column: 2;
+    grid-row: 1;
+  }
 }
 
 .navlink {
@@ -180,6 +233,10 @@ a {
   font-size: var(--text-nav);
   font-weight: var(--weight-medium);
   text-decoration: none;
+}
+
+.navlink:focus-visible {
+  outline-offset: calc(var(--focus-offset) * -1);
 }
 
 .navlink:hover {

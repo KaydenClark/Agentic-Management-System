@@ -1,7 +1,7 @@
 // The /rsi page's data seam (S-007 TK-002). Turns S-006's rsi_runs and
 // rsi_results rows into the page's series: per task and per version, held-out
-// and dev apart, one series per arm, provider, model and effort, so a model
-// change always starts a new series. Runs on the server only. It counts rows
+// and dev apart, one series per arm, provider, model, effort and grader, so
+// changing a model or evaluator starts a new series. Server only. It counts rows
 // and compares counts; it computes no statistic (headlines with intervals
 // are TK-003 and come from the loop's own method).
 import { SERIES, type SeriesId, type SeriesPlan, type Split } from "./series";
@@ -98,7 +98,25 @@ export interface Series {
   provider: string;
   model: string;
   effort: string;
+  graderVersion: string;
+  observedTasks: readonly string[];
+  coverage: string;
   points: readonly Point[];
+}
+
+export interface RunEvidence {
+  run: RsiRun;
+  marks: readonly Mark[];
+}
+
+// Runs have no task or split column. Keep all attempts with no public
+// results separate from trial points rather than inventing a grade or split.
+export function runsWithoutResults(data: RsiData): RunEvidence[] {
+  const withResults = new Set(data.results.filter((r) => r.is_test === false).map((r) => r.run_id));
+  return data.runs
+    .filter((r) => r.is_test === false && !withResults.has(r.id))
+    .sort((a, b) => a.started_at.localeCompare(b.started_at) || a.id - b.id)
+    .map((run) => ({ run, marks: runMarks([run]) }));
 }
 
 export interface SeriesView extends SeriesPlan {
@@ -201,10 +219,24 @@ export function seriesViews(data: RsiData): SeriesView[] {
     );
     const order = new Map(versions.map((v, i) => [v.id, i]));
 
-    const groups = new Map<string, RsiResult[]>();
+    // Coverage belongs to the final plotted point: pool every matching run
+    // in each version first, then separate differing per-task attempt counts.
+    // Immutable case versions remain unknown even when these counts match.
+    const pointRows = new Map<string, RsiResult[]>();
+    const dimensions = (r: RsiResult) => [plan.view === "task" ? r.task_id : "", r.arm, r.provider, r.model, r.effort, r.grader_version];
     for (const r of rows) {
-      const key = [plan.view === "task" ? r.task_id : "", r.arm, r.provider, r.model, r.effort].join("\u0000");
-      groups.set(key, [...(groups.get(key) ?? []), r]);
+      const key = JSON.stringify([...dimensions(r), versionOf(r).id]);
+      pointRows.set(key, [...(pointRows.get(key) ?? []), r]);
+    }
+    const groups = new Map<string, RsiResult[]>();
+    const coverageByGroup = new Map<string, string>();
+    for (const vrows of pointRows.values()) {
+      const attempts = new Map<string, number>();
+      for (const row of vrows) attempts.set(row.task_id, (attempts.get(row.task_id) ?? 0) + 1);
+      const coverage = JSON.stringify([...attempts].sort((a, b) => a[0].localeCompare(b[0])));
+      const key = JSON.stringify([...dimensions(vrows[0]), coverage]);
+      coverageByGroup.set(key, coverage);
+      groups.set(key, [...(groups.get(key) ?? []), ...vrows]);
     }
 
     const series: Series[] = [...groups.entries()].map(([key, group]) => {
@@ -222,7 +254,7 @@ export function seriesViews(data: RsiData): SeriesView[] {
         points.push(point);
       }
       const head = group[0];
-      return { key, taskId: plan.view === "task" ? head.task_id : null, arm: head.arm, provider: head.provider, model: head.model, effort: head.effort, points };
+      return { key, taskId: plan.view === "task" ? head.task_id : null, arm: head.arm, provider: head.provider, model: head.model, effort: head.effort, graderVersion: head.grader_version, observedTasks: [...new Set(group.map((r) => r.task_id))].sort(), coverage: coverageByGroup.get(key)!, points };
     });
     series.sort(
       (a, b) => order.get(a.points[0].version.id)! - order.get(b.points[0].version.id)! || (a.taskId ?? "").localeCompare(b.taskId ?? "") || a.key.localeCompare(b.key),

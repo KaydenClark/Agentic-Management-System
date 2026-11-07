@@ -7,6 +7,7 @@
 // stage. Coverage (every chart skill has an article) is a test, not a build
 // rule, so the site still builds while articles are being written.
 // Plain JavaScript so the tests import it on any Node; types in content.d.mts.
+import { isReaderHref } from '../reader-links.mjs';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { basename, join } from 'node:path';
 import { stages } from '../start/skills.mjs';
@@ -29,7 +30,7 @@ export const FAQ_RANGE = [3, 6];
 // Site routes an article may link besides /skills/<name>: the reading order
 // of app/nav.ts (a test keeps the two equal; nav.ts is TypeScript, which
 // this plain module cannot import).
-export const SITE_ROUTES = ['/', '/start', '/why', '/how-it-works', '/skills', '/rsi', '/glossary', '/about'];
+export const SITE_ROUTES = ['/', '/start', '/why', '/how-it-works', '/grill-board-demo', '/skills', '/governance', '/rsi', '/glossary'];
 // The skills repository is private: a link to it is a 404 for readers.
 export const PRIVATE_SKILLS_REPO = /github\.com\/KaydenClark\/skills(?![\w.-])/i;
 
@@ -106,21 +107,27 @@ const blockText = (block) => (block.type === 'code' ? block.text : blockInlines(
 
 // Why a link target is not allowed in an article, or null when it is.
 export function hrefProblem(href, chart = stages) {
-  if (href.startsWith('/')) {
-    if (SITE_ROUTES.includes(href)) return null;
-    const skill = href.match(/^\/skills\/([a-z0-9-]+)$/);
-    if (skill) return chartSkills(chart).some((s) => s.name === skill[1]) ? null : `links /skills/${skill[1]}, which is not a chart skill`;
-    const stage = href.match(/^\/skills#([a-z0-9-]+)$/);
-    if (stage && chart.some((st) => st.id === stage[1])) return null;
-    return `links ${href}, which is not a site route an article may link (${SITE_ROUTES.join(', ')}, /skills/<name>, /skills#<stage>)`;
-  }
-  if (/^https:\/\//.test(href)) {
-    let url;
-    try { url = new URL(href); } catch { return `links ${href}, which is not a valid URL`; }
-    if (PRIVATE_SKILLS_REPO.test(`${url.host}${url.pathname}`)) return 'links the private skills repository (readers get a 404); name the commit instead';
+  if (PRIVATE_SKILLS_REPO.test(href)) return 'links the private skills repository (readers get a 404); name the commit instead';
+  if (!isReaderHref(href)) return `links ${href}; reader links must stay on-site`;
+  if (href.startsWith('#')) return null; // Final built-page checks resolve the actual fragment.
+  const [path] = href.split('#');
+  if (SITE_ROUTES.includes(path)) {
+    if (path === '/skills' && href.includes('#') && !chart.some(stage => href === `/skills#${stage.id}`)) return `links ${href}, which is not a chart stage`;
     return null;
   }
-  return `links ${href}; only /skills/<name>, a site route or a public https:// URL are allowed`;
+  const skill = path.match(/^\/skills\/([a-z0-9-]+)$/);
+  if (skill) return chartSkills(chart).some(s => s.name === skill[1]) ? null : `links /skills/${skill[1]}, which is not a chart skill`;
+  return `links ${href}, which is not a site route an article may link`;
+}
+
+function creditUriProblem(href) {
+  if (PRIVATE_SKILLS_REPO.test(href)) return 'credits the private skills repository; retain public attribution and the catalog pin instead';
+  try {
+    const url = new URL(href);
+    if (PRIVATE_SKILLS_REPO.test(decodeURIComponent(`${url.host}${url.pathname}`))) return 'credits the private skills repository; retain public attribution and the catalog pin instead';
+    if (url.protocol === 'https:' && !url.username && !url.password) return null;
+  } catch { /* Invalid source identities are refused, not rendered as navigation. */ }
+  return `credit source ${href} must be a public https:// URI`;
 }
 
 // One article's source to its validated, renderable form.
@@ -225,10 +232,16 @@ export function parseArticle(src, { file = 'article.md', chart = stages } = {}) 
   const links = [];
   const collect = (nodes) => walkInline(nodes, (n) => { if (n.type === 'link') links.push(n.href); });
   collect(summary);
-  collect(creditText);
   for (const b of blocks) blockInlines(b).forEach(collect);
   for (const href of links) {
     const problem = hrefProblem(href, chart);
+    if (problem) fail(problem);
+  }
+
+  const creditSources = [];
+  walkInline(creditText, node => { if (node.type === 'link') creditSources.push(node.href); });
+  for (const uri of creditSources) {
+    const problem = creditUriProblem(uri);
     if (problem) fail(problem);
   }
 
@@ -240,6 +253,7 @@ export function parseArticle(src, { file = 'article.md', chart = stages } = {}) 
     pin: data.pin,
     credit: data.credit,
     creditText,
+    creditSources,
     creditLicense: data.credit_license || null,
     stage: place.stage,
     flow: place.flow,

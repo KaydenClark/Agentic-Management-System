@@ -9,6 +9,13 @@
 // rather than parsing CSS closes the parser-loophole class Codex kept finding
 // on PR #32 (duplicates, !important, var() spacing, nested media).
 //
+// Site-only colors (S-007 TK-002J: the /rsi fitness levels, which the Grill
+// Board does not use) sit in a second marked block after END. It may only
+// declare --level-* tokens, each with its meaning, as a hex color or a
+// recorded token, in the same light, manual-dark and system-dark rules as the
+// generated block, the two dark rules alike. Everything outside both blocks
+// keeps the rule above.
+//
 // Limit: tokens.json records colors and mixes only. Type and spacing tokens
 // are hand-written outside the markers and are not compared; tokens.test.mjs
 // still forbids any color, type or spacing literal outside tokens.css.
@@ -18,6 +25,15 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { BEGIN, END, CSS_PATH, JSON_PATH, generate } from '../scripts/gen-tokens.mjs';
+
+export const SITE_BEGIN = '/* BEGIN site tokens: hand-written, not recorded in grill-board/theme/tokens.json */';
+export const SITE_END = '/* END site tokens */';
+const SITE_PREFIX = '--level-';
+const SITE_RULES = [
+  ':root, [data-theme="light"], .t-light',
+  '[data-theme="dark"], .t-dark',
+  '@media (prefers-color-scheme: dark) :root:not([data-theme="light"])',
+];
 
 const json = JSON.parse(readFileSync(JSON_PATH, 'utf8'));
 const css = readFileSync(CSS_PATH, 'utf8');
@@ -55,9 +71,19 @@ export function problems(text) {
     const at = i === -1 ? a.length : i;
     out.push(`theme block differs from scripts/gen-tokens.mjs output at block line ${at + 1}: found ${JSON.stringify(a[at])}, expected ${JSON.stringify(x[at])}; run npm run tokens:gen`);
   }
-  // (c) outside the markers: no recorded token declared, no color-like value.
-  const outside = (text.slice(0, b) + '\n' + text.slice(e + END.length)).replace(/\/\*[\s\S]*?\*\//g, '');
+  // (d) the site block: once, after END, only --level-* tokens in the three theme rules.
   const names = recordedNames();
+  for (const [name, marker] of [['site BEGIN', SITE_BEGIN], ['site END', SITE_END]]) {
+    const n = count(text, marker);
+    if (n !== 1) out.push(`${name} marker appears ${n} times, not once`);
+  }
+  if (out.length) return out;
+  const sb = text.indexOf(SITE_BEGIN);
+  const se = text.indexOf(SITE_END);
+  if (sb < e || se < sb) return ['the site block must follow the generated block, BEGIN before END'];
+  out.push(...siteProblems(text.slice(sb + SITE_BEGIN.length, se), names));
+  // (c) outside the markers: no recorded token declared, no color-like value.
+  const outside = (text.slice(0, b) + '\n' + text.slice(e + END.length, sb) + '\n' + text.slice(se + SITE_END.length)).replace(/\/\*[\s\S]*?\*\//g, '');
   for (const name of names) {
     if (new RegExp(`${esc(name)}\\s*:`).test(outside)) out.push(`recorded token ${name} is declared outside the generated block`);
   }
@@ -68,6 +94,58 @@ export function problems(text) {
     if (COLOR_LITERAL.test(value)) out.push(`${prop}: ${value} is a color literal outside the generated block`);
     else if (usesRecorded.test(value)) out.push(`${prop}: ${value} uses a recorded color token outside the generated block`);
     else if (/^[a-z]+$/i.test(value)) out.push(`${prop}: ${value} is a bare keyword (possibly a named color) outside the generated block`);
+  }
+  return out;
+}
+
+// Leaf rules as [selector path, body]; null when braces do not balance.
+function leafRules(text) {
+  const out = [];
+  const stack = [];
+  let buf = '';
+  for (const ch of text.replace(/\/\*[\s\S]*?\*\//g, '')) {
+    if (ch === '{') {
+      if (stack.length) stack[stack.length - 1].parent = true;
+      stack.push({ prelude: buf.trim().replace(/\s+/g, ' '), parent: false });
+      buf = '';
+    } else if (ch === '}') {
+      const frame = stack.pop();
+      if (!frame) return null;
+      if (!frame.parent || buf.trim()) out.push([[...stack.map((f) => f.prelude), frame.prelude].join(' '), buf]);
+      buf = '';
+    } else buf += ch;
+  }
+  return stack.length || buf.trim() ? null : out;
+}
+
+function siteProblems(block, names) {
+  const out = [];
+  const rules = leafRules(block);
+  if (!rules) return ['the site block has unbalanced braces or a stray declaration'];
+  const selectors = rules.map(([sel]) => sel);
+  if (JSON.stringify(selectors) !== JSON.stringify(SITE_RULES)) out.push(`the site block's rules are ${JSON.stringify(selectors)}, not the light, manual-dark and system-dark rules`);
+  const declared = rules.map(([sel, body]) => {
+    const decls = new Map();
+    for (const raw of body.split(';').map((d) => d.trim()).filter(Boolean)) {
+      const m = raw.match(/^(--[\w-]+)\s*:\s*(.+)$/);
+      if (!m) { out.push(`${sel}: ${raw} is not a custom property`); continue; }
+      const [, name, value] = m;
+      if (!name.startsWith(SITE_PREFIX)) out.push(`${name} in the site block is not a ${SITE_PREFIX}* token`);
+      if (names.includes(name)) out.push(`recorded token ${name} is declared in the site block`);
+      if (decls.has(name)) out.push(`${name} is declared twice in ${sel}`);
+      if (!/^#[0-9a-f]{6}$/i.test(value) && !new RegExp(`^var\\((?:${names.map(esc).join('|')})\\)$`).test(value)) out.push(`${name}: ${value} is neither a hex color nor a recorded token`);
+      decls.set(name, value);
+    }
+    return decls;
+  });
+  const [light, dark, system] = declared;
+  if (light && dark && system) {
+    const keys = (d) => [...d.keys()].sort().join(' ');
+    if (keys(light) !== keys(dark) || keys(dark) !== keys(system)) out.push('the site block does not declare the same tokens in all three rules');
+    for (const [name, value] of dark) if (system.get(name) !== value) out.push(`${name} differs between the manual-dark and system-dark rules`);
+  }
+  for (const line of block.split('\n')) {
+    if (/--[\w-]+\s*:/.test(line) && !/\/\*\s*\S[^*]*\*\//.test(line)) out.push(`${line.trim()} states no meaning`);
   }
   return out;
 }
@@ -133,6 +211,28 @@ test('a recorded token or color outside the generated block fails', () => {
   fails(css + `\n[data-theme="light"] { ${lightDecls} }\n`, 'a second light rule', /declared outside/);
   // A recorded token redeclared right after the END marker.
   fails(css.replace(END, `${END}\n:root { --ground: #F7F7F7; }`), 'recorded token after END', /--ground is declared outside/);
+});
+
+test('the site block holds only stated --level-* tokens, alike in both dark rules', () => {
+  const sb = css.indexOf(SITE_BEGIN);
+  const se = css.indexOf(SITE_END);
+  const site = css.slice(sb, se);
+  const inSite = (from, to) => {
+    assert.ok(site.includes(from), `plant site ${from} not found in the site block`);
+    return css.slice(0, sb) + site.replace(from, to) + css.slice(se);
+  };
+  fails(inSite('  --level-stable-on: #FFFFFF; /* Text on a Stable fill */', '  --level-stable-on: #FFFFFF; /* Text on a Stable fill */\n  --accent: #123456; /* stray */'), 'a non-level token', /not a --level-\* token/);
+  fails(inSite('  --level-stable-on: #FFFFFF; /* Text on a Stable fill */', '  --level-stable-on: #FFFFFF; /* Text on a Stable fill */\n  --heat: #123456; /* override */'), 'a recorded token', /recorded token --heat is declared in the site block/);
+  fails(inSite('  --level-stable: #24739A;', '  --level-stable: green;'), 'a named color', /neither a hex color/);
+  fails(inSite('  --level-stable: #24739A;', '  --level-stable: color-mix(in oklab, var(--owner) 50%, white);'), 'a mix', /neither a hex color/);
+  fails(inSite('  --level-stable: #24739A; /* Fitness level Stable: two deciding runs passed */', '  --level-stable: #24739A;'), 'a token without its meaning', /states no meaning/);
+  fails(inSite('    --level-stable: #5BB3D9;', '    --level-stable: #5BB3DA;'), 'system dark unlike manual dark', /differs between the manual-dark and system-dark/);
+  fails(inSite('  --level-functional: #E8B84A; /* Fitness level Functional: one deciding run passed */\n', ''), 'a token missing from manual dark', /same tokens in all three rules/);
+  fails(inSite('[data-theme="dark"],\n.t-dark {', '@media (min-width: 2000px) {\n[data-theme="dark"],\n.t-dark {').replace(SITE_END, `}\n${SITE_END}`), 'manual dark scoped by a media query', /not the light, manual-dark and system-dark rules/);
+  fails(css.replace(SITE_BEGIN, ''), 'no site BEGIN', /site BEGIN marker appears 0 times/);
+  fails(css.replace(SITE_END, '') + `\n${SITE_END}\n.x { --level-excellent: #000000; }\n${SITE_END}`, 'two site END markers', /site END marker appears 2 times/);
+  // A level token outside the site block is a color outside both blocks.
+  fails(css + '\n:root { --level-excellent: #000000; }\n', 'a level token after the site block', /color literal outside/);
 });
 
 test('missing, duplicated or reordered markers fail', () => {

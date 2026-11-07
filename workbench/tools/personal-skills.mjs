@@ -51,7 +51,7 @@ export function inspectPersonalSkills(manifest, project, { home = os.homedir(), 
         if (!['ENOENT', 'ENOTDIR'].includes(error.code)) findings.push(finding('skill-lane-unreadable', `${name} in ${root}: ${error.message}`, { skill: name }));
       }
     }
-    if (available.size !== 1) findings.push(finding('skill-lane-missing', `${name}: expected one personal source, found ${available.size}; make the catalog available to this host without copying it into the project.`, { skill: name }));
+    if (available.size !== 1) findings.push(finding('skill-lane-missing', `${name}: expected one personal source, found ${available.size}. Report it: installing or updating the personal catalog is separate maintenance that needs the owner's explicit authorization, and the method is never copied into the project.`, { skill: name }));
   }
   const projectRoots = [[lane, null]];
   const seenRoots = new Set();
@@ -68,6 +68,6 @@ export function inspectPersonalSkills(manifest, project, { home = os.homedir(), 
       if (fs.existsSync(path.join(directory, name, 'SKILL.md'))) findings.push(finding('personal-catalog-unavailable', `${name} has a project copy${relative ? ` in ${relative}` : ''}; preserve the personal source and reconcile the project duplicate.`, { skill: name, ...(relative ? { root: relative } : {}) }));
     }
   }
-  if (findings.length) findings.push(finding('personal-catalog-unavailable', 'Personal-catalog setup is incomplete; repair the stated discovery or ownership gap before selection or claims.'));
+  if (findings.length) findings.push(finding('personal-catalog-unavailable', 'Personal-catalog setup is incomplete; selection and claims wait until the stated discovery or ownership gap is resolved within existing authority.'));
   return findings;
 }

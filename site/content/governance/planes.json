@@ -1,0 +1,8 @@
+[
+  {"number":6,"name":"Projection","definition":"Snapshot summary of each plane's claims as of its last visit.","example":"A dated summary says the button was not keyboard accessible when last checked."},
+  {"number":5,"name":"Intent","definition":"What the owner wants, with reasons, boundaries, corrections and confirmation status.","example":"The owner wants a keyboard-accessible button so visitors can use it without a mouse."},
+  {"number":4,"name":"Enduring Context","definition":"Our knowledge of what exists, what Canon and Grounding say exists or should change, and Intent and what to do with it.","example":"The team knows the button currently misses keyboard focus and understands the owner's requested outcome."},
+  {"number":3,"name":"Grounding","definition":"Evidence and proofs used to establish and support the authoritative source of truth.","example":"A recorded keyboard test on a named version shows whether the button receives focus."},
+  {"number":2,"name":"Canon","definition":"The authoritative source of truth for the target: what governs.","example":"The assigned acceptance condition says the button must be operable by keyboard."},
+  {"number":1,"name":"Actuality","definition":"What exists and is being worked on.","example":"The running button receives focus and can be activated with the keyboard."}
+]

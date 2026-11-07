@@ -15,7 +15,23 @@ export function ReadingNav() {
       <ol>
         {nav.map((entry, i) => (
           <li key={entry.href}>
-            <Link className="navlink" href={entry.href} aria-current={i === index ? "page" : undefined}>
+            <Link
+              className="navlink"
+              prefetch={false}
+              href={entry.href}
+              aria-current={i === index ? "page" : undefined}
+              onFocus={(event) => {
+                // Native focus can leave a partly visible link clipped. Move
+                // only the menu row, rather than scrolling ancestor page content.
+                const link = event.currentTarget.getBoundingClientRect();
+                const row = event.currentTarget.closest(".topnav");
+                if (!row) return;
+                const viewport = row.getBoundingClientRect();
+                const left = link.left < viewport.left ? link.left - viewport.left
+                  : link.right > viewport.right ? link.right - viewport.right : 0;
+                if (left) row.scrollBy({ left, behavior: "instant" });
+              }}
+            >
               {entry.label}
             </Link>
           </li>

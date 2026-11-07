@@ -2,6 +2,7 @@
 date: 2026-11-01
 canonicalized_in:
   - AGENTS.md
+superseded_by: 003K-model-tiers-pair-claude-and-codex-models.md
 ---
 
 # Implementors run on Opus or Sonnet

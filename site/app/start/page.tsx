@@ -1,4 +1,4 @@
-// /start: Start here, the first tour page (S-003). The Blueprint's elevator
+// /start: the canonical About introduction (S-003). /about is a compatibility alias. The Blueprint's elevator
 // pitch as short screens, one idea and one picture each, then a toy that moves
 // one sample piece of work through the real lifecycle, then the quickstart:
 // a reading route through the site (S-003 Quickstart: no installation,
@@ -16,8 +16,8 @@ import { Toy } from "./Toy";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = {
-  title: "Start here | Agentic Management System",
-  description: "What the Agentic Management System is, the problem it solves and how a piece of work moves through it, as pictures and a toy.",
+  title: "About | Agentic Management System",
+  description: "About AMS: its purpose, people, methods, limits and first website, with a toy and a route for exploring it.",
 };
 
 const S003 = { label: "S-003", path: "workbench/landmarks/LMK-003-ams-website/specs/S-003-showcase-site/SPEC.md" };
@@ -31,7 +31,7 @@ const README_AGENTS = { label: "README, Working With Agents", path: "README.md" 
 const MANIFEST = { label: "the manifest, skillPolicy", path: "workbench/manifest.json" };
 
 const PARTS = ["Agents", "Workflows", "Intent capture", "Skills", "Tools"];
-const CARRIED = ["What you meant", "Why", "Corrections", "Proof"];
+
 
 function Screen({ id, n, title, children }: { id: string; n: number; title: string; children: ReactNode }) {
   return (
@@ -53,17 +53,15 @@ export default function StartHere() {
     <div className={styles.page}>
       <header className={styles.intro}>
         <p className="eyebrow">Tour</p>
-        <h1>Start here</h1>
+        <h1>About</h1>
         <p className="lede" data-opener="">
-          The Agentic Management System, or <dfn id="ams">AMS</dfn>, is a reusable system for turning{" "}
-          <dfn id="intent">intent</dfn>—what you want, why and within what boundaries—into outcomes with AI.
-          People develop and write down what they want; <dfn id="agent">agents</dfn>,
-          AI assistants that carry out work, deliver it with checks and evidence. Explore the system in pictures,
-          then move one sample piece of work from an idea to done. It ends with a quickstart, a short route through
-          the rest of the site and the first step to take if you want a setup of your own.
+          The Agentic Management System, or <dfn id="ams">AMS</dfn>, brings people and AI assistants together to
+          turn <dfn id="intent">intent</dfn>—what you want, why and within what boundaries—into checked outcomes.
+          The assistants, called <dfn id="agent">agents</dfn>, carry out the work. This introduction explains the
+          system in pictures, lets you try a small demonstration, and points to the evidence and limits.
         </p>
         <p className={styles.jump}>
-          <a href="#try">Skip to the toy</a> <a href="#quickstart">Skip to the quickstart</a>
+          <a href="#try">Try the toy</a> <a href="#refuses">Limits</a> <a href="#built">The project</a> <a href="#quickstart">Where to go next</a>
         </p>
       </header>
 
@@ -98,52 +96,20 @@ export default function StartHere() {
         <SourceLinks sources={[S.blueprint, S.ddr000A, S.glossary]} />
       </Screen>
 
-      <Screen id="problem" n={2} title="The problem it solves">
+      <Screen id="problem" n={2} title="Why keep intent with the work?">
         <p className={styles.say}>
-          Hand work to an AI and the meaning can get lost on the way. The AMS keeps it attached from the request to
-          the result, and nothing counts as done without proof.
+          A useful result needs to reflect what you meant, including the reasons, corrections and boundaries.
+          AMS gives that understanding a lasting home and gives each piece of work a clear owner.
+          <Link href="/why#words"> Why</Link> explores the problem, the intended benefits and what evidence would
+          show that the methods help. These are goals, not a promise that every project improves.
         </p>
-        <figure className={styles.figure}>
-          <div className={styles.lanes}>
-            <div className={styles.lane} data-lane="without">
-              <p className={styles.laneName}>Without it</p>
-              <div className={styles.laneRow}>
-                <span className={styles.end}>Request</span>
-                <ul className={styles.lost}>
-                  {CARRIED.map((c) => (
-                    <li key={c}>
-                      <s>{c}</s>
-                    </li>
-                  ))}
-                </ul>
-                <span className={styles.end}>A result, but is it right?</span>
-              </div>
-            </div>
-            <div className={styles.lane} data-lane="with">
-              <p className={styles.laneName}>With the AMS</p>
-              <div className={styles.laneRow}>
-                <span className={styles.end}>Request</span>
-                <ul className={styles.kept}>
-                  {CARRIED.map((c) => (
-                    <li key={c}>{c}</li>
-                  ))}
-                </ul>
-                <span className={styles.end}>The result, with its proof</span>
-              </div>
-            </div>
-          </div>
-          <figcaption>
-            Without a system, what you meant, why, your corrections and the proof fall away between the request and the
-            result. With the AMS all four travel with the work.
-          </figcaption>
-        </figure>
-        <SourceLinks sources={[S.blueprint, S.adr001H]} />
       </Screen>
 
       <Screen id="flow" n={3} title="How a piece of work moves">
         <p className={styles.say}>
-          Every piece of work passes the same seven stages, each run by skills: written methods an agent loads before
-          it acts. Review findings come back as a new Journey, and kept improvements start the next loop.
+          The methods below cover agreeing what is wanted, preparing work, carrying it out and judging the result.
+          A skill is a written method an agent uses for a particular job; the work selects the methods it needs.
+          <Link href="/how-it-works"> How it works</Link> explains the records and decisions behind the stages.
         </p>
         <figure className={styles.figure}>
           <ol className={styles.skillStages} data-skills-diagram="">
@@ -157,7 +123,9 @@ export default function StartHere() {
                   <ul className={styles.skillMain} aria-label={`${st.name}: main flow`}>
                     {st.main.map((k) => (
                       <li key={k} data-skill={k} data-main="">
-                        {k}
+                        <Link className={styles.skillLink} href={`/skills/${k}`}>
+                          {k}
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -165,7 +133,9 @@ export default function StartHere() {
                     <ul className={styles.skillUsed} aria-label={`${st.name}: also used`}>
                       {st.used.map((k) => (
                         <li key={k} data-skill={k}>
-                          {k}
+                          <Link className={styles.skillLink} href={`/skills/${k}`}>
+                            {k}
+                          </Link>
                         </li>
                       ))}
                     </ul>
@@ -264,14 +234,20 @@ export default function StartHere() {
             </ul>
           </div>
           <figcaption>
-            Three orchestrators, all Claude, work for the owner in this project. No session holds untrusted input, secrets and the power
+            This project separates website, local data and consistency work into orchestration roles. Different AI assistants can carry those roles. No session holds untrusted input, secrets and the power
             to act in the outside world all at once.
           </figcaption>
         </figure>
         <SourceLinks sources={[S.adr002Z, S.adr002P]} />
       </Screen>
 
-      <Screen id="refuses" n={6} title="What it refuses to do">
+      <Screen id="refuses" n={6} title="Limits: what it refuses to do">
+        <p>
+          This website runs no agents and writes no project records. Its toy is an illustration, not a control for
+          real work. Published activity, a passing check and an audit score are different from demonstrated
+          improvement. <Link href="/how-it-works#guarantees">Checks and human judgment</Link> explain why those
+          boundaries matter; <Link href="/rsi">RSI results</Link> presents the evidence and its remaining gaps.
+        </p>
         <ul className={styles.refusals} data-refusals="">
           <li>
             <strong>Go past the ask.</strong> Nothing destructive, paid or wider in scope without asking first.
@@ -305,7 +281,7 @@ export default function StartHere() {
       </Screen>
 
       <Screen id="today" n={7} title="Where it stands today">
-        <ul className={styles.today}>
+        <ul id="status" className={styles.today}>
           <li>
             The Workbench Node lifecycle and Python command-line tools are working components; the assembled RSI loop has not been demonstrated as a runtime system.
             <SourceLinks sources={[ARCH, WORKBENCH, PYTHON]} />
@@ -317,6 +293,31 @@ export default function StartHere() {
           </li>
         </ul>
       </Screen>
+
+      <section id="built" className={styles.screen} aria-labelledby="project">
+        <h2 id="project">The project behind this website</h2>
+        <p>
+          Kayden Clark created this AMS project to develop reusable ways of working with AI. This website is its
+          first outside product: its development follows the methods it explains. Friction from the
+          build supplies issues to investigate and bounded improvements to compare; merely recording a repair
+          does not show that it helped.
+        </p>
+        <h3 id="holds">What the project files hold</h3>
+        <p>
+          The Workbench holds the intended outcomes, assignments, decisions, knowledge and feedback. The local
+          Grill Board helps the owner answer questions about the work; Python tools handle stored evidence.
+          This website presents explanations and reads published results. These components have different jobs
+          and permissions; <Link href="/how-it-works#grill-board">the Grill Board</Link> and
+          <Link href="/how-it-works#governance"> governance</Link> sections explain those boundaries.
+        </p>
+        <h3 id="license">License and delivery</h3>
+        <p>
+          The project uses the MIT License, copyright 2026 Kayden Clark. Reuse and modification are allowed under
+          its terms, including keeping its copyright and permission notice. Website changes are checked on dev;
+          only the owner promotes them to the public main version. The footer displays the build revision as text.
+        </p>
+        <SourceLinks sources={[S003, { label: "DDR-000R", path: "workbench/docs/ddr/000R-the-license-is-mit-copyright-kayden-clark.md" }, { label: "LICENSE", path: "LICENSE" }]} />
+      </section>
 
       <Screen id="quickstart" n={8} title="Quickstart: where to go from here">
         <p className={styles.say}>
@@ -331,8 +332,8 @@ export default function StartHere() {
           </li>
           <li>
             <strong>A real piece of work.</strong> <Link href="/how-it-works#example">How it works</Link> follows
-            one real Spec, a bounded destination with acceptance conditions, and one of its Tasks that plans execution from this site to their files, so you
-            can see how a request is written down, split up and closed with proof.
+            a real Spec, a bounded destination with acceptance conditions, and two of its Tasks that plan and carry out execution from this site. You can
+            see how work was split up, checked and handed back, including what the recorded checks could not prove.
           </li>
           <li>
             <strong>A demonstration and the skills.</strong> The <a href="#try">toy</a> on this page shows who holds
@@ -360,7 +361,7 @@ export default function StartHere() {
         </div>
         <p>
           New words along the way are in the <Link href="/glossary">Glossary</Link>, and{" "}
-          <Link href="/about">About</Link> says what the repository holds.
+          <a href="#holds">the project files</a> explain where the different parts live.
         </p>
       </Screen>
     </div>

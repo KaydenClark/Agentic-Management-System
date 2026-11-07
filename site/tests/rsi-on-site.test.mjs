@@ -1,9 +1,10 @@
 import './tsx-register.mjs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createElement } from 'react';
+import { createElement, Fragment } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 const { RepairEvidence } = await import('../app/rsi/repair.tsx');
+const { RoundTwoEvidence } = await import('../app/rsi/round-two.tsx');
 const { RsiView } = await import('../app/rsi/view.tsx');
 const { seriesViews } = await import('../app/rsi/data.ts');
 const { linkCoverageCase } = await import('../app/rsi/fixtures/cases.ts');
@@ -24,7 +25,7 @@ test('RSI presents a paired chart and its real underlying comparison on-site', (
 test('all RSI evidence links remain on-site and fragment links resolve', () => {
   const data = structuredClone(linkCoverageCase);
   for (const row of [...data.runs, ...data.results]) row.source_url = 'https://github.com/example/repository/commit/example';
-  const html = renderToStaticMarkup(createElement(RsiView, { views: seriesViews(data), unavailable: false }, createElement(RepairEvidence))) + renderToStaticMarkup(createElement(Footer));
+  const html = renderToStaticMarkup(createElement(RsiView, { views: seriesViews(data), unavailable: false }, createElement(Fragment, null, createElement(RoundTwoEvidence), createElement(RepairEvidence)))) + renderToStaticMarkup(createElement(Footer));
   const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map(m => m[1]);
   assert.equal(new Set(ids).size, ids.length, 'evidence destinations must be unique');
   for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {

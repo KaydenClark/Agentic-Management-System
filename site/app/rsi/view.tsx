@@ -1,9 +1,10 @@
+import { Signal } from "../components/Signal";
 // The /rsi page body (S-007). Pure: it renders the series views it is given
 // and reads nothing, so render tests can feed it labeled fixtures and the
 // page feeds it Supabase rows. Every number is a link to the rows behind it,
 // and each row shows its strength label.
 import type { ReactNode } from "react";
-import type { Arm, Count, ExecutionState, Mark, Point, RsiResult, Series, SeriesView, Strength } from "./data";
+import type { Arm, Count, ExecutionState, Mark, Point, RsiResult, RunEvidence, Series, SeriesView, Strength } from "./data";
 import { SPLITS } from "./series";
 import styles from "./rsi.module.css";
 
@@ -186,6 +187,7 @@ function SeriesBlock({ series, index, view }: { series: Series; index: number; v
       data-provider={series.provider}
       data-model={series.model}
       data-effort={series.effort}
+      data-grader={series.graderVersion}
       aria-label={label}
     >
       <h4 className={styles.seriesTitle}>
@@ -198,8 +200,10 @@ function SeriesBlock({ series, index, view }: { series: Series; index: number; v
       </h4>
       <p className={styles.provenance} data-provenance="">
         Provider <code data-label="">{series.provider}</code>, model <code data-label="">{series.model}</code>, effort{" "}
-        <code data-label="">{series.effort}</code>. A different provider, model or effort starts a new series.
+        <code data-label="">{series.effort}</code>. Grader <code data-label="">{series.graderVersion}</code>.
+        A different provider, model, effort, grader, observed task set or per-task attempt coverage starts a new series.
       </p>
+      <p className={styles.provenance}>Observed tasks: {series.observedTasks.map((task, i) => <span key={task}>{i ? ", " : ""}<code data-label="">{task}</code></span>)}. Immutable case versions are unknown; these lines describe recorded pass share, not equivalent benchmarks or useful improvement.</p>
       <SeriesLine series={series} versionOrder={view.versions.map((v) => v.id)} label={label} />
       <ol className={styles.points}>
         {series.points.map((p, i) => (
@@ -243,7 +247,7 @@ function SeriesPlace({ series: view, unavailable }: { series: SeriesView; unavai
   );
 }
 
-export function RsiView({ views, unavailable, readAt = null, children }: { views: readonly SeriesView[]; unavailable: boolean; readAt?: string | null; children?: ReactNode }) {
+export function RsiView({ views, unavailable, readAt = null, stale = false, runEvidence = [], children }: { views: readonly SeriesView[]; unavailable: boolean; readAt?: string | null; stale?: boolean; runEvidence?: readonly RunEvidence[]; children?: ReactNode }) {
   const anyRows = views.some((v) => !v.empty);
   return (
     <div className={styles.page} data-rsi-page="">
@@ -258,21 +262,24 @@ export function RsiView({ views, unavailable, readAt = null, children }: { views
         ) : (
           <p className="lede">
             RSI is recursive self-improvement: compare a bounded change on real work and keep only supported improvements.
-            Recorded development comparisons appear first; behavioral trial results follow. No sample or placeholder data is shown.
+            Recorded project activity appears first, then each skill&apos;s trend over recorded RSI loops, shared-skill repair results and development comparisons; behavioral trial results follow. No sample or placeholder data is shown.
           </p>
         )}
       </header>
       {children}
-      <section className={styles.place} aria-labelledby="reading-results">
+      <section className={styles.place} aria-labelledby="reading-results" data-read-state={unavailable ? "failed" : stale ? "stale" : anyRows || runEvidence.length ? "populated" : "empty"}>
         <h2 id="reading-results">How to read the trial results</h2>
         {unavailable ? (
-          <p className={styles.note} data-load-note="">
+          <Signal kind="heat" label="Results unavailable">
+          <p data-load-note="">
             Results could not be loaded from the data store. No trial count is inferred from that failed read.
-            The page tries again on its next refresh; no earlier successful data is retained here, and the last
-            successful read is unknown for this response.
+            The page tries again on its next refresh; no earlier successful data is available in this response, and the last
+            successful read is unknown. Cache retention across deployments or hosts is not guaranteed.
           </p>
+          </Signal>
         ) : null}
-        {readAt ? <p className={styles.muted}>Last successful read: <time dateTime={readAt}>{Number.isFinite(Date.parse(readAt)) ? `${readTime.format(new Date(readAt))} UTC` : readAt}</time>.</p> : null}
+        {stale ? <Signal kind="heat" label="Trial data may be stale"><p>The retained successful read is older than five minutes. Its refresh outcome is unknown; the server retries on later requests. These rows may omit newer trials or attempts.</p></Signal> : null}
+        {readAt ? <p className={styles.muted} data-review-exclude="">Last successful read: <time dateTime={readAt}>{Number.isFinite(Date.parse(readAt)) ? `${readTime.format(new Date(readAt))} UTC` : readAt}</time>.</p> : null}
         <p className={styles.muted}>
           Development charts compare recorded checks and document lengths. Trial charts below show pass share;
           a square point marks a regression. An empty frame contains no trial data.
@@ -287,6 +294,23 @@ export function RsiView({ views, unavailable, readAt = null, children }: { views
           A later comparison must retain the failed row, identify the change, and rerun the candidate beside the
           current version and controls. A stopped attempt is evidence of a stop, not improvement.</p>
       </section>
+      {runEvidence.length > 0 ? (
+        <section className={styles.place} aria-labelledby="run-only-evidence" data-run-evidence="">
+          <h2 id="run-only-evidence">Runs without trial results</h2>
+          <p>No trial result rows were recorded for these attempts. Task, split and pass grade are unknown; these runs supply no trial count or improvement score.</p>
+          <ul className={styles.points}>
+            {runEvidence.map(({ run, marks }) => (
+              <li key={run.id} data-run-id={run.id} id={`rsi-run-${run.id}`} className={styles.row}>
+                <p><strong>{({ running: "Running attempt", completed: "Completed run without a result", stopped: "Stopped attempt", failed: "Failed run" })[run.state]}</strong>: <code>{run.run_key}</code>.</p>
+                <p>{ARM[run.arm] ?? run.arm}. Provider <code>{run.provider}</code>, model <code>{run.model}</code>, effort <code>{run.effort}</code>. Grader <code>{run.grader_version}</code>.</p>
+                <p>Version: runtime <code>{run.runtime_commit}</code>, controls <code>{run.controls_commit}</code>, skills <code>{run.skills_commit}</code>.</p>
+                <p>Started <time dateTime={run.started_at}>{run.started_at}</time>. Strength: <span data-strength="">{STRENGTH[run.strength] ?? run.strength}</span>. Source: <code>{run.source_kind} {run.source_ref}</code>.</p>
+                <ul className={styles.marks}>{marks.map((mark) => <MarkItem key={mark.kind} mark={mark} />)}</ul>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
       {SPLITS.map(({ split, title, about }) => (
         <section key={split} className={styles.split} data-split={split} aria-labelledby={`rsi-split-${split}`}>
           <h2 id={`rsi-split-${split}`}>{title}</h2>

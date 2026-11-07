@@ -294,6 +294,170 @@ Kayden explicitly answered Publish and merge into dev to the request to push the
 <!-- /jot-entry -->
 
 <!-- jot-entry -->
+### JOT-4adf0b91-665d-4abb-8644-4835b40e905a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:17:13.071Z
+Author: Kayden
+Source: Kayden, S-003 orchestration and carry instruction in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden assigns S-003 to orchestration using appropriate frontend web development skills and carry through completion. This releases preparation-only execution holds for the five confirmed presentation Tasks TK-001P through TK-001T: coherent orientation, persistent navigation, visual glossary, readable typography and visible Grill Board palette. Execute serially with one writer for shared site files, inspect the assembled destination and deliver checked site PRs into dev. Preserve unresolved website-only-link feedback outside the separately approved RSI scope. Human QA, whole-Spec acceptance and owner-only dev-to-main promotion remain distinct. No new model campaigns, paid services or shared-skill installation are authorized.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-09260032-786b-47fb-8c71-1d7c4f387bb2
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:25:07.680Z
+Author: Kayden
+Source: Kayden, explicit confirmation of S-003 website-only material readback in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: JOT-78d8b232-f2c6-4697-ab8c-9e25f60760ba
+
+Kayden confirms and authorizes implementation across S-003: website examples and supporting material are presented on the website, with irrelevant material omitted, instead of sending visitors to GitHub. Visitors should understand and assess AMS without leaving the site. Preserve source and revision identity, including the deployed SHA visibly as text; apply this to source and footer links as well. This confirms the previously pending cross-S-003 link readback and supersedes its unresolved state. Implement within checked feature-to-dev delivery; Human QA and owner-only production promotion remain separate. This answer does not itself authorize a retry of the stopped typography verification.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-d161d980-cc09-430b-9207-cabfb5daf703
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:26:00.107Z
+Author: Kayden
+Source: Kayden, corrective-run authorization for draft PR146 in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden explicitly authorizes a corrective run after the S-003 typography three-strike stop and directs continuation. Finish one production build, freeze it until all browser/reflow checks complete, repair remaining scoped defects and continue S-003. Preserve both failures and prior incomplete run. Checked delivery targets dev; this grants no Human QA, production promotion, new trials or shared-skill installation.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-40afcae9-af5c-4573-8ddb-afcdfea99ac0
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T06:59:28.766Z
+Author: Kayden
+Source: Kayden, orientation corrective-run authorization in AMS chat, 2026-11-02
+Topic: website-presentation
+Supersedes: none
+
+Kayden explicitly authorizes correction of the stopped orientation Task in draft PR147 and continuation of S-003. Correct the new alias checker to be independent of HTML attribute order while retaining negative controls, finish one build, verify the full site suite and affected rendered experience, then continue checked site delivery to dev. Preserve the two failed attempts209/214 and211/214 and their source. No Human QA, production promotion or shared-skill change is implied.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8f52b5d8-13f7-4428-8cee-035352c0cd1a
+Kind: intent
+State: confirmed
+Recorded: 2026-11-03T07:44:21.595Z
+Author: Kayden
+Source: Kayden, explicit navigation focus-correction authorization in AMS chat, 2026-11-03
+Topic: website-presentation
+Supersedes: none
+
+Kayden authorizes only the bounded navigation focus correction after draft PR148 stopped. Establish why phone keyboard focus leaves links partly clipped, guarantee full focus visibility and verify the80case matrix and affected browser checks before checked dev delivery. Preserve both failed attempts and exact geometry. This grants no blanket permission for future corrective runs or weakening checks, and no Human QA or production promotion. The earlier S-003 assignment remains the source for other already-approved Tasks; any later three-strike stop still needs its own authorization.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-5529977d-ad73-433f-9a3c-85dede8946ba
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T03:57:17.313Z
+Author: Kayden
+Source: Kayden, RSI Results prototype review and implementation approval in AMS chat, 2026-11-03
+Topic: website-presentation
+Supersedes: none
+
+For every skill the RSI loop works on, the RSI page shows whether RSI is actually improving it over time. Each RSI loop contributes one plotted point per skill: the Alignment Score of the version that loop kept, pooled over the deciding tier's runs, with its fitness level. Kayden chose two views from the prototypes: a per-skill line chart (one point per loop, a running average line, a fitness-level strip, and a visible break where a new test contract or model starts a new line) and a skills-by-loops Fitness level per loop strip. The High and Small tier runs stay visible per skill as secondary marks that never decide the point. Better colors are wanted: Excellent is green. Results are real recorded data; there are no more empty-looking results where real results exist. Kayden approved implementation through orchestrate.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-41b13707-6dc7-476a-9ed9-1edb7dae9d43
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T06:06:34.461Z
+Author: owner-assistant
+Source: Owner approval in website repair chat, 2026-11-04
+Topic: website-presentation
+Supersedes: none
+
+The owner approved four bounded repairs: preserve contrasting candidate chart fills, keep freshness-only changes out of page review hashes, separate grader versions in trial series, and show stopped or failed runs with no result rows. Record actual skill failures with skill, reliably known model tier (otherwise unknown), failed activity, correct outcome and evidence. Preserve real pass and fail evidence, do not invent results or authorize new trials, redesign, owner QA or dev-to-main promotion. This grants execution for these repairs; earlier task ownership and project delivery gates remain.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-39aff91b-1bef-4a28-b67c-f846f1f36b2d
+Kind: intent
+State: confirmed
+Recorded: 2026-11-04T07:06:19.479Z
+Author: owner-assistant
+Source: Owner publication and destination approval in website repair chat, 2026-11-04
+Topic: website-presentation
+Supersedes: none
+
+After the public push was denied, the owner authorized merging into dev and main for the things that belong in each. This releases publication and checked destination merges for the four website fixes and associated failure records. Website implementation goes to dev; non-site failure records go to main through their own checked PR. It does not authorize unrelated dev-to-main promotion or supply Human QA. Preserve previous denials and evidence limits.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-8634622a-512b-44d9-9b99-0f973c450356
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T07:38:36.032Z
+Author: Kayden (captured by Codex S003 writer)
+Source: chat:ams-12-outcomes-two-confirmations-20261105
+Topic: website-presentation
+Supersedes: none
+
+On 2026-11-05 Kayden requested twelve AMS outcomes through orchestrate and carry, including implementation of the missing visitor experience in S-009 and S-010. He then clarified that his two prior confirmations were sufficient. This captures that existing confirmed intent and execution approval; it requests no new confirmation and establishes no implementation proof.
+
+Kayden authorizes implementation of S-009 (demo Grill Board) and S-010 (governance stack and flow charts), with bounded Tasks, Check, QA, independent Review and checked website delivery into dev. S-009 recovers the retained PR76 work: clearly labeled everyday sample cards and local-only interactions that send no answers. S-010 explains governance and the complete chart inventory using the current six claim-plane definitions and actual lifecycle states/transitions; verification must detect diagram drift. Both experiences must connect to the tour, glossary, navigation and review inventory, and work at375px and desktop in both themes. Shared S-003 integration remains separately assigned; this entry does not assign another writer's files.
+
+Preserve historical evidence, prior failed attempts, active Wiki/Board writers and all unchanged boundaries. PR101 stays stopped; initial candidate -> retry -> retry -> stop remains, baseline excluded. This website authority grants no new model campaign, evaluator qualification, personal skill installation or wider rollout. Public pages expose no review status/private criticism, and samples send no answers. Human QA is actual owner judgment; only Kayden controls dev-to-main promotion. Earlier preparation-only entries remain historical; this later scoped implementation instruction releases S-009/S-010 execution only, not unrelated holds.
+<!-- /jot-entry -->
+
+## Protected reader evidence — 2026-11-06
+
+Independent authenticated readback of dev `517184e46a4b3ba0ebda36a54a6744e1b7c3b606` established a working stored-row reader, beyond READY metadata: HTTP 200, the exact deployed footer, linked result rows in both task and version views, and a successful-read timestamp. [TK-002](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002/TASK.md) owns the dated safe summary and verification limits; [the site procedure](../../site/README.md#protected-dev-reader-readback) explains reproducible protected access. Raw protected responses and access tokens stay private. This closes the earlier observation gap for that identified deployment; later dev revisions still require readback. It establishes neither whole-Spec acceptance, owner Human QA nor improved outcomes.
+
+<!-- jot-entry -->
+### JOT-7a282d6d-3ca7-47bd-bc90-4c662fa6ab52
+Kind: observation
+State: current
+Recorded: 2026-11-06T10:35:27.226Z
+Author: codex-s007-reader-readback
+Source: Authenticated Vercel connector readback, dev 517184e46a4b3ba0ebda36a54a6744e1b7c3b606, 2026-11-06; S-007 TK-002
+Topic: website-presentation
+Supersedes: none
+
+Protected dev returned HTTP 200 with the exact footer SHA, stored result links in both task and version views and last successful read 2026-11-06T10:21:12.288Z. No unavailable message rendered. This establishes reader behavior only for the identified deployment; it grants no whole-Spec acceptance, owner QA, improvement claim or later deployment certification. Safe summary belongs TK-002; authenticated readback procedure belongs site/README.md. Raw protected HTML and access details remain private.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-54c3a590-89e6-4bf7-95ef-4c50771e7ac8
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T08:57:14.738Z
+Author: Kayden (captured by Codex S003 writer)
+Source: chat:ams-12-outcomes-task8-two-confirmations-20261105
+Topic: website-presentation
+Supersedes: none
+
+Source is Kayden's AMS twelve-outcome request of 2026-11-05, beginning with /Orchestrate and /carry please, and his subsequent correction: "We're my two confirmations not enough? I'm confused now". This records the existing twice-confirmed scope and execution authority. It requests no new approval and establishes no implementation, review, acceptance or deployment proof.
+
+Exact task8 owner request:
+"Recover the bounded website fixes.
+Resume #151 only under a scoped release of its stop: establish document-start keyboard traversal, retain real reachability/focus checks, and add negative controls before rerunning the same enlarged-text matrix. Resume #165 by coherently shortening its record while preserving receipts and requirements, then verify the existing chart fixes. Inspect #111’s navigation work against the current shell before reusing it.
+Pass condition: the original failures are resolved without suppressing checks, and current-base candidates are reviewed, tested, and contained in dev."
+
+This is the scoped release for those bounded website recovery operations: S-003/#151 keyboard verification, S-007/#165 record and existing-chart verification, and S-008/#111 inspection against the current shell before reuse. Retain the actual prior failures, requirements, receipts, source identities and stop history. It grants no unchecked reuse or suppression of detecting assertions. Follow the current Spec/Task claim and review workflow, preserve unrelated writers, and deliver checked current-base website candidates into dev.
+
+Earlier S-007 approval/publication Jots remain unchanged. JOT-8634622a-512b-44d9-9b99-0f973c450356 remains the separate S-009/S-010-only authority capture; this entry neither rewrites it nor broadens its original claim. PR101 stays stopped. Preserve r1 and its three assessment runs, with initial candidate -> retry -> retry -> stop and baseline excluded; no Task/campaign rename resets exhausted attempts. No new model trials, evaluator qualification, paid services, shared-skill installation or wider rollout is granted by this website recovery entry. Actual Human QA and owner-controlled dev-to-main promotion remain required; no production promotion or Human QA waiver is implied.
+<!-- /jot-entry -->
+
+### Current deployment recovery — 2026-11-06
+
+The later inventory build failure on dev40acb3a is historical. Authenticated readback of READY dev86cd758ccdbe5a9064dfeb7a224a8d4d0372e2ee independently confirmed HTTP200, the exact footer SHA, linked stored rows in both task/version views and a successful-read timestamp. [TK-002 CHECK](../landmarks/LMK-002-rsi-presentation/specs/S-007-rsi-charts/tasks/TK-002/CHECK.md#recovered-current-deployment--2026-11-06) retains the dated safe evidence and original failed deployment. This verifies the recovered identified deployment, without certifying later deployments, whole-Spec acceptance or owner QA.
+
+<!-- jot-entry -->
 ### JOT-7621aa25-99a9-4a6c-ba9d-8fa55e6a8d82
 Kind: intent
 State: confirmed

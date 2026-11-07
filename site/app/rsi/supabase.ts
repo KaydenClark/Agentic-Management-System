@@ -1,10 +1,6 @@
-// Reads S-006's RSI tables for /rsi with the publishable key (S-007 TK-002).
-// Server only: page.tsx calls it while rendering on the server (at build and
-// on revalidation), so the key stays in the server bundle and never reaches
-// served HTML, RSC payloads or client JS. Plain fetch against PostgREST, no
-// client library. Any failure (missing env, refused request, error status,
-// unexpected body) returns the empty data marked unavailable; it never
-// throws, so the build cannot fail on it.
+// Server-side public PostgREST readers. No service key or private lineage.
+// Each request bypasses fetch caching; cached.ts retains only fully validated
+// successful envelopes, keeping failures distinct from a successful empty read.
 import { emptyData, type RsiData, type RsiResult, type RsiRun } from "./data";
 
 const RUN_COLUMNS = [
@@ -19,10 +15,30 @@ const RESULT_COLUMNS = [
   "output_tokens", "turns", "wall_seconds", "metric_unknowns", "source_kind", "source_ref", "source_url", "strength", "is_test", "detail",
 ].join(",");
 
+// Exclude summary and detail: arbitrary operational/private text is never a
+// presentation contract. Unexpected response fields are discarded as well.
+const EVENT_FIELDS = ["id", "kind", "subject", "occurred_at", "recorded_at", "source_kind", "source_ref", "source_url", "strength", "is_test"] as const;
+const EVENT_COLUMNS = EVENT_FIELDS.join(",");
+export interface BuildEvent {
+  id: number;
+  kind: "merge";
+  subject: string;
+  occurred_at: string;
+  recorded_at: string;
+  source_kind: "commit";
+  source_ref: string;
+  source_url: string;
+  strength: "recorded_fact";
+  is_test: boolean;
+}
+export interface BuildActivity { events: BuildEvent[]; unsupported: number }
+export const emptyActivity: BuildActivity = { events: [], unsupported: 0 };
+export type ReadResult<T> = { ok: true; data: T; readAt: string } | { ok: false; data: T; readAt: null; reason: string };
+
 const PAGE = 1000; // Supabase's default PostgREST row cap per request.
 const MAX_PAGES = 50;
 
-export type LoadResult = { ok: true; data: RsiData; readAt: string } | { ok: false; reason: string; data: RsiData; readAt: null };
+export type LoadResult = ReadResult<RsiData>;
 
 interface LoadOptions {
   env?: Readonly<Record<string, string | undefined>>;
@@ -37,6 +53,9 @@ function validRow(table: string, value: unknown): boolean {
   const row = value as Record<string, unknown>;
   const positiveInteger = (v: unknown) => typeof v === "number" && Number.isSafeInteger(v) && v > 0;
   if (!positiveInteger(row.id) || typeof row.is_test !== "boolean") return false;
+  // Unsupported core fields are counted without being returned to the page.
+  // A malformed row identity still fails the read rather than inventing counts.
+  if (table === "build_events") return true;
   const labels = ["arm", "provider", "model", "effort", "source_kind", "source_ref", "strength"];
   if (labels.some((key) => typeof row[key] !== "string" || !(row[key] as string).trim())) return false;
   for (const key of ["runtime_commit", "controls_commit", "skills_commit", "grader_version"]) {
@@ -70,6 +89,7 @@ async function readTable<T>(base: string, key: string, table: string, columns: s
       res = await fetchImpl(url.toString(), {
         headers: { apikey: key, Authorization: `Bearer ${key}`, Accept: "application/json" },
         signal: AbortSignal.timeout(timeoutMs),
+        cache: "no-store", // only validated successful envelopes are cached by cached.ts
       });
     } catch (err) {
       throw new LoadError(`${table}: request failed (${err instanceof Error ? err.name : "error"})`);
@@ -83,7 +103,10 @@ async function readTable<T>(base: string, key: string, table: string, columns: s
     }
     if (!Array.isArray(body)) throw new LoadError(`${table}: response was not a row list`);
     if (!body.every((row) => validRow(table, row))) throw new LoadError(`${table}: response contained malformed rows`);
-    rows.push(...(body as T[]));
+    const projected = table === "build_events"
+      ? body.map((row) => Object.fromEntries(EVENT_FIELDS.map((key) => [key, row[key]])))
+      : body;
+    rows.push(...(projected as T[]));
     if (body.length < PAGE) return rows;
   }
   throw new LoadError(`${table}: more rows than this page reads`);
@@ -106,5 +129,41 @@ export async function loadRsiData(options: LoadOptions = {}): Promise<LoadResult
     return { ok: true, readAt: new Date().toISOString(), data: { runs: runs.filter((r) => r?.is_test === false), results: results.filter((r) => r?.is_test === false) } };
   } catch (err) {
     return { ok: false, reason: err instanceof LoadError ? err.message : "unexpected read failure", data: emptyData, readAt: null };
+  }
+}
+
+// The first reviewed public producer path is exact Git-derived merge facts.
+// Other kinds/locators need their own safe contract, not a general text filter.
+function supportedMerge(row: Record<string, unknown>): boolean {
+  const iso = (v: unknown) => {
+    if (typeof v !== "string" ||
+      !/^\d{4}-\d{2}-\d{2}T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,6})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.test(v) ||
+      !Number.isFinite(Date.parse(v))) return false;
+    // Date.parse normalizes impossible dates such as February30; compare
+    // the calendar date after UTC normalization instead of accepting it.
+    return new Date(`${v.slice(0, 10)}T00:00:00Z`).toISOString().slice(0, 10) === v.slice(0, 10);
+  };
+  return row.kind === "merge" && row.source_kind === "commit" && row.strength === "recorded_fact" &&
+    typeof row.subject === "string" && /^PR #[1-9]\d*$/.test(row.subject) && Number.isSafeInteger(Number(row.subject.slice(4))) &&
+    typeof row.source_ref === "string" && /^[a-f0-9]{40}$/.test(row.source_ref) &&
+    row.source_url === `https://github.com/KaydenClark/Agentic-Management-System/commit/${row.source_ref}` &&
+    iso(row.occurred_at) && iso(row.recorded_at);
+}
+
+// Independent stream: an activity-read failure cannot erase trial evidence.
+export async function loadBuildEvents(options: LoadOptions = {}): Promise<ReadResult<BuildActivity>> {
+  const env = options.env ?? process.env;
+  const base = env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!base || !key) return { ok: false, reason: "public data reader is not configured", data: emptyActivity, readAt: null };
+  try {
+    const rows = await readTable<Record<string, unknown>>(base, key, "build_events", EVENT_COLUMNS, options.fetchImpl ?? fetch, options.timeoutMs ?? 8000);
+    const publicRows = rows.filter((row) => row.is_test === false);
+    if (new Set(publicRows.map((row) => row.id)).size !== publicRows.length) throw new LoadError("build_events: conflicting row identities");
+    const events = publicRows.filter(supportedMerge) as unknown as BuildEvent[];
+    if (new Set(events.map((row) => row.source_ref)).size !== events.length) throw new LoadError("build_events: conflicting source identities");
+    return { ok: true, data: { events, unsupported: publicRows.length - events.length }, readAt: new Date().toISOString() };
+  } catch (err) {
+    return { ok: false, reason: err instanceof LoadError ? err.message : "unexpected activity read failure", data: emptyActivity, readAt: null };
   }
 }
