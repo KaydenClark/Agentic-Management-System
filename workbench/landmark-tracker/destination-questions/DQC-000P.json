@@ -1,7 +1,7 @@
 {
   "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000P",
-  "revision": 2,
+  "revision": 3,
   "title": "RSI: Sharing accepted versions",
   "question": "After merge, should participating machines update automatically, on startup, or only when you request it?",
   "answer": null,
@@ -87,10 +87,67 @@
           }
         }
       ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-07T00:52:08.166Z",
+      "reason": "DQC correct",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "needs-rewrite",
+            "proposal": {
+              "readback": "**Question:** After merge, should participating machines update automatically, on startup, or only when you request it?\n\n**Recommended answer:** Offer an explicit enrollment policy for checked updates between uses, with pinned versions for active work, preservation of local edits and a rollback path. Record installed and actually loaded versions. Choose the update timing and enrollment scope with you.\n\n**Why:** I assumed a distribution policy without your direction. Merging shared source does not make a repaired version available in every environment.\n\n**Intended impact:** Determines how improvements reach your work and how later use can establish whether the repair held.",
+              "why": "I assumed a distribution policy without your direction. Merging shared source does not make a repaired version available in every environment.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000E",
+                "DQC-000O"
+              ]
+            },
+            "digest": "f7750265a384b454986747ad85756d2364d68112c45145eea9bca57f10e9b813",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000P-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:21.330Z",
+                "requestDigest": "c8e23bdfe4faf1b94d2f783f4e2df33ae39e12bd13db40f2f3384a1c62d19d7d",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-firstpass-20261106-DQC-000P-answer",
+                "type": "correct",
+                "at": "2026-11-07T00:52:08.166Z",
+                "requestDigest": "40f2b86e484515437d80236d49ad1438d09274bbe66cfbb638c0e3bfe0c43b52",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "note": "We should either have something automated, or that I can run that just updates the skills.",
+                "kind": "change",
+                "revision": 3,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "lifecycle": {
-    "state": "pending",
+    "state": "needs-rewrite",
     "proposal": {
       "readback": "**Question:** After merge, should participating machines update automatically, on startup, or only when you request it?\n\n**Recommended answer:** Offer an explicit enrollment policy for checked updates between uses, with pinned versions for active work, preservation of local edits and a rollback path. Record installed and actually loaded versions. Choose the update timing and enrollment scope with you.\n\n**Why:** I assumed a distribution policy without your direction. Merging shared source does not make a repaired version available in every environment.\n\n**Intended impact:** Determines how improvements reach your work and how later use can establish whether the repair held.",
       "why": "I assumed a distribution policy without your direction. Merging shared source does not make a repaired version available in every environment.",
@@ -121,6 +178,17 @@
         "source": null,
         "note": null,
         "revision": 2,
+        "round": "rsi-cross-project-20261106"
+      },
+      {
+        "eventId": "rsi-firstpass-20261106-DQC-000P-answer",
+        "type": "correct",
+        "at": "2026-11-07T00:52:08.166Z",
+        "requestDigest": "40f2b86e484515437d80236d49ad1438d09274bbe66cfbb638c0e3bfe0c43b52",
+        "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+        "note": "We should either have something automated, or that I can run that just updates the skills.",
+        "kind": "change",
+        "revision": 3,
         "round": "rsi-cross-project-20261106"
       }
     ]

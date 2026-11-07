@@ -343,7 +343,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000I, DQC-000N.
 
 ## DQC-000P — RSI: Sharing accepted versions
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000P.json)
+Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000P.json)
 
 <pre>**Question:** After merge, should participating machines update automatically, on startup, or only when you request it?
 
@@ -358,6 +358,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000O.
 
 - propose at r2
+- correct at r3: We should either have something automated, or that I can run that just updates the skills\.
 
 ## DQC-000Q — RSI: Website and completion proof
 
