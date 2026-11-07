@@ -200,23 +200,39 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000F.
 
 ## DQC-000H — RSI: Evidence and privacy
 
-Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000H.json)
+Revision 5; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000H.json)
 
-<pre>**Question:** What information should the repair loop retain, and what should the public website show?
+<pre>**Question:** What do we save, and what do we show on the website?
 
-**Recommended answer:** Retain the failure history and supporting evidence needed to diagnose and repair skills, with access for the authorized repair worker. Publicly show skill/version identities, each audit run’s Alignment score and model tier/provider, and each three-run assessment’s aggregate Fitness and Alignment. Preserve failed improvement attempts as well as passing ones, so the website can show improvement and recurrence trends across hundreds of uses and tests. Skill content and reusable regression tests are open-source material; private project inputs, personal information, credentials and raw private transcripts stay outside the public dataset. Where a regression case needs private material, keep that material restricted and publish a safe case description and its results. The website receives only the intended public fields, rather than access to the private records. This does not require keeping all repair evidence local or treating the skills themselves as private.
+**Recommended answer:**
 
-**Why:** The website exists to demonstrate whether AMS and its skills improve over time. Those results can be public without exposing the private material sometimes needed to reproduce a failure. The repair worker still needs enough evidence to perform the repair.
+Save:
 
-**Intended impact:** Readers can see skill quality, failed attempts and error trends over time. The shared repair loop can use the evidence it needs while private source material remains protected.</pre>
+- What the skill did wrong.
+- What we changed to fix it.
+- Whether the tests passed or failed afterward.
 
-Source: Kayden AMS alignment chat, 2026-11-06: question 4 first-pass correction, confirmed question 5 and request to return to question 4\.. Scope: Concept alignment on shared evidence and public presentation only\. No private upload, access-policy change, website implementation or deployment\..
+Show on the website:
+
+- Each skill’s scores and grades over time.
+- Which model and provider did the work.
+- Failed repair attempts as well as successful ones.
+- Whether failures become less common as you use the skills.
+
+Keep private project files and conversations off the website. The agent fixing a skill can use a private example when it needs one and has permission.
+
+**Why:** People should be able to see whether the skills are getting better without seeing your private work.
+
+**Intended impact:** You can look at a skill’s history and answer: “Have our changes made this skill more reliable?”</pre>
+
+Source: Kayden AMS alignment chat, 2026-11-06: owner requested plain-language question 4 and explicitly confirmed its replacement readback\.. Scope: Concept alignment only\. No implementation, installation, database writes, access change or deployment\..
 
 Round: rsi-cross-project-20261106. Dependencies: DQC-000I.
 
 - propose at r2
 - correct at r3: For the website, I just want the results We should log the fitness level, alignment score, model tier, and provider used for each run\. So if we had 4 runs of the RSI loop to get the skills to a passing excellent state, I want to see that\. The website is supposed to show hundreds of tests, no single test result\. We are showing improvements over time, not run results\. How have skills X, Y, Z, A, B, C improved over the last 500 runs? Are we getting better at making skills? Is this a worth while effort? Are we having less errors over time when I run them? Are they doing what we designed them to do? Is the system working? That is what the tests are supposed to show\. None of that should be conflicting with privacy\. The Agentic Management system is open Source\. My skills repo is only private so we can keep private info on there, my skills themselves are not private, they are open source\. The website is to show them off\.
 - propose at r4
+- propose at r5
 
 ## DQC-000I — RSI: Recording authority
 
