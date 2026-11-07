@@ -34,3 +34,8 @@ test('empty score denominators are unavailable and do not create an assessment g
  const loaded=await loadSkillAudits({env,fetchImpl:async()=>ok([{...row,quality_passed:0,quality_total:0,regression_passed:0,regression_total:0,passed:null,evidence_complete:false,critical_missed:null}])});
  const html=render(loaded);assert.match(html,/Quality: score unavailable/);assert.match(html,/Regression: score unavailable/);assert.doesNotMatch(html,/0 of 0/);assert.match(html,/whole assessment grade/);
 });
+
+test('completed all-N/A audit reports no applicable checks rather than incomplete evidence',async()=>{
+ const loaded=await loadSkillAudits({env,fetchImpl:async()=>ok([{...row,quality_passed:0,quality_total:0,regression_passed:0,regression_total:0,passed:null,evidence_complete:true,critical_missed:null}])});
+ const html=render(loaded);assert.match(html,/<strong>No applicable checks<\/strong>/);assert.match(html,/Evidence: complete/);assert.doesNotMatch(html,/<strong>Incomplete<\/strong>/);
+});
