@@ -1,7 +1,7 @@
 # RSI repair: bounded branch delivery and closeout
 
 Owner: Kayden direct AMS chat, 2026-11-06. Every edit to AMS/shared skills is RSI work.
-Status: TK-003C source published/installed and closed; TK-003D claimed for checked AMS main delivery.
+Status: bounded AMS adoption merged; native closure/checked publication and guarded handback remain.
 Source-delivery capability: [S-011](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/SPEC.md), within [LMK-004](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md).
 
 ## Confirmed scope and authority
@@ -80,10 +80,14 @@ Native remote claim of TK-003C refused before writing because the prepared Spec 
 
 Source is reviewed, merged and installed; native close succeeded. Attempt2 is scoped Excellent51/51 with verified finding resolution, without a benefit claim. [History](../wiki/history/S-011.md) and the [safe summary](../../evals/bounded-delivery/qualification-summary.json) retain both attempts, exact receipts and cleanup disposition.
 
-## TK-003D adoption and delivery
+## TK-003D checked adoption and preservation
 
-The Dispatcher verified TK-003C's published/installed artifact before remote claimd2e907e224b6a40818702c88bb554cbb70874e84. Current Task inventory is complete, digest3c75a223750702cfd7bbd62aa051ac1612aceb309381c2a9aa7664d293e9ee37, separately bound atb1424c8ef1001150c792382b7f80448e8dd87756 before remaining edits; neither earlier snapshot was replaced. Authenticated PR210 targets maina96c2486697aeb14d71a6fc6020b9775674f0a1c.
+Dispatcher verified source/install before native claimd2e907e224b6a40818702c88bb554cbb70874e84. Genuine current snapshot3c75a223750702cfd7bbd62aa051ac1612aceb309381c2a9aa7664d293e9ee37 was separately bound atb1424c8ef1001150c792382b7f80448e8dd87756. Earlier snapshots unchanged. Installed158 setup files match skills/mainaf42a289/packagebc6134e42;42 AMS tool hashes match with no update, historical producera9545e05 retained. Host autodiscovery remains unverified.
 
-Direct installed-source comparison found all158 tracked setup files byte-identical to skills/mainaf42a289546d631ac3c2c13c5f1fa65c02365a35; packagebc6134e42d80bd7356a07cfd701b7bb65a4d306dedb18a7b97c8d163e2f7651a verifies. Exact prerequisite CatalogCI42319489381 and published-mainCI42321456109 are successful. Tools verify validates all42 AMS hashes with no available tool-byte changes: historical producera9545e05 remains truthful; template/reference changes do not justify a forged receipt. Personal-catalog structural verification passes while native autodiscovery remains unverified.
+Fresh gpt-6-astra/high noncontributor Standards and Spec reviews PASS exact23447862f452f75e1e85a21d09a90ada1ac1f9ad againsta96c248, all26 files/zero findings (private hashesb419bf9e/70f9a468). Shared CI42324298665 passes865 pytest,6 skips,10 browser tests and structural checks. FAIL213/214 preserve local isolation restrictions; actual9d CI42324114576 failed Task8866/8000 (FAIL215), corrected before final review. Cancelled CI is not passing evidence.
 
-Director reports source cleanup completed after its writer stopped: exact2c52150 containment, no dirty/ignored/hidden-index entries and absent remote branch were rechecked; managed source worktree was archived and local branch deleted with guarded -d from containing mainaf42a289. The TK-003C native receipt/checksum remains unchanged historical evidence. Fresh f4b7c63 layout/ADR/Wiki/render/hygiene pass. Full local b1424c8 pytest is restricted (702 pass,6 skip,124 fail,39 errors; FAIL-214); shared exact-head CI/review remain required. Optional object audit confirms original812 and current814 file hashes in branch history; only actual post-main closeout can establish remote preservation. Merge, resulting-main checks and closeout are pending.
+[PR210](https://github.com/KaydenClark/Agentic-Management-System/pull/210) merged pinned2344786 -> maind489a9041f3a98e9153d2cf3a2bc5e659b96e3d6. Fresh containment and resulting tree74c5d76 equality pass. Separate remote-main fresh layout/ADR/Wiki/render/projection/hygiene pass; full CI reused only for this identical tested tree. Native landing records continuation, not whole-Spec acceptance.
+
+Actual04eb native result: exit1/accounted=false/remoteRecoverable=false/complete=false, zero original-byte/index findings; global1 unaccountedref,8 nonremote refs,13 nonremote worktrees,2 missing historical worktrees retained. Actual8f/3c checks also have zero original-byte/index findings after8f recovery, retaining all their global failures/pending continuation bytes. Six8f working originals and all seven index objects are in main. Its working projection was uncommitted: isolated immutable46c render reconstructed/hash-verified blob40ee705e and SHA25660156737954feb603681f20c42db23a69aefd67548e14bbf2d26a05f554955a9. Independent0644 private copy is native-accepted local-only original, not remote recovery or preservation all along. No snapshot/checker changes.
+
+Source archive/local deletion is Director-observed;003C receipt unchanged. AMS active checkout remains for closure/publication, then Director guard recheck/archive. PR208 two uncontained commits, unrelated material and raw global findings remain. Safe summary links proof/limits; no website promotion, Human QA, general benefit or whole-S-011 acceptance.

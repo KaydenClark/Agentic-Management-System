@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
 **Execution approval:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
-**Next gate:** Close TK-003D with verification and documentation proof.
+**Next gate:** Bounded adoption delivered; preserve workspace findings; older TK-002/TK-003 campaigns remain held.
 
 ## Intent and authority
 
@@ -26,7 +26,7 @@ Prevent lost delivery and exposed handoffs.
 
 ## Current Verified State
 
-[Repair evidence](../../../../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) retains verified source/install results; TK-003D owns AMS delivery. Whole-Spec acceptance is incomplete.
+[Repair evidence](../../../../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) retains source/install and checked AMS delivery with preservation limits. Whole-Spec acceptance is incomplete.
 
 ## Desired Behavior
 
