@@ -272,7 +272,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G.
 
 ## DQC-000J — RSI: Capture and transport
 
-Revision 5; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+Revision 6; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
 
 <pre>**Question:** How should the skills send their results and failures to Supabase?
 
@@ -300,6 +300,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 - correct at r3: I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best\. What do I have set up? What does the research and our CDRs tell us to do?
 - propose at r4
 - propose at r5
+- correct at r6: My one issue with writing it into the skill itself, is what happens when I hand these skills out? I dont want other people to have to run the RSI Loop, I want them to be able to just use the skills\.
 
 ## DQC-000K — RSI: Repair triggers and priority
 
