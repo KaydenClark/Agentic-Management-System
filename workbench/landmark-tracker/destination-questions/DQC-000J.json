@@ -1,11 +1,14 @@
 {
   "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000J",
-  "revision": 9,
+  "revision": 10,
   "title": "RSI: Capture and transport",
   "question": "Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?",
-  "answer": null,
-  "confirmation": null,
+  "answer": "**Question:** Should Workbench setup and RSI setup be separate, with the current RSI test limited to Servitor?\n\n**Recommended answer:** Yes. Keep two separate setups:\n\n- **Workbench setup:** Create and use a Workbench without installing the RSI tools or connecting to Supabase.\n- **RSI setup:** Add the improvement loop later if you choose, without rebuilding the Workbench. Turning RSI off must leave the Workbench usable.\n\nFor now, test RSI only on Servitor, using real AMS website work. Logging across the PC and cloud is outside this test. The skills you share remain usable without RSI.\n\n**Why:** Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.\n\n**Intended impact:** You can first set up and use a Workbench on its own, then add RSI and test that it records failures and supports repairs. You control whether and when RSI is used.",
+  "confirmation": {
+    "basis": "Kayden AMS alignment chat, 2026-11-06: confirmed the separate Workbench/RSI setups and Servitor scope, then requested a full readback to move alignment to a new chat.",
+    "revision": 10
+  },
   "expectedResult": null,
   "result": null,
   "uncertainty": [],
@@ -709,10 +712,168 @@
           }
         }
       ]
+    },
+    {
+      "revision": 10,
+      "at": "2026-11-07T01:59:10.204Z",
+      "reason": "DQC confirm",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "confirmed",
+            "proposal": {
+              "readback": "**Question:** Should Workbench setup and RSI setup be separate, with the current RSI test limited to Servitor?\n\n**Recommended answer:** Yes. Keep two separate setups:\n\n- **Workbench setup:** Create and use a Workbench without installing the RSI tools or connecting to Supabase.\n- **RSI setup:** Add the improvement loop later if you choose, without rebuilding the Workbench. Turning RSI off must leave the Workbench usable.\n\nFor now, test RSI only on Servitor, using real AMS website work. Logging across the PC and cloud is outside this test. The skills you share remain usable without RSI.\n\n**Why:** Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.\n\n**Intended impact:** You can first set up and use a Workbench on its own, then add RSI and test that it records failures and supports repairs. You control whether and when RSI is used.",
+              "why": "Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.",
+              "source": "Kayden AMS alignment chat, 2026-11-06: limit current RSI testing to Servitor and separate Workbench setup from optional later RSI setup.",
+              "scope": "Revised concept/readback only. Current proposed test scope is Servitor and real AMS website work; PC/cloud rollout is excluded. No Workbench update, RSI implementation, test campaign, installation, service or database change is launched.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner narrowed scope and requires revised readback before advancing."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Prove Workbench independence and optional later RSI without cross-environment rollout."
+              },
+              "dependencies": [
+                "DQC-000H",
+                "DQC-000I"
+              ]
+            },
+            "digest": "69f1da08e7b5ef35401547ec4aaf71975de6648d1e35be4f585eff93a434891d",
+            "confirmations": [
+              {
+                "readback": "**Question:** Should Workbench setup and RSI setup be separate, with the current RSI test limited to Servitor?\n\n**Recommended answer:** Yes. Keep two separate setups:\n\n- **Workbench setup:** Create and use a Workbench without installing the RSI tools or connecting to Supabase.\n- **RSI setup:** Add the improvement loop later if you choose, without rebuilding the Workbench. Turning RSI off must leave the Workbench usable.\n\nFor now, test RSI only on Servitor, using real AMS website work. Logging across the PC and cloud is outside this test. The skills you share remain usable without RSI.\n\n**Why:** Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.\n\n**Intended impact:** You can first set up and use a Workbench on its own, then add RSI and test that it records failures and supports repairs. You control whether and when RSI is used.",
+                "proposal": {
+                  "readback": "**Question:** Should Workbench setup and RSI setup be separate, with the current RSI test limited to Servitor?\n\n**Recommended answer:** Yes. Keep two separate setups:\n\n- **Workbench setup:** Create and use a Workbench without installing the RSI tools or connecting to Supabase.\n- **RSI setup:** Add the improvement loop later if you choose, without rebuilding the Workbench. Turning RSI off must leave the Workbench usable.\n\nFor now, test RSI only on Servitor, using real AMS website work. Logging across the PC and cloud is outside this test. The skills you share remain usable without RSI.\n\n**Why:** Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.\n\n**Intended impact:** You can first set up and use a Workbench on its own, then add RSI and test that it records failures and supports repairs. You control whether and when RSI is used.",
+                  "why": "Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.",
+                  "source": "Kayden AMS alignment chat, 2026-11-06: limit current RSI testing to Servitor and separate Workbench setup from optional later RSI setup.",
+                  "scope": "Revised concept/readback only. Current proposed test scope is Servitor and real AMS website work; PC/cloud rollout is excluded. No Workbench update, RSI implementation, test campaign, installation, service or database change is launched.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner narrowed scope and requires revised readback before advancing."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Prove Workbench independence and optional later RSI without cross-environment rollout."
+                  },
+                  "dependencies": [
+                    "DQC-000H",
+                    "DQC-000I"
+                  ]
+                },
+                "digest": "69f1da08e7b5ef35401547ec4aaf71975de6648d1e35be4f585eff93a434891d",
+                "source": "Kayden AMS alignment chat, 2026-11-06: confirmed the separate Workbench/RSI setups and Servitor scope, then requested a full readback to move alignment to a new chat.",
+                "scope": "Revised concept/readback only. Current proposed test scope is Servitor and real AMS website work; PC/cloud rollout is excluded. No Workbench update, RSI implementation, test campaign, installation, service or database change is launched.",
+                "revision": 10,
+                "eventId": "rsi-q6-separate-systems-owner-confirm",
+                "at": "2026-11-07T01:59:10.204Z"
+              }
+            ],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000J-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:17.898Z",
+                "requestDigest": "afb09c733c8ca73f45c2b87f3774bc38f41d0ae9a97301e7d0f1d74a833cbcb4",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-firstpass-20261106-DQC-000J-answer",
+                "type": "correct",
+                "at": "2026-11-07T00:52:04.542Z",
+                "requestDigest": "ee999f07200c4763b5426cb231e097d4b7abe9f58ff4c2cbd8b1a58bec970af7",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "note": "I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best. What do I have set up? What does the research and our CDRs tell us to do?",
+                "kind": "change",
+                "revision": 3,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-q6-shared-tool-plain-v2",
+                "type": "propose",
+                "at": "2026-11-07T01:44:26.811Z",
+                "requestDigest": "389a42802fd8abfed4e9c76c09fe69cdf1b7515526eaae615bfe86a997c05ae4",
+                "source": null,
+                "note": null,
+                "revision": 4,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-q6-cloud-report-preservation-v3",
+                "type": "propose",
+                "at": "2026-11-07T01:44:53.424Z",
+                "requestDigest": "382deac4dffbc96550408736be0c0ec67993cce2df670b8830d804c950ccac1e",
+                "source": null,
+                "note": null,
+                "revision": 5,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-q6-sharing-owner-correction",
+                "type": "correct",
+                "at": "2026-11-07T01:49:05.344Z",
+                "requestDigest": "4047f1dd191eb62ff921e20bcff24f1fbd386c95a4317f6fd288a1df615995bd",
+                "source": "Kayden AMS alignment chat, 2026-11-06: shared skills must be usable without requiring the recipient to run RSI.",
+                "note": "My one issue with writing it into the skill itself, is what happens when I hand these skills out? I dont want other people to have to run the RSI Loop, I want them to be able to just use the skills.",
+                "kind": "change",
+                "revision": 6,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-q6-personal-reporting-v4",
+                "type": "propose",
+                "at": "2026-11-07T01:49:05.910Z",
+                "requestDigest": "c9db03c3f27512a481f0e917dbdf1904faffc87e02730ee3d3fe03ee2ca22ec1",
+                "source": null,
+                "note": null,
+                "revision": 7,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-q6-separate-systems-owner-correction",
+                "type": "correct",
+                "at": "2026-11-07T01:54:22.310Z",
+                "requestDigest": "e5662ba3145e9bb1148cf8430c5ef87ac832736fcc8a91bd45c4a30b0245f0e4",
+                "source": "Kayden AMS alignment chat, 2026-11-06: limit current RSI testing to Servitor and separate Workbench setup from optional later RSI setup.",
+                "note": "I want to be able to test that, instead of being able to log failures everywhere. Let's just do it here on servitor, and I should be able to set up the workbench independently of the RSI Loop. I should also be able to establish the RSI Loop later if I want. These should be two separate systems.",
+                "kind": "change",
+                "revision": 8,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-q6-separate-setups-servitor-v5",
+                "type": "propose",
+                "at": "2026-11-07T01:54:23.722Z",
+                "requestDigest": "8ce99d35157d227512e7cce2cfcb3bba0244cf38e0283a2e84567345322ef7b9",
+                "source": null,
+                "note": null,
+                "revision": 9,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-q6-separate-systems-owner-confirm",
+                "type": "confirm",
+                "at": "2026-11-07T01:59:10.204Z",
+                "requestDigest": "987293280da3afb2750434950089af918aaeeda5ae2c1b718713c057b3120336",
+                "source": "Kayden AMS alignment chat, 2026-11-06: confirmed the separate Workbench/RSI setups and Servitor scope, then requested a full readback to move alignment to a new chat.",
+                "note": "confirmed. and let's do a full readback of everything so I can move this alignment session to a new chat",
+                "revision": 10,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "lifecycle": {
-    "state": "pending",
+    "state": "confirmed",
     "proposal": {
       "readback": "**Question:** Should Workbench setup and RSI setup be separate, with the current RSI test limited to Servitor?\n\n**Recommended answer:** Yes. Keep two separate setups:\n\n- **Workbench setup:** Create and use a Workbench without installing the RSI tools or connecting to Supabase.\n- **RSI setup:** Add the improvement loop later if you choose, without rebuilding the Workbench. Turning RSI off must leave the Workbench usable.\n\nFor now, test RSI only on Servitor, using real AMS website work. Logging across the PC and cloud is outside this test. The skills you share remain usable without RSI.\n\n**Why:** Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.\n\n**Intended impact:** You can first set up and use a Workbench on its own, then add RSI and test that it records failures and supports repairs. You control whether and when RSI is used.",
       "why": "Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.",
@@ -733,7 +894,36 @@
       ]
     },
     "digest": "69f1da08e7b5ef35401547ec4aaf71975de6648d1e35be4f585eff93a434891d",
-    "confirmations": [],
+    "confirmations": [
+      {
+        "readback": "**Question:** Should Workbench setup and RSI setup be separate, with the current RSI test limited to Servitor?\n\n**Recommended answer:** Yes. Keep two separate setups:\n\n- **Workbench setup:** Create and use a Workbench without installing the RSI tools or connecting to Supabase.\n- **RSI setup:** Add the improvement loop later if you choose, without rebuilding the Workbench. Turning RSI off must leave the Workbench usable.\n\nFor now, test RSI only on Servitor, using real AMS website work. Logging across the PC and cloud is outside this test. The skills you share remain usable without RSI.\n\n**Why:** Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.\n\n**Intended impact:** You can first set up and use a Workbench on its own, then add RSI and test that it records failures and supports repairs. You control whether and when RSI is used.",
+        "proposal": {
+          "readback": "**Question:** Should Workbench setup and RSI setup be separate, with the current RSI test limited to Servitor?\n\n**Recommended answer:** Yes. Keep two separate setups:\n\n- **Workbench setup:** Create and use a Workbench without installing the RSI tools or connecting to Supabase.\n- **RSI setup:** Add the improvement loop later if you choose, without rebuilding the Workbench. Turning RSI off must leave the Workbench usable.\n\nFor now, test RSI only on Servitor, using real AMS website work. Logging across the PC and cloud is outside this test. The skills you share remain usable without RSI.\n\n**Why:** Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.\n\n**Intended impact:** You can first set up and use a Workbench on its own, then add RSI and test that it records failures and supports repairs. You control whether and when RSI is used.",
+          "why": "Setting up a Workbench should not automatically sign a project up for the improvement loop. We should prove the two can work separately before expanding where RSI runs.",
+          "source": "Kayden AMS alignment chat, 2026-11-06: limit current RSI testing to Servitor and separate Workbench setup from optional later RSI setup.",
+          "scope": "Revised concept/readback only. Current proposed test scope is Servitor and real AMS website work; PC/cloud rollout is excluded. No Workbench update, RSI implementation, test campaign, installation, service or database change is launched.",
+          "round": "rsi-cross-project-20261106",
+          "priority": {
+            "value": 1,
+            "reason": "Owner narrowed scope and requires revised readback before advancing."
+          },
+          "value": {
+            "value": 1,
+            "reason": "Prove Workbench independence and optional later RSI without cross-environment rollout."
+          },
+          "dependencies": [
+            "DQC-000H",
+            "DQC-000I"
+          ]
+        },
+        "digest": "69f1da08e7b5ef35401547ec4aaf71975de6648d1e35be4f585eff93a434891d",
+        "source": "Kayden AMS alignment chat, 2026-11-06: confirmed the separate Workbench/RSI setups and Servitor scope, then requested a full readback to move alignment to a new chat.",
+        "scope": "Revised concept/readback only. Current proposed test scope is Servitor and real AMS website work; PC/cloud rollout is excluded. No Workbench update, RSI implementation, test campaign, installation, service or database change is launched.",
+        "revision": 10,
+        "eventId": "rsi-q6-separate-systems-owner-confirm",
+        "at": "2026-11-07T01:59:10.204Z"
+      }
+    ],
     "events": [
       {
         "eventId": "rsi-align-20261106-DQC-000J-v1",
@@ -816,6 +1006,16 @@
         "source": null,
         "note": null,
         "revision": 9,
+        "round": "rsi-cross-project-20261106"
+      },
+      {
+        "eventId": "rsi-q6-separate-systems-owner-confirm",
+        "type": "confirm",
+        "at": "2026-11-07T01:59:10.204Z",
+        "requestDigest": "987293280da3afb2750434950089af918aaeeda5ae2c1b718713c057b3120336",
+        "source": "Kayden AMS alignment chat, 2026-11-06: confirmed the separate Workbench/RSI setups and Servitor scope, then requested a full readback to move alignment to a new chat.",
+        "note": "confirmed. and let's do a full readback of everything so I can move this alignment session to a new chat",
+        "revision": 10,
         "round": "rsi-cross-project-20261106"
       }
     ]

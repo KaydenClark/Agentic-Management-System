@@ -273,7 +273,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G.
 
 ## DQC-000J — RSI: Capture and transport
 
-Revision 9; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+Revision 10; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
 
 <pre>**Question:** Should Workbench setup and RSI setup be separate, with the current RSI test limited to Servitor?
 
@@ -300,6 +300,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000H, DQC-000I.
 - propose at r7
 - correct at r8: I want to be able to test that, instead of being able to log failures everywhere\. Let's just do it here on servitor, and I should be able to set up the workbench independently of the RSI Loop\. I should also be able to establish the RSI Loop later if I want\. These should be two separate systems\.
 - propose at r9
+- confirm at r10: confirmed\. and let's do a full readback of everything so I can move this alignment session to a new chat
 
 ## DQC-000K — RSI: Repair triggers and priority
 
