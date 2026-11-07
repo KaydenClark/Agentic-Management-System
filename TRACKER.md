@@ -134,7 +134,7 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000E — RSI: Coverage
 
-Revision 6; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+Revision 7; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
 
 <pre>**Question:** Should shared skill reporting work from any project and environment, independently of whether GPT_OS is present?
 
@@ -153,6 +153,7 @@ Round: rsi-cross-project-20261106. Dependencies: none.
 - propose at r4
 - propose at r5
 - confirm at r6: Yes, that's what I mean\. It should work from any project on my Mac, PC, or in the cloud without requiring GPT\_OS\. Let's move to question 2\.
+- correct at r7: I want to be able to test that, instead of being able to log failures everywhere\. Let's just do it here on servitor, and I should be able to set up the workbench independently of the RSI Loop\. I should also be able to establish the RSI Loop later if I want\. These should be two separate systems\.
 
 ## DQC-000F — RSI: Run boundaries
 
