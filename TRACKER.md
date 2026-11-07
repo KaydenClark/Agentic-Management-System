@@ -153,7 +153,7 @@ Round: rsi-cross-project-20261106. Dependencies: none.
 
 ## DQC-000F — RSI: Run boundaries
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
+Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
 
 <pre>**Question:** What counts as one skill use, and when is it finished?
 
@@ -168,6 +168,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 
 - propose at r2
+- correct at r3: When me, you \(codex\), or claude uses one of the workbench skills that we are doing RSI on\. we should log the failures and run the RSI loop on it\. The benefits of an RSI loop is that its recorded and can be started as soon as its logged in the system as needing to be fixed\.
 
 ## DQC-000G — RSI: Success and failure
 
