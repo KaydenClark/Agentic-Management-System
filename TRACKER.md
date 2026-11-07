@@ -362,7 +362,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000O.
 
 ## DQC-000Q — RSI: Website and completion proof
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000Q.json)
+Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000Q.json)
 
 <pre>**Question:** What must the website show, and what evidence makes this shared loop complete?
 
@@ -377,3 +377,4 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000I, DQC-000N, DQC-000P.
 
 - propose at r2
+- correct at r3: It should show the run history, how has each improvement run gone? Does a stable version have less failures? I honestly dont know what to show here\. Its probably part of why this RSI Loop is not set up\.

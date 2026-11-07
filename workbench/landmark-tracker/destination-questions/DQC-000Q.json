@@ -1,7 +1,7 @@
 {
   "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000Q",
-  "revision": 2,
+  "revision": 3,
   "title": "RSI: Website and completion proof",
   "question": "What must the website show, and what evidence makes this shared loop complete?",
   "answer": null,
@@ -88,10 +88,68 @@
           }
         }
       ]
+    },
+    {
+      "revision": 3,
+      "at": "2026-11-07T00:52:08.673Z",
+      "reason": "DQC correct",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "needs-rewrite",
+            "proposal": {
+              "readback": "**Question:** What must the website show, and what evidence makes this shared loop complete?\n\n**Recommended answer:** Show each skill and the Workbench it produces, real uses, failures, repair history, rejected attempts, grades, version adoption and later recurrence from canonical safe records. Show freshness and coverage. Prove one complete real-work loop, then verify the promised Mac, PC and cloud paths before claiming that coverage.\n\n**Why:** I assumed a setup-workbench pilot and specific views. You established the website as the evidence surface for AMS; its exact presentation and completion standard remain choices.\n\n**Intended impact:** Defines visible accountability and prevents a working demo or successful upload from being reported as a complete RSI loop.",
+              "why": "I assumed a setup-workbench pilot and specific views. You established the website as the evidence surface for AMS; its exact presentation and completion standard remain choices.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000I",
+                "DQC-000N",
+                "DQC-000P"
+              ]
+            },
+            "digest": "85ad75462657a214e270b21d5c5f1fa76fd4f6add468ba7f93554e1dd698bed8",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000Q-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:21.910Z",
+                "requestDigest": "f9290cdd3b06922b32ec78fe30ddbb3d3fc000bfc90f17cba4bec4f3c1ec08e5",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              },
+              {
+                "eventId": "rsi-firstpass-20261106-DQC-000Q-answer",
+                "type": "correct",
+                "at": "2026-11-07T00:52:08.673Z",
+                "requestDigest": "808c7ae849011f0a97f708a294094e9f653232c846062650d53aa1bb51b6b4d8",
+                "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                "note": "It should show the run history, how has each improvement run gone? Does a stable version have less failures? I honestly dont know what to show here. Its probably part of why this RSI Loop is not set up.",
+                "kind": "change",
+                "revision": 3,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
     }
   ],
   "lifecycle": {
-    "state": "pending",
+    "state": "needs-rewrite",
     "proposal": {
       "readback": "**Question:** What must the website show, and what evidence makes this shared loop complete?\n\n**Recommended answer:** Show each skill and the Workbench it produces, real uses, failures, repair history, rejected attempts, grades, version adoption and later recurrence from canonical safe records. Show freshness and coverage. Prove one complete real-work loop, then verify the promised Mac, PC and cloud paths before claiming that coverage.\n\n**Why:** I assumed a setup-workbench pilot and specific views. You established the website as the evidence surface for AMS; its exact presentation and completion standard remain choices.\n\n**Intended impact:** Defines visible accountability and prevents a working demo or successful upload from being reported as a complete RSI loop.",
       "why": "I assumed a setup-workbench pilot and specific views. You established the website as the evidence surface for AMS; its exact presentation and completion standard remain choices.",
@@ -123,6 +181,17 @@
         "source": null,
         "note": null,
         "revision": 2,
+        "round": "rsi-cross-project-20261106"
+      },
+      {
+        "eventId": "rsi-firstpass-20261106-DQC-000Q-answer",
+        "type": "correct",
+        "at": "2026-11-07T00:52:08.673Z",
+        "requestDigest": "808c7ae849011f0a97f708a294094e9f653232c846062650d53aa1bb51b6b4d8",
+        "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+        "note": "It should show the run history, how has each improvement run gone? Does a stable version have less failures? I honestly dont know what to show here. Its probably part of why this RSI Loop is not set up.",
+        "kind": "change",
+        "revision": 3,
         "round": "rsi-cross-project-20261106"
       }
     ]
