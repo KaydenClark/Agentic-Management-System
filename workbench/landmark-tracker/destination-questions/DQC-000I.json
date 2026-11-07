@@ -1,7 +1,7 @@
 {
-  "schema": "landmark-tracker/destination-question@2",
+  "schema": "landmark-tracker/destination-question@3",
   "id": "DQC-000I",
-  "revision": 1,
+  "revision": 2,
   "title": "RSI: Recording authority",
   "question": "Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?",
   "answer": null,
@@ -41,6 +41,88 @@
           "field": "captured"
         }
       ]
+    },
+    {
+      "revision": 2,
+      "at": "2026-11-07T00:09:17.342Z",
+      "reason": "DQC propose",
+      "changes": [
+        {
+          "field": "lifecycle",
+          "to": {
+            "state": "pending",
+            "proposal": {
+              "readback": "**Question:** Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?\n\n**Recommended answer:** Yes. Keep one linked lifecycle in Supabase; reference original project failure IDs and corrections. Queue evidence locally until receipt is verified, preserving original event times and preventing duplicates.\n\n**Why:** This preserves the existing ownership model, but I assumed it also fits ordinary skill uses and projects before setup.\n\n**Intended impact:** Prevents competing histories and silent evidence loss during outages or cloud teardown.",
+              "why": "This preserves the existing ownership model, but I assumed it also fits ordinary skill uses and projects before setup.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": [
+                "DQC-000F",
+                "DQC-000H"
+              ]
+            },
+            "digest": "f5dbb5427ab3133b0b8b1a393b1cb4c7ccc588adff2d8dea38791d22981e5db8",
+            "confirmations": [],
+            "events": [
+              {
+                "eventId": "rsi-align-20261106-DQC-000I-v1",
+                "type": "propose",
+                "at": "2026-11-07T00:09:17.342Z",
+                "requestDigest": "5758994aeec180d57dd893243ef5cfc76697879f0530b80f5e919cd4d1565843",
+                "source": null,
+                "note": null,
+                "revision": 2,
+                "round": "rsi-cross-project-20261106"
+              }
+            ]
+          }
+        }
+      ]
     }
-  ]
+  ],
+  "lifecycle": {
+    "state": "pending",
+    "proposal": {
+      "readback": "**Question:** Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?\n\n**Recommended answer:** Yes. Keep one linked lifecycle in Supabase; reference original project failure IDs and corrections. Queue evidence locally until receipt is verified, preserving original event times and preventing duplicates.\n\n**Why:** This preserves the existing ownership model, but I assumed it also fits ordinary skill uses and projects before setup.\n\n**Intended impact:** Prevents competing histories and silent evidence loss during outages or cloud teardown.",
+      "why": "This preserves the existing ownership model, but I assumed it also fits ordinary skill uses and projects before setup.",
+      "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+      "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+      "round": "rsi-cross-project-20261106",
+      "priority": {
+        "value": 1,
+        "reason": "Owner requested first-pass alignment before further decisions."
+      },
+      "value": {
+        "value": 1,
+        "reason": "Expose an unresolved choice affecting the shared RSI loop."
+      },
+      "dependencies": [
+        "DQC-000F",
+        "DQC-000H"
+      ]
+    },
+    "digest": "f5dbb5427ab3133b0b8b1a393b1cb4c7ccc588adff2d8dea38791d22981e5db8",
+    "confirmations": [],
+    "events": [
+      {
+        "eventId": "rsi-align-20261106-DQC-000I-v1",
+        "type": "propose",
+        "at": "2026-11-07T00:09:17.342Z",
+        "requestDigest": "5758994aeec180d57dd893243ef5cfc76697879f0530b80f5e919cd4d1565843",
+        "source": null,
+        "note": null,
+        "revision": 2,
+        "round": "rsi-cross-project-20261106"
+      }
+    ]
+  }
 }

@@ -206,10 +206,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000G.
 
 ## DQC-000I — RSI: Recording authority
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000I.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000I.json)
 
-Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?
+<pre>**Question:** Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?
 
+**Recommended answer:** Yes. Keep one linked lifecycle in Supabase; reference original project failure IDs and corrections. Queue evidence locally until receipt is verified, preserving original event times and preventing duplicates.
+
+**Why:** This preserves the existing ownership model, but I assumed it also fits ordinary skill uses and projects before setup.
+
+**Intended impact:** Prevents competing histories and silent evidence loss during outages or cloud teardown.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000F, DQC-000H.
+
+- propose at r2
 
 ## DQC-000J — RSI: Capture and transport
 
