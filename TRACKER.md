@@ -134,7 +134,7 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000E — Finish the Workbench Dashboard in AMS
 
-Revision 3; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
 
 <pre>## Summary
 
@@ -162,8 +162,9 @@ You have asked for this Dashboard from the start, and a working one already exis
 
 Then stop. Not included: Drafts to approve, turning the Dashboard into skills (the next job), the public website, and your Human QA.</pre>
 
-Source: workbench/wiki/context-grilling-board\.md@75862efddf475ce3e4f57c25f4002bf625642c53\#jot-97b271e2-af5c-4901-a9ae-4f87fa65f759. Scope: Add Destination Tracker, Taskboard and Wiki sections and the Dashboard frame to the AMS Python Board in the Redesign look; S-004 branch and draft PR; stop before skills, Drafts, website and Human QA.
+Source: Kayden, AMS chat, 2026-11-07 \(kayden-ams-chat-2026-11-07\). Scope: Add Destination Tracker, Taskboard and Wiki sections and the Dashboard frame to the AMS Python Board in the Redesign look; S-004 branch and draft PR; stop before skills, Drafts, website and Human QA.
 
 Round: dashboard-round-1. Dependencies: none.
 
 - propose at r2
+- propose at r4
