@@ -260,10 +260,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000I.
 
 ## DQC-000L — RSI: Worker location and resources
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000L.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000L.json)
 
-Where should repair and evaluation run, and what resource use can continue without asking?
+<pre>**Question:** Where should repair and evaluation run, and what resource use can continue without asking?
 
+**Recommended answer:** Start with the existing local Python-worker direction and subscription harnesses, using the established model/attempt limits. Make offline or unavailable workers visible. Choose the actual machine, scheduling, concurrency and any cloud execution explicitly; add no paid service by inference.
+
+**Why:** A hosted database does not execute repairs. I assumed a local worker without establishing which host is reliably available.
+
+**Intended impact:** Determines availability, compute authority, scheduling and practical throughput.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000H, DQC-000J, DQC-000K.
+
+- propose at r2
 
 ## DQC-000M — RSI: Repair scope and pruning
 
