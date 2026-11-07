@@ -2745,7 +2745,7 @@
         "at": "2026-11-07T00:08:46.937Z"
       },
       "corrections": [],
-      "revision": 1,
+      "revision": 2,
       "history": [
         {
           "revision": 1,
@@ -2756,14 +2756,83 @@
               "field": "captured"
             }
           ]
+        },
+        {
+          "revision": 2,
+          "at": "2026-11-07T00:09:15.024Z",
+          "reason": "DQC propose",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "pending",
+                "proposal": {
+                  "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+                  "why": "I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.",
+                  "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                  "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner requested first-pass alignment before further decisions."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                  },
+                  "dependencies": []
+                },
+                "digest": "af204dbc4ba6a36857d4d700ac73a985d7703d139f6585f35574e0bc4774eba3",
+                "confirmations": [],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000E-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:15.024Z",
+                    "requestDigest": "685d3b2859e67f0ab3371fc1db4e25e9fa3c30231d02644b516c2c195d5cd862",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
         "state": "pending",
-        "proposal": null,
-        "digest": null,
+        "proposal": {
+          "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+          "why": "I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.",
+          "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+          "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+          "round": "rsi-cross-project-20261106",
+          "priority": {
+            "value": 1,
+            "reason": "Owner requested first-pass alignment before further decisions."
+          },
+          "value": {
+            "value": 1,
+            "reason": "Expose an unresolved choice affecting the shared RSI loop."
+          },
+          "dependencies": []
+        },
+        "digest": "af204dbc4ba6a36857d4d700ac73a985d7703d139f6585f35574e0bc4774eba3",
         "confirmations": [],
-        "events": []
+        "events": [
+          {
+            "eventId": "rsi-align-20261106-DQC-000E-v1",
+            "type": "propose",
+            "at": "2026-11-07T00:09:15.024Z",
+            "requestDigest": "685d3b2859e67f0ab3371fc1db4e25e9fa3c30231d02644b516c2c195d5cd862",
+            "source": null,
+            "note": null,
+            "revision": 2,
+            "round": "rsi-cross-project-20261106"
+          }
+        ]
       }
     },
     {

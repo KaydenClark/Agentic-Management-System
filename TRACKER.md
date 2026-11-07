@@ -134,10 +134,21 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000E — RSI: Coverage
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
 
-Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?
+<pre>**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?
 
+**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.
+
+**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.
+
+**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: none.
+
+- propose at r2
 
 ## DQC-000F — RSI: Run boundaries
 
