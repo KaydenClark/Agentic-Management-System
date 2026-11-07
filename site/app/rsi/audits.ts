@@ -10,6 +10,8 @@ export interface SkillAudit {
 const fields = ['audit_run_id','audit_set_id','skill','skills_commit','contract_version','contract_digest','provider','model','model_tier','quality_passed','quality_total','regression_passed','regression_total','critical_missed','evidence_complete','passed','assessment_grade','completed_at','recorded_at'] as const;
 const empty: SkillAudit[] = [];
 type Options = { env?: Readonly<Record<string,string | undefined>>; fetchImpl?: typeof fetch; timeoutMs?: number };
+// Refuse the entire read when a projected row is malformed: dropping it would
+// turn an unknown count into an apparently complete count.
 function valid(row: Record<string,unknown>): boolean {
   const label = (v: unknown) => typeof v === 'string' && /^[a-zA-Z0-9][a-zA-Z0-9_.:-]{0,127}$/.test(v);
   const number = (v: unknown) => typeof v === 'number' && Number.isSafeInteger(v) && v >= 0;
@@ -24,6 +26,8 @@ function valid(row: Record<string,unknown>): boolean {
     (row.critical_missed === null || typeof row.critical_missed === 'boolean') && typeof row.evidence_complete === 'boolean' &&
     (row.passed === null || typeof row.passed === 'boolean') && (row.assessment_grade === null || ['Excellent','Stable','Functional','Broken'].includes(String(row.assessment_grade))) && date(row.completed_at) && date(row.recorded_at);
 }
+// The audit route accepts only publishable credentials; service JWTs and
+// secret keys must never be sent even when accidentally configured here.
 function publicKey(key: string): boolean {
   if (key.startsWith('sb_publishable_')) return true;
   if (key.startsWith('sb_secret_')) return false;
@@ -35,6 +39,8 @@ export async function loadSkillAudits(options: Options = {}): Promise<ReadResult
   if (!base || !key || !publicKey(key)) return fail();
   try {
     const rows: SkillAudit[] = [];
+    // Exhaust the ordered projection before reporting a count. A truncated or
+    // failed page invalidates the whole envelope instead of returning a partial set.
     for (let page=0; page<50; page++) {
       const url = new URL('/rest/v1/rsi_skill_audit_results',base);
       url.searchParams.set('select',fields.join(',')); url.searchParams.set('order','completed_at.desc,audit_run_id.asc'); url.searchParams.set('limit','1000'); url.searchParams.set('offset',String(page*1000));
@@ -42,6 +48,7 @@ export async function loadSkillAudits(options: Options = {}): Promise<ReadResult
       const response = await (options.fetchImpl ?? fetch)(url.toString(),{headers,signal:AbortSignal.timeout(options.timeoutMs ?? 8000),cache:'no-store'});
       if (!response.ok) return fail(); const body: unknown = await response.json();
       if (!Array.isArray(body) || !body.every(v => v && typeof v === 'object' && !Array.isArray(v) && valid(v))) return fail();
+      // Reproject unexpected fields away even if the server returns more than selected.
       rows.push(...body.map(v => Object.fromEntries(fields.map(k => [k,v[k]])) as unknown as SkillAudit));
       if (body.length < 1000) {
         if (new Set(rows.map(row=>row.audit_run_id)).size !== rows.length) return fail();

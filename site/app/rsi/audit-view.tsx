@@ -8,6 +8,8 @@ export function AuditEvidence({loaded,now}:{loaded:ReadResult<SkillAudit[]>;now?
   const state=readState(loaded,loaded.data.length===0,now);
   const sets = new Map<string, SkillAudit[]>();
   for (const row of loaded.data) sets.set(row.audit_set_id, [...(sets.get(row.audit_set_id) ?? []), row]);
+  // Only summarize a complete, consistent public set. Grade is supplied by the
+  // store, while the linked rows provide the pooled denominators.
   const assessments = [...sets.values()].filter(rows => rows.length === 3 && rows[0].assessment_grade !== null && rows.every(row =>
     row.assessment_grade === rows[0].assessment_grade && row.skill === rows[0].skill && row.skills_commit === rows[0].skills_commit &&
     row.contract_version === rows[0].contract_version && row.contract_digest === rows[0].contract_digest));
