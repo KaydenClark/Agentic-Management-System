@@ -3644,7 +3644,7 @@
         "at": "2026-11-07T00:08:47.210Z"
       },
       "corrections": [],
-      "revision": 2,
+      "revision": 3,
       "history": [
         {
           "revision": 1,
@@ -3701,10 +3701,67 @@
               }
             }
           ]
+        },
+        {
+          "revision": 3,
+          "at": "2026-11-07T00:52:03.485Z",
+          "reason": "DQC correct",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "needs-rewrite",
+                "proposal": {
+                  "readback": "**Question:** What may leave each project, what stays private, and what may the public website show?\n\n**Recommended answer:** Share version identities, safe outcome/failure summaries and evidence references. Keep raw transcripts and private project material at their authorized source. Separate private shared records from public-safe presentation; decide retention and remote access for repair evidence explicitly.\n\n**Why:** I assumed local-only raw evidence and public-safe summaries. That affects whether another machine can reproduce and repair a finding.\n\n**Intended impact:** Sets the data boundary, retention expectations and the evidence available to remote repairs.",
+                  "why": "I assumed local-only raw evidence and public-safe summaries. That affects whether another machine can reproduce and repair a finding.",
+                  "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                  "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner requested first-pass alignment before further decisions."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                  },
+                  "dependencies": [
+                    "DQC-000E",
+                    "DQC-000G"
+                  ]
+                },
+                "digest": "f7ea8f249a53b7e1294305dc3b7254da1ab8a611e287fcb06f259ef29f2583c9",
+                "confirmations": [],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000H-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:16.710Z",
+                    "requestDigest": "a85bada6a142b15699f9da6b3b4f52ff1ef33adfcbf31a32f56c9c5198fcd94d",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-firstpass-20261106-DQC-000H-answer",
+                    "type": "correct",
+                    "at": "2026-11-07T00:52:03.485Z",
+                    "requestDigest": "ee3b428276002118ef0dfd9dff8b2011193cce6f57ee6c2d0f2eb227825232e1",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "note": "For the website, I just want the results We should log the fitness level, alignment score, model tier, and provider used for each run. So if we had 4 runs of the RSI loop to get the skills to a passing excellent state, I want to see that. The website is supposed to show hundreds of tests, no single test result. We are showing improvements over time, not run results. How have skills X, Y, Z, A, B, C improved over the last 500 runs? Are we getting better at making skills? Is this a worth while effort? Are we having less errors over time when I run them? Are they doing what we designed them to do? Is the system working? That is what the tests are supposed to show. None of that should be conflicting with privacy. The Agentic Management system is open Source. My skills repo is only private so we can keep private info on there, my skills themselves are not private, they are open source. The website is to show them off.",
+                    "kind": "change",
+                    "revision": 3,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
-        "state": "pending",
+        "state": "needs-rewrite",
         "proposal": {
           "readback": "**Question:** What may leave each project, what stays private, and what may the public website show?\n\n**Recommended answer:** Share version identities, safe outcome/failure summaries and evidence references. Keep raw transcripts and private project material at their authorized source. Separate private shared records from public-safe presentation; decide retention and remote access for repair evidence explicitly.\n\n**Why:** I assumed local-only raw evidence and public-safe summaries. That affects whether another machine can reproduce and repair a finding.\n\n**Intended impact:** Sets the data boundary, retention expectations and the evidence available to remote repairs.",
           "why": "I assumed local-only raw evidence and public-safe summaries. That affects whether another machine can reproduce and repair a finding.",
@@ -3735,6 +3792,17 @@
             "source": null,
             "note": null,
             "revision": 2,
+            "round": "rsi-cross-project-20261106"
+          },
+          {
+            "eventId": "rsi-firstpass-20261106-DQC-000H-answer",
+            "type": "correct",
+            "at": "2026-11-07T00:52:03.485Z",
+            "requestDigest": "ee3b428276002118ef0dfd9dff8b2011193cce6f57ee6c2d0f2eb227825232e1",
+            "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+            "note": "For the website, I just want the results We should log the fitness level, alignment score, model tier, and provider used for each run. So if we had 4 runs of the RSI loop to get the skills to a passing excellent state, I want to see that. The website is supposed to show hundreds of tests, no single test result. We are showing improvements over time, not run results. How have skills X, Y, Z, A, B, C improved over the last 500 runs? Are we getting better at making skills? Is this a worth while effort? Are we having less errors over time when I run them? Are they doing what we designed them to do? Is the system working? That is what the tests are supposed to show. None of that should be conflicting with privacy. The Agentic Management system is open Source. My skills repo is only private so we can keep private info on there, my skills themselves are not private, they are open source. The website is to show them off.",
+            "kind": "change",
+            "revision": 3,
             "round": "rsi-cross-project-20261106"
           }
         ]
