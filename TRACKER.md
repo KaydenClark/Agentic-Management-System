@@ -134,7 +134,7 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 
 ## DQC-000E — RSI: Coverage
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+Revision 3; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
 
 <pre>**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?
 
@@ -149,6 +149,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: none.
 
 - propose at r2
+- confirm at r3: Yes, Because of this we need to be very smart about how we do this\. Can we create something that we can have in GPT\_OS \(that is on both Mac and PC, and can be created as an environment for the cloud\) that would allow us to send info back to supabase? Do we need to send info back or can supabase collect it from github as long as the projects as pushing back to Kaydenclark/skills?
 
 ## DQC-000F — RSI: Run boundaries
 

@@ -2626,9 +2626,12 @@
       "id": "DQC-000E",
       "title": "RSI: Coverage",
       "question": "Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?",
-      "answer": null,
-      "answered": false,
-      "confirmation": null,
+      "answer": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+      "answered": true,
+      "confirmation": {
+        "basis": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+        "revision": 3
+      },
       "expectedResult": null,
       "result": null,
       "uncertainty": [],
@@ -2745,7 +2748,7 @@
         "at": "2026-11-07T00:08:46.937Z"
       },
       "corrections": [],
-      "revision": 2,
+      "revision": 3,
       "history": [
         {
           "revision": 1,
@@ -2799,10 +2802,89 @@
               }
             }
           ]
+        },
+        {
+          "revision": 3,
+          "at": "2026-11-07T00:52:01.825Z",
+          "reason": "DQC confirm",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "confirmed",
+                "proposal": {
+                  "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+                  "why": "I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.",
+                  "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                  "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner requested first-pass alignment before further decisions."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                  },
+                  "dependencies": []
+                },
+                "digest": "af204dbc4ba6a36857d4d700ac73a985d7703d139f6585f35574e0bc4774eba3",
+                "confirmations": [
+                  {
+                    "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+                    "proposal": {
+                      "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+                      "why": "I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.",
+                      "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+                      "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                      "round": "rsi-cross-project-20261106",
+                      "priority": {
+                        "value": 1,
+                        "reason": "Owner requested first-pass alignment before further decisions."
+                      },
+                      "value": {
+                        "value": 1,
+                        "reason": "Expose an unresolved choice affecting the shared RSI loop."
+                      },
+                      "dependencies": []
+                    },
+                    "digest": "af204dbc4ba6a36857d4d700ac73a985d7703d139f6585f35574e0bc4774eba3",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+                    "revision": 3,
+                    "eventId": "rsi-firstpass-20261106-DQC-000E-answer",
+                    "at": "2026-11-07T00:52:01.825Z"
+                  }
+                ],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000E-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:15.024Z",
+                    "requestDigest": "685d3b2859e67f0ab3371fc1db4e25e9fa3c30231d02644b516c2c195d5cd862",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-firstpass-20261106-DQC-000E-answer",
+                    "type": "confirm",
+                    "at": "2026-11-07T00:52:01.825Z",
+                    "requestDigest": "f1b523fba7fba7f7475c678d4981fb8a1f04c09cf56e6b63a2efbe9f757736dc",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "note": "Yes, Because of this we need to be very smart about how we do this. Can we create something that we can have in GPT_OS (that is on both Mac and PC, and can be created as an environment for the cloud) that would allow us to send info back to supabase? Do we need to send info back or can supabase collect it from github as long as the projects as pushing back to Kaydenclark/skills?",
+                    "revision": 3,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
-        "state": "pending",
+        "state": "confirmed",
         "proposal": {
           "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
           "why": "I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.",
@@ -2820,7 +2902,33 @@
           "dependencies": []
         },
         "digest": "af204dbc4ba6a36857d4d700ac73a985d7703d139f6585f35574e0bc4774eba3",
-        "confirmations": [],
+        "confirmations": [
+          {
+            "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+            "proposal": {
+              "readback": "**Question:** Should capture cover every shared skill across your Mac, PC and cloud, including explicit commands, automatically selected skills and skills called by other skills?\n\n**Recommended answer:** Yes. Cover those uses, including projects that have no Workbench yet. Track third-party skills too, while keeping their repair ownership distinct.\n\n**Why:** I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.\n\n**Intended impact:** Defines the coverage promise and which environments and invocation paths must be verified.",
+              "why": "I assumed host-wide coverage; project-only setup would miss first use and work outside an adopted project.",
+              "source": "Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks.",
+              "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+              "round": "rsi-cross-project-20261106",
+              "priority": {
+                "value": 1,
+                "reason": "Owner requested first-pass alignment before further decisions."
+              },
+              "value": {
+                "value": 1,
+                "reason": "Expose an unresolved choice affecting the shared RSI loop."
+              },
+              "dependencies": []
+            },
+            "digest": "af204dbc4ba6a36857d4d700ac73a985d7703d139f6585f35574e0bc4774eba3",
+            "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+            "scope": "Meaning-only first-pass alignment. Recommendations are pending, not owner-confirmed. No implementation, trials, installation, database writes or merge-rule changes.",
+            "revision": 3,
+            "eventId": "rsi-firstpass-20261106-DQC-000E-answer",
+            "at": "2026-11-07T00:52:01.825Z"
+          }
+        ],
         "events": [
           {
             "eventId": "rsi-align-20261106-DQC-000E-v1",
@@ -2830,6 +2938,16 @@
             "source": null,
             "note": null,
             "revision": 2,
+            "round": "rsi-cross-project-20261106"
+          },
+          {
+            "eventId": "rsi-firstpass-20261106-DQC-000E-answer",
+            "type": "confirm",
+            "at": "2026-11-07T00:52:01.825Z",
+            "requestDigest": "f1b523fba7fba7f7475c678d4981fb8a1f04c09cf56e6b63a2efbe9f757736dc",
+            "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+            "note": "Yes, Because of this we need to be very smart about how we do this. Can we create something that we can have in GPT_OS (that is on both Mac and PC, and can be created as an environment for the cloud) that would allow us to send info back to supabase? Do we need to send info back or can supabase collect it from github as long as the projects as pushing back to Kaydenclark/skills?",
+            "revision": 3,
             "round": "rsi-cross-project-20261106"
           }
         ]
