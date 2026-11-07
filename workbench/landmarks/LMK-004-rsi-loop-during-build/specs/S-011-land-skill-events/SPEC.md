@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
 **Execution approval:** [JOT-3a2975df-e456-4141-bf6b-27ae716f1f98](../../../../wiki/context-workbench-adoption.md)
-**Next gate:** Inspect TK-003C correction preparation before attempt2; earlier holds remain.
+**Next gate:** Review TK-003C source, publish/install; earlier holds remain.
 
 ## Intent and authority
 
@@ -46,7 +46,7 @@ The [prune-artifact addition](../../../../wiki/context-owner-answers-coherence.m
 
 ### Current bounded contract
 
-The confirmed readback owns the current requirements/scenarios. Reached setup instructions and templates must defer promotion to project controls, without AMS policy. Create captures the project-authorized merge actor, branch and conditions; permitted main delivery, owner-opted staging and the unresolved-authority stop remain. Website/unrelated work stay excluded. Changed setup needs scoped Stable/Excellent, accepted retention and no applicable recorded-failure regression before merge/install; PR71 qualifies only its original scope.
+The confirmed readback owns the current requirements/scenarios. Reached setup instructions and templates must defer promotion to project controls, without AMS policy. Create captures the project-authorized merge actor, branch and conditions; permitted main delivery, owner-opted staging and the unresolved-authority stop remain. Website/unrelated work stay excluded. Changed setup needs scoped Stable/Excellent, verified native finding retests and no applicable recorded-failure regression before merge/install; PR71 qualifies only its original scope.
 
 ## Non-Goals
 

@@ -1,7 +1,7 @@
 # RSI repair: bounded branch delivery and closeout
 
 Owner: Kayden direct AMS chat, 2026-11-06. Every edit to AMS/shared skills is RSI work.
-Status: prior source installed; TK-003C attempt1 draft with an open finding; attempt2 preparation awaits Director inspection. TK-003D stays blocked.
+Status: prior source installed; TK-003C attempt2 qualifies and awaits independent review/delivery. TK-003D stays blocked.
 Source-delivery capability: [S-011](../landmarks/LMK-004-rsi-loop-during-build/specs/S-011-land-skill-events/SPEC.md), within [LMK-004](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md).
 
 ## Confirmed scope and authority
@@ -89,6 +89,6 @@ The original adoption snapshot and digest binding stay authoritative for their a
 
 Native remote claim of TK-003C refused before writing because the prepared Spec used local source anchors rather than direct current Jot citations (FAIL-204). Structural Map counts and next selection did not prove that claim precondition. The new [source-bound filing](../wiki/context-workbench-adoption.md#jot-3a2975df-e456-4141-bf6b-27ae716f1f98) quotes actual existing confirmation/execution authority and separately labels S-011 routing as Codex's clerical mapping, not a new owner quote or acceptance. It preserves the exact earlier8290-character readback and old campaign limits. The actual exported executionAuthority check is run read-only before a future retry; no local-claim bypass or validator change is authorized.
 
-## TK-003C correction preparation
+## TK-003C current qualification
 
-Attempt1 930cbc1: native Excellent48/51, complete/qualified, assessmentAccepted=true, retentionAccepted=false; original FAIL-203 retest passes. Director requires open Create/A02-01 correction in the same Task (FAIL-208). Source held. [History](../wiki/history/S-011.md) retains evidence/disposition and attempt2 plan; frozen17/3/classes unchanged.
+Attempt1 930cbc1: Excellent48/51, finding retained. Attempt2 2c52150: Excellent51/51, native A02-01 verified-resolved, no rejected retests. retentionAccepted=false deliberately excludes useful-benefit claims (FAIL-211). Fixed17/3/classes and actual proof remain in [history](../wiki/history/S-011.md) and the [safe summary](../../evals/bounded-delivery/qualification-summary.json).

@@ -67,7 +67,7 @@
       "class": "Quality",
       "obligation": "declared main/dev routes and composed interfaces",
       "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
-      "boundedRetestEvidence": "native cases1\u20136,13; all three artifact cases2/3",
+      "boundedRetestEvidence": "native cases1–6,13; all three artifact cases2/3",
       "retainedDisposition": "bounded predicate verified; historical unrelated coherence findings unchanged",
       "globalHistoricalClosureClaimed": false,
       "originalObservationUnmodified": true
@@ -78,7 +78,7 @@
       "class": "Quality",
       "obligation": "declared main/dev routes and composed interfaces",
       "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
-      "boundedRetestEvidence": "native cases1\u20136,13; all three artifact cases2/3",
+      "boundedRetestEvidence": "native cases1–6,13; all three artifact cases2/3",
       "retainedDisposition": "bounded predicate verified; historical unrelated coherence findings unchanged",
       "globalHistoricalClosureClaimed": false,
       "originalObservationUnmodified": true
@@ -529,7 +529,7 @@
       "class": "Quality",
       "obligation": "complete outgoing diff whitespace",
       "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
-      "boundedRetestEvidence": "independent full base92f39d6\u2192619aa374 git diff --check returned0",
+      "boundedRetestEvidence": "independent full base92f39d6→619aa374 git diff --check returned0",
       "retainedDisposition": "current exact diff verified; historical failed CI retained",
       "globalHistoricalClosureClaimed": false,
       "originalObservationUnmodified": true
@@ -540,7 +540,7 @@
       "class": "Quality",
       "obligation": "complete outgoing diff whitespace",
       "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
-      "boundedRetestEvidence": "independent full base92f39d6\u2192619aa374 git diff --check returned0",
+      "boundedRetestEvidence": "independent full base92f39d6→619aa374 git diff --check returned0",
       "retainedDisposition": "current exact diff verified; historical failed CI retained",
       "globalHistoricalClosureClaimed": false,
       "originalObservationUnmodified": true
@@ -551,7 +551,7 @@
       "class": "Quality",
       "obligation": "complete outgoing diff whitespace",
       "currentCandidate": "619aa37440858dd5af3e5260955ed0023e0fa582",
-      "boundedRetestEvidence": "independent full base92f39d6\u2192619aa374 git diff --check returned0",
+      "boundedRetestEvidence": "independent full base92f39d6→619aa374 git diff --check returned0",
       "retainedDisposition": "current exact diff verified; historical failed CI retained",
       "globalHistoricalClosureClaimed": false,
       "originalObservationUnmodified": true
@@ -865,5 +865,110 @@
     "containment": "verified from fresh main ref",
     "installation": "registered published-source update/check verified active main4db09e3; imported files retained",
     "postMergeCI": "42309160258: success"
+  },
+  "setupGuidanceCorrection": {
+    "scope": "Setup copy/seed promotion guidance and explicitly supplied-source authority decisions only; not whole Setup fitness or useful benefit",
+    "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+    "baseline": "4db09e3dc463667f7e5106ecc8b7aa6d1dfbfc21",
+    "packageSha256": "bc6134e42d80bd7356a07cfd701b7bb65a4d306dedb18a7b97c8d163e2f7651a",
+    "createSha256": "7838a618b65c540368a78b2a19a7846c2c680c69bc4b35ef29a1cf53683b71d8",
+    "contractSha256": "ff416823f39141009f8b0d0bb7947cca26a06035af78cc8416cec41056d65eb2",
+    "nativeOperation": "score(packet, actualPriorFindings); no fabricated matched-baseline history record",
+    "attempt1": {
+      "candidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac",
+      "alignment": {
+        "passed": 48,
+        "applicable": 51,
+        "percentageNumerator": 1600,
+        "percentageDenominator": 17
+      },
+      "level": "Excellent",
+      "passingRuns": 3,
+      "evidenceState": "complete",
+      "qualification": "qualified",
+      "assessmentAccepted": true,
+      "retentionAccepted": false,
+      "findings": [
+        {
+          "findingId": "setup-guidance-correction:A02-01",
+          "checkId": "A02-01",
+          "class": "Quality",
+          "status": "open",
+          "sourceRunId": "setup-guidance-1",
+          "candidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac",
+          "lastCandidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac"
+        }
+      ],
+      "packetSha256": "ecc6d52806c1b22af24548bec3538c67163acf20264d54a4252d67ff09f0ab88",
+      "resultSha256": "e7e094d8714c5fe002a9dd95e01321a1c73f474b18e0c0499ea32138353ece3a"
+    },
+    "attempt2": {
+      "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+      "alignment": {
+        "passed": 51,
+        "applicable": 51,
+        "percentageNumerator": 100,
+        "percentageDenominator": 1
+      },
+      "level": "Excellent",
+      "passingRuns": 3,
+      "evidenceState": "complete",
+      "qualification": "qualified",
+      "assessmentAccepted": true,
+      "retentionAccepted": false,
+      "findings": [
+        {
+          "findingId": "setup-guidance-correction:A02-01",
+          "checkId": "A02-01",
+          "class": "Quality",
+          "status": "verified-resolved",
+          "sourceRunId": "setup-guidance-1",
+          "candidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac",
+          "lastCandidate": "930cbc1f780549b26cb8b37a2b240e3ce7176fac",
+          "resolvedAt": "setup-guidance-correction-candidate-2-2c52150",
+          "repairedRevision": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f"
+        }
+      ],
+      "rejectedRetests": [],
+      "packetSha256": "d78e97388b908e1bc2ed882877091f64d06c624471e6e2f9a3ff84c6911bb122",
+      "resultSha256": "2a462ac730918faa8f042011303ac5bfff63529bb1b09d1f35ecefa418f0e693"
+    },
+    "conditions": {
+      "model": "gpt-6.1-sol",
+      "effort": "high",
+      "runs": 3,
+      "eachRun": "all three original authority scenarios; actual current Create observations",
+      "applicableChecks": 17,
+      "critical": 7,
+      "quality": 10,
+      "regression": 0,
+      "calibration": "unchanged bounded method; 11 protected probes matched; native scorer controls42/42",
+      "pruning": "independent gpt-6.1-sol/high, no changes required"
+    },
+    "checks": {
+      "actualOutputRegression": "four old-output assertion failures plus parent; candidate/post-pruning5/5",
+      "package": "77/77",
+      "maintenance": "8/8",
+      "workflowCleanup": "8 cases",
+      "ciRunner": "6/6",
+      "currentHeadCI": {
+        "run": 42319489381,
+        "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+        "result": "success"
+      }
+    },
+    "sourceDelivery": {
+      "pr": "https://github.com/KaydenClark/skills/pull/73",
+      "state": "draft; qualified, final independent reviews pending",
+      "target": "main",
+      "publishedMain": null,
+      "installed": null
+    },
+    "limits": [
+      "retentionAccepted intentionally stays false because useful-benefit comparison is outside native score",
+      "Original FAIL-203 retest and actual attempt-one failure remain preserved",
+      "Prior PR71 evidence keeps its original source/scope; frozen older campaigns remain held",
+      "No source merge, new installation, owner QA or comparative benefit claimed"
+    ]
   }
 }
