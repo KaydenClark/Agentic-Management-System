@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { seriesViews, runsWithoutResults } from "./data";
 import { loadCachedEvidence } from "./cached";
 import { readState } from "./read-state";
+import { AuditEvidence } from "./audit-view";
 import { ActivityEvidence } from "./activity";
 import { RsiView } from "./view";
 import { RepairEvidence } from "./repair";
@@ -27,6 +28,7 @@ export default async function RsiPage() {
   return (
     <RsiView views={seriesViews(loaded.data)} runEvidence={runsWithoutResults(loaded.data)} unavailable={!loaded.ok} readAt={loaded.readAt} stale={state === "stale"}>
       <ActivityEvidence loaded={evidence.activity} />
+      <AuditEvidence loaded={evidence.audits} />
       <SkillTrends records={recordedLoops()} />
       <RoundTwoEvidence />
       <RepairEvidence />

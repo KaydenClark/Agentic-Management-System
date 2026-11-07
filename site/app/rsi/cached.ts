@@ -5,6 +5,7 @@
 import { unstable_cache } from "next/cache";
 import { emptyData } from "./data";
 import { loadBuildEvents, loadRsiData, emptyActivity, type BuildActivity, type LoadResult, type ReadResult } from "./supabase";
+import { loadSkillAudits, type SkillAudit } from "./audits";
 import { READ_INTERVAL_SECONDS } from "./read-state";
 
 const trials = unstable_cache(async (base: string) => {
@@ -19,15 +20,23 @@ const activity = unstable_cache(async (base: string) => {
   return loaded;
 }, ["s007-public-merge-facts-v2"], { revalidate: READ_INTERVAL_SECONDS });
 
-export async function loadCachedEvidence(): Promise<{ trials: LoadResult; activity: ReadResult<BuildActivity> }> {
+const audits = unstable_cache(async (base: string) => {
+  const loaded = await loadSkillAudits({ env: { NEXT_PUBLIC_SUPABASE_URL: base, NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY } });
+  if (!loaded.ok) throw new Error("public audit read unavailable");
+  return loaded;
+}, ["s007-public-skill-audits-v1"], { revalidate: READ_INTERVAL_SECONDS });
+
+export async function loadCachedEvidence(): Promise<{ trials: LoadResult; activity: ReadResult<BuildActivity>; audits: ReadResult<SkillAudit[]> }> {
   const base = process.env.NEXT_PUBLIC_SUPABASE_URL;
   // Missing configuration is a failed read, not a successfully empty store.
   if (!base || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) return {
     trials: { ok: false, data: emptyData, readAt: null, reason: "public reader not configured" },
     activity: { ok: false, data: emptyActivity, readAt: null, reason: "public reader not configured" },
+    audits: { ok: false, data: [], readAt: null, reason: "public reader not configured" },
   };
-  const [trialRead, activityRead] = await Promise.allSettled([trials(base), activity(base)]);
+  const [trialRead, activityRead, auditRead] = await Promise.allSettled([trials(base), activity(base), audits(base)]);
   return {
+    audits: auditRead.status === "fulfilled" ? auditRead.value : { ok: false, data: [], readAt: null, reason: "public audit read unavailable" },
     trials: trialRead.status === "fulfilled" ? trialRead.value : { ok: false, data: emptyData, readAt: null, reason: "public trial read unavailable" },
     activity: activityRead.status === "fulfilled" ? activityRead.value : { ok: false, data: emptyActivity, readAt: null, reason: "public activity read unavailable" },
   };
