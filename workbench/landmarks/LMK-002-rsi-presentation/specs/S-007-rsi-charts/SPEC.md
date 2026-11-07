@@ -10,7 +10,7 @@
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
-**Next gate:** Review F slice; retain full-lineage and producer gaps.
+**Next gate:** Full lineage, recurrence and owner QA remain open.
 
 ## Intent and authority
 
