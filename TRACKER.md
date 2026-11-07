@@ -131,3 +131,9 @@ Round: ams-concept-20261103. Dependencies: DQC-000A.
 - [dqc:DQC-000A](workbench/landmark-tracker/destination-questions/DQC-000A.json) (tracker): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
 - [spec:S-004](workbench/landmarks/LMK-001-grill-board/specs/S-004-grill-board-cards/SPEC.md) (room): Connect sourced concept coverage with its actual maintained execution owner; no execution state is inferred\.
 - propose at r4
+
+## DQC-000E — Finish the Workbench Dashboard in AMS
+
+Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000E.json)
+
+What does the AMS Workbench Dashboard include, where does its code come from, and how does it look?

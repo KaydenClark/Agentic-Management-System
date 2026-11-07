@@ -1,0 +1,46 @@
+{
+  "schema": "landmark-tracker/destination-question@2",
+  "id": "DQC-000E",
+  "revision": 1,
+  "title": "Finish the Workbench Dashboard in AMS",
+  "question": "What does the AMS Workbench Dashboard include, where does its code come from, and how does it look?",
+  "answer": null,
+  "confirmation": null,
+  "expectedResult": null,
+  "result": null,
+  "uncertainty": [],
+  "sources": [
+    {
+      "id": "workbench/wiki/context-grilling-board.md",
+      "revision": "75862efddf475ce3e4f57c25f4002bf625642c53#jot-97b271e2-af5c-4901-a9ae-4f87fa65f759"
+    }
+  ],
+  "landmarks": [],
+  "assessment": null,
+  "related": [],
+  "claims": [],
+  "origin": {
+    "title": "Finish the Workbench Dashboard in AMS",
+    "question": "What does the AMS Workbench Dashboard include, where does its code come from, and how does it look?",
+    "sources": [
+      {
+        "id": "workbench/wiki/context-grilling-board.md",
+        "revision": "75862efddf475ce3e4f57c25f4002bf625642c53#jot-97b271e2-af5c-4901-a9ae-4f87fa65f759"
+      }
+    ],
+    "revision": 1,
+    "at": "2026-11-07T09:17:53.116Z"
+  },
+  "history": [
+    {
+      "revision": 1,
+      "at": "2026-11-07T09:17:53.116Z",
+      "reason": "Owner asked to finish the grilling board by adding the working LLM_Workbench Dashboard instead of redesigning it",
+      "changes": [
+        {
+          "field": "captured"
+        }
+      ]
+    }
+  ]
+}

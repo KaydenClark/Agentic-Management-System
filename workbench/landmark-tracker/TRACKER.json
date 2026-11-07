@@ -12,14 +12,15 @@
     "Verified"
   ],
   "workbench": {
-    "items": 9,
-    "denominator": 9,
+    "items": 10,
+    "denominator": 10,
     "status": "incomplete",
     "counted": [
       "dqc:DQC-000A",
       "dqc:DQC-000B",
       "dqc:DQC-000C",
       "dqc:DQC-000D",
+      "dqc:DQC-000E",
       "spec:S-004",
       "task:S-004/TK-002H",
       "task:S-004/TK-002I",
@@ -51,6 +52,7 @@
       "dqc:DQC-000B",
       "dqc:DQC-000C",
       "dqc:DQC-000D",
+      "dqc:DQC-000E",
       "spec:S-004",
       "task:S-004/TK-002H",
       "task:S-004/TK-002I",
@@ -61,13 +63,14 @@
     "invalid": [],
     "bySourceType": {
       "dqc": {
-        "items": 4,
+        "items": 5,
         "status": "incomplete",
         "counted": [
           "dqc:DQC-000A",
           "dqc:DQC-000B",
           "dqc:DQC-000C",
-          "dqc:DQC-000D"
+          "dqc:DQC-000D",
+          "dqc:DQC-000E"
         ],
         "numerators": {
           "Idea": 0,
@@ -224,6 +227,18 @@
         "itemRevision": null
       },
       {
+        "key": "dqc:DQC-000E",
+        "type": "dqc",
+        "id": "DQC-000E",
+        "state": "unassessed",
+        "contributions": null,
+        "basis": null,
+        "evidence": [],
+        "revision": null,
+        "holder": "DQC-000E",
+        "itemRevision": null
+      },
+      {
         "key": "spec:S-004",
         "type": "spec",
         "id": "S-004",
@@ -293,7 +308,8 @@
       "DQC-000A",
       "DQC-000B",
       "DQC-000C",
-      "DQC-000D"
+      "DQC-000D",
+      "DQC-000E"
     ]
   },
   "items": [
@@ -332,6 +348,15 @@
       "key": "dqc:DQC-000D",
       "type": "dqc",
       "id": "DQC-000D",
+      "resolution": "tracker",
+      "state": "unassessed",
+      "holders": [],
+      "relatedBy": []
+    },
+    {
+      "key": "dqc:DQC-000E",
+      "type": "dqc",
+      "id": "DQC-000E",
       "resolution": "tracker",
       "state": "unassessed",
       "holders": [],
@@ -2295,6 +2320,150 @@
             "round": "ams-concept-20261103"
           }
         ]
+      }
+    },
+    {
+      "id": "DQC-000E",
+      "title": "Finish the Workbench Dashboard in AMS",
+      "question": "What does the AMS Workbench Dashboard include, where does its code come from, and how does it look?",
+      "answer": null,
+      "answered": false,
+      "confirmation": null,
+      "expectedResult": null,
+      "result": null,
+      "uncertainty": [],
+      "landmarks": [],
+      "landmarkDisplay": "No landmark",
+      "assessment": {
+        "state": "unassessed"
+      },
+      "distribution": {
+        "items": 1,
+        "denominator": 1,
+        "status": "incomplete",
+        "counted": [
+          "dqc:DQC-000E"
+        ],
+        "numerators": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "distribution": {
+          "Idea": 0,
+          "Aligning": 0,
+          "Confirmed": 0,
+          "Mapped": 0,
+          "Planned": 0,
+          "Journey": 0,
+          "Review": 0,
+          "Verified": 0
+        },
+        "unassessed": [
+          "dqc:DQC-000E"
+        ],
+        "unknown": [],
+        "invalid": [],
+        "bySourceType": {
+          "dqc": {
+            "items": 1,
+            "status": "incomplete",
+            "counted": [
+              "dqc:DQC-000E"
+            ],
+            "numerators": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            },
+            "distribution": {
+              "Idea": 0,
+              "Aligning": 0,
+              "Confirmed": 0,
+              "Mapped": 0,
+              "Planned": 0,
+              "Journey": 0,
+              "Review": 0,
+              "Verified": 0
+            }
+          }
+        },
+        "contributions": [
+          {
+            "key": "dqc:DQC-000E",
+            "type": "dqc",
+            "id": "DQC-000E",
+            "state": "unassessed",
+            "contributions": null,
+            "basis": null,
+            "evidence": [],
+            "revision": null,
+            "holder": "DQC-000E",
+            "itemRevision": null
+          }
+        ],
+        "unassessedPercent": 100
+      },
+      "related": [],
+      "relatedBy": [],
+      "lineage": {
+        "key": "dqc:DQC-000E",
+        "type": "dqc",
+        "id": "DQC-000E",
+        "resolution": "tracker",
+        "state": "unassessed",
+        "related": []
+      },
+      "claims": [],
+      "reconciliation": [],
+      "sources": [
+        {
+          "id": "workbench/wiki/context-grilling-board.md",
+          "revision": "75862efddf475ce3e4f57c25f4002bf625642c53#jot-97b271e2-af5c-4901-a9ae-4f87fa65f759"
+        }
+      ],
+      "origin": {
+        "title": "Finish the Workbench Dashboard in AMS",
+        "question": "What does the AMS Workbench Dashboard include, where does its code come from, and how does it look?",
+        "sources": [
+          {
+            "id": "workbench/wiki/context-grilling-board.md",
+            "revision": "75862efddf475ce3e4f57c25f4002bf625642c53#jot-97b271e2-af5c-4901-a9ae-4f87fa65f759"
+          }
+        ],
+        "revision": 1,
+        "at": "2026-11-07T09:17:53.116Z"
+      },
+      "corrections": [],
+      "revision": 1,
+      "history": [
+        {
+          "revision": 1,
+          "at": "2026-11-07T09:17:53.116Z",
+          "reason": "Owner asked to finish the grilling board by adding the working LLM_Workbench Dashboard instead of redesigning it",
+          "changes": [
+            {
+              "field": "captured"
+            }
+          ]
+        }
+      ],
+      "lifecycle": {
+        "state": "pending",
+        "proposal": null,
+        "digest": null,
+        "confirmations": [],
+        "events": []
       }
     }
   ],
