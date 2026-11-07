@@ -219,22 +219,37 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000G.
 
 ## DQC-000I — RSI: Recording authority
 
-Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000I.json)
+Revision 4; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000I.json)
 
-<pre>**Question:** Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?
+<pre>**Question:** Which system should own the per-skill failure history, regression cases and RSI results?
 
-**Recommended answer:** Yes. Keep one linked lifecycle in Supabase; reference original project failure IDs and corrections. Queue evidence locally until receipt is verified, preserving original event times and preventing duplicates.
+**Recommended answer:** Use Supabase as the shared record of skill use, failures and improvement history; use KaydenClark/skills for the skill source and versioned regression-test assets.
 
-**Why:** This preserves the existing ownership model, but I assumed it also fits ordinary skill uses and projects before setup.
+| Information | Authoritative home |
+|---|---|
+| Real uses and reported failures, including expected/actual behavior, severity and recurrence | Supabase |
+| Repair jobs, candidate attempts, each audit run’s Alignment score and model/provider, and the three-run aggregate Fitness/Alignment result | Supabase |
+| Skill source, regression-case definitions/fixtures, rubric and grader versions | KaydenClark/skills, pinned to exact revisions |
+| Merge, installed-version and later-use evidence | Supabase, referencing the actual Git commits and installation/use receipts |
+| Events awaiting upload | A durable reporting-tool queue in each environment until Supabase acknowledges receipt |
 
-**Intended impact:** Prevents competing histories and silent evidence loss during outages or cloud teardown.</pre>
+Each use and failure gets a stable ID. A regression case in Git references its originating failure IDs; Supabase records which exact case and skill versions were tested and what happened. Repeated occurrences and failed repair attempts remain separate records. Corrections preserve the earlier history.
 
-Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+The per-skill failure log is a readable view of these linked Supabase records, available to the repair worker and agents through the reporting tools. Application projects do not maintain separate copies. Servitor reads eligible repair jobs and writes their progress/results; the website reads the safe results and trends from the same data. Public skill content and results remain presentable while private source material stays outside the public dataset.
 
-Round: rsi-cross-project-20261106. Dependencies: DQC-000F, DQC-000H.
+Keep safe exports as recovery snapshots, with Supabase remaining the operational authority. The exact reporting/authentication interface belongs to question 6; evidence access and retention details remain open in question 4.
+
+**Why:** Git is suited to reviewing and reproducing changes to skills and tests. A shared database is suited to concurrent use/failure records, repair state and long-term comparisons across machines. This reuses ADR-003H’s Python-to-Supabase results direction and the existing assessment store, while replacing the earlier project-owned failure-intake recommendation. Logging a real use should not require a project commit or a Git merge.
+
+**Intended impact:** One failure reported anywhere is available to the Servitor repair worker and becomes traceable regression coverage. The same records support per-skill histories across hundreds of uses and improvement cycles, without losing failed attempts or creating competing logs.</pre>
+
+Source: Kayden AMS alignment chat, 2026-11-06: confirmed question 3, explicit jump to question 5 and request for expert storage recommendation; ADR-003H and S-006 source inspection\.. Scope: Proposed concept ownership only\. Question 4 remains unanswered; no schema, migration, live logging backend, private evidence upload or implementation is authorized\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000G.
 
 - propose at r2
 - correct at r3: I am not sure if supabase should own the lifecycle of Kaydenclark/skills\. I need you to be the expert and find out the best system for me\.
+- propose at r4
 
 ## DQC-000J — RSI: Capture and transport
 
