@@ -31,6 +31,58 @@ This routing clarification is not proof that the systemic failure is fixed.
 | Improve a demonstrated harness gap | improve-workbench |
 | Author a reusable skill | author-skill |
 
+## Prose First Coding
+
+Prose First Coding is an AMS design philosophy that combines **spec-as-source**
+and **comment-driven development**. Write the complete behavior in plain English
+before writing code. Carry that prose into source comments and implement each
+step beneath its comment. The comments remain the authoritative specification
+for the code's intended behavior. With TDD, write the prose first, then use
+red/green/refactor to verify the specified behavior.
+
+1. **Write the full prose pass.** Use complete sentences to describe the inputs,
+   what happens in order, and what is returned or changed. Include boundaries,
+   exceptions, and precedence rules that affect the result.
+2. **Resolve behavioral gaps.** Read the full specification in order. If two
+   reasonable implementations could behave differently, clarify the intended
+   behavior before writing code.
+3. **Carry the prose into source verbatim.** Put each comment at the level it
+   governs. A function rule goes above the function. A branch rule goes above
+   the branch.
+4. **Implement each step directly beneath its comment.** Use as many lines as
+   the step needs. If implementation exposes a missing decision, resolve it in
+   the prose before continuing.
+5. **Keep the prose authoritative.** Read the comments in order to check that
+   they still form a complete, understandable specification. When intended
+   behavior changes, edit the relevant comment first, then update the code
+   beneath it.
+
+### Example
+
+First pass in plain English.
+
+> Calculate the shipping charge in cents from an order subtotal given in whole cents.\
+> If the subtotal is negative, reject it as invalid.\
+> If the subtotal is at least 5,000 cents, shipping is free.\
+> Otherwise, charge 500 cents for shipping.
+
+Second pass with the same prose in source.
+
+```python
+# Calculate the shipping charge in cents from an order subtotal given in whole cents.
+def shipping_charge_cents(subtotal_cents: int) -> int:
+    # If the subtotal is negative, reject it as invalid.
+    if subtotal_cents < 0:
+        raise ValueError("Order subtotal cannot be negative.")
+
+    # If the subtotal is at least 5,000 cents, shipping is free.
+    if subtotal_cents >= 5_000:
+        return 0
+
+    # Otherwise, charge 500 cents for shipping.
+    return 500
+```
+
 ## Concept lifecycle
 
 TRACKER.md and Grilling Board cards project stable DQCs; TASKBOARD.md projects execution. Capture interview branches before asking, preserve the exact confirmed readback, and link execution owners by stable ID in both directions. Native CLI and Python Board share owning operations; never edit a second question store. After the owner finishes a round, review every changed DQC and feedback item, perform authorized Wiki/docs reconciliation or preparation, and record the next frontier with actual source revisions. Round completion grants no additional execution authority.
