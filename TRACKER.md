@@ -210,7 +210,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000G.
 
 ## DQC-000I — RSI: Recording authority
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000I.json)
+Revision 3; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000I.json)
 
 <pre>**Question:** Should Supabase own the shared lifecycle while project feedback logs retain local failure intake?
 
@@ -225,6 +225,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000F, DQC-000H.
 
 - propose at r2
+- correct at r3: I am not sure if supabase should own the lifecycle of Kaydenclark/skills\. I need you to be the expert and find out the best system for me\.
 
 ## DQC-000J — RSI: Capture and transport
 
