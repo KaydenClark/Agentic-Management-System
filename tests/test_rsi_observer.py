@@ -276,3 +276,9 @@ def test_same_identity_with_changed_readback_stays_pending(tmp_path):
     with pytest.raises(ValueError, match='readback differs'):
         Outbox(tmp_path).flush(Store(Settings('http://example.invalid', 'sb_secret_fixture'), http))
     assert cli(tmp_path, ['status', 'chat-1'])['pending_event_ids'] == ['request-1']
+
+
+def test_skill_audit_requires_exact_shared_rubric_identity(tmp_path):
+    packet = audit_packet()
+    packet['rubric'] = dict(packet['rubric'], checkVersion=True)
+    assert 'approved r1' in cli(tmp_path, ['audit-score'], packet, ok=False)

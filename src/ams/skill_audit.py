@@ -47,7 +47,8 @@ def _contract(packet):
     token(packet.get('skill'), 'skill', SKILL)
     for field in ('skills_commit', 'candidate', 'baseline'):
         assessment.revision(packet.get(field), field)
-    require(packet.get('rubric') == assessment.RUBRIC, 'shared checks must pin the approved r1 inventory')
+    require(assessment.same_artifact(packet.get('rubric'), assessment.RUBRIC),
+            'shared checks must pin the approved r1 inventory')
     conditions = packet.get('conditions')
     require(isinstance(conditions, dict), 'frozen audit conditions are required')
     token(conditions.get('provider'), 'provider')
