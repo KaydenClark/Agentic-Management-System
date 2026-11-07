@@ -959,16 +959,79 @@
     },
     "sourceDelivery": {
       "pr": "https://github.com/KaydenClark/skills/pull/73",
-      "state": "draft; qualified, final independent reviews pending",
+      "state": "merged; resulting published main checked; registered source installation verified",
       "target": "main",
-      "publishedMain": null,
-      "installed": null
+      "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+      "publishedMain": "af42a289546d631ac3c2c13c5f1fa65c02365a35",
+      "containment": "fresh fetch and ancestry pass; resulting tree identical to reviewed candidate",
+      "mainCI": {
+        "run": 42321456109,
+        "result": "success",
+        "catalog": "pass",
+        "guardedRemoteCleanup": "pass"
+      },
+      "installed": {
+        "before": "4db09e3dc463667f7e5106ecc8b7aa6d1dfbfc21",
+        "installed": "af42a289546d631ac3c2c13c5f1fa65c02365a35",
+        "branch": "main",
+        "clean": true,
+        "registeredFiles": 318,
+        "localFilesPreserved": true,
+        "localInventorySha256": "8fe6ca1a6a9cbcd3584e7318c8d6cd9f46248fd22022e7957e70f79e2e5238e3",
+        "discoveryUnchanged": true,
+        "locationUnchanged": true,
+        "createSha256": "7838a618b65c540368a78b2a19a7846c2c680c69bc4b35ef29a1cf53683b71d8",
+        "package": "bc6134e42d80bd7356a07cfd701b7bb65a4d306dedb18a7b97c8d163e2f7651a",
+        "importRefresh": false,
+        "maintenanceCheck": "pass"
+      },
+      "installedUse": {
+        "outputs": 6,
+        "result": "pass",
+        "boundary": "Explicit hash-bound installed-package copy under established isolation; no native host autodiscovery, full Genesis or benefit claim"
+      }
     },
     "limits": [
       "retentionAccepted intentionally stays false because useful-benefit comparison is outside native score",
       "Original FAIL-203 retest and actual attempt-one failure remain preserved",
       "Prior PR71 evidence keeps its original source/scope; frozen older campaigns remain held",
-      "No source merge, new installation, owner QA or comparative benefit claimed"
-    ]
+      "Installation is exact published-source verification and bounded explicit use; no owner QA, comparative benefit or whole-Setup/S-011 acceptance"
+    ],
+    "independentReview": {
+      "tier": "Frontier",
+      "model": "gpt-6-astra",
+      "effort": "high",
+      "freshContexts": true,
+      "noncontributors": true,
+      "standards": {
+        "result": "PASS",
+        "findings": 0,
+        "sha256": "97b43a584d67ccf88bb72fd10f9734ae7731551773982568022e80f4ae8995cc"
+      },
+      "spec": {
+        "result": "PASS",
+        "findings": 0,
+        "sha256": "8afc0452e1f871c51ab8efb70774dfdd7c9e017ec225b6f823717e1c9f38389d"
+      },
+      "base": "4db09e3dc463667f7e5106ecc8b7aa6d1dfbfc21",
+      "candidate": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+      "identityBoundary": "Exact dispatch model designation; no independent runtime attestation claimed"
+    },
+    "cleanup": {
+      "remoteBranch": "absent after guarded published-main cleanup",
+      "local": "retained managed source worktree and occupied local branch until active implementor stops",
+      "branch": "setup-promotion-guidance",
+      "expectedHead": "2c52150e5af19a762fa7cb9e6a4a88e717e6a11f",
+      "contained": true,
+      "ignored": 0,
+      "untracked": 0,
+      "hiddenIndexFlags": 0,
+      "owner": "Director",
+      "nextAction": "Recheck guards, archive managed source attachment after implementor stops, then guarded local branch deletion"
+    },
+    "nativeTask": {
+      "id": "TK-003C",
+      "status": "in-progress; ready for native close"
+    }
   }
 }
