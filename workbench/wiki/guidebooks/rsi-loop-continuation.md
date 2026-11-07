@@ -12,6 +12,12 @@ last_verified: 2026-11-04
 
 # RSI loop continuation
 
+## Servitor launch — 2026-11-07
+
+Kayden, direct AMS instruction: “Go ahead. Pick the first real AMS website task on Servitor and build the RSI Loop we designed in the DQCs. I want the Python observer, skill audits recorded in Supabase, and the RSI Charts working together end to end.” This releases the mapped implementation and first bounded proof. Existing stops, paid-service limits and owner-only website promotion remain.
+
+Selected real task: use code-review on the first checked dev candidate for /rsi audit counts. Verify a failed audit counts, a test audit is hidden and an unavailable read differs from zero. Website base: 325ea7d9d0422930fba8d999451a9d84ef3afe0a. Diagnose any actual skill failure before selecting a repair. Keep planted controls distinct from observations. TK-003E/F/G prepare the producer, store and reader. TK-003H owns actual host/candidate and later-use proof.
+
 ## Current Map handoff — 2026-11-07
 
 The owner authorized finishing the correction and checked publication in [JOT-b26faa14](../context-feedback-improvement-loop-plan.md#jot-b26faa14-5462-4a1b-979b-fcafecae147d). Prior failed checks/refusal remain in FAIL-210/211/213; the Map now condenses original records without splitting. The reusable writer/policy mismatch remains open under [FAIL-215](../../feedback/REPORT-setup-workbench-size-rules-2026-11-07.md) for a new chat. Verification and delivery require actual receipts; this grants no RSI implementation authority.
