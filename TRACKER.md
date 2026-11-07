@@ -224,10 +224,21 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000F, DQC-000H.
 
 ## DQC-000J — RSI: Capture and transport
 
-Revision 1; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
 
-Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?
+<pre>**Question:** Should we use a shared observer with host adapters and a restricted upload endpoint, or require logging inside each skill?
 
+**Recommended answer:** Use a shared observer once per participating harness, integrated with setup-workbench for project identity. Prefer supported host events; add explicit lifecycle calls where observation is incomplete. Use restricted authenticated ingestion; leave the exact packaging and endpoint technology open until feasibility is checked.
+
+**Why:** I selected an observer and Supabase Edge Function too early. The requirement is reliable capture with bounded access; the exact technology remains a proposal.
+
+**Intended impact:** Avoids duplicating logging instructions across skills and makes unsupported capture paths visible.</pre>
+
+Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI; first-pass question tree and Question / Recommended answer / Why / Intended impact readbacks\.. Scope: Meaning-only first-pass alignment\. Recommendations are pending, not owner-confirmed\. No implementation, trials, installation, database writes or merge-rule changes\..
+
+Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
+
+- propose at r2
 
 ## DQC-000K — RSI: Repair triggers and priority
 
