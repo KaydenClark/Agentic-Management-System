@@ -324,7 +324,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000M.
 
 ## DQC-000O — RSI: Conditional merge authority
 
-Revision 2; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000O.json)
+Revision 3; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000O.json)
 
 <pre>**Question:** Should qualifying skill repairs merge automatically under your stated Stable/Excellent approval, and what must the gate verify?
 
@@ -339,6 +339,7 @@ Source: Kayden AMS chat, 2026-11-06: align-concept request for cross-project RSI
 Round: rsi-cross-project-20261106. Dependencies: DQC-000I, DQC-000N.
 
 - propose at r2
+- confirm at r3: Yes, they are authorize to merge\. the orchestrator merges them\. Or who ever is fixing the skill\. its part of completing it\. merging it into main and cleaning up the branch you left behind\.
 
 ## DQC-000P — RSI: Sharing accepted versions
 
