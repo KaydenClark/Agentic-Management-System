@@ -156,17 +156,17 @@ Round: rsi-cross-project-20261106. Dependencies: none.
 
 ## DQC-000F — RSI: Run boundaries
 
-Revision 5; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
+Revision 6; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000F.json)
 
-<pre>**Question:** What counts as a skill use, what do we record, and when does a failure enter the RSI loop?
+<pre>**Question:** What do we record for each skill use, and when and where should repairs happen?
 
-**Recommended answer:** Whenever you, Codex or Claude use a participating Workbench skill to perform an operation, record that use and its outcome. One requested operation is one use, even across resumed chats; separately invoked skills have linked uses. Record the skill version, model tier/provider and whether the work completed, failed or was interrupted. Record reported failures immediately and mark them as needing repair. Repair can start after the current work or at the designated time, as agreed in question 7.
+**Recommended answer:** Record each participating skill use, its version, model tier/provider, outcome and reported failures. One requested operation remains one use across resumed chats, with linked uses for other invoked skills. Record failures immediately. Start repairs after the current work finishes. If a failure blocks that work, record it as a critical failure and start the repair in a new chat. Preserve the original session’s continuation so it can resume with the fixed skill once the repair is verified and the repaired version is available to that session.
 
-**Why:** Real work supplies the failure cases and evidence of value. Recording successful uses as well as failures gives us the denominator needed to determine whether errors decrease. Prompt capture preserves findings without requiring repairs to interrupt your work.
+**Why:** Non-blocking repairs should not interrupt useful work. A blocking skill failure needs a separate repair context while preserving the original task and its continuation.
 
-**Intended impact:** Every participating skill has a traceable use history. A reported failure becomes a durable RSI input immediately, and later results can show whether repairs reduce recurrence during real work.</pre>
+**Intended impact:** Real work builds the shared failure and use history. Routine repairs follow completed work; critical blockers get a separate repair chat that returns a usable fix to the original session.</pre>
 
-Source: Kayden AMS alignment chat, 2026-11-06; exact displayed readbacks and owner corrections\.. Scope: Concept alignment only; no implementation, installation, database writes, campaign launch or deployment\..
+Source: Kayden AMS alignment chat, 2026-11-06: question 2 correction on blocking failures and separate repair chats\.. Scope: Concept alignment only\. Revised question 2 awaits confirmation; no actual repair, new chat, installation or campaign is launched\..
 
 Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 
@@ -174,6 +174,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E.
 - correct at r3: When me, you \(codex\), or claude uses one of the workbench skills that we are doing RSI on\. we should log the failures and run the RSI loop on it\. The benefits of an RSI loop is that its recorded and can be started as soon as its logged in the system as needing to be fixed\.
 - propose at r4
 - correct at r5: Repair should start after the work is finished, unless its blocking that work\. In which case the failure is recorded as a critical failure and should be worked on in a new chat so that this session can pick back up with the fixed skill\.
+- propose at r6
 
 ## DQC-000G — RSI: Success and failure
 
