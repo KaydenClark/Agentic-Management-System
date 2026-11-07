@@ -60,7 +60,7 @@ Intent/concepts in DQCs, projected in TRACKER.md, linked to execution by stable 
 Landmark, Spec and Task work, projected in TASKBOARD.md, linked to originating DQCs.
 
 **Implementation Task**:
-Assigned bounded Spec slice owning execution state and proof.
+Bounded Spec or Landmark assignment owning execution state and proof.
 
 **Evaluation task**:
 Repeatable test case; attempts are trials, neither is an implementation assignment.

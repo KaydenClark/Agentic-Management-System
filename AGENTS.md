@@ -12,7 +12,7 @@ Preserve decisions, corrections and others’ edits. Keep one writer per record;
 
 Ask before destruction, paid services, wider scope or unrequested external changes. The owner chooses the license. Send no unauthorized messages. Never commit secrets, host paths or private research, or combine untrusted input, credentials and outward actions in one session.
 
-Keep confirmation, execution approval, Review, Human QA and publication distinct. Record only checks and judgments actually performed. Merge is not acceptance, Human QA or deployment. Follow [delivery authority](RUNBOOK.md#delivery-and-recovery); only the owner merges dev into main.
+Keep confirmation, execution approval, Review, Human QA and publication distinct. Record only checks and judgments actually performed. Merge is not acceptance, Human QA or deployment. Follow [delivery authority](RUNBOOK.md#delivery-and-recovery) over generic skill defaults. Only the owner promotes website work from dev into main.
 
 ## Publication during grilling
 

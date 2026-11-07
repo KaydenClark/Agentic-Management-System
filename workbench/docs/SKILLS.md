@@ -58,6 +58,14 @@ invocation remain setup gaps. A path check is not host activation.
 
 ## Delivery
 
+The [confirmed bounded-delivery model](../wiki/context-workbench-adoption.md#jot-bc41fc6e-de68-4769-b8e6-0419470558c5) supersedes continuing Spec-branch defaults for new work. Landmarks/Specs own outcomes; Tasks own bounded execution and proof. Use short-lived branches for related deliverable changes. A native Task may belong to a Spec or Landmark; bounded maintenance uses its real document, issue or feedback owner without an artificial Spec. Keep one writer per shared record and follow the current owner instruction and project gates.
+
+Ready project intent, Wiki/docs and checked non-site changes merge to main. Website code/content merges to dev; only the owner promotes website dev to main. Split changes with different readiness or destinations; use a temporary assembly branch only for components that cannot safely integrate independently. Do not merge an unfinished or mixed-site candidate to publish ready records. Keep confirmation, implementation, delivery and acceptance distinct.
+
+Commit coherent steps explaining what/why; the [save guard](../../.agents/hooks/require-committed.sh) checks dirt. Push owned unfinished work and use draft PRs; never stash or discard it to clean. After checks, verify exact target containment and reconcile its owner, then use Land's guarded local/remote branch and worktree cleanup. An open parent is not a cleanup blocker; unique bytes, competing writers, unknown ownership and uncontained commits are. Retained branches need an owner, reason and next action.
+
+Manifest `git.deliveryTargets` declares main/dev as verification destinations, not authority. Use installed `record-landing S-ID --target BRANCH` only for Spec landings. Native workspace snapshot accepts a Spec/Landmark Task or `--record TRACKED.md --authority SOURCE --owner NAME`, with `--target BRANCH`; commit owned originals, snapshot, then separately commit its digest binding before product edits. Later check keeps the pinned destination and all preservation findings. Standalone maintenance reconciles its real owner and PR rather than invoking a Spec-only receipt.
+
 The project controls own branch targets, required review, Human QA and publication.
 Read back owners, diff, candidate, target, checks and limits; report push, merge and deployment separately. Record only eligible Review and actual Human QA. An implementor's QA is not independent review. Setup, a successful check, a pushed
 branch or a PR never grants permission to merge main or deploy.
@@ -73,6 +81,8 @@ outgoing diff, checks and exclusions. A genuine unresolved scope or safety issue
 still requires resolution; never bypass an explicit review denial.
 
 ## RSI operations
+
+Every edit to AMS or shared skills is RSI work, per the [owner correction](../wiki/context-feedback-improvement-loop-plan.md#jot-e0b1c5cf-e727-41eb-a52d-1883d6cc68c1). Link source requirements, applicable failures, baseline/candidate checks, qualification, delivery, installation and later-use evidence through existing RSI owners. The [bounded-delivery repair](../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) retains its failed attempts, accepted bounded assessment and limits; do not reset earlier stopped campaigns or treat source publication as demonstrated benefit.
 
 Log every failure and failed retry in [one Markdown log](../feedback/WORKBENCH_FEEDBACK.md):
 failed model tier, provider, actual model/harness, activity/skill, observed failure,

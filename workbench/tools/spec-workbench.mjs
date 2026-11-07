@@ -15,7 +15,7 @@ import { blocksSelection, describe, finding } from './diagnostics.mjs';
 import { checkHostFloor, formatHostFloor } from './host-floor.mjs';
 import { capabilitySession } from './optional-capabilities.mjs';
 import { coordinationContext, publicCoordination, publishClaim } from './claim-coordination.mjs';
-import { assertSafeReadPath, assertSafeWritePath, writeSafeFile, collectionPath, collectionRelative, declaredGit, declaredTracker, lanePath, laneRelative, liveRecordPath, markdownLinkTargets, readManifest } from './workbench-paths.mjs';
+import { assertSafeReadPath, assertSafeWritePath, writeSafeFile, collectionPath, collectionRelative, declaredGit, deliveryTarget, declaredTracker, lanePath, laneRelative, liveRecordPath, markdownLinkTargets, readManifest } from './workbench-paths.mjs';
 // S-003Z TK-008D: the LANDMARK.md artifact reader, the record one size above a
 // Spec (ADR-000U). Doctor folds its findings in beside the ADR and DDR
 // collections, and `next-id --prefix LMK` folds its identities with the
@@ -1255,7 +1255,8 @@ export function recordLanding(rootDir, specId, options = {}) {
   }
   const nextGate = requireValue(options.nextGate, 'record-landing requires --next-gate naming the actual remaining action or blocker');
   if (/[\r\n]/.test(nextGate)) throw new Error('record-landing --next-gate must be one line');
-  const containment = resolveIntegrationContainmentRef(root);
+  const target = deliveryTarget(root, options.target);
+  const containment = resolveIntegrationContainmentRef(root, target);
   if (containment.source !== 'remote-tracking' || !containment.sha) {
     throw new Error('record-landing requires the declared integration remote-tracking ref; fetch origin first');
   }
@@ -1287,7 +1288,7 @@ export function recordLanding(rootDir, specId, options = {}) {
   if (row) planHistoryAppend(spec, row, root);
   if (content !== spec.content) writeRecordText(spec.filePath, content, { root });
   if (row) appendHistory(spec, row, root);
-  return { specId: spec.id, candidate, integrationContainment: containment, nextGate, projectionPending: true, publicationPending: true, recorded: !duplicate };
+  return { specId: spec.id, candidate, target, integrationContainment: containment, nextGate, projectionPending: true, publicationPending: true, recorded: !duplicate };
 }
 
 function taskboardPages(root, source, table) {
@@ -4896,8 +4897,8 @@ function resolveCommit(root, ref) {
 // named by `sha` (and `localSha`) for the caller to show. `source` is
 // `remote-tracking`, `local`, or `undeclared` (no `git.integrationBranch`,
 // `ref` null: nothing to check against).
-export function resolveIntegrationContainmentRef(root) {
-  const branch = declaredGit(root)?.integrationBranch ?? null;
+export function resolveIntegrationContainmentRef(root, target) {
+  const branch = target === undefined ? declaredGit(root)?.integrationBranch ?? null : deliveryTarget(root, target);
   if (!branch) return { branch: null, ref: null, source: 'undeclared', sha: null, localSha: null };
   const remoteRef = resolveRemoteTrackingRef(root, branch);
   const ref = remoteRef ?? branch;

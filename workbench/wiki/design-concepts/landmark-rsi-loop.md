@@ -21,6 +21,8 @@ The RSI Loop connects observed failures, diagnosis, controlled repair, qualifica
 
 ## Current accepted answers
 
+Every skills/AMS edit is RSI work. The [2026-11-06 owner correction](../context-feedback-improvement-loop-plan.md#jot-e0b1c5cf-e727-41eb-a52d-1883d6cc68c1) and [bounded-delivery repair](../../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) link the confirmed workflow, retained failures, bounded qualification and actual source/installation/adoption evidence. This scoped repair does not launch held Stage B work or reset older campaigns.
+
 No DQCs are assigned to this Landmark in the inspected tracker. Confirmed owner answers instead reside in [the RSI topic](../context-feedback-improvement-loop-plan.md) and [exact Stage A readback](../guidebooks/rsi-loop-readback-2026-11-04.md). They establish Landmark-wide ownership, capability-specific Specs, canonical Markdown failure intake, worker-written Supabase records, private raw transcripts, subscription meters, three attempts with baseline excluded, and Stable/Excellent plus useful benefit and no regression. These sourced confirmations are not fabricated DQC answers. The newer [Stage A confirmation](../context-feedback-improvement-loop-plan.md#jot-6a1d5383-d939-47b2-bd45-51e702c12550) supersedes earlier unconfirmed assembled wording; [PR169 delivery](../context-feedback-improvement-loop-plan.md#jot-9280ecbd-819b-4559-bf34-6f342a7402a9) resolves its former publication hold.
 
 ## Open and unresolved

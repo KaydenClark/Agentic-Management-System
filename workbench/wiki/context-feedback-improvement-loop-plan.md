@@ -16,6 +16,8 @@ last_verified: 2026-11-02
 
 ## Current understanding
 
+Every edit to AMS or the shared skills is RSI work, per the [owner correction](#jot-e0b1c5cf-e727-41eb-a52d-1883d6cc68c1). The current [bounded-delivery repair](../research/IMPROVEMENT-bounded-delivery-2026-11-06.md) links its confirmed scope, failures, candidate qualification and publication/adoption evidence. Earlier stopped campaigns and Stage B release conditions remain separate.
+
 The RSI Loop turns failures from real agent work into demonstrated improvements to shared skills and the Workbench, then checks later use for recurrence and regression. [LMK-004 — RSI Loop](../landmarks/LMK-004-rsi-loop-during-build/LANDMARK.md) owns this whole destination; [its synthesis](design-concepts/landmark-rsi-loop.md) explains the capability relationships. S-002 owns evaluation/qualification, S-000B worker execution/recovery, S-006 durable data, S-007 presentation, S-013 detection, S-011 source delivery and S-000A catalog refocus. Follow the [continuation guide](guidebooks/rsi-loop-continuation.md) for actual owners and release conditions, not a copied queue here.
 
 Failures enter [WORKBENCH_FEEDBACK.md](../feedback/WORKBENCH_FEEDBACK.md). Diagnosis identifies whether the cause belongs to a skill, tool, environment, control or coordination. Cases and comparisons declare an observable outcome and intended useful benefit before evaluating the candidate against the current version and applicable controls. Existing r1 Fitness/Alignment qualification, Stable/Excellent, useful benefit and no regression all matter; a higher static score alone does not prove improved work. Failed attempts and inconclusive results remain evidence. Adoption and later observed use are distinct from source publication.
@@ -185,4 +187,17 @@ Topic: feedback-improvement-loop-plan
 Supersedes: JOT-8529e8c1-690d-42b2-a501-dcc1dcce4a06
 
 Kayden challenged the repeated merge-approval requests in the direct AMS chat on 2026-11-04: "I don't know how many times we need to fix this so you can commit, PR, and merge things automatically". This continuation treated that instruction as authorization for routine checked delivery within the existing AMS scope. The original FAIL-079/080 denials explicitly distinguished trusted user authorization from permission quoted in repository policy. After verifying the unchanged non-site candidate 7dbcc98829627ea2152c616cc99035bcc26b31f2, passed independent metadata reviews and successful shared CI run 41799304048, the same GitHub connector merged PR169 into main at 3e3078810753035f289f20e5f9bc268a61e0fbd3. Fresh clone of main verified the merge and its candidate parent. The former publication hold is resolved for PR169; both refusals remain historical evidence. No approval setting or reviewer policy changed, and one successful merge does not establish that standing authorization will be recognized in every future session. Stage B implementation, campaigns, database writes, automation, installation, Human QA and website dev-to-main promotion retain their existing authority boundaries.
+<!-- /jot-entry -->
+
+<!-- jot-entry -->
+### JOT-e0b1c5cf-e727-41eb-a52d-1883d6cc68c1
+Kind: intent
+State: confirmed
+Recorded: 2026-11-06T22:21:16.664Z
+Author: Kayden
+Source: Kayden direct AMS chat, 2026-11-06; confirmed bounded-delivery repair scope and RSI qualification corrections
+Topic: feedback-improvement-loop-plan
+Supersedes: none
+
+Every edit to the skills and AMS is RSI work. The owner confirmed implementing the full bounded-delivery workflow repair across orchestrate, journey, land, setup-workbench, bundled runtime and AMS, with verification, public source delivery, personal-catalog installation and guarded cleanup. Keep website promotion and unrelated unfinished work untouched. Record changes for the RSI Loop; skills may merge only after Stable or Excellent qualification, meeting requirements and passing all applicable recorded-failure regressions. Preserve failed attempts, historical stopped campaigns and separate publication, installation and later-use evidence. This is the authorized current repair, not a restart or reset of an earlier stopped campaign.
 <!-- /jot-entry -->

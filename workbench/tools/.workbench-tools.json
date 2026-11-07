@@ -3,7 +3,7 @@
   "source": {
     "repository": "https://github.com/KaydenClark/skills.git",
     "release": "v3.2.2",
-    "sha256": "8c3b46b064ac4d5f209a4d7ea80247bc2abe3367d2dd04261e4710b26934b65c",
+    "sha256": "a9545e05ca548234d166823e3b999328f396c7305055caf3158a3044f4e7e44f",
     "upstream": {
       "repository": "https://github.com/KaydenClark/LLM_Workbench.git",
       "commit": "9d5e1f25b0d5870589ae1c5752f27f42acb796ef",
@@ -40,7 +40,7 @@
     "artifact-pagination.mjs": "999f79e129686e126e5d271f49372bd2871c384c22aa5b5c40464fec8f49cb8b",
     "artifact-budgets.mjs": "2c8eec1e81003e2cef9efd1424a7963563109dc0f83ea626c7dc1c32b3193047",
     "spec-report.mjs": "e0e7ae8ff8d89319f67952559d5713c0082288d305681738181b2952f4f17a30",
-    "spec-workbench.mjs": "7610b38a04af2f9996455a814b3d5454dbd75464ad79c5f573028029eecb78a5",
+    "spec-workbench.mjs": "8014f61113bdfd7258206b7ec89602bb37166a39964761696cb2dcb0c18543e0",
     "task-packet.mjs": "68cb064d767a75e710393784aff0b65a5ab313a4a92ecd172d47c0f34bb4079c",
     "task-receipt.mjs": "7b12d2c6c7fd5fcc025fdbc33f4dbadebf1baaac674d908ef658d16105589e33",
     "task-record.mjs": "cf33e729619e1ca7eef15fff684e8df754e40104e4dad014074aba431efe9d8a",
@@ -49,9 +49,9 @@
     "visible-ids.mjs": "587b737001ec95a5bbee2f4f9b3920bacdb5b7e540f01da87ea8fe0b0ee4796f",
     "skill-inspection.mjs": "36f0371f5dafaa4b10824440d25727792a884de71d2a1b848b06f4ef592eab73",
     "wiki.mjs": "506c574ac43bed13bb3fa62b324572905d2445953edd3d29a970a67a336b31a2",
-    "workspace-closeout.mjs": "a61609e2a3d8f63810de95ab43ae353ba9942f9f69ec47d23d4da66ffc14efb9",
-    "workbench-layout.mjs": "cdc67d516963860b8283222dc13759d1a1048f783c3faa05ca206711ed2e7246",
-    "workbench-paths.mjs": "1b983217041860795382b30e8ab6d1cbc6f4954884cb227c89e6b8d22e6948d2",
+    "workspace-closeout.mjs": "54839572c0fe7102c162b4f78d286a15f4a59763a1a850d7794ce9f97099292b",
+    "workbench-layout.mjs": "59aba210491f24e2151df446527f2001c50f70344d805b050913c8a359ddc7fa",
+    "workbench-paths.mjs": "9e9607c8b3e0e05c280241aecbad8cc90cbe70fc6427b8c5504f51a1958bce7d",
     "spec-history.mjs": "9a93faf9675ea1f263970cee7e48d59f305f5ba23e3b549a2cfff4e3576567dd",
     "dqc-lifecycle.mjs": "c3835bd6ab1d0e0c72da531bcd2ab49f9eba5071f2cc60fbe59180ec6f2f82e4"
   },
@@ -129,7 +129,23 @@
         "landmark-tracker.mjs": "0b5a714307a91489d2a3448dd7c006a8263417d027630d2c8cb2cc8455e6f70a",
         "dqc-lifecycle.mjs": "46e7dbcec6cb683754e71c8d2d3c3c39dfeebd2f1444d22cbc61ec552b0d2e02"
       }
+    },
+    {
+      "path": "~/.workbench-tools-backup-3Gr5ZW",
+      "files": [
+        "spec-workbench.mjs",
+        "workspace-closeout.mjs",
+        "workbench-layout.mjs",
+        "workbench-paths.mjs"
+      ],
+      "absent": [],
+      "hashes": {
+        "spec-workbench.mjs": "7610b38a04af2f9996455a814b3d5454dbd75464ad79c5f573028029eecb78a5",
+        "workspace-closeout.mjs": "a61609e2a3d8f63810de95ab43ae353ba9942f9f69ec47d23d4da66ffc14efb9",
+        "workbench-layout.mjs": "cdc67d516963860b8283222dc13759d1a1048f783c3faa05ca206711ed2e7246",
+        "workbench-paths.mjs": "1b983217041860795382b30e8ab6d1cbc6f4954884cb227c89e6b8d22e6948d2"
+      }
     }
   ],
-  "updatedAt": "2026-11-04"
+  "updatedAt": "2026-11-06"
 }
