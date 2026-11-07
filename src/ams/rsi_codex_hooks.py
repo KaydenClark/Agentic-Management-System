@@ -35,8 +35,12 @@ def observe(project, payload):
     skills = config['skills']
     if not isinstance(skills, list) or not all(isinstance(s, str) and re.fullmatch(SKILL, s) for s in skills):
         return
+    # Only UserPromptSubmit supplies the session and turn identity needed for
+    # an explicit request; SessionStart cannot identify each resume occurrence.
     if not isinstance(payload, dict) or payload.get('hook_event_name') != 'UserPromptSubmit':
         return  # SessionStart has no stable occurrence ID; never invent one.
+    # Reject malformed, oversized or wrong-project inputs before extracting a
+    # token, so untrusted hook data cannot create a request for this project.
     session, turn, prompt, cwd = (payload.get(k) for k in ('session_id', 'turn_id', 'prompt', 'cwd'))
     if not all(isinstance(v, str) and v and len(v) <= 256 for v in (session, turn, cwd)):
         return
