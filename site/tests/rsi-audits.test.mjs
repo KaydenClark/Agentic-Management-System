@@ -6,7 +6,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 const {loadSkillAudits}=await import('../app/rsi/audits.ts');
 const {AuditEvidence}=await import('../app/rsi/audit-view.tsx');
 const env={NEXT_PUBLIC_SUPABASE_URL:'https://fixture.supabase.co',NEXT_PUBLIC_SUPABASE_ANON_KEY:'sb_publishable_fixture'};
-const row={audit_run_id:'run-1',audit_set_id:'set-1',skill:'journey',skills_commit:'a'.repeat(40),contract_version:'skill-audit-v1',contract_digest:'b'.repeat(64),provider:'openai',model:'codex',model_tier:'mid',quality_passed:3,quality_total:4,regression_passed:2,regression_total:2,critical_missed:true,evidence_complete:true,passed:false,completed_at:'2026-11-07T12:00:00Z',recorded_at:'2026-11-07T12:01:00Z'};
+const row={audit_run_id:'run-1',audit_set_id:'set-1',skill:'journey',skills_commit:'a'.repeat(40),contract_version:'skill-audit-v1',contract_digest:'b'.repeat(64),provider:'openai',model:'codex',model_tier:'mid',quality_passed:3,quality_total:4,regression_passed:2,regression_total:2,critical_missed:true,evidence_complete:true,passed:false,assessment_grade:null,completed_at:'2026-11-07T12:00:00Z',recorded_at:'2026-11-07T12:01:00Z'};
 const ok=body=>({ok:true,status:200,json:async()=>body});
 const render=(loaded,now=Date.parse('2026-11-07T12:02:00Z'))=>renderToStaticMarkup(createElement(AuditEvidence,{loaded,now}));
 test('reads public projection and shows completed failures with provenance and independent scores',async()=>{
@@ -38,4 +38,11 @@ test('empty score denominators are unavailable and do not create an assessment g
 test('completed all-N/A audit reports no applicable checks rather than incomplete evidence',async()=>{
  const loaded=await loadSkillAudits({env,fetchImpl:async()=>ok([{...row,quality_passed:0,quality_total:0,regression_passed:0,regression_total:0,passed:null,evidence_complete:true,critical_missed:null}])});
  const html=render(loaded);assert.match(html,/<strong>No applicable checks<\/strong>/);assert.match(html,/Evidence: complete/);assert.doesNotMatch(html,/<strong>Incomplete<\/strong>/);
+});
+
+test('assessment grade stays distinct from run outcome, scores and Critical',async()=>{
+ const loaded=await loadSkillAudits({env,fetchImpl:async()=>ok([{...row,quality_passed:19,quality_total:20,regression_passed:20,regression_total:20,critical_missed:true,assessment_grade:'Broken'}])});
+ const html=render(loaded);assert.match(html,/19 of 20/);assert.match(html,/20 of 20/);assert.match(html,/Critical: Missed/);assert.match(html,/Assessment grade: <strong>Broken/);assert.match(html,/does not establish qualification/);
+ const unknown=render({...loaded,data:[{...loaded.data[0],assessment_grade:null}]});assert.match(unknown,/Assessment grade: <strong>Unknown/);
+ assert.equal((await loadSkillAudits({env,fetchImpl:async()=>ok([{...row,assessment_grade:'Invented'}])})).ok,false);
 });

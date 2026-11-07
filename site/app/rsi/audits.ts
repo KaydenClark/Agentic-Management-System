@@ -5,9 +5,9 @@ export interface SkillAudit {
   contract_version: string; contract_digest: string; provider: string; model: string;
   model_tier: 'small' | 'mid' | 'high'; quality_passed: number; quality_total: number;
   regression_passed: number; regression_total: number; critical_missed: boolean | null;
-  evidence_complete: boolean; passed: boolean | null; completed_at: string; recorded_at: string;
+  evidence_complete: boolean; passed: boolean | null; assessment_grade: 'Excellent' | 'Stable' | 'Functional' | 'Broken' | null; completed_at: string; recorded_at: string;
 }
-const fields = ['audit_run_id','audit_set_id','skill','skills_commit','contract_version','contract_digest','provider','model','model_tier','quality_passed','quality_total','regression_passed','regression_total','critical_missed','evidence_complete','passed','completed_at','recorded_at'] as const;
+const fields = ['audit_run_id','audit_set_id','skill','skills_commit','contract_version','contract_digest','provider','model','model_tier','quality_passed','quality_total','regression_passed','regression_total','critical_missed','evidence_complete','passed','assessment_grade','completed_at','recorded_at'] as const;
 const empty: SkillAudit[] = [];
 type Options = { env?: Readonly<Record<string,string | undefined>>; fetchImpl?: typeof fetch; timeoutMs?: number };
 function valid(row: Record<string,unknown>): boolean {
@@ -22,7 +22,7 @@ function valid(row: Record<string,unknown>): boolean {
     ['quality_passed','quality_total','regression_passed','regression_total'].every(k => number(row[k])) &&
     Number(row.quality_passed) <= Number(row.quality_total) && Number(row.regression_passed) <= Number(row.regression_total) &&
     (row.critical_missed === null || typeof row.critical_missed === 'boolean') && typeof row.evidence_complete === 'boolean' &&
-    (row.passed === null || typeof row.passed === 'boolean') && date(row.completed_at) && date(row.recorded_at);
+    (row.passed === null || typeof row.passed === 'boolean') && (row.assessment_grade === null || ['Excellent','Stable','Functional','Broken'].includes(String(row.assessment_grade))) && date(row.completed_at) && date(row.recorded_at);
 }
 function publicKey(key: string): boolean {
   if (key.startsWith('sb_publishable_')) return true;
