@@ -29,7 +29,7 @@ Close only003D under its actual claimant with truthful proof; publish checked cl
 - [x] Exact assembled candidate passes required CI, native/record/Wiki/hygiene/fresh-checkout checks and independent review; failed or unavailable evidence remains explicit.
 - [x] Authorized checked merge is proven contained in freshly fetched AMS/main, and the resulting target tree is verified separately from PR checks.
 - [x] Original-byte and actual-workspace closeout findings are preserved; unrelated active/dirty/ignored work and uncontained historical evidence remain untouched.
-- [ ] Native Task/RSI/knowledge owners reflect actual delivery and gaps; eligible owned branch/worktree cleanup is executed or exact retained findings and next actions are reported.
+- [x] Native Task/RSI/knowledge owners reflect actual delivery and gaps; eligible owned branch/worktree cleanup is executed or exact retained findings and next actions are reported.
 
 ## Scope and hand-back
 
@@ -51,4 +51,4 @@ PR210 merged pinned2344786 -> maind489a9041f3a98e9153d2cf3a2bc5e659b96e3d6. Fres
 
 Actual original04eb, prior8f and current3c native checks have zero remaining original-byte/index findings but global exit1/accounted=false/remoteRecoverable=false/complete=false. Six8f working originals/seven index versions are in main history. Its uncommitted working projection40ee705e/601567 was reconstructed/hash-verified from isolated immutable46c render, copied independently mode0644, native-accepted local-only original. It was not remotely preserved all along. All snapshots/raw findings remain unchanged/private.
 
-Final criterion pending: native closure, checked record publication and owned cleanup/retention handback. Retain active writer checkout; Director rechecks exact containment, dirt/ignored/both index inventories and activity before archive/local deletion. Preserve PR208 and unrelated work. Artifact merged; parent acceptance/Human QA/benefit remain excluded.
+Retention proof: this owned checkout at34611fd is clean, ignored0 and hidden-index flags0 in both inventories. It remains active for PR212/native closure publication; Director owns the next guard recheck/archive/local deletion after writer release and final target containment. PR208 retains exactly2 uncontained commits. Existing owners report actual delivery and gaps; native receipt will record close attribution. Final checked publication remains required. No parent acceptance/Human QA/benefit claim.
