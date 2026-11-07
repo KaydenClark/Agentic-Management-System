@@ -83,7 +83,7 @@ an AMS glossary entry.
 - [Grill Board](design-concepts/landmark-grill-board.md) — confirmed DQC lifecycle, pending branch context and unresolved redesign controls.
 - [RSI presentation](design-concepts/landmark-rsi-presentation.md) — traceable read-only presentation, honest empty states and data/evidence limits.
 - [AMS website](design-concepts/landmark-ams-website.md) — public explanation, sample demonstration and owner-controlled production promotion.
-- [RSI Loop](design-concepts/landmark-rsi-loop.md) — capability ownership, confirmed Stage A preparation and continuing execution holds.
+- [RSI Loop](design-concepts/landmark-rsi-loop.md) — Servitor-first optional loop, severity-based skill audits, automatic eligible adoption and continuing execution holds.
 
 ## History
 

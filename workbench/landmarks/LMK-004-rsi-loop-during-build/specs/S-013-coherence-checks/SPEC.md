@@ -3,10 +3,10 @@
 **Spec ID:** S-013
 **Status:** active
 **Priority:** 2
-**Owner:** Kayden; orchestrator C (Coherence, cloud, no secrets)
+**Owner:** Kayden; orchestrator C (cloud, no secrets)
 **Stance:** Builder
-**Updated:** 2026-11-06
-**Catalog description:** Checks that keep the AMS coherent: up to Spec, skills pinned and in sync, `dev` measured against `main`, and independent Spec review.
+**Updated:** 2026-11-07
+**Catalog description:** Spec conformance, skill pins/sync, dev/main drift and independent review.
 **Blockers:** none
 **Confirmation:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
 **Execution approval:** [JOT-7d1aa896-f169-4621-9f7c-b4f538591df8](../../../../wiki/context-active-spec-approvals.md)
@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-The [owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes Map/Plan preparation; implementation and trial holds remain.
+[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac); no execution release or reset of prior stops.
 
 The owner asked that the system stay coherent and nothing fall behind, with one orchestrator checking that the project stays up to Spec, and that the distance between `dev` and `main` be measured so a long-unmerged trunk does not happen again. Orchestrator C runs in a cloud session, works only through GitHub, holds no secrets and writes no product code.
 
@@ -32,18 +32,18 @@ No criterion is checked off. Drift and up-to-Spec checks exist ([TK-001](tasks/T
 
 ## Desired Behavior
 
-- **Up to Spec.** For each active Spec, compare delivered behavior on `main` or `dev` with its acceptance criteria and report gaps.
-- **Skills pinned and in sync.** Every RSI row names a skills commit; report rows whose commit is behind the current skills `main` and sessions that could not install skills.
-- **`dev` ahead of `main`.** Report commits and days `dev` is ahead of `main`, with a threshold that raises a Grill Board item.
-- **Independent Spec review.** A fresh-context reviewer passes or returns the exact assembled commit against the Spec's conditions; a changed commit needs a fresh review.
-- Reports are committed records; findings are visible, never silently fixed.
-- **Preparation routing.** Detect a large shared-skill or other AMS change proceeding without its Map/Plan or past a Prepare stop. Route the [recorded failure](../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) and recurrence to [S-000A](../S-000A-skills-refocus/SPEC.md) for source repair; check preparation before claiming a reliability improvement. This addition is preparation only.
+- Compare each active Spec with delivered main/dev behavior and report evidenced gaps.
+- Check every RSI row’s skills pin against current skills main; report missing/stale versions and failed installations. Measure dev-ahead-of-main commits/days and create a Grill Board item above threshold.
+- A fresh-context reviewer evaluates the exact Spec candidate; changed content needs fresh review. Commit reports; never silently fix findings.
+- Detect large shared-skill/AMS work bypassing Map/Plan or Prepare stops. Route the [known failure](../../../../feedback/REPORT-skills-workbench-bypass-2026-11-02.md) to S-000A and verify preparation before claiming improvement. This addition releases no implementation.
 
 ### Failure detection and use evidence
 
-Detect and route observed mismatches before owner prompting, preserving a separate occurrence for each recurrence. Link detection to the existing failure intake and S-006 safe identities; classify suspected cause without asserting skill causation from involvement alone. Count eligible successful uses alongside failures for later recurrence measurement.
+S-000B’s per-chat Python observer supplies request/loading/use/failure events. Skipping an explicit skill request (including chat invocation) is Critical and a failed requested use. Unknown observation stays unknown; file presence proves no use. This grants the secret-free C actor no credentials.
 
-Distinguish accepted source version, installed bytes, actual host loading and observed use. A deliberately pinned baseline is not an accidental stale installation; report the condition rather than silently upgrading a comparison. S-000B owns recovery; S-002 qualification/retention. Installation needs separate authority; C stays secret-free.
+Detect/report mismatches before owner prompting; retain each recurrence occurrence and S-006 identity. Diagnose owning causes rather than inferring skill causation from involvement. Route to one active repair per skill; count successful eligible uses alongside failures.
+
+Distinguish accepted source, installed bytes, actual loading and observed use. Report accidental stale loading separately from intentional baseline pins; never upgrade a frozen comparison silently. S-000B owns recovery, S-002 qualification/retention and S-011 authorized adoption. C remains secret-free.
 
 ## Decisions And Contracts
 
@@ -65,10 +65,10 @@ Distinguish accepted source version, installed bytes, actual host loading and ob
 
 Each Task is one fresh-session run in orchestrator C's cloud lane (GitHub only, no secrets), landed feature -> `main` through a checked PR. Stack: a read-only check script, Git and GitHub reads, a committed report, and tests on fixture repositories.
 
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
-
 ## Acceptance Criteria
+
+- [ ] **Requested skill:** plant an explicit request that never loads or runs; record a Critical failed requested use with its request identity before owner intervention. Excluding it because it did not load fails.
+- [ ] **Later version:** later work verifies the accepted loaded revision and detects recurrence; a stale version cannot prove the accepted repair failed or succeeded without that distinction.
 
 - [ ] **Feedback loop connection:** Detection closes the reporting gap: an orchestrator exercises acceptance beyond green checks, records an unreported mismatch with source/candidate identity, assigns its existing owner and next action, and preserves recurrence. A planted failure that reaches completion without a finding must fail.
 - [ ] **Prepare boundary:** TK-001D detects and routes a planted missing-Map/Plan or Prepare-stop bypass, including cross-repository skill work, before owner intervention. A document reminder alone fails.
@@ -120,6 +120,5 @@ Pending.
 ## Feedback-loop planning boundary
 
 The 2026-11-02 preparation request granted no implementation authority. TK-001D's later scoped release is recorded in [its Task](tasks/TK-001D/TASK.md); other holds, stopped experiments and failed evidence retain their scope. See [plan](../../../../wiki/context-feedback-improvement-loop-plan.md).
-
 
 Detection replay and limits: [procedure](../../../../wiki/guidebooks/coherence-observations.md).

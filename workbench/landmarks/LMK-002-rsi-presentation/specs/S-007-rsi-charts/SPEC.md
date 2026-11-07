@@ -5,7 +5,7 @@
 **Priority:** 2
 **Owner:** Kayden; orchestrator A (Website, cloud)
 **Stance:** Builder
-**Updated:** 2026-11-03
+**Updated:** 2026-11-07
 **Catalog description:** Website pages that chart RSI results from Supabase, present and honestly empty from the first deploy, with every number linked to its rows.
 **Blockers:** none
 **Confirmation:** [JOT-9a370da6-d1ec-4f3f-a998-3dbbd7d82df1](../../../../wiki/context-active-spec-approvals.md)
@@ -14,7 +14,7 @@
 
 ## Intent and authority
 
-The [owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-55876e5d-6957-4a4e-917b-8ba7245adee2) authorizes Map/Plan preparation; implementation and trial holds remain.
+[RSI Map source](../../../../wiki/context-feedback-improvement-loop-plan.md#jot-7862917b-48cb-41bc-8f21-0ddfc611cdac); no execution release or reset of prior stops.
 
 The owner named "a site page showing the improvement charts" as an example Spec, asked that chart places exist from the start so the owner can see where data will appear, and ruled out fabricated data.
 
@@ -35,23 +35,14 @@ History: [S-007 history](../../../../wiki/history/S-007.md).
 
 ## Desired Behavior
 
-- Follow S-003's shared data contract: distinguish populated, successful-empty, loading and unavailable states; identify the last successful read and any retained data. A failed read never becomes “no trials.” Static explanations and chart spaces remain visible.
-- Explain the website build using sourced S-006 build events alongside the measured results. Readable prose connects the events; it need not itself be stored as rows. Distinguish build activity, assessments and demonstrated improvement. This page supplies the build-evidence explanation; S-003 has no separate “Under the hood” page.
-
-- Chart places for each planned series exist from the first deploy.
-- **Empty state.** With no rows a chart says that no trials are recorded yet, explains what a task, trial and version are, and names the next expected event. No sample chart or placeholder number.
-- Results are shown per task and per version; dev and held-out are visibly separate.
-- Each series shows its provenance: provider, model, effort and system version. A model change starts a new series.
-- Regressions, variants, removed versions and fired stop rules are shown.
-- Every number links to its rows. Each row's strength label is shown.
-- **Headlines** come only from held-out tasks, with the interval and the baseline. An interval including zero reads as no difference detected at this size.
-- Synthetic or test rows never render.
-
-### Learning evidence views
-
-Provide per-skill and whole-Workbench views from S-006, joined to canonical failure IDs rather than copied independent logs. Show lifecycle stage/age and blockers, candidate lineage and dispositions, paired baseline/candidate results with regressions, and later-use recurrence per eligible use. Owner interventions, runtime and available usage metrics show effort alongside outcomes. A skill-by-case matrix distinguishes pass, failure, unrun and unavailable evidence.
-
-Every displayed metric identifies its case set/version, actual model/host/skills, sample size, evidence strength and freshness. Keep fixed benchmark trends separate from expanded historical coverage; imports or improved detection cannot appear as worsening reliability. Distinguish development/held-out results, operational errors, Fitness/Alignment levels and demonstrated benefit. No independently maintained numeric website dataset replaces the canonical Supabase rows; explanatory prose and clearly labeled test fixtures remain allowed.
+- Follow S-003’s populated, successful-empty, loading and unavailable states; show last successful read and retained-data timestamp. A failed read is never “no trials.” Static explanations/chart spaces remain visible from first deploy.
+- An empty chart says no trials are recorded, explains task/trial/version and the next expected event. Never fabricate sample results. Synthetic/test rows do not render.
+- Explain the website build from sourced S-006 events, linking activity to results or absent evidence. S-003 needs no separate build-history page. Prose may explain; Supabase owns displayed numbers.
+- Show per-task/version results, development versus held-out, provider/model/effort/system/skills/host, source/strength, sample size/denominators and freshness. Model/contract/case-set changes form distinct series. Imports or broader detection cannot masquerade as worsening reliability. Every number links to rows.
+- Display regressions, failed attempts, rejected/removed versions, variants and fired stops. Public improvement headlines require held-out tasks, controls, prior version/baseline and interval; an interval containing zero means no detected difference at that size.
+- Per-skill and whole-Workbench views join canonical failure IDs, lifecycle stage/age/blockers, candidate lineage/dispositions, paired comparisons and later recurrence per eligible use. Show owner interventions, runtime and available usage alongside outcomes. A skill/case matrix distinguishes pass, failure, unrun and unavailable.
+- Skill results separately show Quality Score, Regression Score, Critical result and severity grade, with actual completed audit counts (even fewer than three), versioned denominators and qualification limits. Whole-Workbench Alignment is a separately labeled assessment; activity/audits alone prove no benefit/generalization.
+- Distinguish request, loading and use failures. Skipped explicit requests count as Critical failed requested uses. Later-use views identify accepted versions actually loaded; no uses means no recurrence rate, not a proven fix. No hand-maintained numeric website dataset replaces Supabase.
 
 ## Decisions And Contracts
 
@@ -71,10 +62,10 @@ Every displayed metric identifies its case set/version, actual model/host/skills
 
 Every Task targets `dev`: branch from `origin/dev`, PR into `dev`, and only the owner merges `dev` -> `main`. Stack: a Next.js route in `site/`, Supabase reads with the publishable key, the build, render tests on labeled fixtures and the protected `dev` deployment.
 
-| Task | Slice | Status | Blockers | Proof |
-|---|---|---|---|---|
-
 ## Acceptance Criteria
+
+- [ ] **Actual audits:** two stored runs display two, never the intended three; failed or unavailable reads do not imply zero audits. The synthetic 95% Quality / 100% Regression / Critical failure example displays Broken and cannot be mistaken for live results.
+- [ ] **Separate meanings:** skill grades, each score, Critical results and whole-Workbench Alignment remain distinct. Accepted-but-not-loaded and no-later-use states cannot imply success or zero recurrence.
 
 - [ ] **Feedback connection:** safe failures, stopped attempts, assessments and dispositions render from S-006 with source, scope, freshness and next action. Workflow explanations link changed steps to evidence. Activity/audits alone cannot imply benefit.
 - [ ] **Read states:** populated, empty, pending and unavailable follow S-003; failed reads cannot mean zero results, retained data needs its timestamp.
@@ -129,4 +120,4 @@ Pending.
 
 ## Feedback-loop planning boundary
 
-This Map does not activate website implementation or held Tasks. Existing approval scopes and stopped experiments remain. See the [mapped owner intent](../../../../wiki/context-feedback-improvement-loop-plan.md#current-mapped-destination).
+Map releases no website work or held Tasks; prior scopes/stops remain.
