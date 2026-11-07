@@ -7,7 +7,7 @@
 **Updated:** 2026-11-07
 **Catalog description:** Measured skill improvement on website work, with qualification and later-use evidence.
 **Blockers:** none
-**Next gate:** Plan the first complete Servitor proof against the mapped capability owners; implementation and stopped campaigns remain held.
+**Next gate:** Implement TK-003E/F/G, then prove the first Servitor case in TK-003H. Earlier campaign stops remain.
 
 ## Direction
 
