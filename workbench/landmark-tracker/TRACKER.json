@@ -5779,7 +5779,7 @@
         "at": "2026-11-07T00:08:47.385Z"
       },
       "corrections": [],
-      "revision": 7,
+      "revision": 8,
       "history": [
         {
           "revision": 1,
@@ -6229,10 +6229,120 @@
               }
             }
           ]
+        },
+        {
+          "revision": 8,
+          "at": "2026-11-07T01:54:22.310Z",
+          "reason": "DQC correct",
+          "changes": [
+            {
+              "field": "lifecycle",
+              "to": {
+                "state": "needs-rewrite",
+                "proposal": {
+                  "readback": "**Question:** How do we record your skill use without making other people run the RSI loop?\n\n**Recommended answer:** Keep reporting instructions and tools in your personal coding setup, separate from the skills you share. Your Codex/Claude setup tells agents to report participating skill uses and failures through the shared reporting tool. Add automatic checks where the coding app supports them. Use the same skill files yourself and when sharing them. Someone receiving a skill can just use it: no reporting tool, Supabase account or RSI loop is required, and their activity is not sent to your system. Your Mac, PC and cloud environments get the reporting setup separately. Reports still survive connection problems and temporary cloud sessions as discussed.\n\n**Why:** The skills teach people how to do the work. Your own setup collects evidence to improve those skills. Keeping those responsibilities separate lets you share the skills without imposing your improvement system on other people.\n\n**Intended impact:** Your uses feed the RSI loop, while other people can use the same skills independently.",
+                  "why": "The skills teach people how to do the work. Your own setup collects evidence to improve those skills. Keeping those responsibilities separate lets you share the skills without imposing your improvement system on other people.",
+                  "source": "Kayden AMS alignment chat, 2026-11-06: question 6 distribution correction; reporting must remain separate from shared skill requirements.",
+                  "scope": "Concept alignment only. No personal configuration, shared skill, reporting runtime or installation is changed. Exact host capture capabilities remain to be verified during authorized implementation.",
+                  "round": "rsi-cross-project-20261106",
+                  "priority": {
+                    "value": 1,
+                    "reason": "Owner correction requires a replacement readback before advancing."
+                  },
+                  "value": {
+                    "value": 1,
+                    "reason": "Keep shared skills independently usable while observing owner skill use."
+                  },
+                  "dependencies": [
+                    "DQC-000E",
+                    "DQC-000H",
+                    "DQC-000I"
+                  ]
+                },
+                "digest": "6a2067f1ca269688c68a0c6321ccd22059a2ce96ff6dfe8bdb3e8896be023fe9",
+                "confirmations": [],
+                "events": [
+                  {
+                    "eventId": "rsi-align-20261106-DQC-000J-v1",
+                    "type": "propose",
+                    "at": "2026-11-07T00:09:17.898Z",
+                    "requestDigest": "afb09c733c8ca73f45c2b87f3774bc38f41d0ae9a97301e7d0f1d74a833cbcb4",
+                    "source": null,
+                    "note": null,
+                    "revision": 2,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-firstpass-20261106-DQC-000J-answer",
+                    "type": "correct",
+                    "at": "2026-11-07T00:52:04.542Z",
+                    "requestDigest": "ee999f07200c4763b5426cb231e097d4b7abe9f58ff4c2cbd8b1a58bec970af7",
+                    "source": "Kayden AMS chat, 2026-11-06 America/Denver: numbered first-pass answers to the 13 displayed RSI readbacks.",
+                    "note": "I think requiring loggin in each  skill would be easier, but again, I need you to be the expert, tell me what would actually be best. What do I have set up? What does the research and our CDRs tell us to do?",
+                    "kind": "change",
+                    "revision": 3,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q6-shared-tool-plain-v2",
+                    "type": "propose",
+                    "at": "2026-11-07T01:44:26.811Z",
+                    "requestDigest": "389a42802fd8abfed4e9c76c09fe69cdf1b7515526eaae615bfe86a997c05ae4",
+                    "source": null,
+                    "note": null,
+                    "revision": 4,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q6-cloud-report-preservation-v3",
+                    "type": "propose",
+                    "at": "2026-11-07T01:44:53.424Z",
+                    "requestDigest": "382deac4dffbc96550408736be0c0ec67993cce2df670b8830d804c950ccac1e",
+                    "source": null,
+                    "note": null,
+                    "revision": 5,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q6-sharing-owner-correction",
+                    "type": "correct",
+                    "at": "2026-11-07T01:49:05.344Z",
+                    "requestDigest": "4047f1dd191eb62ff921e20bcff24f1fbd386c95a4317f6fd288a1df615995bd",
+                    "source": "Kayden AMS alignment chat, 2026-11-06: shared skills must be usable without requiring the recipient to run RSI.",
+                    "note": "My one issue with writing it into the skill itself, is what happens when I hand these skills out? I dont want other people to have to run the RSI Loop, I want them to be able to just use the skills.",
+                    "kind": "change",
+                    "revision": 6,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q6-personal-reporting-v4",
+                    "type": "propose",
+                    "at": "2026-11-07T01:49:05.910Z",
+                    "requestDigest": "c9db03c3f27512a481f0e917dbdf1904faffc87e02730ee3d3fe03ee2ca22ec1",
+                    "source": null,
+                    "note": null,
+                    "revision": 7,
+                    "round": "rsi-cross-project-20261106"
+                  },
+                  {
+                    "eventId": "rsi-q6-separate-systems-owner-correction",
+                    "type": "correct",
+                    "at": "2026-11-07T01:54:22.310Z",
+                    "requestDigest": "e5662ba3145e9bb1148cf8430c5ef87ac832736fcc8a91bd45c4a30b0245f0e4",
+                    "source": "Kayden AMS alignment chat, 2026-11-06: limit current RSI testing to Servitor and separate Workbench setup from optional later RSI setup.",
+                    "note": "I want to be able to test that, instead of being able to log failures everywhere. Let's just do it here on servitor, and I should be able to set up the workbench independently of the RSI Loop. I should also be able to establish the RSI Loop later if I want. These should be two separate systems.",
+                    "kind": "change",
+                    "revision": 8,
+                    "round": "rsi-cross-project-20261106"
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
       "lifecycle": {
-        "state": "pending",
+        "state": "needs-rewrite",
         "proposal": {
           "readback": "**Question:** How do we record your skill use without making other people run the RSI loop?\n\n**Recommended answer:** Keep reporting instructions and tools in your personal coding setup, separate from the skills you share. Your Codex/Claude setup tells agents to report participating skill uses and failures through the shared reporting tool. Add automatic checks where the coding app supports them. Use the same skill files yourself and when sharing them. Someone receiving a skill can just use it: no reporting tool, Supabase account or RSI loop is required, and their activity is not sent to your system. Your Mac, PC and cloud environments get the reporting setup separately. Reports still survive connection problems and temporary cloud sessions as discussed.\n\n**Why:** The skills teach people how to do the work. Your own setup collects evidence to improve those skills. Keeping those responsibilities separate lets you share the skills without imposing your improvement system on other people.\n\n**Intended impact:** Your uses feed the RSI loop, while other people can use the same skills independently.",
           "why": "The skills teach people how to do the work. Your own setup collects evidence to improve those skills. Keeping those responsibilities separate lets you share the skills without imposing your improvement system on other people.",
@@ -6316,6 +6426,17 @@
             "source": null,
             "note": null,
             "revision": 7,
+            "round": "rsi-cross-project-20261106"
+          },
+          {
+            "eventId": "rsi-q6-separate-systems-owner-correction",
+            "type": "correct",
+            "at": "2026-11-07T01:54:22.310Z",
+            "requestDigest": "e5662ba3145e9bb1148cf8430c5ef87ac832736fcc8a91bd45c4a30b0245f0e4",
+            "source": "Kayden AMS alignment chat, 2026-11-06: limit current RSI testing to Servitor and separate Workbench setup from optional later RSI setup.",
+            "note": "I want to be able to test that, instead of being able to log failures everywhere. Let's just do it here on servitor, and I should be able to set up the workbench independently of the RSI Loop. I should also be able to establish the RSI Loop later if I want. These should be two separate systems.",
+            "kind": "change",
+            "revision": 8,
             "round": "rsi-cross-project-20261106"
           }
         ]

@@ -272,7 +272,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G.
 
 ## DQC-000J — RSI: Capture and transport
 
-Revision 7; pending. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
+Revision 8; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000J.json)
 
 <pre>**Question:** How do we record your skill use without making other people run the RSI loop?
 
@@ -292,6 +292,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 - propose at r5
 - correct at r6: My one issue with writing it into the skill itself, is what happens when I hand these skills out? I dont want other people to have to run the RSI Loop, I want them to be able to just use the skills\.
 - propose at r7
+- correct at r8: I want to be able to test that, instead of being able to log failures everywhere\. Let's just do it here on servitor, and I should be able to set up the workbench independently of the RSI Loop\. I should also be able to establish the RSI Loop later if I want\. These should be two separate systems\.
 
 ## DQC-000K — RSI: Repair triggers and priority
 
