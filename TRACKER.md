@@ -253,7 +253,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000E, DQC-000H, DQC-000I.
 
 ## DQC-000K — RSI: Repair triggers and priority
 
-Revision 3; confirmed. [Record](workbench/landmark-tracker/destination-questions/DQC-000K.json)
+Revision 4; needs-rewrite. [Record](workbench/landmark-tracker/destination-questions/DQC-000K.json)
 
 <pre>**Question:** When should findings become repair work, and may repairs run while your original task continues?
 
@@ -269,6 +269,7 @@ Round: rsi-cross-project-20261106. Dependencies: DQC-000G, DQC-000I.
 
 - propose at r2
 - confirm at r3: I like your recommended answer\. Capture into Kaydenclark/skills or supabase, then then fix when we are done, or at a designated time\.
+- correct at r4: Repair should start after the work is finished, unless its blocking that work\. In which case the failure is recorded as a critical failure and should be worked on in a new chat so that this session can pick back up with the fixed skill\.
 
 ## DQC-000L — RSI: Worker location and resources
 
